@@ -8,21 +8,11 @@ const client = createClient({
 });
 
 export async function getDeploymentConfig() {
-  const config = await client.deployments.getConfig({
+  const deployment = await client.deployments.invoke({
     key: 'withFallback',
   });
 
-  if (config) {
-    setTimeout(() => {
-      config.addMetrics({
-        feedback: {
-          score: 100,
-        },
-      });
-    }, 2000);
-  }
-
-  console.log(JSON.stringify(config));
+  deployment?.choices[0].message.console.log(JSON.stringify(config));
 }
 
 // export async function getDeploymentConfig() {
