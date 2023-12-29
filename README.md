@@ -1,10 +1,8 @@
 <p align="left">
   <a href="https://orquesta.cloud" target="_blank">
-    <img src="https://raw.githubusercontent.com/orquestadev/orquesta-node/main/img/banner.png" alt="Orquesta"  height="240">
+    <img src="https://raw.githubusercontent.com/orquestadev/orquesta-node/main/img/banner.png" alt="Orquesta">
   </a>
 </p>
-
-_LLM Operations and Integration Platform_
 
 ![npm](https://img.shields.io/pypi/v/orquesta-node)
 
