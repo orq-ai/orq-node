@@ -1,4 +1,5 @@
 import { createClient } from './orquesta-sdk/src';
+import { isContentChoice } from './orquesta-sdk/src/lib/utils';
 
 // Initiate the client with the Orquesta API key:
 const client = createClient({
@@ -9,10 +10,15 @@ const client = createClient({
 
 export async function getDeploymentConfig() {
   const deployment = await client.deployments.invoke({
-    key: 'withFallback',
+    key: 'customer_service',
+    context: { environments: 'production', country: 'NLD' },
+    inputs: { firstname: 'John', city: 'New York' },
+    metadata: { customer_id: 'Qwtqwty90281' },
   });
 
-  deployment?.choices[0].message.console.log(JSON.stringify(config));
+  if (deployment && isContentChoice(deployment.choices[0].message)) {
+    console.log(deployment.choices[0].message.content);
+  }
 }
 
 // export async function getDeploymentConfig() {

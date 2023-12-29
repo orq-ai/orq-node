@@ -89,6 +89,11 @@ export type DeploymentChoiceToolCalls = {
   tool_calls: DeploymentChoiceToolCall;
 };
 
+export type DeploymentChoiceMessage =
+  | DeploymentChoiceContent
+  | DeploymentChoiceImage
+  | DeploymentChoiceToolCall;
+
 export type DeploymentChoice = {
   index: number;
   message:

@@ -146,7 +146,9 @@ export class Deployments {
     }
   }
 
-  public async invoke(params: OrquestaDeploymentParams) {
+  public async invoke(
+    params: OrquestaDeploymentParams
+  ): Promise<Deployment | undefined> {
     try {
       const response = await createHttpRequest({
         ...this.#commonConfig,

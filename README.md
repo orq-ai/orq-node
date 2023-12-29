@@ -61,12 +61,12 @@ The Deployments API delivers text outputs, images or tool calls based on the con
 #### `invoke()`
 
 ```python
-deployment = await client.deployments.invoke(
-     key="customer_service",
-    context={"environments": "production", "country": "NLD"},
-    inputs={"firstname": "John", "city": "New York"},
-    metadata={"customer_id": "Qwtqwty90281"},
-)
+  const deployment = await client.deployments.invoke({
+    key: 'customer_service',
+    context: { environments: 'production', country: 'NLD' },
+    inputs: { firstname: 'John', city: 'New York' },
+    metadata: { customer_id: 'Qwtqwty90281' },
+  });
 
 print(deployment.choices[0].message.content)
 ```

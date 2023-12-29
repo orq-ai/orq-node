@@ -1,3 +1,6 @@
+import { Deployment } from '../api';
+import { DeploymentChoiceContent } from '../models';
+
 export function extractSSEData(input: string): string {
   const entries = input.split('\n\n');
   return entries.map((entry) => entry.replace(/^data: /, '').trim()).join('');
@@ -46,4 +49,15 @@ export function parseJson(input: string) {
   }
 
   return results;
+}
+
+export function isContentChoice(
+  message: Deployment['choices'][0]['message']
+): message is DeploymentChoiceContent {
+  return (
+    'content' in message &&
+    !!message.content &&
+    message.content !== null &&
+    message.content !== undefined
+  );
 }
