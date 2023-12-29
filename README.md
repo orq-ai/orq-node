@@ -1,6 +1,6 @@
 <p align="left">
   <a href="https://orquesta.cloud" target="_blank">
-    <img src="https://raw.githubusercontent.com/orquestadev/orquesta-javascript/main/img/banner.png" alt="Orquesta"  height="84">
+    <img src="https://raw.githubusercontent.com/orquestadev/orquesta-node/main/img/banner.png" alt="Orquesta"  height="240">
   </a>
 </p>
 
