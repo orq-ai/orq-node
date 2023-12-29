@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Orquesta's Typescript SDK",
   "author": "orquestadev",
+  "homepage": "https://orquesta.cloud",
   "license": "MIT",
   "repository": {
     "type": "git",
