@@ -57,7 +57,7 @@ export type DeploymentToolFunction = {
   parameters: DeploymentToolFunctionParameters;
 };
 
-export type DeploymentTool = {
+export type DeplomentToolCall = {
   type: 'function';
   function: DeploymentToolFunction;
 };
@@ -69,7 +69,7 @@ export type DeploymentConfiguration = {
   type: DeploymentModelType;
   messages: DeploymentMessage[];
   parameters: Record<string, DeploymentParameter>;
-  tools?: DeploymentTool[];
+  tools?: DeplomentToolCall[];
 };
 
 export type DeploymentChoiceContent = {
@@ -82,24 +82,21 @@ export type DeploymentChoiceImage = {
   url: string;
 };
 
-export type DeploymentChoiceToolCall = {};
-
 export type DeploymentChoiceToolCalls = {
   role: DeploymentMessageRole.Assistant;
-  tool_calls: DeploymentChoiceToolCall;
+  tool_calls: DeplomentToolCall[];
 };
 
 export type DeploymentChoiceMessage =
   | DeploymentChoiceContent
   | DeploymentChoiceImage
-  | DeploymentChoiceToolCall;
+  | DeploymentChoiceToolCalls;
 
 export type DeploymentChoice = {
   index: number;
-  message:
-    | DeploymentChoiceContent
-    | DeploymentChoiceImage
-    | DeploymentChoiceToolCall;
+  message: DeploymentChoiceContent &
+    DeploymentChoiceImage &
+    DeploymentChoiceToolCalls;
   finish_reason: string;
 };
 

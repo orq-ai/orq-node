@@ -1,9 +1,26 @@
 {
   "name": "@orquesta/node",
-  "version": "0.0.1",
+  "version": "2.0.0",
+  "description": "Orquesta's Typescript SDK",
+  "author": "orquestadev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orquestadev/orquesta-node.git"
+  },
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "keywords": [
+    "prompts",
+    "typescript",
+    "orquesta",
+    "orquestadev",
+    "ai",
+    "mlops",
+    "llmops",
+    "generativeai"
+  ],
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts"

@@ -2,6 +2,7 @@ import { Readable } from 'stream';
 import { handleRequestError } from '../exceptions';
 import { createHttpRequest } from '../http';
 import {
+  DeplomentToolCall,
   DeploymentChoice,
   DeploymentConfiguration,
   DeploymentMessage,
@@ -10,7 +11,6 @@ import {
   DeploymentParameter,
   DeploymentProvider,
   DeploymentResponse,
-  DeploymentTool,
   OrquestaClientOptions,
 } from '../models';
 import { extractSSEData, safeJSONParse } from '../utils';
@@ -75,7 +75,7 @@ export class DeploymentConfig
   provider: DeploymentProvider;
   parameters: Record<string, DeploymentParameter>;
   type: DeploymentModelType;
-  tools?: DeploymentTool[] | undefined;
+  tools?: DeplomentToolCall[] | undefined;
 
   constructor(
     protected override options: OrquestaClientOptions,

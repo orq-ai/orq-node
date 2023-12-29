@@ -10,7 +10,7 @@ export function isOrquestaError(payload: any): payload is OrquestaError {
 
 export function handleRequestError(err: unknown) {
   if (axios.isAxiosError(err)) {
-    if (isOrquestaError(err.response?.data)) {
+    if (err.response && isOrquestaError(err.response.data)) {
       const { code, error, source } = err.response.data;
       throw new OrquestaError(error, code, source);
     }
