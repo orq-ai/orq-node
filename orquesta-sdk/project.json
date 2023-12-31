@@ -6,25 +6,35 @@
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/orquesta-sdk",
         "main": "orquesta-sdk/src/index.ts",
         "tsConfig": "orquesta-sdk/tsconfig.lib.json",
-        "assets": ["orquesta-sdk/*.md"]
+        "assets": [
+          "orquesta-sdk/*.md"
+        ]
       }
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs orquesta-sdk {args.ver} {args.tag}",
-      "dependsOn": ["build"]
+      "dependsOn": [
+        "build"
+      ]
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ]
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
         "reportsDirectory": "../coverage/orquesta-sdk"
       }
