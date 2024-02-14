@@ -176,7 +176,7 @@ deployment.addMetrics({
 
 <div id="logging"/>
 
-Wether you use the `get_config` or `invoke`, you can log the model generations to the deployment. Here are some examples on how to do this:
+Whether you use the `get_config` or `invoke`, you can log the model generations to the deployment. Here are some examples of how to do this:
 
 #### Logging the completion choices the model generated for the input prompt
 
