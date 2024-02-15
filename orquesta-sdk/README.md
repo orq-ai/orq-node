@@ -95,7 +95,7 @@ const deployment = await client.deployments.invoke({
   messages: [
     {
       role: 'user',
-      message:
+      content:
         'A customer is asking about the latest software update features. Generate a detailed and informative response highlighting the key new features and improvements in the latest update.',
     },
   ],
@@ -165,7 +165,7 @@ deployment.addMetrics({
   messages: [
     {
       role: 'user',
-      message:
+      content:
         'A customer is asking about the latest software update features. Generate a detailed and informative response highlighting the key new features and improvements in the latest update.',
     },
   ],
