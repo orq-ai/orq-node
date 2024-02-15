@@ -7,6 +7,6 @@
  *                                    This field is optional.
  */
 export type OrquestaClientOptions = {
-  apiKey: string;
-  environment?: string;
+	apiKey: string;
+	environment?: string;
 };

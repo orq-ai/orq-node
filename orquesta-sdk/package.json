@@ -1,6 +1,6 @@
 {
   "name": "@orquesta/node",
-  "version": "2.0.0",
+  "version": "2.0.4",
   "description": "Orquesta's Typescript SDK",
   "author": "orquestadev",
   "homepage": "https://orquesta.cloud",
@@ -10,7 +10,8 @@
     "url": "git+https://github.com/orquestadev/orquesta-node.git"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "axios": "^1.5.1"
   },
   "keywords": [
     "prompts",
