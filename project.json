@@ -1,5 +1,5 @@
 {
-  "name": "orquesta-node",
+  "name": "orq-ai-node",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "targets": {
     "local-registry": {
