@@ -6,8 +6,6 @@
 
 Build AI Applications from Playground to Production
 
-![npm](https://img.shields.io/pypi/v/orq-ai-node)
-
 # orq.ai Node SDK
 
 The orq.ai Node library enables easy orq.ai REST API integration in NodeJS 16+ apps.
