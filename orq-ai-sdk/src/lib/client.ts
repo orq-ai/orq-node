@@ -6,7 +6,7 @@ export function createClient(options: OrqAIClientOptions): Client {
 	return new Client(options.apiKey, options.environment);
 }
 
-class Client {
+export class Client {
 	#deployments: Deployment | null = null;
 
 	constructor(

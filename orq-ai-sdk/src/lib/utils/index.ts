@@ -1,4 +1,4 @@
-import { OrqAIClientOptions, UserInfo } from "../models";
+import type { OrqAIClientOptions, UserInfo } from "../models";
 
 export function extractSSEData(input: string): string {
 	const entries = input.split("\n\n");
