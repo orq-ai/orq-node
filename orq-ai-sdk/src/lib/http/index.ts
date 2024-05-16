@@ -1,12 +1,5 @@
-import axios from "axios";
-
-const axiosInstance = axios.create({
-	baseURL: "https://api.orq.ai/v2",
-});
-
 // Create a function that allow to create an http request with axios
 export async function createHttpRequest<T extends { [key: string]: any }>({
-	method,
 	url,
 	apiKey,
 	data,
@@ -16,14 +9,14 @@ export async function createHttpRequest<T extends { [key: string]: any }>({
 	apiKey: string;
 	data?: T;
 }) {
-	return axiosInstance({
-		method,
-		url,
+	return fetch(`https://api.orq.ai/v2/${url}`, {
+		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			Accept: "application/json",
 			Authorization: `Bearer ${apiKey}`,
+			...(data?.["stream"] && { Accept: "text/event-stream" }),
 		},
-		...(data && { data }),
-		...(data?.["stream"] && { responseType: "stream" }),
+		body: JSON.stringify(data),
 	});
 }

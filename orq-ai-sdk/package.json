@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "2.7.0",
+  "version": "2.10.0",
   "description": "orq.ai Typescript SDK",
   "author": "orq.ai",
   "homepage": "https://orq.ai",
@@ -10,8 +10,9 @@
     "url": "git+https://github.com/orq-ai/orq-node.git"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "axios": "^1.5.1"
+    "axios": "^1.5.1",
+    "eventsource-parser": "^1.1.2",
+    "tslib": "^2.3.0"
   },
   "keywords": [
     "prompts",

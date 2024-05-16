@@ -1,4 +1,4 @@
-import { Readable } from "stream";
+import { createParser } from "eventsource-parser";
 import { handleRequestError } from "../exceptions";
 import { createHttpRequest } from "../http";
 import {
@@ -13,7 +13,7 @@ import {
 	DeploymentProvider,
 	DeploymentResponse,
 } from "../models";
-import { Store, extractSSEData, safeJSONParse } from "../utils";
+import { Store, safeJSONParse } from "../utils";
 
 const DEPLOYMENTS_GET_CONFIG = "deployments/get_config";
 const DEPLOYMENTS_INVOKE = "deployments/invoke";
@@ -66,7 +66,7 @@ export abstract class BaseDeployment {
 				data: metrics,
 			});
 
-			return response.data;
+			return await response.json();
 		} catch (err) {
 			handleRequestError(err);
 			return;
@@ -135,7 +135,9 @@ export class Deployment {
 				data: buildDeploymentRequestBody(params),
 			});
 
-			return new DeploymentPromptConfig(response.data);
+			const config = await response.json();
+
+			return new DeploymentPromptConfig(config);
 		} catch (err) {
 			handleRequestError(err);
 			return;
@@ -153,7 +155,14 @@ export class Deployment {
 				data: buildDeploymentRequestBody(params),
 			});
 
-			return new DeploymentGeneration(response.data);
+			if (!response.ok) {
+				const errorResponse = await response.json();
+				handleRequestError(errorResponse);
+			}
+
+			const generation = await response.json();
+
+			return new DeploymentGeneration(generation);
 		} catch (err) {
 			handleRequestError(err);
 			return;
@@ -163,28 +172,71 @@ export class Deployment {
 	public async *invokeWithStream(
 		params: InvokeDeploymentParams,
 	): AsyncGenerator<DeploymentGeneration> {
-		try {
-			const response = await createHttpRequest({
-				method: "POST",
-				apiKey: Store.apiKey,
-				url: DEPLOYMENTS_INVOKE,
-				data: {
-					...buildDeploymentRequestBody(params),
-					stream: true,
-				},
-			});
+		const response = await createHttpRequest({
+			method: "POST",
+			apiKey: Store.apiKey,
+			url: DEPLOYMENTS_INVOKE,
+			data: {
+				...buildDeploymentRequestBody(params),
+				stream: true,
+			},
+		});
 
-			const stream: Readable = response.data;
+		if (!response.ok) {
+			const errorResponse = await response.json();
+			handleRequestError(errorResponse);
+		}
 
-			for await (const chunk of stream) {
-				const jsonValue = extractSSEData(chunk.toString("utf8"));
-				const parsedObjects = safeJSONParse(jsonValue);
-				for (const parsedObject of parsedObjects) {
+		const reader = response.body?.getReader();
+		const queue: DeploymentResponse[] = [];
+		let streamEnded = false;
+
+		const parser = createParser((event) => {
+			if (event.type === "event") {
+				const jsonValue = event.data;
+				const parsedObject = safeJSONParse(jsonValue);
+				if (parsedObject) {
+					queue.push(parsedObject);
+				}
+			}
+		});
+
+		async function readStream() {
+			if (!reader) {
+				throw new Error("Failed to create a readable stream.");
+			}
+
+			while (true) {
+				const { done, value } = await reader.read();
+
+				if (done) {
+					streamEnded = true;
+					break;
+				}
+
+				const text = new TextDecoder().decode(value);
+				parser.feed(text);
+			}
+		}
+
+		// Start reading the stream asynchronously
+		readStream();
+
+		// Yield objects from the queue as they become available
+		while (true) {
+			while (queue.length > 0) {
+				const parsedObject = queue.shift();
+				if (parsedObject) {
 					yield new DeploymentGeneration(parsedObject);
 				}
 			}
-		} catch (err) {
-			handleRequestError(err);
+
+			if (streamEnded && queue.length === 0) {
+				break;
+			}
+
+			// Sleep briefly to prevent a tight loop if the queue is empty
+			await new Promise((resolve) => setTimeout(resolve, 10));
 		}
 	}
 }

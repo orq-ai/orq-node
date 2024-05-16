@@ -1,18 +1,19 @@
 import type { OrqAIClientOptions, UserInfo } from "../models";
 
-export function extractSSEData(input: string): string {
-	const entries = input.split("\n\n");
-	return entries.map((entry) => entry.replace(/^data: /, "").trim()).join("");
-}
-
 export function safeJSONParse(input: string) {
 	const cleanedInput = input.replace(/\[DONE\]/g, "");
 
 	if (!cleanedInput || cleanedInput === "[DONE]") {
-		return [];
+		return;
 	}
 
-	return parseJson(cleanedInput);
+	// Try to parse the JSON to avoid going into the iteration
+	// If the JSON cannot be parsed, then we fallback to parseJson method
+	try {
+		return JSON.parse(cleanedInput);
+	} catch (_) {
+		return parseJson(cleanedInput);
+	}
 }
 
 export function parseJson(input: string) {
