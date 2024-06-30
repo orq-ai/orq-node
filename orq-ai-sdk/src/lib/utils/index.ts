@@ -50,5 +50,6 @@ export function parseJson(input: string) {
 
 	return results;
 }
+
 export const Store: OrqAIClientOptions & { userInfo?: UserInfo } =
 	{} as OrqAIClientOptions;

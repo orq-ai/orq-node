@@ -1,4 +1,5 @@
 import { Deployment } from "./api";
+import { Feedback } from "./api/feedback";
 import type { OrqAIClientOptions, UserInfo } from "./models";
 import { Store } from "./utils";
 
@@ -7,8 +8,6 @@ export function createClient(options: OrqAIClientOptions): Client {
 }
 
 export class Client {
-	#deployments: Deployment | null = null;
-
 	constructor(
 		protected apiKey: string,
 		protected environment?: string,
@@ -22,10 +21,10 @@ export class Client {
 	}
 
 	get deployments() {
-		if (!this.#deployments) {
-			this.#deployments = new Deployment();
-		}
+		return new Deployment();
+	}
 
-		return this.#deployments;
+	get feedback() {
+		return new Feedback();
 	}
 }

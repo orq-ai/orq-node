@@ -191,7 +191,7 @@ export class Deployment {
 		const queue: DeploymentResponse[] = [];
 		let streamEnded = false;
 
-		const parser = createParser((event) => {
+		const parser = createParser((event: { type: string; data: string }) => {
 			if (event.type === "event") {
 				const jsonValue = event.data;
 				const parsedObject = safeJSONParse(jsonValue);

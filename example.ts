@@ -3,24 +3,37 @@ import { createClient } from "./orq-ai-sdk/src";
 async function main() {
 	const client = createClient({
 		apiKey:
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3b3Jrc3BhY2VJZCI6IjY0YWIyNjBlLTllOGMtNDYzNy04ZDI2LTA1YzViYmYwMDA0YiIsImlhdCI6MTY5Nzk3MTQ4ODAzMX0.s-Wl6RWcfmzJpXgN7hr_6faDif4298dd_ZGwpVURKX4",
+			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3b3Jrc3BhY2VJZCI6ImRkOWQ0ZTcxLTYyMzEtNDg3Ny1iYzY5LWE2YjA4MzU0NmYwYSIsImlhdCI6MTY5Nzk3MDU1MjUxOH0.2MsRZGdK78qA4axKbR0sqacVzPVPQiAFwIQGCCjZKBE",
 		environment: "production",
 	});
 
-	const config = await client.deployments.getConfig({
-		key: "functionCalling",
+	const stream = await client.deployments.invoke({
+		key: "20240503-1523_x7qu_58",
 		context: {
 			environments: [],
 		},
-		inputs: {
-			overview:
-				"General health for a 30y old. Gym session that also complements his Muay Thai beginner journey and also ads some aesthetic focus on building his chest",
-			sessionDate: "2024-05-15",
-			preferredWorkoutLength: "60min",
-		},
 		metadata: {
-			"custom-field-name": "custom-metadata-value",
+			example: "nodejs",
 		},
+	});
+
+	if (!stream) return;
+
+	await client.feedback.report({
+		property: "rating",
+		value: ["good"],
+		trace_id: stream.id,
+	});
+
+	await client.feedback.report({
+		property: "defects",
+		value: ["spelling", "off_topic"],
+		trace_id: stream.id,
+	});
+
+	await client.feedback.correct({
+		correction: "Thank you for sharing the video of your workout.",
+		trace_id: stream.id,
 	});
 }
 
