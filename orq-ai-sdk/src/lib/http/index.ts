@@ -9,7 +9,7 @@ export async function createHttpRequest<T extends { [key: string]: any }>({
 	apiKey: string;
 	data?: T;
 }) {
-	return fetch(`https://preview.orq.ai/v2/${url}`, {
+	return fetch(`https://api.orq.ai/v2/${url}`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
