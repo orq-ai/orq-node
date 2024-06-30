@@ -26,12 +26,12 @@ yarn add @orq-ai/node
 
 ## Usage
 
-_You can get your workspace API key from the settings section in your Orquesta workspace. `https://my.orquesta.dev/<workspace>/settings/developers`_
+_You can get your workspace API key from the settings section in your orq.ai workspace. `https://my.orq.ai/<workspace>/settings/developers`_
 
-Initialize the Orquesta client with your API key:
+Initialize the orq.ai client with your API key:
 
 ```ts
-import { createClient } from '@orquesta/node';
+import { createClient } from '@orq-ai/node';
 
 const client = createClient({
   apiKey: 'orquesta-api-key',
@@ -48,7 +48,7 @@ generation = await client.deployments.invoke(
 
 ## Deployments
 
-The Deployments API delivers text outputs, images or tool calls based on the configuration established within Orquesta for your deployments. Additionally, this API supports streaming. To ensure ease of use and minimize errors, using the code snippets from the Orquesta Admin panel is highly recommended.
+The Deployments API delivers text outputs, images or tool calls based on the configuration established within orq.ai for your deployments. Additionally, this API supports streaming. To ensure ease of use and minimize errors, using the code snippets from the orq.ai Admin panel is highly recommended.
 
 ### Invoke a deployment
 
@@ -234,3 +234,7 @@ generation.addMetrics(
   ]
 );
 ```
+
+### API documentation
+
+[Feedback API](https://github.com/orquestadev/orquesta-node/blob/main/orq-ai-sdk/src/lib/api/feedback/README.md)
