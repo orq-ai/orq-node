@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createHttpRequest } from "../http";
-import { FeedbackCorrection, FeedbackReport } from "../models";
+import { createHttpRequest } from "../../http";
+import type { FeedbackCorrection, FeedbackReport } from "../../models";
 import { Feedback } from "./feedback";
 
 // Mock the createHttpRequest function

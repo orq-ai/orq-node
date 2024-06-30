@@ -1,11 +1,11 @@
-import { createHttpRequest } from "../http";
+import { createHttpRequest } from "../../http";
 import type {
 	FeedbackCorrection,
 	FeedbackCorrectionResponse,
 	FeedbackReport,
 	FeedbackResponse,
-} from "../models";
-import { Store } from "../utils";
+} from "../../models";
+import { Store } from "../../utils";
 
 const FEEDBACK_POST = "feedback";
 

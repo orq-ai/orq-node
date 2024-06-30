@@ -234,3 +234,7 @@ generation.addMetrics(
   ]
 );
 ```
+
+### API documentation
+
+[Feedback API](https://github.com/orquestadev/orquesta-node/blob/main/orq-ai-sdk/src/lib/api/feedback/README.md)
