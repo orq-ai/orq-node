@@ -149,8 +149,6 @@ export type DeploymentResponse = Omit<
 };
 
 export type DeploymentCommon = {
-	chain_id?: string;
-	conversation_id?: string;
 	user_id?: string;
 };
 

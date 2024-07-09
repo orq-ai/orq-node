@@ -113,8 +113,6 @@ After invoking, streaming or getting the configuration of a deployment, you can 
 
 ```ts
 generation.addMetrics({
-  chain_id: 'c4a75b53-62fa-401b-8e97-493f3d299316',
-  conversation_id: 'ee7b0c8c-eeb2-43cf-83e9-a4a49f8f13ea',
   user_id: 'e3a202a6-461b-447c-abe2-018ba4d04cd0',
   feedback: { score: 100 },
   metadata: {
@@ -146,7 +144,6 @@ After invoking, streaming or getting the configuration of a deployment, you can 
 ```ts
 deploymentPromptConfig.addMetrics({
   chain_id: 'c4a75b53-62fa-401b-8e97-493f3d299316',
-  conversation_id: 'ee7b0c8c-eeb2-43cf-83e9-a4a49f8f13ea',
   user_id: 'e3a202a6-461b-447c-abe2-018ba4d04cd0',
   feedback: { score: 100 },
   metadata: {

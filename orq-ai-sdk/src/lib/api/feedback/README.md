@@ -107,8 +107,6 @@ await client.feedback.report(feedbackPayload);
 #### Example
 
 ```typescript
-// Correction property only accept one value at a time
-
 const feedbackPayload: FeedbackReport = {
   property: 'defects',
   value: ['grammatical', 'hallucination'], // Can include multiple defects

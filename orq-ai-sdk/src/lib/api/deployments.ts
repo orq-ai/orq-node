@@ -1,7 +1,7 @@
 import { createParser } from "eventsource-parser";
 import { handleRequestError } from "../exceptions";
 import { createHttpRequest } from "../http";
-import {
+import type {
 	DeplomentToolCall,
 	DeploymentChoice,
 	DeploymentCommon,
@@ -25,6 +25,7 @@ export type InvokeDeploymentParams = DeploymentCommon & {
 	context?: Record<string, unknown>;
 	metadata?: Record<string, unknown>;
 	inputs?: Record<string, string>;
+	prefix_messages?: DeploymentMessage[];
 	messages?: DeploymentMessage[];
 	extra_params?: Record<string, unknown>;
 };
@@ -35,6 +36,7 @@ function buildDeploymentRequestBody(params: InvokeDeploymentParams) {
 		...(params.context && { context: params.context }),
 		...(params.metadata && { metadata: params.metadata }),
 		...(params.inputs && { inputs: params.inputs }),
+		...(params.prefix_messages && { prefix_messages: params.prefix_messages }),
 		...(params.messages && { messages: params.messages }),
 		...(params.extra_params && { extra_params: params.extra_params }),
 	};
@@ -191,7 +193,7 @@ export class Deployment {
 		const queue: DeploymentResponse[] = [];
 		let streamEnded = false;
 
-		const parser = createParser((event: { type: string; data: string }) => {
+		const parser = createParser((event) => {
 			if (event.type === "event") {
 				const jsonValue = event.data;
 				const parsedObject = safeJSONParse(jsonValue);
