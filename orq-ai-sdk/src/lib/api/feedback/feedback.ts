@@ -5,9 +5,8 @@ import type {
 	FeedbackReport,
 	FeedbackResponse,
 } from "../../models";
-import { Store } from "../../utils";
 
-const FEEDBACK_POST = "feedback";
+const FEEDBACK_POST = "v2/feedback";
 
 type FeedbackData =
 	| FeedbackReport
@@ -20,7 +19,6 @@ export class Feedback {
 	#createFeedbackRequest(data: FeedbackData) {
 		return createHttpRequest({
 			method: "POST",
-			apiKey: Store.apiKey,
 			url: FEEDBACK_POST,
 			data,
 		});

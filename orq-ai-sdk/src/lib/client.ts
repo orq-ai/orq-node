@@ -1,6 +1,8 @@
 import { Deployment } from "./api";
+import { Contacts } from "./api/contacts";
 import { Feedback } from "./api/feedback";
-import type { OrqAIClientOptions, UserInfo } from "./models";
+import { Webhooks } from "./api/webhooks";
+import type { Contact, OrqAIClientOptions, UserInfo } from "./models";
 import { Store } from "./utils";
 
 export function createClient(options: OrqAIClientOptions): Client {
@@ -16,8 +18,16 @@ export class Client {
 		Store.environment = environment;
 	}
 
+	/* @deprecated
+	 * Use setContact instead
+	 */
 	public setUser(info: UserInfo) {
 		Store.userInfo = info;
+	}
+
+	public async setContact(contact: Omit<Contact, "id">) {
+		Store.contactId = contact.external_id;
+		await this.contacts.create(contact);
 	}
 
 	get deployments() {
@@ -26,5 +36,13 @@ export class Client {
 
 	get feedback() {
 		return new Feedback();
+	}
+
+	get webhooks() {
+		return new Webhooks();
+	}
+
+	get contacts() {
+		return new Contacts();
 	}
 }

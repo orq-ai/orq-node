@@ -15,10 +15,10 @@ import type {
 } from "../models";
 import { Store, safeJSONParse } from "../utils";
 
-const DEPLOYMENTS_GET_CONFIG = "deployments/get_config";
-const DEPLOYMENTS_INVOKE = "deployments/invoke";
+const DEPLOYMENTS_GET_CONFIG = "v2/deployments/get_config";
+const DEPLOYMENTS_INVOKE = "v2/deployments/invoke";
 
-const buildAddMetricsUrl = (id: string) => `deployments/${id}/metrics`;
+const buildAddMetricsUrl = (id: string) => `v2/deployments/${id}/metrics`;
 
 export type InvokeDeploymentParams = DeploymentCommon & {
 	key: string;
@@ -63,7 +63,6 @@ export abstract class BaseDeployment {
 		try {
 			const response = await createHttpRequest({
 				method: "POST",
-				apiKey: Store.apiKey,
 				url,
 				data: metrics,
 			});
@@ -132,7 +131,6 @@ export class Deployment {
 		try {
 			const response = await createHttpRequest({
 				method: "POST",
-				apiKey: Store.apiKey,
 				url: DEPLOYMENTS_GET_CONFIG,
 				data: buildDeploymentRequestBody(params),
 			});
@@ -152,7 +150,6 @@ export class Deployment {
 		try {
 			const response = await createHttpRequest({
 				method: "POST",
-				apiKey: Store.apiKey,
 				url: DEPLOYMENTS_INVOKE,
 				data: buildDeploymentRequestBody(params),
 			});
@@ -176,7 +173,6 @@ export class Deployment {
 	): AsyncGenerator<DeploymentGeneration> {
 		const response = await createHttpRequest({
 			method: "POST",
-			apiKey: Store.apiKey,
 			url: DEPLOYMENTS_INVOKE,
 			data: {
 				...buildDeploymentRequestBody(params),

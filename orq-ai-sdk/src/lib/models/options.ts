@@ -8,5 +8,6 @@
  */
 export type OrqAIClientOptions = {
 	apiKey: string;
+	contactId?: string;
 	environment?: string;
 };

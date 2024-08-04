@@ -1,20 +1,22 @@
+import { Store } from "../utils";
+
 // Create a function that allow to create an http request with axios
 export async function createHttpRequest<T extends { [key: string]: any }>({
+	method = "POST",
 	url,
-	apiKey,
 	data,
 }: {
 	method: string;
 	url: string;
-	apiKey: string;
 	data?: T;
 }) {
-	return fetch(`https://api.orq.ai/v2/${url}`, {
-		method: "POST",
+	return fetch(`https://api.orq.ai/${url}`, {
+		method,
 		headers: {
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			Authorization: `Bearer ${apiKey}`,
+			Authorization: `Bearer ${Store.apiKey}`,
+			...(Store.contactId && { "X-Orq-Contact-Id": Store.contactId }),
 			...(data?.["stream"] && { Accept: "text/event-stream" }),
 		},
 		body: JSON.stringify(data),
