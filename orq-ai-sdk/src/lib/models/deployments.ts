@@ -146,6 +146,12 @@ export type DeploymentResponse = Omit<
 	 * The system fingerprint returned by the provider
 	 */
 	system_fingerprint?: string;
+
+	/**
+	 * The retrieval documents chunks returned by the knowledge base upon request
+	 */
+
+	retrievals?: DeploymentRetrieval[];
 };
 
 export type DeploymentCommon = {
@@ -167,3 +173,33 @@ export type DeploymentEvent = DeploymentCommon & {
 	choices?: DeploymentChoice[];
 	messages?: DeploymentMessage[];
 };
+
+export interface DeploymentInvokeOptions {
+	/**  When using knowledge bases, indicates on the request the retrieval documents should be returned in the response */
+	include_retrievals?: boolean;
+}
+
+export interface DeploymentRetrievalMetadata {
+	/** Name of the retrieved document chunk */
+	file_name: string;
+
+	/** Type of the retrieved document chunk */
+	file_type: string;
+
+	/** Page number of the retrieved document chunk. Only available for PDF files */
+	page_number?: number | null;
+
+	/** Search score of the retrieved document chunk */
+	search_score: number;
+
+	/** Rerank score of the retrieved document chunk */
+	rerank_score?: number | null;
+}
+
+export interface DeploymentRetrieval {
+	/** Retrieved document chunk from the knowledge base */
+	document: string;
+
+	/** Metadata of the retrieved document chunk */
+	metadata: DeploymentRetrievalMetadata;
+}
