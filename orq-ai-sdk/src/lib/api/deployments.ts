@@ -7,11 +7,13 @@ import type {
 	DeploymentCommon,
 	DeploymentConfiguration,
 	DeploymentEvent,
+	DeploymentInvokeOptions,
 	DeploymentMessage,
 	DeploymentModelType,
 	DeploymentParameter,
 	DeploymentProvider,
 	DeploymentResponse,
+	DeploymentRetrieval,
 } from "../models";
 import { Store, safeJSONParse } from "../utils";
 
@@ -28,6 +30,7 @@ export type InvokeDeploymentParams = DeploymentCommon & {
 	prefix_messages?: DeploymentMessage[];
 	messages?: DeploymentMessage[];
 	extra_params?: Record<string, unknown>;
+	invoke_options?: DeploymentInvokeOptions;
 };
 
 function buildDeploymentRequestBody(params: InvokeDeploymentParams) {
@@ -39,6 +42,7 @@ function buildDeploymentRequestBody(params: InvokeDeploymentParams) {
 		...(params.prefix_messages && { prefix_messages: params.prefix_messages }),
 		...(params.messages && { messages: params.messages }),
 		...(params.extra_params && { extra_params: params.extra_params }),
+		...(params.invoke_options && { invoke_options: params.invoke_options }),
 	};
 }
 
@@ -110,6 +114,7 @@ export class DeploymentGeneration
 	is_final: boolean;
 	provider: DeploymentProvider;
 	system_fingerprint: string | undefined;
+	retrievals?: DeploymentRetrieval[];
 
 	constructor(data: DeploymentResponse) {
 		super(data.id);
@@ -120,6 +125,7 @@ export class DeploymentGeneration
 		this.finalized = data.finalized;
 		this.is_final = data.is_final;
 		this.choices = data.choices;
+		this.retrievals = data.retrievals;
 		this.system_fingerprint = data.system_fingerprint;
 	}
 }
