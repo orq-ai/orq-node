@@ -1,37 +1,27 @@
 {
-  "name": "orq-ai-node",
-  "version": "2.14.2",
-  "license": "MIT",
-  "scripts": {},
-  "private": true,
-  "dependencies": {
-    "eventsource-parser": "^1.1.2"
+  "name": "@orq-ai/node",
+  "version": "0.0.1",
+  "author": "Speakeasy",
+  "main": "./index.js",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint --max-warnings=0 src",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "zod": ">= 3"
   },
   "devDependencies": {
-    "@nx/eslint": "19.6.0",
-    "@nx/eslint-plugin": "19.6.0",
-    "@nx/js": "19.6.0",
-    "@nx/vite": "19.6.0",
-    "@swc-node/register": "1.9.2",
-    "@swc/core": "1.5.7",
-    "@types/node": "18.19.31",
-    "@typescript-eslint/eslint-plugin": "7.18.0",
-    "@typescript-eslint/parser": "7.18.0",
-    "@vitest/coverage-v8": "1.5.3",
-    "@vitest/ui": "1.5.3",
-    "eslint": "8.57.0",
-    "eslint-config-prettier": "^9.0.0",
-    "nx": "19.6.0",
-    "prettier": "^2.6.2",
-    "typescript": "5.5.4",
-    "verdaccio": "^5.0.4",
-    "vite": "^5.0.0",
-    "vitest": "1.5.3"
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "eslint": "^8.57.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "typescript": "^5.4.5",
+    "zod": "^3.23.4"
   },
-  "workspaces": [
-    "packages/*"
-  ],
-  "nx": {
-    "includedScripts": []
+  "dependencies": {
+    
   }
 }

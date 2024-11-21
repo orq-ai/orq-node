@@ -1,0 +1,553 @@
+lockVersion: 2.0.0
+id: dc5d7338-76c5-420f-ad00-80b13b3176f5
+management:
+  docChecksum: 951f8f629c14adb96b3d136c96598eae
+  docVersion: "2.0"
+  speakeasyVersion: 1.441.1
+  generationVersion: 2.461.2
+  releaseVersion: 0.0.1
+  configChecksum: 3dc77f826ba60447f24ac7a900a020ae
+features:
+  typescript:
+    acceptHeaders: 2.81.2
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.11
+    core: 3.18.6
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.11
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.4
+    groups: 2.81.2
+    inputOutputModels: 2.82.0
+    nameOverrides: 2.81.2
+    nullables: 0.1.0
+    operationTimeout: 0.2.0
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.2.0
+    serverEvents: 0.1.5
+    serverEventsSentinels: 0.1.0
+    tests: 0.7.0
+    unions: 2.85.8
+    uploadStreams: 0.1.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .eslintrc.cjs
+  - .gitattributes
+  - .npmignore
+  - CONTRIBUTING.md
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/content.md
+  - docs/models/components/content2.md
+  - docs/models/components/deployments.md
+  - docs/models/components/deployments22.md
+  - docs/models/components/deployments2messagescontenttype.md
+  - docs/models/components/deployments2messagestype.md
+  - docs/models/components/deployments2type.md
+  - docs/models/components/deploymentscontent.md
+  - docs/models/components/deploymentsfunction.md
+  - docs/models/components/deploymentsrole.md
+  - docs/models/components/deploymentstoolcalls.md
+  - docs/models/components/deploymentstype.md
+  - docs/models/components/functiont.md
+  - docs/models/components/imageurl.md
+  - docs/models/components/inputs.md
+  - docs/models/components/invokeoptions.md
+  - docs/models/components/messages.md
+  - docs/models/components/one.md
+  - docs/models/components/prefixmessages.md
+  - docs/models/components/role.md
+  - docs/models/components/security.md
+  - docs/models/components/toolcalls.md
+  - docs/models/components/two.md
+  - docs/models/components/two1.md
+  - docs/models/components/two2.md
+  - docs/models/components/twoimageurl.md
+  - docs/models/components/twotype.md
+  - docs/models/components/type.md
+  - docs/models/components/userid.md
+  - docs/models/errors/honoapierror.md
+  - docs/models/operations/apiversion.md
+  - docs/models/operations/billedunits.md
+  - docs/models/operations/bulkfileuploadfilespurpose.md
+  - docs/models/operations/bulkfileuploadpurpose.md
+  - docs/models/operations/bulkfileuploadrequestbody.md
+  - docs/models/operations/choices.md
+  - docs/models/operations/content.md
+  - docs/models/operations/content2.md
+  - docs/models/operations/createcontactrequestbody.md
+  - docs/models/operations/createcontactresponsebody.md
+  - docs/models/operations/createfeedbackrequestbody.md
+  - docs/models/operations/createfeedbackresponsebody.md
+  - docs/models/operations/createfeedbackvalue.md
+  - docs/models/operations/data.md
+  - docs/models/operations/delta.md
+  - docs/models/operations/deploymentcreatemetric21.md
+  - docs/models/operations/deploymentcreatemetric22.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricstype.md
+  - docs/models/operations/deploymentcreatemetric2imageurl.md
+  - docs/models/operations/deploymentcreatemetric2type.md
+  - docs/models/operations/deploymentcreatemetriccontent.md
+  - docs/models/operations/deploymentcreatemetriccontent2.md
+  - docs/models/operations/deploymentcreatemetricfunction.md
+  - docs/models/operations/deploymentcreatemetricmessagedeploymentsmetricsrole.md
+  - docs/models/operations/deploymentcreatemetricmessagerole.md
+  - docs/models/operations/deploymentcreatemetricmessages.md
+  - docs/models/operations/deploymentcreatemetricrequest.md
+  - docs/models/operations/deploymentcreatemetricrequestbody.md
+  - docs/models/operations/deploymentcreatemetricresponsebody.md
+  - docs/models/operations/deploymentcreatemetricrole.md
+  - docs/models/operations/deploymentcreatemetrictoolcalls.md
+  - docs/models/operations/deploymentcreatemetrictype.md
+  - docs/models/operations/deploymentgetconfig21.md
+  - docs/models/operations/deploymentgetconfig22.md
+  - docs/models/operations/deploymentgetconfig2deployments2.md
+  - docs/models/operations/deploymentgetconfig2deploymentsresponse200type.md
+  - docs/models/operations/deploymentgetconfig2deploymentsresponsetype.md
+  - docs/models/operations/deploymentgetconfig2deploymentstype.md
+  - docs/models/operations/deploymentgetconfig2imageurl.md
+  - docs/models/operations/deploymentgetconfig2type.md
+  - docs/models/operations/deploymentgetconfigcontent.md
+  - docs/models/operations/deploymentgetconfigcontent2.md
+  - docs/models/operations/deploymentgetconfigdeploymentscontent.md
+  - docs/models/operations/deploymentgetconfigdeploymentsfunction.md
+  - docs/models/operations/deploymentgetconfigdeploymentsresponse200applicationjsontype.md
+  - docs/models/operations/deploymentgetconfigdeploymentsresponse200type.md
+  - docs/models/operations/deploymentgetconfigdeploymentsresponsefunction.md
+  - docs/models/operations/deploymentgetconfigdeploymentsresponsetype.md
+  - docs/models/operations/deploymentgetconfigdeploymentsrole.md
+  - docs/models/operations/deploymentgetconfigdeploymentstoolcalls.md
+  - docs/models/operations/deploymentgetconfigdeploymentstype.md
+  - docs/models/operations/deploymentgetconfigencodingformat.md
+  - docs/models/operations/deploymentgetconfigfunction.md
+  - docs/models/operations/deploymentgetconfigmessages.md
+  - docs/models/operations/deploymentgetconfigparameters.md
+  - docs/models/operations/deploymentgetconfigquality.md
+  - docs/models/operations/deploymentgetconfigrequestbody.md
+  - docs/models/operations/deploymentgetconfigresponsebody.md
+  - docs/models/operations/deploymentgetconfigresponseformat.md
+  - docs/models/operations/deploymentgetconfigresponseformattype.md
+  - docs/models/operations/deploymentgetconfigrole.md
+  - docs/models/operations/deploymentgetconfigtoolcalls.md
+  - docs/models/operations/deploymentgetconfigtools.md
+  - docs/models/operations/deploymentgetconfigtype.md
+  - docs/models/operations/deploymentinvokechoices.md
+  - docs/models/operations/deploymentinvokedeploymentschoices.md
+  - docs/models/operations/deploymentinvokedeploymentsmessage.md
+  - docs/models/operations/deploymentinvokedeploymentsresponsebody.md
+  - docs/models/operations/deploymentinvokemessage.md
+  - docs/models/operations/deploymentinvokemessage1.md
+  - docs/models/operations/deploymentinvokemessage2.md
+  - docs/models/operations/deploymentinvokemessage3.md
+  - docs/models/operations/deploymentinvokemessagedeployments1.md
+  - docs/models/operations/deploymentinvokemessagedeployments2.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsfunction.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsresponse200role.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsresponse200texteventstreamresponsebodyrole.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsresponse200texteventstreamrole.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsrole.md
+  - docs/models/operations/deploymentinvokemessagedeploymentstoolcalls.md
+  - docs/models/operations/deploymentinvokemessagedeploymentstype.md
+  - docs/models/operations/deploymentinvokemessagefunction.md
+  - docs/models/operations/deploymentinvokemessagerole.md
+  - docs/models/operations/deploymentinvokemessagetoolcalls.md
+  - docs/models/operations/deploymentinvokemessagetype.md
+  - docs/models/operations/deploymentinvokemetadata.md
+  - docs/models/operations/deploymentinvokeobject.md
+  - docs/models/operations/deploymentinvokeprovider.md
+  - docs/models/operations/deploymentinvokeresponse.md
+  - docs/models/operations/deploymentinvokeresponsebody.md
+  - docs/models/operations/deploymentinvokeretrievals.md
+  - docs/models/operations/deployments21.md
+  - docs/models/operations/deployments22.md
+  - docs/models/operations/deployments2deploymentstype.md
+  - docs/models/operations/deployments2imageurl.md
+  - docs/models/operations/deployments2type.md
+  - docs/models/operations/deploymentscontent.md
+  - docs/models/operations/deploymentscontent2.md
+  - docs/models/operations/deploymentsdata.md
+  - docs/models/operations/deploymentsdeploymentsfunction.md
+  - docs/models/operations/deploymentsdeploymentsresponsetype.md
+  - docs/models/operations/deploymentsdeploymentstype.md
+  - docs/models/operations/deploymentsencodingformat.md
+  - docs/models/operations/deploymentsformat.md
+  - docs/models/operations/deploymentsfunction.md
+  - docs/models/operations/deploymentsmessages.md
+  - docs/models/operations/deploymentsobject.md
+  - docs/models/operations/deploymentsparameters.md
+  - docs/models/operations/deploymentsphotorealversion.md
+  - docs/models/operations/deploymentsprovider.md
+  - docs/models/operations/deploymentsquality.md
+  - docs/models/operations/deploymentsrequest.md
+  - docs/models/operations/deploymentsresponsebody.md
+  - docs/models/operations/deploymentsresponseformat.md
+  - docs/models/operations/deploymentsresponseformat1.md
+  - docs/models/operations/deploymentsresponseformat2.md
+  - docs/models/operations/deploymentsresponseformatdeploymentstype.md
+  - docs/models/operations/deploymentsresponseformattype.md
+  - docs/models/operations/deploymentsrole.md
+  - docs/models/operations/deploymentstoolcalls.md
+  - docs/models/operations/deploymentstools.md
+  - docs/models/operations/deploymentstype.md
+  - docs/models/operations/detail.md
+  - docs/models/operations/document.md
+  - docs/models/operations/documents.md
+  - docs/models/operations/embedding.md
+  - docs/models/operations/encodingformat.md
+  - docs/models/operations/feedback.md
+  - docs/models/operations/files.md
+  - docs/models/operations/filet.md
+  - docs/models/operations/fileuploadpurpose.md
+  - docs/models/operations/fileuploadrequestbody.md
+  - docs/models/operations/fileuploadresponsebody.md
+  - docs/models/operations/finishreason.md
+  - docs/models/operations/format.md
+  - docs/models/operations/four.md
+  - docs/models/operations/functiont.md
+  - docs/models/operations/imageurl.md
+  - docs/models/operations/input.md
+  - docs/models/operations/inputs.md
+  - docs/models/operations/invokeoptions.md
+  - docs/models/operations/jsonschema.md
+  - docs/models/operations/logprobs.md
+  - docs/models/operations/message.md
+  - docs/models/operations/message1.md
+  - docs/models/operations/message2.md
+  - docs/models/operations/message3.md
+  - docs/models/operations/messagefunction.md
+  - docs/models/operations/messagerole.md
+  - docs/models/operations/messages.md
+  - docs/models/operations/messages1.md
+  - docs/models/operations/messages2.md
+  - docs/models/operations/messages3.md
+  - docs/models/operations/messagescontent.md
+  - docs/models/operations/messagesfunction.md
+  - docs/models/operations/messagesrole.md
+  - docs/models/operations/messagestoolcalls.md
+  - docs/models/operations/messagestype.md
+  - docs/models/operations/messagetoolcalls.md
+  - docs/models/operations/messagetype.md
+  - docs/models/operations/meta.md
+  - docs/models/operations/metadata.md
+  - docs/models/operations/modelparameters.md
+  - docs/models/operations/modeltype.md
+  - docs/models/operations/objectt.md
+  - docs/models/operations/one.md
+  - docs/models/operations/parameterst.md
+  - docs/models/operations/performance.md
+  - docs/models/operations/photorealversion.md
+  - docs/models/operations/prefixmessages.md
+  - docs/models/operations/prompt.md
+  - docs/models/operations/promptconfig.md
+  - docs/models/operations/provider.md
+  - docs/models/operations/purpose.md
+  - docs/models/operations/quality.md
+  - docs/models/operations/refusal.md
+  - docs/models/operations/remoteconfigsgetconfigrequestbody.md
+  - docs/models/operations/remoteconfigsgetconfigresponsebody.md
+  - docs/models/operations/remoteconfigsgetconfigtype.md
+  - docs/models/operations/responsebody.md
+  - docs/models/operations/responsebody1.md
+  - docs/models/operations/responsebody2.md
+  - docs/models/operations/responsebodychoices.md
+  - docs/models/operations/responsebodycontent.md
+  - docs/models/operations/responsebodyfinishreason.md
+  - docs/models/operations/responsebodyfunction.md
+  - docs/models/operations/responsebodylogprobs.md
+  - docs/models/operations/responsebodymessage.md
+  - docs/models/operations/responsebodyrefusal.md
+  - docs/models/operations/responsebodyrole.md
+  - docs/models/operations/responsebodytoolcalls.md
+  - docs/models/operations/responsebodytoplogprobs.md
+  - docs/models/operations/responsebodytype.md
+  - docs/models/operations/responsebodyusage.md
+  - docs/models/operations/responseformat.md
+  - docs/models/operations/responseformat1.md
+  - docs/models/operations/responseformat2.md
+  - docs/models/operations/responseformatjsonschema.md
+  - docs/models/operations/responseformattype.md
+  - docs/models/operations/results.md
+  - docs/models/operations/retrievals.md
+  - docs/models/operations/role.md
+  - docs/models/operations/routerchatcompletions21.md
+  - docs/models/operations/routerchatcompletions22.md
+  - docs/models/operations/routerchatcompletions2detail.md
+  - docs/models/operations/routerchatcompletions2imageurl.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletions1.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletions2.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsimageurl.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequest1.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequest2.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequestimageurl.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequestrequestbodymessages4type.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequestrequestbodymessagestype.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequestrequestbodytype.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionsrequesttype.md
+  - docs/models/operations/routerchatcompletions2routerchatcompletionstype.md
+  - docs/models/operations/routerchatcompletions2type.md
+  - docs/models/operations/routerchatcompletionscontent2.md
+  - docs/models/operations/routerchatcompletionscontentrouterchatcompletions2.md
+  - docs/models/operations/routerchatcompletionscontentrouterchatcompletionsrequest2.md
+  - docs/models/operations/routerchatcompletionsfunction.md
+  - docs/models/operations/routerchatcompletionsmessages.md
+  - docs/models/operations/routerchatcompletionsmessagescontent.md
+  - docs/models/operations/routerchatcompletionsmessagesrole.md
+  - docs/models/operations/routerchatcompletionsmessagesrouterchatcompletionscontent.md
+  - docs/models/operations/routerchatcompletionsmessagesrouterchatcompletionsrequestcontent.md
+  - docs/models/operations/routerchatcompletionsmessagesrouterchatcompletionsrequestrole.md
+  - docs/models/operations/routerchatcompletionsmessagesrouterchatcompletionsrole.md
+  - docs/models/operations/routerchatcompletionsrequestbody.md
+  - docs/models/operations/routerchatcompletionsresponse.md
+  - docs/models/operations/routerchatcompletionsresponsebody.md
+  - docs/models/operations/routerchatcompletionsresponsebodychoices.md
+  - docs/models/operations/routerchatcompletionsresponsebodycontent.md
+  - docs/models/operations/routerchatcompletionsresponsebodyfinishreason.md
+  - docs/models/operations/routerchatcompletionsresponsebodyfunction.md
+  - docs/models/operations/routerchatcompletionsresponsebodyrole.md
+  - docs/models/operations/routerchatcompletionsresponsebodyrouterchatcompletionstoplogprobs.md
+  - docs/models/operations/routerchatcompletionsresponsebodytoolcalls.md
+  - docs/models/operations/routerchatcompletionsresponsebodytoplogprobs.md
+  - docs/models/operations/routerchatcompletionsresponsebodytype.md
+  - docs/models/operations/routerchatcompletionsresponsebodyusage.md
+  - docs/models/operations/routerchatcompletionsrouterchatcompletionsresponsebody.md
+  - docs/models/operations/routerchatcompletionsrouterchatcompletionstype.md
+  - docs/models/operations/routerchatcompletionstype.md
+  - docs/models/operations/routercompletionschoices.md
+  - docs/models/operations/routercompletionsrequestbody.md
+  - docs/models/operations/routercompletionsresponsebody.md
+  - docs/models/operations/routercompletionsusage.md
+  - docs/models/operations/routerembeddingdata.md
+  - docs/models/operations/routerembeddingobject.md
+  - docs/models/operations/routerembeddingrequestbody.md
+  - docs/models/operations/routerembeddingresponsebody.md
+  - docs/models/operations/routerembeddingrouterembeddingsobject.md
+  - docs/models/operations/routerembeddingusage.md
+  - docs/models/operations/routerimagegenerationschoices.md
+  - docs/models/operations/routerimagegenerationsmessage.md
+  - docs/models/operations/routerimagegenerationsmessage1.md
+  - docs/models/operations/routerimagegenerationsmessage2.md
+  - docs/models/operations/routerimagegenerationsmessage3.md
+  - docs/models/operations/routerimagegenerationsmessagefunction.md
+  - docs/models/operations/routerimagegenerationsmessagerole.md
+  - docs/models/operations/routerimagegenerationsmessagerouterimagesresponserole.md
+  - docs/models/operations/routerimagegenerationsmessagerouterimagesrole.md
+  - docs/models/operations/routerimagegenerationsmessagetoolcalls.md
+  - docs/models/operations/routerimagegenerationsmessagetype.md
+  - docs/models/operations/routerimagegenerationsrequestbody.md
+  - docs/models/operations/routerimagegenerationsresponsebody.md
+  - docs/models/operations/routerrerankrequestbody.md
+  - docs/models/operations/routerrerankresponsebody.md
+  - docs/models/operations/size.md
+  - docs/models/operations/stop.md
+  - docs/models/operations/three.md
+  - docs/models/operations/tokens.md
+  - docs/models/operations/toolcalls.md
+  - docs/models/operations/tools.md
+  - docs/models/operations/toplogprobs.md
+  - docs/models/operations/two.md
+  - docs/models/operations/two1.md
+  - docs/models/operations/two2.md
+  - docs/models/operations/twodetail.md
+  - docs/models/operations/twoimageurl.md
+  - docs/models/operations/twotype.md
+  - docs/models/operations/type.md
+  - docs/models/operations/usage.md
+  - docs/models/operations/userid.md
+  - docs/models/operations/value.md
+  - docs/sdks/chat/README.md
+  - docs/sdks/completions/README.md
+  - docs/sdks/contacts/README.md
+  - docs/sdks/deployments/README.md
+  - docs/sdks/embeddings/README.md
+  - docs/sdks/feedback/README.md
+  - docs/sdks/files/README.md
+  - docs/sdks/images/README.md
+  - docs/sdks/metrics/README.md
+  - docs/sdks/orq/README.md
+  - docs/sdks/orqcompletions/README.md
+  - docs/sdks/remoteconfig/README.md
+  - docs/sdks/router/README.md
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/contactsCreate.ts
+  - src/funcs/deploymentsAll.ts
+  - src/funcs/deploymentsGetConfig.ts
+  - src/funcs/deploymentsInvoke.ts
+  - src/funcs/deploymentsMetricsCreate.ts
+  - src/funcs/feedbackCreate.ts
+  - src/funcs/filesBulkUpload.ts
+  - src/funcs/filesUpload.ts
+  - src/funcs/remoteconfigGetConfig.ts
+  - src/funcs/routerChatCompletionsCreate.ts
+  - src/funcs/routerCompletionsCreate.ts
+  - src/funcs/routerEmbeddingsCreate.ts
+  - src/funcs/routerImagesGenerate.ts
+  - src/funcs/routerRerank.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/event-streams.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/components/deployments.ts
+  - src/models/components/index.ts
+  - src/models/components/security.ts
+  - src/models/errors/apierror.ts
+  - src/models/errors/honoapierror.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/operations/bulkfileupload.ts
+  - src/models/operations/createcontact.ts
+  - src/models/operations/createfeedback.ts
+  - src/models/operations/deploymentcreatemetric.ts
+  - src/models/operations/deploymentgetconfig.ts
+  - src/models/operations/deploymentinvoke.ts
+  - src/models/operations/deployments.ts
+  - src/models/operations/fileupload.ts
+  - src/models/operations/index.ts
+  - src/models/operations/remoteconfigsgetconfig.ts
+  - src/models/operations/routerchatcompletions.ts
+  - src/models/operations/routercompletions.ts
+  - src/models/operations/routerembedding.ts
+  - src/models/operations/routerimagegenerations.ts
+  - src/models/operations/routerrerank.ts
+  - src/sdk/chat.ts
+  - src/sdk/completions.ts
+  - src/sdk/contacts.ts
+  - src/sdk/deployments.ts
+  - src/sdk/embeddings.ts
+  - src/sdk/feedback.ts
+  - src/sdk/files.ts
+  - src/sdk/images.ts
+  - src/sdk/index.ts
+  - src/sdk/metrics.ts
+  - src/sdk/orqcompletions.ts
+  - src/sdk/remoteconfig.ts
+  - src/sdk/router.ts
+  - src/sdk/sdk.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  CreateContact:
+    speakeasy-default-create-contact:
+      requestBody:
+        application/json: {"external_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "external_id": "<id>"}
+  CreateFeedback:
+    "":
+      requestBody:
+        application/json: {"property": "rating", "value": ["good"], "trace_id": "67HTZ65Z9W91HSF51CW68KK1QH"}
+      responses:
+        "200":
+          application/json: {"property": "<value>", "value": "<value>", "trace_id": "<id>", "id": "<id>"}
+  DeploymentGetConfig:
+    speakeasy-default-deployment-get-config:
+      requestBody:
+        application/json: {"key": "<key>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "provider": "<value>", "model": "ATS", "version": "<value>", "messages": []}
+  DeploymentInvoke:
+    speakeasy-default-deployment-invoke:
+      requestBody:
+        application/json: {"key": "<key>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "created": "2023-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": "1729.12"}, {"index": "3047.15"}]}
+  Deployments:
+    speakeasy-default-deployments:
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [], "has_more": false}
+        "500":
+          application/json: {"message": "<value>"}
+  DeploymentCreateMetric:
+    speakeasy-default-deployment-create-metric:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"code": "4865.89", "success": false}
+  FileUpload:
+    speakeasy-default-file-upload:
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": "4036.54", "file_name": "example.file"}
+  BulkFileUpload:
+    speakeasy-default-bulk-file-upload:
+      requestBody:
+        multipart/form-data: {"files": [{}], "purpose": "retrieval"}
+      responses:
+        "200":
+          application/json: [{"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": "4883.89", "file_name": "example.file"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": "9335.52", "file_name": "example.file"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": "561.36", "file_name": "example.file"}]
+  RouterRerank:
+    speakeasy-default-router-rerank:
+      responses:
+        "200":
+          application/json: {"results": [{"index": "1967.56", "relevance_score": "3138.23"}, {"index": "5345.26", "relevance_score": "8653.00"}, {"index": "4463.38", "relevance_score": "1381.46"}]}
+  RouterEmbedding:
+    speakeasy-default-router-embedding:
+      requestBody:
+        application/json: {"input": "<value>", "model": "LeBaron"}
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"object": "embedding", "embedding": [], "index": "7964.74"}], "model": "Wrangler", "usage": {"prompt_tokens": "0.87", "total_tokens": "1697.27"}}
+  RouterChatCompletions:
+    speakeasy-default-router-chat-completions:
+      requestBody:
+        application/json: {"model": "Fiesta", "messages": [{"role": "user", "content": "<value>"}, {"role": "system", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "choices": [{"finish_reason": "content_filter", "index": "7524.37", "logprobs": {"content": [{"token": "<value>", "logprob": "3570.21", "bytes": ["177.60"], "top_logprobs": []}, {"token": "<value>", "logprob": "2113.38", "bytes": [], "top_logprobs": [{"token": "<value>", "logprob": "1856.93", "bytes": []}]}, {"token": "<value>", "logprob": "1009.67", "bytes": ["3392.36", "365.22"], "top_logprobs": [{"token": "<value>", "logprob": "6502.37", "bytes": []}, {"token": "<value>", "logprob": "155.53", "bytes": ["276.20", "6596.82"]}]}], "refusal": [{"token": "<value>", "logprob": "9065.37", "bytes": ["4963.23"], "top_logprobs": [{"token": "<value>", "logprob": "7823.67", "bytes": []}]}, {"token": "<value>", "logprob": "7034.40", "bytes": ["7804.86", "7602.58", "2199.75"], "top_logprobs": [{"token": "<value>", "logprob": "4278.87", "bytes": ["934.71", "4914.27"]}]}]}, "delta": {"content": "<value>", "refusal": "<value>", "tool_calls": [{"id": "<id>", "type": "function", "function": {"name": "<value>", "arguments": "<value>"}}], "role": "user"}}, {"finish_reason": "tool_calls", "index": "454.16", "logprobs": {"content": [], "refusal": [{"token": "<value>", "logprob": "5833.53", "bytes": ["3259.90", "4078.33"], "top_logprobs": []}]}, "delta": {"content": "<value>", "refusal": "<value>", "tool_calls": [], "role": "correction"}}, {"finish_reason": "tool_calls", "index": "54.36", "logprobs": {"content": [{"token": "<value>", "logprob": "8988.41", "bytes": ["172.08", "1981.75"], "top_logprobs": [{"token": "<value>", "logprob": "3535.31", "bytes": ["6798.85"]}, {"token": "<value>", "logprob": "724.37", "bytes": ["9517.81", "5665.12", "2955.58"]}, {"token": "<value>", "logprob": "2032.57", "bytes": ["7122.13"]}]}, {"token": "<value>", "logprob": "9958.51", "bytes": ["2127.75", "6207.47", "2841.20"], "top_logprobs": [{"token": "<value>", "logprob": "2710.82", "bytes": ["6097.55"]}, {"token": "<value>", "logprob": "5200.49", "bytes": ["8007.59", "1177.47"]}]}, {"token": "<value>", "logprob": "5898.12", "bytes": ["2773.21", "7703.70", "3505.87"], "top_logprobs": []}], "refusal": [{"token": "<value>", "logprob": "6177.60", "bytes": ["8142.21", "9843.62"], "top_logprobs": [{"token": "<value>", "logprob": "2824.36", "bytes": []}, {"token": "<value>", "logprob": "6794.44", "bytes": ["7413.83", "9349.59", "9477.80"]}, {"token": "<value>", "logprob": "9387.56", "bytes": ["785.23"]}]}, {"token": "<value>", "logprob": "7216.58", "bytes": ["3718.85", "1621.36", "2965.97"], "top_logprobs": []}, {"token": "<value>", "logprob": "8254.61", "bytes": ["2398.72", "9049.17", "9959.72"], "top_logprobs": [{"token": "<value>", "logprob": "3589.66", "bytes": ["1267.14", "2906.13", "6778.78"]}]}]}, "delta": {"content": "<value>", "refusal": "<value>", "tool_calls": [], "role": "exception"}}], "created": "6290.63", "model": "PT Cruiser", "system_fingerprint": "<value>", "object": "<value>"}
+  RouterCompletions:
+    speakeasy-default-router-completions:
+      responses:
+        "200":
+          application/json: {"id": "<id>", "choices": [{"finish_reason": "content_filter", "index": "4174.58", "text": "<value>"}], "created": "1343.65", "model": "A8", "system_fingerprint": "<value>", "object": "<value>"}
+  RouterImageGenerations:
+    speakeasy-default-router-image-generations:
+      responses:
+        "200":
+          application/json: {"id": "<id>", "created": "7401.98", "choices": [{"index": "3310.48"}], "model": "Challenger", "object": "<value>"}
+  RemoteConfigsGetConfig:
+    speakeasy-default-remote-configs-get-config:
+      responses:
+        "200":
+          application/json: {"type": "boolean"}

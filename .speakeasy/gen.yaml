@@ -1,0 +1,45 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: orq
+  maintainOpenAPIOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+  useClassNamesForArrayFields: true
+  fixes:
+    nameResolutionDec2023: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+  auth:
+    oAuth2ClientCredentialsEnabled: true
+    oAuth2PasswordEnabled: false
+typescript:
+  version: 0.0.1 # TODO: should be change
+  additionalDependencies:
+    dependencies: {}
+    devDependencies: {}
+    peerDependencies: {}
+  additionalPackageJSON: {}
+  author: Orq
+  clientServerStatusCodesAsErrors: true
+  defaultErrorName: APIError
+  enumFormat: union
+  envVarPrefix: ORQ
+  flattenGlobalSecurity: true
+  flatteningOrder: body-first
+  imports:
+    option: openapi
+    paths:
+      callbacks: models/callbacks
+      errors: models/errors
+      operations: models/operations
+      shared: models/components
+      webhooks: models/webhooks
+  inputModelSuffix: input
+  maxMethodParams: 0
+  methodArguments: infer-optional-args
+  moduleFormat: commonjs
+  outputModelSuffix: output
+  packageName: 'orq-poc-typescript' # TODO: should be change to @orq-ai/node
+  responseFormat: flat
+  templateVersion: v2
+  useIndexModules: true
