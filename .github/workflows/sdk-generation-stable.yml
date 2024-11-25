@@ -1,0 +1,16 @@
+name: '[Stable] Generate'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .speakeasy/gen.yaml
+
+jobs:
+  publish:
+    uses: ./.github/workflows/sdk_generation.yml
+    name: Runner
+    secrets: inherit
+    with:
+      target: orq-ai-node
