@@ -14,3 +14,4 @@ jobs:
     secrets: inherit
     with:
       target: orq-ai-node
+      npm_publish_tag_name: latest
