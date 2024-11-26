@@ -1,0 +1,17 @@
+name: '[Pre-release] Generate'
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/orq-rc/.speakeasy/gen.yaml
+
+jobs:
+  publish:
+    uses: ./.github/workflows/sdk_generation.yml
+    name: Runner
+    secrets: inherit
+    with:
+      target: orq-ai-prerelease-node
+      npm_publish_tag_name: next

@@ -1,0 +1,33 @@
+name: Generate
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        type: string
+        default: false
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DOCKER_DEFAULT_PLATFORM: linux/amd64
+
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+  statuses: write
+  id-token: write
+
+jobs:
+  generate:
+    uses: ./.github/workflows/workflow-executor.yml
+    with:
+      mode: direct
+      target: ${{ inputs.target }}
+    secrets:
+      github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      npm_token: ${{ secrets.NPM_TOKEN }}
+      speakeasy_api_key: ${{ secrets.SPEAKEASY_API_KEY }}

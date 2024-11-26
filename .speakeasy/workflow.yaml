@@ -1,0 +1,34 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    orq-ai-node:
+        inputs:
+            - location: ./openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/orq/orq/orq-ai-node
+    orq-ai-prerelease-node:
+        inputs:
+            - location: ./openapi-prerelease.yaml
+        registry:
+            location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node
+targets:
+    orq-ai-node:
+        target: typescript
+        source: orq-ai-node
+        publish:
+            npm:
+                token: $npm_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/orq/orq/orq-ai-node-code-samples
+            blocking: false
+    orq-ai-prerelease-node:
+        target: typescript
+        source: orq-ai-prerelease-node
+        publish:
+            npm:
+                token: $npm_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node-code-samples
+            blocking: false
