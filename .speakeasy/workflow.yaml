@@ -25,6 +25,7 @@ targets:
     orq-ai-prerelease-node:
         target: typescript
         source: orq-ai-prerelease-node
+        output: ./packages/orq-rc
         publish:
             npm:
                 token: $npm_token
