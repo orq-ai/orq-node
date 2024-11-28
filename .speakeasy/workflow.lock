@@ -1,0 +1,54 @@
+speakeasyVersion: 1.448.2
+sources:
+    orq-ai-prerelease-node:
+        sourceNamespace: orq-ai-prerelease-node
+        sourceRevisionDigest: sha256:9c72fa25d4ec2a5e25a88032f9dff796fb3fb2fdb47c883a026bde4a79aa69d8
+        sourceBlobDigest: sha256:e0fc97516af3dd12bd9c3aac6559084afd7c89d4458319808ccc36f74576d2e8
+        tags:
+            - latest
+            - speakeasy-sdk-regen-1732804061
+            - "2.0"
+targets:
+    orq-ai-prerelease-node:
+        source: orq-ai-prerelease-node
+        sourceNamespace: orq-ai-prerelease-node
+        sourceRevisionDigest: sha256:9c72fa25d4ec2a5e25a88032f9dff796fb3fb2fdb47c883a026bde4a79aa69d8
+        sourceBlobDigest: sha256:e0fc97516af3dd12bd9c3aac6559084afd7c89d4458319808ccc36f74576d2e8
+        codeSamplesNamespace: orq-ai-prerelease-node-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:9d5f70827faa20acde9d0fa8d2854cc27c507032c7642983bc22cc8a60691f0d
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        orq-ai-node:
+            inputs:
+                - location: ./openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/orq/orq/orq-ai-node
+        orq-ai-prerelease-node:
+            inputs:
+                - location: ./openapi-prerelease.yaml
+            registry:
+                location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node
+    targets:
+        orq-ai-node:
+            target: typescript
+            source: orq-ai-node
+            publish:
+                npm:
+                    token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/orq/orq/orq-ai-node-typescript-code-samples
+                blocking: false
+        orq-ai-prerelease-node:
+            target: typescript
+            source: orq-ai-prerelease-node
+            output: ./packages/orq-rc
+            publish:
+                npm:
+                    token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node-typescript-code-samples
+                blocking: false

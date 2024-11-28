@@ -1,0 +1,25 @@
+# GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyToolCalls
+
+## Example Usage
+
+```typescript
+import { GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyToolCalls } from "@orq-ai/node/models/operations";
+
+let value:
+  GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyToolCalls = {
+    type: "function",
+    function: {
+      name: "<value>",
+      arguments: "<value>",
+    },
+  };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                    | Type                                                                                                                                                                                     | Required                                                                                                                                                                                 | Description                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                     | *string*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `index`                                                                                                                                                                                  | *number*                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `type`                                                                                                                                                                                   | [operations.GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBody3Type](../../models/operations/getallpromptsitemspromptsresponse200applicationjsonresponsebody3type.md)       | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
+| `function`                                                                                                                                                                               | [operations.GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyFunction](../../models/operations/getallpromptsitemspromptsresponse200applicationjsonresponsebodyfunction.md) | :heavy_check_mark:                                                                                                                                                                       | N/A                                                                                                                                                                                      |
