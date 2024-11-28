@@ -20,7 +20,7 @@ targets:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/orq/orq/orq-ai-node-code-samples
+                location: registry.speakeasyapi.dev/orq/orq/orq-ai-node-typescript-code-samples
             blocking: false
     orq-ai-prerelease-node:
         target: typescript
@@ -30,5 +30,5 @@ targets:
                 token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node-code-samples
+                location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node-typescript-code-samples
             blocking: false

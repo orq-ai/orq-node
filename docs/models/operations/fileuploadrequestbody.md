@@ -1,0 +1,16 @@
+# FileUploadRequestBody
+
+## Example Usage
+
+```typescript
+import { FileUploadRequestBody } from "@orq-ai/node/models/operations";
+
+// No examples available for this model
+```
+
+## Fields
+
+| Field                                                                                                                                                                                | Type                                                                                                                                                                                 | Required                                                                                                                                                                             | Description                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `file`                                                                                                                                                                               | [File](https://developer.mozilla.org/en-US/docs/Web/API/File) \| [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob) \| [operations.FileT](../../models/operations/filet.md) | :heavy_minus_sign:                                                                                                                                                                   | The file to be uploaded.                                                                                                                                                             |
+| `purpose`                                                                                                                                                                            | [operations.Purpose](../../models/operations/purpose.md)                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                   | The intended purpose of the uploaded file.                                                                                                                                           |

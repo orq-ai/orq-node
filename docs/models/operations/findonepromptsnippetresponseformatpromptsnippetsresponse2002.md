@@ -1,0 +1,17 @@
+# FindOnePromptSnippetResponseFormatPromptSnippetsResponse2002
+
+## Example Usage
+
+```typescript
+import { FindOnePromptSnippetResponseFormatPromptSnippetsResponse2002 } from "@orq-ai/node/models/operations";
+
+let value: FindOnePromptSnippetResponseFormatPromptSnippetsResponse2002 = {
+  type: "json_object",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                            | Type                                                                                                                                                                                                                                             | Required                                                                                                                                                                                                                                         | Description                                                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                                           | [operations.FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJSONResponseBody2VersionsType](../../models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody2versionstype.md) | :heavy_check_mark:                                                                                                                                                                                                                               | N/A                                                                                                                                                                                                                                              |
