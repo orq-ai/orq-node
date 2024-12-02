@@ -6,11 +6,11 @@
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
-  "fal";
+  "leonardoai";
 ```
 
 ## Values
 
 ```typescript
-"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia"
+"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina"
 ```

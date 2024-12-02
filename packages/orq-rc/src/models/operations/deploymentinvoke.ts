@@ -306,6 +306,7 @@ export const DeploymentInvokeProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 /**
  * The provider used to generate the response

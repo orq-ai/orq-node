@@ -39,6 +39,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponseModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -267,6 +268,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponseProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponseProvider =
   ClosedEnum<
@@ -451,6 +453,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -684,6 +687,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Provider =
   ClosedEnum<
@@ -945,6 +949,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1156,6 +1161,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsProvider = ClosedEnum<
   typeof FindOnePromptSnippetResponseBodyPromptSnippetsProvider
@@ -1329,6 +1335,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ModelType 
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -1560,6 +1567,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Provider =
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Provider =
   ClosedEnum<
@@ -1812,6 +1820,7 @@ export const FindOnePromptSnippetResponseBodyModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2018,6 +2027,7 @@ export const FindOnePromptSnippetResponseBodyProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type FindOnePromptSnippetResponseBodyProvider = ClosedEnum<
   typeof FindOnePromptSnippetResponseBodyProvider
@@ -2176,6 +2186,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -2409,6 +2420,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -6320,7 +6332,7 @@ export const FindOnePromptSnippetResponseBody3$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() =>
@@ -6384,7 +6396,7 @@ export const FindOnePromptSnippetResponseBody3$outboundSchema: z.ZodType<
     FindOnePromptSnippetResponseBodyPromptSnippetsResponseMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>
@@ -9954,7 +9966,7 @@ export const FindOnePromptSnippetResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() =>
@@ -10018,7 +10030,7 @@ export const FindOnePromptSnippetResponseBody2$outboundSchema: z.ZodType<
     FindOnePromptSnippetResponseBodyPromptSnippetsMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>
@@ -13450,7 +13462,7 @@ export const FindOnePromptSnippetResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => FindOnePromptSnippetResponseBodyVersions$inboundSchema),
@@ -13504,7 +13516,7 @@ export const FindOnePromptSnippetResponseBody1$outboundSchema: z.ZodType<
     FindOnePromptSnippetResponseBodyMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => FindOnePromptSnippetResponseBodyVersions$outboundSchema),

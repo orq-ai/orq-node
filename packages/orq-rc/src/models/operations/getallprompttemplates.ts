@@ -107,6 +107,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -321,6 +322,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesProvider = ClosedEnum<
   typeof GetAllPromptTemplatesItemsPromptTemplatesProvider
@@ -494,6 +496,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSON
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -727,6 +730,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSON
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -984,6 +988,7 @@ export const GetAllPromptTemplatesItemsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1191,6 +1196,7 @@ export const GetAllPromptTemplatesItemsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptTemplatesItemsProvider = ClosedEnum<
   typeof GetAllPromptTemplatesItemsProvider
@@ -1357,6 +1363,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponseModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1577,6 +1584,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponseProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesResponseProvider =
   ClosedEnum<typeof GetAllPromptTemplatesItemsPromptTemplatesResponseProvider>;
@@ -1816,6 +1824,7 @@ export const ItemsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2010,6 +2019,7 @@ export const ItemsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type ItemsProvider = ClosedEnum<typeof ItemsProvider>;
 
@@ -2162,6 +2172,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponse200ModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2393,6 +2404,7 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponse200Provider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesResponse200Provider =
   ClosedEnum<
@@ -6719,7 +6731,7 @@ export const Items3$inboundSchema: z.ZodType<Items3, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2024-11-26T10:00:21.083Z",
+      "2024-12-01T21:30:44.576Z",
     ).transform(v => new Date(v)),
     versions: z.array(
       z.lazy(() => GetAllPromptTemplatesItemsVersions$inboundSchema),
@@ -6776,7 +6788,7 @@ export const Items3$outboundSchema: z.ZodType<
     GetAllPromptTemplatesItemsPromptTemplatesMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => GetAllPromptTemplatesItemsVersions$outboundSchema),
@@ -10153,7 +10165,7 @@ export const Items2$inboundSchema: z.ZodType<Items2, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2024-11-26T10:00:21.083Z",
+      "2024-12-01T21:30:44.576Z",
     ).transform(v => new Date(v)),
     versions: z.array(z.lazy(() => ItemsVersions$inboundSchema)),
     key: z.string(),
@@ -10205,7 +10217,7 @@ export const Items2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => GetAllPromptTemplatesItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => ItemsVersions$outboundSchema)),
   key: z.string(),
@@ -13452,7 +13464,7 @@ export const Items1$inboundSchema: z.ZodType<Items1, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2024-11-26T10:00:21.083Z",
+      "2024-12-01T21:30:44.576Z",
     ).transform(v => new Date(v)),
     versions: z.array(
       z.lazy(() =>
@@ -13507,7 +13519,7 @@ export const Items1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => ItemsPromptConfig$outboundSchema),
   metadata: z.lazy(() => ItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>

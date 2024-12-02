@@ -291,6 +291,7 @@ export const DeploymentGetConfigDeploymentsResponseType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model. Current `chat`,`completion` and `image` are supported

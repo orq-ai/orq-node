@@ -7,11 +7,12 @@ The type of the model
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesResponseModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesResponseModelType = "stt";
+let value: GetAllPromptTemplatesItemsPromptTemplatesResponseModelType =
+  "rerank";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

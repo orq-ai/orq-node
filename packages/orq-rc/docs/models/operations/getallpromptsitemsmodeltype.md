@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { GetAllPromptsItemsModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsItemsModelType = "embedding";
+let value: GetAllPromptsItemsModelType = "vision";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

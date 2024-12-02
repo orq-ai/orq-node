@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { UpdatePromptResponseBodyPromptsResponse200ModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseBodyPromptsResponse200ModelType = "rerank";
+let value: UpdatePromptResponseBodyPromptsResponse200ModelType = "moderations";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

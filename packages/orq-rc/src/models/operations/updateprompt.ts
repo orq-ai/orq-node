@@ -21,6 +21,7 @@ export const UpdatePromptModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -219,6 +220,7 @@ export const UpdatePromptProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -378,6 +380,7 @@ export const UpdatePromptResponseBodyPromptsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -590,6 +593,7 @@ export const UpdatePromptResponseBodyPromptsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyPromptsProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsProvider
@@ -755,6 +759,7 @@ export const UpdatePromptResponseBodyPromptsResponse200ApplicationJSONModelType 
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -988,6 +993,7 @@ export const UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -1233,6 +1239,7 @@ export const UpdatePromptResponseBodyModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1441,6 +1448,7 @@ export const UpdatePromptResponseBodyProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyProvider
@@ -1601,6 +1609,7 @@ export const UpdatePromptResponseBodyPromptsResponseModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1816,6 +1825,7 @@ export const UpdatePromptResponseBodyPromptsResponseProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyPromptsResponseProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsResponseProvider
@@ -2043,6 +2053,7 @@ export const ResponseBodyModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2241,6 +2252,7 @@ export const ResponseBodyProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type ResponseBodyProvider = ClosedEnum<typeof ResponseBodyProvider>;
 
@@ -2393,6 +2405,7 @@ export const UpdatePromptResponseBodyPromptsResponse200ModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2612,6 +2625,7 @@ export const UpdatePromptResponseBodyPromptsResponse200Provider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyPromptsResponse200Provider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsResponse200Provider
@@ -7645,7 +7659,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => UpdatePromptResponseBodyVersions$inboundSchema),
@@ -7699,7 +7713,7 @@ export const ResponseBody3$outboundSchema: z.ZodType<
     UpdatePromptResponseBodyPromptsMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => UpdatePromptResponseBodyVersions$outboundSchema),
@@ -11001,7 +11015,7 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => ResponseBodyVersions$inboundSchema)),
   key: z.string(),
@@ -11053,7 +11067,7 @@ export const ResponseBody2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => UpdatePromptResponseBodyMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => ResponseBodyVersions$outboundSchema)),
   key: z.string(),
@@ -14243,7 +14257,7 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => Versions$inboundSchema)),
   type: ResponseBodyType$inboundSchema,
@@ -14291,7 +14305,7 @@ export const ResponseBody1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => ResponseBodyPromptConfig$outboundSchema),
   metadata: z.lazy(() => ResponseBodyMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => Versions$outboundSchema)),
   type: ResponseBodyType$outboundSchema,

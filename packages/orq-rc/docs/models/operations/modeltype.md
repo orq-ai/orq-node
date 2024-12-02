@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { ModelType } from "@orq-ai/node/models/operations";
 
-let value: ModelType = "vision";
+let value: ModelType = "image";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { CreatePromptVersionPromptsModelType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptVersionPromptsModelType = "rerank";
+let value: CreatePromptVersionPromptsModelType = "moderations";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

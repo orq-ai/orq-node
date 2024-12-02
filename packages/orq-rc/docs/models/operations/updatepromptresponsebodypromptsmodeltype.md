@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { UpdatePromptResponseBodyPromptsModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseBodyPromptsModelType = "vision";
+let value: UpdatePromptResponseBodyPromptsModelType = "image";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

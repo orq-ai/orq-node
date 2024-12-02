@@ -98,6 +98,7 @@ export const DeploymentsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -296,6 +297,7 @@ export const DeploymentsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 
