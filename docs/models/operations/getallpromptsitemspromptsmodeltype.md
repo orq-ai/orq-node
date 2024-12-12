@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { GetAllPromptsItemsPromptsModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsItemsPromptsModelType = "image";
+let value: GetAllPromptsItemsPromptsModelType = "tts";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

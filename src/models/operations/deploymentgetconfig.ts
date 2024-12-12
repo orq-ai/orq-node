@@ -291,6 +291,7 @@ export const DeploymentGetConfigDeploymentsResponseType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model. Current `chat`,`completion` and `image` are supported
@@ -1074,11 +1075,11 @@ export namespace FunctionT$ {
   export type Outbound = FunctionT$Outbound;
 }
 
-export function functionTToJSON(functionT: FunctionT): string {
+export function functionToJSON(functionT: FunctionT): string {
   return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
 }
 
-export function functionTFromJSON(
+export function functionFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionT, SDKValidationError> {
   return safeParse(
@@ -3183,11 +3184,11 @@ export namespace ParametersT$ {
   export type Outbound = ParametersT$Outbound;
 }
 
-export function parametersTToJSON(parametersT: ParametersT): string {
+export function parametersToJSON(parametersT: ParametersT): string {
   return JSON.stringify(ParametersT$outboundSchema.parse(parametersT));
 }
 
-export function parametersTFromJSON(
+export function parametersFromJSON(
   jsonString: string,
 ): SafeParseResult<ParametersT, SDKValidationError> {
   return safeParse(

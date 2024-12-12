@@ -452,7 +452,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
-  serverURL: "https://my.staging.orq.ai",
+  serverURL: "https://my.orq.ai",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 

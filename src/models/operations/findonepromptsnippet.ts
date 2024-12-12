@@ -39,6 +39,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponseModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -267,6 +268,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponseProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponseProvider =
   ClosedEnum<
@@ -451,6 +453,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -684,6 +687,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Provider =
   ClosedEnum<
@@ -945,6 +949,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1156,6 +1161,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsProvider = ClosedEnum<
   typeof FindOnePromptSnippetResponseBodyPromptSnippetsProvider
@@ -1329,6 +1335,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ModelType 
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -1560,6 +1567,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Provider =
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Provider =
   ClosedEnum<
@@ -1812,6 +1820,7 @@ export const FindOnePromptSnippetResponseBodyModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2018,6 +2027,7 @@ export const FindOnePromptSnippetResponseBodyProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type FindOnePromptSnippetResponseBodyProvider = ClosedEnum<
   typeof FindOnePromptSnippetResponseBodyProvider
@@ -2176,6 +2186,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -2409,6 +2420,7 @@ export const FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applicatio
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -4882,7 +4894,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ResponseFormat$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ResponseFormatToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ResponseFormatToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ResponseFormat:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ResponseFormat,
 ): string {
@@ -4894,7 +4906,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ResponseFormatFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ResponseFormatFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ResponseFormat,
@@ -5095,7 +5107,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelParameters$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelParametersToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ModelParametersToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelParameters:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelParameters,
 ): string {
@@ -5107,7 +5119,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelParametersFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ModelParametersFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelParameters,
@@ -5608,7 +5620,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Content$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ContentToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ContentToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Content:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Content,
 ): string {
@@ -5620,7 +5632,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ContentFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ContentFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Content,
@@ -5708,7 +5720,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Function$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3FunctionToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3FunctionToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Function:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Function,
 ): string {
@@ -5720,7 +5732,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3FunctionFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3FunctionFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Function,
@@ -5793,7 +5805,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCallsToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ToolCallsToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls,
 ): string {
@@ -5805,7 +5817,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCallsFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3ToolCallsFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls,
@@ -5915,7 +5927,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Messages$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3MessagesToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3MessagesToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Messages:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Messages,
 ): string {
@@ -5927,7 +5939,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3MessagesFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3MessagesFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Messages,
@@ -6046,7 +6058,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PromptConfig$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PromptConfigToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3PromptConfigToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PromptConfig:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PromptConfig,
 ): string {
@@ -6058,7 +6070,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PromptConfigFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3PromptConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PromptConfig,
@@ -6126,7 +6138,7 @@ export namespace FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Applic
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Metadata$Outbound;
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3MetadataToJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3MetadataToJSON(
   findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Metadata:
     FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Metadata,
 ): string {
@@ -6138,7 +6150,7 @@ export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200Applica
   );
 }
 
-export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3MetadataFromJSON(
+export function findOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSON3MetadataFromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Metadata,
@@ -6320,7 +6332,7 @@ export const FindOnePromptSnippetResponseBody3$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() =>
@@ -6384,7 +6396,7 @@ export const FindOnePromptSnippetResponseBody3$outboundSchema: z.ZodType<
     FindOnePromptSnippetResponseBodyPromptSnippetsResponseMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>
@@ -9954,7 +9966,7 @@ export const FindOnePromptSnippetResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() =>
@@ -10018,7 +10030,7 @@ export const FindOnePromptSnippetResponseBody2$outboundSchema: z.ZodType<
     FindOnePromptSnippetResponseBodyPromptSnippetsMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>
@@ -11754,7 +11766,7 @@ export namespace FindOnePromptSnippetResponseFormatPromptSnippetsResponse200Appl
     FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson2$Outbound;
 }
 
-export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson2ToJSON(
+export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJSON2ToJSON(
   findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson2:
     FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson2,
 ): string {
@@ -11766,7 +11778,7 @@ export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200Appli
   );
 }
 
-export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson2FromJSON(
+export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson2,
@@ -11944,7 +11956,7 @@ export namespace FindOnePromptSnippetResponseFormatPromptSnippetsResponse200Appl
     FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson1$Outbound;
 }
 
-export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson1ToJSON(
+export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJSON1ToJSON(
   findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson1:
     FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson1,
 ): string {
@@ -11956,7 +11968,7 @@ export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200Appli
   );
 }
 
-export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson1FromJSON(
+export function findOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJSON1FromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetResponseFormatPromptSnippetsResponse200ApplicationJson1,
@@ -12481,7 +12493,7 @@ export namespace FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2$
     FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2$Outbound;
 }
 
-export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2ToJSON(
+export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJSON2ToJSON(
   findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2:
     FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2,
 ): string {
@@ -12491,7 +12503,7 @@ export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2To
   );
 }
 
-export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2FromJSON(
+export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2,
@@ -12581,7 +12593,7 @@ export namespace FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1$
     FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1$Outbound;
 }
 
-export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1ToJSON(
+export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJSON1ToJSON(
   findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1:
     FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1,
 ): string {
@@ -12591,7 +12603,7 @@ export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1To
   );
 }
 
-export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1FromJSON(
+export function findOnePromptSnippet2PromptSnippetsResponse200ApplicationJSON1FromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson1,
@@ -12657,7 +12669,7 @@ export namespace FindOnePromptSnippetContentPromptSnippetsResponse200Application
     FindOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2$Outbound;
 }
 
-export function findOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2ToJSON(
+export function findOnePromptSnippetContentPromptSnippetsResponse200ApplicationJSON2ToJSON(
   findOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2:
     FindOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2,
 ): string {
@@ -12669,7 +12681,7 @@ export function findOnePromptSnippetContentPromptSnippetsResponse200ApplicationJ
   );
 }
 
-export function findOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2FromJSON(
+export function findOnePromptSnippetContentPromptSnippetsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   FindOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2,
@@ -13450,7 +13462,7 @@ export const FindOnePromptSnippetResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => FindOnePromptSnippetResponseBodyVersions$inboundSchema),
@@ -13504,7 +13516,7 @@ export const FindOnePromptSnippetResponseBody1$outboundSchema: z.ZodType<
     FindOnePromptSnippetResponseBodyMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => FindOnePromptSnippetResponseBodyVersions$outboundSchema),

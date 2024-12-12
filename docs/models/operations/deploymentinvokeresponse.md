@@ -11,7 +11,7 @@ const value: operations.DeploymentInvokeResponseBody = {
   created: new Date("2024-02-06T18:51:30.654Z"),
   object: "chat",
   model: "Model Y",
-  provider: "anyscale",
+  provider: "perplexity",
   isFinal: false,
   choices: [
     {

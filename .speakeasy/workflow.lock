@@ -1,5 +1,13 @@
-speakeasyVersion: 1.449.0
+speakeasyVersion: 1.454.0
 sources:
+    orq-ai-node:
+        sourceNamespace: orq-ai-node
+        sourceRevisionDigest: sha256:124147b62647f80d9c595af677e0b904130b58ab9049de79d04902cedc96beb8
+        sourceBlobDigest: sha256:897b0e8e98e67b47490aae717bf3256d6d4574cdd4014a81401d844337126fb4
+        tags:
+            - latest
+            - speakeasy-sdk-regen-1734004973
+            - "2.0"
     orq-ai-prerelease-node:
         sourceNamespace: orq-ai-prerelease-node
         sourceRevisionDigest: sha256:5575160d830a0e46a53c982d7143ac980e75d7c3f3b849c1eedf012550d0056f
@@ -9,6 +17,13 @@ sources:
             - speakeasy-sdk-regen-1733176523
             - "2.0"
 targets:
+    orq-ai-node:
+        source: orq-ai-node
+        sourceNamespace: orq-ai-node
+        sourceRevisionDigest: sha256:124147b62647f80d9c595af677e0b904130b58ab9049de79d04902cedc96beb8
+        sourceBlobDigest: sha256:897b0e8e98e67b47490aae717bf3256d6d4574cdd4014a81401d844337126fb4
+        codeSamplesNamespace: orq-ai-node-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:b51cbcd4dfaeeb44689270679695acb6dd6a6578e9c77edcbf4e7e65cb5504d2
     orq-ai-prerelease-node:
         source: orq-ai-prerelease-node
         sourceNamespace: orq-ai-prerelease-node

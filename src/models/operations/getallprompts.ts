@@ -122,6 +122,7 @@ export const GetAllPromptsItemsPromptsResponseModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -333,6 +334,7 @@ export const GetAllPromptsItemsPromptsResponseProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptsItemsPromptsResponseProvider = ClosedEnum<
   typeof GetAllPromptsItemsPromptsResponseProvider
@@ -494,6 +496,7 @@ export const GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyMode
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -727,6 +730,7 @@ export const GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyProv
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyProvider =
   ClosedEnum<
@@ -980,6 +984,7 @@ export const GetAllPromptsItemsPromptsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1184,6 +1189,7 @@ export const GetAllPromptsItemsPromptsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptsItemsPromptsProvider = ClosedEnum<
   typeof GetAllPromptsItemsPromptsProvider
@@ -1342,6 +1348,7 @@ export const GetAllPromptsItemsPromptsResponse200ModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1557,6 +1564,7 @@ export const GetAllPromptsItemsPromptsResponse200Provider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptsItemsPromptsResponse200Provider = ClosedEnum<
   typeof GetAllPromptsItemsPromptsResponse200Provider
@@ -1782,6 +1790,7 @@ export const GetAllPromptsItemsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1986,6 +1995,7 @@ export const GetAllPromptsItemsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptsItemsProvider = ClosedEnum<
   typeof GetAllPromptsItemsProvider
@@ -2136,6 +2146,7 @@ export const GetAllPromptsItemsPromptsResponse200ApplicationJSONModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2363,6 +2374,7 @@ export const GetAllPromptsItemsPromptsResponse200ApplicationJSONProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type GetAllPromptsItemsPromptsResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -6612,7 +6624,7 @@ export const GetAllPromptsItems3$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => GetAllPromptsItemsPromptsResponseVersions$inboundSchema),
@@ -6669,7 +6681,7 @@ export const GetAllPromptsItems3$outboundSchema: z.ZodType<
     GetAllPromptsItemsPromptsResponseMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => GetAllPromptsItemsPromptsResponseVersions$outboundSchema),
@@ -9874,7 +9886,7 @@ export const GetAllPromptsItems2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => GetAllPromptsItemsPromptsVersions$inboundSchema),
@@ -9928,7 +9940,7 @@ export const GetAllPromptsItems2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => GetAllPromptsItemsPromptsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => GetAllPromptsItemsPromptsVersions$outboundSchema),
@@ -11492,7 +11504,7 @@ export namespace GetAllPromptsResponseFormatPromptsResponse200ApplicationJson2$ 
     GetAllPromptsResponseFormatPromptsResponse200ApplicationJson2$Outbound;
 }
 
-export function getAllPromptsResponseFormatPromptsResponse200ApplicationJson2ToJSON(
+export function getAllPromptsResponseFormatPromptsResponse200ApplicationJSON2ToJSON(
   getAllPromptsResponseFormatPromptsResponse200ApplicationJson2:
     GetAllPromptsResponseFormatPromptsResponse200ApplicationJson2,
 ): string {
@@ -11502,7 +11514,7 @@ export function getAllPromptsResponseFormatPromptsResponse200ApplicationJson2ToJ
   );
 }
 
-export function getAllPromptsResponseFormatPromptsResponse200ApplicationJson2FromJSON(
+export function getAllPromptsResponseFormatPromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   GetAllPromptsResponseFormatPromptsResponse200ApplicationJson2,
@@ -11680,7 +11692,7 @@ export namespace GetAllPromptsResponseFormatPromptsResponse200ApplicationJson1$ 
     GetAllPromptsResponseFormatPromptsResponse200ApplicationJson1$Outbound;
 }
 
-export function getAllPromptsResponseFormatPromptsResponse200ApplicationJson1ToJSON(
+export function getAllPromptsResponseFormatPromptsResponse200ApplicationJSON1ToJSON(
   getAllPromptsResponseFormatPromptsResponse200ApplicationJson1:
     GetAllPromptsResponseFormatPromptsResponse200ApplicationJson1,
 ): string {
@@ -11690,7 +11702,7 @@ export function getAllPromptsResponseFormatPromptsResponse200ApplicationJson1ToJ
   );
 }
 
-export function getAllPromptsResponseFormatPromptsResponse200ApplicationJson1FromJSON(
+export function getAllPromptsResponseFormatPromptsResponse200ApplicationJSON1FromJSON(
   jsonString: string,
 ): SafeParseResult<
   GetAllPromptsResponseFormatPromptsResponse200ApplicationJson1,
@@ -12202,7 +12214,7 @@ export namespace GetAllPrompts2PromptsResponse200ApplicationJson2$ {
     GetAllPrompts2PromptsResponse200ApplicationJson2$Outbound;
 }
 
-export function getAllPrompts2PromptsResponse200ApplicationJson2ToJSON(
+export function getAllPrompts2PromptsResponse200ApplicationJSON2ToJSON(
   getAllPrompts2PromptsResponse200ApplicationJson2:
     GetAllPrompts2PromptsResponse200ApplicationJson2,
 ): string {
@@ -12213,7 +12225,7 @@ export function getAllPrompts2PromptsResponse200ApplicationJson2ToJSON(
   );
 }
 
-export function getAllPrompts2PromptsResponse200ApplicationJson2FromJSON(
+export function getAllPrompts2PromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   GetAllPrompts2PromptsResponse200ApplicationJson2,
@@ -12303,7 +12315,7 @@ export namespace GetAllPrompts2PromptsResponse200ApplicationJson1$ {
     GetAllPrompts2PromptsResponse200ApplicationJson1$Outbound;
 }
 
-export function getAllPrompts2PromptsResponse200ApplicationJson1ToJSON(
+export function getAllPrompts2PromptsResponse200ApplicationJSON1ToJSON(
   getAllPrompts2PromptsResponse200ApplicationJson1:
     GetAllPrompts2PromptsResponse200ApplicationJson1,
 ): string {
@@ -12314,7 +12326,7 @@ export function getAllPrompts2PromptsResponse200ApplicationJson1ToJSON(
   );
 }
 
-export function getAllPrompts2PromptsResponse200ApplicationJson1FromJSON(
+export function getAllPrompts2PromptsResponse200ApplicationJSON1FromJSON(
   jsonString: string,
 ): SafeParseResult<
   GetAllPrompts2PromptsResponse200ApplicationJson1,
@@ -12381,7 +12393,7 @@ export namespace GetAllPromptsContentPromptsResponse200ApplicationJson2$ {
     GetAllPromptsContentPromptsResponse200ApplicationJson2$Outbound;
 }
 
-export function getAllPromptsContentPromptsResponse200ApplicationJson2ToJSON(
+export function getAllPromptsContentPromptsResponse200ApplicationJSON2ToJSON(
   getAllPromptsContentPromptsResponse200ApplicationJson2:
     GetAllPromptsContentPromptsResponse200ApplicationJson2,
 ): string {
@@ -12392,7 +12404,7 @@ export function getAllPromptsContentPromptsResponse200ApplicationJson2ToJSON(
   );
 }
 
-export function getAllPromptsContentPromptsResponse200ApplicationJson2FromJSON(
+export function getAllPromptsContentPromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   GetAllPromptsContentPromptsResponse200ApplicationJson2,
@@ -13142,7 +13154,7 @@ export const GetAllPromptsItems1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => GetAllPromptsItemsVersions$inboundSchema)),
   type: GetAllPromptsItemsType$inboundSchema,
@@ -13190,7 +13202,7 @@ export const GetAllPromptsItems1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => GetAllPromptsItemsPromptConfig$outboundSchema),
   metadata: z.lazy(() => GetAllPromptsItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => GetAllPromptsItemsVersions$outboundSchema)),
   type: GetAllPromptsItemsType$outboundSchema,

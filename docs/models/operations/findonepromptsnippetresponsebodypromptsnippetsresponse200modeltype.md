@@ -14,5 +14,5 @@ let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ModelType =
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

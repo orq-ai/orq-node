@@ -21,6 +21,7 @@ export const UpdatePromptModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -219,6 +220,7 @@ export const UpdatePromptProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -378,6 +380,7 @@ export const UpdatePromptResponseBodyPromptsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -590,6 +593,7 @@ export const UpdatePromptResponseBodyPromptsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyPromptsProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsProvider
@@ -755,6 +759,7 @@ export const UpdatePromptResponseBodyPromptsResponse200ApplicationJSONModelType 
     Tts: "tts",
     Stt: "stt",
     Rerank: "rerank",
+    Moderations: "moderations",
   } as const;
 /**
  * The type of the model
@@ -988,6 +993,7 @@ export const UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
     Fal: "fal",
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
+    Jina: "jina",
   } as const;
 export type UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -1233,6 +1239,7 @@ export const UpdatePromptResponseBodyModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1441,6 +1448,7 @@ export const UpdatePromptResponseBodyProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyProvider
@@ -1601,6 +1609,7 @@ export const UpdatePromptResponseBodyPromptsResponseModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -1816,6 +1825,7 @@ export const UpdatePromptResponseBodyPromptsResponseProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyPromptsResponseProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsResponseProvider
@@ -2043,6 +2053,7 @@ export const ResponseBodyModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2241,6 +2252,7 @@ export const ResponseBodyProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type ResponseBodyProvider = ClosedEnum<typeof ResponseBodyProvider>;
 
@@ -2393,6 +2405,7 @@ export const UpdatePromptResponseBodyPromptsResponse200ModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -2612,6 +2625,7 @@ export const UpdatePromptResponseBodyPromptsResponse200Provider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type UpdatePromptResponseBodyPromptsResponse200Provider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsResponse200Provider
@@ -7645,7 +7659,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => UpdatePromptResponseBodyVersions$inboundSchema),
@@ -7699,7 +7713,7 @@ export const ResponseBody3$outboundSchema: z.ZodType<
     UpdatePromptResponseBodyPromptsMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => UpdatePromptResponseBodyVersions$outboundSchema),
@@ -9370,7 +9384,7 @@ export namespace UpdatePromptResponseFormatPromptsResponse200ApplicationJson2$ {
     UpdatePromptResponseFormatPromptsResponse200ApplicationJson2$Outbound;
 }
 
-export function updatePromptResponseFormatPromptsResponse200ApplicationJson2ToJSON(
+export function updatePromptResponseFormatPromptsResponse200ApplicationJSON2ToJSON(
   updatePromptResponseFormatPromptsResponse200ApplicationJson2:
     UpdatePromptResponseFormatPromptsResponse200ApplicationJson2,
 ): string {
@@ -9380,7 +9394,7 @@ export function updatePromptResponseFormatPromptsResponse200ApplicationJson2ToJS
   );
 }
 
-export function updatePromptResponseFormatPromptsResponse200ApplicationJson2FromJSON(
+export function updatePromptResponseFormatPromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   UpdatePromptResponseFormatPromptsResponse200ApplicationJson2,
@@ -9558,7 +9572,7 @@ export namespace UpdatePromptResponseFormatPromptsResponse200ApplicationJson1$ {
     UpdatePromptResponseFormatPromptsResponse200ApplicationJson1$Outbound;
 }
 
-export function updatePromptResponseFormatPromptsResponse200ApplicationJson1ToJSON(
+export function updatePromptResponseFormatPromptsResponse200ApplicationJSON1ToJSON(
   updatePromptResponseFormatPromptsResponse200ApplicationJson1:
     UpdatePromptResponseFormatPromptsResponse200ApplicationJson1,
 ): string {
@@ -9568,7 +9582,7 @@ export function updatePromptResponseFormatPromptsResponse200ApplicationJson1ToJS
   );
 }
 
-export function updatePromptResponseFormatPromptsResponse200ApplicationJson1FromJSON(
+export function updatePromptResponseFormatPromptsResponse200ApplicationJSON1FromJSON(
   jsonString: string,
 ): SafeParseResult<
   UpdatePromptResponseFormatPromptsResponse200ApplicationJson1,
@@ -10067,7 +10081,7 @@ export namespace UpdatePrompt2PromptsResponse200ApplicationJson2$ {
     UpdatePrompt2PromptsResponse200ApplicationJson2$Outbound;
 }
 
-export function updatePrompt2PromptsResponse200ApplicationJson2ToJSON(
+export function updatePrompt2PromptsResponse200ApplicationJSON2ToJSON(
   updatePrompt2PromptsResponse200ApplicationJson2:
     UpdatePrompt2PromptsResponse200ApplicationJson2,
 ): string {
@@ -10078,7 +10092,7 @@ export function updatePrompt2PromptsResponse200ApplicationJson2ToJSON(
   );
 }
 
-export function updatePrompt2PromptsResponse200ApplicationJson2FromJSON(
+export function updatePrompt2PromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   UpdatePrompt2PromptsResponse200ApplicationJson2,
@@ -10168,7 +10182,7 @@ export namespace UpdatePrompt2PromptsResponse200ApplicationJson1$ {
     UpdatePrompt2PromptsResponse200ApplicationJson1$Outbound;
 }
 
-export function updatePrompt2PromptsResponse200ApplicationJson1ToJSON(
+export function updatePrompt2PromptsResponse200ApplicationJSON1ToJSON(
   updatePrompt2PromptsResponse200ApplicationJson1:
     UpdatePrompt2PromptsResponse200ApplicationJson1,
 ): string {
@@ -10179,7 +10193,7 @@ export function updatePrompt2PromptsResponse200ApplicationJson1ToJSON(
   );
 }
 
-export function updatePrompt2PromptsResponse200ApplicationJson1FromJSON(
+export function updatePrompt2PromptsResponse200ApplicationJSON1FromJSON(
   jsonString: string,
 ): SafeParseResult<
   UpdatePrompt2PromptsResponse200ApplicationJson1,
@@ -10242,7 +10256,7 @@ export namespace UpdatePromptContentPromptsResponse200ApplicationJson2$ {
     UpdatePromptContentPromptsResponse200ApplicationJson2$Outbound;
 }
 
-export function updatePromptContentPromptsResponse200ApplicationJson2ToJSON(
+export function updatePromptContentPromptsResponse200ApplicationJSON2ToJSON(
   updatePromptContentPromptsResponse200ApplicationJson2:
     UpdatePromptContentPromptsResponse200ApplicationJson2,
 ): string {
@@ -10253,7 +10267,7 @@ export function updatePromptContentPromptsResponse200ApplicationJson2ToJSON(
   );
 }
 
-export function updatePromptContentPromptsResponse200ApplicationJson2FromJSON(
+export function updatePromptContentPromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
 ): SafeParseResult<
   UpdatePromptContentPromptsResponse200ApplicationJson2,
@@ -11001,7 +11015,7 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => ResponseBodyVersions$inboundSchema)),
   key: z.string(),
@@ -11053,7 +11067,7 @@ export const ResponseBody2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => UpdatePromptResponseBodyMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => ResponseBodyVersions$outboundSchema)),
   key: z.string(),
@@ -14243,7 +14257,7 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.083Z",
+    "2024-12-01T21:30:44.576Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => Versions$inboundSchema)),
   type: ResponseBodyType$inboundSchema,
@@ -14291,7 +14305,7 @@ export const ResponseBody1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => ResponseBodyPromptConfig$outboundSchema),
   metadata: z.lazy(() => ResponseBodyMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-11-26T10:00:21.083Z"))
+  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => Versions$outboundSchema)),
   type: ResponseBodyType$outboundSchema,

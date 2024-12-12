@@ -9,11 +9,11 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONMode
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONModelType =
-    "tts";
+    "stt";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

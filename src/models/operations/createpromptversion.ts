@@ -21,6 +21,7 @@ export const CreatePromptVersionModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -225,6 +226,7 @@ export const CreatePromptVersionProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type CreatePromptVersionProvider = ClosedEnum<
   typeof CreatePromptVersionProvider
@@ -386,6 +388,7 @@ export const CreatePromptVersionPromptsModelType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
+  Moderations: "moderations",
 } as const;
 /**
  * The type of the model
@@ -589,6 +592,7 @@ export const CreatePromptVersionPromptsProvider = {
   Fal: "fal",
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
+  Jina: "jina",
 } as const;
 export type CreatePromptVersionPromptsProvider = ClosedEnum<
   typeof CreatePromptVersionPromptsProvider

@@ -12,7 +12,7 @@ let value: DeploymentInvokeResponseBody = {
   created: new Date("2023-05-18T15:07:06.997Z"),
   object: "image",
   model: "El Camino",
-  provider: "leonardoai",
+  provider: "nvidia",
   isFinal: false,
   choices: [
     {

@@ -115,11 +115,11 @@ export namespace FileT$ {
   export type Outbound = FileT$Outbound;
 }
 
-export function fileTToJSON(fileT: FileT): string {
+export function fileToJSON(fileT: FileT): string {
   return JSON.stringify(FileT$outboundSchema.parse(fileT));
 }
 
-export function fileTFromJSON(
+export function fileFromJSON(
   jsonString: string,
 ): SafeParseResult<FileT, SDKValidationError> {
   return safeParse(
@@ -238,7 +238,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   bytes: z.number(),
   file_name: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2024-11-26T10:00:21.420Z",
+    "2024-12-01T21:30:45.101Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -269,7 +269,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   purpose: FileUploadPurpose$outboundSchema,
   bytes: z.number(),
   fileName: z.string(),
-  created: z.date().default(() => new Date("2024-11-26T10:00:21.420Z"))
+  created: z.date().default(() => new Date("2024-12-01T21:30:45.101Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

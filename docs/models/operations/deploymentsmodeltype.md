@@ -7,11 +7,11 @@ The type of the model
 ```typescript
 import { DeploymentsModelType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentsModelType = "image";
+let value: DeploymentsModelType = "tts";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```

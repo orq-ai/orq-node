@@ -9,11 +9,11 @@ import { GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyModelTyp
 
 let value:
   GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyModelType =
-    "embedding";
+    "vision";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank"
+"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
 ```
