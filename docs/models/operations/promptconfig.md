@@ -6,10 +6,35 @@
 import { PromptConfig } from "@orq-ai/node/models/operations";
 
 let value: PromptConfig = {
+  tools: [
+    {
+      type: "function",
+      function: {
+        name: "<value>",
+        parameters: {
+          type: "object",
+          properties: {
+            "key": "<value>",
+          },
+        },
+      },
+    },
+  ],
+  model: "Grand Cherokee",
+  modelType: "chat",
+  modelParameters: {},
+  provider: "anyscale",
   messages: [
     {
-      role: "assistant",
-      content: "<value>",
+      role: "tool",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://hateful-humor.net",
+          },
+        },
+      ],
     },
   ],
 };
@@ -17,12 +42,11 @@ let value: PromptConfig = {
 
 ## Fields
 
-| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `stream`                                                                             | *boolean*                                                                            | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `model`                                                                              | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `modelType`                                                                          | [operations.ModelType](../../models/operations/modeltype.md)                         | :heavy_minus_sign:                                                                   | The type of the model                                                                |
-| `modelParameters`                                                                    | [operations.ModelParameters](../../models/operations/modelparameters.md)             | :heavy_minus_sign:                                                                   | Model Parameters: Not all parameters apply to every model                            |
-| `provider`                                                                           | [operations.Provider](../../models/operations/provider.md)                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `version`                                                                            | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `messages`                                                                           | [operations.CreatePromptMessages](../../models/operations/createpromptmessages.md)[] | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `tools`                                                                            | [operations.DeploymentsTools](../../models/operations/deploymentstools.md)[]       | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `model`                                                                            | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `modelType`                                                                        | [operations.ModelType](../../models/operations/modeltype.md)                       | :heavy_check_mark:                                                                 | The type of the model                                                              |
+| `modelParameters`                                                                  | [operations.ModelParameters](../../models/operations/modelparameters.md)           | :heavy_check_mark:                                                                 | Model Parameters: Not all parameters apply to every model                          |
+| `provider`                                                                         | [operations.DeploymentsProvider](../../models/operations/deploymentsprovider.md)   | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `messages`                                                                         | [operations.DeploymentsMessages](../../models/operations/deploymentsmessages.md)[] | :heavy_check_mark:                                                                 | N/A                                                                                |

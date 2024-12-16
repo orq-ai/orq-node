@@ -1,11 +1,13 @@
 # Provider
 
+The provider used to generate the response
+
 ## Example Usage
 
 ```typescript
 import { Provider } from "@orq-ai/node/models/operations";
 
-let value: Provider = "huggingface";
+let value: Provider = "google";
 ```
 
 ## Values

@@ -6,15 +6,8 @@
 import { Messages } from "@orq-ai/node/models/components";
 
 let value: Messages = {
-  role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://jam-packed-traditionalism.com/",
-      },
-    },
-  ],
+  role: "expected_output",
+  content: "<value>",
 };
 ```
 
