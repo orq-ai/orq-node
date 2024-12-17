@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "1.31.0-rc.12",
+  "version": "1.32.0-rc.5",
   "author": "Orq",
   "main": "./index.js",
   "sideEffects": false,
@@ -15,8 +15,6 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19",
     "zod": ">= 3"
   },
   "devDependencies": {

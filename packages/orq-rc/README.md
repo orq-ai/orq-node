@@ -174,27 +174,6 @@ run();
 * [bulkUpload](docs/sdks/files/README.md#bulkupload) - Bulk upload file
 
 
-### [prompt](docs/sdks/prompt/README.md)
-
-
-#### [prompt.snippets](docs/sdks/snippets/README.md)
-
-* [findOne](docs/sdks/snippets/README.md#findone) - Get one prompt snippet
-
-#### [prompt.templates](docs/sdks/templates/README.md)
-
-* [getAll](docs/sdks/templates/README.md#getall) - Get all prompt templates
-
-### [prompts](docs/sdks/prompts/README.md)
-
-* [create](docs/sdks/prompts/README.md#create) - Create a new prompt
-* [createVersion](docs/sdks/prompts/README.md#createversion) - Create a new prompt version
-* [delete](docs/sdks/prompts/README.md#delete) - Delete a prompt
-* [getOne](docs/sdks/prompts/README.md#getone) - Get one prompt
-* [update](docs/sdks/prompts/README.md#update) - Update a prompt
-* [duplicate](docs/sdks/prompts/README.md#duplicate) - Duplicate a prompt
-* [getAll](docs/sdks/prompts/README.md#getall) - Get all prompts
-
 ### [remoteconfig](docs/sdks/remoteconfig/README.md)
 
 * [getConfig](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
@@ -226,15 +205,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesBulkUpload`](docs/sdks/files/README.md#bulkupload) - Bulk upload file
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload file
-- [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a new prompt
-- [`promptsCreateVersion`](docs/sdks/prompts/README.md#createversion) - Create a new prompt version
-- [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
-- [`promptsDuplicate`](docs/sdks/prompts/README.md#duplicate) - Duplicate a prompt
-- [`promptsGetAll`](docs/sdks/prompts/README.md#getall) - Get all prompts
-- [`promptsGetOne`](docs/sdks/prompts/README.md#getone) - Get one prompt
-- [`promptSnippetsFindOne`](docs/sdks/snippets/README.md#findone) - Get one prompt snippet
-- [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
-- [`promptTemplatesGetAll`](docs/sdks/templates/README.md#getall) - Get all prompt templates
 - [`remoteconfigGetConfig`](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
 
 </details>
@@ -380,24 +350,14 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-All SDK methods return a response object or throw an error. By default, an API error will throw a `errors.APIError`.
-
-If a HTTP request fails, an operation my also throw an error from the `models/errors/httpclienterrors.ts` module:
-
-| HTTP Client Error                                    | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- |
-| RequestAbortedError                                  | HTTP request was aborted by the client               |
-| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
-| ConnectionError                                      | HTTP client was unable to make a request to a server |
-| InvalidRequestError                                  | Any input used to create a request is invalid        |
-| UnexpectedClientError                                | Unrecognised or unexpected error                     |
-
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `all` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `all` method may throw the following errors:
 
 | Error Type          | Status Code | Content Type     |
 | ------------------- | ----------- | ---------------- |
 | errors.HonoApiError | 500         | application/json |
 | errors.APIError     | 4XX, 5XX    | \*/\*            |
+
+If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
 
 ```typescript
 import { Orq } from "@orq-ai/node";
@@ -416,8 +376,9 @@ async function run() {
     console.log(result);
   } catch (err) {
     switch (true) {
+      // The server response does not match the expected SDK schema
       case (err instanceof SDKValidationError): {
-        // Validation errors can be pretty-printed
+        // Pretty-print will provide a human-readable multi-line error message
         console.error(err.pretty());
         // Raw value may also be inspected
         console.error(err.rawValue);
@@ -429,6 +390,7 @@ async function run() {
         return;
       }
       default: {
+        // Other errors such as network errors, see HTTPClientErrors for more details
         throw err;
       }
     }
@@ -439,7 +401,17 @@ run();
 
 ```
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted string since validation errors can list many issues and the plain error string may be difficult read when debugging.
+Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted multi-line string since validation errors can list many issues and the plain error string may be difficult read when debugging.
+
+In some rare cases, the SDK can fail to get a response from the server or even make the request due to unexpected circumstances such as network conditions. These types of errors are captured in the `models/errors/httpclienterrors.ts` module:
+
+| HTTP Client Error                                    | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- |
+| RequestAbortedError                                  | HTTP request was aborted by the client               |
+| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
+| ConnectionError                                      | HTTP client was unable to make a request to a server |
+| InvalidRequestError                                  | Any input used to create a request is invalid        |
+| UnexpectedClientError                                | Unrecognised or unexpected error                     |
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

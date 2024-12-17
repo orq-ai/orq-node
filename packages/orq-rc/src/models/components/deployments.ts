@@ -685,11 +685,11 @@ export namespace FunctionT$ {
   export type Outbound = FunctionT$Outbound;
 }
 
-export function functionTToJSON(functionT: FunctionT): string {
+export function functionToJSON(functionT: FunctionT): string {
   return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
 }
 
-export function functionTFromJSON(
+export function functionFromJSON(
   jsonString: string,
 ): SafeParseResult<FunctionT, SDKValidationError> {
   return safeParse(
