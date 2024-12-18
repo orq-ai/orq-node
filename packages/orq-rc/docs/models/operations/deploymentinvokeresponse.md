@@ -9,7 +9,7 @@
 const value: operations.DeploymentInvokeResponseBody = {
   id: "<id>",
   created: new Date("2024-02-06T18:51:30.654Z"),
-  object: "completion",
+  object: "chat",
   model: "Model Y",
   provider: "perplexity",
   isFinal: false,

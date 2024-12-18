@@ -1,0 +1,24 @@
+# GetAllPromptsItemsPromptsToolCalls
+
+## Example Usage
+
+```typescript
+import { GetAllPromptsItemsPromptsToolCalls } from "@orq-ai/node/models/operations";
+
+let value: GetAllPromptsItemsPromptsToolCalls = {
+  type: "function",
+  function: {
+    name: "<value>",
+    arguments: "<value>",
+  },
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                            | Type                                                                                                                                                                             | Required                                                                                                                                                                         | Description                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                             | *string*                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                               | N/A                                                                                                                                                                              |
+| `index`                                                                                                                                                                          | *number*                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                               | N/A                                                                                                                                                                              |
+| `type`                                                                                                                                                                           | [operations.GetAllPromptsItemsPromptsResponse200ApplicationJSONResponseBodyType](../../models/operations/getallpromptsitemspromptsresponse200applicationjsonresponsebodytype.md) | :heavy_check_mark:                                                                                                                                                               | N/A                                                                                                                                                                              |
+| `function`                                                                                                                                                                       | [operations.GetAllPromptsItemsPromptsFunction](../../models/operations/getallpromptsitemspromptsfunction.md)                                                                     | :heavy_check_mark:                                                                                                                                                               | N/A                                                                                                                                                                              |

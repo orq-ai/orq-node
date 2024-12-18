@@ -174,6 +174,27 @@ run();
 * [bulkUpload](docs/sdks/files/README.md#bulkupload) - Bulk upload file
 
 
+### [prompt](docs/sdks/prompt/README.md)
+
+
+#### [prompt.snippets](docs/sdks/snippets/README.md)
+
+* [findOne](docs/sdks/snippets/README.md#findone) - Get one prompt snippet
+
+#### [prompt.templates](docs/sdks/templates/README.md)
+
+* [getAll](docs/sdks/templates/README.md#getall) - Get all prompt templates
+
+### [prompts](docs/sdks/prompts/README.md)
+
+* [create](docs/sdks/prompts/README.md#create) - Create a new prompt
+* [createVersion](docs/sdks/prompts/README.md#createversion) - Create a new prompt version
+* [delete](docs/sdks/prompts/README.md#delete) - Delete a prompt
+* [getOne](docs/sdks/prompts/README.md#getone) - Get one prompt
+* [update](docs/sdks/prompts/README.md#update) - Update a prompt
+* [duplicate](docs/sdks/prompts/README.md#duplicate) - Duplicate a prompt
+* [getAll](docs/sdks/prompts/README.md#getall) - Get all prompts
+
 ### [remoteconfig](docs/sdks/remoteconfig/README.md)
 
 * [getConfig](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
@@ -205,6 +226,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesBulkUpload`](docs/sdks/files/README.md#bulkupload) - Bulk upload file
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload file
+- [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a new prompt
+- [`promptsCreateVersion`](docs/sdks/prompts/README.md#createversion) - Create a new prompt version
+- [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
+- [`promptsDuplicate`](docs/sdks/prompts/README.md#duplicate) - Duplicate a prompt
+- [`promptsGetAll`](docs/sdks/prompts/README.md#getall) - Get all prompts
+- [`promptsGetOne`](docs/sdks/prompts/README.md#getone) - Get one prompt
+- [`promptSnippetsFindOne`](docs/sdks/snippets/README.md#findone) - Get one prompt snippet
+- [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
+- [`promptTemplatesGetAll`](docs/sdks/templates/README.md#getall) - Get all prompt templates
 - [`remoteconfigGetConfig`](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
 
 </details>

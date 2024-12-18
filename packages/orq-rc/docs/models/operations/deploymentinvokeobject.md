@@ -7,11 +7,11 @@ Indicates the type of model used to generate the response
 ```typescript
 import { DeploymentInvokeObject } from "@orq-ai/node/models/operations";
 
-let value: DeploymentInvokeObject = "completion";
+let value: DeploymentInvokeObject = "chat";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "image" | "vision"
+"chat" | "completion" | "image"
 ```

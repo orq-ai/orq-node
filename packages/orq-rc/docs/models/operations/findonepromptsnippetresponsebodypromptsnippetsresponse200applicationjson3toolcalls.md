@@ -1,0 +1,28 @@
+# FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls
+
+## Example Usage
+
+```typescript
+import {
+  FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ToolCalls =
+    {
+      type: "function",
+      function: {
+        name: "<value>",
+        arguments: "<value>",
+      },
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                        | Type                                                                                                                                                                                                         | Required                                                                                                                                                                                                     | Description                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                                                                         | *string*                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |
+| `index`                                                                                                                                                                                                      | *number*                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |
+| `type`                                                                                                                                                                                                       | [operations.FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Type](../../models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3type.md)         | :heavy_check_mark:                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |
+| `function`                                                                                                                                                                                                   | [operations.FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Function](../../models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3function.md) | :heavy_check_mark:                                                                                                                                                                                           | N/A                                                                                                                                                                                                          |
