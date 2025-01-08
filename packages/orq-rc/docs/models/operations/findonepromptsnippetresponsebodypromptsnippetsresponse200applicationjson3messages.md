@@ -10,7 +10,7 @@ import {
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Messages =
     {
-      role: "system",
+      role: "expected_output",
       content: "<value>",
     };
 ```

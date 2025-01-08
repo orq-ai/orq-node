@@ -10,7 +10,7 @@ import {
 let value:
   FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJSONResponseBodyImageUrl =
     {
-      url: "https://oddball-pigpen.org/",
+      url: "https://accurate-dulcimer.info/",
     };
 ```
 

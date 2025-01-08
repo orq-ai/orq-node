@@ -8,8 +8,15 @@ import { UpdatePromptResponseBodyPromptsResponse200PromptConfig } from "@orq-ai/
 let value: UpdatePromptResponseBodyPromptsResponse200PromptConfig = {
   messages: [
     {
-      role: "prompt",
-      content: "<value>",
+      role: "exception",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://educated-intent.net",
+          },
+        },
+      ],
     },
   ],
 };

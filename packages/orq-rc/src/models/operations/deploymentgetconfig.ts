@@ -212,9 +212,33 @@ export type Messages = {
 };
 
 /**
- * Unique ID that identifies a user. This is useful for tracking the same user across multiple requests
+ * Metadata about the document
  */
-export type UserId = string | number;
+export type Metadata = {
+  /**
+   * Name of the file the text is from.
+   */
+  fileName?: string | undefined;
+  /**
+   * Content type of the file the text is from.
+   */
+  fileType?: string | undefined;
+  /**
+   * The page number the text is from.
+   */
+  pageNumber?: number | undefined;
+};
+
+export type Documents = {
+  /**
+   * The text content of the document
+   */
+  text: string;
+  /**
+   * Metadata about the document
+   */
+  metadata?: Metadata | undefined;
+};
 
 export type InvokeOptions = {
   /**
@@ -225,7 +249,7 @@ export type InvokeOptions = {
 
 export type DeploymentGetConfigRequestBody = {
   /**
-   * The deployment id to invoke
+   * The deployment key to invoke
    */
   key: string;
   /**
@@ -253,29 +277,13 @@ export type DeploymentGetConfigRequestBody = {
    */
   metadata?: { [k: string]: any } | undefined;
   /**
-   * Unique ID that identifies a chaining operation. This is useful for tracking a chain of completions across multiple
-   */
-  chainId?: string | undefined;
-  /**
-   * Unique ID that identifies a chat conversation. This is useful for tracking the same conversation across multiple requests
-   */
-  conversationId?: string | undefined;
-  /**
-   * Unique ID that identifies a user. This is useful for tracking the same user across multiple requests
-   */
-  userId?: string | number | undefined;
-  /**
-   * Unique ID that identifies a deployment entity.
-   */
-  deploymentId?: string | undefined;
-  /**
-   * Unique ID that identifies a specific variant of a deployment.
-   */
-  deploymentVariantId?: string | undefined;
-  /**
    * Utilized for passing additional parameters to the model provider. Exercise caution when using this feature, as the included parameters will overwrite any parameters specified in the deployment prompt configuration.
    */
   extraParams?: { [k: string]: any } | undefined;
+  /**
+   * A list of relevant documents that evaluators and guardrails can cite to evaluate the user input or the model response based on your deployment settings.
+   */
+  documents?: Array<Documents> | undefined;
   invokeOptions?: InvokeOptions | undefined;
 };
 
@@ -1791,43 +1799,123 @@ export function messagesFromJSON(
 }
 
 /** @internal */
-export const UserId$inboundSchema: z.ZodType<UserId, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number()]);
-
-/** @internal */
-export type UserId$Outbound = string | number;
-
-/** @internal */
-export const UserId$outboundSchema: z.ZodType<
-  UserId$Outbound,
+export const Metadata$inboundSchema: z.ZodType<
+  Metadata,
   z.ZodTypeDef,
-  UserId
-> = z.union([z.string(), z.number()]);
+  unknown
+> = z.object({
+  file_name: z.string().optional(),
+  file_type: z.string().optional(),
+  page_number: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_name": "fileName",
+    "file_type": "fileType",
+    "page_number": "pageNumber",
+  });
+});
+
+/** @internal */
+export type Metadata$Outbound = {
+  file_name?: string | undefined;
+  file_type?: string | undefined;
+  page_number?: number | undefined;
+};
+
+/** @internal */
+export const Metadata$outboundSchema: z.ZodType<
+  Metadata$Outbound,
+  z.ZodTypeDef,
+  Metadata
+> = z.object({
+  fileName: z.string().optional(),
+  fileType: z.string().optional(),
+  pageNumber: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileName: "file_name",
+    fileType: "file_type",
+    pageNumber: "page_number",
+  });
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UserId$ {
-  /** @deprecated use `UserId$inboundSchema` instead. */
-  export const inboundSchema = UserId$inboundSchema;
-  /** @deprecated use `UserId$outboundSchema` instead. */
-  export const outboundSchema = UserId$outboundSchema;
-  /** @deprecated use `UserId$Outbound` instead. */
-  export type Outbound = UserId$Outbound;
+export namespace Metadata$ {
+  /** @deprecated use `Metadata$inboundSchema` instead. */
+  export const inboundSchema = Metadata$inboundSchema;
+  /** @deprecated use `Metadata$outboundSchema` instead. */
+  export const outboundSchema = Metadata$outboundSchema;
+  /** @deprecated use `Metadata$Outbound` instead. */
+  export type Outbound = Metadata$Outbound;
 }
 
-export function userIdToJSON(userId: UserId): string {
-  return JSON.stringify(UserId$outboundSchema.parse(userId));
+export function metadataToJSON(metadata: Metadata): string {
+  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
 }
 
-export function userIdFromJSON(
+export function metadataFromJSON(
   jsonString: string,
-): SafeParseResult<UserId, SDKValidationError> {
+): SafeParseResult<Metadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UserId$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UserId' from JSON`,
+    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Metadata' from JSON`,
+  );
+}
+
+/** @internal */
+export const Documents$inboundSchema: z.ZodType<
+  Documents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  text: z.string(),
+  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+});
+
+/** @internal */
+export type Documents$Outbound = {
+  text: string;
+  metadata?: Metadata$Outbound | undefined;
+};
+
+/** @internal */
+export const Documents$outboundSchema: z.ZodType<
+  Documents$Outbound,
+  z.ZodTypeDef,
+  Documents
+> = z.object({
+  text: z.string(),
+  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Documents$ {
+  /** @deprecated use `Documents$inboundSchema` instead. */
+  export const inboundSchema = Documents$inboundSchema;
+  /** @deprecated use `Documents$outboundSchema` instead. */
+  export const outboundSchema = Documents$outboundSchema;
+  /** @deprecated use `Documents$Outbound` instead. */
+  export type Outbound = Documents$Outbound;
+}
+
+export function documentsToJSON(documents: Documents): string {
+  return JSON.stringify(Documents$outboundSchema.parse(documents));
+}
+
+export function documentsFromJSON(
+  jsonString: string,
+): SafeParseResult<Documents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Documents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Documents' from JSON`,
   );
 }
 
@@ -1903,22 +1991,13 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
   messages: z.array(z.lazy(() => Messages$inboundSchema)).optional(),
   file_ids: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
-  chain_id: z.string().optional(),
-  conversation_id: z.string().optional(),
-  user_id: z.union([z.string(), z.number()]).optional(),
-  deployment_id: z.string().optional(),
-  deployment_variant_id: z.string().optional(),
   extra_params: z.record(z.any()).optional(),
+  documents: z.array(z.lazy(() => Documents$inboundSchema)).optional(),
   invoke_options: z.lazy(() => InvokeOptions$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prefix_messages": "prefixMessages",
     "file_ids": "fileIds",
-    "chain_id": "chainId",
-    "conversation_id": "conversationId",
-    "user_id": "userId",
-    "deployment_id": "deploymentId",
-    "deployment_variant_id": "deploymentVariantId",
     "extra_params": "extraParams",
     "invoke_options": "invokeOptions",
   });
@@ -1933,12 +2012,8 @@ export type DeploymentGetConfigRequestBody$Outbound = {
   messages?: Array<Messages$Outbound> | undefined;
   file_ids?: Array<string> | undefined;
   metadata?: { [k: string]: any } | undefined;
-  chain_id?: string | undefined;
-  conversation_id?: string | undefined;
-  user_id?: string | number | undefined;
-  deployment_id?: string | undefined;
-  deployment_variant_id?: string | undefined;
   extra_params?: { [k: string]: any } | undefined;
+  documents?: Array<Documents$Outbound> | undefined;
   invoke_options?: InvokeOptions$Outbound | undefined;
 };
 
@@ -1956,22 +2031,13 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
   messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
   fileIds: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
-  chainId: z.string().optional(),
-  conversationId: z.string().optional(),
-  userId: z.union([z.string(), z.number()]).optional(),
-  deploymentId: z.string().optional(),
-  deploymentVariantId: z.string().optional(),
   extraParams: z.record(z.any()).optional(),
+  documents: z.array(z.lazy(() => Documents$outboundSchema)).optional(),
   invokeOptions: z.lazy(() => InvokeOptions$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     prefixMessages: "prefix_messages",
     fileIds: "file_ids",
-    chainId: "chain_id",
-    conversationId: "conversation_id",
-    userId: "user_id",
-    deploymentId: "deployment_id",
-    deploymentVariantId: "deployment_variant_id",
     extraParams: "extra_params",
     invokeOptions: "invoke_options",
   });

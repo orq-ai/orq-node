@@ -9,17 +9,15 @@ import { CreatePromptVersionResponseBody } from "@orq-ai/node/models/operations"
 
 let value: CreatePromptVersionResponseBody = {
   id: "<id>",
-  displayName: "Ethelyn_Buckridge",
+  displayName: "Ross.Marvin",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "prompt",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://leading-handle.net",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

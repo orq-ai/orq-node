@@ -6,7 +6,7 @@
 import { Message1 } from "@orq-ai/node/models/operations";
 
 let value: Message1 = {
-  role: "correction",
+  role: "prompt",
   toolCalls: [
     {
       type: "function",

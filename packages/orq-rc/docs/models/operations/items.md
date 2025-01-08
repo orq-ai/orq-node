@@ -9,14 +9,14 @@
 const value: operations.Items1 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "48bfbc25-6a44-45c9-a115-cbbc488bf4ca",
-  createdById: "cf02c183-4b0d-4788-9a51-5285ff99fec5",
-  displayName: "Colin_Zboncak11",
-  updatedById: "e83aa140-323a-4012-b544-cf8f61647a7e",
+  domainId: "9c6bc5fa-e8bc-4e28-86e1-fe17bbec47b2",
+  createdById: "74d95dcf-d62d-405e-8fab-088513569b55",
+  displayName: "Alize76",
+  updatedById: "dbfe990f-2bd5-431b-97be-2e64ff3a1ada",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "exception",
         content: "<value>",
       },
     ],
@@ -25,13 +25,13 @@ const value: operations.Items1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "26b41eb9-cd7e-4e49-a88f-4fe7dca53ad0",
-      displayName: "Imelda.Hand51",
-      updatedById: "bd040faf-8c55-46a5-bef0-31037d37eac8",
+      createdById: "9ee02135-8abe-4fad-bc4e-0047a1ac2687",
+      displayName: "Vicky_Blick6",
+      updatedById: "238a7f3c-d879-4686-b6b1-2dc46ed9306a",
       promptConfig: {
         messages: [
           {
-            role: "tool",
+            role: "correction",
             content: "<value>",
           },
         ],
@@ -49,49 +49,6 @@ const value: operations.Items1 = {
 
 ```typescript
 const value: operations.Items2 = {
-  id: "<id>",
-  owner: "<value>",
-  domainId: "69c6bc5f-ae8b-4ce2-886e-1fe17bbec47b",
-  createdById: "374d95dc-fd62-4d05-9efa-b088513569b5",
-  displayName: "Aisha62",
-  updatedById: "cdbfe990-f2bd-4531-ab7b-e2e64ff3a1ad",
-  promptConfig: {
-    messages: [
-      {
-        role: "exception",
-        content: "<value>",
-      },
-    ],
-  },
-  metadata: {},
-  versions: [
-    {
-      id: "<id>",
-      createdById: "69ee0213-58ab-4efa-9dc4-e0047a1ac268",
-      displayName: "Polly_Schmeler-Blick6",
-      updatedById: "238a7f3c-d879-4686-b6b1-2dc46ed9306a",
-      promptConfig: {
-        messages: [
-          {
-            role: "correction",
-            content: "<value>",
-          },
-        ],
-      },
-      metadata: {},
-      commit: "<value>",
-      timestamp: "<value>",
-    },
-  ],
-  key: "<key>",
-  type: "snippet",
-};
-```
-
-### `operations.Items3`
-
-```typescript
-const value: operations.Items3 = {
   id: "<id>",
   owner: "<value>",
   domainId: "53cc8f2e-12b1-496b-8ecd-048634f450d2",
@@ -118,6 +75,59 @@ const value: operations.Items3 = {
           {
             role: "expected_output",
             content: "<value>",
+          },
+        ],
+      },
+      metadata: {},
+      commit: "<value>",
+      timestamp: "<value>",
+    },
+  ],
+  key: "<key>",
+  type: "snippet",
+};
+```
+
+### `operations.Items3`
+
+```typescript
+const value: operations.Items3 = {
+  id: "<id>",
+  owner: "<value>",
+  domainId: "9f2e1773-57df-48d9-b536-80293d511e12",
+  createdById: "4ad9fb18-bc0b-4db8-978b-e9eb1844559a",
+  displayName: "Brayan0",
+  updatedById: "81df7016-e2d0-47a0-b9f2-b92008fab792",
+  promptConfig: {
+    messages: [
+      {
+        role: "correction",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
+      },
+    ],
+  },
+  metadata: {},
+  versions: [
+    {
+      id: "<id>",
+      createdById: "32fc2862-2f4f-4172-b081-bb2fb4bb5659",
+      displayName: "Chad41",
+      updatedById: "b7a8c784-9492-4266-9420-047b7e0259d5",
+      promptConfig: {
+        messages: [
+          {
+            role: "system",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

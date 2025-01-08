@@ -9,7 +9,7 @@ import {
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Provider =
-    "openai";
+    "nvidia";
 ```
 
 ## Values

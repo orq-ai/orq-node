@@ -10,7 +10,7 @@ import { FindOnePromptSnippet22 } from "@orq-ai/node/models/operations";
 let value: FindOnePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://outlandish-exasperation.name/",
+    url: "https://caring-grandson.name/",
   },
 };
 ```

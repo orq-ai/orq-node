@@ -8,7 +8,7 @@ The type of the model
 import { GetAllPromptTemplatesItemsPromptTemplatesResponseModelType } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponseModelType =
-  "rerank";
+  "completion";
 ```
 
 ## Values

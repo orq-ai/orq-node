@@ -360,6 +360,7 @@ export type CreatePromptVersionMetadata = {
 };
 
 export type CreatePromptVersionRequestBody = {
+  id: string;
   displayName: string;
   description?: string | null | undefined;
   promptConfig: CreatePromptVersionPromptConfig;
@@ -2054,6 +2055,7 @@ export const CreatePromptVersionRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  _id: z.string(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => CreatePromptVersionPromptConfig$inboundSchema),
@@ -2062,6 +2064,7 @@ export const CreatePromptVersionRequestBody$inboundSchema: z.ZodType<
   timestamp: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "_id": "id",
     "display_name": "displayName",
     "prompt_config": "promptConfig",
   });
@@ -2069,6 +2072,7 @@ export const CreatePromptVersionRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreatePromptVersionRequestBody$Outbound = {
+  _id: string;
   display_name: string;
   description?: string | null | undefined;
   prompt_config: CreatePromptVersionPromptConfig$Outbound;
@@ -2083,6 +2087,7 @@ export const CreatePromptVersionRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptVersionRequestBody
 > = z.object({
+  id: z.string(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => CreatePromptVersionPromptConfig$outboundSchema),
@@ -2091,6 +2096,7 @@ export const CreatePromptVersionRequestBody$outboundSchema: z.ZodType<
   timestamp: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    id: "_id",
     displayName: "display_name",
     promptConfig: "prompt_config",
   });

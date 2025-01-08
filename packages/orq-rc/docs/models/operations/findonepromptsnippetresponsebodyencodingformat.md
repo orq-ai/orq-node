@@ -7,7 +7,7 @@ The format to return the embeddings
 ```typescript
 import { FindOnePromptSnippetResponseBodyEncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetResponseBodyEncodingFormat = "base64";
+let value: FindOnePromptSnippetResponseBodyEncodingFormat = "float";
 ```
 
 ## Values

@@ -8,13 +8,11 @@ import { FindOnePromptSnippetResponseBodyPromptConfig } from "@orq-ai/node/model
 let value: FindOnePromptSnippetResponseBodyPromptConfig = {
   messages: [
     {
-      role: "expected_output",
+      role: "system",
       content: [
         {
-          type: "image_url",
-          imageUrl: {
-            url: "https://glaring-obesity.info",
-          },
+          type: "text",
+          text: "<value>",
         },
       ],
     },

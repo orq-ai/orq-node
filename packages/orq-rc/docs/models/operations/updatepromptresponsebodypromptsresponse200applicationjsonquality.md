@@ -8,7 +8,7 @@ Only supported on `image` models.
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONQuality } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONQuality =
-  "standard";
+  "hd";
 ```
 
 ## Values

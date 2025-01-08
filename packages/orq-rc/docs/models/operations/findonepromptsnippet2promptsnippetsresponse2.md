@@ -10,7 +10,7 @@ import { FindOnePromptSnippet2PromptSnippetsResponse2 } from "@orq-ai/node/model
 let value: FindOnePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://incomparable-puppet.biz/",
+    url: "https://fearless-scratch.name/",
   },
 };
 ```

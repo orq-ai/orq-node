@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptPromptsResponseType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsResponseType = "prompt";
+let value: CreatePromptPromptsResponseType = "template";
 ```
 
 ## Values

@@ -6,8 +6,15 @@
 import { DeploymentGetConfigMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentGetConfigMessages = {
-  role: "exception",
-  content: "<value>",
+  role: "expected_output",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://outrageous-baritone.info/",
+      },
+    },
+  ],
 };
 ```
 

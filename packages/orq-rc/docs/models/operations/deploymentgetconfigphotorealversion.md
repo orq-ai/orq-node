@@ -7,7 +7,7 @@ The version of photoReal to use. Must be v1 or v2. Only available for `leonardoa
 ```typescript
 import { DeploymentGetConfigPhotoRealVersion } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigPhotoRealVersion = "v2";
+let value: DeploymentGetConfigPhotoRealVersion = "v1";
 ```
 
 ## Values

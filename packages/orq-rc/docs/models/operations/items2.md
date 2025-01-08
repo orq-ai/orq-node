@@ -10,14 +10,14 @@ import { Items2 } from "@orq-ai/node/models/operations";
 let value: Items2 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "5ee459f2-4d7e-4285-b576-5ebb49cc5cb2",
-  createdById: "777997da-66c5-430e-ae15-21e0f1d955c5",
-  displayName: "Joseph82",
-  updatedById: "0c3e0517-d425-4d23-a1b6-4b5bd3f24257",
+  domainId: "42825ab0-6ad7-4f40-b74d-34cb8b600810",
+  createdById: "d20f42b1-4fa8-46c2-afd9-0be851ce1c0f",
+  displayName: "Kattie82",
+  updatedById: "c8177365-2748-40ed-98df-1aff92903f5a",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "expected_output",
         content: [
           {
             type: "text",
@@ -31,13 +31,13 @@ let value: Items2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "917557b1-eb2f-48f3-9844-9ecb8e7dd3c0",
-      displayName: "Daphnee51",
-      updatedById: "3a907b0e-803f-4914-b706-739c39afcd72",
+      createdById: "c163a164-85b0-4a34-bcf5-d1ac26e1096c",
+      displayName: "Eliezer98",
+      updatedById: "64f2bea6-35ba-4edd-ae45-68a4064feda5",
       promptConfig: {
         messages: [
           {
-            role: "assistant",
+            role: "correction",
             content: "<value>",
           },
         ],

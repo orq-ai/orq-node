@@ -10,7 +10,7 @@ import { CreatePromptVersion22 } from "@orq-ai/node/models/operations";
 let value: CreatePromptVersion22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://coordinated-chainstay.net",
+    url: "https://murky-retrospectivity.info",
   },
 };
 ```

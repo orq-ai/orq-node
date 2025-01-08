@@ -326,7 +326,7 @@ export type PromptConfig = {
   messages: Array<CreatePromptMessages>;
 };
 
-export type Metadata = {
+export type CreatePromptMetadata = {
   useCases?: Array<string> | undefined;
   language?: string | undefined;
 };
@@ -344,7 +344,7 @@ export type CreatePromptRequestBody = {
   displayName: string;
   description?: string | null | undefined;
   promptConfig?: PromptConfig | undefined;
-  metadata?: Metadata | undefined;
+  metadata?: CreatePromptMetadata | undefined;
   key?: string | undefined;
   type: CreatePromptPromptsType;
 };
@@ -698,7 +698,7 @@ export type CreatePromptPromptConfig = {
   messages: Array<CreatePromptPromptsMessages>;
 };
 
-export type CreatePromptMetadata = {
+export type CreatePromptPromptsMetadata = {
   useCases?: Array<string> | undefined;
   language?: string | undefined;
 };
@@ -727,7 +727,7 @@ export type CreatePromptResponseBody = {
   domainId: string;
   description?: string | null | undefined;
   promptConfig?: CreatePromptPromptConfig | undefined;
-  metadata?: CreatePromptMetadata | undefined;
+  metadata?: CreatePromptPromptsMetadata | undefined;
   key?: string | undefined;
   type: CreatePromptPromptsResponseType;
 };
@@ -1885,8 +1885,8 @@ export function promptConfigFromJSON(
 }
 
 /** @internal */
-export const Metadata$inboundSchema: z.ZodType<
-  Metadata,
+export const CreatePromptMetadata$inboundSchema: z.ZodType<
+  CreatePromptMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1899,16 +1899,16 @@ export const Metadata$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Metadata$Outbound = {
+export type CreatePromptMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
   language?: string | undefined;
 };
 
 /** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
+export const CreatePromptMetadata$outboundSchema: z.ZodType<
+  CreatePromptMetadata$Outbound,
   z.ZodTypeDef,
-  Metadata
+  CreatePromptMetadata
 > = z.object({
   useCases: z.array(z.string()).optional(),
   language: z.string().optional(),
@@ -1922,26 +1922,30 @@ export const Metadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Metadata$ {
-  /** @deprecated use `Metadata$inboundSchema` instead. */
-  export const inboundSchema = Metadata$inboundSchema;
-  /** @deprecated use `Metadata$outboundSchema` instead. */
-  export const outboundSchema = Metadata$outboundSchema;
-  /** @deprecated use `Metadata$Outbound` instead. */
-  export type Outbound = Metadata$Outbound;
+export namespace CreatePromptMetadata$ {
+  /** @deprecated use `CreatePromptMetadata$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptMetadata$inboundSchema;
+  /** @deprecated use `CreatePromptMetadata$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptMetadata$outboundSchema;
+  /** @deprecated use `CreatePromptMetadata$Outbound` instead. */
+  export type Outbound = CreatePromptMetadata$Outbound;
 }
 
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
+export function createPromptMetadataToJSON(
+  createPromptMetadata: CreatePromptMetadata,
+): string {
+  return JSON.stringify(
+    CreatePromptMetadata$outboundSchema.parse(createPromptMetadata),
+  );
 }
 
-export function metadataFromJSON(
+export function createPromptMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
+): SafeParseResult<CreatePromptMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
+    (x) => CreatePromptMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMetadata' from JSON`,
   );
 }
 
@@ -1975,7 +1979,7 @@ export const CreatePromptRequestBody$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => PromptConfig$inboundSchema).optional(),
-  metadata: z.lazy(() => Metadata$inboundSchema).optional(),
+  metadata: z.lazy(() => CreatePromptMetadata$inboundSchema).optional(),
   key: z.string().optional(),
   type: CreatePromptPromptsType$inboundSchema,
 }).transform((v) => {
@@ -1990,7 +1994,7 @@ export type CreatePromptRequestBody$Outbound = {
   display_name: string;
   description?: string | null | undefined;
   prompt_config?: PromptConfig$Outbound | undefined;
-  metadata?: Metadata$Outbound | undefined;
+  metadata?: CreatePromptMetadata$Outbound | undefined;
   key?: string | undefined;
   type: string;
 };
@@ -2004,7 +2008,7 @@ export const CreatePromptRequestBody$outboundSchema: z.ZodType<
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => PromptConfig$outboundSchema).optional(),
-  metadata: z.lazy(() => Metadata$outboundSchema).optional(),
+  metadata: z.lazy(() => CreatePromptMetadata$outboundSchema).optional(),
   key: z.string().optional(),
   type: CreatePromptPromptsType$outboundSchema,
 }).transform((v) => {
@@ -3278,8 +3282,8 @@ export function createPromptPromptConfigFromJSON(
 }
 
 /** @internal */
-export const CreatePromptMetadata$inboundSchema: z.ZodType<
-  CreatePromptMetadata,
+export const CreatePromptPromptsMetadata$inboundSchema: z.ZodType<
+  CreatePromptPromptsMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3292,16 +3296,16 @@ export const CreatePromptMetadata$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptMetadata$Outbound = {
+export type CreatePromptPromptsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
   language?: string | undefined;
 };
 
 /** @internal */
-export const CreatePromptMetadata$outboundSchema: z.ZodType<
-  CreatePromptMetadata$Outbound,
+export const CreatePromptPromptsMetadata$outboundSchema: z.ZodType<
+  CreatePromptPromptsMetadata$Outbound,
   z.ZodTypeDef,
-  CreatePromptMetadata
+  CreatePromptPromptsMetadata
 > = z.object({
   useCases: z.array(z.string()).optional(),
   language: z.string().optional(),
@@ -3315,30 +3319,32 @@ export const CreatePromptMetadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptMetadata$ {
-  /** @deprecated use `CreatePromptMetadata$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptMetadata$inboundSchema;
-  /** @deprecated use `CreatePromptMetadata$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptMetadata$outboundSchema;
-  /** @deprecated use `CreatePromptMetadata$Outbound` instead. */
-  export type Outbound = CreatePromptMetadata$Outbound;
+export namespace CreatePromptPromptsMetadata$ {
+  /** @deprecated use `CreatePromptPromptsMetadata$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptPromptsMetadata$inboundSchema;
+  /** @deprecated use `CreatePromptPromptsMetadata$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptPromptsMetadata$outboundSchema;
+  /** @deprecated use `CreatePromptPromptsMetadata$Outbound` instead. */
+  export type Outbound = CreatePromptPromptsMetadata$Outbound;
 }
 
-export function createPromptMetadataToJSON(
-  createPromptMetadata: CreatePromptMetadata,
+export function createPromptPromptsMetadataToJSON(
+  createPromptPromptsMetadata: CreatePromptPromptsMetadata,
 ): string {
   return JSON.stringify(
-    CreatePromptMetadata$outboundSchema.parse(createPromptMetadata),
+    CreatePromptPromptsMetadata$outboundSchema.parse(
+      createPromptPromptsMetadata,
+    ),
   );
 }
 
-export function createPromptMetadataFromJSON(
+export function createPromptPromptsMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptMetadata, SDKValidationError> {
+): SafeParseResult<CreatePromptPromptsMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptMetadata' from JSON`,
+    (x) => CreatePromptPromptsMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptsMetadata' from JSON`,
   );
 }
 
@@ -3375,7 +3381,7 @@ export const CreatePromptResponseBody$inboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => CreatePromptPromptConfig$inboundSchema)
     .optional(),
-  metadata: z.lazy(() => CreatePromptMetadata$inboundSchema).optional(),
+  metadata: z.lazy(() => CreatePromptPromptsMetadata$inboundSchema).optional(),
   key: z.string().optional(),
   type: CreatePromptPromptsResponseType$inboundSchema,
 }).transform((v) => {
@@ -3394,7 +3400,7 @@ export type CreatePromptResponseBody$Outbound = {
   domain_id: string;
   description?: string | null | undefined;
   prompt_config?: CreatePromptPromptConfig$Outbound | undefined;
-  metadata?: CreatePromptMetadata$Outbound | undefined;
+  metadata?: CreatePromptPromptsMetadata$Outbound | undefined;
   key?: string | undefined;
   type: string;
 };
@@ -3411,7 +3417,7 @@ export const CreatePromptResponseBody$outboundSchema: z.ZodType<
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => CreatePromptPromptConfig$outboundSchema)
     .optional(),
-  metadata: z.lazy(() => CreatePromptMetadata$outboundSchema).optional(),
+  metadata: z.lazy(() => CreatePromptPromptsMetadata$outboundSchema).optional(),
   key: z.string().optional(),
   type: CreatePromptPromptsResponseType$outboundSchema,
 }).transform((v) => {

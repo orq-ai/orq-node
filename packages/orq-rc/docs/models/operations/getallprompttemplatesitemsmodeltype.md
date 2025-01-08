@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptTemplatesItemsModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsModelType = "vision";
+let value: GetAllPromptTemplatesItemsModelType = "completion";
 ```
 
 ## Values

@@ -6,12 +6,18 @@
 import { CreatePromptVersionRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersionRequestBody = {
-  displayName: "Emanuel14",
+  id: "<id>",
+  displayName: "Delphia.Heller",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: "<value>",
+        role: "system",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
       },
     ],
   },
@@ -25,6 +31,7 @@ let value: CreatePromptVersionRequestBody = {
 
 | Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
 | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                     | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `displayName`                                                                                            | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `description`                                                                                            | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
 | `promptConfig`                                                                                           | [operations.CreatePromptVersionPromptConfig](../../models/operations/createpromptversionpromptconfig.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

@@ -6731,7 +6731,7 @@ export const Items3$inboundSchema: z.ZodType<Items3, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2024-12-01T21:30:44.576Z",
+      "2025-01-02T13:55:01.056Z",
     ).transform(v => new Date(v)),
     versions: z.array(
       z.lazy(() => GetAllPromptTemplatesItemsVersions$inboundSchema),
@@ -6788,7 +6788,7 @@ export const Items3$outboundSchema: z.ZodType<
     GetAllPromptTemplatesItemsPromptTemplatesMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
+  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => GetAllPromptTemplatesItemsVersions$outboundSchema),
@@ -10165,7 +10165,7 @@ export const Items2$inboundSchema: z.ZodType<Items2, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2024-12-01T21:30:44.576Z",
+      "2025-01-02T13:55:01.056Z",
     ).transform(v => new Date(v)),
     versions: z.array(z.lazy(() => ItemsVersions$inboundSchema)),
     key: z.string(),
@@ -10217,7 +10217,7 @@ export const Items2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => GetAllPromptTemplatesItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
+  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => ItemsVersions$outboundSchema)),
   key: z.string(),
@@ -13464,7 +13464,7 @@ export const Items1$inboundSchema: z.ZodType<Items1, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2024-12-01T21:30:44.576Z",
+      "2025-01-02T13:55:01.056Z",
     ).transform(v => new Date(v)),
     versions: z.array(
       z.lazy(() =>
@@ -13519,7 +13519,7 @@ export const Items1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => ItemsPromptConfig$outboundSchema),
   metadata: z.lazy(() => ItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2024-12-01T21:30:44.576Z"))
+  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>

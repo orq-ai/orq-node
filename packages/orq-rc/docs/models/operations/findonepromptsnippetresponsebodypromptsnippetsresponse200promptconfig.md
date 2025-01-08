@@ -9,8 +9,15 @@ let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200PromptConfig = {
     messages: [
       {
-        role: "exception",
-        content: "<value>",
+        role: "correction",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://aged-premier.org/",
+            },
+          },
+        ],
       },
     ],
   };

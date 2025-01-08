@@ -20,6 +20,7 @@ export type FileT = {
  */
 export const Purpose = {
   Retrieval: "retrieval",
+  KnowledgeDatasource: "knowledge_datasource",
 } as const;
 /**
  * The intended purpose of the uploaded file.
@@ -42,6 +43,7 @@ export type FileUploadRequestBody = {
  */
 export const FileUploadPurpose = {
   Retrieval: "retrieval",
+  KnowledgeDatasource: "knowledge_datasource",
 } as const;
 /**
  * The intended purpose of the uploaded file.
@@ -63,6 +65,10 @@ export type FileUploadResponseBody = {
   purpose: FileUploadPurpose;
   bytes: number;
   fileName: string;
+  /**
+   * The id of the resource
+   */
+  workspaceId: string;
   /**
    * The date and time the resource was created
    */
@@ -237,14 +243,16 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   purpose: FileUploadPurpose$inboundSchema,
   bytes: z.number(),
   file_name: z.string(),
+  workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2024-12-01T21:30:45.101Z",
+    "2025-01-02T13:55:01.176Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "object_name": "objectName",
     "file_name": "fileName",
+    "workspace_id": "workspaceId",
   });
 });
 
@@ -255,6 +263,7 @@ export type FileUploadResponseBody$Outbound = {
   purpose: string;
   bytes: number;
   file_name: string;
+  workspace_id: string;
   created: string;
 };
 
@@ -269,13 +278,15 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   purpose: FileUploadPurpose$outboundSchema,
   bytes: z.number(),
   fileName: z.string(),
-  created: z.date().default(() => new Date("2024-12-01T21:30:45.101Z"))
+  workspaceId: z.string(),
+  created: z.date().default(() => new Date("2025-01-02T13:55:01.176Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     objectName: "object_name",
     fileName: "file_name",
+    workspaceId: "workspace_id",
   });
 });
 

@@ -9,18 +9,18 @@ import { GetAllPromptTemplatesItemsVersions } from "@orq-ai/node/models/operatio
 
 let value: GetAllPromptTemplatesItemsVersions = {
   id: "<id>",
-  createdById: "296ef849-e684-4763-a845-8c5ed04715ba",
-  displayName: "Meredith_Heaney",
-  updatedById: "40b058e1-6059-4431-89ba-f0a99f0bd85c",
+  createdById: "717f6d14-66a5-4ba6-a691-dab816650b19",
+  displayName: "Lori.Brakus-Stroman",
+  updatedById: "85308d53-1131-4411-9d28-c723685cce0e",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "expected_output",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://enchanted-handle.name/",
+              url: "https://hefty-knight.info",
             },
           },
         ],

@@ -18,7 +18,7 @@ const value: operations.UpdatePromptContentPromptsResponse2002[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://insignificant-bowling.info",
+      url: "https://kaleidoscopic-grandpa.com/",
     },
   },
 ];

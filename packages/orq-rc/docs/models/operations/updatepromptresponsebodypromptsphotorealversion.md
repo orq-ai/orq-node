@@ -7,7 +7,7 @@ The version of photoReal to use. Must be v1 or v2. Only available for `leonardoa
 ```typescript
 import { UpdatePromptResponseBodyPromptsPhotoRealVersion } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseBodyPromptsPhotoRealVersion = "v2";
+let value: UpdatePromptResponseBodyPromptsPhotoRealVersion = "v1";
 ```
 
 ## Values

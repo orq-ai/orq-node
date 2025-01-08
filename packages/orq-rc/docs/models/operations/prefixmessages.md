@@ -6,13 +6,11 @@
 import { PrefixMessages } from "@orq-ai/node/models/operations";
 
 let value: PrefixMessages = {
-  role: "tool",
+  role: "expected_output",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://exalted-breastplate.com/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

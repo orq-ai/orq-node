@@ -8,13 +8,8 @@ import { ItemsPromptConfig } from "@orq-ai/node/models/operations";
 let value: ItemsPromptConfig = {
   messages: [
     {
-      role: "user",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "system",
+      content: "<value>",
     },
   ],
 };

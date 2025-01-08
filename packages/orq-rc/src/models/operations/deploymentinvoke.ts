@@ -281,6 +281,7 @@ export const DeploymentInvokeObject = {
   Chat: "chat",
   Completion: "completion",
   Image: "image",
+  Vision: "vision",
 } as const;
 /**
  * Indicates the type of model used to generate the response

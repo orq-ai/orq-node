@@ -8,8 +8,13 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONMess
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONMessages =
     {
-      role: "system",
-      content: "<value>",
+      role: "exception",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     };
 ```
 

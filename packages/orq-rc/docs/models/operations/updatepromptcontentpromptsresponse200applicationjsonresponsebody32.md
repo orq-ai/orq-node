@@ -20,7 +20,7 @@ const value:
   operations.UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody32 = {
     type: "image_url",
     imageUrl: {
-      url: "https://edible-orchid.org",
+      url: "https://massive-lift.biz/",
     },
   };
 ```

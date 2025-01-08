@@ -8,7 +8,7 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSO
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSONMessages =
     {
-      role: "user",
+      role: "exception",
       content: "<value>",
     };
 ```

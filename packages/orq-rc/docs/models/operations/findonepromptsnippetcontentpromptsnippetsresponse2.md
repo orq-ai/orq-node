@@ -18,7 +18,7 @@ const value: operations.FindOnePromptSnippet2PromptSnippetsResponse1 = {
 const value: operations.FindOnePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ripe-eggplant.net",
+    url: "https://adolescent-viability.org/",
   },
 };
 ```

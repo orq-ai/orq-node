@@ -9,19 +9,14 @@ import { ResponseBodyVersions } from "@orq-ai/node/models/operations";
 
 let value: ResponseBodyVersions = {
   id: "<id>",
-  createdById: "56de4492-5061-48af-933f-d9d3dd38eaa8",
-  displayName: "Wilford_Hahn",
-  updatedById: "431a8300-b340-42d3-af24-d64b0ed1cf79",
+  createdById: "3d61b499-f34e-4b7b-9662-84a6dc29b818",
+  displayName: "Eric.Hane73",
+  updatedById: "cf7c2cf8-42e5-4766-9cea-f39abc5e2479",
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "expected_output",
+        content: "<value>",
       },
     ],
   },

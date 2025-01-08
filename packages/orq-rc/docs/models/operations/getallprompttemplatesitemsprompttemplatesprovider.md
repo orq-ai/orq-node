@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesProvider = "perplexity";
+let value: GetAllPromptTemplatesItemsPromptTemplatesProvider = "replicate";
 ```
 
 ## Values

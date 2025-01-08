@@ -8,22 +8,19 @@ Prompts retrieved.
 import { GetAllPromptsResponseBody } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsResponseBody = {
-  count: 5480.83,
-  page: 5592.32,
-  limit: 6233.73,
-  totalPages: 2303.52,
-  items: [
+  object: "list",
+  data: [
     {
       id: "<id>",
       owner: "<value>",
-      domainId: "047bc6cb-a248-4d6f-8a58-6e031c3b8df2",
-      createdById: "a0d66954-3bc9-43b2-ae77-39f9a4538297",
-      displayName: "Antone50",
-      updatedById: "b54a157c-5cc0-43a7-905a-f3258a530213",
+      domainId: "f68a7b0a-5e20-4083-ac03-d0c1dc367633",
+      createdById: "24130b66-7459-4379-8248-6b37d2e77a8d",
+      displayName: "Breana53",
+      updatedById: "dff838b7-4dd8-498c-8e0f-565db260c31a",
       promptConfig: {
         messages: [
           {
-            role: "system",
+            role: "tool",
             content: "<value>",
           },
         ],
@@ -32,14 +29,19 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "296ac16f-077d-44c0-875c-61b057b51d0d",
-          displayName: "Brain_Cormier81",
-          updatedById: "19b80cbb-31f7-4b18-b815-ebbe4c198636",
+          createdById: "cf1d7087-e5c2-4682-a33b-f2820066a631",
+          displayName: "Cydney.Auer65",
+          updatedById: "add27ebd-67e6-4a6b-9978-9eabf135f391",
           promptConfig: {
             messages: [
               {
-                role: "prompt",
-                content: "<value>",
+                role: "user",
+                content: [
+                  {
+                    type: "text",
+                    text: "<value>",
+                  },
+                ],
               },
             ],
           },
@@ -48,19 +50,21 @@ let value: GetAllPromptsResponseBody = {
           timestamp: "<value>",
         },
       ],
-      key: "<key>",
-      type: "snippet",
+      type: "prompt",
     },
   ],
+  hasMore: false,
+  firstId: "<id>",
+  lastId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field                             | Type                              | Required                          | Description                       |
-| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `count`                           | *number*                          | :heavy_check_mark:                | N/A                               |
-| `page`                            | *number*                          | :heavy_check_mark:                | N/A                               |
-| `limit`                           | *number*                          | :heavy_check_mark:                | N/A                               |
-| `totalPages`                      | *number*                          | :heavy_check_mark:                | N/A                               |
-| `items`                           | *operations.GetAllPromptsItems*[] | :heavy_check_mark:                | N/A                               |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `object`                                                                         | [operations.GetAllPromptsObject](../../models/operations/getallpromptsobject.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `data`                                                                           | *operations.GetAllPromptsData*[]                                                 | :heavy_check_mark:                                                               | N/A                                                                              |
+| `hasMore`                                                                        | *boolean*                                                                        | :heavy_check_mark:                                                               | N/A                                                                              |
+| `firstId`                                                                        | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
+| `lastId`                                                                         | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |

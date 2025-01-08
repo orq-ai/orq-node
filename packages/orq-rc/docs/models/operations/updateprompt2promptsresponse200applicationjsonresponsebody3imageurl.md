@@ -7,7 +7,7 @@ import { UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody3ImageUrl } f
 
 let value: UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody3ImageUrl =
   {
-    url: "https://limp-toothbrush.com",
+    url: "https://superficial-sand.com",
   };
 ```
 

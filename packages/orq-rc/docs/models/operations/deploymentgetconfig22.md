@@ -10,7 +10,7 @@ import { DeploymentGetConfig22 } from "@orq-ai/node/models/operations";
 let value: DeploymentGetConfig22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://lovely-warming.org/",
+    url: "https://dreary-hippodrome.info/",
   },
 };
 ```

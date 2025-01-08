@@ -11,7 +11,7 @@ import {
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3ModelType =
-    "stt";
+    "completion";
 ```
 
 ## Values

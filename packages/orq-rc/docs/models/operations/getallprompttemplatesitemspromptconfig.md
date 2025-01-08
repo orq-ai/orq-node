@@ -8,7 +8,7 @@ import { GetAllPromptTemplatesItemsPromptConfig } from "@orq-ai/node/models/oper
 let value: GetAllPromptTemplatesItemsPromptConfig = {
   messages: [
     {
-      role: "assistant",
+      role: "correction",
       content: "<value>",
     },
   ],

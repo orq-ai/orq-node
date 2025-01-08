@@ -8,12 +8,12 @@ import { UpdatePromptResponseBodyPromptsPromptConfig } from "@orq-ai/node/models
 let value: UpdatePromptResponseBodyPromptsPromptConfig = {
   messages: [
     {
-      role: "user",
+      role: "prompt",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://courageous-jump.net/",
+            url: "https://infatuated-bug.info",
           },
         },
       ],

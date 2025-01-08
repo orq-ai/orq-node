@@ -6,7 +6,7 @@
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
-  "leonardoai";
+  "google-ai";
 ```
 
 ## Values

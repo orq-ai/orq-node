@@ -9,7 +9,7 @@
 const value: operations.Filters1 = {
   type: "id",
   id: "<id>",
-  path: "/opt/lib",
+  path: "/var/yp",
 };
 ```
 
@@ -32,7 +32,7 @@ const value: operations.Filters3 = {
   type: "string",
   operator: "contains",
   value: "<value>",
-  path: "/tmp",
+  path: "/private/tmp",
 };
 ```
 
@@ -45,7 +45,7 @@ const value: operations.Four = {
   values: [
     "<value>",
   ],
-  path: "/private/var",
+  path: "/opt/bin",
 };
 ```
 

@@ -9,7 +9,7 @@ let value: Filters3 = {
   type: "string",
   operator: "equals",
   value: "<value>",
-  path: "/var/tmp",
+  path: "/rescue",
 };
 ```
 

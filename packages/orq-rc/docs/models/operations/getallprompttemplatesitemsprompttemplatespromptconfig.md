@@ -8,7 +8,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesPromptConfig } from "@orq-ai/n
 let value: GetAllPromptTemplatesItemsPromptTemplatesPromptConfig = {
   messages: [
     {
-      role: "expected_output",
+      role: "user",
       content: "<value>",
     },
   ],

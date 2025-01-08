@@ -10,7 +10,7 @@ import { GetAllPromptTemplates2PromptTemplatesResponse2 } from "@orq-ai/node/mod
 let value: GetAllPromptTemplates2PromptTemplatesResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://haunting-solvency.org/",
+    url: "https://complicated-boyfriend.info",
   },
 };
 ```

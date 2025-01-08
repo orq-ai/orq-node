@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2PromptsResponse200ApplicationJson1 = {
 const value: operations.UpdatePrompt2PromptsResponse200ApplicationJson2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://bare-giant.com/",
+    url: "https://oddball-diversity.biz",
   },
 };
 ```

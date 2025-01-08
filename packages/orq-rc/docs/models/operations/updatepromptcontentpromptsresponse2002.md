@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2PromptsResponse2001 = {
 const value: operations.UpdatePrompt2PromptsResponse2002 = {
   type: "image_url",
   imageUrl: {
-    url: "https://blaring-flint.info",
+    url: "https://quixotic-comparison.biz",
   },
 };
 ```

@@ -11,7 +11,7 @@ let value: Four = {
   values: [
     "<value>",
   ],
-  path: "/Applications",
+  path: "/usr/lib",
 };
 ```
 

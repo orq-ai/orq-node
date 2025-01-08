@@ -6,15 +6,8 @@
 import { CreatePromptMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptMessages = {
-  role: "prompt",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://any-molasses.info/",
-      },
-    },
-  ],
+  role: "expected_output",
+  content: "<value>",
 };
 ```
 

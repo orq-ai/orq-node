@@ -9,13 +9,13 @@ import { GetAllPromptTemplatesItemsPromptTemplatesVersions } from "@orq-ai/node/
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesVersions = {
   id: "<id>",
-  createdById: "51ce1c0f-984e-44df-ac81-7736527480ed",
-  displayName: "Roxanne_Brown-Murray",
-  updatedById: "2903f5a4-fb5c-4163-8a16-485b0a34cf5d",
+  createdById: "9ffd5ea6-0c8c-4bc4-9c87-a014f25055fd",
+  displayName: "Albin.Olson99",
+  updatedById: "d46caf91-ecb0-462d-9bef-cf9005ddf10e",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "tool",
         content: [
           {
             type: "text",

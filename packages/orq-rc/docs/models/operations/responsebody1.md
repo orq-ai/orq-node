@@ -9,15 +9,15 @@ import { ResponseBody1 } from "@orq-ai/node/models/operations";
 
 let value: ResponseBody1 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "6be4a609-5071-4a88-aeeb-940153986cbb",
-  createdById: "06770a40-8e00-4980-81d7-12950a0122c1",
-  displayName: "Isadore.Rogahn87",
-  updatedById: "d2e580b3-ea44-42c7-84fc-9c1a5bfc9b74",
+  owner: "<value>",
+  domainId: "5e948332-bc56-4c05-948e-0d89f24379b0",
+  createdById: "e7d14b97-ace7-4a6e-876f-05d7596545ef",
+  displayName: "Mustafa27",
+  updatedById: "708dee87-3dcd-431b-aee8-a148e790f725",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "assistant",
         content: "<value>",
       },
     ],
@@ -26,13 +26,13 @@ let value: ResponseBody1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "7ae937a3-bc8d-438e-bbc3-95a8a9bc0f62",
-      displayName: "Ottis.Miller",
-      updatedById: "c6cc6780-3dc1-4a08-92d9-1aeb1a9ac453",
+      createdById: "ed14a40b-3542-422f-abf9-5277c83d2805",
+      displayName: "Brittany_Lind46",
+      updatedById: "24c49139-1b74-4da1-ba3e-293f59279c8b",
       promptConfig: {
         messages: [
           {
-            role: "exception",
+            role: "user",
             content: "<value>",
           },
         ],

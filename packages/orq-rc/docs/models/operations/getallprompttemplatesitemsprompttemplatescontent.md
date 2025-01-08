@@ -17,10 +17,8 @@ const value: string = "<value>";
 const value: operations.GetAllPromptTemplatesContentPromptTemplatesResponse2[] =
   [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://unsung-entry.org",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

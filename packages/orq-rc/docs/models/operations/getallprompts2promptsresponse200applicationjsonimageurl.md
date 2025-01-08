@@ -6,7 +6,7 @@
 import { GetAllPrompts2PromptsResponse200ApplicationJSONImageUrl } from "@orq-ai/node/models/operations";
 
 let value: GetAllPrompts2PromptsResponse200ApplicationJSONImageUrl = {
-  url: "https://tedious-hepatitis.org/",
+  url: "https://tempting-lieu.info",
 };
 ```
 

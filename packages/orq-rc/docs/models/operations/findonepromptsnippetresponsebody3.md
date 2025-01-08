@@ -10,22 +10,15 @@ import { FindOnePromptSnippetResponseBody3 } from "@orq-ai/node/models/operation
 let value: FindOnePromptSnippetResponseBody3 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "8bf6e009-4345-4b9c-bdd6-6ea185f09b4f",
-  createdById: "e094da81-8af9-4ffa-a87e-011c5a968af9",
-  displayName: "Annamarie.Legros-Schmitt42",
-  updatedById: "4c970ff3-08fe-4945-9e72-3417ea1045cf",
+  domainId: "353f9b15-e12a-49de-b246-01374e5ef734",
+  createdById: "4679f354-515e-445f-bb8c-1713256f47cd",
+  displayName: "Eduardo43",
+  updatedById: "8ed099f0-8309-4cc0-b603-3354f5e2c070",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://boiling-fellow.org",
-            },
-          },
-        ],
+        role: "expected_output",
+        content: "<value>",
       },
     ],
   },
@@ -33,13 +26,13 @@ let value: FindOnePromptSnippetResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "3db588b8-2c6f-4445-a9e2-4977de7ac84a",
-      displayName: "Stephen_Vandervort",
-      updatedById: "b7f65d8a-ca61-49e6-be89-d91f3b873b1f",
+      createdById: "ec5e461a-07ad-42cb-8891-96d596e41b69",
+      displayName: "Vanessa37",
+      updatedById: "a27f8094-1680-488c-a68b-e69b0c6a7bb3",
       promptConfig: {
         messages: [
           {
-            role: "tool",
+            role: "correction",
             content: "<value>",
           },
         ],

@@ -18,10 +18,8 @@ const value:
   operations.UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody32[] =
     [
       {
-        type: "image_url",
-        imageUrl: {
-          url: "https://brisk-unit.org/",
-        },
+        type: "text",
+        text: "<value>",
       },
     ];
 ```

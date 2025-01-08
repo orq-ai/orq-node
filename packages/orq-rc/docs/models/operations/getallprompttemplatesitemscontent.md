@@ -18,7 +18,7 @@ const value: operations.GetAllPromptTemplatesContentPromptTemplates2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://miserly-doubter.org",
+      url: "https://unsteady-appliance.biz/",
     },
   },
 ];

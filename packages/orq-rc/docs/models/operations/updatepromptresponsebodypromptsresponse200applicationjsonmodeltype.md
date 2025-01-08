@@ -8,7 +8,7 @@ The type of the model
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONModelType } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONModelType =
-  "rerank";
+  "completion";
 ```
 
 ## Values

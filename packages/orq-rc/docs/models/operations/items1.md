@@ -9,21 +9,19 @@ import { Items1 } from "@orq-ai/node/models/operations";
 
 let value: Items1 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "e1096ce4-679f-4b64-9f2b-ea635baedde4",
-  createdById: "68a4064f-eda5-48d1-bc0d-c0a822c9fff1",
-  displayName: "Deion.Rosenbaum56",
-  updatedById: "11506a61-142f-42c9-b98f-5c86f916cbe4",
+  owner: "vendor",
+  domainId: "6c83448b-fbc2-456a-a445-c9115cbbc488",
+  createdById: "f4ca9cf0-2c18-434b-a0d7-88a515285ff9",
+  displayName: "Winona.Runolfsdottir36",
+  updatedById: "7fe10e83-aa14-4032-93a0-12544cf8f616",
   promptConfig: {
     messages: [
       {
         role: "exception",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://total-fort.org",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },
@@ -33,14 +31,21 @@ let value: Items1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "a60c8cbc-4c87-4a01-84f2-5055fd60da2f",
-      displayName: "Sandra67",
-      updatedById: "91ecb062-dbef-4cf9-b005-ddf10e48f6a6",
+      createdById: "eeb726b4-1eb9-4cd7-8ee4-988f4fe7dca5",
+      displayName: "Margaret44",
+      updatedById: "5782bd04-0faf-48c5-b56a-5ef031037d37",
       promptConfig: {
         messages: [
           {
-            role: "tool",
-            content: "<value>",
+            role: "prompt",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://oval-arcade.biz",
+                },
+              },
+            ],
           },
         ],
       },

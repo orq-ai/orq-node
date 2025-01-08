@@ -18,10 +18,8 @@ const value:
   operations.GetAllPromptTemplatesContentPromptTemplatesResponse200ApplicationJSONResponseBody2[] =
     [
       {
-        type: "image_url",
-        imageUrl: {
-          url: "https://wide-eyed-yarmulke.info",
-        },
+        type: "text",
+        text: "<value>",
       },
     ];
 ```

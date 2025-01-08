@@ -8,20 +8,25 @@ Prompt templates retrieved.
 import { GetAllPromptTemplatesResponseBody } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesResponseBody = {
-  count: 4013.88,
+  count: 5715.50,
   items: [
     {
       id: "<id>",
-      owner: "vendor",
-      domainId: "2e177357-df8d-4953-a680-293d511e12d4",
-      createdById: "d9fb18bc-0bdb-4878-8be9-eb1844559a42",
-      displayName: "Kira_Altenwerth53",
-      updatedById: "df7016e2-d07a-409f-b2b9-2008fab792ec",
+      owner: "<value>",
+      domainId: "2ccc8f69-16b3-4fa4-ac1f-0e4c04b81669",
+      createdById: "d762cb68-a205-497b-9d72-d9bbf4b5635f",
+      displayName: "Delaney.Gerlach83",
+      updatedById: "698fabf6-5023-42c8-bad3-5b606e65fa51",
       promptConfig: {
         messages: [
           {
-            role: "user",
-            content: "<value>",
+            role: "prompt",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },
@@ -29,14 +34,19 @@ let value: GetAllPromptTemplatesResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "2fc28622-f4f1-4720-881b-b2fb4bb5659e",
-          displayName: "Sean79",
-          updatedById: "7a8c7849-4922-4664-8200-47b7e0259d54",
+          createdById: "1b325d80-7a89-43d8-bbf6-e0094345b9cd",
+          displayName: "Haskell_Walter",
+          updatedById: "5f09b4fd-e094-4da8-918a-f9ffa87e011c",
           promptConfig: {
             messages: [
               {
-                role: "correction",
-                content: "<value>",
+                role: "prompt",
+                content: [
+                  {
+                    type: "text",
+                    text: "<value>",
+                  },
+                ],
               },
             ],
           },
@@ -45,8 +55,7 @@ let value: GetAllPromptTemplatesResponseBody = {
           timestamp: "<value>",
         },
       ],
-      key: "<key>",
-      type: "snippet",
+      type: "template",
     },
   ],
 };

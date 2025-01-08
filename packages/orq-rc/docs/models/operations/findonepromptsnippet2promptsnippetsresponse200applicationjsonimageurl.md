@@ -7,7 +7,7 @@ import { FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJSONImageUrl }
 
 let value:
   FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJSONImageUrl = {
-    url: "https://wide-seagull.net/",
+    url: "https://rusty-status.biz",
   };
 ```
 

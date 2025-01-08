@@ -5,8 +5,7 @@
 ```typescript
 import { FindOnePromptSnippetResponseBodyPromptSnippetsProvider } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetResponseBodyPromptSnippetsProvider =
-  "huggingface";
+let value: FindOnePromptSnippetResponseBodyPromptSnippetsProvider = "replicate";
 ```
 
 ## Values

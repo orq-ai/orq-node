@@ -9,7 +9,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONRole
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONRole =
-    "user";
+    "system";
 ```
 
 ## Values

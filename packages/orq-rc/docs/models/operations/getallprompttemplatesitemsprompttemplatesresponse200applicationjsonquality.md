@@ -9,7 +9,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONQual
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONQuality =
-    "hd";
+    "standard";
 ```
 
 ## Values

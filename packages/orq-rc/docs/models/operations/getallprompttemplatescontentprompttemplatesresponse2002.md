@@ -18,7 +18,7 @@ const value: operations.GetAllPromptTemplates2PromptTemplatesResponse2001 = {
 const value: operations.GetAllPromptTemplates2PromptTemplatesResponse2002 = {
   type: "image_url",
   imageUrl: {
-    url: "https://kosher-kettledrum.net/",
+    url: "https://fortunate-confusion.info/",
   },
 };
 ```

@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesModelType = "rerank";
+let value: GetAllPromptTemplatesItemsPromptTemplatesModelType = "embedding";
 ```
 
 ## Values

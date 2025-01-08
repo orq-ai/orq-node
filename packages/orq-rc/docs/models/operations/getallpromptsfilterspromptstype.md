@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsType = "search";
+let value: GetAllPromptsFiltersPromptsType = "number";
 ```
 
 ## Values
 
 ```typescript
-"search"
+"string" | "multi-value-array" | "single-value-array" | "number" | "date" | "object" | "boolean" | "evaluator"
 ```

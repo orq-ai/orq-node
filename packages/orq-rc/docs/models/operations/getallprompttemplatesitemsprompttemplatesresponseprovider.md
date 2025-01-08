@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesResponseProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesResponseProvider = "jina";
+let value: GetAllPromptTemplatesItemsPromptTemplatesResponseProvider = "openai";
 ```
 
 ## Values

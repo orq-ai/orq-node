@@ -11,15 +11,22 @@ Prompt snippet retrieved.
 const value: operations.FindOnePromptSnippetResponseBody1 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "2cf541af-2710-4ad5-9e13-e89020e2d5c5",
-  createdById: "147d7f80-6b3b-480c-b817-4e4f85db6acd",
-  displayName: "Cassidy.Beer62",
-  updatedById: "946518f9-4f6b-4afe-921c-e7b1329304a9",
+  domainId: "9f24b3d5-209d-44ec-b099-3570226bd2ca",
+  createdById: "f11c23ef-5dd9-4994-9932-6b9fa22139de",
+  displayName: "Keegan_Hahn",
+  updatedById: "27663243-bb91-4910-8539-ebcfa99d6ca4",
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: "<value>",
+        role: "assistant",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://jagged-petal.com/",
+            },
+          },
+        ],
       },
     ],
   },
@@ -27,19 +34,14 @@ const value: operations.FindOnePromptSnippetResponseBody1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "48772846-bec6-49b6-b52b-d5c9c6b61874",
-      displayName: "Geovany86",
-      updatedById: "3d3510ae-7dca-4fc4-acb6-13c3fb799f24",
+      createdById: "66885c10-6e42-4e25-bb43-6ce02f98d00f",
+      displayName: "Nedra_Kreiger93",
+      updatedById: "c0f6f545-b3d9-4ff2-8f00-ff277dac7abb",
       promptConfig: {
         messages: [
           {
-            role: "assistant",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            role: "system",
+            content: "<value>",
           },
         ],
       },
@@ -58,18 +60,20 @@ const value: operations.FindOnePromptSnippetResponseBody1 = {
 const value: operations.FindOnePromptSnippetResponseBody2 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "09d4ec09-9357-4022-96bd-2caef11c23ef",
-  createdById: "dd999493-26b9-4fa2-9213-9de68c492727",
-  displayName: "Horace23",
-  updatedById: "b9191053-9ebc-4fa9-99d6-ca403b946a26",
+  domainId: "66e9be70-4de5-44e5-ba41-8e93ac58a2f7",
+  createdById: "3720366e-a6f9-45b7-bee5-84afd51f6457",
+  displayName: "Wyatt_Herman0",
+  updatedById: "e016b444-d38f-4b5c-bf5b-1e1584a8b58c",
   promptConfig: {
     messages: [
       {
-        role: "tool",
+        role: "prompt",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://limping-strategy.name/",
+            },
           },
         ],
       },
@@ -79,21 +83,14 @@ const value: operations.FindOnePromptSnippetResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "c106e42e-25b4-436c-be02-f98d00fdb27e",
-      displayName: "Adelbert41",
-      updatedById: "545b3d9f-f2f0-40ff-9277-dac7abb01506",
+      createdById: "f41a1c48-cc7f-4744-ab66-04dcb0047e64",
+      displayName: "Tavares.Stiedemann",
+      updatedById: "bf558a9b-6d25-4c5a-9424-e7350c390d20",
       promptConfig: {
         messages: [
           {
             role: "expected_output",
-            content: [
-              {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://judicious-suv.biz",
-                },
-              },
-            ],
+            content: "<value>",
           },
         ],
       },
@@ -113,10 +110,10 @@ const value: operations.FindOnePromptSnippetResponseBody2 = {
 const value: operations.FindOnePromptSnippetResponseBody3 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "e54e5a41-8e93-4ac5-98a2-f7f3720366ea",
-  createdById: "f95b7ee5-84af-4d51-9f64-57ff45802e01",
-  displayName: "Mose.Haag87",
-  updatedById: "8fb5cf5b-1e15-484a-88b5-8ccb8a17d9f4",
+  domainId: "64ecc8d7-773e-4433-bdc6-0f2dcfc5363b",
+  createdById: "a2097358-a7f0-4ae3-a3c7-f9e02a6d6b91",
+  displayName: "Meghan.MacGyver",
+  updatedById: "1213d06c-13ba-492c-a22c-55455b35ce91",
   promptConfig: {
     messages: [
       {
@@ -129,21 +126,14 @@ const value: operations.FindOnePromptSnippetResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "c48cc7f7-44b6-4604-8dcb-0047e649ebd2",
-      displayName: "Karine.Wilkinson",
-      updatedById: "a9b6d25c-5a42-44e7-9350-c390d204e486",
+      createdById: "dc92be4f-c494-41da-a926-e2034ca009a2",
+      displayName: "Dayana96",
+      updatedById: "74fdb76c-8a9b-4162-a338-0f80a41d310b",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
-            content: [
-              {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://superficial-impostor.info",
-                },
-              },
-            ],
+            role: "system",
+            content: "<value>",
           },
         ],
       },

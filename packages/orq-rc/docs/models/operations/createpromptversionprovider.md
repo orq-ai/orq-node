@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptVersionProvider } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptVersionProvider = "openai";
+let value: CreatePromptVersionProvider = "fal";
 ```
 
 ## Values

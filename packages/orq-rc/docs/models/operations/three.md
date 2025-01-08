@@ -6,8 +6,8 @@
 import { Three } from "@orq-ai/node/models/operations";
 
 let value: Three = {
-  role: "user",
-  url: "https://aggressive-convection.info/",
+  role: "exception",
+  url: "https://impish-term.net",
 };
 ```
 

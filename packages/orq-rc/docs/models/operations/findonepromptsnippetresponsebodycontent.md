@@ -18,7 +18,7 @@ const value: operations.FindOnePromptSnippetContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://adolescent-yogurt.biz/",
+      url: "https://good-natured-premise.info",
     },
   },
 ];

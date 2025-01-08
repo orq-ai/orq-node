@@ -10,7 +10,7 @@ import { CreatePromptVersion2Prompts2 } from "@orq-ai/node/models/operations";
 let value: CreatePromptVersion2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://dapper-armchair.biz",
+    url: "https://substantial-conversation.net/",
   },
 };
 ```

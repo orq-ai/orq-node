@@ -6,16 +6,26 @@
 import { GetAllPromptsFilters1 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsFilters1 = {
-  type: "id",
-  id: "<id>",
-  path: "/selinux",
+  operator: "is_not",
+  type: "string",
+  options: [
+    9649.38,
+  ],
+  name: "<value>",
+  path: "/usr/libexec",
 };
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `type`                                                                                     | [operations.GetAllPromptsFiltersType](../../models/operations/getallpromptsfilterstype.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `id`                                                                                       | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `path`                                                                                     | *string*                                                                                   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `operator`                                                                                         | [operations.GetAllPromptsFiltersOperator](../../models/operations/getallpromptsfiltersoperator.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `value`                                                                                            | *any*                                                                                              | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `type`                                                                                             | [operations.GetAllPromptsFiltersType](../../models/operations/getallpromptsfilterstype.md)         | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `options`                                                                                          | *operations.Options*[]                                                                             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `optionsMap`                                                                                       | Record<string, *operations.OptionsMap*>                                                            | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `imageUrlMap`                                                                                      | Record<string, *string*>                                                                           | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `name`                                                                                             | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `path`                                                                                             | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `hideOperators`                                                                                    | *operations.HideOperators*[]                                                                       | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

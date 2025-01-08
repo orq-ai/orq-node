@@ -13,5 +13,5 @@ let value: BulkFileUploadFilesPurpose = "retrieval";
 ## Values
 
 ```typescript
-"retrieval"
+"retrieval" | "knowledge_datasource"
 ```

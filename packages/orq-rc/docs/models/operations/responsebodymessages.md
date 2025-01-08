@@ -6,13 +6,11 @@
 import { ResponseBodyMessages } from "@orq-ai/node/models/operations";
 
 let value: ResponseBodyMessages = {
-  role: "prompt",
+  role: "system",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://prime-self-confidence.org",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

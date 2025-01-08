@@ -8,7 +8,7 @@ import { UpdatePromptResponseBodyPromptsResponsePromptConfig } from "@orq-ai/nod
 let value: UpdatePromptResponseBodyPromptsResponsePromptConfig = {
   messages: [
     {
-      role: "exception",
+      role: "prompt",
       content: "<value>",
     },
   ],

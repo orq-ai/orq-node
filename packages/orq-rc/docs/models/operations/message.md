@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.Message1 = {
-  role: "exception",
+  role: "assistant",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.Message1 = {
 
 ```typescript
 const value: operations.Message2 = {
-  role: "user",
+  role: "assistant",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.Message2 = {
 
 ```typescript
 const value: operations.Three = {
-  role: "assistant",
-  url: "https://animated-advertisement.info",
+  role: "correction",
+  url: "https://lavish-mouser.org",
 };
 ```
 

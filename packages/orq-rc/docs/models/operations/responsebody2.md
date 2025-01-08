@@ -10,15 +10,20 @@ import { ResponseBody2 } from "@orq-ai/node/models/operations";
 let value: ResponseBody2 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "eced09ba-4601-4893-a770-29fa1d619365",
-  createdById: "6138c091-9d37-4c22-8ebb-d878b612f0bf",
-  displayName: "Misael_Ferry",
-  updatedById: "a2ce5ae0-d968-4db8-87e3-1ab944947583",
+  domainId: "df589c2d-b090-479a-ae4d-7acbcacee5f0",
+  createdById: "73818d25-a565-4752-a317-d1a6d5b68cf2",
+  displayName: "Brenna_Rogahn59",
+  updatedById: "0560d7fe-8a54-4281-b75c-6e3e9184ba16",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
-        content: "<value>",
+        role: "exception",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
       },
     ],
   },
@@ -26,14 +31,19 @@ let value: ResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "3d61b499-f34e-4b7b-9662-84a6dc29b818",
-      displayName: "Eric.Hane73",
-      updatedById: "cf7c2cf8-42e5-4766-9cea-f39abc5e2479",
+      createdById: "d8f8cfb9-5066-4d3b-90ea-64296be4a609",
+      displayName: "Adrian_Bosco",
+      updatedById: "eeb94015-3986-4cbb-8806-770a408e0098",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
-            content: "<value>",
+            role: "system",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

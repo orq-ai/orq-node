@@ -8,7 +8,7 @@ The type of the model
 import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ModelType } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200ModelType =
-  "embedding";
+  "vision";
 ```
 
 ## Values

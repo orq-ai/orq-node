@@ -8,15 +8,8 @@ import { CreatePromptVersionPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptVersionPromptConfig = {
   messages: [
     {
-      role: "user",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://cautious-maintainer.name",
-          },
-        },
-      ],
+      role: "system",
+      content: "<value>",
     },
   ],
 };

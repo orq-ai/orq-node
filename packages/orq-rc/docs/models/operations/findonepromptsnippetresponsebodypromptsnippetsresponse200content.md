@@ -19,7 +19,7 @@ const value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://honorable-unblinking.net/",
+        url: "https://suburban-forager.org/",
       },
     },
   ];

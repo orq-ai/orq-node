@@ -7,7 +7,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONProv
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONProvider =
-    "google-ai";
+    "jina";
 ```
 
 ## Values

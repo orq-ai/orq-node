@@ -8,7 +8,7 @@ The role of the prompt message
 import { FindOnePromptSnippetResponseBodyPromptSnippetsResponseRole } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponseRole =
-  "correction";
+  "expected_output";
 ```
 
 ## Values

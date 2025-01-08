@@ -8,12 +8,12 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200PromptConfig } from
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200PromptConfig = {
   messages: [
     {
-      role: "expected_output",
+      role: "exception",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://rural-tinderbox.name/",
+            url: "https://far-off-reward.info",
           },
         },
       ],

@@ -9,7 +9,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONForm
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONFormat =
-    "json_object";
+    "url";
 ```
 
 ## Values

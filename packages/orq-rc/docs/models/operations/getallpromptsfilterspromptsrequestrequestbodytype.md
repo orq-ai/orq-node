@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsRequestRequestBodyType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsRequestRequestBodyType = "string_array";
+let value: GetAllPromptsFiltersPromptsRequestRequestBodyType = "evaluator";
 ```
 
 ## Values
 
 ```typescript
-"string_array"
+"string" | "multi-value-array" | "single-value-array" | "number" | "date" | "object" | "boolean" | "evaluator"
 ```

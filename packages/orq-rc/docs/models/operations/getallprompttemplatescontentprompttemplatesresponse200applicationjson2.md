@@ -22,7 +22,7 @@ const value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://flickering-convection.net",
+        url: "https://heavy-scorn.name",
       },
     };
 ```

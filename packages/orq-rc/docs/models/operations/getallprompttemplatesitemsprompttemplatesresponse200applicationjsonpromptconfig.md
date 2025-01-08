@@ -11,7 +11,12 @@ let value:
       messages: [
         {
           role: "assistant",
-          content: "<value>",
+          content: [
+            {
+              type: "text",
+              text: "<value>",
+            },
+          ],
         },
       ],
     };

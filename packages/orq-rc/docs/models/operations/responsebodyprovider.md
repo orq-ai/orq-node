@@ -5,7 +5,7 @@
 ```typescript
 import { ResponseBodyProvider } from "@orq-ai/node/models/operations";
 
-let value: ResponseBodyProvider = "anyscale";
+let value: ResponseBodyProvider = "perplexity";
 ```
 
 ## Values

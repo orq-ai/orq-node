@@ -8,8 +8,15 @@ import { CreatePromptVersionPromptsPromptConfig } from "@orq-ai/node/models/oper
 let value: CreatePromptVersionPromptsPromptConfig = {
   messages: [
     {
-      role: "tool",
-      content: "<value>",
+      role: "user",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://tattered-flint.org/",
+          },
+        },
+      ],
     },
   ],
 };

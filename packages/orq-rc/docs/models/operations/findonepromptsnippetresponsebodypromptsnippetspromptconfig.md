@@ -8,8 +8,13 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsPromptConfig } from "@orq
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: "<value>",
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

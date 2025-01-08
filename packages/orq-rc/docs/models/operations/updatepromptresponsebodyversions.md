@@ -9,13 +9,13 @@ import { UpdatePromptResponseBodyVersions } from "@orq-ai/node/models/operations
 
 let value: UpdatePromptResponseBodyVersions = {
   id: "<id>",
-  createdById: "c905cbaa-9a98-4c57-a635-056133352b51",
-  displayName: "Chelsea.Cruickshank",
-  updatedById: "0c5a060d-2a42-4e9e-a4df-6e55ff3d5fde",
+  createdById: "e764149c-8c29-4e33-9bc3-5a697cdd9970",
+  displayName: "Anika_Stanton67",
+  updatedById: "42d48215-5595-4c15-9a91-74a2a74b320d",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "tool",
         content: "<value>",
       },
     ],

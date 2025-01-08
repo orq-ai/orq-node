@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllPromptsFiltersOperator } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersOperator = "equals";
+let value: GetAllPromptsFiltersOperator = "is_empty";
 ```
 
 ## Values
 
 ```typescript
-"contains" | "equals"
+"is" | "is_not" | "is_empty" | "is_not_empty"
 ```

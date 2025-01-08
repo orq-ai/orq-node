@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptTemplatesItemsProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsProvider = "aws";
+let value: GetAllPromptTemplatesItemsProvider = "leonardoai";
 ```
 
 ## Values

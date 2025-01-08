@@ -5,7 +5,7 @@
 ```typescript
 import { ItemsProvider } from "@orq-ai/node/models/operations";
 
-let value: ItemsProvider = "replicate";
+let value: ItemsProvider = "perplexity";
 ```
 
 ## Values

@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeFormQuery, encodeJSON } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -26,7 +26,7 @@ import { Result } from "../types/fp.js";
  */
 export async function promptsGetAll(
   client: OrqCore,
-  request?: operations.GetAllPromptsRequest | undefined,
+  request?: operations.GetAllPromptsRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<
@@ -43,21 +43,20 @@ export async function promptsGetAll(
   const parsed = safeParse(
     request,
     (value) =>
-      operations.GetAllPromptsRequest$outboundSchema.optional().parse(value),
+      operations.GetAllPromptsRequestBody$outboundSchema.optional().parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload?.RequestBody, { explode: true });
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/resources/prompts/query")();
-
-  const query = encodeFormQuery({
-    "limit": payload?.limit,
-    "page": payload?.page,
-  });
 
   const headers = new Headers({
     "Content-Type": "application/json",
@@ -87,7 +86,6 @@ export async function promptsGetAll(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
     body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);

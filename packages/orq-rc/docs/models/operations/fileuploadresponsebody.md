@@ -10,9 +10,10 @@ import { FileUploadResponseBody } from "@orq-ai/node/models/operations";
 let value: FileUploadResponseBody = {
   id: "<id>",
   objectName: "<value>",
-  purpose: "retrieval",
-  bytes: 2531.91,
+  purpose: "knowledge_datasource",
+  bytes: 1594.14,
   fileName: "example.file",
+  workspaceId: "a6164d0f-5502-46e1-8fd7-539006143420",
 };
 ```
 
@@ -25,4 +26,5 @@ let value: FileUploadResponseBody = {
 | `purpose`                                                                                     | [operations.FileUploadPurpose](../../models/operations/fileuploadpurpose.md)                  | :heavy_check_mark:                                                                            | The intended purpose of the uploaded file.                                                    |
 | `bytes`                                                                                       | *number*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `fileName`                                                                                    | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | The id of the resource                                                                        |
 | `created`                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | The date and time the resource was created                                                    |

@@ -18,10 +18,8 @@ const value:
   operations.FindOnePromptSnippetContentPromptSnippetsResponse200ApplicationJson2[] =
     [
       {
-        type: "image_url",
-        imageUrl: {
-          url: "https://doting-middle.net",
-        },
+        type: "text",
+        text: "<value>",
       },
     ];
 ```

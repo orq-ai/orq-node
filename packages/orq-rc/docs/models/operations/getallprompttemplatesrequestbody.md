@@ -13,7 +13,7 @@ let value: GetAllPromptTemplatesRequestBody = {
       values: [
         "<value>",
       ],
-      path: "/boot/defaults",
+      path: "/etc/ppp",
     },
   ],
 };

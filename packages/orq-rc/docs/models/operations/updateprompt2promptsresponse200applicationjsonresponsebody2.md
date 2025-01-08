@@ -10,7 +10,7 @@ import { UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody2 } from "@or
 let value: UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://hateful-heartache.info",
+    url: "https://roasted-verve.net/",
   },
 };
 ```

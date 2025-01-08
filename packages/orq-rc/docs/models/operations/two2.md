@@ -10,7 +10,7 @@ import { Two2 } from "@orq-ai/node/models/operations";
 let value: Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://second-hand-gripper.name/",
+    url: "https://fatherly-agreement.net",
   },
 };
 ```

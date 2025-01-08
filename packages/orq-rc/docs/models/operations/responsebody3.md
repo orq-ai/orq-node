@@ -9,21 +9,19 @@ import { ResponseBody3 } from "@orq-ai/node/models/operations";
 
 let value: ResponseBody3 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "ab286384-83e5-491a-84f6-93dc3e0c7d71",
-  createdById: "f52c0140-fb8c-4a23-ad57-60b8a4636afa",
-  displayName: "Hayden58",
-  updatedById: "f462edc0-831c-4388-b370-0e6e764149c8",
+  owner: "<value>",
+  domainId: "58b7d606-15fd-4366-bc00-1a6d47b85282",
+  createdById: "82b1c720-f4f8-481f-8b81-265810800606",
+  displayName: "Cierra43",
+  updatedById: "e4492506-18af-433f-9d9d-3dd38eaa84f7",
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "prompt",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://enchanted-republican.net/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },
@@ -33,17 +31,19 @@ let value: ResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "35a697cd-d997-4041-a7d9-a342d4821555",
-      displayName: "Emery.Borer",
-      updatedById: "174a2a74-b320-4d78-9115-8b7d60615fd3",
+      createdById: "431a8300-b340-42d3-af24-d64b0ed1cf79",
+      displayName: "Dixie90",
+      updatedById: "ed09ba46-0189-4377-8029-fa1d619365a6",
       promptConfig: {
         messages: [
           {
-            role: "exception",
+            role: "assistant",
             content: [
               {
-                type: "text",
-                text: "<value>",
+                type: "image_url",
+                imageUrl: {
+                  url: "https://pleasant-captain.name/",
+                },
               },
             ],
           },

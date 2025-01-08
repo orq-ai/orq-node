@@ -22,7 +22,7 @@ const value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://inborn-legend.name",
+        url: "https://silver-ownership.com",
       },
     };
 ```

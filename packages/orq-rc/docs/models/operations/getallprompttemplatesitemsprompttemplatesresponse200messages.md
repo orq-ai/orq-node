@@ -6,13 +6,11 @@
 import { GetAllPromptTemplatesItemsPromptTemplatesResponse200Messages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200Messages = {
-  role: "user",
+  role: "expected_output",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://impassioned-sand.com",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

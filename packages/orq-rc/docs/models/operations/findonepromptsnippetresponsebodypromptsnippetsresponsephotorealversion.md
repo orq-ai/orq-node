@@ -8,7 +8,7 @@ The version of photoReal to use. Must be v1 or v2. Only available for `leonardoa
 import { FindOnePromptSnippetResponseBodyPromptSnippetsResponsePhotoRealVersion } from "@orq-ai/node/models/operations";
 
 let value:
-  FindOnePromptSnippetResponseBodyPromptSnippetsResponsePhotoRealVersion = "v1";
+  FindOnePromptSnippetResponseBodyPromptSnippetsResponsePhotoRealVersion = "v2";
 ```
 
 ## Values

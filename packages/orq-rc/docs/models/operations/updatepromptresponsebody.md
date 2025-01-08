@@ -11,14 +11,14 @@ Prompt updated.
 const value: operations.ResponseBody1 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "1825d98f-6e96-45e9-8483-32bc56c0548e",
-  createdById: "d89f2437-9b06-4e7d-814b-97ace7a6e76f",
-  displayName: "Esperanza.Klein",
-  updatedById: "545ef1ba-a04b-4708-adee-873dcd31bee8",
+  domainId: "8fbf7b26-a705-4a67-ad49-dc3042048a63",
+  createdById: "cbd4875a-2c06-496a-80d1-4401dcbb1400",
+  displayName: "Cloyd.Armstrong79",
+  updatedById: "fadac44a-9823-486f-986f-145dc4d17a41",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "exception",
         content: "<value>",
       },
     ],
@@ -27,14 +27,21 @@ const value: operations.ResponseBody1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "8e790f72-5823-4ed1-94a4-0b354222fbf9",
-      displayName: "Casandra_Kunde52",
-      updatedById: "d2805a28-8e71-424c-8491-391b74da1a3e",
+      createdById: "610e14ad-5a70-460f-8c53-655e6b2879ad",
+      displayName: "Georgiana39",
+      updatedById: "938aaa33-3b7a-4c97-b682-cecdd2fa6e9f",
       promptConfig: {
         messages: [
           {
-            role: "tool",
-            content: "<value>",
+            role: "user",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://unfinished-character.info/",
+                },
+              },
+            ],
           },
         ],
       },
@@ -53,14 +60,14 @@ const value: operations.ResponseBody1 = {
 const value: operations.ResponseBody2 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "59279c8b-d450-48fb-bf7b-26a705a67d49",
-  createdById: "c3042048-a639-4cbd-9487-5a2c0696a0d1",
-  displayName: "Eldon77",
-  updatedById: "b1400030-03c0-4fad-8ac4-4a982386f86f",
+  domainId: "7af1cd44-7683-47de-aa4d-632f183d3b2f",
+  createdById: "6f862b93-3370-44b9-8db0-975fa481b522",
+  displayName: "Orland39",
+  updatedById: "103801b7-fe46-4e95-acea-3d6b7f123332",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "assistant",
         content: "<value>",
       },
     ],
@@ -69,21 +76,14 @@ const value: operations.ResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "dc4d17a4-1475-4610-9e14-ad5a7060fc53",
-      displayName: "Emie.VonRueden74",
-      updatedById: "879ad360-9e6f-4938-baaa-333b7ac97682",
+      createdById: "36f54153-c124-44dc-8945-9b68ea812391",
+      displayName: "Ford_Pouros",
+      updatedById: "739a1918-211e-4941-982c-7b6ba8d994e8",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
-            content: [
-              {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://defensive-yeast.name",
-                },
-              },
-            ],
+            role: "tool",
+            content: "<value>",
           },
         ],
       },
@@ -103,14 +103,14 @@ const value: operations.ResponseBody2 = {
 const value: operations.ResponseBody3 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "e9fc5bb5-e25a-47af-91cd-4476837dea4d",
-  createdById: "32f183d3-b2fa-46f8-a62b-9333704b9db0",
-  displayName: "Ibrahim_Zemlak",
-  updatedById: "1b5220cb-746e-4103-8801-b7fe46e95cea",
+  domainId: "48b428d6-74c1-42fa-98cf-3c5bbf10b9bc",
+  createdById: "5c69e204-c9f8-44ca-bda7-404063b31d0c",
+  displayName: "Benny_Klein62",
+  updatedById: "07ee2d01-f617-4008-b395-2f304445c051",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "assistant",
         content: "<value>",
       },
     ],
@@ -119,14 +119,19 @@ const value: operations.ResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "b7f12333-2b33-436f-a541-53c1244dc945",
-      displayName: "Nadia_Langosh",
-      updatedById: "1239105b-bcb9-4739-9a19-18211e94182c",
+      createdById: "7c4b0e17-25a2-44ad-8981-2f07c3774eeb",
+      displayName: "Logan.Gleichner",
+      updatedById: "3e3c02d8-a662-42e7-a7a0-8e667d9bb0fb",
       promptConfig: {
         messages: [
           {
-            role: "prompt",
-            content: "<value>",
+            role: "system",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

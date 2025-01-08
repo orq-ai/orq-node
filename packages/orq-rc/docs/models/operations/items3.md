@@ -9,16 +9,23 @@ import { Items3 } from "@orq-ai/node/models/operations";
 
 let value: Items3 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "92fd8e8e-dfe0-426f-a42e-7e2a71b3000e",
-  createdById: "ea84f576-f25a-4197-a438-575f2159a6f5",
-  displayName: "Louvenia76",
-  updatedById: "521368cf-119b-4def-9662-aad17932d071",
+  owner: "<value>",
+  domainId: "47a48120-f029-41eb-9f84-8e84e5035d77",
+  createdById: "eff6fca3-32e4-477c-bd26-dd1241619391",
+  displayName: "Torey.Flatley48",
+  updatedById: "a66cbf5e-c594-4d13-826b-870613e3dc29",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: "<value>",
+        role: "prompt",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://unwritten-asset.biz/",
+            },
+          },
+        ],
       },
     ],
   },
@@ -26,19 +33,14 @@ let value: Items3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "d1466a5b-a669-41da-8b81-6650b19baf1d",
-      displayName: "Kaelyn.Ledner19",
-      updatedById: "8d531131-411d-428c-b723-685cce0e6ebf",
+      createdById: "b621d7eb-658e-4b0b-9eb2-725ee459f24d",
+      displayName: "Stanton.Lemke",
+      updatedById: "65ebb49c-c5cb-42d7-8779-97da66c530ee",
       promptConfig: {
         messages: [
           {
             role: "user",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            content: "<value>",
           },
         ],
       },

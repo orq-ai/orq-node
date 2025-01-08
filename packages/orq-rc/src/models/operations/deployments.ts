@@ -453,6 +453,8 @@ export type DeploymentsResponseBody = {
   object: ObjectT;
   data: Array<Data>;
   hasMore: boolean;
+  firstId: string | null;
+  lastId: string | null;
 };
 
 /** @internal */
@@ -2026,9 +2028,13 @@ export const DeploymentsResponseBody$inboundSchema: z.ZodType<
   object: ObjectT$inboundSchema,
   data: z.array(z.lazy(() => Data$inboundSchema)),
   has_more: z.boolean(),
+  first_id: z.nullable(z.string()),
+  last_id: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
+    "first_id": "firstId",
+    "last_id": "lastId",
   });
 });
 
@@ -2037,6 +2043,8 @@ export type DeploymentsResponseBody$Outbound = {
   object: string;
   data: Array<Data$Outbound>;
   has_more: boolean;
+  first_id: string | null;
+  last_id: string | null;
 };
 
 /** @internal */
@@ -2048,9 +2056,13 @@ export const DeploymentsResponseBody$outboundSchema: z.ZodType<
   object: ObjectT$outboundSchema,
   data: z.array(z.lazy(() => Data$outboundSchema)),
   hasMore: z.boolean(),
+  firstId: z.nullable(z.string()),
+  lastId: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",
+    firstId: "first_id",
+    lastId: "last_id",
   });
 });
 

@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentInvokeMessageDeployments1 = {
-  role: "exception",
+  role: "tool",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.DeploymentInvokeMessageDeployments1 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessageDeployments2 = {
-  role: "prompt",
+  role: "assistant",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.DeploymentInvokeMessageDeployments2 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessage3 = {
-  role: "prompt",
-  url: "https://hungry-conservative.net/",
+  role: "system",
+  url: "https://windy-version.org",
 };
 ```
 

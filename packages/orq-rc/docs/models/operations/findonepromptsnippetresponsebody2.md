@@ -10,22 +10,15 @@ import { FindOnePromptSnippetResponseBody2 } from "@orq-ai/node/models/operation
 let value: FindOnePromptSnippetResponseBody2 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "6e41b690-fe90-46fa-a27f-8094168088c6",
-  createdById: "be69b0c6-a7bb-43ad-a3ca-f4244cba3df8",
-  displayName: "Jevon19",
-  updatedById: "d75f3803-9a9d-4fc7-bd1a-82f59e81d5fe",
+  domainId: "7ac8261b-fc69-4484-ab4f-a10f353ea885",
+  createdById: "63a5c68c-7fcd-4f69-8baf-44ec39b5697c",
+  displayName: "Howard_Monahan7",
+  updatedById: "ab9f72a9-98f2-4123-8993-777c7c28d279",
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://limp-advancement.net",
-            },
-          },
-        ],
+        role: "correction",
+        content: "<value>",
       },
     ],
   },
@@ -33,19 +26,14 @@ let value: FindOnePromptSnippetResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "d3581164-67ff-42e1-a825-b6cbf8c55661",
-      displayName: "Ava.Berge28",
-      updatedById: "cb2acc1a-bd87-4fc8-a5d7-17d709fd9ed7",
+      createdById: "f7516a14-da32-4e42-af41-76e211e72983",
+      displayName: "Eusebio22",
+      updatedById: "24643c51-825e-45a8-92ad-1cbd14b0bd76",
       promptConfig: {
         messages: [
           {
-            role: "prompt",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            role: "system",
+            content: "<value>",
           },
         ],
       },

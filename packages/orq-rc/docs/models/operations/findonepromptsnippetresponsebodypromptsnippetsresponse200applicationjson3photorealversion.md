@@ -11,7 +11,7 @@ import {
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3PhotoRealVersion =
-    "v2";
+    "v1";
 ```
 
 ## Values

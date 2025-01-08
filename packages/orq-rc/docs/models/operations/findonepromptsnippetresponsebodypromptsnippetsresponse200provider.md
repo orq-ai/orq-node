@@ -6,7 +6,7 @@
 import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Provider } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Provider =
-  "huggingface";
+  "anyscale";
 ```
 
 ## Values

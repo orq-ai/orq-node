@@ -7,7 +7,14 @@ import { UpdatePromptResponseBodyMessages } from "@orq-ai/node/models/operations
 
 let value: UpdatePromptResponseBodyMessages = {
   role: "assistant",
-  content: "<value>",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://pretty-complication.net/",
+      },
+    },
+  ],
 };
 ```
 

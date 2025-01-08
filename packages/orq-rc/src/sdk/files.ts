@@ -3,6 +3,10 @@
  */
 
 import { filesBulkUpload } from "../funcs/filesBulkUpload.js";
+import { filesDelete } from "../funcs/filesDelete.js";
+import { filesGet } from "../funcs/filesGet.js";
+import { filesList } from "../funcs/filesList.js";
+import { filesUpdate } from "../funcs/filesUpdate.js";
 import { filesUpload } from "../funcs/filesUpload.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -20,6 +24,62 @@ export class Files extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.FileUploadResponseBody> {
     return unwrapAsync(filesUpload(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List all files
+   */
+  async list(
+    request?: operations.FileListRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.FileListResponseBody> {
+    return unwrapAsync(filesList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get file by ID
+   */
+  async get(
+    request: operations.FileGetRequest,
+    options?: RequestOptions,
+  ): Promise<operations.FileGetResponseBody> {
+    return unwrapAsync(filesGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update file name
+   */
+  async update(
+    request: operations.FileUpdateRequest,
+    options?: RequestOptions,
+  ): Promise<operations.FileUpdateResponseBody> {
+    return unwrapAsync(filesUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete file
+   */
+  async delete(
+    request: operations.FileDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(filesDelete(
       this,
       request,
       options,

@@ -4,7 +4,6 @@
 
 import { deploymentsAll } from "../funcs/deploymentsAll.js";
 import { deploymentsGetConfig } from "../funcs/deploymentsGetConfig.js";
-import { deploymentsInvalidate } from "../funcs/deploymentsInvalidate.js";
 import {
   deploymentsInvoke,
   InvokeAcceptEnum,
@@ -34,23 +33,6 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeploymentsResponseBody> {
     return unwrapAsync(deploymentsAll(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Invalidates cache
-   *
-   * @remarks
-   * Explicitly invalidate a cache of a deployment
-   */
-  async invalidate(
-    request: operations.InvalidDeploymentRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(deploymentsInvalidate(
       this,
       request,
       options,

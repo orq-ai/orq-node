@@ -6,7 +6,7 @@
 import { GetAllPromptTemplatesItemsPromptTemplatesResponse200Provider } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200Provider =
-  "google-ai";
+  "openai";
 ```
 
 ## Values

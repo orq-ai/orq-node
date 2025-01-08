@@ -6,7 +6,7 @@
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONMessages = {
-  role: "user",
+  role: "system",
   content: "<value>",
 };
 ```

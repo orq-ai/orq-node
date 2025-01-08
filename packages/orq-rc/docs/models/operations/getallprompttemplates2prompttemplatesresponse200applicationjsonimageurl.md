@@ -7,7 +7,7 @@ import { GetAllPromptTemplates2PromptTemplatesResponse200ApplicationJSONImageUrl
 
 let value:
   GetAllPromptTemplates2PromptTemplatesResponse200ApplicationJSONImageUrl = {
-    url: "https://merry-blight.com/",
+    url: "https://deafening-vibraphone.com/",
   };
 ```
 

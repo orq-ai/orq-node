@@ -7,8 +7,7 @@ The type of the model
 ```typescript
 import { FindOnePromptSnippetResponseBodyPromptSnippetsModelType } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetResponseBodyPromptSnippetsModelType =
-  "embedding";
+let value: FindOnePromptSnippetResponseBodyPromptSnippetsModelType = "stt";
 ```
 
 ## Values

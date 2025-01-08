@@ -8,7 +8,7 @@ The format to return the embeddings
 import { FindOnePromptSnippetResponseBodyPromptSnippetsEncodingFormat } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsEncodingFormat =
-  "base64";
+  "float";
 ```
 
 ## Values

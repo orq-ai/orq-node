@@ -10,7 +10,7 @@ import { FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2 } from "
 let value: FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ill-fated-molasses.net",
+    url: "https://urban-earth.net",
   },
 };
 ```

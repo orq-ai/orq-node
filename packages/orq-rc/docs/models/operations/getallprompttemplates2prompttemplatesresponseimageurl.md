@@ -6,7 +6,7 @@
 import { GetAllPromptTemplates2PromptTemplatesResponseImageUrl } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplates2PromptTemplatesResponseImageUrl = {
-  url: "https://nifty-eggplant.net/",
+  url: "https://hidden-import.info",
 };
 ```
 

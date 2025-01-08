@@ -5,7 +5,7 @@
 ```typescript
 import { UpdatePromptResponseBodyProvider } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseBodyProvider = "replicate";
+let value: UpdatePromptResponseBodyProvider = "anthropic";
 ```
 
 ## Values

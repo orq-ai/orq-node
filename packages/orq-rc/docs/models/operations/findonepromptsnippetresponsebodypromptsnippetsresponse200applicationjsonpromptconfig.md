@@ -12,8 +12,15 @@ let value:
     {
       messages: [
         {
-          role: "tool",
-          content: "<value>",
+          role: "correction",
+          content: [
+            {
+              type: "image_url",
+              imageUrl: {
+                url: "https://little-pulse.biz",
+              },
+            },
+          ],
         },
       ],
     };

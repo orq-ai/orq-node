@@ -6,13 +6,8 @@
 import { CreatePromptVersionPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersionPromptsMessages = {
-  role: "tool",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  role: "expected_output",
+  content: "<value>",
 };
 ```
 

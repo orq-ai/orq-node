@@ -102,7 +102,7 @@ export class Prompts extends ClientSDK {
    * Get all prompts
    */
   async getAll(
-    request?: operations.GetAllPromptsRequest | undefined,
+    request?: operations.GetAllPromptsRequestBody | undefined,
     options?: RequestOptions,
   ): Promise<operations.GetAllPromptsResponseBody> {
     return unwrapAsync(promptsGetAll(

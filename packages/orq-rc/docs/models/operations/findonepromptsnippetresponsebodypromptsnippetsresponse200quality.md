@@ -8,7 +8,7 @@ Only supported on `image` models.
 import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Quality } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponse200Quality =
-  "hd";
+  "standard";
 ```
 
 ## Values

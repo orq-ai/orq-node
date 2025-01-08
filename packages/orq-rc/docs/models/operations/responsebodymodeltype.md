@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { ResponseBodyModelType } from "@orq-ai/node/models/operations";
 
-let value: ResponseBodyModelType = "chat";
+let value: ResponseBodyModelType = "completion";
 ```
 
 ## Values

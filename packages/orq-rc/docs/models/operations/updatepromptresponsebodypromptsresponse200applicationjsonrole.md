@@ -8,7 +8,7 @@ The role of the prompt message
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONRole } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONRole =
-  "prompt";
+  "assistant";
 ```
 
 ## Values

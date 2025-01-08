@@ -17,10 +17,8 @@ const value: string = "<value>";
 const value:
   operations.GetAllPromptTemplatesContentPromptTemplatesResponse2002[] = [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://intelligent-squid.net/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

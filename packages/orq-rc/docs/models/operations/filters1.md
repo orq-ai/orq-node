@@ -8,7 +8,7 @@ import { Filters1 } from "@orq-ai/node/models/operations";
 let value: Filters1 = {
   type: "id",
   id: "<id>",
-  path: "/var/yp",
+  path: "/mnt",
 };
 ```
 

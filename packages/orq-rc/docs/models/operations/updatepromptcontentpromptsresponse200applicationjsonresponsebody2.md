@@ -20,7 +20,7 @@ const value:
   operations.UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody2 = {
     type: "image_url",
     imageUrl: {
-      url: "https://hopeful-chasuble.biz/",
+      url: "https://silver-instance.biz",
     },
   };
 ```

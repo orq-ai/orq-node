@@ -10,7 +10,7 @@ import { UpdatePrompt2PromptsResponse200ApplicationJson2 } from "@orq-ai/node/mo
 let value: UpdatePrompt2PromptsResponse200ApplicationJson2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://blushing-anticodon.name",
+    url: "https://entire-bowling.net",
   },
 };
 ```
