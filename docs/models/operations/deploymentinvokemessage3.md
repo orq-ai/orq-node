@@ -6,8 +6,8 @@
 import { DeploymentInvokeMessage3 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeMessage3 = {
-  role: "exception",
-  url: "https://torn-railway.biz",
+  role: "assistant",
+  url: "https://livid-king.name",
 };
 ```
 

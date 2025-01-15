@@ -156,7 +156,6 @@ run();
 ### [deployments](docs/sdks/deployments/README.md)
 
 * [all](docs/sdks/deployments/README.md#all) - List all deployments
-* [invalidate](docs/sdks/deployments/README.md#invalidate) - Invalidates cache
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 
@@ -171,8 +170,33 @@ run();
 ### [files](docs/sdks/files/README.md)
 
 * [upload](docs/sdks/files/README.md#upload) - Upload file
+* [list](docs/sdks/files/README.md#list) - List all files
+* [get](docs/sdks/files/README.md#get) - Get file by ID
+* [update](docs/sdks/files/README.md#update) - Update file name
+* [delete](docs/sdks/files/README.md#delete) - Delete file
 * [bulkUpload](docs/sdks/files/README.md#bulkupload) - Bulk upload file
 
+
+### [prompt](docs/sdks/prompt/README.md)
+
+
+#### [prompt.snippets](docs/sdks/snippets/README.md)
+
+* [findOne](docs/sdks/snippets/README.md#findone) - Get one prompt snippet
+
+#### [prompt.templates](docs/sdks/templates/README.md)
+
+* [getAll](docs/sdks/templates/README.md#getall) - Get all prompt templates
+
+### [prompts](docs/sdks/prompts/README.md)
+
+* [create](docs/sdks/prompts/README.md#create) - Create a new prompt
+* [createVersion](docs/sdks/prompts/README.md#createversion) - Create a new prompt version
+* [delete](docs/sdks/prompts/README.md#delete) - Delete a prompt
+* [getOne](docs/sdks/prompts/README.md#getone) - Get one prompt
+* [update](docs/sdks/prompts/README.md#update) - Update a prompt
+* [duplicate](docs/sdks/prompts/README.md#duplicate) - Duplicate a prompt
+* [getAll](docs/sdks/prompts/README.md#getall) - Get all prompts
 
 ### [remoteconfig](docs/sdks/remoteconfig/README.md)
 
@@ -199,12 +223,24 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
 - [`deploymentsAll`](docs/sdks/deployments/README.md#all) - List all deployments
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
-- [`deploymentsInvalidate`](docs/sdks/deployments/README.md#invalidate) - Invalidates cache
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesBulkUpload`](docs/sdks/files/README.md#bulkupload) - Bulk upload file
+- [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
+- [`filesGet`](docs/sdks/files/README.md#get) - Get file by ID
+- [`filesList`](docs/sdks/files/README.md#list) - List all files
+- [`filesUpdate`](docs/sdks/files/README.md#update) - Update file name
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload file
+- [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a new prompt
+- [`promptsCreateVersion`](docs/sdks/prompts/README.md#createversion) - Create a new prompt version
+- [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
+- [`promptsDuplicate`](docs/sdks/prompts/README.md#duplicate) - Duplicate a prompt
+- [`promptsGetAll`](docs/sdks/prompts/README.md#getall) - Get all prompts
+- [`promptsGetOne`](docs/sdks/prompts/README.md#getone) - Get one prompt
+- [`promptSnippetsFindOne`](docs/sdks/snippets/README.md#findone) - Get one prompt snippet
+- [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
+- [`promptTemplatesGetAll`](docs/sdks/templates/README.md#getall) - Get all prompt templates
 - [`remoteconfigGetConfig`](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
 
 </details>

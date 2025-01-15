@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { DeploymentGetConfigDeploymentsRole } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigDeploymentsRole = "expected_output";
+let value: DeploymentGetConfigDeploymentsRole = "exception";
 ```
 
 ## Values

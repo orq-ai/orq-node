@@ -1,0 +1,17 @@
+# GetAllPromptTemplatesResponseFormatPromptTemplatesResponse2002
+
+## Example Usage
+
+```typescript
+import { GetAllPromptTemplatesResponseFormatPromptTemplatesResponse2002 } from "@orq-ai/node/models/operations";
+
+let value: GetAllPromptTemplatesResponseFormatPromptTemplatesResponse2002 = {
+  type: "json_object",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                         | [operations.GetAllPromptTemplatesResponseFormatPromptTemplatesResponse200ApplicationJSONResponseBodyItems2Type](../../models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitems2type.md) | :heavy_check_mark:                                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                                            |

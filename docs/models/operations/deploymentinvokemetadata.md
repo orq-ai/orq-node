@@ -9,9 +9,9 @@ import { DeploymentInvokeMetadata } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeMetadata = {
   fileName: "example.file",
-  pageNumber: 6969.97,
-  fileType: "text",
-  searchScore: 7774.08,
+  pageNumber: 2835.19,
+  fileType: "audio",
+  searchScore: 1811.51,
 };
 ```
 

@@ -28,7 +28,7 @@ export type DeploymentInvokeDeploymentsObject = ClosedEnum<
 /**
  * The provider used to generate the response
  */
-export const DeploymentInvokeProvider = {
+export const DeploymentInvokeDeploymentsProvider = {
   Cohere: "cohere",
   Openai: "openai",
   Anthropic: "anthropic",
@@ -48,8 +48,8 @@ export const DeploymentInvokeProvider = {
 /**
  * The provider used to generate the response
  */
-export type DeploymentInvokeProvider = ClosedEnum<
-  typeof DeploymentInvokeProvider
+export type DeploymentInvokeDeploymentsProvider = ClosedEnum<
+  typeof DeploymentInvokeDeploymentsProvider
 >;
 
 /**
@@ -182,7 +182,7 @@ export type DeploymentInvokeDeploymentsChoices = {
 /**
  * Metadata of the retrieved chunk from the knowledge base
  */
-export type DeploymentInvokeMetadata = {
+export type DeploymentInvokeDeploymentsMetadata = {
   /**
    * Name of the file
    */
@@ -213,7 +213,7 @@ export type DeploymentInvokeRetrievals = {
   /**
    * Metadata of the retrieved chunk from the knowledge base
    */
-  metadata: DeploymentInvokeMetadata;
+  metadata: DeploymentInvokeDeploymentsMetadata;
 };
 
 export type DeploymentInvokeData = {
@@ -236,7 +236,7 @@ export type DeploymentInvokeData = {
   /**
    * The provider used to generate the response
    */
-  provider?: DeploymentInvokeProvider | undefined;
+  provider?: DeploymentInvokeDeploymentsProvider | undefined;
   /**
    * Indicates if the response is the final response
    */
@@ -291,7 +291,7 @@ export type DeploymentInvokeObject = ClosedEnum<typeof DeploymentInvokeObject>;
 /**
  * The provider used to generate the response
  */
-export const Provider = {
+export const DeploymentInvokeProvider = {
   Cohere: "cohere",
   Openai: "openai",
   Anthropic: "anthropic",
@@ -312,7 +312,9 @@ export const Provider = {
 /**
  * The provider used to generate the response
  */
-export type Provider = ClosedEnum<typeof Provider>;
+export type DeploymentInvokeProvider = ClosedEnum<
+  typeof DeploymentInvokeProvider
+>;
 
 /**
  * The role of the prompt message
@@ -439,7 +441,7 @@ export type DeploymentInvokeChoices = {
 /**
  * Metadata of the retrieved chunk from the knowledge base
  */
-export type Metadata = {
+export type DeploymentInvokeMetadata = {
   /**
    * Name of the file
    */
@@ -470,7 +472,7 @@ export type Retrievals = {
   /**
    * Metadata of the retrieved chunk from the knowledge base
    */
-  metadata: Metadata;
+  metadata: DeploymentInvokeMetadata;
 };
 
 /**
@@ -496,7 +498,7 @@ export type DeploymentInvokeResponseBody = {
   /**
    * The provider used to generate the response
    */
-  provider: Provider;
+  provider: DeploymentInvokeProvider;
   /**
    * Indicates if the response is the final response
    */
@@ -554,24 +556,26 @@ export namespace DeploymentInvokeDeploymentsObject$ {
 }
 
 /** @internal */
-export const DeploymentInvokeProvider$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeProvider
-> = z.nativeEnum(DeploymentInvokeProvider);
+export const DeploymentInvokeDeploymentsProvider$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeDeploymentsProvider
+> = z.nativeEnum(DeploymentInvokeDeploymentsProvider);
 
 /** @internal */
-export const DeploymentInvokeProvider$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentInvokeProvider
-> = DeploymentInvokeProvider$inboundSchema;
+export const DeploymentInvokeDeploymentsProvider$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeDeploymentsProvider> =
+    DeploymentInvokeDeploymentsProvider$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentInvokeProvider$ {
-  /** @deprecated use `DeploymentInvokeProvider$inboundSchema` instead. */
-  export const inboundSchema = DeploymentInvokeProvider$inboundSchema;
-  /** @deprecated use `DeploymentInvokeProvider$outboundSchema` instead. */
-  export const outboundSchema = DeploymentInvokeProvider$outboundSchema;
+export namespace DeploymentInvokeDeploymentsProvider$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsProvider$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeDeploymentsProvider$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsProvider$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsProvider$outboundSchema;
 }
 
 /** @internal */
@@ -1172,8 +1176,8 @@ export function deploymentInvokeDeploymentsChoicesFromJSON(
 }
 
 /** @internal */
-export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
-  DeploymentInvokeMetadata,
+export const DeploymentInvokeDeploymentsMetadata$inboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1193,7 +1197,7 @@ export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentInvokeMetadata$Outbound = {
+export type DeploymentInvokeDeploymentsMetadata$Outbound = {
   file_name: string;
   page_number: number | null;
   file_type: string;
@@ -1202,10 +1206,10 @@ export type DeploymentInvokeMetadata$Outbound = {
 };
 
 /** @internal */
-export const DeploymentInvokeMetadata$outboundSchema: z.ZodType<
-  DeploymentInvokeMetadata$Outbound,
+export const DeploymentInvokeDeploymentsMetadata$outboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsMetadata$Outbound,
   z.ZodTypeDef,
-  DeploymentInvokeMetadata
+  DeploymentInvokeDeploymentsMetadata
 > = z.object({
   fileName: z.string(),
   pageNumber: z.nullable(z.number()),
@@ -1226,30 +1230,35 @@ export const DeploymentInvokeMetadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentInvokeMetadata$ {
-  /** @deprecated use `DeploymentInvokeMetadata$inboundSchema` instead. */
-  export const inboundSchema = DeploymentInvokeMetadata$inboundSchema;
-  /** @deprecated use `DeploymentInvokeMetadata$outboundSchema` instead. */
-  export const outboundSchema = DeploymentInvokeMetadata$outboundSchema;
-  /** @deprecated use `DeploymentInvokeMetadata$Outbound` instead. */
-  export type Outbound = DeploymentInvokeMetadata$Outbound;
+export namespace DeploymentInvokeDeploymentsMetadata$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsMetadata$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeDeploymentsMetadata$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsMetadata$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsMetadata$outboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsMetadata$Outbound` instead. */
+  export type Outbound = DeploymentInvokeDeploymentsMetadata$Outbound;
 }
 
-export function deploymentInvokeMetadataToJSON(
-  deploymentInvokeMetadata: DeploymentInvokeMetadata,
+export function deploymentInvokeDeploymentsMetadataToJSON(
+  deploymentInvokeDeploymentsMetadata: DeploymentInvokeDeploymentsMetadata,
 ): string {
   return JSON.stringify(
-    DeploymentInvokeMetadata$outboundSchema.parse(deploymentInvokeMetadata),
+    DeploymentInvokeDeploymentsMetadata$outboundSchema.parse(
+      deploymentInvokeDeploymentsMetadata,
+    ),
   );
 }
 
-export function deploymentInvokeMetadataFromJSON(
+export function deploymentInvokeDeploymentsMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentInvokeMetadata, SDKValidationError> {
+): SafeParseResult<DeploymentInvokeDeploymentsMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentInvokeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentInvokeMetadata' from JSON`,
+    (x) =>
+      DeploymentInvokeDeploymentsMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeDeploymentsMetadata' from JSON`,
   );
 }
 
@@ -1260,13 +1269,13 @@ export const DeploymentInvokeRetrievals$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   document: z.string(),
-  metadata: z.lazy(() => DeploymentInvokeMetadata$inboundSchema),
+  metadata: z.lazy(() => DeploymentInvokeDeploymentsMetadata$inboundSchema),
 });
 
 /** @internal */
 export type DeploymentInvokeRetrievals$Outbound = {
   document: string;
-  metadata: DeploymentInvokeMetadata$Outbound;
+  metadata: DeploymentInvokeDeploymentsMetadata$Outbound;
 };
 
 /** @internal */
@@ -1276,7 +1285,7 @@ export const DeploymentInvokeRetrievals$outboundSchema: z.ZodType<
   DeploymentInvokeRetrievals
 > = z.object({
   document: z.string(),
-  metadata: z.lazy(() => DeploymentInvokeMetadata$outboundSchema),
+  metadata: z.lazy(() => DeploymentInvokeDeploymentsMetadata$outboundSchema),
 });
 
 /**
@@ -1321,7 +1330,7 @@ export const DeploymentInvokeData$inboundSchema: z.ZodType<
     .optional(),
   object: DeploymentInvokeDeploymentsObject$inboundSchema.optional(),
   model: z.string().optional(),
-  provider: DeploymentInvokeProvider$inboundSchema.optional(),
+  provider: DeploymentInvokeDeploymentsProvider$inboundSchema.optional(),
   is_final: z.boolean().optional(),
   integration_id: z.string().optional(),
   finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -1368,7 +1377,7 @@ export const DeploymentInvokeData$outboundSchema: z.ZodType<
   created: z.date().transform(v => v.toISOString()).optional(),
   object: DeploymentInvokeDeploymentsObject$outboundSchema.optional(),
   model: z.string().optional(),
-  provider: DeploymentInvokeProvider$outboundSchema.optional(),
+  provider: DeploymentInvokeDeploymentsProvider$outboundSchema.optional(),
   isFinal: z.boolean().optional(),
   integrationId: z.string().optional(),
   finalized: z.date().transform(v => v.toISOString()).optional(),
@@ -1516,22 +1525,24 @@ export namespace DeploymentInvokeObject$ {
 }
 
 /** @internal */
-export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
-  .nativeEnum(Provider);
+export const DeploymentInvokeProvider$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeProvider
+> = z.nativeEnum(DeploymentInvokeProvider);
 
 /** @internal */
-export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
-  Provider$inboundSchema;
+export const DeploymentInvokeProvider$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeProvider
+> = DeploymentInvokeProvider$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Provider$ {
-  /** @deprecated use `Provider$inboundSchema` instead. */
-  export const inboundSchema = Provider$inboundSchema;
-  /** @deprecated use `Provider$outboundSchema` instead. */
-  export const outboundSchema = Provider$outboundSchema;
+export namespace DeploymentInvokeProvider$ {
+  /** @deprecated use `DeploymentInvokeProvider$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeProvider$inboundSchema;
+  /** @deprecated use `DeploymentInvokeProvider$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeProvider$outboundSchema;
 }
 
 /** @internal */
@@ -2069,8 +2080,8 @@ export function deploymentInvokeChoicesFromJSON(
 }
 
 /** @internal */
-export const Metadata$inboundSchema: z.ZodType<
-  Metadata,
+export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
+  DeploymentInvokeMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2090,7 +2101,7 @@ export const Metadata$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Metadata$Outbound = {
+export type DeploymentInvokeMetadata$Outbound = {
   file_name: string;
   page_number: number | null;
   file_type: string;
@@ -2099,10 +2110,10 @@ export type Metadata$Outbound = {
 };
 
 /** @internal */
-export const Metadata$outboundSchema: z.ZodType<
-  Metadata$Outbound,
+export const DeploymentInvokeMetadata$outboundSchema: z.ZodType<
+  DeploymentInvokeMetadata$Outbound,
   z.ZodTypeDef,
-  Metadata
+  DeploymentInvokeMetadata
 > = z.object({
   fileName: z.string(),
   pageNumber: z.nullable(z.number()),
@@ -2123,26 +2134,30 @@ export const Metadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Metadata$ {
-  /** @deprecated use `Metadata$inboundSchema` instead. */
-  export const inboundSchema = Metadata$inboundSchema;
-  /** @deprecated use `Metadata$outboundSchema` instead. */
-  export const outboundSchema = Metadata$outboundSchema;
-  /** @deprecated use `Metadata$Outbound` instead. */
-  export type Outbound = Metadata$Outbound;
+export namespace DeploymentInvokeMetadata$ {
+  /** @deprecated use `DeploymentInvokeMetadata$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeMetadata$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMetadata$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeMetadata$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMetadata$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMetadata$Outbound;
 }
 
-export function metadataToJSON(metadata: Metadata): string {
-  return JSON.stringify(Metadata$outboundSchema.parse(metadata));
+export function deploymentInvokeMetadataToJSON(
+  deploymentInvokeMetadata: DeploymentInvokeMetadata,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMetadata$outboundSchema.parse(deploymentInvokeMetadata),
+  );
 }
 
-export function metadataFromJSON(
+export function deploymentInvokeMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<Metadata, SDKValidationError> {
+): SafeParseResult<DeploymentInvokeMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Metadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metadata' from JSON`,
+    (x) => DeploymentInvokeMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeMetadata' from JSON`,
   );
 }
 
@@ -2153,13 +2168,13 @@ export const Retrievals$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   document: z.string(),
-  metadata: z.lazy(() => Metadata$inboundSchema),
+  metadata: z.lazy(() => DeploymentInvokeMetadata$inboundSchema),
 });
 
 /** @internal */
 export type Retrievals$Outbound = {
   document: string;
-  metadata: Metadata$Outbound;
+  metadata: DeploymentInvokeMetadata$Outbound;
 };
 
 /** @internal */
@@ -2169,7 +2184,7 @@ export const Retrievals$outboundSchema: z.ZodType<
   Retrievals
 > = z.object({
   document: z.string(),
-  metadata: z.lazy(() => Metadata$outboundSchema),
+  metadata: z.lazy(() => DeploymentInvokeMetadata$outboundSchema),
 });
 
 /**
@@ -2209,7 +2224,7 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   object: DeploymentInvokeObject$inboundSchema,
   model: z.string(),
-  provider: Provider$inboundSchema,
+  provider: DeploymentInvokeProvider$inboundSchema,
   is_final: z.boolean(),
   integration_id: z.string().optional(),
   finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
@@ -2253,7 +2268,7 @@ export const DeploymentInvokeResponseBody$outboundSchema: z.ZodType<
   created: z.date().transform(v => v.toISOString()),
   object: DeploymentInvokeObject$outboundSchema,
   model: z.string(),
-  provider: Provider$outboundSchema,
+  provider: DeploymentInvokeProvider$outboundSchema,
   isFinal: z.boolean(),
   integrationId: z.string().optional(),
   finalized: z.date().transform(v => v.toISOString()).optional(),

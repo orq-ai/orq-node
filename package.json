@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "1.31.11",
+  "version": "3.0.1",
   "author": "Orq",
   "main": "./index.js",
   "sideEffects": false,

@@ -6,8 +6,8 @@
 import { Message3 } from "@orq-ai/node/models/operations";
 
 let value: Message3 = {
-  role: "exception",
-  url: "https://steep-best-seller.name/",
+  role: "assistant",
+  url: "https://brisk-pilot.biz/",
 };
 ```
 
