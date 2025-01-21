@@ -8,7 +8,7 @@ Only supported on `image` models.
 import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONFormat } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONFormat =
-  "url";
+  "json_object";
 ```
 
 ## Values

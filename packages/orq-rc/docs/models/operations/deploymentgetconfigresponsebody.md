@@ -10,19 +10,12 @@ import { DeploymentGetConfigResponseBody } from "@orq-ai/node/models/operations"
 let value: DeploymentGetConfigResponseBody = {
   id: "<id>",
   provider: "<value>",
-  model: "Camaro",
+  model: "1",
   version: "<value>",
   messages: [
     {
-      role: "expected_output",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://turbulent-embossing.org",
-          },
-        },
-      ],
+      role: "correction",
+      content: "<value>",
     },
   ],
   parameters: {},

@@ -5,7 +5,7 @@
 ```typescript
 import { RelativeTime } from "@orq-ai/node/models/operations";
 
-let value: RelativeTime = "one_month_ago";
+let value: RelativeTime = "custom_date";
 ```
 
 ## Values

@@ -1,6 +1,6 @@
 # Data2
 
-Prompt snippet model returned from the API
+The schema for the deployment workflow run
 
 ## Example Usage
 
@@ -9,66 +9,93 @@ import { Data2 } from "@orq-ai/node/models/operations";
 
 let value: Data2 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "18537fa4-f4b4-4ca9-9739-d0be945b5014",
-  createdById: "5c36dc35-2185-4899-af3e-001a8228f241",
-  displayName: "Tiffany_Kozey",
-  updatedById: "abb743e0-5b96-412b-b755-6a91210cd6fd",
-  promptConfig: {
-    messages: [
-      {
-        role: "user",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://unhealthy-accelerator.name/",
+  workspaceId: "f18e1390-e103-49f7-8878-4bb8da7d91cd",
+  startedAt: new Date("2025-04-24T09:01:08.745Z"),
+  evals: [
+    {
+      type: "http_eval",
+      id: "<id>",
+      status: "failed",
+      startedAt: "<value>",
+      relatedEntities: [
+        {
+          type: "contact",
+          contactId: "<id>",
+        },
+      ],
+      evaluatorType: "input_guardrail",
+    },
+  ],
+  productType: "deployments",
+  relatedEntities: [
+    {
+      type: "deployment_variant",
+      deploymentVariantId: "a8a6267a-4a3c-4b19-b1f5-081abde45f66",
+    },
+  ],
+  data: {
+    deploymentId: "<id>",
+    deploymentKey: "<value>",
+    deploymentVariantVersion: "<value>",
+    deploymentVariantPosition: 1873.02,
+    deploymentVariantId: "77b6dae4-c1cd-46bf-a290-5289ffe9e538",
+    isDefaultMatched: false,
+    action: "simulate",
+    promptConfig: {
+      stream: false,
+      model: "1",
+      modelDbId: "d9fb5a5e-0883-464a-bcc6-3489cb2b1eb1",
+      modelType: "stt",
+      modelParameters: {},
+      provider: "fal",
+      messages: [
+        {
+          role: "exception",
+          content: [
+            {
+              type: "text",
+              text: "<value>",
             },
-          },
-        ],
+          ],
+        },
+      ],
+    },
+    variables: [
+      {
+        key: "<key>",
+      },
+    ],
+    retries: [
+      {
+        retryAttempt: 5675.1,
+        status: 7897.91,
+      },
+    ],
+    promptSnippets: [
+      {
+        id: "<id>",
+        key: "<key>",
+        value: "<value>",
       },
     ],
   },
-  metadata: {},
-  versions: [
-    {
-      id: "<id>",
-      createdById: "81d467d9-9547-4457-bded-8b57f527a214",
-      displayName: "Marguerite52",
-      updatedById: "03f71409-f995-438e-a096-9d736216a4eb",
-      promptConfig: {
-        messages: [
-          {
-            role: "prompt",
-            content: "<value>",
-          },
-        ],
-      },
-      metadata: {},
-      commit: "<value>",
-      timestamp: "<value>",
-    },
-  ],
-  key: "<key>",
-  type: "snippet",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `owner`                                                                                              | *operations.GetAllPromptsDataOwner*                                                                  | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `domainId`                                                                                           | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `createdById`                                                                                        | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `displayName`                                                                                        | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `updatedById`                                                                                        | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `description`                                                                                        | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
-| `promptConfig`                                                                                       | [operations.GetAllPromptsDataPromptConfig](../../models/operations/getallpromptsdatapromptconfig.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `metadata`                                                                                           | [operations.GetAllPromptsDataMetadata](../../models/operations/getallpromptsdatametadata.md)         | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `created`                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)        | :heavy_minus_sign:                                                                                   | The date and time the resource was created                                                           |
-| `updated`                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)        | :heavy_minus_sign:                                                                                   | The date and time the resource was last updated                                                      |
-| `versions`                                                                                           | [operations.GetAllPromptsDataVersions](../../models/operations/getallpromptsdataversions.md)[]       | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `key`                                                                                                | *string*                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `type`                                                                                               | [operations.GetAllPromptsDataType](../../models/operations/getallpromptsdatatype.md)                 | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | The unique identifier for the workflow run                                                    |
+| `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | The unique identifier for the workspace                                                       |
+| `workflowMetadata`                                                                            | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | Metadata for the workflow run                                                                 |
+| `workflowInput`                                                                               | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | Input for the workflow run                                                                    |
+| `workflowOutput`                                                                              | Record<string, *any*>                                                                         | :heavy_minus_sign:                                                                            | Output for the workflow run                                                                   |
+| `projectId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | The optional project_id for the entity of the event                                           |
+| `requestProperties`                                                                           | [operations.DataRequestProperties](../../models/operations/datarequestproperties.md)          | :heavy_minus_sign:                                                                            | An optional field that is filled if the workflow was triggered by an HTTP request             |
+| `startedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `finishedAt`                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `evals`                                                                                       | *operations.DataEvals*[]                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `productType`                                                                                 | [operations.DataProductType](../../models/operations/dataproducttype.md)                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `relatedEntities`                                                                             | *operations.DataRelatedEntities*[]                                                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `data`                                                                                        | [operations.DeploymentGetLogsDataData](../../models/operations/deploymentgetlogsdatadata.md)  | :heavy_check_mark:                                                                            | N/A                                                                                           |

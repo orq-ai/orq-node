@@ -6,11 +6,11 @@
 import { GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters76 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters76 =
-  "contains";
+  "is_between";
 ```
 
 ## Values
 
 ```typescript
-"contains" | "does_not_contain" | "is_empty" | "is_not_empty"
+"is" | "is_before" | "is_on_or_before" | "is_between" | "is_relative_today" | "is_relative_time" | "is_empty" | "is_not_empty"
 ```

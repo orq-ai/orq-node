@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsFiltersType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersType = "string";
+let value: GetAllPromptsFiltersType = "single-value-array";
 ```
 
 ## Values

@@ -10,7 +10,7 @@ import { GetAllPromptTemplates2PromptTemplates2 } from "@orq-ai/node/models/oper
 let value: GetAllPromptTemplates2PromptTemplates2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://minor-jellyfish.org",
+    url: "https://tender-cemetery.net",
   },
 };
 ```

@@ -9,23 +9,16 @@ import { Items3 } from "@orq-ai/node/models/operations";
 
 let value: Items3 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "47a48120-f029-41eb-9f84-8e84e5035d77",
-  createdById: "eff6fca3-32e4-477c-bd26-dd1241619391",
-  displayName: "Torey.Flatley48",
-  updatedById: "a66cbf5e-c594-4d13-826b-870613e3dc29",
+  owner: "vendor",
+  domainId: "1442e30f-fbd2-41d5-85bc-91501b42fda5",
+  createdById: "ded418cf-e00a-4290-8b6c-b781aad03a86",
+  displayName: "Robert.Hickle54",
+  updatedById: "7e38f7e0-804e-4676-ab68-1b8fd55a78f1",
   promptConfig: {
     messages: [
       {
         role: "prompt",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://unwritten-asset.biz/",
-            },
-          },
-        ],
+        content: "<value>",
       },
     ],
   },
@@ -33,14 +26,19 @@ let value: Items3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "b621d7eb-658e-4b0b-9eb2-725ee459f24d",
-      displayName: "Stanton.Lemke",
-      updatedById: "65ebb49c-c5cb-42d7-8779-97da66c530ee",
+      createdById: "9c4f27b7-8705-41c7-b6ca-62736e460e1a",
+      displayName: "Taryn.Glover",
+      updatedById: "2c564466-8b11-4212-90dc-05a2212aa446",
       promptConfig: {
         messages: [
           {
-            role: "user",
-            content: "<value>",
+            role: "expected_output",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

@@ -1,24 +1,17 @@
 # GetAllPromptsFiltersOptions
 
-## Example Usage
+
+## Supported Types
+
+### `string`
 
 ```typescript
-import { GetAllPromptsFiltersOptions } from "@orq-ai/node/models/operations";
-
-let value: GetAllPromptsFiltersOptions = {
-  name: "<value>",
-  path: "/usr/libexec",
-  type: "single-value-array",
-  id: "<id>",
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                                                                                                                                                  | Type                                                                                                                                                                   | Required                                                                                                                                                               | Description                                                                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                                                                                                                                                                 | *string*                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                     | N/A                                                                                                                                                                    |
-| `path`                                                                                                                                                                 | *string*                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                     | N/A                                                                                                                                                                    |
-| `type`                                                                                                                                                                 | [operations.GetAllPromptsFiltersPromptsRequestRequestBodyQuery6OptionsType](../../models/operations/getallpromptsfilterspromptsrequestrequestbodyquery6optionstype.md) | :heavy_check_mark:                                                                                                                                                     | N/A                                                                                                                                                                    |
-| `hideOperators`                                                                                                                                                        | *operations.GetAllPromptsFiltersPromptsRequestRequestBodyHideOperators*[]                                                                                              | :heavy_minus_sign:                                                                                                                                                     | N/A                                                                                                                                                                    |
-| `id`                                                                                                                                                                   | *string*                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                     | N/A                                                                                                                                                                    |
+```typescript
+const value: number = 5049.67;
+```
+

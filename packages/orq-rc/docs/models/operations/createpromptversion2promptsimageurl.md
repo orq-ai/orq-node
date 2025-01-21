@@ -6,7 +6,7 @@
 import { CreatePromptVersion2PromptsImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersion2PromptsImageUrl = {
-  url: "https://repentant-allocation.info/",
+  url: "https://cautious-galoshes.net/",
 };
 ```
 

@@ -227,6 +227,8 @@ export const CreatePromptVersionProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type CreatePromptVersionProvider = ClosedEnum<
   typeof CreatePromptVersionProvider
@@ -594,6 +596,8 @@ export const CreatePromptVersionPromptsProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type CreatePromptVersionPromptsProvider = ClosedEnum<
   typeof CreatePromptVersionPromptsProvider

@@ -8,7 +8,7 @@ The format to return the embeddings
 import { GetAllPromptTemplatesItemsPromptTemplatesResponseEncodingFormat } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponseEncodingFormat =
-  "float";
+  "base64";
 ```
 
 ## Values

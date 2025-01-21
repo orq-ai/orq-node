@@ -8,8 +8,15 @@ import { GetAllPromptTemplatesItemsPromptConfig } from "@orq-ai/node/models/oper
 let value: GetAllPromptTemplatesItemsPromptConfig = {
   messages: [
     {
-      role: "correction",
-      content: "<value>",
+      role: "tool",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://realistic-operating.name/",
+          },
+        },
+      ],
     },
   ],
 };

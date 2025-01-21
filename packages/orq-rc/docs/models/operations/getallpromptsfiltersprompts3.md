@@ -9,7 +9,7 @@ let value: GetAllPromptsFiltersPrompts3 = {
   type: "string",
   operator: "equals",
   value: "<value>",
-  path: "/etc/ppp",
+  path: "/opt/include",
 };
 ```
 

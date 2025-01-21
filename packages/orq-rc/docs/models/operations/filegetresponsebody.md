@@ -11,9 +11,9 @@ let value: FileGetResponseBody = {
   id: "<id>",
   objectName: "<value>",
   purpose: "knowledge_datasource",
-  bytes: 9677.95,
+  bytes: 7606.27,
   fileName: "example.file",
-  workspaceId: "849e6847-6384-458c-b5ed-04715ba9b35a",
+  workspaceId: "bef7afda-7b00-4c2c-86f1-84180375d45e",
 };
 ```
 

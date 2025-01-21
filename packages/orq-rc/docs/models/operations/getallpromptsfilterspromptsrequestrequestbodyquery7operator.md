@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### `operations.GetAllPromptsOperator1`
+### `operations.GetAllPromptsOperatorPrompts1`
 
 ```typescript
-const value: operations.GetAllPromptsOperator1 = "is";
+const value: operations.GetAllPromptsOperatorPrompts1 = "is";
 ```
 
-### `operations.GetAllPromptsOperator2`
+### `operations.GetAllPromptsOperatorPrompts2`
 
 ```typescript
-const value: operations.GetAllPromptsOperator2 = "is_greater_than_or_equal_to";
+const value: operations.GetAllPromptsOperatorPrompts2 = "equals";
 ```
 

@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { DeploymentInvokeMessageRole } from "@orq-ai/node/models/operations";
 
-let value: DeploymentInvokeMessageRole = "exception";
+let value: DeploymentInvokeMessageRole = "tool";
 ```
 
 ## Values

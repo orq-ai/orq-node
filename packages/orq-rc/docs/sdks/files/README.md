@@ -98,7 +98,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.files.list();
+  const result = await orq.files.list({
+    limit: 50,
+  });
 
   // Handle the result
   console.log(result);
@@ -122,7 +124,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await filesList(orq);
+  const res = await filesList(orq, {
+    limit: 50,
+  });
 
   if (!res.ok) {
     throw res.error;
@@ -404,7 +408,7 @@ async function run() {
         content: await openAsBlob("example.file"),
       },
     ],
-    purpose: "retrieval",
+    purpose: "knowledge_datasource",
   });
 
   // Handle the result
@@ -437,7 +441,7 @@ async function run() {
         content: await openAsBlob("example.file"),
       },
     ],
-    purpose: "retrieval",
+    purpose: "knowledge_datasource",
   });
 
   if (!res.ok) {

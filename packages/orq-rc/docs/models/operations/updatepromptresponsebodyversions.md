@@ -9,9 +9,9 @@ import { UpdatePromptResponseBodyVersions } from "@orq-ai/node/models/operations
 
 let value: UpdatePromptResponseBodyVersions = {
   id: "<id>",
-  createdById: "e764149c-8c29-4e33-9bc3-5a697cdd9970",
-  displayName: "Anika_Stanton67",
-  updatedById: "42d48215-5595-4c15-9a91-74a2a74b320d",
+  createdById: "713ad312-3044-4ac7-a569-048d1f471cce",
+  displayName: "Tillman_Johns",
+  updatedById: "d95e0d3f-0242-4492-8b7a-682db3332837",
   promptConfig: {
     messages: [
       {

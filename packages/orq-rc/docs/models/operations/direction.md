@@ -7,7 +7,7 @@ The direction to sort by
 ```typescript
 import { Direction } from "@orq-ai/node/models/operations";
 
-let value: Direction = "desc";
+let value: Direction = "asc";
 ```
 
 ## Values

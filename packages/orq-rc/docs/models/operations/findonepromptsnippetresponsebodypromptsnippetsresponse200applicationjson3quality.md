@@ -9,7 +9,7 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJso
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Quality =
-    "standard";
+    "hd";
 ```
 
 ## Values

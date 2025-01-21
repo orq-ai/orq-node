@@ -8,8 +8,8 @@ Usage statistics to add to the deployment
 import { Usage } from "@orq-ai/node/models/operations";
 
 let value: Usage = {
-  promptTokens: 7997.96,
-  completionTokens: 769.56,
+  promptTokens: 4579.97,
+  completionTokens: 7830.71,
 };
 ```
 

@@ -3,33 +3,33 @@
 
 ## Supported Types
 
-### `operations.GetAllPromptsHideOperators1`
+### `operations.DeploymentGetLogsHideOperators1`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperators1 = "does_not_contain";
+const value: operations.DeploymentGetLogsHideOperators1 = "is_not";
 ```
 
-### `operations.GetAllPromptsHideOperators2`
+### `operations.DeploymentGetLogsHideOperators2`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperators2 = "is_between";
+const value: operations.DeploymentGetLogsHideOperators2 = "is_not_equal";
 ```
 
-### `operations.GetAllPromptsHideOperators3`
+### `operations.DeploymentGetLogsHideOperators3`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperators3 = "is_not_empty";
+const value: operations.DeploymentGetLogsHideOperators3 = "is_empty";
 ```
 
-### `operations.GetAllPromptsHideOperators4`
+### `operations.HideOperators4`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperators4 = "does_not_contain";
+const value: operations.HideOperators4 = "is_empty";
 ```
 
 ### `operations.HideOperators5`
 
 ```typescript
-const value: operations.HideOperators5 = "is_on_or_before";
+const value: operations.HideOperators5 = "is_relative_time";
 ```
 

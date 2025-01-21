@@ -17,10 +17,8 @@ const value: string = "<value>";
 const value:
   operations.GetAllPromptsContentPromptsResponse200ApplicationJson2[] = [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://decent-tool.info/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

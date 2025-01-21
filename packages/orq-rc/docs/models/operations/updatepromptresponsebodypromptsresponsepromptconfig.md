@@ -8,8 +8,13 @@ import { UpdatePromptResponseBodyPromptsResponsePromptConfig } from "@orq-ai/nod
 let value: UpdatePromptResponseBodyPromptsResponsePromptConfig = {
   messages: [
     {
-      role: "prompt",
-      content: "<value>",
+      role: "system",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

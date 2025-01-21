@@ -5,7 +5,7 @@
 ```typescript
 import { Unit1 } from "@orq-ai/node/models/operations";
 
-let value: Unit1 = "month";
+let value: Unit1 = "year";
 ```
 
 ## Values

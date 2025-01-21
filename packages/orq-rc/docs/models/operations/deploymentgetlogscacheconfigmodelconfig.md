@@ -1,0 +1,29 @@
+# DeploymentGetLogsCacheConfigModelConfig
+
+Configuration of embedding model to be used
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsCacheConfigModelConfig } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsCacheConfigModelConfig = {
+  model: "ATS",
+  modelDbId: "09cf9361-6d60-42ab-83c4-84b6c7ae683b",
+  modelType: "stt",
+  modelParameters: {},
+  provider: "togetherai",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                  | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `model`                                                                                                                                                | *string*                                                                                                                                               | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
+| `modelDbId`                                                                                                                                            | *string*                                                                                                                                               | :heavy_check_mark:                                                                                                                                     | The id of the resource                                                                                                                                 |
+| `modelType`                                                                                                                                            | [operations.DeploymentGetLogsCacheConfigDeploymentsModelType](../../models/operations/deploymentgetlogscacheconfigdeploymentsmodeltype.md)             | :heavy_check_mark:                                                                                                                                     | The type of the model                                                                                                                                  |
+| `modelParameters`                                                                                                                                      | [operations.DeploymentGetLogsCacheConfigDeploymentsModelParameters](../../models/operations/deploymentgetlogscacheconfigdeploymentsmodelparameters.md) | :heavy_check_mark:                                                                                                                                     | Model Parameters: Not all parameters apply to every model                                                                                              |
+| `provider`                                                                                                                                             | [operations.DeploymentGetLogsCacheConfigDeploymentsProvider](../../models/operations/deploymentgetlogscacheconfigdeploymentsprovider.md)               | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
+| `integrationId`                                                                                                                                        | *string*                                                                                                                                               | :heavy_minus_sign:                                                                                                                                     | The id of the resource                                                                                                                                 |
+| `version`                                                                                                                                              | *string*                                                                                                                                               | :heavy_minus_sign:                                                                                                                                     | N/A                                                                                                                                                    |

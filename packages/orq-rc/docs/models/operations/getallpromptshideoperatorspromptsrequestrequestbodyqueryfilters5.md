@@ -6,7 +6,7 @@
 import { GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters5 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters5 =
-  "is_relative_today";
+  "is_between";
 ```
 
 ## Values

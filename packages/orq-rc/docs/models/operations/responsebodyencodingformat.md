@@ -7,7 +7,7 @@ The format to return the embeddings
 ```typescript
 import { ResponseBodyEncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: ResponseBodyEncodingFormat = "float";
+let value: ResponseBodyEncodingFormat = "base64";
 ```
 
 ## Values

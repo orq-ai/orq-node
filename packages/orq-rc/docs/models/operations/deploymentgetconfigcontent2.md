@@ -18,7 +18,7 @@ const value: operations.DeploymentGetConfig21 = {
 const value: operations.DeploymentGetConfig2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://bouncy-marketplace.name",
+    url: "https://eminent-brace.org",
   },
 };
 ```

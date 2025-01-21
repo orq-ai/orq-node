@@ -9,7 +9,7 @@
 const value: operations.GetAllPromptsFiltersPrompts1 = {
   type: "id",
   id: "<id>",
-  path: "/media",
+  path: "/var/yp",
 };
 ```
 
@@ -30,22 +30,22 @@ const value: operations.GetAllPromptsFiltersPrompts2 = {
 ```typescript
 const value: operations.GetAllPromptsFiltersPrompts3 = {
   type: "string",
-  operator: "contains",
+  operator: "equals",
   value: "<value>",
-  path: "/etc/periodic",
+  path: "/opt/bin",
 };
 ```
 
-### `operations.GetAllPromptsFilters4`
+### `operations.GetAllPromptsFiltersPrompts4`
 
 ```typescript
-const value: operations.GetAllPromptsFilters4 = {
+const value: operations.GetAllPromptsFiltersPrompts4 = {
   type: "string_array",
   operator: "in",
   values: [
     "<value>",
   ],
-  path: "/lib",
+  path: "/System",
 };
 ```
 

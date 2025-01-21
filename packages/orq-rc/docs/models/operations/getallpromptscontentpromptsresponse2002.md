@@ -18,7 +18,7 @@ const value: operations.GetAllPrompts2PromptsResponse2001 = {
 const value: operations.GetAllPrompts2PromptsResponse2002 = {
   type: "image_url",
   imageUrl: {
-    url: "https://partial-department.name/",
+    url: "https://unaware-dredger.com/",
   },
 };
 ```

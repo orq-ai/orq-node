@@ -1,0 +1,19 @@
+# DeploymentGetLogsConfigurationDeploymentsResponse2
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsConfigurationDeploymentsResponse2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsConfigurationDeploymentsResponse2 = {
+  type: "query",
+  query: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                 | Description                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                   | [operations.DeploymentGetLogsConfigurationDeploymentsResponse200ApplicationJSONResponseBodyDataType](../../models/operations/deploymentgetlogsconfigurationdeploymentsresponse200applicationjsonresponsebodydatatype.md) | :heavy_check_mark:                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                      |
+| `query`                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                      |

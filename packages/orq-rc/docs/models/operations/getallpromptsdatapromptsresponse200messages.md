@@ -6,13 +6,11 @@
 import { GetAllPromptsDataPromptsResponse200Messages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsDataPromptsResponse200Messages = {
-  role: "assistant",
+  role: "tool",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://ill-fated-polarisation.com",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

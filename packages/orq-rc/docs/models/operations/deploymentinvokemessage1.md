@@ -6,7 +6,7 @@
 import { DeploymentInvokeMessage1 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeMessage1 = {
-  role: "prompt",
+  role: "expected_output",
   toolCalls: [
     {
       type: "function",

@@ -7,7 +7,7 @@ The format to return the embeddings
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesEncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesEncodingFormat = "float";
+let value: GetAllPromptTemplatesItemsPromptTemplatesEncodingFormat = "base64";
 ```
 
 ## Values

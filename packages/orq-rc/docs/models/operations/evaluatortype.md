@@ -5,7 +5,7 @@
 ```typescript
 import { EvaluatorType } from "@orq-ai/node/models/operations";
 
-let value: EvaluatorType = "python_eval";
+let value: EvaluatorType = "typescript_eval";
 ```
 
 ## Values

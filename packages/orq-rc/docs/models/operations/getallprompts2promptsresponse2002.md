@@ -10,7 +10,7 @@ import { GetAllPrompts2PromptsResponse2002 } from "@orq-ai/node/models/operation
 let value: GetAllPrompts2PromptsResponse2002 = {
   type: "image_url",
   imageUrl: {
-    url: "https://idolized-statue.name/",
+    url: "https://obedient-amnesty.org/",
   },
 };
 ```

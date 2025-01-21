@@ -10,7 +10,7 @@ let value:
     {
       messages: [
         {
-          role: "assistant",
+          role: "tool",
           content: [
             {
               type: "text",

@@ -8,12 +8,11 @@ import { GetAllPromptTemplatesRequestBody } from "@orq-ai/node/models/operations
 let value: GetAllPromptTemplatesRequestBody = {
   filters: [
     {
-      type: "string_array",
-      operator: "in",
-      values: [
+      type: "search",
+      value: "<value>",
+      searchPaths: [
         "<value>",
       ],
-      path: "/etc/ppp",
     },
   ],
 };
@@ -21,6 +20,6 @@ let value: GetAllPromptTemplatesRequestBody = {
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `filters`              | *operations.Filters*[] | :heavy_check_mark:     | N/A                    |
+| Field                                       | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `filters`                                   | *operations.GetAllPromptTemplatesFilters*[] | :heavy_check_mark:                          | N/A                                         |

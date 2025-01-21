@@ -1,0 +1,25 @@
+# DeploymentGetLogsEvaluators2
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsEvaluators2 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsEvaluators2 = {
+  id: "<id>",
+  configType: "input_guardrail",
+  evaluatorId: "<id>",
+  type: "guardrail",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                           | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `configType`                                                                                                                                   | [operations.DeploymentGetLogsEvaluatorsDeploymentsConfigType](../../models/operations/deploymentgetlogsevaluatorsdeploymentsconfigtype.md)     | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `evaluatorId`                                                                                                                                  | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `evaluatorEnabled`                                                                                                                             | *boolean*                                                                                                                                      | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
+| `sampleRate`                                                                                                                                   | *number*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
+| `type`                                                                                                                                         | [operations.DeploymentGetLogsEvaluatorsDeploymentsResponseType](../../models/operations/deploymentgetlogsevaluatorsdeploymentsresponsetype.md) | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |

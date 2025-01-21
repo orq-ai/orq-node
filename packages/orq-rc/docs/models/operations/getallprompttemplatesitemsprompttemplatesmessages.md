@@ -6,13 +6,11 @@
 import { GetAllPromptTemplatesItemsPromptTemplatesMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesMessages = {
-  role: "prompt",
+  role: "expected_output",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://uniform-rosemary.net",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

@@ -4,7 +4,9 @@
 
 import * as z from "zod";
 import { OrqCore } from "../core.js";
+import { appendForm } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -54,14 +56,14 @@ export async function filesBulkUpload(
   const payload = parsed.value;
   const body = new FormData();
 
-  body.append("files", String(payload.files));
-  body.append("purpose", payload.purpose);
+  appendForm(body, "files", payload.files);
+  appendForm(body, "purpose", payload.purpose);
 
   const path = pathToFunc("/v2/files/bulk")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
@@ -116,7 +118,8 @@ export async function filesBulkUpload(
     | ConnectionError
   >(
     M.json(200, z.array(operations.ResponseBody$inboundSchema)),
-    M.fail([400, "4XX", "5XX"]),
+    M.fail([400, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

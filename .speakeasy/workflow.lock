@@ -1,4 +1,4 @@
-speakeasyVersion: 1.468.7
+speakeasyVersion: 1.469.11
 sources:
     orq-ai-node:
         sourceNamespace: orq-ai-node
@@ -10,11 +10,11 @@ sources:
             - "2.0"
     orq-ai-prerelease-node:
         sourceNamespace: orq-ai-prerelease-node
-        sourceRevisionDigest: sha256:a6a85543a94955afdb278e54f4ebdf669e13bca85106f98ae4d0885eb823e713
-        sourceBlobDigest: sha256:acf698591bd1f4e6742a98c8a1a13c14947cf53c8c563e10aa504dac51b147bb
+        sourceRevisionDigest: sha256:0bf6ed66e0c2c5e7308a1c9455f098864ba23e4b371a3a048002b832ff7cf07a
+        sourceBlobDigest: sha256:902eab4ebe5f054c5a6db6d2525dd1ba3ab7b280e1f03281a17b8d3cd85910ca
         tags:
             - latest
-            - speakeasy-sdk-regen-1736370532
+            - speakeasy-sdk-regen-1737463131
             - "2.0"
 targets:
     orq-ai-node:
@@ -27,10 +27,10 @@ targets:
     orq-ai-prerelease-node:
         source: orq-ai-prerelease-node
         sourceNamespace: orq-ai-prerelease-node
-        sourceRevisionDigest: sha256:a6a85543a94955afdb278e54f4ebdf669e13bca85106f98ae4d0885eb823e713
-        sourceBlobDigest: sha256:acf698591bd1f4e6742a98c8a1a13c14947cf53c8c563e10aa504dac51b147bb
+        sourceRevisionDigest: sha256:0bf6ed66e0c2c5e7308a1c9455f098864ba23e4b371a3a048002b832ff7cf07a
+        sourceBlobDigest: sha256:902eab4ebe5f054c5a6db6d2525dd1ba3ab7b280e1f03281a17b8d3cd85910ca
         codeSamplesNamespace: orq-ai-prerelease-node-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:ef82c8b11e69df6bf956a05f879be8810f20e0ac7c40e8753f035aa1a86563a9
+        codeSamplesRevisionDigest: sha256:02018ad15bcf5e0a927da97e4d174ba5cd283cf46c93452f397a5bb2d57a8a74
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -38,8 +38,6 @@ workflow:
         orq-ai-node:
             inputs:
                 - location: ./openapi.yaml
-            registry:
-                location: registry.speakeasyapi.dev/orq/orq/orq-ai-node
         orq-ai-prerelease-node:
             inputs:
                 - location: ./openapi-prerelease.yaml

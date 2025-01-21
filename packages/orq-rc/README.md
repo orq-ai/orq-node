@@ -150,9 +150,11 @@ run();
 
 ### [deployments](docs/sdks/deployments/README.md)
 
-* [all](docs/sdks/deployments/README.md#all) - List all deployments
+* [list](docs/sdks/deployments/README.md#list) - List all deployments
+* [invalidate](docs/sdks/deployments/README.md#invalidate) - Invalidates cache
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
+* [getLogs](docs/sdks/deployments/README.md#getlogs) - Get Logs
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)
 
@@ -216,9 +218,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <summary>Available standalone functions</summary>
 
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
-- [`deploymentsAll`](docs/sdks/deployments/README.md#all) - List all deployments
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
+- [`deploymentsGetLogs`](docs/sdks/deployments/README.md#getlogs) - Get Logs
+- [`deploymentsInvalidate`](docs/sdks/deployments/README.md#invalidate) - Invalidates cache
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
+- [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
 - [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesBulkUpload`](docs/sdks/files/README.md#bulkupload) - Bulk upload file
@@ -260,6 +264,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.invoke({
     key: "<key>",
+    stream: false,
   });
 
   for await (const event of result) {
@@ -381,7 +386,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `all` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `list` method may throw the following errors:
 
 | Error Type          | Status Code | Content Type     |
 | ------------------- | ----------- | ---------------- |
@@ -401,7 +406,9 @@ const orq = new Orq({
 async function run() {
   let result;
   try {
-    result = await orq.deployments.all();
+    result = await orq.deployments.list({
+      limit: 10,
+    });
 
     // Handle the result
     console.log(result);
@@ -455,7 +462,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
-  serverURL: "https://my.staging.orq.ai",
+  serverURL: "https://my.orq.ai",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 

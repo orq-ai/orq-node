@@ -6,7 +6,7 @@
 import { FindOnePromptSnippetResponseBodyMessages } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyMessages = {
-  role: "expected_output",
+  role: "tool",
   content: [
     {
       type: "text",

@@ -9,7 +9,7 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSO
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSONRole =
-    "exception";
+    "expected_output";
 ```
 
 ## Values

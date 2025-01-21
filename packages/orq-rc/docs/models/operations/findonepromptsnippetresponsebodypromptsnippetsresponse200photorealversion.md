@@ -9,7 +9,7 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200PhotoRealVersi
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200PhotoRealVersion =
-    "v2";
+    "v1";
 ```
 
 ## Values

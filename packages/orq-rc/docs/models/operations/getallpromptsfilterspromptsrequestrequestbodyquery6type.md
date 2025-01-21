@@ -6,7 +6,7 @@
 import { GetAllPromptsFiltersPromptsRequestRequestBodyQuery6Type } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsFiltersPromptsRequestRequestBodyQuery6Type =
-  "multi-value-array";
+  "evaluator";
 ```
 
 ## Values

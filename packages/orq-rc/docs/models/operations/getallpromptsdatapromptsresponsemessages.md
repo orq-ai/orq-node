@@ -6,11 +6,13 @@
 import { GetAllPromptsDataPromptsResponseMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsDataPromptsResponseMessages = {
-  role: "system",
+  role: "user",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://scared-thread.biz/",
+      },
     },
   ],
 };

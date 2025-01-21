@@ -11,7 +11,7 @@ let value:
   FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJSONResponseBody2 = {
     type: "image_url",
     imageUrl: {
-      url: "https://wide-eyed-government.net",
+      url: "https://enraged-retention.biz",
     },
   };
 ```

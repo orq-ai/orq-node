@@ -8,7 +8,7 @@ import { GetAllPromptsDataPromptConfig } from "@orq-ai/node/models/operations";
 let value: GetAllPromptsDataPromptConfig = {
   messages: [
     {
-      role: "system",
+      role: "assistant",
       content: "<value>",
     },
   ],

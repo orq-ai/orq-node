@@ -18,7 +18,7 @@ const value: operations.CreatePromptVersion2Prompts1 = {
 const value: operations.CreatePromptVersion2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://concrete-tray.name/",
+    url: "https://impractical-junior.com/",
   },
 };
 ```

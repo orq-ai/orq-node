@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesModelType = "embedding";
+let value: GetAllPromptTemplatesItemsPromptTemplatesModelType = "chat";
 ```
 
 ## Values

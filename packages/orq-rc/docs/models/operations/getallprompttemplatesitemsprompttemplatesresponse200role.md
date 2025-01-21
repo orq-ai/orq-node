@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesResponse200Role } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200Role = "system";
+let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200Role = "user";
 ```
 
 ## Values

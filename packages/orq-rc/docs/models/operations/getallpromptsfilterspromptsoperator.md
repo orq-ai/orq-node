@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsOperator } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsOperator = "is_not_empty";
+let value: GetAllPromptsFiltersPromptsOperator = "contains";
 ```
 
 ## Values

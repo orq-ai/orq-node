@@ -1,0 +1,22 @@
+# DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJson1
+
+Define the internal account of the system. Also sometimes called user (internal)
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJson1 } from "@orq-ai/node/models/operations";
+
+let value:
+  DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJson1 = {
+    type: "account",
+    accountId: "e78bfad6-2b3e-4176-adff-0fa46ee12065",
+  };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                                     | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData1Evals6Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata1evals6type.md) | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
+| `accountId`                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                         | The id of the resource                                                                                                                                                                                                                     |

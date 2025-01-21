@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentInvokeMessage1 = {
-  role: "user",
+  role: "prompt",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.DeploymentInvokeMessage1 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessage2 = {
-  role: "assistant",
+  role: "system",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.DeploymentInvokeMessage2 = {
 
 ```typescript
 const value: operations.Message3 = {
-  role: "system",
-  url: "https://fatal-import.net/",
+  role: "exception",
+  url: "https://muted-pleasure.biz",
 };
 ```
 

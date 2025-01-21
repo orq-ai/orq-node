@@ -18,7 +18,7 @@ const value: operations.CreatePromptContentPrompts2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://superb-digestive.com",
+      url: "https://steep-sweatshop.com",
     },
   },
 ];
