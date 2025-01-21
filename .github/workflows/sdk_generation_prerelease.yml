@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - packages/orq-rc/.speakeasy/gen.yaml
+      - test
+    # paths:
+    #   - packages/orq-rc/.speakeasy/gen.yaml
 
 jobs:
   publish:

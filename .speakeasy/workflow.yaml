@@ -4,13 +4,9 @@ sources:
     orq-ai-node:
         inputs:
             - location: ./openapi.yaml
-        registry:
-            location: registry.speakeasyapi.dev/orq/orq/orq-ai-node
     orq-ai-prerelease-node:
         inputs:
             - location: ./openapi-prerelease.yaml
-        registry:
-            location: registry.speakeasyapi.dev/orq/orq/orq-ai-prerelease-node
 targets:
     orq-ai-node:
         target: typescript
