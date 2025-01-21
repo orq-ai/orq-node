@@ -209,6 +209,8 @@ export const Provider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type Provider = ClosedEnum<typeof Provider>;
 
@@ -561,6 +563,8 @@ export const CreatePromptProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
 

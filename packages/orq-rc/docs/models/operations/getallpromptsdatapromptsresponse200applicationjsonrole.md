@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { GetAllPromptsDataPromptsResponse200ApplicationJSONRole } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsDataPromptsResponse200ApplicationJSONRole = "system";
+let value: GetAllPromptsDataPromptsResponse200ApplicationJSONRole = "user";
 ```
 
 ## Values

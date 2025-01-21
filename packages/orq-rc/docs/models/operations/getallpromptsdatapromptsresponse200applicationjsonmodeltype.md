@@ -7,7 +7,8 @@ The type of the model
 ```typescript
 import { GetAllPromptsDataPromptsResponse200ApplicationJSONModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsDataPromptsResponse200ApplicationJSONModelType = "tts";
+let value: GetAllPromptsDataPromptsResponse200ApplicationJSONModelType =
+  "completion";
 ```
 
 ## Values

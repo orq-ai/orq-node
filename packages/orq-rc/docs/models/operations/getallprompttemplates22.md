@@ -10,7 +10,7 @@ import { GetAllPromptTemplates22 } from "@orq-ai/node/models/operations";
 let value: GetAllPromptTemplates22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://worst-wriggler.com",
+    url: "https://inconsequential-comparison.net",
   },
 };
 ```

@@ -9,7 +9,14 @@ let value: GetAllPromptTemplatesItemsPromptTemplatesPromptConfig = {
   messages: [
     {
       role: "user",
-      content: "<value>",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://troubled-term.name/",
+          },
+        },
+      ],
     },
   ],
 };

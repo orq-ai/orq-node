@@ -1,0 +1,21 @@
+# DeploymentGetLogsRelatedEntities5
+
+Define the internal account of the system. Also sometimes called user (internal)
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsRelatedEntities5 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsRelatedEntities5 = {
+  type: "account",
+  accountId: "92026ba0-c5a0-460d-b2a4-2e9e4df6e55f",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                            | Type                                                                                                                                                                                                                             | Required                                                                                                                                                                                                                         | Description                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                           | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData45Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata45type.md) | :heavy_check_mark:                                                                                                                                                                                                               | N/A                                                                                                                                                                                                                              |
+| `accountId`                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                               | The id of the resource                                                                                                                                                                                                           |

@@ -7,7 +7,7 @@ import { FiltersValue } from "@orq-ai/node/models/operations";
 
 let value: FiltersValue = {
   criteria: {},
-  mode: "datetime",
+  mode: "date",
 };
 ```
 

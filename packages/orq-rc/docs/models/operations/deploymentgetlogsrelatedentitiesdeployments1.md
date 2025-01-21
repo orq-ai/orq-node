@@ -1,0 +1,19 @@
+# DeploymentGetLogsRelatedEntitiesDeployments1
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsRelatedEntitiesDeployments1 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsRelatedEntitiesDeployments1 = {
+  type: "playground",
+  playgroundId: "5fde290b-0a39-440a-a7b0-802c3122d9c4",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                           | Required                                                                                                                                                                                                                       | Description                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                         | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData3Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata3type.md) | :heavy_check_mark:                                                                                                                                                                                                             | N/A                                                                                                                                                                                                                            |
+| `playgroundId`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                             | The id of the resource                                                                                                                                                                                                         |

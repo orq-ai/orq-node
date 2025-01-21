@@ -9,11 +9,11 @@ import {
 
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJson3Provider =
-    "nvidia";
+    "aws";
 ```
 
 ## Values
 
 ```typescript
-"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina"
+"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs"
 ```

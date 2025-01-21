@@ -11,9 +11,9 @@ let value: FileUpdateResponseBody = {
   id: "<id>",
   objectName: "<value>",
   purpose: "retrieval",
-  bytes: 302.35,
+  bytes: 651.39,
   fileName: "example.file",
-  workspaceId: "b058e160-5943-419b-aaf0-a99f0bd85c17",
+  workspaceId: "cf69dc84-4d19-477c-82f5-d2cacfa8bc73",
 };
 ```
 

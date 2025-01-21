@@ -8,12 +8,12 @@ import { GetAllPromptsDataPromptsResponse200ApplicationJSONPromptConfig } from "
 let value: GetAllPromptsDataPromptsResponse200ApplicationJSONPromptConfig = {
   messages: [
     {
-      role: "assistant",
+      role: "prompt",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://squiggly-moment.org",
+            url: "https://thorough-simple.info",
           },
         },
       ],

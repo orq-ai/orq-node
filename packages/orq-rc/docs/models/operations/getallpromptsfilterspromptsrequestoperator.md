@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsRequestOperator } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsRequestOperator = "is_before";
+let value: GetAllPromptsFiltersPromptsRequestOperator = "is";
 ```
 
 ## Values

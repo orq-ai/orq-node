@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { DataModelType } from "@orq-ai/node/models/operations";
 
-let value: DataModelType = "rerank";
+let value: DataModelType = "tts";
 ```
 
 ## Values

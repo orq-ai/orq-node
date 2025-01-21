@@ -8,7 +8,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponsePromptConfig } from "@
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponsePromptConfig = {
   messages: [
     {
-      role: "user",
+      role: "expected_output",
       content: "<value>",
     },
   ],

@@ -1,6 +1,6 @@
 # DeploymentsResponseBody
 
-List of deployments
+List all deployments
 
 ## Example Usage
 
@@ -34,7 +34,7 @@ let value: DeploymentsResponseBody = {
         model: "Model 3",
         modelType: "vision",
         modelParameters: {},
-        provider: "anthropic",
+        provider: "huggingface",
         messages: [
           {
             role: "system",
@@ -46,8 +46,6 @@ let value: DeploymentsResponseBody = {
     },
   ],
   hasMore: false,
-  firstId: "<id>",
-  lastId: "<id>",
 };
 ```
 
@@ -58,5 +56,3 @@ let value: DeploymentsResponseBody = {
 | `object`                                                 | [operations.ObjectT](../../models/operations/objectt.md) | :heavy_check_mark:                                       | N/A                                                      |
 | `data`                                                   | [operations.Data](../../models/operations/data.md)[]     | :heavy_check_mark:                                       | N/A                                                      |
 | `hasMore`                                                | *boolean*                                                | :heavy_check_mark:                                       | N/A                                                      |
-| `firstId`                                                | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `lastId`                                                 | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |

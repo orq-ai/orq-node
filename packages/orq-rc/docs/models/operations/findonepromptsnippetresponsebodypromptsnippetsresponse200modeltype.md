@@ -8,7 +8,7 @@ The type of the model
 import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ModelType } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ModelType =
-  "image";
+  "tts";
 ```
 
 ## Values

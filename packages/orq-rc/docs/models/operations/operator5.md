@@ -5,7 +5,7 @@
 ```typescript
 import { Operator5 } from "@orq-ai/node/models/operations";
 
-let value: Operator5 = "is_less_than";
+let value: Operator5 = "equals";
 ```
 
 ## Values

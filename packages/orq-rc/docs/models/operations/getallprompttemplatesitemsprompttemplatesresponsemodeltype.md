@@ -7,8 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptTemplatesItemsPromptTemplatesResponseModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesItemsPromptTemplatesResponseModelType =
-  "completion";
+let value: GetAllPromptTemplatesItemsPromptTemplatesResponseModelType = "stt";
 ```
 
 ## Values

@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptsDataModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsDataModelType = "stt";
+let value: GetAllPromptsDataModelType = "image";
 ```
 
 ## Values

@@ -1,0 +1,25 @@
+# DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData4Evals7WorkflowRunEvals41
+
+Define the internal account of the system. Also sometimes called user (internal)
+
+## Example Usage
+
+```typescript
+import {
+  DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData4Evals7WorkflowRunEvals41,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData4Evals7WorkflowRunEvals41 =
+    {
+      type: "account",
+      accountId: "b8ed099f-0830-49cc-8060-33354f5e2c07",
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                                                       | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData4Evals7WorkflowRunEvals4Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata4evals7workflowrunevals4type.md) | :heavy_check_mark:                                                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                                                          |
+| `accountId`                                                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                           | The id of the resource                                                                                                                                                                                                                                                       |

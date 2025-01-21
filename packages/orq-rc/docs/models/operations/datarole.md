@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { DataRole } from "@orq-ai/node/models/operations";
 
-let value: DataRole = "correction";
+let value: DataRole = "prompt";
 ```
 
 ## Values

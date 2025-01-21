@@ -8,7 +8,8 @@ Only supported on `image` models.
 import { GetAllPromptsDataPromptsResponse200ApplicationJSONResponseBodyFormat } from "@orq-ai/node/models/operations";
 
 let value:
-  GetAllPromptsDataPromptsResponse200ApplicationJSONResponseBodyFormat = "text";
+  GetAllPromptsDataPromptsResponse200ApplicationJSONResponseBodyFormat =
+    "json_object";
 ```
 
 ## Values

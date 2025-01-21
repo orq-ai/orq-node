@@ -7,17 +7,12 @@ import { CreatePromptVersionRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersionRequestBody = {
   id: "<id>",
-  displayName: "Delphia.Heller",
+  displayName: "Athena.Larkin19",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "user",
+        content: "<value>",
       },
     ],
   },

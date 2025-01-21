@@ -8,7 +8,7 @@ import { UpdatePromptResponseBodyPromptConfig } from "@orq-ai/node/models/operat
 let value: UpdatePromptResponseBodyPromptConfig = {
   messages: [
     {
-      role: "expected_output",
+      role: "exception",
       content: "<value>",
     },
   ],

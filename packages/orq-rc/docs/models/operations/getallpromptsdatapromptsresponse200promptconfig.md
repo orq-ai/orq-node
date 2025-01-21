@@ -8,8 +8,13 @@ import { GetAllPromptsDataPromptsResponse200PromptConfig } from "@orq-ai/node/mo
 let value: GetAllPromptsDataPromptsResponse200PromptConfig = {
   messages: [
     {
-      role: "assistant",
-      content: "<value>",
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

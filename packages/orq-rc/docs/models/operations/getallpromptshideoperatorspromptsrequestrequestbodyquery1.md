@@ -5,7 +5,8 @@
 ```typescript
 import { GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1 } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1 = "is_not";
+let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1 =
+  "is_empty";
 ```
 
 ## Values

@@ -6,7 +6,7 @@
 import { CreatePromptVersion2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersion2ImageUrl = {
-  url: "https://rectangular-nightlife.name",
+  url: "https://jumbo-verve.biz/",
 };
 ```
 

@@ -6,7 +6,7 @@
 import { GetAllPromptsFiltersPromptsRequestRequestBodyQueryOperator } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsFiltersPromptsRequestRequestBodyQueryOperator =
-  "does_not_contain";
+  "is_empty";
 ```
 
 ## Values

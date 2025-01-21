@@ -6,16 +6,16 @@
 import { GetAllPromptsFilters2 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsFilters2 = {
-  operator: "does_not_contain",
+  operator: "is_empty",
   value: [
     "<value>",
   ],
-  type: "string",
+  type: "boolean",
   options: [
     "<value>",
   ],
   name: "<value>",
-  path: "/System",
+  path: "/usr/src",
 };
 ```
 
@@ -26,9 +26,9 @@ let value: GetAllPromptsFilters2 = {
 | `operator`                                                                                                       | [operations.GetAllPromptsFiltersPromptsOperator](../../models/operations/getallpromptsfilterspromptsoperator.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `value`                                                                                                          | *any*[]                                                                                                          | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `type`                                                                                                           | [operations.GetAllPromptsFiltersPromptsType](../../models/operations/getallpromptsfilterspromptstype.md)         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `options`                                                                                                        | *operations.FiltersOptions*[]                                                                                    | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `optionsMap`                                                                                                     | Record<string, *operations.FiltersOptionsMap*>                                                                   | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `options`                                                                                                        | *operations.GetAllPromptsFiltersPromptsOptions*[]                                                                | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `optionsMap`                                                                                                     | Record<string, *operations.GetAllPromptsFiltersPromptsOptionsMap*>                                               | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `imageUrlMap`                                                                                                    | Record<string, *string*>                                                                                         | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
 | `name`                                                                                                           | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
 | `path`                                                                                                           | *string*                                                                                                         | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
-| `hideOperators`                                                                                                  | *operations.FiltersHideOperators*[]                                                                              | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `hideOperators`                                                                                                  | *operations.GetAllPromptsFiltersPromptsHideOperators*[]                                                          | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

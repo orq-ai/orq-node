@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { CreatePromptVersionModelType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptVersionModelType = "vision";
+let value: CreatePromptVersionModelType = "chat";
 ```
 
 ## Values

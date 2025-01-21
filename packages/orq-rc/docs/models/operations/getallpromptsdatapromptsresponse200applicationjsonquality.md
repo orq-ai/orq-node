@@ -7,8 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { GetAllPromptsDataPromptsResponse200ApplicationJSONQuality } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsDataPromptsResponse200ApplicationJSONQuality =
-  "standard";
+let value: GetAllPromptsDataPromptsResponse200ApplicationJSONQuality = "hd";
 ```
 
 ## Values

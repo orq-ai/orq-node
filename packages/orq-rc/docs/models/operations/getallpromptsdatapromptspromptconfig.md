@@ -8,11 +8,13 @@ import { GetAllPromptsDataPromptsPromptConfig } from "@orq-ai/node/models/operat
 let value: GetAllPromptsDataPromptsPromptConfig = {
   messages: [
     {
-      role: "prompt",
+      role: "correction",
       content: [
         {
-          type: "text",
-          text: "<value>",
+          type: "image_url",
+          imageUrl: {
+            url: "https://infatuated-hope.net",
+          },
         },
       ],
     },

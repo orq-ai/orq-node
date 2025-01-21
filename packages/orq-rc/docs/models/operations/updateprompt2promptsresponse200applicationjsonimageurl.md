@@ -6,7 +6,7 @@
 import { UpdatePrompt2PromptsResponse200ApplicationJSONImageUrl } from "@orq-ai/node/models/operations";
 
 let value: UpdatePrompt2PromptsResponse200ApplicationJSONImageUrl = {
-  url: "https://sentimental-knight.info",
+  url: "https://feline-graffiti.info",
 };
 ```
 

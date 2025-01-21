@@ -9,19 +9,17 @@ import { GetAllPromptTemplatesItemsVersions } from "@orq-ai/node/models/operatio
 
 let value: GetAllPromptTemplatesItemsVersions = {
   id: "<id>",
-  createdById: "717f6d14-66a5-4ba6-a691-dab816650b19",
-  displayName: "Lori.Brakus-Stroman",
-  updatedById: "85308d53-1131-4411-9d28-c723685cce0e",
+  createdById: "648daffd-0c9b-4f35-a85d-80e8a89f7bd1",
+  displayName: "Jadon.Wehner-Dibbert45",
+  updatedById: "7befee56-d727-4515-9fef-91323e3610fc",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "assistant",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://hefty-knight.info",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

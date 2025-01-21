@@ -12,7 +12,7 @@ let value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://worthless-guard.info",
+        url: "https://spiffy-lift.info/",
       },
     };
 ```

@@ -9,13 +9,13 @@ import { FindOnePromptSnippetResponseBodyVersions } from "@orq-ai/node/models/op
 
 let value: FindOnePromptSnippetResponseBodyVersions = {
   id: "<id>",
-  createdById: "15b4dc35-d355-4c01-a96a-4ec1cffb194f",
-  displayName: "Leonor.Kessler93",
-  updatedById: "06caf1e5-7613-4b02-90d9-2cfee0949527",
+  createdById: "d75205d5-db70-4b97-bfb5-59288adae090",
+  displayName: "Brandt_Breitenberg54",
+  updatedById: "c87ecd37-5544-4980-8451-8b2372e4c89b",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "tool",
         content: "<value>",
       },
     ],

@@ -10,20 +10,20 @@ Prompt snippet retrieved.
 ```typescript
 const value: operations.FindOnePromptSnippetResponseBody1 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "9f24b3d5-209d-44ec-b099-3570226bd2ca",
-  createdById: "f11c23ef-5dd9-4994-9932-6b9fa22139de",
-  displayName: "Keegan_Hahn",
-  updatedById: "27663243-bb91-4910-8539-ebcfa99d6ca4",
+  owner: "<value>",
+  domainId: "fbc7dd1d-dd69-48cf-b0c6-693d01dbb6b4",
+  createdById: "2ed064c2-4143-4ecf-b439-ae9376159723",
+  displayName: "Clare74",
+  updatedById: "fe723eff-409e-4b84-80ab-3c6ec1829949",
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "correction",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://jagged-petal.com/",
+              url: "https://quiet-ghost.name/",
             },
           },
         ],
@@ -34,14 +34,21 @@ const value: operations.FindOnePromptSnippetResponseBody1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "66885c10-6e42-4e25-bb43-6ce02f98d00f",
-      displayName: "Nedra_Kreiger93",
-      updatedById: "c0f6f545-b3d9-4ff2-8f00-ff277dac7abb",
+      createdById: "6b02690c-31b2-4108-a889-b667ecc400af",
+      displayName: "Fabian45",
+      updatedById: "3eaf4c58-4115-40e8-86fb-49860d813553",
       promptConfig: {
         messages: [
           {
             role: "system",
-            content: "<value>",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://personal-coordination.name",
+                },
+              },
+            ],
           },
         ],
       },
@@ -59,21 +66,19 @@ const value: operations.FindOnePromptSnippetResponseBody1 = {
 ```typescript
 const value: operations.FindOnePromptSnippetResponseBody2 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "66e9be70-4de5-44e5-ba41-8e93ac58a2f7",
-  createdById: "3720366e-a6f9-45b7-bee5-84afd51f6457",
-  displayName: "Wyatt_Herman0",
-  updatedById: "e016b444-d38f-4b5c-bf5b-1e1584a8b58c",
+  owner: "vendor",
+  domainId: "09a1529d-d2ba-4339-a14a-1fb98ac281b9",
+  createdById: "f756e9ff-95e7-4b71-be18-af247d0c9e2d",
+  displayName: "Osbaldo.Kozey63",
+  updatedById: "a563e10f-69f7-4adf-8c15-30d12e7de14c",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "exception",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://limping-strategy.name/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },
@@ -83,14 +88,19 @@ const value: operations.FindOnePromptSnippetResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "f41a1c48-cc7f-4744-ab66-04dcb0047e64",
-      displayName: "Tavares.Stiedemann",
-      updatedById: "bf558a9b-6d25-4c5a-9424-e7350c390d20",
+      createdById: "66e8de55-16f5-456e-a870-494015afec01",
+      displayName: "Jules.Graham27",
+      updatedById: "b321edd8-0422-4fc5-a3e9-eb344722135b",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
-            content: "<value>",
+            role: "exception",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },
@@ -109,15 +119,15 @@ const value: operations.FindOnePromptSnippetResponseBody2 = {
 ```typescript
 const value: operations.FindOnePromptSnippetResponseBody3 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "64ecc8d7-773e-4433-bdc6-0f2dcfc5363b",
-  createdById: "a2097358-a7f0-4ae3-a3c7-f9e02a6d6b91",
-  displayName: "Meghan.MacGyver",
-  updatedById: "1213d06c-13ba-492c-a22c-55455b35ce91",
+  owner: "<value>",
+  domainId: "87c3dd6d-a898-4a67-b384-519f4e06d42a",
+  createdById: "a1b08d63-e267-4089-9601-66e5b907a4be",
+  displayName: "Lacey38",
+  updatedById: "f5818e30-634e-4d5e-bdf8-8fef57ca0e86",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "system",
         content: "<value>",
       },
     ],
@@ -126,13 +136,13 @@ const value: operations.FindOnePromptSnippetResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "dc92be4f-c494-41da-a926-e2034ca009a2",
-      displayName: "Dayana96",
-      updatedById: "74fdb76c-8a9b-4162-a338-0f80a41d310b",
+      createdById: "94cfaae8-2df3-4384-ad73-015e52fa6be2",
+      displayName: "Naomi.Durgan-Koch",
+      updatedById: "a837235d-70f2-4e89-ba65-0ff78531f08a",
       promptConfig: {
         messages: [
           {
-            role: "system",
+            role: "prompt",
             content: "<value>",
           },
         ],

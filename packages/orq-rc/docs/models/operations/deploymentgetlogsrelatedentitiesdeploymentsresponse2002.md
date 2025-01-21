@@ -1,0 +1,21 @@
+# DeploymentGetLogsRelatedEntitiesDeploymentsResponse2002
+
+Define the user set using the SDK
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsRelatedEntitiesDeploymentsResponse2002 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsRelatedEntitiesDeploymentsResponse2002 = {
+  type: "contact",
+  contactId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                       | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData1Evals52Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata1evals52type.md) | :heavy_check_mark:                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                          |
+| `contactId`                                                                                                                                                                                                                                  | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                          |

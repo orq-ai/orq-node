@@ -6,13 +6,11 @@
 import { GetAllPromptTemplatesItemsPromptTemplatesResponseMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponseMessages = {
-  role: "tool",
+  role: "correction",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://portly-cannon.info/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

@@ -10,7 +10,14 @@ let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponsePromptConfig =
     messages: [
       {
         role: "expected_output",
-        content: "<value>",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://neat-crest.org",
+            },
+          },
+        ],
       },
     ],
   };

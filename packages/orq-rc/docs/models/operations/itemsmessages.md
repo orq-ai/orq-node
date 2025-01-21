@@ -6,7 +6,7 @@
 import { ItemsMessages } from "@orq-ai/node/models/operations";
 
 let value: ItemsMessages = {
-  role: "tool",
+  role: "correction",
   content: "<value>",
 };
 ```

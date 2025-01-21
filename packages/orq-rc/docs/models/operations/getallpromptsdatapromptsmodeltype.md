@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptsDataPromptsModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsDataPromptsModelType = "tts";
+let value: GetAllPromptsDataPromptsModelType = "embedding";
 ```
 
 ## Values

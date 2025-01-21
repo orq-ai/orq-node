@@ -6,7 +6,7 @@
 import { GetAllPromptTemplates2PromptTemplatesImageUrl } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptTemplates2PromptTemplatesImageUrl = {
-  url: "https://grounded-retrospectivity.biz/",
+  url: "https://well-groomed-tennis.com",
 };
 ```
 

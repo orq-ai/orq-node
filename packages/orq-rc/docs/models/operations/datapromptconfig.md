@@ -8,12 +8,12 @@ import { DataPromptConfig } from "@orq-ai/node/models/operations";
 let value: DataPromptConfig = {
   messages: [
     {
-      role: "assistant",
+      role: "exception",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://sore-alert.com/",
+            url: "https://concerned-making.com/",
           },
         },
       ],

@@ -8,10 +8,10 @@ import { ResponseBody } from "@orq-ai/node/models/operations";
 let value: ResponseBody = {
   id: "<id>",
   objectName: "<value>",
-  purpose: "retrieval",
-  bytes: 6232.95,
+  purpose: "knowledge_datasource",
+  bytes: 1302.29,
   fileName: "example.file",
-  workspaceId: "e92fd8e8-edfe-4026-bf42-e7e2a71b3000",
+  workspaceId: "a090bc65-3d7c-4922-a4d5-eab407a5fafc",
 };
 ```
 

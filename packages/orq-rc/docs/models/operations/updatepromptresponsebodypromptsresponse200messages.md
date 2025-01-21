@@ -6,8 +6,13 @@
 import { UpdatePromptResponseBodyPromptsResponse200Messages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsResponse200Messages = {
-  role: "prompt",
-  content: "<value>",
+  role: "assistant",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

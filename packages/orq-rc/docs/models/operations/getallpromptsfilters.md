@@ -7,13 +7,13 @@
 
 ```typescript
 const value: operations.GetAllPromptsFilters1 = {
-  operator: "is",
-  type: "single-value-array",
+  operator: "is_not_empty",
+  type: "date",
   options: [
-    "<value>",
+    7327.49,
   ],
   name: "<value>",
-  path: "/opt/lib",
+  path: "/home",
 };
 ```
 
@@ -25,12 +25,12 @@ const value: operations.GetAllPromptsFilters2 = {
   value: [
     "<value>",
   ],
-  type: "boolean",
+  type: "string",
   options: [
-    7064.71,
+    8626.25,
   ],
   name: "<value>",
-  path: "/Applications",
+  path: "/Network",
 };
 ```
 
@@ -38,94 +38,92 @@ const value: operations.GetAllPromptsFilters2 = {
 
 ```typescript
 const value: operations.GetAllPromptsFilters3 = {
-  operator: "is_not_empty",
+  operator: "is_on_or_before",
   value: {
     criteria: {},
     mode: "date",
   },
-  type: "string",
+  type: "multi-value-array",
   name: "<value>",
-  path: "/tmp",
+  path: "/usr/ports",
 };
 ```
 
-### `operations.Filters4`
+### `operations.GetAllPromptsFilters4`
 
 ```typescript
-const value: operations.Filters4 = {
-  operator: "is_between",
-  value: [
-    3909.16,
-  ],
-  type: "boolean",
+const value: operations.GetAllPromptsFilters4 = {
+  operator: "is_less_than_or_equal_to",
+  value: 7971.33,
+  type: "evaluator",
   name: "<value>",
-  path: "/opt",
+  path: "/mnt",
 };
 ```
 
-### `operations.Filters5`
+### `operations.GetAllPromptsFilters5`
 
 ```typescript
-const value: operations.Filters5 = {
-  operator: "starts_with",
+const value: operations.GetAllPromptsFilters5 = {
+  operator: "is_empty",
   value: "<value>",
   type: "evaluator",
-  name: "<value>",
-  path: "/usr/include",
-};
-```
-
-### `operations.Six`
-
-```typescript
-const value: operations.Six = {
-  operator: "is_empty",
-  type: "evaluator",
-  options: [
-    {
-      name: "<value>",
-      path: "/usr/obj",
-      type: "number",
-      id: "<id>",
-    },
-  ],
-  selectedOptionId: "<id>",
   name: "<value>",
   path: "/usr/obj",
 };
 ```
 
-### `operations.Seven`
+### `operations.Filters6`
 
 ```typescript
-const value: operations.Seven = {
-  operator: "is",
-  type: "single-value-array",
+const value: operations.Filters6 = {
+  operator: "contains",
+  type: "evaluator",
+  options: [
+    {
+      name: "<value>",
+      path: "/etc/mail",
+      type: "evaluator",
+      id: "<id>",
+    },
+  ],
+  selectedOptionId: "<id>",
+  name: "<value>",
+  path: "/proc",
+};
+```
+
+### `operations.Filters7`
+
+```typescript
+const value: operations.Filters7 = {
+  operator: "is_not_equal",
+  type: "evaluator",
   selectedOptionId: "<id>",
   options: [
     {
       name: "<value>",
-      path: "/usr/share",
+      path: "/Applications",
       type: "string",
       id: "<id>",
       evaluatorId: "<id>",
-      evaluatorType: "json_schema",
+      evaluatorType: "ragas",
       evaluatorOutputType: "enum",
     },
   ],
   name: "<value>",
-  path: "/opt/share",
+  path: "/home/user/dir",
 };
 ```
 
-### `operations.Eight`
+### `operations.Filters8`
 
 ```typescript
-const value: operations.Eight = {
+const value: operations.Filters8 = {
   operator: "is",
-  type: "string",
+  type: "boolean",
   name: "<value>",
-  path: "/private",
+  path: "/etc/periodic",
 };
 ```
 

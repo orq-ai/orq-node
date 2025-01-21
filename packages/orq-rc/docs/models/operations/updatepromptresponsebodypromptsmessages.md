@@ -6,15 +6,8 @@
 import { UpdatePromptResponseBodyPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBodyPromptsMessages = {
-  role: "prompt",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://improbable-cornet.info/",
-      },
-    },
-  ],
+  role: "correction",
+  content: "<value>",
 };
 ```
 

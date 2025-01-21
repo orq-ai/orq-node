@@ -5,7 +5,7 @@
 ```typescript
 import { HideOperators4 } from "@orq-ai/node/models/operations";
 
-let value: HideOperators4 = "is_not_empty";
+let value: HideOperators4 = "contains";
 ```
 
 ## Values

@@ -6,8 +6,15 @@
 import { DataMessages } from "@orq-ai/node/models/operations";
 
 let value: DataMessages = {
-  role: "exception",
-  content: "<value>",
+  role: "tool",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://brisk-bob.biz",
+      },
+    },
+  ],
 };
 ```
 

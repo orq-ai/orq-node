@@ -18,7 +18,7 @@ const value: operations.Two[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://firsthand-section.biz",
+      url: "https://simplistic-teriyaki.com",
     },
   },
 ];
