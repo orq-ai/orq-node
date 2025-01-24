@@ -9,14 +9,21 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsResponseVersions } from "
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponseVersions = {
   id: "<id>",
-  createdById: "88b82c6f-4459-4e24-a977-de7ac84a9e0e",
-  displayName: "Afton.Reilly",
-  updatedById: "5d8aca61-9e6e-489d-a91f-3b873b1fd864",
+  createdById: "3cbf3f98-945e-4ad4-a124-73acbb9beaf8",
+  displayName: "Jarrod_Romaguera",
+  updatedById: "6e2d2ceb-f94d-4bd8-8d1e-3c0efe821987",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: "<value>",
+        role: "correction",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://pointed-invite.org/",
+            },
+          },
+        ],
       },
     ],
   },

@@ -9,15 +9,15 @@ import { FindOnePromptSnippetResponseBody3 } from "@orq-ai/node/models/operation
 
 let value: FindOnePromptSnippetResponseBody3 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "353f9b15-e12a-49de-b246-01374e5ef734",
-  createdById: "4679f354-515e-445f-bb8c-1713256f47cd",
-  displayName: "Eduardo43",
-  updatedById: "8ed099f0-8309-4cc0-b603-3354f5e2c070",
+  owner: "<value>",
+  domainId: "d9565ca1-c755-4242-b78f-c852682ea6c2",
+  createdById: "0682af10-bc65-45d0-9c2d-8d2238744c1e",
+  displayName: "Nicholaus0",
+  updatedById: "9a9350e7-20c5-4487-b905-f3518666b747",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "exception",
         content: "<value>",
       },
     ],
@@ -26,14 +26,19 @@ let value: FindOnePromptSnippetResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "ec5e461a-07ad-42cb-8891-96d596e41b69",
-      displayName: "Vanessa37",
-      updatedById: "a27f8094-1680-488c-a68b-e69b0c6a7bb3",
+      createdById: "de50c58c-74de-4b00-b9c2-eeca51f42f9f",
+      displayName: "Eileen.Mohr",
+      updatedById: "1280c61d-12ce-4007-96f7-b52b79c5781b",
       promptConfig: {
         messages: [
           {
-            role: "correction",
-            content: "<value>",
+            role: "tool",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

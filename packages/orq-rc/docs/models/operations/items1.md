@@ -10,18 +10,20 @@ import { Items1 } from "@orq-ai/node/models/operations";
 let value: Items1 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "6c83448b-fbc2-456a-a445-c9115cbbc488",
-  createdById: "f4ca9cf0-2c18-434b-a0d7-88a515285ff9",
-  displayName: "Winona.Runolfsdottir36",
-  updatedById: "7fe10e83-aa14-4032-93a0-12544cf8f616",
+  domainId: "2b6332f6-96cc-40af-8d49-798b5690472b",
+  createdById: "bdaeb3d3-d989-4647-8298-aae80e1b31f0",
+  displayName: "Isidro_Dare",
+  updatedById: "1dfd9d67-15ed-49e6-8ff9-0eef741ebccd",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "user",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://smoggy-basket.net",
+            },
           },
         ],
       },
@@ -31,9 +33,9 @@ let value: Items1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "eeb726b4-1eb9-4cd7-8ee4-988f4fe7dca5",
-      displayName: "Margaret44",
-      updatedById: "5782bd04-0faf-48c5-b56a-5ef031037d37",
+      createdById: "1d53317c-afcb-4616-9d51-891c890371b3",
+      displayName: "Alexie_Stanton73",
+      updatedById: "39331c1e-d2f5-4e12-8704-92161ac71936",
       promptConfig: {
         messages: [
           {
@@ -42,7 +44,7 @@ let value: Items1 = {
               {
                 type: "image_url",
                 imageUrl: {
-                  url: "https://oval-arcade.biz",
+                  url: "https://negative-marten.biz",
                 },
               },
             ],

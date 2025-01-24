@@ -18,7 +18,7 @@ const value: operations.GetAllPrompts2Prompts1 = {
 const value: operations.GetAllPrompts2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://torn-testing.name/",
+    url: "https://insecure-issue.com",
   },
 };
 ```

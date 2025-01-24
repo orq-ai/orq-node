@@ -9,14 +9,19 @@ import { DataVersions } from "@orq-ai/node/models/operations";
 
 let value: DataVersions = {
   id: "<id>",
-  createdById: "d4063065-b165-4ae2-9d90-c8c6a3358bad",
-  displayName: "Tara_Dibbert25",
-  updatedById: "e1fdda3c-097c-4067-826e-74804ca093fc",
+  createdById: "1a9defa1-05db-45e0-9382-7d2dda115629",
+  displayName: "Mario.Langosh90",
+  updatedById: "c0d0d280-2437-4c29-960d-ba21ee354a45",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: "<value>",
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
       },
     ],
   },

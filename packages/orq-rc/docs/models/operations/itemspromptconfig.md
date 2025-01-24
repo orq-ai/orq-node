@@ -8,8 +8,15 @@ import { ItemsPromptConfig } from "@orq-ai/node/models/operations";
 let value: ItemsPromptConfig = {
   messages: [
     {
-      role: "system",
-      content: "<value>",
+      role: "assistant",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://some-wedding.org",
+          },
+        },
+      ],
     },
   ],
 };

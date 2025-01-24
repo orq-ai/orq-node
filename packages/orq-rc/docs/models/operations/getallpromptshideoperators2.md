@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsHideOperators2 } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsHideOperators2 = "is_not_equal";
+let value: GetAllPromptsHideOperators2 = "is_between";
 ```
 
 ## Values

@@ -18,7 +18,7 @@ const value: operations.CreatePromptVersion21 = {
 const value: operations.CreatePromptVersion22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://important-cruelty.biz/",
+    url: "https://lovable-kinase.info/",
   },
 };
 ```

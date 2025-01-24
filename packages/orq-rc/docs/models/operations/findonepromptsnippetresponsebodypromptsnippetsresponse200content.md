@@ -17,10 +17,8 @@ const value: string = "<value>";
 const value:
   operations.FindOnePromptSnippetContentPromptSnippetsResponse2002[] = [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://suburban-forager.org/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

@@ -6,25 +6,25 @@
 ### `operations.HideOperators1`
 
 ```typescript
-const value: operations.HideOperators1 = "contains";
+const value: operations.HideOperators1 = "starts_with";
 ```
 
 ### `operations.HideOperators2`
 
 ```typescript
-const value: operations.HideOperators2 = "is_not_equal";
+const value: operations.HideOperators2 = "is_between";
 ```
 
 ### `operations.HideOperators3`
 
 ```typescript
-const value: operations.HideOperators3 = "is_not_empty";
+const value: operations.HideOperators3 = "is";
 ```
 
-### `operations.HideOperators4`
+### `operations.Four`
 
 ```typescript
-const value: operations.HideOperators4 = "is_not_empty";
+const value: operations.Four = "contains";
 ```
 
 ### `operations.Five`

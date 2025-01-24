@@ -1,0 +1,28 @@
+# DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBodyDataToolCalls
+
+## Example Usage
+
+```typescript
+import {
+  DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBodyDataToolCalls,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBodyDataToolCalls =
+    {
+      type: "function",
+      function: {
+        name: "<value>",
+        arguments: "<value>",
+      },
+    };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                | Type                                                                                                                                                                                                                 | Required                                                                                                                                                                                                             | Description                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                                 | *string*                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
+| `index`                                                                                                                                                                                                              | *number*                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
+| `type`                                                                                                                                                                                                               | [operations.DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBodyDataType](../../models/operations/deploymentgetlogsmessagedeploymentsresponse200applicationjsonresponsebodydatatype.md)         | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
+| `function`                                                                                                                                                                                                           | [operations.DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBodyDataFunction](../../models/operations/deploymentgetlogsmessagedeploymentsresponse200applicationjsonresponsebodydatafunction.md) | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |

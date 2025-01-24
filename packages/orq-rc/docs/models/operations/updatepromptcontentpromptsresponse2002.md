@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2PromptsResponse2001 = {
 const value: operations.UpdatePrompt2PromptsResponse2002 = {
   type: "image_url",
   imageUrl: {
-    url: "https://quixotic-comparison.biz",
+    url: "https://whimsical-nectarine.com/",
   },
 };
 ```

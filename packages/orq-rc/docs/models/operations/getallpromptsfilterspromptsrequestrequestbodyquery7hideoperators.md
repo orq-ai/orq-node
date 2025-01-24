@@ -8,7 +8,7 @@
 ```typescript
 const value:
   operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters71 =
-    "contains";
+    "is";
 ```
 
 ### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters72`
@@ -16,7 +16,7 @@ const value:
 ```typescript
 const value:
   operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters72 =
-    "is_between";
+    "is_not_equal";
 ```
 
 ### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters73`
@@ -24,7 +24,7 @@ const value:
 ```typescript
 const value:
   operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters73 =
-    "is_not_empty";
+    "is_empty";
 ```
 
 ### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters74`
@@ -32,14 +32,14 @@ const value:
 ```typescript
 const value:
   operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters74 =
-    "does_not_contain";
+    "contains";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters5`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters75`
 
 ```typescript
 const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters5 =
-    "is_between";
+  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters75 =
+    "is";
 ```
 

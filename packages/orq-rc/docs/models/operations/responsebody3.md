@@ -9,19 +9,21 @@ import { ResponseBody3 } from "@orq-ai/node/models/operations";
 
 let value: ResponseBody3 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "58b7d606-15fd-4366-bc00-1a6d47b85282",
-  createdById: "82b1c720-f4f8-481f-8b81-265810800606",
-  displayName: "Cierra43",
-  updatedById: "e4492506-18af-433f-9d9d-3dd38eaa84f7",
+  owner: "vendor",
+  domainId: "517e89b0-d011-4f80-aeff-65a5814e082d",
+  createdById: "f8420792-5659-4884-8cfc-1fa1f9038f07",
+  displayName: "Harrison.Shields76",
+  updatedById: "f83c93aa-fba4-4c11-9293-094a7d097a9f",
   promptConfig: {
     messages: [
       {
         role: "prompt",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://hairy-illusion.com/",
+            },
           },
         ],
       },
@@ -31,21 +33,14 @@ let value: ResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "431a8300-b340-42d3-af24-d64b0ed1cf79",
-      displayName: "Dixie90",
-      updatedById: "ed09ba46-0189-4377-8029-fa1d619365a6",
+      createdById: "51739d36-2777-4f05-aa3b-27a1e5eb2e57",
+      displayName: "Tito88",
+      updatedById: "54c5ba94-a80e-47e0-bcf5-9055e5cee6ff",
       promptConfig: {
         messages: [
           {
-            role: "assistant",
-            content: [
-              {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://pleasant-captain.name/",
-                },
-              },
-            ],
+            role: "expected_output",
+            content: "<value>",
           },
         ],
       },

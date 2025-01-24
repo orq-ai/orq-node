@@ -7,7 +7,7 @@ The format to return the embeddings
 ```typescript
 import { CreatePromptVersionEncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptVersionEncodingFormat = "float";
+let value: CreatePromptVersionEncodingFormat = "base64";
 ```
 
 ## Values

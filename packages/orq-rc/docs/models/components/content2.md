@@ -18,7 +18,7 @@ const value: components.Two1 = {
 const value: components.Deployments22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://illiterate-unique.name",
+    url: "https://sparse-sand.com",
   },
 };
 ```

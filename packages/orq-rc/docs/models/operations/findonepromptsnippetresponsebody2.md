@@ -9,16 +9,23 @@ import { FindOnePromptSnippetResponseBody2 } from "@orq-ai/node/models/operation
 
 let value: FindOnePromptSnippetResponseBody2 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "7ac8261b-fc69-4484-ab4f-a10f353ea885",
-  createdById: "63a5c68c-7fcd-4f69-8baf-44ec39b5697c",
-  displayName: "Howard_Monahan7",
-  updatedById: "ab9f72a9-98f2-4123-8993-777c7c28d279",
+  owner: "<value>",
+  domainId: "e27df2b1-9c59-4545-8a9e-d998a6f02229",
+  createdById: "12cda6bd-5ab6-4076-be1f-be3a3c064ce0",
+  displayName: "Cara69",
+  updatedById: "46976ec8-5bd4-4e65-b92e-c1eeaecbe441",
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: "<value>",
+        role: "expected_output",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://last-publicity.info",
+            },
+          },
+        ],
       },
     ],
   },
@@ -26,14 +33,21 @@ let value: FindOnePromptSnippetResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "f7516a14-da32-4e42-af41-76e211e72983",
-      displayName: "Eusebio22",
-      updatedById: "24643c51-825e-45a8-92ad-1cbd14b0bd76",
+      createdById: "4f6d956d-3714-425b-a677-921f4c8a0adc",
+      displayName: "Ali_Goldner",
+      updatedById: "c53a1461-18be-4e69-8114-a15f3c0b6a0c",
       promptConfig: {
         messages: [
           {
-            role: "system",
-            content: "<value>",
+            role: "user",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://tense-babushka.biz/",
+                },
+              },
+            ],
           },
         ],
       },

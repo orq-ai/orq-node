@@ -8,7 +8,7 @@ The role of the prompt message
 import { DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole =
-  "user";
+  "prompt";
 ```
 
 ## Values

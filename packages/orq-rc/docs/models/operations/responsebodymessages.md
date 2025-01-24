@@ -6,7 +6,7 @@
 import { ResponseBodyMessages } from "@orq-ai/node/models/operations";
 
 let value: ResponseBodyMessages = {
-  role: "system",
+  role: "correction",
   content: [
     {
       type: "text",

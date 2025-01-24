@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsRequestType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsRequestType = "number";
+let value: GetAllPromptsFiltersPromptsRequestType = "boolean";
 ```
 
 ## Values

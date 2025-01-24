@@ -5,7 +5,7 @@
 ```typescript
 import { FiltersDirection } from "@orq-ai/node/models/operations";
 
-let value: FiltersDirection = "past";
+let value: FiltersDirection = "present";
 ```
 
 ## Values

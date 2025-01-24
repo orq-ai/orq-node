@@ -22,7 +22,7 @@ const value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://right-peony.org/",
+        url: "https://circular-finger.biz/",
       },
     };
 ```

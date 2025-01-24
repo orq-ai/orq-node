@@ -1,0 +1,21 @@
+# DeploymentGetLogsRelatedEntitiesDeploymentsResponse2003
+
+Define the relationship between an entity and a human eval, also known as feedback
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsRelatedEntitiesDeploymentsResponse2003 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsRelatedEntitiesDeploymentsResponse2003 = {
+  type: "human_eval",
+  humanEvalId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                        | Type                                                                                                                                                                                                                                         | Required                                                                                                                                                                                                                                     | Description                                                                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                                                       | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData1Evals53Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata1evals53type.md) | :heavy_check_mark:                                                                                                                                                                                                                           | N/A                                                                                                                                                                                                                                          |
+| `humanEvalId`                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                           | The id of the resource                                                                                                                                                                                                                       |

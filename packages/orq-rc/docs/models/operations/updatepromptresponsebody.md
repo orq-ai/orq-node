@@ -11,14 +11,14 @@ Prompt updated.
 const value: operations.ResponseBody1 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "8fbf7b26-a705-4a67-ad49-dc3042048a63",
-  createdById: "cbd4875a-2c06-496a-80d1-4401dcbb1400",
-  displayName: "Cloyd.Armstrong79",
-  updatedById: "fadac44a-9823-486f-986f-145dc4d17a41",
+  domainId: "d979880f-05f8-47b1-9d9e-fef59e317d11",
+  createdById: "cc5b3377-806c-4416-89d6-285d8302bfba",
+  displayName: "Efren.Legros",
+  updatedById: "638cbd16-d714-446a-a181-35887650977b",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "tool",
         content: "<value>",
       },
     ],
@@ -27,18 +27,18 @@ const value: operations.ResponseBody1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "610e14ad-5a70-460f-8c53-655e6b2879ad",
-      displayName: "Georgiana39",
-      updatedById: "938aaa33-3b7a-4c97-b682-cecdd2fa6e9f",
+      createdById: "f9027d16-5ae9-4a7e-8a02-d1b192fc9c4c",
+      displayName: "Ophelia15",
+      updatedById: "bf2a54e0-e586-4d81-91c5-6f216d191821",
       promptConfig: {
         messages: [
           {
-            role: "user",
+            role: "tool",
             content: [
               {
                 type: "image_url",
                 imageUrl: {
-                  url: "https://unfinished-character.info/",
+                  url: "https://glaring-epic.biz",
                 },
               },
             ],
@@ -59,16 +59,23 @@ const value: operations.ResponseBody1 = {
 ```typescript
 const value: operations.ResponseBody2 = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "7af1cd44-7683-47de-aa4d-632f183d3b2f",
-  createdById: "6f862b93-3370-44b9-8db0-975fa481b522",
-  displayName: "Orland39",
-  updatedById: "103801b7-fe46-4e95-acea-3d6b7f123332",
+  owner: "<value>",
+  domainId: "4ccbaed6-aebe-4f89-8761-5792f54675cf",
+  createdById: "09ade025-472d-48f9-a65d-e376d32774cd",
+  displayName: "Vaughn.West",
+  updatedById: "86599bb0-8ace-4561-87e4-329874f24562",
   promptConfig: {
     messages: [
       {
         role: "assistant",
-        content: "<value>",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://spotless-bathhouse.biz/",
+            },
+          },
+        ],
       },
     ],
   },
@@ -76,13 +83,13 @@ const value: operations.ResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "36f54153-c124-44dc-8945-9b68ea812391",
-      displayName: "Ford_Pouros",
-      updatedById: "739a1918-211e-4941-982c-7b6ba8d994e8",
+      createdById: "6545d27a-6e16-4f7d-81b4-1ac21e63fe43",
+      displayName: "Haleigh.Heidenreich",
+      updatedById: "17df9686-4b31-4d01-b6f1-6175af3afcd6",
       promptConfig: {
         messages: [
           {
-            role: "tool",
+            role: "assistant",
             content: "<value>",
           },
         ],
@@ -102,16 +109,23 @@ const value: operations.ResponseBody2 = {
 ```typescript
 const value: operations.ResponseBody3 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "48b428d6-74c1-42fa-98cf-3c5bbf10b9bc",
-  createdById: "5c69e204-c9f8-44ca-bda7-404063b31d0c",
-  displayName: "Benny_Klein62",
-  updatedById: "07ee2d01-f617-4008-b395-2f304445c051",
+  owner: "vendor",
+  domainId: "58bf2c45-81e7-4771-8249-f5d0c7a75e91",
+  createdById: "133f2be6-cc7c-402a-9446-5467a92cf4ea",
+  displayName: "Rylan_Kub57",
+  updatedById: "96adb405-2b09-4136-8700-b4877b8822e3",
   promptConfig: {
     messages: [
       {
         role: "assistant",
-        content: "<value>",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://concerned-carboxyl.net",
+            },
+          },
+        ],
       },
     ],
   },
@@ -119,13 +133,13 @@ const value: operations.ResponseBody3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "7c4b0e17-25a2-44ad-8981-2f07c3774eeb",
-      displayName: "Logan.Gleichner",
-      updatedById: "3e3c02d8-a662-42e7-a7a0-8e667d9bb0fb",
+      createdById: "90c853dc-8421-4b36-91eb-e0140243a638",
+      displayName: "Laisha.Borer13",
+      updatedById: "89ba7c0f-3b4b-474e-9310-524f7ae07ced",
       promptConfig: {
         messages: [
           {
-            role: "system",
+            role: "assistant",
             content: [
               {
                 type: "text",

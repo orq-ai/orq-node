@@ -6,7 +6,7 @@
 import { GetAllPromptsFiltersPromptsRequestRequestBodyQuery7OptionsType } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsFiltersPromptsRequestRequestBodyQuery7OptionsType =
-  "boolean";
+  "multi-value-array";
 ```
 
 ## Values

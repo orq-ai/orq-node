@@ -6,15 +6,8 @@
 import { GetAllPromptsDataPromptsResponse200ApplicationJSONMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsDataPromptsResponse200ApplicationJSONMessages = {
-  role: "exception",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://regal-obligation.name",
-      },
-    },
-  ],
+  role: "system",
+  content: "<value>",
 };
 ```
 

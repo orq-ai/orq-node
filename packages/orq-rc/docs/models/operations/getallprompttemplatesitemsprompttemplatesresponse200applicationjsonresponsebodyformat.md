@@ -11,7 +11,7 @@ import {
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONResponseBodyFormat =
-    "url";
+    "text";
 ```
 
 ## Values

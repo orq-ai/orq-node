@@ -20,7 +20,7 @@ const value:
       {
         type: "image_url",
         imageUrl: {
-          url: "https://unfortunate-birth.net",
+          url: "https://kosher-testing.info",
         },
       },
     ];

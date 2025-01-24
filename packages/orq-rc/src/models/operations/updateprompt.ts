@@ -221,6 +221,8 @@ export const UpdatePromptProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -594,6 +596,8 @@ export const UpdatePromptResponseBodyPromptsProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type UpdatePromptResponseBodyPromptsProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsProvider
@@ -994,6 +998,8 @@ export const UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
     Jina: "jina",
+    Togetherai: "togetherai",
+    Elevenlabs: "elevenlabs",
   } as const;
 export type UpdatePromptResponseBodyPromptsResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -1449,6 +1455,8 @@ export const UpdatePromptResponseBodyProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type UpdatePromptResponseBodyProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyProvider
@@ -1826,6 +1834,8 @@ export const UpdatePromptResponseBodyPromptsResponseProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type UpdatePromptResponseBodyPromptsResponseProvider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsResponseProvider
@@ -2253,6 +2263,8 @@ export const ResponseBodyProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type ResponseBodyProvider = ClosedEnum<typeof ResponseBodyProvider>;
 
@@ -2626,6 +2638,8 @@ export const UpdatePromptResponseBodyPromptsResponse200Provider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type UpdatePromptResponseBodyPromptsResponse200Provider = ClosedEnum<
   typeof UpdatePromptResponseBodyPromptsResponse200Provider
@@ -7659,7 +7673,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-02T13:55:01.056Z",
+    "2025-01-21T09:55:10.979Z",
   ).transform(v => new Date(v)),
   versions: z.array(
     z.lazy(() => UpdatePromptResponseBodyVersions$inboundSchema),
@@ -7713,7 +7727,7 @@ export const ResponseBody3$outboundSchema: z.ZodType<
     UpdatePromptResponseBodyPromptsMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-21T09:55:10.979Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => UpdatePromptResponseBodyVersions$outboundSchema),
@@ -11015,7 +11029,7 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-02T13:55:01.056Z",
+    "2025-01-21T09:55:10.979Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => ResponseBodyVersions$inboundSchema)),
   key: z.string(),
@@ -11067,7 +11081,7 @@ export const ResponseBody2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => UpdatePromptResponseBodyMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-21T09:55:10.979Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => ResponseBodyVersions$outboundSchema)),
   key: z.string(),
@@ -14257,7 +14271,7 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-02T13:55:01.056Z",
+    "2025-01-21T09:55:10.979Z",
   ).transform(v => new Date(v)),
   versions: z.array(z.lazy(() => Versions$inboundSchema)),
   type: ResponseBodyType$inboundSchema,
@@ -14305,7 +14319,7 @@ export const ResponseBody1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => ResponseBodyPromptConfig$outboundSchema),
   metadata: z.lazy(() => ResponseBodyMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-21T09:55:10.979Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => Versions$outboundSchema)),
   type: ResponseBodyType$outboundSchema,

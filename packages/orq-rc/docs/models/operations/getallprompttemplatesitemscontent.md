@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetAllPromptTemplatesContentPromptTemplates2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://unsteady-appliance.biz/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

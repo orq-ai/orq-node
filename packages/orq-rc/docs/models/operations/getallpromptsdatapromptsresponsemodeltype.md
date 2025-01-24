@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetAllPromptsDataPromptsResponseModelType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsDataPromptsResponseModelType = "rerank";
+let value: GetAllPromptsDataPromptsResponseModelType = "tts";
 ```
 
 ## Values

@@ -1,0 +1,21 @@
+# DeploymentGetLogsRelatedEntitiesDeploymentsResponse2001
+
+Define the internal account of the system. Also sometimes called user (internal)
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsRelatedEntitiesDeploymentsResponse2001 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetLogsRelatedEntitiesDeploymentsResponse2001 = {
+  type: "account",
+  accountId: "217db36b-ee86-4aaf-9787-b5084b2dc62d",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                                                                                     | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyData1Evals5Type](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodydata1evals5type.md) | :heavy_check_mark:                                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                                        |
+| `accountId`                                                                                                                                                                                                                                | *string*                                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                                         | The id of the resource                                                                                                                                                                                                                     |

@@ -5,7 +5,7 @@
 ```typescript
 import { Mode } from "@orq-ai/node/models/operations";
 
-let value: Mode = "datetime";
+let value: Mode = "date";
 ```
 
 ## Values

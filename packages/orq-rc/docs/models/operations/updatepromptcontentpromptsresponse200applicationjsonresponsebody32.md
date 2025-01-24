@@ -20,7 +20,7 @@ const value:
   operations.UpdatePrompt2PromptsResponse200ApplicationJSONResponseBody32 = {
     type: "image_url",
     imageUrl: {
-      url: "https://massive-lift.biz/",
+      url: "https://majestic-turret.name",
     },
   };
 ```

@@ -9,15 +9,22 @@
 const value: operations.Items1 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "9c6bc5fa-e8bc-4e28-86e1-fe17bbec47b2",
-  createdById: "74d95dcf-d62d-405e-8fab-088513569b55",
-  displayName: "Alize76",
-  updatedById: "dbfe990f-2bd5-431b-97be-2e64ff3a1ada",
+  domainId: "8b6a556d-3f47-4476-b540-c7432f944fa2",
+  createdById: "6a921c3b-0f86-4c6a-80e8-bf610795722e",
+  displayName: "Kale.White23",
+  updatedById: "512d72eb-4ebf-4194-924b-a511975174db",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: "<value>",
+        role: "expected_output",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://wavy-bonfire.net",
+            },
+          },
+        ],
       },
     ],
   },
@@ -25,13 +32,13 @@ const value: operations.Items1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "9ee02135-8abe-4fad-bc4e-0047a1ac2687",
-      displayName: "Vicky_Blick6",
-      updatedById: "238a7f3c-d879-4686-b6b1-2dc46ed9306a",
+      createdById: "01cb9e60-1b49-473b-80ab-14e79cd183bf",
+      displayName: "Luna38",
+      updatedById: "7debab24-7625-4b0a-b5e4-fd3e476280f6",
       promptConfig: {
         messages: [
           {
-            role: "correction",
+            role: "user",
             content: "<value>",
           },
         ],
@@ -50,15 +57,15 @@ const value: operations.Items1 = {
 ```typescript
 const value: operations.Items2 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "53cc8f2e-12b1-496b-8ecd-048634f450d2",
-  createdById: "4e3cce13-b342-4271-8560-617dd19d3cec",
-  displayName: "Adelbert38",
-  updatedById: "525ef3c4-e2a1-4fbd-8979-87c22651dc8f",
+  owner: "vendor",
+  domainId: "c5b11148-4480-4d91-af43-db7e70b45e9c",
+  createdById: "9cfb05c0-ea36-4018-b32f-a042f498e052",
+  displayName: "Gillian_Legros",
+  updatedById: "b2a0bc2e-1bea-49b3-94d1-9e1211ca369b",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "user",
         content: "<value>",
       },
     ],
@@ -67,13 +74,13 @@ const value: operations.Items2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "53c2da0c-aeb8-4d48-94f3-05808db9ffd9",
-      displayName: "Adrain_Yundt34",
-      updatedById: "cbfd8175-84dd-4596-9e2b-f23bc7937154",
+      createdById: "20974716-9e73-473e-8e0b-7d950e9418b9",
+      displayName: "Sigmund_Bins",
+      updatedById: "853ec54c-c0d7-4195-aec2-c44f1bb3e1b0",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
+            role: "tool",
             content: "<value>",
           },
         ],
@@ -93,21 +100,16 @@ const value: operations.Items2 = {
 ```typescript
 const value: operations.Items3 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "9f2e1773-57df-48d9-b536-80293d511e12",
-  createdById: "4ad9fb18-bc0b-4db8-978b-e9eb1844559a",
-  displayName: "Brayan0",
-  updatedById: "81df7016-e2d0-47a0-b9f2-b92008fab792",
+  owner: "vendor",
+  domainId: "a934dd5f-fb33-471e-8657-ee48608ccb31",
+  createdById: "0c361864-f4af-4bac-aa63-fa060d383aac",
+  displayName: "Riley_Larson12",
+  updatedById: "f2aa6687-a139-4931-9386-400d8e320993",
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "system",
+        content: "<value>",
       },
     ],
   },
@@ -115,17 +117,19 @@ const value: operations.Items3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "32fc2862-2f4f-4172-b081-bb2fb4bb5659",
-      displayName: "Chad41",
-      updatedById: "b7a8c784-9492-4266-9420-047b7e0259d5",
+      createdById: "a549304d-ee3a-474a-992c-e415d7c9f8c6",
+      displayName: "Don_Lueilwitz3",
+      updatedById: "0898784e-d899-432e-96eb-b2ec0e8bd35c",
       promptConfig: {
         messages: [
           {
-            role: "system",
+            role: "prompt",
             content: [
               {
-                type: "text",
-                text: "<value>",
+                type: "image_url",
+                imageUrl: {
+                  url: "https://vain-epic.info",
+                },
               },
             ],
           },

@@ -1,0 +1,19 @@
+# EvalsUsage
+
+## Example Usage
+
+```typescript
+import { EvalsUsage } from "@orq-ai/node/models/operations";
+
+let value: EvalsUsage = {};
+```
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `totalTokens`                                                                                                                        | *number*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `promptTokens`                                                                                                                       | *number*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `completionTokens`                                                                                                                   | *number*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `promptTokensDetails`                                                                                                                | [operations.DeploymentGetLogsEvalsPromptTokensDetails](../../models/operations/deploymentgetlogsevalsprompttokensdetails.md)         | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |
+| `completionTokensDetails`                                                                                                            | [operations.DeploymentGetLogsEvalsCompletionTokensDetails](../../models/operations/deploymentgetlogsevalscompletiontokensdetails.md) | :heavy_minus_sign:                                                                                                                   | N/A                                                                                                                                  |

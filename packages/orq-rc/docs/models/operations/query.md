@@ -6,13 +6,13 @@
 import { Query } from "@orq-ai/node/models/operations";
 
 let value: Query = {
-  operator: "or",
+  operator: "and",
 };
 ```
 
 ## Fields
 
-| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `operator`                                                                           | [operations.GetAllPromptsOperator](../../models/operations/getallpromptsoperator.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `filters`                                                                            | *operations.GetAllPromptsFilters*[]                                                  | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| Field                                                      | Type                                                       | Required                                                   | Description                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| `operator`                                                 | [operations.Operator](../../models/operations/operator.md) | :heavy_check_mark:                                         | N/A                                                        |
+| `filters`                                                  | *operations.Filters*[]                                     | :heavy_minus_sign:                                         | N/A                                                        |

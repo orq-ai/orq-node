@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptContentPromptsResponse2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://common-puppet.biz",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

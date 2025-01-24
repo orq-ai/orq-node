@@ -7,7 +7,7 @@ The provider used to generate the response
 ```typescript
 import { DeploymentInvokeDeploymentsProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentInvokeDeploymentsProvider = "cohere";
+let value: DeploymentInvokeDeploymentsProvider = "openai";
 ```
 
 ## Values

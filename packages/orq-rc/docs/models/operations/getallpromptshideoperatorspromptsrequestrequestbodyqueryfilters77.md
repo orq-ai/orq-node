@@ -12,5 +12,5 @@ let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters77 =
 ## Values
 
 ```typescript
-"is" | "is_not" | "is_empty" | "is_not_empty"
+"contains" | "does_not_contain" | "is_empty" | "is_not_empty"
 ```

@@ -6,11 +6,11 @@
 import { GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters79 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters79 =
-  "is_empty";
+  "equals";
 ```
 
 ## Values
 
 ```typescript
-"is" | "is_not" | "contains" | "does_not_contain" | "starts_with" | "ends_with" | "is_empty" | "is_not_empty"
+"equals" | "is_not_equal" | "is_greater_than" | "is_less_than" | "is_greater_than_or_equal_to" | "is_less_than_or_equal_to" | "is_between" | "is_empty" | "is_not_empty"
 ```

@@ -3,41 +3,38 @@
 
 ## Supported Types
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody1`
 
 ```typescript
-const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1 =
-    "contains";
+const value: operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody1 =
+  "is_not_empty";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody2`
 
 ```typescript
-const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2 =
-    "is_less_than_or_equal_to";
+const value: operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody2 =
+  "is_less_than";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery3`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody3`
 
 ```typescript
-const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery3 = "is";
+const value: operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody3 =
+  "is_empty";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery4`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody4`
 
 ```typescript
-const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery4 =
-    "is_not_empty";
+const value: operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody4 =
+  "does_not_contain";
 ```
 
 ### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody5`
 
 ```typescript
 const value: operations.GetAllPromptsHideOperatorsPromptsRequestRequestBody5 =
-  "is_before";
+  "is_relative_time";
 ```
 

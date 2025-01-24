@@ -18,7 +18,7 @@ const value: operations.GetAllPromptTemplates21 = {
 const value: operations.GetAllPromptTemplates22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://exhausted-impostor.net",
+    url: "https://rigid-godfather.net/",
   },
 };
 ```

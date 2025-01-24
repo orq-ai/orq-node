@@ -10,20 +10,15 @@ import { ResponseBody2 } from "@orq-ai/node/models/operations";
 let value: ResponseBody2 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "df589c2d-b090-479a-ae4d-7acbcacee5f0",
-  createdById: "73818d25-a565-4752-a317-d1a6d5b68cf2",
-  displayName: "Brenna_Rogahn59",
-  updatedById: "0560d7fe-8a54-4281-b75c-6e3e9184ba16",
+  domainId: "786ec6dc-8978-4845-aff1-ddaef5e668e5",
+  createdById: "6ad53e6b-9c01-4728-95bc-b340d84af1b6",
+  displayName: "Hudson.Dickinson89",
+  updatedById: "4393025c-da6a-43c7-8f4a-d30683cb9f96",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "expected_output",
+        content: "<value>",
       },
     ],
   },
@@ -31,9 +26,9 @@ let value: ResponseBody2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "d8f8cfb9-5066-4d3b-90ea-64296be4a609",
-      displayName: "Adrian_Bosco",
-      updatedById: "eeb94015-3986-4cbb-8806-770a408e0098",
+      createdById: "5cc11108-2ad8-4d5c-8d3f-b02d978490ff",
+      displayName: "Flo.Franey",
+      updatedById: "38516b97-fbfc-4231-a67f-e36893495b43",
       promptConfig: {
         messages: [
           {

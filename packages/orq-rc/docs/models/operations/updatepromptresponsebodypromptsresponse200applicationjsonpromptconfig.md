@@ -9,8 +9,13 @@ let value:
   UpdatePromptResponseBodyPromptsResponse200ApplicationJSONPromptConfig = {
     messages: [
       {
-        role: "expected_output",
-        content: "<value>",
+        role: "correction",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
       },
     ],
   };

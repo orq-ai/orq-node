@@ -9,19 +9,17 @@ import { Versions } from "@orq-ai/node/models/operations";
 
 let value: Versions = {
   id: "<id>",
-  createdById: "3bc8d38e-bc39-45a8-ba9b-c0f62ec69366",
-  displayName: "Hollie.Schamberger",
-  updatedById: "03dc1a08-2d91-4aeb-91a9-ac4537613182",
+  createdById: "ae33c2da-dfae-4b00-8397-a40635ff442e",
+  displayName: "Hector_Ritchie",
+  updatedById: "9c5eff22-56fc-4ab5-aa04-f8c9c7fed105",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "user",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://jealous-switch.name",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

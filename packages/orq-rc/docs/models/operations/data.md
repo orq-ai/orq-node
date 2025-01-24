@@ -29,7 +29,7 @@ let value: Data = {
     model: "Escalade",
     modelType: "completion",
     modelParameters: {},
-    provider: "replicate",
+    provider: "google",
     messages: [
       {
         role: "tool",

@@ -5,8 +5,7 @@
 ```typescript
 import { GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2 } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2 =
-  "is_between";
+let value: GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2 = "equals";
 ```
 
 ## Values

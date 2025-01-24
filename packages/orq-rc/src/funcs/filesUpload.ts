@@ -3,8 +3,10 @@
  */
 
 import { OrqCore } from "../core.js";
+import { appendForm } from "../lib/encodings.js";
 import { readableStreamToArrayBuffer } from "../lib/files.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -59,13 +61,14 @@ export async function filesUpload(
 
   if (payload?.file !== undefined) {
     if (isBlobLike(payload?.file)) {
-      body.append("file", payload?.file);
+      appendForm(body, "file", payload?.file);
     } else if (isReadableStream(payload?.file.content)) {
       const buffer = await readableStreamToArrayBuffer(payload?.file.content);
       const blob = new Blob([buffer], { type: "application/octet-stream" });
-      body.append("file", blob);
+      appendForm(body, "file", blob);
     } else {
-      body.append(
+      appendForm(
+        body,
         "file",
         new Blob([payload?.file.content], { type: "application/octet-stream" }),
         payload?.file.fileName,
@@ -73,14 +76,14 @@ export async function filesUpload(
     }
   }
   if (payload?.purpose !== undefined) {
-    body.append("purpose", payload?.purpose);
+    appendForm(body, "purpose", payload?.purpose);
   }
 
   const path = pathToFunc("/v2/files")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
@@ -135,7 +138,8 @@ export async function filesUpload(
     | ConnectionError
   >(
     M.json(200, operations.FileUploadResponseBody$inboundSchema),
-    M.fail([400, "4XX", "5XX"]),
+    M.fail([400, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

@@ -8,8 +8,15 @@ import { UpdatePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: UpdatePromptPromptConfig = {
   messages: [
     {
-      role: "correction",
-      content: "<value>",
+      role: "assistant",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://great-maintainer.info",
+          },
+        },
+      ],
     },
   ],
 };

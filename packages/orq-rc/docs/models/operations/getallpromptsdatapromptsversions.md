@@ -9,17 +9,19 @@ import { GetAllPromptsDataPromptsVersions } from "@orq-ai/node/models/operations
 
 let value: GetAllPromptsDataPromptsVersions = {
   id: "<id>",
-  createdById: "a429bd4e-9bce-446e-bd67-b0538c2f7c57",
-  displayName: "Maryjane95",
-  updatedById: "a1c22d01-e4ca-41c3-bb68-f44459ce0a99",
+  createdById: "ac117073-b8a6-4446-95b3-509fcf901416",
+  displayName: "Cornelius98",
+  updatedById: "9ede0b3d-a429-40c5-bc1f-bcd7592d0098",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "correction",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://natural-gym.com/",
+            },
           },
         ],
       },

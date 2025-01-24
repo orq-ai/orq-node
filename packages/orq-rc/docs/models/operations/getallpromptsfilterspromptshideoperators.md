@@ -3,35 +3,34 @@
 
 ## Supported Types
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequest1`
+### `operations.GetAllPromptsHideOperatorsPrompts1`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPromptsRequest1 = "contains";
+const value: operations.GetAllPromptsHideOperatorsPrompts1 = "ends_with";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequest2`
+### `operations.GetAllPromptsHideOperatorsPrompts2`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPromptsRequest2 =
-  "is_less_than_or_equal_to";
+const value: operations.GetAllPromptsHideOperatorsPrompts2 = "is_not_equal";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequest3`
+### `operations.GetAllPromptsHideOperatorsPrompts3`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPromptsRequest3 = "is_empty";
+const value: operations.GetAllPromptsHideOperatorsPrompts3 = "is_not";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequest4`
+### `operations.GetAllPromptsHideOperatorsPrompts4`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPromptsRequest4 =
-  "is_not_empty";
+const value: operations.GetAllPromptsHideOperatorsPrompts4 = "does_not_contain";
 ```
 
 ### `operations.GetAllPromptsHideOperatorsPrompts5`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPrompts5 = "is_between";
+const value: operations.GetAllPromptsHideOperatorsPrompts5 =
+  "is_relative_today";
 ```
 

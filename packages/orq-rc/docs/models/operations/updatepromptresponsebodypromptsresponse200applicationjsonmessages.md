@@ -7,7 +7,12 @@ import { UpdatePromptResponseBodyPromptsResponse200ApplicationJSONMessages } fro
 
 let value: UpdatePromptResponseBodyPromptsResponse200ApplicationJSONMessages = {
   role: "system",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

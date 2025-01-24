@@ -9,7 +9,7 @@ import { DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBod
 
 let value:
   DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole =
-    "correction";
+    "system";
 ```
 
 ## Values

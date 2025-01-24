@@ -3,36 +3,36 @@
 
 ## Supported Types
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters1`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1`
 
 ```typescript
 const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters1 =
-    "is_not";
+  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery1 =
+    "starts_with";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters2`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2`
 
 ```typescript
 const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters2 =
-    "is_not_empty";
+  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery2 =
+    "equals";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters3`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery3`
 
 ```typescript
 const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters3 =
+  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery3 =
     "is_empty";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters4`
+### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery4`
 
 ```typescript
 const value:
-  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQueryFilters4 =
-    "contains";
+  operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery4 =
+    "is_empty";
 ```
 
 ### `operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery5`
@@ -40,6 +40,6 @@ const value:
 ```typescript
 const value:
   operations.GetAllPromptsHideOperatorsPromptsRequestRequestBodyQuery5 =
-    "is_between";
+    "is_relative_time";
 ```
 

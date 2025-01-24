@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { ResponseBodyRole } from "@orq-ai/node/models/operations";
 
-let value: ResponseBodyRole = "system";
+let value: ResponseBodyRole = "prompt";
 ```
 
 ## Values

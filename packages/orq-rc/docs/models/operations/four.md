@@ -5,21 +5,11 @@
 ```typescript
 import { Four } from "@orq-ai/node/models/operations";
 
-let value: Four = {
-  type: "string_array",
-  operator: "in",
-  values: [
-    "<value>",
-  ],
-  path: "/usr/lib",
-};
+let value: Four = "does_not_contain";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                  | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                 | [operations.GetAllPromptTemplatesFiltersPromptTemplatesRequestType](../../models/operations/getallprompttemplatesfiltersprompttemplatesrequesttype.md) | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
-| `operator`                                                                                                                                             | [operations.FiltersOperator](../../models/operations/filtersoperator.md)                                                                               | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
-| `values`                                                                                                                                               | *string*[]                                                                                                                                             | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
-| `path`                                                                                                                                                 | *string*                                                                                                                                               | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
+```typescript
+"contains" | "does_not_contain" | "is_empty" | "is_not_empty"
+```

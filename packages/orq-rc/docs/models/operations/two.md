@@ -18,7 +18,7 @@ const value: operations.One = {
 const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ideal-mortise.net/",
+    url: "https://courageous-juggernaut.info/",
   },
 };
 ```

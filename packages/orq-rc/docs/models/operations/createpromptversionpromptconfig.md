@@ -8,8 +8,13 @@ import { CreatePromptVersionPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptVersionPromptConfig = {
   messages: [
     {
-      role: "system",
-      content: "<value>",
+      role: "correction",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

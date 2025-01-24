@@ -6,8 +6,8 @@
 import { CreatePromptRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptRequestBody = {
-  displayName: "Summer_Hagenes50",
-  type: "prompt",
+  displayName: "Jodie85",
+  type: "snippet",
 };
 ```
 

@@ -9,73 +9,90 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType =
+  {
+    StringArray: "string_array",
+  } as const;
+export type GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType =
+  ClosedEnum<
+    typeof GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType
+  >;
+
+export const GetAllPromptTemplatesFiltersPromptTemplatesOperator = {
+  In: "in",
+} as const;
+export type GetAllPromptTemplatesFiltersPromptTemplatesOperator = ClosedEnum<
+  typeof GetAllPromptTemplatesFiltersPromptTemplatesOperator
+>;
+
+export type GetAllPromptTemplatesFilters4 = {
+  type: GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType;
+  operator: GetAllPromptTemplatesFiltersPromptTemplatesOperator;
+  values: Array<string>;
+  path: string;
+};
+
 export const GetAllPromptTemplatesFiltersPromptTemplatesRequestType = {
-  StringArray: "string_array",
+  String: "string",
 } as const;
 export type GetAllPromptTemplatesFiltersPromptTemplatesRequestType = ClosedEnum<
   typeof GetAllPromptTemplatesFiltersPromptTemplatesRequestType
 >;
 
-export const FiltersOperator = {
-  In: "in",
+export const GetAllPromptTemplatesFiltersOperator = {
+  Contains: "contains",
+  Equals: "equals",
 } as const;
-export type FiltersOperator = ClosedEnum<typeof FiltersOperator>;
+export type GetAllPromptTemplatesFiltersOperator = ClosedEnum<
+  typeof GetAllPromptTemplatesFiltersOperator
+>;
 
-export type Four = {
+export type GetAllPromptTemplatesFilters3 = {
   type: GetAllPromptTemplatesFiltersPromptTemplatesRequestType;
-  operator: FiltersOperator;
-  values: Array<string>;
+  operator: GetAllPromptTemplatesFiltersOperator;
+  value: string;
   path: string;
 };
 
 export const GetAllPromptTemplatesFiltersPromptTemplatesType = {
-  String: "string",
+  Search: "search",
 } as const;
 export type GetAllPromptTemplatesFiltersPromptTemplatesType = ClosedEnum<
   typeof GetAllPromptTemplatesFiltersPromptTemplatesType
 >;
 
-export const Operator = {
-  Contains: "contains",
-  Equals: "equals",
-} as const;
-export type Operator = ClosedEnum<typeof Operator>;
-
-export type Filters3 = {
+export type GetAllPromptTemplatesFilters2 = {
   type: GetAllPromptTemplatesFiltersPromptTemplatesType;
-  operator: Operator;
   value: string;
-  path: string;
+  searchPaths: Array<string>;
 };
 
 export const GetAllPromptTemplatesFiltersType = {
-  Search: "search",
+  Id: "id",
 } as const;
 export type GetAllPromptTemplatesFiltersType = ClosedEnum<
   typeof GetAllPromptTemplatesFiltersType
 >;
 
-export type Filters2 = {
+export type GetAllPromptTemplatesFilters1 = {
   type: GetAllPromptTemplatesFiltersType;
-  value: string;
-  searchPaths: Array<string>;
-};
-
-export const FiltersType = {
-  Id: "id",
-} as const;
-export type FiltersType = ClosedEnum<typeof FiltersType>;
-
-export type Filters1 = {
-  type: FiltersType;
   id: string;
   path: string;
 };
 
-export type Filters = Filters1 | Filters2 | Filters3 | Four;
+export type GetAllPromptTemplatesFilters =
+  | GetAllPromptTemplatesFilters1
+  | GetAllPromptTemplatesFilters2
+  | GetAllPromptTemplatesFilters3
+  | GetAllPromptTemplatesFilters4;
 
 export type GetAllPromptTemplatesRequestBody = {
-  filters: Array<Filters1 | Filters2 | Filters3 | Four>;
+  filters: Array<
+    | GetAllPromptTemplatesFilters1
+    | GetAllPromptTemplatesFilters2
+    | GetAllPromptTemplatesFilters3
+    | GetAllPromptTemplatesFilters4
+  >;
 };
 
 export type GetAllPromptTemplatesRequest = {
@@ -323,6 +340,8 @@ export const GetAllPromptTemplatesItemsPromptTemplatesProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesProvider = ClosedEnum<
   typeof GetAllPromptTemplatesItemsPromptTemplatesProvider
@@ -731,6 +750,8 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSON
     Leonardoai: "leonardoai",
     Nvidia: "nvidia",
     Jina: "jina",
+    Togetherai: "togetherai",
+    Elevenlabs: "elevenlabs",
   } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONProvider =
   ClosedEnum<
@@ -1197,6 +1218,8 @@ export const GetAllPromptTemplatesItemsProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type GetAllPromptTemplatesItemsProvider = ClosedEnum<
   typeof GetAllPromptTemplatesItemsProvider
@@ -1585,6 +1608,8 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponseProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesResponseProvider =
   ClosedEnum<typeof GetAllPromptTemplatesItemsPromptTemplatesResponseProvider>;
@@ -2020,6 +2045,8 @@ export const ItemsProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type ItemsProvider = ClosedEnum<typeof ItemsProvider>;
 
@@ -2405,6 +2432,8 @@ export const GetAllPromptTemplatesItemsPromptTemplatesResponse200Provider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 export type GetAllPromptTemplatesItemsPromptTemplatesResponse200Provider =
   ClosedEnum<
@@ -2633,6 +2662,124 @@ export type GetAllPromptTemplatesResponseBody = {
 };
 
 /** @internal */
+export const GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType
+  > = z.nativeEnum(
+    GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType,
+  );
+
+/** @internal */
+export const GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType
+  > =
+    GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$ {
+  /** @deprecated use `GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptTemplatesFiltersPromptTemplatesOperator$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptTemplatesFiltersPromptTemplatesOperator> =
+    z.nativeEnum(GetAllPromptTemplatesFiltersPromptTemplatesOperator);
+
+/** @internal */
+export const GetAllPromptTemplatesFiltersPromptTemplatesOperator$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptTemplatesFiltersPromptTemplatesOperator> =
+    GetAllPromptTemplatesFiltersPromptTemplatesOperator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptTemplatesFiltersPromptTemplatesOperator$ {
+  /** @deprecated use `GetAllPromptTemplatesFiltersPromptTemplatesOperator$inboundSchema` instead. */
+  export const inboundSchema =
+    GetAllPromptTemplatesFiltersPromptTemplatesOperator$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFiltersPromptTemplatesOperator$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPromptTemplatesFiltersPromptTemplatesOperator$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptTemplatesFilters4$inboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters4,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$inboundSchema,
+  operator: GetAllPromptTemplatesFiltersPromptTemplatesOperator$inboundSchema,
+  values: z.array(z.string()),
+  path: z.string(),
+});
+
+/** @internal */
+export type GetAllPromptTemplatesFilters4$Outbound = {
+  type: string;
+  operator: string;
+  values: Array<string>;
+  path: string;
+};
+
+/** @internal */
+export const GetAllPromptTemplatesFilters4$outboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters4$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptTemplatesFilters4
+> = z.object({
+  type:
+    GetAllPromptTemplatesFiltersPromptTemplatesRequestRequestBodyType$outboundSchema,
+  operator: GetAllPromptTemplatesFiltersPromptTemplatesOperator$outboundSchema,
+  values: z.array(z.string()),
+  path: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptTemplatesFilters4$ {
+  /** @deprecated use `GetAllPromptTemplatesFilters4$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptTemplatesFilters4$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters4$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptTemplatesFilters4$outboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters4$Outbound` instead. */
+  export type Outbound = GetAllPromptTemplatesFilters4$Outbound;
+}
+
+export function getAllPromptTemplatesFilters4ToJSON(
+  getAllPromptTemplatesFilters4: GetAllPromptTemplatesFilters4,
+): string {
+  return JSON.stringify(
+    GetAllPromptTemplatesFilters4$outboundSchema.parse(
+      getAllPromptTemplatesFilters4,
+    ),
+  );
+}
+
+export function getAllPromptTemplatesFilters4FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptTemplatesFilters4, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptTemplatesFilters4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptTemplatesFilters4' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptTemplatesFiltersPromptTemplatesRequestType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetAllPromptTemplatesFiltersPromptTemplatesRequestType
@@ -2658,76 +2805,91 @@ export namespace GetAllPromptTemplatesFiltersPromptTemplatesRequestType$ {
 }
 
 /** @internal */
-export const FiltersOperator$inboundSchema: z.ZodNativeEnum<
-  typeof FiltersOperator
-> = z.nativeEnum(FiltersOperator);
+export const GetAllPromptTemplatesFiltersOperator$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptTemplatesFiltersOperator> = z.nativeEnum(
+    GetAllPromptTemplatesFiltersOperator,
+  );
 
 /** @internal */
-export const FiltersOperator$outboundSchema: z.ZodNativeEnum<
-  typeof FiltersOperator
-> = FiltersOperator$inboundSchema;
+export const GetAllPromptTemplatesFiltersOperator$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptTemplatesFiltersOperator> =
+    GetAllPromptTemplatesFiltersOperator$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FiltersOperator$ {
-  /** @deprecated use `FiltersOperator$inboundSchema` instead. */
-  export const inboundSchema = FiltersOperator$inboundSchema;
-  /** @deprecated use `FiltersOperator$outboundSchema` instead. */
-  export const outboundSchema = FiltersOperator$outboundSchema;
+export namespace GetAllPromptTemplatesFiltersOperator$ {
+  /** @deprecated use `GetAllPromptTemplatesFiltersOperator$inboundSchema` instead. */
+  export const inboundSchema =
+    GetAllPromptTemplatesFiltersOperator$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFiltersOperator$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPromptTemplatesFiltersOperator$outboundSchema;
 }
 
 /** @internal */
-export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
-  .object({
-    type: GetAllPromptTemplatesFiltersPromptTemplatesRequestType$inboundSchema,
-    operator: FiltersOperator$inboundSchema,
-    values: z.array(z.string()),
-    path: z.string(),
-  });
+export const GetAllPromptTemplatesFilters3$inboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptTemplatesFiltersPromptTemplatesRequestType$inboundSchema,
+  operator: GetAllPromptTemplatesFiltersOperator$inboundSchema,
+  value: z.string(),
+  path: z.string(),
+});
 
 /** @internal */
-export type Four$Outbound = {
+export type GetAllPromptTemplatesFilters3$Outbound = {
   type: string;
   operator: string;
-  values: Array<string>;
+  value: string;
   path: string;
 };
 
 /** @internal */
-export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
-  z.object({
-    type: GetAllPromptTemplatesFiltersPromptTemplatesRequestType$outboundSchema,
-    operator: FiltersOperator$outboundSchema,
-    values: z.array(z.string()),
-    path: z.string(),
-  });
+export const GetAllPromptTemplatesFilters3$outboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters3$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptTemplatesFilters3
+> = z.object({
+  type: GetAllPromptTemplatesFiltersPromptTemplatesRequestType$outboundSchema,
+  operator: GetAllPromptTemplatesFiltersOperator$outboundSchema,
+  value: z.string(),
+  path: z.string(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Four$ {
-  /** @deprecated use `Four$inboundSchema` instead. */
-  export const inboundSchema = Four$inboundSchema;
-  /** @deprecated use `Four$outboundSchema` instead. */
-  export const outboundSchema = Four$outboundSchema;
-  /** @deprecated use `Four$Outbound` instead. */
-  export type Outbound = Four$Outbound;
+export namespace GetAllPromptTemplatesFilters3$ {
+  /** @deprecated use `GetAllPromptTemplatesFilters3$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptTemplatesFilters3$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters3$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptTemplatesFilters3$outboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters3$Outbound` instead. */
+  export type Outbound = GetAllPromptTemplatesFilters3$Outbound;
 }
 
-export function fourToJSON(four: Four): string {
-  return JSON.stringify(Four$outboundSchema.parse(four));
+export function getAllPromptTemplatesFilters3ToJSON(
+  getAllPromptTemplatesFilters3: GetAllPromptTemplatesFilters3,
+): string {
+  return JSON.stringify(
+    GetAllPromptTemplatesFilters3$outboundSchema.parse(
+      getAllPromptTemplatesFilters3,
+    ),
+  );
 }
 
-export function fourFromJSON(
+export function getAllPromptTemplatesFilters3FromJSON(
   jsonString: string,
-): SafeParseResult<Four, SDKValidationError> {
+): SafeParseResult<GetAllPromptTemplatesFilters3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Four$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Four' from JSON`,
+    (x) => GetAllPromptTemplatesFilters3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptTemplatesFilters3' from JSON`,
   );
 }
 
@@ -2755,80 +2917,64 @@ export namespace GetAllPromptTemplatesFiltersPromptTemplatesType$ {
 }
 
 /** @internal */
-export const Operator$inboundSchema: z.ZodNativeEnum<typeof Operator> = z
-  .nativeEnum(Operator);
-
-/** @internal */
-export const Operator$outboundSchema: z.ZodNativeEnum<typeof Operator> =
-  Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Operator$ {
-  /** @deprecated use `Operator$inboundSchema` instead. */
-  export const inboundSchema = Operator$inboundSchema;
-  /** @deprecated use `Operator$outboundSchema` instead. */
-  export const outboundSchema = Operator$outboundSchema;
-}
-
-/** @internal */
-export const Filters3$inboundSchema: z.ZodType<
-  Filters3,
+export const GetAllPromptTemplatesFilters2$inboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters2,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: GetAllPromptTemplatesFiltersPromptTemplatesType$inboundSchema,
-  operator: Operator$inboundSchema,
   value: z.string(),
-  path: z.string(),
+  searchPaths: z.array(z.string()),
 });
 
 /** @internal */
-export type Filters3$Outbound = {
+export type GetAllPromptTemplatesFilters2$Outbound = {
   type: string;
-  operator: string;
   value: string;
-  path: string;
+  searchPaths: Array<string>;
 };
 
 /** @internal */
-export const Filters3$outboundSchema: z.ZodType<
-  Filters3$Outbound,
+export const GetAllPromptTemplatesFilters2$outboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters2$Outbound,
   z.ZodTypeDef,
-  Filters3
+  GetAllPromptTemplatesFilters2
 > = z.object({
   type: GetAllPromptTemplatesFiltersPromptTemplatesType$outboundSchema,
-  operator: Operator$outboundSchema,
   value: z.string(),
-  path: z.string(),
+  searchPaths: z.array(z.string()),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Filters3$ {
-  /** @deprecated use `Filters3$inboundSchema` instead. */
-  export const inboundSchema = Filters3$inboundSchema;
-  /** @deprecated use `Filters3$outboundSchema` instead. */
-  export const outboundSchema = Filters3$outboundSchema;
-  /** @deprecated use `Filters3$Outbound` instead. */
-  export type Outbound = Filters3$Outbound;
+export namespace GetAllPromptTemplatesFilters2$ {
+  /** @deprecated use `GetAllPromptTemplatesFilters2$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptTemplatesFilters2$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters2$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptTemplatesFilters2$outboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters2$Outbound` instead. */
+  export type Outbound = GetAllPromptTemplatesFilters2$Outbound;
 }
 
-export function filters3ToJSON(filters3: Filters3): string {
-  return JSON.stringify(Filters3$outboundSchema.parse(filters3));
+export function getAllPromptTemplatesFilters2ToJSON(
+  getAllPromptTemplatesFilters2: GetAllPromptTemplatesFilters2,
+): string {
+  return JSON.stringify(
+    GetAllPromptTemplatesFilters2$outboundSchema.parse(
+      getAllPromptTemplatesFilters2,
+    ),
+  );
 }
 
-export function filters3FromJSON(
+export function getAllPromptTemplatesFilters2FromJSON(
   jsonString: string,
-): SafeParseResult<Filters3, SDKValidationError> {
+): SafeParseResult<GetAllPromptTemplatesFilters2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Filters3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Filters3' from JSON`,
+    (x) => GetAllPromptTemplatesFilters2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptTemplatesFilters2' from JSON`,
   );
 }
 
@@ -2854,105 +3000,30 @@ export namespace GetAllPromptTemplatesFiltersType$ {
 }
 
 /** @internal */
-export const Filters2$inboundSchema: z.ZodType<
-  Filters2,
+export const GetAllPromptTemplatesFilters1$inboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters1,
   z.ZodTypeDef,
   unknown
 > = z.object({
   type: GetAllPromptTemplatesFiltersType$inboundSchema,
-  value: z.string(),
-  searchPaths: z.array(z.string()),
-});
-
-/** @internal */
-export type Filters2$Outbound = {
-  type: string;
-  value: string;
-  searchPaths: Array<string>;
-};
-
-/** @internal */
-export const Filters2$outboundSchema: z.ZodType<
-  Filters2$Outbound,
-  z.ZodTypeDef,
-  Filters2
-> = z.object({
-  type: GetAllPromptTemplatesFiltersType$outboundSchema,
-  value: z.string(),
-  searchPaths: z.array(z.string()),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Filters2$ {
-  /** @deprecated use `Filters2$inboundSchema` instead. */
-  export const inboundSchema = Filters2$inboundSchema;
-  /** @deprecated use `Filters2$outboundSchema` instead. */
-  export const outboundSchema = Filters2$outboundSchema;
-  /** @deprecated use `Filters2$Outbound` instead. */
-  export type Outbound = Filters2$Outbound;
-}
-
-export function filters2ToJSON(filters2: Filters2): string {
-  return JSON.stringify(Filters2$outboundSchema.parse(filters2));
-}
-
-export function filters2FromJSON(
-  jsonString: string,
-): SafeParseResult<Filters2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Filters2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Filters2' from JSON`,
-  );
-}
-
-/** @internal */
-export const FiltersType$inboundSchema: z.ZodNativeEnum<typeof FiltersType> = z
-  .nativeEnum(FiltersType);
-
-/** @internal */
-export const FiltersType$outboundSchema: z.ZodNativeEnum<typeof FiltersType> =
-  FiltersType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FiltersType$ {
-  /** @deprecated use `FiltersType$inboundSchema` instead. */
-  export const inboundSchema = FiltersType$inboundSchema;
-  /** @deprecated use `FiltersType$outboundSchema` instead. */
-  export const outboundSchema = FiltersType$outboundSchema;
-}
-
-/** @internal */
-export const Filters1$inboundSchema: z.ZodType<
-  Filters1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: FiltersType$inboundSchema,
   id: z.string(),
   path: z.string(),
 });
 
 /** @internal */
-export type Filters1$Outbound = {
+export type GetAllPromptTemplatesFilters1$Outbound = {
   type: string;
   id: string;
   path: string;
 };
 
 /** @internal */
-export const Filters1$outboundSchema: z.ZodType<
-  Filters1$Outbound,
+export const GetAllPromptTemplatesFilters1$outboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters1$Outbound,
   z.ZodTypeDef,
-  Filters1
+  GetAllPromptTemplatesFilters1
 > = z.object({
-  type: FiltersType$outboundSchema,
+  type: GetAllPromptTemplatesFiltersType$outboundSchema,
   id: z.string(),
   path: z.string(),
 });
@@ -2961,81 +3032,96 @@ export const Filters1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Filters1$ {
-  /** @deprecated use `Filters1$inboundSchema` instead. */
-  export const inboundSchema = Filters1$inboundSchema;
-  /** @deprecated use `Filters1$outboundSchema` instead. */
-  export const outboundSchema = Filters1$outboundSchema;
-  /** @deprecated use `Filters1$Outbound` instead. */
-  export type Outbound = Filters1$Outbound;
+export namespace GetAllPromptTemplatesFilters1$ {
+  /** @deprecated use `GetAllPromptTemplatesFilters1$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptTemplatesFilters1$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters1$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptTemplatesFilters1$outboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters1$Outbound` instead. */
+  export type Outbound = GetAllPromptTemplatesFilters1$Outbound;
 }
 
-export function filters1ToJSON(filters1: Filters1): string {
-  return JSON.stringify(Filters1$outboundSchema.parse(filters1));
+export function getAllPromptTemplatesFilters1ToJSON(
+  getAllPromptTemplatesFilters1: GetAllPromptTemplatesFilters1,
+): string {
+  return JSON.stringify(
+    GetAllPromptTemplatesFilters1$outboundSchema.parse(
+      getAllPromptTemplatesFilters1,
+    ),
+  );
 }
 
-export function filters1FromJSON(
+export function getAllPromptTemplatesFilters1FromJSON(
   jsonString: string,
-): SafeParseResult<Filters1, SDKValidationError> {
+): SafeParseResult<GetAllPromptTemplatesFilters1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Filters1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Filters1' from JSON`,
+    (x) => GetAllPromptTemplatesFilters1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptTemplatesFilters1' from JSON`,
   );
 }
 
 /** @internal */
-export const Filters$inboundSchema: z.ZodType<Filters, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => Filters1$inboundSchema),
-    z.lazy(() => Filters2$inboundSchema),
-    z.lazy(() => Filters3$inboundSchema),
-    z.lazy(() => Four$inboundSchema),
-  ]);
-
-/** @internal */
-export type Filters$Outbound =
-  | Filters1$Outbound
-  | Filters2$Outbound
-  | Filters3$Outbound
-  | Four$Outbound;
-
-/** @internal */
-export const Filters$outboundSchema: z.ZodType<
-  Filters$Outbound,
+export const GetAllPromptTemplatesFilters$inboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters,
   z.ZodTypeDef,
-  Filters
+  unknown
 > = z.union([
-  z.lazy(() => Filters1$outboundSchema),
-  z.lazy(() => Filters2$outboundSchema),
-  z.lazy(() => Filters3$outboundSchema),
-  z.lazy(() => Four$outboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters1$inboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters2$inboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters3$inboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters4$inboundSchema),
+]);
+
+/** @internal */
+export type GetAllPromptTemplatesFilters$Outbound =
+  | GetAllPromptTemplatesFilters1$Outbound
+  | GetAllPromptTemplatesFilters2$Outbound
+  | GetAllPromptTemplatesFilters3$Outbound
+  | GetAllPromptTemplatesFilters4$Outbound;
+
+/** @internal */
+export const GetAllPromptTemplatesFilters$outboundSchema: z.ZodType<
+  GetAllPromptTemplatesFilters$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptTemplatesFilters
+> = z.union([
+  z.lazy(() => GetAllPromptTemplatesFilters1$outboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters2$outboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters3$outboundSchema),
+  z.lazy(() => GetAllPromptTemplatesFilters4$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Filters$ {
-  /** @deprecated use `Filters$inboundSchema` instead. */
-  export const inboundSchema = Filters$inboundSchema;
-  /** @deprecated use `Filters$outboundSchema` instead. */
-  export const outboundSchema = Filters$outboundSchema;
-  /** @deprecated use `Filters$Outbound` instead. */
-  export type Outbound = Filters$Outbound;
+export namespace GetAllPromptTemplatesFilters$ {
+  /** @deprecated use `GetAllPromptTemplatesFilters$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptTemplatesFilters$inboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptTemplatesFilters$outboundSchema;
+  /** @deprecated use `GetAllPromptTemplatesFilters$Outbound` instead. */
+  export type Outbound = GetAllPromptTemplatesFilters$Outbound;
 }
 
-export function filtersToJSON(filters: Filters): string {
-  return JSON.stringify(Filters$outboundSchema.parse(filters));
+export function getAllPromptTemplatesFiltersToJSON(
+  getAllPromptTemplatesFilters: GetAllPromptTemplatesFilters,
+): string {
+  return JSON.stringify(
+    GetAllPromptTemplatesFilters$outboundSchema.parse(
+      getAllPromptTemplatesFilters,
+    ),
+  );
 }
 
-export function filtersFromJSON(
+export function getAllPromptTemplatesFiltersFromJSON(
   jsonString: string,
-): SafeParseResult<Filters, SDKValidationError> {
+): SafeParseResult<GetAllPromptTemplatesFilters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Filters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Filters' from JSON`,
+    (x) => GetAllPromptTemplatesFilters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptTemplatesFilters' from JSON`,
   );
 }
 
@@ -3047,10 +3133,10 @@ export const GetAllPromptTemplatesRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   filters: z.array(
     z.union([
-      z.lazy(() => Filters1$inboundSchema),
-      z.lazy(() => Filters2$inboundSchema),
-      z.lazy(() => Filters3$inboundSchema),
-      z.lazy(() => Four$inboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters1$inboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters2$inboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters3$inboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters4$inboundSchema),
     ]),
   ),
 });
@@ -3058,7 +3144,10 @@ export const GetAllPromptTemplatesRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptTemplatesRequestBody$Outbound = {
   filters: Array<
-    Filters1$Outbound | Filters2$Outbound | Filters3$Outbound | Four$Outbound
+    | GetAllPromptTemplatesFilters1$Outbound
+    | GetAllPromptTemplatesFilters2$Outbound
+    | GetAllPromptTemplatesFilters3$Outbound
+    | GetAllPromptTemplatesFilters4$Outbound
   >;
 };
 
@@ -3070,10 +3159,10 @@ export const GetAllPromptTemplatesRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   filters: z.array(
     z.union([
-      z.lazy(() => Filters1$outboundSchema),
-      z.lazy(() => Filters2$outboundSchema),
-      z.lazy(() => Filters3$outboundSchema),
-      z.lazy(() => Four$outboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters1$outboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters2$outboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters3$outboundSchema),
+      z.lazy(() => GetAllPromptTemplatesFilters4$outboundSchema),
     ]),
   ),
 });
@@ -6731,7 +6820,7 @@ export const Items3$inboundSchema: z.ZodType<Items3, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-01-02T13:55:01.056Z",
+      "2025-01-21T09:55:10.979Z",
     ).transform(v => new Date(v)),
     versions: z.array(
       z.lazy(() => GetAllPromptTemplatesItemsVersions$inboundSchema),
@@ -6788,7 +6877,7 @@ export const Items3$outboundSchema: z.ZodType<
     GetAllPromptTemplatesItemsPromptTemplatesMetadata$outboundSchema
   ),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-21T09:55:10.979Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() => GetAllPromptTemplatesItemsVersions$outboundSchema),
@@ -10165,7 +10254,7 @@ export const Items2$inboundSchema: z.ZodType<Items2, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-01-02T13:55:01.056Z",
+      "2025-01-21T09:55:10.979Z",
     ).transform(v => new Date(v)),
     versions: z.array(z.lazy(() => ItemsVersions$inboundSchema)),
     key: z.string(),
@@ -10217,7 +10306,7 @@ export const Items2$outboundSchema: z.ZodType<
   ),
   metadata: z.lazy(() => GetAllPromptTemplatesItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-21T09:55:10.979Z"))
     .transform(v => v.toISOString()),
   versions: z.array(z.lazy(() => ItemsVersions$outboundSchema)),
   key: z.string(),
@@ -13464,7 +13553,7 @@ export const Items1$inboundSchema: z.ZodType<Items1, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-01-02T13:55:01.056Z",
+      "2025-01-21T09:55:10.979Z",
     ).transform(v => new Date(v)),
     versions: z.array(
       z.lazy(() =>
@@ -13519,7 +13608,7 @@ export const Items1$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => ItemsPromptConfig$outboundSchema),
   metadata: z.lazy(() => ItemsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-21T09:55:10.979Z"))
     .transform(v => v.toISOString()),
   versions: z.array(
     z.lazy(() =>

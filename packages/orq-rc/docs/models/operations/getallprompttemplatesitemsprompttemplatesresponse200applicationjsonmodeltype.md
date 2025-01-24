@@ -9,7 +9,7 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONMode
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONModelType =
-    "chat";
+    "moderations";
 ```
 
 ## Values

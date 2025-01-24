@@ -11,7 +11,7 @@ import {
 
 let value:
   GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONPhotoRealVersion =
-    "v2";
+    "v1";
 ```
 
 ## Values

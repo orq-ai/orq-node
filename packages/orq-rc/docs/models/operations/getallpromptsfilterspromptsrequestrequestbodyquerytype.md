@@ -5,7 +5,8 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsRequestRequestBodyQueryType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsRequestRequestBodyQueryType = "number";
+let value: GetAllPromptsFiltersPromptsRequestRequestBodyQueryType =
+  "multi-value-array";
 ```
 
 ## Values

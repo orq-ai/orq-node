@@ -10,7 +10,7 @@ import { GetAllPrompts2PromptsResponse200ApplicationJson2 } from "@orq-ai/node/m
 let value: GetAllPrompts2PromptsResponse200ApplicationJson2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://criminal-blowgun.name/",
+    url: "https://blond-tool.org/",
   },
 };
 ```

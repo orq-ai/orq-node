@@ -22,7 +22,7 @@ const value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://heavy-scorn.name",
+        url: "https://secret-adviser.net",
       },
     };
 ```

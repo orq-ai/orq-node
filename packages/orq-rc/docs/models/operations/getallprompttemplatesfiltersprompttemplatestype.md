@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllPromptTemplatesFiltersPromptTemplatesType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesFiltersPromptTemplatesType = "string";
+let value: GetAllPromptTemplatesFiltersPromptTemplatesType = "search";
 ```
 
 ## Values
 
 ```typescript
-"string"
+"search"
 ```

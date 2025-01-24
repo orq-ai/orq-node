@@ -5,7 +5,8 @@
 ```typescript
 import { GetAllPromptsFiltersPromptsRequestRequestBodyType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsFiltersPromptsRequestRequestBodyType = "evaluator";
+let value: GetAllPromptsFiltersPromptsRequestRequestBodyType =
+  "single-value-array";
 ```
 
 ## Values

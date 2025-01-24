@@ -13,7 +13,7 @@ let value: BulkFileUploadRequestBody = {
       content: await openAsBlob("example.file"),
     },
   ],
-  purpose: "retrieval",
+  purpose: "knowledge_datasource",
 };
 ```
 

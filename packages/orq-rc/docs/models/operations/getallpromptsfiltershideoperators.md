@@ -3,33 +3,34 @@
 
 ## Supported Types
 
-### `operations.GetAllPromptsHideOperatorsPrompts1`
+### `operations.GetAllPromptsHideOperators1`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPrompts1 = "contains";
+const value: operations.GetAllPromptsHideOperators1 = "is_not";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPrompts2`
+### `operations.GetAllPromptsHideOperators2`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPrompts2 = "is_less_than";
+const value: operations.GetAllPromptsHideOperators2 =
+  "is_greater_than_or_equal_to";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPrompts3`
+### `operations.GetAllPromptsHideOperators3`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPrompts3 = "is";
+const value: operations.GetAllPromptsHideOperators3 = "is";
 ```
 
-### `operations.GetAllPromptsHideOperatorsPrompts4`
+### `operations.GetAllPromptsHideOperators4`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperatorsPrompts4 = "is_empty";
+const value: operations.GetAllPromptsHideOperators4 = "does_not_contain";
 ```
 
 ### `operations.GetAllPromptsHideOperators5`
 
 ```typescript
-const value: operations.GetAllPromptsHideOperators5 = "is";
+const value: operations.GetAllPromptsHideOperators5 = "is_relative_today";
 ```
 

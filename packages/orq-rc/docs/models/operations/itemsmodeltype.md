@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { ItemsModelType } from "@orq-ai/node/models/operations";
 
-let value: ItemsModelType = "rerank";
+let value: ItemsModelType = "stt";
 ```
 
 ## Values

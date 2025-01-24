@@ -8,8 +8,15 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSO
 let value:
   FindOnePromptSnippetResponseBodyPromptSnippetsResponse200ApplicationJSONMessages =
     {
-      role: "exception",
-      content: "<value>",
+      role: "correction",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://fragrant-flint.com",
+          },
+        },
+      ],
     };
 ```
 

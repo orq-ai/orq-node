@@ -12,11 +12,11 @@ let value: GetAllPromptsResponseBody = {
   data: [
     {
       id: "<id>",
-      owner: "<value>",
-      domainId: "f68a7b0a-5e20-4083-ac03-d0c1dc367633",
-      createdById: "24130b66-7459-4379-8248-6b37d2e77a8d",
-      displayName: "Breana53",
-      updatedById: "dff838b7-4dd8-498c-8e0f-565db260c31a",
+      owner: "vendor",
+      domainId: "10309a07-5ccb-4030-8fe8-3936d8dd8d7e",
+      createdById: "6e3c6c47-1833-43c7-a27e-e277c81fe855",
+      displayName: "Anita.Swaniawski",
+      updatedById: "099f5b02-cddc-4c02-86bd-b2f3a06b1e43",
       promptConfig: {
         messages: [
           {
@@ -29,17 +29,19 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "cf1d7087-e5c2-4682-a33b-f2820066a631",
-          displayName: "Cydney.Auer65",
-          updatedById: "add27ebd-67e6-4a6b-9978-9eabf135f391",
+          createdById: "db1fef13-792f-4f37-8487-7df10a20bc97",
+          displayName: "Jimmy.Tremblay23",
+          updatedById: "ad49a03b-f4e7-4175-ba0b-c6bd6a9c0b49",
           promptConfig: {
             messages: [
               {
-                role: "user",
+                role: "tool",
                 content: [
                   {
-                    type: "text",
-                    text: "<value>",
+                    type: "image_url",
+                    imageUrl: {
+                      url: "https://murky-hope.net/",
+                    },
                   },
                 ],
               },
@@ -50,12 +52,11 @@ let value: GetAllPromptsResponseBody = {
           timestamp: "<value>",
         },
       ],
-      type: "prompt",
+      key: "<key>",
+      type: "snippet",
     },
   ],
   hasMore: false,
-  firstId: "<id>",
-  lastId: "<id>",
 };
 ```
 
@@ -66,5 +67,3 @@ let value: GetAllPromptsResponseBody = {
 | `object`                                                                         | [operations.GetAllPromptsObject](../../models/operations/getallpromptsobject.md) | :heavy_check_mark:                                                               | N/A                                                                              |
 | `data`                                                                           | *operations.GetAllPromptsData*[]                                                 | :heavy_check_mark:                                                               | N/A                                                                              |
 | `hasMore`                                                                        | *boolean*                                                                        | :heavy_check_mark:                                                               | N/A                                                                              |
-| `firstId`                                                                        | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
-| `lastId`                                                                         | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |

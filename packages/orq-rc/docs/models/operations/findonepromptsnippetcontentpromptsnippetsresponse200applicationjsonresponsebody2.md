@@ -22,7 +22,7 @@ const value:
     {
       type: "image_url",
       imageUrl: {
-        url: "https://silver-ownership.com",
+        url: "https://tender-fuel.com/",
       },
     };
 ```

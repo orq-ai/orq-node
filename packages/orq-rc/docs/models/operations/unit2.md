@@ -5,7 +5,7 @@
 ```typescript
 import { Unit2 } from "@orq-ai/node/models/operations";
 
-let value: Unit2 = "hours_ago";
+let value: Unit2 = "minutes_ago";
 ```
 
 ## Values

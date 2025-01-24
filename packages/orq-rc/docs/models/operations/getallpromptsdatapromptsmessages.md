@@ -6,8 +6,15 @@
 import { GetAllPromptsDataPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsDataPromptsMessages = {
-  role: "system",
-  content: "<value>",
+  role: "expected_output",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://front-bidet.info/",
+      },
+    },
+  ],
 };
 ```
 

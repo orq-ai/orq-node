@@ -9,13 +9,13 @@ import { ItemsVersions } from "@orq-ai/node/models/operations";
 
 let value: ItemsVersions = {
   id: "<id>",
-  createdById: "7b1eb2f8-f384-449e-acb8-e7dd3c0538b1",
-  displayName: "Trever_Pagac",
-  updatedById: "b0e803f9-1470-4673-b9c3-9afcd72f271f",
+  createdById: "cc5879be-9ef8-44ab-8a03-33fa320454b9",
+  displayName: "Lysanne.Robel14",
+  updatedById: "846c8eb2-1a8b-48ff-94cc-d6e6b953ae61",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "exception",
         content: "<value>",
       },
     ],

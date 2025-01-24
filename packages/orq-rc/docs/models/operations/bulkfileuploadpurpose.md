@@ -7,7 +7,7 @@ The intended purpose of the uploaded file.
 ```typescript
 import { BulkFileUploadPurpose } from "@orq-ai/node/models/operations";
 
-let value: BulkFileUploadPurpose = "knowledge_datasource";
+let value: BulkFileUploadPurpose = "retrieval";
 ```
 
 ## Values

@@ -9,13 +9,13 @@ import { FindOnePromptSnippetResponseBodyPromptSnippetsVersions } from "@orq-ai/
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsVersions = {
   id: "<id>",
-  createdById: "35811646-7ff2-4e18-825b-6cbf8c556618",
-  displayName: "Sienna15",
-  updatedById: "b2acc1ab-d87f-4c85-ad71-7d709fd9ed79",
+  createdById: "bf316bd3-5155-48b7-80b3-ae60e4b5da42",
+  displayName: "Orion_Considine12",
+  updatedById: "346bca81-71d4-4606-8a7d-6fdc23521060",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "expected_output",
         content: "<value>",
       },
     ],

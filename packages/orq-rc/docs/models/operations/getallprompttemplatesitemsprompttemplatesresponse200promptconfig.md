@@ -8,15 +8,8 @@ import { GetAllPromptTemplatesItemsPromptTemplatesResponse200PromptConfig } from
 let value: GetAllPromptTemplatesItemsPromptTemplatesResponse200PromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://far-off-reward.info",
-          },
-        },
-      ],
+      role: "tool",
+      content: "<value>",
     },
   ],
 };

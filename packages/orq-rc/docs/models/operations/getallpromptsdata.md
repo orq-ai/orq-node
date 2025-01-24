@@ -3,62 +3,20 @@
 
 ## Supported Types
 
-### `operations.Data1`
+### `operations.GetAllPromptsData1`
 
 ```typescript
-const value: operations.Data1 = {
+const value: operations.GetAllPromptsData1 = {
   id: "<id>",
   owner: "vendor",
-  domainId: "62239850-56cb-433a-aa81-40cce1eefc44",
-  createdById: "aa5849cb-68c3-4377-b096-9e5134d8f414",
-  displayName: "Nat.Mertz95",
-  updatedById: "64a6ff1e-cb5a-4cdc-9528-4c06c1a3240a",
+  domainId: "65038086-25a2-4076-84a2-0e110f854a85",
+  createdById: "27ae6025-348c-40a7-a13b-ee5966284bf4",
+  displayName: "Mike55",
+  updatedById: "7ebe91ed-3380-4158-9f91-99e4842bbd38",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: "<value>",
-      },
-    ],
-  },
-  metadata: {},
-  versions: [
-    {
-      id: "<id>",
-      createdById: "e71d1a37-9e46-4352-8889-360047bc6cba",
-      displayName: "Edna.Schulist",
-      updatedById: "586e031c-3b8d-4f22-ba0d-669543bc93b2",
-      promptConfig: {
-        messages: [
-          {
-            role: "exception",
-            content: "<value>",
-          },
-        ],
-      },
-      metadata: {},
-      commit: "<value>",
-      timestamp: "<value>",
-    },
-  ],
-  type: "prompt",
-};
-```
-
-### `operations.Data2`
-
-```typescript
-const value: operations.Data2 = {
-  id: "<id>",
-  owner: "<value>",
-  domainId: "9f9a4538-2979-41e6-838e-b54a157c5cc0",
-  createdById: "a705af32-58a5-4302-9135-16296ac16f07",
-  displayName: "Reta.Sanford49",
-  updatedById: "c61b057b-51d0-4d12-b22c-c219b80cbb31",
-  promptConfig: {
-    messages: [
-      {
-        role: "exception",
+        role: "correction",
         content: [
           {
             type: "text",
@@ -72,14 +30,63 @@ const value: operations.Data2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "8815ebbe-4c19-4863-96db-7fc0cb0e737d",
-      displayName: "Tatyana50",
-      updatedById: "04b54dcb-af02-4744-8f00-e207e4ed46e1",
+      createdById: "f8d25b9f-10f5-411d-9745-d67044aebc63",
+      displayName: "Eleonore_Jerde89",
+      updatedById: "ff618661-cc60-4703-bb8e-28df1da4091a",
       promptConfig: {
         messages: [
           {
-            role: "assistant",
+            role: "expected_output",
             content: "<value>",
+          },
+        ],
+      },
+      metadata: {},
+      commit: "<value>",
+      timestamp: "<value>",
+    },
+  ],
+  type: "prompt",
+};
+```
+
+### `operations.GetAllPromptsData2`
+
+```typescript
+const value: operations.GetAllPromptsData2 = {
+  id: "<id>",
+  owner: "<value>",
+  domainId: "dd4ca643-9380-4f01-afd8-aed91e1250a2",
+  createdById: "842d63a8-6db4-4296-9ecf-92a6992cdf49",
+  displayName: "Tevin_Lueilwitz",
+  updatedById: "7227f5f9-8d80-4922-8a22-931e840dea58",
+  promptConfig: {
+    messages: [
+      {
+        role: "tool",
+        content: "<value>",
+      },
+    ],
+  },
+  metadata: {},
+  versions: [
+    {
+      id: "<id>",
+      createdById: "0973e7a0-4149-48ee-936e-e8f7fe41366a",
+      displayName: "Emerson.Turner",
+      updatedById: "3f1894be-4999-4b02-974b-2793cfc7ad3b",
+      promptConfig: {
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://glittering-straw.com/",
+                },
+              },
+            ],
           },
         ],
       },
@@ -93,21 +100,28 @@ const value: operations.Data2 = {
 };
 ```
 
-### `operations.Data3`
+### `operations.GetAllPromptsData3`
 
 ```typescript
-const value: operations.Data3 = {
+const value: operations.GetAllPromptsData3 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "0b27156e-be72-4698-be94-f27eb8b76abe",
-  createdById: "f1f31aaf-c699-4c96-8a35-1d14e83fe13a",
-  displayName: "Kale_Pacocha96",
-  updatedById: "8493e76c-e7c2-44be-b12f-1083495f3de7",
+  domainId: "f53f34a2-729c-47d5-a974-542f5f931bb6",
+  createdById: "de339b30-3f7e-4fa0-a25c-7080eaf86c6e",
+  displayName: "Ashtyn.Schneider4",
+  updatedById: "cfdb7a48-5517-4384-b2ca-e927dfb2bfaa",
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: "<value>",
+        role: "correction",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://rough-stir-fry.net/",
+            },
+          },
+        ],
       },
     ],
   },
@@ -115,18 +129,18 @@ const value: operations.Data3 = {
   versions: [
     {
       id: "<id>",
-      createdById: "907d634e-a279-48c0-8498-12c8ad95824a",
-      displayName: "Abagail21",
-      updatedById: "71ccbff2-cabf-4d6e-bebe-7b09b6d748ea",
+      createdById: "25843cce-87dd-459e-8001-4d74ba014df8",
+      displayName: "Kelsie52",
+      updatedById: "3e49941a-e593-494f-9154-686ac20f592c",
       promptConfig: {
         messages: [
           {
-            role: "exception",
+            role: "prompt",
             content: [
               {
                 type: "image_url",
                 imageUrl: {
-                  url: "https://silky-bathhouse.name/",
+                  url: "https://pleasant-traditionalism.com/",
                 },
               },
             ],

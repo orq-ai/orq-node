@@ -308,6 +308,8 @@ export const DeploymentInvokeProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
 } as const;
 /**
  * The provider used to generate the response

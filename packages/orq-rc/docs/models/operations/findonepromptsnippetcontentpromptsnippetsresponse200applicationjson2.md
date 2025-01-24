@@ -20,7 +20,7 @@ const value:
   operations.FindOnePromptSnippet2PromptSnippetsResponse200ApplicationJson2 = {
     type: "image_url",
     imageUrl: {
-      url: "https://fortunate-violin.info/",
+      url: "https://acceptable-kiss.org/",
     },
   };
 ```

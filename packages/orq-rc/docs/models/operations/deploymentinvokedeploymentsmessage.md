@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentInvokeMessageDeployments1 = {
-  role: "tool",
+  role: "user",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.DeploymentInvokeMessageDeployments1 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessageDeployments2 = {
-  role: "assistant",
+  role: "exception",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.DeploymentInvokeMessageDeployments2 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessage3 = {
-  role: "system",
-  url: "https://windy-version.org",
+  role: "prompt",
+  url: "https://focused-glider.biz",
 };
 ```
 

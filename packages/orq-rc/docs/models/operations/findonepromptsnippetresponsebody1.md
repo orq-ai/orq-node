@@ -10,14 +10,14 @@ import { FindOnePromptSnippetResponseBody1 } from "@orq-ai/node/models/operation
 let value: FindOnePromptSnippetResponseBody1 = {
   id: "<id>",
   owner: "<value>",
-  domainId: "dadac73c-92cf-4541-8af2-710ad5e13e89",
-  createdById: "20e2d5c5-4147-4d7f-b806-b3b80c8174e4",
-  displayName: "Karson_Schulist",
-  updatedById: "cdd2d039-1946-4518-8f94-f6bafe21ce7b",
+  domainId: "d5cb9986-098b-437b-ad89-477212d71f29",
+  createdById: "32e148b4-0980-485c-a588-f9a627b89c08",
+  displayName: "Waino.Sanford",
+  updatedById: "ffc9fd88-55c3-47ad-aa35-370719ddef0e",
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "correction",
         content: "<value>",
       },
     ],
@@ -26,17 +26,19 @@ let value: FindOnePromptSnippetResponseBody1 = {
   versions: [
     {
       id: "<id>",
-      createdById: "9304a95d-4487-4728-a46b-ec69b652bd5c",
-      displayName: "Otto.Rogahn",
-      updatedById: "74e6066d-c3d3-4510-8ae7-dcafc4cb613c",
+      createdById: "18861001-0be3-4e81-ad7f-0530578c50ae",
+      displayName: "Dashawn_Herzog82",
+      updatedById: "2bae79d4-b317-40b3-9e06-6f6b08637eea",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
+            role: "correction",
             content: [
               {
-                type: "text",
-                text: "<value>",
+                type: "image_url",
+                imageUrl: {
+                  url: "https://functional-majority.name",
+                },
               },
             ],
           },

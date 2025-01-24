@@ -18,7 +18,7 @@ const value: operations.GetAllPromptTemplates2PromptTemplatesResponse2001 = {
 const value: operations.GetAllPromptTemplates2PromptTemplatesResponse2002 = {
   type: "image_url",
   imageUrl: {
-    url: "https://fortunate-confusion.info/",
+    url: "https://far-flung-ocelot.info",
   },
 };
 ```

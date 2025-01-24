@@ -6,13 +6,11 @@
 import { FindOnePromptSnippetResponseBodyPromptSnippetsResponseMessages } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetResponseBodyPromptSnippetsResponseMessages = {
-  role: "system",
+  role: "tool",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://outlandish-event.biz",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

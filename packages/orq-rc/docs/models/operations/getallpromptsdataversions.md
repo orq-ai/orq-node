@@ -9,19 +9,17 @@ import { GetAllPromptsDataVersions } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsDataVersions = {
   id: "<id>",
-  createdById: "045b5c95-2066-45c1-b138-be4284f03c68",
-  displayName: "Manuela.Parker",
-  updatedById: "5fde290b-0a39-440a-a7b0-802c3122d9c4",
+  createdById: "a988c31b-ab78-413a-a0ed-b84f46a58d86",
+  displayName: "Elmer29",
+  updatedById: "f164707a-7590-46e0-b882-16870ced8eb7",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "system",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://wide-bin.net/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

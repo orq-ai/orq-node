@@ -10,7 +10,7 @@ import { GetAllPromptTemplates2PromptTemplatesResponse200ApplicationJson2 } from
 let value: GetAllPromptTemplates2PromptTemplatesResponse200ApplicationJson2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://outrageous-metal.name",
+    url: "https://eminent-gym.net",
   },
 };
 ```

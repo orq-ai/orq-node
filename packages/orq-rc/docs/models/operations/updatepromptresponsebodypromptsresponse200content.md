@@ -18,8 +18,10 @@ const value:
   operations.UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2[] =
     [
       {
-        type: "text",
-        text: "<value>",
+        type: "image_url",
+        imageUrl: {
+          url: "https://pushy-final.org",
+        },
       },
     ];
 ```

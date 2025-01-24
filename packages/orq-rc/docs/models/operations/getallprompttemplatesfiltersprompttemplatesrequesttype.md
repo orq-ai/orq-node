@@ -5,12 +5,11 @@
 ```typescript
 import { GetAllPromptTemplatesFiltersPromptTemplatesRequestType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptTemplatesFiltersPromptTemplatesRequestType =
-  "string_array";
+let value: GetAllPromptTemplatesFiltersPromptTemplatesRequestType = "string";
 ```
 
 ## Values
 
 ```typescript
-"string_array"
+"string"
 ```

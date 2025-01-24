@@ -9,21 +9,16 @@ import { Items2 } from "@orq-ai/node/models/operations";
 
 let value: Items2 = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "42825ab0-6ad7-4f40-b74d-34cb8b600810",
-  createdById: "d20f42b1-4fa8-46c2-afd9-0be851ce1c0f",
-  displayName: "Kattie82",
-  updatedById: "c8177365-2748-40ed-98df-1aff92903f5a",
+  owner: "vendor",
+  domainId: "11222049-f6d3-4f00-85e9-0d261e0e2332",
+  createdById: "d653e953-e31a-4429-8729-ab485e798fef",
+  displayName: "Jaylin_Prohaska",
+  updatedById: "7c7ada57-7f6e-4eb3-86a4-279a94563372",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "tool",
+        content: "<value>",
       },
     ],
   },
@@ -31,14 +26,19 @@ let value: Items2 = {
   versions: [
     {
       id: "<id>",
-      createdById: "c163a164-85b0-4a34-bcf5-d1ac26e1096c",
-      displayName: "Eliezer98",
-      updatedById: "64f2bea6-35ba-4edd-ae45-68a4064feda5",
+      createdById: "6bf74a2e-c21e-4f42-abf4-55748d64e835",
+      displayName: "Ashtyn47",
+      updatedById: "9cec4106-0b7b-470d-be9b-0b154d7137f3",
       promptConfig: {
         messages: [
           {
-            role: "correction",
-            content: "<value>",
+            role: "assistant",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

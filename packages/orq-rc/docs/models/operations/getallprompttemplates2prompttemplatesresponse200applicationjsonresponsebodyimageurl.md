@@ -10,7 +10,7 @@ import {
 let value:
   GetAllPromptTemplates2PromptTemplatesResponse200ApplicationJSONResponseBodyImageUrl =
     {
-      url: "https://overcooked-replacement.org/",
+      url: "https://pricey-retrospectivity.com/",
     };
 ```
 

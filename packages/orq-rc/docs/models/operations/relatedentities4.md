@@ -1,0 +1,19 @@
+# RelatedEntities4
+
+## Example Usage
+
+```typescript
+import { RelatedEntities4 } from "@orq-ai/node/models/operations";
+
+let value: RelatedEntities4 = {
+  type: "deployment_completion",
+  deploymentCompletionId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                | Type                                                                                                                                                                                                                 | Required                                                                                                                                                                                                             | Description                                                                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                                               | [operations.DeploymentGetLogsRelatedEntitiesDeploymentsResponse200ApplicationJSONResponseBodyType](../../models/operations/deploymentgetlogsrelatedentitiesdeploymentsresponse200applicationjsonresponsebodytype.md) | :heavy_check_mark:                                                                                                                                                                                                   | N/A                                                                                                                                                                                                                  |
+| `deploymentCompletionId`                                                                                                                                                                                             | *string*                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                   | The id of the resource                                                                                                                                                                                               |

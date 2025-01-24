@@ -5,11 +5,11 @@
 ```typescript
 import { FiltersType } from "@orq-ai/node/models/operations";
 
-let value: FiltersType = "id";
+let value: FiltersType = "string";
 ```
 
 ## Values
 
 ```typescript
-"id"
+"string" | "multi-value-array" | "single-value-array" | "number" | "date" | "object" | "boolean" | "evaluator"
 ```

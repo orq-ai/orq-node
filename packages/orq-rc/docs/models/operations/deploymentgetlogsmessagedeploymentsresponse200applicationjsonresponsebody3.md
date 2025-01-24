@@ -1,0 +1,20 @@
+# DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBody3
+
+## Example Usage
+
+```typescript
+import { DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBody3 } from "@orq-ai/node/models/operations";
+
+let value:
+  DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBody3 = {
+    role: "user",
+    url: "https://naughty-castanet.info/",
+  };
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                                                                                                                     | [operations.DeploymentGetLogsMessageDeploymentsResponse200ApplicationJSONResponseBodyData4Evals7Role](../../models/operations/deploymentgetlogsmessagedeploymentsresponse200applicationjsonresponsebodydata4evals7role.md) | :heavy_check_mark:                                                                                                                                                                                                         | The role of the prompt message                                                                                                                                                                                             |
+| `url`                                                                                                                                                                                                                      | *string*                                                                                                                                                                                                                   | :heavy_check_mark:                                                                                                                                                                                                         | N/A                                                                                                                                                                                                                        |

@@ -17,10 +17,8 @@ const value: string = "<value>";
 const value:
   operations.UpdatePromptContentPromptsResponse200ApplicationJson2[] = [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://marvelous-finer.name/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

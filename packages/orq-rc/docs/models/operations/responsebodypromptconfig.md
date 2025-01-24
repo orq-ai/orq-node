@@ -8,13 +8,8 @@ import { ResponseBodyPromptConfig } from "@orq-ai/node/models/operations";
 let value: ResponseBodyPromptConfig = {
   messages: [
     {
-      role: "expected_output",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "assistant",
+      content: "<value>",
     },
   ],
 };

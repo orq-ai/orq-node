@@ -1,0 +1,27 @@
+# DeploymentGetLogsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyData4JSONSchema
+
+## Example Usage
+
+```typescript
+import {
+  DeploymentGetLogsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyData4JSONSchema,
+} from "@orq-ai/node/models/operations";
+
+let value:
+  DeploymentGetLogsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyData4JSONSchema =
+    {
+      name: "<value>",
+      strict: false,
+      schema: {
+        "key": "<value>",
+      },
+    };
+```
+
+## Fields
+
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `name`                | *string*              | :heavy_check_mark:    | N/A                   |
+| `strict`              | *boolean*             | :heavy_check_mark:    | N/A                   |
+| `schema`              | Record<string, *any*> | :heavy_check_mark:    | N/A                   |

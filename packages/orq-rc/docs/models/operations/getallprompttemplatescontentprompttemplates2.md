@@ -18,7 +18,7 @@ const value: operations.GetAllPromptTemplates2PromptTemplates1 = {
 const value: operations.GetAllPromptTemplates2PromptTemplates2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://supportive-quinoa.com",
+    url: "https://stupendous-sesame.org/",
   },
 };
 ```

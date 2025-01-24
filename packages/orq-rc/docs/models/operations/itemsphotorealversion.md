@@ -7,7 +7,7 @@ The version of photoReal to use. Must be v1 or v2. Only available for `leonardoa
 ```typescript
 import { ItemsPhotoRealVersion } from "@orq-ai/node/models/operations";
 
-let value: ItemsPhotoRealVersion = "v2";
+let value: ItemsPhotoRealVersion = "v1";
 ```
 
 ## Values
