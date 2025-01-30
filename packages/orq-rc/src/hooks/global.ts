@@ -19,10 +19,10 @@ import {
         const payload = await request.json()
   
         if ('context' in payload && typeof payload.context === 'object') {
-          payload.context.environment = environment;
+          payload.context.environments = environment;
         } else {
           payload.context = {
-            environment
+            environments: environment
           }
         }
         return new Request(request.url, {
