@@ -248,10 +248,6 @@ export type Deployments = {
    */
   key: string;
   /**
-   * If set, partial message content will be sent. Tokens will be sent as data-only `server-sent events` as they become available, with the stream terminated by a `data: [DONE]` message.
-   */
-  stream?: boolean | undefined;
-  /**
    * Key-value pairs variables to replace in your prompts. If a variable is not provided that is defined in the prompt, the default variables are used.
    */
   inputs?: { [k: string]: string | number | boolean } | undefined;
@@ -1583,7 +1579,6 @@ export const Deployments$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string(),
-  stream: z.boolean().default(false),
   inputs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(z.lazy(() => PrefixMessages$inboundSchema))
@@ -1606,7 +1601,6 @@ export const Deployments$inboundSchema: z.ZodType<
 /** @internal */
 export type Deployments$Outbound = {
   key: string;
-  stream: boolean;
   inputs?: { [k: string]: string | number | boolean } | undefined;
   context?: { [k: string]: any } | undefined;
   prefix_messages?: Array<PrefixMessages$Outbound> | undefined;
@@ -1625,7 +1619,6 @@ export const Deployments$outboundSchema: z.ZodType<
   Deployments
 > = z.object({
   key: z.string(),
-  stream: z.boolean().default(false),
   inputs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(z.lazy(() => PrefixMessages$outboundSchema))

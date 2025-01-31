@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: fff8acaee035f288fc4609d241fa237a
+  docChecksum: 4ebaa43690fe55950a33c22a79282828
   docVersion: "2.0"
   speakeasyVersion: 1.480.1
   generationVersion: 2.499.1
-  releaseVersion: 3.1.0-rc.26
-  configChecksum: c8e9784c139cf5e9b2b25f2510bd8973
+  releaseVersion: 3.1.0-rc.27
+  configChecksum: bdec88e9efb164bc04110745d2d5da21
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -26,6 +26,7 @@ features:
     globals: 2.82.2
     groups: 2.81.2
     hiddenGlobals: 0.1.0
+    ignores: 2.81.1
     inputOutputModels: 2.82.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
@@ -1021,7 +1022,7 @@ examples:
   DeploymentInvoke:
     speakeasy-default-deployment-invoke:
       requestBody:
-        application/json: {"key": "<key>", "stream": false}
+        application/json: {"key": "<key>"}
       responses:
         "200":
           application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12}, {"index": 3047.15}]}
