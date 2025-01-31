@@ -8,10 +8,10 @@ import { FileListData } from "@orq-ai/node/models/operations";
 let value: FileListData = {
   id: "<id>",
   objectName: "<value>",
-  purpose: "knowledge_datasource",
-  bytes: 9903.45,
+  purpose: "retrieval",
+  bytes: 7487.89,
   fileName: "example.file",
-  workspaceId: "62a7f1c4-3a3a-4868-84b6-5de035dffe4f",
+  workspaceId: "3274d38f-adfc-4bff-a714-26296ef849e6",
 };
 ```
 

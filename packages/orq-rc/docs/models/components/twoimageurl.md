@@ -6,7 +6,7 @@
 import { TwoImageUrl } from "@orq-ai/node/models/components";
 
 let value: TwoImageUrl = {
-  url: "https://exotic-metal.biz",
+  url: "https://brilliant-march.info/",
 };
 ```
 

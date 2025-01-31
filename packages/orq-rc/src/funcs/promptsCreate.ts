@@ -3,8 +3,9 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -22,7 +23,7 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a new prompt
+ * Create a prompt
  */
 export async function promptsCreate(
   client: OrqCore,
@@ -54,12 +55,16 @@ export async function promptsCreate(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/resources/prompts")();
+  const path = pathToFunc("/v2/prompts")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
-  });
+    "contactId": encodeSimple("contactId", client._options.contactId, {
+      explode: false,
+      charEncoding: "none",
+    }),
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
@@ -114,7 +119,8 @@ export async function promptsCreate(
     | ConnectionError
   >(
     M.json(200, operations.CreatePromptResponseBody$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

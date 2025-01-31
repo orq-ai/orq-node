@@ -11,11 +11,21 @@ import { Params, pathToFunc } from "./url.js";
  * Contains the list of servers available to the SDK
  */
 export const ServerList = [
-  "https://my.staging.orq.ai",
+  "https://my.orq.ai",
 ] as const;
 
 export type SDKOptions = {
   apiKey?: string | (() => Promise<string>);
+
+  /**
+   * Allows setting the contactId parameter for all supported operations
+   */
+  contactId?: string | undefined;
+
+  /**
+   * Allows setting the environment parameter for all supported operations
+   */
+  environment?: string | undefined;
 
   httpClient?: HTTPClient;
   /**
@@ -54,7 +64,7 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "2.0",
-  sdkVersion: "3.0.0-rc.19",
-  genVersion: "2.481.0",
-  userAgent: "speakeasy-sdk/typescript 3.0.0-rc.19 2.481.0 2.0 @orq-ai/node",
+  sdkVersion: "3.1.0-rc.26",
+  genVersion: "2.499.1",
+  userAgent: "speakeasy-sdk/typescript 3.1.0-rc.26 2.499.1 2.0 @orq-ai/node",
 } as const;

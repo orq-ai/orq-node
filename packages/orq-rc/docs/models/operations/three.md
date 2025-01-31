@@ -6,8 +6,8 @@
 import { Three } from "@orq-ai/node/models/operations";
 
 let value: Three = {
-  role: "exception",
-  url: "https://impish-term.net",
+  role: "assistant",
+  url: "https://animated-advertisement.info",
 };
 ```
 

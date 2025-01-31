@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type CreateFeedbackGlobals = {
+  contactId?: string | undefined;
+};
+
 /**
  * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
  */
@@ -54,6 +58,60 @@ export type CreateFeedbackResponseBody = {
   traceId: string;
   id: string;
 };
+
+/** @internal */
+export const CreateFeedbackGlobals$inboundSchema: z.ZodType<
+  CreateFeedbackGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/** @internal */
+export type CreateFeedbackGlobals$Outbound = {
+  contactId?: string | undefined;
+};
+
+/** @internal */
+export const CreateFeedbackGlobals$outboundSchema: z.ZodType<
+  CreateFeedbackGlobals$Outbound,
+  z.ZodTypeDef,
+  CreateFeedbackGlobals
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateFeedbackGlobals$ {
+  /** @deprecated use `CreateFeedbackGlobals$inboundSchema` instead. */
+  export const inboundSchema = CreateFeedbackGlobals$inboundSchema;
+  /** @deprecated use `CreateFeedbackGlobals$outboundSchema` instead. */
+  export const outboundSchema = CreateFeedbackGlobals$outboundSchema;
+  /** @deprecated use `CreateFeedbackGlobals$Outbound` instead. */
+  export type Outbound = CreateFeedbackGlobals$Outbound;
+}
+
+export function createFeedbackGlobalsToJSON(
+  createFeedbackGlobals: CreateFeedbackGlobals,
+): string {
+  return JSON.stringify(
+    CreateFeedbackGlobals$outboundSchema.parse(createFeedbackGlobals),
+  );
+}
+
+export function createFeedbackGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateFeedbackGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateFeedbackGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateFeedbackGlobals' from JSON`,
+  );
+}
 
 /** @internal */
 export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z

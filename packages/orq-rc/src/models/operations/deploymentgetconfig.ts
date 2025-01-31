@@ -9,6 +9,10 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type DeploymentGetConfigGlobals = {
+  contactId?: string | undefined;
+};
+
 export type Inputs = string | number | boolean;
 
 /**
@@ -675,6 +679,60 @@ export type DeploymentGetConfigResponseBody = {
    */
   tools?: Array<Tools> | undefined;
 };
+
+/** @internal */
+export const DeploymentGetConfigGlobals$inboundSchema: z.ZodType<
+  DeploymentGetConfigGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/** @internal */
+export type DeploymentGetConfigGlobals$Outbound = {
+  contactId?: string | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfigGlobals$outboundSchema: z.ZodType<
+  DeploymentGetConfigGlobals$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigGlobals
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigGlobals$ {
+  /** @deprecated use `DeploymentGetConfigGlobals$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigGlobals$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigGlobals$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigGlobals$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigGlobals$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigGlobals$Outbound;
+}
+
+export function deploymentGetConfigGlobalsToJSON(
+  deploymentGetConfigGlobals: DeploymentGetConfigGlobals,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigGlobals$outboundSchema.parse(deploymentGetConfigGlobals),
+  );
+}
+
+export function deploymentGetConfigGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfigGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfigGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigGlobals' from JSON`,
+  );
+}
 
 /** @internal */
 export const Inputs$inboundSchema: z.ZodType<Inputs, z.ZodTypeDef, unknown> = z

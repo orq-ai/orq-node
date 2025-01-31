@@ -22,6 +22,7 @@ typescript:
   author: Orq
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
+  enableCustomCodeRegions: false
   enableReactQuery: false
   enumFormat: union
   envVarPrefix: ORQ

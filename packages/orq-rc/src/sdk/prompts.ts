@@ -3,11 +3,9 @@
  */
 
 import { promptsCreate } from "../funcs/promptsCreate.js";
-import { promptsCreateVersion } from "../funcs/promptsCreateVersion.js";
 import { promptsDelete } from "../funcs/promptsDelete.js";
-import { promptsDuplicate } from "../funcs/promptsDuplicate.js";
-import { promptsGetAll } from "../funcs/promptsGetAll.js";
-import { promptsGetOne } from "../funcs/promptsGetOne.js";
+import { promptsGet } from "../funcs/promptsGet.js";
+import { promptsList } from "../funcs/promptsList.js";
 import { promptsUpdate } from "../funcs/promptsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -15,55 +13,13 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Prompts extends ClientSDK {
   /**
-   * Create a new prompt
+   * Create a prompt
    */
   async create(
     request?: operations.CreatePromptRequestBody | undefined,
     options?: RequestOptions,
   ): Promise<operations.CreatePromptResponseBody> {
     return unwrapAsync(promptsCreate(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a new prompt version
-   */
-  async createVersion(
-    request: operations.CreatePromptVersionRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreatePromptVersionResponseBody> {
-    return unwrapAsync(promptsCreateVersion(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a prompt
-   */
-  async delete(
-    request: operations.DeletePromptRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(promptsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get one prompt
-   */
-  async getOne(
-    request: operations.GetOnePromptRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(promptsGetOne(
       this,
       request,
       options,
@@ -85,13 +41,13 @@ export class Prompts extends ClientSDK {
   }
 
   /**
-   * Duplicate a prompt
+   * Delete a prompt
    */
-  async duplicate(
-    request: operations.DuplicatePromptRequest,
+  async delete(
+    request: operations.DeletePromptRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(promptsDuplicate(
+    return unwrapAsync(promptsDelete(
       this,
       request,
       options,
@@ -99,13 +55,27 @@ export class Prompts extends ClientSDK {
   }
 
   /**
-   * Get all prompts
+   * Retrieve a prompt
    */
-  async getAll(
-    request?: operations.GetAllPromptsRequestBody | undefined,
+  async get(
+    request: operations.GetOnePromptRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(promptsGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List all prompts
+   */
+  async list(
+    request?: operations.GetAllPromptsRequest | undefined,
     options?: RequestOptions,
   ): Promise<operations.GetAllPromptsResponseBody> {
-    return unwrapAsync(promptsGetAll(
+    return unwrapAsync(promptsList(
       this,
       request,
       options,

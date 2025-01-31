@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentInvokeMessage1 = {
-  role: "user",
+  role: "tool",
   toolCalls: [
     {
       type: "function",
@@ -34,7 +34,7 @@ const value: operations.DeploymentInvokeMessage2 = {
 ```typescript
 const value: operations.Message3 = {
   role: "system",
-  url: "https://fatal-import.net/",
+  url: "https://windy-version.org",
 };
 ```
 

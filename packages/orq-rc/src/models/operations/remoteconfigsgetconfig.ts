@@ -8,6 +8,10 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type RemoteConfigsGetConfigGlobals = {
+  contactId?: string | undefined;
+};
+
 export type RemoteConfigsGetConfigRequestBody = {
   /**
    * Remote configuration key
@@ -43,6 +47,62 @@ export type RemoteConfigsGetConfigResponseBody = {
   type: RemoteConfigsGetConfigType;
   value?: any | undefined;
 };
+
+/** @internal */
+export const RemoteConfigsGetConfigGlobals$inboundSchema: z.ZodType<
+  RemoteConfigsGetConfigGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/** @internal */
+export type RemoteConfigsGetConfigGlobals$Outbound = {
+  contactId?: string | undefined;
+};
+
+/** @internal */
+export const RemoteConfigsGetConfigGlobals$outboundSchema: z.ZodType<
+  RemoteConfigsGetConfigGlobals$Outbound,
+  z.ZodTypeDef,
+  RemoteConfigsGetConfigGlobals
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RemoteConfigsGetConfigGlobals$ {
+  /** @deprecated use `RemoteConfigsGetConfigGlobals$inboundSchema` instead. */
+  export const inboundSchema = RemoteConfigsGetConfigGlobals$inboundSchema;
+  /** @deprecated use `RemoteConfigsGetConfigGlobals$outboundSchema` instead. */
+  export const outboundSchema = RemoteConfigsGetConfigGlobals$outboundSchema;
+  /** @deprecated use `RemoteConfigsGetConfigGlobals$Outbound` instead. */
+  export type Outbound = RemoteConfigsGetConfigGlobals$Outbound;
+}
+
+export function remoteConfigsGetConfigGlobalsToJSON(
+  remoteConfigsGetConfigGlobals: RemoteConfigsGetConfigGlobals,
+): string {
+  return JSON.stringify(
+    RemoteConfigsGetConfigGlobals$outboundSchema.parse(
+      remoteConfigsGetConfigGlobals,
+    ),
+  );
+}
+
+export function remoteConfigsGetConfigGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<RemoteConfigsGetConfigGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RemoteConfigsGetConfigGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RemoteConfigsGetConfigGlobals' from JSON`,
+  );
+}
 
 /** @internal */
 export const RemoteConfigsGetConfigRequestBody$inboundSchema: z.ZodType<

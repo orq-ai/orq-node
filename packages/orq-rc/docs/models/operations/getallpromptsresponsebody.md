@@ -13,49 +13,41 @@ let value: GetAllPromptsResponseBody = {
     {
       id: "<id>",
       owner: "<value>",
-      domainId: "f68a7b0a-5e20-4083-ac03-d0c1dc367633",
-      createdById: "24130b66-7459-4379-8248-6b37d2e77a8d",
-      displayName: "Breana53",
-      updatedById: "dff838b7-4dd8-498c-8e0f-565db260c31a",
+      domainId: "5c0196a4-ec1c-4ffb-b194-fb9b75e506ca",
+      createdById: "1e57613b-020d-492c-afee-09495277f04d",
+      displayName: "Reyna20",
+      updatedById: "92cf541a-f271-40ad-95e1-3e89020e2d5c",
       promptConfig: {
         messages: [
           {
-            role: "tool",
+            role: "user",
             content: "<value>",
           },
         ],
       },
       metadata: {},
+      type: "prompt",
       versions: [
         {
           id: "<id>",
-          createdById: "cf1d7087-e5c2-4682-a33b-f2820066a631",
-          displayName: "Cydney.Auer65",
-          updatedById: "add27ebd-67e6-4a6b-9978-9eabf135f391",
+          createdById: "47d7f806-b3b8-40c8-8174-e4f85db6acdd",
+          displayName: "Rhiannon_Dooley",
+          updatedById: "46518f94-f6ba-4fe2-b1ce-7b1329304a95",
           promptConfig: {
             messages: [
               {
                 role: "user",
-                content: [
-                  {
-                    type: "text",
-                    text: "<value>",
-                  },
-                ],
+                content: "<value>",
               },
             ],
           },
           metadata: {},
-          commit: "<value>",
           timestamp: "<value>",
         },
       ],
-      type: "prompt",
     },
   ],
   hasMore: false,
-  firstId: "<id>",
-  lastId: "<id>",
 };
 ```
 
@@ -64,7 +56,5 @@ let value: GetAllPromptsResponseBody = {
 | Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `object`                                                                         | [operations.GetAllPromptsObject](../../models/operations/getallpromptsobject.md) | :heavy_check_mark:                                                               | N/A                                                                              |
-| `data`                                                                           | *operations.GetAllPromptsData*[]                                                 | :heavy_check_mark:                                                               | N/A                                                                              |
+| `data`                                                                           | [operations.GetAllPromptsData](../../models/operations/getallpromptsdata.md)[]   | :heavy_check_mark:                                                               | N/A                                                                              |
 | `hasMore`                                                                        | *boolean*                                                                        | :heavy_check_mark:                                                               | N/A                                                                              |
-| `firstId`                                                                        | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |
-| `lastId`                                                                         | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |

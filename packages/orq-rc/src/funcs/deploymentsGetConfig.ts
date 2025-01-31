@@ -3,8 +3,9 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -57,10 +58,14 @@ export async function deploymentsGetConfig(
 
   const path = pathToFunc("/v2/deployments/get_config")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
-  });
+    "contactId": encodeSimple("contactId", client._options.contactId, {
+      explode: false,
+      charEncoding: "none",
+    }),
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
@@ -122,7 +127,8 @@ export async function deploymentsGetConfig(
       204,
       operations.DeploymentGetConfigResponseBody$inboundSchema.optional(),
     ),
-    M.fail([401, "4XX", "5XX"]),
+    M.fail([401, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

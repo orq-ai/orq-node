@@ -5,7 +5,7 @@
 ```typescript
 import { RemoteConfigsGetConfigType } from "@orq-ai/node/models/operations";
 
-let value: RemoteConfigsGetConfigType = "json";
+let value: RemoteConfigsGetConfigType = "decimal";
 ```
 
 ## Values

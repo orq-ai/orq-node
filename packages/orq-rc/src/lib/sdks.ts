@@ -15,7 +15,7 @@ import { ERR, OK, Result } from "../types/fp.js";
 import { stringToBase64 } from "./base64.js";
 import { SDK_METADATA, SDKOptions, serverURLFromOptions } from "./config.js";
 import { encodeForm } from "./encodings.js";
-import { env } from "./env.js";
+import { env, fillGlobals } from "./env.js";
 import {
   HTTPClient,
   isAbortError,
@@ -94,7 +94,7 @@ export class ClientSDK {
     } else {
       this.#hooks = new SDKHooks();
     }
-    this._options = { ...options, hooks: this.#hooks };
+    this._options = { ...fillGlobals(options), hooks: this.#hooks };
 
     const url = serverURLFromOptions(options);
     if (url) {
@@ -135,7 +135,10 @@ export class ClientSDK {
 
     const secQuery: string[] = [];
     for (const [k, v] of Object.entries(security?.queryParams || {})) {
-      secQuery.push(encodeForm(k, v, { charEncoding: "percent" }));
+      const q = encodeForm(k, v, { charEncoding: "percent" });
+      if (typeof q !== "undefined") {
+        secQuery.push(q);
+      }
     }
     if (secQuery.length) {
       finalQuery += `&${secQuery.join("&")}`;

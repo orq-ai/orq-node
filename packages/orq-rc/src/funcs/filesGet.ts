@@ -5,6 +5,7 @@
 import { OrqCore } from "../core.js";
 import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -60,9 +61,13 @@ export async function filesGet(
 
   const path = pathToFunc("/v2/files/{file_id}")(pathParams);
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+    "contactId": encodeSimple("contactId", client._options.contactId, {
+      explode: false,
+      charEncoding: "none",
+    }),
+  }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
@@ -117,7 +122,8 @@ export async function filesGet(
     | ConnectionError
   >(
     M.json(200, operations.FileGetResponseBody$inboundSchema),
-    M.fail([404, "4XX", "5XX"]),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

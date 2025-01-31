@@ -23,7 +23,7 @@ let value: DeploymentsPromptConfig = {
   model: "Grand Cherokee",
   modelType: "chat",
   modelParameters: {},
-  provider: "anyscale",
+  provider: "groq",
   messages: [
     {
       role: "tool",

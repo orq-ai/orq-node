@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type CreateContactGlobals = {
+  contactId?: string | undefined;
+};
+
 /**
  * Update user information payload
  */
@@ -79,6 +83,60 @@ export type CreateContactResponseBody = {
    */
   updated?: Date | undefined;
 };
+
+/** @internal */
+export const CreateContactGlobals$inboundSchema: z.ZodType<
+  CreateContactGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/** @internal */
+export type CreateContactGlobals$Outbound = {
+  contactId?: string | undefined;
+};
+
+/** @internal */
+export const CreateContactGlobals$outboundSchema: z.ZodType<
+  CreateContactGlobals$Outbound,
+  z.ZodTypeDef,
+  CreateContactGlobals
+> = z.object({
+  contactId: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateContactGlobals$ {
+  /** @deprecated use `CreateContactGlobals$inboundSchema` instead. */
+  export const inboundSchema = CreateContactGlobals$inboundSchema;
+  /** @deprecated use `CreateContactGlobals$outboundSchema` instead. */
+  export const outboundSchema = CreateContactGlobals$outboundSchema;
+  /** @deprecated use `CreateContactGlobals$Outbound` instead. */
+  export type Outbound = CreateContactGlobals$Outbound;
+}
+
+export function createContactGlobalsToJSON(
+  createContactGlobals: CreateContactGlobals,
+): string {
+  return JSON.stringify(
+    CreateContactGlobals$outboundSchema.parse(createContactGlobals),
+  );
+}
+
+export function createContactGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateContactGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateContactGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateContactGlobals' from JSON`,
+  );
+}
 
 /** @internal */
 export const CreateContactRequestBody$inboundSchema: z.ZodType<
@@ -177,7 +235,7 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-02T13:55:01.056Z",
+    "2025-01-31T07:05:40.814Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -214,7 +272,7 @@ export const CreateContactResponseBody$outboundSchema: z.ZodType<
   tags: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-02T13:55:01.056Z"))
+  updated: z.date().default(() => new Date("2025-01-31T07:05:40.814Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
