@@ -17,6 +17,12 @@ import {
       if (["DeploymentInvoke", "DeploymentStream"].includes(hookCtx.operationID) && environment) {
         request.headers.delete('environment')
         const payload = await request.json()
+
+        if (hookCtx.operationID === 'DeploymentStream') {
+          payload.stream = true;
+        } else {
+          payload.stream = false;
+        }
   
         if ('context' in payload && typeof payload.context === 'object') {
           payload.context.environments = environment;
