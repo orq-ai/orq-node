@@ -6,12 +6,12 @@ security:
   - ApiKey: []
 servers:
   - url: "https://my.orq.ai"
-  - url: "http://localhost:4200"
 openapi: "3.1.0"
 x-speakeasy-timeout: 600000
 externalDocs:
   url: "https://docs.orq.ai"
   description: "orq.ai Documentation"
+x-speakeasy-globals: {"parameters": [{"name": "contactId", "in": "header", "schema": {"type": "string"}, "x-speakeasy-globals-hidden": true}, {"name": "environment", "in": "header", "schema": {"type": "string"}, "x-speakeasy-globals-hidden": true}]}
 components:
   securitySchemes:
     "ApiKey":
@@ -2907,7 +2907,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-01-30T08:04:01.719Z"
+          default: "2025-01-31T07:05:41.928Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -2966,7 +2966,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-01-30T08:04:01.719Z"
+            default: "2025-01-31T07:05:41.928Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3044,7 +3044,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-01-30T08:04:01.719Z"
+          default: "2025-01-31T07:05:41.928Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3089,7 +3089,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-01-30T08:04:01.719Z"
+                default: "2025-01-31T07:05:41.928Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3131,7 +3131,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-01-30T08:04:01.719Z"
+          default: "2025-01-31T07:05:41.928Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3370,7 +3370,7 @@ components:
                           - type: "string"
                             format: "date-time"
                           - type: "string"
-                        default: "2025-01-30T08:04:00.613Z"
+                        default: "2025-01-31T07:05:40.814Z"
                         description: "The date and time the resource was created"
                         readOnly: true
                         format: "date-time"
@@ -3378,7 +3378,7 @@ components:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2025-01-30T08:04:00.614Z"
+                            default: "2025-01-31T07:05:40.814Z"
                           - type: "string"
                         description: "The date and time the resource was last updated"
                         readOnly: true
@@ -3406,7 +3406,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-01-30T08:04:00.613Z"
+              default: "2025-01-31T07:05:40.814Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3414,7 +3414,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-01-30T08:04:00.614Z"
+                  default: "2025-01-31T07:05:40.814Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -3923,7 +3923,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-01-30T08:04:00.613Z"
+              default: "2025-01-31T07:05:40.814Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3931,7 +3931,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-01-30T08:04:00.614Z"
+                  default: "2025-01-31T07:05:40.814Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -4080,7 +4080,7 @@ components:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -4088,7 +4088,7 @@ components:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -4541,7 +4541,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-01-30T08:04:00.613Z"
+          default: "2025-01-31T07:05:40.814Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -4549,7 +4549,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-01-30T08:04:00.614Z"
+              default: "2025-01-31T07:05:40.814Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6228,7 +6228,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-01-30T08:04:00.613Z"
+          default: "2025-01-31T07:05:40.814Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6236,7 +6236,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-01-30T08:04:00.614Z"
+              default: "2025-01-31T07:05:40.814Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -35787,7 +35787,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -35795,7 +35795,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -35805,6 +35805,11 @@ paths:
                   - "external_id"
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/feedback":
     post:
       tags:
@@ -35870,6 +35875,11 @@ paths:
                   - "id"
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/deployments":
     get:
       tags:
@@ -35904,6 +35914,10 @@ paths:
           description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
           name: "ending_before"
           in: "query"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "List all deployments"
@@ -36798,6 +36812,11 @@ paths:
           description: "Unauthorized."
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/deployments/invoke":
     post:
       tags:
@@ -37034,6 +37053,15 @@ paths:
           description: "No content - successful operation"
       security:
         - ApiKey: []
+      parameters:
+        - name: "environment"
+          in: "header"
+          schema:
+            type: "string"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/deployments/{id}/metrics":
     post:
       tags:
@@ -37051,6 +37079,10 @@ paths:
           description: "Deployment ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       requestBody:
         required: true
         description: "The deployment request payload"
@@ -37327,7 +37359,7 @@ paths:
           description: "Unauthorized."
       security:
         - ApiKey: []
-  "/v2/deploymentsstream":
+  "/v2/deployments/stream":
     post:
       tags:
         - "Deployments"
@@ -37610,207 +37642,210 @@ paths:
               schema:
                 type: "object"
                 properties:
-                  "id":
-                    type: "string"
-                    format: "ulid"
-                    description: "A unique identifier for the response. Can be used to add metrics to the transaction."
-                    readOnly: true
-                  "created":
-                    type: "string"
-                    format: "date-time"
-                    description: "A timestamp indicating when the object was created. Usually in a standardized format like ISO 8601"
-                  "object":
-                    type: "string"
-                    enum:
-                      - "chat"
-                      - "completion"
-                      - "image"
-                      - "vision"
-                    description: "Indicates the type of model used to generate the response"
-                  "model":
-                    type: "string"
-                    description: "The model used to generate the response"
-                  "provider":
-                    type: "string"
-                    enum:
-                      - "cohere"
-                      - "openai"
-                      - "anthropic"
-                      - "huggingface"
-                      - "replicate"
-                      - "google"
-                      - "google-ai"
-                      - "azure"
-                      - "aws"
-                      - "anyscale"
-                      - "perplexity"
-                      - "groq"
-                      - "fal"
-                      - "leonardoai"
-                      - "nvidia"
-                      - "jina"
-                      - "togetherai"
-                      - "elevenlabs"
-                    description: "The provider used to generate the response"
-                  "is_final":
-                    type: "boolean"
-                    description: "Indicates if the response is the final response"
-                  "integration_id":
-                    type: "string"
-                    description: "Indicates integration id used to generate the response"
-                  "finalized":
-                    type: "string"
-                    format: "date-time"
-                    description: "A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601"
-                  "system_fingerprint":
-                    type:
-                      - "string"
-                      - "null"
-                    description: "Provider backed system fingerprint."
-                  "choices":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "index":
-                          type: "number"
-                        "message":
-                          anyOf:
-                            - type: "object"
-                              properties:
-                                "role":
-                                  type: "string"
-                                  enum:
-                                    - "system"
-                                    - "assistant"
-                                    - "user"
-                                    - "exception"
-                                    - "tool"
-                                    - "prompt"
-                                    - "correction"
-                                    - "expected_output"
-                                  description: "The role of the prompt message"
-                                "content":
-                                  type:
-                                    - "string"
-                                    - "null"
-                                "tool_calls":
-                                  type: "array"
-                                  items:
-                                    type: "object"
-                                    properties:
-                                      "id":
-                                        type: "string"
-                                      "index":
-                                        type: "number"
-                                      "type":
-                                        type: "string"
-                                        enum:
-                                          - "function"
-                                      "function":
-                                        type: "object"
-                                        properties:
-                                          "name":
-                                            type: "string"
-                                          "arguments":
-                                            type: "string"
-                                            description: "JSON string arguments for the functions"
-                                        required:
-                                          - "name"
-                                          - "arguments"
-                                    required:
-                                      - "type"
-                                      - "function"
-                              required:
-                                - "role"
-                                - "tool_calls"
-                            - type: "object"
-                              properties:
-                                "role":
-                                  type: "string"
-                                  enum:
-                                    - "system"
-                                    - "assistant"
-                                    - "user"
-                                    - "exception"
-                                    - "tool"
-                                    - "prompt"
-                                    - "correction"
-                                    - "expected_output"
-                                  description: "The role of the prompt message"
-                                "content":
-                                  type:
-                                    - "string"
-                                    - "null"
-                              required:
-                                - "role"
-                                - "content"
-                            - type: "object"
-                              properties:
-                                "role":
-                                  type: "string"
-                                  enum:
-                                    - "system"
-                                    - "assistant"
-                                    - "user"
-                                    - "exception"
-                                    - "tool"
-                                    - "prompt"
-                                    - "correction"
-                                    - "expected_output"
-                                  description: "The role of the prompt message"
-                                "url":
-                                  type: "string"
-                              required:
-                                - "role"
-                                - "url"
-                        "finish_reason":
-                          type:
-                            - "string"
-                            - "null"
-                      required:
-                        - "index"
-                    description: "A list of choices generated by the model"
-                  "retrievals":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "document":
-                          type: "string"
-                          description: "Content of the retrieved chunk from the knowledge base"
-                        "metadata":
+                  "data":
+                    type: "object"
+                    properties:
+                      "id":
+                        type: "string"
+                        format: "ulid"
+                        description: "A unique identifier for the response. Can be used to add metrics to the transaction."
+                        readOnly: true
+                      "created":
+                        type: "string"
+                        format: "date-time"
+                        description: "A timestamp indicating when the object was created. Usually in a standardized format like ISO 8601"
+                      "object":
+                        type: "string"
+                        enum:
+                          - "chat"
+                          - "completion"
+                          - "image"
+                          - "vision"
+                        description: "Indicates the type of model used to generate the response"
+                      "model":
+                        type: "string"
+                        description: "The model used to generate the response"
+                      "provider":
+                        type: "string"
+                        enum:
+                          - "cohere"
+                          - "openai"
+                          - "anthropic"
+                          - "huggingface"
+                          - "replicate"
+                          - "google"
+                          - "google-ai"
+                          - "azure"
+                          - "aws"
+                          - "anyscale"
+                          - "perplexity"
+                          - "groq"
+                          - "fal"
+                          - "leonardoai"
+                          - "nvidia"
+                          - "jina"
+                          - "togetherai"
+                          - "elevenlabs"
+                        description: "The provider used to generate the response"
+                      "is_final":
+                        type: "boolean"
+                        description: "Indicates if the response is the final response"
+                      "integration_id":
+                        type: "string"
+                        description: "Indicates integration id used to generate the response"
+                      "finalized":
+                        type: "string"
+                        format: "date-time"
+                        description: "A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601"
+                      "system_fingerprint":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "Provider backed system fingerprint."
+                      "choices":
+                        type: "array"
+                        items:
                           type: "object"
                           properties:
-                            "file_name":
-                              type: "string"
-                              description: "Name of the file"
-                            "page_number":
+                            "index":
+                              type: "number"
+                            "message":
+                              anyOf:
+                                - type: "object"
+                                  properties:
+                                    "role":
+                                      type: "string"
+                                      enum:
+                                        - "system"
+                                        - "assistant"
+                                        - "user"
+                                        - "exception"
+                                        - "tool"
+                                        - "prompt"
+                                        - "correction"
+                                        - "expected_output"
+                                      description: "The role of the prompt message"
+                                    "content":
+                                      type:
+                                        - "string"
+                                        - "null"
+                                    "tool_calls":
+                                      type: "array"
+                                      items:
+                                        type: "object"
+                                        properties:
+                                          "id":
+                                            type: "string"
+                                          "index":
+                                            type: "number"
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "function"
+                                          "function":
+                                            type: "object"
+                                            properties:
+                                              "name":
+                                                type: "string"
+                                              "arguments":
+                                                type: "string"
+                                                description: "JSON string arguments for the functions"
+                                            required:
+                                              - "name"
+                                              - "arguments"
+                                        required:
+                                          - "type"
+                                          - "function"
+                                  required:
+                                    - "role"
+                                    - "tool_calls"
+                                - type: "object"
+                                  properties:
+                                    "role":
+                                      type: "string"
+                                      enum:
+                                        - "system"
+                                        - "assistant"
+                                        - "user"
+                                        - "exception"
+                                        - "tool"
+                                        - "prompt"
+                                        - "correction"
+                                        - "expected_output"
+                                      description: "The role of the prompt message"
+                                    "content":
+                                      type:
+                                        - "string"
+                                        - "null"
+                                  required:
+                                    - "role"
+                                    - "content"
+                                - type: "object"
+                                  properties:
+                                    "role":
+                                      type: "string"
+                                      enum:
+                                        - "system"
+                                        - "assistant"
+                                        - "user"
+                                        - "exception"
+                                        - "tool"
+                                        - "prompt"
+                                        - "correction"
+                                        - "expected_output"
+                                      description: "The role of the prompt message"
+                                    "url":
+                                      type: "string"
+                                  required:
+                                    - "role"
+                                    - "url"
+                            "finish_reason":
                               type:
-                                - "number"
+                                - "string"
                                 - "null"
-                              description: "Page number of the chunk"
-                            "file_type":
-                              type: "string"
-                              description: "Type of the file"
-                            "rerank_score":
-                              type: "number"
-                              description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
-                            "search_score":
-                              type: "number"
-                              description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
                           required:
-                            - "file_name"
-                            - "page_number"
-                            - "file_type"
-                            - "search_score"
-                          description: "Metadata of the retrieved chunk from the knowledge base"
-                      required:
-                        - "document"
-                        - "metadata"
-                    description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
-                  "provider_response":
-                    description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
+                            - "index"
+                        description: "A list of choices generated by the model"
+                      "retrievals":
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            "document":
+                              type: "string"
+                              description: "Content of the retrieved chunk from the knowledge base"
+                            "metadata":
+                              type: "object"
+                              properties:
+                                "file_name":
+                                  type: "string"
+                                  description: "Name of the file"
+                                "page_number":
+                                  type:
+                                    - "number"
+                                    - "null"
+                                  description: "Page number of the chunk"
+                                "file_type":
+                                  type: "string"
+                                  description: "Type of the file"
+                                "rerank_score":
+                                  type: "number"
+                                  description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
+                                "search_score":
+                                  type: "number"
+                                  description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
+                              required:
+                                - "file_name"
+                                - "page_number"
+                                - "file_type"
+                                - "search_score"
+                              description: "Metadata of the retrieved chunk from the knowledge base"
+                          required:
+                            - "document"
+                            - "metadata"
+                        description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
+                      "provider_response":
+                        description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
                 required:
                   - "id"
                   - "created"
@@ -37823,6 +37858,15 @@ paths:
               x-speakeasy-sse-sentinel: "[DONE]"
       security:
         - ApiKey: []
+      parameters:
+        - name: "environment"
+          in: "header"
+          schema:
+            type: "string"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/files":
     post:
       tags:
@@ -37881,7 +37925,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-01-30T08:04:01.719Z"
+                    default: "2025-01-31T07:05:41.928Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -37895,6 +37939,11 @@ paths:
           description: "Bad request"
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
     get:
       tags:
         - "Files"
@@ -37928,6 +37977,10 @@ paths:
           required: false
           name: "firstId"
           in: "query"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Files retrieved successfully"
@@ -37968,7 +38021,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-01-30T08:04:01.719Z"
+                          default: "2025-01-31T07:05:41.928Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -38002,6 +38055,10 @@ paths:
           description: "The ID of the file"
           name: "file_id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "File details retrieved successfully"
@@ -38033,7 +38090,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-01-30T08:04:01.719Z"
+                    default: "2025-01-31T07:05:41.928Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38062,6 +38119,10 @@ paths:
           description: "The ID of the file"
           name: "file_id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "204":
           description: "File deleted successfully"
@@ -38718,7 +38779,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -38726,7 +38787,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -39070,6 +39131,11 @@ paths:
                 description: "Prompt snippet model returned from the API"
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/resources/prompts/snippets/{id}":
     patch:
       tags:
@@ -39086,6 +39152,10 @@ paths:
           description: "Prompt ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       requestBody:
         content:
           "application/json":
@@ -39720,7 +39790,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -39728,7 +39798,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -40098,6 +40168,10 @@ paths:
           description: "Prompt ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Prompt deleted snippet."
@@ -40118,6 +40192,10 @@ paths:
           description: "Prompt ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Prompt snippet retrieved."
@@ -40446,7 +40524,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -40454,7 +40532,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -40807,7 +40885,7 @@ paths:
       tags:
         - "Prompt Snippets"
       x-speakeasy-group: "promptSnippets"
-      x-speakeasy-name-override: "get"
+      x-speakeasy-name-override: "getByKey"
       operationId: "FindOneByKeyPromptSnippet"
       summary: "Retrieve a prompt snippet by key"
       parameters:
@@ -40818,6 +40896,10 @@ paths:
           description: "Prompt Key"
           name: "key"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Prompt snippet retrieved."
@@ -41146,7 +41228,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41154,7 +41236,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42146,7 +42228,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42154,7 +42236,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42497,6 +42579,11 @@ paths:
                 description: "Prompt model returned from the API"
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
   "/v2/prompts/{id}":
     patch:
       tags:
@@ -42513,6 +42600,10 @@ paths:
           description: "Prompt ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       requestBody:
         content:
           "application/json":
@@ -43141,7 +43232,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-30T08:04:00.613Z"
+                    default: "2025-01-31T07:05:40.814Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -43149,7 +43240,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-30T08:04:00.614Z"
+                        default: "2025-01-31T07:05:40.814Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -43518,6 +43609,10 @@ paths:
           description: "Prompt ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Prompt deleted."
@@ -43538,6 +43633,10 @@ paths:
           description: "Prompt ID"
           name: "id"
           in: "path"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Prompt retrieved."
@@ -43576,6 +43675,10 @@ paths:
           description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
           name: "ending_before"
           in: "query"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
       responses:
         "200":
           description: "Prompts retrieved."
@@ -43911,7 +44014,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-01-30T08:04:00.613Z"
+                          default: "2025-01-31T07:05:40.814Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -43919,7 +44022,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-01-30T08:04:00.614Z"
+                              default: "2025-01-31T07:05:40.814Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -44326,3 +44429,8 @@ paths:
           description: "Internal server error"
       security:
         - ApiKey: []
+      parameters:
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
