@@ -587,6 +587,13 @@ components:
                 - "float"
                 - "base64"
               description: "The format to return the embeddings"
+            "reasoningEffort":
+              type: "string"
+              enum:
+                - "low"
+                - "medium"
+                - "high"
+              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
           description: "Model Parameters: Not all parameters apply to every model"
         "tools":
           type: "array"
@@ -1710,6 +1717,13 @@ components:
                         - "float"
                         - "base64"
                       description: "The format to return the embeddings"
+                    "reasoningEffort":
+                      type: "string"
+                      enum:
+                        - "low"
+                        - "medium"
+                        - "high"
+                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                   description: "Model Parameters: Not all parameters apply to every model"
                 "provider":
                   type: "string"
@@ -2233,6 +2247,13 @@ components:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -2492,6 +2513,13 @@ components:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -2808,6 +2836,13 @@ components:
                                 - "float"
                                 - "base64"
                               description: "The format to return the embeddings"
+                            "reasoningEffort":
+                              type: "string"
+                              enum:
+                                - "low"
+                                - "medium"
+                                - "high"
+                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                           description: "Model Parameters: Not all parameters apply to every model"
                         "provider":
                           type: "string"
@@ -2907,7 +2942,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-01-31T13:31:13.979Z"
+          default: "2025-02-02T16:01:08.536Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -2966,7 +3001,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-01-31T13:31:13.979Z"
+            default: "2025-02-02T16:01:08.536Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3044,7 +3079,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-01-31T13:31:13.979Z"
+          default: "2025-02-02T16:01:08.536Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3089,7 +3124,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-01-31T13:31:13.979Z"
+                default: "2025-02-02T16:01:08.536Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3131,7 +3166,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-01-31T13:31:13.979Z"
+          default: "2025-02-02T16:01:08.536Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3370,7 +3405,7 @@ components:
                           - type: "string"
                             format: "date-time"
                           - type: "string"
-                        default: "2025-01-31T13:31:12.934Z"
+                        default: "2025-02-02T16:01:07.473Z"
                         description: "The date and time the resource was created"
                         readOnly: true
                         format: "date-time"
@@ -3378,7 +3413,7 @@ components:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2025-01-31T13:31:12.935Z"
+                            default: "2025-02-02T16:01:07.474Z"
                           - type: "string"
                         description: "The date and time the resource was last updated"
                         readOnly: true
@@ -3406,7 +3441,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-01-31T13:31:12.934Z"
+              default: "2025-02-02T16:01:07.473Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3414,7 +3449,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-01-31T13:31:12.935Z"
+                  default: "2025-02-02T16:01:07.474Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -3923,7 +3958,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-01-31T13:31:12.934Z"
+              default: "2025-02-02T16:01:07.473Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3931,7 +3966,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-01-31T13:31:12.935Z"
+                  default: "2025-02-02T16:01:07.474Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -4080,7 +4115,7 @@ components:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -4088,7 +4123,7 @@ components:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -4362,6 +4397,13 @@ components:
                     - "float"
                     - "base64"
                   description: "The format to return the embeddings"
+                "reasoningEffort":
+                  type: "string"
+                  enum:
+                    - "low"
+                    - "medium"
+                    - "high"
+                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -4541,7 +4583,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-01-31T13:31:12.934Z"
+          default: "2025-02-02T16:01:07.473Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -4549,7 +4591,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-01-31T13:31:12.935Z"
+              default: "2025-02-02T16:01:07.474Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -4693,6 +4735,13 @@ components:
                           - "float"
                           - "base64"
                         description: "The format to return the embeddings"
+                      "reasoningEffort":
+                        type: "string"
+                        enum:
+                          - "low"
+                          - "medium"
+                          - "high"
+                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                     description: "Model Parameters: Not all parameters apply to every model"
                   "provider":
                     type: "string"
@@ -5021,6 +5070,13 @@ components:
                     - "float"
                     - "base64"
                   description: "The format to return the embeddings"
+                "reasoningEffort":
+                  type: "string"
+                  enum:
+                    - "low"
+                    - "medium"
+                    - "high"
+                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -5432,6 +5488,13 @@ components:
                     - "float"
                     - "base64"
                   description: "The format to return the embeddings"
+                "reasoningEffort":
+                  type: "string"
+                  enum:
+                    - "low"
+                    - "medium"
+                    - "high"
+                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -5731,6 +5794,13 @@ components:
                     - "float"
                     - "base64"
                   description: "The format to return the embeddings"
+                "reasoningEffort":
+                  type: "string"
+                  enum:
+                    - "low"
+                    - "medium"
+                    - "high"
+                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -6055,6 +6125,13 @@ components:
                     - "float"
                     - "base64"
                   description: "The format to return the embeddings"
+                "reasoningEffort":
+                  type: "string"
+                  enum:
+                    - "low"
+                    - "medium"
+                    - "high"
+                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -6228,7 +6305,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-01-31T13:31:12.934Z"
+          default: "2025-02-02T16:01:07.473Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6236,7 +6313,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-01-31T13:31:12.935Z"
+              default: "2025-02-02T16:01:07.474Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6386,6 +6463,13 @@ components:
                           - "float"
                           - "base64"
                         description: "The format to return the embeddings"
+                      "reasoningEffort":
+                        type: "string"
+                        enum:
+                          - "low"
+                          - "medium"
+                          - "high"
+                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                     description: "Model Parameters: Not all parameters apply to every model"
                   "provider":
                     type: "string"
@@ -8046,6 +8130,13 @@ components:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
@@ -10169,6 +10260,13 @@ components:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
@@ -11112,6 +11210,13 @@ components:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -11635,6 +11740,13 @@ components:
                                         - "float"
                                         - "base64"
                                       description: "The format to return the embeddings"
+                                    "reasoningEffort":
+                                      type: "string"
+                                      enum:
+                                        - "low"
+                                        - "medium"
+                                        - "high"
+                                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                   description: "Model Parameters: Not all parameters apply to every model"
                                 "provider":
                                   type: "string"
@@ -11894,6 +12006,13 @@ components:
                                         - "float"
                                         - "base64"
                                       description: "The format to return the embeddings"
+                                    "reasoningEffort":
+                                      type: "string"
+                                      enum:
+                                        - "low"
+                                        - "medium"
+                                        - "high"
+                                      description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                   description: "Model Parameters: Not all parameters apply to every model"
                                 "provider":
                                   type: "string"
@@ -12210,6 +12329,13 @@ components:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -13724,6 +13850,13 @@ components:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
@@ -14620,6 +14753,13 @@ components:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -16450,6 +16590,13 @@ components:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
@@ -17361,6 +17508,13 @@ components:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -19188,6 +19342,13 @@ components:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
@@ -20022,6 +20183,13 @@ components:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -23032,6 +23200,13 @@ components:
                                                 - "float"
                                                 - "base64"
                                               description: "The format to return the embeddings"
+                                            "reasoningEffort":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "medium"
+                                                - "high"
+                                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                           description: "Model Parameters: Not all parameters apply to every model"
                                         "provider":
                                           type: "string"
@@ -25155,6 +25330,13 @@ components:
                                                 - "float"
                                                 - "base64"
                                               description: "The format to return the embeddings"
+                                            "reasoningEffort":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "medium"
+                                                - "high"
+                                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                           description: "Model Parameters: Not all parameters apply to every model"
                                         "provider":
                                           type: "string"
@@ -26098,6 +26280,13 @@ components:
                                   - "float"
                                   - "base64"
                                 description: "The format to return the embeddings"
+                              "reasoningEffort":
+                                type: "string"
+                                enum:
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                             description: "Model Parameters: Not all parameters apply to every model"
                           "provider":
                             type: "string"
@@ -26621,6 +26810,13 @@ components:
                                               - "float"
                                               - "base64"
                                             description: "The format to return the embeddings"
+                                          "reasoningEffort":
+                                            type: "string"
+                                            enum:
+                                              - "low"
+                                              - "medium"
+                                              - "high"
+                                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                         description: "Model Parameters: Not all parameters apply to every model"
                                       "provider":
                                         type: "string"
@@ -26880,6 +27076,13 @@ components:
                                               - "float"
                                               - "base64"
                                             description: "The format to return the embeddings"
+                                          "reasoningEffort":
+                                            type: "string"
+                                            enum:
+                                              - "low"
+                                              - "medium"
+                                              - "high"
+                                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                         description: "Model Parameters: Not all parameters apply to every model"
                                       "provider":
                                         type: "string"
@@ -27196,6 +27399,13 @@ components:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
@@ -28710,6 +28920,13 @@ components:
                                                 - "float"
                                                 - "base64"
                                               description: "The format to return the embeddings"
+                                            "reasoningEffort":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "medium"
+                                                - "high"
+                                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                           description: "Model Parameters: Not all parameters apply to every model"
                                         "provider":
                                           type: "string"
@@ -29606,6 +29823,13 @@ components:
                                   - "float"
                                   - "base64"
                                 description: "The format to return the embeddings"
+                              "reasoningEffort":
+                                type: "string"
+                                enum:
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                             description: "Model Parameters: Not all parameters apply to every model"
                           "provider":
                             type: "string"
@@ -31436,6 +31660,13 @@ components:
                                                 - "float"
                                                 - "base64"
                                               description: "The format to return the embeddings"
+                                            "reasoningEffort":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "medium"
+                                                - "high"
+                                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                           description: "Model Parameters: Not all parameters apply to every model"
                                         "provider":
                                           type: "string"
@@ -32347,6 +32578,13 @@ components:
                                   - "float"
                                   - "base64"
                                 description: "The format to return the embeddings"
+                              "reasoningEffort":
+                                type: "string"
+                                enum:
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                             description: "Model Parameters: Not all parameters apply to every model"
                           "provider":
                             type: "string"
@@ -34174,6 +34412,13 @@ components:
                                                 - "float"
                                                 - "base64"
                                               description: "The format to return the embeddings"
+                                            "reasoningEffort":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "medium"
+                                                - "high"
+                                              description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                           description: "Model Parameters: Not all parameters apply to every model"
                                         "provider":
                                           type: "string"
@@ -35008,6 +35253,13 @@ components:
                                   - "float"
                                   - "base64"
                                 description: "The format to return the embeddings"
+                              "reasoningEffort":
+                                type: "string"
+                                enum:
+                                  - "low"
+                                  - "medium"
+                                  - "high"
+                                description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                             description: "Model Parameters: Not all parameters apply to every model"
                           "provider":
                             type: "string"
@@ -35788,7 +36040,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -35796,7 +36048,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -36118,6 +36370,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -36769,6 +37028,13 @@ paths:
                           - "float"
                           - "base64"
                         description: "The format to return the embeddings"
+                      "reasoningEffort":
+                        type: "string"
+                        enum:
+                          - "low"
+                          - "medium"
+                          - "high"
+                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                     description: "Model Parameters: Not all parameters apply to every model"
                   "tools":
                     type: "array"
@@ -37926,7 +38192,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-01-31T13:31:13.979Z"
+                    default: "2025-02-02T16:01:08.536Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38022,7 +38288,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-01-31T13:31:13.979Z"
+                          default: "2025-02-02T16:01:08.536Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -38091,7 +38357,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-01-31T13:31:13.979Z"
+                    default: "2025-02-02T16:01:08.536Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38275,6 +38541,13 @@ paths:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -38601,6 +38874,13 @@ paths:
                               - "float"
                               - "base64"
                             description: "The format to return the embeddings"
+                          "reasoningEffort":
+                            type: "string"
+                            enum:
+                              - "low"
+                              - "medium"
+                              - "high"
+                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -38780,7 +39060,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -38788,7 +39068,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -38932,6 +39212,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -39291,6 +39578,13 @@ paths:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -39612,6 +39906,13 @@ paths:
                               - "float"
                               - "base64"
                             description: "The format to return the embeddings"
+                          "reasoningEffort":
+                            type: "string"
+                            enum:
+                              - "low"
+                              - "medium"
+                              - "high"
+                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -39791,7 +40092,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -39799,7 +40100,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -39943,6 +40244,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -40346,6 +40654,13 @@ paths:
                               - "float"
                               - "base64"
                             description: "The format to return the embeddings"
+                          "reasoningEffort":
+                            type: "string"
+                            enum:
+                              - "low"
+                              - "medium"
+                              - "high"
+                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -40525,7 +40840,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -40533,7 +40848,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -40677,6 +40992,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -41050,6 +41372,13 @@ paths:
                               - "float"
                               - "base64"
                             description: "The format to return the embeddings"
+                          "reasoningEffort":
+                            type: "string"
+                            enum:
+                              - "low"
+                              - "medium"
+                              - "high"
+                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -41229,7 +41558,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41237,7 +41566,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -41381,6 +41710,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -41727,6 +42063,13 @@ paths:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -42056,6 +42399,13 @@ paths:
                               - "float"
                               - "base64"
                             description: "The format to return the embeddings"
+                          "reasoningEffort":
+                            type: "string"
+                            enum:
+                              - "low"
+                              - "medium"
+                              - "high"
+                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -42229,7 +42579,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42237,7 +42587,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42387,6 +42737,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -42739,6 +43096,13 @@ paths:
                             - "float"
                             - "base64"
                           description: "The format to return the embeddings"
+                        "reasoningEffort":
+                          type: "string"
+                          enum:
+                            - "low"
+                            - "medium"
+                            - "high"
+                          description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -43060,6 +43424,13 @@ paths:
                               - "float"
                               - "base64"
                             description: "The format to return the embeddings"
+                          "reasoningEffort":
+                            type: "string"
+                            enum:
+                              - "low"
+                              - "medium"
+                              - "high"
+                            description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -43233,7 +43604,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-01-31T13:31:12.934Z"
+                    default: "2025-02-02T16:01:07.473Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -43241,7 +43612,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-01-31T13:31:12.935Z"
+                        default: "2025-02-02T16:01:07.474Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -43391,6 +43762,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -43842,6 +44220,13 @@ paths:
                                     - "float"
                                     - "base64"
                                   description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -44015,7 +44400,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-01-31T13:31:12.934Z"
+                          default: "2025-02-02T16:01:07.473Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -44023,7 +44408,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-01-31T13:31:12.935Z"
+                              default: "2025-02-02T16:01:07.474Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -44173,6 +44558,13 @@ paths:
                                           - "float"
                                           - "base64"
                                         description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
                                     description: "Model Parameters: Not all parameters apply to every model"
                                   "provider":
                                     type: "string"
