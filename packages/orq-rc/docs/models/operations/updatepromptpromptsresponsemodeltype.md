@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { UpdatePromptPromptsResponseModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptPromptsResponseModelType = "tts";
+let value: UpdatePromptPromptsResponseModelType = "embedding";
 ```
 
 ## Values

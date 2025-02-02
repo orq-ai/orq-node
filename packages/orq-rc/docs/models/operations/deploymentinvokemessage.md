@@ -24,7 +24,7 @@ const value: operations.DeploymentInvokeMessage1 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessage2 = {
-  role: "assistant",
+  role: "tool",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.DeploymentInvokeMessage2 = {
 
 ```typescript
 const value: operations.Message3 = {
-  role: "system",
-  url: "https://windy-version.org",
+  role: "expected_output",
+  url: "https://exalted-breastplate.com/",
 };
 ```
 

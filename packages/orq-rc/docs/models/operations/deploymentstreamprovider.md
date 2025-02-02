@@ -7,7 +7,7 @@ The provider used to generate the response
 ```typescript
 import { DeploymentStreamProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamProvider = "togetherai";
+let value: DeploymentStreamProvider = "openai";
 ```
 
 ## Values

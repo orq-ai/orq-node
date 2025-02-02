@@ -154,6 +154,21 @@ export type FindOneByKeyPromptSnippetEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const FindOneByKeyPromptSnippetReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type FindOneByKeyPromptSnippetReasoningEffort = ClosedEnum<
+  typeof FindOneByKeyPromptSnippetReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type FindOneByKeyPromptSnippetModelParameters = {
@@ -229,6 +244,10 @@ export type FindOneByKeyPromptSnippetModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: FindOneByKeyPromptSnippetEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: FindOneByKeyPromptSnippetReasoningEffort | undefined;
 };
 
 export const FindOneByKeyPromptSnippetProvider = {
@@ -580,6 +599,21 @@ export type FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort = ClosedEnum<
+  typeof FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type FindOneByKeyPromptSnippetPromptSnippetsModelParameters = {
@@ -658,6 +692,12 @@ export type FindOneByKeyPromptSnippetPromptSnippetsModelParameters = {
    */
   encodingFormat?:
     | FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat
+    | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?:
+    | FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort
     | undefined;
 };
 
@@ -1572,6 +1612,29 @@ export namespace FindOneByKeyPromptSnippetEncodingFormat$ {
 }
 
 /** @internal */
+export const FindOneByKeyPromptSnippetReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof FindOneByKeyPromptSnippetReasoningEffort> = z
+    .nativeEnum(FindOneByKeyPromptSnippetReasoningEffort);
+
+/** @internal */
+export const FindOneByKeyPromptSnippetReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof FindOneByKeyPromptSnippetReasoningEffort> =
+    FindOneByKeyPromptSnippetReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FindOneByKeyPromptSnippetReasoningEffort$ {
+  /** @deprecated use `FindOneByKeyPromptSnippetReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema =
+    FindOneByKeyPromptSnippetReasoningEffort$inboundSchema;
+  /** @deprecated use `FindOneByKeyPromptSnippetReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    FindOneByKeyPromptSnippetReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const FindOneByKeyPromptSnippetModelParameters$inboundSchema: z.ZodType<
   FindOneByKeyPromptSnippetModelParameters,
   z.ZodTypeDef,
@@ -1598,6 +1661,8 @@ export const FindOneByKeyPromptSnippetModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: FindOneByKeyPromptSnippetPhotoRealVersion$inboundSchema
     .optional(),
   encoding_format: FindOneByKeyPromptSnippetEncodingFormat$inboundSchema
+    .optional(),
+  reasoningEffort: FindOneByKeyPromptSnippetReasoningEffort$inboundSchema
     .optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1626,6 +1691,7 @@ export type FindOneByKeyPromptSnippetModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -1655,6 +1721,8 @@ export const FindOneByKeyPromptSnippetModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: FindOneByKeyPromptSnippetPhotoRealVersion$outboundSchema
     .optional(),
   encodingFormat: FindOneByKeyPromptSnippetEncodingFormat$outboundSchema
+    .optional(),
+  reasoningEffort: FindOneByKeyPromptSnippetReasoningEffort$outboundSchema
     .optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -3071,6 +3139,31 @@ export namespace FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat$ {
 }
 
 /** @internal */
+export const FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<
+    typeof FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort
+  > = z.nativeEnum(FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort);
+
+/** @internal */
+export const FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<
+    typeof FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort
+  > = FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$ {
+  /** @deprecated use `FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema =
+    FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$inboundSchema;
+  /** @deprecated use `FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const FindOneByKeyPromptSnippetPromptSnippetsModelParameters$inboundSchema:
   z.ZodType<
     FindOneByKeyPromptSnippetPromptSnippetsModelParameters,
@@ -3107,6 +3200,9 @@ export const FindOneByKeyPromptSnippetPromptSnippetsModelParameters$inboundSchem
     encoding_format:
       FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat$inboundSchema
         .optional(),
+    reasoningEffort:
+      FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$inboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       "encoding_format": "encodingFormat",
@@ -3134,6 +3230,7 @@ export type FindOneByKeyPromptSnippetPromptSnippetsModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -3172,6 +3269,9 @@ export const FindOneByKeyPromptSnippetPromptSnippetsModelParameters$outboundSche
         .optional(),
     encodingFormat:
       FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat$outboundSchema
+        .optional(),
+    reasoningEffort:
+      FindOneByKeyPromptSnippetPromptSnippetsReasoningEffort$outboundSchema
         .optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -4353,7 +4453,7 @@ export const FindOneByKeyPromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-31T13:31:12.935Z",
+    "2025-02-02T16:01:07.474Z",
   ).transform(v => new Date(v)),
   type: FindOneByKeyPromptSnippetType$inboundSchema,
   versions: z.array(
@@ -4407,7 +4507,7 @@ export const FindOneByKeyPromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-31T13:31:12.935Z"))
+  updated: z.date().default(() => new Date("2025-02-02T16:01:07.474Z"))
     .transform(v => v.toISOString()),
   type: FindOneByKeyPromptSnippetType$outboundSchema,
   versions: z.array(

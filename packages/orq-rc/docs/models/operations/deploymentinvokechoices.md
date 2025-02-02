@@ -6,7 +6,7 @@
 import { DeploymentInvokeChoices } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeChoices = {
-  index: 7740.48,
+  index: 9295.3,
 };
 ```
 

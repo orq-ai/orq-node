@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.FindOnePromptSnippetContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://hateful-t-shirt.name",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

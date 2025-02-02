@@ -18,7 +18,7 @@ const value: operations.CreatePrompt21 = {
 const value: operations.CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://normal-publicity.net/",
+    url: "https://round-saw.info/",
   },
 };
 ```

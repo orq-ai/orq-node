@@ -9,21 +9,14 @@ import { UpdatePromptVersions } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptVersions = {
   id: "<id>",
-  createdById: "1fd8648e-4835-43f9-8b15-e12a9de24601",
-  displayName: "Jayden92",
-  updatedById: "734c4679-f354-4515-9e45-fb8c1713256f",
+  createdById: "459e2497-7de7-4ac8-a4a9-e0e805b7f65d",
+  displayName: "Maritza.Osinski",
+  updatedById: "e6e89d91-f3b8-473b-a1fd-8648e48353f9",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://forceful-kick.biz",
-            },
-          },
-        ],
+        role: "system",
+        content: "<value>",
       },
     ],
   },

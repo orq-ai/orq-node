@@ -6,11 +6,13 @@
 import { UpdatePromptPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptPromptsMessages = {
-  role: "user",
+  role: "system",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://outlandish-event.biz",
+      },
     },
   ],
 };

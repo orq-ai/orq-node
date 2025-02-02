@@ -18,7 +18,7 @@ const value: operations.FindOnePromptSnippetContentPromptSnippets2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://jam-packed-season.net/",
+      url: "https://well-off-negotiation.com/",
     },
   },
 ];

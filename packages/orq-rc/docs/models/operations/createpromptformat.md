@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { CreatePromptFormat } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptFormat = "json_object";
+let value: CreatePromptFormat = "url";
 ```
 
 ## Values

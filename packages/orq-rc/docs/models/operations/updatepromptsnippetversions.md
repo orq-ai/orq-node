@@ -9,25 +9,18 @@ import { UpdatePromptSnippetVersions } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptSnippetVersions = {
   id: "<id>",
-  displayName: "Danyka47",
+  displayName: "Sidney.Mueller45",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://eminent-validity.name/",
-            },
-          },
-        ],
+        role: "user",
+        content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "14706739-c39a-4fcd-972f-271ffb544282",
-  updatedById: "ab06ad7f-4074-4d34-9cb8-b600810fd20f",
+  createdById: "b1eb2f8f-3844-49ec-bb8e-7dd3c0538b18",
+  updatedById: "3a907b0e-803f-4914-b706-739c39afcd72",
   timestamp: "<value>",
 };
 ```

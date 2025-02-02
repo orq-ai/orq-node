@@ -7,7 +7,7 @@ The language that the prompt is written in. Use this field to categorize the pro
 ```typescript
 import { FindOnePromptSnippetLanguage } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetLanguage = "French";
+let value: FindOnePromptSnippetLanguage = "Dutch";
 ```
 
 ## Values

@@ -9,30 +9,35 @@ import { FindOnePromptSnippetResponseBody } from "@orq-ai/node/models/operations
 
 let value: FindOnePromptSnippetResponseBody = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "ff99fec5-537f-4e10-9e83-aa140323a012",
+  owner: "vendor",
+  domainId: "bc256a44-5c91-415c-8bbc-488bf4ca9cf0",
   key: "<key>",
-  displayName: "Elias53",
+  displayName: "Nigel27",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: "<value>",
+        role: "system",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
       },
     ],
   },
   metadata: {},
-  createdById: "647a7eeb-726b-441e-9b9c-d7ee4988f4fe",
-  updatedById: "dca53ad0-a7e5-4782-bbd0-40faf8c556a5",
+  createdById: "88a51528-5ff9-49fe-9c55-37fe10e83aa1",
+  updatedById: "0323a012-544c-4f8f-8616-47a7eeb726b4",
   type: "snippet",
   versions: [
     {
       id: "<id>",
-      displayName: "Wilma.Dickinson4",
+      displayName: "Sydni_Morissette",
       promptConfig: {
         messages: [
           {
-            role: "exception",
+            role: "expected_output",
             content: [
               {
                 type: "text",
@@ -43,8 +48,8 @@ let value: FindOnePromptSnippetResponseBody = {
         ],
       },
       metadata: {},
-      createdById: "7eac8f90-369c-46bc-85fa-e8bce286e1fe",
-      updatedById: "7bbec47b-2374-4d95-adcf-d62d05efab08",
+      createdById: "988f4fe7-dca5-43ad-b0a7-e5782bd040fa",
+      updatedById: "8c556a5e-f031-4037-ad37-eac8f90369c6",
       timestamp: "<value>",
     },
   ],

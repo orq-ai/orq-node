@@ -18,7 +18,7 @@ const value: operations.CreatePromptSnippetContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://blushing-possession.biz/",
+      url: "https://weekly-abacus.name",
     },
   },
 ];

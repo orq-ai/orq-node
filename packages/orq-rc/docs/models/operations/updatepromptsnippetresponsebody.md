@@ -10,29 +10,34 @@ import { UpdatePromptSnippetResponseBody } from "@orq-ai/node/models/operations"
 let value: UpdatePromptSnippetResponseBody = {
   id: "<id>",
   owner: "<value>",
-  domainId: "b14fa86c-2fd9-40be-b851-ce1c0f984e4d",
+  domainId: "71ffb544-2825-4ab0-a6ad-7f4074d34cb8",
   key: "<key>",
-  displayName: "Ottilie.Bergstrom43",
+  displayName: "Heather_Anderson8",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: "<value>",
+        role: "expected_output",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
       },
     ],
   },
   metadata: {},
-  createdById: "27480ed8-df1a-4ff9-a290-3f5a4fb5c163",
-  updatedById: "16485b0a-34cf-45d1-bac2-6e1096ce4679",
+  createdById: "0f42b14f-a86c-42fd-990b-e851ce1c0f98",
+  updatedById: "e4dfc817-7365-4274-880e-d8df1aff9290",
   type: "snippet",
   versions: [
     {
       id: "<id>",
-      displayName: "Max13",
+      displayName: "Verlie94",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
+            role: "user",
             content: [
               {
                 type: "text",
@@ -43,8 +48,8 @@ let value: UpdatePromptSnippetResponseBody = {
         ],
       },
       metadata: {},
-      createdById: "35baedde-4568-4a40-a64f-eda58d1c0dc0",
-      updatedById: "822c9fff-1f37-4c39-a211-506a61142f2c",
+      createdById: "63a16485-b0a3-44cf-95d1-ac26e1096ce4",
+      updatedById: "79fb64f2-bea6-435b-baed-de4568a4064f",
       timestamp: "<value>",
     },
   ],

@@ -10,15 +10,8 @@ import { CreatePromptSnippetPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptSnippetPromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://clear-cut-bungalow.name",
-          },
-        },
-      ],
+      role: "system",
+      content: "<value>",
     },
   ],
 };

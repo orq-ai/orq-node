@@ -9,23 +9,18 @@ import { FindOneByKeyPromptSnippetVersions } from "@orq-ai/node/models/operation
 
 let value: FindOneByKeyPromptSnippetVersions = {
   id: "<id>",
-  displayName: "Jakob_Brakus80",
+  displayName: "Kylie13",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "correction",
+        content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "cfc1c132-38a7-4f3c-bd87-96866b12dc46",
-  updatedById: "d9306add-0353-4cc8-af2e-12b196becd04",
+  createdById: "31b7be2e-64ff-43a1-aada-6669ee021358",
+  updatedById: "befadc4e-0047-4a1a-ac26-87cfc1c13238",
   timestamp: "<value>",
 };
 ```

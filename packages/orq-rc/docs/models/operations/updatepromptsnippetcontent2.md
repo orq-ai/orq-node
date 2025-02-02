@@ -18,7 +18,7 @@ const value: operations.UpdatePromptSnippet21 = {
 const value: operations.UpdatePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://artistic-finger.com",
+    url: "https://triangular-husband.info/",
   },
 };
 ```

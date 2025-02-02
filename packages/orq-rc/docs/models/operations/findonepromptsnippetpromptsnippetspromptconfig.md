@@ -10,12 +10,12 @@ import { FindOnePromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/node/mod
 let value: FindOnePromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "expected_output",
+      role: "tool",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://impartial-colon.net/",
+            url: "https://hateful-t-shirt.name",
           },
         },
       ],

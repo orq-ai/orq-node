@@ -10,7 +10,7 @@ import { DeploymentStream22Input } from "@orq-ai/node/models/operations";
 let value: DeploymentStream22Input = {
   type: "image_url",
   imageUrl: {
-    url: "https://blushing-legend.biz",
+    url: "https://grave-birdcage.info",
   },
 };
 ```

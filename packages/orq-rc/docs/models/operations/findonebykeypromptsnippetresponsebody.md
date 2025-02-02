@@ -10,41 +10,36 @@ import { FindOneByKeyPromptSnippetResponseBody } from "@orq-ai/node/models/opera
 let value: FindOneByKeyPromptSnippetResponseBody = {
   id: "<id>",
   owner: "<value>",
-  domainId: "34f450d2-34e3-4cce-b13b-342271560617",
+  domainId: "f3cd8796-866b-412d-8c46-ed9306add035",
   key: "<key>",
-  displayName: "Rebeka23",
+  displayName: "Providenci14",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "system",
+        content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "03496b52-5ef3-4c4e-92a1-fbd97987c226",
-  updatedById: "1dc8f1c4-53c2-4da0-acae-b8d484f30580",
+  createdById: "b196becd-0486-434f-8450-d234e3cce13b",
+  updatedById: "42271560-617d-4d19-bd3c-ec103496b525",
   type: "snippet",
   versions: [
     {
       id: "<id>",
-      displayName: "Scotty95",
+      displayName: "Verona.Schaefer88",
       promptConfig: {
         messages: [
           {
-            role: "tool",
+            role: "prompt",
             content: "<value>",
           },
         ],
       },
       metadata: {},
-      createdById: "09fd52cb-fd81-4758-a4dd-596e2bf23bc7",
-      updatedById: "371547e2-69f2-4e17-a735-7df8d9536802",
+      createdById: "fbd97987-c226-451d-bc8f-1c453c2da0ca",
+      updatedById: "b8d484f3-0580-48db-b9ff-d9709fd52cbf",
       timestamp: "<value>",
     },
   ],

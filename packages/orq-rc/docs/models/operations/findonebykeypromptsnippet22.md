@@ -10,7 +10,7 @@ import { FindOneByKeyPromptSnippet22 } from "@orq-ai/node/models/operations";
 let value: FindOneByKeyPromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://shrill-ostrich.net/",
+    url: "https://cautious-whack.org",
   },
 };
 ```

@@ -18,7 +18,7 @@ const value: operations.DeploymentStreamContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://hungry-conservative.net/",
+      url: "https://confused-slipper.biz/",
     },
   },
 ];

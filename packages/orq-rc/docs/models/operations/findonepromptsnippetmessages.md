@@ -6,7 +6,7 @@
 import { FindOnePromptSnippetMessages } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetMessages = {
-  role: "exception",
+  role: "expected_output",
   content: "<value>",
 };
 ```

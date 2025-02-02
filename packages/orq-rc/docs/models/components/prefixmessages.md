@@ -6,8 +6,15 @@
 import { PrefixMessages } from "@orq-ai/node/models/components";
 
 let value: PrefixMessages = {
-  role: "correction",
-  content: "<value>",
+  role: "prompt",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://creamy-blowgun.net",
+      },
+    },
+  ],
 };
 ```
 

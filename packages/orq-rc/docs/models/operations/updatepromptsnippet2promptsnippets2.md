@@ -10,7 +10,7 @@ import { UpdatePromptSnippet2PromptSnippets2 } from "@orq-ai/node/models/operati
 let value: UpdatePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://fortunate-confusion.info/",
+    url: "https://tragic-mentor.info/",
   },
 };
 ```

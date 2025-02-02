@@ -10,13 +10,11 @@ import { FindOnePromptSnippetPromptConfig } from "@orq-ai/node/models/operations
 let value: FindOnePromptSnippetPromptConfig = {
   messages: [
     {
-      role: "correction",
+      role: "exception",
       content: [
         {
-          type: "image_url",
-          imageUrl: {
-            url: "https://staid-eternity.net",
-          },
+          type: "text",
+          text: "<value>",
         },
       ],
     },

@@ -6,7 +6,7 @@
 import { CreatePromptSnippet2PromptSnippetsImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptSnippet2PromptSnippetsImageUrl = {
-  url: "https://bustling-flood.name/",
+  url: "https://antique-completion.info",
 };
 ```
 

@@ -6,15 +6,8 @@
 import { DeploymentStreamMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessages = {
-  role: "tool",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://comfortable-grandson.org/",
-      },
-    },
-  ],
+  role: "correction",
+  content: "<value>",
 };
 ```
 

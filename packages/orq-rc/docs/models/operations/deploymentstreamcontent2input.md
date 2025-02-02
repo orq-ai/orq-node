@@ -18,7 +18,7 @@ const value: operations.DeploymentStream2Deployments1 = {
 const value: operations.DeploymentStream22Input = {
   type: "image_url",
   imageUrl: {
-    url: "https://whimsical-parsnip.com",
+    url: "https://complete-availability.net/",
   },
 };
 ```

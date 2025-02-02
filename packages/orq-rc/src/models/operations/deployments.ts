@@ -212,6 +212,21 @@ export type DeploymentsEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const DeploymentsReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type DeploymentsReasoningEffort = ClosedEnum<
+  typeof DeploymentsReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type DeploymentsModelParameters = {
@@ -287,6 +302,10 @@ export type DeploymentsModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: DeploymentsEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: DeploymentsReasoningEffort | undefined;
 };
 
 export const DeploymentsProvider = {
@@ -1227,6 +1246,27 @@ export namespace DeploymentsEncodingFormat$ {
 }
 
 /** @internal */
+export const DeploymentsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsReasoningEffort
+> = z.nativeEnum(DeploymentsReasoningEffort);
+
+/** @internal */
+export const DeploymentsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsReasoningEffort
+> = DeploymentsReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsReasoningEffort$ {
+  /** @deprecated use `DeploymentsReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsReasoningEffort$inboundSchema;
+  /** @deprecated use `DeploymentsReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema = DeploymentsReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   DeploymentsModelParameters,
   z.ZodTypeDef,
@@ -1252,6 +1292,7 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: DeploymentsEncodingFormat$inboundSchema.optional(),
+  reasoningEffort: DeploymentsReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1279,6 +1320,7 @@ export type DeploymentsModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -1307,6 +1349,7 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: DeploymentsEncodingFormat$outboundSchema.optional(),
+  reasoningEffort: DeploymentsReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

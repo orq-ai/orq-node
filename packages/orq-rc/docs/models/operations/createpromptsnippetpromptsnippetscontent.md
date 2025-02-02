@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CreatePromptSnippetContentPromptSnippets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://rundown-fisherman.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

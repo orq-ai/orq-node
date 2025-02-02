@@ -18,7 +18,7 @@ const value: operations.CreatePromptSnippet2PromptSnippets1 = {
 const value: operations.CreatePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://private-silk.org",
+    url: "https://untried-coast.name/",
   },
 };
 ```

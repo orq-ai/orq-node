@@ -11,14 +11,7 @@ let value: FindOneByKeyPromptSnippetPromptConfig = {
   messages: [
     {
       role: "exception",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://usable-handover.biz/",
-          },
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

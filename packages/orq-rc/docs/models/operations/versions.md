@@ -9,16 +9,16 @@ import { Versions } from "@orq-ai/node/models/operations";
 
 let value: Versions = {
   id: "<id>",
-  displayName: "Evie.Nikolaus",
+  displayName: "Grady81",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "expected_output",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://muted-calculus.info",
+              url: "https://crazy-barge.biz/",
             },
           },
         ],
@@ -26,8 +26,8 @@ let value: Versions = {
     ],
   },
   metadata: {},
-  createdById: "650b19ba-f1d0-4868-8530-8d531131411d",
-  updatedById: "8c723685-cce0-4e6e-bbfc-586547a48120",
+  createdById: "68cf119b-def6-462a-8ad1-7932d0717f6d",
+  updatedById: "466a5ba6-691d-4ab8-9166-50b19baf1d08",
   timestamp: "<value>",
 };
 ```

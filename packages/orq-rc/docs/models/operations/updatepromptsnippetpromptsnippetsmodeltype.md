@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { UpdatePromptSnippetPromptSnippetsModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptSnippetPromptSnippetsModelType = "embedding";
+let value: UpdatePromptSnippetPromptSnippetsModelType = "vision";
 ```
 
 ## Values

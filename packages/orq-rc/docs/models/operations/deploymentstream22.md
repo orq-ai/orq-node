@@ -10,7 +10,7 @@ import { DeploymentStream22 } from "@orq-ai/node/models/operations";
 let value: DeploymentStream22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://finished-ceramic.com",
+    url: "https://pointless-adult.info",
   },
 };
 ```

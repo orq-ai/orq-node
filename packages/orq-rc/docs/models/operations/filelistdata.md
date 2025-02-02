@@ -9,9 +9,9 @@ let value: FileListData = {
   id: "<id>",
   objectName: "<value>",
   purpose: "retrieval",
-  bytes: 7487.89,
+  bytes: 1154.84,
   fileName: "example.file",
-  workspaceId: "3274d38f-adfc-4bff-a714-26296ef849e6",
+  workspaceId: "9ff62a7f-1c43-4a3a-b868-4b65de035dff",
 };
 ```
 

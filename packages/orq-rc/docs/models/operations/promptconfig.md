@@ -10,13 +10,11 @@ import { PromptConfig } from "@orq-ai/node/models/operations";
 let value: PromptConfig = {
   messages: [
     {
-      role: "system",
+      role: "user",
       content: [
         {
-          type: "image_url",
-          imageUrl: {
-            url: "https://rectangular-litter.biz",
-          },
+          type: "text",
+          text: "<value>",
         },
       ],
     },

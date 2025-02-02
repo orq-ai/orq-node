@@ -5,7 +5,7 @@
 ```typescript
 import { FindOnePromptSnippetProvider } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetProvider = "anyscale";
+let value: FindOnePromptSnippetProvider = "nvidia";
 ```
 
 ## Values

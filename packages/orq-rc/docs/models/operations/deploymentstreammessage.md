@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentStreamMessage1 = {
-  role: "correction",
+  role: "user",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.DeploymentStreamMessage1 = {
 
 ```typescript
 const value: operations.DeploymentStreamMessage2 = {
-  role: "prompt",
+  role: "exception",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.DeploymentStreamMessage2 = {
 
 ```typescript
 const value: operations.DeploymentStreamMessage3 = {
-  role: "assistant",
-  url: "https://standard-venom.info/",
+  role: "prompt",
+  url: "https://focused-glider.biz",
 };
 ```
 

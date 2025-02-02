@@ -7,14 +7,7 @@ import { FindOneByKeyPromptSnippetMessages } from "@orq-ai/node/models/operation
 
 let value: FindOneByKeyPromptSnippetMessages = {
   role: "assistant",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://dirty-bracelet.net/",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

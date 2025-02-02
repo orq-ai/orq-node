@@ -6,7 +6,7 @@
 import { FindOneByKeyPromptSnippet2PromptSnippetsImageUrl } from "@orq-ai/node/models/operations";
 
 let value: FindOneByKeyPromptSnippet2PromptSnippetsImageUrl = {
-  url: "https://immaculate-mountain.org/",
+  url: "https://gummy-tooth.org/",
 };
 ```
 

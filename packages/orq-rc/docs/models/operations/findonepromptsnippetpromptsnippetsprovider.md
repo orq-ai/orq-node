@@ -5,7 +5,7 @@
 ```typescript
 import { FindOnePromptSnippetPromptSnippetsProvider } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetPromptSnippetsProvider = "anthropic";
+let value: FindOnePromptSnippetPromptSnippetsProvider = "azure";
 ```
 
 ## Values

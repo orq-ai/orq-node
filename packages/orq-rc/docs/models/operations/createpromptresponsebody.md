@@ -10,15 +10,22 @@ import { CreatePromptResponseBody } from "@orq-ai/node/models/operations";
 let value: CreatePromptResponseBody = {
   id: "<id>",
   owner: "<value>",
-  domainId: "e4c04b81-669a-4d76-b2cb-68a20597bd72",
-  createdById: "9bbf4b56-35f4-4394-87d3-698fabf65023",
-  displayName: "Nicola_Orn23",
-  updatedById: "b606e65f-a51c-4be3-a1b3-25d807a893d8",
+  domainId: "84949226-6420-4047-8b7e-0259d540d69f",
+  createdById: "2ccc8f69-16b3-4fa4-ac1f-0e4c04b81669",
+  displayName: "Romaine80",
+  updatedById: "68a20597-bd72-4d9b-8bf4-b5635f43947d",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
-        content: "<value>",
+        role: "exception",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://respectful-redesign.org",
+            },
+          },
+        ],
       },
     ],
   },
@@ -27,13 +34,13 @@ let value: CreatePromptResponseBody = {
   versions: [
     {
       id: "<id>",
-      createdById: "e0094345-b9cd-4d66-9ea1-85f09b4fde09",
-      displayName: "Rosina.Lind",
-      updatedById: "f9ffa87e-011c-45a9-a68a-f991f8c0644c",
+      createdById: "650232c8-ad35-4b60-86e6-5fa51cbe31b3",
+      displayName: "Emmanuelle46",
+      updatedById: "893d8bf6-e009-4434-a5b9-cdd66ea185f0",
       promptConfig: {
         messages: [
           {
-            role: "exception",
+            role: "prompt",
             content: "<value>",
           },
         ],

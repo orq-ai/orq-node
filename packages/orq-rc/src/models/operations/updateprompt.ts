@@ -131,6 +131,21 @@ export type UpdatePromptEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const UpdatePromptReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type UpdatePromptReasoningEffort = ClosedEnum<
+  typeof UpdatePromptReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type UpdatePromptModelParameters = {
@@ -206,6 +221,10 @@ export type UpdatePromptModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: UpdatePromptEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: UpdatePromptReasoningEffort | undefined;
 };
 
 export const UpdatePromptProvider = {
@@ -550,6 +569,21 @@ export type UpdatePromptPromptsEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const UpdatePromptPromptsReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type UpdatePromptPromptsReasoningEffort = ClosedEnum<
+  typeof UpdatePromptPromptsReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type UpdatePromptPromptsModelParameters = {
@@ -625,6 +659,10 @@ export type UpdatePromptPromptsModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: UpdatePromptPromptsEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: UpdatePromptPromptsReasoningEffort | undefined;
 };
 
 export const UpdatePromptPromptsProvider = {
@@ -975,6 +1013,21 @@ export type UpdatePromptPromptsResponseEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const UpdatePromptPromptsResponseReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type UpdatePromptPromptsResponseReasoningEffort = ClosedEnum<
+  typeof UpdatePromptPromptsResponseReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type UpdatePromptPromptsResponseModelParameters = {
@@ -1050,6 +1103,10 @@ export type UpdatePromptPromptsResponseModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: UpdatePromptPromptsResponseEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: UpdatePromptPromptsResponseReasoningEffort | undefined;
 };
 
 export const UpdatePromptPromptsResponseProvider = {
@@ -1774,6 +1831,27 @@ export namespace UpdatePromptEncodingFormat$ {
 }
 
 /** @internal */
+export const UpdatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptReasoningEffort
+> = z.nativeEnum(UpdatePromptReasoningEffort);
+
+/** @internal */
+export const UpdatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptReasoningEffort
+> = UpdatePromptReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePromptReasoningEffort$ {
+  /** @deprecated use `UpdatePromptReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = UpdatePromptReasoningEffort$inboundSchema;
+  /** @deprecated use `UpdatePromptReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema = UpdatePromptReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   UpdatePromptModelParameters,
   z.ZodTypeDef,
@@ -1799,6 +1877,7 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: UpdatePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: UpdatePromptEncodingFormat$inboundSchema.optional(),
+  reasoningEffort: UpdatePromptReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1826,6 +1905,7 @@ export type UpdatePromptModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -1854,6 +1934,7 @@ export const UpdatePromptModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: UpdatePromptPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: UpdatePromptEncodingFormat$outboundSchema.optional(),
+  reasoningEffort: UpdatePromptReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -3307,6 +3388,28 @@ export namespace UpdatePromptPromptsEncodingFormat$ {
 }
 
 /** @internal */
+export const UpdatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsReasoningEffort
+> = z.nativeEnum(UpdatePromptPromptsReasoningEffort);
+
+/** @internal */
+export const UpdatePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsReasoningEffort
+> = UpdatePromptPromptsReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePromptPromptsReasoningEffort$ {
+  /** @deprecated use `UpdatePromptPromptsReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = UpdatePromptPromptsReasoningEffort$inboundSchema;
+  /** @deprecated use `UpdatePromptPromptsReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdatePromptPromptsReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   UpdatePromptPromptsModelParameters,
   z.ZodTypeDef,
@@ -3333,6 +3436,7 @@ export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: UpdatePromptPromptsPhotoRealVersion$inboundSchema
     .optional(),
   encoding_format: UpdatePromptPromptsEncodingFormat$inboundSchema.optional(),
+  reasoningEffort: UpdatePromptPromptsReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -3360,6 +3464,7 @@ export type UpdatePromptPromptsModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -3389,6 +3494,7 @@ export const UpdatePromptPromptsModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: UpdatePromptPromptsPhotoRealVersion$outboundSchema
     .optional(),
   encodingFormat: UpdatePromptPromptsEncodingFormat$outboundSchema.optional(),
+  reasoningEffort: UpdatePromptPromptsReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -4741,6 +4847,29 @@ export namespace UpdatePromptPromptsResponseEncodingFormat$ {
 }
 
 /** @internal */
+export const UpdatePromptPromptsResponseReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof UpdatePromptPromptsResponseReasoningEffort> = z
+    .nativeEnum(UpdatePromptPromptsResponseReasoningEffort);
+
+/** @internal */
+export const UpdatePromptPromptsResponseReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof UpdatePromptPromptsResponseReasoningEffort> =
+    UpdatePromptPromptsResponseReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePromptPromptsResponseReasoningEffort$ {
+  /** @deprecated use `UpdatePromptPromptsResponseReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdatePromptPromptsResponseReasoningEffort$inboundSchema;
+  /** @deprecated use `UpdatePromptPromptsResponseReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdatePromptPromptsResponseReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const UpdatePromptPromptsResponseModelParameters$inboundSchema:
   z.ZodType<UpdatePromptPromptsResponseModelParameters, z.ZodTypeDef, unknown> =
     z.object({
@@ -4770,6 +4899,8 @@ export const UpdatePromptPromptsResponseModelParameters$inboundSchema:
         UpdatePromptPromptsResponsePhotoRealVersion$inboundSchema.optional(),
       encoding_format: UpdatePromptPromptsResponseEncodingFormat$inboundSchema
         .optional(),
+      reasoningEffort: UpdatePromptPromptsResponseReasoningEffort$inboundSchema
+        .optional(),
     }).transform((v) => {
       return remap$(v, {
         "encoding_format": "encodingFormat",
@@ -4797,6 +4928,7 @@ export type UpdatePromptPromptsResponseModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -4827,6 +4959,8 @@ export const UpdatePromptPromptsResponseModelParameters$outboundSchema:
     photoRealVersion: UpdatePromptPromptsResponsePhotoRealVersion$outboundSchema
       .optional(),
     encodingFormat: UpdatePromptPromptsResponseEncodingFormat$outboundSchema
+      .optional(),
+    reasoningEffort: UpdatePromptPromptsResponseReasoningEffort$outboundSchema
       .optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -5884,7 +6018,7 @@ export const UpdatePromptResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-31T13:31:12.935Z",
+    "2025-02-02T16:01:07.474Z",
   ).transform(v => new Date(v)),
   type: UpdatePromptPromptsType$inboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptVersions$inboundSchema)),
@@ -5932,7 +6066,7 @@ export const UpdatePromptResponseBody$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => UpdatePromptPromptsPromptConfig$outboundSchema),
   metadata: z.lazy(() => UpdatePromptPromptsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-31T13:31:12.935Z"))
+  updated: z.date().default(() => new Date("2025-02-02T16:01:07.474Z"))
     .transform(v => v.toISOString()),
   type: UpdatePromptPromptsType$outboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptVersions$outboundSchema)),

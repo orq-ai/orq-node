@@ -9,25 +9,23 @@ import { FindOnePromptSnippetVersions } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetVersions = {
   id: "<id>",
-  displayName: "Vita_Ziemann3",
+  displayName: "Ola_Schaden79",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "correction",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://big-apricot.org",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },
     ],
   },
   metadata: {},
-  createdById: "48f6a6c8-3448-4bfb-ac25-6a445c9115cb",
-  updatedById: "c488bf4c-a9cf-402c-a183-4b0d788a5152",
+  createdById: "a014f250-55fd-460d-8a2f-1d46caf91ecb",
+  updatedById: "62dbefcf-9005-4ddf-a10e-48f6a6c83448",
   timestamp: "<value>",
 };
 ```

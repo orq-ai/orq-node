@@ -13,15 +13,20 @@ let value: GetAllPromptsResponseBody = {
     {
       id: "<id>",
       owner: "<value>",
-      domainId: "5c0196a4-ec1c-4ffb-b194-fb9b75e506ca",
-      createdById: "1e57613b-020d-492c-afee-09495277f04d",
-      displayName: "Reyna20",
-      updatedById: "92cf541a-f271-40ad-95e1-3e89020e2d5c",
+      domainId: "9c5b6fc5-0a31-4ef4-8427-dbd3be4b64f5",
+      createdById: "67cfde7b-415b-44dc-835d-355c0196a4ec",
+      displayName: "Ottis.Weissnat-Rice57",
+      updatedById: "fb9b75e5-06ca-4f1e-b576-13b020d92cfe",
       promptConfig: {
         messages: [
           {
-            role: "user",
-            content: "<value>",
+            role: "system",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },
@@ -30,14 +35,21 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "47d7f806-b3b8-40c8-8174-e4f85db6acdd",
-          displayName: "Rhiannon_Dooley",
-          updatedById: "46518f94-f6ba-4fe2-b1ce-7b1329304a95",
+          createdById: "95277f04-dada-4c73-bc92-cf541af2710a",
+          displayName: "Eudora.Carroll",
+          updatedById: "9020e2d5-c541-447d-b7f8-06b3b80c8174",
           promptConfig: {
             messages: [
               {
                 role: "user",
-                content: "<value>",
+                content: [
+                  {
+                    type: "image_url",
+                    imageUrl: {
+                      url: "https://stylish-postbox.info/",
+                    },
+                  },
+                ],
               },
             ],
           },

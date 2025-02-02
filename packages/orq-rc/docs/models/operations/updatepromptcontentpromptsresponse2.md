@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2PromptsResponse1 = {
 const value: operations.UpdatePrompt2PromptsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://reckless-hexagon.com",
+    url: "https://glossy-tinderbox.biz/",
   },
 };
 ```

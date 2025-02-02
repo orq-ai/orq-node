@@ -5,7 +5,7 @@
 ```typescript
 import { FindOneByKeyPromptSnippetPromptSnippetsUseCases } from "@orq-ai/node/models/operations";
 
-let value: FindOneByKeyPromptSnippetPromptSnippetsUseCases = "Agents";
+let value: FindOneByKeyPromptSnippetPromptSnippetsUseCases = "Tagging";
 ```
 
 ## Values

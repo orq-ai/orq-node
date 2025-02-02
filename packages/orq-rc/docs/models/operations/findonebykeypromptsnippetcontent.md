@@ -18,7 +18,7 @@ const value: operations.FindOneByKeyPromptSnippetContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://oval-amendment.org",
+      url: "https://gaseous-kiss.net",
     },
   },
 ];

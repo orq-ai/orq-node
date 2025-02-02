@@ -6,7 +6,7 @@
 import { CreatePromptPromptsResponseMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptPromptsResponseMessages = {
-  role: "expected_output",
+  role: "assistant",
   content: "<value>",
 };
 ```

@@ -123,6 +123,19 @@ export const EncodingFormat = {
 export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const ReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type ModelParameters = {
@@ -194,6 +207,10 @@ export type ModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: EncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: ReasoningEffort | undefined;
 };
 
 export const Provider = {
@@ -544,6 +561,21 @@ export type CreatePromptSnippetEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const CreatePromptSnippetReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type CreatePromptSnippetReasoningEffort = ClosedEnum<
+  typeof CreatePromptSnippetReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type CreatePromptSnippetModelParameters = {
@@ -619,6 +651,10 @@ export type CreatePromptSnippetModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: CreatePromptSnippetEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: CreatePromptSnippetReasoningEffort | undefined;
 };
 
 export const CreatePromptSnippetProvider = {
@@ -975,6 +1011,21 @@ export type CreatePromptSnippetPromptSnippetsEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const CreatePromptSnippetPromptSnippetsReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type CreatePromptSnippetPromptSnippetsReasoningEffort = ClosedEnum<
+  typeof CreatePromptSnippetPromptSnippetsReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type CreatePromptSnippetPromptSnippetsModelParameters = {
@@ -1052,6 +1103,12 @@ export type CreatePromptSnippetPromptSnippetsModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: CreatePromptSnippetPromptSnippetsEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?:
+    | CreatePromptSnippetPromptSnippetsReasoningEffort
+    | undefined;
 };
 
 export const CreatePromptSnippetPromptSnippetsProvider = {
@@ -1764,6 +1821,27 @@ export namespace EncodingFormat$ {
 }
 
 /** @internal */
+export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof ReasoningEffort
+> = z.nativeEnum(ReasoningEffort);
+
+/** @internal */
+export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof ReasoningEffort
+> = ReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ReasoningEffort$ {
+  /** @deprecated use `ReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = ReasoningEffort$inboundSchema;
+  /** @deprecated use `ReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema = ReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const ModelParameters$inboundSchema: z.ZodType<
   ModelParameters,
   z.ZodTypeDef,
@@ -1789,6 +1867,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
   encoding_format: EncodingFormat$inboundSchema.optional(),
+  reasoningEffort: ReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1816,6 +1895,7 @@ export type ModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -1844,6 +1924,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
   encodingFormat: EncodingFormat$outboundSchema.optional(),
+  reasoningEffort: ReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -3242,6 +3323,28 @@ export namespace CreatePromptSnippetEncodingFormat$ {
 }
 
 /** @internal */
+export const CreatePromptSnippetReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptSnippetReasoningEffort
+> = z.nativeEnum(CreatePromptSnippetReasoningEffort);
+
+/** @internal */
+export const CreatePromptSnippetReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptSnippetReasoningEffort
+> = CreatePromptSnippetReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptSnippetReasoningEffort$ {
+  /** @deprecated use `CreatePromptSnippetReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptSnippetReasoningEffort$inboundSchema;
+  /** @deprecated use `CreatePromptSnippetReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    CreatePromptSnippetReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const CreatePromptSnippetModelParameters$inboundSchema: z.ZodType<
   CreatePromptSnippetModelParameters,
   z.ZodTypeDef,
@@ -3268,6 +3371,7 @@ export const CreatePromptSnippetModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: CreatePromptSnippetPhotoRealVersion$inboundSchema
     .optional(),
   encoding_format: CreatePromptSnippetEncodingFormat$inboundSchema.optional(),
+  reasoningEffort: CreatePromptSnippetReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -3295,6 +3399,7 @@ export type CreatePromptSnippetModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -3324,6 +3429,7 @@ export const CreatePromptSnippetModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: CreatePromptSnippetPhotoRealVersion$outboundSchema
     .optional(),
   encodingFormat: CreatePromptSnippetEncodingFormat$outboundSchema.optional(),
+  reasoningEffort: CreatePromptSnippetReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -4802,6 +4908,29 @@ export namespace CreatePromptSnippetPromptSnippetsEncodingFormat$ {
 }
 
 /** @internal */
+export const CreatePromptSnippetPromptSnippetsReasoningEffort$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptSnippetPromptSnippetsReasoningEffort> = z
+    .nativeEnum(CreatePromptSnippetPromptSnippetsReasoningEffort);
+
+/** @internal */
+export const CreatePromptSnippetPromptSnippetsReasoningEffort$outboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptSnippetPromptSnippetsReasoningEffort> =
+    CreatePromptSnippetPromptSnippetsReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptSnippetPromptSnippetsReasoningEffort$ {
+  /** @deprecated use `CreatePromptSnippetPromptSnippetsReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema =
+    CreatePromptSnippetPromptSnippetsReasoningEffort$inboundSchema;
+  /** @deprecated use `CreatePromptSnippetPromptSnippetsReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    CreatePromptSnippetPromptSnippetsReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const CreatePromptSnippetPromptSnippetsModelParameters$inboundSchema:
   z.ZodType<
     CreatePromptSnippetPromptSnippetsModelParameters,
@@ -4835,6 +4964,8 @@ export const CreatePromptSnippetPromptSnippetsModelParameters$inboundSchema:
         .optional(),
     encoding_format:
       CreatePromptSnippetPromptSnippetsEncodingFormat$inboundSchema.optional(),
+    reasoningEffort:
+      CreatePromptSnippetPromptSnippetsReasoningEffort$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "encoding_format": "encodingFormat",
@@ -4862,6 +4993,7 @@ export type CreatePromptSnippetPromptSnippetsModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -4898,6 +5030,9 @@ export const CreatePromptSnippetPromptSnippetsModelParameters$outboundSchema:
         .optional(),
     encodingFormat:
       CreatePromptSnippetPromptSnippetsEncodingFormat$outboundSchema.optional(),
+    reasoningEffort:
+      CreatePromptSnippetPromptSnippetsReasoningEffort$outboundSchema
+        .optional(),
   }).transform((v) => {
     return remap$(v, {
       encodingFormat: "encoding_format",
@@ -6088,7 +6223,7 @@ export const CreatePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-01-31T13:31:12.935Z",
+    "2025-02-02T16:01:07.474Z",
   ).transform(v => new Date(v)),
   type: CreatePromptSnippetPromptSnippetsType$inboundSchema,
   versions: z.array(z.lazy(() => Versions$inboundSchema)),
@@ -6140,7 +6275,7 @@ export const CreatePromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-01-31T13:31:12.935Z"))
+  updated: z.date().default(() => new Date("2025-02-02T16:01:07.474Z"))
     .transform(v => v.toISOString()),
   type: CreatePromptSnippetPromptSnippetsType$outboundSchema,
   versions: z.array(z.lazy(() => Versions$outboundSchema)),

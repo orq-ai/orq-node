@@ -6,8 +6,13 @@
 import { CreatePromptSnippetPromptSnippetsResponseMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptSnippetPromptSnippetsResponseMessages = {
-  role: "correction",
-  content: "<value>",
+  role: "user",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

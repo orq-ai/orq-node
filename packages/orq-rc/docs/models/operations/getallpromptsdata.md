@@ -9,15 +9,15 @@ import { GetAllPromptsData } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsData = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "ab9f72a9-98f2-4123-8993-777c7c28d279",
-  createdById: "c1f7516a-14da-432e-a42f-4176e211e729",
-  displayName: "Clovis.Hayes51",
-  updatedById: "3e24643c-5182-45e5-9a82-ad1cbd14b0bd",
+  owner: "vendor",
+  domainId: "a10f353e-a885-4963-ba5c-68c7fcdf69ba",
+  createdById: "44ec39b5-697c-4065-89c1-2ab9f72a998f",
+  displayName: "Antwan_Frami61",
+  updatedById: "777c7c28-d279-42c1-bf75-16a14da32e42",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "user",
         content: "<value>",
       },
     ],
@@ -27,19 +27,14 @@ let value: GetAllPromptsData = {
   versions: [
     {
       id: "<id>",
-      createdById: "02fd4f54-2ef5-4b51-a681-d739c5b6fc50",
-      displayName: "Clinton_Waters26",
-      updatedById: "27dbd3be-4b64-4f51-867c-fde7b415b4dc",
+      createdById: "76e211e7-2983-4953-b843-e24643c51825",
+      displayName: "Frida64",
+      updatedById: "1cbd14b0-bd76-4402-8fd4-f542ef5b5168",
       promptConfig: {
         messages: [
           {
-            role: "user",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            role: "correction",
+            content: "<value>",
           },
         ],
       },

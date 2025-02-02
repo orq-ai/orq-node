@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.FindOneByKeyPromptSnippetContentPromptSnippets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://wrong-petticoat.org",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

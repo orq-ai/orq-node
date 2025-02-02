@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 4ebaa43690fe55950a33c22a79282828
+  docChecksum: 366ccfe6357560efff0f267d18126e5b
   docVersion: "2.0"
-  speakeasyVersion: 1.480.1
-  generationVersion: 2.499.1
-  releaseVersion: 3.1.0-rc.27
-  configChecksum: bdec88e9efb164bc04110745d2d5da21
+  speakeasyVersion: 1.481.1
+  generationVersion: 2.500.5
+  releaseVersion: 3.1.0-rc.28
+  configChecksum: 2bad90fc3fab41e8b0a475086f672f54
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.18.21
+    core: 3.18.22
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -134,6 +134,7 @@ generatedFiles:
   - docs/models/operations/createpromptpromptspromptconfig.md
   - docs/models/operations/createpromptpromptsprovider.md
   - docs/models/operations/createpromptpromptsquality.md
+  - docs/models/operations/createpromptpromptsreasoningeffort.md
   - docs/models/operations/createpromptpromptsresponse200format.md
   - docs/models/operations/createpromptpromptsresponse200type.md
   - docs/models/operations/createpromptpromptsresponsecontent.md
@@ -149,6 +150,7 @@ generatedFiles:
   - docs/models/operations/createpromptpromptsresponsepromptconfig.md
   - docs/models/operations/createpromptpromptsresponseprovider.md
   - docs/models/operations/createpromptpromptsresponsequality.md
+  - docs/models/operations/createpromptpromptsresponsereasoningeffort.md
   - docs/models/operations/createpromptpromptsresponseresponseformat.md
   - docs/models/operations/createpromptpromptsresponserole.md
   - docs/models/operations/createpromptpromptsresponsetoolcalls.md
@@ -160,6 +162,7 @@ generatedFiles:
   - docs/models/operations/createpromptpromptsusecases.md
   - docs/models/operations/createpromptprovider.md
   - docs/models/operations/createpromptquality.md
+  - docs/models/operations/createpromptreasoningeffort.md
   - docs/models/operations/createpromptrequestbody.md
   - docs/models/operations/createpromptresponsebody.md
   - docs/models/operations/createpromptresponseformat.md
@@ -222,6 +225,7 @@ generatedFiles:
   - docs/models/operations/createpromptsnippetpromptsnippetspromptconfig.md
   - docs/models/operations/createpromptsnippetpromptsnippetsprovider.md
   - docs/models/operations/createpromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsreasoningeffort.md
   - docs/models/operations/createpromptsnippetpromptsnippetsresponse200type.md
   - docs/models/operations/createpromptsnippetpromptsnippetsresponsecontent.md
   - docs/models/operations/createpromptsnippetpromptsnippetsresponseformat.md
@@ -237,6 +241,7 @@ generatedFiles:
   - docs/models/operations/createpromptsnippetpromptsnippetsusecases.md
   - docs/models/operations/createpromptsnippetprovider.md
   - docs/models/operations/createpromptsnippetquality.md
+  - docs/models/operations/createpromptsnippetreasoningeffort.md
   - docs/models/operations/createpromptsnippetrequestbody.md
   - docs/models/operations/createpromptsnippetresponsebody.md
   - docs/models/operations/createpromptsnippetresponseformat.md
@@ -308,6 +313,7 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigmessages.md
   - docs/models/operations/deploymentgetconfigphotorealversion.md
   - docs/models/operations/deploymentgetconfigquality.md
+  - docs/models/operations/deploymentgetconfigreasoningeffort.md
   - docs/models/operations/deploymentgetconfigrequestbody.md
   - docs/models/operations/deploymentgetconfigresponsebody.md
   - docs/models/operations/deploymentgetconfigresponseformat.md
@@ -356,6 +362,7 @@ generatedFiles:
   - docs/models/operations/deploymentspromptconfig.md
   - docs/models/operations/deploymentsprovider.md
   - docs/models/operations/deploymentsquality.md
+  - docs/models/operations/deploymentsreasoningeffort.md
   - docs/models/operations/deploymentsrequest.md
   - docs/models/operations/deploymentsresponsebody.md
   - docs/models/operations/deploymentsresponseformat.md
@@ -474,6 +481,7 @@ generatedFiles:
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetspromptconfig.md
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetsprovider.md
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsreasoningeffort.md
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetsresponseformat.md
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetsresponsetype.md
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetsrole.md
@@ -482,6 +490,7 @@ generatedFiles:
   - docs/models/operations/findonebykeypromptsnippetpromptsnippetsusecases.md
   - docs/models/operations/findonebykeypromptsnippetprovider.md
   - docs/models/operations/findonebykeypromptsnippetquality.md
+  - docs/models/operations/findonebykeypromptsnippetreasoningeffort.md
   - docs/models/operations/findonebykeypromptsnippetrequest.md
   - docs/models/operations/findonebykeypromptsnippetresponsebody.md
   - docs/models/operations/findonebykeypromptsnippetresponseformat.md
@@ -539,6 +548,7 @@ generatedFiles:
   - docs/models/operations/findonepromptsnippetpromptsnippetspromptconfig.md
   - docs/models/operations/findonepromptsnippetpromptsnippetsprovider.md
   - docs/models/operations/findonepromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsreasoningeffort.md
   - docs/models/operations/findonepromptsnippetpromptsnippetsresponseformat.md
   - docs/models/operations/findonepromptsnippetpromptsnippetsresponsetype.md
   - docs/models/operations/findonepromptsnippetpromptsnippetsrole.md
@@ -547,6 +557,7 @@ generatedFiles:
   - docs/models/operations/findonepromptsnippetpromptsnippetsusecases.md
   - docs/models/operations/findonepromptsnippetprovider.md
   - docs/models/operations/findonepromptsnippetquality.md
+  - docs/models/operations/findonepromptsnippetreasoningeffort.md
   - docs/models/operations/findonepromptsnippetrequest.md
   - docs/models/operations/findonepromptsnippetresponsebody.md
   - docs/models/operations/findonepromptsnippetresponseformat.md
@@ -608,6 +619,7 @@ generatedFiles:
   - docs/models/operations/getallpromptspromptspromptconfig.md
   - docs/models/operations/getallpromptspromptsprovider.md
   - docs/models/operations/getallpromptspromptsquality.md
+  - docs/models/operations/getallpromptspromptsreasoningeffort.md
   - docs/models/operations/getallpromptspromptsresponseformat.md
   - docs/models/operations/getallpromptspromptsresponsetype.md
   - docs/models/operations/getallpromptspromptsrole.md
@@ -616,6 +628,7 @@ generatedFiles:
   - docs/models/operations/getallpromptspromptsusecases.md
   - docs/models/operations/getallpromptsprovider.md
   - docs/models/operations/getallpromptsquality.md
+  - docs/models/operations/getallpromptsreasoningeffort.md
   - docs/models/operations/getallpromptsrequest.md
   - docs/models/operations/getallpromptsresponsebody.md
   - docs/models/operations/getallpromptsresponseformat.md
@@ -665,6 +678,7 @@ generatedFiles:
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
   - docs/models/operations/quality.md
+  - docs/models/operations/reasoningeffort.md
   - docs/models/operations/remoteconfigsgetconfigglobals.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
@@ -730,6 +744,7 @@ generatedFiles:
   - docs/models/operations/updatepromptpromptspromptconfig.md
   - docs/models/operations/updatepromptpromptsprovider.md
   - docs/models/operations/updatepromptpromptsquality.md
+  - docs/models/operations/updatepromptpromptsreasoningeffort.md
   - docs/models/operations/updatepromptpromptsresponse200format.md
   - docs/models/operations/updatepromptpromptsresponse200type.md
   - docs/models/operations/updatepromptpromptsresponsecontent.md
@@ -745,6 +760,7 @@ generatedFiles:
   - docs/models/operations/updatepromptpromptsresponsepromptconfig.md
   - docs/models/operations/updatepromptpromptsresponseprovider.md
   - docs/models/operations/updatepromptpromptsresponsequality.md
+  - docs/models/operations/updatepromptpromptsresponsereasoningeffort.md
   - docs/models/operations/updatepromptpromptsresponseresponseformat.md
   - docs/models/operations/updatepromptpromptsresponserole.md
   - docs/models/operations/updatepromptpromptsresponsetoolcalls.md
@@ -756,6 +772,7 @@ generatedFiles:
   - docs/models/operations/updatepromptpromptsusecases.md
   - docs/models/operations/updatepromptprovider.md
   - docs/models/operations/updatepromptquality.md
+  - docs/models/operations/updatepromptreasoningeffort.md
   - docs/models/operations/updatepromptrequest.md
   - docs/models/operations/updatepromptrequestbody.md
   - docs/models/operations/updatepromptresponsebody.md
@@ -821,6 +838,7 @@ generatedFiles:
   - docs/models/operations/updatepromptsnippetpromptsnippetspromptconfig.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsprovider.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsreasoningeffort.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponse200format.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponse200type.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponsecontent.md
@@ -836,6 +854,7 @@ generatedFiles:
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponsepromptconfig.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponseprovider.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponsequality.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsereasoningeffort.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponseresponseformat.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponserole.md
   - docs/models/operations/updatepromptsnippetpromptsnippetsresponsetoolcalls.md
@@ -847,6 +866,7 @@ generatedFiles:
   - docs/models/operations/updatepromptsnippetpromptsnippetsusecases.md
   - docs/models/operations/updatepromptsnippetprovider.md
   - docs/models/operations/updatepromptsnippetquality.md
+  - docs/models/operations/updatepromptsnippetreasoningeffort.md
   - docs/models/operations/updatepromptsnippetrequest.md
   - docs/models/operations/updatepromptsnippetrequestbody.md
   - docs/models/operations/updatepromptsnippetresponsebody.md

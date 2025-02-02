@@ -11,11 +11,12 @@ let value: DeploymentsResponseBody = {
   object: "list",
   data: [
     {
-      id: "56ecb1eb-f2d2-491d-8c96-1b7bdfd05b28",
+      id: "9e5a2b42-90d0-4a4b-bf39-993f7db4d6e9",
       created: "<value>",
       updated: "<value>",
       key: "<key>",
-      description: "apologise lest ick yum",
+      description:
+        "agreeable beneath unlike vastly but inventory sheepishly furthermore",
       promptConfig: {
         tools: [
           {
@@ -31,10 +32,10 @@ let value: DeploymentsResponseBody = {
             },
           },
         ],
-        model: "Model 3",
-        modelType: "vision",
+        model: "Countach",
+        modelType: "moderations",
         modelParameters: {},
-        provider: "huggingface",
+        provider: "fal",
         messages: [
           {
             role: "system",

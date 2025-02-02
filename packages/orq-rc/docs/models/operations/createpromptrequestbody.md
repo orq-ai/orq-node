@@ -6,11 +6,11 @@
 import { CreatePromptRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptRequestBody = {
-  displayName: "Emelie.Paucek12",
+  displayName: "Ubaldo.VonRueden",
   promptConfig: {
     messages: [
       {
-        role: "tool",
+        role: "assistant",
         content: "<value>",
       },
     ],

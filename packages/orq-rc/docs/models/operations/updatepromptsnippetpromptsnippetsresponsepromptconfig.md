@@ -10,13 +10,8 @@ import { UpdatePromptSnippetPromptSnippetsResponsePromptConfig } from "@orq-ai/n
 let value: UpdatePromptSnippetPromptSnippetsResponsePromptConfig = {
   messages: [
     {
-      role: "tool",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "user",
+      content: "<value>",
     },
   ],
 };

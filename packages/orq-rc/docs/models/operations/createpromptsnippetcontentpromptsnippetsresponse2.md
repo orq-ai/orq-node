@@ -18,7 +18,7 @@ const value: operations.CreatePromptSnippet2PromptSnippetsResponse1 = {
 const value: operations.CreatePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://clean-importance.org/",
+    url: "https://every-lawmaker.info/",
   },
 };
 ```

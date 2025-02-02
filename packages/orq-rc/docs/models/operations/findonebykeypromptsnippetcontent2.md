@@ -18,7 +18,7 @@ const value: operations.FindOneByKeyPromptSnippet21 = {
 const value: operations.FindOneByKeyPromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://timely-punctuation.org",
+    url: "https://lustrous-publication.net/",
   },
 };
 ```

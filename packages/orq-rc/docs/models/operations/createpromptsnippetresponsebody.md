@@ -9,42 +9,44 @@ import { CreatePromptSnippetResponseBody } from "@orq-ai/node/models/operations"
 
 let value: CreatePromptSnippetResponseBody = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "291ebf84-8e84-4e50-835d-775eff6fca33",
+  owner: "vendor",
+  domainId: "5308d531-1314-411d-b28c-723685cce0e6",
   key: "<key>",
-  displayName: "Theresa77",
+  displayName: "Maryse_Rowe-Hickle",
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "user",
         content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "dd124161-9391-4fe6-9347-0a66cbf5ec59",
-  updatedById: "d1326b87-0613-4e3d-bc29-1bac7e04b621",
+  createdById: "a48120f0-291e-4bf8-b48e-84e5035d775e",
+  updatedById: "f6fca332-e477-4cd2-96dd-1241619391fe",
   type: "snippet",
   versions: [
     {
       id: "<id>",
-      displayName: "Jaqueline.Reynolds",
+      displayName: "Deangelo.Kub",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
+            role: "exception",
             content: [
               {
-                type: "text",
-                text: "<value>",
+                type: "image_url",
+                imageUrl: {
+                  url: "https://hairy-technologist.net",
+                },
               },
             ],
           },
         ],
       },
       metadata: {},
-      createdById: "beb2725e-e459-4f24-bd7e-2855765ebb49",
-      updatedById: "c5cb2d77-7997-4da6-b6c5-30ee1521e0f1",
+      createdById: "594d1326-b870-4613-9e3d-c291bac7e04b",
+      updatedById: "21d7eb65-8eb0-4beb-8272-5ee459f24d7e",
       timestamp: "<value>",
     },
   ],

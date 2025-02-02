@@ -5,7 +5,7 @@
 ```typescript
 import { DeploymentsProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentsProvider = "togetherai";
+let value: DeploymentsProvider = "elevenlabs";
 ```
 
 ## Values

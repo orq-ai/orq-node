@@ -10,8 +10,15 @@ import { FindOneByKeyPromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/nod
 let value: FindOneByKeyPromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "expected_output",
-      content: "<value>",
+      role: "user",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://soft-stool.net",
+          },
+        },
+      ],
     },
   ],
 };

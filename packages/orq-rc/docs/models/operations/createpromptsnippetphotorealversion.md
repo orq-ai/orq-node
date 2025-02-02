@@ -7,7 +7,7 @@ The version of photoReal to use. Must be v1 or v2. Only available for `leonardoa
 ```typescript
 import { CreatePromptSnippetPhotoRealVersion } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptSnippetPhotoRealVersion = "v1";
+let value: CreatePromptSnippetPhotoRealVersion = "v2";
 ```
 
 ## Values

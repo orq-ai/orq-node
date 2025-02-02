@@ -9,21 +9,16 @@ import { UpdatePromptResponseBody } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseBody = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "6b8ed099-f083-409c-9c06-033354f5e2c0",
-  createdById: "0cf0ec5e-461a-407a-8d2c-b89196d596e4",
-  displayName: "Nella95",
-  updatedById: "906fa27f-8094-4168-9088-c68be69b0c6a",
+  owner: "vendor",
+  domainId: "12a9de24-6013-474e-95ef-734c4679f354",
+  createdById: "15e45fb8-c171-4325-b6f4-7cdc47236b8e",
+  displayName: "Alexandrea_Monahan",
+  updatedById: "309cc060-3335-44f5-8e2c-070cf0ec5e46",
   promptConfig: {
     messages: [
       {
         role: "prompt",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        content: "<value>",
       },
     ],
   },
@@ -32,14 +27,21 @@ let value: UpdatePromptResponseBody = {
   versions: [
     {
       id: "<id>",
-      createdById: "ad3caf42-44cb-4a3d-8f8a-84453ed75f38",
-      displayName: "Claud86",
-      updatedById: "c7d1a82f-59e8-41d5-8fed-5cf870bd3581",
+      createdById: "7ad2cb89-196d-4596-9e41-b690fe906fa2",
+      displayName: "Vito_Bailey27",
+      updatedById: "68088c68-be69-4b0c-96a7-bb3ad3caf424",
       promptConfig: {
         messages: [
           {
-            role: "exception",
-            content: "<value>",
+            role: "correction",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://total-vanadyl.name/",
+                },
+              },
+            ],
           },
         ],
       },

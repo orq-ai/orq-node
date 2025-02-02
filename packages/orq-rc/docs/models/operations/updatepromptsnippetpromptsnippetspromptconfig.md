@@ -10,7 +10,7 @@ import { UpdatePromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/node/mode
 let value: UpdatePromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "exception",
+      role: "correction",
       content: "<value>",
     },
   ],

@@ -6,7 +6,7 @@
 import { Choices } from "@orq-ai/node/models/operations";
 
 let value: Choices = {
-  index: 1629.54,
+  index: 4581.39,
 };
 ```
 

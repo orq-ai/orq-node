@@ -10,8 +10,13 @@ import { UpdatePromptSnippetPromptConfig } from "@orq-ai/node/models/operations"
 let value: UpdatePromptSnippetPromptConfig = {
   messages: [
     {
-      role: "assistant",
-      content: "<value>",
+      role: "correction",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

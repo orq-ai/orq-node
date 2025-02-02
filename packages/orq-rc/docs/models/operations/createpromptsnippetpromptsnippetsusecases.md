@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptSnippetPromptSnippetsUseCases } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptSnippetPromptSnippetsUseCases = "Code understanding";
+let value: CreatePromptSnippetPromptSnippetsUseCases = "Conversation";
 ```
 
 ## Values

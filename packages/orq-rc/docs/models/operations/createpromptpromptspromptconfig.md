@@ -10,8 +10,15 @@ import { CreatePromptPromptsPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptPromptsPromptConfig = {
   messages: [
     {
-      role: "system",
-      content: "<value>",
+      role: "prompt",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://scaly-cantaloupe.name",
+          },
+        },
+      ],
     },
   ],
 };

@@ -11,14 +11,7 @@ let value: CreatePromptPromptConfig = {
   messages: [
     {
       role: "expected_output",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://black-knickers.biz",
-          },
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

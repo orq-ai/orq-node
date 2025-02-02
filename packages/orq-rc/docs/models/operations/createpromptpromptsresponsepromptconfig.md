@@ -10,7 +10,7 @@ import { CreatePromptPromptsResponsePromptConfig } from "@orq-ai/node/models/ope
 let value: CreatePromptPromptsResponsePromptConfig = {
   messages: [
     {
-      role: "exception",
+      role: "tool",
       content: "<value>",
     },
   ],

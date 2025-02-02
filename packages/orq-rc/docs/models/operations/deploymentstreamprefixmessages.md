@@ -6,15 +6,8 @@
 import { DeploymentStreamPrefixMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamPrefixMessages = {
-  role: "system",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://far-off-gazebo.name",
-      },
-    },
-  ],
+  role: "tool",
+  content: "<value>",
 };
 ```
 

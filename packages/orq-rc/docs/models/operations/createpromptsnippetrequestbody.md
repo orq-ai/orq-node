@@ -7,17 +7,12 @@ import { CreatePromptSnippetRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptSnippetRequestBody = {
   key: "<key>",
-  displayName: "Janie32",
+  displayName: "Mattie62",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "tool",
+        content: "<value>",
       },
     ],
   },

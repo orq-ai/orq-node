@@ -9,18 +9,18 @@ import { CreatePromptVersions } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersions = {
   id: "<id>",
-  createdById: "1bb2fb4b-b565-49e2-ae0a-6cb7a8c78494",
-  displayName: "Ceasar.Johnson26",
-  updatedById: "0047b7e0-259d-4540-ad69-f02ccc8f6916",
+  createdById: "81df7016-e2d0-47a0-b9f2-b92008fab792",
+  displayName: "Noemie96",
+  updatedById: "28622f4f-1720-481b-ab2f-b4bb5659e2e0",
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "exception",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://soft-blight.org/",
+              url: "https://proud-knight.net/",
             },
           },
         ],
