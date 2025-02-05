@@ -10,15 +10,22 @@ import { GetAllPromptsData } from "@orq-ai/node/models/operations";
 let value: GetAllPromptsData = {
   id: "<id>",
   owner: "vendor",
-  domainId: "a10f353e-a885-4963-ba5c-68c7fcdf69ba",
-  createdById: "44ec39b5-697c-4065-89c1-2ab9f72a998f",
-  displayName: "Antwan_Frami61",
-  updatedById: "777c7c28-d279-42c1-bf75-16a14da32e42",
+  domainId: "cc1abd87-fc85-4d71-b7d7-09fd9ed79bd0",
+  createdById: "7ac8261b-fc69-4484-ab4f-a10f353ea885",
+  displayName: "Heber.OKon",
+  updatedById: "8c7fcdf6-9baf-444e-8c39-b5697c0659c1",
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: "<value>",
+        role: "prompt",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://marvelous-challenge.net",
+            },
+          },
+        ],
       },
     ],
   },
@@ -27,9 +34,9 @@ let value: GetAllPromptsData = {
   versions: [
     {
       id: "<id>",
-      createdById: "76e211e7-2983-4953-b843-e24643c51825",
-      displayName: "Frida64",
-      updatedById: "1cbd14b0-bd76-4402-8fd4-f542ef5b5168",
+      createdById: "998f2123-9937-477c-97c2-8d2792c1f751",
+      displayName: "Magdalena_Haag64",
+      updatedById: "2e42f417-6e21-41e7-8298-3953843e2464",
       promptConfig: {
         messages: [
           {

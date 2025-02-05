@@ -10,8 +10,13 @@ import { FindOneByKeyPromptSnippetPromptConfig } from "@orq-ai/node/models/opera
 let value: FindOneByKeyPromptSnippetPromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: "<value>",
+      role: "prompt",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

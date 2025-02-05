@@ -923,10 +923,6 @@ export type FindOnePromptSnippetPromptSnippetsMetadata = {
 export type FindOnePromptSnippetVersions = {
   id: string;
   /**
-   * The prompt snippet’s name, meant to be displayable in the UI.
-   */
-  displayName: string;
-  /**
    * The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
   description?: string | null | undefined;
@@ -948,10 +944,6 @@ export type FindOnePromptSnippetResponseBody = {
   owner: string | FindOnePromptSnippetOwner2;
   domainId: string;
   key: string;
-  /**
-   * The prompt snippet’s name, meant to be displayable in the UI.
-   */
-  displayName: string;
   /**
    * The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -4209,7 +4201,6 @@ export const FindOnePromptSnippetVersions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() =>
     FindOnePromptSnippetPromptSnippetsPromptConfig$inboundSchema
@@ -4223,7 +4214,6 @@ export const FindOnePromptSnippetVersions$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "display_name": "displayName",
     "prompt_config": "promptConfig",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -4233,7 +4223,6 @@ export const FindOnePromptSnippetVersions$inboundSchema: z.ZodType<
 /** @internal */
 export type FindOnePromptSnippetVersions$Outbound = {
   _id: string;
-  display_name: string;
   description?: string | null | undefined;
   prompt_config: FindOnePromptSnippetPromptSnippetsPromptConfig$Outbound;
   metadata: FindOnePromptSnippetPromptSnippetsMetadata$Outbound;
@@ -4249,7 +4238,6 @@ export const FindOnePromptSnippetVersions$outboundSchema: z.ZodType<
   FindOnePromptSnippetVersions
 > = z.object({
   id: z.string(),
-  displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() =>
     FindOnePromptSnippetPromptSnippetsPromptConfig$outboundSchema
@@ -4263,7 +4251,6 @@ export const FindOnePromptSnippetVersions$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    displayName: "display_name",
     promptConfig: "prompt_config",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
@@ -4313,7 +4300,6 @@ export const FindOnePromptSnippetResponseBody$inboundSchema: z.ZodType<
   owner: z.union([z.string(), FindOnePromptSnippetOwner2$inboundSchema]),
   domain_id: z.string(),
   key: z.string(),
-  display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => FindOnePromptSnippetPromptConfig$inboundSchema),
   metadata: z.lazy(() => FindOnePromptSnippetMetadata$inboundSchema),
@@ -4322,7 +4308,7 @@ export const FindOnePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-05T12:50:57.727Z",
+    "2025-02-05T18:57:06.512Z",
   ).transform(v => new Date(v)),
   type: FindOnePromptSnippetType$inboundSchema,
   versions: z.array(z.lazy(() => FindOnePromptSnippetVersions$inboundSchema)),
@@ -4330,7 +4316,6 @@ export const FindOnePromptSnippetResponseBody$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "domain_id": "domainId",
-    "display_name": "displayName",
     "prompt_config": "promptConfig",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -4343,7 +4328,6 @@ export type FindOnePromptSnippetResponseBody$Outbound = {
   owner: string | string;
   domain_id: string;
   key: string;
-  display_name: string;
   description?: string | null | undefined;
   prompt_config: FindOnePromptSnippetPromptConfig$Outbound;
   metadata: FindOnePromptSnippetMetadata$Outbound;
@@ -4365,14 +4349,13 @@ export const FindOnePromptSnippetResponseBody$outboundSchema: z.ZodType<
   owner: z.union([z.string(), FindOnePromptSnippetOwner2$outboundSchema]),
   domainId: z.string(),
   key: z.string(),
-  displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => FindOnePromptSnippetPromptConfig$outboundSchema),
   metadata: z.lazy(() => FindOnePromptSnippetMetadata$outboundSchema),
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-05T12:50:57.727Z"))
+  updated: z.date().default(() => new Date("2025-02-05T18:57:06.512Z"))
     .transform(v => v.toISOString()),
   type: FindOnePromptSnippetType$outboundSchema,
   versions: z.array(z.lazy(() => FindOnePromptSnippetVersions$outboundSchema)),
@@ -4380,7 +4363,6 @@ export const FindOnePromptSnippetResponseBody$outboundSchema: z.ZodType<
   return remap$(v, {
     id: "_id",
     domainId: "domain_id",
-    displayName: "display_name",
     promptConfig: "prompt_config",
     createdById: "created_by_id",
     updatedById: "updated_by_id",

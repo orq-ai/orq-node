@@ -5,7 +5,7 @@
 ```typescript
 import { FindOneByKeyPromptSnippetPromptSnippetsProvider } from "@orq-ai/node/models/operations";
 
-let value: FindOneByKeyPromptSnippetPromptSnippetsProvider = "anthropic";
+let value: FindOneByKeyPromptSnippetPromptSnippetsProvider = "google-ai";
 ```
 
 ## Values

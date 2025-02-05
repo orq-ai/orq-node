@@ -10,12 +10,12 @@ import { GetAllPromptsPromptsPromptConfig } from "@orq-ai/node/models/operations
 let value: GetAllPromptsPromptsPromptConfig = {
   messages: [
     {
-      role: "exception",
+      role: "assistant",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://understated-birdbath.name/",
+            url: "https://hidden-turret.biz/",
           },
         },
       ],

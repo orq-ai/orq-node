@@ -10,8 +10,13 @@ import { UpdatePromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/node/mode
 let value: UpdatePromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "correction",
-      content: "<value>",
+      role: "tool",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

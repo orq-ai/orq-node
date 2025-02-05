@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2Prompts1 = {
 const value: operations.UpdatePrompt2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://adolescent-viability.org/",
+    url: "https://flawless-farmer.net/",
   },
 };
 ```

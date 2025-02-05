@@ -13,20 +13,15 @@ let value: GetAllPromptsResponseBody = {
     {
       id: "<id>",
       owner: "<value>",
-      domainId: "9c5b6fc5-0a31-4ef4-8427-dbd3be4b64f5",
-      createdById: "67cfde7b-415b-44dc-835d-355c0196a4ec",
-      displayName: "Ottis.Weissnat-Rice57",
-      updatedById: "fb9b75e5-06ca-4f1e-b576-13b020d92cfe",
+      domainId: "825e5a82-ad1c-4bd1-94b0-bd76402fd4f5",
+      createdById: "2ef5b516-81d7-439c-95b6-fc50a31ef442",
+      displayName: "Samir73",
+      updatedById: "4b64f516-7cfd-4e7b-8415-b4dc35d355c0",
       promptConfig: {
         messages: [
           {
-            role: "system",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            role: "tool",
+            content: "<value>",
           },
         ],
       },
@@ -35,18 +30,18 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "95277f04-dada-4c73-bc92-cf541af2710a",
-          displayName: "Eudora.Carroll",
-          updatedById: "9020e2d5-c541-447d-b7f8-06b3b80c8174",
+          createdById: "a4ec1cff-b194-4fb9-8b75-e506caf1e576",
+          displayName: "Dell2",
+          updatedById: "92cfee09-4952-477f-904d-adac73c92cf5",
           promptConfig: {
             messages: [
               {
-                role: "user",
+                role: "system",
                 content: [
                   {
                     type: "image_url",
                     imageUrl: {
-                      url: "https://stylish-postbox.info/",
+                      url: "https://lovely-bracelet.com/",
                     },
                   },
                 ],

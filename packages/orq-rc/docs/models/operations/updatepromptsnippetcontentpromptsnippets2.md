@@ -18,7 +18,7 @@ const value: operations.UpdatePromptSnippet2PromptSnippets1 = {
 const value: operations.UpdatePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://small-exterior.name/",
+    url: "https://shocked-characterization.org",
   },
 };
 ```

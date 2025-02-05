@@ -436,10 +436,6 @@ export type UpdatePromptSnippetMetadata = {
 
 export type UpdatePromptSnippetRequestBody = {
   /**
-   * The prompt snippet’s name, meant to be displayable in the UI.
-   */
-  displayName?: string | undefined;
-  /**
    * The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
   description?: string | null | undefined;
@@ -1392,10 +1388,6 @@ export type UpdatePromptSnippetPromptSnippetsResponseMetadata = {
 export type UpdatePromptSnippetVersions = {
   id: string;
   /**
-   * The prompt snippet’s name, meant to be displayable in the UI.
-   */
-  displayName: string;
-  /**
    * The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
   description?: string | null | undefined;
@@ -1417,10 +1409,6 @@ export type UpdatePromptSnippetResponseBody = {
   owner: string | UpdatePromptSnippetOwner2;
   domainId: string;
   key: string;
-  /**
-   * The prompt snippet’s name, meant to be displayable in the UI.
-   */
-  displayName: string;
   /**
    * The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -2870,7 +2858,6 @@ export const UpdatePromptSnippetRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  display_name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => UpdatePromptSnippetPromptConfig$inboundSchema)
     .optional(),
@@ -2878,14 +2865,12 @@ export const UpdatePromptSnippetRequestBody$inboundSchema: z.ZodType<
   path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "display_name": "displayName",
     "prompt_config": "promptConfig",
   });
 });
 
 /** @internal */
 export type UpdatePromptSnippetRequestBody$Outbound = {
-  display_name?: string | undefined;
   description?: string | null | undefined;
   prompt_config?: UpdatePromptSnippetPromptConfig$Outbound | undefined;
   metadata?: UpdatePromptSnippetMetadata$Outbound | undefined;
@@ -2898,7 +2883,6 @@ export const UpdatePromptSnippetRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdatePromptSnippetRequestBody
 > = z.object({
-  displayName: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => UpdatePromptSnippetPromptConfig$outboundSchema)
     .optional(),
@@ -2906,7 +2890,6 @@ export const UpdatePromptSnippetRequestBody$outboundSchema: z.ZodType<
   path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    displayName: "display_name",
     promptConfig: "prompt_config",
   });
 });
@@ -6409,7 +6392,6 @@ export const UpdatePromptSnippetVersions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() =>
     UpdatePromptSnippetPromptSnippetsResponsePromptConfig$inboundSchema
@@ -6423,7 +6405,6 @@ export const UpdatePromptSnippetVersions$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "display_name": "displayName",
     "prompt_config": "promptConfig",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -6433,7 +6414,6 @@ export const UpdatePromptSnippetVersions$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePromptSnippetVersions$Outbound = {
   _id: string;
-  display_name: string;
   description?: string | null | undefined;
   prompt_config: UpdatePromptSnippetPromptSnippetsResponsePromptConfig$Outbound;
   metadata: UpdatePromptSnippetPromptSnippetsResponseMetadata$Outbound;
@@ -6449,7 +6429,6 @@ export const UpdatePromptSnippetVersions$outboundSchema: z.ZodType<
   UpdatePromptSnippetVersions
 > = z.object({
   id: z.string(),
-  displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() =>
     UpdatePromptSnippetPromptSnippetsResponsePromptConfig$outboundSchema
@@ -6463,7 +6442,6 @@ export const UpdatePromptSnippetVersions$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    displayName: "display_name",
     promptConfig: "prompt_config",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
@@ -6513,7 +6491,6 @@ export const UpdatePromptSnippetResponseBody$inboundSchema: z.ZodType<
   owner: z.union([z.string(), UpdatePromptSnippetOwner2$inboundSchema]),
   domain_id: z.string(),
   key: z.string(),
-  display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() =>
     UpdatePromptSnippetPromptSnippetsPromptConfig$inboundSchema
@@ -6526,7 +6503,7 @@ export const UpdatePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-05T12:50:57.727Z",
+    "2025-02-05T18:57:06.512Z",
   ).transform(v => new Date(v)),
   type: UpdatePromptSnippetPromptSnippetsType$inboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptSnippetVersions$inboundSchema)),
@@ -6534,7 +6511,6 @@ export const UpdatePromptSnippetResponseBody$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "domain_id": "domainId",
-    "display_name": "displayName",
     "prompt_config": "promptConfig",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -6547,7 +6523,6 @@ export type UpdatePromptSnippetResponseBody$Outbound = {
   owner: string | string;
   domain_id: string;
   key: string;
-  display_name: string;
   description?: string | null | undefined;
   prompt_config: UpdatePromptSnippetPromptSnippetsPromptConfig$Outbound;
   metadata: UpdatePromptSnippetPromptSnippetsMetadata$Outbound;
@@ -6569,7 +6544,6 @@ export const UpdatePromptSnippetResponseBody$outboundSchema: z.ZodType<
   owner: z.union([z.string(), UpdatePromptSnippetOwner2$outboundSchema]),
   domainId: z.string(),
   key: z.string(),
-  displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() =>
     UpdatePromptSnippetPromptSnippetsPromptConfig$outboundSchema
@@ -6580,7 +6554,7 @@ export const UpdatePromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-05T12:50:57.727Z"))
+  updated: z.date().default(() => new Date("2025-02-05T18:57:06.512Z"))
     .transform(v => v.toISOString()),
   type: UpdatePromptSnippetPromptSnippetsType$outboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptSnippetVersions$outboundSchema)),
@@ -6588,7 +6562,6 @@ export const UpdatePromptSnippetResponseBody$outboundSchema: z.ZodType<
   return remap$(v, {
     id: "_id",
     domainId: "domain_id",
-    displayName: "display_name",
     promptConfig: "prompt_config",
     createdById: "created_by_id",
     updatedById: "updated_by_id",

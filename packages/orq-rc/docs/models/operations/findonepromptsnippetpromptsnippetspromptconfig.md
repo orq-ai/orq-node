@@ -10,15 +10,8 @@ import { FindOnePromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/node/mod
 let value: FindOnePromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "tool",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://hateful-t-shirt.name",
-          },
-        },
-      ],
+      role: "assistant",
+      content: "<value>",
     },
   ],
 };

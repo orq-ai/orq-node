@@ -6,7 +6,7 @@
 import { GetAllPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsMessages = {
-  role: "tool",
+  role: "correction",
   content: "<value>",
 };
 ```

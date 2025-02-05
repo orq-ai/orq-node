@@ -9,14 +9,13 @@ import { FindOnePromptSnippetResponseBody } from "@orq-ai/node/models/operations
 
 let value: FindOnePromptSnippetResponseBody = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "bc256a44-5c91-415c-8bbc-488bf4ca9cf0",
+  owner: "<value>",
+  domainId: "0da2f1d4-6caf-491e-bcb0-62dbefcf9005",
   key: "<key>",
-  displayName: "Nigel27",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "correction",
         content: [
           {
             type: "text",
@@ -27,17 +26,16 @@ let value: FindOnePromptSnippetResponseBody = {
     ],
   },
   metadata: {},
-  createdById: "88a51528-5ff9-49fe-9c55-37fe10e83aa1",
-  updatedById: "0323a012-544c-4f8f-8616-47a7eeb726b4",
+  createdById: "0e48f6a6-c834-448b-bfbc-256a445c9115",
+  updatedById: "bbc488bf-4ca9-4cf0-92c1-834b0d788a51",
   type: "snippet",
   versions: [
     {
       id: "<id>",
-      displayName: "Sydni_Morissette",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
+            role: "assistant",
             content: [
               {
                 type: "text",
@@ -48,8 +46,8 @@ let value: FindOnePromptSnippetResponseBody = {
         ],
       },
       metadata: {},
-      createdById: "988f4fe7-dca5-43ad-b0a7-e5782bd040fa",
-      updatedById: "8c556a5e-f031-4037-ad37-eac8f90369c6",
+      createdById: "ff99fec5-537f-4e10-9e83-aa140323a012",
+      updatedById: "44cf8f61-647a-47ee-9b72-6b41eb9cd7ee",
       timestamp: "<value>",
     },
   ],
@@ -64,7 +62,6 @@ let value: FindOnePromptSnippetResponseBody = {
 | `owner`                                                                                                                                                            | *operations.FindOnePromptSnippetOwner*                                                                                                                             | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
 | `domainId`                                                                                                                                                         | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
 | `key`                                                                                                                                                              | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
-| `displayName`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | The prompt snippet’s name, meant to be displayable in the UI.                                                                                                      |
 | `description`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                 | The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
 | `promptConfig`                                                                                                                                                     | [operations.FindOnePromptSnippetPromptConfig](../../models/operations/findonepromptsnippetpromptconfig.md)                                                         | :heavy_check_mark:                                                                                                                                                 | A list of messages compatible with the openAI schema                                                                                                               |
 | `metadata`                                                                                                                                                         | [operations.FindOnePromptSnippetMetadata](../../models/operations/findonepromptsnippetmetadata.md)                                                                 | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |

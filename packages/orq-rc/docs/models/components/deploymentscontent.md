@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.Content2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://faraway-meadow.info/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

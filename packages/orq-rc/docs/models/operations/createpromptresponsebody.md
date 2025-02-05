@@ -9,20 +9,20 @@ import { CreatePromptResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptResponseBody = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "84949226-6420-4047-8b7e-0259d540d69f",
-  createdById: "2ccc8f69-16b3-4fa4-ac1f-0e4c04b81669",
-  displayName: "Romaine80",
-  updatedById: "68a20597-bd72-4d9b-8bf4-b5635f43947d",
+  owner: "vendor",
+  domainId: "2d07a09f-2b92-4008-afab-792ecf432fc2",
+  createdById: "622f4f17-2081-4bb2-bfb4-bb5659e2e0a6",
+  displayName: "Miracle_Nolan",
+  updatedById: "84949226-6420-4047-8b7e-0259d540d69f",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "assistant",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://respectful-redesign.org",
+              url: "https://muted-wasabi.info",
             },
           },
         ],
@@ -34,13 +34,13 @@ let value: CreatePromptResponseBody = {
   versions: [
     {
       id: "<id>",
-      createdById: "650232c8-ad35-4b60-86e6-5fa51cbe31b3",
-      displayName: "Emmanuelle46",
-      updatedById: "893d8bf6-e009-4434-a5b9-cdd66ea185f0",
+      createdById: "916b3fa4-c1f0-4e4c-904b-81669ad762cb",
+      displayName: "Joshua.Cruickshank",
+      updatedById: "7bd72d9b-bf4b-4563-b5f4-3947d3698fab",
       promptConfig: {
         messages: [
           {
-            role: "prompt",
+            role: "exception",
             content: "<value>",
           },
         ],

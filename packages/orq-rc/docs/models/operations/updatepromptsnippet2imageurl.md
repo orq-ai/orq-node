@@ -6,7 +6,7 @@
 import { UpdatePromptSnippet2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptSnippet2ImageUrl = {
-  url: "https://forsaken-minority.net",
+  url: "https://subtle-intellect.org/",
 };
 ```
 

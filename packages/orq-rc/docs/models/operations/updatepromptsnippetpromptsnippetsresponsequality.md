@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { UpdatePromptSnippetPromptSnippetsResponseQuality } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptSnippetPromptSnippetsResponseQuality = "standard";
+let value: UpdatePromptSnippetPromptSnippetsResponseQuality = "hd";
 ```
 
 ## Values

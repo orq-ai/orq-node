@@ -10,13 +10,8 @@ import { FindOnePromptSnippetPromptConfig } from "@orq-ai/node/models/operations
 let value: FindOnePromptSnippetPromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "user",
+      content: "<value>",
     },
   ],
 };

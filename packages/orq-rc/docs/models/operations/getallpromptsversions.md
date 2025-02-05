@@ -9,13 +9,13 @@ import { GetAllPromptsVersions } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsVersions = {
   id: "<id>",
-  createdById: "b6cbf8c5-5661-481e-9074-2cb2acc1abd8",
-  displayName: "Virgie.Macejkovic",
-  updatedById: "17d709fd-9ed7-49bd-a0c7-ac8261bfc694",
+  createdById: "39a9dfc7-d1a8-42f5-a9e8-1d5fed5cf870",
+  displayName: "Ryann_Halvorson7",
+  updatedById: "6467ff2e-1825-4b6c-8bf8-c5566181e074",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "correction",
         content: [
           {
             type: "text",

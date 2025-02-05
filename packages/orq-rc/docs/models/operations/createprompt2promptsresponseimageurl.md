@@ -6,7 +6,7 @@
 import { CreatePrompt2PromptsResponseImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreatePrompt2PromptsResponseImageUrl = {
-  url: "https://pointless-t-shirt.net",
+  url: "https://peaceful-horst.org/",
 };
 ```
 

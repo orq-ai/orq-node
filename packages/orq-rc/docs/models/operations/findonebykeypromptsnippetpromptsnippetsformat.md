@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { FindOneByKeyPromptSnippetPromptSnippetsFormat } from "@orq-ai/node/models/operations";
 
-let value: FindOneByKeyPromptSnippetPromptSnippetsFormat = "json_object";
+let value: FindOneByKeyPromptSnippetPromptSnippetsFormat = "text";
 ```
 
 ## Values

@@ -6,12 +6,12 @@
 import { FindOneByKeyPromptSnippetPromptSnippetsMessages } from "@orq-ai/node/models/operations";
 
 let value: FindOneByKeyPromptSnippetPromptSnippetsMessages = {
-  role: "exception",
+  role: "expected_output",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://gorgeous-aftermath.com/",
+        url: "https://worldly-mortise.com",
       },
     },
   ],

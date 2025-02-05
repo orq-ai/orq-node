@@ -18,7 +18,7 @@ const value: operations.UpdatePromptContentPromptsResponse2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://helpless-loaf.name",
+      url: "https://idolized-longboat.name",
     },
   },
 ];

@@ -5,7 +5,7 @@
 ```typescript
 import { UpdatePromptSnippetProvider } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptSnippetProvider = "togetherai";
+let value: UpdatePromptSnippetProvider = "azure";
 ```
 
 ## Values

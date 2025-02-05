@@ -6,8 +6,15 @@
 import { FindOnePromptSnippetMessages } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetMessages = {
-  role: "expected_output",
-  content: "<value>",
+  role: "prompt",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://substantial-thunderbolt.biz",
+      },
+    },
+  ],
 };
 ```
 

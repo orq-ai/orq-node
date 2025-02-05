@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.FindOnePromptSnippetContentPromptSnippets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://well-off-negotiation.com/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

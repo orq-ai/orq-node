@@ -6,8 +6,15 @@
 import { CreatePromptPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptPromptsMessages = {
-  role: "correction",
-  content: "<value>",
+  role: "tool",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://phony-joy.com",
+      },
+    },
+  ],
 };
 ```
 

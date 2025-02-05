@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { FindOnePromptSnippetRole } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetRole = "system";
+let value: FindOnePromptSnippetRole = "exception";
 ```
 
 ## Values

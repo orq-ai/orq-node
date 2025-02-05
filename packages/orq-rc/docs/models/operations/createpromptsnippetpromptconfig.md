@@ -10,7 +10,7 @@ import { CreatePromptSnippetPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptSnippetPromptConfig = {
   messages: [
     {
-      role: "system",
+      role: "expected_output",
       content: "<value>",
     },
   ],

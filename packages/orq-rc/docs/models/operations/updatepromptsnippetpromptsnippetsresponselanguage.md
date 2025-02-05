@@ -7,7 +7,7 @@ The language that the prompt is written in. Use this field to categorize the pro
 ```typescript
 import { UpdatePromptSnippetPromptSnippetsResponseLanguage } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptSnippetPromptSnippetsResponseLanguage = "Russian";
+let value: UpdatePromptSnippetPromptSnippetsResponseLanguage = "Chinese";
 ```
 
 ## Values

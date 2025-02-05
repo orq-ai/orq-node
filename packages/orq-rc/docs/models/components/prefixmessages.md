@@ -6,13 +6,11 @@
 import { PrefixMessages } from "@orq-ai/node/models/components";
 
 let value: PrefixMessages = {
-  role: "prompt",
+  role: "exception",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://creamy-blowgun.net",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.FindOneByKeyPromptSnippetContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://gaseous-kiss.net",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

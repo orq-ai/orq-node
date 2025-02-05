@@ -18,7 +18,7 @@ const value: operations.GetAllPromptsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://tall-case.net/",
+      url: "https://perfumed-populist.com/",
     },
   },
 ];

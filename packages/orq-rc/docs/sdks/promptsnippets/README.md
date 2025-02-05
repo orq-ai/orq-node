@@ -27,7 +27,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.promptSnippets.create({
     key: "<key>",
-    displayName: "Jed6",
     promptConfig: {
       messages: [
         {
@@ -86,7 +85,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await promptSnippetsCreate(orq, {
     key: "<key>",
-    displayName: "Jed6",
     promptConfig: {
       messages: [
         {

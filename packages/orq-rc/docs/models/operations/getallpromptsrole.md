@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { GetAllPromptsRole } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsRole = "correction";
+let value: GetAllPromptsRole = "system";
 ```
 
 ## Values

@@ -18,7 +18,7 @@ const value: operations.CreatePrompt2PromptsResponse1 = {
 const value: operations.CreatePrompt2PromptsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://gifted-mixture.net/",
+    url: "https://round-saw.info/",
   },
 };
 ```

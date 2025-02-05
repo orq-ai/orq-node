@@ -18,7 +18,7 @@ const value: operations.FindOnePromptSnippet2PromptSnippets1 = {
 const value: operations.FindOnePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://winding-freezing.net",
+    url: "https://powerless-knitting.biz/",
   },
 };
 ```

@@ -18,7 +18,7 @@ const value: operations.FindOneByKeyPromptSnippet21 = {
 const value: operations.FindOneByKeyPromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://lustrous-publication.net/",
+    url: "https://judicious-tectonics.biz",
   },
 };
 ```

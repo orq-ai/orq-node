@@ -18,7 +18,7 @@ const value: operations.UpdatePromptSnippet2PromptSnippetsResponse1 = {
 const value: operations.UpdatePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://submissive-daddy.org",
+    url: "https://obvious-fund.info",
   },
 };
 ```

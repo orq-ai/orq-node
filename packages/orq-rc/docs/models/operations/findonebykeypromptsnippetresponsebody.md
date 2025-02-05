@@ -9,37 +9,42 @@ import { FindOneByKeyPromptSnippetResponseBody } from "@orq-ai/node/models/opera
 
 let value: FindOneByKeyPromptSnippetResponseBody = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "f3cd8796-866b-412d-8c46-ed9306add035",
+  owner: "vendor",
+  domainId: "990f2bd5-31b7-4be2-be64-ff3a1ada6669",
   key: "<key>",
-  displayName: "Providenci14",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "expected_output",
         content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "b196becd-0486-434f-8450-d234e3cce13b",
-  updatedById: "42271560-617d-4d19-bd3c-ec103496b525",
+  createdById: "21358abe-fadc-44e0-b047-a1ac2687cfc1",
+  updatedById: "13238a7f-3cd8-4796-9866-b12dc46ed930",
   type: "snippet",
   versions: [
     {
       id: "<id>",
-      displayName: "Verona.Schaefer88",
       promptConfig: {
         messages: [
           {
             role: "prompt",
-            content: "<value>",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://exhausted-flat.biz/",
+                },
+              },
+            ],
           },
         ],
       },
       metadata: {},
-      createdById: "fbd97987-c226-451d-bc8f-1c453c2da0ca",
-      updatedById: "b8d484f3-0580-48db-b9ff-d9709fd52cbf",
+      createdById: "cc8f2e12-b196-4bec-bd04-8634f450d234",
+      updatedById: "3cce13b3-4227-4156-8061-7dd19d3cec10",
       timestamp: "<value>",
     },
   ],
@@ -54,7 +59,6 @@ let value: FindOneByKeyPromptSnippetResponseBody = {
 | `owner`                                                                                                                                                            | *operations.FindOneByKeyPromptSnippetOwner*                                                                                                                        | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
 | `domainId`                                                                                                                                                         | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
 | `key`                                                                                                                                                              | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
-| `displayName`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | The prompt snippet’s name, meant to be displayable in the UI.                                                                                                      |
 | `description`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                 | The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
 | `promptConfig`                                                                                                                                                     | [operations.FindOneByKeyPromptSnippetPromptConfig](../../models/operations/findonebykeypromptsnippetpromptconfig.md)                                               | :heavy_check_mark:                                                                                                                                                 | A list of messages compatible with the openAI schema                                                                                                               |
 | `metadata`                                                                                                                                                         | [operations.FindOneByKeyPromptSnippetMetadata](../../models/operations/findonebykeypromptsnippetmetadata.md)                                                       | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |

@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsPromptsUseCases } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsPromptsUseCases = "API interaction";
+let value: GetAllPromptsPromptsUseCases = "Documents QA";
 ```
 
 ## Values

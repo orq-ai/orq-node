@@ -6,7 +6,7 @@
 import { UpdatePromptSnippet2PromptSnippetsResponseImageUrl } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptSnippet2PromptSnippetsResponseImageUrl = {
-  url: "https://enchanted-bathrobe.net/",
+  url: "https://gray-complication.com/",
 };
 ```
 
