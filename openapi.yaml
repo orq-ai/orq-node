@@ -2942,7 +2942,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-05T12:50:58.799Z"
+          default: "2025-02-05T18:57:07.880Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3001,7 +3001,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-02-05T12:50:58.799Z"
+            default: "2025-02-05T18:57:07.880Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3079,7 +3079,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-05T12:50:58.799Z"
+          default: "2025-02-05T18:57:07.880Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3124,7 +3124,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-02-05T12:50:58.799Z"
+                default: "2025-02-05T18:57:07.880Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3166,7 +3166,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-05T12:50:58.799Z"
+          default: "2025-02-05T18:57:07.880Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3405,7 +3405,7 @@ components:
                           - type: "string"
                             format: "date-time"
                           - type: "string"
-                        default: "2025-02-05T12:50:57.726Z"
+                        default: "2025-02-05T18:57:06.511Z"
                         description: "The date and time the resource was created"
                         readOnly: true
                         format: "date-time"
@@ -3413,7 +3413,7 @@ components:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2025-02-05T12:50:57.727Z"
+                            default: "2025-02-05T18:57:06.512Z"
                           - type: "string"
                         description: "The date and time the resource was last updated"
                         readOnly: true
@@ -3441,7 +3441,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-05T12:50:57.726Z"
+              default: "2025-02-05T18:57:06.511Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3449,7 +3449,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-05T12:50:57.727Z"
+                  default: "2025-02-05T18:57:06.512Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -3958,7 +3958,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-05T12:50:57.726Z"
+              default: "2025-02-05T18:57:06.511Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3966,7 +3966,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-05T12:50:57.727Z"
+                  default: "2025-02-05T18:57:06.512Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -4115,7 +4115,7 @@ components:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -4123,7 +4123,7 @@ components:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -4269,10 +4269,6 @@ components:
           format: "uuid"
         "key":
           type: "string"
-        "display_name":
-          type: "string"
-          maxLength: 128
-          description: "The prompt snippet’s name, meant to be displayable in the UI."
         "description":
           type:
             - "string"
@@ -4583,7 +4579,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-05T12:50:57.726Z"
+          default: "2025-02-05T18:57:06.511Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -4591,7 +4587,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-05T12:50:57.727Z"
+              default: "2025-02-05T18:57:06.512Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -4607,10 +4603,6 @@ components:
             properties:
               "_id":
                 type: "string"
-              "display_name":
-                type: "string"
-                maxLength: 128
-                description: "The prompt snippet’s name, meant to be displayable in the UI."
               "description":
                 type:
                   - "string"
@@ -4920,7 +4912,6 @@ components:
                 type: "string"
             required:
               - "_id"
-              - "display_name"
               - "prompt_config"
               - "metadata"
               - "created_by_id"
@@ -4932,7 +4923,6 @@ components:
         - "owner"
         - "domain_id"
         - "key"
-        - "display_name"
         - "prompt_config"
         - "metadata"
         - "created_by_id"
@@ -6305,7 +6295,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-05T12:50:57.726Z"
+          default: "2025-02-05T18:57:06.511Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6313,7 +6303,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-05T12:50:57.727Z"
+              default: "2025-02-05T18:57:06.512Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -36040,7 +36030,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -36048,7 +36038,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -38192,7 +38182,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-05T12:50:58.799Z"
+                    default: "2025-02-05T18:57:07.880Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38288,7 +38278,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-02-05T12:50:58.799Z"
+                          default: "2025-02-05T18:57:07.880Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -38357,7 +38347,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-05T12:50:58.799Z"
+                    default: "2025-02-05T18:57:07.880Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38413,10 +38403,6 @@ paths:
               properties:
                 "key":
                   type: "string"
-                "display_name":
-                  type: "string"
-                  maxLength: 128
-                  description: "The prompt snippet’s name, meant to be displayable in the UI."
                 "description":
                   type:
                     - "string"
@@ -38722,7 +38708,6 @@ paths:
                   example: "Customer Service/Billing/Refund"
               required:
                 - "key"
-                - "display_name"
                 - "prompt_config"
                 - "path"
       responses:
@@ -38746,10 +38731,6 @@ paths:
                     format: "uuid"
                   "key":
                     type: "string"
-                  "display_name":
-                    type: "string"
-                    maxLength: 128
-                    description: "The prompt snippet’s name, meant to be displayable in the UI."
                   "description":
                     type:
                       - "string"
@@ -39060,7 +39041,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -39068,7 +39049,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -39084,10 +39065,6 @@ paths:
                       properties:
                         "_id":
                           type: "string"
-                        "display_name":
-                          type: "string"
-                          maxLength: 128
-                          description: "The prompt snippet’s name, meant to be displayable in the UI."
                         "description":
                           type:
                             - "string"
@@ -39397,7 +39374,6 @@ paths:
                           type: "string"
                       required:
                         - "_id"
-                        - "display_name"
                         - "prompt_config"
                         - "metadata"
                         - "created_by_id"
@@ -39409,7 +39385,6 @@ paths:
                   - "owner"
                   - "domain_id"
                   - "key"
-                  - "display_name"
                   - "prompt_config"
                   - "metadata"
                   - "created_by_id"
@@ -39450,10 +39425,6 @@ paths:
             schema:
               type: "object"
               properties:
-                "display_name":
-                  type: "string"
-                  maxLength: 128
-                  description: "The prompt snippet’s name, meant to be displayable in the UI."
                 "description":
                   type:
                     - "string"
@@ -39778,10 +39749,6 @@ paths:
                     format: "uuid"
                   "key":
                     type: "string"
-                  "display_name":
-                    type: "string"
-                    maxLength: 128
-                    description: "The prompt snippet’s name, meant to be displayable in the UI."
                   "description":
                     type:
                       - "string"
@@ -40092,7 +40059,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -40100,7 +40067,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -40116,10 +40083,6 @@ paths:
                       properties:
                         "_id":
                           type: "string"
-                        "display_name":
-                          type: "string"
-                          maxLength: 128
-                          description: "The prompt snippet’s name, meant to be displayable in the UI."
                         "description":
                           type:
                             - "string"
@@ -40429,7 +40392,6 @@ paths:
                           type: "string"
                       required:
                         - "_id"
-                        - "display_name"
                         - "prompt_config"
                         - "metadata"
                         - "created_by_id"
@@ -40441,7 +40403,6 @@ paths:
                   - "owner"
                   - "domain_id"
                   - "key"
-                  - "display_name"
                   - "prompt_config"
                   - "metadata"
                   - "created_by_id"
@@ -40526,10 +40487,6 @@ paths:
                     format: "uuid"
                   "key":
                     type: "string"
-                  "display_name":
-                    type: "string"
-                    maxLength: 128
-                    description: "The prompt snippet’s name, meant to be displayable in the UI."
                   "description":
                     type:
                       - "string"
@@ -40840,7 +40797,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -40848,7 +40805,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -40864,10 +40821,6 @@ paths:
                       properties:
                         "_id":
                           type: "string"
-                        "display_name":
-                          type: "string"
-                          maxLength: 128
-                          description: "The prompt snippet’s name, meant to be displayable in the UI."
                         "description":
                           type:
                             - "string"
@@ -41177,7 +41130,6 @@ paths:
                           type: "string"
                       required:
                         - "_id"
-                        - "display_name"
                         - "prompt_config"
                         - "metadata"
                         - "created_by_id"
@@ -41189,7 +41141,6 @@ paths:
                   - "owner"
                   - "domain_id"
                   - "key"
-                  - "display_name"
                   - "prompt_config"
                   - "metadata"
                   - "created_by_id"
@@ -41244,10 +41195,6 @@ paths:
                     format: "uuid"
                   "key":
                     type: "string"
-                  "display_name":
-                    type: "string"
-                    maxLength: 128
-                    description: "The prompt snippet’s name, meant to be displayable in the UI."
                   "description":
                     type:
                       - "string"
@@ -41558,7 +41505,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41566,7 +41513,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -41582,10 +41529,6 @@ paths:
                       properties:
                         "_id":
                           type: "string"
-                        "display_name":
-                          type: "string"
-                          maxLength: 128
-                          description: "The prompt snippet’s name, meant to be displayable in the UI."
                         "description":
                           type:
                             - "string"
@@ -41895,7 +41838,6 @@ paths:
                           type: "string"
                       required:
                         - "_id"
-                        - "display_name"
                         - "prompt_config"
                         - "metadata"
                         - "created_by_id"
@@ -41907,7 +41849,6 @@ paths:
                   - "owner"
                   - "domain_id"
                   - "key"
-                  - "display_name"
                   - "prompt_config"
                   - "metadata"
                   - "created_by_id"
@@ -42579,7 +42520,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42587,7 +42528,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -43604,7 +43545,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-05T12:50:57.726Z"
+                    default: "2025-02-05T18:57:06.511Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -43612,7 +43553,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-05T12:50:57.727Z"
+                        default: "2025-02-05T18:57:06.512Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -44400,7 +44341,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-02-05T12:50:57.726Z"
+                          default: "2025-02-05T18:57:06.511Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -44408,7 +44349,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-02-05T12:50:57.727Z"
+                              default: "2025-02-05T18:57:06.512Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
