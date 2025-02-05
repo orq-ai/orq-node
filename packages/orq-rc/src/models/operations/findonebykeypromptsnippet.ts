@@ -4453,7 +4453,7 @@ export const FindOneByKeyPromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-05T11:00:10.120Z",
+    "2025-02-05T12:50:57.727Z",
   ).transform(v => new Date(v)),
   type: FindOneByKeyPromptSnippetType$inboundSchema,
   versions: z.array(
@@ -4507,7 +4507,7 @@ export const FindOneByKeyPromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-05T11:00:10.120Z"))
+  updated: z.date().default(() => new Date("2025-02-05T12:50:57.727Z"))
     .transform(v => v.toISOString()),
   type: FindOneByKeyPromptSnippetType$outboundSchema,
   versions: z.array(
