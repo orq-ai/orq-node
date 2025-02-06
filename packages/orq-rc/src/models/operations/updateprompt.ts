@@ -6018,7 +6018,7 @@ export const UpdatePromptResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-06T14:05:20.313Z",
+    "2025-02-06T15:43:55.428Z",
   ).transform(v => new Date(v)),
   type: UpdatePromptPromptsType$inboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptVersions$inboundSchema)),
@@ -6066,7 +6066,7 @@ export const UpdatePromptResponseBody$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => UpdatePromptPromptsPromptConfig$outboundSchema),
   metadata: z.lazy(() => UpdatePromptPromptsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-06T14:05:20.313Z"))
+  updated: z.date().default(() => new Date("2025-02-06T15:43:55.428Z"))
     .transform(v => v.toISOString()),
   type: UpdatePromptPromptsType$outboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptVersions$outboundSchema)),
