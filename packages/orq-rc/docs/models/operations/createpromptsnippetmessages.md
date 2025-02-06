@@ -6,13 +6,11 @@
 import { CreatePromptSnippetMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptSnippetMessages = {
-  role: "tool",
+  role: "prompt",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://rubbery-silk.name/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

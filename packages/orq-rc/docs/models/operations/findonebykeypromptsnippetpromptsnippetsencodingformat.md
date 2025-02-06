@@ -7,7 +7,7 @@ The format to return the embeddings
 ```typescript
 import { FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat = "base64";
+let value: FindOneByKeyPromptSnippetPromptSnippetsEncodingFormat = "float";
 ```
 
 ## Values

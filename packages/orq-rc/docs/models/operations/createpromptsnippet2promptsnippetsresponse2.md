@@ -10,7 +10,7 @@ import { CreatePromptSnippet2PromptSnippetsResponse2 } from "@orq-ai/node/models
 let value: CreatePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://heavenly-instruction.info",
+    url: "https://superb-department.biz/",
   },
 };
 ```

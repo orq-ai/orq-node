@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { UpdatePromptSnippetPromptSnippetsResponseRole } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptSnippetPromptSnippetsResponseRole = "expected_output";
+let value: UpdatePromptSnippetPromptSnippetsResponseRole = "correction";
 ```
 
 ## Values

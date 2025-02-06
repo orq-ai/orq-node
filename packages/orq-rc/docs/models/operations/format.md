@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { Format } from "@orq-ai/node/models/operations";
 
-let value: Format = "text";
+let value: Format = "url";
 ```
 
 ## Values

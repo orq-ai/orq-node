@@ -12,14 +12,14 @@ let value: FindOnePromptSnippetVersions = {
   promptConfig: {
     messages: [
       {
-        role: "tool",
+        role: "prompt",
         content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "11506a61-142f-42c9-b98f-5c86f916cbe4",
-  updatedById: "79ffd5ea-60c8-4cbc-b4c8-7a014f25055f",
+  createdById: "96becd04-8634-4f45-80d2-34e3cce13b34",
+  updatedById: "27156061-7dd1-49d3-8cec-103496b525ef",
   timestamp: "<value>",
 };
 ```

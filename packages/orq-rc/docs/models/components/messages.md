@@ -6,8 +6,13 @@
 import { Messages } from "@orq-ai/node/models/components";
 
 let value: Messages = {
-  role: "expected_output",
-  content: "<value>",
+  role: "prompt",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

@@ -10,22 +10,15 @@ import { UpdatePromptResponseBody } from "@orq-ai/node/models/operations";
 let value: UpdatePromptResponseBody = {
   id: "<id>",
   owner: "vendor",
-  domainId: "805b7f65-d8ac-4a61-a9e6-e89d91f3b873",
-  createdById: "1fd8648e-4835-43f9-8b15-e12a9de24601",
-  displayName: "Jayden92",
-  updatedById: "734c4679-f354-4515-9e45-fb8c1713256f",
+  domainId: "d2792c1f-7516-4a14-8da3-2e42f4176e21",
+  createdById: "e7298395-3843-4e24-b643-c51825e5a82a",
+  displayName: "Augustine_Pollich10",
+  updatedById: "b0bd7640-2fd4-4f54-92ef-5b51681d739c",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://forceful-kick.biz",
-            },
-          },
-        ],
+        role: "prompt",
+        content: "<value>",
       },
     ],
   },
@@ -34,19 +27,14 @@ let value: UpdatePromptResponseBody = {
   versions: [
     {
       id: "<id>",
-      createdById: "36b8ed09-9f08-4309-8cc0-6033354f5e2c",
-      displayName: "Jalen3",
-      updatedById: "c5e461a0-7ad2-4cb8-b919-6d596e41b690",
+      createdById: "fc50a31e-f442-47db-bd3b-e4b64f5167cf",
+      displayName: "Tomasa.Reichel",
+      updatedById: "b4dc35d3-55c0-4196-aa4e-c1cffb194fb9",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            role: "exception",
+            content: "<value>",
           },
         ],
       },

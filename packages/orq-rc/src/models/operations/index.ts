@@ -20,6 +20,7 @@ export * from "./fileupload.js";
 export * from "./findonebykeypromptsnippet.js";
 export * from "./findonepromptsnippet.js";
 export * from "./getallprompts.js";
+export * from "./getallpromptsnippets.js";
 export * from "./getoneprompt.js";
 export * from "./remoteconfigsgetconfig.js";
 export * from "./updateprompt.js";

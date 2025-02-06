@@ -10,19 +10,19 @@ import { FindOneByKeyPromptSnippetResponseBody } from "@orq-ai/node/models/opera
 let value: FindOneByKeyPromptSnippetResponseBody = {
   id: "<id>",
   owner: "vendor",
-  domainId: "990f2bd5-31b7-4be2-be64-ff3a1ada6669",
+  domainId: "1f0e4c04-b816-469a-bd76-2cb68a20597b",
   key: "<key>",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "exception",
         content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "21358abe-fadc-44e0-b047-a1ac2687cfc1",
-  updatedById: "13238a7f-3cd8-4796-9866-b12dc46ed930",
+  createdById: "d9bbf4b5-635f-4439-847d-3698fabf6502",
+  updatedById: "2c8ad35b-606e-465f-9a51-cbe31b325d80",
   type: "snippet",
   versions: [
     {
@@ -35,7 +35,7 @@ let value: FindOneByKeyPromptSnippetResponseBody = {
               {
                 type: "image_url",
                 imageUrl: {
-                  url: "https://exhausted-flat.biz/",
+                  url: "https://these-meander.net/",
                 },
               },
             ],
@@ -43,8 +43,8 @@ let value: FindOneByKeyPromptSnippetResponseBody = {
         ],
       },
       metadata: {},
-      createdById: "cc8f2e12-b196-4bec-bd04-8634f450d234",
-      updatedById: "3cce13b3-4227-4156-8061-7dd19d3cec10",
+      createdById: "f6e00943-45b9-4cdd-866e-a185f09b4fde",
+      updatedById: "94da818a-f9ff-4a87-be01-1c5a968af991",
       timestamp: "<value>",
     },
   ],

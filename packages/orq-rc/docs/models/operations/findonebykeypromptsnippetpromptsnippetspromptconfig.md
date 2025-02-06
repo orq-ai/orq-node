@@ -10,7 +10,7 @@ import { FindOneByKeyPromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/nod
 let value: FindOneByKeyPromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "assistant",
+      role: "tool",
       content: "<value>",
     },
   ],

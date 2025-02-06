@@ -10,12 +10,12 @@ import { CreatePromptPromptsPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptPromptsPromptConfig = {
   messages: [
     {
-      role: "tool",
+      role: "exception",
       content: [
         {
           type: "image_url",
           imageUrl: {
-            url: "https://crooked-schedule.net/",
+            url: "https://roasted-sermon.name/",
           },
         },
       ],

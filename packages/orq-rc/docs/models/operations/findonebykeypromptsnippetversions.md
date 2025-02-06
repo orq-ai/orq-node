@@ -12,12 +12,12 @@ let value: FindOneByKeyPromptSnippetVersions = {
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "assistant",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://wordy-patroller.org/",
+              url: "https://scared-rawhide.info/",
             },
           },
         ],
@@ -25,8 +25,8 @@ let value: FindOneByKeyPromptSnippetVersions = {
     ],
   },
   metadata: {},
-  createdById: "8bce286e-1fe1-47bb-bec4-7b2374d95dcf",
-  updatedById: "62d05efa-b088-4513-b569-b55004baccdb",
+  createdById: "659e2e0a-6cb7-4a8c-9784-949226642004",
+  updatedById: "b7e0259d-540d-469f-902c-cc8f6916b3fa",
   timestamp: "<value>",
 };
 ```

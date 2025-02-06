@@ -10,7 +10,7 @@ import { CreatePrompt2PromptsResponse2 } from "@orq-ai/node/models/operations";
 let value: CreatePrompt2PromptsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ruddy-vision.biz/",
+    url: "https://neglected-pliers.net",
   },
 };
 ```

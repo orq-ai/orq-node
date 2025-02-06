@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptSnippetContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://definite-jazz.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

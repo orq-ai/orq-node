@@ -6,15 +6,8 @@
 import { UpdatePromptPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptPromptsMessages = {
-  role: "exception",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://near-formamide.org/",
-      },
-    },
-  ],
+  role: "system",
+  content: "<value>",
 };
 ```
 

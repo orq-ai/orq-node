@@ -9,27 +9,20 @@ import { UpdatePromptSnippetResponseBody } from "@orq-ai/node/models/operations"
 
 let value: UpdatePromptSnippetResponseBody = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "907b0e80-3f91-4470-9673-9c39afcd72f2",
+  owner: "<value>",
+  domainId: "dca53ad0-a7e5-4782-bbd0-40faf8c556a5",
   key: "<key>",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://gullible-disclosure.biz",
-            },
-          },
-        ],
+        role: "expected_output",
+        content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "2825ab06-ad7f-4407-b4d3-4cb8b600810f",
-  updatedById: "20f42b14-fa86-4c2f-ad90-be851ce1c0f9",
+  createdById: "31037d37-eac8-4f90-8369-c6bc5fae8bce",
+  updatedById: "86e1fe17-bbec-447b-9237-4d95dcfd62d0",
   type: "snippet",
   versions: [
     {
@@ -37,19 +30,21 @@ let value: UpdatePromptSnippetResponseBody = {
       promptConfig: {
         messages: [
           {
-            role: "user",
+            role: "expected_output",
             content: [
               {
-                type: "text",
-                text: "<value>",
+                type: "image_url",
+                imageUrl: {
+                  url: "https://artistic-lawmaker.name",
+                },
               },
             ],
           },
         ],
       },
       metadata: {},
-      createdById: "dfc81773-6527-4480-9ed8-df1aff92903f",
-      updatedById: "a4fb5c16-3a16-4485-8b0a-34cf5d1ac26e",
+      createdById: "513569b5-5004-4bac-acdb-fe990f2bd531",
+      updatedById: "7be2e64f-f3a1-4ada-b666-9ee021358abe",
       timestamp: "<value>",
     },
   ],

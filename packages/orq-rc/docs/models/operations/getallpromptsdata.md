@@ -9,23 +9,16 @@ import { GetAllPromptsData } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsData = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "cc1abd87-fc85-4d71-b7d7-09fd9ed79bd0",
-  createdById: "7ac8261b-fc69-4484-ab4f-a10f353ea885",
-  displayName: "Heber.OKon",
-  updatedById: "8c7fcdf6-9baf-444e-8c39-b5697c0659c1",
+  owner: "<value>",
+  domainId: "29304a95-d448-4772-b846-bec69b652bd5",
+  createdById: "9c6b6187-4e60-466d-9c3d-3510ae7dcafc",
+  displayName: "Pat21",
+  updatedById: "3fb799f2-4b3d-4520-a9d4-ec0993570226",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://marvelous-challenge.net",
-            },
-          },
-        ],
+        role: "correction",
+        content: "<value>",
       },
     ],
   },
@@ -34,13 +27,13 @@ let value: GetAllPromptsData = {
   versions: [
     {
       id: "<id>",
-      createdById: "998f2123-9937-477c-97c2-8d2792c1f751",
-      displayName: "Magdalena_Haag64",
-      updatedById: "2e42f417-6e21-41e7-8298-3953843e2464",
+      createdById: "caef11c2-3ef5-4dd9-a994-9326b9fa2213",
+      displayName: "Roel_Jacobs80",
+      updatedById: "92727663-243b-4b91-b910-539ebcfa99d6",
       promptConfig: {
         messages: [
           {
-            role: "correction",
+            role: "prompt",
             content: "<value>",
           },
         ],

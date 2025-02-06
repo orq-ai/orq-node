@@ -10,8 +10,15 @@ import { UpdatePromptSnippetPromptSnippetsResponsePromptConfig } from "@orq-ai/n
 let value: UpdatePromptSnippetPromptSnippetsResponsePromptConfig = {
   messages: [
     {
-      role: "expected_output",
-      content: "<value>",
+      role: "tool",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://candid-farmer.biz/",
+          },
+        },
+      ],
     },
   ],
 };

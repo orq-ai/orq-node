@@ -10,7 +10,7 @@ import { UpdatePromptSnippet2PromptSnippetsResponse2 } from "@orq-ai/node/models
 let value: UpdatePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://back-wear.com",
+    url: "https://crazy-retention.com/",
   },
 };
 ```

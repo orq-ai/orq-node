@@ -10,7 +10,7 @@ import { UpdatePromptSnippet2PromptSnippets2 } from "@orq-ai/node/models/operati
 let value: UpdatePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://sparkling-season.info",
+    url: "https://everlasting-dredger.biz",
   },
 };
 ```

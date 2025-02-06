@@ -10,7 +10,7 @@ import { FindOnePromptSnippetPromptConfig } from "@orq-ai/node/models/operations
 let value: FindOnePromptSnippetPromptConfig = {
   messages: [
     {
-      role: "user",
+      role: "assistant",
       content: "<value>",
     },
   ],

@@ -6,7 +6,7 @@
 import { CreatePromptSnippet2PromptSnippetsResponseImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptSnippet2PromptSnippetsResponseImageUrl = {
-  url: "https://rectangular-litter.biz",
+  url: "https://favorite-adult.info",
 };
 ```
 

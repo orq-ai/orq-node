@@ -6,15 +6,8 @@
 import { UpdatePromptSnippetPromptSnippetsResponseMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptSnippetPromptSnippetsResponseMessages = {
-  role: "expected_output",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://apprehensive-saloon.biz",
-      },
-    },
-  ],
+  role: "correction",
+  content: "<value>",
 };
 ```
 

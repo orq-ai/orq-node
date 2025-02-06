@@ -18,7 +18,7 @@ const value: operations.FindOnePromptSnippet21 = {
 const value: operations.FindOnePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ragged-hierarchy.biz",
+    url: "https://steep-version.net/",
   },
 };
 ```

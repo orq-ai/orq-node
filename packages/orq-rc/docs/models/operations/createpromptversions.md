@@ -9,19 +9,17 @@ import { CreatePromptVersions } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptVersions = {
   id: "<id>",
-  createdById: "f2e17735-7df8-4d95-9368-0293d511e12d",
-  displayName: "Manley_Mohr70",
-  updatedById: "8bc0bdb8-78be-49eb-a184-4559a420920e",
+  createdById: "73b1fd86-48e4-4835-93f9-b15e12a9de24",
+  displayName: "Abagail25",
+  updatedById: "5ef734c4-679f-4354-9515-e45fb8c17132",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "exception",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://artistic-carboxyl.info/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

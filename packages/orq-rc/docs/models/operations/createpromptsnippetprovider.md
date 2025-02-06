@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptSnippetProvider } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptSnippetProvider = "elevenlabs";
+let value: CreatePromptSnippetProvider = "azure";
 ```
 
 ## Values

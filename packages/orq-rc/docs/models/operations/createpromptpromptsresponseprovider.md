@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptPromptsResponseProvider } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsResponseProvider = "jina";
+let value: CreatePromptPromptsResponseProvider = "google-ai";
 ```
 
 ## Values

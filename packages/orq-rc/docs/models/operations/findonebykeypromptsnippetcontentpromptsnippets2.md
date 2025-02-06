@@ -18,7 +18,7 @@ const value: operations.FindOneByKeyPromptSnippet2PromptSnippets1 = {
 const value: operations.FindOneByKeyPromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://juvenile-spear.biz/",
+    url: "https://indolent-cinema.com",
   },
 };
 ```

@@ -6,12 +6,27 @@ import { promptSnippetsCreate } from "../funcs/promptSnippetsCreate.js";
 import { promptSnippetsDelete } from "../funcs/promptSnippetsDelete.js";
 import { promptSnippetsGet } from "../funcs/promptSnippetsGet.js";
 import { promptSnippetsGetByKey } from "../funcs/promptSnippetsGetByKey.js";
+import { promptSnippetsList } from "../funcs/promptSnippetsList.js";
 import { promptSnippetsUpdate } from "../funcs/promptSnippetsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class PromptSnippets extends ClientSDK {
+  /**
+   * List all prompts snippets
+   */
+  async list(
+    request?: operations.GetAllPromptSnippetsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetAllPromptSnippetsResponseBody> {
+    return unwrapAsync(promptSnippetsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Create a prompt snippet
    */

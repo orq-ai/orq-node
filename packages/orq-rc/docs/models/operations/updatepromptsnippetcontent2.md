@@ -18,7 +18,7 @@ const value: operations.UpdatePromptSnippet21 = {
 const value: operations.UpdatePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://short-accompanist.net",
+    url: "https://scented-availability.info",
   },
 };
 ```

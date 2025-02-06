@@ -9,21 +9,19 @@ import { CreatePromptResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptResponseBody = {
   id: "<id>",
-  owner: "vendor",
-  domainId: "2d07a09f-2b92-4008-afab-792ecf432fc2",
-  createdById: "622f4f17-2081-4bb2-bfb4-bb5659e2e0a6",
-  displayName: "Miracle_Nolan",
-  updatedById: "84949226-6420-4047-8b7e-0259d540d69f",
+  owner: "<value>",
+  domainId: "cdc47236-b8ed-4099-9f08-309cc0603335",
+  createdById: "f5e2c070-cf0e-4c5e-9461-a07ad2cb8919",
+  displayName: "Sandy.Mayer87",
+  updatedById: "1b690fe9-06fa-427f-9809-4168088c68be",
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "tool",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://muted-wasabi.info",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },
@@ -34,14 +32,19 @@ let value: CreatePromptResponseBody = {
   versions: [
     {
       id: "<id>",
-      createdById: "916b3fa4-c1f0-4e4c-904b-81669ad762cb",
-      displayName: "Joshua.Cruickshank",
-      updatedById: "7bd72d9b-bf4b-4563-b5f4-3947d3698fab",
+      createdById: "c6a7bb3a-d3ca-4f42-b44c-ba3df8a84453",
+      displayName: "Ryann_Hilll",
+      updatedById: "039a9dfc-7d1a-482f-859e-81d5fed5cf87",
       promptConfig: {
         messages: [
           {
-            role: "exception",
-            content: "<value>",
+            role: "prompt",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

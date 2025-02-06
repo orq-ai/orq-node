@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { CreatePromptSnippetPromptSnippetsModelType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptSnippetPromptSnippetsModelType = "chat";
+let value: CreatePromptSnippetPromptSnippetsModelType = "embedding";
 ```
 
 ## Values

@@ -10,7 +10,7 @@ import { UpdatePromptSnippet22 } from "@orq-ai/node/models/operations";
 let value: UpdatePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://incomparable-gazebo.name",
+    url: "https://poor-brace.org",
   },
 };
 ```

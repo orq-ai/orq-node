@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsProvider = "anyscale";
+let value: GetAllPromptsProvider = "elevenlabs";
 ```
 
 ## Values

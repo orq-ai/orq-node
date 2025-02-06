@@ -10,7 +10,7 @@ import { CreatePromptSnippet22 } from "@orq-ai/node/models/operations";
 let value: CreatePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://alive-flint.name/",
+    url: "https://tall-custom.net",
   },
 };
 ```

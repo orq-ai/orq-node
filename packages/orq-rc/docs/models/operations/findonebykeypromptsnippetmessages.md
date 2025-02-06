@@ -7,7 +7,12 @@ import { FindOneByKeyPromptSnippetMessages } from "@orq-ai/node/models/operation
 
 let value: FindOneByKeyPromptSnippetMessages = {
   role: "tool",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

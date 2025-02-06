@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { FindOnePromptSnippetModelType } from "@orq-ai/node/models/operations";
 
-let value: FindOnePromptSnippetModelType = "chat";
+let value: FindOnePromptSnippetModelType = "tts";
 ```
 
 ## Values

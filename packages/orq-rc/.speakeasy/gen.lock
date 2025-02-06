@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 3c918107b0172aff15f28fd78040a901
+  docChecksum: 03fc1e5d2b88086601451593cafa6b98
   docVersion: "2.0"
   speakeasyVersion: 1.484.1
   generationVersion: 2.503.2
-  releaseVersion: 3.1.0-rc.41
-  configChecksum: 52bc61451aea1f5ef9e70d817996df24
+  releaseVersion: 3.1.0-rc.42
+  configChecksum: 4475d0e76859b2b4ba0398217a380b40
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -601,6 +601,75 @@ generatedFiles:
   - docs/models/operations/getallpromptsmetadata.md
   - docs/models/operations/getallpromptsmodelparameters.md
   - docs/models/operations/getallpromptsmodeltype.md
+  - docs/models/operations/getallpromptsnippets21.md
+  - docs/models/operations/getallpromptsnippets22.md
+  - docs/models/operations/getallpromptsnippets2imageurl.md
+  - docs/models/operations/getallpromptsnippets2promptsnippets1.md
+  - docs/models/operations/getallpromptsnippets2promptsnippets2.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetsimageurl.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetsresponse200type.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetsresponsetype.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetstype.md
+  - docs/models/operations/getallpromptsnippets2type.md
+  - docs/models/operations/getallpromptsnippetscontent.md
+  - docs/models/operations/getallpromptsnippetscontent2.md
+  - docs/models/operations/getallpromptsnippetscontentpromptsnippets2.md
+  - docs/models/operations/getallpromptsnippetsdata.md
+  - docs/models/operations/getallpromptsnippetsencodingformat.md
+  - docs/models/operations/getallpromptsnippetsformat.md
+  - docs/models/operations/getallpromptsnippetsfunction.md
+  - docs/models/operations/getallpromptsnippetsglobals.md
+  - docs/models/operations/getallpromptsnippetslanguage.md
+  - docs/models/operations/getallpromptsnippetsmessages.md
+  - docs/models/operations/getallpromptsnippetsmetadata.md
+  - docs/models/operations/getallpromptsnippetsmodelparameters.md
+  - docs/models/operations/getallpromptsnippetsmodeltype.md
+  - docs/models/operations/getallpromptsnippetsobject.md
+  - docs/models/operations/getallpromptsnippetsowner.md
+  - docs/models/operations/getallpromptsnippetsowner2.md
+  - docs/models/operations/getallpromptsnippetsphotorealversion.md
+  - docs/models/operations/getallpromptsnippetspromptconfig.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetscontent.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsencodingformat.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsformat.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsfunction.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetslanguage.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmessages.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmetadata.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmodelparameters.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmodeltype.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsphotorealversion.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetspromptconfig.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsprovider.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsquality.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsreasoningeffort.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsresponseformat.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsresponsetype.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsrole.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetstoolcalls.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetstype.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsusecases.md
+  - docs/models/operations/getallpromptsnippetsprovider.md
+  - docs/models/operations/getallpromptsnippetsquality.md
+  - docs/models/operations/getallpromptsnippetsreasoningeffort.md
+  - docs/models/operations/getallpromptsnippetsrequest.md
+  - docs/models/operations/getallpromptsnippetsresponsebody.md
+  - docs/models/operations/getallpromptsnippetsresponseformat.md
+  - docs/models/operations/getallpromptsnippetsresponseformat1.md
+  - docs/models/operations/getallpromptsnippetsresponseformat2.md
+  - docs/models/operations/getallpromptsnippetsresponseformatjsonschema.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippets1.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippets2.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetsjsonschema.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetsresponse200type.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetsresponsetype.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetstype.md
+  - docs/models/operations/getallpromptsnippetsresponseformattype.md
+  - docs/models/operations/getallpromptsnippetsrole.md
+  - docs/models/operations/getallpromptsnippetstoolcalls.md
+  - docs/models/operations/getallpromptsnippetstype.md
+  - docs/models/operations/getallpromptsnippetsusecases.md
+  - docs/models/operations/getallpromptsnippetsversions.md
   - docs/models/operations/getallpromptsobject.md
   - docs/models/operations/getallpromptsowner.md
   - docs/models/operations/getallpromptsowner2.md
@@ -926,6 +995,7 @@ generatedFiles:
   - src/funcs/promptSnippetsDelete.ts
   - src/funcs/promptSnippetsGet.ts
   - src/funcs/promptSnippetsGetByKey.ts
+  - src/funcs/promptSnippetsList.ts
   - src/funcs/promptSnippetsUpdate.ts
   - src/funcs/promptsCreate.ts
   - src/funcs/promptsDelete.ts
@@ -982,6 +1052,7 @@ generatedFiles:
   - src/models/operations/findonebykeypromptsnippet.ts
   - src/models/operations/findonepromptsnippet.ts
   - src/models/operations/getallprompts.ts
+  - src/models/operations/getallpromptsnippets.ts
   - src/models/operations/getoneprompt.ts
   - src/models/operations/index.ts
   - src/models/operations/remoteconfigsgetconfig.ts
@@ -1178,5 +1249,14 @@ examples:
       responses:
         "200":
           application/json: {"type": "boolean"}
+  GetAllPromptSnippets:
+    speakeasy-default-get-all-prompt-snippets:
+      parameters:
+        query:
+          limit: 10
+        header: {}
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"_id": "<id>", "owner": "vendor", "domain_id": "a232aa0b-11b8-4a00-8571-e9e705d0e6e2", "key": "<key>", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "exception", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "created_by_id": "8d6d4612-e0ae-4e1b-89dd-f121dc2a4c81", "updated_by_id": "4fb451a7-0cfc-48fe-807f-bc60ab960d56", "updated": "2025-02-06T14:05:20.313Z", "type": "snippet", "versions": []}, {"_id": "<id>", "owner": "vendor", "domain_id": "f6573e0a-6233-41ad-b7c0-7cc481991696", "key": "<key>", "prompt_config": {"messages": [{"role": "correction", "content": []}, {"role": "user", "content": [{"type": "image_url", "image_url": {"url": "https://sorrowful-coil.biz"}}]}]}, "metadata": {}, "created_by_id": "36e08594-4ebc-4eb2-a7bd-4753d0a17c47", "updated_by_id": "e329a9ec-9793-48e1-aa63-0f5fe368082f", "updated": "2025-02-06T14:05:20.313Z", "type": "snippet", "versions": []}, {"_id": "<id>", "owner": "<value>", "domain_id": "e0874e78-3076-448e-9c2e-d7f3039dec6f", "key": "<key>", "prompt_config": {"messages": [{"role": "correction", "content": [{"type": "image_url", "image_url": {"url": "https://spherical-gerbil.org/"}}]}]}, "metadata": {}, "created_by_id": "7f7bcfa2-69af-4219-84d5-861b3fe5754c", "updated_by_id": "c551a92c-7431-4ddf-8193-e2177ab4c4d0", "updated": "2025-02-06T14:05:20.313Z", "type": "snippet", "versions": [{"_id": "<id>", "prompt_config": {"messages": [{"role": "correction", "content": [{"type": "text", "text": "<value>"}]}, {"role": "correction", "content": "<value>"}, {"role": "system", "content": "<value>"}]}, "metadata": {}, "created_by_id": "5b0dba7a-30fd-4263-bf0c-cec19e17aef2", "updated_by_id": "28695ca4-33b1-4104-bd1e-faebad1494b3", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": []}, "metadata": {}, "created_by_id": "76b63f80-6d94-4b84-a3a1-ce423bc77dd5", "updated_by_id": "b42fcfa6-f3f7-4b3d-858e-e61458f7304a", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "system", "content": "<value>"}]}, "metadata": {}, "created_by_id": "e54f642e-86b7-4c60-b873-f569812ed552", "updated_by_id": "f7ffa2f9-aacd-4dda-a7da-dae8ecef9614", "timestamp": "<value>"}]}], "has_more": true}
 examplesVersion: 1.0.0
 generatedTests: {}

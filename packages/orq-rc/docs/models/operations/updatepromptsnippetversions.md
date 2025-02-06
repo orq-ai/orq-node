@@ -12,19 +12,21 @@ let value: UpdatePromptSnippetVersions = {
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "expected_output",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://worthy-t-shirt.net",
+            },
           },
         ],
       },
     ],
   },
   metadata: {},
-  createdById: "25d231b6-4b5b-4d3f-a242-578de3917557",
-  updatedById: "1eb2f8f3-8449-4ecb-88e7-dd3c0538b18f",
+  createdById: "5537fe10-e83a-4a14-9032-3a012544cf8f",
+  updatedById: "1647a7ee-b726-4b41-beb9-cd7ee4988f4f",
   timestamp: "<value>",
 };
 ```

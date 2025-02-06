@@ -10,11 +10,13 @@ import { UpdatePromptSnippetPromptSnippetsPromptConfig } from "@orq-ai/node/mode
 let value: UpdatePromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
-      role: "tool",
+      role: "user",
       content: [
         {
-          type: "text",
-          text: "<value>",
+          type: "image_url",
+          imageUrl: {
+            url: "https://boiling-galoshes.net/",
+          },
         },
       ],
     },

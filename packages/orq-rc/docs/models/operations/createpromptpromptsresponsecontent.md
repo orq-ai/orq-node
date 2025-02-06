@@ -18,7 +18,7 @@ const value: operations.CreatePromptContentPromptsResponse2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://live-cantaloupe.biz/",
+      url: "https://unusual-knuckle.name/",
     },
   },
 ];

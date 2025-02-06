@@ -18,7 +18,7 @@ const value: operations.CreatePromptSnippet2PromptSnippets1 = {
 const value: operations.CreatePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://illiterate-valentine.biz/",
+    url: "https://lustrous-convection.org",
   },
 };
 ```

@@ -6,7 +6,7 @@
 import { CreatePromptSnippet2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptSnippet2ImageUrl = {
-  url: "https://muffled-topsail.com/",
+  url: "https://noted-topsail.info",
 };
 ```
 

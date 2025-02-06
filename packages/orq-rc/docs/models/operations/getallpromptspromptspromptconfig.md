@@ -10,15 +10,8 @@ import { GetAllPromptsPromptsPromptConfig } from "@orq-ai/node/models/operations
 let value: GetAllPromptsPromptsPromptConfig = {
   messages: [
     {
-      role: "assistant",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://hidden-turret.biz/",
-          },
-        },
-      ],
+      role: "expected_output",
+      content: "<value>",
     },
   ],
 };

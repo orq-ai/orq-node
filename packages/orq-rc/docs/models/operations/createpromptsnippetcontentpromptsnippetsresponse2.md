@@ -18,7 +18,7 @@ const value: operations.CreatePromptSnippet2PromptSnippetsResponse1 = {
 const value: operations.CreatePromptSnippet2PromptSnippetsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://defenseless-festival.net",
+    url: "https://second-mathematics.net",
   },
 };
 ```

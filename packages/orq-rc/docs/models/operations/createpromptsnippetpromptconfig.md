@@ -11,7 +11,14 @@ let value: CreatePromptSnippetPromptConfig = {
   messages: [
     {
       role: "expected_output",
-      content: "<value>",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://fake-doing.com/",
+          },
+        },
+      ],
     },
   ],
 };

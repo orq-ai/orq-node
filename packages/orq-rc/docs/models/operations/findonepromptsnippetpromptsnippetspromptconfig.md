@@ -11,7 +11,14 @@ let value: FindOnePromptSnippetPromptSnippetsPromptConfig = {
   messages: [
     {
       role: "assistant",
-      content: "<value>",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://worst-chasuble.org",
+          },
+        },
+      ],
     },
   ],
 };

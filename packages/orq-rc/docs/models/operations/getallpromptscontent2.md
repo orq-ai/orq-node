@@ -18,7 +18,7 @@ const value: operations.GetAllPrompts21 = {
 const value: operations.GetAllPrompts22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://insignificant-marksman.net",
+    url: "https://all-story.name/",
   },
 };
 ```

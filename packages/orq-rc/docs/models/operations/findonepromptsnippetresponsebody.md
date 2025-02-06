@@ -9,25 +9,20 @@ import { FindOnePromptSnippetResponseBody } from "@orq-ai/node/models/operations
 
 let value: FindOnePromptSnippetResponseBody = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "0da2f1d4-6caf-491e-bcb0-62dbefcf9005",
+  owner: "vendor",
+  domainId: "4e2a1fbd-9798-47c2-b265-1dc8f1c453c2",
   key: "<key>",
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "prompt",
+        content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "0e48f6a6-c834-448b-bfbc-256a445c9115",
-  updatedById: "bbc488bf-4ca9-4cf0-92c1-834b0d788a51",
+  createdById: "caeb8d48-4f30-4580-b8db-9ffd9709fd52",
+  updatedById: "bfd81758-4dd5-496e-b2bf-23bc79371547",
   type: "snippet",
   versions: [
     {
@@ -36,18 +31,13 @@ let value: FindOnePromptSnippetResponseBody = {
         messages: [
           {
             role: "assistant",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            content: "<value>",
           },
         ],
       },
       metadata: {},
-      createdById: "ff99fec5-537f-4e10-9e83-aa140323a012",
-      updatedById: "44cf8f61-647a-47ee-9b72-6b41eb9cd7ee",
+      createdById: "9f2e1773-57df-48d9-b536-80293d511e12",
+      updatedById: "4ad9fb18-bc0b-4db8-978b-e9eb1844559a",
       timestamp: "<value>",
     },
   ],

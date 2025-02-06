@@ -10,7 +10,7 @@ import { CreatePromptSnippet2PromptSnippets2 } from "@orq-ai/node/models/operati
 let value: CreatePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://wiggly-tooth.com",
+    url: "https://productive-unibody.net",
   },
 };
 ```

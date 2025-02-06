@@ -5,7 +5,7 @@
 ```typescript
 import { Provider } from "@orq-ai/node/models/operations";
 
-let value: Provider = "fal";
+let value: Provider = "togetherai";
 ```
 
 ## Values

@@ -6,12 +6,12 @@
 import { UpdatePromptSnippetMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptSnippetMessages = {
-  role: "user",
+  role: "correction",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://gripping-nerve.org/",
+        url: "https://sorrowful-yarmulke.name",
       },
     },
   ],

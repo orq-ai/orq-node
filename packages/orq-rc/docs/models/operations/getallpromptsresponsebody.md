@@ -13,15 +13,20 @@ let value: GetAllPromptsResponseBody = {
     {
       id: "<id>",
       owner: "<value>",
-      domainId: "825e5a82-ad1c-4bd1-94b0-bd76402fd4f5",
-      createdById: "2ef5b516-81d7-439c-95b6-fc50a31ef442",
-      displayName: "Samir73",
-      updatedById: "4b64f516-7cfd-4e7b-8415-b4dc35d355c0",
+      domainId: "3b946a26-6885-4c10-b6e4-2e25b436ce02",
+      createdById: "98d00fdb-27ee-40c0-8f6f-545b3d9ff2f0",
+      displayName: "Tyree.Corkery-Kihn",
+      updatedById: "c7abb015-066e-49be-8704-de54e5a418e9",
       promptConfig: {
         messages: [
           {
-            role: "tool",
-            content: "<value>",
+            role: "prompt",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },
@@ -30,19 +35,17 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "a4ec1cff-b194-4fb9-8b75-e506caf1e576",
-          displayName: "Dell2",
-          updatedById: "92cfee09-4952-477f-904d-adac73c92cf5",
+          createdById: "8a2f7f37-2036-46ea-86f9-5b7ee584afd5",
+          displayName: "Vita48",
+          updatedById: "f45802e0-16b4-444d-a38f-b5cf5b1e1584",
           promptConfig: {
             messages: [
               {
-                role: "system",
+                role: "tool",
                 content: [
                   {
-                    type: "image_url",
-                    imageUrl: {
-                      url: "https://lovely-bracelet.com/",
-                    },
+                    type: "text",
+                    text: "<value>",
                   },
                 ],
               },

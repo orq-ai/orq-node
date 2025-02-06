@@ -10,19 +10,19 @@ import { CreatePromptSnippetResponseBody } from "@orq-ai/node/models/operations"
 let value: CreatePromptSnippetResponseBody = {
   id: "<id>",
   owner: "vendor",
-  domainId: "ab816650-b19b-4af1-8d08-685308d53113",
+  domainId: "5a4fb5c1-63a1-4648-b5b0-a34cf5d1ac26",
   key: "<key>",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "system",
         content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "1d28c723-685c-4ce0-8e6e-bfc586547a48",
-  updatedById: "20f0291e-bf84-48e8-b4e5-035d775eff6f",
+  createdById: "96ce4679-fb64-4f2b-aea6-35baedde4568",
+  updatedById: "4064feda-58d1-4c0d-bc0a-822c9fff1f37",
   type: "snippet",
   versions: [
     {
@@ -30,14 +30,19 @@ let value: CreatePromptSnippetResponseBody = {
       promptConfig: {
         messages: [
           {
-            role: "prompt",
-            content: "<value>",
+            role: "assistant",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },
       metadata: {},
-      createdById: "32e477cd-26dd-4124-9161-9391fe63470a",
-      updatedById: "6cbf5ec5-94d1-4326-ab87-0613e3dc291b",
+      createdById: "11506a61-142f-42c9-b98f-5c86f916cbe4",
+      updatedById: "79ffd5ea-60c8-4cbc-b4c8-7a014f25055f",
       timestamp: "<value>",
     },
   ],

@@ -10,8 +10,13 @@ import { UpdatePromptPromptsResponsePromptConfig } from "@orq-ai/node/models/ope
 let value: UpdatePromptPromptsResponsePromptConfig = {
   messages: [
     {
-      role: "system",
-      content: "<value>",
+      role: "expected_output",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

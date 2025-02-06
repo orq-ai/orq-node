@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptPromptsUseCases } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsUseCases = "Tagging";
+let value: CreatePromptPromptsUseCases = "Chatbots";
 ```
 
 ## Values

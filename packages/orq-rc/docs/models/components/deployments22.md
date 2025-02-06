@@ -10,7 +10,7 @@ import { Deployments22 } from "@orq-ai/node/models/components";
 let value: Deployments22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://rundown-knuckle.com/",
+    url: "https://torn-settler.net/",
   },
 };
 ```

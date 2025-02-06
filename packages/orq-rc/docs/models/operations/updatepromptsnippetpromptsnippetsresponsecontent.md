@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptSnippetContentPromptSnippetsResponse2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://questionable-league.info/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

@@ -10,7 +10,7 @@ import { FindOnePromptSnippet2PromptSnippets2 } from "@orq-ai/node/models/operat
 let value: FindOnePromptSnippet2PromptSnippets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://arid-skean.net",
+    url: "https://royal-boulevard.com/",
   },
 };
 ```

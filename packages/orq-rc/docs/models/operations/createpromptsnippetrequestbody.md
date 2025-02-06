@@ -10,7 +10,7 @@ let value: CreatePromptSnippetRequestBody = {
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "system",
         content: "<value>",
       },
     ],

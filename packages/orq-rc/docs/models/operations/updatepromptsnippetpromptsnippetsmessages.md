@@ -6,7 +6,7 @@
 import { UpdatePromptSnippetPromptSnippetsMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptSnippetPromptSnippetsMessages = {
-  role: "exception",
+  role: "user",
   content: "<value>",
 };
 ```

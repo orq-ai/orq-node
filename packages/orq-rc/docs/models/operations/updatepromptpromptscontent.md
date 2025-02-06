@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptContentPrompts2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://sweet-squid.info",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

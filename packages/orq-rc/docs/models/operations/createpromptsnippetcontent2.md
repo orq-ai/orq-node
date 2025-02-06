@@ -18,7 +18,7 @@ const value: operations.CreatePromptSnippet21 = {
 const value: operations.CreatePromptSnippet22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://dull-captain.name/",
+    url: "https://glorious-deer.name/",
   },
 };
 ```

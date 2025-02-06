@@ -12,14 +12,14 @@ let value: Versions = {
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "correction",
         content: "<value>",
       },
     ],
   },
   metadata: {},
-  createdById: "f2159a6f-5bad-4fec-bb52-1368cf119bde",
-  updatedById: "662aad17-932d-4071-87f6-d1466a5ba669",
+  createdById: "0f42b14f-a86c-42fd-990b-e851ce1c0f98",
+  updatedById: "e4dfc817-7365-4274-880e-d8df1aff9290",
   timestamp: "<value>",
 };
 ```

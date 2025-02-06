@@ -16,8 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptContent2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "image_url",
+    imageUrl: {
+      url: "https://stingy-fedora.info",
+    },
   },
 ];
 ```

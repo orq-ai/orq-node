@@ -181,6 +181,7 @@ run();
 
 ### [promptSnippets](docs/sdks/promptsnippets/README.md)
 
+* [list](docs/sdks/promptsnippets/README.md#list) - List all prompts snippets
 * [create](docs/sdks/promptsnippets/README.md#create) - Create a prompt snippet
 * [update](docs/sdks/promptsnippets/README.md#update) - Update a prompt snippet
 * [delete](docs/sdks/promptsnippets/README.md#delete) - Delete a prompt snippet
@@ -228,6 +229,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`promptSnippetsDelete`](docs/sdks/promptsnippets/README.md#delete) - Delete a prompt snippet
 - [`promptSnippetsGet`](docs/sdks/promptsnippets/README.md#get) - Retrieve a prompt snippet
 - [`promptSnippetsGetByKey`](docs/sdks/promptsnippets/README.md#getbykey) - Retrieve a prompt snippet by key
+- [`promptSnippetsList`](docs/sdks/promptsnippets/README.md#list) - List all prompts snippets
 - [`promptSnippetsUpdate`](docs/sdks/promptsnippets/README.md#update) - Update a prompt snippet
 - [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
 - [`remoteconfigGetConfig`](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
