@@ -6,7 +6,7 @@
 import { GetAllPrompts2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: GetAllPrompts2ImageUrl = {
-  url: "https://hoarse-intent.info",
+  url: "https://wealthy-chapel.org",
 };
 ```
 

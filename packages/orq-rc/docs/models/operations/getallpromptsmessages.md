@@ -6,15 +6,8 @@
 import { GetAllPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsMessages = {
-  role: "correction",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://acidic-mountain.biz",
-      },
-    },
-  ],
+  role: "exception",
+  content: "<value>",
 };
 ```
 

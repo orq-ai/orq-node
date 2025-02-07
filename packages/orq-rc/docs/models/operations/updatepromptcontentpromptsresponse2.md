@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2PromptsResponse1 = {
 const value: operations.UpdatePrompt2PromptsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://blushing-polyester.org/",
+    url: "https://beloved-milestone.name",
   },
 };
 ```

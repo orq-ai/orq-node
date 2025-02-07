@@ -27,6 +27,20 @@ export class Prompts extends ClientSDK {
   }
 
   /**
+   * List all prompts
+   */
+  async list(
+    request?: operations.GetAllPromptsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetAllPromptsResponseBody> {
+    return unwrapAsync(promptsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Update a prompt
    */
   async update(
@@ -62,20 +76,6 @@ export class Prompts extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(promptsGet(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * List all prompts
-   */
-  async list(
-    request?: operations.GetAllPromptsRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.GetAllPromptsResponseBody> {
-    return unwrapAsync(promptsList(
       this,
       request,
       options,

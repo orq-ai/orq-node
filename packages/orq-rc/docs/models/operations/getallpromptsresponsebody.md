@@ -12,21 +12,16 @@ let value: GetAllPromptsResponseBody = {
   data: [
     {
       id: "<id>",
-      owner: "<value>",
-      domainId: "3b946a26-6885-4c10-b6e4-2e25b436ce02",
-      createdById: "98d00fdb-27ee-40c0-8f6f-545b3d9ff2f0",
-      displayName: "Tyree.Corkery-Kihn",
-      updatedById: "c7abb015-066e-49be-8704-de54e5a418e9",
+      owner: "vendor",
+      domainId: "4dc35d35-5c01-496a-94ec-1cffb194fb9b",
+      createdById: "5e506caf-1e57-4613-9b02-0d92cfee0949",
+      displayName: "Candida_Kunze4",
+      updatedById: "dadac73c-92cf-4541-8af2-710ad5e13e89",
       promptConfig: {
         messages: [
           {
-            role: "prompt",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
+            role: "assistant",
+            content: "<value>",
           },
         ],
       },
@@ -35,19 +30,14 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "8a2f7f37-2036-46ea-86f9-5b7ee584afd5",
-          displayName: "Vita48",
-          updatedById: "f45802e0-16b4-444d-a38f-b5cf5b1e1584",
+          createdById: "e2d5c541-47d7-4f80-96b3-b80c8174e4f8",
+          displayName: "Raphaelle77",
+          updatedById: "d2d03919-4651-48f9-84f6-bafe21ce7b13",
           promptConfig: {
             messages: [
               {
                 role: "tool",
-                content: [
-                  {
-                    type: "text",
-                    text: "<value>",
-                  },
-                ],
+                content: "<value>",
               },
             ],
           },

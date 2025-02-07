@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsPromptsProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsPromptsProvider = "nvidia";
+let value: GetAllPromptsPromptsProvider = "groq";
 ```
 
 ## Values

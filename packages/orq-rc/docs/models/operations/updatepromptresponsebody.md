@@ -10,15 +10,22 @@ import { UpdatePromptResponseBody } from "@orq-ai/node/models/operations";
 let value: UpdatePromptResponseBody = {
   id: "<id>",
   owner: "vendor",
-  domainId: "d2792c1f-7516-4a14-8da3-2e42f4176e21",
-  createdById: "e7298395-3843-4e24-b643-c51825e5a82a",
-  displayName: "Augustine_Pollich10",
-  updatedById: "b0bd7640-2fd4-4f54-92ef-5b51681d739c",
+  domainId: "a403b946-a266-4885-bc10-6e42e25b436c",
+  createdById: "02f98d00-fdb2-47ee-80c0-f6f545b3d9ff",
+  displayName: "Verla_Barrows96",
+  updatedById: "77dac7ab-b015-4066-8e9b-e704de54e5a4",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
-        content: "<value>",
+        role: "tool",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://rewarding-rule.biz/",
+            },
+          },
+        ],
       },
     ],
   },
@@ -27,14 +34,19 @@ let value: UpdatePromptResponseBody = {
   versions: [
     {
       id: "<id>",
-      createdById: "fc50a31e-f442-47db-bd3b-e4b64f5167cf",
-      displayName: "Tomasa.Reichel",
-      updatedById: "b4dc35d3-55c0-4196-aa4e-c1cffb194fb9",
+      createdById: "8a2f7f37-2036-46ea-86f9-5b7ee584afd5",
+      displayName: "Vita48",
+      updatedById: "f45802e0-16b4-444d-a38f-b5cf5b1e1584",
       promptConfig: {
         messages: [
           {
-            role: "exception",
-            content: "<value>",
+            role: "tool",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

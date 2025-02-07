@@ -9,19 +9,14 @@ import { UpdatePromptVersions } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptVersions = {
   id: "<id>",
-  createdById: "353ea885-963a-45c6-b8c7-fcdf69baf44e",
-  displayName: "Concepcion.Rodriguez",
-  updatedById: "7c0659c1-2ab9-4f72-ba99-8f2123993777",
+  createdById: "bd2caef1-1c23-4ef5-8dd9-9949326b9fa2",
+  displayName: "Augusta_Metz",
+  updatedById: "8c492727-6632-443b-ab91-910539ebcfa9",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "correction",
+        content: "<value>",
       },
     ],
   },

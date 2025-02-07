@@ -9,15 +9,15 @@ import { GetAllPromptsData } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsData = {
   id: "<id>",
-  owner: "<value>",
-  domainId: "29304a95-d448-4772-b846-bec69b652bd5",
-  createdById: "9c6b6187-4e60-466d-9c3d-3510ae7dcafc",
-  displayName: "Pat21",
-  updatedById: "3fb799f2-4b3d-4520-a9d4-ec0993570226",
+  owner: "vendor",
+  domainId: "0659c12a-b9f7-42a9-b98f-2123993777c7",
+  createdById: "28d2792c-1f75-416a-814d-a32e42f4176e",
+  displayName: "Aubrey.Turner",
+  updatedById: "83953843-e246-443c-b518-25e5a82ad1cb",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "system",
         content: "<value>",
       },
     ],
@@ -27,13 +27,13 @@ let value: GetAllPromptsData = {
   versions: [
     {
       id: "<id>",
-      createdById: "caef11c2-3ef5-4dd9-a994-9326b9fa2213",
-      displayName: "Roel_Jacobs80",
-      updatedById: "92727663-243b-4b91-b910-539ebcfa99d6",
+      createdById: "b0bd7640-2fd4-4f54-92ef-5b51681d739c",
+      displayName: "Maybell_Windler35",
+      updatedById: "a31ef442-7dbd-43be-94b6-4f5167cfde7b",
       promptConfig: {
         messages: [
           {
-            role: "prompt",
+            role: "system",
             content: "<value>",
           },
         ],

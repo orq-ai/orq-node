@@ -10,7 +10,7 @@ import { GetAllPrompts2Prompts2 } from "@orq-ai/node/models/operations";
 let value: GetAllPrompts2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://cool-shadowbox.org",
+    url: "https://medium-independence.org",
   },
 };
 ```

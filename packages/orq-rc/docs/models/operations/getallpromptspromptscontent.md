@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetAllPromptsContentPrompts2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://lovely-bracelet.com/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

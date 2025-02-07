@@ -174,10 +174,10 @@ run();
 ### [prompts](docs/sdks/prompts/README.md)
 
 * [create](docs/sdks/prompts/README.md#create) - Create a prompt
+* [list](docs/sdks/prompts/README.md#list) - List all prompts
 * [update](docs/sdks/prompts/README.md#update) - Update a prompt
 * [delete](docs/sdks/prompts/README.md#delete) - Delete a prompt
 * [get](docs/sdks/prompts/README.md#get) - Retrieve a prompt
-* [list](docs/sdks/prompts/README.md#list) - List all prompts
 
 ### [promptSnippets](docs/sdks/promptsnippets/README.md)
 
