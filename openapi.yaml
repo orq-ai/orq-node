@@ -2942,7 +2942,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-07T08:38:39.966Z"
+          default: "2025-02-07T11:55:49.771Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3001,7 +3001,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-02-07T08:38:39.966Z"
+            default: "2025-02-07T11:55:49.771Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3079,7 +3079,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-07T08:38:39.966Z"
+          default: "2025-02-07T11:55:49.771Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3124,7 +3124,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-02-07T08:38:39.966Z"
+                default: "2025-02-07T11:55:49.771Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3166,7 +3166,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-07T08:38:39.966Z"
+          default: "2025-02-07T11:55:49.771Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3405,7 +3405,7 @@ components:
                           - type: "string"
                             format: "date-time"
                           - type: "string"
-                        default: "2025-02-07T08:38:38.865Z"
+                        default: "2025-02-07T11:55:48.682Z"
                         description: "The date and time the resource was created"
                         readOnly: true
                         format: "date-time"
@@ -3413,7 +3413,7 @@ components:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2025-02-07T08:38:38.866Z"
+                            default: "2025-02-07T11:55:48.683Z"
                           - type: "string"
                         description: "The date and time the resource was last updated"
                         readOnly: true
@@ -3441,7 +3441,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-07T08:38:38.865Z"
+              default: "2025-02-07T11:55:48.682Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3449,7 +3449,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-07T08:38:38.866Z"
+                  default: "2025-02-07T11:55:48.683Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -3958,7 +3958,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-07T08:38:38.865Z"
+              default: "2025-02-07T11:55:48.682Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3966,7 +3966,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-07T08:38:38.866Z"
+                  default: "2025-02-07T11:55:48.683Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -4115,7 +4115,7 @@ components:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -4123,7 +4123,7 @@ components:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -4579,7 +4579,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-07T08:38:38.865Z"
+          default: "2025-02-07T11:55:48.682Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -4587,7 +4587,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-07T08:38:38.866Z"
+              default: "2025-02-07T11:55:48.683Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6295,7 +6295,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-07T08:38:38.865Z"
+          default: "2025-02-07T11:55:48.682Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6303,7 +6303,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-07T08:38:38.866Z"
+              default: "2025-02-07T11:55:48.683Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -36030,7 +36030,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -36038,7 +36038,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -38182,7 +38182,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-07T08:38:39.966Z"
+                    default: "2025-02-07T11:55:49.771Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38278,7 +38278,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-02-07T08:38:39.966Z"
+                          default: "2025-02-07T11:55:49.771Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -38347,7 +38347,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-07T08:38:39.966Z"
+                    default: "2025-02-07T11:55:49.771Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -38764,7 +38764,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-02-07T08:38:38.865Z"
+                          default: "2025-02-07T11:55:48.682Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -38772,7 +38772,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-02-07T08:38:38.866Z"
+                              default: "2025-02-07T11:55:48.683Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -39777,7 +39777,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -39785,7 +39785,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -40795,7 +40795,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -40803,7 +40803,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -41533,7 +41533,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41541,7 +41541,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42241,7 +42241,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42249,7 +42249,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -43256,7 +43256,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -43264,7 +43264,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -43619,6 +43619,748 @@ paths:
           in: "header"
           schema:
             type: "string"
+    get:
+      tags:
+        - "Prompts"
+      x-speakeasy-group: "prompts"
+      x-speakeasy-name-override: "list"
+      operationId: "GetAllPrompts"
+      summary: "List all prompts"
+      parameters:
+        - schema:
+            type: "number"
+            minimum: 1
+            maximum: 100
+            default: 10
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          required: false
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          name: "limit"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          required: false
+          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          name: "starting_after"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          required: false
+          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          name: "ending_before"
+          in: "query"
+        - name: "contactId"
+          in: "header"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Prompts retrieved."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "object":
+                    type: "string"
+                    enum:
+                      - "list"
+                  "data":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "_id":
+                          type: "string"
+                        "owner":
+                          anyOf:
+                            - type: "string"
+                            - type: "string"
+                              enum:
+                                - "vendor"
+                        "domain_id":
+                          type: "string"
+                          format: "uuid"
+                        "created_by_id":
+                          type: "string"
+                          format: "uuid"
+                        "display_name":
+                          type: "string"
+                          maxLength: 128
+                          description: "The prompt’s name, meant to be displayable in the UI."
+                        "updated_by_id":
+                          type: "string"
+                          format: "uuid"
+                        "description":
+                          type:
+                            - "string"
+                            - "null"
+                          description: "The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose"
+                        "prompt_config":
+                          type: "object"
+                          properties:
+                            "stream":
+                              type: "boolean"
+                            "model":
+                              type: "string"
+                            "model_db_id":
+                              type: "string"
+                              format: "uuid"
+                              description: "The id of the resource"
+                              readOnly: true
+                            "model_type":
+                              type: "string"
+                              enum:
+                                - "chat"
+                                - "completion"
+                                - "embedding"
+                                - "vision"
+                                - "image"
+                                - "tts"
+                                - "stt"
+                                - "rerank"
+                                - "moderations"
+                              description: "The type of the model"
+                            "model_parameters":
+                              type: "object"
+                              properties:
+                                "temperature":
+                                  type: "number"
+                                  description: "Only supported on `chat` and `completion` models."
+                                "maxTokens":
+                                  type: "number"
+                                  description: "Only supported on `chat` and `completion` models."
+                                "topK":
+                                  type: "number"
+                                  description: "Only supported on `chat` and `completion` models."
+                                "topP":
+                                  type: "number"
+                                  description: "Only supported on `chat` and `completion` models."
+                                "frequencyPenalty":
+                                  type: "number"
+                                  description: "Only supported on `chat` and `completion` models."
+                                "presencePenalty":
+                                  type: "number"
+                                  description: "Only supported on `chat` and `completion` models."
+                                "numImages":
+                                  type: "number"
+                                  description: "Only supported on `image` models."
+                                "seed":
+                                  type: "number"
+                                  description: "Best effort deterministic seed for the model. Currently only OpenAI models support these"
+                                "format":
+                                  type: "string"
+                                  enum:
+                                    - "url"
+                                    - "b64_json"
+                                    - "text"
+                                    - "json_object"
+                                  description: "Only supported on `image` models."
+                                "dimensions":
+                                  type: "string"
+                                  description: "Only supported on `image` models."
+                                "quality":
+                                  type: "string"
+                                  enum:
+                                    - "standard"
+                                    - "hd"
+                                  description: "Only supported on `image` models."
+                                "style":
+                                  type: "string"
+                                  description: "Only supported on `image` models."
+                                "responseFormat":
+                                  oneOf:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "json_schema"
+                                        "json_schema":
+                                          type: "object"
+                                          properties:
+                                            "name":
+                                              type: "string"
+                                            "strict":
+                                              type: "boolean"
+                                            "schema":
+                                              type: "object"
+                                              additionalProperties: {}
+                                          required:
+                                            - "name"
+                                            - "strict"
+                                            - "schema"
+                                      required:
+                                        - "type"
+                                        - "json_schema"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "json_object"
+                                      required:
+                                        - "type"
+                                    - type: "null"
+                                  description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                                "photoRealVersion":
+                                  type: "string"
+                                  enum:
+                                    - "v1"
+                                    - "v2"
+                                  description: "The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider"
+                                "encoding_format":
+                                  type: "string"
+                                  enum:
+                                    - "float"
+                                    - "base64"
+                                  description: "The format to return the embeddings"
+                                "reasoningEffort":
+                                  type: "string"
+                                  enum:
+                                    - "low"
+                                    - "medium"
+                                    - "high"
+                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                              description: "Model Parameters: Not all parameters apply to every model"
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "cohere"
+                                - "openai"
+                                - "anthropic"
+                                - "huggingface"
+                                - "replicate"
+                                - "google"
+                                - "google-ai"
+                                - "azure"
+                                - "aws"
+                                - "anyscale"
+                                - "perplexity"
+                                - "groq"
+                                - "fal"
+                                - "leonardoai"
+                                - "nvidia"
+                                - "jina"
+                                - "togetherai"
+                                - "elevenlabs"
+                            "integration_id":
+                              type:
+                                - "string"
+                                - "null"
+                              format: "uuid"
+                              description: "The id of the resource"
+                              readOnly: true
+                            "version":
+                              type: "string"
+                            "messages":
+                              type: "array"
+                              items:
+                                type: "object"
+                                properties:
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "system"
+                                      - "assistant"
+                                      - "user"
+                                      - "exception"
+                                      - "tool"
+                                      - "prompt"
+                                      - "correction"
+                                      - "expected_output"
+                                    description: "The role of the prompt message"
+                                  "content":
+                                    anyOf:
+                                      - type: "string"
+                                      - type: "array"
+                                        items:
+                                          oneOf:
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "text"
+                                                "text":
+                                                  type: "string"
+                                              required:
+                                                - "type"
+                                                - "text"
+                                              description: "Text content part of a prompt message"
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "image_url"
+                                                "image_url":
+                                                  type: "object"
+                                                  properties:
+                                                    "id":
+                                                      type: "string"
+                                                      format: "ulid"
+                                                      description: "The orq.ai id of the image"
+                                                      readOnly: true
+                                                    "url":
+                                                      anyOf:
+                                                        - type: "string"
+                                                        - type: "string"
+                                                          format: "uri"
+                                                      description: "Either a URL of the image or the base64 encoded data URI."
+                                                      examples:
+                                                        - "https://picsum.photos/id/1/200/300"
+                                                        - "data:image/jpeg;base64,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"
+                                                    "detail":
+                                                      type: "string"
+                                                      description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                                  required:
+                                                    - "url"
+                                              required:
+                                                - "type"
+                                                - "image_url"
+                                              description: "The image part of the prompt message. Only supported with vision models."
+                                    description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
+                                  "tool_calls":
+                                    type: "array"
+                                    items:
+                                      type: "object"
+                                      properties:
+                                        "id":
+                                          type: "string"
+                                        "index":
+                                          type: "number"
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "function"
+                                        "function":
+                                          type: "object"
+                                          properties:
+                                            "name":
+                                              type: "string"
+                                            "arguments":
+                                              type: "string"
+                                              description: "JSON string arguments for the functions"
+                                          required:
+                                            - "name"
+                                            - "arguments"
+                                      required:
+                                        - "type"
+                                        - "function"
+                                required:
+                                  - "role"
+                                  - "content"
+                          required:
+                            - "messages"
+                          description: "A list of messages compatible with the openAI schema"
+                        "metadata":
+                          type: "object"
+                          properties:
+                            "use_cases":
+                              type: "array"
+                              items:
+                                type: "string"
+                                enum:
+                                  - "Agents"
+                                  - "Agents simulations"
+                                  - "API interaction"
+                                  - "Autonomous Agents"
+                                  - "Chatbots"
+                                  - "Classification"
+                                  - "Code understanding"
+                                  - "Code writing"
+                                  - "Documents QA"
+                                  - "Conversation"
+                                  - "Extraction"
+                                  - "Multi-modal"
+                                  - "Self-checking"
+                                  - "SQL"
+                                  - "Summarization"
+                                  - "Tagging"
+                              description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
+                            "language":
+                              type: "string"
+                              enum:
+                                - "Chinese"
+                                - "Dutch"
+                                - "English"
+                                - "French"
+                                - "German"
+                                - "Russian"
+                                - "Spanish"
+                              description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                        "created":
+                          anyOf:
+                            - type: "string"
+                              format: "date-time"
+                            - type: "string"
+                          default: "2025-02-07T11:55:48.682Z"
+                          description: "The date and time the resource was created"
+                          readOnly: true
+                          format: "date-time"
+                        "updated":
+                          anyOf:
+                            - type: "string"
+                              format: "date-time"
+                              default: "2025-02-07T11:55:48.683Z"
+                            - type: "string"
+                          description: "The date and time the resource was last updated"
+                          readOnly: true
+                          format: "date-time"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "prompt"
+                        "versions":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "_id":
+                                type: "string"
+                              "created_by_id":
+                                type: "string"
+                                format: "uuid"
+                              "display_name":
+                                type: "string"
+                                maxLength: 128
+                                description: "The prompt’s name, meant to be displayable in the UI."
+                              "updated_by_id":
+                                type: "string"
+                                format: "uuid"
+                              "description":
+                                type:
+                                  - "string"
+                                  - "null"
+                                description: "The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose"
+                              "prompt_config":
+                                type: "object"
+                                properties:
+                                  "stream":
+                                    type: "boolean"
+                                  "model":
+                                    type: "string"
+                                  "model_db_id":
+                                    type: "string"
+                                    format: "uuid"
+                                    description: "The id of the resource"
+                                    readOnly: true
+                                  "model_type":
+                                    type: "string"
+                                    enum:
+                                      - "chat"
+                                      - "completion"
+                                      - "embedding"
+                                      - "vision"
+                                      - "image"
+                                      - "tts"
+                                      - "stt"
+                                      - "rerank"
+                                      - "moderations"
+                                    description: "The type of the model"
+                                  "model_parameters":
+                                    type: "object"
+                                    properties:
+                                      "temperature":
+                                        type: "number"
+                                        description: "Only supported on `chat` and `completion` models."
+                                      "maxTokens":
+                                        type: "number"
+                                        description: "Only supported on `chat` and `completion` models."
+                                      "topK":
+                                        type: "number"
+                                        description: "Only supported on `chat` and `completion` models."
+                                      "topP":
+                                        type: "number"
+                                        description: "Only supported on `chat` and `completion` models."
+                                      "frequencyPenalty":
+                                        type: "number"
+                                        description: "Only supported on `chat` and `completion` models."
+                                      "presencePenalty":
+                                        type: "number"
+                                        description: "Only supported on `chat` and `completion` models."
+                                      "numImages":
+                                        type: "number"
+                                        description: "Only supported on `image` models."
+                                      "seed":
+                                        type: "number"
+                                        description: "Best effort deterministic seed for the model. Currently only OpenAI models support these"
+                                      "format":
+                                        type: "string"
+                                        enum:
+                                          - "url"
+                                          - "b64_json"
+                                          - "text"
+                                          - "json_object"
+                                        description: "Only supported on `image` models."
+                                      "dimensions":
+                                        type: "string"
+                                        description: "Only supported on `image` models."
+                                      "quality":
+                                        type: "string"
+                                        enum:
+                                          - "standard"
+                                          - "hd"
+                                        description: "Only supported on `image` models."
+                                      "style":
+                                        type: "string"
+                                        description: "Only supported on `image` models."
+                                      "responseFormat":
+                                        oneOf:
+                                          - type: "object"
+                                            properties:
+                                              "type":
+                                                type: "string"
+                                                enum:
+                                                  - "json_schema"
+                                              "json_schema":
+                                                type: "object"
+                                                properties:
+                                                  "name":
+                                                    type: "string"
+                                                  "strict":
+                                                    type: "boolean"
+                                                  "schema":
+                                                    type: "object"
+                                                    additionalProperties: {}
+                                                required:
+                                                  - "name"
+                                                  - "strict"
+                                                  - "schema"
+                                            required:
+                                              - "type"
+                                              - "json_schema"
+                                          - type: "object"
+                                            properties:
+                                              "type":
+                                                type: "string"
+                                                enum:
+                                                  - "json_object"
+                                            required:
+                                              - "type"
+                                          - type: "null"
+                                        description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
+                                      "photoRealVersion":
+                                        type: "string"
+                                        enum:
+                                          - "v1"
+                                          - "v2"
+                                        description: "The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider"
+                                      "encoding_format":
+                                        type: "string"
+                                        enum:
+                                          - "float"
+                                          - "base64"
+                                        description: "The format to return the embeddings"
+                                      "reasoningEffort":
+                                        type: "string"
+                                        enum:
+                                          - "low"
+                                          - "medium"
+                                          - "high"
+                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                    description: "Model Parameters: Not all parameters apply to every model"
+                                  "provider":
+                                    type: "string"
+                                    enum:
+                                      - "cohere"
+                                      - "openai"
+                                      - "anthropic"
+                                      - "huggingface"
+                                      - "replicate"
+                                      - "google"
+                                      - "google-ai"
+                                      - "azure"
+                                      - "aws"
+                                      - "anyscale"
+                                      - "perplexity"
+                                      - "groq"
+                                      - "fal"
+                                      - "leonardoai"
+                                      - "nvidia"
+                                      - "jina"
+                                      - "togetherai"
+                                      - "elevenlabs"
+                                  "integration_id":
+                                    type:
+                                      - "string"
+                                      - "null"
+                                    format: "uuid"
+                                    description: "The id of the resource"
+                                    readOnly: true
+                                  "version":
+                                    type: "string"
+                                  "messages":
+                                    type: "array"
+                                    items:
+                                      type: "object"
+                                      properties:
+                                        "role":
+                                          type: "string"
+                                          enum:
+                                            - "system"
+                                            - "assistant"
+                                            - "user"
+                                            - "exception"
+                                            - "tool"
+                                            - "prompt"
+                                            - "correction"
+                                            - "expected_output"
+                                          description: "The role of the prompt message"
+                                        "content":
+                                          anyOf:
+                                            - type: "string"
+                                            - type: "array"
+                                              items:
+                                                oneOf:
+                                                  - type: "object"
+                                                    properties:
+                                                      "type":
+                                                        type: "string"
+                                                        enum:
+                                                          - "text"
+                                                      "text":
+                                                        type: "string"
+                                                    required:
+                                                      - "type"
+                                                      - "text"
+                                                    description: "Text content part of a prompt message"
+                                                  - type: "object"
+                                                    properties:
+                                                      "type":
+                                                        type: "string"
+                                                        enum:
+                                                          - "image_url"
+                                                      "image_url":
+                                                        type: "object"
+                                                        properties:
+                                                          "id":
+                                                            type: "string"
+                                                            format: "ulid"
+                                                            description: "The orq.ai id of the image"
+                                                            readOnly: true
+                                                          "url":
+                                                            anyOf:
+                                                              - type: "string"
+                                                              - type: "string"
+                                                                format: "uri"
+                                                            description: "Either a URL of the image or the base64 encoded data URI."
+                                                            examples:
+                                                              - "https://picsum.photos/id/1/200/300"
+                                                              - "data:image/jpeg;base64,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"
+                                                          "detail":
+                                                            type: "string"
+                                                            description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                                        required:
+                                                          - "url"
+                                                    required:
+                                                      - "type"
+                                                      - "image_url"
+                                                    description: "The image part of the prompt message. Only supported with vision models."
+                                          description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
+                                        "tool_calls":
+                                          type: "array"
+                                          items:
+                                            type: "object"
+                                            properties:
+                                              "id":
+                                                type: "string"
+                                              "index":
+                                                type: "number"
+                                              "type":
+                                                type: "string"
+                                                enum:
+                                                  - "function"
+                                              "function":
+                                                type: "object"
+                                                properties:
+                                                  "name":
+                                                    type: "string"
+                                                  "arguments":
+                                                    type: "string"
+                                                    description: "JSON string arguments for the functions"
+                                                required:
+                                                  - "name"
+                                                  - "arguments"
+                                            required:
+                                              - "type"
+                                              - "function"
+                                      required:
+                                        - "role"
+                                        - "content"
+                                required:
+                                  - "messages"
+                                description: "A list of messages compatible with the openAI schema"
+                              "metadata":
+                                type: "object"
+                                properties:
+                                  "use_cases":
+                                    type: "array"
+                                    items:
+                                      type: "string"
+                                      enum:
+                                        - "Agents"
+                                        - "Agents simulations"
+                                        - "API interaction"
+                                        - "Autonomous Agents"
+                                        - "Chatbots"
+                                        - "Classification"
+                                        - "Code understanding"
+                                        - "Code writing"
+                                        - "Documents QA"
+                                        - "Conversation"
+                                        - "Extraction"
+                                        - "Multi-modal"
+                                        - "Self-checking"
+                                        - "SQL"
+                                        - "Summarization"
+                                        - "Tagging"
+                                    description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
+                                  "language":
+                                    type: "string"
+                                    enum:
+                                      - "Chinese"
+                                      - "Dutch"
+                                      - "English"
+                                      - "French"
+                                      - "German"
+                                      - "Russian"
+                                      - "Spanish"
+                                    description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                              "timestamp":
+                                type: "string"
+                            required:
+                              - "_id"
+                              - "created_by_id"
+                              - "display_name"
+                              - "updated_by_id"
+                              - "prompt_config"
+                              - "metadata"
+                              - "timestamp"
+                            description: "Prompt version model returned from the API"
+                      required:
+                        - "_id"
+                        - "owner"
+                        - "domain_id"
+                        - "created_by_id"
+                        - "display_name"
+                        - "updated_by_id"
+                        - "prompt_config"
+                        - "metadata"
+                        - "type"
+                        - "versions"
+                      description: "Prompt model returned from the API"
+                  "has_more":
+                    type: "boolean"
+                required:
+                  - "object"
+                  - "data"
+                  - "has_more"
+      security:
+        - ApiKey: []
   "/v2/prompts/{id}":
     patch:
       tags:
@@ -44281,7 +45023,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-07T08:38:38.865Z"
+                    default: "2025-02-07T11:55:48.682Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -44289,7 +45031,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-07T08:38:38.866Z"
+                        default: "2025-02-07T11:55:48.683Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -44696,749 +45438,6 @@ paths:
       responses:
         "200":
           description: "Prompt retrieved."
-      security:
-        - ApiKey: []
-  "/v2/prompts/":
-    get:
-      tags:
-        - "Prompts"
-      x-speakeasy-group: "prompts"
-      x-speakeasy-name-override: "list"
-      operationId: "GetAllPrompts"
-      summary: "List all prompts"
-      parameters:
-        - schema:
-            type: "number"
-            minimum: 1
-            maximum: 100
-            default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
-          required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
-          name: "limit"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
-          required: false
-          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
-          name: "starting_after"
-          in: "query"
-        - schema:
-            type: "string"
-            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
-          required: false
-          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
-          name: "ending_before"
-          in: "query"
-        - name: "contactId"
-          in: "header"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "Prompts retrieved."
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "object":
-                    type: "string"
-                    enum:
-                      - "list"
-                  "data":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "_id":
-                          type: "string"
-                        "owner":
-                          anyOf:
-                            - type: "string"
-                            - type: "string"
-                              enum:
-                                - "vendor"
-                        "domain_id":
-                          type: "string"
-                          format: "uuid"
-                        "created_by_id":
-                          type: "string"
-                          format: "uuid"
-                        "display_name":
-                          type: "string"
-                          maxLength: 128
-                          description: "The prompt’s name, meant to be displayable in the UI."
-                        "updated_by_id":
-                          type: "string"
-                          format: "uuid"
-                        "description":
-                          type:
-                            - "string"
-                            - "null"
-                          description: "The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose"
-                        "prompt_config":
-                          type: "object"
-                          properties:
-                            "stream":
-                              type: "boolean"
-                            "model":
-                              type: "string"
-                            "model_db_id":
-                              type: "string"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "chat"
-                                - "completion"
-                                - "embedding"
-                                - "vision"
-                                - "image"
-                                - "tts"
-                                - "stt"
-                                - "rerank"
-                                - "moderations"
-                              description: "The type of the model"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "temperature":
-                                  type: "number"
-                                  description: "Only supported on `chat` and `completion` models."
-                                "maxTokens":
-                                  type: "number"
-                                  description: "Only supported on `chat` and `completion` models."
-                                "topK":
-                                  type: "number"
-                                  description: "Only supported on `chat` and `completion` models."
-                                "topP":
-                                  type: "number"
-                                  description: "Only supported on `chat` and `completion` models."
-                                "frequencyPenalty":
-                                  type: "number"
-                                  description: "Only supported on `chat` and `completion` models."
-                                "presencePenalty":
-                                  type: "number"
-                                  description: "Only supported on `chat` and `completion` models."
-                                "numImages":
-                                  type: "number"
-                                  description: "Only supported on `image` models."
-                                "seed":
-                                  type: "number"
-                                  description: "Best effort deterministic seed for the model. Currently only OpenAI models support these"
-                                "format":
-                                  type: "string"
-                                  enum:
-                                    - "url"
-                                    - "b64_json"
-                                    - "text"
-                                    - "json_object"
-                                  description: "Only supported on `image` models."
-                                "dimensions":
-                                  type: "string"
-                                  description: "Only supported on `image` models."
-                                "quality":
-                                  type: "string"
-                                  enum:
-                                    - "standard"
-                                    - "hd"
-                                  description: "Only supported on `image` models."
-                                "style":
-                                  type: "string"
-                                  description: "Only supported on `image` models."
-                                "responseFormat":
-                                  oneOf:
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "json_schema"
-                                        "json_schema":
-                                          type: "object"
-                                          properties:
-                                            "name":
-                                              type: "string"
-                                            "strict":
-                                              type: "boolean"
-                                            "schema":
-                                              type: "object"
-                                              additionalProperties: {}
-                                          required:
-                                            - "name"
-                                            - "strict"
-                                            - "schema"
-                                      required:
-                                        - "type"
-                                        - "json_schema"
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "json_object"
-                                      required:
-                                        - "type"
-                                    - type: "null"
-                                  description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
-                                "photoRealVersion":
-                                  type: "string"
-                                  enum:
-                                    - "v1"
-                                    - "v2"
-                                  description: "The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider"
-                                "encoding_format":
-                                  type: "string"
-                                  enum:
-                                    - "float"
-                                    - "base64"
-                                  description: "The format to return the embeddings"
-                                "reasoningEffort":
-                                  type: "string"
-                                  enum:
-                                    - "low"
-                                    - "medium"
-                                    - "high"
-                                  description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
-                              description: "Model Parameters: Not all parameters apply to every model"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
-                            "version":
-                              type: "string"
-                            "messages":
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  "role":
-                                    type: "string"
-                                    enum:
-                                      - "system"
-                                      - "assistant"
-                                      - "user"
-                                      - "exception"
-                                      - "tool"
-                                      - "prompt"
-                                      - "correction"
-                                      - "expected_output"
-                                    description: "The role of the prompt message"
-                                  "content":
-                                    anyOf:
-                                      - type: "string"
-                                      - type: "array"
-                                        items:
-                                          oneOf:
-                                            - type: "object"
-                                              properties:
-                                                "type":
-                                                  type: "string"
-                                                  enum:
-                                                    - "text"
-                                                "text":
-                                                  type: "string"
-                                              required:
-                                                - "type"
-                                                - "text"
-                                              description: "Text content part of a prompt message"
-                                            - type: "object"
-                                              properties:
-                                                "type":
-                                                  type: "string"
-                                                  enum:
-                                                    - "image_url"
-                                                "image_url":
-                                                  type: "object"
-                                                  properties:
-                                                    "id":
-                                                      type: "string"
-                                                      format: "ulid"
-                                                      description: "The orq.ai id of the image"
-                                                      readOnly: true
-                                                    "url":
-                                                      anyOf:
-                                                        - type: "string"
-                                                        - type: "string"
-                                                          format: "uri"
-                                                      description: "Either a URL of the image or the base64 encoded data URI."
-                                                      examples:
-                                                        - "https://picsum.photos/id/1/200/300"
-                                                        - "data:image/jpeg;base64,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"
-                                                    "detail":
-                                                      type: "string"
-                                                      description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
-                                                  required:
-                                                    - "url"
-                                              required:
-                                                - "type"
-                                                - "image_url"
-                                              description: "The image part of the prompt message. Only supported with vision models."
-                                    description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                                  "tool_calls":
-                                    type: "array"
-                                    items:
-                                      type: "object"
-                                      properties:
-                                        "id":
-                                          type: "string"
-                                        "index":
-                                          type: "number"
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "function"
-                                        "function":
-                                          type: "object"
-                                          properties:
-                                            "name":
-                                              type: "string"
-                                            "arguments":
-                                              type: "string"
-                                              description: "JSON string arguments for the functions"
-                                          required:
-                                            - "name"
-                                            - "arguments"
-                                      required:
-                                        - "type"
-                                        - "function"
-                                required:
-                                  - "role"
-                                  - "content"
-                          required:
-                            - "messages"
-                          description: "A list of messages compatible with the openAI schema"
-                        "metadata":
-                          type: "object"
-                          properties:
-                            "use_cases":
-                              type: "array"
-                              items:
-                                type: "string"
-                                enum:
-                                  - "Agents"
-                                  - "Agents simulations"
-                                  - "API interaction"
-                                  - "Autonomous Agents"
-                                  - "Chatbots"
-                                  - "Classification"
-                                  - "Code understanding"
-                                  - "Code writing"
-                                  - "Documents QA"
-                                  - "Conversation"
-                                  - "Extraction"
-                                  - "Multi-modal"
-                                  - "Self-checking"
-                                  - "SQL"
-                                  - "Summarization"
-                                  - "Tagging"
-                              description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
-                            "language":
-                              type: "string"
-                              enum:
-                                - "Chinese"
-                                - "Dutch"
-                                - "English"
-                                - "French"
-                                - "German"
-                                - "Russian"
-                                - "Spanish"
-                              description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
-                        "created":
-                          anyOf:
-                            - type: "string"
-                              format: "date-time"
-                            - type: "string"
-                          default: "2025-02-07T08:38:38.865Z"
-                          description: "The date and time the resource was created"
-                          readOnly: true
-                          format: "date-time"
-                        "updated":
-                          anyOf:
-                            - type: "string"
-                              format: "date-time"
-                              default: "2025-02-07T08:38:38.866Z"
-                            - type: "string"
-                          description: "The date and time the resource was last updated"
-                          readOnly: true
-                          format: "date-time"
-                        "type":
-                          type: "string"
-                          enum:
-                            - "prompt"
-                        "versions":
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              "_id":
-                                type: "string"
-                              "created_by_id":
-                                type: "string"
-                                format: "uuid"
-                              "display_name":
-                                type: "string"
-                                maxLength: 128
-                                description: "The prompt’s name, meant to be displayable in the UI."
-                              "updated_by_id":
-                                type: "string"
-                                format: "uuid"
-                              "description":
-                                type:
-                                  - "string"
-                                  - "null"
-                                description: "The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose"
-                              "prompt_config":
-                                type: "object"
-                                properties:
-                                  "stream":
-                                    type: "boolean"
-                                  "model":
-                                    type: "string"
-                                  "model_db_id":
-                                    type: "string"
-                                    format: "uuid"
-                                    description: "The id of the resource"
-                                    readOnly: true
-                                  "model_type":
-                                    type: "string"
-                                    enum:
-                                      - "chat"
-                                      - "completion"
-                                      - "embedding"
-                                      - "vision"
-                                      - "image"
-                                      - "tts"
-                                      - "stt"
-                                      - "rerank"
-                                      - "moderations"
-                                    description: "The type of the model"
-                                  "model_parameters":
-                                    type: "object"
-                                    properties:
-                                      "temperature":
-                                        type: "number"
-                                        description: "Only supported on `chat` and `completion` models."
-                                      "maxTokens":
-                                        type: "number"
-                                        description: "Only supported on `chat` and `completion` models."
-                                      "topK":
-                                        type: "number"
-                                        description: "Only supported on `chat` and `completion` models."
-                                      "topP":
-                                        type: "number"
-                                        description: "Only supported on `chat` and `completion` models."
-                                      "frequencyPenalty":
-                                        type: "number"
-                                        description: "Only supported on `chat` and `completion` models."
-                                      "presencePenalty":
-                                        type: "number"
-                                        description: "Only supported on `chat` and `completion` models."
-                                      "numImages":
-                                        type: "number"
-                                        description: "Only supported on `image` models."
-                                      "seed":
-                                        type: "number"
-                                        description: "Best effort deterministic seed for the model. Currently only OpenAI models support these"
-                                      "format":
-                                        type: "string"
-                                        enum:
-                                          - "url"
-                                          - "b64_json"
-                                          - "text"
-                                          - "json_object"
-                                        description: "Only supported on `image` models."
-                                      "dimensions":
-                                        type: "string"
-                                        description: "Only supported on `image` models."
-                                      "quality":
-                                        type: "string"
-                                        enum:
-                                          - "standard"
-                                          - "hd"
-                                        description: "Only supported on `image` models."
-                                      "style":
-                                        type: "string"
-                                        description: "Only supported on `image` models."
-                                      "responseFormat":
-                                        oneOf:
-                                          - type: "object"
-                                            properties:
-                                              "type":
-                                                type: "string"
-                                                enum:
-                                                  - "json_schema"
-                                              "json_schema":
-                                                type: "object"
-                                                properties:
-                                                  "name":
-                                                    type: "string"
-                                                  "strict":
-                                                    type: "boolean"
-                                                  "schema":
-                                                    type: "object"
-                                                    additionalProperties: {}
-                                                required:
-                                                  - "name"
-                                                  - "strict"
-                                                  - "schema"
-                                            required:
-                                              - "type"
-                                              - "json_schema"
-                                          - type: "object"
-                                            properties:
-                                              "type":
-                                                type: "string"
-                                                enum:
-                                                  - "json_object"
-                                            required:
-                                              - "type"
-                                          - type: "null"
-                                        description: "An object specifying the format that the model must output. \n\n Setting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema \n\n Setting to `{ \"type\": \"json_object\" }` enables JSON mode, which ensures the message the model generates is valid JSON.\n\nImportant: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly \"stuck\" request. Also note that the message content may be partially cut off if finish_reason=\"length\", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length."
-                                      "photoRealVersion":
-                                        type: "string"
-                                        enum:
-                                          - "v1"
-                                          - "v2"
-                                        description: "The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider"
-                                      "encoding_format":
-                                        type: "string"
-                                        enum:
-                                          - "float"
-                                          - "base64"
-                                        description: "The format to return the embeddings"
-                                      "reasoningEffort":
-                                        type: "string"
-                                        enum:
-                                          - "low"
-                                          - "medium"
-                                          - "high"
-                                        description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
-                                    description: "Model Parameters: Not all parameters apply to every model"
-                                  "provider":
-                                    type: "string"
-                                    enum:
-                                      - "cohere"
-                                      - "openai"
-                                      - "anthropic"
-                                      - "huggingface"
-                                      - "replicate"
-                                      - "google"
-                                      - "google-ai"
-                                      - "azure"
-                                      - "aws"
-                                      - "anyscale"
-                                      - "perplexity"
-                                      - "groq"
-                                      - "fal"
-                                      - "leonardoai"
-                                      - "nvidia"
-                                      - "jina"
-                                      - "togetherai"
-                                      - "elevenlabs"
-                                  "integration_id":
-                                    type:
-                                      - "string"
-                                      - "null"
-                                    format: "uuid"
-                                    description: "The id of the resource"
-                                    readOnly: true
-                                  "version":
-                                    type: "string"
-                                  "messages":
-                                    type: "array"
-                                    items:
-                                      type: "object"
-                                      properties:
-                                        "role":
-                                          type: "string"
-                                          enum:
-                                            - "system"
-                                            - "assistant"
-                                            - "user"
-                                            - "exception"
-                                            - "tool"
-                                            - "prompt"
-                                            - "correction"
-                                            - "expected_output"
-                                          description: "The role of the prompt message"
-                                        "content":
-                                          anyOf:
-                                            - type: "string"
-                                            - type: "array"
-                                              items:
-                                                oneOf:
-                                                  - type: "object"
-                                                    properties:
-                                                      "type":
-                                                        type: "string"
-                                                        enum:
-                                                          - "text"
-                                                      "text":
-                                                        type: "string"
-                                                    required:
-                                                      - "type"
-                                                      - "text"
-                                                    description: "Text content part of a prompt message"
-                                                  - type: "object"
-                                                    properties:
-                                                      "type":
-                                                        type: "string"
-                                                        enum:
-                                                          - "image_url"
-                                                      "image_url":
-                                                        type: "object"
-                                                        properties:
-                                                          "id":
-                                                            type: "string"
-                                                            format: "ulid"
-                                                            description: "The orq.ai id of the image"
-                                                            readOnly: true
-                                                          "url":
-                                                            anyOf:
-                                                              - type: "string"
-                                                              - type: "string"
-                                                                format: "uri"
-                                                            description: "Either a URL of the image or the base64 encoded data URI."
-                                                            examples:
-                                                              - "https://picsum.photos/id/1/200/300"
-                                                              - "data:image/jpeg;base64,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"
-                                                          "detail":
-                                                            type: "string"
-                                                            description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
-                                                        required:
-                                                          - "url"
-                                                    required:
-                                                      - "type"
-                                                      - "image_url"
-                                                    description: "The image part of the prompt message. Only supported with vision models."
-                                          description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                                        "tool_calls":
-                                          type: "array"
-                                          items:
-                                            type: "object"
-                                            properties:
-                                              "id":
-                                                type: "string"
-                                              "index":
-                                                type: "number"
-                                              "type":
-                                                type: "string"
-                                                enum:
-                                                  - "function"
-                                              "function":
-                                                type: "object"
-                                                properties:
-                                                  "name":
-                                                    type: "string"
-                                                  "arguments":
-                                                    type: "string"
-                                                    description: "JSON string arguments for the functions"
-                                                required:
-                                                  - "name"
-                                                  - "arguments"
-                                            required:
-                                              - "type"
-                                              - "function"
-                                      required:
-                                        - "role"
-                                        - "content"
-                                required:
-                                  - "messages"
-                                description: "A list of messages compatible with the openAI schema"
-                              "metadata":
-                                type: "object"
-                                properties:
-                                  "use_cases":
-                                    type: "array"
-                                    items:
-                                      type: "string"
-                                      enum:
-                                        - "Agents"
-                                        - "Agents simulations"
-                                        - "API interaction"
-                                        - "Autonomous Agents"
-                                        - "Chatbots"
-                                        - "Classification"
-                                        - "Code understanding"
-                                        - "Code writing"
-                                        - "Documents QA"
-                                        - "Conversation"
-                                        - "Extraction"
-                                        - "Multi-modal"
-                                        - "Self-checking"
-                                        - "SQL"
-                                        - "Summarization"
-                                        - "Tagging"
-                                    description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
-                                  "language":
-                                    type: "string"
-                                    enum:
-                                      - "Chinese"
-                                      - "Dutch"
-                                      - "English"
-                                      - "French"
-                                      - "German"
-                                      - "Russian"
-                                      - "Spanish"
-                                    description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
-                              "timestamp":
-                                type: "string"
-                            required:
-                              - "_id"
-                              - "created_by_id"
-                              - "display_name"
-                              - "updated_by_id"
-                              - "prompt_config"
-                              - "metadata"
-                              - "timestamp"
-                            description: "Prompt version model returned from the API"
-                      required:
-                        - "_id"
-                        - "owner"
-                        - "domain_id"
-                        - "created_by_id"
-                        - "display_name"
-                        - "updated_by_id"
-                        - "prompt_config"
-                        - "metadata"
-                        - "type"
-                        - "versions"
-                      description: "Prompt model returned from the API"
-                  "has_more":
-                    type: "boolean"
-                required:
-                  - "object"
-                  - "data"
-                  - "has_more"
       security:
         - ApiKey: []
   "/v2/remoteconfigs":
