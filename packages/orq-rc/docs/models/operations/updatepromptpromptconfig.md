@@ -10,13 +10,8 @@ import { UpdatePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: UpdatePromptPromptConfig = {
   messages: [
     {
-      role: "expected_output",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "tool",
+      content: "<value>",
     },
   ],
 };

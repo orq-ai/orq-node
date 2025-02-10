@@ -10,10 +10,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileUploadGlobals = {
-  contactId?: string | undefined;
-};
-
 export type FileT = {
   fileName: string;
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
@@ -78,60 +74,6 @@ export type FileUploadResponseBody = {
    */
   created?: Date | undefined;
 };
-
-/** @internal */
-export const FileUploadGlobals$inboundSchema: z.ZodType<
-  FileUploadGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type FileUploadGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const FileUploadGlobals$outboundSchema: z.ZodType<
-  FileUploadGlobals$Outbound,
-  z.ZodTypeDef,
-  FileUploadGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileUploadGlobals$ {
-  /** @deprecated use `FileUploadGlobals$inboundSchema` instead. */
-  export const inboundSchema = FileUploadGlobals$inboundSchema;
-  /** @deprecated use `FileUploadGlobals$outboundSchema` instead. */
-  export const outboundSchema = FileUploadGlobals$outboundSchema;
-  /** @deprecated use `FileUploadGlobals$Outbound` instead. */
-  export type Outbound = FileUploadGlobals$Outbound;
-}
-
-export function fileUploadGlobalsToJSON(
-  fileUploadGlobals: FileUploadGlobals,
-): string {
-  return JSON.stringify(
-    FileUploadGlobals$outboundSchema.parse(fileUploadGlobals),
-  );
-}
-
-export function fileUploadGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<FileUploadGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileUploadGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileUploadGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
@@ -303,7 +245,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-02-10T17:12:37.531Z",
+    "2025-02-10T22:25:10.468Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -337,7 +279,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-02-10T17:12:37.531Z"))
+  created: z.date().default(() => new Date("2025-02-10T22:25:10.468Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

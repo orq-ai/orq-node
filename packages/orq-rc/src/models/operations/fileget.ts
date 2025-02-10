@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileGetGlobals = {
-  contactId?: string | undefined;
-};
-
 export type FileGetRequest = {
   /**
    * The ID of the file
@@ -56,56 +52,6 @@ export type FileGetResponseBody = {
    */
   created?: Date | undefined;
 };
-
-/** @internal */
-export const FileGetGlobals$inboundSchema: z.ZodType<
-  FileGetGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type FileGetGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const FileGetGlobals$outboundSchema: z.ZodType<
-  FileGetGlobals$Outbound,
-  z.ZodTypeDef,
-  FileGetGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileGetGlobals$ {
-  /** @deprecated use `FileGetGlobals$inboundSchema` instead. */
-  export const inboundSchema = FileGetGlobals$inboundSchema;
-  /** @deprecated use `FileGetGlobals$outboundSchema` instead. */
-  export const outboundSchema = FileGetGlobals$outboundSchema;
-  /** @deprecated use `FileGetGlobals$Outbound` instead. */
-  export type Outbound = FileGetGlobals$Outbound;
-}
-
-export function fileGetGlobalsToJSON(fileGetGlobals: FileGetGlobals): string {
-  return JSON.stringify(FileGetGlobals$outboundSchema.parse(fileGetGlobals));
-}
-
-export function fileGetGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<FileGetGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileGetGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileGetGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileGetRequest$inboundSchema: z.ZodType<
@@ -199,7 +145,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-02-10T17:12:37.531Z",
+    "2025-02-10T22:25:10.468Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -233,7 +179,7 @@ export const FileGetResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-02-10T17:12:37.531Z"))
+  created: z.date().default(() => new Date("2025-02-10T22:25:10.468Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

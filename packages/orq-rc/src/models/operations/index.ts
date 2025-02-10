@@ -22,6 +22,8 @@ export * from "./findonepromptsnippet.js";
 export * from "./getallprompts.js";
 export * from "./getallpromptsnippets.js";
 export * from "./getoneprompt.js";
+export * from "./getpromptversion.js";
+export * from "./listpromptversions.js";
 export * from "./remoteconfigsgetconfig.js";
 export * from "./updateprompt.js";
 export * from "./updatepromptsnippet.js";

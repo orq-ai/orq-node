@@ -6,13 +6,11 @@
 import { Messages } from "@orq-ai/node/models/components";
 
 let value: Messages = {
-  role: "prompt",
+  role: "system",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://warped-celsius.com",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

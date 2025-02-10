@@ -11,14 +11,7 @@ let value: UpdatePromptPromptsPromptConfig = {
   messages: [
     {
       role: "correction",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://stingy-fedora.info",
-          },
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

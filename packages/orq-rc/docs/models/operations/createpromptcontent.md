@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CreatePromptContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://competent-digestive.biz/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

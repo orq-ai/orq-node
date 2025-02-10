@@ -8,70 +8,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileDeleteGlobals = {
-  contactId?: string | undefined;
-};
-
 export type FileDeleteRequest = {
   /**
    * The ID of the file
    */
   fileId: string;
 };
-
-/** @internal */
-export const FileDeleteGlobals$inboundSchema: z.ZodType<
-  FileDeleteGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type FileDeleteGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const FileDeleteGlobals$outboundSchema: z.ZodType<
-  FileDeleteGlobals$Outbound,
-  z.ZodTypeDef,
-  FileDeleteGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileDeleteGlobals$ {
-  /** @deprecated use `FileDeleteGlobals$inboundSchema` instead. */
-  export const inboundSchema = FileDeleteGlobals$inboundSchema;
-  /** @deprecated use `FileDeleteGlobals$outboundSchema` instead. */
-  export const outboundSchema = FileDeleteGlobals$outboundSchema;
-  /** @deprecated use `FileDeleteGlobals$Outbound` instead. */
-  export type Outbound = FileDeleteGlobals$Outbound;
-}
-
-export function fileDeleteGlobalsToJSON(
-  fileDeleteGlobals: FileDeleteGlobals,
-): string {
-  return JSON.stringify(
-    FileDeleteGlobals$outboundSchema.parse(fileDeleteGlobals),
-  );
-}
-
-export function fileDeleteGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<FileDeleteGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileDeleteGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileDeleteGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileDeleteRequest$inboundSchema: z.ZodType<

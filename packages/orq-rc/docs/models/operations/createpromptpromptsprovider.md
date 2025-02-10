@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptPromptsProvider } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsProvider = "anyscale";
+let value: CreatePromptPromptsProvider = "openai";
 ```
 
 ## Values

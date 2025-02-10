@@ -173,11 +173,13 @@ run();
 
 ### [prompts](docs/sdks/prompts/README.md)
 
-* [create](docs/sdks/prompts/README.md#create) - Create a prompt
 * [list](docs/sdks/prompts/README.md#list) - List all prompts
+* [create](docs/sdks/prompts/README.md#create) - Create a prompt
+* [retrieve](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 * [update](docs/sdks/prompts/README.md#update) - Update a prompt
 * [delete](docs/sdks/prompts/README.md#delete) - Delete a prompt
-* [get](docs/sdks/prompts/README.md#get) - Retrieve a prompt
+* [listVersions](docs/sdks/prompts/README.md#listversions) - List all prompt versions
+* [getVersion](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
 
 ### [promptSnippets](docs/sdks/promptsnippets/README.md)
 
@@ -223,14 +225,16 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesUpload`](docs/sdks/files/README.md#upload) - Upload file
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
-- [`promptsGet`](docs/sdks/prompts/README.md#get) - Retrieve a prompt
+- [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
 - [`promptsList`](docs/sdks/prompts/README.md#list) - List all prompts
+- [`promptsListVersions`](docs/sdks/prompts/README.md#listversions) - List all prompt versions
 - [`promptSnippetsCreate`](docs/sdks/promptsnippets/README.md#create) - Create a prompt snippet
 - [`promptSnippetsDelete`](docs/sdks/promptsnippets/README.md#delete) - Delete a prompt snippet
 - [`promptSnippetsGet`](docs/sdks/promptsnippets/README.md#get) - Retrieve a prompt snippet
 - [`promptSnippetsGetByKey`](docs/sdks/promptsnippets/README.md#getbykey) - Retrieve a prompt snippet by key
 - [`promptSnippetsList`](docs/sdks/promptsnippets/README.md#list) - List all prompts snippets
 - [`promptSnippetsUpdate`](docs/sdks/promptsnippets/README.md#update) - Update a prompt snippet
+- [`promptsRetrieve`](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 - [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
 - [`remoteconfigGetConfig`](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
 

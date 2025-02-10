@@ -7,70 +7,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeletePromptSnippetGlobals = {
-  contactId?: string | undefined;
-};
-
 export type DeletePromptSnippetRequest = {
   /**
    * Prompt ID
    */
   id: string;
 };
-
-/** @internal */
-export const DeletePromptSnippetGlobals$inboundSchema: z.ZodType<
-  DeletePromptSnippetGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type DeletePromptSnippetGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const DeletePromptSnippetGlobals$outboundSchema: z.ZodType<
-  DeletePromptSnippetGlobals$Outbound,
-  z.ZodTypeDef,
-  DeletePromptSnippetGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeletePromptSnippetGlobals$ {
-  /** @deprecated use `DeletePromptSnippetGlobals$inboundSchema` instead. */
-  export const inboundSchema = DeletePromptSnippetGlobals$inboundSchema;
-  /** @deprecated use `DeletePromptSnippetGlobals$outboundSchema` instead. */
-  export const outboundSchema = DeletePromptSnippetGlobals$outboundSchema;
-  /** @deprecated use `DeletePromptSnippetGlobals$Outbound` instead. */
-  export type Outbound = DeletePromptSnippetGlobals$Outbound;
-}
-
-export function deletePromptSnippetGlobalsToJSON(
-  deletePromptSnippetGlobals: DeletePromptSnippetGlobals,
-): string {
-  return JSON.stringify(
-    DeletePromptSnippetGlobals$outboundSchema.parse(deletePromptSnippetGlobals),
-  );
-}
-
-export function deletePromptSnippetGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<DeletePromptSnippetGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeletePromptSnippetGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeletePromptSnippetGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const DeletePromptSnippetRequest$inboundSchema: z.ZodType<

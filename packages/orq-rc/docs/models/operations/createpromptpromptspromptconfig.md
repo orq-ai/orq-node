@@ -15,7 +15,7 @@ let value: CreatePromptPromptsPromptConfig = {
         {
           type: "image_url",
           imageUrl: {
-            url: "https://roasted-sermon.name/",
+            url: "https://forceful-kick.biz",
           },
         },
       ],

@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FindOnePromptSnippetGlobals = {
-  contactId?: string | undefined;
-};
-
 export type FindOnePromptSnippetRequest = {
   /**
    * Prompt ID
@@ -966,62 +962,6 @@ export type FindOnePromptSnippetResponseBody = {
   type: FindOnePromptSnippetType;
   versions: Array<FindOnePromptSnippetVersions>;
 };
-
-/** @internal */
-export const FindOnePromptSnippetGlobals$inboundSchema: z.ZodType<
-  FindOnePromptSnippetGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type FindOnePromptSnippetGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const FindOnePromptSnippetGlobals$outboundSchema: z.ZodType<
-  FindOnePromptSnippetGlobals$Outbound,
-  z.ZodTypeDef,
-  FindOnePromptSnippetGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FindOnePromptSnippetGlobals$ {
-  /** @deprecated use `FindOnePromptSnippetGlobals$inboundSchema` instead. */
-  export const inboundSchema = FindOnePromptSnippetGlobals$inboundSchema;
-  /** @deprecated use `FindOnePromptSnippetGlobals$outboundSchema` instead. */
-  export const outboundSchema = FindOnePromptSnippetGlobals$outboundSchema;
-  /** @deprecated use `FindOnePromptSnippetGlobals$Outbound` instead. */
-  export type Outbound = FindOnePromptSnippetGlobals$Outbound;
-}
-
-export function findOnePromptSnippetGlobalsToJSON(
-  findOnePromptSnippetGlobals: FindOnePromptSnippetGlobals,
-): string {
-  return JSON.stringify(
-    FindOnePromptSnippetGlobals$outboundSchema.parse(
-      findOnePromptSnippetGlobals,
-    ),
-  );
-}
-
-export function findOnePromptSnippetGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<FindOnePromptSnippetGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FindOnePromptSnippetGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FindOnePromptSnippetGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const FindOnePromptSnippetRequest$inboundSchema: z.ZodType<
@@ -4308,7 +4248,7 @@ export const FindOnePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-10T17:12:36.462Z",
+    "2025-02-10T22:25:09.383Z",
   ).transform(v => new Date(v)),
   type: FindOnePromptSnippetType$inboundSchema,
   versions: z.array(z.lazy(() => FindOnePromptSnippetVersions$inboundSchema)),
@@ -4355,7 +4295,7 @@ export const FindOnePromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-10T17:12:36.462Z"))
+  updated: z.date().default(() => new Date("2025-02-10T22:25:09.383Z"))
     .transform(v => v.toISOString()),
   type: FindOnePromptSnippetType$outboundSchema,
   versions: z.array(z.lazy(() => FindOnePromptSnippetVersions$outboundSchema)),

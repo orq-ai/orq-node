@@ -64,10 +64,6 @@ export async function promptSnippetsGet(
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
-    "contactId": encodeSimple("contactId", client._options.contactId, {
-      explode: false,
-      charEncoding: "none",
-    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);

@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type UpdatePromptSnippetGlobals = {
-  contactId?: string | undefined;
-};
-
 /**
  * The type of the model
  */
@@ -1431,60 +1427,6 @@ export type UpdatePromptSnippetResponseBody = {
   type: UpdatePromptSnippetPromptSnippetsType;
   versions: Array<UpdatePromptSnippetVersions>;
 };
-
-/** @internal */
-export const UpdatePromptSnippetGlobals$inboundSchema: z.ZodType<
-  UpdatePromptSnippetGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type UpdatePromptSnippetGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const UpdatePromptSnippetGlobals$outboundSchema: z.ZodType<
-  UpdatePromptSnippetGlobals$Outbound,
-  z.ZodTypeDef,
-  UpdatePromptSnippetGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptSnippetGlobals$ {
-  /** @deprecated use `UpdatePromptSnippetGlobals$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptSnippetGlobals$inboundSchema;
-  /** @deprecated use `UpdatePromptSnippetGlobals$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptSnippetGlobals$outboundSchema;
-  /** @deprecated use `UpdatePromptSnippetGlobals$Outbound` instead. */
-  export type Outbound = UpdatePromptSnippetGlobals$Outbound;
-}
-
-export function updatePromptSnippetGlobalsToJSON(
-  updatePromptSnippetGlobals: UpdatePromptSnippetGlobals,
-): string {
-  return JSON.stringify(
-    UpdatePromptSnippetGlobals$outboundSchema.parse(updatePromptSnippetGlobals),
-  );
-}
-
-export function updatePromptSnippetGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdatePromptSnippetGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdatePromptSnippetGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdatePromptSnippetGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const UpdatePromptSnippetModelType$inboundSchema: z.ZodNativeEnum<
@@ -6503,7 +6445,7 @@ export const UpdatePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-10T17:12:36.462Z",
+    "2025-02-10T22:25:09.383Z",
   ).transform(v => new Date(v)),
   type: UpdatePromptSnippetPromptSnippetsType$inboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptSnippetVersions$inboundSchema)),
@@ -6554,7 +6496,7 @@ export const UpdatePromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-10T17:12:36.462Z"))
+  updated: z.date().default(() => new Date("2025-02-10T22:25:09.383Z"))
     .transform(v => v.toISOString()),
   type: UpdatePromptSnippetPromptSnippetsType$outboundSchema,
   versions: z.array(z.lazy(() => UpdatePromptSnippetVersions$outboundSchema)),

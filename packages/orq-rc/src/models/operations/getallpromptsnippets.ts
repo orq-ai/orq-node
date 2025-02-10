@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetAllPromptSnippetsGlobals = {
-  contactId?: string | undefined;
-};
-
 export type GetAllPromptSnippetsRequest = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
@@ -990,62 +986,6 @@ export type GetAllPromptSnippetsResponseBody = {
   data: Array<GetAllPromptSnippetsData>;
   hasMore: boolean;
 };
-
-/** @internal */
-export const GetAllPromptSnippetsGlobals$inboundSchema: z.ZodType<
-  GetAllPromptSnippetsGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type GetAllPromptSnippetsGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const GetAllPromptSnippetsGlobals$outboundSchema: z.ZodType<
-  GetAllPromptSnippetsGlobals$Outbound,
-  z.ZodTypeDef,
-  GetAllPromptSnippetsGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptSnippetsGlobals$ {
-  /** @deprecated use `GetAllPromptSnippetsGlobals$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptSnippetsGlobals$inboundSchema;
-  /** @deprecated use `GetAllPromptSnippetsGlobals$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptSnippetsGlobals$outboundSchema;
-  /** @deprecated use `GetAllPromptSnippetsGlobals$Outbound` instead. */
-  export type Outbound = GetAllPromptSnippetsGlobals$Outbound;
-}
-
-export function getAllPromptSnippetsGlobalsToJSON(
-  getAllPromptSnippetsGlobals: GetAllPromptSnippetsGlobals,
-): string {
-  return JSON.stringify(
-    GetAllPromptSnippetsGlobals$outboundSchema.parse(
-      getAllPromptSnippetsGlobals,
-    ),
-  );
-}
-
-export function getAllPromptSnippetsGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllPromptSnippetsGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllPromptSnippetsGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptSnippetsGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetAllPromptSnippetsRequest$inboundSchema: z.ZodType<
@@ -4369,7 +4309,7 @@ export const GetAllPromptSnippetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-10T17:12:36.462Z",
+    "2025-02-10T22:25:09.383Z",
   ).transform(v => new Date(v)),
   type: GetAllPromptSnippetsType$inboundSchema,
   versions: z.array(z.lazy(() => GetAllPromptSnippetsVersions$inboundSchema)),
@@ -4416,7 +4356,7 @@ export const GetAllPromptSnippetsData$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-10T17:12:36.462Z"))
+  updated: z.date().default(() => new Date("2025-02-10T22:25:09.383Z"))
     .transform(v => v.toISOString()),
   type: GetAllPromptSnippetsType$outboundSchema,
   versions: z.array(z.lazy(() => GetAllPromptSnippetsVersions$outboundSchema)),

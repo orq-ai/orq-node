@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://definitive-vol.info",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

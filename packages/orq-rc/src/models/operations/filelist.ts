@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileListGlobals = {
-  contactId?: string | undefined;
-};
-
 export type FileListRequest = {
   page?: number | undefined;
   limit?: number | undefined;
@@ -67,58 +63,6 @@ export type FileListResponseBody = {
   data: Array<FileListData>;
   hasMore: boolean;
 };
-
-/** @internal */
-export const FileListGlobals$inboundSchema: z.ZodType<
-  FileListGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type FileListGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const FileListGlobals$outboundSchema: z.ZodType<
-  FileListGlobals$Outbound,
-  z.ZodTypeDef,
-  FileListGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListGlobals$ {
-  /** @deprecated use `FileListGlobals$inboundSchema` instead. */
-  export const inboundSchema = FileListGlobals$inboundSchema;
-  /** @deprecated use `FileListGlobals$outboundSchema` instead. */
-  export const outboundSchema = FileListGlobals$outboundSchema;
-  /** @deprecated use `FileListGlobals$Outbound` instead. */
-  export type Outbound = FileListGlobals$Outbound;
-}
-
-export function fileListGlobalsToJSON(
-  fileListGlobals: FileListGlobals,
-): string {
-  return JSON.stringify(FileListGlobals$outboundSchema.parse(fileListGlobals));
-}
-
-export function fileListGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<FileListGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileListGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileListGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const FileListRequest$inboundSchema: z.ZodType<
@@ -236,7 +180,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-02-10T17:12:37.531Z",
+    "2025-02-10T22:25:10.468Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -270,7 +214,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-02-10T17:12:37.531Z"))
+  created: z.date().default(() => new Date("2025-02-10T22:25:10.468Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

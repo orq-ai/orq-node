@@ -12,46 +12,27 @@ let value: GetAllPromptsResponseBody = {
   data: [
     {
       id: "<id>",
-      owner: "vendor",
-      domainId: "80941680-88c6-48be-a69b-0c6a7bb3ad3c",
-      displayName: "Verdie25",
+      type: "prompt",
+      owner: "<value>",
+      domainId: "a9e0e805-b7f6-45d8-8aca-619e6e89d91f",
+      created: "<value>",
+      updated: "<value>",
+      displayName: "Meredith.Kris72",
       promptConfig: {
         messages: [
           {
-            role: "prompt",
+            role: "expected_output",
             content: [
               {
-                type: "text",
-                text: "<value>",
+                type: "image_url",
+                imageUrl: {
+                  url: "https://foolish-knight.org/",
+                },
               },
             ],
           },
         ],
       },
-      metadata: {},
-      type: "prompt",
-      versions: [
-        {
-          id: "<id>",
-          promptConfig: {
-            messages: [
-              {
-                role: "correction",
-                content: [
-                  {
-                    type: "image_url",
-                    imageUrl: {
-                      url: "https://massive-ectoderm.biz",
-                    },
-                  },
-                ],
-              },
-            ],
-          },
-          metadata: {},
-          timestamp: "<value>",
-        },
-      ],
     },
   ],
   hasMore: false,

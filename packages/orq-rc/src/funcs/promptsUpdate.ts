@@ -66,10 +66,6 @@ export async function promptsUpdate(
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
     Accept: "application/json",
-    "contactId": encodeSimple("contactId", client._options.contactId, {
-      explode: false,
-      charEncoding: "none",
-    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);

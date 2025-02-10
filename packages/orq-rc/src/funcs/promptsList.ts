@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -24,6 +24,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * List all prompts
+ *
+ * @remarks
+ * Returns a list of your prompts. The prompts are returned sorted by creation date, with the most recent prompts appearing first
  */
 export async function promptsList(
   client: OrqCore,
@@ -63,10 +66,6 @@ export async function promptsList(
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
-    "contactId": encodeSimple("contactId", client._options.contactId, {
-      explode: false,
-      charEncoding: "none",
-    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);

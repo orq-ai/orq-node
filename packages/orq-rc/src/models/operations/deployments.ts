@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeploymentsGlobals = {
-  contactId?: string | undefined;
-};
-
 export type DeploymentsRequest = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
@@ -483,60 +479,6 @@ export type DeploymentsResponseBody = {
   data: Array<Data>;
   hasMore: boolean;
 };
-
-/** @internal */
-export const DeploymentsGlobals$inboundSchema: z.ZodType<
-  DeploymentsGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type DeploymentsGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const DeploymentsGlobals$outboundSchema: z.ZodType<
-  DeploymentsGlobals$Outbound,
-  z.ZodTypeDef,
-  DeploymentsGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsGlobals$ {
-  /** @deprecated use `DeploymentsGlobals$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsGlobals$inboundSchema;
-  /** @deprecated use `DeploymentsGlobals$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsGlobals$outboundSchema;
-  /** @deprecated use `DeploymentsGlobals$Outbound` instead. */
-  export type Outbound = DeploymentsGlobals$Outbound;
-}
-
-export function deploymentsGlobalsToJSON(
-  deploymentsGlobals: DeploymentsGlobals,
-): string {
-  return JSON.stringify(
-    DeploymentsGlobals$outboundSchema.parse(deploymentsGlobals),
-  );
-}
-
-export function deploymentsGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentsGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentsGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentsGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const DeploymentsRequest$inboundSchema: z.ZodType<

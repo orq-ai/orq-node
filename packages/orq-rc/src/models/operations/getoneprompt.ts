@@ -7,70 +7,12 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetOnePromptGlobals = {
-  contactId?: string | undefined;
-};
-
 export type GetOnePromptRequest = {
   /**
    * Prompt ID
    */
   id: string;
 };
-
-/** @internal */
-export const GetOnePromptGlobals$inboundSchema: z.ZodType<
-  GetOnePromptGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type GetOnePromptGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const GetOnePromptGlobals$outboundSchema: z.ZodType<
-  GetOnePromptGlobals$Outbound,
-  z.ZodTypeDef,
-  GetOnePromptGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOnePromptGlobals$ {
-  /** @deprecated use `GetOnePromptGlobals$inboundSchema` instead. */
-  export const inboundSchema = GetOnePromptGlobals$inboundSchema;
-  /** @deprecated use `GetOnePromptGlobals$outboundSchema` instead. */
-  export const outboundSchema = GetOnePromptGlobals$outboundSchema;
-  /** @deprecated use `GetOnePromptGlobals$Outbound` instead. */
-  export type Outbound = GetOnePromptGlobals$Outbound;
-}
-
-export function getOnePromptGlobalsToJSON(
-  getOnePromptGlobals: GetOnePromptGlobals,
-): string {
-  return JSON.stringify(
-    GetOnePromptGlobals$outboundSchema.parse(getOnePromptGlobals),
-  );
-}
-
-export function getOnePromptGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOnePromptGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOnePromptGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const GetOnePromptRequest$inboundSchema: z.ZodType<

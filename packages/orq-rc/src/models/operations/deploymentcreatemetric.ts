@@ -9,10 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeploymentCreateMetricGlobals = {
-  contactId?: string | undefined;
-};
-
 /**
  * Usage statistics to add to the deployment
  */
@@ -320,62 +316,6 @@ export type DeploymentCreateMetricResponseBody = {
    */
   success: boolean;
 };
-
-/** @internal */
-export const DeploymentCreateMetricGlobals$inboundSchema: z.ZodType<
-  DeploymentCreateMetricGlobals,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/** @internal */
-export type DeploymentCreateMetricGlobals$Outbound = {
-  contactId?: string | undefined;
-};
-
-/** @internal */
-export const DeploymentCreateMetricGlobals$outboundSchema: z.ZodType<
-  DeploymentCreateMetricGlobals$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricGlobals
-> = z.object({
-  contactId: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricGlobals$ {
-  /** @deprecated use `DeploymentCreateMetricGlobals$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricGlobals$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricGlobals$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricGlobals$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricGlobals$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricGlobals$Outbound;
-}
-
-export function deploymentCreateMetricGlobalsToJSON(
-  deploymentCreateMetricGlobals: DeploymentCreateMetricGlobals,
-): string {
-  return JSON.stringify(
-    DeploymentCreateMetricGlobals$outboundSchema.parse(
-      deploymentCreateMetricGlobals,
-    ),
-  );
-}
-
-export function deploymentCreateMetricGlobalsFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentCreateMetricGlobals, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentCreateMetricGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricGlobals' from JSON`,
-  );
-}
 
 /** @internal */
 export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z

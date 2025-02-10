@@ -3,6 +3,7 @@
  */
 
 export * from "./apierror.js";
+export * from "./getpromptversion.js";
 export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
 export * from "./sdkvalidationerror.js";
