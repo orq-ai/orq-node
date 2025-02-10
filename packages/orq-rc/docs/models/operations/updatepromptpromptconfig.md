@@ -10,13 +10,11 @@ import { UpdatePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: UpdatePromptPromptConfig = {
   messages: [
     {
-      role: "correction",
+      role: "expected_output",
       content: [
         {
-          type: "image_url",
-          imageUrl: {
-            url: "https://simple-hammock.com/",
-          },
+          type: "text",
+          text: "<value>",
         },
       ],
     },

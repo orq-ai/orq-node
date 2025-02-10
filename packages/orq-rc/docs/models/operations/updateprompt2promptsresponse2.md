@@ -10,7 +10,7 @@ import { UpdatePrompt2PromptsResponse2 } from "@orq-ai/node/models/operations";
 let value: UpdatePrompt2PromptsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://superior-drive.org",
+    url: "https://sore-boulevard.net",
   },
 };
 ```

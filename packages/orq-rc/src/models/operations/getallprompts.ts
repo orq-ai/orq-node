@@ -898,12 +898,8 @@ export type GetAllPromptsPromptsMetadata = {
  */
 export type GetAllPromptsVersions = {
   id: string;
-  createdById: string;
-  /**
-   * The prompt’s name, meant to be displayable in the UI.
-   */
-  displayName: string;
-  updatedById: string;
+  createdById?: string | undefined;
+  updatedById?: string | undefined;
   /**
    * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -923,12 +919,12 @@ export type GetAllPromptsData = {
   id: string;
   owner: string | GetAllPromptsOwner2;
   domainId: string;
-  createdById: string;
+  createdById?: string | undefined;
   /**
    * The prompt’s name, meant to be displayable in the UI.
    */
   displayName: string;
-  updatedById: string;
+  updatedById?: string | undefined;
   /**
    * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -3954,9 +3950,8 @@ export const GetAllPromptsVersions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  created_by_id: z.string(),
-  display_name: z.string(),
-  updated_by_id: z.string(),
+  created_by_id: z.string().optional(),
+  updated_by_id: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => GetAllPromptsPromptsPromptConfig$inboundSchema),
   metadata: z.lazy(() => GetAllPromptsPromptsMetadata$inboundSchema),
@@ -3965,7 +3960,6 @@ export const GetAllPromptsVersions$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "created_by_id": "createdById",
-    "display_name": "displayName",
     "updated_by_id": "updatedById",
     "prompt_config": "promptConfig",
   });
@@ -3974,9 +3968,8 @@ export const GetAllPromptsVersions$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsVersions$Outbound = {
   _id: string;
-  created_by_id: string;
-  display_name: string;
-  updated_by_id: string;
+  created_by_id?: string | undefined;
+  updated_by_id?: string | undefined;
   description?: string | null | undefined;
   prompt_config: GetAllPromptsPromptsPromptConfig$Outbound;
   metadata: GetAllPromptsPromptsMetadata$Outbound;
@@ -3990,9 +3983,8 @@ export const GetAllPromptsVersions$outboundSchema: z.ZodType<
   GetAllPromptsVersions
 > = z.object({
   id: z.string(),
-  createdById: z.string(),
-  displayName: z.string(),
-  updatedById: z.string(),
+  createdById: z.string().optional(),
+  updatedById: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => GetAllPromptsPromptsPromptConfig$outboundSchema),
   metadata: z.lazy(() => GetAllPromptsPromptsMetadata$outboundSchema),
@@ -4001,7 +3993,6 @@ export const GetAllPromptsVersions$outboundSchema: z.ZodType<
   return remap$(v, {
     id: "_id",
     createdById: "created_by_id",
-    displayName: "display_name",
     updatedById: "updated_by_id",
     promptConfig: "prompt_config",
   });
@@ -4047,16 +4038,16 @@ export const GetAllPromptsData$inboundSchema: z.ZodType<
   _id: z.string(),
   owner: z.union([z.string(), GetAllPromptsOwner2$inboundSchema]),
   domain_id: z.string(),
-  created_by_id: z.string(),
+  created_by_id: z.string().optional(),
   display_name: z.string(),
-  updated_by_id: z.string(),
+  updated_by_id: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
   metadata: z.lazy(() => GetAllPromptsMetadata$inboundSchema),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-10T14:13:16.580Z",
+    "2025-02-10T14:20:21.534Z",
   ).transform(v => new Date(v)),
   type: GetAllPromptsType$inboundSchema,
   versions: z.array(z.lazy(() => GetAllPromptsVersions$inboundSchema)),
@@ -4076,9 +4067,9 @@ export type GetAllPromptsData$Outbound = {
   _id: string;
   owner: string | string;
   domain_id: string;
-  created_by_id: string;
+  created_by_id?: string | undefined;
   display_name: string;
-  updated_by_id: string;
+  updated_by_id?: string | undefined;
   description?: string | null | undefined;
   prompt_config: GetAllPromptsPromptConfig$Outbound;
   metadata: GetAllPromptsMetadata$Outbound;
@@ -4097,14 +4088,14 @@ export const GetAllPromptsData$outboundSchema: z.ZodType<
   id: z.string(),
   owner: z.union([z.string(), GetAllPromptsOwner2$outboundSchema]),
   domainId: z.string(),
-  createdById: z.string(),
+  createdById: z.string().optional(),
   displayName: z.string(),
-  updatedById: z.string(),
+  updatedById: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => GetAllPromptsPromptConfig$outboundSchema),
   metadata: z.lazy(() => GetAllPromptsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-10T14:13:16.580Z"))
+  updated: z.date().default(() => new Date("2025-02-10T14:20:21.534Z"))
     .transform(v => v.toISOString()),
   type: GetAllPromptsType$outboundSchema,
   versions: z.array(z.lazy(() => GetAllPromptsVersions$outboundSchema)),

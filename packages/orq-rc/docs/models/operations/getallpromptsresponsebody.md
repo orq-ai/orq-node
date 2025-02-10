@@ -13,15 +13,18 @@ let value: GetAllPromptsResponseBody = {
     {
       id: "<id>",
       owner: "vendor",
-      domainId: "4dc35d35-5c01-496a-94ec-1cffb194fb9b",
-      createdById: "5e506caf-1e57-4613-9b02-0d92cfee0949",
-      displayName: "Candida_Kunze4",
-      updatedById: "dadac73c-92cf-4541-8af2-710ad5e13e89",
+      domainId: "80941680-88c6-48be-a69b-0c6a7bb3ad3c",
+      displayName: "Verdie25",
       promptConfig: {
         messages: [
           {
-            role: "assistant",
-            content: "<value>",
+            role: "prompt",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },
@@ -30,14 +33,18 @@ let value: GetAllPromptsResponseBody = {
       versions: [
         {
           id: "<id>",
-          createdById: "e2d5c541-47d7-4f80-96b3-b80c8174e4f8",
-          displayName: "Raphaelle77",
-          updatedById: "d2d03919-4651-48f9-84f6-bafe21ce7b13",
           promptConfig: {
             messages: [
               {
-                role: "tool",
-                content: "<value>",
+                role: "correction",
+                content: [
+                  {
+                    type: "image_url",
+                    imageUrl: {
+                      url: "https://massive-ectoderm.biz",
+                    },
+                  },
+                ],
               },
             ],
           },

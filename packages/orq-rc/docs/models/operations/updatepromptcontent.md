@@ -18,7 +18,7 @@ const value: operations.UpdatePromptContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://haunting-chairperson.net/",
+      url: "https://definitive-vol.info",
     },
   },
 ];

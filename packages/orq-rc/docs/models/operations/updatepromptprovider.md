@@ -5,7 +5,7 @@
 ```typescript
 import { UpdatePromptProvider } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptProvider = "replicate";
+let value: UpdatePromptProvider = "togetherai";
 ```
 
 ## Values

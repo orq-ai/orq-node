@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 7968f08c2d29fa3228151ed0c01f98ac
+  docChecksum: b7f3962b4be0a9701638d7e7c24bd96f
   docVersion: "2.0"
   speakeasyVersion: 1.487.1
   generationVersion: 2.506.0
-  releaseVersion: 3.1.0-rc.51
-  configChecksum: 7e5c28a010e3f89b245f9b7f98f8bda1
+  releaseVersion: 3.1.0-rc.52
+  configChecksum: fd4991b2c560d1ae2d6601fcaa4307e9
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -1220,7 +1220,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"_id": "<id>", "owner": "vendor", "domain_id": "95fa7f0e-7432-4ce4-a7cb-60cc78135dde", "created_by_id": "85898c12-5a19-4071-8c55-62af6646dadb", "display_name": "Margaret33", "updated_by_id": "2450617e-6bb0-4579-9d6f-9464a3158c87", "prompt_config": {"messages": []}, "metadata": {}, "updated": "2025-01-31T07:05:40.814Z", "type": "prompt", "versions": [{"_id": "<id>", "created_by_id": "50e178a7-7008-4b26-bdfc-c1ec81c22f47", "display_name": "Casey_Cruickshank", "updated_by_id": "16f66c94-a48a-4104-bfbc-5837b3ed84e5", "prompt_config": {"messages": [{"role": "tool", "content": [{"type": "image_url", "image_url": {"url": "https://dreary-sand.com/"}}, {"type": "text", "text": "<value>"}]}, {"role": "user", "content": "<value>"}, {"role": "correction", "content": "<value>"}]}, "metadata": {}, "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "e8b3533c-c7b3-4742-ab57-cb678aab9370", "display_name": "Fanny.Koch", "updated_by_id": "3c305b67-0826-490c-8285-96b36fd9f4d2", "prompt_config": {"messages": []}, "metadata": {}, "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "14d94e3c-9254-4b9b-a826-2985ea54280a", "display_name": "Estevan.Jacobs18", "updated_by_id": "225298c8-545f-4c55-a3a4-8aa23305a18a", "prompt_config": {"messages": [{"role": "system", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "metadata": {}, "timestamp": "<value>"}]}
+          application/json: {"_id": "<id>", "owner": "vendor", "domain_id": "95fa7f0e-7432-4ce4-a7cb-60cc78135dde", "created_by_id": "85898c12-5a19-4071-8c55-62af6646dadb", "display_name": "Margaret33", "updated_by_id": "2450617e-6bb0-4579-9d6f-9464a3158c87", "prompt_config": {"messages": []}, "metadata": {}, "updated": "2025-01-31T07:05:40.814Z", "type": "prompt", "versions": [{"_id": "<id>", "created_by_id": "50e178a7-7008-4b26-bdfc-c1ec81c22f47", "updated_by_id": "16f66c94-a48a-4104-bfbc-5837b3ed84e5", "prompt_config": {"messages": [{"role": "tool", "content": [{"type": "image_url", "image_url": {"url": "https://dreary-sand.com/"}}, {"type": "text", "text": "<value>"}]}, {"role": "user", "content": "<value>"}, {"role": "correction", "content": "<value>"}]}, "metadata": {}, "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "e8b3533c-c7b3-4742-ab57-cb678aab9370", "updated_by_id": "3c305b67-0826-490c-8285-96b36fd9f4d2", "prompt_config": {"messages": []}, "metadata": {}, "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "14d94e3c-9254-4b9b-a826-2985ea54280a", "updated_by_id": "225298c8-545f-4c55-a3a4-8aa23305a18a", "prompt_config": {"messages": [{"role": "system", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "metadata": {}, "timestamp": "<value>"}]}
         "404":
           application/json: {"message": "<value>"}
   DeletePrompt:
