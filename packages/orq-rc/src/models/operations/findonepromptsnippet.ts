@@ -4308,7 +4308,7 @@ export const FindOnePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-08T16:48:28.255Z",
+    "2025-02-10T06:48:04.659Z",
   ).transform(v => new Date(v)),
   type: FindOnePromptSnippetType$inboundSchema,
   versions: z.array(z.lazy(() => FindOnePromptSnippetVersions$inboundSchema)),
@@ -4355,7 +4355,7 @@ export const FindOnePromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-08T16:48:28.255Z"))
+  updated: z.date().default(() => new Date("2025-02-10T06:48:04.659Z"))
     .transform(v => v.toISOString()),
   type: FindOnePromptSnippetType$outboundSchema,
   versions: z.array(z.lazy(() => FindOnePromptSnippetVersions$outboundSchema)),
