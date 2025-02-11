@@ -123,7 +123,8 @@ export async function deploymentsMetricsCreate(
     | ConnectionError
   >(
     M.json(200, operations.DeploymentCreateMetricResponseBody$inboundSchema),
-    M.fail([400, 401, "4XX", "5XX"]),
+    M.fail([400, 401, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

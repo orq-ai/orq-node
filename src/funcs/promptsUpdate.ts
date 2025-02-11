@@ -61,7 +61,7 @@ export async function promptsUpdate(
     }),
   };
 
-  const path = pathToFunc("/v2/resources/prompts/{id}")(pathParams);
+  const path = pathToFunc("/v2/prompts/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -127,7 +127,8 @@ export async function promptsUpdate(
   >(
     M.json(200, operations.UpdatePromptResponseBody$inboundSchema),
     M.jsonErr(404, errors.UpdatePromptResponseBody$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;

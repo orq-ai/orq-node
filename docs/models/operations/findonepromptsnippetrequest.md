@@ -6,7 +6,7 @@
 import { FindOnePromptSnippetRequest } from "@orq-ai/node/models/operations";
 
 let value: FindOnePromptSnippetRequest = {
-  key: "<key>",
+  id: "<id>",
 };
 ```
 
@@ -14,4 +14,4 @@ let value: FindOnePromptSnippetRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `key`              | *string*           | :heavy_check_mark: | Prompt Snippet Key |
+| `id`               | *string*           | :heavy_check_mark: | Prompt ID          |

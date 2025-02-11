@@ -23,7 +23,7 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a new prompt
+ * Create a prompt
  */
 export async function promptsCreate(
   client: OrqCore,
@@ -55,7 +55,7 @@ export async function promptsCreate(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/resources/prompts")();
+  const path = pathToFunc("/v2/prompts")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -115,7 +115,8 @@ export async function promptsCreate(
     | ConnectionError
   >(
     M.json(200, operations.CreatePromptResponseBody$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

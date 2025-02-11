@@ -119,7 +119,8 @@ export async function filesDelete(
     | ConnectionError
   >(
     M.nil(204, z.void()),
-    M.fail([404, "4XX", "5XX"]),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

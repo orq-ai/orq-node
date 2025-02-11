@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -23,11 +23,6 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export enum InvokeAcceptEnum {
-  applicationJson = "application/json",
-  textEventStream = "text/event-stream",
-}
-
 /**
  * Invoke
  *
@@ -37,10 +32,10 @@ export enum InvokeAcceptEnum {
 export async function deploymentsInvoke(
   client: OrqCore,
   request: components.Deployments,
-  options?: RequestOptions & { acceptHeaderOverride?: InvokeAcceptEnum },
+  options?: RequestOptions,
 ): Promise<
   Result<
-    operations.DeploymentInvokeResponse | undefined,
+    operations.DeploymentInvokeResponseBody | undefined,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -65,8 +60,15 @@ export async function deploymentsInvoke(
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
-    Accept: options?.acceptHeaderOverride
-      || "application/json;q=1, text/event-stream;q=0",
+    Accept: "application/json",
+    "contactId": encodeSimple("contactId", client._options.contactId, {
+      explode: false,
+      charEncoding: "none",
+    }),
+    "environment": encodeSimple("environment", client._options.environment, {
+      explode: false,
+      charEncoding: "none",
+    }),
   }));
 
   const secConfig = await extractSecurity(client._options.apiKey);
@@ -112,7 +114,7 @@ export async function deploymentsInvoke(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.DeploymentInvokeResponse | undefined,
+    operations.DeploymentInvokeResponseBody | undefined,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -121,12 +123,16 @@ export async function deploymentsInvoke(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.DeploymentInvokeResponse$inboundSchema.optional()),
-    M.sse(200, operations.DeploymentInvokeResponse$inboundSchema.optional(), {
-      sseSentinel: "[DONE]",
-    }),
-    M.nil(204, operations.DeploymentInvokeResponse$inboundSchema.optional()),
-    M.fail(["4XX", "5XX"]),
+    M.json(
+      200,
+      operations.DeploymentInvokeResponseBody$inboundSchema.optional(),
+    ),
+    M.nil(
+      204,
+      operations.DeploymentInvokeResponseBody$inboundSchema.optional(),
+    ),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

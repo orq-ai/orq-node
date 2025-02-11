@@ -118,7 +118,8 @@ export async function filesGet(
     | ConnectionError
   >(
     M.json(200, operations.FileGetResponseBody$inboundSchema),
-    M.fail([404, "4XX", "5XX"]),
+    M.fail([404, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

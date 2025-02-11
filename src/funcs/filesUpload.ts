@@ -138,7 +138,8 @@ export async function filesUpload(
     | ConnectionError
   >(
     M.json(200, operations.FileUploadResponseBody$inboundSchema),
-    M.fail([400, "4XX", "5XX"]),
+    M.fail([400, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

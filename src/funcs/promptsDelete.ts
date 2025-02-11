@@ -60,7 +60,7 @@ export async function promptsDelete(
     }),
   };
 
-  const path = pathToFunc("/v2/resources/prompts/{id}")(pathParams);
+  const path = pathToFunc("/v2/prompts/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "*/*",
@@ -119,7 +119,8 @@ export async function promptsDelete(
     | ConnectionError
   >(
     M.nil(200, z.void()),
-    M.fail(["4XX", "5XX"]),
+    M.fail("4XX"),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;

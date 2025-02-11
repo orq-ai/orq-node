@@ -7,7 +7,7 @@ The intended purpose of the uploaded file.
 ```typescript
 import { FileListPurpose } from "@orq-ai/node/models/operations";
 
-let value: FileListPurpose = "knowledge_datasource";
+let value: FileListPurpose = "retrieval";
 ```
 
 ## Values

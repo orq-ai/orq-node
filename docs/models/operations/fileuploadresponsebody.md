@@ -11,9 +11,9 @@ let value: FileUploadResponseBody = {
   id: "<id>",
   objectName: "<value>",
   purpose: "knowledge_datasource",
-  bytes: 1594.14,
+  bytes: 8207.67,
   fileName: "example.file",
-  workspaceId: "a6164d0f-5502-46e1-8fd7-539006143420",
+  workspaceId: "ed2a6164-d0f5-4502-96e1-fd7539006143",
 };
 ```
 

@@ -116,7 +116,8 @@ export async function remoteconfigGetConfig(
     | ConnectionError
   >(
     M.json(200, operations.RemoteConfigsGetConfigResponseBody$inboundSchema),
-    M.fail([400, 401, 404, "4XX", 500, "5XX"]),
+    M.fail([400, 401, 404, "4XX"]),
+    M.fail([500, "5XX"]),
   )(response);
   if (!result.ok) {
     return result;

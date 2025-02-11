@@ -1,0 +1,17 @@
+# CreatePromptSnippetFormat
+
+Only supported on `image` models.
+
+## Example Usage
+
+```typescript
+import { CreatePromptSnippetFormat } from "@orq-ai/node/models/operations";
+
+let value: CreatePromptSnippetFormat = "text";
+```
+
+## Values
+
+```typescript
+"url" | "b64_json" | "text" | "json_object"
+```

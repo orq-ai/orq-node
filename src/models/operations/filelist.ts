@@ -62,8 +62,6 @@ export type FileListResponseBody = {
   object: FileListObject;
   data: Array<FileListData>;
   hasMore: boolean;
-  firstId: string | null;
-  lastId: string | null;
 };
 
 /** @internal */
@@ -73,7 +71,7 @@ export const FileListRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   page: z.number().optional(),
-  limit: z.number().optional(),
+  limit: z.number().default(50),
   lastId: z.nullable(z.string()).optional(),
   firstId: z.nullable(z.string()).optional(),
 });
@@ -81,7 +79,7 @@ export const FileListRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type FileListRequest$Outbound = {
   page?: number | undefined;
-  limit?: number | undefined;
+  limit: number;
   lastId?: string | null | undefined;
   firstId?: string | null | undefined;
 };
@@ -93,7 +91,7 @@ export const FileListRequest$outboundSchema: z.ZodType<
   FileListRequest
 > = z.object({
   page: z.number().optional(),
-  limit: z.number().optional(),
+  limit: z.number().default(50),
   lastId: z.nullable(z.string()).optional(),
   firstId: z.nullable(z.string()).optional(),
 });
@@ -182,7 +180,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-01-02T13:55:01.176Z",
+    "2025-02-11T16:43:22.676Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -216,7 +214,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-01-02T13:55:01.176Z"))
+  created: z.date().default(() => new Date("2025-02-11T16:43:22.676Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -263,13 +261,9 @@ export const FileListResponseBody$inboundSchema: z.ZodType<
   object: FileListObject$inboundSchema,
   data: z.array(z.lazy(() => FileListData$inboundSchema)),
   has_more: z.boolean(),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
-    "first_id": "firstId",
-    "last_id": "lastId",
   });
 });
 
@@ -278,8 +272,6 @@ export type FileListResponseBody$Outbound = {
   object: string;
   data: Array<FileListData$Outbound>;
   has_more: boolean;
-  first_id: string | null;
-  last_id: string | null;
 };
 
 /** @internal */
@@ -291,13 +283,9 @@ export const FileListResponseBody$outboundSchema: z.ZodType<
   object: FileListObject$outboundSchema,
   data: z.array(z.lazy(() => FileListData$outboundSchema)),
   hasMore: z.boolean(),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",
-    firstId: "first_id",
-    lastId: "last_id",
   });
 });
 

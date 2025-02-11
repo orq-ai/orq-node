@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.Two[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://firsthand-section.biz",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

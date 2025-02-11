@@ -18,7 +18,7 @@ const value: operations.DeploymentGetConfigContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://exalted-breastplate.com/",
+      url: "https://fair-custom.name",
     },
   },
 ];

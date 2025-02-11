@@ -123,7 +123,8 @@ export async function deploymentsGetConfig(
       204,
       operations.DeploymentGetConfigResponseBody$inboundSchema.optional(),
     ),
-    M.fail([401, "4XX", "5XX"]),
+    M.fail([401, "4XX"]),
+    M.fail("5XX"),
   )(response);
   if (!result.ok) {
     return result;
