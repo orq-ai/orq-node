@@ -11,20 +11,18 @@ let value: UpdatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "bb3ad3ca-f424-44cb-ba3d-f8a84453ed75",
+  domainId: "7ff2e182-5b6c-4bf8-8c55-66181e0742cb",
   created: "<value>",
   updated: "<value>",
-  displayName: "Dameon.Becker",
+  displayName: "Loraine68",
   promptConfig: {
     messages: [
       {
-        role: "tool",
+        role: "correction",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://light-soup.com",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

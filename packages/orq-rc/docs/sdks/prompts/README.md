@@ -239,11 +239,12 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.prompts.retrieve({
+  const result = await orq.prompts.retrieve({
     id: "<id>",
   });
 
-
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -274,7 +275,8 @@ async function run() {
 
   const { value: result } = res;
 
-  
+  // Handle the result
+  console.log(result);
 }
 
 run();
@@ -291,7 +293,7 @@ run();
 
 ### Response
 
-**Promise\<void\>**
+**Promise\<[operations.GetOnePromptResponseBody](../../models/operations/getonepromptresponsebody.md)\>**
 
 ### Errors
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 34f55098a01cf657b25a4911570d447c
+  docChecksum: 29ab4b116371e806530721239a401d8a
   docVersion: "2.0"
   speakeasyVersion: 1.488.0
   generationVersion: 2.506.0
-  releaseVersion: 3.1.0-rc.63
-  configChecksum: 0f1edf92d4c3e67c1bc0ea1335a3b2ec
+  releaseVersion: 3.1.0-rc.64
+  configChecksum: ec7da1eb1cccfc1a123c97433339a90f
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -634,7 +634,39 @@ generatedFiles:
   - docs/models/operations/getallpromptstoolcalls.md
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
+  - docs/models/operations/getoneprompt21.md
+  - docs/models/operations/getoneprompt22.md
+  - docs/models/operations/getoneprompt2imageurl.md
+  - docs/models/operations/getoneprompt2promptstype.md
+  - docs/models/operations/getoneprompt2type.md
+  - docs/models/operations/getonepromptcontent.md
+  - docs/models/operations/getonepromptcontent2.md
+  - docs/models/operations/getonepromptencodingformat.md
+  - docs/models/operations/getonepromptformat.md
+  - docs/models/operations/getonepromptfunction.md
+  - docs/models/operations/getonepromptlanguage.md
+  - docs/models/operations/getonepromptmessages.md
+  - docs/models/operations/getonepromptmetadata.md
+  - docs/models/operations/getonepromptmodelparameters.md
+  - docs/models/operations/getonepromptmodeltype.md
+  - docs/models/operations/getonepromptphotorealversion.md
+  - docs/models/operations/getonepromptpromptconfig.md
+  - docs/models/operations/getonepromptpromptstype.md
+  - docs/models/operations/getonepromptprovider.md
+  - docs/models/operations/getonepromptquality.md
+  - docs/models/operations/getonepromptreasoningeffort.md
   - docs/models/operations/getonepromptrequest.md
+  - docs/models/operations/getonepromptresponsebody.md
+  - docs/models/operations/getonepromptresponseformat.md
+  - docs/models/operations/getonepromptresponseformat1.md
+  - docs/models/operations/getonepromptresponseformat2.md
+  - docs/models/operations/getonepromptresponseformatjsonschema.md
+  - docs/models/operations/getonepromptresponseformatpromptstype.md
+  - docs/models/operations/getonepromptresponseformattype.md
+  - docs/models/operations/getonepromptrole.md
+  - docs/models/operations/getoneprompttoolcalls.md
+  - docs/models/operations/getoneprompttype.md
+  - docs/models/operations/getonepromptusecases.md
   - docs/models/operations/getpromptversion21.md
   - docs/models/operations/getpromptversion22.md
   - docs/models/operations/getpromptversion2imageurl.md
@@ -1189,6 +1221,9 @@ examples:
         path:
           id: "<id>"
         header: {}
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "created": "<value>", "updated": "<value>", "display_name": "Nathen72", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "assistant", "content": "<value>"}, {"role": "expected_output", "content": [{"type": "text", "text": "<value>"}]}]}}
   GetAllPrompts:
     speakeasy-default-get-all-prompts:
       parameters:

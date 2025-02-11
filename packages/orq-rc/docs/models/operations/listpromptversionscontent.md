@@ -18,7 +18,7 @@ const value: operations.ListPromptVersionsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://experienced-eyebrow.name",
+      url: "https://sorrowful-hyena.name/",
     },
   },
 ];

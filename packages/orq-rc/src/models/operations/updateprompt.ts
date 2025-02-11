@@ -434,7 +434,7 @@ export type UpdatePromptRequestBody = {
 
 export type UpdatePromptRequest = {
   /**
-   * Prompt ID
+   * Unique identifier of the prompt
    */
   id: string;
   requestBody?: UpdatePromptRequestBody | undefined;

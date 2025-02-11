@@ -14,12 +14,7 @@ let value: GetPromptVersionResponseBody = {
     messages: [
       {
         role: "user",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        content: "<value>",
       },
     ],
   },

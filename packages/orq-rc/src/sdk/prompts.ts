@@ -54,7 +54,7 @@ export class Prompts extends ClientSDK {
   async retrieve(
     request: operations.GetOnePromptRequest,
     options?: RequestOptions,
-  ): Promise<void> {
+  ): Promise<operations.GetOnePromptResponseBody> {
     return unwrapAsync(promptsRetrieve(
       this,
       request,

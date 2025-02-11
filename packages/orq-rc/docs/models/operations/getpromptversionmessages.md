@@ -6,15 +6,8 @@
 import { GetPromptVersionMessages } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersionMessages = {
-  role: "assistant",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://pretty-seafood.net/",
-      },
-    },
-  ],
+  role: "correction",
+  content: "<value>",
 };
 ```
 
