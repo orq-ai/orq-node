@@ -18,7 +18,7 @@ const value: components.One = {
 const value: components.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://pink-sandbar.com/",
+    url: "https://glorious-deer.name/",
   },
 };
 ```

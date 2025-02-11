@@ -10,7 +10,7 @@ import { ListPromptVersions22 } from "@orq-ai/node/models/operations";
 let value: ListPromptVersions22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://subtle-ocelot.org",
+    url: "https://supportive-quinoa.com",
   },
 };
 ```

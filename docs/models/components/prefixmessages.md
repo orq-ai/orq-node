@@ -9,10 +9,8 @@ let value: PrefixMessages = {
   role: "prompt",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://marvelous-challenge.net",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

@@ -10,7 +10,7 @@ import { GetAllPromptsPromptConfig } from "@orq-ai/node/models/operations";
 let value: GetAllPromptsPromptConfig = {
   messages: [
     {
-      role: "expected_output",
+      role: "user",
       content: [
         {
           type: "text",

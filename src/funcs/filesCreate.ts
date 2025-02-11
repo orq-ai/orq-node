@@ -3,7 +3,8 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { appendForm } from "../lib/encodings.js";
+import { readableStreamToArrayBuffer } from "../lib/files.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -20,21 +21,23 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { isBlobLike } from "../types/blobs.js";
 import { Result } from "../types/fp.js";
+import { isReadableStream } from "../types/streams.js";
 
 /**
- * Retrieve a file
+ * Create file
  *
  * @remarks
- * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object
+ * Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/post_v2-deployments-get-config).
  */
-export async function filesGet(
+export async function filesCreate(
   client: OrqCore,
-  request: operations.FileGetRequest,
+  request?: operations.FileUploadRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.FileGetResponseBody,
+    operations.FileUploadResponseBody,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -46,23 +49,37 @@ export async function filesGet(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.FileGetRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.FileUploadRequestBody$outboundSchema.optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = null;
+  const body = new FormData();
 
-  const pathParams = {
-    file_id: encodeSimple("file_id", payload.file_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
+  if (payload?.file !== undefined) {
+    if (isBlobLike(payload?.file)) {
+      appendForm(body, "file", payload?.file);
+    } else if (isReadableStream(payload?.file.content)) {
+      const buffer = await readableStreamToArrayBuffer(payload?.file.content);
+      const blob = new Blob([buffer], { type: "application/octet-stream" });
+      appendForm(body, "file", blob);
+    } else {
+      appendForm(
+        body,
+        "file",
+        new Blob([payload?.file.content], { type: "application/octet-stream" }),
+        payload?.file.fileName,
+      );
+    }
+  }
+  if (payload?.purpose !== undefined) {
+    appendForm(body, "purpose", payload?.purpose);
+  }
 
-  const path = pathToFunc("/v2/files/{file_id}")(pathParams);
+  const path = pathToFunc("/v2/files")();
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -73,7 +90,7 @@ export async function filesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "FileGet",
+    operationID: "FileUpload",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -87,7 +104,7 @@ export async function filesGet(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -101,7 +118,7 @@ export async function filesGet(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["400", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -111,7 +128,7 @@ export async function filesGet(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.FileGetResponseBody,
+    operations.FileUploadResponseBody,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -120,8 +137,8 @@ export async function filesGet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.FileGetResponseBody$inboundSchema),
-    M.fail([404, "4XX"]),
+    M.json(200, operations.FileUploadResponseBody$inboundSchema),
+    M.fail([400, "4XX"]),
     M.fail("5XX"),
   )(response);
   if (!result.ok) {

@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetPromptVersionContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://spirited-heartache.name/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

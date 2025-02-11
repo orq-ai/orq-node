@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { GetOnePromptQuality } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptQuality = "standard";
+let value: GetOnePromptQuality = "hd";
 ```
 
 ## Values

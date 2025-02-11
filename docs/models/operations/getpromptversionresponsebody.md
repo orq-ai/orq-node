@@ -13,8 +13,15 @@ let value: GetPromptVersionResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: "<value>",
+        role: "assistant",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://discrete-louse.biz",
+            },
+          },
+        ],
       },
     ],
   },

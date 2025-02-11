@@ -12,6 +12,420 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The type of the model
  */
+export const ModelType = {
+  Chat: "chat",
+  Completion: "completion",
+  Embedding: "embedding",
+  Vision: "vision",
+  Image: "image",
+  Tts: "tts",
+  Stt: "stt",
+  Rerank: "rerank",
+  Moderations: "moderations",
+} as const;
+/**
+ * The type of the model
+ */
+export type ModelType = ClosedEnum<typeof ModelType>;
+
+/**
+ * Only supported on `image` models.
+ */
+export const Format = {
+  Url: "url",
+  B64Json: "b64_json",
+  Text: "text",
+  JsonObject: "json_object",
+} as const;
+/**
+ * Only supported on `image` models.
+ */
+export type Format = ClosedEnum<typeof Format>;
+
+/**
+ * Only supported on `image` models.
+ */
+export const Quality = {
+  Standard: "standard",
+  Hd: "hd",
+} as const;
+/**
+ * Only supported on `image` models.
+ */
+export type Quality = ClosedEnum<typeof Quality>;
+
+export const CreatePromptResponseFormatType = {
+  JsonObject: "json_object",
+} as const;
+export type CreatePromptResponseFormatType = ClosedEnum<
+  typeof CreatePromptResponseFormatType
+>;
+
+export type ResponseFormat2 = {
+  type: CreatePromptResponseFormatType;
+};
+
+export const ResponseFormatType = {
+  JsonSchema: "json_schema",
+} as const;
+export type ResponseFormatType = ClosedEnum<typeof ResponseFormatType>;
+
+export type JsonSchema = {
+  name: string;
+  strict: boolean;
+  schema: { [k: string]: any };
+};
+
+export type ResponseFormat1 = {
+  type: ResponseFormatType;
+  jsonSchema: JsonSchema;
+};
+
+/**
+ * An object specifying the format that the model must output.
+ *
+ * @remarks
+ *
+ *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
+ *
+ *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
+ *
+ * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
+ */
+export type ResponseFormat = ResponseFormat2 | ResponseFormat1;
+
+/**
+ * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
+ */
+export const PhotoRealVersion = {
+  V1: "v1",
+  V2: "v2",
+} as const;
+/**
+ * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
+ */
+export type PhotoRealVersion = ClosedEnum<typeof PhotoRealVersion>;
+
+/**
+ * The format to return the embeddings
+ */
+export const EncodingFormat = {
+  Float: "float",
+  Base64: "base64",
+} as const;
+/**
+ * The format to return the embeddings
+ */
+export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
+
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const ReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
+
+/**
+ * Model Parameters: Not all parameters apply to every model
+ */
+export type ModelParameters = {
+  /**
+   * Only supported on `chat` and `completion` models.
+   */
+  temperature?: number | undefined;
+  /**
+   * Only supported on `chat` and `completion` models.
+   */
+  maxTokens?: number | undefined;
+  /**
+   * Only supported on `chat` and `completion` models.
+   */
+  topK?: number | undefined;
+  /**
+   * Only supported on `chat` and `completion` models.
+   */
+  topP?: number | undefined;
+  /**
+   * Only supported on `chat` and `completion` models.
+   */
+  frequencyPenalty?: number | undefined;
+  /**
+   * Only supported on `chat` and `completion` models.
+   */
+  presencePenalty?: number | undefined;
+  /**
+   * Only supported on `image` models.
+   */
+  numImages?: number | undefined;
+  /**
+   * Best effort deterministic seed for the model. Currently only OpenAI models support these
+   */
+  seed?: number | undefined;
+  /**
+   * Only supported on `image` models.
+   */
+  format?: Format | undefined;
+  /**
+   * Only supported on `image` models.
+   */
+  dimensions?: string | undefined;
+  /**
+   * Only supported on `image` models.
+   */
+  quality?: Quality | undefined;
+  /**
+   * Only supported on `image` models.
+   */
+  style?: string | undefined;
+  /**
+   * An object specifying the format that the model must output.
+   *
+   * @remarks
+   *
+   *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
+   *
+   *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
+   *
+   * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
+   */
+  responseFormat?: ResponseFormat2 | ResponseFormat1 | null | undefined;
+  /**
+   * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
+   */
+  photoRealVersion?: PhotoRealVersion | undefined;
+  /**
+   * The format to return the embeddings
+   */
+  encodingFormat?: EncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: ReasoningEffort | undefined;
+};
+
+export const Provider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+} as const;
+export type Provider = ClosedEnum<typeof Provider>;
+
+/**
+ * The role of the prompt message
+ */
+export const CreatePromptRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type CreatePromptRole = ClosedEnum<typeof CreatePromptRole>;
+
+export const CreatePrompt2PromptsType = {
+  ImageUrl: "image_url",
+} as const;
+export type CreatePrompt2PromptsType = ClosedEnum<
+  typeof CreatePrompt2PromptsType
+>;
+
+export type CreatePrompt2ImageUrl = {
+  /**
+   * Either a URL of the image or the base64 encoded data URI.
+   */
+  url: string;
+  /**
+   * Specifies the detail level of the image. Currently only supported with OpenAI models
+   */
+  detail?: string | undefined;
+};
+
+/**
+ * The image part of the prompt message. Only supported with vision models.
+ */
+export type CreatePrompt22 = {
+  type: CreatePrompt2PromptsType;
+  imageUrl: CreatePrompt2ImageUrl;
+};
+
+export const CreatePrompt2Type = {
+  Text: "text",
+} as const;
+export type CreatePrompt2Type = ClosedEnum<typeof CreatePrompt2Type>;
+
+/**
+ * Text content part of a prompt message
+ */
+export type CreatePrompt21 = {
+  type: CreatePrompt2Type;
+  text: string;
+};
+
+export type CreatePromptContent2 = CreatePrompt21 | CreatePrompt22;
+
+/**
+ * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+ */
+export type CreatePromptContent =
+  | string
+  | Array<CreatePrompt21 | CreatePrompt22>;
+
+export const CreatePromptType = {
+  Function: "function",
+} as const;
+export type CreatePromptType = ClosedEnum<typeof CreatePromptType>;
+
+export type CreatePromptFunction = {
+  name: string;
+  /**
+   * JSON string arguments for the functions
+   */
+  arguments: string;
+};
+
+export type CreatePromptToolCalls = {
+  id?: string | undefined;
+  index?: number | undefined;
+  type: CreatePromptType;
+  function: CreatePromptFunction;
+};
+
+export type CreatePromptMessages = {
+  /**
+   * The role of the prompt message
+   */
+  role: CreatePromptRole;
+  /**
+   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
+   */
+  content: string | Array<CreatePrompt21 | CreatePrompt22>;
+  toolCalls?: Array<CreatePromptToolCalls> | undefined;
+};
+
+/**
+ * A list of messages compatible with the openAI schema
+ */
+export type PromptConfig = {
+  stream?: boolean | undefined;
+  model?: string | undefined;
+  /**
+   * The type of the model
+   */
+  modelType?: ModelType | undefined;
+  /**
+   * Model Parameters: Not all parameters apply to every model
+   */
+  modelParameters?: ModelParameters | undefined;
+  provider?: Provider | undefined;
+  version?: string | undefined;
+  messages: Array<CreatePromptMessages>;
+};
+
+export const UseCases = {
+  Agents: "Agents",
+  AgentsSimulations: "Agents simulations",
+  APIInteraction: "API interaction",
+  AutonomousAgents: "Autonomous Agents",
+  Chatbots: "Chatbots",
+  Classification: "Classification",
+  CodeUnderstanding: "Code understanding",
+  CodeWriting: "Code writing",
+  DocumentsQA: "Documents QA",
+  Conversation: "Conversation",
+  Extraction: "Extraction",
+  MultiModal: "Multi-modal",
+  SelfChecking: "Self-checking",
+  Sql: "SQL",
+  Summarization: "Summarization",
+  Tagging: "Tagging",
+} as const;
+export type UseCases = ClosedEnum<typeof UseCases>;
+
+/**
+ * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
+ */
+export const Language = {
+  Chinese: "Chinese",
+  Dutch: "Dutch",
+  English: "English",
+  French: "French",
+  German: "German",
+  Russian: "Russian",
+  Spanish: "Spanish",
+} as const;
+/**
+ * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
+ */
+export type Language = ClosedEnum<typeof Language>;
+
+export type CreatePromptMetadata = {
+  /**
+   * A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose
+   */
+  useCases?: Array<UseCases> | undefined;
+  /**
+   * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
+   */
+  language?: Language | undefined;
+};
+
+export type CreatePromptRequestBody = {
+  /**
+   * The prompt’s name, meant to be displayable in the UI.
+   */
+  displayName: string;
+  /**
+   * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
+   */
+  description?: string | null | undefined;
+  /**
+   * A list of messages compatible with the openAI schema
+   */
+  promptConfig: PromptConfig;
+  metadata?: CreatePromptMetadata | undefined;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path: string;
+};
+
+export const CreatePromptPromptsType = {
+  Prompt: "prompt",
+} as const;
+export type CreatePromptPromptsType = ClosedEnum<
+  typeof CreatePromptPromptsType
+>;
+
+/**
+ * The type of the model
+ */
 export const CreatePromptModelType = {
   Chat: "chat",
   Completion: "completion",
@@ -54,22 +468,22 @@ export const CreatePromptQuality = {
  */
 export type CreatePromptQuality = ClosedEnum<typeof CreatePromptQuality>;
 
-export const CreatePromptResponseFormatPromptsType = {
+export const CreatePromptResponseFormatPromptsResponseType = {
   JsonObject: "json_object",
 } as const;
-export type CreatePromptResponseFormatPromptsType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsType
+export type CreatePromptResponseFormatPromptsResponseType = ClosedEnum<
+  typeof CreatePromptResponseFormatPromptsResponseType
 >;
 
 export type CreatePromptResponseFormat2 = {
-  type: CreatePromptResponseFormatPromptsType;
+  type: CreatePromptResponseFormatPromptsResponseType;
 };
 
-export const CreatePromptResponseFormatType = {
+export const CreatePromptResponseFormatPromptsType = {
   JsonSchema: "json_schema",
 } as const;
-export type CreatePromptResponseFormatType = ClosedEnum<
-  typeof CreatePromptResponseFormatType
+export type CreatePromptResponseFormatPromptsType = ClosedEnum<
+  typeof CreatePromptResponseFormatPromptsType
 >;
 
 export type CreatePromptResponseFormatJsonSchema = {
@@ -79,7 +493,7 @@ export type CreatePromptResponseFormatJsonSchema = {
 };
 
 export type CreatePromptResponseFormat1 = {
-  type: CreatePromptResponseFormatType;
+  type: CreatePromptResponseFormatPromptsType;
   jsonSchema: CreatePromptResponseFormatJsonSchema;
 };
 
@@ -248,442 +662,6 @@ export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
 /**
  * The role of the prompt message
  */
-export const CreatePromptRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type CreatePromptRole = ClosedEnum<typeof CreatePromptRole>;
-
-export const CreatePrompt2PromptsType = {
-  ImageUrl: "image_url",
-} as const;
-export type CreatePrompt2PromptsType = ClosedEnum<
-  typeof CreatePrompt2PromptsType
->;
-
-export type CreatePrompt2ImageUrl = {
-  /**
-   * Either a URL of the image or the base64 encoded data URI.
-   */
-  url: string;
-  /**
-   * Specifies the detail level of the image. Currently only supported with OpenAI models
-   */
-  detail?: string | undefined;
-};
-
-/**
- * The image part of the prompt message. Only supported with vision models.
- */
-export type CreatePrompt22 = {
-  type: CreatePrompt2PromptsType;
-  imageUrl: CreatePrompt2ImageUrl;
-};
-
-export const CreatePrompt2Type = {
-  Text: "text",
-} as const;
-export type CreatePrompt2Type = ClosedEnum<typeof CreatePrompt2Type>;
-
-/**
- * Text content part of a prompt message
- */
-export type CreatePrompt21 = {
-  type: CreatePrompt2Type;
-  text: string;
-};
-
-export type CreatePromptContent2 = CreatePrompt21 | CreatePrompt22;
-
-/**
- * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
- */
-export type CreatePromptContent =
-  | string
-  | Array<CreatePrompt21 | CreatePrompt22>;
-
-export const CreatePromptType = {
-  Function: "function",
-} as const;
-export type CreatePromptType = ClosedEnum<typeof CreatePromptType>;
-
-export type CreatePromptFunction = {
-  name: string;
-  /**
-   * JSON string arguments for the functions
-   */
-  arguments: string;
-};
-
-export type CreatePromptToolCalls = {
-  id?: string | undefined;
-  index?: number | undefined;
-  type: CreatePromptType;
-  function: CreatePromptFunction;
-};
-
-export type CreatePromptMessages = {
-  /**
-   * The role of the prompt message
-   */
-  role: CreatePromptRole;
-  /**
-   * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
-   */
-  content: string | Array<CreatePrompt21 | CreatePrompt22>;
-  toolCalls?: Array<CreatePromptToolCalls> | undefined;
-};
-
-/**
- * A list of messages compatible with the openAI schema
- */
-export type CreatePromptPromptConfig = {
-  stream?: boolean | undefined;
-  model?: string | undefined;
-  /**
-   * The type of the model
-   */
-  modelType?: CreatePromptModelType | undefined;
-  /**
-   * Model Parameters: Not all parameters apply to every model
-   */
-  modelParameters?: CreatePromptModelParameters | undefined;
-  provider?: CreatePromptProvider | undefined;
-  version?: string | undefined;
-  messages: Array<CreatePromptMessages>;
-};
-
-export const CreatePromptUseCases = {
-  Agents: "Agents",
-  AgentsSimulations: "Agents simulations",
-  APIInteraction: "API interaction",
-  AutonomousAgents: "Autonomous Agents",
-  Chatbots: "Chatbots",
-  Classification: "Classification",
-  CodeUnderstanding: "Code understanding",
-  CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
-  Conversation: "Conversation",
-  Extraction: "Extraction",
-  MultiModal: "Multi-modal",
-  SelfChecking: "Self-checking",
-  Sql: "SQL",
-  Summarization: "Summarization",
-  Tagging: "Tagging",
-} as const;
-export type CreatePromptUseCases = ClosedEnum<typeof CreatePromptUseCases>;
-
-/**
- * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
- */
-export const CreatePromptLanguage = {
-  Chinese: "Chinese",
-  Dutch: "Dutch",
-  English: "English",
-  French: "French",
-  German: "German",
-  Russian: "Russian",
-  Spanish: "Spanish",
-} as const;
-/**
- * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
- */
-export type CreatePromptLanguage = ClosedEnum<typeof CreatePromptLanguage>;
-
-export type CreatePromptMetadata = {
-  /**
-   * A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose
-   */
-  useCases?: Array<CreatePromptUseCases> | undefined;
-  /**
-   * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
-   */
-  language?: CreatePromptLanguage | undefined;
-};
-
-export type CreatePromptRequestBody = {
-  /**
-   * The prompt’s name, meant to be displayable in the UI.
-   */
-  displayName: string;
-  /**
-   * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
-   */
-  description?: string | null | undefined;
-  /**
-   * A list of messages compatible with the openAI schema
-   */
-  promptConfig: CreatePromptPromptConfig;
-  metadata?: CreatePromptMetadata | undefined;
-  /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
-   */
-  path: string;
-};
-
-export const CreatePromptPromptsType = {
-  Prompt: "prompt",
-} as const;
-export type CreatePromptPromptsType = ClosedEnum<
-  typeof CreatePromptPromptsType
->;
-
-/**
- * The type of the model
- */
-export const CreatePromptPromptsModelType = {
-  Chat: "chat",
-  Completion: "completion",
-  Embedding: "embedding",
-  Vision: "vision",
-  Image: "image",
-  Tts: "tts",
-  Stt: "stt",
-  Rerank: "rerank",
-  Moderations: "moderations",
-} as const;
-/**
- * The type of the model
- */
-export type CreatePromptPromptsModelType = ClosedEnum<
-  typeof CreatePromptPromptsModelType
->;
-
-/**
- * Only supported on `image` models.
- */
-export const CreatePromptPromptsFormat = {
-  Url: "url",
-  B64Json: "b64_json",
-  Text: "text",
-  JsonObject: "json_object",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type CreatePromptPromptsFormat = ClosedEnum<
-  typeof CreatePromptPromptsFormat
->;
-
-/**
- * Only supported on `image` models.
- */
-export const CreatePromptPromptsQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type CreatePromptPromptsQuality = ClosedEnum<
-  typeof CreatePromptPromptsQuality
->;
-
-export const CreatePromptResponseFormatPromptsResponse200Type = {
-  JsonObject: "json_object",
-} as const;
-export type CreatePromptResponseFormatPromptsResponse200Type = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsResponse200Type
->;
-
-export type CreatePromptResponseFormatPrompts2 = {
-  type: CreatePromptResponseFormatPromptsResponse200Type;
-};
-
-export const CreatePromptResponseFormatPromptsResponseType = {
-  JsonSchema: "json_schema",
-} as const;
-export type CreatePromptResponseFormatPromptsResponseType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsResponseType
->;
-
-export type CreatePromptResponseFormatPromptsJsonSchema = {
-  name: string;
-  strict: boolean;
-  schema: { [k: string]: any };
-};
-
-export type CreatePromptResponseFormatPrompts1 = {
-  type: CreatePromptResponseFormatPromptsResponseType;
-  jsonSchema: CreatePromptResponseFormatPromptsJsonSchema;
-};
-
-/**
- * An object specifying the format that the model must output.
- *
- * @remarks
- *
- *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
- *
- *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
- *
- * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
- */
-export type CreatePromptPromptsResponseFormat =
-  | CreatePromptResponseFormatPrompts2
-  | CreatePromptResponseFormatPrompts1;
-
-/**
- * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
- */
-export const CreatePromptPromptsPhotoRealVersion = {
-  V1: "v1",
-  V2: "v2",
-} as const;
-/**
- * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
- */
-export type CreatePromptPromptsPhotoRealVersion = ClosedEnum<
-  typeof CreatePromptPromptsPhotoRealVersion
->;
-
-/**
- * The format to return the embeddings
- */
-export const CreatePromptPromptsEncodingFormat = {
-  Float: "float",
-  Base64: "base64",
-} as const;
-/**
- * The format to return the embeddings
- */
-export type CreatePromptPromptsEncodingFormat = ClosedEnum<
-  typeof CreatePromptPromptsEncodingFormat
->;
-
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export const CreatePromptPromptsReasoningEffort = {
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-} as const;
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export type CreatePromptPromptsReasoningEffort = ClosedEnum<
-  typeof CreatePromptPromptsReasoningEffort
->;
-
-/**
- * Model Parameters: Not all parameters apply to every model
- */
-export type CreatePromptPromptsModelParameters = {
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  temperature?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  maxTokens?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  topK?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  topP?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  frequencyPenalty?: number | undefined;
-  /**
-   * Only supported on `chat` and `completion` models.
-   */
-  presencePenalty?: number | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  numImages?: number | undefined;
-  /**
-   * Best effort deterministic seed for the model. Currently only OpenAI models support these
-   */
-  seed?: number | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  format?: CreatePromptPromptsFormat | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  dimensions?: string | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  quality?: CreatePromptPromptsQuality | undefined;
-  /**
-   * Only supported on `image` models.
-   */
-  style?: string | undefined;
-  /**
-   * An object specifying the format that the model must output.
-   *
-   * @remarks
-   *
-   *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
-   *
-   *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
-   *
-   * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
-   */
-  responseFormat?:
-    | CreatePromptResponseFormatPrompts2
-    | CreatePromptResponseFormatPrompts1
-    | null
-    | undefined;
-  /**
-   * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
-   */
-  photoRealVersion?: CreatePromptPromptsPhotoRealVersion | undefined;
-  /**
-   * The format to return the embeddings
-   */
-  encodingFormat?: CreatePromptPromptsEncodingFormat | undefined;
-  /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   */
-  reasoningEffort?: CreatePromptPromptsReasoningEffort | undefined;
-};
-
-export const CreatePromptPromptsProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type CreatePromptPromptsProvider = ClosedEnum<
-  typeof CreatePromptPromptsProvider
->;
-
-/**
- * The role of the prompt message
- */
 export const CreatePromptPromptsRole = {
   System: "system",
   Assistant: "assistant",
@@ -794,7 +772,7 @@ export type CreatePromptPromptsMessages = {
 /**
  * A list of messages compatible with the openAI schema
  */
-export type CreatePromptPromptsPromptConfig = {
+export type CreatePromptPromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
   /**
@@ -804,12 +782,12 @@ export type CreatePromptPromptsPromptConfig = {
   /**
    * The type of the model
    */
-  modelType?: CreatePromptPromptsModelType | undefined;
+  modelType?: CreatePromptModelType | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
-  modelParameters?: CreatePromptPromptsModelParameters | undefined;
-  provider?: CreatePromptPromptsProvider | undefined;
+  modelParameters?: CreatePromptModelParameters | undefined;
+  provider?: CreatePromptProvider | undefined;
   /**
    * The id of the resource
    */
@@ -818,7 +796,7 @@ export type CreatePromptPromptsPromptConfig = {
   messages: Array<CreatePromptPromptsMessages>;
 };
 
-export const CreatePromptPromptsUseCases = {
+export const CreatePromptUseCases = {
   Agents: "Agents",
   AgentsSimulations: "Agents simulations",
   APIInteraction: "API interaction",
@@ -836,14 +814,12 @@ export const CreatePromptPromptsUseCases = {
   Summarization: "Summarization",
   Tagging: "Tagging",
 } as const;
-export type CreatePromptPromptsUseCases = ClosedEnum<
-  typeof CreatePromptPromptsUseCases
->;
+export type CreatePromptUseCases = ClosedEnum<typeof CreatePromptUseCases>;
 
 /**
  * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
  */
-export const CreatePromptPromptsLanguage = {
+export const CreatePromptLanguage = {
   Chinese: "Chinese",
   Dutch: "Dutch",
   English: "English",
@@ -855,19 +831,17 @@ export const CreatePromptPromptsLanguage = {
 /**
  * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
  */
-export type CreatePromptPromptsLanguage = ClosedEnum<
-  typeof CreatePromptPromptsLanguage
->;
+export type CreatePromptLanguage = ClosedEnum<typeof CreatePromptLanguage>;
 
 export type CreatePromptPromptsMetadata = {
   /**
    * A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose
    */
-  useCases?: Array<CreatePromptPromptsUseCases> | undefined;
+  useCases?: Array<CreatePromptUseCases> | undefined;
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: CreatePromptPromptsLanguage | undefined;
+  language?: CreatePromptLanguage | undefined;
 };
 
 /**
@@ -893,151 +867,65 @@ export type CreatePromptResponseBody = {
   /**
    * A list of messages compatible with the openAI schema
    */
-  promptConfig: CreatePromptPromptsPromptConfig;
+  promptConfig: CreatePromptPromptConfig;
   metadata?: CreatePromptPromptsMetadata | undefined;
 };
 
 /** @internal */
-export const CreatePromptModelType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptModelType
-> = z.nativeEnum(CreatePromptModelType);
+export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> = z
+  .nativeEnum(ModelType);
 
 /** @internal */
-export const CreatePromptModelType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptModelType
-> = CreatePromptModelType$inboundSchema;
+export const ModelType$outboundSchema: z.ZodNativeEnum<typeof ModelType> =
+  ModelType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptModelType$ {
-  /** @deprecated use `CreatePromptModelType$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptModelType$inboundSchema;
-  /** @deprecated use `CreatePromptModelType$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptModelType$outboundSchema;
+export namespace ModelType$ {
+  /** @deprecated use `ModelType$inboundSchema` instead. */
+  export const inboundSchema = ModelType$inboundSchema;
+  /** @deprecated use `ModelType$outboundSchema` instead. */
+  export const outboundSchema = ModelType$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = z.nativeEnum(CreatePromptFormat);
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
+  .nativeEnum(Format);
 
 /** @internal */
-export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = CreatePromptFormat$inboundSchema;
+export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
+  Format$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptFormat$ {
-  /** @deprecated use `CreatePromptFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptFormat$inboundSchema;
-  /** @deprecated use `CreatePromptFormat$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptFormat$outboundSchema;
+export namespace Format$ {
+  /** @deprecated use `Format$inboundSchema` instead. */
+  export const inboundSchema = Format$inboundSchema;
+  /** @deprecated use `Format$outboundSchema` instead. */
+  export const outboundSchema = Format$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptQuality$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptQuality
-> = z.nativeEnum(CreatePromptQuality);
+export const Quality$inboundSchema: z.ZodNativeEnum<typeof Quality> = z
+  .nativeEnum(Quality);
 
 /** @internal */
-export const CreatePromptQuality$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptQuality
-> = CreatePromptQuality$inboundSchema;
+export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> =
+  Quality$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptQuality$ {
-  /** @deprecated use `CreatePromptQuality$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptQuality$inboundSchema;
-  /** @deprecated use `CreatePromptQuality$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptQuality$outboundSchema;
-}
-
-/** @internal */
-export const CreatePromptResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> = z.nativeEnum(
-    CreatePromptResponseFormatPromptsType,
-  );
-
-/** @internal */
-export const CreatePromptResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> =
-    CreatePromptResponseFormatPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePromptResponseFormatPromptsType$ {
-  /** @deprecated use `CreatePromptResponseFormatPromptsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreatePromptResponseFormatPromptsType$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPromptsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptResponseFormatPromptsType$outboundSchema;
-}
-
-/** @internal */
-export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePromptResponseFormatPromptsType$inboundSchema,
-});
-
-/** @internal */
-export type CreatePromptResponseFormat2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const CreatePromptResponseFormat2$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormat2
-> = z.object({
-  type: CreatePromptResponseFormatPromptsType$outboundSchema,
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePromptResponseFormat2$ {
-  /** @deprecated use `CreatePromptResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptResponseFormat2$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptResponseFormat2$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormat2$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormat2$Outbound;
-}
-
-export function createPromptResponseFormat2ToJSON(
-  createPromptResponseFormat2: CreatePromptResponseFormat2,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat2$outboundSchema.parse(
-      createPromptResponseFormat2,
-    ),
-  );
-}
-
-export function createPromptResponseFormat2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePromptResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat2' from JSON`,
-  );
+export namespace Quality$ {
+  /** @deprecated use `Quality$inboundSchema` instead. */
+  export const inboundSchema = Quality$inboundSchema;
+  /** @deprecated use `Quality$outboundSchema` instead. */
+  export const outboundSchema = Quality$outboundSchema;
 }
 
 /** @internal */
@@ -1062,8 +950,81 @@ export namespace CreatePromptResponseFormatType$ {
 }
 
 /** @internal */
-export const CreatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatJsonSchema,
+export const ResponseFormat2$inboundSchema: z.ZodType<
+  ResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptResponseFormatType$inboundSchema,
+});
+
+/** @internal */
+export type ResponseFormat2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ResponseFormat2$outboundSchema: z.ZodType<
+  ResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  ResponseFormat2
+> = z.object({
+  type: CreatePromptResponseFormatType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ResponseFormat2$ {
+  /** @deprecated use `ResponseFormat2$inboundSchema` instead. */
+  export const inboundSchema = ResponseFormat2$inboundSchema;
+  /** @deprecated use `ResponseFormat2$outboundSchema` instead. */
+  export const outboundSchema = ResponseFormat2$outboundSchema;
+  /** @deprecated use `ResponseFormat2$Outbound` instead. */
+  export type Outbound = ResponseFormat2$Outbound;
+}
+
+export function responseFormat2ToJSON(
+  responseFormat2: ResponseFormat2,
+): string {
+  return JSON.stringify(ResponseFormat2$outboundSchema.parse(responseFormat2));
+}
+
+export function responseFormat2FromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseFormat2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseFormatType$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormatType
+> = z.nativeEnum(ResponseFormatType);
+
+/** @internal */
+export const ResponseFormatType$outboundSchema: z.ZodNativeEnum<
+  typeof ResponseFormatType
+> = ResponseFormatType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ResponseFormatType$ {
+  /** @deprecated use `ResponseFormatType$inboundSchema` instead. */
+  export const inboundSchema = ResponseFormatType$inboundSchema;
+  /** @deprecated use `ResponseFormatType$outboundSchema` instead. */
+  export const outboundSchema = ResponseFormatType$outboundSchema;
+}
+
+/** @internal */
+export const JsonSchema$inboundSchema: z.ZodType<
+  JsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1073,17 +1034,17 @@ export const CreatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptResponseFormatJsonSchema$Outbound = {
+export type JsonSchema$Outbound = {
   name: string;
   strict: boolean;
   schema: { [k: string]: any };
 };
 
 /** @internal */
-export const CreatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatJsonSchema$Outbound,
+export const JsonSchema$outboundSchema: z.ZodType<
+  JsonSchema$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormatJsonSchema
+  JsonSchema
 > = z.object({
   name: z.string(),
   strict: z.boolean(),
@@ -1094,46 +1055,37 @@ export const CreatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormatJsonSchema$ {
-  /** @deprecated use `CreatePromptResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    CreatePromptResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormatJsonSchema$Outbound;
+export namespace JsonSchema$ {
+  /** @deprecated use `JsonSchema$inboundSchema` instead. */
+  export const inboundSchema = JsonSchema$inboundSchema;
+  /** @deprecated use `JsonSchema$outboundSchema` instead. */
+  export const outboundSchema = JsonSchema$outboundSchema;
+  /** @deprecated use `JsonSchema$Outbound` instead. */
+  export type Outbound = JsonSchema$Outbound;
 }
 
-export function createPromptResponseFormatJsonSchemaToJSON(
-  createPromptResponseFormatJsonSchema: CreatePromptResponseFormatJsonSchema,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormatJsonSchema$outboundSchema.parse(
-      createPromptResponseFormatJsonSchema,
-    ),
-  );
+export function jsonSchemaToJSON(jsonSchema: JsonSchema): string {
+  return JSON.stringify(JsonSchema$outboundSchema.parse(jsonSchema));
 }
 
-export function createPromptResponseFormatJsonSchemaFromJSON(
+export function jsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatJsonSchema, SDKValidationError> {
+): SafeParseResult<JsonSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatJsonSchema' from JSON`,
+    (x) => JsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat1,
+export const ResponseFormat1$inboundSchema: z.ZodType<
+  ResponseFormat1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreatePromptResponseFormatType$inboundSchema,
-  json_schema: z.lazy(() => CreatePromptResponseFormatJsonSchema$inboundSchema),
+  type: ResponseFormatType$inboundSchema,
+  json_schema: z.lazy(() => JsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "json_schema": "jsonSchema",
@@ -1141,19 +1093,19 @@ export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptResponseFormat1$Outbound = {
+export type ResponseFormat1$Outbound = {
   type: string;
-  json_schema: CreatePromptResponseFormatJsonSchema$Outbound;
+  json_schema: JsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat1$Outbound,
+export const ResponseFormat1$outboundSchema: z.ZodType<
+  ResponseFormat1$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormat1
+  ResponseFormat1
 > = z.object({
-  type: CreatePromptResponseFormatType$outboundSchema,
-  jsonSchema: z.lazy(() => CreatePromptResponseFormatJsonSchema$outboundSchema),
+  type: ResponseFormatType$outboundSchema,
+  jsonSchema: z.lazy(() => JsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     jsonSchema: "json_schema",
@@ -1164,157 +1116,149 @@ export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormat1$ {
-  /** @deprecated use `CreatePromptResponseFormat1$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptResponseFormat1$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormat1$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptResponseFormat1$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormat1$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormat1$Outbound;
+export namespace ResponseFormat1$ {
+  /** @deprecated use `ResponseFormat1$inboundSchema` instead. */
+  export const inboundSchema = ResponseFormat1$inboundSchema;
+  /** @deprecated use `ResponseFormat1$outboundSchema` instead. */
+  export const outboundSchema = ResponseFormat1$outboundSchema;
+  /** @deprecated use `ResponseFormat1$Outbound` instead. */
+  export type Outbound = ResponseFormat1$Outbound;
 }
 
-export function createPromptResponseFormat1ToJSON(
-  createPromptResponseFormat1: CreatePromptResponseFormat1,
+export function responseFormat1ToJSON(
+  responseFormat1: ResponseFormat1,
 ): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat1$outboundSchema.parse(
-      createPromptResponseFormat1,
-    ),
-  );
+  return JSON.stringify(ResponseFormat1$outboundSchema.parse(responseFormat1));
 }
 
-export function createPromptResponseFormat1FromJSON(
+export function responseFormat1FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat1, SDKValidationError> {
+): SafeParseResult<ResponseFormat1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptResponseFormat1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat1' from JSON`,
+    (x) => ResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat1' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptResponseFormat$inboundSchema: z.ZodType<
-  CreatePromptResponseFormat,
+export const ResponseFormat$inboundSchema: z.ZodType<
+  ResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
+  z.lazy(() => ResponseFormat2$inboundSchema),
+  z.lazy(() => ResponseFormat1$inboundSchema),
 ]);
 
 /** @internal */
-export type CreatePromptResponseFormat$Outbound =
-  | CreatePromptResponseFormat2$Outbound
-  | CreatePromptResponseFormat1$Outbound;
+export type ResponseFormat$Outbound =
+  | ResponseFormat2$Outbound
+  | ResponseFormat1$Outbound;
 
 /** @internal */
-export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
-  CreatePromptResponseFormat$Outbound,
+export const ResponseFormat$outboundSchema: z.ZodType<
+  ResponseFormat$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormat
+  ResponseFormat
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
+  z.lazy(() => ResponseFormat2$outboundSchema),
+  z.lazy(() => ResponseFormat1$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormat$ {
-  /** @deprecated use `CreatePromptResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptResponseFormat$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormat$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptResponseFormat$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormat$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormat$Outbound;
+export namespace ResponseFormat$ {
+  /** @deprecated use `ResponseFormat$inboundSchema` instead. */
+  export const inboundSchema = ResponseFormat$inboundSchema;
+  /** @deprecated use `ResponseFormat$outboundSchema` instead. */
+  export const outboundSchema = ResponseFormat$outboundSchema;
+  /** @deprecated use `ResponseFormat$Outbound` instead. */
+  export type Outbound = ResponseFormat$Outbound;
 }
 
-export function createPromptResponseFormatToJSON(
-  createPromptResponseFormat: CreatePromptResponseFormat,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormat$outboundSchema.parse(createPromptResponseFormat),
-  );
+export function responseFormatToJSON(responseFormat: ResponseFormat): string {
+  return JSON.stringify(ResponseFormat$outboundSchema.parse(responseFormat));
 }
 
-export function createPromptResponseFormatFromJSON(
+export function responseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormat, SDKValidationError> {
+): SafeParseResult<ResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormat' from JSON`,
+    (x) => ResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPhotoRealVersion
-> = z.nativeEnum(CreatePromptPhotoRealVersion);
+export const PhotoRealVersion$inboundSchema: z.ZodNativeEnum<
+  typeof PhotoRealVersion
+> = z.nativeEnum(PhotoRealVersion);
 
 /** @internal */
-export const CreatePromptPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPhotoRealVersion
-> = CreatePromptPhotoRealVersion$inboundSchema;
+export const PhotoRealVersion$outboundSchema: z.ZodNativeEnum<
+  typeof PhotoRealVersion
+> = PhotoRealVersion$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPhotoRealVersion$ {
-  /** @deprecated use `CreatePromptPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPhotoRealVersion$inboundSchema;
-  /** @deprecated use `CreatePromptPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPhotoRealVersion$outboundSchema;
+export namespace PhotoRealVersion$ {
+  /** @deprecated use `PhotoRealVersion$inboundSchema` instead. */
+  export const inboundSchema = PhotoRealVersion$inboundSchema;
+  /** @deprecated use `PhotoRealVersion$outboundSchema` instead. */
+  export const outboundSchema = PhotoRealVersion$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptEncodingFormat
-> = z.nativeEnum(CreatePromptEncodingFormat);
+export const EncodingFormat$inboundSchema: z.ZodNativeEnum<
+  typeof EncodingFormat
+> = z.nativeEnum(EncodingFormat);
 
 /** @internal */
-export const CreatePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptEncodingFormat
-> = CreatePromptEncodingFormat$inboundSchema;
+export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
+  typeof EncodingFormat
+> = EncodingFormat$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptEncodingFormat$ {
-  /** @deprecated use `CreatePromptEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptEncodingFormat$inboundSchema;
-  /** @deprecated use `CreatePromptEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptEncodingFormat$outboundSchema;
+export namespace EncodingFormat$ {
+  /** @deprecated use `EncodingFormat$inboundSchema` instead. */
+  export const inboundSchema = EncodingFormat$inboundSchema;
+  /** @deprecated use `EncodingFormat$outboundSchema` instead. */
+  export const outboundSchema = EncodingFormat$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptReasoningEffort
-> = z.nativeEnum(CreatePromptReasoningEffort);
+export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof ReasoningEffort
+> = z.nativeEnum(ReasoningEffort);
 
 /** @internal */
-export const CreatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptReasoningEffort
-> = CreatePromptReasoningEffort$inboundSchema;
+export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof ReasoningEffort
+> = ReasoningEffort$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptReasoningEffort$ {
-  /** @deprecated use `CreatePromptReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptReasoningEffort$inboundSchema;
-  /** @deprecated use `CreatePromptReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptReasoningEffort$outboundSchema;
+export namespace ReasoningEffort$ {
+  /** @deprecated use `ReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = ReasoningEffort$inboundSchema;
+  /** @deprecated use `ReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema = ReasoningEffort$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptModelParameters$inboundSchema: z.ZodType<
-  CreatePromptModelParameters,
+export const ModelParameters$inboundSchema: z.ZodType<
+  ModelParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1326,19 +1270,19 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptFormat$inboundSchema.optional(),
+  format: Format$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: CreatePromptQuality$inboundSchema.optional(),
+  quality: Quality$inboundSchema.optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
-      z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
+      z.lazy(() => ResponseFormat2$inboundSchema),
+      z.lazy(() => ResponseFormat1$inboundSchema),
     ]),
   ).optional(),
-  photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
-  encoding_format: CreatePromptEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
+  photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
+  encoding_format: EncodingFormat$inboundSchema.optional(),
+  reasoningEffort: ReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1346,7 +1290,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptModelParameters$Outbound = {
+export type ModelParameters$Outbound = {
   temperature?: number | undefined;
   maxTokens?: number | undefined;
   topK?: number | undefined;
@@ -1360,8 +1304,8 @@ export type CreatePromptModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | CreatePromptResponseFormat2$Outbound
-    | CreatePromptResponseFormat1$Outbound
+    | ResponseFormat2$Outbound
+    | ResponseFormat1$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1370,10 +1314,10 @@ export type CreatePromptModelParameters$Outbound = {
 };
 
 /** @internal */
-export const CreatePromptModelParameters$outboundSchema: z.ZodType<
-  CreatePromptModelParameters$Outbound,
+export const ModelParameters$outboundSchema: z.ZodType<
+  ModelParameters$Outbound,
   z.ZodTypeDef,
-  CreatePromptModelParameters
+  ModelParameters
 > = z.object({
   temperature: z.number().optional(),
   maxTokens: z.number().optional(),
@@ -1383,19 +1327,19 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptFormat$outboundSchema.optional(),
+  format: Format$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: CreatePromptQuality$outboundSchema.optional(),
+  quality: Quality$outboundSchema.optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
+      z.lazy(() => ResponseFormat2$outboundSchema),
+      z.lazy(() => ResponseFormat1$outboundSchema),
     ]),
   ).optional(),
-  photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),
-  encodingFormat: CreatePromptEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
+  photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
+  encodingFormat: EncodingFormat$outboundSchema.optional(),
+  reasoningEffort: ReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -1406,54 +1350,48 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptModelParameters$ {
-  /** @deprecated use `CreatePromptModelParameters$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptModelParameters$inboundSchema;
-  /** @deprecated use `CreatePromptModelParameters$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptModelParameters$outboundSchema;
-  /** @deprecated use `CreatePromptModelParameters$Outbound` instead. */
-  export type Outbound = CreatePromptModelParameters$Outbound;
+export namespace ModelParameters$ {
+  /** @deprecated use `ModelParameters$inboundSchema` instead. */
+  export const inboundSchema = ModelParameters$inboundSchema;
+  /** @deprecated use `ModelParameters$outboundSchema` instead. */
+  export const outboundSchema = ModelParameters$outboundSchema;
+  /** @deprecated use `ModelParameters$Outbound` instead. */
+  export type Outbound = ModelParameters$Outbound;
 }
 
-export function createPromptModelParametersToJSON(
-  createPromptModelParameters: CreatePromptModelParameters,
+export function modelParametersToJSON(
+  modelParameters: ModelParameters,
 ): string {
-  return JSON.stringify(
-    CreatePromptModelParameters$outboundSchema.parse(
-      createPromptModelParameters,
-    ),
-  );
+  return JSON.stringify(ModelParameters$outboundSchema.parse(modelParameters));
 }
 
-export function createPromptModelParametersFromJSON(
+export function modelParametersFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptModelParameters, SDKValidationError> {
+): SafeParseResult<ModelParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptModelParameters' from JSON`,
+    (x) => ModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ModelParameters' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptProvider$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptProvider
-> = z.nativeEnum(CreatePromptProvider);
+export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
+  .nativeEnum(Provider);
 
 /** @internal */
-export const CreatePromptProvider$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptProvider
-> = CreatePromptProvider$inboundSchema;
+export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
+  Provider$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptProvider$ {
-  /** @deprecated use `CreatePromptProvider$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptProvider$inboundSchema;
-  /** @deprecated use `CreatePromptProvider$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptProvider$outboundSchema;
+export namespace Provider$ {
+  /** @deprecated use `Provider$inboundSchema` instead. */
+  export const inboundSchema = Provider$inboundSchema;
+  /** @deprecated use `Provider$outboundSchema` instead. */
+  export const outboundSchema = Provider$outboundSchema;
 }
 
 /** @internal */
@@ -2032,17 +1970,16 @@ export function createPromptMessagesFromJSON(
 }
 
 /** @internal */
-export const CreatePromptPromptConfig$inboundSchema: z.ZodType<
-  CreatePromptPromptConfig,
+export const PromptConfig$inboundSchema: z.ZodType<
+  PromptConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_type: CreatePromptModelType$inboundSchema.optional(),
-  model_parameters: z.lazy(() => CreatePromptModelParameters$inboundSchema)
-    .optional(),
-  provider: CreatePromptProvider$inboundSchema.optional(),
+  model_type: ModelType$inboundSchema.optional(),
+  model_parameters: z.lazy(() => ModelParameters$inboundSchema).optional(),
+  provider: Provider$inboundSchema.optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => CreatePromptMessages$inboundSchema)),
 }).transform((v) => {
@@ -2053,28 +1990,27 @@ export const CreatePromptPromptConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptPromptConfig$Outbound = {
+export type PromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
   model_type?: string | undefined;
-  model_parameters?: CreatePromptModelParameters$Outbound | undefined;
+  model_parameters?: ModelParameters$Outbound | undefined;
   provider?: string | undefined;
   version?: string | undefined;
   messages: Array<CreatePromptMessages$Outbound>;
 };
 
 /** @internal */
-export const CreatePromptPromptConfig$outboundSchema: z.ZodType<
-  CreatePromptPromptConfig$Outbound,
+export const PromptConfig$outboundSchema: z.ZodType<
+  PromptConfig$Outbound,
   z.ZodTypeDef,
-  CreatePromptPromptConfig
+  PromptConfig
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelType: CreatePromptModelType$outboundSchema.optional(),
-  modelParameters: z.lazy(() => CreatePromptModelParameters$outboundSchema)
-    .optional(),
-  provider: CreatePromptProvider$outboundSchema.optional(),
+  modelType: ModelType$outboundSchema.optional(),
+  modelParameters: z.lazy(() => ModelParameters$outboundSchema).optional(),
+  provider: Provider$outboundSchema.optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => CreatePromptMessages$outboundSchema)),
 }).transform((v) => {
@@ -2088,73 +2024,65 @@ export const CreatePromptPromptConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptConfig$ {
-  /** @deprecated use `CreatePromptPromptConfig$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptConfig$inboundSchema;
-  /** @deprecated use `CreatePromptPromptConfig$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptConfig$outboundSchema;
-  /** @deprecated use `CreatePromptPromptConfig$Outbound` instead. */
-  export type Outbound = CreatePromptPromptConfig$Outbound;
+export namespace PromptConfig$ {
+  /** @deprecated use `PromptConfig$inboundSchema` instead. */
+  export const inboundSchema = PromptConfig$inboundSchema;
+  /** @deprecated use `PromptConfig$outboundSchema` instead. */
+  export const outboundSchema = PromptConfig$outboundSchema;
+  /** @deprecated use `PromptConfig$Outbound` instead. */
+  export type Outbound = PromptConfig$Outbound;
 }
 
-export function createPromptPromptConfigToJSON(
-  createPromptPromptConfig: CreatePromptPromptConfig,
-): string {
-  return JSON.stringify(
-    CreatePromptPromptConfig$outboundSchema.parse(createPromptPromptConfig),
-  );
+export function promptConfigToJSON(promptConfig: PromptConfig): string {
+  return JSON.stringify(PromptConfig$outboundSchema.parse(promptConfig));
 }
 
-export function createPromptPromptConfigFromJSON(
+export function promptConfigFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptConfig, SDKValidationError> {
+): SafeParseResult<PromptConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptConfig' from JSON`,
+    (x) => PromptConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PromptConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptUseCases$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptUseCases
-> = z.nativeEnum(CreatePromptUseCases);
+export const UseCases$inboundSchema: z.ZodNativeEnum<typeof UseCases> = z
+  .nativeEnum(UseCases);
 
 /** @internal */
-export const CreatePromptUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptUseCases
-> = CreatePromptUseCases$inboundSchema;
+export const UseCases$outboundSchema: z.ZodNativeEnum<typeof UseCases> =
+  UseCases$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptUseCases$ {
-  /** @deprecated use `CreatePromptUseCases$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptUseCases$inboundSchema;
-  /** @deprecated use `CreatePromptUseCases$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptUseCases$outboundSchema;
+export namespace UseCases$ {
+  /** @deprecated use `UseCases$inboundSchema` instead. */
+  export const inboundSchema = UseCases$inboundSchema;
+  /** @deprecated use `UseCases$outboundSchema` instead. */
+  export const outboundSchema = UseCases$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptLanguage
-> = z.nativeEnum(CreatePromptLanguage);
+export const Language$inboundSchema: z.ZodNativeEnum<typeof Language> = z
+  .nativeEnum(Language);
 
 /** @internal */
-export const CreatePromptLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptLanguage
-> = CreatePromptLanguage$inboundSchema;
+export const Language$outboundSchema: z.ZodNativeEnum<typeof Language> =
+  Language$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptLanguage$ {
-  /** @deprecated use `CreatePromptLanguage$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptLanguage$inboundSchema;
-  /** @deprecated use `CreatePromptLanguage$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptLanguage$outboundSchema;
+export namespace Language$ {
+  /** @deprecated use `Language$inboundSchema` instead. */
+  export const inboundSchema = Language$inboundSchema;
+  /** @deprecated use `Language$outboundSchema` instead. */
+  export const outboundSchema = Language$outboundSchema;
 }
 
 /** @internal */
@@ -2163,8 +2091,8 @@ export const CreatePromptMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  use_cases: z.array(CreatePromptUseCases$inboundSchema).optional(),
-  language: CreatePromptLanguage$inboundSchema.optional(),
+  use_cases: z.array(UseCases$inboundSchema).optional(),
+  language: Language$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -2183,8 +2111,8 @@ export const CreatePromptMetadata$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptMetadata
 > = z.object({
-  useCases: z.array(CreatePromptUseCases$outboundSchema).optional(),
-  language: CreatePromptLanguage$outboundSchema.optional(),
+  useCases: z.array(UseCases$outboundSchema).optional(),
+  language: Language$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
@@ -2230,7 +2158,7 @@ export const CreatePromptRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => CreatePromptPromptConfig$inboundSchema),
+  prompt_config: z.lazy(() => PromptConfig$inboundSchema),
   metadata: z.lazy(() => CreatePromptMetadata$inboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
@@ -2244,7 +2172,7 @@ export const CreatePromptRequestBody$inboundSchema: z.ZodType<
 export type CreatePromptRequestBody$Outbound = {
   display_name: string;
   description?: string | null | undefined;
-  prompt_config: CreatePromptPromptConfig$Outbound;
+  prompt_config: PromptConfig$Outbound;
   metadata?: CreatePromptMetadata$Outbound | undefined;
   path: string;
 };
@@ -2257,7 +2185,7 @@ export const CreatePromptRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => CreatePromptPromptConfig$outboundSchema),
+  promptConfig: z.lazy(() => PromptConfig$outboundSchema),
   metadata: z.lazy(() => CreatePromptMetadata$outboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
@@ -2320,147 +2248,66 @@ export namespace CreatePromptPromptsType$ {
 }
 
 /** @internal */
-export const CreatePromptPromptsModelType$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsModelType
-> = z.nativeEnum(CreatePromptPromptsModelType);
+export const CreatePromptModelType$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptModelType
+> = z.nativeEnum(CreatePromptModelType);
 
 /** @internal */
-export const CreatePromptPromptsModelType$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsModelType
-> = CreatePromptPromptsModelType$inboundSchema;
+export const CreatePromptModelType$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptModelType
+> = CreatePromptModelType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsModelType$ {
-  /** @deprecated use `CreatePromptPromptsModelType$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsModelType$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsModelType$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsModelType$outboundSchema;
+export namespace CreatePromptModelType$ {
+  /** @deprecated use `CreatePromptModelType$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptModelType$inboundSchema;
+  /** @deprecated use `CreatePromptModelType$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptModelType$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsFormat
-> = z.nativeEnum(CreatePromptPromptsFormat);
+export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptFormat
+> = z.nativeEnum(CreatePromptFormat);
 
 /** @internal */
-export const CreatePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsFormat
-> = CreatePromptPromptsFormat$inboundSchema;
+export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptFormat
+> = CreatePromptFormat$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsFormat$ {
-  /** @deprecated use `CreatePromptPromptsFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsFormat$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsFormat$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsFormat$outboundSchema;
+export namespace CreatePromptFormat$ {
+  /** @deprecated use `CreatePromptFormat$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptFormat$inboundSchema;
+  /** @deprecated use `CreatePromptFormat$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptFormat$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptPromptsQuality$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsQuality
-> = z.nativeEnum(CreatePromptPromptsQuality);
+export const CreatePromptQuality$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptQuality
+> = z.nativeEnum(CreatePromptQuality);
 
 /** @internal */
-export const CreatePromptPromptsQuality$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsQuality
-> = CreatePromptPromptsQuality$inboundSchema;
+export const CreatePromptQuality$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptQuality
+> = CreatePromptQuality$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsQuality$ {
-  /** @deprecated use `CreatePromptPromptsQuality$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsQuality$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsQuality$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsQuality$outboundSchema;
-}
-
-/** @internal */
-export const CreatePromptResponseFormatPromptsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponse200Type> = z
-    .nativeEnum(CreatePromptResponseFormatPromptsResponse200Type);
-
-/** @internal */
-export const CreatePromptResponseFormatPromptsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponse200Type> =
-    CreatePromptResponseFormatPromptsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePromptResponseFormatPromptsResponse200Type$ {
-  /** @deprecated use `CreatePromptResponseFormatPromptsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreatePromptResponseFormatPromptsResponse200Type$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPromptsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptResponseFormatPromptsResponse200Type$outboundSchema;
-}
-
-/** @internal */
-export const CreatePromptResponseFormatPrompts2$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreatePromptResponseFormatPromptsResponse200Type$inboundSchema,
-});
-
-/** @internal */
-export type CreatePromptResponseFormatPrompts2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const CreatePromptResponseFormatPrompts2$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts2$Outbound,
-  z.ZodTypeDef,
-  CreatePromptResponseFormatPrompts2
-> = z.object({
-  type: CreatePromptResponseFormatPromptsResponse200Type$outboundSchema,
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePromptResponseFormatPrompts2$ {
-  /** @deprecated use `CreatePromptResponseFormatPrompts2$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptResponseFormatPrompts2$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPrompts2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptResponseFormatPrompts2$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPrompts2$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormatPrompts2$Outbound;
-}
-
-export function createPromptResponseFormatPrompts2ToJSON(
-  createPromptResponseFormatPrompts2: CreatePromptResponseFormatPrompts2,
-): string {
-  return JSON.stringify(
-    CreatePromptResponseFormatPrompts2$outboundSchema.parse(
-      createPromptResponseFormatPrompts2,
-    ),
-  );
-}
-
-export function createPromptResponseFormatPrompts2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatPrompts2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreatePromptResponseFormatPrompts2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatPrompts2' from JSON`,
-  );
+export namespace CreatePromptQuality$ {
+  /** @deprecated use `CreatePromptQuality$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptQuality$inboundSchema;
+  /** @deprecated use `CreatePromptQuality$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptQuality$outboundSchema;
 }
 
 /** @internal */
@@ -2487,88 +2334,158 @@ export namespace CreatePromptResponseFormatPromptsResponseType$ {
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsJsonSchema$inboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsJsonSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    name: z.string(),
-    strict: z.boolean(),
-    schema: z.record(z.any()),
-  });
+export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
+});
 
 /** @internal */
-export type CreatePromptResponseFormatPromptsJsonSchema$Outbound = {
+export type CreatePromptResponseFormat2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const CreatePromptResponseFormat2$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormat2
+> = z.object({
+  type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptResponseFormat2$ {
+  /** @deprecated use `CreatePromptResponseFormat2$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptResponseFormat2$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat2$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptResponseFormat2$outboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat2$Outbound` instead. */
+  export type Outbound = CreatePromptResponseFormat2$Outbound;
+}
+
+export function createPromptResponseFormat2ToJSON(
+  createPromptResponseFormat2: CreatePromptResponseFormat2,
+): string {
+  return JSON.stringify(
+    CreatePromptResponseFormat2$outboundSchema.parse(
+      createPromptResponseFormat2,
+    ),
+  );
+}
+
+export function createPromptResponseFormat2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptResponseFormat2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsType$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> = z.nativeEnum(
+    CreatePromptResponseFormatPromptsType,
+  );
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> =
+    CreatePromptResponseFormatPromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptResponseFormatPromptsType$ {
+  /** @deprecated use `CreatePromptResponseFormatPromptsType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreatePromptResponseFormatPromptsType$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatPromptsType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreatePromptResponseFormatPromptsType$outboundSchema;
+}
+
+/** @internal */
+export const CreatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
+  CreatePromptResponseFormatJsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  strict: z.boolean(),
+  schema: z.record(z.any()),
+});
+
+/** @internal */
+export type CreatePromptResponseFormatJsonSchema$Outbound = {
   name: string;
   strict: boolean;
   schema: { [k: string]: any };
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsJsonSchema$outboundSchema:
-  z.ZodType<
-    CreatePromptResponseFormatPromptsJsonSchema$Outbound,
-    z.ZodTypeDef,
-    CreatePromptResponseFormatPromptsJsonSchema
-  > = z.object({
-    name: z.string(),
-    strict: z.boolean(),
-    schema: z.record(z.any()),
-  });
+export const CreatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
+  CreatePromptResponseFormatJsonSchema$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormatJsonSchema
+> = z.object({
+  name: z.string(),
+  strict: z.boolean(),
+  schema: z.record(z.any()),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormatPromptsJsonSchema$ {
-  /** @deprecated use `CreatePromptResponseFormatPromptsJsonSchema$inboundSchema` instead. */
+export namespace CreatePromptResponseFormatJsonSchema$ {
+  /** @deprecated use `CreatePromptResponseFormatJsonSchema$inboundSchema` instead. */
   export const inboundSchema =
-    CreatePromptResponseFormatPromptsJsonSchema$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPromptsJsonSchema$outboundSchema` instead. */
+    CreatePromptResponseFormatJsonSchema$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatJsonSchema$outboundSchema` instead. */
   export const outboundSchema =
-    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPromptsJsonSchema$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormatPromptsJsonSchema$Outbound;
+    CreatePromptResponseFormatJsonSchema$outboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatJsonSchema$Outbound` instead. */
+  export type Outbound = CreatePromptResponseFormatJsonSchema$Outbound;
 }
 
-export function createPromptResponseFormatPromptsJsonSchemaToJSON(
-  createPromptResponseFormatPromptsJsonSchema:
-    CreatePromptResponseFormatPromptsJsonSchema,
+export function createPromptResponseFormatJsonSchemaToJSON(
+  createPromptResponseFormatJsonSchema: CreatePromptResponseFormatJsonSchema,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema.parse(
-      createPromptResponseFormatPromptsJsonSchema,
+    CreatePromptResponseFormatJsonSchema$outboundSchema.parse(
+      createPromptResponseFormatJsonSchema,
     ),
   );
 }
 
-export function createPromptResponseFormatPromptsJsonSchemaFromJSON(
+export function createPromptResponseFormatJsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<
-  CreatePromptResponseFormatPromptsJsonSchema,
-  SDKValidationError
-> {
+): SafeParseResult<CreatePromptResponseFormatJsonSchema, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      CreatePromptResponseFormatPromptsJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreatePromptResponseFormatPromptsJsonSchema' from JSON`,
+      CreatePromptResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormatJsonSchema' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts1$inboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts1,
+export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
-  json_schema: z.lazy(() =>
-    CreatePromptResponseFormatPromptsJsonSchema$inboundSchema
-  ),
+  type: CreatePromptResponseFormatPromptsType$inboundSchema,
+  json_schema: z.lazy(() => CreatePromptResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "json_schema": "jsonSchema",
@@ -2576,21 +2493,19 @@ export const CreatePromptResponseFormatPrompts1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptResponseFormatPrompts1$Outbound = {
+export type CreatePromptResponseFormat1$Outbound = {
   type: string;
-  json_schema: CreatePromptResponseFormatPromptsJsonSchema$Outbound;
+  json_schema: CreatePromptResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
-export const CreatePromptResponseFormatPrompts1$outboundSchema: z.ZodType<
-  CreatePromptResponseFormatPrompts1$Outbound,
+export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat1$Outbound,
   z.ZodTypeDef,
-  CreatePromptResponseFormatPrompts1
+  CreatePromptResponseFormat1
 > = z.object({
-  type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    CreatePromptResponseFormatPromptsJsonSchema$outboundSchema
-  ),
+  type: CreatePromptResponseFormatPromptsType$outboundSchema,
+  jsonSchema: z.lazy(() => CreatePromptResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     jsonSchema: "json_schema",
@@ -2601,166 +2516,157 @@ export const CreatePromptResponseFormatPrompts1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormatPrompts1$ {
-  /** @deprecated use `CreatePromptResponseFormatPrompts1$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptResponseFormatPrompts1$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPrompts1$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptResponseFormatPrompts1$outboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPrompts1$Outbound` instead. */
-  export type Outbound = CreatePromptResponseFormatPrompts1$Outbound;
+export namespace CreatePromptResponseFormat1$ {
+  /** @deprecated use `CreatePromptResponseFormat1$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptResponseFormat1$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat1$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptResponseFormat1$outboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat1$Outbound` instead. */
+  export type Outbound = CreatePromptResponseFormat1$Outbound;
 }
 
-export function createPromptResponseFormatPrompts1ToJSON(
-  createPromptResponseFormatPrompts1: CreatePromptResponseFormatPrompts1,
+export function createPromptResponseFormat1ToJSON(
+  createPromptResponseFormat1: CreatePromptResponseFormat1,
 ): string {
   return JSON.stringify(
-    CreatePromptResponseFormatPrompts1$outboundSchema.parse(
-      createPromptResponseFormatPrompts1,
+    CreatePromptResponseFormat1$outboundSchema.parse(
+      createPromptResponseFormat1,
     ),
   );
 }
 
-export function createPromptResponseFormatPrompts1FromJSON(
+export function createPromptResponseFormat1FromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptResponseFormatPrompts1, SDKValidationError> {
+): SafeParseResult<CreatePromptResponseFormat1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptResponseFormatPrompts1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptResponseFormatPrompts1' from JSON`,
+    (x) => CreatePromptResponseFormat1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat1' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
-  CreatePromptPromptsResponseFormat,
+export const CreatePromptResponseFormat$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormatPrompts2$inboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPrompts1$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
 ]);
 
 /** @internal */
-export type CreatePromptPromptsResponseFormat$Outbound =
-  | CreatePromptResponseFormatPrompts2$Outbound
-  | CreatePromptResponseFormatPrompts1$Outbound;
+export type CreatePromptResponseFormat$Outbound =
+  | CreatePromptResponseFormat2$Outbound
+  | CreatePromptResponseFormat1$Outbound;
 
 /** @internal */
-export const CreatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
-  CreatePromptPromptsResponseFormat$Outbound,
+export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat$Outbound,
   z.ZodTypeDef,
-  CreatePromptPromptsResponseFormat
+  CreatePromptResponseFormat
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormatPrompts2$outboundSchema),
-  z.lazy(() => CreatePromptResponseFormatPrompts1$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsResponseFormat$ {
-  /** @deprecated use `CreatePromptPromptsResponseFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsResponseFormat$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsResponseFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptPromptsResponseFormat$outboundSchema;
-  /** @deprecated use `CreatePromptPromptsResponseFormat$Outbound` instead. */
-  export type Outbound = CreatePromptPromptsResponseFormat$Outbound;
+export namespace CreatePromptResponseFormat$ {
+  /** @deprecated use `CreatePromptResponseFormat$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptResponseFormat$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptResponseFormat$outboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat$Outbound` instead. */
+  export type Outbound = CreatePromptResponseFormat$Outbound;
 }
 
-export function createPromptPromptsResponseFormatToJSON(
-  createPromptPromptsResponseFormat: CreatePromptPromptsResponseFormat,
+export function createPromptResponseFormatToJSON(
+  createPromptResponseFormat: CreatePromptResponseFormat,
 ): string {
   return JSON.stringify(
-    CreatePromptPromptsResponseFormat$outboundSchema.parse(
-      createPromptPromptsResponseFormat,
-    ),
+    CreatePromptResponseFormat$outboundSchema.parse(createPromptResponseFormat),
   );
 }
 
-export function createPromptPromptsResponseFormatFromJSON(
+export function createPromptResponseFormatFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsResponseFormat, SDKValidationError> {
+): SafeParseResult<CreatePromptResponseFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptsResponseFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsResponseFormat' from JSON`,
+    (x) => CreatePromptResponseFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsPhotoRealVersion
-> = z.nativeEnum(CreatePromptPromptsPhotoRealVersion);
+export const CreatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPhotoRealVersion
+> = z.nativeEnum(CreatePromptPhotoRealVersion);
 
 /** @internal */
-export const CreatePromptPromptsPhotoRealVersion$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptPromptsPhotoRealVersion> =
-    CreatePromptPromptsPhotoRealVersion$inboundSchema;
+export const CreatePromptPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPhotoRealVersion
+> = CreatePromptPhotoRealVersion$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsPhotoRealVersion$ {
-  /** @deprecated use `CreatePromptPromptsPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    CreatePromptPromptsPhotoRealVersion$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptPromptsPhotoRealVersion$outboundSchema;
+export namespace CreatePromptPhotoRealVersion$ {
+  /** @deprecated use `CreatePromptPhotoRealVersion$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptPhotoRealVersion$inboundSchema;
+  /** @deprecated use `CreatePromptPhotoRealVersion$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptPhotoRealVersion$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptPromptsEncodingFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsEncodingFormat
-> = z.nativeEnum(CreatePromptPromptsEncodingFormat);
+export const CreatePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptEncodingFormat
+> = z.nativeEnum(CreatePromptEncodingFormat);
 
 /** @internal */
-export const CreatePromptPromptsEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsEncodingFormat
-> = CreatePromptPromptsEncodingFormat$inboundSchema;
+export const CreatePromptEncodingFormat$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptEncodingFormat
+> = CreatePromptEncodingFormat$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsEncodingFormat$ {
-  /** @deprecated use `CreatePromptPromptsEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsEncodingFormat$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptPromptsEncodingFormat$outboundSchema;
+export namespace CreatePromptEncodingFormat$ {
+  /** @deprecated use `CreatePromptEncodingFormat$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptEncodingFormat$inboundSchema;
+  /** @deprecated use `CreatePromptEncodingFormat$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptEncodingFormat$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsReasoningEffort
-> = z.nativeEnum(CreatePromptPromptsReasoningEffort);
+export const CreatePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptReasoningEffort
+> = z.nativeEnum(CreatePromptReasoningEffort);
 
 /** @internal */
-export const CreatePromptPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsReasoningEffort
-> = CreatePromptPromptsReasoningEffort$inboundSchema;
+export const CreatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptReasoningEffort
+> = CreatePromptReasoningEffort$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsReasoningEffort$ {
-  /** @deprecated use `CreatePromptPromptsReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsReasoningEffort$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptPromptsReasoningEffort$outboundSchema;
+export namespace CreatePromptReasoningEffort$ {
+  /** @deprecated use `CreatePromptReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptReasoningEffort$inboundSchema;
+  /** @deprecated use `CreatePromptReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptReasoningEffort$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptPromptsModelParameters$inboundSchema: z.ZodType<
-  CreatePromptPromptsModelParameters,
+export const CreatePromptModelParameters$inboundSchema: z.ZodType<
+  CreatePromptModelParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2772,20 +2678,19 @@ export const CreatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptPromptsFormat$inboundSchema.optional(),
+  format: CreatePromptFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: CreatePromptPromptsQuality$inboundSchema.optional(),
+  quality: CreatePromptQuality$inboundSchema.optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormatPrompts2$inboundSchema),
-      z.lazy(() => CreatePromptResponseFormatPrompts1$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
     ]),
   ).optional(),
-  photoRealVersion: CreatePromptPromptsPhotoRealVersion$inboundSchema
-    .optional(),
-  encoding_format: CreatePromptPromptsEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: CreatePromptPromptsReasoningEffort$inboundSchema.optional(),
+  photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
+  encoding_format: CreatePromptEncodingFormat$inboundSchema.optional(),
+  reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -2793,7 +2698,7 @@ export const CreatePromptPromptsModelParameters$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptPromptsModelParameters$Outbound = {
+export type CreatePromptModelParameters$Outbound = {
   temperature?: number | undefined;
   maxTokens?: number | undefined;
   topK?: number | undefined;
@@ -2807,8 +2712,8 @@ export type CreatePromptPromptsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | CreatePromptResponseFormatPrompts2$Outbound
-    | CreatePromptResponseFormatPrompts1$Outbound
+    | CreatePromptResponseFormat2$Outbound
+    | CreatePromptResponseFormat1$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -2817,10 +2722,10 @@ export type CreatePromptPromptsModelParameters$Outbound = {
 };
 
 /** @internal */
-export const CreatePromptPromptsModelParameters$outboundSchema: z.ZodType<
-  CreatePromptPromptsModelParameters$Outbound,
+export const CreatePromptModelParameters$outboundSchema: z.ZodType<
+  CreatePromptModelParameters$Outbound,
   z.ZodTypeDef,
-  CreatePromptPromptsModelParameters
+  CreatePromptModelParameters
 > = z.object({
   temperature: z.number().optional(),
   maxTokens: z.number().optional(),
@@ -2830,20 +2735,19 @@ export const CreatePromptPromptsModelParameters$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptPromptsFormat$outboundSchema.optional(),
+  format: CreatePromptFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: CreatePromptPromptsQuality$outboundSchema.optional(),
+  quality: CreatePromptQuality$outboundSchema.optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormatPrompts2$outboundSchema),
-      z.lazy(() => CreatePromptResponseFormatPrompts1$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
     ]),
   ).optional(),
-  photoRealVersion: CreatePromptPromptsPhotoRealVersion$outboundSchema
-    .optional(),
-  encodingFormat: CreatePromptPromptsEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: CreatePromptPromptsReasoningEffort$outboundSchema.optional(),
+  photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),
+  encodingFormat: CreatePromptEncodingFormat$outboundSchema.optional(),
+  reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -2854,56 +2758,54 @@ export const CreatePromptPromptsModelParameters$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsModelParameters$ {
-  /** @deprecated use `CreatePromptPromptsModelParameters$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsModelParameters$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreatePromptPromptsModelParameters$outboundSchema;
-  /** @deprecated use `CreatePromptPromptsModelParameters$Outbound` instead. */
-  export type Outbound = CreatePromptPromptsModelParameters$Outbound;
+export namespace CreatePromptModelParameters$ {
+  /** @deprecated use `CreatePromptModelParameters$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptModelParameters$inboundSchema;
+  /** @deprecated use `CreatePromptModelParameters$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptModelParameters$outboundSchema;
+  /** @deprecated use `CreatePromptModelParameters$Outbound` instead. */
+  export type Outbound = CreatePromptModelParameters$Outbound;
 }
 
-export function createPromptPromptsModelParametersToJSON(
-  createPromptPromptsModelParameters: CreatePromptPromptsModelParameters,
+export function createPromptModelParametersToJSON(
+  createPromptModelParameters: CreatePromptModelParameters,
 ): string {
   return JSON.stringify(
-    CreatePromptPromptsModelParameters$outboundSchema.parse(
-      createPromptPromptsModelParameters,
+    CreatePromptModelParameters$outboundSchema.parse(
+      createPromptModelParameters,
     ),
   );
 }
 
-export function createPromptPromptsModelParametersFromJSON(
+export function createPromptModelParametersFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsModelParameters, SDKValidationError> {
+): SafeParseResult<CreatePromptModelParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      CreatePromptPromptsModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsModelParameters' from JSON`,
+    (x) => CreatePromptModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptModelParameters' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsProvider$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsProvider
-> = z.nativeEnum(CreatePromptPromptsProvider);
+export const CreatePromptProvider$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptProvider
+> = z.nativeEnum(CreatePromptProvider);
 
 /** @internal */
-export const CreatePromptPromptsProvider$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsProvider
-> = CreatePromptPromptsProvider$inboundSchema;
+export const CreatePromptProvider$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptProvider
+> = CreatePromptProvider$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsProvider$ {
-  /** @deprecated use `CreatePromptPromptsProvider$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsProvider$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsProvider$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsProvider$outboundSchema;
+export namespace CreatePromptProvider$ {
+  /** @deprecated use `CreatePromptProvider$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptProvider$inboundSchema;
+  /** @deprecated use `CreatePromptProvider$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptProvider$outboundSchema;
 }
 
 /** @internal */
@@ -3507,19 +3409,18 @@ export function createPromptPromptsMessagesFromJSON(
 }
 
 /** @internal */
-export const CreatePromptPromptsPromptConfig$inboundSchema: z.ZodType<
-  CreatePromptPromptsPromptConfig,
+export const CreatePromptPromptConfig$inboundSchema: z.ZodType<
+  CreatePromptPromptConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
   model_db_id: z.string().optional(),
-  model_type: CreatePromptPromptsModelType$inboundSchema.optional(),
-  model_parameters: z.lazy(() =>
-    CreatePromptPromptsModelParameters$inboundSchema
-  ).optional(),
-  provider: CreatePromptPromptsProvider$inboundSchema.optional(),
+  model_type: CreatePromptModelType$inboundSchema.optional(),
+  model_parameters: z.lazy(() => CreatePromptModelParameters$inboundSchema)
+    .optional(),
+  provider: CreatePromptProvider$inboundSchema.optional(),
   integration_id: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => CreatePromptPromptsMessages$inboundSchema)),
@@ -3533,12 +3434,12 @@ export const CreatePromptPromptsPromptConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreatePromptPromptsPromptConfig$Outbound = {
+export type CreatePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
   model_db_id?: string | undefined;
   model_type?: string | undefined;
-  model_parameters?: CreatePromptPromptsModelParameters$Outbound | undefined;
+  model_parameters?: CreatePromptModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
   version?: string | undefined;
@@ -3546,19 +3447,18 @@ export type CreatePromptPromptsPromptConfig$Outbound = {
 };
 
 /** @internal */
-export const CreatePromptPromptsPromptConfig$outboundSchema: z.ZodType<
-  CreatePromptPromptsPromptConfig$Outbound,
+export const CreatePromptPromptConfig$outboundSchema: z.ZodType<
+  CreatePromptPromptConfig$Outbound,
   z.ZodTypeDef,
-  CreatePromptPromptsPromptConfig
+  CreatePromptPromptConfig
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
   modelDbId: z.string().optional(),
-  modelType: CreatePromptPromptsModelType$outboundSchema.optional(),
-  modelParameters: z.lazy(() =>
-    CreatePromptPromptsModelParameters$outboundSchema
-  ).optional(),
-  provider: CreatePromptPromptsProvider$outboundSchema.optional(),
+  modelType: CreatePromptModelType$outboundSchema.optional(),
+  modelParameters: z.lazy(() => CreatePromptModelParameters$outboundSchema)
+    .optional(),
+  provider: CreatePromptProvider$outboundSchema.optional(),
   integrationId: z.nullable(z.string()).optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => CreatePromptPromptsMessages$outboundSchema)),
@@ -3575,75 +3475,73 @@ export const CreatePromptPromptsPromptConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsPromptConfig$ {
-  /** @deprecated use `CreatePromptPromptsPromptConfig$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsPromptConfig$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsPromptConfig$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsPromptConfig$outboundSchema;
-  /** @deprecated use `CreatePromptPromptsPromptConfig$Outbound` instead. */
-  export type Outbound = CreatePromptPromptsPromptConfig$Outbound;
+export namespace CreatePromptPromptConfig$ {
+  /** @deprecated use `CreatePromptPromptConfig$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptPromptConfig$inboundSchema;
+  /** @deprecated use `CreatePromptPromptConfig$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptPromptConfig$outboundSchema;
+  /** @deprecated use `CreatePromptPromptConfig$Outbound` instead. */
+  export type Outbound = CreatePromptPromptConfig$Outbound;
 }
 
-export function createPromptPromptsPromptConfigToJSON(
-  createPromptPromptsPromptConfig: CreatePromptPromptsPromptConfig,
+export function createPromptPromptConfigToJSON(
+  createPromptPromptConfig: CreatePromptPromptConfig,
 ): string {
   return JSON.stringify(
-    CreatePromptPromptsPromptConfig$outboundSchema.parse(
-      createPromptPromptsPromptConfig,
-    ),
+    CreatePromptPromptConfig$outboundSchema.parse(createPromptPromptConfig),
   );
 }
 
-export function createPromptPromptsPromptConfigFromJSON(
+export function createPromptPromptConfigFromJSON(
   jsonString: string,
-): SafeParseResult<CreatePromptPromptsPromptConfig, SDKValidationError> {
+): SafeParseResult<CreatePromptPromptConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreatePromptPromptsPromptConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePromptPromptsPromptConfig' from JSON`,
+    (x) => CreatePromptPromptConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptPromptConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const CreatePromptPromptsUseCases$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsUseCases
-> = z.nativeEnum(CreatePromptPromptsUseCases);
+export const CreatePromptUseCases$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptUseCases
+> = z.nativeEnum(CreatePromptUseCases);
 
 /** @internal */
-export const CreatePromptPromptsUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsUseCases
-> = CreatePromptPromptsUseCases$inboundSchema;
+export const CreatePromptUseCases$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptUseCases
+> = CreatePromptUseCases$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsUseCases$ {
-  /** @deprecated use `CreatePromptPromptsUseCases$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsUseCases$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsUseCases$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsUseCases$outboundSchema;
+export namespace CreatePromptUseCases$ {
+  /** @deprecated use `CreatePromptUseCases$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptUseCases$inboundSchema;
+  /** @deprecated use `CreatePromptUseCases$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptUseCases$outboundSchema;
 }
 
 /** @internal */
-export const CreatePromptPromptsLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsLanguage
-> = z.nativeEnum(CreatePromptPromptsLanguage);
+export const CreatePromptLanguage$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptLanguage
+> = z.nativeEnum(CreatePromptLanguage);
 
 /** @internal */
-export const CreatePromptPromptsLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptPromptsLanguage
-> = CreatePromptPromptsLanguage$inboundSchema;
+export const CreatePromptLanguage$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptLanguage
+> = CreatePromptLanguage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptPromptsLanguage$ {
-  /** @deprecated use `CreatePromptPromptsLanguage$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptPromptsLanguage$inboundSchema;
-  /** @deprecated use `CreatePromptPromptsLanguage$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptPromptsLanguage$outboundSchema;
+export namespace CreatePromptLanguage$ {
+  /** @deprecated use `CreatePromptLanguage$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptLanguage$inboundSchema;
+  /** @deprecated use `CreatePromptLanguage$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptLanguage$outboundSchema;
 }
 
 /** @internal */
@@ -3652,8 +3550,8 @@ export const CreatePromptPromptsMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  use_cases: z.array(CreatePromptPromptsUseCases$inboundSchema).optional(),
-  language: CreatePromptPromptsLanguage$inboundSchema.optional(),
+  use_cases: z.array(CreatePromptUseCases$inboundSchema).optional(),
+  language: CreatePromptLanguage$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -3672,8 +3570,8 @@ export const CreatePromptPromptsMetadata$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptPromptsMetadata
 > = z.object({
-  useCases: z.array(CreatePromptPromptsUseCases$outboundSchema).optional(),
-  language: CreatePromptPromptsLanguage$outboundSchema.optional(),
+  useCases: z.array(CreatePromptUseCases$outboundSchema).optional(),
+  language: CreatePromptLanguage$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
@@ -3729,7 +3627,7 @@ export const CreatePromptResponseBody$inboundSchema: z.ZodType<
   updated_by_id: z.string().optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => CreatePromptPromptsPromptConfig$inboundSchema),
+  prompt_config: z.lazy(() => CreatePromptPromptConfig$inboundSchema),
   metadata: z.lazy(() => CreatePromptPromptsMetadata$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -3754,7 +3652,7 @@ export type CreatePromptResponseBody$Outbound = {
   updated_by_id?: string | undefined;
   display_name: string;
   description?: string | null | undefined;
-  prompt_config: CreatePromptPromptsPromptConfig$Outbound;
+  prompt_config: CreatePromptPromptConfig$Outbound;
   metadata?: CreatePromptPromptsMetadata$Outbound | undefined;
 };
 
@@ -3774,7 +3672,7 @@ export const CreatePromptResponseBody$outboundSchema: z.ZodType<
   updatedById: z.string().optional(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
-  promptConfig: z.lazy(() => CreatePromptPromptsPromptConfig$outboundSchema),
+  promptConfig: z.lazy(() => CreatePromptPromptConfig$outboundSchema),
   metadata: z.lazy(() => CreatePromptPromptsMetadata$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

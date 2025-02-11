@@ -14,22 +14,15 @@ let value: GetAllPromptsResponseBody = {
       id: "<id>",
       type: "prompt",
       owner: "<value>",
-      domainId: "a9e0e805-b7f6-45d8-8aca-619e6e89d91f",
+      domainId: "6f25a197-4385-475f-9215-9a6f5badfecb",
       created: "<value>",
       updated: "<value>",
-      displayName: "Meredith.Kris72",
+      displayName: "Cale52",
       promptConfig: {
         messages: [
           {
             role: "expected_output",
-            content: [
-              {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://foolish-knight.org/",
-                },
-              },
-            ],
+            content: "<value>",
           },
         ],
       },

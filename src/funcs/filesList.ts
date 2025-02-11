@@ -24,6 +24,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * List all files
+ *
+ * @remarks
+ * Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top.
  */
 export async function filesList(
   client: OrqCore,
@@ -56,10 +59,9 @@ export async function filesList(
   const path = pathToFunc("/v2/files")();
 
   const query = encodeFormQuery({
-    "firstId": payload?.firstId,
-    "lastId": payload?.lastId,
+    "ending_before": payload?.ending_before,
     "limit": payload?.limit,
-    "page": payload?.page,
+    "starting_after": payload?.starting_after,
   });
 
   const headers = new Headers(compactMap({

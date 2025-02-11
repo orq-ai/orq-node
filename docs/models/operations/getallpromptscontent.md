@@ -18,7 +18,7 @@ const value: operations.GetAllPromptsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://competent-digestive.biz/",
+      url: "https://weekly-abacus.name",
     },
   },
 ];

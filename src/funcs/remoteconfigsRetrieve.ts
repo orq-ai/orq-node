@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -23,18 +23,15 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve a file
- *
- * @remarks
- * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object
+ * Retrieve a remote config
  */
-export async function filesGet(
+export async function remoteconfigsRetrieve(
   client: OrqCore,
-  request: operations.FileGetRequest,
+  request?: operations.RemoteConfigsGetConfigRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.FileGetResponseBody,
+    operations.RemoteConfigsGetConfigResponseBody,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -46,25 +43,23 @@ export async function filesGet(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.FileGetRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.RemoteConfigsGetConfigRequestBody$outboundSchema.optional()
+        .parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = null;
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
-  const pathParams = {
-    file_id: encodeSimple("file_id", payload.file_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc("/v2/files/{file_id}")(pathParams);
+  const path = pathToFunc("/v2/remoteconfigs")();
 
   const headers = new Headers(compactMap({
+    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -73,7 +68,7 @@ export async function filesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "FileGet",
+    operationID: "RemoteConfigsGetConfig",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -87,7 +82,7 @@ export async function filesGet(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "POST",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
@@ -101,7 +96,7 @@ export async function filesGet(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["404", "4XX", "5XX"],
+    errorCodes: ["400", "401", "404", "4XX", "500", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -111,7 +106,7 @@ export async function filesGet(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.FileGetResponseBody,
+    operations.RemoteConfigsGetConfigResponseBody,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -120,9 +115,9 @@ export async function filesGet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.FileGetResponseBody$inboundSchema),
-    M.fail([404, "4XX"]),
-    M.fail("5XX"),
+    M.json(200, operations.RemoteConfigsGetConfigResponseBody$inboundSchema),
+    M.fail([400, 401, 404, "4XX"]),
+    M.fail([500, "5XX"]),
   )(response);
   if (!result.ok) {
     return result;

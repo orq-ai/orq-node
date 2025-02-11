@@ -8,4 +8,3 @@ export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
 export * from "./sdkvalidationerror.js";
 export * from "./updateprompt.js";
-export * from "./updatepromptsnippet.js";

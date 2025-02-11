@@ -6,8 +6,13 @@
 import { GetOnePromptMessages } from "@orq-ai/node/models/operations";
 
 let value: GetOnePromptMessages = {
-  role: "prompt",
-  content: "<value>",
+  role: "correction",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

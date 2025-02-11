@@ -9,18 +9,20 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "5cf6afba-15e3-4db5-a88b-82c6f4459e24",
+  domainId: "b1369e92-fd8e-48ed-afe0-26f42e7e2a71",
   created: "<value>",
   updated: "<value>",
-  displayName: "Jack48",
+  displayName: "Delilah90",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "expected_output",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://zany-freckle.info/",
+            },
           },
         ],
       },

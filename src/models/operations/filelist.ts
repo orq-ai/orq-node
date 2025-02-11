@@ -10,10 +10,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type FileListRequest = {
-  page?: number | undefined;
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   */
   limit?: number | undefined;
-  lastId?: string | null | undefined;
-  firstId?: string | null | undefined;
+  /**
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   */
+  startingAfter?: string | undefined;
+  /**
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   */
+  endingBefore?: string | undefined;
 };
 
 export const FileListObject = {
@@ -70,18 +78,21 @@ export const FileListRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  page: z.number().optional(),
-  limit: z.number().default(50),
-  lastId: z.nullable(z.string()).optional(),
-  firstId: z.nullable(z.string()).optional(),
+  limit: z.number().default(10),
+  starting_after: z.string().optional(),
+  ending_before: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "starting_after": "startingAfter",
+    "ending_before": "endingBefore",
+  });
 });
 
 /** @internal */
 export type FileListRequest$Outbound = {
-  page?: number | undefined;
   limit: number;
-  lastId?: string | null | undefined;
-  firstId?: string | null | undefined;
+  starting_after?: string | undefined;
+  ending_before?: string | undefined;
 };
 
 /** @internal */
@@ -90,10 +101,14 @@ export const FileListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileListRequest
 > = z.object({
-  page: z.number().optional(),
-  limit: z.number().default(50),
-  lastId: z.nullable(z.string()).optional(),
-  firstId: z.nullable(z.string()).optional(),
+  limit: z.number().default(10),
+  startingAfter: z.string().optional(),
+  endingBefore: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    startingAfter: "starting_after",
+    endingBefore: "ending_before",
+  });
 });
 
 /**
@@ -180,7 +195,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-02-11T20:51:32.012Z",
+    "2025-02-11T21:32:16.292Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -214,7 +229,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-02-11T20:51:32.012Z"))
+  created: z.date().default(() => new Date("2025-02-11T21:32:16.292Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
