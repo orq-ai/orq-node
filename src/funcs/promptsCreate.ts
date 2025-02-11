@@ -23,7 +23,7 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a prompt
+ * Create a new prompt
  */
 export async function promptsCreate(
   client: OrqCore,
@@ -55,7 +55,7 @@ export async function promptsCreate(
     ? null
     : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v2/prompts")();
+  const path = pathToFunc("/v2/resources/prompts")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

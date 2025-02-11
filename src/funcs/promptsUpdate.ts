@@ -61,7 +61,7 @@ export async function promptsUpdate(
     }),
   };
 
-  const path = pathToFunc("/v2/prompts/{id}")(pathParams);
+  const path = pathToFunc("/v2/resources/prompts/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

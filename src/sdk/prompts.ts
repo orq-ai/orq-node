@@ -3,11 +3,11 @@
  */
 
 import { promptsCreate } from "../funcs/promptsCreate.js";
+import { promptsCreateVersion } from "../funcs/promptsCreateVersion.js";
 import { promptsDelete } from "../funcs/promptsDelete.js";
-import { promptsGetVersion } from "../funcs/promptsGetVersion.js";
-import { promptsList } from "../funcs/promptsList.js";
-import { promptsListVersions } from "../funcs/promptsListVersions.js";
-import { promptsRetrieve } from "../funcs/promptsRetrieve.js";
+import { promptsDuplicate } from "../funcs/promptsDuplicate.js";
+import { promptsGetAll } from "../funcs/promptsGetAll.js";
+import { promptsGetOne } from "../funcs/promptsGetOne.js";
 import { promptsUpdate } from "../funcs/promptsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -15,24 +15,7 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Prompts extends ClientSDK {
   /**
-   * List all prompts
-   *
-   * @remarks
-   * Returns a list of your prompts. The prompts are returned sorted by creation date, with the most recent prompts appearing first
-   */
-  async list(
-    request?: operations.GetAllPromptsRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.GetAllPromptsResponseBody> {
-    return unwrapAsync(promptsList(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a prompt
+   * Create a new prompt
    */
   async create(
     request?: operations.CreatePromptRequestBody | undefined,
@@ -46,30 +29,13 @@ export class Prompts extends ClientSDK {
   }
 
   /**
-   * Retrieve a prompt
-   *
-   * @remarks
-   * Retrieves a prompt object
+   * Create a new prompt version
    */
-  async retrieve(
-    request: operations.GetOnePromptRequest,
+  async createVersion(
+    request: operations.CreatePromptVersionRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetOnePromptResponseBody> {
-    return unwrapAsync(promptsRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update a prompt
-   */
-  async update(
-    request: operations.UpdatePromptRequest,
-    options?: RequestOptions,
-  ): Promise<operations.UpdatePromptResponseBody> {
-    return unwrapAsync(promptsUpdate(
+  ): Promise<operations.CreatePromptVersionResponseBody> {
+    return unwrapAsync(promptsCreateVersion(
       this,
       request,
       options,
@@ -91,16 +57,13 @@ export class Prompts extends ClientSDK {
   }
 
   /**
-   * List all prompt versions
-   *
-   * @remarks
-   * Returns a list of your prompt versions. The prompt versions are returned sorted by creation date, with the most recent prompt versions appearing first
+   * Get one prompt
    */
-  async listVersions(
-    request: operations.ListPromptVersionsRequest,
+  async getOne(
+    request: operations.GetOnePromptRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListPromptVersionsResponseBody> {
-    return unwrapAsync(promptsListVersions(
+  ): Promise<void> {
+    return unwrapAsync(promptsGetOne(
       this,
       request,
       options,
@@ -108,16 +71,41 @@ export class Prompts extends ClientSDK {
   }
 
   /**
-   * Retrieve a prompt version
-   *
-   * @remarks
-   * Retrieves a specific version of a prompt by its ID and version ID.
+   * Update a prompt
    */
-  async getVersion(
-    request: operations.GetPromptVersionRequest,
+  async update(
+    request: operations.UpdatePromptRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPromptVersionResponseBody> {
-    return unwrapAsync(promptsGetVersion(
+  ): Promise<operations.UpdatePromptResponseBody> {
+    return unwrapAsync(promptsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Duplicate a prompt
+   */
+  async duplicate(
+    request: operations.DuplicatePromptRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(promptsDuplicate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get all prompts
+   */
+  async getAll(
+    request?: operations.GetAllPromptsRequestBody | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetAllPromptsResponseBody> {
+    return unwrapAsync(promptsGetAll(
       this,
       request,
       options,

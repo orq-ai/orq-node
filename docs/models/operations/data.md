@@ -6,11 +6,11 @@
 import { Data } from "@orq-ai/node/models/operations";
 
 let value: Data = {
-  id: "4c790999-fa56-4b0a-8a32-5597f132a473",
+  id: "0aa32559-7f13-42a4-a732-1a235d1d1f7f",
   created: "<value>",
   updated: "<value>",
   key: "<key>",
-  description: "gosh arraign barracks",
+  description: "woot minus apropos shrilly ick swine proud plait",
   promptConfig: {
     tools: [
       {
@@ -26,14 +26,21 @@ let value: Data = {
         },
       },
     ],
-    model: "Model 3",
-    modelType: "tts",
+    model: "Escalade",
+    modelType: "completion",
     modelParameters: {},
     provider: "replicate",
     messages: [
       {
         role: "tool",
-        content: "<value>",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://qualified-hose.org",
+            },
+          },
+        ],
       },
     ],
   },

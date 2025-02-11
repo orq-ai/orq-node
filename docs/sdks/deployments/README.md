@@ -5,12 +5,11 @@
 
 ### Available Operations
 
-* [list](#list) - List all deployments
+* [all](#all) - List all deployments
 * [getConfig](#getconfig) - Get config
 * [invoke](#invoke) - Invoke
-* [stream](#stream) - Stream
 
-## list
+## all
 
 Returns a list of your deployments. The deployments are returned sorted by creation date, with the most recent deployments appearing first.
 
@@ -24,7 +23,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.deployments.list({});
+  const result = await orq.deployments.all({});
 
   // Handle the result
   console.log(result);
@@ -39,7 +38,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { deploymentsList } from "@orq-ai/node/funcs/deploymentsList.js";
+import { deploymentsAll } from "@orq-ai/node/funcs/deploymentsAll.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,7 +47,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await deploymentsList(orq, {});
+  const res = await deploymentsAll(orq, {});
 
   if (!res.ok) {
     throw res.error;
@@ -177,8 +176,10 @@ async function run() {
     key: "<key>",
   });
 
-  // Handle the result
-  console.log(result);
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
 }
 
 run();
@@ -209,8 +210,10 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
 }
 
 run();
@@ -227,87 +230,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.DeploymentInvokeResponseBody](../../models/operations/deploymentinvokeresponsebody.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## stream
-
-Stream deployment generation. Only supported for completions and chat completions.
-
-### Example Usage
-
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.deployments.stream({
-    key: "<key>",
-  });
-
-  for await (const event of result) {
-    // Handle the event
-    console.log(event);
-  }
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { deploymentsStream } from "@orq-ai/node/funcs/deploymentsStream.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await deploymentsStream(orq, {
-    key: "<key>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
-    // Handle the event
-    console.log(event);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeploymentStreamRequestBody](../../models/operations/deploymentstreamrequestbody.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[EventStream<operations.DeploymentStreamResponseBody>](../../models/.md)\>**
+**Promise\<[operations.DeploymentInvokeResponse](../../models/operations/deploymentinvokeresponse.md)\>**
 
 ### Errors
 

@@ -1,6 +1,6 @@
 # DeploymentsResponseBody
 
-List all deployments
+List of deployments
 
 ## Example Usage
 
@@ -11,12 +11,11 @@ let value: DeploymentsResponseBody = {
   object: "list",
   data: [
     {
-      id: "9e5a2b42-90d0-4a4b-bf39-993f7db4d6e9",
+      id: "56ecb1eb-f2d2-491d-8c96-1b7bdfd05b28",
       created: "<value>",
       updated: "<value>",
       key: "<key>",
-      description:
-        "agreeable beneath unlike vastly but inventory sheepishly furthermore",
+      description: "apologise lest ick yum",
       promptConfig: {
         tools: [
           {
@@ -32,10 +31,10 @@ let value: DeploymentsResponseBody = {
             },
           },
         ],
-        model: "Countach",
-        modelType: "moderations",
+        model: "Model 3",
+        modelType: "vision",
         modelParameters: {},
-        provider: "fal",
+        provider: "anthropic",
         messages: [
           {
             role: "system",
@@ -47,6 +46,8 @@ let value: DeploymentsResponseBody = {
     },
   ],
   hasMore: false,
+  firstId: "<id>",
+  lastId: "<id>",
 };
 ```
 
@@ -57,3 +58,5 @@ let value: DeploymentsResponseBody = {
 | `object`                                                 | [operations.ObjectT](../../models/operations/objectt.md) | :heavy_check_mark:                                       | N/A                                                      |
 | `data`                                                   | [operations.Data](../../models/operations/data.md)[]     | :heavy_check_mark:                                       | N/A                                                      |
 | `hasMore`                                                | *boolean*                                                | :heavy_check_mark:                                       | N/A                                                      |
+| `firstId`                                                | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `lastId`                                                 | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |

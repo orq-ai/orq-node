@@ -3,15 +3,275 @@
  */
 
 import * as z from "zod";
+import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type DeploymentInvokeGlobals = {
-  environment?: string | undefined;
-  contactId?: string | undefined;
+/**
+ * Indicates the type of model used to generate the response
+ */
+export const DeploymentInvokeDeploymentsObject = {
+  Chat: "chat",
+  Completion: "completion",
+  Image: "image",
+} as const;
+/**
+ * Indicates the type of model used to generate the response
+ */
+export type DeploymentInvokeDeploymentsObject = ClosedEnum<
+  typeof DeploymentInvokeDeploymentsObject
+>;
+
+/**
+ * The provider used to generate the response
+ */
+export const DeploymentInvokeDeploymentsProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+} as const;
+/**
+ * The provider used to generate the response
+ */
+export type DeploymentInvokeDeploymentsProvider = ClosedEnum<
+  typeof DeploymentInvokeDeploymentsProvider
+>;
+
+/**
+ * The role of the prompt message
+ */
+export const DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole =
+  {
+    System: "system",
+    Assistant: "assistant",
+    User: "user",
+    Exception: "exception",
+    Tool: "tool",
+    Prompt: "prompt",
+    Correction: "correction",
+    ExpectedOutput: "expected_output",
+  } as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole =
+  ClosedEnum<
+    typeof DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole
+  >;
+
+export type DeploymentInvokeMessage3 = {
+  /**
+   * The role of the prompt message
+   */
+  role: DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole;
+  url: string;
+};
+
+/**
+ * The role of the prompt message
+ */
+export const DeploymentInvokeMessageDeploymentsResponse200Role = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentInvokeMessageDeploymentsResponse200Role = ClosedEnum<
+  typeof DeploymentInvokeMessageDeploymentsResponse200Role
+>;
+
+export type DeploymentInvokeMessageDeployments2 = {
+  /**
+   * The role of the prompt message
+   */
+  role: DeploymentInvokeMessageDeploymentsResponse200Role;
+  content: string | null;
+};
+
+/**
+ * The role of the prompt message
+ */
+export const DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole =
+  {
+    System: "system",
+    Assistant: "assistant",
+    User: "user",
+    Exception: "exception",
+    Tool: "tool",
+    Prompt: "prompt",
+    Correction: "correction",
+    ExpectedOutput: "expected_output",
+  } as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole =
+  ClosedEnum<
+    typeof DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole
+  >;
+
+export const DeploymentInvokeMessageDeploymentsType = {
+  Function: "function",
+} as const;
+export type DeploymentInvokeMessageDeploymentsType = ClosedEnum<
+  typeof DeploymentInvokeMessageDeploymentsType
+>;
+
+export type DeploymentInvokeMessageDeploymentsFunction = {
+  name: string;
+  /**
+   * JSON string arguments for the functions
+   */
+  arguments: string;
+};
+
+export type DeploymentInvokeMessageDeploymentsToolCalls = {
+  id?: string | undefined;
+  index?: number | undefined;
+  type: DeploymentInvokeMessageDeploymentsType;
+  function: DeploymentInvokeMessageDeploymentsFunction;
+};
+
+export type DeploymentInvokeMessageDeployments1 = {
+  /**
+   * The role of the prompt message
+   */
+  role:
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole;
+  content?: string | null | undefined;
+  toolCalls: Array<DeploymentInvokeMessageDeploymentsToolCalls>;
+};
+
+export type DeploymentInvokeDeploymentsMessage =
+  | DeploymentInvokeMessageDeployments2
+  | DeploymentInvokeMessage3
+  | DeploymentInvokeMessageDeployments1;
+
+export type DeploymentInvokeDeploymentsChoices = {
+  index: number;
+  message?:
+    | DeploymentInvokeMessageDeployments2
+    | DeploymentInvokeMessage3
+    | DeploymentInvokeMessageDeployments1
+    | undefined;
+  finishReason?: string | null | undefined;
+};
+
+/**
+ * Metadata of the retrieved chunk from the knowledge base
+ */
+export type DeploymentInvokeDeploymentsMetadata = {
+  /**
+   * Name of the file
+   */
+  fileName: string;
+  /**
+   * Page number of the chunk
+   */
+  pageNumber: number | null;
+  /**
+   * Type of the file
+   */
+  fileType: string;
+  /**
+   * Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45
+   */
+  rerankScore?: number | undefined;
+  /**
+   * Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query.
+   */
+  searchScore: number;
+};
+
+export type DeploymentInvokeRetrievals = {
+  /**
+   * Content of the retrieved chunk from the knowledge base
+   */
+  document: string;
+  /**
+   * Metadata of the retrieved chunk from the knowledge base
+   */
+  metadata: DeploymentInvokeDeploymentsMetadata;
+};
+
+export type DeploymentInvokeData = {
+  /**
+   * A unique identifier for the response. Can be used to add metrics to the transaction.
+   */
+  id?: string | undefined;
+  /**
+   * A timestamp indicating when the object was created. Usually in a standardized format like ISO 8601
+   */
+  created?: Date | undefined;
+  /**
+   * Indicates the type of model used to generate the response
+   */
+  object?: DeploymentInvokeDeploymentsObject | undefined;
+  /**
+   * The model used to generate the response
+   */
+  model?: string | undefined;
+  /**
+   * The provider used to generate the response
+   */
+  provider?: DeploymentInvokeDeploymentsProvider | undefined;
+  /**
+   * Indicates if the response is the final response
+   */
+  isFinal?: boolean | undefined;
+  /**
+   * Indicates integration id used to generate the response
+   */
+  integrationId?: string | undefined;
+  /**
+   * A timestamp indicating when the object was finalized. Usually in a standardized format like ISO 8601
+   */
+  finalized?: Date | undefined;
+  /**
+   * Provider backed system fingerprint.
+   */
+  systemFingerprint?: string | null | undefined;
+  /**
+   * A list of choices generated by the model
+   */
+  choices?: Array<DeploymentInvokeDeploymentsChoices> | undefined;
+  /**
+   * List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`.
+   */
+  retrievals?: Array<DeploymentInvokeRetrievals> | undefined;
+  /**
+   * Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`.
+   */
+  providerResponse?: any | undefined;
+};
+
+/**
+ * Response from the gateway
+ */
+export type DeploymentInvokeDeploymentsResponseBody = {
+  data?: DeploymentInvokeData | undefined;
 };
 
 /**
@@ -48,8 +308,6 @@ export const DeploymentInvokeProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
 } as const;
 /**
  * The provider used to generate the response
@@ -271,60 +529,977 @@ export type DeploymentInvokeResponseBody = {
   providerResponse?: any | undefined;
 };
 
+export type DeploymentInvokeResponse =
+  | DeploymentInvokeResponseBody
+  | EventStream<DeploymentInvokeDeploymentsResponseBody>;
+
 /** @internal */
-export const DeploymentInvokeGlobals$inboundSchema: z.ZodType<
-  DeploymentInvokeGlobals,
+export const DeploymentInvokeDeploymentsObject$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeDeploymentsObject
+> = z.nativeEnum(DeploymentInvokeDeploymentsObject);
+
+/** @internal */
+export const DeploymentInvokeDeploymentsObject$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeDeploymentsObject
+> = DeploymentInvokeDeploymentsObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeDeploymentsObject$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsObject$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeDeploymentsObject$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsObject$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsObject$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentInvokeDeploymentsProvider$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeDeploymentsProvider
+> = z.nativeEnum(DeploymentInvokeDeploymentsProvider);
+
+/** @internal */
+export const DeploymentInvokeDeploymentsProvider$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeDeploymentsProvider> =
+    DeploymentInvokeDeploymentsProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeDeploymentsProvider$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsProvider$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeDeploymentsProvider$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsProvider$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsProvider$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole
+  > = z.nativeEnum(
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole,
+  );
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole
+  > =
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$ {
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentInvokeMessage3$inboundSchema: z.ZodType<
+  DeploymentInvokeMessage3,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  environment: z.string().optional(),
-  contactId: z.string().optional(),
+  role:
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$inboundSchema,
+  url: z.string(),
 });
 
 /** @internal */
-export type DeploymentInvokeGlobals$Outbound = {
-  environment?: string | undefined;
-  contactId?: string | undefined;
+export type DeploymentInvokeMessage3$Outbound = {
+  role: string;
+  url: string;
 };
 
 /** @internal */
-export const DeploymentInvokeGlobals$outboundSchema: z.ZodType<
-  DeploymentInvokeGlobals$Outbound,
+export const DeploymentInvokeMessage3$outboundSchema: z.ZodType<
+  DeploymentInvokeMessage3$Outbound,
   z.ZodTypeDef,
-  DeploymentInvokeGlobals
+  DeploymentInvokeMessage3
 > = z.object({
-  environment: z.string().optional(),
-  contactId: z.string().optional(),
+  role:
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamRole$outboundSchema,
+  url: z.string(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentInvokeGlobals$ {
-  /** @deprecated use `DeploymentInvokeGlobals$inboundSchema` instead. */
-  export const inboundSchema = DeploymentInvokeGlobals$inboundSchema;
-  /** @deprecated use `DeploymentInvokeGlobals$outboundSchema` instead. */
-  export const outboundSchema = DeploymentInvokeGlobals$outboundSchema;
-  /** @deprecated use `DeploymentInvokeGlobals$Outbound` instead. */
-  export type Outbound = DeploymentInvokeGlobals$Outbound;
+export namespace DeploymentInvokeMessage3$ {
+  /** @deprecated use `DeploymentInvokeMessage3$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeMessage3$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessage3$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeMessage3$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessage3$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessage3$Outbound;
 }
 
-export function deploymentInvokeGlobalsToJSON(
-  deploymentInvokeGlobals: DeploymentInvokeGlobals,
+export function deploymentInvokeMessage3ToJSON(
+  deploymentInvokeMessage3: DeploymentInvokeMessage3,
 ): string {
   return JSON.stringify(
-    DeploymentInvokeGlobals$outboundSchema.parse(deploymentInvokeGlobals),
+    DeploymentInvokeMessage3$outboundSchema.parse(deploymentInvokeMessage3),
   );
 }
 
-export function deploymentInvokeGlobalsFromJSON(
+export function deploymentInvokeMessage3FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentInvokeGlobals, SDKValidationError> {
+): SafeParseResult<DeploymentInvokeMessage3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentInvokeGlobals$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentInvokeGlobals' from JSON`,
+    (x) => DeploymentInvokeMessage3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeMessage3' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsResponse200Role$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsResponse200Role> = z
+    .nativeEnum(DeploymentInvokeMessageDeploymentsResponse200Role);
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsResponse200Role$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsResponse200Role> =
+    DeploymentInvokeMessageDeploymentsResponse200Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeploymentsResponse200Role$ {
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsResponse200Role$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeploymentsResponse200Role$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsResponse200Role$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeploymentsResponse200Role$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeployments2$inboundSchema: z.ZodType<
+  DeploymentInvokeMessageDeployments2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: DeploymentInvokeMessageDeploymentsResponse200Role$inboundSchema,
+  content: z.nullable(z.string()),
+});
+
+/** @internal */
+export type DeploymentInvokeMessageDeployments2$Outbound = {
+  role: string;
+  content: string | null;
+};
+
+/** @internal */
+export const DeploymentInvokeMessageDeployments2$outboundSchema: z.ZodType<
+  DeploymentInvokeMessageDeployments2$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeMessageDeployments2
+> = z.object({
+  role: DeploymentInvokeMessageDeploymentsResponse200Role$outboundSchema,
+  content: z.nullable(z.string()),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeployments2$ {
+  /** @deprecated use `DeploymentInvokeMessageDeployments2$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeployments2$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeployments2$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeployments2$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeployments2$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessageDeployments2$Outbound;
+}
+
+export function deploymentInvokeMessageDeployments2ToJSON(
+  deploymentInvokeMessageDeployments2: DeploymentInvokeMessageDeployments2,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMessageDeployments2$outboundSchema.parse(
+      deploymentInvokeMessageDeployments2,
+    ),
+  );
+}
+
+export function deploymentInvokeMessageDeployments2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeMessageDeployments2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeMessageDeployments2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeMessageDeployments2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole
+  > = z.nativeEnum(
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole,
+  );
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole
+  > =
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$ {
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsType> = z.nativeEnum(
+    DeploymentInvokeMessageDeploymentsType,
+  );
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsType> =
+    DeploymentInvokeMessageDeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeploymentsType$ {
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeploymentsType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsFunction$inboundSchema:
+  z.ZodType<DeploymentInvokeMessageDeploymentsFunction, z.ZodTypeDef, unknown> =
+    z.object({
+      name: z.string(),
+      arguments: z.string(),
+    });
+
+/** @internal */
+export type DeploymentInvokeMessageDeploymentsFunction$Outbound = {
+  name: string;
+  arguments: string;
+};
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsFunction$outboundSchema:
+  z.ZodType<
+    DeploymentInvokeMessageDeploymentsFunction$Outbound,
+    z.ZodTypeDef,
+    DeploymentInvokeMessageDeploymentsFunction
+  > = z.object({
+    name: z.string(),
+    arguments: z.string(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeploymentsFunction$ {
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsFunction$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeploymentsFunction$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsFunction$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeploymentsFunction$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsFunction$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessageDeploymentsFunction$Outbound;
+}
+
+export function deploymentInvokeMessageDeploymentsFunctionToJSON(
+  deploymentInvokeMessageDeploymentsFunction:
+    DeploymentInvokeMessageDeploymentsFunction,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMessageDeploymentsFunction$outboundSchema.parse(
+      deploymentInvokeMessageDeploymentsFunction,
+    ),
+  );
+}
+
+export function deploymentInvokeMessageDeploymentsFunctionFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentInvokeMessageDeploymentsFunction,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeMessageDeploymentsFunction$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentInvokeMessageDeploymentsFunction' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsToolCalls$inboundSchema:
+  z.ZodType<
+    DeploymentInvokeMessageDeploymentsToolCalls,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.string().optional(),
+    index: z.number().optional(),
+    type: DeploymentInvokeMessageDeploymentsType$inboundSchema,
+    function: z.lazy(() =>
+      DeploymentInvokeMessageDeploymentsFunction$inboundSchema
+    ),
+  });
+
+/** @internal */
+export type DeploymentInvokeMessageDeploymentsToolCalls$Outbound = {
+  id?: string | undefined;
+  index?: number | undefined;
+  type: string;
+  function: DeploymentInvokeMessageDeploymentsFunction$Outbound;
+};
+
+/** @internal */
+export const DeploymentInvokeMessageDeploymentsToolCalls$outboundSchema:
+  z.ZodType<
+    DeploymentInvokeMessageDeploymentsToolCalls$Outbound,
+    z.ZodTypeDef,
+    DeploymentInvokeMessageDeploymentsToolCalls
+  > = z.object({
+    id: z.string().optional(),
+    index: z.number().optional(),
+    type: DeploymentInvokeMessageDeploymentsType$outboundSchema,
+    function: z.lazy(() =>
+      DeploymentInvokeMessageDeploymentsFunction$outboundSchema
+    ),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeploymentsToolCalls$ {
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsToolCalls$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeploymentsToolCalls$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsToolCalls$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeploymentsToolCalls$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeploymentsToolCalls$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessageDeploymentsToolCalls$Outbound;
+}
+
+export function deploymentInvokeMessageDeploymentsToolCallsToJSON(
+  deploymentInvokeMessageDeploymentsToolCalls:
+    DeploymentInvokeMessageDeploymentsToolCalls,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMessageDeploymentsToolCalls$outboundSchema.parse(
+      deploymentInvokeMessageDeploymentsToolCalls,
+    ),
+  );
+}
+
+export function deploymentInvokeMessageDeploymentsToolCallsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentInvokeMessageDeploymentsToolCalls,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeMessageDeploymentsToolCalls$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentInvokeMessageDeploymentsToolCalls' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeMessageDeployments1$inboundSchema: z.ZodType<
+  DeploymentInvokeMessageDeployments1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role:
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$inboundSchema,
+  content: z.nullable(z.string()).optional(),
+  tool_calls: z.array(
+    z.lazy(() => DeploymentInvokeMessageDeploymentsToolCalls$inboundSchema),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_calls": "toolCalls",
+  });
+});
+
+/** @internal */
+export type DeploymentInvokeMessageDeployments1$Outbound = {
+  role: string;
+  content?: string | null | undefined;
+  tool_calls: Array<DeploymentInvokeMessageDeploymentsToolCalls$Outbound>;
+};
+
+/** @internal */
+export const DeploymentInvokeMessageDeployments1$outboundSchema: z.ZodType<
+  DeploymentInvokeMessageDeployments1$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeMessageDeployments1
+> = z.object({
+  role:
+    DeploymentInvokeMessageDeploymentsResponse200TextEventStreamResponseBodyRole$outboundSchema,
+  content: z.nullable(z.string()).optional(),
+  toolCalls: z.array(
+    z.lazy(() => DeploymentInvokeMessageDeploymentsToolCalls$outboundSchema),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    toolCalls: "tool_calls",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeMessageDeployments1$ {
+  /** @deprecated use `DeploymentInvokeMessageDeployments1$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeMessageDeployments1$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeployments1$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeMessageDeployments1$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessageDeployments1$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessageDeployments1$Outbound;
+}
+
+export function deploymentInvokeMessageDeployments1ToJSON(
+  deploymentInvokeMessageDeployments1: DeploymentInvokeMessageDeployments1,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMessageDeployments1$outboundSchema.parse(
+      deploymentInvokeMessageDeployments1,
+    ),
+  );
+}
+
+export function deploymentInvokeMessageDeployments1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeMessageDeployments1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeMessageDeployments1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeMessageDeployments1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeDeploymentsMessage$inboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentInvokeMessageDeployments2$inboundSchema),
+  z.lazy(() => DeploymentInvokeMessage3$inboundSchema),
+  z.lazy(() => DeploymentInvokeMessageDeployments1$inboundSchema),
+]);
+
+/** @internal */
+export type DeploymentInvokeDeploymentsMessage$Outbound =
+  | DeploymentInvokeMessageDeployments2$Outbound
+  | DeploymentInvokeMessage3$Outbound
+  | DeploymentInvokeMessageDeployments1$Outbound;
+
+/** @internal */
+export const DeploymentInvokeDeploymentsMessage$outboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsMessage$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeDeploymentsMessage
+> = z.union([
+  z.lazy(() => DeploymentInvokeMessageDeployments2$outboundSchema),
+  z.lazy(() => DeploymentInvokeMessage3$outboundSchema),
+  z.lazy(() => DeploymentInvokeMessageDeployments1$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeDeploymentsMessage$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsMessage$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeDeploymentsMessage$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsMessage$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsMessage$outboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsMessage$Outbound` instead. */
+  export type Outbound = DeploymentInvokeDeploymentsMessage$Outbound;
+}
+
+export function deploymentInvokeDeploymentsMessageToJSON(
+  deploymentInvokeDeploymentsMessage: DeploymentInvokeDeploymentsMessage,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeDeploymentsMessage$outboundSchema.parse(
+      deploymentInvokeDeploymentsMessage,
+    ),
+  );
+}
+
+export function deploymentInvokeDeploymentsMessageFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeDeploymentsMessage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeDeploymentsMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeDeploymentsMessage' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeDeploymentsChoices$inboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsChoices,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  index: z.number(),
+  message: z.union([
+    z.lazy(() => DeploymentInvokeMessageDeployments2$inboundSchema),
+    z.lazy(() => DeploymentInvokeMessage3$inboundSchema),
+    z.lazy(() => DeploymentInvokeMessageDeployments1$inboundSchema),
+  ]).optional(),
+  finish_reason: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "finish_reason": "finishReason",
+  });
+});
+
+/** @internal */
+export type DeploymentInvokeDeploymentsChoices$Outbound = {
+  index: number;
+  message?:
+    | DeploymentInvokeMessageDeployments2$Outbound
+    | DeploymentInvokeMessage3$Outbound
+    | DeploymentInvokeMessageDeployments1$Outbound
+    | undefined;
+  finish_reason?: string | null | undefined;
+};
+
+/** @internal */
+export const DeploymentInvokeDeploymentsChoices$outboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsChoices$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeDeploymentsChoices
+> = z.object({
+  index: z.number(),
+  message: z.union([
+    z.lazy(() => DeploymentInvokeMessageDeployments2$outboundSchema),
+    z.lazy(() => DeploymentInvokeMessage3$outboundSchema),
+    z.lazy(() => DeploymentInvokeMessageDeployments1$outboundSchema),
+  ]).optional(),
+  finishReason: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    finishReason: "finish_reason",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeDeploymentsChoices$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsChoices$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeDeploymentsChoices$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsChoices$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsChoices$outboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsChoices$Outbound` instead. */
+  export type Outbound = DeploymentInvokeDeploymentsChoices$Outbound;
+}
+
+export function deploymentInvokeDeploymentsChoicesToJSON(
+  deploymentInvokeDeploymentsChoices: DeploymentInvokeDeploymentsChoices,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeDeploymentsChoices$outboundSchema.parse(
+      deploymentInvokeDeploymentsChoices,
+    ),
+  );
+}
+
+export function deploymentInvokeDeploymentsChoicesFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeDeploymentsChoices, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeDeploymentsChoices$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeDeploymentsChoices' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeDeploymentsMetadata$inboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_name: z.string(),
+  page_number: z.nullable(z.number()),
+  file_type: z.string(),
+  rerank_score: z.number().optional(),
+  search_score: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_name": "fileName",
+    "page_number": "pageNumber",
+    "file_type": "fileType",
+    "rerank_score": "rerankScore",
+    "search_score": "searchScore",
+  });
+});
+
+/** @internal */
+export type DeploymentInvokeDeploymentsMetadata$Outbound = {
+  file_name: string;
+  page_number: number | null;
+  file_type: string;
+  rerank_score?: number | undefined;
+  search_score: number;
+};
+
+/** @internal */
+export const DeploymentInvokeDeploymentsMetadata$outboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsMetadata$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeDeploymentsMetadata
+> = z.object({
+  fileName: z.string(),
+  pageNumber: z.nullable(z.number()),
+  fileType: z.string(),
+  rerankScore: z.number().optional(),
+  searchScore: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    fileName: "file_name",
+    pageNumber: "page_number",
+    fileType: "file_type",
+    rerankScore: "rerank_score",
+    searchScore: "search_score",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeDeploymentsMetadata$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsMetadata$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeDeploymentsMetadata$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsMetadata$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsMetadata$outboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsMetadata$Outbound` instead. */
+  export type Outbound = DeploymentInvokeDeploymentsMetadata$Outbound;
+}
+
+export function deploymentInvokeDeploymentsMetadataToJSON(
+  deploymentInvokeDeploymentsMetadata: DeploymentInvokeDeploymentsMetadata,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeDeploymentsMetadata$outboundSchema.parse(
+      deploymentInvokeDeploymentsMetadata,
+    ),
+  );
+}
+
+export function deploymentInvokeDeploymentsMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeDeploymentsMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeDeploymentsMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeDeploymentsMetadata' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeRetrievals$inboundSchema: z.ZodType<
+  DeploymentInvokeRetrievals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  document: z.string(),
+  metadata: z.lazy(() => DeploymentInvokeDeploymentsMetadata$inboundSchema),
+});
+
+/** @internal */
+export type DeploymentInvokeRetrievals$Outbound = {
+  document: string;
+  metadata: DeploymentInvokeDeploymentsMetadata$Outbound;
+};
+
+/** @internal */
+export const DeploymentInvokeRetrievals$outboundSchema: z.ZodType<
+  DeploymentInvokeRetrievals$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeRetrievals
+> = z.object({
+  document: z.string(),
+  metadata: z.lazy(() => DeploymentInvokeDeploymentsMetadata$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeRetrievals$ {
+  /** @deprecated use `DeploymentInvokeRetrievals$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeRetrievals$inboundSchema;
+  /** @deprecated use `DeploymentInvokeRetrievals$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeRetrievals$outboundSchema;
+  /** @deprecated use `DeploymentInvokeRetrievals$Outbound` instead. */
+  export type Outbound = DeploymentInvokeRetrievals$Outbound;
+}
+
+export function deploymentInvokeRetrievalsToJSON(
+  deploymentInvokeRetrievals: DeploymentInvokeRetrievals,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeRetrievals$outboundSchema.parse(deploymentInvokeRetrievals),
+  );
+}
+
+export function deploymentInvokeRetrievalsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeRetrievals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentInvokeRetrievals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeRetrievals' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeData$inboundSchema: z.ZodType<
+  DeploymentInvokeData,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string().optional(),
+  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  object: DeploymentInvokeDeploymentsObject$inboundSchema.optional(),
+  model: z.string().optional(),
+  provider: DeploymentInvokeDeploymentsProvider$inboundSchema.optional(),
+  is_final: z.boolean().optional(),
+  integration_id: z.string().optional(),
+  finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  system_fingerprint: z.nullable(z.string()).optional(),
+  choices: z.array(
+    z.lazy(() => DeploymentInvokeDeploymentsChoices$inboundSchema),
+  ).optional(),
+  retrievals: z.array(z.lazy(() => DeploymentInvokeRetrievals$inboundSchema))
+    .optional(),
+  provider_response: z.any().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "is_final": "isFinal",
+    "integration_id": "integrationId",
+    "system_fingerprint": "systemFingerprint",
+    "provider_response": "providerResponse",
+  });
+});
+
+/** @internal */
+export type DeploymentInvokeData$Outbound = {
+  id?: string | undefined;
+  created?: string | undefined;
+  object?: string | undefined;
+  model?: string | undefined;
+  provider?: string | undefined;
+  is_final?: boolean | undefined;
+  integration_id?: string | undefined;
+  finalized?: string | undefined;
+  system_fingerprint?: string | null | undefined;
+  choices?: Array<DeploymentInvokeDeploymentsChoices$Outbound> | undefined;
+  retrievals?: Array<DeploymentInvokeRetrievals$Outbound> | undefined;
+  provider_response?: any | undefined;
+};
+
+/** @internal */
+export const DeploymentInvokeData$outboundSchema: z.ZodType<
+  DeploymentInvokeData$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeData
+> = z.object({
+  id: z.string().optional(),
+  created: z.date().transform(v => v.toISOString()).optional(),
+  object: DeploymentInvokeDeploymentsObject$outboundSchema.optional(),
+  model: z.string().optional(),
+  provider: DeploymentInvokeDeploymentsProvider$outboundSchema.optional(),
+  isFinal: z.boolean().optional(),
+  integrationId: z.string().optional(),
+  finalized: z.date().transform(v => v.toISOString()).optional(),
+  systemFingerprint: z.nullable(z.string()).optional(),
+  choices: z.array(
+    z.lazy(() => DeploymentInvokeDeploymentsChoices$outboundSchema),
+  ).optional(),
+  retrievals: z.array(z.lazy(() => DeploymentInvokeRetrievals$outboundSchema))
+    .optional(),
+  providerResponse: z.any().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    isFinal: "is_final",
+    integrationId: "integration_id",
+    systemFingerprint: "system_fingerprint",
+    providerResponse: "provider_response",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeData$ {
+  /** @deprecated use `DeploymentInvokeData$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeData$inboundSchema;
+  /** @deprecated use `DeploymentInvokeData$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeData$outboundSchema;
+  /** @deprecated use `DeploymentInvokeData$Outbound` instead. */
+  export type Outbound = DeploymentInvokeData$Outbound;
+}
+
+export function deploymentInvokeDataToJSON(
+  deploymentInvokeData: DeploymentInvokeData,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeData$outboundSchema.parse(deploymentInvokeData),
+  );
+}
+
+export function deploymentInvokeDataFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentInvokeData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeData' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeDeploymentsResponseBody$inboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  data: z.string().transform((v, ctx) => {
+    try {
+      return JSON.parse(v);
+    } catch (err) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `malformed json: ${err}`,
+      });
+      return z.NEVER;
+    }
+  }).pipe(z.lazy(() => DeploymentInvokeData$inboundSchema).optional()),
+});
+
+/** @internal */
+export type DeploymentInvokeDeploymentsResponseBody$Outbound = {
+  data?: DeploymentInvokeData$Outbound | undefined;
+};
+
+/** @internal */
+export const DeploymentInvokeDeploymentsResponseBody$outboundSchema: z.ZodType<
+  DeploymentInvokeDeploymentsResponseBody$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeDeploymentsResponseBody
+> = z.object({
+  data: z.lazy(() => DeploymentInvokeData$outboundSchema).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeDeploymentsResponseBody$ {
+  /** @deprecated use `DeploymentInvokeDeploymentsResponseBody$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentInvokeDeploymentsResponseBody$inboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsResponseBody$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentInvokeDeploymentsResponseBody$outboundSchema;
+  /** @deprecated use `DeploymentInvokeDeploymentsResponseBody$Outbound` instead. */
+  export type Outbound = DeploymentInvokeDeploymentsResponseBody$Outbound;
+}
+
+export function deploymentInvokeDeploymentsResponseBodyToJSON(
+  deploymentInvokeDeploymentsResponseBody:
+    DeploymentInvokeDeploymentsResponseBody,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeDeploymentsResponseBody$outboundSchema.parse(
+      deploymentInvokeDeploymentsResponseBody,
+    ),
+  );
+}
+
+export function deploymentInvokeDeploymentsResponseBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentInvokeDeploymentsResponseBody,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentInvokeDeploymentsResponseBody$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentInvokeDeploymentsResponseBody' from JSON`,
   );
 }
 
@@ -1140,5 +2315,71 @@ export function deploymentInvokeResponseBodyFromJSON(
     jsonString,
     (x) => DeploymentInvokeResponseBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentInvokeResponseBody' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentInvokeResponse$inboundSchema: z.ZodType<
+  DeploymentInvokeResponse,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentInvokeResponseBody$inboundSchema),
+  z.instanceof(ReadableStream<Uint8Array>).transform(stream => {
+    return new EventStream({
+      stream,
+      decoder(rawEvent) {
+        const schema = z.lazy(() =>
+          DeploymentInvokeDeploymentsResponseBody$inboundSchema
+        );
+        return schema.parse(rawEvent);
+      },
+    });
+  }),
+]);
+
+/** @internal */
+export type DeploymentInvokeResponse$Outbound =
+  | DeploymentInvokeResponseBody$Outbound
+  | never;
+
+/** @internal */
+export const DeploymentInvokeResponse$outboundSchema: z.ZodType<
+  DeploymentInvokeResponse$Outbound,
+  z.ZodTypeDef,
+  DeploymentInvokeResponse
+> = z.union([
+  z.lazy(() => DeploymentInvokeResponseBody$outboundSchema),
+  z.never(),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentInvokeResponse$ {
+  /** @deprecated use `DeploymentInvokeResponse$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeResponse$inboundSchema;
+  /** @deprecated use `DeploymentInvokeResponse$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeResponse$outboundSchema;
+  /** @deprecated use `DeploymentInvokeResponse$Outbound` instead. */
+  export type Outbound = DeploymentInvokeResponse$Outbound;
+}
+
+export function deploymentInvokeResponseToJSON(
+  deploymentInvokeResponse: DeploymentInvokeResponse,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeResponse$outboundSchema.parse(deploymentInvokeResponse),
+  );
+}
+
+export function deploymentInvokeResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentInvokeResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentInvokeResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeResponse' from JSON`,
   );
 }

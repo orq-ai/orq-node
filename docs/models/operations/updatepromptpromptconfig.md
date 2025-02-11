@@ -1,7 +1,5 @@
 # UpdatePromptPromptConfig
 
-A list of messages compatible with the openAI schema
-
 ## Example Usage
 
 ```typescript
@@ -10,13 +8,8 @@ import { UpdatePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: UpdatePromptPromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "correction",
+      content: "<value>",
     },
   ],
 };

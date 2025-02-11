@@ -6,8 +6,15 @@
 import { Messages } from "@orq-ai/node/models/components";
 
 let value: Messages = {
-  role: "correction",
-  content: "<value>",
+  role: "assistant",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://svelte-plumber.org",
+      },
+    },
+  ],
 };
 ```
 

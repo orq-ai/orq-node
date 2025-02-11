@@ -9,7 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeletePromptRequest = {
   /**
-   * Unique identifier of the prompt
+   * Prompt ID
    */
   id: string;
 };

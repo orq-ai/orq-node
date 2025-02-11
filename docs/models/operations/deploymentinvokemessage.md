@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentInvokeMessage1 = {
-  role: "tool",
+  role: "user",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.DeploymentInvokeMessage1 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessage2 = {
-  role: "tool",
+  role: "assistant",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.DeploymentInvokeMessage2 = {
 
 ```typescript
 const value: operations.Message3 = {
-  role: "expected_output",
-  url: "https://exalted-breastplate.com/",
+  role: "system",
+  url: "https://fatal-import.net/",
 };
 ```
 

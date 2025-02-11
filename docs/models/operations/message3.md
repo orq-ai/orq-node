@@ -7,7 +7,7 @@ import { Message3 } from "@orq-ai/node/models/operations";
 
 let value: Message3 = {
   role: "assistant",
-  url: "https://lumbering-fork.org/",
+  url: "https://brisk-pilot.biz/",
 };
 ```
 

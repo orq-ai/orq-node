@@ -6,15 +6,8 @@
 import { PrefixMessages } from "@orq-ai/node/models/components";
 
 let value: PrefixMessages = {
-  role: "prompt",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://marvelous-challenge.net",
-      },
-    },
-  ],
+  role: "user",
+  content: "<value>",
 };
 ```
 

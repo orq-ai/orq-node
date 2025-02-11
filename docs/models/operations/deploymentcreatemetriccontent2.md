@@ -18,7 +18,7 @@ const value: operations.DeploymentCreateMetric21 = {
 const value: operations.DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://another-horst.name",
+    url: "https://comfortable-grandson.org/",
   },
 };
 ```

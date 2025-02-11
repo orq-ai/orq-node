@@ -14,12 +14,14 @@ let value: FileListResponseBody = {
       id: "<id>",
       objectName: "<value>",
       purpose: "retrieval",
-      bytes: 9920.12,
+      bytes: 9509.53,
       fileName: "example.file",
-      workspaceId: "31f3b0be-465b-4327-84d3-8fadfcbff714",
+      workspaceId: "3b0be465-b327-44d3-a8fa-dfcbff714262",
     },
   ],
   hasMore: false,
+  firstId: "<id>",
+  lastId: "<id>",
 };
 ```
 
@@ -30,3 +32,5 @@ let value: FileListResponseBody = {
 | `object`                                                               | [operations.FileListObject](../../models/operations/filelistobject.md) | :heavy_check_mark:                                                     | N/A                                                                    |
 | `data`                                                                 | [operations.FileListData](../../models/operations/filelistdata.md)[]   | :heavy_check_mark:                                                     | N/A                                                                    |
 | `hasMore`                                                              | *boolean*                                                              | :heavy_check_mark:                                                     | N/A                                                                    |
+| `firstId`                                                              | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |
+| `lastId`                                                               | *string*                                                               | :heavy_check_mark:                                                     | N/A                                                                    |

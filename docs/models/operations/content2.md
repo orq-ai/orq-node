@@ -18,7 +18,7 @@ const value: operations.Two1 = {
 const value: operations.DeploymentGetConfig22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://muted-technician.org/",
+    url: "https://flawless-morbidity.org/",
   },
 };
 ```

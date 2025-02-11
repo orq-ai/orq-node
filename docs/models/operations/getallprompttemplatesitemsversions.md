@@ -1,0 +1,48 @@
+# GetAllPromptTemplatesItemsVersions
+
+Prompt version model returned from the API
+
+## Example Usage
+
+```typescript
+import { GetAllPromptTemplatesItemsVersions } from "@orq-ai/node/models/operations";
+
+let value: GetAllPromptTemplatesItemsVersions = {
+  id: "<id>",
+  createdById: "717f6d14-66a5-4ba6-a691-dab816650b19",
+  displayName: "Lori.Brakus-Stroman",
+  updatedById: "85308d53-1131-4411-9d28-c723685cce0e",
+  promptConfig: {
+    messages: [
+      {
+        role: "expected_output",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://hefty-knight.info",
+            },
+          },
+        ],
+      },
+    ],
+  },
+  metadata: {},
+  commit: "<value>",
+  timestamp: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                    | Type                                                                                                                                                                                                     | Required                                                                                                                                                                                                 | Description                                                                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                     | *string*                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `createdById`                                                                                                                                                                                            | *string*                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `displayName`                                                                                                                                                                                            | *string*                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `updatedById`                                                                                                                                                                                            | *string*                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `description`                                                                                                                                                                                            | *string*                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `promptConfig`                                                                                                                                                                                           | [operations.GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONPromptConfig](../../models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonpromptconfig.md) | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `metadata`                                                                                                                                                                                               | [operations.GetAllPromptTemplatesItemsPromptTemplatesResponse200ApplicationJSONMetadata](../../models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonmetadata.md)         | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `commit`                                                                                                                                                                                                 | *string*                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |
+| `timestamp`                                                                                                                                                                                              | *string*                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                       | N/A                                                                                                                                                                                                      |

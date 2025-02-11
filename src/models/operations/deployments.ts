@@ -15,13 +15,9 @@ export type DeploymentsRequest = {
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   * A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `ed33dade-ae32-4959-8c5c-7ae4aad748b5`, your subsequent call can include `after=ed33dade-ae32-4959-8c5c-7ae4aad748b5` in order to fetch the next page of the list.
    */
-  startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
-   */
-  endingBefore?: string | undefined;
+  after?: string | undefined;
 };
 
 export const ObjectT = {
@@ -208,21 +204,6 @@ export type DeploymentsEncodingFormat = ClosedEnum<
 >;
 
 /**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export const DeploymentsReasoningEffort = {
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-} as const;
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export type DeploymentsReasoningEffort = ClosedEnum<
-  typeof DeploymentsReasoningEffort
->;
-
-/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type DeploymentsModelParameters = {
@@ -298,10 +279,6 @@ export type DeploymentsModelParameters = {
    * The format to return the embeddings
    */
   encodingFormat?: DeploymentsEncodingFormat | undefined;
-  /**
-   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
-   */
-  reasoningEffort?: DeploymentsReasoningEffort | undefined;
 };
 
 export const DeploymentsProvider = {
@@ -321,8 +298,6 @@ export const DeploymentsProvider = {
   Leonardoai: "leonardoai",
   Nvidia: "nvidia",
   Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 
@@ -472,12 +447,14 @@ export type Data = {
 };
 
 /**
- * List all deployments
+ * List of deployments
  */
 export type DeploymentsResponseBody = {
   object: ObjectT;
   data: Array<Data>;
   hasMore: boolean;
+  firstId: string | null;
+  lastId: string | null;
 };
 
 /** @internal */
@@ -487,20 +464,13 @@ export const DeploymentsRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   limit: z.number().default(10),
-  starting_after: z.string().optional(),
-  ending_before: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "starting_after": "startingAfter",
-    "ending_before": "endingBefore",
-  });
+  after: z.string().optional(),
 });
 
 /** @internal */
 export type DeploymentsRequest$Outbound = {
   limit: number;
-  starting_after?: string | undefined;
-  ending_before?: string | undefined;
+  after?: string | undefined;
 };
 
 /** @internal */
@@ -510,13 +480,7 @@ export const DeploymentsRequest$outboundSchema: z.ZodType<
   DeploymentsRequest
 > = z.object({
   limit: z.number().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
+  after: z.string().optional(),
 });
 
 /**
@@ -1188,27 +1152,6 @@ export namespace DeploymentsEncodingFormat$ {
 }
 
 /** @internal */
-export const DeploymentsReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsReasoningEffort
-> = z.nativeEnum(DeploymentsReasoningEffort);
-
-/** @internal */
-export const DeploymentsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsReasoningEffort
-> = DeploymentsReasoningEffort$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsReasoningEffort$ {
-  /** @deprecated use `DeploymentsReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsReasoningEffort$inboundSchema;
-  /** @deprecated use `DeploymentsReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsReasoningEffort$outboundSchema;
-}
-
-/** @internal */
 export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   DeploymentsModelParameters,
   z.ZodTypeDef,
@@ -1234,7 +1177,6 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: DeploymentsEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: DeploymentsReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1262,7 +1204,6 @@ export type DeploymentsModelParameters$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
-  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -1291,7 +1232,6 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   ).optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: DeploymentsEncodingFormat$outboundSchema.optional(),
-  reasoningEffort: DeploymentsReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -2088,9 +2028,13 @@ export const DeploymentsResponseBody$inboundSchema: z.ZodType<
   object: ObjectT$inboundSchema,
   data: z.array(z.lazy(() => Data$inboundSchema)),
   has_more: z.boolean(),
+  first_id: z.nullable(z.string()),
+  last_id: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "has_more": "hasMore",
+    "first_id": "firstId",
+    "last_id": "lastId",
   });
 });
 
@@ -2099,6 +2043,8 @@ export type DeploymentsResponseBody$Outbound = {
   object: string;
   data: Array<Data$Outbound>;
   has_more: boolean;
+  first_id: string | null;
+  last_id: string | null;
 };
 
 /** @internal */
@@ -2110,9 +2056,13 @@ export const DeploymentsResponseBody$outboundSchema: z.ZodType<
   object: ObjectT$outboundSchema,
   data: z.array(z.lazy(() => Data$outboundSchema)),
   hasMore: z.boolean(),
+  firstId: z.nullable(z.string()),
+  lastId: z.nullable(z.string()),
 }).transform((v) => {
   return remap$(v, {
     hasMore: "has_more",
+    firstId: "first_id",
+    lastId: "last_id",
   });
 });
 

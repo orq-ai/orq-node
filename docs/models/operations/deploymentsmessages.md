@@ -6,8 +6,15 @@
 import { DeploymentsMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentsMessages = {
-  role: "correction",
-  content: "<value>",
+  role: "assistant",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://favorable-sand.info/",
+      },
+    },
+  ],
 };
 ```
 

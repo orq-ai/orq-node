@@ -5,29 +5,15 @@
 import { dlv } from "./dlv.js";
 
 import * as z from "zod";
-import { SDKOptions } from "./config.js";
 
 export interface Env {
   ORQ_API_KEY?: string | undefined;
-
-  /**
-   * Sets the contactId parameter for all supported operations
-   */
-  ORQ_CONTACT_ID?: string | undefined;
-
-  /**
-   * Sets the environment parameter for all supported operations
-   */
-  ORQ_ENVIRONMENT?: string | undefined;
 
   ORQ_DEBUG?: boolean | undefined;
 }
 
 export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
   ORQ_API_KEY: z.string().optional(),
-
-  ORQ_CONTACT_ID: z.string().optional(),
-  ORQ_ENVIRONMENT: z.string().optional(),
 
   ORQ_DEBUG: z.coerce.boolean().optional(),
 });
@@ -52,22 +38,4 @@ export function env(): Env {
  */
 export function resetEnv() {
   envMemo = undefined;
-}
-
-/**
- * Populates global parameters with environment variables.
- */
-export function fillGlobals(options: SDKOptions): SDKOptions {
-  const clone = { ...options };
-
-  const envVars = env();
-
-  if (typeof envVars.ORQ_CONTACT_ID !== "undefined") {
-    clone.contactId ??= envVars.ORQ_CONTACT_ID;
-  }
-  if (typeof envVars.ORQ_ENVIRONMENT !== "undefined") {
-    clone.environment ??= envVars.ORQ_ENVIRONMENT;
-  }
-
-  return clone;
 }

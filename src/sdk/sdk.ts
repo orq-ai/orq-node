@@ -7,8 +7,8 @@ import { Contacts } from "./contacts.js";
 import { Deployments } from "./deployments.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
+import { Prompt } from "./prompt.js";
 import { Prompts } from "./prompts.js";
-import { PromptSnippets } from "./promptsnippets.js";
 import { Remoteconfig } from "./remoteconfig.js";
 
 export class Orq extends ClientSDK {
@@ -32,9 +32,9 @@ export class Orq extends ClientSDK {
     return (this._files ??= new Files(this._options));
   }
 
-  private _promptSnippets?: PromptSnippets;
-  get promptSnippets(): PromptSnippets {
-    return (this._promptSnippets ??= new PromptSnippets(this._options));
+  private _prompt?: Prompt;
+  get prompt(): Prompt {
+    return (this._prompt ??= new Prompt(this._options));
   }
 
   private _prompts?: Prompts;

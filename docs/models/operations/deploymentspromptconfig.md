@@ -20,14 +20,21 @@ let value: DeploymentsPromptConfig = {
       },
     },
   ],
-  model: "LeBaron",
-  modelType: "completion",
+  model: "Grand Cherokee",
+  modelType: "chat",
   modelParameters: {},
-  provider: "elevenlabs",
+  provider: "anyscale",
   messages: [
     {
       role: "tool",
-      content: "<value>",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://hateful-humor.net",
+          },
+        },
+      ],
     },
   ],
 };
