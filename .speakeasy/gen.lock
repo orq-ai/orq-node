@@ -1,18 +1,17 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 2a9debf87329c6023bc4e0588d5617dc
+  docChecksum: 9b157b7f1f219ff5f8a3bed5067f8a91
   docVersion: "2.0"
   speakeasyVersion: 1.488.0
   generationVersion: 2.506.0
-  releaseVersion: 3.1.2
-  configChecksum: 9d2d47693d6200296fe01a121da3e44a
+  releaseVersion: 3.1.3
+  configChecksum: 38a26c8957cca141209d3c308a76fda2
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 features:
   typescript:
-    acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
     core: 3.19.0
@@ -23,7 +22,9 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
+    globals: 2.82.2
     groups: 2.81.2
+    hiddenGlobals: 0.1.0
     ignores: 2.81.1
     inputOutputModels: 2.82.0
     methodArguments: 0.1.2
@@ -74,11 +75,10 @@ generatedFiles:
   - docs/models/components/twoimageurl.md
   - docs/models/components/twotype.md
   - docs/models/components/type.md
+  - docs/models/errors/getpromptversionresponsebody.md
   - docs/models/errors/honoapierror.md
   - docs/models/errors/updatepromptresponsebody.md
-  - docs/models/operations/bulkfileuploadfilespurpose.md
-  - docs/models/operations/bulkfileuploadpurpose.md
-  - docs/models/operations/bulkfileuploadrequestbody.md
+  - docs/models/errors/updatepromptsnippetresponsebody.md
   - docs/models/operations/choices.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
@@ -103,6 +103,7 @@ generatedFiles:
   - docs/models/operations/createpromptencodingformat.md
   - docs/models/operations/createpromptformat.md
   - docs/models/operations/createpromptfunction.md
+  - docs/models/operations/createpromptlanguage.md
   - docs/models/operations/createpromptmessages.md
   - docs/models/operations/createpromptmetadata.md
   - docs/models/operations/createpromptmodelparameters.md
@@ -110,108 +111,125 @@ generatedFiles:
   - docs/models/operations/createpromptphotorealversion.md
   - docs/models/operations/createpromptpromptconfig.md
   - docs/models/operations/createpromptpromptscontent.md
+  - docs/models/operations/createpromptpromptsencodingformat.md
+  - docs/models/operations/createpromptpromptsformat.md
   - docs/models/operations/createpromptpromptsfunction.md
+  - docs/models/operations/createpromptpromptslanguage.md
   - docs/models/operations/createpromptpromptsmessages.md
   - docs/models/operations/createpromptpromptsmetadata.md
-  - docs/models/operations/createpromptpromptsresponse200type.md
+  - docs/models/operations/createpromptpromptsmodelparameters.md
+  - docs/models/operations/createpromptpromptsmodeltype.md
+  - docs/models/operations/createpromptpromptsphotorealversion.md
+  - docs/models/operations/createpromptpromptspromptconfig.md
+  - docs/models/operations/createpromptpromptsprovider.md
+  - docs/models/operations/createpromptpromptsquality.md
+  - docs/models/operations/createpromptpromptsreasoningeffort.md
+  - docs/models/operations/createpromptpromptsresponseformat.md
   - docs/models/operations/createpromptpromptsresponsetype.md
   - docs/models/operations/createpromptpromptsrole.md
   - docs/models/operations/createpromptpromptstoolcalls.md
   - docs/models/operations/createpromptpromptstype.md
+  - docs/models/operations/createpromptpromptsusecases.md
   - docs/models/operations/createpromptprovider.md
   - docs/models/operations/createpromptquality.md
+  - docs/models/operations/createpromptreasoningeffort.md
   - docs/models/operations/createpromptrequestbody.md
   - docs/models/operations/createpromptresponsebody.md
   - docs/models/operations/createpromptresponseformat.md
   - docs/models/operations/createpromptresponseformat1.md
   - docs/models/operations/createpromptresponseformat2.md
   - docs/models/operations/createpromptresponseformatjsonschema.md
+  - docs/models/operations/createpromptresponseformatprompts1.md
+  - docs/models/operations/createpromptresponseformatprompts2.md
+  - docs/models/operations/createpromptresponseformatpromptsjsonschema.md
+  - docs/models/operations/createpromptresponseformatpromptsresponse200type.md
   - docs/models/operations/createpromptresponseformatpromptsresponsetype.md
   - docs/models/operations/createpromptresponseformatpromptstype.md
   - docs/models/operations/createpromptresponseformattype.md
   - docs/models/operations/createpromptrole.md
+  - docs/models/operations/createpromptsnippet21.md
+  - docs/models/operations/createpromptsnippet22.md
+  - docs/models/operations/createpromptsnippet2imageurl.md
+  - docs/models/operations/createpromptsnippet2promptsnippets1.md
+  - docs/models/operations/createpromptsnippet2promptsnippets2.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsimageurl.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponse1.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponse2.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponse200applicationjsonresponsebodytype.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponse200applicationjsontype.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponse200type.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponseimageurl.md
+  - docs/models/operations/createpromptsnippet2promptsnippetsresponsetype.md
+  - docs/models/operations/createpromptsnippet2promptsnippetstype.md
+  - docs/models/operations/createpromptsnippet2type.md
+  - docs/models/operations/createpromptsnippetcontent.md
+  - docs/models/operations/createpromptsnippetcontent2.md
+  - docs/models/operations/createpromptsnippetcontentpromptsnippets2.md
+  - docs/models/operations/createpromptsnippetcontentpromptsnippetsresponse2.md
+  - docs/models/operations/createpromptsnippetencodingformat.md
+  - docs/models/operations/createpromptsnippetformat.md
+  - docs/models/operations/createpromptsnippetfunction.md
+  - docs/models/operations/createpromptsnippetlanguage.md
+  - docs/models/operations/createpromptsnippetmessages.md
+  - docs/models/operations/createpromptsnippetmetadata.md
+  - docs/models/operations/createpromptsnippetmodelparameters.md
+  - docs/models/operations/createpromptsnippetmodeltype.md
+  - docs/models/operations/createpromptsnippetphotorealversion.md
+  - docs/models/operations/createpromptsnippetpromptconfig.md
+  - docs/models/operations/createpromptsnippetpromptsnippetscontent.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsencodingformat.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsformat.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsfunction.md
+  - docs/models/operations/createpromptsnippetpromptsnippetslanguage.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsmessages.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsmetadata.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsmodelparameters.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsmodeltype.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsphotorealversion.md
+  - docs/models/operations/createpromptsnippetpromptsnippetspromptconfig.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsprovider.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsreasoningeffort.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponse200type.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponsecontent.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponseformat.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponsefunction.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponsemessages.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponsemetadata.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponserole.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponsetoolcalls.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsresponsetype.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsrole.md
+  - docs/models/operations/createpromptsnippetpromptsnippetstoolcalls.md
+  - docs/models/operations/createpromptsnippetpromptsnippetstype.md
+  - docs/models/operations/createpromptsnippetpromptsnippetsusecases.md
+  - docs/models/operations/createpromptsnippetprovider.md
+  - docs/models/operations/createpromptsnippetquality.md
+  - docs/models/operations/createpromptsnippetreasoningeffort.md
+  - docs/models/operations/createpromptsnippetrequestbody.md
+  - docs/models/operations/createpromptsnippetresponsebody.md
+  - docs/models/operations/createpromptsnippetresponseformat.md
+  - docs/models/operations/createpromptsnippetresponseformat1.md
+  - docs/models/operations/createpromptsnippetresponseformat2.md
+  - docs/models/operations/createpromptsnippetresponseformatjsonschema.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippets1.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippets2.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippetsjsonschema.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippetsresponse200applicationjsontype.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippetsresponse200type.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippetsresponsetype.md
+  - docs/models/operations/createpromptsnippetresponseformatpromptsnippetstype.md
+  - docs/models/operations/createpromptsnippetresponseformattype.md
+  - docs/models/operations/createpromptsnippetrole.md
+  - docs/models/operations/createpromptsnippettoolcalls.md
+  - docs/models/operations/createpromptsnippettype.md
+  - docs/models/operations/createpromptsnippetusecases.md
   - docs/models/operations/createprompttoolcalls.md
   - docs/models/operations/createprompttype.md
-  - docs/models/operations/createpromptversion21.md
-  - docs/models/operations/createpromptversion22.md
-  - docs/models/operations/createpromptversion2imageurl.md
-  - docs/models/operations/createpromptversion2prompts1.md
-  - docs/models/operations/createpromptversion2prompts2.md
-  - docs/models/operations/createpromptversion2promptsimageurl.md
-  - docs/models/operations/createpromptversion2promptsresponse200type.md
-  - docs/models/operations/createpromptversion2promptsresponsetype.md
-  - docs/models/operations/createpromptversion2promptstype.md
-  - docs/models/operations/createpromptversion2type.md
-  - docs/models/operations/createpromptversioncontent.md
-  - docs/models/operations/createpromptversioncontent2.md
-  - docs/models/operations/createpromptversioncontentprompts2.md
-  - docs/models/operations/createpromptversionencodingformat.md
-  - docs/models/operations/createpromptversionformat.md
-  - docs/models/operations/createpromptversionfunction.md
-  - docs/models/operations/createpromptversionmessages.md
-  - docs/models/operations/createpromptversionmetadata.md
-  - docs/models/operations/createpromptversionmodelparameters.md
-  - docs/models/operations/createpromptversionmodeltype.md
-  - docs/models/operations/createpromptversionphotorealversion.md
-  - docs/models/operations/createpromptversionpromptconfig.md
-  - docs/models/operations/createpromptversionpromptscontent.md
-  - docs/models/operations/createpromptversionpromptsencodingformat.md
-  - docs/models/operations/createpromptversionpromptsformat.md
-  - docs/models/operations/createpromptversionpromptsfunction.md
-  - docs/models/operations/createpromptversionpromptsmessages.md
-  - docs/models/operations/createpromptversionpromptsmetadata.md
-  - docs/models/operations/createpromptversionpromptsmodelparameters.md
-  - docs/models/operations/createpromptversionpromptsmodeltype.md
-  - docs/models/operations/createpromptversionpromptsphotorealversion.md
-  - docs/models/operations/createpromptversionpromptspromptconfig.md
-  - docs/models/operations/createpromptversionpromptsprovider.md
-  - docs/models/operations/createpromptversionpromptsquality.md
-  - docs/models/operations/createpromptversionpromptsresponseformat.md
-  - docs/models/operations/createpromptversionpromptsrole.md
-  - docs/models/operations/createpromptversionpromptstoolcalls.md
-  - docs/models/operations/createpromptversionpromptstype.md
-  - docs/models/operations/createpromptversionprovider.md
-  - docs/models/operations/createpromptversionquality.md
-  - docs/models/operations/createpromptversionrequest.md
-  - docs/models/operations/createpromptversionrequestbody.md
-  - docs/models/operations/createpromptversionresponsebody.md
-  - docs/models/operations/createpromptversionresponseformat.md
-  - docs/models/operations/createpromptversionresponseformat1.md
-  - docs/models/operations/createpromptversionresponseformat2.md
-  - docs/models/operations/createpromptversionresponseformatjsonschema.md
-  - docs/models/operations/createpromptversionresponseformatprompts1.md
-  - docs/models/operations/createpromptversionresponseformatprompts2.md
-  - docs/models/operations/createpromptversionresponseformatpromptsresponse200type.md
-  - docs/models/operations/createpromptversionresponseformatpromptsresponsetype.md
-  - docs/models/operations/createpromptversionresponseformatpromptstype.md
-  - docs/models/operations/createpromptversionresponseformattype.md
-  - docs/models/operations/createpromptversionrole.md
-  - docs/models/operations/createpromptversiontoolcalls.md
-  - docs/models/operations/createpromptversiontype.md
-  - docs/models/operations/criteria.md
+  - docs/models/operations/createpromptusecases.md
   - docs/models/operations/data.md
-  - docs/models/operations/data1.md
-  - docs/models/operations/data2.md
-  - docs/models/operations/data3.md
-  - docs/models/operations/datacontent.md
-  - docs/models/operations/dataencodingformat.md
-  - docs/models/operations/dataformat.md
-  - docs/models/operations/datafunction.md
-  - docs/models/operations/datamessages.md
-  - docs/models/operations/datametadata.md
-  - docs/models/operations/datamodelparameters.md
-  - docs/models/operations/datamodeltype.md
-  - docs/models/operations/dataowner.md
-  - docs/models/operations/dataphotorealversion.md
-  - docs/models/operations/datapromptconfig.md
-  - docs/models/operations/dataprovider.md
-  - docs/models/operations/dataquality.md
-  - docs/models/operations/dataresponseformat.md
-  - docs/models/operations/datarole.md
-  - docs/models/operations/datatoolcalls.md
-  - docs/models/operations/datatype.md
-  - docs/models/operations/dataversions.md
   - docs/models/operations/deletepromptrequest.md
+  - docs/models/operations/deletepromptsnippetrequest.md
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstype.md
@@ -254,6 +272,7 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigmessages.md
   - docs/models/operations/deploymentgetconfigphotorealversion.md
   - docs/models/operations/deploymentgetconfigquality.md
+  - docs/models/operations/deploymentgetconfigreasoningeffort.md
   - docs/models/operations/deploymentgetconfigrequestbody.md
   - docs/models/operations/deploymentgetconfigresponsebody.md
   - docs/models/operations/deploymentgetconfigresponseformat.md
@@ -266,27 +285,12 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigtoolcalls.md
   - docs/models/operations/deploymentgetconfigtype.md
   - docs/models/operations/deploymentinvokechoices.md
-  - docs/models/operations/deploymentinvokedata.md
-  - docs/models/operations/deploymentinvokedeploymentschoices.md
-  - docs/models/operations/deploymentinvokedeploymentsmessage.md
-  - docs/models/operations/deploymentinvokedeploymentsmetadata.md
-  - docs/models/operations/deploymentinvokedeploymentsobject.md
-  - docs/models/operations/deploymentinvokedeploymentsprovider.md
-  - docs/models/operations/deploymentinvokedeploymentsresponsebody.md
+  - docs/models/operations/deploymentinvokeglobals.md
   - docs/models/operations/deploymentinvokemessage.md
   - docs/models/operations/deploymentinvokemessage1.md
   - docs/models/operations/deploymentinvokemessage2.md
-  - docs/models/operations/deploymentinvokemessage3.md
-  - docs/models/operations/deploymentinvokemessagedeployments1.md
-  - docs/models/operations/deploymentinvokemessagedeployments2.md
-  - docs/models/operations/deploymentinvokemessagedeploymentsfunction.md
-  - docs/models/operations/deploymentinvokemessagedeploymentsresponse200role.md
-  - docs/models/operations/deploymentinvokemessagedeploymentsresponse200texteventstreamresponsebodyrole.md
-  - docs/models/operations/deploymentinvokemessagedeploymentsresponse200texteventstreamrole.md
   - docs/models/operations/deploymentinvokemessagedeploymentsresponserole.md
   - docs/models/operations/deploymentinvokemessagedeploymentsrole.md
-  - docs/models/operations/deploymentinvokemessagedeploymentstoolcalls.md
-  - docs/models/operations/deploymentinvokemessagedeploymentstype.md
   - docs/models/operations/deploymentinvokemessagefunction.md
   - docs/models/operations/deploymentinvokemessagerole.md
   - docs/models/operations/deploymentinvokemessagetoolcalls.md
@@ -294,9 +298,7 @@ generatedFiles:
   - docs/models/operations/deploymentinvokemetadata.md
   - docs/models/operations/deploymentinvokeobject.md
   - docs/models/operations/deploymentinvokeprovider.md
-  - docs/models/operations/deploymentinvokeresponse.md
   - docs/models/operations/deploymentinvokeresponsebody.md
-  - docs/models/operations/deploymentinvokeretrievals.md
   - docs/models/operations/deployments21.md
   - docs/models/operations/deployments22.md
   - docs/models/operations/deployments2deploymentstype.md
@@ -318,6 +320,7 @@ generatedFiles:
   - docs/models/operations/deploymentspromptconfig.md
   - docs/models/operations/deploymentsprovider.md
   - docs/models/operations/deploymentsquality.md
+  - docs/models/operations/deploymentsreasoningeffort.md
   - docs/models/operations/deploymentsrequest.md
   - docs/models/operations/deploymentsresponsebody.md
   - docs/models/operations/deploymentsresponseformat.md
@@ -329,14 +332,56 @@ generatedFiles:
   - docs/models/operations/deploymentsrole.md
   - docs/models/operations/deploymentstoolcalls.md
   - docs/models/operations/deploymentstools.md
+  - docs/models/operations/deploymentstream21.md
+  - docs/models/operations/deploymentstream22.md
+  - docs/models/operations/deploymentstream22input.md
+  - docs/models/operations/deploymentstream2deployments1.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodytype.md
+  - docs/models/operations/deploymentstream2deploymentsrequesttype.md
+  - docs/models/operations/deploymentstream2deploymentstype.md
+  - docs/models/operations/deploymentstream2imageurl.md
+  - docs/models/operations/deploymentstream2imageurlinput.md
+  - docs/models/operations/deploymentstream2type.md
+  - docs/models/operations/deploymentstreamchoices.md
+  - docs/models/operations/deploymentstreamcontent.md
+  - docs/models/operations/deploymentstreamcontent2.md
+  - docs/models/operations/deploymentstreamcontent2input.md
+  - docs/models/operations/deploymentstreamcontentinput.md
+  - docs/models/operations/deploymentstreamdata.md
+  - docs/models/operations/deploymentstreamdeploymentsfunction.md
+  - docs/models/operations/deploymentstreamdeploymentsmetadata.md
+  - docs/models/operations/deploymentstreamdeploymentsrole.md
+  - docs/models/operations/deploymentstreamdeploymentstoolcalls.md
+  - docs/models/operations/deploymentstreamdeploymentstype.md
+  - docs/models/operations/deploymentstreamdocuments.md
+  - docs/models/operations/deploymentstreamfunction.md
+  - docs/models/operations/deploymentstreamglobals.md
+  - docs/models/operations/deploymentstreaminputs.md
+  - docs/models/operations/deploymentstreaminvokeoptions.md
+  - docs/models/operations/deploymentstreammessage.md
+  - docs/models/operations/deploymentstreammessage1.md
+  - docs/models/operations/deploymentstreammessage2.md
+  - docs/models/operations/deploymentstreammessage3.md
+  - docs/models/operations/deploymentstreammessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentstreammessagedeploymentsrole.md
+  - docs/models/operations/deploymentstreammessagefunction.md
+  - docs/models/operations/deploymentstreammessagerole.md
+  - docs/models/operations/deploymentstreammessages.md
+  - docs/models/operations/deploymentstreammessagetoolcalls.md
+  - docs/models/operations/deploymentstreammessagetype.md
+  - docs/models/operations/deploymentstreammetadata.md
+  - docs/models/operations/deploymentstreamobject.md
+  - docs/models/operations/deploymentstreamprefixmessages.md
+  - docs/models/operations/deploymentstreamprovider.md
+  - docs/models/operations/deploymentstreamrequestbody.md
+  - docs/models/operations/deploymentstreamresponsebody.md
+  - docs/models/operations/deploymentstreamretrievals.md
+  - docs/models/operations/deploymentstreamrole.md
+  - docs/models/operations/deploymentstreamtoolcalls.md
+  - docs/models/operations/deploymentstreamtype.md
   - docs/models/operations/deploymentstype.md
-  - docs/models/operations/direction.md
   - docs/models/operations/documents.md
-  - docs/models/operations/duplicatepromptrequest.md
-  - docs/models/operations/eight.md
   - docs/models/operations/encodingformat.md
-  - docs/models/operations/evaluatoroutputtype.md
-  - docs/models/operations/evaluatortype.md
   - docs/models/operations/feedback.md
   - docs/models/operations/filedeleterequest.md
   - docs/models/operations/filegetpurpose.md
@@ -347,657 +392,353 @@ generatedFiles:
   - docs/models/operations/filelistpurpose.md
   - docs/models/operations/filelistrequest.md
   - docs/models/operations/filelistresponsebody.md
-  - docs/models/operations/files.md
   - docs/models/operations/filet.md
-  - docs/models/operations/fileupdatepurpose.md
-  - docs/models/operations/fileupdaterequest.md
-  - docs/models/operations/fileupdaterequestbody.md
-  - docs/models/operations/fileupdateresponsebody.md
   - docs/models/operations/fileuploadpurpose.md
   - docs/models/operations/fileuploadrequestbody.md
   - docs/models/operations/fileuploadresponsebody.md
-  - docs/models/operations/filters.md
-  - docs/models/operations/filters1.md
-  - docs/models/operations/filters2.md
-  - docs/models/operations/filters3.md
-  - docs/models/operations/filters4.md
-  - docs/models/operations/filters5.md
-  - docs/models/operations/filtersdirection.md
-  - docs/models/operations/filtershideoperators.md
-  - docs/models/operations/filtersoperator.md
-  - docs/models/operations/filtersoptions.md
-  - docs/models/operations/filtersoptionsmap.md
-  - docs/models/operations/filterstype.md
-  - docs/models/operations/filtersvalue.md
+  - docs/models/operations/findonebykeypromptsnippet21.md
+  - docs/models/operations/findonebykeypromptsnippet22.md
+  - docs/models/operations/findonebykeypromptsnippet2imageurl.md
+  - docs/models/operations/findonebykeypromptsnippet2promptsnippets1.md
+  - docs/models/operations/findonebykeypromptsnippet2promptsnippets2.md
+  - docs/models/operations/findonebykeypromptsnippet2promptsnippetsimageurl.md
+  - docs/models/operations/findonebykeypromptsnippet2promptsnippetsresponse200type.md
+  - docs/models/operations/findonebykeypromptsnippet2promptsnippetsresponsetype.md
+  - docs/models/operations/findonebykeypromptsnippet2promptsnippetstype.md
+  - docs/models/operations/findonebykeypromptsnippet2type.md
+  - docs/models/operations/findonebykeypromptsnippetcontent.md
+  - docs/models/operations/findonebykeypromptsnippetcontent2.md
+  - docs/models/operations/findonebykeypromptsnippetcontentpromptsnippets2.md
+  - docs/models/operations/findonebykeypromptsnippetencodingformat.md
+  - docs/models/operations/findonebykeypromptsnippetformat.md
+  - docs/models/operations/findonebykeypromptsnippetfunction.md
+  - docs/models/operations/findonebykeypromptsnippetlanguage.md
+  - docs/models/operations/findonebykeypromptsnippetmessages.md
+  - docs/models/operations/findonebykeypromptsnippetmetadata.md
+  - docs/models/operations/findonebykeypromptsnippetmodelparameters.md
+  - docs/models/operations/findonebykeypromptsnippetmodeltype.md
+  - docs/models/operations/findonebykeypromptsnippetowner.md
+  - docs/models/operations/findonebykeypromptsnippetowner2.md
+  - docs/models/operations/findonebykeypromptsnippetphotorealversion.md
+  - docs/models/operations/findonebykeypromptsnippetpromptconfig.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetscontent.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsencodingformat.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsformat.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsfunction.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetslanguage.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsmessages.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsmetadata.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsmodelparameters.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsmodeltype.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsphotorealversion.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetspromptconfig.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsprovider.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsreasoningeffort.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsresponseformat.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsresponsetype.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsrole.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetstoolcalls.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetstype.md
+  - docs/models/operations/findonebykeypromptsnippetpromptsnippetsusecases.md
+  - docs/models/operations/findonebykeypromptsnippetprovider.md
+  - docs/models/operations/findonebykeypromptsnippetquality.md
+  - docs/models/operations/findonebykeypromptsnippetreasoningeffort.md
+  - docs/models/operations/findonebykeypromptsnippetrequest.md
+  - docs/models/operations/findonebykeypromptsnippetresponsebody.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformat.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformat1.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformat2.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatjsonschema.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatpromptsnippets1.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatpromptsnippets2.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatpromptsnippetsjsonschema.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatpromptsnippetsresponse200type.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatpromptsnippetsresponsetype.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformatpromptsnippetstype.md
+  - docs/models/operations/findonebykeypromptsnippetresponseformattype.md
+  - docs/models/operations/findonebykeypromptsnippetrole.md
+  - docs/models/operations/findonebykeypromptsnippettoolcalls.md
+  - docs/models/operations/findonebykeypromptsnippettype.md
+  - docs/models/operations/findonebykeypromptsnippetusecases.md
+  - docs/models/operations/findonebykeypromptsnippetversions.md
   - docs/models/operations/findonepromptsnippet21.md
   - docs/models/operations/findonepromptsnippet22.md
   - docs/models/operations/findonepromptsnippet2imageurl.md
   - docs/models/operations/findonepromptsnippet2promptsnippets1.md
   - docs/models/operations/findonepromptsnippet2promptsnippets2.md
   - docs/models/operations/findonepromptsnippet2promptsnippetsimageurl.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse1.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse2.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse2001.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse2002.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjson1.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjson2.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonimageurl.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody1type.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody1versionstype.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody2type.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody2versionstype.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody3type.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebody3versionstype.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebodyimageurl.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200applicationjsontype.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200imageurl.md
   - docs/models/operations/findonepromptsnippet2promptsnippetsresponse200type.md
-  - docs/models/operations/findonepromptsnippet2promptsnippetsresponseimageurl.md
   - docs/models/operations/findonepromptsnippet2promptsnippetsresponsetype.md
   - docs/models/operations/findonepromptsnippet2promptsnippetstype.md
   - docs/models/operations/findonepromptsnippet2type.md
+  - docs/models/operations/findonepromptsnippetcontent.md
   - docs/models/operations/findonepromptsnippetcontent2.md
   - docs/models/operations/findonepromptsnippetcontentpromptsnippets2.md
-  - docs/models/operations/findonepromptsnippetcontentpromptsnippetsresponse2.md
-  - docs/models/operations/findonepromptsnippetcontentpromptsnippetsresponse2002.md
-  - docs/models/operations/findonepromptsnippetcontentpromptsnippetsresponse200applicationjson2.md
-  - docs/models/operations/findonepromptsnippetcontentpromptsnippetsresponse200applicationjsonresponsebody2.md
+  - docs/models/operations/findonepromptsnippetencodingformat.md
+  - docs/models/operations/findonepromptsnippetformat.md
+  - docs/models/operations/findonepromptsnippetfunction.md
+  - docs/models/operations/findonepromptsnippetlanguage.md
+  - docs/models/operations/findonepromptsnippetmessages.md
+  - docs/models/operations/findonepromptsnippetmetadata.md
+  - docs/models/operations/findonepromptsnippetmodelparameters.md
+  - docs/models/operations/findonepromptsnippetmodeltype.md
+  - docs/models/operations/findonepromptsnippetowner.md
   - docs/models/operations/findonepromptsnippetowner2.md
-  - docs/models/operations/findonepromptsnippetownerpromptsnippets2.md
-  - docs/models/operations/findonepromptsnippetownerpromptsnippetsresponse2.md
+  - docs/models/operations/findonepromptsnippetphotorealversion.md
+  - docs/models/operations/findonepromptsnippetpromptconfig.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetscontent.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsencodingformat.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsformat.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsfunction.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetslanguage.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsmessages.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsmetadata.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsmodelparameters.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsmodeltype.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsphotorealversion.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetspromptconfig.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsprovider.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsreasoningeffort.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsresponseformat.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsresponsetype.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsrole.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetstoolcalls.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetstype.md
+  - docs/models/operations/findonepromptsnippetpromptsnippetsusecases.md
+  - docs/models/operations/findonepromptsnippetprovider.md
+  - docs/models/operations/findonepromptsnippetquality.md
+  - docs/models/operations/findonepromptsnippetreasoningeffort.md
   - docs/models/operations/findonepromptsnippetrequest.md
   - docs/models/operations/findonepromptsnippetresponsebody.md
-  - docs/models/operations/findonepromptsnippetresponsebody1.md
-  - docs/models/operations/findonepromptsnippetresponsebody2.md
-  - docs/models/operations/findonepromptsnippetresponsebody3.md
-  - docs/models/operations/findonepromptsnippetresponsebodycontent.md
-  - docs/models/operations/findonepromptsnippetresponsebodyencodingformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodyformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodyfunction.md
-  - docs/models/operations/findonepromptsnippetresponsebodymessages.md
-  - docs/models/operations/findonepromptsnippetresponsebodymetadata.md
-  - docs/models/operations/findonepromptsnippetresponsebodymodelparameters.md
-  - docs/models/operations/findonepromptsnippetresponsebodymodeltype.md
-  - docs/models/operations/findonepromptsnippetresponsebodyowner.md
-  - docs/models/operations/findonepromptsnippetresponsebodyphotorealversion.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptconfig.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetscontent.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsencodingformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsfunction.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsmessages.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsmetadata.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsmodelparameters.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsmodeltype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsowner.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsphotorealversion.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetspromptconfig.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsprovider.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsquality.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson1format.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson1type.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson2type.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson2versionstype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3content.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3encodingformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3format.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3function.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3messages.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3metadata.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3modelparameters.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3modeltype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3photorealversion.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3promptconfig.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3provider.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3quality.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3responseformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3role.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3toolcalls.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjson3type.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsoncontent.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonencodingformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonfunction.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonmessages.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonmetadata.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonmodelparameters.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonmodeltype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonphotorealversion.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonpromptconfig.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonprovider.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonquality.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonresponseformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsonrole.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsontoolcalls.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200applicationjsontype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200content.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200encodingformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200format.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200function.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200messages.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200metadata.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200modelparameters.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200modeltype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200photorealversion.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200promptconfig.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200provider.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200quality.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200responseformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200role.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200toolcalls.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponse200type.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsecontent.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponseencodingformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponseformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsefunction.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsemessages.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsemetadata.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsemodelparameters.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsemodeltype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponseowner.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsephotorealversion.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsepromptconfig.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponseprovider.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsequality.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponseresponseformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponserole.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsetoolcalls.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponsetype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsresponseversions.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsrole.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetstoolcalls.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetstype.md
-  - docs/models/operations/findonepromptsnippetresponsebodypromptsnippetsversions.md
-  - docs/models/operations/findonepromptsnippetresponsebodyprovider.md
-  - docs/models/operations/findonepromptsnippetresponsebodyquality.md
-  - docs/models/operations/findonepromptsnippetresponsebodyresponseformat.md
-  - docs/models/operations/findonepromptsnippetresponsebodyrole.md
-  - docs/models/operations/findonepromptsnippetresponsebodytoolcalls.md
-  - docs/models/operations/findonepromptsnippetresponsebodytype.md
-  - docs/models/operations/findonepromptsnippetresponsebodyversions.md
+  - docs/models/operations/findonepromptsnippetresponseformat.md
   - docs/models/operations/findonepromptsnippetresponseformat1.md
   - docs/models/operations/findonepromptsnippetresponseformat2.md
   - docs/models/operations/findonepromptsnippetresponseformatjsonschema.md
   - docs/models/operations/findonepromptsnippetresponseformatpromptsnippets1.md
   - docs/models/operations/findonepromptsnippetresponseformatpromptsnippets2.md
   - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsjsonschema.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse1.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse2.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse2001.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse2002.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjson1.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjson2.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonjsonschema.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody1type.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody1versionstype.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody2type.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody2versionstype.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody3type.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebody3versionstype.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebodyjsonschema.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200applicationjsontype.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200jsonschema.md
   - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponse200type.md
-  - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponsejsonschema.md
   - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetsresponsetype.md
   - docs/models/operations/findonepromptsnippetresponseformatpromptsnippetstype.md
   - docs/models/operations/findonepromptsnippetresponseformattype.md
-  - docs/models/operations/five.md
+  - docs/models/operations/findonepromptsnippetrole.md
+  - docs/models/operations/findonepromptsnippettoolcalls.md
+  - docs/models/operations/findonepromptsnippettype.md
+  - docs/models/operations/findonepromptsnippetusecases.md
+  - docs/models/operations/findonepromptsnippetversions.md
   - docs/models/operations/format.md
-  - docs/models/operations/four.md
   - docs/models/operations/functiont.md
   - docs/models/operations/getallprompts21.md
   - docs/models/operations/getallprompts22.md
   - docs/models/operations/getallprompts2imageurl.md
-  - docs/models/operations/getallprompts2prompts1.md
-  - docs/models/operations/getallprompts2prompts2.md
-  - docs/models/operations/getallprompts2promptsimageurl.md
-  - docs/models/operations/getallprompts2promptsresponse1.md
-  - docs/models/operations/getallprompts2promptsresponse2.md
-  - docs/models/operations/getallprompts2promptsresponse2001.md
-  - docs/models/operations/getallprompts2promptsresponse2002.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjson1.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjson2.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonimageurl.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodydata1type.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodydata1versionstype.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodydata2type.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodydata3type.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodydata3versionstype.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodydatatype.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodyimageurl.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/getallprompts2promptsresponse200applicationjsontype.md
-  - docs/models/operations/getallprompts2promptsresponse200imageurl.md
-  - docs/models/operations/getallprompts2promptsresponse200type.md
-  - docs/models/operations/getallprompts2promptsresponseimageurl.md
-  - docs/models/operations/getallprompts2promptsresponsetype.md
   - docs/models/operations/getallprompts2promptstype.md
   - docs/models/operations/getallprompts2type.md
+  - docs/models/operations/getallpromptscontent.md
   - docs/models/operations/getallpromptscontent2.md
-  - docs/models/operations/getallpromptscontentprompts2.md
-  - docs/models/operations/getallpromptscontentpromptsresponse2.md
-  - docs/models/operations/getallpromptscontentpromptsresponse2002.md
-  - docs/models/operations/getallpromptscontentpromptsresponse200applicationjson2.md
-  - docs/models/operations/getallpromptscontentpromptsresponse200applicationjsonresponsebody2.md
   - docs/models/operations/getallpromptsdata.md
-  - docs/models/operations/getallpromptsdatacontent.md
-  - docs/models/operations/getallpromptsdataencodingformat.md
-  - docs/models/operations/getallpromptsdataformat.md
-  - docs/models/operations/getallpromptsdatafunction.md
-  - docs/models/operations/getallpromptsdatamessages.md
-  - docs/models/operations/getallpromptsdatametadata.md
-  - docs/models/operations/getallpromptsdatamodelparameters.md
-  - docs/models/operations/getallpromptsdatamodeltype.md
-  - docs/models/operations/getallpromptsdataowner.md
-  - docs/models/operations/getallpromptsdataphotorealversion.md
-  - docs/models/operations/getallpromptsdatapromptconfig.md
-  - docs/models/operations/getallpromptsdatapromptscontent.md
-  - docs/models/operations/getallpromptsdatapromptsencodingformat.md
-  - docs/models/operations/getallpromptsdatapromptsformat.md
-  - docs/models/operations/getallpromptsdatapromptsfunction.md
-  - docs/models/operations/getallpromptsdatapromptsmessages.md
-  - docs/models/operations/getallpromptsdatapromptsmetadata.md
-  - docs/models/operations/getallpromptsdatapromptsmodelparameters.md
-  - docs/models/operations/getallpromptsdatapromptsmodeltype.md
-  - docs/models/operations/getallpromptsdatapromptsowner.md
-  - docs/models/operations/getallpromptsdatapromptsphotorealversion.md
-  - docs/models/operations/getallpromptsdatapromptspromptconfig.md
-  - docs/models/operations/getallpromptsdatapromptsprovider.md
-  - docs/models/operations/getallpromptsdatapromptsquality.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsoncontent.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonencodingformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonfunction.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonmessages.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonmetadata.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonmodelparameters.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonmodeltype.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonphotorealversion.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonpromptconfig.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonprovider.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonquality.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonresponsebody1type.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonresponsebody3type.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonresponsebodyformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonresponseformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsonrole.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsontoolcalls.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200applicationjsontype.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200content.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200encodingformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200format.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200function.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200messages.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200metadata.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200modelparameters.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200modeltype.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200photorealversion.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200promptconfig.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200provider.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200quality.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200responseformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200role.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200toolcalls.md
-  - docs/models/operations/getallpromptsdatapromptsresponse200type.md
-  - docs/models/operations/getallpromptsdatapromptsresponsecontent.md
-  - docs/models/operations/getallpromptsdatapromptsresponseencodingformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponseformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponsefunction.md
-  - docs/models/operations/getallpromptsdatapromptsresponsemessages.md
-  - docs/models/operations/getallpromptsdatapromptsresponsemetadata.md
-  - docs/models/operations/getallpromptsdatapromptsresponsemodelparameters.md
-  - docs/models/operations/getallpromptsdatapromptsresponsemodeltype.md
-  - docs/models/operations/getallpromptsdatapromptsresponsephotorealversion.md
-  - docs/models/operations/getallpromptsdatapromptsresponsepromptconfig.md
-  - docs/models/operations/getallpromptsdatapromptsresponseprovider.md
-  - docs/models/operations/getallpromptsdatapromptsresponsequality.md
-  - docs/models/operations/getallpromptsdatapromptsresponseresponseformat.md
-  - docs/models/operations/getallpromptsdatapromptsresponserole.md
-  - docs/models/operations/getallpromptsdatapromptsresponsetoolcalls.md
-  - docs/models/operations/getallpromptsdatapromptsresponsetype.md
-  - docs/models/operations/getallpromptsdatapromptsrole.md
-  - docs/models/operations/getallpromptsdatapromptstoolcalls.md
-  - docs/models/operations/getallpromptsdatapromptstype.md
-  - docs/models/operations/getallpromptsdatapromptsversions.md
-  - docs/models/operations/getallpromptsdataprovider.md
-  - docs/models/operations/getallpromptsdataquality.md
-  - docs/models/operations/getallpromptsdataresponseformat.md
-  - docs/models/operations/getallpromptsdatarole.md
-  - docs/models/operations/getallpromptsdatatoolcalls.md
-  - docs/models/operations/getallpromptsdatatype.md
-  - docs/models/operations/getallpromptsdataversions.md
-  - docs/models/operations/getallpromptsfilters.md
-  - docs/models/operations/getallpromptsfilters1.md
-  - docs/models/operations/getallpromptsfilters2.md
-  - docs/models/operations/getallpromptsfilters3.md
-  - docs/models/operations/getallpromptsfilters4.md
-  - docs/models/operations/getallpromptsfiltershideoperators.md
-  - docs/models/operations/getallpromptsfiltersoperator.md
-  - docs/models/operations/getallpromptsfiltersoptions.md
-  - docs/models/operations/getallpromptsfiltersprompts1.md
-  - docs/models/operations/getallpromptsfiltersprompts2.md
-  - docs/models/operations/getallpromptsfiltersprompts3.md
-  - docs/models/operations/getallpromptsfilterspromptshideoperators.md
-  - docs/models/operations/getallpromptsfilterspromptsoperator.md
-  - docs/models/operations/getallpromptsfilterspromptsoptions.md
-  - docs/models/operations/getallpromptsfilterspromptsrequesthideoperators.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestoperator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbody1type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbody2type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbody3operator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbody3type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbody4operator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbody4type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyhideoperators.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyoperator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery6operator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery6optionstype.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery6type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery7hideoperators.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery7hideoperators1.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery7operator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery7optionstype.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery7type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery8hideoperators.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery8operator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquery8type.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyqueryhideoperators.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyqueryoperator.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodyquerytype.md
-  - docs/models/operations/getallpromptsfilterspromptsrequestrequestbodytype.md
-  - docs/models/operations/getallpromptsfilterspromptsrequesttype.md
-  - docs/models/operations/getallpromptsfilterspromptstype.md
-  - docs/models/operations/getallpromptsfilterstype.md
-  - docs/models/operations/getallpromptsfiltersvalue.md
-  - docs/models/operations/getallpromptshideoperators1.md
-  - docs/models/operations/getallpromptshideoperators2.md
-  - docs/models/operations/getallpromptshideoperators3.md
-  - docs/models/operations/getallpromptshideoperators4.md
-  - docs/models/operations/getallpromptshideoperators5.md
-  - docs/models/operations/getallpromptshideoperatorsprompts1.md
-  - docs/models/operations/getallpromptshideoperatorsprompts2.md
-  - docs/models/operations/getallpromptshideoperatorsprompts3.md
-  - docs/models/operations/getallpromptshideoperatorsprompts4.md
-  - docs/models/operations/getallpromptshideoperatorsprompts5.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequest1.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequest2.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequest3.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequest4.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequest5.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbody1.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbody2.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbody3.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbody4.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbody5.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyquery1.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyquery2.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyquery3.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyquery4.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyquery5.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters1.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters2.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters3.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters4.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters5.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters71.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters72.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters73.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters74.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters75.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters76.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters77.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters78.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters79.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters81.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters82.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters83.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters84.md
-  - docs/models/operations/getallpromptshideoperatorspromptsrequestrequestbodyqueryfilters85.md
+  - docs/models/operations/getallpromptsencodingformat.md
+  - docs/models/operations/getallpromptsformat.md
+  - docs/models/operations/getallpromptsfunction.md
+  - docs/models/operations/getallpromptslanguage.md
+  - docs/models/operations/getallpromptsmessages.md
+  - docs/models/operations/getallpromptsmetadata.md
+  - docs/models/operations/getallpromptsmodelparameters.md
+  - docs/models/operations/getallpromptsmodeltype.md
+  - docs/models/operations/getallpromptsnippets21.md
+  - docs/models/operations/getallpromptsnippets22.md
+  - docs/models/operations/getallpromptsnippets2imageurl.md
+  - docs/models/operations/getallpromptsnippets2promptsnippets1.md
+  - docs/models/operations/getallpromptsnippets2promptsnippets2.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetsimageurl.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetsresponse200type.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetsresponsetype.md
+  - docs/models/operations/getallpromptsnippets2promptsnippetstype.md
+  - docs/models/operations/getallpromptsnippets2type.md
+  - docs/models/operations/getallpromptsnippetscontent.md
+  - docs/models/operations/getallpromptsnippetscontent2.md
+  - docs/models/operations/getallpromptsnippetscontentpromptsnippets2.md
+  - docs/models/operations/getallpromptsnippetsdata.md
+  - docs/models/operations/getallpromptsnippetsencodingformat.md
+  - docs/models/operations/getallpromptsnippetsformat.md
+  - docs/models/operations/getallpromptsnippetsfunction.md
+  - docs/models/operations/getallpromptsnippetslanguage.md
+  - docs/models/operations/getallpromptsnippetsmessages.md
+  - docs/models/operations/getallpromptsnippetsmetadata.md
+  - docs/models/operations/getallpromptsnippetsmodelparameters.md
+  - docs/models/operations/getallpromptsnippetsmodeltype.md
+  - docs/models/operations/getallpromptsnippetsobject.md
+  - docs/models/operations/getallpromptsnippetsowner.md
+  - docs/models/operations/getallpromptsnippetsowner2.md
+  - docs/models/operations/getallpromptsnippetsphotorealversion.md
+  - docs/models/operations/getallpromptsnippetspromptconfig.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetscontent.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsencodingformat.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsformat.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsfunction.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetslanguage.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmessages.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmetadata.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmodelparameters.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsmodeltype.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsphotorealversion.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetspromptconfig.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsprovider.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsquality.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsreasoningeffort.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsresponseformat.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsresponsetype.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsrole.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetstoolcalls.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetstype.md
+  - docs/models/operations/getallpromptsnippetspromptsnippetsusecases.md
+  - docs/models/operations/getallpromptsnippetsprovider.md
+  - docs/models/operations/getallpromptsnippetsquality.md
+  - docs/models/operations/getallpromptsnippetsreasoningeffort.md
+  - docs/models/operations/getallpromptsnippetsrequest.md
+  - docs/models/operations/getallpromptsnippetsresponsebody.md
+  - docs/models/operations/getallpromptsnippetsresponseformat.md
+  - docs/models/operations/getallpromptsnippetsresponseformat1.md
+  - docs/models/operations/getallpromptsnippetsresponseformat2.md
+  - docs/models/operations/getallpromptsnippetsresponseformatjsonschema.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippets1.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippets2.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetsjsonschema.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetsresponse200type.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetsresponsetype.md
+  - docs/models/operations/getallpromptsnippetsresponseformatpromptsnippetstype.md
+  - docs/models/operations/getallpromptsnippetsresponseformattype.md
+  - docs/models/operations/getallpromptsnippetsrole.md
+  - docs/models/operations/getallpromptsnippetstoolcalls.md
+  - docs/models/operations/getallpromptsnippetstype.md
+  - docs/models/operations/getallpromptsnippetsusecases.md
+  - docs/models/operations/getallpromptsnippetsversions.md
   - docs/models/operations/getallpromptsobject.md
-  - docs/models/operations/getallpromptsoperator.md
-  - docs/models/operations/getallpromptsoperator1.md
-  - docs/models/operations/getallpromptsoperator2.md
-  - docs/models/operations/getallpromptsowner2.md
-  - docs/models/operations/getallpromptsownerprompts2.md
-  - docs/models/operations/getallpromptsownerpromptsresponse2.md
-  - docs/models/operations/getallpromptspromptsfilters.md
-  - docs/models/operations/getallpromptsrequestbody.md
+  - docs/models/operations/getallpromptsphotorealversion.md
+  - docs/models/operations/getallpromptspromptconfig.md
+  - docs/models/operations/getallpromptspromptstype.md
+  - docs/models/operations/getallpromptsprovider.md
+  - docs/models/operations/getallpromptsquality.md
+  - docs/models/operations/getallpromptsreasoningeffort.md
+  - docs/models/operations/getallpromptsrequest.md
   - docs/models/operations/getallpromptsresponsebody.md
+  - docs/models/operations/getallpromptsresponseformat.md
   - docs/models/operations/getallpromptsresponseformat1.md
   - docs/models/operations/getallpromptsresponseformat2.md
   - docs/models/operations/getallpromptsresponseformatjsonschema.md
-  - docs/models/operations/getallpromptsresponseformatprompts1.md
-  - docs/models/operations/getallpromptsresponseformatprompts2.md
-  - docs/models/operations/getallpromptsresponseformatpromptsjsonschema.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse1.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse2.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse2001.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse2002.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjson1.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjson2.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonjsonschema.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodydata1type.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodydata1versionstype.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodydata2type.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodydata3type.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodydata3versionstype.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodydatatype.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodyjsonschema.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200applicationjsontype.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200jsonschema.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponse200type.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponsejsonschema.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponsetype.md
   - docs/models/operations/getallpromptsresponseformatpromptstype.md
   - docs/models/operations/getallpromptsresponseformattype.md
-  - docs/models/operations/getallprompttemplates21.md
-  - docs/models/operations/getallprompttemplates22.md
-  - docs/models/operations/getallprompttemplates2imageurl.md
-  - docs/models/operations/getallprompttemplates2prompttemplates1.md
-  - docs/models/operations/getallprompttemplates2prompttemplates2.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesimageurl.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse1.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse2.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse2001.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse2002.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjson1.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjson2.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonimageurl.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyimageurl.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyitems1type.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyitems1versionstype.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyitems2type.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyitems3type.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyitems3versionstype.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodyitemstype.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200applicationjsontype.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200imageurl.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponse200type.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponseimageurl.md
-  - docs/models/operations/getallprompttemplates2prompttemplatesresponsetype.md
-  - docs/models/operations/getallprompttemplates2prompttemplatestype.md
-  - docs/models/operations/getallprompttemplates2type.md
-  - docs/models/operations/getallprompttemplatescontent2.md
-  - docs/models/operations/getallprompttemplatescontentprompttemplates2.md
-  - docs/models/operations/getallprompttemplatescontentprompttemplatesresponse2.md
-  - docs/models/operations/getallprompttemplatescontentprompttemplatesresponse2002.md
-  - docs/models/operations/getallprompttemplatescontentprompttemplatesresponse200applicationjson2.md
-  - docs/models/operations/getallprompttemplatescontentprompttemplatesresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/getallprompttemplatesfiltersprompttemplatesrequesttype.md
-  - docs/models/operations/getallprompttemplatesfiltersprompttemplatestype.md
-  - docs/models/operations/getallprompttemplatesfilterstype.md
-  - docs/models/operations/getallprompttemplatesitemscontent.md
-  - docs/models/operations/getallprompttemplatesitemsencodingformat.md
-  - docs/models/operations/getallprompttemplatesitemsformat.md
-  - docs/models/operations/getallprompttemplatesitemsfunction.md
-  - docs/models/operations/getallprompttemplatesitemsmessages.md
-  - docs/models/operations/getallprompttemplatesitemsmetadata.md
-  - docs/models/operations/getallprompttemplatesitemsmodelparameters.md
-  - docs/models/operations/getallprompttemplatesitemsmodeltype.md
-  - docs/models/operations/getallprompttemplatesitemsowner.md
-  - docs/models/operations/getallprompttemplatesitemsphotorealversion.md
-  - docs/models/operations/getallprompttemplatesitemspromptconfig.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatescontent.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesencodingformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesfunction.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesmessages.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesmetadata.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesmodelparameters.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesmodeltype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesowner.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesphotorealversion.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatespromptconfig.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesprovider.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesquality.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsoncontent.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonencodingformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonfunction.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonmessages.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonmetadata.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonmodelparameters.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonmodeltype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonphotorealversion.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonpromptconfig.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonprovider.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonquality.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonresponsebody1type.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonresponsebody3type.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonresponsebodyformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonresponseformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsonrole.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsontoolcalls.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200applicationjsontype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200content.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200encodingformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200format.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200function.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200messages.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200metadata.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200modelparameters.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200modeltype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200photorealversion.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200promptconfig.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200provider.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200quality.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200responseformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200role.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200toolcalls.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponse200type.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsecontent.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponseencodingformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponseformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsefunction.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsemessages.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsemetadata.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsemodelparameters.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsemodeltype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsephotorealversion.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsepromptconfig.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponseprovider.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsequality.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponseresponseformat.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponserole.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsetoolcalls.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesresponsetype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesrole.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatestoolcalls.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatestype.md
-  - docs/models/operations/getallprompttemplatesitemsprompttemplatesversions.md
-  - docs/models/operations/getallprompttemplatesitemsprovider.md
-  - docs/models/operations/getallprompttemplatesitemsquality.md
-  - docs/models/operations/getallprompttemplatesitemsresponseformat.md
-  - docs/models/operations/getallprompttemplatesitemsrole.md
-  - docs/models/operations/getallprompttemplatesitemstoolcalls.md
-  - docs/models/operations/getallprompttemplatesitemstype.md
-  - docs/models/operations/getallprompttemplatesitemsversions.md
-  - docs/models/operations/getallprompttemplatesowner2.md
-  - docs/models/operations/getallprompttemplatesownerprompttemplates2.md
-  - docs/models/operations/getallprompttemplatesownerprompttemplatesresponse2.md
-  - docs/models/operations/getallprompttemplatesrequest.md
-  - docs/models/operations/getallprompttemplatesrequestbody.md
-  - docs/models/operations/getallprompttemplatesresponsebody.md
-  - docs/models/operations/getallprompttemplatesresponseformat1.md
-  - docs/models/operations/getallprompttemplatesresponseformat2.md
-  - docs/models/operations/getallprompttemplatesresponseformatjsonschema.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplates1.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplates2.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesjsonschema.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse1.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse2.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse2001.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse2002.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjson1.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjson2.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonjsonschema.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitems1type.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitems1versionstype.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitems2type.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitems3type.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitems3versionstype.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyitemstype.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodyjsonschema.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200applicationjsontype.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200jsonschema.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponse200type.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponsejsonschema.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatesresponsetype.md
-  - docs/models/operations/getallprompttemplatesresponseformatprompttemplatestype.md
-  - docs/models/operations/getallprompttemplatesresponseformattype.md
+  - docs/models/operations/getallpromptsrole.md
+  - docs/models/operations/getallpromptstoolcalls.md
+  - docs/models/operations/getallpromptstype.md
+  - docs/models/operations/getallpromptsusecases.md
+  - docs/models/operations/getoneprompt21.md
+  - docs/models/operations/getoneprompt22.md
+  - docs/models/operations/getoneprompt2imageurl.md
+  - docs/models/operations/getoneprompt2promptstype.md
+  - docs/models/operations/getoneprompt2type.md
+  - docs/models/operations/getonepromptcontent.md
+  - docs/models/operations/getonepromptcontent2.md
+  - docs/models/operations/getonepromptencodingformat.md
+  - docs/models/operations/getonepromptformat.md
+  - docs/models/operations/getonepromptfunction.md
+  - docs/models/operations/getonepromptlanguage.md
+  - docs/models/operations/getonepromptmessages.md
+  - docs/models/operations/getonepromptmetadata.md
+  - docs/models/operations/getonepromptmodelparameters.md
+  - docs/models/operations/getonepromptmodeltype.md
+  - docs/models/operations/getonepromptphotorealversion.md
+  - docs/models/operations/getonepromptpromptconfig.md
+  - docs/models/operations/getonepromptpromptstype.md
+  - docs/models/operations/getonepromptprovider.md
+  - docs/models/operations/getonepromptquality.md
+  - docs/models/operations/getonepromptreasoningeffort.md
   - docs/models/operations/getonepromptrequest.md
-  - docs/models/operations/hideoperators.md
-  - docs/models/operations/hideoperators1.md
-  - docs/models/operations/hideoperators2.md
-  - docs/models/operations/hideoperators3.md
-  - docs/models/operations/hideoperators4.md
-  - docs/models/operations/hideoperators5.md
+  - docs/models/operations/getonepromptresponsebody.md
+  - docs/models/operations/getonepromptresponseformat.md
+  - docs/models/operations/getonepromptresponseformat1.md
+  - docs/models/operations/getonepromptresponseformat2.md
+  - docs/models/operations/getonepromptresponseformatjsonschema.md
+  - docs/models/operations/getonepromptresponseformatpromptstype.md
+  - docs/models/operations/getonepromptresponseformattype.md
+  - docs/models/operations/getonepromptrole.md
+  - docs/models/operations/getoneprompttoolcalls.md
+  - docs/models/operations/getoneprompttype.md
+  - docs/models/operations/getonepromptusecases.md
+  - docs/models/operations/getpromptversion21.md
+  - docs/models/operations/getpromptversion22.md
+  - docs/models/operations/getpromptversion2imageurl.md
+  - docs/models/operations/getpromptversion2promptstype.md
+  - docs/models/operations/getpromptversion2type.md
+  - docs/models/operations/getpromptversioncontent.md
+  - docs/models/operations/getpromptversioncontent2.md
+  - docs/models/operations/getpromptversionencodingformat.md
+  - docs/models/operations/getpromptversionformat.md
+  - docs/models/operations/getpromptversionfunction.md
+  - docs/models/operations/getpromptversionlanguage.md
+  - docs/models/operations/getpromptversionmessages.md
+  - docs/models/operations/getpromptversionmetadata.md
+  - docs/models/operations/getpromptversionmodelparameters.md
+  - docs/models/operations/getpromptversionmodeltype.md
+  - docs/models/operations/getpromptversionphotorealversion.md
+  - docs/models/operations/getpromptversionpromptconfig.md
+  - docs/models/operations/getpromptversionpromptstype.md
+  - docs/models/operations/getpromptversionprovider.md
+  - docs/models/operations/getpromptversionquality.md
+  - docs/models/operations/getpromptversionreasoningeffort.md
+  - docs/models/operations/getpromptversionrequest.md
+  - docs/models/operations/getpromptversionresponsebody.md
+  - docs/models/operations/getpromptversionresponseformat.md
+  - docs/models/operations/getpromptversionresponseformat1.md
+  - docs/models/operations/getpromptversionresponseformat2.md
+  - docs/models/operations/getpromptversionresponseformatjsonschema.md
+  - docs/models/operations/getpromptversionresponseformatpromptstype.md
+  - docs/models/operations/getpromptversionresponseformattype.md
+  - docs/models/operations/getpromptversionrole.md
+  - docs/models/operations/getpromptversiontoolcalls.md
+  - docs/models/operations/getpromptversiontype.md
+  - docs/models/operations/getpromptversionusecases.md
   - docs/models/operations/imageurl.md
   - docs/models/operations/inputs.md
   - docs/models/operations/invokeoptions.md
-  - docs/models/operations/items.md
-  - docs/models/operations/items1.md
-  - docs/models/operations/items2.md
-  - docs/models/operations/items3.md
-  - docs/models/operations/itemscontent.md
-  - docs/models/operations/itemsencodingformat.md
-  - docs/models/operations/itemsformat.md
-  - docs/models/operations/itemsfunction.md
-  - docs/models/operations/itemsmessages.md
-  - docs/models/operations/itemsmetadata.md
-  - docs/models/operations/itemsmodelparameters.md
-  - docs/models/operations/itemsmodeltype.md
-  - docs/models/operations/itemsowner.md
-  - docs/models/operations/itemsphotorealversion.md
-  - docs/models/operations/itemspromptconfig.md
-  - docs/models/operations/itemsprovider.md
-  - docs/models/operations/itemsquality.md
-  - docs/models/operations/itemsresponseformat.md
-  - docs/models/operations/itemsrole.md
-  - docs/models/operations/itemstoolcalls.md
-  - docs/models/operations/itemstype.md
-  - docs/models/operations/itemsversions.md
   - docs/models/operations/jsonschema.md
+  - docs/models/operations/language.md
+  - docs/models/operations/listpromptversions21.md
+  - docs/models/operations/listpromptversions22.md
+  - docs/models/operations/listpromptversions2imageurl.md
+  - docs/models/operations/listpromptversions2promptstype.md
+  - docs/models/operations/listpromptversions2type.md
+  - docs/models/operations/listpromptversionscontent.md
+  - docs/models/operations/listpromptversionscontent2.md
+  - docs/models/operations/listpromptversionsdata.md
+  - docs/models/operations/listpromptversionsencodingformat.md
+  - docs/models/operations/listpromptversionsformat.md
+  - docs/models/operations/listpromptversionsfunction.md
+  - docs/models/operations/listpromptversionslanguage.md
+  - docs/models/operations/listpromptversionsmessages.md
+  - docs/models/operations/listpromptversionsmetadata.md
+  - docs/models/operations/listpromptversionsmodelparameters.md
+  - docs/models/operations/listpromptversionsmodeltype.md
+  - docs/models/operations/listpromptversionsobject.md
+  - docs/models/operations/listpromptversionsphotorealversion.md
+  - docs/models/operations/listpromptversionspromptconfig.md
+  - docs/models/operations/listpromptversionspromptstype.md
+  - docs/models/operations/listpromptversionsprovider.md
+  - docs/models/operations/listpromptversionsquality.md
+  - docs/models/operations/listpromptversionsreasoningeffort.md
+  - docs/models/operations/listpromptversionsrequest.md
+  - docs/models/operations/listpromptversionsresponsebody.md
+  - docs/models/operations/listpromptversionsresponseformat.md
+  - docs/models/operations/listpromptversionsresponseformat1.md
+  - docs/models/operations/listpromptversionsresponseformat2.md
+  - docs/models/operations/listpromptversionsresponseformatjsonschema.md
+  - docs/models/operations/listpromptversionsresponseformatpromptstype.md
+  - docs/models/operations/listpromptversionsresponseformattype.md
+  - docs/models/operations/listpromptversionsrole.md
+  - docs/models/operations/listpromptversionstoolcalls.md
+  - docs/models/operations/listpromptversionstype.md
+  - docs/models/operations/listpromptversionsusecases.md
   - docs/models/operations/message.md
   - docs/models/operations/message1.md
   - docs/models/operations/message2.md
@@ -1008,22 +749,12 @@ generatedFiles:
   - docs/models/operations/messagetoolcalls.md
   - docs/models/operations/messagetype.md
   - docs/models/operations/metadata.md
-  - docs/models/operations/mode.md
   - docs/models/operations/modelparameters.md
   - docs/models/operations/modeltype.md
   - docs/models/operations/objectt.md
   - docs/models/operations/one.md
-  - docs/models/operations/operator.md
-  - docs/models/operations/operator1.md
-  - docs/models/operations/operator2.md
-  - docs/models/operations/operator3.md
-  - docs/models/operations/operator4.md
-  - docs/models/operations/operator5.md
-  - docs/models/operations/options.md
-  - docs/models/operations/optionsmap.md
   - docs/models/operations/owner.md
   - docs/models/operations/owner2.md
-  - docs/models/operations/pagination.md
   - docs/models/operations/parameterst.md
   - docs/models/operations/performance.md
   - docs/models/operations/photorealversion.md
@@ -1032,33 +763,10 @@ generatedFiles:
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
   - docs/models/operations/quality.md
-  - docs/models/operations/query.md
-  - docs/models/operations/relativetime.md
+  - docs/models/operations/reasoningeffort.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
-  - docs/models/operations/responsebody.md
-  - docs/models/operations/responsebody1.md
-  - docs/models/operations/responsebody2.md
-  - docs/models/operations/responsebody3.md
-  - docs/models/operations/responsebodycontent.md
-  - docs/models/operations/responsebodyencodingformat.md
-  - docs/models/operations/responsebodyformat.md
-  - docs/models/operations/responsebodyfunction.md
-  - docs/models/operations/responsebodymessages.md
-  - docs/models/operations/responsebodymetadata.md
-  - docs/models/operations/responsebodymodelparameters.md
-  - docs/models/operations/responsebodymodeltype.md
-  - docs/models/operations/responsebodyowner.md
-  - docs/models/operations/responsebodyphotorealversion.md
-  - docs/models/operations/responsebodypromptconfig.md
-  - docs/models/operations/responsebodyprovider.md
-  - docs/models/operations/responsebodyquality.md
-  - docs/models/operations/responsebodyresponseformat.md
-  - docs/models/operations/responsebodyrole.md
-  - docs/models/operations/responsebodytoolcalls.md
-  - docs/models/operations/responsebodytype.md
-  - docs/models/operations/responsebodyversions.md
   - docs/models/operations/responseformat.md
   - docs/models/operations/responseformat1.md
   - docs/models/operations/responseformat2.md
@@ -1066,9 +774,6 @@ generatedFiles:
   - docs/models/operations/responseformattype.md
   - docs/models/operations/retrievals.md
   - docs/models/operations/role.md
-  - docs/models/operations/seven.md
-  - docs/models/operations/six.md
-  - docs/models/operations/sortingprops.md
   - docs/models/operations/three.md
   - docs/models/operations/toolcalls.md
   - docs/models/operations/tools.md
@@ -1078,153 +783,55 @@ generatedFiles:
   - docs/models/operations/twoimageurl.md
   - docs/models/operations/twotype.md
   - docs/models/operations/type.md
-  - docs/models/operations/unit.md
-  - docs/models/operations/unit1.md
-  - docs/models/operations/unit2.md
   - docs/models/operations/updateprompt21.md
   - docs/models/operations/updateprompt22.md
   - docs/models/operations/updateprompt2imageurl.md
   - docs/models/operations/updateprompt2prompts1.md
   - docs/models/operations/updateprompt2prompts2.md
   - docs/models/operations/updateprompt2promptsimageurl.md
-  - docs/models/operations/updateprompt2promptsresponse1.md
-  - docs/models/operations/updateprompt2promptsresponse2.md
-  - docs/models/operations/updateprompt2promptsresponse2001.md
-  - docs/models/operations/updateprompt2promptsresponse2002.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjson1.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjson2.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonimageurl.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody1type.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody1versionstype.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody2type.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody2versionstype.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody31.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody32.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody3imageurl.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody3promptconfigtype.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody3type.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody3versionspromptconfigtype.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebody3versionstype.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebodyimageurl.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/updateprompt2promptsresponse200applicationjsontype.md
-  - docs/models/operations/updateprompt2promptsresponse200imageurl.md
   - docs/models/operations/updateprompt2promptsresponse200type.md
-  - docs/models/operations/updateprompt2promptsresponseimageurl.md
   - docs/models/operations/updateprompt2promptsresponsetype.md
   - docs/models/operations/updateprompt2promptstype.md
   - docs/models/operations/updateprompt2type.md
   - docs/models/operations/updatepromptcontent.md
   - docs/models/operations/updatepromptcontent2.md
   - docs/models/operations/updatepromptcontentprompts2.md
-  - docs/models/operations/updatepromptcontentpromptsresponse2.md
-  - docs/models/operations/updatepromptcontentpromptsresponse2002.md
-  - docs/models/operations/updatepromptcontentpromptsresponse200applicationjson2.md
-  - docs/models/operations/updatepromptcontentpromptsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/updatepromptcontentpromptsresponse200applicationjsonresponsebody32.md
   - docs/models/operations/updatepromptencodingformat.md
   - docs/models/operations/updatepromptformat.md
   - docs/models/operations/updatepromptfunction.md
+  - docs/models/operations/updatepromptlanguage.md
   - docs/models/operations/updatepromptmessages.md
   - docs/models/operations/updatepromptmetadata.md
   - docs/models/operations/updatepromptmodelparameters.md
   - docs/models/operations/updatepromptmodeltype.md
-  - docs/models/operations/updatepromptowner2.md
-  - docs/models/operations/updatepromptownerprompts2.md
   - docs/models/operations/updatepromptphotorealversion.md
   - docs/models/operations/updatepromptpromptconfig.md
+  - docs/models/operations/updatepromptpromptscontent.md
+  - docs/models/operations/updatepromptpromptsencodingformat.md
+  - docs/models/operations/updatepromptpromptsformat.md
+  - docs/models/operations/updatepromptpromptsfunction.md
+  - docs/models/operations/updatepromptpromptslanguage.md
+  - docs/models/operations/updatepromptpromptsmessages.md
+  - docs/models/operations/updatepromptpromptsmetadata.md
+  - docs/models/operations/updatepromptpromptsmodelparameters.md
+  - docs/models/operations/updatepromptpromptsmodeltype.md
+  - docs/models/operations/updatepromptpromptsphotorealversion.md
+  - docs/models/operations/updatepromptpromptspromptconfig.md
+  - docs/models/operations/updatepromptpromptsprovider.md
+  - docs/models/operations/updatepromptpromptsquality.md
+  - docs/models/operations/updatepromptpromptsreasoningeffort.md
+  - docs/models/operations/updatepromptpromptsresponseformat.md
+  - docs/models/operations/updatepromptpromptsresponsetype.md
+  - docs/models/operations/updatepromptpromptsrole.md
+  - docs/models/operations/updatepromptpromptstoolcalls.md
+  - docs/models/operations/updatepromptpromptstype.md
+  - docs/models/operations/updatepromptpromptsusecases.md
   - docs/models/operations/updatepromptprovider.md
   - docs/models/operations/updatepromptquality.md
+  - docs/models/operations/updatepromptreasoningeffort.md
   - docs/models/operations/updatepromptrequest.md
   - docs/models/operations/updatepromptrequestbody.md
   - docs/models/operations/updatepromptresponsebody.md
-  - docs/models/operations/updatepromptresponsebodycontent.md
-  - docs/models/operations/updatepromptresponsebodyencodingformat.md
-  - docs/models/operations/updatepromptresponsebodyformat.md
-  - docs/models/operations/updatepromptresponsebodyfunction.md
-  - docs/models/operations/updatepromptresponsebodymessages.md
-  - docs/models/operations/updatepromptresponsebodymetadata.md
-  - docs/models/operations/updatepromptresponsebodymodelparameters.md
-  - docs/models/operations/updatepromptresponsebodymodeltype.md
-  - docs/models/operations/updatepromptresponsebodyowner.md
-  - docs/models/operations/updatepromptresponsebodyphotorealversion.md
-  - docs/models/operations/updatepromptresponsebodypromptconfig.md
-  - docs/models/operations/updatepromptresponsebodypromptscontent.md
-  - docs/models/operations/updatepromptresponsebodypromptsencodingformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsfunction.md
-  - docs/models/operations/updatepromptresponsebodypromptsmessages.md
-  - docs/models/operations/updatepromptresponsebodypromptsmetadata.md
-  - docs/models/operations/updatepromptresponsebodypromptsmodelparameters.md
-  - docs/models/operations/updatepromptresponsebodypromptsmodeltype.md
-  - docs/models/operations/updatepromptresponsebodypromptsphotorealversion.md
-  - docs/models/operations/updatepromptresponsebodypromptspromptconfig.md
-  - docs/models/operations/updatepromptresponsebodypromptsprovider.md
-  - docs/models/operations/updatepromptresponsebodypromptsquality.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjson1type.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjson2type.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjson3format.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjson3type.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsoncontent.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonencodingformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonfunction.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonmessages.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonmetadata.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonmodelparameters.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonmodeltype.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonphotorealversion.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonpromptconfig.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonprovider.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonquality.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonresponseformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsonrole.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsontoolcalls.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200applicationjsontype.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200content.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200encodingformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200format.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200function.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200messages.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200metadata.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200modelparameters.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200modeltype.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200photorealversion.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200promptconfig.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200provider.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200quality.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200responseformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200role.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200toolcalls.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponse200type.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsecontent.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponseencodingformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponseformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsefunction.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsemessages.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsemetadata.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsemodelparameters.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsemodeltype.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsephotorealversion.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsepromptconfig.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponseprovider.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsequality.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponseresponseformat.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponserole.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsetoolcalls.md
-  - docs/models/operations/updatepromptresponsebodypromptsresponsetype.md
-  - docs/models/operations/updatepromptresponsebodypromptsrole.md
-  - docs/models/operations/updatepromptresponsebodypromptstoolcalls.md
-  - docs/models/operations/updatepromptresponsebodypromptstype.md
-  - docs/models/operations/updatepromptresponsebodyprovider.md
-  - docs/models/operations/updatepromptresponsebodyquality.md
-  - docs/models/operations/updatepromptresponsebodyresponseformat.md
-  - docs/models/operations/updatepromptresponsebodyrole.md
-  - docs/models/operations/updatepromptresponsebodytoolcalls.md
-  - docs/models/operations/updatepromptresponsebodytype.md
-  - docs/models/operations/updatepromptresponsebodyversions.md
   - docs/models/operations/updatepromptresponseformat.md
   - docs/models/operations/updatepromptresponseformat1.md
   - docs/models/operations/updatepromptresponseformat2.md
@@ -1232,39 +839,112 @@ generatedFiles:
   - docs/models/operations/updatepromptresponseformatprompts1.md
   - docs/models/operations/updatepromptresponseformatprompts2.md
   - docs/models/operations/updatepromptresponseformatpromptsjsonschema.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse1.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse2.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse2001.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse2002.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjson1.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjson2.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonjsonschema.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody1.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody1type.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody1versionstype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody2.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody2type.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody2versionstype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody31.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody32.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody3jsonschema.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody3promptconfigtype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody3type.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody3versionspromptconfigtype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebody3versionstype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebodyjsonschema.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsonresponsebodytype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsontype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200jsonschema.md
   - docs/models/operations/updatepromptresponseformatpromptsresponse200type.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponsejsonschema.md
   - docs/models/operations/updatepromptresponseformatpromptsresponsetype.md
   - docs/models/operations/updatepromptresponseformatpromptstype.md
   - docs/models/operations/updatepromptresponseformattype.md
   - docs/models/operations/updatepromptrole.md
+  - docs/models/operations/updatepromptsnippet21.md
+  - docs/models/operations/updatepromptsnippet22.md
+  - docs/models/operations/updatepromptsnippet2imageurl.md
+  - docs/models/operations/updatepromptsnippet2promptsnippets1.md
+  - docs/models/operations/updatepromptsnippet2promptsnippets2.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsimageurl.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponse1.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponse2.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponse200applicationjsonresponsebodytype.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponse200applicationjsontype.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponse200type.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponseimageurl.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetsresponsetype.md
+  - docs/models/operations/updatepromptsnippet2promptsnippetstype.md
+  - docs/models/operations/updatepromptsnippet2type.md
+  - docs/models/operations/updatepromptsnippetcontent.md
+  - docs/models/operations/updatepromptsnippetcontent2.md
+  - docs/models/operations/updatepromptsnippetcontentpromptsnippets2.md
+  - docs/models/operations/updatepromptsnippetcontentpromptsnippetsresponse2.md
+  - docs/models/operations/updatepromptsnippetencodingformat.md
+  - docs/models/operations/updatepromptsnippetformat.md
+  - docs/models/operations/updatepromptsnippetfunction.md
+  - docs/models/operations/updatepromptsnippetlanguage.md
+  - docs/models/operations/updatepromptsnippetmessages.md
+  - docs/models/operations/updatepromptsnippetmetadata.md
+  - docs/models/operations/updatepromptsnippetmodelparameters.md
+  - docs/models/operations/updatepromptsnippetmodeltype.md
+  - docs/models/operations/updatepromptsnippetowner.md
+  - docs/models/operations/updatepromptsnippetowner2.md
+  - docs/models/operations/updatepromptsnippetphotorealversion.md
+  - docs/models/operations/updatepromptsnippetpromptconfig.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetscontent.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsencodingformat.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsformat.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsfunction.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetslanguage.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsmessages.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsmetadata.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsmodelparameters.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsmodeltype.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsphotorealversion.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetspromptconfig.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsprovider.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsquality.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsreasoningeffort.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponse200format.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponse200type.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsecontent.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponseencodingformat.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponseformat.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsefunction.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponselanguage.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsemessages.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsemetadata.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsemodelparameters.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsemodeltype.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsephotorealversion.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsepromptconfig.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponseprovider.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsequality.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsereasoningeffort.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponseresponseformat.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponserole.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsetoolcalls.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponsetype.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsresponseusecases.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsrole.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetstoolcalls.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetstype.md
+  - docs/models/operations/updatepromptsnippetpromptsnippetsusecases.md
+  - docs/models/operations/updatepromptsnippetprovider.md
+  - docs/models/operations/updatepromptsnippetquality.md
+  - docs/models/operations/updatepromptsnippetreasoningeffort.md
+  - docs/models/operations/updatepromptsnippetrequest.md
+  - docs/models/operations/updatepromptsnippetrequestbody.md
+  - docs/models/operations/updatepromptsnippetresponsebody.md
+  - docs/models/operations/updatepromptsnippetresponseformat.md
+  - docs/models/operations/updatepromptsnippetresponseformat1.md
+  - docs/models/operations/updatepromptsnippetresponseformat2.md
+  - docs/models/operations/updatepromptsnippetresponseformatjsonschema.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippets1.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippets2.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsjsonschema.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsresponse1.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsresponse2.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsresponse200applicationjsonresponsebodytype.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsresponse200applicationjsontype.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsresponse200type.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetsresponsetype.md
+  - docs/models/operations/updatepromptsnippetresponseformatpromptsnippetstype.md
+  - docs/models/operations/updatepromptsnippetresponseformattype.md
+  - docs/models/operations/updatepromptsnippetrole.md
+  - docs/models/operations/updatepromptsnippettoolcalls.md
+  - docs/models/operations/updatepromptsnippettype.md
+  - docs/models/operations/updatepromptsnippetusecases.md
+  - docs/models/operations/updatepromptsnippetversions.md
   - docs/models/operations/updateprompttoolcalls.md
   - docs/models/operations/updateprompttype.md
+  - docs/models/operations/updatepromptusecases.md
   - docs/models/operations/usage.md
+  - docs/models/operations/usecases.md
   - docs/models/operations/value.md
   - docs/models/operations/versions.md
   - docs/sdks/contacts/README.md
@@ -1273,35 +953,36 @@ generatedFiles:
   - docs/sdks/files/README.md
   - docs/sdks/metrics/README.md
   - docs/sdks/orq/README.md
-  - docs/sdks/prompt/README.md
   - docs/sdks/prompts/README.md
+  - docs/sdks/promptsnippets/README.md
   - docs/sdks/remoteconfig/README.md
-  - docs/sdks/snippets/README.md
-  - docs/sdks/templates/README.md
   - eslint.config.mjs
   - jsr.json
   - package.json
   - src/core.ts
   - src/funcs/contactsCreate.ts
-  - src/funcs/deploymentsAll.ts
   - src/funcs/deploymentsGetConfig.ts
   - src/funcs/deploymentsInvoke.ts
+  - src/funcs/deploymentsList.ts
   - src/funcs/deploymentsMetricsCreate.ts
+  - src/funcs/deploymentsStream.ts
   - src/funcs/feedbackCreate.ts
-  - src/funcs/filesBulkUpload.ts
   - src/funcs/filesDelete.ts
   - src/funcs/filesGet.ts
   - src/funcs/filesList.ts
-  - src/funcs/filesUpdate.ts
   - src/funcs/filesUpload.ts
-  - src/funcs/promptSnippetsFindOne.ts
-  - src/funcs/promptTemplatesGetAll.ts
+  - src/funcs/promptSnippetsCreate.ts
+  - src/funcs/promptSnippetsDelete.ts
+  - src/funcs/promptSnippetsGet.ts
+  - src/funcs/promptSnippetsGetByKey.ts
+  - src/funcs/promptSnippetsList.ts
+  - src/funcs/promptSnippetsUpdate.ts
   - src/funcs/promptsCreate.ts
-  - src/funcs/promptsCreateVersion.ts
   - src/funcs/promptsDelete.ts
-  - src/funcs/promptsDuplicate.ts
-  - src/funcs/promptsGetAll.ts
-  - src/funcs/promptsGetOne.ts
+  - src/funcs/promptsGetVersion.ts
+  - src/funcs/promptsList.ts
+  - src/funcs/promptsListVersions.ts
+  - src/funcs/promptsRetrieve.ts
   - src/funcs/promptsUpdate.ts
   - src/funcs/remoteconfigGetConfig.ts
   - src/hooks/hooks.ts
@@ -1329,46 +1010,49 @@ generatedFiles:
   - src/models/components/index.ts
   - src/models/components/security.ts
   - src/models/errors/apierror.ts
+  - src/models/errors/getpromptversion.ts
   - src/models/errors/honoapierror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/errors/updateprompt.ts
-  - src/models/operations/bulkfileupload.ts
+  - src/models/errors/updatepromptsnippet.ts
   - src/models/operations/createcontact.ts
   - src/models/operations/createfeedback.ts
   - src/models/operations/createprompt.ts
-  - src/models/operations/createpromptversion.ts
+  - src/models/operations/createpromptsnippet.ts
   - src/models/operations/deleteprompt.ts
+  - src/models/operations/deletepromptsnippet.ts
   - src/models/operations/deploymentcreatemetric.ts
   - src/models/operations/deploymentgetconfig.ts
   - src/models/operations/deploymentinvoke.ts
   - src/models/operations/deployments.ts
-  - src/models/operations/duplicateprompt.ts
+  - src/models/operations/deploymentstream.ts
   - src/models/operations/filedelete.ts
   - src/models/operations/fileget.ts
   - src/models/operations/filelist.ts
-  - src/models/operations/fileupdate.ts
   - src/models/operations/fileupload.ts
+  - src/models/operations/findonebykeypromptsnippet.ts
   - src/models/operations/findonepromptsnippet.ts
   - src/models/operations/getallprompts.ts
-  - src/models/operations/getallprompttemplates.ts
+  - src/models/operations/getallpromptsnippets.ts
   - src/models/operations/getoneprompt.ts
+  - src/models/operations/getpromptversion.ts
   - src/models/operations/index.ts
+  - src/models/operations/listpromptversions.ts
   - src/models/operations/remoteconfigsgetconfig.ts
   - src/models/operations/updateprompt.ts
+  - src/models/operations/updatepromptsnippet.ts
   - src/sdk/contacts.ts
   - src/sdk/deployments.ts
   - src/sdk/feedback.ts
   - src/sdk/files.ts
   - src/sdk/index.ts
   - src/sdk/metrics.ts
-  - src/sdk/prompt.ts
   - src/sdk/prompts.ts
+  - src/sdk/promptsnippets.ts
   - src/sdk/remoteconfig.ts
   - src/sdk/sdk.ts
-  - src/sdk/snippets.ts
-  - src/sdk/templates.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
@@ -1400,7 +1084,7 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "brook cleverly blossom", "prompt_config": {"tools": [{"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>"}}}}, {"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}}}], "model": "Prius", "model_type": "moderations", "model_parameters": {}, "provider": "openai", "messages": []}, "version": "<value>"}, {"id": "1dc2a4c8-104f-4b45-91a7-0cfc8fe07fbc", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "inasmuch irritably finally", "prompt_config": {"tools": [], "model": "Camaro", "model_type": "completion", "model_parameters": {}, "provider": "fal", "messages": [{"role": "exception", "content": []}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://parched-merit.com/"}}, {"type": "text", "text": "<value>"}]}, {"role": "tool", "content": "<value>"}]}, "version": "<value>"}, {"id": "ebd834b7-d8c2-4236-be08-5944ebceb27b", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "along energetic oddball pasta thread", "prompt_config": {"tools": [], "model": "Element", "model_type": "image", "model_parameters": {}, "provider": "cohere", "messages": [{"role": "assistant", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": "<value>"}]}, "version": "<value>"}], "has_more": false, "first_id": "<id>", "last_id": "<id>"}
+          application/json: {"object": "list", "data": [{"id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "brook cleverly blossom", "prompt_config": {"tools": [{"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>"}}}}, {"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}}}], "model": "Prius", "model_type": "moderations", "model_parameters": {}, "provider": "openai", "messages": []}, "version": "<value>"}, {"id": "1dc2a4c8-104f-4b45-91a7-0cfc8fe07fbc", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "inasmuch irritably finally", "prompt_config": {"tools": [], "model": "Camaro", "model_type": "completion", "model_parameters": {}, "provider": "fal", "messages": [{"role": "exception", "content": []}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://parched-merit.com/"}}, {"type": "text", "text": "<value>"}]}, {"role": "tool", "content": "<value>"}]}, "version": "<value>"}, {"id": "ebd834b7-d8c2-4236-be08-5944ebceb27b", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "along energetic oddball pasta thread", "prompt_config": {"tools": [], "model": "Element", "model_type": "image", "model_parameters": {}, "provider": "cohere", "messages": [{"role": "assistant", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": "<value>"}]}, "version": "<value>"}], "has_more": false}
         "500":
           application/json: {"message": "<value>"}
   DeploymentGetConfig:
@@ -1413,7 +1097,7 @@ examples:
   DeploymentInvoke:
     speakeasy-default-deployment-invoke:
       requestBody:
-        application/json: {"key": "<key>", "stream": false}
+        application/json: {"key": "<key>"}
       responses:
         "200":
           application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12}, {"index": 3047.15}]}
@@ -1443,7 +1127,7 @@ examples:
           limit: 50
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 6783.17, "file_name": "example.file", "workspace_id": "232aa0b1-1b8a-4005-b71e-9e705d0e6e21", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 4602.76, "file_name": "example.file", "workspace_id": "66718d6d-4612-4e0a-9ee1-b9ddf121dc2a", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 5446.51, "file_name": "example.file", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "created": "2025-02-11T16:43:22.676Z"}], "has_more": true, "first_id": "<id>", "last_id": "<id>"}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 6783.17, "file_name": "example.file", "workspace_id": "232aa0b1-1b8a-4005-b71e-9e705d0e6e21", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 4602.76, "file_name": "example.file", "workspace_id": "66718d6d-4612-4e0a-9ee1-b9ddf121dc2a", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 5446.51, "file_name": "example.file", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "created": "2025-02-11T16:43:22.676Z"}], "has_more": true}
   FileGet:
     speakeasy-default-file-get:
       parameters:
@@ -1497,7 +1181,7 @@ examples:
           key: "<key>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "owner": "<value>", "domain_id": "c65b0e01-cb71-4bcd-a060-93e7d5b8c93b", "created_by_id": "7b3823c9-eca7-4b78-a2fc-964f7b3c1870", "display_name": "Estefania6", "updated_by_id": "defaa7aa-3da5-41f8-af17-3dfced0ec663", "prompt_config": {"messages": [{"role": "correction", "content": "<value>"}]}, "metadata": {}, "updated": "2025-01-02T13:55:01.056Z", "versions": [{"_id": "<id>", "created_by_id": "f7014378-d751-45c5-b131-8b1a39e685a4", "display_name": "Alejandra_Lind", "updated_by_id": "490937c7-9db3-47d3-b124-67063626b8af", "prompt_config": {"messages": [{"role": "expected_output", "content": [{"type": "image_url", "image_url": {"url": "https://filthy-siege.biz/"}}, {"type": "image_url", "image_url": {"url": "https://chilly-shadowbox.name"}}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "4ee58ee2-19fe-4f51-a1a8-15cc8ea9e661", "display_name": "Lilyan.Pfannerstill66", "updated_by_id": "c3552bea-e34a-482d-9f52-2e81306d8147", "prompt_config": {"messages": [{"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://strange-doing.net"}}]}, {"role": "user", "content": [{"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": []}]}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "24a51bb0-6b66-4b48-9ad5-6c47af968ae4", "display_name": "Imelda.Wintheiser61", "updated_by_id": "733ae14d-fdb3-4131-bd5b-8472235c4b22", "prompt_config": {"messages": []}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}], "type": "prompt"}
+          application/json: {"_id": "<id>", "owner": "<value>", "domain_id": "c65b0e01-cb71-4bcd-a060-93e7d5b8c93b", "key": "<key>", "prompt_config": {"messages": [{"role": "correction", "content": "<value>"}]}, "metadata": {}, "created_by_id": "7b3823c9-eca7-4b78-a2fc-964f7b3c1870", "updated_by_id": "defaa7aa-3da5-41f8-af17-3dfced0ec663", "updated": "2025-01-02T13:55:01.056Z", "type": "snippet", "versions": [{"_id": "<id>", "prompt_config": {"messages": [{"role": "expected_output", "content": [{"type": "image_url", "image_url": {"url": "https://filthy-siege.biz/"}}, {"type": "image_url", "image_url": {"url": "https://chilly-shadowbox.name"}}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "created_by_id": "f7014378-d751-45c5-b131-8b1a39e685a4", "updated_by_id": "490937c7-9db3-47d3-b124-67063626b8af", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": [{"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://strange-doing.net"}}]}, {"role": "user", "content": [{"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": []}]}, "metadata": {}, "created_by_id": "4ee58ee2-19fe-4f51-a1a8-15cc8ea9e661", "updated_by_id": "c3552bea-e34a-482d-9f52-2e81306d8147", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": []}, "metadata": {}, "created_by_id": "24a51bb0-6b66-4b48-9ad5-6c47af968ae4", "updated_by_id": "733ae14d-fdb3-4131-bd5b-8472235c4b22", "timestamp": "<value>"}]}
   FindOneByKeyPromptSnippet:
     speakeasy-default-find-one-by-key-prompt-snippet:
       parameters:
@@ -1513,14 +1197,14 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "owner": "<value>", "domain_id": "9a0790cc-23f2-474a-964b-0d278a6af50d", "created_by_id": "738dd1fb-9371-4a92-b8ec-8fb977295586", "display_name": "Dwight_Sipes", "updated_by_id": "c2ee924d-279b-42b7-a7a9-5f7873d9e4c4", "prompt_config": {"messages": [{"role": "prompt", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://jittery-cycle.com"}}, {"type": "image_url", "image_url": {"url": "https://ignorant-knuckle.biz"}}]}, {"role": "tool", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}, "updated": "2025-01-02T13:55:01.056Z", "versions": [{"_id": "<id>", "created_by_id": "24b50978-225a-457d-9999-ee0d086d14e4", "display_name": "Ines48", "updated_by_id": "04eddf5d-8c05-4eb7-849c-b160799f958b", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "expected_output", "content": [{"type": "image_url", "image_url": {"url": "https://chilly-programme.org/"}}]}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}], "key": "<key>", "type": "snippet"}, {"_id": "<id>", "owner": "vendor", "domain_id": "6194824d-1a0d-400e-9676-8fa9b14911cd", "created_by_id": "aebb8bed-fc99-42df-8bea-7acd6c7aacfb", "display_name": "Ewald94", "updated_by_id": "b8345289-fce7-4447-b8a1-1a67970e6ada", "prompt_config": {"messages": []}, "metadata": {}, "updated": "2025-01-02T13:55:01.056Z", "versions": [], "type": "prompt"}, {"_id": "<id>", "owner": "<value>", "domain_id": "2dae8fbe-e20d-49a8-a4ca-19cf90942c7e", "created_by_id": "d0cf42ff-c8b4-4675-9239-2c048dcba1b2", "display_name": "Annamarie_Franey75", "updated_by_id": "c8667a70-b6a5-4785-9545-4dca88de9992", "prompt_config": {"messages": [{"role": "tool", "content": []}]}, "metadata": {}, "updated": "2025-01-02T13:55:01.056Z", "versions": [{"_id": "<id>", "created_by_id": "be343e2f-f689-4fec-b367-0b131fa17459", "display_name": "Cheyenne.Murray99", "updated_by_id": "1bfc1c56-85cf-426d-b31f-a64638ed73bb", "prompt_config": {"messages": [{"role": "correction", "content": "<value>"}, {"role": "tool", "content": "<value>"}, {"role": "prompt", "content": [{"type": "image_url", "image_url": {"url": "https://perfumed-vibraphone.info"}}, {"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://criminal-pocket-watch.name"}}]}]}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}, {"_id": "<id>", "created_by_id": "6535355a-774b-4ae6-93f8-c8e508be2705", "display_name": "Samara_OKeefe29", "updated_by_id": "81c089fc-0d13-4b8f-8455-da045f741a9a", "prompt_config": {"messages": []}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}], "type": "prompt"}], "has_more": false, "first_id": "<id>", "last_id": "<id>"}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "9a0790cc-23f2-474a-964b-0d278a6af50d", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "738dd1fb-9371-4a92-b8ec-8fb977295586", "updated_by_id": "c2ee924d-279b-42b7-a7a9-5f7873d9e4c4", "display_name": "Dwight_Sipes", "prompt_config": {"messages": [{"role": "prompt", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://jittery-cycle.com"}}, {"type": "image_url", "image_url": {"url": "https://ignorant-knuckle.biz"}}]}, {"role": "tool", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}}, {"_id": "<id>", "type": "prompt", "owner": "vendor", "domain_id": "6194824d-1a0d-400e-9676-8fa9b14911cd", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "aebb8bed-fc99-42df-8bea-7acd6c7aacfb", "updated_by_id": "b8345289-fce7-4447-b8a1-1a67970e6ada", "display_name": "Ewald94", "prompt_config": {"messages": []}, "metadata": {}}, {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "2dae8fbe-e20d-49a8-a4ca-19cf90942c7e", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "d0cf42ff-c8b4-4675-9239-2c048dcba1b2", "updated_by_id": "c8667a70-b6a5-4785-9545-4dca88de9992", "display_name": "Annamarie_Franey75", "prompt_config": {"messages": [{"role": "tool", "content": []}]}, "metadata": {}}], "has_more": false}
   CreatePrompt:
     speakeasy-default-create-prompt:
       requestBody:
-        application/json: {"display_name": "Jed6", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://well-worn-formation.biz"}}, {"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "type": "snippet"}
+        application/json: {"display_name": "Jed6", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://well-worn-formation.biz"}}, {"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "ulid-string", "display_name": "string", "domain_id": "uuid-string", "description": "Sample description for the prompt", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "type": "prompt"}
+          application/json: {"_id": "ulid-string", "type": "prompt", "owner": "<value>", "domain_id": "uuid-string", "created": "<value>", "updated": "<value>", "display_name": "string", "description": "Sample description for the prompt", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}}
   GetOnePrompt:
     speakeasy-default-get-one-prompt:
       parameters:
@@ -1536,7 +1220,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "owner": "vendor", "domain_id": "5fa7f0e7-432c-4e47-acb6-0cc78135ddeb", "created_by_id": "5898c125-a190-471c-a556-2af6646dadb3", "display_name": "Dedric.Donnelly68", "updated_by_id": "450617e6-bb05-479d-86f9-464a3158c876", "prompt_config": {"messages": [{"role": "user", "content": "<value>"}, {"role": "expected_output", "content": "<value>"}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}, "updated": "2025-01-02T13:55:01.056Z", "versions": [], "type": "template"}
+          application/json: {"_id": "<id>", "type": "prompt", "owner": "vendor", "domain_id": "5fa7f0e7-432c-4e47-acb6-0cc78135ddeb", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "5898c125-a190-471c-a556-2af6646dadb3", "updated_by_id": "450617e6-bb05-479d-86f9-464a3158c876", "display_name": "Dedric.Donnelly68", "prompt_config": {"messages": [{"role": "user", "content": "<value>"}, {"role": "expected_output", "content": "<value>"}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}}
         "404":
           application/json: {"message": "<value>"}
   DeletePrompt:

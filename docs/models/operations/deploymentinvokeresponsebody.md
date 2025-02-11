@@ -9,14 +9,14 @@ import { DeploymentInvokeResponseBody } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeResponseBody = {
   id: "<id>",
-  created: new Date("2025-05-03T10:48:13.302Z"),
+  created: new Date("2025-12-07T08:01:55.761Z"),
   object: "vision",
-  model: "Challenger",
-  provider: "google",
+  model: "Countach",
+  provider: "elevenlabs",
   isFinal: false,
   choices: [
     {
-      index: 5876,
+      index: 2317.01,
     },
   ],
 };

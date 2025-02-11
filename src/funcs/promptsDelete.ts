@@ -60,7 +60,7 @@ export async function promptsDelete(
     }),
   };
 
-  const path = pathToFunc("/v2/resources/prompts/{id}")(pathParams);
+  const path = pathToFunc("/v2/prompts/{id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "*/*",

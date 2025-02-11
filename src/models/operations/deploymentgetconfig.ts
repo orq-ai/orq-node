@@ -524,6 +524,21 @@ export type DeploymentGetConfigEncodingFormat = ClosedEnum<
 >;
 
 /**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const DeploymentGetConfigReasoningEffort = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type DeploymentGetConfigReasoningEffort = ClosedEnum<
+  typeof DeploymentGetConfigReasoningEffort
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type ParametersT = {
@@ -599,6 +614,10 @@ export type ParametersT = {
    * The format to return the embeddings
    */
   encodingFormat?: DeploymentGetConfigEncodingFormat | undefined;
+  /**
+   * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   */
+  reasoningEffort?: DeploymentGetConfigReasoningEffort | undefined;
 };
 
 /**
@@ -3149,6 +3168,28 @@ export namespace DeploymentGetConfigEncodingFormat$ {
 }
 
 /** @internal */
+export const DeploymentGetConfigReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigReasoningEffort
+> = z.nativeEnum(DeploymentGetConfigReasoningEffort);
+
+/** @internal */
+export const DeploymentGetConfigReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigReasoningEffort
+> = DeploymentGetConfigReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigReasoningEffort$ {
+  /** @deprecated use `DeploymentGetConfigReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigReasoningEffort$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const ParametersT$inboundSchema: z.ZodType<
   ParametersT,
   z.ZodTypeDef,
@@ -3175,6 +3216,7 @@ export const ParametersT$inboundSchema: z.ZodType<
   photoRealVersion: DeploymentGetConfigPhotoRealVersion$inboundSchema
     .optional(),
   encoding_format: DeploymentGetConfigEncodingFormat$inboundSchema.optional(),
+  reasoningEffort: DeploymentGetConfigReasoningEffort$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -3202,6 +3244,7 @@ export type ParametersT$Outbound = {
     | undefined;
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
+  reasoningEffort?: string | undefined;
 };
 
 /** @internal */
@@ -3231,6 +3274,7 @@ export const ParametersT$outboundSchema: z.ZodType<
   photoRealVersion: DeploymentGetConfigPhotoRealVersion$outboundSchema
     .optional(),
   encodingFormat: DeploymentGetConfigEncodingFormat$outboundSchema.optional(),
+  reasoningEffort: DeploymentGetConfigReasoningEffort$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

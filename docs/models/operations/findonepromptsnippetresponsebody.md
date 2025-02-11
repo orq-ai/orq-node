@@ -1,119 +1,17 @@
 # FindOnePromptSnippetResponseBody
 
-Prompt snippet retrieved.
+Prompt snippet model returned from the API
 
-
-## Supported Types
-
-### `operations.FindOnePromptSnippetResponseBody1`
+## Example Usage
 
 ```typescript
-const value: operations.FindOnePromptSnippetResponseBody1 = {
+import { FindOnePromptSnippetResponseBody } from "@orq-ai/node/models/operations";
+
+let value: FindOnePromptSnippetResponseBody = {
   id: "<id>",
   owner: "vendor",
-  domainId: "9f24b3d5-209d-44ec-b099-3570226bd2ca",
-  createdById: "f11c23ef-5dd9-4994-9932-6b9fa22139de",
-  displayName: "Keegan_Hahn",
-  updatedById: "27663243-bb91-4910-8539-ebcfa99d6ca4",
-  promptConfig: {
-    messages: [
-      {
-        role: "assistant",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://jagged-petal.com/",
-            },
-          },
-        ],
-      },
-    ],
-  },
-  metadata: {},
-  versions: [
-    {
-      id: "<id>",
-      createdById: "66885c10-6e42-4e25-bb43-6ce02f98d00f",
-      displayName: "Nedra_Kreiger93",
-      updatedById: "c0f6f545-b3d9-4ff2-8f00-ff277dac7abb",
-      promptConfig: {
-        messages: [
-          {
-            role: "system",
-            content: "<value>",
-          },
-        ],
-      },
-      metadata: {},
-      commit: "<value>",
-      timestamp: "<value>",
-    },
-  ],
-  type: "prompt",
-};
-```
-
-### `operations.FindOnePromptSnippetResponseBody2`
-
-```typescript
-const value: operations.FindOnePromptSnippetResponseBody2 = {
-  id: "<id>",
-  owner: "<value>",
-  domainId: "66e9be70-4de5-44e5-ba41-8e93ac58a2f7",
-  createdById: "3720366e-a6f9-45b7-bee5-84afd51f6457",
-  displayName: "Wyatt_Herman0",
-  updatedById: "e016b444-d38f-4b5c-bf5b-1e1584a8b58c",
-  promptConfig: {
-    messages: [
-      {
-        role: "prompt",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://limping-strategy.name/",
-            },
-          },
-        ],
-      },
-    ],
-  },
-  metadata: {},
-  versions: [
-    {
-      id: "<id>",
-      createdById: "f41a1c48-cc7f-4744-ab66-04dcb0047e64",
-      displayName: "Tavares.Stiedemann",
-      updatedById: "bf558a9b-6d25-4c5a-9424-e7350c390d20",
-      promptConfig: {
-        messages: [
-          {
-            role: "expected_output",
-            content: "<value>",
-          },
-        ],
-      },
-      metadata: {},
-      commit: "<value>",
-      timestamp: "<value>",
-    },
-  ],
+  domainId: "4e2a1fbd-9798-47c2-b265-1dc8f1c453c2",
   key: "<key>",
-  type: "snippet",
-};
-```
-
-### `operations.FindOnePromptSnippetResponseBody3`
-
-```typescript
-const value: operations.FindOnePromptSnippetResponseBody3 = {
-  id: "<id>",
-  owner: "vendor",
-  domainId: "64ecc8d7-773e-4433-bdc6-0f2dcfc5363b",
-  createdById: "a2097358-a7f0-4ae3-a3c7-f9e02a6d6b91",
-  displayName: "Meghan.MacGyver",
-  updatedById: "1213d06c-13ba-492c-a22c-55455b35ce91",
   promptConfig: {
     messages: [
       {
@@ -123,26 +21,43 @@ const value: operations.FindOnePromptSnippetResponseBody3 = {
     ],
   },
   metadata: {},
+  createdById: "caeb8d48-4f30-4580-b8db-9ffd9709fd52",
+  updatedById: "bfd81758-4dd5-496e-b2bf-23bc79371547",
+  type: "snippet",
   versions: [
     {
       id: "<id>",
-      createdById: "dc92be4f-c494-41da-a926-e2034ca009a2",
-      displayName: "Dayana96",
-      updatedById: "74fdb76c-8a9b-4162-a338-0f80a41d310b",
       promptConfig: {
         messages: [
           {
-            role: "system",
+            role: "assistant",
             content: "<value>",
           },
         ],
       },
       metadata: {},
-      commit: "<value>",
+      createdById: "9f2e1773-57df-48d9-b536-80293d511e12",
+      updatedById: "4ad9fb18-bc0b-4db8-978b-e9eb1844559a",
       timestamp: "<value>",
     },
   ],
-  type: "template",
 };
 ```
 
+## Fields
+
+| Field                                                                                                                                                              | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                                                                                                                                                               | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `owner`                                                                                                                                                            | *operations.FindOnePromptSnippetOwner*                                                                                                                             | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `domainId`                                                                                                                                                         | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `key`                                                                                                                                                              | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `description`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                 | The prompt snippet’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
+| `promptConfig`                                                                                                                                                     | [operations.FindOnePromptSnippetPromptConfig](../../models/operations/findonepromptsnippetpromptconfig.md)                                                         | :heavy_check_mark:                                                                                                                                                 | A list of messages compatible with the openAI schema                                                                                                               |
+| `metadata`                                                                                                                                                         | [operations.FindOnePromptSnippetMetadata](../../models/operations/findonepromptsnippetmetadata.md)                                                                 | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `createdById`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `updatedById`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `created`                                                                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                      | :heavy_minus_sign:                                                                                                                                                 | The date and time the resource was created                                                                                                                         |
+| `updated`                                                                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                                      | :heavy_minus_sign:                                                                                                                                                 | The date and time the resource was last updated                                                                                                                    |
+| `type`                                                                                                                                                             | [operations.FindOnePromptSnippetType](../../models/operations/findonepromptsnippettype.md)                                                                         | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `versions`                                                                                                                                                         | [operations.FindOnePromptSnippetVersions](../../models/operations/findonepromptsnippetversions.md)[]                                                               | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |

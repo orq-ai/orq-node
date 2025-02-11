@@ -18,7 +18,7 @@ const value: operations.Deployments21 = {
 const value: operations.Deployments22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://spanish-sunbeam.org",
+    url: "https://true-wasabi.net",
   },
 };
 ```

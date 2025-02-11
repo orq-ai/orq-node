@@ -12,6 +12,6 @@ let value: GetOnePromptRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | Prompt ID          |
+| Field                           | Type                            | Required                        | Description                     |
+| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
+| `id`                            | *string*                        | :heavy_check_mark:              | Unique identifier of the prompt |
