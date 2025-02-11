@@ -6142,7 +6142,7 @@ export const CreatePromptSnippetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-02-10T22:25:09.383Z",
+    "2025-02-11T07:51:03.634Z",
   ).transform(v => new Date(v)),
   type: CreatePromptSnippetPromptSnippetsType$inboundSchema,
   versions: z.array(z.lazy(() => Versions$inboundSchema)),
@@ -6191,7 +6191,7 @@ export const CreatePromptSnippetResponseBody$outboundSchema: z.ZodType<
   createdById: z.string(),
   updatedById: z.string(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-02-10T22:25:09.383Z"))
+  updated: z.date().default(() => new Date("2025-02-11T07:51:03.634Z"))
     .transform(v => v.toISOString()),
   type: CreatePromptSnippetPromptSnippetsType$outboundSchema,
   versions: z.array(z.lazy(() => Versions$outboundSchema)),
