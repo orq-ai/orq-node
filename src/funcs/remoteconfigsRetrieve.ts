@@ -68,6 +68,7 @@ export async function remoteconfigsRetrieve(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "RemoteConfigsGetConfig",
     oAuth2Scopes: [],
 

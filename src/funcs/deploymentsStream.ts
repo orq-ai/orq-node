@@ -78,6 +78,7 @@ export async function deploymentsStream(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "DeploymentStream",
     oAuth2Scopes: [],
 

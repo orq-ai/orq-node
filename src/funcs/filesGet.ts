@@ -73,6 +73,7 @@ export async function filesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "FileGet",
     oAuth2Scopes: [],
 

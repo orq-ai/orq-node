@@ -67,6 +67,7 @@ export async function promptsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "CreatePrompt",
     oAuth2Scopes: [],
 

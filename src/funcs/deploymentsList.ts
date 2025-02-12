@@ -75,6 +75,7 @@ export async function deploymentsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "Deployments",
     oAuth2Scopes: [],
 

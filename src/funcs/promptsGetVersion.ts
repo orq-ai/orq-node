@@ -81,6 +81,7 @@ export async function promptsGetVersion(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "GetPromptVersion",
     oAuth2Scopes: [],
 

@@ -75,6 +75,7 @@ export async function deploymentsMetricsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "DeploymentCreateMetric",
     oAuth2Scopes: [],
 

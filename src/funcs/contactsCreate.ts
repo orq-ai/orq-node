@@ -67,6 +67,7 @@ export async function contactsCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "CreateContact",
     oAuth2Scopes: [],
 

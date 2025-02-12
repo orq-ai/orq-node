@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 1ef71539e3bdf0770a76513c30f7af4d
+  docChecksum: c7089932c76999de457cb64c764bcfd6
   docVersion: "2.0"
-  speakeasyVersion: 1.488.0
-  generationVersion: 2.506.0
-  releaseVersion: 3.1.4
-  configChecksum: a548a61f8dd99029e236688c9263d276
+  speakeasyVersion: 1.489.1
+  generationVersion: 2.511.2
+  releaseVersion: 3.1.5
+  configChecksum: a834430665e472e594ba70b5d21e4582
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -18,7 +18,7 @@ features:
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
-    globalSecurity: 2.82.12
+    globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
