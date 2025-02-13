@@ -76,6 +76,7 @@ export async function deploymentsInvoke(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "DeploymentInvoke",
     oAuth2Scopes: [],
 

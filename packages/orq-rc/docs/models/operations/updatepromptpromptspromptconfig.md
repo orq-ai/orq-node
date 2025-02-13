@@ -10,8 +10,15 @@ import { UpdatePromptPromptsPromptConfig } from "@orq-ai/node/models/operations"
 let value: UpdatePromptPromptsPromptConfig = {
   messages: [
     {
-      role: "system",
-      content: "<value>",
+      role: "exception",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://hairy-technologist.net",
+          },
+        },
+      ],
     },
   ],
 };

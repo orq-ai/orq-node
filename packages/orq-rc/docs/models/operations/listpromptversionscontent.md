@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.ListPromptVersionsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://sorrowful-hyena.name/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

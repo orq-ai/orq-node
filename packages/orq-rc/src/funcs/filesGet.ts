@@ -23,7 +23,10 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get file by ID
+ * Retrieve a file
+ *
+ * @remarks
+ * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object
  */
 export async function filesGet(
   client: OrqCore,
@@ -70,6 +73,7 @@ export async function filesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "FileGet",
     oAuth2Scopes: [],
 

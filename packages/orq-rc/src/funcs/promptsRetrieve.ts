@@ -73,6 +73,7 @@ export async function promptsRetrieve(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "GetOnePrompt",
     oAuth2Scopes: [],
 

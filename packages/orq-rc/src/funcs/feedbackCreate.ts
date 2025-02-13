@@ -67,6 +67,7 @@ export async function feedbackCreate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "CreateFeedback",
     oAuth2Scopes: [],
 

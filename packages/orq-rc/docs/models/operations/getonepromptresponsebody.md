@@ -11,19 +11,19 @@ let value: GetOnePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "906fa27f-8094-4168-9088-c68be69b0c6a",
+  domainId: "1d28c723-685c-4ce0-8e6e-bfc586547a48",
   created: "<value>",
   updated: "<value>",
-  displayName: "Maymie_Dicki85",
+  displayName: "Carol.Witting",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "system",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://cruel-extension.biz/",
+              url: "https://mediocre-eternity.name",
             },
           },
         ],

@@ -5,7 +5,7 @@
 ```typescript
 import { ListPromptVersionsUseCases } from "@orq-ai/node/models/operations";
 
-let value: ListPromptVersionsUseCases = "Multi-modal";
+let value: ListPromptVersionsUseCases = "Self-checking";
 ```
 
 ## Values

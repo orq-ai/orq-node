@@ -71,6 +71,7 @@ export async function promptsDelete(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "DeletePrompt",
     oAuth2Scopes: [],
 

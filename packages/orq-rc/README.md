@@ -27,7 +27,6 @@ For more information about the API: [orq.ai Documentation](https://docs.orq.ai)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
-  * [Server-sent event streaming](#server-sent-event-streaming)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -153,7 +152,6 @@ run();
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
-* [stream](docs/sdks/deployments/README.md#stream) - Stream
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)
 
@@ -165,9 +163,9 @@ run();
 
 ### [files](docs/sdks/files/README.md)
 
-* [upload](docs/sdks/files/README.md#upload) - Upload file
+* [create](docs/sdks/files/README.md#create) - Create file
 * [list](docs/sdks/files/README.md#list) - List all files
-* [get](docs/sdks/files/README.md#get) - Get file by ID
+* [get](docs/sdks/files/README.md#get) - Retrieve a file
 * [delete](docs/sdks/files/README.md#delete) - Delete file
 
 
@@ -181,18 +179,9 @@ run();
 * [listVersions](docs/sdks/prompts/README.md#listversions) - List all prompt versions
 * [getVersion](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
 
-### [promptSnippets](docs/sdks/promptsnippets/README.md)
+### [remoteconfigs](docs/sdks/remoteconfigs/README.md)
 
-* [list](docs/sdks/promptsnippets/README.md#list) - List all prompts snippets
-* [create](docs/sdks/promptsnippets/README.md#create) - Create a prompt snippet
-* [update](docs/sdks/promptsnippets/README.md#update) - Update a prompt snippet
-* [delete](docs/sdks/promptsnippets/README.md#delete) - Delete a prompt snippet
-* [get](docs/sdks/promptsnippets/README.md#get) - Retrieve a prompt snippet
-* [getByKey](docs/sdks/promptsnippets/README.md#getbykey) - Retrieve a prompt snippet by key
-
-### [remoteconfig](docs/sdks/remoteconfig/README.md)
-
-* [getConfig](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
+* [retrieve](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -217,64 +206,22 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
 - [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
-- [`deploymentsStream`](docs/sdks/deployments/README.md#stream) - Stream
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
+- [`filesCreate`](docs/sdks/files/README.md#create) - Create file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
-- [`filesGet`](docs/sdks/files/README.md#get) - Get file by ID
+- [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
-- [`filesUpload`](docs/sdks/files/README.md#upload) - Upload file
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
 - [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
 - [`promptsList`](docs/sdks/prompts/README.md#list) - List all prompts
 - [`promptsListVersions`](docs/sdks/prompts/README.md#listversions) - List all prompt versions
-- [`promptSnippetsCreate`](docs/sdks/promptsnippets/README.md#create) - Create a prompt snippet
-- [`promptSnippetsDelete`](docs/sdks/promptsnippets/README.md#delete) - Delete a prompt snippet
-- [`promptSnippetsGet`](docs/sdks/promptsnippets/README.md#get) - Retrieve a prompt snippet
-- [`promptSnippetsGetByKey`](docs/sdks/promptsnippets/README.md#getbykey) - Retrieve a prompt snippet by key
-- [`promptSnippetsList`](docs/sdks/promptsnippets/README.md#list) - List all prompts snippets
-- [`promptSnippetsUpdate`](docs/sdks/promptsnippets/README.md#update) - Update a prompt snippet
 - [`promptsRetrieve`](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 - [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
-- [`remoteconfigGetConfig`](docs/sdks/remoteconfig/README.md#getconfig) - Get Configurations
+- [`remoteconfigsRetrieve`](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
-
-<!-- Start Server-sent event streaming [eventstream] -->
-## Server-sent event streaming
-
-[Server-sent events][mdn-sse] are used to stream content from certain
-operations. These operations will expose the stream as an async iterable that
-can be consumed using a [`for await...of`][mdn-for-await-of] loop. The loop will
-terminate when the server no longer has any events to send and closes the
-underlying connection.
-
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.deployments.stream({
-    key: "<key>",
-  });
-
-  for await (const event of result) {
-    // Handle the event
-    console.log(event);
-  }
-}
-
-run();
-
-```
-
-[mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
-<!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -298,7 +245,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.files.upload();
+  const result = await orq.files.create();
 
   // Handle the result
   console.log(result);

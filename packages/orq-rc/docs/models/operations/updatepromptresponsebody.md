@@ -11,18 +11,20 @@ let value: UpdatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "7ff2e182-5b6c-4bf8-8c55-66181e0742cb",
+  domainId: "4d1326b8-7061-43e3-8dc2-91bac7e04b62",
   created: "<value>",
   updated: "<value>",
-  displayName: "Loraine68",
+  displayName: "Reba_Tillman",
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "tool",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://rowdy-tooth.net/",
+            },
           },
         ],
       },

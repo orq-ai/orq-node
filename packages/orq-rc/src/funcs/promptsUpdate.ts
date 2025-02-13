@@ -73,6 +73,7 @@ export async function promptsUpdate(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "UpdatePrompt",
     oAuth2Scopes: [],
 

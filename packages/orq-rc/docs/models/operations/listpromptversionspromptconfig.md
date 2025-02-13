@@ -10,7 +10,7 @@ import { ListPromptVersionsPromptConfig } from "@orq-ai/node/models/operations";
 let value: ListPromptVersionsPromptConfig = {
   messages: [
     {
-      role: "exception",
+      role: "correction",
       content: "<value>",
     },
   ],

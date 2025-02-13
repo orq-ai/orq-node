@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt2Prompts1 = {
 const value: operations.UpdatePrompt2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://aged-premier.org/",
+    url: "https://excitable-dime.info/",
   },
 };
 ```

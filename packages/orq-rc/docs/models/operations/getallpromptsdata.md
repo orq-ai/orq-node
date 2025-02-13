@@ -9,20 +9,15 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "5cf6afba-15e3-4db5-a88b-82c6f4459e24",
+  domainId: "6ef849e6-8476-4384-858c-5ed04715ba9b",
   created: "<value>",
   updated: "<value>",
-  displayName: "Jack48",
+  displayName: "Evangeline_Thiel28",
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "prompt",
+        content: "<value>",
       },
     ],
   },

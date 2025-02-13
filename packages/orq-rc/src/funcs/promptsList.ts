@@ -73,6 +73,7 @@ export async function promptsList(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    baseURL: options?.serverURL ?? "",
     operationID: "GetAllPrompts",
     oAuth2Scopes: [],
 

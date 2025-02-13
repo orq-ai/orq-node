@@ -11,12 +11,7 @@ let value: UpdatePromptPromptConfig = {
   messages: [
     {
       role: "exception",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

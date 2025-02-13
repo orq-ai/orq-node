@@ -14,10 +14,10 @@ let value: GetAllPromptsResponseBody = {
       id: "<id>",
       type: "prompt",
       owner: "<value>",
-      domainId: "a9e0e805-b7f6-45d8-8aca-619e6e89d91f",
+      domainId: "58e16059-4319-4baf-80a9-9f0bd85c178b",
       created: "<value>",
       updated: "<value>",
-      displayName: "Meredith.Kris72",
+      displayName: "Dannie_Mueller61",
       promptConfig: {
         messages: [
           {
@@ -26,7 +26,7 @@ let value: GetAllPromptsResponseBody = {
               {
                 type: "image_url",
                 imageUrl: {
-                  url: "https://foolish-knight.org/",
+                  url: "https://nautical-traditionalism.net",
                 },
               },
             ],

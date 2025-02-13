@@ -6,7 +6,7 @@
 import { DeploymentCreateMetricMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetricMessages = {
-  role: "expected_output",
+  role: "correction",
   content: "<value>",
 };
 ```

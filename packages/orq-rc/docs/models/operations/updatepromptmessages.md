@@ -9,10 +9,8 @@ let value: UpdatePromptMessages = {
   role: "assistant",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://troubled-yak.net",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };
