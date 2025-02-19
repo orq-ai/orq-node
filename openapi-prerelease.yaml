@@ -2942,7 +2942,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-19T06:59:01.710Z"
+          default: "2025-02-19T15:51:29.392Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3001,7 +3001,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-02-19T06:59:01.710Z"
+            default: "2025-02-19T15:51:29.392Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3079,7 +3079,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-19T06:59:01.710Z"
+          default: "2025-02-19T15:51:29.392Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3124,7 +3124,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-02-19T06:59:01.710Z"
+                default: "2025-02-19T15:51:29.392Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3166,7 +3166,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-19T06:59:01.710Z"
+          default: "2025-02-19T15:51:29.392Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3405,7 +3405,7 @@ components:
                           - type: "string"
                             format: "date-time"
                           - type: "string"
-                        default: "2025-02-19T06:59:00.575Z"
+                        default: "2025-02-19T15:51:28.249Z"
                         description: "The date and time the resource was created"
                         readOnly: true
                         format: "date-time"
@@ -3413,7 +3413,7 @@ components:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2025-02-19T06:59:00.576Z"
+                            default: "2025-02-19T15:51:28.250Z"
                           - type: "string"
                         description: "The date and time the resource was last updated"
                         readOnly: true
@@ -3441,7 +3441,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-19T06:59:00.575Z"
+              default: "2025-02-19T15:51:28.249Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3449,7 +3449,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-19T06:59:00.576Z"
+                  default: "2025-02-19T15:51:28.250Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -3958,7 +3958,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-19T06:59:00.575Z"
+              default: "2025-02-19T15:51:28.249Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3966,7 +3966,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-19T06:59:00.576Z"
+                  default: "2025-02-19T15:51:28.250Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -4115,7 +4115,7 @@ components:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-19T06:59:00.575Z"
+                    default: "2025-02-19T15:51:28.249Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -4123,7 +4123,7 @@ components:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-19T06:59:00.576Z"
+                        default: "2025-02-19T15:51:28.250Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -5680,10 +5680,6 @@ components:
                 properties:
                   "_id":
                     type: "string"
-                  "type":
-                    type: "string"
-                    enum:
-                      - "prompt"
                   "created_by_id":
                     type: "string"
                     format: "uuid"
@@ -5992,7 +5988,6 @@ components:
                         description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
                 required:
                   - "_id"
-                  - "type"
                   - "prompt_config"
               - type: "object"
                 properties:
@@ -6012,10 +6007,6 @@ components:
           properties:
             "_id":
               type: "string"
-            "type":
-              type: "string"
-              enum:
-                - "prompt"
             "created_by_id":
               type: "string"
               format: "uuid"
@@ -6324,7 +6315,6 @@ components:
                   description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
           required:
             - "_id"
-            - "type"
             - "prompt_config"
         - type: "object"
           properties:
@@ -36102,7 +36092,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-19T06:59:00.575Z"
+                    default: "2025-02-19T15:51:28.249Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -36110,7 +36100,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-19T06:59:00.576Z"
+                        default: "2025-02-19T15:51:28.250Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -37723,7 +37713,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-19T06:59:01.710Z"
+                    default: "2025-02-19T15:51:29.392Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -37810,7 +37800,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-02-19T06:59:01.710Z"
+                          default: "2025-02-19T15:51:29.392Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -37876,7 +37866,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-19T06:59:01.710Z"
+                    default: "2025-02-19T15:51:29.392Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -40109,10 +40099,6 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                            "type":
-                              type: "string"
-                              enum:
-                                - "prompt"
                             "created_by_id":
                               type: "string"
                               format: "uuid"
@@ -40421,7 +40407,6 @@ paths:
                                   description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
                           required:
                             - "_id"
-                            - "type"
                             - "prompt_config"
                         - type: "object"
                           properties:
@@ -40472,10 +40457,6 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                      "type":
-                        type: "string"
-                        enum:
-                          - "prompt"
                       "created_by_id":
                         type: "string"
                         format: "uuid"
@@ -40784,7 +40765,6 @@ paths:
                             description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
                     required:
                       - "_id"
-                      - "type"
                       - "prompt_config"
                   - type: "object"
                     properties:
