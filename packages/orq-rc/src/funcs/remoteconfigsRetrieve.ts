@@ -20,16 +20,17 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
  * Retrieve a remote config
  */
-export async function remoteconfigsRetrieve(
+export function remoteconfigsRetrieve(
   client: OrqCore,
   request?: operations.RemoteConfigsGetConfigRequestBody | undefined,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.RemoteConfigsGetConfigResponseBody,
     | APIError
@@ -41,6 +42,32 @@ export async function remoteconfigsRetrieve(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: OrqCore,
+  request?: operations.RemoteConfigsGetConfigRequestBody | undefined,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.RemoteConfigsGetConfigResponseBody,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) =>
@@ -49,7 +76,7 @@ export async function remoteconfigsRetrieve(
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = payload === undefined
@@ -68,7 +95,7 @@ export async function remoteconfigsRetrieve(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "RemoteConfigsGetConfig",
     oAuth2Scopes: [],
 
@@ -91,7 +118,7 @@ export async function remoteconfigsRetrieve(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -102,7 +129,7 @@ export async function remoteconfigsRetrieve(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -121,8 +148,8 @@ export async function remoteconfigsRetrieve(
     M.fail([500, "5XX"]),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

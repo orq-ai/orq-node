@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 8ddc488fb9671368b369ff74f7ff1f0f
+  docChecksum: f57abc7b899e829790b075c008cf666c
   docVersion: "2.0"
-  speakeasyVersion: 1.493.0
-  generationVersion: 2.512.4
-  releaseVersion: 3.2.0-rc.7
-  configChecksum: cc8aa5075ce39c6897810c93bfed5caa
+  speakeasyVersion: 1.495.1
+  generationVersion: 2.515.4
+  releaseVersion: 3.2.0-rc.8
+  configChecksum: 9e0e8c71ddecec947abf3f4b8e4d3615
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.19.0
+    core: 3.20.0
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -30,7 +30,7 @@ features:
     inputOutputModels: 2.82.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     operationTimeout: 0.2.0
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -592,6 +592,7 @@ generatedFiles:
   - src/sdk/prompts.ts
   - src/sdk/remoteconfigs.ts
   - src/sdk/sdk.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
