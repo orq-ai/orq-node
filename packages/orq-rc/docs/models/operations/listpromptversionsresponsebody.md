@@ -12,7 +12,6 @@ let value: ListPromptVersionsResponseBody = {
   data: [
     {
       id: "<id>",
-      type: "prompt",
       promptConfig: {
         messages: [
           {

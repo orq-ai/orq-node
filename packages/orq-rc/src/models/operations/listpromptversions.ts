@@ -32,11 +32,6 @@ export type ListPromptVersionsObject = ClosedEnum<
   typeof ListPromptVersionsObject
 >;
 
-export const ListPromptVersionsType = {
-  Prompt: "prompt",
-} as const;
-export type ListPromptVersionsType = ClosedEnum<typeof ListPromptVersionsType>;
-
 /**
  * The type of the model
  */
@@ -355,12 +350,10 @@ export type ListPromptVersionsContent =
   | string
   | Array<ListPromptVersions21 | ListPromptVersions22>;
 
-export const ListPromptVersionsPromptsType = {
+export const ListPromptVersionsType = {
   Function: "function",
 } as const;
-export type ListPromptVersionsPromptsType = ClosedEnum<
-  typeof ListPromptVersionsPromptsType
->;
+export type ListPromptVersionsType = ClosedEnum<typeof ListPromptVersionsType>;
 
 export type ListPromptVersionsFunction = {
   name: string;
@@ -373,7 +366,7 @@ export type ListPromptVersionsFunction = {
 export type ListPromptVersionsToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: ListPromptVersionsPromptsType;
+  type: ListPromptVersionsType;
   function: ListPromptVersionsFunction;
 };
 
@@ -470,7 +463,6 @@ export type ListPromptVersionsMetadata = {
 
 export type ListPromptVersionsData = {
   id: string;
-  type: ListPromptVersionsType;
   createdById?: string | undefined;
   updatedById?: string | undefined;
   /**
@@ -588,27 +580,6 @@ export namespace ListPromptVersionsObject$ {
   export const inboundSchema = ListPromptVersionsObject$inboundSchema;
   /** @deprecated use `ListPromptVersionsObject$outboundSchema` instead. */
   export const outboundSchema = ListPromptVersionsObject$outboundSchema;
-}
-
-/** @internal */
-export const ListPromptVersionsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsType
-> = z.nativeEnum(ListPromptVersionsType);
-
-/** @internal */
-export const ListPromptVersionsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsType
-> = ListPromptVersionsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListPromptVersionsType$ {
-  /** @deprecated use `ListPromptVersionsType$inboundSchema` instead. */
-  export const inboundSchema = ListPromptVersionsType$inboundSchema;
-  /** @deprecated use `ListPromptVersionsType$outboundSchema` instead. */
-  export const outboundSchema = ListPromptVersionsType$outboundSchema;
 }
 
 /** @internal */
@@ -1555,24 +1526,24 @@ export function listPromptVersionsContentFromJSON(
 }
 
 /** @internal */
-export const ListPromptVersionsPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsPromptsType
-> = z.nativeEnum(ListPromptVersionsPromptsType);
+export const ListPromptVersionsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsType
+> = z.nativeEnum(ListPromptVersionsType);
 
 /** @internal */
-export const ListPromptVersionsPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsPromptsType
-> = ListPromptVersionsPromptsType$inboundSchema;
+export const ListPromptVersionsType$outboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsType
+> = ListPromptVersionsType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ListPromptVersionsPromptsType$ {
-  /** @deprecated use `ListPromptVersionsPromptsType$inboundSchema` instead. */
-  export const inboundSchema = ListPromptVersionsPromptsType$inboundSchema;
-  /** @deprecated use `ListPromptVersionsPromptsType$outboundSchema` instead. */
-  export const outboundSchema = ListPromptVersionsPromptsType$outboundSchema;
+export namespace ListPromptVersionsType$ {
+  /** @deprecated use `ListPromptVersionsType$inboundSchema` instead. */
+  export const inboundSchema = ListPromptVersionsType$inboundSchema;
+  /** @deprecated use `ListPromptVersionsType$outboundSchema` instead. */
+  export const outboundSchema = ListPromptVersionsType$outboundSchema;
 }
 
 /** @internal */
@@ -1640,7 +1611,7 @@ export const ListPromptVersionsToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: ListPromptVersionsPromptsType$inboundSchema,
+  type: ListPromptVersionsType$inboundSchema,
   function: z.lazy(() => ListPromptVersionsFunction$inboundSchema),
 });
 
@@ -1660,7 +1631,7 @@ export const ListPromptVersionsToolCalls$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: ListPromptVersionsPromptsType$outboundSchema,
+  type: ListPromptVersionsType$outboundSchema,
   function: z.lazy(() => ListPromptVersionsFunction$outboundSchema),
 });
 
@@ -1993,7 +1964,6 @@ export const ListPromptVersionsData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  type: ListPromptVersionsType$inboundSchema,
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
   description: z.nullable(z.string()).optional(),
@@ -2012,7 +1982,6 @@ export const ListPromptVersionsData$inboundSchema: z.ZodType<
 /** @internal */
 export type ListPromptVersionsData$Outbound = {
   _id: string;
-  type: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
   description?: string | null | undefined;
@@ -2028,7 +1997,6 @@ export const ListPromptVersionsData$outboundSchema: z.ZodType<
   ListPromptVersionsData
 > = z.object({
   id: z.string(),
-  type: ListPromptVersionsType$outboundSchema,
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   description: z.nullable(z.string()).optional(),

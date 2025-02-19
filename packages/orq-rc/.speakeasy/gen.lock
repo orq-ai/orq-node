@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: f57abc7b899e829790b075c008cf666c
+  docChecksum: 293e8b502b8ca3f6cf9d7f792b8009a2
   docVersion: "2.0"
   speakeasyVersion: 1.495.1
   generationVersion: 2.515.4
-  releaseVersion: 3.2.0-rc.8
-  configChecksum: 9e0e8c71ddecec947abf3f4b8e4d3615
+  releaseVersion: 3.2.0-rc.9
+  configChecksum: a87c6bacca168ce74185fc76c0affcdf
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -340,7 +340,6 @@ generatedFiles:
   - docs/models/operations/getpromptversionmodeltype.md
   - docs/models/operations/getpromptversionphotorealversion.md
   - docs/models/operations/getpromptversionpromptconfig.md
-  - docs/models/operations/getpromptversionpromptstype.md
   - docs/models/operations/getpromptversionprovider.md
   - docs/models/operations/getpromptversionquality.md
   - docs/models/operations/getpromptversionreasoningeffort.md
@@ -380,7 +379,6 @@ generatedFiles:
   - docs/models/operations/listpromptversionsobject.md
   - docs/models/operations/listpromptversionsphotorealversion.md
   - docs/models/operations/listpromptversionspromptconfig.md
-  - docs/models/operations/listpromptversionspromptstype.md
   - docs/models/operations/listpromptversionsprovider.md
   - docs/models/operations/listpromptversionsquality.md
   - docs/models/operations/listpromptversionsreasoningeffort.md
@@ -804,7 +802,7 @@ examples:
           version_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "type": "prompt", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}]}, "timestamp": "<value>"}
+          application/json: {"_id": "<id>", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}]}, "timestamp": "<value>"}
         "404":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.0
