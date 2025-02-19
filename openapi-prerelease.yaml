@@ -2942,7 +2942,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-17T13:39:11.793Z"
+          default: "2025-02-19T06:59:01.710Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3001,7 +3001,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-02-17T13:39:11.793Z"
+            default: "2025-02-19T06:59:01.710Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3079,7 +3079,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-17T13:39:11.793Z"
+          default: "2025-02-19T06:59:01.710Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3124,7 +3124,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-02-17T13:39:11.793Z"
+                default: "2025-02-19T06:59:01.710Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3166,7 +3166,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-17T13:39:11.793Z"
+          default: "2025-02-19T06:59:01.710Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3405,7 +3405,7 @@ components:
                           - type: "string"
                             format: "date-time"
                           - type: "string"
-                        default: "2025-02-17T13:39:10.687Z"
+                        default: "2025-02-19T06:59:00.575Z"
                         description: "The date and time the resource was created"
                         readOnly: true
                         format: "date-time"
@@ -3413,7 +3413,7 @@ components:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2025-02-17T13:39:10.688Z"
+                            default: "2025-02-19T06:59:00.576Z"
                           - type: "string"
                         description: "The date and time the resource was last updated"
                         readOnly: true
@@ -3441,7 +3441,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-17T13:39:10.687Z"
+              default: "2025-02-19T06:59:00.575Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3449,7 +3449,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-17T13:39:10.688Z"
+                  default: "2025-02-19T06:59:00.576Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -3958,7 +3958,7 @@ components:
                 - type: "string"
                   format: "date-time"
                 - type: "string"
-              default: "2025-02-17T13:39:10.687Z"
+              default: "2025-02-19T06:59:00.575Z"
               description: "The date and time the resource was created"
               readOnly: true
               format: "date-time"
@@ -3966,7 +3966,7 @@ components:
               anyOf:
                 - type: "string"
                   format: "date-time"
-                  default: "2025-02-17T13:39:10.688Z"
+                  default: "2025-02-19T06:59:00.576Z"
                 - type: "string"
               description: "The date and time the resource was last updated"
               readOnly: true
@@ -4115,7 +4115,7 @@ components:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-17T13:39:10.687Z"
+                    default: "2025-02-19T06:59:00.575Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -4123,7 +4123,7 @@ components:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-17T13:39:10.688Z"
+                        default: "2025-02-19T06:59:00.576Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -6379,15 +6379,21 @@ components:
               description: "The unique identifier for the workspace"
               readOnly: true
             "workflow_metadata":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Metadata for the workflow run"
             "workflow_input":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Input for the workflow run"
             "workflow_output":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Output for the workflow run"
             "project_id":
@@ -6415,7 +6421,9 @@ components:
                 "response_time":
                   type: "number"
                 "metadata":
-                  type: "object"
+                  type:
+                    - "object"
+                    - "null"
                   additionalProperties: {}
                 "status":
                   type: "number"
@@ -7133,7 +7141,9 @@ components:
                               "response_time":
                                 type: "number"
                               "metadata":
-                                type: "object"
+                                type:
+                                  - "object"
+                                  - "null"
                                 additionalProperties: {}
                               "status":
                                 type: "number"
@@ -8538,15 +8548,21 @@ components:
               description: "The unique identifier for the workspace"
               readOnly: true
             "workflow_metadata":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Metadata for the workflow run"
             "workflow_input":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Input for the workflow run"
             "workflow_output":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Output for the workflow run"
             "project_id":
@@ -8574,7 +8590,9 @@ components:
                 "response_time":
                   type: "number"
                 "metadata":
-                  type: "object"
+                  type:
+                    - "object"
+                    - "null"
                   additionalProperties: {}
                 "status":
                   type: "number"
@@ -9292,7 +9310,9 @@ components:
                               "response_time":
                                 type: "number"
                               "metadata":
-                                type: "object"
+                                type:
+                                  - "object"
+                                  - "null"
                                 additionalProperties: {}
                               "status":
                                 type: "number"
@@ -12157,15 +12177,21 @@ components:
               description: "The unique identifier for the workspace"
               readOnly: true
             "workflow_metadata":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Metadata for the workflow run"
             "workflow_input":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Input for the workflow run"
             "workflow_output":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Output for the workflow run"
             "project_id":
@@ -12193,7 +12219,9 @@ components:
                 "response_time":
                   type: "number"
                 "metadata":
-                  type: "object"
+                  type:
+                    - "object"
+                    - "null"
                   additionalProperties: {}
                 "status":
                   type: "number"
@@ -12911,7 +12939,9 @@ components:
                               "response_time":
                                 type: "number"
                               "metadata":
-                                type: "object"
+                                type:
+                                  - "object"
+                                  - "null"
                                 additionalProperties: {}
                               "status":
                                 type: "number"
@@ -14926,15 +14956,21 @@ components:
               description: "The unique identifier for the workspace"
               readOnly: true
             "workflow_metadata":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Metadata for the workflow run"
             "workflow_input":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Input for the workflow run"
             "workflow_output":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Output for the workflow run"
             "project_id":
@@ -14962,7 +14998,9 @@ components:
                 "response_time":
                   type: "number"
                 "metadata":
-                  type: "object"
+                  type:
+                    - "object"
+                    - "null"
                   additionalProperties: {}
                 "status":
                   type: "number"
@@ -15680,7 +15718,9 @@ components:
                               "response_time":
                                 type: "number"
                               "metadata":
-                                type: "object"
+                                type:
+                                  - "object"
+                                  - "null"
                                 additionalProperties: {}
                               "status":
                                 type: "number"
@@ -17707,15 +17747,21 @@ components:
               description: "The unique identifier for the workspace"
               readOnly: true
             "workflow_metadata":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Metadata for the workflow run"
             "workflow_input":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Input for the workflow run"
             "workflow_output":
-              type: "object"
+              type:
+                - "object"
+                - "null"
               additionalProperties: {}
               description: "Output for the workflow run"
             "project_id":
@@ -17743,7 +17789,9 @@ components:
                 "response_time":
                   type: "number"
                 "metadata":
-                  type: "object"
+                  type:
+                    - "object"
+                    - "null"
                   additionalProperties: {}
                 "status":
                   type: "number"
@@ -18461,7 +18509,9 @@ components:
                               "response_time":
                                 type: "number"
                               "metadata":
-                                type: "object"
+                                type:
+                                  - "object"
+                                  - "null"
                                 additionalProperties: {}
                               "status":
                                 type: "number"
@@ -21594,15 +21644,21 @@ components:
                     description: "The unique identifier for the workspace"
                     readOnly: true
                   "workflow_metadata":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Metadata for the workflow run"
                   "workflow_input":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Input for the workflow run"
                   "workflow_output":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Output for the workflow run"
                   "project_id":
@@ -21630,7 +21686,9 @@ components:
                       "response_time":
                         type: "number"
                       "metadata":
-                        type: "object"
+                        type:
+                          - "object"
+                          - "null"
                         additionalProperties: {}
                       "status":
                         type: "number"
@@ -22348,7 +22406,9 @@ components:
                                     "response_time":
                                       type: "number"
                                     "metadata":
-                                      type: "object"
+                                      type:
+                                        - "object"
+                                        - "null"
                                       additionalProperties: {}
                                     "status":
                                       type: "number"
@@ -23753,15 +23813,21 @@ components:
                     description: "The unique identifier for the workspace"
                     readOnly: true
                   "workflow_metadata":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Metadata for the workflow run"
                   "workflow_input":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Input for the workflow run"
                   "workflow_output":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Output for the workflow run"
                   "project_id":
@@ -23789,7 +23855,9 @@ components:
                       "response_time":
                         type: "number"
                       "metadata":
-                        type: "object"
+                        type:
+                          - "object"
+                          - "null"
                         additionalProperties: {}
                       "status":
                         type: "number"
@@ -24507,7 +24575,9 @@ components:
                                     "response_time":
                                       type: "number"
                                     "metadata":
-                                      type: "object"
+                                      type:
+                                        - "object"
+                                        - "null"
                                       additionalProperties: {}
                                     "status":
                                       type: "number"
@@ -27372,15 +27442,21 @@ components:
                     description: "The unique identifier for the workspace"
                     readOnly: true
                   "workflow_metadata":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Metadata for the workflow run"
                   "workflow_input":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Input for the workflow run"
                   "workflow_output":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Output for the workflow run"
                   "project_id":
@@ -27408,7 +27484,9 @@ components:
                       "response_time":
                         type: "number"
                       "metadata":
-                        type: "object"
+                        type:
+                          - "object"
+                          - "null"
                         additionalProperties: {}
                       "status":
                         type: "number"
@@ -28126,7 +28204,9 @@ components:
                                     "response_time":
                                       type: "number"
                                     "metadata":
-                                      type: "object"
+                                      type:
+                                        - "object"
+                                        - "null"
                                       additionalProperties: {}
                                     "status":
                                       type: "number"
@@ -30141,15 +30221,21 @@ components:
                     description: "The unique identifier for the workspace"
                     readOnly: true
                   "workflow_metadata":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Metadata for the workflow run"
                   "workflow_input":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Input for the workflow run"
                   "workflow_output":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Output for the workflow run"
                   "project_id":
@@ -30177,7 +30263,9 @@ components:
                       "response_time":
                         type: "number"
                       "metadata":
-                        type: "object"
+                        type:
+                          - "object"
+                          - "null"
                         additionalProperties: {}
                       "status":
                         type: "number"
@@ -30895,7 +30983,9 @@ components:
                                     "response_time":
                                       type: "number"
                                     "metadata":
-                                      type: "object"
+                                      type:
+                                        - "object"
+                                        - "null"
                                       additionalProperties: {}
                                     "status":
                                       type: "number"
@@ -32922,15 +33012,21 @@ components:
                     description: "The unique identifier for the workspace"
                     readOnly: true
                   "workflow_metadata":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Metadata for the workflow run"
                   "workflow_input":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Input for the workflow run"
                   "workflow_output":
-                    type: "object"
+                    type:
+                      - "object"
+                      - "null"
                     additionalProperties: {}
                     description: "Output for the workflow run"
                   "project_id":
@@ -32958,7 +33054,9 @@ components:
                       "response_time":
                         type: "number"
                       "metadata":
-                        type: "object"
+                        type:
+                          - "object"
+                          - "null"
                         additionalProperties: {}
                       "status":
                         type: "number"
@@ -33676,7 +33774,9 @@ components:
                                     "response_time":
                                       type: "number"
                                     "metadata":
-                                      type: "object"
+                                      type:
+                                        - "object"
+                                        - "null"
                                       additionalProperties: {}
                                     "status":
                                       type: "number"
@@ -36002,7 +36102,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-17T13:39:10.687Z"
+                    default: "2025-02-19T06:59:00.575Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -36010,7 +36110,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-17T13:39:10.688Z"
+                        default: "2025-02-19T06:59:00.576Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -37623,7 +37723,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-17T13:39:11.793Z"
+                    default: "2025-02-19T06:59:01.710Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -37710,7 +37810,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-02-17T13:39:11.793Z"
+                          default: "2025-02-19T06:59:01.710Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -37776,7 +37876,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-17T13:39:11.793Z"
+                    default: "2025-02-19T06:59:01.710Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
