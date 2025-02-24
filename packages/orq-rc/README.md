@@ -70,6 +70,65 @@ yarn add @orq-ai/node zod
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
 ```
+
+
+
+### Model Context Protocol (MCP) Server
+
+This SDK is also an installable MCP server where the various SDK methods are
+exposed as tools that can be invoked by AI applications.
+
+> Node.js v20 or greater is required to run the MCP server.
+
+<details>
+<summary>Claude installation steps</summary>
+
+Add the following server definition to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "Orq": {
+      "command": "npx",
+      "args": ["-y", "--package", "@orq-ai/node", "--", "mcp", "start"],
+      "env": {
+        "ORQ_API_KEY": "...",
+        "ORQ_CONTACT_ID": "...",
+        "ORQ_ENVIRONMENT": "..."
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Cursor installation steps</summary>
+
+Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+
+| Field   | Value |
+| ------- | ----- |
+| Name    | Orq |
+| Type    | `command` |
+| Command | `npx -y --package @orq-ai/node -- mcp start` |
+
+Environment variables needed by the server can be passed using the `--env` flag in the command above. This is a repeatable flag so `--env KEY1=value1 --env KEY2=value2` can be used to pass multiple environment variables. 
+
+The available environment variables are:
+
+- `ORQ_API_KEY`
+- `ORQ_CONTACT_ID`
+- `ORQ_ENVIRONMENT`
+
+</details>
+
+For a full list of server arguments, run:
+
+```sh
+npx -y --package @orq-ai/node -- mcp start --help
+```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
