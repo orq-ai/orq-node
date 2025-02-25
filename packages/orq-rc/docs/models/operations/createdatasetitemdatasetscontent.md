@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CreateDatasetItemContentDatasets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://worldly-mortise.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

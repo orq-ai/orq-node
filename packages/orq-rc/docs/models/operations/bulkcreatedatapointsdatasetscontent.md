@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapointsContentDatasets2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://querulous-bump.name/",
+      url: "https://hopeful-costume.com",
     },
   },
 ];

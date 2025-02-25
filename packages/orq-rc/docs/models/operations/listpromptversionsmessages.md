@@ -6,15 +6,8 @@
 import { ListPromptVersionsMessages } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersionsMessages = {
-  role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://forsaken-minority.net",
-      },
-    },
-  ],
+  role: "expected_output",
+  content: "<value>",
 };
 ```
 

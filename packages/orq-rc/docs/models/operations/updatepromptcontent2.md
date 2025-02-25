@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt21 = {
 const value: operations.UpdatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://squiggly-place.biz",
+    url: "https://clear-cut-dredger.info",
   },
 };
 ```

@@ -1,13 +1,13 @@
-# UpdatePromptPromptsLanguage
+# CreatePromptPromptsLanguage
 
 The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
 
 ## Example Usage
 
 ```typescript
-import { UpdatePromptPromptsLanguage } from "@orq-ai/node/models/operations";
+import { CreatePromptPromptsLanguage } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptPromptsLanguage = "German";
+let value: CreatePromptPromptsLanguage = "Russian";
 ```
 
 ## Values

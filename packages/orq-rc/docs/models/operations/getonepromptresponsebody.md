@@ -11,19 +11,19 @@ let value: GetOnePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "1d28c723-685c-4ce0-8e6e-bfc586547a48",
+  domainId: "5a197438-575f-4215-89a6-f5badfecb521",
   created: "<value>",
   updated: "<value>",
-  displayName: "Carol.Witting",
+  displayName: "Holly_Rutherford11",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "tool",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://mediocre-eternity.name",
+              url: "https://worthless-guard.info",
             },
           },
         ],

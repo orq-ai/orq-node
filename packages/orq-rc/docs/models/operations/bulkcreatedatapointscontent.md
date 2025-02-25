@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapointsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://timely-punctuation.org",
+      url: "https://glaring-fibre.com",
     },
   },
 ];

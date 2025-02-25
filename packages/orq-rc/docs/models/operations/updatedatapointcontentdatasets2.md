@@ -18,7 +18,7 @@ const value: operations.UpdateDatapoint2Datasets1 = {
 const value: operations.UpdateDatapoint2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://teeming-bakeware.info/",
+    url: "https://zealous-stay.info",
   },
 };
 ```

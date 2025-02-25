@@ -6,15 +6,8 @@
 import { BulkCreateDatapointsMessages } from "@orq-ai/node/models/operations";
 
 let value: BulkCreateDatapointsMessages = {
-  role: "expected_output",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://zealous-ceramic.net/",
-      },
-    },
-  ],
+  role: "system",
+  content: "<value>",
 };
 ```
 

@@ -6,13 +6,8 @@
 import { BulkCreateDatapointsDatasetsMessages } from "@orq-ai/node/models/operations";
 
 let value: BulkCreateDatapointsDatasetsMessages = {
-  role: "correction",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  role: "prompt",
+  content: "<value>",
 };
 ```
 

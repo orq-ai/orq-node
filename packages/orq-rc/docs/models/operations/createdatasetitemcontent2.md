@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItem21 = {
 const value: operations.CreateDatasetItem22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://multicolored-sesame.info",
+    url: "https://unrealistic-feather.info/",
   },
 };
 ```

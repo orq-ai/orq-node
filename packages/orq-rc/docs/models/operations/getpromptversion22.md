@@ -10,7 +10,7 @@ import { GetPromptVersion22 } from "@orq-ai/node/models/operations";
 let value: GetPromptVersion22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://cloudy-fireplace.biz",
+    url: "https://important-heartbeat.net",
   },
 };
 ```

@@ -15,8 +15,15 @@ let value: ListPromptVersionsResponseBody = {
       promptConfig: {
         messages: [
           {
-            role: "exception",
-            content: "<value>",
+            role: "expected_output",
+            content: [
+              {
+                type: "image_url",
+                imageUrl: {
+                  url: "https://orderly-saw.net/",
+                },
+              },
+            ],
           },
         ],
       },

@@ -18,7 +18,7 @@ const value: operations.RetrieveDatapoint21 = {
 const value: operations.RetrieveDatapoint22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://shy-rust.org",
+    url: "https://oval-arcade.biz",
   },
 };
 ```

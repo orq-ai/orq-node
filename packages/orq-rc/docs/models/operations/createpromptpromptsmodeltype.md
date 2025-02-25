@@ -1,13 +1,13 @@
-# UpdatePromptPromptsModelType
+# CreatePromptPromptsModelType
 
 The type of the model
 
 ## Example Usage
 
 ```typescript
-import { UpdatePromptPromptsModelType } from "@orq-ai/node/models/operations";
+import { CreatePromptPromptsModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptPromptsModelType = "completion";
+let value: CreatePromptPromptsModelType = "moderations";
 ```
 
 ## Values

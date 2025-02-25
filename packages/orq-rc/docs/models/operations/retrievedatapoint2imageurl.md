@@ -6,7 +6,7 @@
 import { RetrieveDatapoint2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatapoint2ImageUrl = {
-  url: "https://indolent-programme.net",
+  url: "https://tasty-dead.info/",
 };
 ```
 

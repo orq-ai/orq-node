@@ -1,4 +1,4 @@
-# UpdatePromptPromptsResponseFormat
+# CreatePromptPromptsResponseFormat
 
 An object specifying the format that the model must output. 
 
@@ -11,10 +11,10 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ## Supported Types
 
-### `operations.UpdatePromptResponseFormatPrompts1`
+### `operations.CreatePromptResponseFormatPrompts1`
 
 ```typescript
-const value: operations.UpdatePromptResponseFormatPrompts1 = {
+const value: operations.CreatePromptResponseFormatPrompts1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -26,10 +26,10 @@ const value: operations.UpdatePromptResponseFormatPrompts1 = {
 };
 ```
 
-### `operations.UpdatePromptResponseFormatPrompts2`
+### `operations.CreatePromptResponseFormatPrompts2`
 
 ```typescript
-const value: operations.UpdatePromptResponseFormatPrompts2 = {
+const value: operations.CreatePromptResponseFormatPrompts2 = {
   type: "json_object",
 };
 ```

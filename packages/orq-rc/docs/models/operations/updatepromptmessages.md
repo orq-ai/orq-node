@@ -6,13 +6,8 @@
 import { UpdatePromptMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptMessages = {
-  role: "assistant",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  role: "prompt",
+  content: "<value>",
 };
 ```
 

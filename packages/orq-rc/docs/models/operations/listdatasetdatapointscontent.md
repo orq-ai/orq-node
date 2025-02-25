@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.ListDatasetDatapointsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://proper-hutch.org/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

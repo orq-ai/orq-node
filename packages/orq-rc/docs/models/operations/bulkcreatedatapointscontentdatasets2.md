@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapoints2Datasets1 = {
 const value: operations.BulkCreateDatapoints2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://inconsequential-excess.org",
+    url: "https://annual-zebra.com",
   },
 };
 ```

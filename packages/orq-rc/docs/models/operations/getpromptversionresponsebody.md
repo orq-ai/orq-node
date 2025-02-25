@@ -12,15 +12,8 @@ let value: GetPromptVersionResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://serpentine-annual.net",
-            },
-          },
-        ],
+        role: "user",
+        content: "<value>",
       },
     ],
   },

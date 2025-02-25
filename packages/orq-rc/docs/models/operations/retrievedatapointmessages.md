@@ -7,7 +7,12 @@ import { RetrieveDatapointMessages } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatapointMessages = {
   role: "tool",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 
