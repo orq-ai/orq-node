@@ -207,6 +207,10 @@ export type ModelParameters = {
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
   reasoningEffort?: ReasoningEffort | undefined;
+  /**
+   * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
+   */
+  budgetTokens?: number | undefined;
 };
 
 export const Provider = {
@@ -635,6 +639,10 @@ export type CreatePromptModelParameters = {
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
   reasoningEffort?: CreatePromptReasoningEffort | undefined;
+  /**
+   * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
+   */
+  budgetTokens?: number | undefined;
 };
 
 export const CreatePromptProvider = {
@@ -1283,6 +1291,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
   encoding_format: EncodingFormat$inboundSchema.optional(),
   reasoningEffort: ReasoningEffort$inboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1311,6 +1320,7 @@ export type ModelParameters$Outbound = {
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
 };
 
 /** @internal */
@@ -1340,6 +1350,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
   encodingFormat: EncodingFormat$outboundSchema.optional(),
   reasoningEffort: ReasoningEffort$outboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -2691,6 +2702,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
   encoding_format: CreatePromptEncodingFormat$inboundSchema.optional(),
   reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -2719,6 +2731,7 @@ export type CreatePromptModelParameters$Outbound = {
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
 };
 
 /** @internal */
@@ -2748,6 +2761,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: CreatePromptEncodingFormat$outboundSchema.optional(),
   reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

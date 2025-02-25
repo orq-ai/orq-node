@@ -302,6 +302,10 @@ export type DeploymentsModelParameters = {
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
   reasoningEffort?: DeploymentsReasoningEffort | undefined;
+  /**
+   * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
+   */
+  budgetTokens?: number | undefined;
 };
 
 export const DeploymentsProvider = {
@@ -1235,6 +1239,7 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: DeploymentsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: DeploymentsEncodingFormat$inboundSchema.optional(),
   reasoningEffort: DeploymentsReasoningEffort$inboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1263,6 +1268,7 @@ export type DeploymentsModelParameters$Outbound = {
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
 };
 
 /** @internal */
@@ -1292,6 +1298,7 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: DeploymentsPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: DeploymentsEncodingFormat$outboundSchema.optional(),
   reasoningEffort: DeploymentsReasoningEffort$outboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

@@ -250,6 +250,10 @@ export type ListPromptVersionsModelParameters = {
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
   reasoningEffort?: ListPromptVersionsReasoningEffort | undefined;
+  /**
+   * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
+   */
+  budgetTokens?: number | undefined;
 };
 
 export const ListPromptVersionsProvider = {
@@ -1041,6 +1045,7 @@ export const ListPromptVersionsModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: ListPromptVersionsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: ListPromptVersionsEncodingFormat$inboundSchema.optional(),
   reasoningEffort: ListPromptVersionsReasoningEffort$inboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1069,6 +1074,7 @@ export type ListPromptVersionsModelParameters$Outbound = {
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
 };
 
 /** @internal */
@@ -1099,6 +1105,7 @@ export const ListPromptVersionsModelParameters$outboundSchema: z.ZodType<
     .optional(),
   encodingFormat: ListPromptVersionsEncodingFormat$outboundSchema.optional(),
   reasoningEffort: ListPromptVersionsReasoningEffort$outboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
