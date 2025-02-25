@@ -594,6 +594,9 @@ components:
                 - "medium"
                 - "high"
               description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+            "budgetTokens":
+              type: "number"
+              description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
           description: "Model Parameters: Not all parameters apply to every model"
         "tools":
           type: "array"
@@ -1724,6 +1727,9 @@ components:
                         - "medium"
                         - "high"
                       description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                    "budgetTokens":
+                      type: "number"
+                      description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                   description: "Model Parameters: Not all parameters apply to every model"
                 "provider":
                   type: "string"
@@ -2254,6 +2260,9 @@ components:
                                     - "medium"
                                     - "high"
                                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                "budgetTokens":
+                                  type: "number"
+                                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -2520,6 +2529,9 @@ components:
                                     - "medium"
                                     - "high"
                                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                "budgetTokens":
+                                  type: "number"
+                                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -2843,6 +2855,9 @@ components:
                                 - "medium"
                                 - "high"
                               description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                            "budgetTokens":
+                              type: "number"
+                              description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                           description: "Model Parameters: Not all parameters apply to every model"
                         "provider":
                           type: "string"
@@ -2942,7 +2957,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-25T07:54:03.323Z"
+          default: "2025-02-25T11:29:26.431Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3001,7 +3016,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-02-25T07:54:03.323Z"
+            default: "2025-02-25T11:29:26.431Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3079,7 +3094,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-25T07:54:03.323Z"
+          default: "2025-02-25T11:29:26.431Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3124,7 +3139,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-02-25T07:54:03.323Z"
+                default: "2025-02-25T11:29:26.431Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3166,7 +3181,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-02-25T07:54:03.323Z"
+          default: "2025-02-25T11:29:26.431Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3314,6 +3329,9 @@ components:
                     - "medium"
                     - "high"
                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                "budgetTokens":
+                  type: "number"
+                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -3748,6 +3766,9 @@ components:
                     - "medium"
                     - "high"
                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                "budgetTokens":
+                  type: "number"
+                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -4082,6 +4103,9 @@ components:
                     - "medium"
                     - "high"
                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                "budgetTokens":
+                  type: "number"
+                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -4418,6 +4442,9 @@ components:
                     - "medium"
                     - "high"
                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                "budgetTokens":
+                  type: "number"
+                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
               description: "Model Parameters: Not all parameters apply to every model"
             "provider":
               type: "string"
@@ -4748,6 +4775,9 @@ components:
                               - "medium"
                               - "high"
                             description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                          "budgetTokens":
+                            type: "number"
+                            description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -5075,6 +5105,9 @@ components:
                         - "medium"
                         - "high"
                       description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                    "budgetTokens":
+                      type: "number"
+                      description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                   description: "Model Parameters: Not all parameters apply to every model"
                 "provider":
                   type: "string"
@@ -5411,7 +5444,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-25T07:54:02.170Z"
+          default: "2025-02-25T11:29:25.365Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -5419,7 +5452,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-25T07:54:02.170Z"
+              default: "2025-02-25T11:29:25.365Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -5529,7 +5562,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-02-25T07:54:02.170Z"
+                default: "2025-02-25T11:29:25.365Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -5537,7 +5570,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -5644,7 +5677,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-25T07:54:02.170Z"
+          default: "2025-02-25T11:29:25.365Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -5652,7 +5685,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-25T07:54:02.170Z"
+              default: "2025-02-25T11:29:25.365Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -5753,7 +5786,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-02-25T07:54:02.170Z"
+          default: "2025-02-25T11:29:25.365Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -5761,7 +5794,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-02-25T07:54:02.170Z"
+              default: "2025-02-25T11:29:25.365Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6146,7 +6179,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -6154,7 +6187,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -6469,6 +6502,9 @@ paths:
                                     - "medium"
                                     - "high"
                                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                "budgetTokens":
+                                  type: "number"
+                                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -7127,6 +7163,9 @@ paths:
                           - "medium"
                           - "high"
                         description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                      "budgetTokens":
+                        type: "number"
+                        description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                     description: "Model Parameters: Not all parameters apply to every model"
                   "tools":
                     type: "array"
@@ -7767,7 +7806,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-25T07:54:03.323Z"
+                    default: "2025-02-25T11:29:26.431Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -7854,7 +7893,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-02-25T07:54:03.323Z"
+                          default: "2025-02-25T11:29:26.431Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -7920,7 +7959,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-02-25T07:54:03.323Z"
+                    default: "2025-02-25T11:29:26.431Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -8163,6 +8202,9 @@ paths:
                                     - "medium"
                                     - "high"
                                   description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                "budgetTokens":
+                                  type: "number"
+                                  description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                               description: "Model Parameters: Not all parameters apply to every model"
                             "provider":
                               type: "string"
@@ -8497,6 +8539,9 @@ paths:
                             - "medium"
                             - "high"
                           description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                        "budgetTokens":
+                          type: "number"
+                          description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -8838,6 +8883,9 @@ paths:
                               - "medium"
                               - "high"
                             description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                          "budgetTokens":
+                            type: "number"
+                            description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -9199,6 +9247,9 @@ paths:
                               - "medium"
                               - "high"
                             description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                          "budgetTokens":
+                            type: "number"
+                            description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -9550,6 +9601,9 @@ paths:
                             - "medium"
                             - "high"
                           description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                        "budgetTokens":
+                          type: "number"
+                          description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                       description: "Model Parameters: Not all parameters apply to every model"
                     "provider":
                       type: "string"
@@ -9883,6 +9937,9 @@ paths:
                               - "medium"
                               - "high"
                             description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                          "budgetTokens":
+                            type: "number"
+                            description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                         description: "Model Parameters: Not all parameters apply to every model"
                       "provider":
                         type: "string"
@@ -10290,6 +10347,9 @@ paths:
                                         - "medium"
                                         - "high"
                                       description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                                    "budgetTokens":
+                                      type: "number"
+                                      description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                                   description: "Model Parameters: Not all parameters apply to every model"
                                 "provider":
                                   type: "string"
@@ -10648,6 +10708,9 @@ paths:
                                   - "medium"
                                   - "high"
                                 description: "Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
+                              "budgetTokens":
+                                type: "number"
+                                description: "Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic` "
                             description: "Model Parameters: Not all parameters apply to every model"
                           "provider":
                             type: "string"
@@ -11021,7 +11084,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-02-25T07:54:02.170Z"
+                          default: "2025-02-25T11:29:25.365Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -11029,7 +11092,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-02-25T07:54:02.170Z"
+                              default: "2025-02-25T11:29:25.365Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -11153,7 +11216,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -11161,7 +11224,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11271,7 +11334,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -11279,7 +11342,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11417,7 +11480,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -11425,7 +11488,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11647,7 +11710,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-02-25T07:54:02.170Z"
+                          default: "2025-02-25T11:29:25.365Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -11655,7 +11718,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-02-25T07:54:02.170Z"
+                              default: "2025-02-25T11:29:25.365Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -11931,7 +11994,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -11939,7 +12002,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12105,7 +12168,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -12113,7 +12176,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12393,7 +12456,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-02-25T07:54:02.170Z"
+                    default: "2025-02-25T11:29:25.365Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -12401,7 +12464,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-02-25T07:54:02.170Z"
+                        default: "2025-02-25T11:29:25.365Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12717,7 +12780,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-02-25T07:54:02.170Z"
+                      default: "2025-02-25T11:29:25.365Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -12725,7 +12788,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-02-25T07:54:02.170Z"
+                          default: "2025-02-25T11:29:25.365Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
