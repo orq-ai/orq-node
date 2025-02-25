@@ -6,7 +6,7 @@
 import { PrefixMessages } from "@orq-ai/node/models/components";
 
 let value: PrefixMessages = {
-  role: "prompt",
+  role: "expected_output",
   content: "<value>",
 };
 ```

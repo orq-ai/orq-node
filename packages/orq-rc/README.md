@@ -90,12 +90,14 @@ Add the following server definition to your `claude_desktop_config.json` file:
   "mcpServers": {
     "Orq": {
       "command": "npx",
-      "args": ["-y", "--package", "@orq-ai/node", "--", "mcp", "start"],
-      "env": {
-        "ORQ_API_KEY": "...",
-        "ORQ_CONTACT_ID": "...",
-        "ORQ_ENVIRONMENT": "..."
-      }
+      "args": [
+        "-y", "--package", "@orq-ai/node",
+        "--",
+        "mcp", "start",
+        "--api-key", "...",
+        "--contact-id", "...",
+        "--environment", "..."
+      ]
     }
   }
 }
@@ -108,19 +110,12 @@ Add the following server definition to your `claude_desktop_config.json` file:
 
 Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
 
-| Field   | Value |
-| ------- | ----- |
-| Name    | Orq |
-| Type    | `command` |
-| Command | `npx -y --package @orq-ai/node -- mcp start` |
-
-Environment variables needed by the server can be passed using the `--env` flag in the command above. This is a repeatable flag so `--env KEY1=value1 --env KEY2=value2` can be used to pass multiple environment variables. 
-
-The available environment variables are:
-
-- `ORQ_API_KEY`
-- `ORQ_CONTACT_ID`
-- `ORQ_ENVIRONMENT`
+- Name: Orq
+- Type: `command`
+- Command:
+```sh
+npx -y --package @orq-ai/node -- mcp start --api-key ... --contact-id ... --environment ... 
+```
 
 </details>
 
@@ -206,6 +201,21 @@ run();
 
 * [create](docs/sdks/contacts/README.md#create) - Update user information
 
+### [datasets](docs/sdks/datasets/README.md)
+
+* [list](docs/sdks/datasets/README.md#list) - List datasets
+* [create](docs/sdks/datasets/README.md#create) - Create a dataset
+* [retrieve](docs/sdks/datasets/README.md#retrieve) - Retrieve a dataset
+* [update](docs/sdks/datasets/README.md#update) - Update a dataset
+* [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
+* [listDatapoints](docs/sdks/datasets/README.md#listdatapoints) - List datapoints
+* [createDatapoint](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
+* [retrieveDatapoint](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
+* [updateDatapoint](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
+* [deleteDatapoint](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
+* [createDatapoints](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
+* [clear](docs/sdks/datasets/README.md#clear) - Delete all datapoints
+
 ### [deployments](docs/sdks/deployments/README.md)
 
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
@@ -261,6 +271,18 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <summary>Available standalone functions</summary>
 
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
+- [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
+- [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
+- [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
+- [`datasetsCreateDatapoints`](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
+- [`datasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
+- [`datasetsDeleteDatapoint`](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
+- [`datasetsList`](docs/sdks/datasets/README.md#list) - List datasets
+- [`datasetsListDatapoints`](docs/sdks/datasets/README.md#listdatapoints) - List datapoints
+- [`datasetsRetrieve`](docs/sdks/datasets/README.md#retrieve) - Retrieve a dataset
+- [`datasetsRetrieveDatapoint`](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
+- [`datasetsUpdate`](docs/sdks/datasets/README.md#update) - Update a dataset
+- [`datasetsUpdateDatapoint`](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments

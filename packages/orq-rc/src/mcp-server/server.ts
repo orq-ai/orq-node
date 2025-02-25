@@ -9,6 +9,18 @@ import type { ConsoleLogger } from "./console-logger.js";
 import { MCPScope, mcpScopes } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
+import { tool$datasetsClear } from "./tools/datasetsClear.js";
+import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
+import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
+import { tool$datasetsCreateDatapoints } from "./tools/datasetsCreateDatapoints.js";
+import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
+import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
+import { tool$datasetsList } from "./tools/datasetsList.js";
+import { tool$datasetsListDatapoints } from "./tools/datasetsListDatapoints.js";
+import { tool$datasetsRetrieve } from "./tools/datasetsRetrieve.js";
+import { tool$datasetsRetrieveDatapoint } from "./tools/datasetsRetrieveDatapoint.js";
+import { tool$datasetsUpdate } from "./tools/datasetsUpdate.js";
+import { tool$datasetsUpdateDatapoint } from "./tools/datasetsUpdateDatapoint.js";
 import { tool$deploymentsGetConfig } from "./tools/deploymentsGetConfig.js";
 import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
@@ -31,14 +43,20 @@ export function createMCPServer(deps: {
   logger: ConsoleLogger;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
-  serverIdx?: SDKOptions["serverIdx"];
+  apiKey?: SDKOptions["apiKey"] | undefined;
+  contactId?: SDKOptions["contactId"] | undefined;
+  environment?: SDKOptions["environment"] | undefined;
+  serverIdx?: SDKOptions["serverIdx"] | undefined;
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.2.0-rc.11",
+    version: "3.2.0-rc.12",
   });
 
   const client = new OrqCore({
+    apiKey: deps.apiKey,
+    contactId: deps.contactId,
+    environment: deps.environment,
     serverURL: deps.serverURL,
     serverIdx: deps.serverIdx,
   });
@@ -62,6 +80,18 @@ export function createMCPServer(deps: {
   tool(tool$promptsListVersions);
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);
+  tool(tool$datasetsList);
+  tool(tool$datasetsCreate);
+  tool(tool$datasetsRetrieve);
+  tool(tool$datasetsUpdate);
+  tool(tool$datasetsDelete);
+  tool(tool$datasetsListDatapoints);
+  tool(tool$datasetsCreateDatapoint);
+  tool(tool$datasetsRetrieveDatapoint);
+  tool(tool$datasetsUpdateDatapoint);
+  tool(tool$datasetsDeleteDatapoint);
+  tool(tool$datasetsCreateDatapoints);
+  tool(tool$datasetsClear);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

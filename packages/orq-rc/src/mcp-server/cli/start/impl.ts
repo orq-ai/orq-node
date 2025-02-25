@@ -18,6 +18,9 @@ interface StartCommandFlags {
   readonly transport: "stdio" | "sse";
   readonly port: number;
   readonly scope?: MCPScope[];
+  readonly "api-key"?: string | undefined;
+  readonly "contact-id"?: SDKOptions["contactId"] | undefined;
+  readonly environment?: SDKOptions["environment"] | undefined;
   readonly "server-url"?: string;
   readonly "server-index"?: SDKOptions["serverIdx"];
   readonly "log-level": ConsoleLoggerLevel;
@@ -47,6 +50,9 @@ async function startStdio(flags: StartCommandFlags) {
   const server = createMCPServer({
     logger,
     scopes: flags.scope,
+    ...{ apiKey: flags["api-key"] },
+    contactId: flags["contact-id"],
+    environment: flags.environment,
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });
@@ -66,6 +72,9 @@ async function startSSE(flags: StartCommandFlags) {
   const mcpServer = createMCPServer({
     logger,
     scopes: flags.scope,
+    ...{ apiKey: flags["api-key"] },
+    contactId: flags["contact-id"],
+    environment: flags.environment,
     serverURL: flags["server-url"],
     serverIdx: flags["server-index"],
   });

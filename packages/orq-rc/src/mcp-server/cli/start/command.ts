@@ -40,7 +40,32 @@ export const startCommand = buildCommand({
           },
         }
         : {}),
-
+      "api-key": {
+        kind: "parsed",
+        brief: "Sets the apiKey auth field for the API",
+        optional: true,
+        parse: (value) => {
+          return z.string().parse(value);
+        },
+      },
+      "contact-id": {
+        kind: "parsed",
+        brief:
+          "Allows setting the contactId parameter for all supported operations",
+        optional: true,
+        parse: (value) => {
+          return z.string().parse(value);
+        },
+      },
+      environment: {
+        kind: "parsed",
+        brief:
+          "Allows setting the environment parameter for all supported operations",
+        optional: true,
+        parse: (value) => {
+          return z.string().parse(value);
+        },
+      },
       "server-url": {
         kind: "parsed",
         brief: "Overrides the default server URL used by the SDK",
