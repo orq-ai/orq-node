@@ -246,6 +246,10 @@ export type GetAllPromptsModelParameters = {
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
   reasoningEffort?: GetAllPromptsReasoningEffort | undefined;
+  /**
+   * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
+   */
+  budgetTokens?: number | undefined;
 };
 
 export const GetAllPromptsProvider = {
@@ -1042,6 +1046,7 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   photoRealVersion: GetAllPromptsPhotoRealVersion$inboundSchema.optional(),
   encoding_format: GetAllPromptsEncodingFormat$inboundSchema.optional(),
   reasoningEffort: GetAllPromptsReasoningEffort$inboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1070,6 +1075,7 @@ export type GetAllPromptsModelParameters$Outbound = {
   photoRealVersion?: string | undefined;
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
 };
 
 /** @internal */
@@ -1099,6 +1105,7 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
   photoRealVersion: GetAllPromptsPhotoRealVersion$outboundSchema.optional(),
   encodingFormat: GetAllPromptsEncodingFormat$outboundSchema.optional(),
   reasoningEffort: GetAllPromptsReasoningEffort$outboundSchema.optional(),
+  budgetTokens: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

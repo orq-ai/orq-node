@@ -20,6 +20,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
+import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
@@ -28,11 +29,11 @@ import { Result } from "../types/fp.js";
  * @remarks
  * Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object
  */
-export async function filesGet(
+export function filesGet(
   client: OrqCore,
   request: operations.FileGetRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.FileGetResponseBody,
     | APIError
@@ -44,13 +45,39 @@ export async function filesGet(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: OrqCore,
+  request: operations.FileGetRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.FileGetResponseBody,
+      | APIError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.FileGetRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -73,7 +100,7 @@ export async function filesGet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    baseURL: options?.serverURL ?? "",
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "FileGet",
     oAuth2Scopes: [],
 
@@ -96,7 +123,7 @@ export async function filesGet(
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
@@ -107,7 +134,7 @@ export async function filesGet(
     retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -126,8 +153,8 @@ export async function filesGet(
     M.fail("5XX"),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

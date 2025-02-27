@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 4b33cad9cd56673bd44890531f138281
+  docChecksum: 3928e8efd2be1d3f5d05733e66f92ead
   docVersion: "2.0"
-  speakeasyVersion: 1.493.0
-  generationVersion: 2.512.4
-  releaseVersion: 3.1.9
-  configChecksum: 83a81d1e3b4dba513c46b93fc9f4b4c2
+  speakeasyVersion: 1.506.0
+  generationVersion: 2.533.0
+  releaseVersion: 3.1.10
+  configChecksum: ac6a64b24c18633bf61711a37d57a5f7
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.19.0
+    core: 3.21.3
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -27,9 +27,10 @@ features:
     hiddenGlobals: 0.1.0
     ignores: 2.81.1
     inputOutputModels: 2.82.0
+    mcpServer: 0.3.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
-    nullables: 0.1.0
+    nullables: 0.1.1
     operationTimeout: 0.2.0
     responseFormat: 0.2.3
     retries: 2.83.0
@@ -604,6 +605,36 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/contactsCreate.ts
+  - src/mcp-server/tools/deploymentsGetConfig.ts
+  - src/mcp-server/tools/deploymentsInvoke.ts
+  - src/mcp-server/tools/deploymentsList.ts
+  - src/mcp-server/tools/deploymentsMetricsCreate.ts
+  - src/mcp-server/tools/deploymentsStream.ts
+  - src/mcp-server/tools/feedbackCreate.ts
+  - src/mcp-server/tools/filesCreate.ts
+  - src/mcp-server/tools/filesDelete.ts
+  - src/mcp-server/tools/filesGet.ts
+  - src/mcp-server/tools/filesList.ts
+  - src/mcp-server/tools/promptsCreate.ts
+  - src/mcp-server/tools/promptsDelete.ts
+  - src/mcp-server/tools/promptsGetVersion.ts
+  - src/mcp-server/tools/promptsList.ts
+  - src/mcp-server/tools/promptsListVersions.ts
+  - src/mcp-server/tools/promptsRetrieve.ts
+  - src/mcp-server/tools/promptsUpdate.ts
+  - src/mcp-server/tools/remoteconfigsRetrieve.ts
   - src/models/components/deployments.ts
   - src/models/components/index.ts
   - src/models/components/security.ts
@@ -643,6 +674,7 @@ generatedFiles:
   - src/sdk/prompts.ts
   - src/sdk/remoteconfigs.ts
   - src/sdk/sdk.ts
+  - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts
