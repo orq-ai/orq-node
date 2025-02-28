@@ -7,11 +7,11 @@ The intended purpose of the uploaded file.
 ```typescript
 import { Purpose } from "@orq-ai/node/models/operations";
 
-let value: Purpose = "knowledge_datasource";
+let value: Purpose = "batch";
 ```
 
 ## Values
 
 ```typescript
-"retrieval" | "knowledge_datasource"
+"retrieval" | "knowledge_datasource" | "batch"
 ```

@@ -13,5 +13,5 @@ let value: FileUploadPurpose = "retrieval";
 ## Values
 
 ```typescript
-"retrieval" | "knowledge_datasource"
+"retrieval" | "knowledge_datasource" | "batch"
 ```

@@ -22,6 +22,7 @@ export type FileGetRequest = {
 export const FileGetPurpose = {
   Retrieval: "retrieval",
   KnowledgeDatasource: "knowledge_datasource",
+  Batch: "batch",
 } as const;
 /**
  * The intended purpose of the uploaded file.
@@ -145,7 +146,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-02-27T17:20:06.978Z",
+    "2025-02-28T09:18:03.386Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -179,7 +180,7 @@ export const FileGetResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-02-27T17:20:06.978Z"))
+  created: z.date().default(() => new Date("2025-02-28T09:18:03.386Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
