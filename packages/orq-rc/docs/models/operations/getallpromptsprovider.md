@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsProvider = "fal";
+let value: GetAllPromptsProvider = "replicate";
 ```
 
 ## Values

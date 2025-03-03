@@ -12,7 +12,7 @@ let value: GetPromptVersionResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "expected_output",
         content: "<value>",
       },
     ],

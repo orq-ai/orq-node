@@ -6,13 +6,11 @@
 import { UpdateDatapointMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapointMessages = {
-  role: "exception",
+  role: "expected_output",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://steep-experience.info",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

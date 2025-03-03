@@ -11,13 +11,13 @@ let value: ListDatasetsResponseBody = {
   object: "list",
   data: [
     {
-      id: "fcd72f27-1ffb-4544-9282-5ab06ad7f407",
-      displayName: "Reta_Hagenes",
-      projectId: "b600810f-d20f-442b-914f-a86c2fd90be8",
-      workspaceId: "1ce1c0f9-84e4-4dfc-b817-736527480ed8",
+      id: "c39afcd7-2f27-41ff-bb54-42825ab06ad7",
+      displayName: "Dina.Kub82",
+      projectId: "4cb8b600-810f-4d20-8f42-b14fa86c2fd9",
+      workspaceId: "be851ce1-c0f9-484e-84df-c81773652748",
       metadata: {
-        totalVersions: 9623.96,
-        datapointsCount: 1105.22,
+        totalVersions: 9062.32,
+        datapointsCount: 8163.65,
       },
     },
   ],

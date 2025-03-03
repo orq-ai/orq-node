@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { CreatePromptModelType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptModelType = "completion";
+let value: CreatePromptModelType = "rerank";
 ```
 
 ## Values

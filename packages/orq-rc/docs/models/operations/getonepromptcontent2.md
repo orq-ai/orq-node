@@ -18,7 +18,7 @@ const value: operations.GetOnePrompt21 = {
 const value: operations.GetOnePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://appropriate-bakeware.com/",
+    url: "https://untried-coast.name/",
   },
 };
 ```

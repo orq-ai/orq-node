@@ -6,7 +6,7 @@
 import { GetPromptVersionMessages } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersionMessages = {
-  role: "expected_output",
+  role: "user",
   content: "<value>",
 };
 ```

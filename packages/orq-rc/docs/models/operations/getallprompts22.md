@@ -10,7 +10,7 @@ import { GetAllPrompts22 } from "@orq-ai/node/models/operations";
 let value: GetAllPrompts22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://simplistic-descendant.biz/",
+    url: "https://hospitable-republican.biz/",
   },
 };
 ```

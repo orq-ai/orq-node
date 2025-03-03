@@ -14,20 +14,18 @@ let value: GetAllPromptsResponseBody = {
       id: "<id>",
       type: "prompt",
       owner: "<value>",
-      domainId: "58e16059-4319-4baf-80a9-9f0bd85c178b",
+      domainId: "0b058e16-0594-4319-9baf-0a99f0bd85c1",
       created: "<value>",
       updated: "<value>",
-      displayName: "Dannie_Mueller61",
+      displayName: "Josie.Borer",
       promptConfig: {
         messages: [
           {
             role: "expected_output",
             content: [
               {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://nautical-traditionalism.net",
-                },
+                type: "text",
+                text: "<value>",
               },
             ],
           },

@@ -5,7 +5,7 @@
 ```typescript
 import { GetPromptVersionProvider } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionProvider = "aws";
+let value: GetPromptVersionProvider = "perplexity";
 ```
 
 ## Values

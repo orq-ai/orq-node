@@ -10,7 +10,7 @@ import { PromptConfig } from "@orq-ai/node/models/operations";
 let value: PromptConfig = {
   messages: [
     {
-      role: "prompt",
+      role: "assistant",
       content: [
         {
           type: "text",

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: cff83a1d4d4d48e1cf980e40ab9cbd63
+  docChecksum: f78b34d55abe77893344e57d405f7d85
   docVersion: "2.0"
-  speakeasyVersion: 1.507.0
-  generationVersion: 2.533.0
-  releaseVersion: 3.2.0-rc.23
-  configChecksum: 00b751ef1f0ec3f7370d6391a6e69e4d
+  speakeasyVersion: 1.508.1
+  generationVersion: 2.536.0
+  releaseVersion: 3.2.0-rc.24
+  configChecksum: 60b72020d06bf27500323b3a329b5d0f
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -852,7 +852,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"code": 4865.89, "success": false}
+          application/json: {"success": false}
   FileUpload:
     speakeasy-default-file-upload:
       responses:

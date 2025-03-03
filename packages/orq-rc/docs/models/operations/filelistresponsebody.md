@@ -13,10 +13,10 @@ let value: FileListResponseBody = {
     {
       id: "<id>",
       objectName: "<value>",
-      purpose: "knowledge_datasource",
-      bytes: 8207.67,
+      purpose: "batch",
+      bytes: 5757.51,
       fileName: "example.file",
-      workspaceId: "ed2a6164-d0f5-4502-96e1-fd7539006143",
+      workspaceId: "ded2a616-4d0f-4550-826e-1fd753900614",
     },
   ],
   hasMore: false,

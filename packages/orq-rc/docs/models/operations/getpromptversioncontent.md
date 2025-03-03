@@ -18,7 +18,7 @@ const value: operations.GetPromptVersionContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://gray-complication.com/",
+      url: "https://important-heartbeat.net",
     },
   },
 ];

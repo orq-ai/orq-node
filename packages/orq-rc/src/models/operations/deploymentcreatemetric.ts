@@ -308,10 +308,6 @@ export type DeploymentCreateMetricRequest = {
  */
 export type DeploymentCreateMetricResponseBody = {
   /**
-   * The status code of the request
-   */
-  code: number;
-  /**
    * Whether the request was successful
    */
   success: boolean;
@@ -1734,13 +1730,11 @@ export const DeploymentCreateMetricResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  code: z.number(),
   success: z.boolean(),
 });
 
 /** @internal */
 export type DeploymentCreateMetricResponseBody$Outbound = {
-  code: number;
   success: boolean;
 };
 
@@ -1750,7 +1744,6 @@ export const DeploymentCreateMetricResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentCreateMetricResponseBody
 > = z.object({
-  code: z.number(),
   success: z.boolean(),
 });
 

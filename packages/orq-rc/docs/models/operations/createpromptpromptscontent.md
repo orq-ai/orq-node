@@ -18,7 +18,7 @@ const value: operations.CreatePromptContentPrompts2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://imaginary-detective.biz",
+      url: "https://partial-carboxyl.org/",
     },
   },
 ];

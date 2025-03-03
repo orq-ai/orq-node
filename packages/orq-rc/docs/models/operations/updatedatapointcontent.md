@@ -18,7 +18,7 @@ const value: operations.UpdateDatapointContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://worst-suspension.com/",
+      url: "https://lustrous-publication.net/",
     },
   },
 ];
