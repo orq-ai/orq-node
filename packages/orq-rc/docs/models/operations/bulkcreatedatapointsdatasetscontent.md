@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.BulkCreateDatapointsContentDatasets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://hopeful-costume.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

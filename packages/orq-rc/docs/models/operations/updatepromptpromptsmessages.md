@@ -6,7 +6,7 @@
 import { UpdatePromptPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptPromptsMessages = {
-  role: "exception",
+  role: "tool",
   content: "<value>",
 };
 ```

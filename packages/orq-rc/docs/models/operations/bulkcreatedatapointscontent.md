@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.BulkCreateDatapointsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://glaring-fibre.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

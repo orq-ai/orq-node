@@ -11,12 +11,7 @@ let value: PromptConfig = {
   messages: [
     {
       role: "assistant",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      content: "<value>",
     },
   ],
 };

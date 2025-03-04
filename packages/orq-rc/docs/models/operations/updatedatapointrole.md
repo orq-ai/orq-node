@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { UpdateDatapointRole } from "@orq-ai/node/models/operations";
 
-let value: UpdateDatapointRole = "expected_output";
+let value: UpdateDatapointRole = "tool";
 ```
 
 ## Values

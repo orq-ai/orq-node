@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentInvokeMessage1 = {
-  role: "tool",
+  role: "correction",
   toolCalls: [
     {
       type: "function",
@@ -24,17 +24,17 @@ const value: operations.DeploymentInvokeMessage1 = {
 
 ```typescript
 const value: operations.DeploymentInvokeMessage2 = {
-  role: "tool",
+  role: "user",
   content: "<value>",
 };
 ```
 
-### `operations.Message3`
+### `operations.DeploymentInvokeMessage3`
 
 ```typescript
-const value: operations.Message3 = {
-  role: "expected_output",
-  url: "https://exalted-breastplate.com/",
+const value: operations.DeploymentInvokeMessage3 = {
+  role: "correction",
+  url: "https://afraid-folklore.com",
 };
 ```
 

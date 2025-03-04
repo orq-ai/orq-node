@@ -1,6 +1,6 @@
 # Content
 
-The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. 
+The contents of the user message.
 
 
 ## Supported Types
@@ -11,13 +11,16 @@ The contents of the user message. Either the text content of the message or an a
 const value: string = "<value>";
 ```
 
-### `operations.Two[]`
+### `operations.Content2[]`
 
 ```typescript
-const value: operations.Two[] = [
+const value: operations.Content2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "mp3",
+    },
   },
 ];
 ```

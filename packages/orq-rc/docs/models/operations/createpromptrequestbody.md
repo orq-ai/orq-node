@@ -6,19 +6,12 @@
 import { CreatePromptRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptRequestBody = {
-  displayName: "Abbie_Hamill",
+  displayName: "Gavin35",
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://huge-vibration.net",
-            },
-          },
-        ],
+        role: "correction",
+        content: "<value>",
       },
     ],
   },

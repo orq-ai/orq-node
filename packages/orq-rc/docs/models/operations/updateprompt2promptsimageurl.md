@@ -6,7 +6,7 @@
 import { UpdatePrompt2PromptsImageUrl } from "@orq-ai/node/models/operations";
 
 let value: UpdatePrompt2PromptsImageUrl = {
-  url: "https://grown-pronoun.name",
+  url: "https://crowded-councilman.info/",
 };
 ```
 

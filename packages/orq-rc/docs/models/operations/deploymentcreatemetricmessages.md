@@ -1,20 +1,50 @@
 # DeploymentCreateMetricMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.DeploymentCreateMetricMessages1`
 
 ```typescript
-import { DeploymentCreateMetricMessages } from "@orq-ai/node/models/operations";
-
-let value: DeploymentCreateMetricMessages = {
-  role: "correction",
+const value: operations.DeploymentCreateMetricMessages1 = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.DeploymentCreateMetricMessages2`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.DeploymentCreateMetricRole](../../models/operations/deploymentcreatemetricrole.md)                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.DeploymentCreateMetricContent*                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.DeploymentCreateMetricToolCalls](../../models/operations/deploymentcreatemetrictoolcalls.md)[]                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.DeploymentCreateMetricMessages2 = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.DeploymentCreateMetricMessages3`
+
+```typescript
+const value: operations.DeploymentCreateMetricMessages3 = {
+  role: "user",
+  content: "<value>",
+};
+```
+
+### `operations.DeploymentCreateMetricMessages4`
+
+```typescript
+const value: operations.DeploymentCreateMetricMessages4 = {
+  role: "assistant",
+};
+```
+
+### `operations.DeploymentCreateMetricMessages5`
+
+```typescript
+const value: operations.DeploymentCreateMetricMessages5 = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

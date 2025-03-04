@@ -1,5 +1,7 @@
 # Type
 
+The type of the tool. Currently, only `5` is supported.
+
 ## Example Usage
 
 ```typescript

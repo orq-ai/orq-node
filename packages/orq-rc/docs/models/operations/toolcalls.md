@@ -6,19 +6,16 @@
 import { ToolCalls } from "@orq-ai/node/models/operations";
 
 let value: ToolCalls = {
+  id: "<id>",
   type: "function",
-  function: {
-    name: "<value>",
-    arguments: "<value>",
-  },
+  function: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `id`                                                                                     | *string*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `index`                                                                                  | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `type`                                                                                   | [operations.DeploymentGetConfigType](../../models/operations/deploymentgetconfigtype.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `function`                                                                               | [operations.FunctionT](../../models/operations/functiont.md)                             | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `id`                                                                           | *string*                                                                       | :heavy_check_mark:                                                             | The ID of the tool call.                                                       |
+| `type`                                                                         | [operations.PrefixMessagesType](../../models/operations/prefixmessagestype.md) | :heavy_check_mark:                                                             | The type of the tool. Currently, only `5` is supported.                        |
+| `function`                                                                     | [operations.FunctionT](../../models/operations/functiont.md)                   | :heavy_check_mark:                                                             | N/A                                                                            |

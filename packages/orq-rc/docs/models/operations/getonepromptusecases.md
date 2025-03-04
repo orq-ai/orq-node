@@ -5,7 +5,7 @@
 ```typescript
 import { GetOnePromptUseCases } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptUseCases = "Agents";
+let value: GetOnePromptUseCases = "Documents QA";
 ```
 
 ## Values

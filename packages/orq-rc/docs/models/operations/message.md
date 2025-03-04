@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.Message1 = {
-  role: "exception",
+  role: "correction",
   toolCalls: [
     {
       type: "function",
@@ -24,17 +24,17 @@ const value: operations.Message1 = {
 
 ```typescript
 const value: operations.Message2 = {
-  role: "assistant",
+  role: "correction",
   content: "<value>",
 };
 ```
 
-### `operations.Three`
+### `operations.Message3`
 
 ```typescript
-const value: operations.Three = {
-  role: "assistant",
-  url: "https://serpentine-address.net/",
+const value: operations.Message3 = {
+  role: "user",
+  url: "https://outstanding-dress.info/",
 };
 ```
 

@@ -1,17 +1,17 @@
 # Format
 
-Only supported on `image` models.
+The format of the encoded audio data. Currently supports `wav` and `mp3`.
 
 ## Example Usage
 
 ```typescript
 import { Format } from "@orq-ai/node/models/operations";
 
-let value: Format = "url";
+let value: Format = "wav";
 ```
 
 ## Values
 
 ```typescript
-"url" | "b64_json" | "text" | "json_object"
+"mp3" | "wav"
 ```

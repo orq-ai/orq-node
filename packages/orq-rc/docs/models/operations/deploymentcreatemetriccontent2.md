@@ -18,7 +18,19 @@ const value: operations.DeploymentCreateMetric21 = {
 const value: operations.DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://mammoth-paintwork.info/",
+    url: "https://innocent-masterpiece.org/",
+  },
+};
+```
+
+### `operations.DeploymentCreateMetric23`
+
+```typescript
+const value: operations.DeploymentCreateMetric23 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
   },
 };
 ```

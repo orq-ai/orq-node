@@ -6,12 +6,12 @@
 import { RetrieveDatapointMessages } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatapointMessages = {
-  role: "exception",
+  role: "user",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://scary-scout.biz/",
+        url: "https://robust-appliance.name",
       },
     },
   ],

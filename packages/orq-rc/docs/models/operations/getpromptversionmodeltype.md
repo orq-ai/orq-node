@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetPromptVersionModelType } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionModelType = "vision";
+let value: GetPromptVersionModelType = "tts";
 ```
 
 ## Values

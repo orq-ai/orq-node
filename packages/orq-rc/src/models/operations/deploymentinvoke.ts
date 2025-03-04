@@ -78,7 +78,7 @@ export type DeploymentInvokeMessageDeploymentsRole = ClosedEnum<
   typeof DeploymentInvokeMessageDeploymentsRole
 >;
 
-export type Message3 = {
+export type DeploymentInvokeMessage3 = {
   /**
    * The role of the prompt message
    */
@@ -167,14 +167,14 @@ export type DeploymentInvokeMessage1 = {
 
 export type DeploymentInvokeMessage =
   | DeploymentInvokeMessage2
-  | Message3
+  | DeploymentInvokeMessage3
   | DeploymentInvokeMessage1;
 
 export type DeploymentInvokeChoices = {
   index: number;
   message?:
     | DeploymentInvokeMessage2
-    | Message3
+    | DeploymentInvokeMessage3
     | DeploymentInvokeMessage1
     | undefined;
   finishReason?: string | null | undefined;
@@ -395,8 +395,8 @@ export namespace DeploymentInvokeMessageDeploymentsRole$ {
 }
 
 /** @internal */
-export const Message3$inboundSchema: z.ZodType<
-  Message3,
+export const DeploymentInvokeMessage3$inboundSchema: z.ZodType<
+  DeploymentInvokeMessage3,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -405,16 +405,16 @@ export const Message3$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Message3$Outbound = {
+export type DeploymentInvokeMessage3$Outbound = {
   role: string;
   url: string;
 };
 
 /** @internal */
-export const Message3$outboundSchema: z.ZodType<
-  Message3$Outbound,
+export const DeploymentInvokeMessage3$outboundSchema: z.ZodType<
+  DeploymentInvokeMessage3$Outbound,
   z.ZodTypeDef,
-  Message3
+  DeploymentInvokeMessage3
 > = z.object({
   role: DeploymentInvokeMessageDeploymentsRole$outboundSchema,
   url: z.string(),
@@ -424,26 +424,30 @@ export const Message3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Message3$ {
-  /** @deprecated use `Message3$inboundSchema` instead. */
-  export const inboundSchema = Message3$inboundSchema;
-  /** @deprecated use `Message3$outboundSchema` instead. */
-  export const outboundSchema = Message3$outboundSchema;
-  /** @deprecated use `Message3$Outbound` instead. */
-  export type Outbound = Message3$Outbound;
+export namespace DeploymentInvokeMessage3$ {
+  /** @deprecated use `DeploymentInvokeMessage3$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeMessage3$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessage3$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeMessage3$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessage3$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessage3$Outbound;
 }
 
-export function message3ToJSON(message3: Message3): string {
-  return JSON.stringify(Message3$outboundSchema.parse(message3));
+export function deploymentInvokeMessage3ToJSON(
+  deploymentInvokeMessage3: DeploymentInvokeMessage3,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMessage3$outboundSchema.parse(deploymentInvokeMessage3),
+  );
 }
 
-export function message3FromJSON(
+export function deploymentInvokeMessage3FromJSON(
   jsonString: string,
-): SafeParseResult<Message3, SDKValidationError> {
+): SafeParseResult<DeploymentInvokeMessage3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Message3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Message3' from JSON`,
+    (x) => DeploymentInvokeMessage3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeMessage3' from JSON`,
   );
 }
 
@@ -772,14 +776,14 @@ export const DeploymentInvokeMessage$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() => DeploymentInvokeMessage2$inboundSchema),
-  z.lazy(() => Message3$inboundSchema),
+  z.lazy(() => DeploymentInvokeMessage3$inboundSchema),
   z.lazy(() => DeploymentInvokeMessage1$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentInvokeMessage$Outbound =
   | DeploymentInvokeMessage2$Outbound
-  | Message3$Outbound
+  | DeploymentInvokeMessage3$Outbound
   | DeploymentInvokeMessage1$Outbound;
 
 /** @internal */
@@ -789,7 +793,7 @@ export const DeploymentInvokeMessage$outboundSchema: z.ZodType<
   DeploymentInvokeMessage
 > = z.union([
   z.lazy(() => DeploymentInvokeMessage2$outboundSchema),
-  z.lazy(() => Message3$outboundSchema),
+  z.lazy(() => DeploymentInvokeMessage3$outboundSchema),
   z.lazy(() => DeploymentInvokeMessage1$outboundSchema),
 ]);
 
@@ -833,7 +837,7 @@ export const DeploymentInvokeChoices$inboundSchema: z.ZodType<
   index: z.number(),
   message: z.union([
     z.lazy(() => DeploymentInvokeMessage2$inboundSchema),
-    z.lazy(() => Message3$inboundSchema),
+    z.lazy(() => DeploymentInvokeMessage3$inboundSchema),
     z.lazy(() => DeploymentInvokeMessage1$inboundSchema),
   ]).optional(),
   finish_reason: z.nullable(z.string()).optional(),
@@ -848,7 +852,7 @@ export type DeploymentInvokeChoices$Outbound = {
   index: number;
   message?:
     | DeploymentInvokeMessage2$Outbound
-    | Message3$Outbound
+    | DeploymentInvokeMessage3$Outbound
     | DeploymentInvokeMessage1$Outbound
     | undefined;
   finish_reason?: string | null | undefined;
@@ -863,7 +867,7 @@ export const DeploymentInvokeChoices$outboundSchema: z.ZodType<
   index: z.number(),
   message: z.union([
     z.lazy(() => DeploymentInvokeMessage2$outboundSchema),
-    z.lazy(() => Message3$outboundSchema),
+    z.lazy(() => DeploymentInvokeMessage3$outboundSchema),
     z.lazy(() => DeploymentInvokeMessage1$outboundSchema),
   ]).optional(),
   finishReason: z.nullable(z.string()).optional(),

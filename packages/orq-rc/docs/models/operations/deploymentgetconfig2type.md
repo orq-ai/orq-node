@@ -5,11 +5,11 @@
 ```typescript
 import { DeploymentGetConfig2Type } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfig2Type = "text";
+let value: DeploymentGetConfig2Type = "input_audio";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"input_audio"
 ```

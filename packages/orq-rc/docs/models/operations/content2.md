@@ -12,13 +12,25 @@ const value: operations.Two1 = {
 };
 ```
 
-### `operations.DeploymentGetConfig22`
+### `operations.Two2`
 
 ```typescript
-const value: operations.DeploymentGetConfig22 = {
+const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://muted-technician.org/",
+    url: "https://fake-backburn.info/",
+  },
+};
+```
+
+### `operations.Two3`
+
+```typescript
+const value: operations.Two3 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```

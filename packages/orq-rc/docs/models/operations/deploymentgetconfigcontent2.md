@@ -12,14 +12,12 @@ const value: operations.DeploymentGetConfig21 = {
 };
 ```
 
-### `operations.DeploymentGetConfig2Deployments2`
+### `operations.DeploymentGetConfig22`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://well-groomed-poetry.biz/",
-  },
+const value: operations.DeploymentGetConfig22 = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

@@ -1,20 +1,58 @@
 # Messages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Messages1`
 
 ```typescript
-import { Messages } from "@orq-ai/node/models/operations";
-
-let value: Messages = {
-  role: "prompt",
+const value: operations.Messages1 = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.Messages2`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.DeploymentGetConfigRole](../../models/operations/deploymentgetconfigrole.md)                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.DeploymentGetConfigContent*                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.DeploymentGetConfigToolCalls](../../models/operations/deploymentgetconfigtoolcalls.md)[]                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.Messages2 = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.Messages3`
+
+```typescript
+const value: operations.Messages3 = {
+  role: "user",
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "mp3",
+      },
+    },
+  ],
+};
+```
+
+### `operations.Messages4`
+
+```typescript
+const value: operations.Messages4 = {
+  role: "assistant",
+};
+```
+
+### `operations.Messages5`
+
+```typescript
+const value: operations.Messages5 = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

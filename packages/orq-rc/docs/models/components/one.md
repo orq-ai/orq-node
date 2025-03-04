@@ -1,21 +1,20 @@
 # One
 
-Text content part of a prompt message
-
 ## Example Usage
 
 ```typescript
 import { One } from "@orq-ai/node/models/components";
 
 let value: One = {
-  type: "text",
-  text: "<value>",
+  role: "developer",
+  content: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `type`                                                                     | [components.Deployments2Type](../../models/components/deployments2type.md) | :heavy_check_mark:                                                         | N/A                                                                        |
-| `text`                                                                     | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                       | [components.Role](../../models/components/role.md)                                                                           | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case  `developer`.                                                                  |
+| `content`                                                                                                                    | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | The contents of the developer message.                                                                                       |
+| `name`                                                                                                                       | *string*                                                                                                                     | :heavy_minus_sign:                                                                                                           | An optional name for the participant. Provides the model information to differentiate between participants of the same role. |

@@ -1,7 +1,5 @@
 # DeploymentCreateMetric22
 
-The image part of the prompt message. Only supported with vision models.
-
 ## Example Usage
 
 ```typescript
@@ -10,7 +8,7 @@ import { DeploymentCreateMetric22 } from "@orq-ai/node/models/operations";
 let value: DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://grumpy-chops.org/",
+    url: "https://bony-bonnet.net/",
   },
 };
 ```

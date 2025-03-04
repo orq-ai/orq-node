@@ -16,7 +16,12 @@ let value: ListPromptVersionsResponseBody = {
         messages: [
           {
             role: "user",
-            content: "<value>",
+            content: [
+              {
+                type: "text",
+                text: "<value>",
+              },
+            ],
           },
         ],
       },

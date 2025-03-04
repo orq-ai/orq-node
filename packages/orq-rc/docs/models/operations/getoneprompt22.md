@@ -10,7 +10,7 @@ import { GetOnePrompt22 } from "@orq-ai/node/models/operations";
 let value: GetOnePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://frivolous-coast.org",
+    url: "https://quick-witted-grouper.org",
   },
 };
 ```

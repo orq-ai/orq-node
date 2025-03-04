@@ -1,20 +1,52 @@
 # PrefixMessages
 
-## Example Usage
+
+## Supported Types
+
+### `components.One`
 
 ```typescript
-import { PrefixMessages } from "@orq-ai/node/models/components";
-
-let value: PrefixMessages = {
-  role: "exception",
+const value: components.One = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `components.Two`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [components.Role](../../models/components/role.md)                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *components.Content*                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [components.ToolCalls](../../models/components/toolcalls.md)[]                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: components.Two = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `components.Three`
+
+```typescript
+const value: components.Three = {
+  role: "user",
+  content: "<value>",
+};
+```
+
+### `components.Four`
+
+```typescript
+const value: components.Four = {
+  role: "assistant",
+};
+```
+
+### `components.Five`
+
+```typescript
+const value: components.Five = {
+  role: "tool",
+  content: [
+    "<value>",
+  ],
+  toolCallId: "<id>",
+};
+```
+
