@@ -452,8 +452,8 @@ export type GetPromptVersionMetadata = {
  */
 export type GetPromptVersionResponseBody = {
   id: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -1905,8 +1905,8 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => GetPromptVersionPromptConfig$inboundSchema),
   metadata: z.lazy(() => GetPromptVersionMetadata$inboundSchema).optional(),
@@ -1923,8 +1923,8 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GetPromptVersionResponseBody$Outbound = {
   _id: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   description?: string | null | undefined;
   prompt_config: GetPromptVersionPromptConfig$Outbound;
   metadata?: GetPromptVersionMetadata$Outbound | undefined;
@@ -1938,8 +1938,8 @@ export const GetPromptVersionResponseBody$outboundSchema: z.ZodType<
   GetPromptVersionResponseBody
 > = z.object({
   id: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => GetPromptVersionPromptConfig$outboundSchema),
   metadata: z.lazy(() => GetPromptVersionMetadata$outboundSchema).optional(),

@@ -405,8 +405,8 @@ export type UpdatePromptRequestBody = {
   domainId?: string | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s name, meant to be displayable in the UI.
    */
@@ -874,8 +874,8 @@ export type UpdatePromptResponseBody = {
   domainId: string;
   created: string;
   updated: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s name, meant to be displayable in the UI.
    */
@@ -2185,8 +2185,8 @@ export const UpdatePromptRequestBody$inboundSchema: z.ZodType<
   domain_id: z.string().optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => PromptConfig$inboundSchema).optional(),
@@ -2207,8 +2207,8 @@ export type UpdatePromptRequestBody$Outbound = {
   domain_id?: string | undefined;
   created?: string | undefined;
   updated?: string | undefined;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   display_name?: string | undefined;
   description?: string | null | undefined;
   prompt_config?: PromptConfig$Outbound | undefined;
@@ -2225,8 +2225,8 @@ export const UpdatePromptRequestBody$outboundSchema: z.ZodType<
   domainId: z.string().optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   displayName: z.string().optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => PromptConfig$outboundSchema).optional(),
@@ -3737,8 +3737,8 @@ export const UpdatePromptResponseBody$inboundSchema: z.ZodType<
   domain_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => UpdatePromptPromptConfig$inboundSchema),
@@ -3762,8 +3762,8 @@ export type UpdatePromptResponseBody$Outbound = {
   domain_id: string;
   created: string;
   updated: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   display_name: string;
   description?: string | null | undefined;
   prompt_config: UpdatePromptPromptConfig$Outbound;
@@ -3782,8 +3782,8 @@ export const UpdatePromptResponseBody$outboundSchema: z.ZodType<
   domainId: z.string(),
   created: z.string(),
   updated: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => UpdatePromptPromptConfig$outboundSchema),

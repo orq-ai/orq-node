@@ -467,8 +467,8 @@ export type ListPromptVersionsMetadata = {
 
 export type ListPromptVersionsData = {
   id: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -1971,8 +1971,8 @@ export const ListPromptVersionsData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => ListPromptVersionsPromptConfig$inboundSchema),
   metadata: z.lazy(() => ListPromptVersionsMetadata$inboundSchema).optional(),
@@ -1989,8 +1989,8 @@ export const ListPromptVersionsData$inboundSchema: z.ZodType<
 /** @internal */
 export type ListPromptVersionsData$Outbound = {
   _id: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   description?: string | null | undefined;
   prompt_config: ListPromptVersionsPromptConfig$Outbound;
   metadata?: ListPromptVersionsMetadata$Outbound | undefined;
@@ -2004,8 +2004,8 @@ export const ListPromptVersionsData$outboundSchema: z.ZodType<
   ListPromptVersionsData
 > = z.object({
   id: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => ListPromptVersionsPromptConfig$outboundSchema),
   metadata: z.lazy(() => ListPromptVersionsMetadata$outboundSchema).optional(),
