@@ -1,20 +1,50 @@
 # DeploymentStreamPrefixMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.PrefixMessagesDeveloperMessage`
 
 ```typescript
-import { DeploymentStreamPrefixMessages } from "@orq-ai/node/models/operations";
-
-let value: DeploymentStreamPrefixMessages = {
-  role: "tool",
+const value: operations.PrefixMessagesDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.PrefixMessagesSystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.DeploymentStreamRole](../../models/operations/deploymentstreamrole.md)                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.DeploymentStreamContent*                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.DeploymentStreamToolCalls](../../models/operations/deploymentstreamtoolcalls.md)[]                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.PrefixMessagesSystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.PrefixMessagesUserMessage`
+
+```typescript
+const value: operations.PrefixMessagesUserMessage = {
+  role: "user",
+  content: "<value>",
+};
+```
+
+### `operations.PrefixMessagesAssistantMessage`
+
+```typescript
+const value: operations.PrefixMessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.PrefixMessagesToolMessage`
+
+```typescript
+const value: operations.PrefixMessagesToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { DeploymentStreamMessageRole } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamMessageRole = "system";
+let value: DeploymentStreamMessageRole = "tool";
 ```
 
 ## Values

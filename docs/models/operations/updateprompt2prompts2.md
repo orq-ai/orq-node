@@ -10,7 +10,7 @@ import { UpdatePrompt2Prompts2 } from "@orq-ai/node/models/operations";
 let value: UpdatePrompt2Prompts2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://definite-jazz.com",
+    url: "https://ugly-tool.com/",
   },
 };
 ```

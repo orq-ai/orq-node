@@ -9,19 +9,19 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "b1369e92-fd8e-48ed-afe0-26f42e7e2a71",
+  domainId: "25a19743-8575-4f21-859a-6f5badfecb52",
   created: "<value>",
   updated: "<value>",
-  displayName: "Delilah90",
+  displayName: "Dean_Lebsack95",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "system",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://zany-freckle.info/",
+              url: "https://voluminous-whale.info",
             },
           },
         ],

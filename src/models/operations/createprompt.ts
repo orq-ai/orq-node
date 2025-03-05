@@ -31,7 +31,7 @@ export type ModelType = ClosedEnum<typeof ModelType>;
 /**
  * Only supported on `image` models.
  */
-export const Format = {
+export const CreatePromptFormat = {
   Url: "url",
   B64Json: "b64_json",
   Text: "text",
@@ -40,7 +40,7 @@ export const Format = {
 /**
  * Only supported on `image` models.
  */
-export type Format = ClosedEnum<typeof Format>;
+export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
 
 /**
  * Only supported on `image` models.
@@ -170,7 +170,7 @@ export type ModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  format?: Format | undefined;
+  format?: CreatePromptFormat | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -449,7 +449,7 @@ export type CreatePromptModelType = ClosedEnum<typeof CreatePromptModelType>;
 /**
  * Only supported on `image` models.
  */
-export const CreatePromptFormat = {
+export const CreatePromptPromptsFormat = {
   Url: "url",
   B64Json: "b64_json",
   Text: "text",
@@ -458,7 +458,9 @@ export const CreatePromptFormat = {
 /**
  * Only supported on `image` models.
  */
-export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
+export type CreatePromptPromptsFormat = ClosedEnum<
+  typeof CreatePromptPromptsFormat
+>;
 
 /**
  * Only supported on `image` models.
@@ -598,7 +600,7 @@ export type CreatePromptModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  format?: CreatePromptFormat | undefined;
+  format?: CreatePromptPromptsFormat | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -899,22 +901,24 @@ export namespace ModelType$ {
 }
 
 /** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptFormat
+> = z.nativeEnum(CreatePromptFormat);
 
 /** @internal */
-export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
-  Format$inboundSchema;
+export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptFormat
+> = CreatePromptFormat$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Format$ {
-  /** @deprecated use `Format$inboundSchema` instead. */
-  export const inboundSchema = Format$inboundSchema;
-  /** @deprecated use `Format$outboundSchema` instead. */
-  export const outboundSchema = Format$outboundSchema;
+export namespace CreatePromptFormat$ {
+  /** @deprecated use `CreatePromptFormat$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptFormat$inboundSchema;
+  /** @deprecated use `CreatePromptFormat$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptFormat$outboundSchema;
 }
 
 /** @internal */
@@ -1278,7 +1282,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: Format$inboundSchema.optional(),
+  format: CreatePromptFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
   quality: Quality$inboundSchema.optional(),
   style: z.string().optional(),
@@ -1337,7 +1341,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: Format$outboundSchema.optional(),
+  format: CreatePromptFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
   quality: Quality$outboundSchema.optional(),
   style: z.string().optional(),
@@ -2280,24 +2284,24 @@ export namespace CreatePromptModelType$ {
 }
 
 /** @internal */
-export const CreatePromptFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = z.nativeEnum(CreatePromptFormat);
+export const CreatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsFormat
+> = z.nativeEnum(CreatePromptPromptsFormat);
 
 /** @internal */
-export const CreatePromptFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptFormat
-> = CreatePromptFormat$inboundSchema;
+export const CreatePromptPromptsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsFormat
+> = CreatePromptPromptsFormat$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptFormat$ {
-  /** @deprecated use `CreatePromptFormat$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptFormat$inboundSchema;
-  /** @deprecated use `CreatePromptFormat$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptFormat$outboundSchema;
+export namespace CreatePromptPromptsFormat$ {
+  /** @deprecated use `CreatePromptPromptsFormat$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptPromptsFormat$inboundSchema;
+  /** @deprecated use `CreatePromptPromptsFormat$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptPromptsFormat$outboundSchema;
 }
 
 /** @internal */
@@ -2689,7 +2693,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptFormat$inboundSchema.optional(),
+  format: CreatePromptPromptsFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
   quality: CreatePromptQuality$inboundSchema.optional(),
   style: z.string().optional(),
@@ -2748,7 +2752,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   presencePenalty: z.number().optional(),
   numImages: z.number().optional(),
   seed: z.number().optional(),
-  format: CreatePromptFormat$outboundSchema.optional(),
+  format: CreatePromptPromptsFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
   quality: CreatePromptQuality$outboundSchema.optional(),
   style: z.string().optional(),

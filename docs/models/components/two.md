@@ -18,7 +18,19 @@ const value: components.One = {
 const value: components.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://glorious-deer.name/",
+    url: "https://average-vibraphone.org/",
+  },
+};
+```
+
+### `components.Three`
+
+```typescript
+const value: components.Three = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```

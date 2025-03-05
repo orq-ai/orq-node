@@ -5,11 +5,11 @@
 ```typescript
 import { Deployments2Type } from "@orq-ai/node/models/components";
 
-let value: Deployments2Type = "text";
+let value: Deployments2Type = "input_audio";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"input_audio"
 ```

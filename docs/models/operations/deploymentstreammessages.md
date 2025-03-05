@@ -1,20 +1,58 @@
 # DeploymentStreamMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.DeploymentStreamMessagesDeveloperMessage`
 
 ```typescript
-import { DeploymentStreamMessages } from "@orq-ai/node/models/operations";
-
-let value: DeploymentStreamMessages = {
-  role: "correction",
+const value: operations.DeploymentStreamMessagesDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.DeploymentStreamMessagesSystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.DeploymentStreamDeploymentsRole](../../models/operations/deploymentstreamdeploymentsrole.md)                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.DeploymentStreamContentInput*                                                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.DeploymentStreamDeploymentsToolCalls](../../models/operations/deploymentstreamdeploymentstoolcalls.md)[]                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.DeploymentStreamMessagesSystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.DeploymentStreamMessagesUserMessage`
+
+```typescript
+const value: operations.DeploymentStreamMessagesUserMessage = {
+  role: "user",
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "wav",
+      },
+    },
+  ],
+};
+```
+
+### `operations.DeploymentStreamMessagesAssistantMessage`
+
+```typescript
+const value: operations.DeploymentStreamMessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.DeploymentStreamMessagesToolMessage`
+
+```typescript
+const value: operations.DeploymentStreamMessagesToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

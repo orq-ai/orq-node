@@ -3,23 +3,21 @@
 
 ## Supported Types
 
-### `components.Two1`
+### `components.TextContentPart`
 
 ```typescript
-const value: components.Two1 = {
+const value: components.TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.Deployments22`
+### `components.RefusalContentPart`
 
 ```typescript
-const value: components.Deployments22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://forceful-import.com/",
-  },
+const value: components.RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

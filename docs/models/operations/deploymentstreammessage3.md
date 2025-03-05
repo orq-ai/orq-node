@@ -6,8 +6,8 @@
 import { DeploymentStreamMessage3 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessage3 = {
-  role: "assistant",
-  url: "https://nocturnal-strategy.net/",
+  role: "prompt",
+  url: "https://comfortable-grandson.org/",
 };
 ```
 

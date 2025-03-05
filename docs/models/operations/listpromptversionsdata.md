@@ -11,8 +11,15 @@ let value: ListPromptVersionsData = {
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: "<value>",
+        role: "system",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://remarkable-mozzarella.com/",
+            },
+          },
+        ],
       },
     ],
   },

@@ -14,14 +14,14 @@ let value: GetAllPromptsResponseBody = {
       id: "<id>",
       type: "prompt",
       owner: "<value>",
-      domainId: "6f25a197-4385-475f-9215-9a6f5badfecb",
+      domainId: "62aad179-32d0-4717-bf6d-1466a5ba6691",
       created: "<value>",
       updated: "<value>",
-      displayName: "Cale52",
+      displayName: "Madalyn.Leuschke",
       promptConfig: {
         messages: [
           {
-            role: "expected_output",
+            role: "user",
             content: "<value>",
           },
         ],

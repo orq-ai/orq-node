@@ -6,12 +6,12 @@
 import { GetAllPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsMessages = {
-  role: "tool",
+  role: "expected_output",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://rubbery-silk.name/",
+        url: "https://motionless-exasperation.org",
       },
     },
   ],

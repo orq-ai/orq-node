@@ -8,7 +8,7 @@ Successful operation
 import { DeploymentCreateMetricResponseBody } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetricResponseBody = {
-  code: 8577.23,
+  code: 653.04,
   success: false,
 };
 ```

@@ -3,22 +3,34 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig21`
+### `operations.Two1`
 
 ```typescript
-const value: operations.DeploymentGetConfig21 = {
+const value: operations.Two1 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig2Deployments2`
+### `operations.DeploymentGetConfig22`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments2 = {
+const value: operations.DeploymentGetConfig22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://well-groomed-poetry.biz/",
+    url: "https://trustworthy-drive.net",
+  },
+};
+```
+
+### `operations.Two3`
+
+```typescript
+const value: operations.Two3 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```

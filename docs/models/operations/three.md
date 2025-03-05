@@ -6,14 +6,17 @@
 import { Three } from "@orq-ai/node/models/operations";
 
 let value: Three = {
-  role: "tool",
-  url: "https://understated-impostor.net/",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                           | [operations.DeploymentCreateMetricMessageDeploymentsMetricsRole](../../models/operations/deploymentcreatemetricmessagedeploymentsmetricsrole.md) | :heavy_check_mark:                                                                                                                               | The role of the prompt message                                                                                                                   |
-| `url`                                                                                                                                            | *string*                                                                                                                                         | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `type`                                                                                     | [operations.DeploymentGetConfig2Type](../../models/operations/deploymentgetconfig2type.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `inputAudio`                                                                               | [operations.InputAudio](../../models/operations/inputaudio.md)                             | :heavy_check_mark:                                                                         | N/A                                                                                        |

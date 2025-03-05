@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { UpdatePromptModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptModelType = "completion";
+let value: UpdatePromptModelType = "vision";
 ```
 
 ## Values

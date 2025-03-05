@@ -11,13 +11,15 @@ The contents of the user message. Either the text content of the message or an a
 const value: string = "<value>";
 ```
 
-### `operations.Content2[]`
+### `operations.DeploymentGetConfigContentDeploymentsResponse2[]`
 
 ```typescript
-const value: operations.Content2[] = [
+const value: operations.DeploymentGetConfigContentDeploymentsResponse2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "image_url",
+    imageUrl: {
+      url: "https://courageous-juggernaut.info/",
+    },
   },
 ];
 ```

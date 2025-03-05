@@ -10,7 +10,7 @@ import { CreatePrompt22 } from "@orq-ai/node/models/operations";
 let value: CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://mammoth-mom.biz/",
+    url: "https://different-aftermath.name/",
   },
 };
 ```

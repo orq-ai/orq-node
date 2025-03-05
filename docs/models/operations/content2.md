@@ -3,23 +3,21 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `operations.TextContentPart`
 
 ```typescript
-const value: operations.Two1 = {
+const value: operations.TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig22`
+### `operations.RefusalContentPart`
 
 ```typescript
-const value: operations.DeploymentGetConfig22 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://muted-technician.org/",
-  },
+const value: operations.RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

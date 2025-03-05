@@ -18,7 +18,7 @@ const value: operations.GetAllPrompts21 = {
 const value: operations.GetAllPrompts22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://dull-captain.name/",
+    url: "https://quintessential-hunt.com/",
   },
 };
 ```

@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.Message1 = {
-  role: "user",
+  role: "system",
   toolCalls: [
     {
       type: "function",
@@ -24,17 +24,17 @@ const value: operations.Message1 = {
 
 ```typescript
 const value: operations.Message2 = {
-  role: "correction",
+  role: "tool",
   content: "<value>",
 };
 ```
 
-### `operations.Three`
+### `operations.Message3`
 
 ```typescript
-const value: operations.Three = {
-  role: "prompt",
-  url: "https://cute-secrecy.org/",
+const value: operations.Message3 = {
+  role: "expected_output",
+  url: "https://incomparable-coil.name",
 };
 ```
 

@@ -5,7 +5,7 @@
 ```typescript
 import { GetPromptVersionProvider } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionProvider = "nvidia";
+let value: GetPromptVersionProvider = "openai";
 ```
 
 ## Values

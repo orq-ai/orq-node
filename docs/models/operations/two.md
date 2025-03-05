@@ -18,7 +18,19 @@ const value: operations.One = {
 const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://descriptive-unblinking.net/",
+    url: "https://fake-backburn.info/",
+  },
+};
+```
+
+### `operations.Three`
+
+```typescript
+const value: operations.Three = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```

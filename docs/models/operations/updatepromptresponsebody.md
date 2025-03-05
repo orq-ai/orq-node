@@ -11,18 +11,20 @@ let value: UpdatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "855765eb-b49c-4c5c-8b2d-777997da66c5",
+  domainId: "5a87e8db-0c3e-4051-b7d4-25d231b64b5b",
   created: "<value>",
   updated: "<value>",
-  displayName: "Andres.VonRueden33",
+  displayName: "Cynthia.Crooks-Greenfelder",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "tool",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://portly-cannon.info/",
+            },
           },
         ],
       },

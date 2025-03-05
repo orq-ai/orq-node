@@ -7,7 +7,7 @@ Indicates the type of model used to generate the response
 ```typescript
 import { DeploymentStreamObject } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamObject = "chat";
+let value: DeploymentStreamObject = "completion";
 ```
 
 ## Values

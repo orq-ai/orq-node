@@ -6,11 +6,9 @@
 import { ToolCalls } from "@orq-ai/node/models/components";
 
 let value: ToolCalls = {
+  id: "<id>",
   type: "function",
-  function: {
-    name: "<value>",
-    arguments: "<value>",
-  },
+  function: {},
 };
 ```
 
@@ -18,7 +16,6 @@ let value: ToolCalls = {
 
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `id`                                                         | *string*                                                     | :heavy_minus_sign:                                           | N/A                                                          |
-| `index`                                                      | *number*                                                     | :heavy_minus_sign:                                           | N/A                                                          |
-| `type`                                                       | [components.Type](../../models/components/type.md)           | :heavy_check_mark:                                           | N/A                                                          |
+| `id`                                                         | *string*                                                     | :heavy_check_mark:                                           | The ID of the tool call.                                     |
+| `type`                                                       | [components.Type](../../models/components/type.md)           | :heavy_check_mark:                                           | The type of the tool. Currently, only `5` is supported.      |
 | `function`                                                   | [components.FunctionT](../../models/components/functiont.md) | :heavy_check_mark:                                           | N/A                                                          |

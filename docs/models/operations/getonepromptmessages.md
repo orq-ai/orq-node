@@ -6,7 +6,7 @@
 import { GetOnePromptMessages } from "@orq-ai/node/models/operations";
 
 let value: GetOnePromptMessages = {
-  role: "correction",
+  role: "expected_output",
   content: [
     {
       type: "text",

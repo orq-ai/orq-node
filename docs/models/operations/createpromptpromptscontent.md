@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CreatePromptContentPrompts2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://different-aftermath.name/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

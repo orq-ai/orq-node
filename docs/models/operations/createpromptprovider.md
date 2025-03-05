@@ -5,7 +5,7 @@
 ```typescript
 import { CreatePromptProvider } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptProvider = "azure";
+let value: CreatePromptProvider = "jina";
 ```
 
 ## Values

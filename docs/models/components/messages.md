@@ -1,20 +1,59 @@
 # Messages
 
-## Example Usage
+
+## Supported Types
+
+### `components.MessagesDeveloperMessage`
 
 ```typescript
-import { Messages } from "@orq-ai/node/models/components";
-
-let value: Messages = {
-  role: "exception",
+const value: components.MessagesDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `components.MessagesSystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [components.DeploymentsRole](../../models/components/deploymentsrole.md)                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *components.DeploymentsContent*                                                                                                                                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [components.DeploymentsToolCalls](../../models/components/deploymentstoolcalls.md)[]                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: components.MessagesSystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `components.MessagesUserMessage`
+
+```typescript
+const value: components.MessagesUserMessage = {
+  role: "user",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://french-travel.biz",
+      },
+    },
+  ],
+};
+```
+
+### `components.MessagesAssistantMessage`
+
+```typescript
+const value: components.MessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `components.MessagesToolMessage`
+
+```typescript
+const value: components.MessagesToolMessage = {
+  role: "tool",
+  content: [
+    "<value>",
+  ],
+  toolCallId: "<id>",
+};
+```
+

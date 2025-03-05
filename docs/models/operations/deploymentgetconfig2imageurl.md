@@ -6,7 +6,7 @@
 import { DeploymentGetConfig2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: DeploymentGetConfig2ImageUrl = {
-  url: "https://ideal-mortise.net/",
+  url: "https://insistent-gerbil.info/",
 };
 ```
 

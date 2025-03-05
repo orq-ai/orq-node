@@ -18,7 +18,19 @@ const value: operations.DeploymentStream21 = {
 const value: operations.DeploymentStream22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://worse-interviewer.info/",
+    url: "https://rectangular-developmental.info/",
+  },
+};
+```
+
+### `operations.DeploymentStream23`
+
+```typescript
+const value: operations.DeploymentStream23 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
   },
 };
 ```

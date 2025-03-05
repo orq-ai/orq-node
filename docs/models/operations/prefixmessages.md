@@ -1,20 +1,50 @@
 # PrefixMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.DeveloperMessage`
 
 ```typescript
-import { PrefixMessages } from "@orq-ai/node/models/operations";
-
-let value: PrefixMessages = {
-  role: "assistant",
+const value: operations.DeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.SystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.Role](../../models/operations/role.md)                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.Content*                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.ToolCalls](../../models/operations/toolcalls.md)[]                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.SystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.UserMessage`
+
+```typescript
+const value: operations.UserMessage = {
+  role: "user",
+  content: "<value>",
+};
+```
+
+### `operations.AssistantMessage`
+
+```typescript
+const value: operations.AssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.ToolMessage`
+
+```typescript
+const value: operations.ToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

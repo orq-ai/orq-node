@@ -18,7 +18,19 @@ const value: operations.DeploymentCreateMetric21 = {
 const value: operations.DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://another-horst.name",
+    url: "https://happy-go-lucky-formamide.com",
+  },
+};
+```
+
+### `operations.DeploymentCreateMetric23`
+
+```typescript
+const value: operations.DeploymentCreateMetric23 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```
