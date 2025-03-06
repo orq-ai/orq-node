@@ -3,35 +3,21 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig2Deployments1`
+### `operations.TwoTextContentPart`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments1 = {
+const value: operations.TwoTextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig2Deployments2`
+### `operations.TwoRefusalContentPart`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://trustworthy-drive.net",
-  },
-};
-```
-
-### `operations.DeploymentGetConfig23`
-
-```typescript
-const value: operations.DeploymentGetConfig23 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
+const value: operations.TwoRefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

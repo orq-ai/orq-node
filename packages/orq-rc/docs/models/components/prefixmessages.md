@@ -3,45 +3,45 @@
 
 ## Supported Types
 
-### `components.One`
+### `components.DeveloperMessage`
 
 ```typescript
-const value: components.One = {
+const value: components.DeveloperMessage = {
   role: "developer",
   content: "<value>",
 };
 ```
 
-### `components.Two`
+### `components.SystemMessage`
 
 ```typescript
-const value: components.Two = {
+const value: components.SystemMessage = {
   role: "system",
   content: "<value>",
 };
 ```
 
-### `components.Three`
+### `components.UserMessage`
 
 ```typescript
-const value: components.Three = {
+const value: components.UserMessage = {
   role: "user",
   content: "<value>",
 };
 ```
 
-### `components.Four`
+### `components.AssistantMessage`
 
 ```typescript
-const value: components.Four = {
+const value: components.AssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `components.Five`
+### `components.ToolMessage`
 
 ```typescript
-const value: components.Five = {
+const value: components.ToolMessage = {
   role: "tool",
   content: [
     "<value>",

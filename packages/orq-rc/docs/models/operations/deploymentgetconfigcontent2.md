@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig21`
+### `operations.Two1`
 
 ```typescript
-const value: operations.DeploymentGetConfig21 = {
+const value: operations.Two1 = {
   type: "text",
   text: "<value>",
 };
@@ -16,8 +16,22 @@ const value: operations.DeploymentGetConfig21 = {
 
 ```typescript
 const value: operations.DeploymentGetConfig22 = {
-  type: "refusal",
-  refusal: "<value>",
+  type: "image_url",
+  imageUrl: {
+    url: "https://trustworthy-drive.net",
+  },
+};
+```
+
+### `operations.Two3`
+
+```typescript
+const value: operations.Two3 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
 };
 ```
 

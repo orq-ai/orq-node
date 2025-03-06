@@ -3,35 +3,21 @@
 
 ## Supported Types
 
-### `operations.Two1`
+### `operations.TextContentPart`
 
 ```typescript
-const value: operations.Two1 = {
+const value: operations.TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.Two2`
+### `operations.RefusalContentPart`
 
 ```typescript
-const value: operations.Two2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://fake-backburn.info/",
-  },
-};
-```
-
-### `operations.Two3`
-
-```typescript
-const value: operations.Two3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
+const value: operations.RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

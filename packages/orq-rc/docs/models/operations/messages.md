@@ -3,28 +3,28 @@
 
 ## Supported Types
 
-### `operations.Messages1`
+### `operations.MessagesDeveloperMessage`
 
 ```typescript
-const value: operations.Messages1 = {
+const value: operations.MessagesDeveloperMessage = {
   role: "developer",
   content: "<value>",
 };
 ```
 
-### `operations.Messages2`
+### `operations.MessagesSystemMessage`
 
 ```typescript
-const value: operations.Messages2 = {
+const value: operations.MessagesSystemMessage = {
   role: "system",
   content: "<value>",
 };
 ```
 
-### `operations.Messages3`
+### `operations.MessagesUserMessage`
 
 ```typescript
-const value: operations.Messages3 = {
+const value: operations.MessagesUserMessage = {
   role: "user",
   content: [
     {
@@ -38,18 +38,18 @@ const value: operations.Messages3 = {
 };
 ```
 
-### `operations.Messages4`
+### `operations.MessagesAssistantMessage`
 
 ```typescript
-const value: operations.Messages4 = {
+const value: operations.MessagesAssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `operations.Messages5`
+### `operations.MessagesToolMessage`
 
 ```typescript
-const value: operations.Messages5 = {
+const value: operations.MessagesToolMessage = {
   role: "tool",
   content: "<value>",
   toolCallId: "<id>",

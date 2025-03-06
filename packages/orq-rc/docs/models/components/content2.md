@@ -3,35 +3,21 @@
 
 ## Supported Types
 
-### `components.Two1`
+### `components.TextContentPart`
 
 ```typescript
-const value: components.Two1 = {
+const value: components.TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `components.Two2`
+### `components.RefusalContentPart`
 
 ```typescript
-const value: components.Two2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://reckless-instruction.org",
-  },
-};
-```
-
-### `components.Two3`
-
-```typescript
-const value: components.Two3 = {
-  type: "input_audio",
-  inputAudio: {
-    data: "<value>",
-    format: "mp3",
-  },
+const value: components.RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

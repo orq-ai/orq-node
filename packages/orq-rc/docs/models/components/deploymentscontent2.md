@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `components.Deployments21`
+### `components.Two1`
 
 ```typescript
-const value: components.Deployments21 = {
+const value: components.Two1 = {
   type: "text",
   text: "<value>",
 };
@@ -16,8 +16,22 @@ const value: components.Deployments21 = {
 
 ```typescript
 const value: components.Deployments22 = {
-  type: "refusal",
-  refusal: "<value>",
+  type: "image_url",
+  imageUrl: {
+    url: "https://anguished-developing.info",
+  },
+};
+```
+
+### `components.Two3`
+
+```typescript
+const value: components.Two3 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
 };
 ```
 

@@ -28,7 +28,7 @@ export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRole =
  */
 export type DeploymentGetConfigPrefixMessagesContent = string | Array<string>;
 
-export type Five = {
+export type ToolMessage = {
   /**
    * The role of the messages author, in this case tool.
    */
@@ -56,7 +56,7 @@ export type DeploymentGetConfig2DeploymentsRequestType = ClosedEnum<
   typeof DeploymentGetConfig2DeploymentsRequestType
 >;
 
-export type DeploymentGetConfig22 = {
+export type RefusalContentPart = {
   /**
    * The type of the content part.
    */
@@ -80,7 +80,7 @@ export type DeploymentGetConfig2DeploymentsType = ClosedEnum<
   typeof DeploymentGetConfig2DeploymentsType
 >;
 
-export type DeploymentGetConfig21 = {
+export type TextContentPart = {
   /**
    * The type of the content part.
    */
@@ -91,16 +91,14 @@ export type DeploymentGetConfig21 = {
   text: string;
 };
 
-export type DeploymentGetConfigContent2 =
-  | DeploymentGetConfig21
-  | DeploymentGetConfig22;
+export type Content2 = TextContentPart | RefusalContentPart;
 
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
  */
 export type PrefixMessagesContent =
   | string
-  | Array<DeploymentGetConfig21 | DeploymentGetConfig22>;
+  | Array<TextContentPart | RefusalContentPart>;
 
 /**
  * The role of the messages author, in this case `assistant`.
@@ -126,13 +124,13 @@ export type Audio = {
 };
 
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export const PrefixMessagesType = {
   Function: "function",
 } as const;
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export type PrefixMessagesType = ClosedEnum<typeof PrefixMessagesType>;
 
@@ -153,20 +151,17 @@ export type ToolCalls = {
    */
   id: string;
   /**
-   * The type of the tool. Currently, only `5` is supported.
+   * The type of the tool. Currently, only `function` is supported.
    */
   type: PrefixMessagesType;
   function: FunctionT;
 };
 
-export type Four = {
+export type AssistantMessage = {
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
-  content?:
-    | string
-    | Array<DeploymentGetConfig21 | DeploymentGetConfig22>
-    | undefined;
+  content?: string | Array<TextContentPart | RefusalContentPart> | undefined;
   /**
    * The refusal message by the assistant.
    */
@@ -232,7 +227,7 @@ export type InputAudio = {
   format: Format;
 };
 
-export type Two3 = {
+export type Three = {
   type: DeploymentGetConfig2Type;
   inputAudio: InputAudio;
 };
@@ -276,19 +271,19 @@ export const Type = {
 } as const;
 export type Type = ClosedEnum<typeof Type>;
 
-export type Two1 = {
+export type One = {
   type: Type;
   text: string;
 };
 
-export type Content2 = Two1 | Two2 | Two3;
+export type Two = One | Two2 | Three;
 
 /**
  * The contents of the user message.
  */
-export type Content = string | Array<Two1 | Two2 | Two3>;
+export type Content = string | Array<One | Two2 | Three>;
 
-export type Three = {
+export type UserMessage = {
   /**
    * The role of the messages author, in this case `user`.
    */
@@ -300,7 +295,7 @@ export type Three = {
   /**
    * The contents of the user message.
    */
-  content: string | Array<Two1 | Two2 | Two3>;
+  content: string | Array<One | Two2 | Three>;
 };
 
 /**
@@ -314,7 +309,7 @@ export const PrefixMessagesRole = {
  */
 export type PrefixMessagesRole = ClosedEnum<typeof PrefixMessagesRole>;
 
-export type Two = {
+export type SystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
    */
@@ -340,7 +335,7 @@ export const Role = {
  */
 export type Role = ClosedEnum<typeof Role>;
 
-export type One = {
+export type DeveloperMessage = {
   /**
    * The role of the messages author, in this case  `developer`.
    */
@@ -355,7 +350,12 @@ export type One = {
   name?: string | undefined;
 };
 
-export type PrefixMessages = One | Two | Three | Five | Four;
+export type PrefixMessages =
+  | DeveloperMessage
+  | SystemMessage
+  | UserMessage
+  | ToolMessage
+  | AssistantMessage;
 
 /**
  * The role of the messages author, in this case tool.
@@ -378,7 +378,7 @@ export type DeploymentGetConfigMessagesDeploymentsContent =
   | string
   | Array<string>;
 
-export type Messages5 = {
+export type MessagesToolMessage = {
   /**
    * The role of the messages author, in this case tool.
    */
@@ -408,7 +408,7 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentTyp
     typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
   >;
 
-export type DeploymentGetConfig2DeploymentsRequest2 = {
+export type TwoRefusalContentPart = {
   /**
    * The type of the content part.
    */
@@ -433,7 +433,7 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type =
     typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
   >;
 
-export type DeploymentGetConfig2DeploymentsRequest1 = {
+export type TwoTextContentPart = {
   /**
    * The type of the content part.
    */
@@ -444,19 +444,16 @@ export type DeploymentGetConfig2DeploymentsRequest1 = {
   text: string;
 };
 
-export type DeploymentGetConfigContentDeploymentsRequest2 =
-  | DeploymentGetConfig2DeploymentsRequest1
-  | DeploymentGetConfig2DeploymentsRequest2;
+export type DeploymentGetConfigContentDeployments2 =
+  | TwoTextContentPart
+  | TwoRefusalContentPart;
 
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
  */
 export type DeploymentGetConfigMessagesContent =
   | string
-  | Array<
-    | DeploymentGetConfig2DeploymentsRequest1
-    | DeploymentGetConfig2DeploymentsRequest2
-  >;
+  | Array<TwoTextContentPart | TwoRefusalContentPart>;
 
 /**
  * The role of the messages author, in this case `assistant`.
@@ -482,13 +479,13 @@ export type MessagesAudio = {
 };
 
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export const MessagesType = {
   Function: "function",
 } as const;
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export type MessagesType = ClosedEnum<typeof MessagesType>;
 
@@ -509,22 +506,19 @@ export type MessagesToolCalls = {
    */
   id: string;
   /**
-   * The type of the tool. Currently, only `5` is supported.
+   * The type of the tool. Currently, only `function` is supported.
    */
   type: MessagesType;
   function: MessagesFunction;
 };
 
-export type Messages4 = {
+export type MessagesAssistantMessage = {
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
     | string
-    | Array<
-      | DeploymentGetConfig2DeploymentsRequest1
-      | DeploymentGetConfig2DeploymentsRequest2
-    >
+    | Array<TwoTextContentPart | TwoRefusalContentPart>
     | undefined;
   /**
    * The refusal message by the assistant.
@@ -592,7 +586,7 @@ export type TwoInputAudio = {
   format: TwoFormat;
 };
 
-export type DeploymentGetConfig23 = {
+export type Two3 = {
   type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type;
   inputAudio: TwoInputAudio;
 };
@@ -629,7 +623,7 @@ export type TwoImageUrl = {
   detail?: TwoDetail | undefined;
 };
 
-export type DeploymentGetConfig2Deployments2 = {
+export type DeploymentGetConfig22 = {
   type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType;
   imageUrl: TwoImageUrl;
 };
@@ -641,28 +635,21 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyType = ClosedEnum<
   typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
 >;
 
-export type DeploymentGetConfig2Deployments1 = {
+export type Two1 = {
   type: DeploymentGetConfig2DeploymentsRequestRequestBodyType;
   text: string;
 };
 
-export type DeploymentGetConfigContentDeployments2 =
-  | DeploymentGetConfig2Deployments1
-  | DeploymentGetConfig2Deployments2
-  | DeploymentGetConfig23;
+export type DeploymentGetConfigContent2 = Two1 | DeploymentGetConfig22 | Two3;
 
 /**
  * The contents of the user message.
  */
 export type MessagesContent =
   | string
-  | Array<
-    | DeploymentGetConfig2Deployments1
-    | DeploymentGetConfig2Deployments2
-    | DeploymentGetConfig23
-  >;
+  | Array<Two1 | DeploymentGetConfig22 | Two3>;
 
-export type Messages3 = {
+export type MessagesUserMessage = {
   /**
    * The role of the messages author, in this case `user`.
    */
@@ -674,13 +661,7 @@ export type Messages3 = {
   /**
    * The contents of the user message.
    */
-  content:
-    | string
-    | Array<
-      | DeploymentGetConfig2Deployments1
-      | DeploymentGetConfig2Deployments2
-      | DeploymentGetConfig23
-    >;
+  content: string | Array<Two1 | DeploymentGetConfig22 | Two3>;
 };
 
 /**
@@ -696,7 +677,7 @@ export type DeploymentGetConfigMessagesRole = ClosedEnum<
   typeof DeploymentGetConfigMessagesRole
 >;
 
-export type Messages2 = {
+export type MessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
    */
@@ -722,7 +703,7 @@ export const MessagesRole = {
  */
 export type MessagesRole = ClosedEnum<typeof MessagesRole>;
 
-export type Messages1 = {
+export type MessagesDeveloperMessage = {
   /**
    * The role of the messages author, in this case  `developer`.
    */
@@ -738,11 +719,11 @@ export type Messages1 = {
 };
 
 export type Messages =
-  | Messages1
-  | Messages2
-  | Messages3
-  | Messages5
-  | Messages4;
+  | MessagesDeveloperMessage
+  | MessagesSystemMessage
+  | MessagesUserMessage
+  | MessagesToolMessage
+  | MessagesAssistantMessage;
 
 /**
  * Metadata about the document
@@ -796,12 +777,26 @@ export type DeploymentGetConfigRequestBody = {
   /**
    * A list of messages to include after the `System` message, but before the  `User` and `Assistant` pairs configured in your deployment.
    */
-  prefixMessages?: Array<One | Two | Three | Five | Four> | undefined;
+  prefixMessages?:
+    | Array<
+      | DeveloperMessage
+      | SystemMessage
+      | UserMessage
+      | ToolMessage
+      | AssistantMessage
+    >
+    | undefined;
   /**
    * A list of messages to send to the deployment.
    */
   messages?:
-    | Array<Messages1 | Messages2 | Messages3 | Messages5 | Messages4>
+    | Array<
+      | MessagesDeveloperMessage
+      | MessagesSystemMessage
+      | MessagesUserMessage
+      | MessagesToolMessage
+      | MessagesAssistantMessage
+    >
     | undefined;
   /**
    * A list of file IDs that are associated with the deployment request.
@@ -888,7 +883,7 @@ export type DeploymentGetConfig2ImageUrl = {
 /**
  * The image part of the prompt message. Only supported with vision models.
  */
-export type DeploymentGetConfig2DeploymentsResponse2 = {
+export type DeploymentGetConfig2Deployments2 = {
   type: DeploymentGetConfig2DeploymentsResponse200Type;
   imageUrl: DeploymentGetConfig2ImageUrl;
 };
@@ -903,24 +898,21 @@ export type DeploymentGetConfig2DeploymentsResponseType = ClosedEnum<
 /**
  * Text content part of a prompt message
  */
-export type DeploymentGetConfig2DeploymentsResponse1 = {
+export type DeploymentGetConfig21 = {
   type: DeploymentGetConfig2DeploymentsResponseType;
   text: string;
 };
 
 export type DeploymentGetConfigContentDeploymentsResponse2 =
-  | DeploymentGetConfig2DeploymentsResponse1
-  | DeploymentGetConfig2DeploymentsResponse2;
+  | DeploymentGetConfig21
+  | DeploymentGetConfig2Deployments2;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type DeploymentGetConfigContent =
   | string
-  | Array<
-    | DeploymentGetConfig2DeploymentsResponse1
-    | DeploymentGetConfig2DeploymentsResponse2
-  >;
+  | Array<DeploymentGetConfig21 | DeploymentGetConfig2Deployments2>;
 
 export const DeploymentGetConfigDeploymentsResponseType = {
   Function: "function",
@@ -954,10 +946,7 @@ export type DeploymentGetConfigMessages = {
    */
   content:
     | string
-    | Array<
-      | DeploymentGetConfig2DeploymentsResponse1
-      | DeploymentGetConfig2DeploymentsResponse2
-    >;
+    | Array<DeploymentGetConfig21 | DeploymentGetConfig2Deployments2>;
   toolCalls?: Array<DeploymentGetConfigToolCalls> | undefined;
 };
 
@@ -1367,61 +1356,66 @@ export function deploymentGetConfigPrefixMessagesContentFromJSON(
 }
 
 /** @internal */
-export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
-  .object({
-    role: DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema,
-    content: z.union([z.string(), z.array(z.string())]),
-    tool_call_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tool_call_id": "toolCallId",
-    });
+export const ToolMessage$inboundSchema: z.ZodType<
+  ToolMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema,
+  content: z.union([z.string(), z.array(z.string())]),
+  tool_call_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
   });
+});
 
 /** @internal */
-export type Five$Outbound = {
+export type ToolMessage$Outbound = {
   role: string;
   content: string | Array<string>;
   tool_call_id: string;
 };
 
 /** @internal */
-export const Five$outboundSchema: z.ZodType<Five$Outbound, z.ZodTypeDef, Five> =
-  z.object({
-    role:
-      DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema,
-    content: z.union([z.string(), z.array(z.string())]),
-    toolCallId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolCallId: "tool_call_id",
-    });
+export const ToolMessage$outboundSchema: z.ZodType<
+  ToolMessage$Outbound,
+  z.ZodTypeDef,
+  ToolMessage
+> = z.object({
+  role: DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema,
+  content: z.union([z.string(), z.array(z.string())]),
+  toolCallId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
   });
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Five$ {
-  /** @deprecated use `Five$inboundSchema` instead. */
-  export const inboundSchema = Five$inboundSchema;
-  /** @deprecated use `Five$outboundSchema` instead. */
-  export const outboundSchema = Five$outboundSchema;
-  /** @deprecated use `Five$Outbound` instead. */
-  export type Outbound = Five$Outbound;
+export namespace ToolMessage$ {
+  /** @deprecated use `ToolMessage$inboundSchema` instead. */
+  export const inboundSchema = ToolMessage$inboundSchema;
+  /** @deprecated use `ToolMessage$outboundSchema` instead. */
+  export const outboundSchema = ToolMessage$outboundSchema;
+  /** @deprecated use `ToolMessage$Outbound` instead. */
+  export type Outbound = ToolMessage$Outbound;
 }
 
-export function fiveToJSON(five: Five): string {
-  return JSON.stringify(Five$outboundSchema.parse(five));
+export function toolMessageToJSON(toolMessage: ToolMessage): string {
+  return JSON.stringify(ToolMessage$outboundSchema.parse(toolMessage));
 }
 
-export function fiveFromJSON(
+export function toolMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Five, SDKValidationError> {
+): SafeParseResult<ToolMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Five$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Five' from JSON`,
+    (x) => ToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolMessage' from JSON`,
   );
 }
 
@@ -1449,8 +1443,8 @@ export namespace DeploymentGetConfig2DeploymentsRequestType$ {
 }
 
 /** @internal */
-export const DeploymentGetConfig22$inboundSchema: z.ZodType<
-  DeploymentGetConfig22,
+export const RefusalContentPart$inboundSchema: z.ZodType<
+  RefusalContentPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1459,16 +1453,16 @@ export const DeploymentGetConfig22$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig22$Outbound = {
+export type RefusalContentPart$Outbound = {
   type: string;
   refusal: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig22$outboundSchema: z.ZodType<
-  DeploymentGetConfig22$Outbound,
+export const RefusalContentPart$outboundSchema: z.ZodType<
+  RefusalContentPart$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig22
+  RefusalContentPart
 > = z.object({
   type: DeploymentGetConfig2DeploymentsRequestType$outboundSchema,
   refusal: z.string(),
@@ -1478,30 +1472,30 @@ export const DeploymentGetConfig22$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig22$ {
-  /** @deprecated use `DeploymentGetConfig22$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfig22$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig22$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfig22$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig22$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig22$Outbound;
+export namespace RefusalContentPart$ {
+  /** @deprecated use `RefusalContentPart$inboundSchema` instead. */
+  export const inboundSchema = RefusalContentPart$inboundSchema;
+  /** @deprecated use `RefusalContentPart$outboundSchema` instead. */
+  export const outboundSchema = RefusalContentPart$outboundSchema;
+  /** @deprecated use `RefusalContentPart$Outbound` instead. */
+  export type Outbound = RefusalContentPart$Outbound;
 }
 
-export function deploymentGetConfig22ToJSON(
-  deploymentGetConfig22: DeploymentGetConfig22,
+export function refusalContentPartToJSON(
+  refusalContentPart: RefusalContentPart,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig22$outboundSchema.parse(deploymentGetConfig22),
+    RefusalContentPart$outboundSchema.parse(refusalContentPart),
   );
 }
 
-export function deploymentGetConfig22FromJSON(
+export function refusalContentPartFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig22, SDKValidationError> {
+): SafeParseResult<RefusalContentPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig22$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig22' from JSON`,
+    (x) => RefusalContentPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RefusalContentPart' from JSON`,
   );
 }
 
@@ -1529,8 +1523,8 @@ export namespace DeploymentGetConfig2DeploymentsType$ {
 }
 
 /** @internal */
-export const DeploymentGetConfig21$inboundSchema: z.ZodType<
-  DeploymentGetConfig21,
+export const TextContentPart$inboundSchema: z.ZodType<
+  TextContentPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1539,16 +1533,16 @@ export const DeploymentGetConfig21$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig21$Outbound = {
+export type TextContentPart$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig21$outboundSchema: z.ZodType<
-  DeploymentGetConfig21$Outbound,
+export const TextContentPart$outboundSchema: z.ZodType<
+  TextContentPart$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig21
+  TextContentPart
 > = z.object({
   type: DeploymentGetConfig2DeploymentsType$outboundSchema,
   text: z.string(),
@@ -1558,88 +1552,80 @@ export const DeploymentGetConfig21$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig21$ {
-  /** @deprecated use `DeploymentGetConfig21$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfig21$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig21$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfig21$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig21$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig21$Outbound;
+export namespace TextContentPart$ {
+  /** @deprecated use `TextContentPart$inboundSchema` instead. */
+  export const inboundSchema = TextContentPart$inboundSchema;
+  /** @deprecated use `TextContentPart$outboundSchema` instead. */
+  export const outboundSchema = TextContentPart$outboundSchema;
+  /** @deprecated use `TextContentPart$Outbound` instead. */
+  export type Outbound = TextContentPart$Outbound;
 }
 
-export function deploymentGetConfig21ToJSON(
-  deploymentGetConfig21: DeploymentGetConfig21,
+export function textContentPartToJSON(
+  textContentPart: TextContentPart,
 ): string {
-  return JSON.stringify(
-    DeploymentGetConfig21$outboundSchema.parse(deploymentGetConfig21),
-  );
+  return JSON.stringify(TextContentPart$outboundSchema.parse(textContentPart));
 }
 
-export function deploymentGetConfig21FromJSON(
+export function textContentPartFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig21, SDKValidationError> {
+): SafeParseResult<TextContentPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig21' from JSON`,
+    (x) => TextContentPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TextContentPart' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentGetConfigContent2$inboundSchema: z.ZodType<
-  DeploymentGetConfigContent2,
+export const Content2$inboundSchema: z.ZodType<
+  Content2,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentGetConfig21$inboundSchema),
-  z.lazy(() => DeploymentGetConfig22$inboundSchema),
+  z.lazy(() => TextContentPart$inboundSchema),
+  z.lazy(() => RefusalContentPart$inboundSchema),
 ]);
 
 /** @internal */
-export type DeploymentGetConfigContent2$Outbound =
-  | DeploymentGetConfig21$Outbound
-  | DeploymentGetConfig22$Outbound;
+export type Content2$Outbound =
+  | TextContentPart$Outbound
+  | RefusalContentPart$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContent2$outboundSchema: z.ZodType<
-  DeploymentGetConfigContent2$Outbound,
+export const Content2$outboundSchema: z.ZodType<
+  Content2$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfigContent2
+  Content2
 > = z.union([
-  z.lazy(() => DeploymentGetConfig21$outboundSchema),
-  z.lazy(() => DeploymentGetConfig22$outboundSchema),
+  z.lazy(() => TextContentPart$outboundSchema),
+  z.lazy(() => RefusalContentPart$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfigContent2$ {
-  /** @deprecated use `DeploymentGetConfigContent2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigContent2$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigContent2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfigContent2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfigContent2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfigContent2$Outbound;
+export namespace Content2$ {
+  /** @deprecated use `Content2$inboundSchema` instead. */
+  export const inboundSchema = Content2$inboundSchema;
+  /** @deprecated use `Content2$outboundSchema` instead. */
+  export const outboundSchema = Content2$outboundSchema;
+  /** @deprecated use `Content2$Outbound` instead. */
+  export type Outbound = Content2$Outbound;
 }
 
-export function deploymentGetConfigContent2ToJSON(
-  deploymentGetConfigContent2: DeploymentGetConfigContent2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigContent2$outboundSchema.parse(
-      deploymentGetConfigContent2,
-    ),
-  );
+export function content2ToJSON(content2: Content2): string {
+  return JSON.stringify(Content2$outboundSchema.parse(content2));
 }
 
-export function deploymentGetConfigContent2FromJSON(
+export function content2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfigContent2, SDKValidationError> {
+): SafeParseResult<Content2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfigContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContent2' from JSON`,
+    (x) => Content2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content2' from JSON`,
   );
 }
 
@@ -1651,15 +1637,15 @@ export const PrefixMessagesContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig21$inboundSchema),
-    z.lazy(() => DeploymentGetConfig22$inboundSchema),
+    z.lazy(() => TextContentPart$inboundSchema),
+    z.lazy(() => RefusalContentPart$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type PrefixMessagesContent$Outbound =
   | string
-  | Array<DeploymentGetConfig21$Outbound | DeploymentGetConfig22$Outbound>;
+  | Array<TextContentPart$Outbound | RefusalContentPart$Outbound>;
 
 /** @internal */
 export const PrefixMessagesContent$outboundSchema: z.ZodType<
@@ -1669,8 +1655,8 @@ export const PrefixMessagesContent$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig21$outboundSchema),
-    z.lazy(() => DeploymentGetConfig22$outboundSchema),
+    z.lazy(() => TextContentPart$outboundSchema),
+    z.lazy(() => RefusalContentPart$outboundSchema),
   ])),
 ]);
 
@@ -1906,31 +1892,34 @@ export function toolCallsFromJSON(
 }
 
 /** @internal */
-export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
-  .object({
-    content: z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => DeploymentGetConfig21$inboundSchema),
-        z.lazy(() => DeploymentGetConfig22$inboundSchema),
-      ])),
-    ]).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema,
-    name: z.string().optional(),
-    audio: z.nullable(z.lazy(() => Audio$inboundSchema)).optional(),
-    tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tool_calls": "toolCalls",
-    });
+export const AssistantMessage$inboundSchema: z.ZodType<
+  AssistantMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  content: z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => TextContentPart$inboundSchema),
+      z.lazy(() => RefusalContentPart$inboundSchema),
+    ])),
+  ]).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema,
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => Audio$inboundSchema)).optional(),
+  tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_calls": "toolCalls",
   });
+});
 
 /** @internal */
-export type Four$Outbound = {
+export type AssistantMessage$Outbound = {
   content?:
     | string
-    | Array<DeploymentGetConfig21$Outbound | DeploymentGetConfig22$Outbound>
+    | Array<TextContentPart$Outbound | RefusalContentPart$Outbound>
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -1940,50 +1929,57 @@ export type Four$Outbound = {
 };
 
 /** @internal */
-export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
-  z.object({
-    content: z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => DeploymentGetConfig21$outboundSchema),
-        z.lazy(() => DeploymentGetConfig22$outboundSchema),
-      ])),
-    ]).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema,
-    name: z.string().optional(),
-    audio: z.nullable(z.lazy(() => Audio$outboundSchema)).optional(),
-    toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolCalls: "tool_calls",
-    });
+export const AssistantMessage$outboundSchema: z.ZodType<
+  AssistantMessage$Outbound,
+  z.ZodTypeDef,
+  AssistantMessage
+> = z.object({
+  content: z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => TextContentPart$outboundSchema),
+      z.lazy(() => RefusalContentPart$outboundSchema),
+    ])),
+  ]).optional(),
+  refusal: z.nullable(z.string()).optional(),
+  role: DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema,
+  name: z.string().optional(),
+  audio: z.nullable(z.lazy(() => Audio$outboundSchema)).optional(),
+  toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCalls: "tool_calls",
   });
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Four$ {
-  /** @deprecated use `Four$inboundSchema` instead. */
-  export const inboundSchema = Four$inboundSchema;
-  /** @deprecated use `Four$outboundSchema` instead. */
-  export const outboundSchema = Four$outboundSchema;
-  /** @deprecated use `Four$Outbound` instead. */
-  export type Outbound = Four$Outbound;
+export namespace AssistantMessage$ {
+  /** @deprecated use `AssistantMessage$inboundSchema` instead. */
+  export const inboundSchema = AssistantMessage$inboundSchema;
+  /** @deprecated use `AssistantMessage$outboundSchema` instead. */
+  export const outboundSchema = AssistantMessage$outboundSchema;
+  /** @deprecated use `AssistantMessage$Outbound` instead. */
+  export type Outbound = AssistantMessage$Outbound;
 }
 
-export function fourToJSON(four: Four): string {
-  return JSON.stringify(Four$outboundSchema.parse(four));
+export function assistantMessageToJSON(
+  assistantMessage: AssistantMessage,
+): string {
+  return JSON.stringify(
+    AssistantMessage$outboundSchema.parse(assistantMessage),
+  );
 }
 
-export function fourFromJSON(
+export function assistantMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Four, SDKValidationError> {
+): SafeParseResult<AssistantMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Four$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Four' from JSON`,
+    (x) => AssistantMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AssistantMessage' from JSON`,
   );
 }
 
@@ -2105,7 +2101,7 @@ export function inputAudioFromJSON(
 }
 
 /** @internal */
-export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
+export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
   .object({
     type: DeploymentGetConfig2Type$inboundSchema,
     input_audio: z.lazy(() => InputAudio$inboundSchema),
@@ -2116,46 +2112,49 @@ export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
   });
 
 /** @internal */
-export type Two3$Outbound = {
+export type Three$Outbound = {
   type: string;
   input_audio: InputAudio$Outbound;
 };
 
 /** @internal */
-export const Two3$outboundSchema: z.ZodType<Two3$Outbound, z.ZodTypeDef, Two3> =
-  z.object({
-    type: DeploymentGetConfig2Type$outboundSchema,
-    inputAudio: z.lazy(() => InputAudio$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      inputAudio: "input_audio",
-    });
+export const Three$outboundSchema: z.ZodType<
+  Three$Outbound,
+  z.ZodTypeDef,
+  Three
+> = z.object({
+  type: DeploymentGetConfig2Type$outboundSchema,
+  inputAudio: z.lazy(() => InputAudio$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    inputAudio: "input_audio",
   });
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Two3$ {
-  /** @deprecated use `Two3$inboundSchema` instead. */
-  export const inboundSchema = Two3$inboundSchema;
-  /** @deprecated use `Two3$outboundSchema` instead. */
-  export const outboundSchema = Two3$outboundSchema;
-  /** @deprecated use `Two3$Outbound` instead. */
-  export type Outbound = Two3$Outbound;
+export namespace Three$ {
+  /** @deprecated use `Three$inboundSchema` instead. */
+  export const inboundSchema = Three$inboundSchema;
+  /** @deprecated use `Three$outboundSchema` instead. */
+  export const outboundSchema = Three$outboundSchema;
+  /** @deprecated use `Three$Outbound` instead. */
+  export type Outbound = Three$Outbound;
 }
 
-export function two3ToJSON(two3: Two3): string {
-  return JSON.stringify(Two3$outboundSchema.parse(two3));
+export function threeToJSON(three: Three): string {
+  return JSON.stringify(Three$outboundSchema.parse(three));
 }
 
-export function two3FromJSON(
+export function threeFromJSON(
   jsonString: string,
-): SafeParseResult<Two3, SDKValidationError> {
+): SafeParseResult<Three, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two3' from JSON`,
+    (x) => Three$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Three' from JSON`,
   );
 }
 
@@ -2326,21 +2325,21 @@ export namespace Type$ {
 }
 
 /** @internal */
-export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
+export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
   .object({
     type: Type$inboundSchema,
     text: z.string(),
   });
 
 /** @internal */
-export type Two1$Outbound = {
+export type One$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
-  z.object({
+export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
+  .object({
     type: Type$outboundSchema,
     text: z.string(),
   });
@@ -2349,78 +2348,73 @@ export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Two1$ {
-  /** @deprecated use `Two1$inboundSchema` instead. */
-  export const inboundSchema = Two1$inboundSchema;
-  /** @deprecated use `Two1$outboundSchema` instead. */
-  export const outboundSchema = Two1$outboundSchema;
-  /** @deprecated use `Two1$Outbound` instead. */
-  export type Outbound = Two1$Outbound;
+export namespace One$ {
+  /** @deprecated use `One$inboundSchema` instead. */
+  export const inboundSchema = One$inboundSchema;
+  /** @deprecated use `One$outboundSchema` instead. */
+  export const outboundSchema = One$outboundSchema;
+  /** @deprecated use `One$Outbound` instead. */
+  export type Outbound = One$Outbound;
 }
 
-export function two1ToJSON(two1: Two1): string {
-  return JSON.stringify(Two1$outboundSchema.parse(two1));
+export function oneToJSON(one: One): string {
+  return JSON.stringify(One$outboundSchema.parse(one));
 }
 
-export function two1FromJSON(
+export function oneFromJSON(
   jsonString: string,
-): SafeParseResult<Two1, SDKValidationError> {
+): SafeParseResult<One, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two1' from JSON`,
+    (x) => One$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One' from JSON`,
   );
 }
 
 /** @internal */
-export const Content2$inboundSchema: z.ZodType<
-  Content2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => Two1$inboundSchema),
-  z.lazy(() => Two2$inboundSchema),
-  z.lazy(() => Two3$inboundSchema),
-]);
+export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
+  [
+    z.lazy(() => One$inboundSchema),
+    z.lazy(() => Two2$inboundSchema),
+    z.lazy(() => Three$inboundSchema),
+  ],
+);
 
 /** @internal */
-export type Content2$Outbound = Two1$Outbound | Two2$Outbound | Two3$Outbound;
+export type Two$Outbound = One$Outbound | Two2$Outbound | Three$Outbound;
 
 /** @internal */
-export const Content2$outboundSchema: z.ZodType<
-  Content2$Outbound,
-  z.ZodTypeDef,
-  Content2
-> = z.union([
-  z.lazy(() => Two1$outboundSchema),
-  z.lazy(() => Two2$outboundSchema),
-  z.lazy(() => Two3$outboundSchema),
-]);
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
+  .union([
+    z.lazy(() => One$outboundSchema),
+    z.lazy(() => Two2$outboundSchema),
+    z.lazy(() => Three$outboundSchema),
+  ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Content2$ {
-  /** @deprecated use `Content2$inboundSchema` instead. */
-  export const inboundSchema = Content2$inboundSchema;
-  /** @deprecated use `Content2$outboundSchema` instead. */
-  export const outboundSchema = Content2$outboundSchema;
-  /** @deprecated use `Content2$Outbound` instead. */
-  export type Outbound = Content2$Outbound;
+export namespace Two$ {
+  /** @deprecated use `Two$inboundSchema` instead. */
+  export const inboundSchema = Two$inboundSchema;
+  /** @deprecated use `Two$outboundSchema` instead. */
+  export const outboundSchema = Two$outboundSchema;
+  /** @deprecated use `Two$Outbound` instead. */
+  export type Outbound = Two$Outbound;
 }
 
-export function content2ToJSON(content2: Content2): string {
-  return JSON.stringify(Content2$outboundSchema.parse(content2));
+export function twoToJSON(two: Two): string {
+  return JSON.stringify(Two$outboundSchema.parse(two));
 }
 
-export function content2FromJSON(
+export function twoFromJSON(
   jsonString: string,
-): SafeParseResult<Content2, SDKValidationError> {
+): SafeParseResult<Two, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Content2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Content2' from JSON`,
+    (x) => Two$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two' from JSON`,
   );
 }
 
@@ -2429,16 +2423,16 @@ export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
   z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => Two1$inboundSchema),
+      z.lazy(() => One$inboundSchema),
       z.lazy(() => Two2$inboundSchema),
-      z.lazy(() => Two3$inboundSchema),
+      z.lazy(() => Three$inboundSchema),
     ])),
   ]);
 
 /** @internal */
 export type Content$Outbound =
   | string
-  | Array<Two1$Outbound | Two2$Outbound | Two3$Outbound>;
+  | Array<One$Outbound | Two2$Outbound | Three$Outbound>;
 
 /** @internal */
 export const Content$outboundSchema: z.ZodType<
@@ -2448,9 +2442,9 @@ export const Content$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => Two1$outboundSchema),
+    z.lazy(() => One$outboundSchema),
     z.lazy(() => Two2$outboundSchema),
-    z.lazy(() => Two3$outboundSchema),
+    z.lazy(() => Three$outboundSchema),
   ])),
 ]);
 
@@ -2482,41 +2476,44 @@ export function contentFromJSON(
 }
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
-  .object({
-    role: DeploymentGetConfigPrefixMessagesRole$inboundSchema,
-    name: z.string().optional(),
-    content: z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => Two1$inboundSchema),
-        z.lazy(() => Two2$inboundSchema),
-        z.lazy(() => Two3$inboundSchema),
-      ])),
-    ]),
-  });
+export const UserMessage$inboundSchema: z.ZodType<
+  UserMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: DeploymentGetConfigPrefixMessagesRole$inboundSchema,
+  name: z.string().optional(),
+  content: z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => One$inboundSchema),
+      z.lazy(() => Two2$inboundSchema),
+      z.lazy(() => Three$inboundSchema),
+    ])),
+  ]),
+});
 
 /** @internal */
-export type Three$Outbound = {
+export type UserMessage$Outbound = {
   role: string;
   name?: string | undefined;
-  content: string | Array<Two1$Outbound | Two2$Outbound | Two3$Outbound>;
+  content: string | Array<One$Outbound | Two2$Outbound | Three$Outbound>;
 };
 
 /** @internal */
-export const Three$outboundSchema: z.ZodType<
-  Three$Outbound,
+export const UserMessage$outboundSchema: z.ZodType<
+  UserMessage$Outbound,
   z.ZodTypeDef,
-  Three
+  UserMessage
 > = z.object({
   role: DeploymentGetConfigPrefixMessagesRole$outboundSchema,
   name: z.string().optional(),
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => Two1$outboundSchema),
+      z.lazy(() => One$outboundSchema),
       z.lazy(() => Two2$outboundSchema),
-      z.lazy(() => Two3$outboundSchema),
+      z.lazy(() => Three$outboundSchema),
     ])),
   ]),
 });
@@ -2525,26 +2522,26 @@ export const Three$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Three$ {
-  /** @deprecated use `Three$inboundSchema` instead. */
-  export const inboundSchema = Three$inboundSchema;
-  /** @deprecated use `Three$outboundSchema` instead. */
-  export const outboundSchema = Three$outboundSchema;
-  /** @deprecated use `Three$Outbound` instead. */
-  export type Outbound = Three$Outbound;
+export namespace UserMessage$ {
+  /** @deprecated use `UserMessage$inboundSchema` instead. */
+  export const inboundSchema = UserMessage$inboundSchema;
+  /** @deprecated use `UserMessage$outboundSchema` instead. */
+  export const outboundSchema = UserMessage$outboundSchema;
+  /** @deprecated use `UserMessage$Outbound` instead. */
+  export type Outbound = UserMessage$Outbound;
 }
 
-export function threeToJSON(three: Three): string {
-  return JSON.stringify(Three$outboundSchema.parse(three));
+export function userMessageToJSON(userMessage: UserMessage): string {
+  return JSON.stringify(UserMessage$outboundSchema.parse(userMessage));
 }
 
-export function threeFromJSON(
+export function userMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Three, SDKValidationError> {
+): SafeParseResult<UserMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Three$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Three' from JSON`,
+    (x) => UserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserMessage' from JSON`,
   );
 }
 
@@ -2570,52 +2567,58 @@ export namespace PrefixMessagesRole$ {
 }
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    role: PrefixMessagesRole$inboundSchema,
-    content: z.string(),
-    name: z.string().optional(),
-  });
+export const SystemMessage$inboundSchema: z.ZodType<
+  SystemMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: PrefixMessagesRole$inboundSchema,
+  content: z.string(),
+  name: z.string().optional(),
+});
 
 /** @internal */
-export type Two$Outbound = {
+export type SystemMessage$Outbound = {
   role: string;
   content: string;
   name?: string | undefined;
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    role: PrefixMessagesRole$outboundSchema,
-    content: z.string(),
-    name: z.string().optional(),
-  });
+export const SystemMessage$outboundSchema: z.ZodType<
+  SystemMessage$Outbound,
+  z.ZodTypeDef,
+  SystemMessage
+> = z.object({
+  role: PrefixMessagesRole$outboundSchema,
+  content: z.string(),
+  name: z.string().optional(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Two$ {
-  /** @deprecated use `Two$inboundSchema` instead. */
-  export const inboundSchema = Two$inboundSchema;
-  /** @deprecated use `Two$outboundSchema` instead. */
-  export const outboundSchema = Two$outboundSchema;
-  /** @deprecated use `Two$Outbound` instead. */
-  export type Outbound = Two$Outbound;
+export namespace SystemMessage$ {
+  /** @deprecated use `SystemMessage$inboundSchema` instead. */
+  export const inboundSchema = SystemMessage$inboundSchema;
+  /** @deprecated use `SystemMessage$outboundSchema` instead. */
+  export const outboundSchema = SystemMessage$outboundSchema;
+  /** @deprecated use `SystemMessage$Outbound` instead. */
+  export type Outbound = SystemMessage$Outbound;
 }
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function systemMessageToJSON(systemMessage: SystemMessage): string {
+  return JSON.stringify(SystemMessage$outboundSchema.parse(systemMessage));
 }
 
-export function twoFromJSON(
+export function systemMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Two, SDKValidationError> {
+): SafeParseResult<SystemMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Two$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Two' from JSON`,
+    (x) => SystemMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SystemMessage' from JSON`,
   );
 }
 
@@ -2640,52 +2643,62 @@ export namespace Role$ {
 }
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
-  .object({
-    role: Role$inboundSchema,
-    content: z.string(),
-    name: z.string().optional(),
-  });
+export const DeveloperMessage$inboundSchema: z.ZodType<
+  DeveloperMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  role: Role$inboundSchema,
+  content: z.string(),
+  name: z.string().optional(),
+});
 
 /** @internal */
-export type One$Outbound = {
+export type DeveloperMessage$Outbound = {
   role: string;
   content: string;
   name?: string | undefined;
 };
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .object({
-    role: Role$outboundSchema,
-    content: z.string(),
-    name: z.string().optional(),
-  });
+export const DeveloperMessage$outboundSchema: z.ZodType<
+  DeveloperMessage$Outbound,
+  z.ZodTypeDef,
+  DeveloperMessage
+> = z.object({
+  role: Role$outboundSchema,
+  content: z.string(),
+  name: z.string().optional(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace One$ {
-  /** @deprecated use `One$inboundSchema` instead. */
-  export const inboundSchema = One$inboundSchema;
-  /** @deprecated use `One$outboundSchema` instead. */
-  export const outboundSchema = One$outboundSchema;
-  /** @deprecated use `One$Outbound` instead. */
-  export type Outbound = One$Outbound;
+export namespace DeveloperMessage$ {
+  /** @deprecated use `DeveloperMessage$inboundSchema` instead. */
+  export const inboundSchema = DeveloperMessage$inboundSchema;
+  /** @deprecated use `DeveloperMessage$outboundSchema` instead. */
+  export const outboundSchema = DeveloperMessage$outboundSchema;
+  /** @deprecated use `DeveloperMessage$Outbound` instead. */
+  export type Outbound = DeveloperMessage$Outbound;
 }
 
-export function oneToJSON(one: One): string {
-  return JSON.stringify(One$outboundSchema.parse(one));
+export function developerMessageToJSON(
+  developerMessage: DeveloperMessage,
+): string {
+  return JSON.stringify(
+    DeveloperMessage$outboundSchema.parse(developerMessage),
+  );
 }
 
-export function oneFromJSON(
+export function developerMessageFromJSON(
   jsonString: string,
-): SafeParseResult<One, SDKValidationError> {
+): SafeParseResult<DeveloperMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => One$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'One' from JSON`,
+    (x) => DeveloperMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeveloperMessage' from JSON`,
   );
 }
 
@@ -2695,20 +2708,20 @@ export const PrefixMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => One$inboundSchema),
-  z.lazy(() => Two$inboundSchema),
-  z.lazy(() => Three$inboundSchema),
-  z.lazy(() => Five$inboundSchema),
-  z.lazy(() => Four$inboundSchema),
+  z.lazy(() => DeveloperMessage$inboundSchema),
+  z.lazy(() => SystemMessage$inboundSchema),
+  z.lazy(() => UserMessage$inboundSchema),
+  z.lazy(() => ToolMessage$inboundSchema),
+  z.lazy(() => AssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type PrefixMessages$Outbound =
-  | One$Outbound
-  | Two$Outbound
-  | Three$Outbound
-  | Five$Outbound
-  | Four$Outbound;
+  | DeveloperMessage$Outbound
+  | SystemMessage$Outbound
+  | UserMessage$Outbound
+  | ToolMessage$Outbound
+  | AssistantMessage$Outbound;
 
 /** @internal */
 export const PrefixMessages$outboundSchema: z.ZodType<
@@ -2716,11 +2729,11 @@ export const PrefixMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PrefixMessages
 > = z.union([
-  z.lazy(() => One$outboundSchema),
-  z.lazy(() => Two$outboundSchema),
-  z.lazy(() => Three$outboundSchema),
-  z.lazy(() => Five$outboundSchema),
-  z.lazy(() => Four$outboundSchema),
+  z.lazy(() => DeveloperMessage$outboundSchema),
+  z.lazy(() => SystemMessage$outboundSchema),
+  z.lazy(() => UserMessage$outboundSchema),
+  z.lazy(() => ToolMessage$outboundSchema),
+  z.lazy(() => AssistantMessage$outboundSchema),
 ]);
 
 /**
@@ -2842,8 +2855,8 @@ export function deploymentGetConfigMessagesDeploymentsContentFromJSON(
 }
 
 /** @internal */
-export const Messages5$inboundSchema: z.ZodType<
-  Messages5,
+export const MessagesToolMessage$inboundSchema: z.ZodType<
+  MessagesToolMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2858,17 +2871,17 @@ export const Messages5$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Messages5$Outbound = {
+export type MessagesToolMessage$Outbound = {
   role: string;
   content: string | Array<string>;
   tool_call_id: string;
 };
 
 /** @internal */
-export const Messages5$outboundSchema: z.ZodType<
-  Messages5$Outbound,
+export const MessagesToolMessage$outboundSchema: z.ZodType<
+  MessagesToolMessage$Outbound,
   z.ZodTypeDef,
-  Messages5
+  MessagesToolMessage
 > = z.object({
   role:
     DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema,
@@ -2884,26 +2897,30 @@ export const Messages5$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Messages5$ {
-  /** @deprecated use `Messages5$inboundSchema` instead. */
-  export const inboundSchema = Messages5$inboundSchema;
-  /** @deprecated use `Messages5$outboundSchema` instead. */
-  export const outboundSchema = Messages5$outboundSchema;
-  /** @deprecated use `Messages5$Outbound` instead. */
-  export type Outbound = Messages5$Outbound;
+export namespace MessagesToolMessage$ {
+  /** @deprecated use `MessagesToolMessage$inboundSchema` instead. */
+  export const inboundSchema = MessagesToolMessage$inboundSchema;
+  /** @deprecated use `MessagesToolMessage$outboundSchema` instead. */
+  export const outboundSchema = MessagesToolMessage$outboundSchema;
+  /** @deprecated use `MessagesToolMessage$Outbound` instead. */
+  export type Outbound = MessagesToolMessage$Outbound;
 }
 
-export function messages5ToJSON(messages5: Messages5): string {
-  return JSON.stringify(Messages5$outboundSchema.parse(messages5));
+export function messagesToolMessageToJSON(
+  messagesToolMessage: MessagesToolMessage,
+): string {
+  return JSON.stringify(
+    MessagesToolMessage$outboundSchema.parse(messagesToolMessage),
+  );
 }
 
-export function messages5FromJSON(
+export function messagesToolMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Messages5, SDKValidationError> {
+): SafeParseResult<MessagesToolMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Messages5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Messages5' from JSON`,
+    (x) => MessagesToolMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessagesToolMessage' from JSON`,
   );
 }
 
@@ -2936,8 +2953,8 @@ export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Conte
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequest2$inboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsRequest2,
+export const TwoRefusalContentPart$inboundSchema: z.ZodType<
+  TwoRefusalContentPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2947,16 +2964,16 @@ export const DeploymentGetConfig2DeploymentsRequest2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig2DeploymentsRequest2$Outbound = {
+export type TwoRefusalContentPart$Outbound = {
   type: string;
   refusal: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequest2$outboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsRequest2$Outbound,
+export const TwoRefusalContentPart$outboundSchema: z.ZodType<
+  TwoRefusalContentPart$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2DeploymentsRequest2
+  TwoRefusalContentPart
 > = z.object({
   type:
     DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema,
@@ -2967,41 +2984,30 @@ export const DeploymentGetConfig2DeploymentsRequest2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig2DeploymentsRequest2$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequest2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequest2$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequest2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequest2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequest2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig2DeploymentsRequest2$Outbound;
+export namespace TwoRefusalContentPart$ {
+  /** @deprecated use `TwoRefusalContentPart$inboundSchema` instead. */
+  export const inboundSchema = TwoRefusalContentPart$inboundSchema;
+  /** @deprecated use `TwoRefusalContentPart$outboundSchema` instead. */
+  export const outboundSchema = TwoRefusalContentPart$outboundSchema;
+  /** @deprecated use `TwoRefusalContentPart$Outbound` instead. */
+  export type Outbound = TwoRefusalContentPart$Outbound;
 }
 
-export function deploymentGetConfig2DeploymentsRequest2ToJSON(
-  deploymentGetConfig2DeploymentsRequest2:
-    DeploymentGetConfig2DeploymentsRequest2,
+export function twoRefusalContentPartToJSON(
+  twoRefusalContentPart: TwoRefusalContentPart,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequest2$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsRequest2,
-    ),
+    TwoRefusalContentPart$outboundSchema.parse(twoRefusalContentPart),
   );
 }
 
-export function deploymentGetConfig2DeploymentsRequest2FromJSON(
+export function twoRefusalContentPartFromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequest2,
-  SDKValidationError
-> {
+): SafeParseResult<TwoRefusalContentPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequest2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequest2' from JSON`,
+    (x) => TwoRefusalContentPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoRefusalContentPart' from JSON`,
   );
 }
 
@@ -3034,8 +3040,8 @@ export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequest1$inboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsRequest1,
+export const TwoTextContentPart$inboundSchema: z.ZodType<
+  TwoTextContentPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3045,16 +3051,16 @@ export const DeploymentGetConfig2DeploymentsRequest1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig2DeploymentsRequest1$Outbound = {
+export type TwoTextContentPart$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsRequest1$outboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsRequest1$Outbound,
+export const TwoTextContentPart$outboundSchema: z.ZodType<
+  TwoTextContentPart$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2DeploymentsRequest1
+  TwoTextContentPart
 > = z.object({
   type:
     DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema,
@@ -3065,110 +3071,92 @@ export const DeploymentGetConfig2DeploymentsRequest1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig2DeploymentsRequest1$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequest1$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequest1$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequest1$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequest1$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequest1$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig2DeploymentsRequest1$Outbound;
+export namespace TwoTextContentPart$ {
+  /** @deprecated use `TwoTextContentPart$inboundSchema` instead. */
+  export const inboundSchema = TwoTextContentPart$inboundSchema;
+  /** @deprecated use `TwoTextContentPart$outboundSchema` instead. */
+  export const outboundSchema = TwoTextContentPart$outboundSchema;
+  /** @deprecated use `TwoTextContentPart$Outbound` instead. */
+  export type Outbound = TwoTextContentPart$Outbound;
 }
 
-export function deploymentGetConfig2DeploymentsRequest1ToJSON(
-  deploymentGetConfig2DeploymentsRequest1:
-    DeploymentGetConfig2DeploymentsRequest1,
+export function twoTextContentPartToJSON(
+  twoTextContentPart: TwoTextContentPart,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2DeploymentsRequest1$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsRequest1,
-    ),
+    TwoTextContentPart$outboundSchema.parse(twoTextContentPart),
   );
 }
 
-export function deploymentGetConfig2DeploymentsRequest1FromJSON(
+export function twoTextContentPartFromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsRequest1,
-  SDKValidationError
-> {
+): SafeParseResult<TwoTextContentPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsRequest1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsRequest1' from JSON`,
+    (x) => TwoTextContentPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoTextContentPart' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequest2$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequest2,
-    z.ZodTypeDef,
-    unknown
-  > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$inboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest2$inboundSchema),
-  ]);
+export const DeploymentGetConfigContentDeployments2$inboundSchema: z.ZodType<
+  DeploymentGetConfigContentDeployments2,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => TwoTextContentPart$inboundSchema),
+  z.lazy(() => TwoRefusalContentPart$inboundSchema),
+]);
 
 /** @internal */
-export type DeploymentGetConfigContentDeploymentsRequest2$Outbound =
-  | DeploymentGetConfig2DeploymentsRequest1$Outbound
-  | DeploymentGetConfig2DeploymentsRequest2$Outbound;
+export type DeploymentGetConfigContentDeployments2$Outbound =
+  | TwoTextContentPart$Outbound
+  | TwoRefusalContentPart$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContentDeploymentsRequest2$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigContentDeploymentsRequest2$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigContentDeploymentsRequest2
-  > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$outboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest2$outboundSchema),
-  ]);
+export const DeploymentGetConfigContentDeployments2$outboundSchema: z.ZodType<
+  DeploymentGetConfigContentDeployments2$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigContentDeployments2
+> = z.union([
+  z.lazy(() => TwoTextContentPart$outboundSchema),
+  z.lazy(() => TwoRefusalContentPart$outboundSchema),
+]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfigContentDeploymentsRequest2$ {
-  /** @deprecated use `DeploymentGetConfigContentDeploymentsRequest2$inboundSchema` instead. */
+export namespace DeploymentGetConfigContentDeployments2$ {
+  /** @deprecated use `DeploymentGetConfigContentDeployments2$inboundSchema` instead. */
   export const inboundSchema =
-    DeploymentGetConfigContentDeploymentsRequest2$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigContentDeploymentsRequest2$outboundSchema` instead. */
+    DeploymentGetConfigContentDeployments2$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigContentDeployments2$outboundSchema` instead. */
   export const outboundSchema =
-    DeploymentGetConfigContentDeploymentsRequest2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfigContentDeploymentsRequest2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfigContentDeploymentsRequest2$Outbound;
+    DeploymentGetConfigContentDeployments2$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigContentDeployments2$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigContentDeployments2$Outbound;
 }
 
-export function deploymentGetConfigContentDeploymentsRequest2ToJSON(
-  deploymentGetConfigContentDeploymentsRequest2:
-    DeploymentGetConfigContentDeploymentsRequest2,
+export function deploymentGetConfigContentDeployments2ToJSON(
+  deploymentGetConfigContentDeployments2:
+    DeploymentGetConfigContentDeployments2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigContentDeploymentsRequest2$outboundSchema.parse(
-      deploymentGetConfigContentDeploymentsRequest2,
+    DeploymentGetConfigContentDeployments2$outboundSchema.parse(
+      deploymentGetConfigContentDeployments2,
     ),
   );
 }
 
-export function deploymentGetConfigContentDeploymentsRequest2FromJSON(
+export function deploymentGetConfigContentDeployments2FromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigContentDeploymentsRequest2,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfigContentDeployments2, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentGetConfigContentDeploymentsRequest2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfigContentDeploymentsRequest2' from JSON`,
+      DeploymentGetConfigContentDeployments2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigContentDeployments2' from JSON`,
   );
 }
 
@@ -3180,18 +3168,15 @@ export const DeploymentGetConfigMessagesContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$inboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest2$inboundSchema),
+    z.lazy(() => TwoTextContentPart$inboundSchema),
+    z.lazy(() => TwoRefusalContentPart$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type DeploymentGetConfigMessagesContent$Outbound =
   | string
-  | Array<
-    | DeploymentGetConfig2DeploymentsRequest1$Outbound
-    | DeploymentGetConfig2DeploymentsRequest2$Outbound
-  >;
+  | Array<TwoTextContentPart$Outbound | TwoRefusalContentPart$Outbound>;
 
 /** @internal */
 export const DeploymentGetConfigMessagesContent$outboundSchema: z.ZodType<
@@ -3201,8 +3186,8 @@ export const DeploymentGetConfigMessagesContent$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$outboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsRequest2$outboundSchema),
+    z.lazy(() => TwoTextContentPart$outboundSchema),
+    z.lazy(() => TwoRefusalContentPart$outboundSchema),
   ])),
 ]);
 
@@ -3451,16 +3436,16 @@ export function messagesToolCallsFromJSON(
 }
 
 /** @internal */
-export const Messages4$inboundSchema: z.ZodType<
-  Messages4,
+export const MessagesAssistantMessage$inboundSchema: z.ZodType<
+  MessagesAssistantMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$inboundSchema),
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest2$inboundSchema),
+      z.lazy(() => TwoTextContentPart$inboundSchema),
+      z.lazy(() => TwoRefusalContentPart$inboundSchema),
     ])),
   ]).optional(),
   refusal: z.nullable(z.string()).optional(),
@@ -3475,13 +3460,10 @@ export const Messages4$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Messages4$Outbound = {
+export type MessagesAssistantMessage$Outbound = {
   content?:
     | string
-    | Array<
-      | DeploymentGetConfig2DeploymentsRequest1$Outbound
-      | DeploymentGetConfig2DeploymentsRequest2$Outbound
-    >
+    | Array<TwoTextContentPart$Outbound | TwoRefusalContentPart$Outbound>
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -3491,16 +3473,16 @@ export type Messages4$Outbound = {
 };
 
 /** @internal */
-export const Messages4$outboundSchema: z.ZodType<
-  Messages4$Outbound,
+export const MessagesAssistantMessage$outboundSchema: z.ZodType<
+  MessagesAssistantMessage$Outbound,
   z.ZodTypeDef,
-  Messages4
+  MessagesAssistantMessage
 > = z.object({
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest1$outboundSchema),
-      z.lazy(() => DeploymentGetConfig2DeploymentsRequest2$outboundSchema),
+      z.lazy(() => TwoTextContentPart$outboundSchema),
+      z.lazy(() => TwoRefusalContentPart$outboundSchema),
     ])),
   ]).optional(),
   refusal: z.nullable(z.string()).optional(),
@@ -3518,26 +3500,30 @@ export const Messages4$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Messages4$ {
-  /** @deprecated use `Messages4$inboundSchema` instead. */
-  export const inboundSchema = Messages4$inboundSchema;
-  /** @deprecated use `Messages4$outboundSchema` instead. */
-  export const outboundSchema = Messages4$outboundSchema;
-  /** @deprecated use `Messages4$Outbound` instead. */
-  export type Outbound = Messages4$Outbound;
+export namespace MessagesAssistantMessage$ {
+  /** @deprecated use `MessagesAssistantMessage$inboundSchema` instead. */
+  export const inboundSchema = MessagesAssistantMessage$inboundSchema;
+  /** @deprecated use `MessagesAssistantMessage$outboundSchema` instead. */
+  export const outboundSchema = MessagesAssistantMessage$outboundSchema;
+  /** @deprecated use `MessagesAssistantMessage$Outbound` instead. */
+  export type Outbound = MessagesAssistantMessage$Outbound;
 }
 
-export function messages4ToJSON(messages4: Messages4): string {
-  return JSON.stringify(Messages4$outboundSchema.parse(messages4));
+export function messagesAssistantMessageToJSON(
+  messagesAssistantMessage: MessagesAssistantMessage,
+): string {
+  return JSON.stringify(
+    MessagesAssistantMessage$outboundSchema.parse(messagesAssistantMessage),
+  );
 }
 
-export function messages4FromJSON(
+export function messagesAssistantMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Messages4, SDKValidationError> {
+): SafeParseResult<MessagesAssistantMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Messages4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Messages4' from JSON`,
+    (x) => MessagesAssistantMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessagesAssistantMessage' from JSON`,
   );
 }
 
@@ -3665,69 +3651,59 @@ export function twoInputAudioFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig23$inboundSchema: z.ZodType<
-  DeploymentGetConfig23,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema,
-  input_audio: z.lazy(() => TwoInputAudio$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "input_audio": "inputAudio",
+export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
+  .object({
+    type:
+      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema,
+    input_audio: z.lazy(() => TwoInputAudio$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_audio": "inputAudio",
+    });
   });
-});
 
 /** @internal */
-export type DeploymentGetConfig23$Outbound = {
+export type Two3$Outbound = {
   type: string;
   input_audio: TwoInputAudio$Outbound;
 };
 
 /** @internal */
-export const DeploymentGetConfig23$outboundSchema: z.ZodType<
-  DeploymentGetConfig23$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfig23
-> = z.object({
-  type:
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema,
-  inputAudio: z.lazy(() => TwoInputAudio$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    inputAudio: "input_audio",
+export const Two3$outboundSchema: z.ZodType<Two3$Outbound, z.ZodTypeDef, Two3> =
+  z.object({
+    type:
+      DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema,
+    inputAudio: z.lazy(() => TwoInputAudio$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      inputAudio: "input_audio",
+    });
   });
-});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig23$ {
-  /** @deprecated use `DeploymentGetConfig23$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfig23$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig23$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfig23$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig23$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig23$Outbound;
+export namespace Two3$ {
+  /** @deprecated use `Two3$inboundSchema` instead. */
+  export const inboundSchema = Two3$inboundSchema;
+  /** @deprecated use `Two3$outboundSchema` instead. */
+  export const outboundSchema = Two3$outboundSchema;
+  /** @deprecated use `Two3$Outbound` instead. */
+  export type Outbound = Two3$Outbound;
 }
 
-export function deploymentGetConfig23ToJSON(
-  deploymentGetConfig23: DeploymentGetConfig23,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig23$outboundSchema.parse(deploymentGetConfig23),
-  );
+export function two3ToJSON(two3: Two3): string {
+  return JSON.stringify(Two3$outboundSchema.parse(two3));
 }
 
-export function deploymentGetConfig23FromJSON(
+export function two3FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig23, SDKValidationError> {
+): SafeParseResult<Two3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig23$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig23' from JSON`,
+    (x) => Two3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two3' from JSON`,
   );
 }
 
@@ -3832,8 +3808,8 @@ export function twoImageUrlFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2Deployments2$inboundSchema: z.ZodType<
-  DeploymentGetConfig2Deployments2,
+export const DeploymentGetConfig22$inboundSchema: z.ZodType<
+  DeploymentGetConfig22,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3847,16 +3823,16 @@ export const DeploymentGetConfig2Deployments2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig2Deployments2$Outbound = {
+export type DeploymentGetConfig22$Outbound = {
   type: string;
   image_url: TwoImageUrl$Outbound;
 };
 
 /** @internal */
-export const DeploymentGetConfig2Deployments2$outboundSchema: z.ZodType<
-  DeploymentGetConfig2Deployments2$Outbound,
+export const DeploymentGetConfig22$outboundSchema: z.ZodType<
+  DeploymentGetConfig22$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2Deployments2
+  DeploymentGetConfig22
 > = z.object({
   type:
     DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema,
@@ -3871,32 +3847,30 @@ export const DeploymentGetConfig2Deployments2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig2Deployments2$ {
-  /** @deprecated use `DeploymentGetConfig2Deployments2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfig2Deployments2$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2Deployments2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfig2Deployments2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig2Deployments2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig2Deployments2$Outbound;
+export namespace DeploymentGetConfig22$ {
+  /** @deprecated use `DeploymentGetConfig22$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig22$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig22$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig22$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig22$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig22$Outbound;
 }
 
-export function deploymentGetConfig2Deployments2ToJSON(
-  deploymentGetConfig2Deployments2: DeploymentGetConfig2Deployments2,
+export function deploymentGetConfig22ToJSON(
+  deploymentGetConfig22: DeploymentGetConfig22,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2Deployments2$outboundSchema.parse(
-      deploymentGetConfig2Deployments2,
-    ),
+    DeploymentGetConfig22$outboundSchema.parse(deploymentGetConfig22),
   );
 }
 
-export function deploymentGetConfig2Deployments2FromJSON(
+export function deploymentGetConfig22FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig2Deployments2, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfig22, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig2Deployments2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2Deployments2' from JSON`,
+    (x) => DeploymentGetConfig22$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig22' from JSON`,
   );
 }
 
@@ -3926,126 +3900,110 @@ export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyType$ {
 }
 
 /** @internal */
-export const DeploymentGetConfig2Deployments1$inboundSchema: z.ZodType<
-  DeploymentGetConfig2Deployments1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema,
-  text: z.string(),
-});
+export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
+  .object({
+    type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema,
+    text: z.string(),
+  });
 
 /** @internal */
-export type DeploymentGetConfig2Deployments1$Outbound = {
+export type Two1$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig2Deployments1$outboundSchema: z.ZodType<
-  DeploymentGetConfig2Deployments1$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfig2Deployments1
-> = z.object({
-  type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema,
-  text: z.string(),
-});
+export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
+  z.object({
+    type: DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema,
+    text: z.string(),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig2Deployments1$ {
-  /** @deprecated use `DeploymentGetConfig2Deployments1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfig2Deployments1$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2Deployments1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfig2Deployments1$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig2Deployments1$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig2Deployments1$Outbound;
+export namespace Two1$ {
+  /** @deprecated use `Two1$inboundSchema` instead. */
+  export const inboundSchema = Two1$inboundSchema;
+  /** @deprecated use `Two1$outboundSchema` instead. */
+  export const outboundSchema = Two1$outboundSchema;
+  /** @deprecated use `Two1$Outbound` instead. */
+  export type Outbound = Two1$Outbound;
 }
 
-export function deploymentGetConfig2Deployments1ToJSON(
-  deploymentGetConfig2Deployments1: DeploymentGetConfig2Deployments1,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfig2Deployments1$outboundSchema.parse(
-      deploymentGetConfig2Deployments1,
-    ),
-  );
+export function two1ToJSON(two1: Two1): string {
+  return JSON.stringify(Two1$outboundSchema.parse(two1));
 }
 
-export function deploymentGetConfig2Deployments1FromJSON(
+export function two1FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfig2Deployments1, SDKValidationError> {
+): SafeParseResult<Two1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => DeploymentGetConfig2Deployments1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfig2Deployments1' from JSON`,
+    (x) => Two1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two1' from JSON`,
   );
 }
 
 /** @internal */
-export const DeploymentGetConfigContentDeployments2$inboundSchema: z.ZodType<
-  DeploymentGetConfigContentDeployments2,
+export const DeploymentGetConfigContent2$inboundSchema: z.ZodType<
+  DeploymentGetConfigContent2,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentGetConfig2Deployments1$inboundSchema),
-  z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
-  z.lazy(() => DeploymentGetConfig23$inboundSchema),
+  z.lazy(() => Two1$inboundSchema),
+  z.lazy(() => DeploymentGetConfig22$inboundSchema),
+  z.lazy(() => Two3$inboundSchema),
 ]);
 
 /** @internal */
-export type DeploymentGetConfigContentDeployments2$Outbound =
-  | DeploymentGetConfig2Deployments1$Outbound
-  | DeploymentGetConfig2Deployments2$Outbound
-  | DeploymentGetConfig23$Outbound;
+export type DeploymentGetConfigContent2$Outbound =
+  | Two1$Outbound
+  | DeploymentGetConfig22$Outbound
+  | Two3$Outbound;
 
 /** @internal */
-export const DeploymentGetConfigContentDeployments2$outboundSchema: z.ZodType<
-  DeploymentGetConfigContentDeployments2$Outbound,
+export const DeploymentGetConfigContent2$outboundSchema: z.ZodType<
+  DeploymentGetConfigContent2$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfigContentDeployments2
+  DeploymentGetConfigContent2
 > = z.union([
-  z.lazy(() => DeploymentGetConfig2Deployments1$outboundSchema),
-  z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
-  z.lazy(() => DeploymentGetConfig23$outboundSchema),
+  z.lazy(() => Two1$outboundSchema),
+  z.lazy(() => DeploymentGetConfig22$outboundSchema),
+  z.lazy(() => Two3$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfigContentDeployments2$ {
-  /** @deprecated use `DeploymentGetConfigContentDeployments2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigContentDeployments2$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigContentDeployments2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigContentDeployments2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfigContentDeployments2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfigContentDeployments2$Outbound;
+export namespace DeploymentGetConfigContent2$ {
+  /** @deprecated use `DeploymentGetConfigContent2$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigContent2$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigContent2$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigContent2$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigContent2$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigContent2$Outbound;
 }
 
-export function deploymentGetConfigContentDeployments2ToJSON(
-  deploymentGetConfigContentDeployments2:
-    DeploymentGetConfigContentDeployments2,
+export function deploymentGetConfigContent2ToJSON(
+  deploymentGetConfigContent2: DeploymentGetConfigContent2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigContentDeployments2$outboundSchema.parse(
-      deploymentGetConfigContentDeployments2,
+    DeploymentGetConfigContent2$outboundSchema.parse(
+      deploymentGetConfigContent2,
     ),
   );
 }
 
-export function deploymentGetConfigContentDeployments2FromJSON(
+export function deploymentGetConfigContent2FromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentGetConfigContentDeployments2, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfigContent2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigContentDeployments2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigContentDeployments2' from JSON`,
+    (x) => DeploymentGetConfigContent2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigContent2' from JSON`,
   );
 }
 
@@ -4057,20 +4015,16 @@ export const MessagesContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2Deployments1$inboundSchema),
-    z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
-    z.lazy(() => DeploymentGetConfig23$inboundSchema),
+    z.lazy(() => Two1$inboundSchema),
+    z.lazy(() => DeploymentGetConfig22$inboundSchema),
+    z.lazy(() => Two3$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type MessagesContent$Outbound =
   | string
-  | Array<
-    | DeploymentGetConfig2Deployments1$Outbound
-    | DeploymentGetConfig2Deployments2$Outbound
-    | DeploymentGetConfig23$Outbound
-  >;
+  | Array<Two1$Outbound | DeploymentGetConfig22$Outbound | Two3$Outbound>;
 
 /** @internal */
 export const MessagesContent$outboundSchema: z.ZodType<
@@ -4080,9 +4034,9 @@ export const MessagesContent$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2Deployments1$outboundSchema),
-    z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
-    z.lazy(() => DeploymentGetConfig23$outboundSchema),
+    z.lazy(() => Two1$outboundSchema),
+    z.lazy(() => DeploymentGetConfig22$outboundSchema),
+    z.lazy(() => Two3$outboundSchema),
   ])),
 ]);
 
@@ -4116,8 +4070,8 @@ export function messagesContentFromJSON(
 }
 
 /** @internal */
-export const Messages3$inboundSchema: z.ZodType<
-  Messages3,
+export const MessagesUserMessage$inboundSchema: z.ZodType<
+  MessagesUserMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4126,40 +4080,36 @@ export const Messages3$inboundSchema: z.ZodType<
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2Deployments1$inboundSchema),
-      z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
-      z.lazy(() => DeploymentGetConfig23$inboundSchema),
+      z.lazy(() => Two1$inboundSchema),
+      z.lazy(() => DeploymentGetConfig22$inboundSchema),
+      z.lazy(() => Two3$inboundSchema),
     ])),
   ]),
 });
 
 /** @internal */
-export type Messages3$Outbound = {
+export type MessagesUserMessage$Outbound = {
   role: string;
   name?: string | undefined;
   content:
     | string
-    | Array<
-      | DeploymentGetConfig2Deployments1$Outbound
-      | DeploymentGetConfig2Deployments2$Outbound
-      | DeploymentGetConfig23$Outbound
-    >;
+    | Array<Two1$Outbound | DeploymentGetConfig22$Outbound | Two3$Outbound>;
 };
 
 /** @internal */
-export const Messages3$outboundSchema: z.ZodType<
-  Messages3$Outbound,
+export const MessagesUserMessage$outboundSchema: z.ZodType<
+  MessagesUserMessage$Outbound,
   z.ZodTypeDef,
-  Messages3
+  MessagesUserMessage
 > = z.object({
   role: DeploymentGetConfigMessagesDeploymentsRole$outboundSchema,
   name: z.string().optional(),
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2Deployments1$outboundSchema),
-      z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
-      z.lazy(() => DeploymentGetConfig23$outboundSchema),
+      z.lazy(() => Two1$outboundSchema),
+      z.lazy(() => DeploymentGetConfig22$outboundSchema),
+      z.lazy(() => Two3$outboundSchema),
     ])),
   ]),
 });
@@ -4168,26 +4118,30 @@ export const Messages3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Messages3$ {
-  /** @deprecated use `Messages3$inboundSchema` instead. */
-  export const inboundSchema = Messages3$inboundSchema;
-  /** @deprecated use `Messages3$outboundSchema` instead. */
-  export const outboundSchema = Messages3$outboundSchema;
-  /** @deprecated use `Messages3$Outbound` instead. */
-  export type Outbound = Messages3$Outbound;
+export namespace MessagesUserMessage$ {
+  /** @deprecated use `MessagesUserMessage$inboundSchema` instead. */
+  export const inboundSchema = MessagesUserMessage$inboundSchema;
+  /** @deprecated use `MessagesUserMessage$outboundSchema` instead. */
+  export const outboundSchema = MessagesUserMessage$outboundSchema;
+  /** @deprecated use `MessagesUserMessage$Outbound` instead. */
+  export type Outbound = MessagesUserMessage$Outbound;
 }
 
-export function messages3ToJSON(messages3: Messages3): string {
-  return JSON.stringify(Messages3$outboundSchema.parse(messages3));
+export function messagesUserMessageToJSON(
+  messagesUserMessage: MessagesUserMessage,
+): string {
+  return JSON.stringify(
+    MessagesUserMessage$outboundSchema.parse(messagesUserMessage),
+  );
 }
 
-export function messages3FromJSON(
+export function messagesUserMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Messages3, SDKValidationError> {
+): SafeParseResult<MessagesUserMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Messages3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Messages3' from JSON`,
+    (x) => MessagesUserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessagesUserMessage' from JSON`,
   );
 }
 
@@ -4213,8 +4167,8 @@ export namespace DeploymentGetConfigMessagesRole$ {
 }
 
 /** @internal */
-export const Messages2$inboundSchema: z.ZodType<
-  Messages2,
+export const MessagesSystemMessage$inboundSchema: z.ZodType<
+  MessagesSystemMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4224,17 +4178,17 @@ export const Messages2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Messages2$Outbound = {
+export type MessagesSystemMessage$Outbound = {
   role: string;
   content: string;
   name?: string | undefined;
 };
 
 /** @internal */
-export const Messages2$outboundSchema: z.ZodType<
-  Messages2$Outbound,
+export const MessagesSystemMessage$outboundSchema: z.ZodType<
+  MessagesSystemMessage$Outbound,
   z.ZodTypeDef,
-  Messages2
+  MessagesSystemMessage
 > = z.object({
   role: DeploymentGetConfigMessagesRole$outboundSchema,
   content: z.string(),
@@ -4245,26 +4199,30 @@ export const Messages2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Messages2$ {
-  /** @deprecated use `Messages2$inboundSchema` instead. */
-  export const inboundSchema = Messages2$inboundSchema;
-  /** @deprecated use `Messages2$outboundSchema` instead. */
-  export const outboundSchema = Messages2$outboundSchema;
-  /** @deprecated use `Messages2$Outbound` instead. */
-  export type Outbound = Messages2$Outbound;
+export namespace MessagesSystemMessage$ {
+  /** @deprecated use `MessagesSystemMessage$inboundSchema` instead. */
+  export const inboundSchema = MessagesSystemMessage$inboundSchema;
+  /** @deprecated use `MessagesSystemMessage$outboundSchema` instead. */
+  export const outboundSchema = MessagesSystemMessage$outboundSchema;
+  /** @deprecated use `MessagesSystemMessage$Outbound` instead. */
+  export type Outbound = MessagesSystemMessage$Outbound;
 }
 
-export function messages2ToJSON(messages2: Messages2): string {
-  return JSON.stringify(Messages2$outboundSchema.parse(messages2));
+export function messagesSystemMessageToJSON(
+  messagesSystemMessage: MessagesSystemMessage,
+): string {
+  return JSON.stringify(
+    MessagesSystemMessage$outboundSchema.parse(messagesSystemMessage),
+  );
 }
 
-export function messages2FromJSON(
+export function messagesSystemMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Messages2, SDKValidationError> {
+): SafeParseResult<MessagesSystemMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Messages2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Messages2' from JSON`,
+    (x) => MessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessagesSystemMessage' from JSON`,
   );
 }
 
@@ -4288,8 +4246,8 @@ export namespace MessagesRole$ {
 }
 
 /** @internal */
-export const Messages1$inboundSchema: z.ZodType<
-  Messages1,
+export const MessagesDeveloperMessage$inboundSchema: z.ZodType<
+  MessagesDeveloperMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4299,17 +4257,17 @@ export const Messages1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Messages1$Outbound = {
+export type MessagesDeveloperMessage$Outbound = {
   role: string;
   content: string;
   name?: string | undefined;
 };
 
 /** @internal */
-export const Messages1$outboundSchema: z.ZodType<
-  Messages1$Outbound,
+export const MessagesDeveloperMessage$outboundSchema: z.ZodType<
+  MessagesDeveloperMessage$Outbound,
   z.ZodTypeDef,
-  Messages1
+  MessagesDeveloperMessage
 > = z.object({
   role: MessagesRole$outboundSchema,
   content: z.string(),
@@ -4320,26 +4278,30 @@ export const Messages1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Messages1$ {
-  /** @deprecated use `Messages1$inboundSchema` instead. */
-  export const inboundSchema = Messages1$inboundSchema;
-  /** @deprecated use `Messages1$outboundSchema` instead. */
-  export const outboundSchema = Messages1$outboundSchema;
-  /** @deprecated use `Messages1$Outbound` instead. */
-  export type Outbound = Messages1$Outbound;
+export namespace MessagesDeveloperMessage$ {
+  /** @deprecated use `MessagesDeveloperMessage$inboundSchema` instead. */
+  export const inboundSchema = MessagesDeveloperMessage$inboundSchema;
+  /** @deprecated use `MessagesDeveloperMessage$outboundSchema` instead. */
+  export const outboundSchema = MessagesDeveloperMessage$outboundSchema;
+  /** @deprecated use `MessagesDeveloperMessage$Outbound` instead. */
+  export type Outbound = MessagesDeveloperMessage$Outbound;
 }
 
-export function messages1ToJSON(messages1: Messages1): string {
-  return JSON.stringify(Messages1$outboundSchema.parse(messages1));
+export function messagesDeveloperMessageToJSON(
+  messagesDeveloperMessage: MessagesDeveloperMessage,
+): string {
+  return JSON.stringify(
+    MessagesDeveloperMessage$outboundSchema.parse(messagesDeveloperMessage),
+  );
 }
 
-export function messages1FromJSON(
+export function messagesDeveloperMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Messages1, SDKValidationError> {
+): SafeParseResult<MessagesDeveloperMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Messages1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Messages1' from JSON`,
+    (x) => MessagesDeveloperMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MessagesDeveloperMessage' from JSON`,
   );
 }
 
@@ -4349,20 +4311,20 @@ export const Messages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => Messages1$inboundSchema),
-  z.lazy(() => Messages2$inboundSchema),
-  z.lazy(() => Messages3$inboundSchema),
-  z.lazy(() => Messages5$inboundSchema),
-  z.lazy(() => Messages4$inboundSchema),
+  z.lazy(() => MessagesDeveloperMessage$inboundSchema),
+  z.lazy(() => MessagesSystemMessage$inboundSchema),
+  z.lazy(() => MessagesUserMessage$inboundSchema),
+  z.lazy(() => MessagesToolMessage$inboundSchema),
+  z.lazy(() => MessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type Messages$Outbound =
-  | Messages1$Outbound
-  | Messages2$Outbound
-  | Messages3$Outbound
-  | Messages5$Outbound
-  | Messages4$Outbound;
+  | MessagesDeveloperMessage$Outbound
+  | MessagesSystemMessage$Outbound
+  | MessagesUserMessage$Outbound
+  | MessagesToolMessage$Outbound
+  | MessagesAssistantMessage$Outbound;
 
 /** @internal */
 export const Messages$outboundSchema: z.ZodType<
@@ -4370,11 +4332,11 @@ export const Messages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Messages
 > = z.union([
-  z.lazy(() => Messages1$outboundSchema),
-  z.lazy(() => Messages2$outboundSchema),
-  z.lazy(() => Messages3$outboundSchema),
-  z.lazy(() => Messages5$outboundSchema),
-  z.lazy(() => Messages4$outboundSchema),
+  z.lazy(() => MessagesDeveloperMessage$outboundSchema),
+  z.lazy(() => MessagesSystemMessage$outboundSchema),
+  z.lazy(() => MessagesUserMessage$outboundSchema),
+  z.lazy(() => MessagesToolMessage$outboundSchema),
+  z.lazy(() => MessagesAssistantMessage$outboundSchema),
 ]);
 
 /**
@@ -4594,20 +4556,20 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(
     z.union([
-      z.lazy(() => One$inboundSchema),
-      z.lazy(() => Two$inboundSchema),
-      z.lazy(() => Three$inboundSchema),
-      z.lazy(() => Five$inboundSchema),
-      z.lazy(() => Four$inboundSchema),
+      z.lazy(() => DeveloperMessage$inboundSchema),
+      z.lazy(() => SystemMessage$inboundSchema),
+      z.lazy(() => UserMessage$inboundSchema),
+      z.lazy(() => ToolMessage$inboundSchema),
+      z.lazy(() => AssistantMessage$inboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
-      z.lazy(() => Messages1$inboundSchema),
-      z.lazy(() => Messages2$inboundSchema),
-      z.lazy(() => Messages3$inboundSchema),
-      z.lazy(() => Messages5$inboundSchema),
-      z.lazy(() => Messages4$inboundSchema),
+      z.lazy(() => MessagesDeveloperMessage$inboundSchema),
+      z.lazy(() => MessagesSystemMessage$inboundSchema),
+      z.lazy(() => MessagesUserMessage$inboundSchema),
+      z.lazy(() => MessagesToolMessage$inboundSchema),
+      z.lazy(() => MessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
   file_ids: z.array(z.string()).optional(),
@@ -4631,20 +4593,20 @@ export type DeploymentGetConfigRequestBody$Outbound = {
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
-      | One$Outbound
-      | Two$Outbound
-      | Three$Outbound
-      | Five$Outbound
-      | Four$Outbound
+      | DeveloperMessage$Outbound
+      | SystemMessage$Outbound
+      | UserMessage$Outbound
+      | ToolMessage$Outbound
+      | AssistantMessage$Outbound
     >
     | undefined;
   messages?:
     | Array<
-      | Messages1$Outbound
-      | Messages2$Outbound
-      | Messages3$Outbound
-      | Messages5$Outbound
-      | Messages4$Outbound
+      | MessagesDeveloperMessage$Outbound
+      | MessagesSystemMessage$Outbound
+      | MessagesUserMessage$Outbound
+      | MessagesToolMessage$Outbound
+      | MessagesAssistantMessage$Outbound
     >
     | undefined;
   file_ids?: Array<string> | undefined;
@@ -4665,20 +4627,20 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
-      z.lazy(() => One$outboundSchema),
-      z.lazy(() => Two$outboundSchema),
-      z.lazy(() => Three$outboundSchema),
-      z.lazy(() => Five$outboundSchema),
-      z.lazy(() => Four$outboundSchema),
+      z.lazy(() => DeveloperMessage$outboundSchema),
+      z.lazy(() => SystemMessage$outboundSchema),
+      z.lazy(() => UserMessage$outboundSchema),
+      z.lazy(() => ToolMessage$outboundSchema),
+      z.lazy(() => AssistantMessage$outboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
-      z.lazy(() => Messages1$outboundSchema),
-      z.lazy(() => Messages2$outboundSchema),
-      z.lazy(() => Messages3$outboundSchema),
-      z.lazy(() => Messages5$outboundSchema),
-      z.lazy(() => Messages4$outboundSchema),
+      z.lazy(() => MessagesDeveloperMessage$outboundSchema),
+      z.lazy(() => MessagesSystemMessage$outboundSchema),
+      z.lazy(() => MessagesUserMessage$outboundSchema),
+      z.lazy(() => MessagesToolMessage$outboundSchema),
+      z.lazy(() => MessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
   fileIds: z.array(z.string()).optional(),
@@ -4856,8 +4818,8 @@ export function deploymentGetConfig2ImageUrlFromJSON(
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsResponse2$inboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsResponse2,
+export const DeploymentGetConfig2Deployments2$inboundSchema: z.ZodType<
+  DeploymentGetConfig2Deployments2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4870,16 +4832,16 @@ export const DeploymentGetConfig2DeploymentsResponse2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig2DeploymentsResponse2$Outbound = {
+export type DeploymentGetConfig2Deployments2$Outbound = {
   type: string;
   image_url: DeploymentGetConfig2ImageUrl$Outbound;
 };
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsResponse2$outboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsResponse2$Outbound,
+export const DeploymentGetConfig2Deployments2$outboundSchema: z.ZodType<
+  DeploymentGetConfig2Deployments2$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2DeploymentsResponse2
+  DeploymentGetConfig2Deployments2
 > = z.object({
   type: DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema,
   imageUrl: z.lazy(() => DeploymentGetConfig2ImageUrl$outboundSchema),
@@ -4893,41 +4855,32 @@ export const DeploymentGetConfig2DeploymentsResponse2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig2DeploymentsResponse2$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse2$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsResponse2$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse2$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsResponse2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig2DeploymentsResponse2$Outbound;
+export namespace DeploymentGetConfig2Deployments2$ {
+  /** @deprecated use `DeploymentGetConfig2Deployments2$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig2Deployments2$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2Deployments2$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig2Deployments2$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig2Deployments2$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig2Deployments2$Outbound;
 }
 
-export function deploymentGetConfig2DeploymentsResponse2ToJSON(
-  deploymentGetConfig2DeploymentsResponse2:
-    DeploymentGetConfig2DeploymentsResponse2,
+export function deploymentGetConfig2Deployments2ToJSON(
+  deploymentGetConfig2Deployments2: DeploymentGetConfig2Deployments2,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2DeploymentsResponse2$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsResponse2,
+    DeploymentGetConfig2Deployments2$outboundSchema.parse(
+      deploymentGetConfig2Deployments2,
     ),
   );
 }
 
-export function deploymentGetConfig2DeploymentsResponse2FromJSON(
+export function deploymentGetConfig2Deployments2FromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsResponse2,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfig2Deployments2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsResponse2$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsResponse2' from JSON`,
+    (x) => DeploymentGetConfig2Deployments2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig2Deployments2' from JSON`,
   );
 }
 
@@ -4955,8 +4908,8 @@ export namespace DeploymentGetConfig2DeploymentsResponseType$ {
 }
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsResponse1$inboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsResponse1,
+export const DeploymentGetConfig21$inboundSchema: z.ZodType<
+  DeploymentGetConfig21,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4965,16 +4918,16 @@ export const DeploymentGetConfig2DeploymentsResponse1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentGetConfig2DeploymentsResponse1$Outbound = {
+export type DeploymentGetConfig21$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const DeploymentGetConfig2DeploymentsResponse1$outboundSchema: z.ZodType<
-  DeploymentGetConfig2DeploymentsResponse1$Outbound,
+export const DeploymentGetConfig21$outboundSchema: z.ZodType<
+  DeploymentGetConfig21$Outbound,
   z.ZodTypeDef,
-  DeploymentGetConfig2DeploymentsResponse1
+  DeploymentGetConfig21
 > = z.object({
   type: DeploymentGetConfig2DeploymentsResponseType$outboundSchema,
   text: z.string(),
@@ -4984,41 +4937,30 @@ export const DeploymentGetConfig2DeploymentsResponse1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfig2DeploymentsResponse1$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse1$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsResponse1$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse1$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsResponse1$outboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse1$Outbound` instead. */
-  export type Outbound = DeploymentGetConfig2DeploymentsResponse1$Outbound;
+export namespace DeploymentGetConfig21$ {
+  /** @deprecated use `DeploymentGetConfig21$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig21$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig21$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig21$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig21$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig21$Outbound;
 }
 
-export function deploymentGetConfig2DeploymentsResponse1ToJSON(
-  deploymentGetConfig2DeploymentsResponse1:
-    DeploymentGetConfig2DeploymentsResponse1,
+export function deploymentGetConfig21ToJSON(
+  deploymentGetConfig21: DeploymentGetConfig21,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfig2DeploymentsResponse1$outboundSchema.parse(
-      deploymentGetConfig2DeploymentsResponse1,
-    ),
+    DeploymentGetConfig21$outboundSchema.parse(deploymentGetConfig21),
   );
 }
 
-export function deploymentGetConfig2DeploymentsResponse1FromJSON(
+export function deploymentGetConfig21FromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfig2DeploymentsResponse1,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfig21, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfig2DeploymentsResponse1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfig2DeploymentsResponse1' from JSON`,
+    (x) => DeploymentGetConfig21$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig21' from JSON`,
   );
 }
 
@@ -5029,14 +4971,14 @@ export const DeploymentGetConfigContentDeploymentsResponse2$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$inboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse2$inboundSchema),
+    z.lazy(() => DeploymentGetConfig21$inboundSchema),
+    z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
   ]);
 
 /** @internal */
 export type DeploymentGetConfigContentDeploymentsResponse2$Outbound =
-  | DeploymentGetConfig2DeploymentsResponse1$Outbound
-  | DeploymentGetConfig2DeploymentsResponse2$Outbound;
+  | DeploymentGetConfig21$Outbound
+  | DeploymentGetConfig2Deployments2$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
@@ -5045,8 +4987,8 @@ export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
     z.ZodTypeDef,
     DeploymentGetConfigContentDeploymentsResponse2
   > = z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$outboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse2$outboundSchema),
+    z.lazy(() => DeploymentGetConfig21$outboundSchema),
+    z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
   ]);
 
 /**
@@ -5100,8 +5042,8 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$inboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse2$inboundSchema),
+    z.lazy(() => DeploymentGetConfig21$inboundSchema),
+    z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
   ])),
 ]);
 
@@ -5109,8 +5051,7 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 export type DeploymentGetConfigContent$Outbound =
   | string
   | Array<
-    | DeploymentGetConfig2DeploymentsResponse1$Outbound
-    | DeploymentGetConfig2DeploymentsResponse2$Outbound
+    DeploymentGetConfig21$Outbound | DeploymentGetConfig2Deployments2$Outbound
   >;
 
 /** @internal */
@@ -5121,8 +5062,8 @@ export const DeploymentGetConfigContent$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$outboundSchema),
-    z.lazy(() => DeploymentGetConfig2DeploymentsResponse2$outboundSchema),
+    z.lazy(() => DeploymentGetConfig21$outboundSchema),
+    z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
   ])),
 ]);
 
@@ -5318,8 +5259,8 @@ export const DeploymentGetConfigMessages$inboundSchema: z.ZodType<
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$inboundSchema),
-      z.lazy(() => DeploymentGetConfig2DeploymentsResponse2$inboundSchema),
+      z.lazy(() => DeploymentGetConfig21$inboundSchema),
+      z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$inboundSchema))
@@ -5336,8 +5277,7 @@ export type DeploymentGetConfigMessages$Outbound = {
   content:
     | string
     | Array<
-      | DeploymentGetConfig2DeploymentsResponse1$Outbound
-      | DeploymentGetConfig2DeploymentsResponse2$Outbound
+      DeploymentGetConfig21$Outbound | DeploymentGetConfig2Deployments2$Outbound
     >;
   tool_calls?: Array<DeploymentGetConfigToolCalls$Outbound> | undefined;
 };
@@ -5352,8 +5292,8 @@ export const DeploymentGetConfigMessages$outboundSchema: z.ZodType<
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentGetConfig2DeploymentsResponse1$outboundSchema),
-      z.lazy(() => DeploymentGetConfig2DeploymentsResponse2$outboundSchema),
+      z.lazy(() => DeploymentGetConfig21$outboundSchema),
+      z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$outboundSchema))

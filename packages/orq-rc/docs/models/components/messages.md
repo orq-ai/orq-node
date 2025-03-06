@@ -3,28 +3,28 @@
 
 ## Supported Types
 
-### `components.Messages1`
+### `components.MessagesDeveloperMessage`
 
 ```typescript
-const value: components.Messages1 = {
+const value: components.MessagesDeveloperMessage = {
   role: "developer",
   content: "<value>",
 };
 ```
 
-### `components.Messages2`
+### `components.MessagesSystemMessage`
 
 ```typescript
-const value: components.Messages2 = {
+const value: components.MessagesSystemMessage = {
   role: "system",
   content: "<value>",
 };
 ```
 
-### `components.Messages3`
+### `components.MessagesUserMessage`
 
 ```typescript
-const value: components.Messages3 = {
+const value: components.MessagesUserMessage = {
   role: "user",
   content: [
     {
@@ -35,18 +35,18 @@ const value: components.Messages3 = {
 };
 ```
 
-### `components.Messages4`
+### `components.MessagesAssistantMessage`
 
 ```typescript
-const value: components.Messages4 = {
+const value: components.MessagesAssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `components.Messages5`
+### `components.MessagesToolMessage`
 
 ```typescript
-const value: components.Messages5 = {
+const value: components.MessagesToolMessage = {
   role: "tool",
   content: "<value>",
   toolCallId: "<id>",

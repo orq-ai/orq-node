@@ -1,20 +1,37 @@
 # Two
 
-## Example Usage
+
+## Supported Types
+
+### `operations.One`
 
 ```typescript
-import { Two } from "@orq-ai/node/models/operations";
-
-let value: Two = {
-  role: "system",
-  content: "<value>",
+const value: operations.One = {
+  type: "text",
+  text: "<value>",
 };
 ```
 
-## Fields
+### `operations.Two2`
 
-| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `role`                                                                                                                       | [operations.PrefixMessagesRole](../../models/operations/prefixmessagesrole.md)                                               | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case `system`.                                                                      |
-| `content`                                                                                                                    | *string*                                                                                                                     | :heavy_check_mark:                                                                                                           | The contents of the system message.                                                                                          |
-| `name`                                                                                                                       | *string*                                                                                                                     | :heavy_minus_sign:                                                                                                           | An optional name for the participant. Provides the model information to differentiate between participants of the same role. |
+```typescript
+const value: operations.Two2 = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://fake-backburn.info/",
+  },
+};
+```
+
+### `operations.Three`
+
+```typescript
+const value: operations.Three = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+

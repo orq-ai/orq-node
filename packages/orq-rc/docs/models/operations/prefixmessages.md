@@ -3,45 +3,45 @@
 
 ## Supported Types
 
-### `operations.One`
+### `operations.DeveloperMessage`
 
 ```typescript
-const value: operations.One = {
+const value: operations.DeveloperMessage = {
   role: "developer",
   content: "<value>",
 };
 ```
 
-### `operations.Two`
+### `operations.SystemMessage`
 
 ```typescript
-const value: operations.Two = {
+const value: operations.SystemMessage = {
   role: "system",
   content: "<value>",
 };
 ```
 
-### `operations.Three`
+### `operations.UserMessage`
 
 ```typescript
-const value: operations.Three = {
+const value: operations.UserMessage = {
   role: "user",
   content: "<value>",
 };
 ```
 
-### `operations.Four`
+### `operations.AssistantMessage`
 
 ```typescript
-const value: operations.Four = {
+const value: operations.AssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `operations.Five`
+### `operations.ToolMessage`
 
 ```typescript
-const value: operations.Five = {
+const value: operations.ToolMessage = {
   role: "tool",
   content: "<value>",
   toolCallId: "<id>",

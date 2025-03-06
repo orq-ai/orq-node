@@ -6,15 +6,17 @@
 import { Three } from "@orq-ai/node/models/operations";
 
 let value: Three = {
-  role: "user",
-  content: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `role`                                                                                                                       | [operations.DeploymentGetConfigPrefixMessagesRole](../../models/operations/deploymentgetconfigprefixmessagesrole.md)         | :heavy_check_mark:                                                                                                           | The role of the messages author, in this case `user`.                                                                        |
-| `name`                                                                                                                       | *string*                                                                                                                     | :heavy_minus_sign:                                                                                                           | An optional name for the participant. Provides the model information to differentiate between participants of the same role. |
-| `content`                                                                                                                    | *operations.Content*                                                                                                         | :heavy_check_mark:                                                                                                           | The contents of the user message.                                                                                            |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `type`                                                                                     | [operations.DeploymentGetConfig2Type](../../models/operations/deploymentgetconfig2type.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `inputAudio`                                                                               | [operations.InputAudio](../../models/operations/inputaudio.md)                             | :heavy_check_mark:                                                                         | N/A                                                                                        |

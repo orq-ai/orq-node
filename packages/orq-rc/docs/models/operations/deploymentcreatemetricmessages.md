@@ -3,45 +3,45 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetricMessages1`
+### `operations.DeploymentCreateMetricMessagesDeveloperMessage`
 
 ```typescript
-const value: operations.DeploymentCreateMetricMessages1 = {
+const value: operations.DeploymentCreateMetricMessagesDeveloperMessage = {
   role: "developer",
   content: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetricMessages2`
+### `operations.DeploymentCreateMetricMessagesSystemMessage`
 
 ```typescript
-const value: operations.DeploymentCreateMetricMessages2 = {
+const value: operations.DeploymentCreateMetricMessagesSystemMessage = {
   role: "system",
   content: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetricMessages3`
+### `operations.DeploymentCreateMetricMessagesUserMessage`
 
 ```typescript
-const value: operations.DeploymentCreateMetricMessages3 = {
+const value: operations.DeploymentCreateMetricMessagesUserMessage = {
   role: "user",
   content: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetricMessages4`
+### `operations.DeploymentCreateMetricMessagesAssistantMessage`
 
 ```typescript
-const value: operations.DeploymentCreateMetricMessages4 = {
+const value: operations.DeploymentCreateMetricMessagesAssistantMessage = {
   role: "assistant",
 };
 ```
 
-### `operations.DeploymentCreateMetricMessages5`
+### `operations.DeploymentCreateMetricMessagesToolMessage`
 
 ```typescript
-const value: operations.DeploymentCreateMetricMessages5 = {
+const value: operations.DeploymentCreateMetricMessagesToolMessage = {
   role: "tool",
   content: "<value>",
   toolCallId: "<id>",

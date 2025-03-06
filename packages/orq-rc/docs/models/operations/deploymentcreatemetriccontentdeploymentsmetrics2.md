@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.DeploymentCreateMetric2DeploymentsMetrics1`
+### `operations.DeploymentCreateMetric2TextContentPart`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2DeploymentsMetrics1 = {
+const value: operations.DeploymentCreateMetric2TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentCreateMetric2DeploymentsMetrics2`
+### `operations.DeploymentCreateMetric2RefusalContentPart`
 
 ```typescript
-const value: operations.DeploymentCreateMetric2DeploymentsMetrics2 = {
+const value: operations.DeploymentCreateMetric2RefusalContentPart = {
   type: "refusal",
   refusal: "<value>",
 };

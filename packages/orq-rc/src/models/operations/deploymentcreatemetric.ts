@@ -60,7 +60,7 @@ export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent =
   | string
   | Array<string>;
 
-export type DeploymentCreateMetricMessages5 = {
+export type DeploymentCreateMetricMessagesToolMessage = {
   /**
    * The role of the messages author, in this case tool.
    */
@@ -90,7 +90,7 @@ export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesT
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
   >;
 
-export type DeploymentCreateMetric2DeploymentsMetrics2 = {
+export type DeploymentCreateMetric2RefusalContentPart = {
   /**
    * The type of the content part.
    */
@@ -115,7 +115,7 @@ export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType =
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
   >;
 
-export type DeploymentCreateMetric2DeploymentsMetrics1 = {
+export type DeploymentCreateMetric2TextContentPart = {
   /**
    * The type of the content part.
    */
@@ -127,8 +127,8 @@ export type DeploymentCreateMetric2DeploymentsMetrics1 = {
 };
 
 export type DeploymentCreateMetricContentDeploymentsMetrics2 =
-  | DeploymentCreateMetric2DeploymentsMetrics1
-  | DeploymentCreateMetric2DeploymentsMetrics2;
+  | DeploymentCreateMetric2TextContentPart
+  | DeploymentCreateMetric2RefusalContentPart;
 
 /**
  * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
@@ -136,8 +136,8 @@ export type DeploymentCreateMetricContentDeploymentsMetrics2 =
 export type DeploymentCreateMetricMessagesDeploymentsMetricsContent =
   | string
   | Array<
-    | DeploymentCreateMetric2DeploymentsMetrics1
-    | DeploymentCreateMetric2DeploymentsMetrics2
+    | DeploymentCreateMetric2TextContentPart
+    | DeploymentCreateMetric2RefusalContentPart
   >;
 
 /**
@@ -166,13 +166,13 @@ export type DeploymentCreateMetricMessagesAudio = {
 };
 
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export const DeploymentCreateMetricMessagesType = {
   Function: "function",
 } as const;
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export type DeploymentCreateMetricMessagesType = ClosedEnum<
   typeof DeploymentCreateMetricMessagesType
@@ -195,21 +195,21 @@ export type DeploymentCreateMetricMessagesToolCalls = {
    */
   id: string;
   /**
-   * The type of the tool. Currently, only `5` is supported.
+   * The type of the tool. Currently, only `function` is supported.
    */
   type: DeploymentCreateMetricMessagesType;
   function: DeploymentCreateMetricMessagesFunction;
 };
 
-export type DeploymentCreateMetricMessages4 = {
+export type DeploymentCreateMetricMessagesAssistantMessage = {
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
   content?:
     | string
     | Array<
-      | DeploymentCreateMetric2DeploymentsMetrics1
-      | DeploymentCreateMetric2DeploymentsMetrics2
+      | DeploymentCreateMetric2TextContentPart
+      | DeploymentCreateMetric2RefusalContentPart
     >
     | undefined;
   /**
@@ -351,7 +351,7 @@ export type DeploymentCreateMetricMessagesContent =
     | DeploymentCreateMetric23
   >;
 
-export type DeploymentCreateMetricMessages3 = {
+export type DeploymentCreateMetricMessagesUserMessage = {
   /**
    * The role of the messages author, in this case `user`.
    */
@@ -385,7 +385,7 @@ export type DeploymentCreateMetricMessagesDeploymentsMetricsRole = ClosedEnum<
   typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole
 >;
 
-export type DeploymentCreateMetricMessages2 = {
+export type DeploymentCreateMetricMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
    */
@@ -413,7 +413,7 @@ export type DeploymentCreateMetricMessagesRole = ClosedEnum<
   typeof DeploymentCreateMetricMessagesRole
 >;
 
-export type DeploymentCreateMetricMessages1 = {
+export type DeploymentCreateMetricMessagesDeveloperMessage = {
   /**
    * The role of the messages author, in this case  `developer`.
    */
@@ -429,11 +429,11 @@ export type DeploymentCreateMetricMessages1 = {
 };
 
 export type DeploymentCreateMetricMessages =
-  | DeploymentCreateMetricMessages1
-  | DeploymentCreateMetricMessages2
-  | DeploymentCreateMetricMessages3
-  | DeploymentCreateMetricMessages5
-  | DeploymentCreateMetricMessages4;
+  | DeploymentCreateMetricMessagesDeveloperMessage
+  | DeploymentCreateMetricMessagesSystemMessage
+  | DeploymentCreateMetricMessagesUserMessage
+  | DeploymentCreateMetricMessagesToolMessage
+  | DeploymentCreateMetricMessagesAssistantMessage;
 
 /**
  * The role of the prompt message
@@ -574,11 +574,11 @@ export type DeploymentCreateMetricRequestBody = {
    */
   messages?:
     | Array<
-      | DeploymentCreateMetricMessages1
-      | DeploymentCreateMetricMessages2
-      | DeploymentCreateMetricMessages3
-      | DeploymentCreateMetricMessages5
-      | DeploymentCreateMetricMessages4
+      | DeploymentCreateMetricMessagesDeveloperMessage
+      | DeploymentCreateMetricMessagesSystemMessage
+      | DeploymentCreateMetricMessagesUserMessage
+      | DeploymentCreateMetricMessagesToolMessage
+      | DeploymentCreateMetricMessagesAssistantMessage
     >
     | undefined;
   /**
@@ -829,8 +829,8 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsRequestContentFr
 }
 
 /** @internal */
-export const DeploymentCreateMetricMessages5$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages5,
+export const DeploymentCreateMetricMessagesToolMessage$inboundSchema: z.ZodType<
+  DeploymentCreateMetricMessagesToolMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -845,58 +845,68 @@ export const DeploymentCreateMetricMessages5$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentCreateMetricMessages5$Outbound = {
+export type DeploymentCreateMetricMessagesToolMessage$Outbound = {
   role: string;
   content: string | Array<string>;
   tool_call_id: string;
 };
 
 /** @internal */
-export const DeploymentCreateMetricMessages5$outboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages5$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricMessages5
-> = z.object({
-  role:
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema,
-  content: z.union([z.string(), z.array(z.string())]),
-  toolCallId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
+export const DeploymentCreateMetricMessagesToolMessage$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesToolMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricMessagesToolMessage
+  > = z.object({
+    role:
+      DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema,
+    content: z.union([z.string(), z.array(z.string())]),
+    toolCallId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+    });
   });
-});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetricMessages5$ {
-  /** @deprecated use `DeploymentCreateMetricMessages5$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessages5$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages5$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricMessages5$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages5$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessages5$Outbound;
+export namespace DeploymentCreateMetricMessagesToolMessage$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesToolMessage$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesToolMessage$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesToolMessage$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesToolMessage$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesToolMessage$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricMessagesToolMessage$Outbound;
 }
 
-export function deploymentCreateMetricMessages5ToJSON(
-  deploymentCreateMetricMessages5: DeploymentCreateMetricMessages5,
+export function deploymentCreateMetricMessagesToolMessageToJSON(
+  deploymentCreateMetricMessagesToolMessage:
+    DeploymentCreateMetricMessagesToolMessage,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetricMessages5$outboundSchema.parse(
-      deploymentCreateMetricMessages5,
+    DeploymentCreateMetricMessagesToolMessage$outboundSchema.parse(
+      deploymentCreateMetricMessagesToolMessage,
     ),
   );
 }
 
-export function deploymentCreateMetricMessages5FromJSON(
+export function deploymentCreateMetricMessagesToolMessageFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessages5, SDKValidationError> {
+): SafeParseResult<
+  DeploymentCreateMetricMessagesToolMessage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => DeploymentCreateMetricMessages5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessages5' from JSON`,
+    (x) =>
+      DeploymentCreateMetricMessagesToolMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricMessagesToolMessage' from JSON`,
   );
 }
 
@@ -929,26 +939,28 @@ export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMess
 }
 
 /** @internal */
-export const DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema:
-  z.ZodType<DeploymentCreateMetric2DeploymentsMetrics2, z.ZodTypeDef, unknown> =
-    z.object({
-      type:
-        DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema,
-      refusal: z.string(),
-    });
+export const DeploymentCreateMetric2RefusalContentPart$inboundSchema: z.ZodType<
+  DeploymentCreateMetric2RefusalContentPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema,
+  refusal: z.string(),
+});
 
 /** @internal */
-export type DeploymentCreateMetric2DeploymentsMetrics2$Outbound = {
+export type DeploymentCreateMetric2RefusalContentPart$Outbound = {
   type: string;
   refusal: string;
 };
 
 /** @internal */
-export const DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema:
+export const DeploymentCreateMetric2RefusalContentPart$outboundSchema:
   z.ZodType<
-    DeploymentCreateMetric2DeploymentsMetrics2$Outbound,
+    DeploymentCreateMetric2RefusalContentPart$Outbound,
     z.ZodTypeDef,
-    DeploymentCreateMetric2DeploymentsMetrics2
+    DeploymentCreateMetric2RefusalContentPart
   > = z.object({
     type:
       DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema,
@@ -959,41 +971,41 @@ export const DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema:
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetric2DeploymentsMetrics2$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema` instead. */
+export namespace DeploymentCreateMetric2RefusalContentPart$ {
+  /** @deprecated use `DeploymentCreateMetric2RefusalContentPart$inboundSchema` instead. */
   export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema` instead. */
+    DeploymentCreateMetric2RefusalContentPart$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2RefusalContentPart$outboundSchema` instead. */
   export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics2$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetrics2$Outbound;
+    DeploymentCreateMetric2RefusalContentPart$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2RefusalContentPart$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetric2RefusalContentPart$Outbound;
 }
 
-export function deploymentCreateMetric2DeploymentsMetrics2ToJSON(
-  deploymentCreateMetric2DeploymentsMetrics2:
-    DeploymentCreateMetric2DeploymentsMetrics2,
+export function deploymentCreateMetric2RefusalContentPartToJSON(
+  deploymentCreateMetric2RefusalContentPart:
+    DeploymentCreateMetric2RefusalContentPart,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema.parse(
-      deploymentCreateMetric2DeploymentsMetrics2,
+    DeploymentCreateMetric2RefusalContentPart$outboundSchema.parse(
+      deploymentCreateMetric2RefusalContentPart,
     ),
   );
 }
 
-export function deploymentCreateMetric2DeploymentsMetrics2FromJSON(
+export function deploymentCreateMetric2RefusalContentPartFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  DeploymentCreateMetric2DeploymentsMetrics2,
+  DeploymentCreateMetric2RefusalContentPart,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema.parse(
+      DeploymentCreateMetric2RefusalContentPart$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'DeploymentCreateMetric2DeploymentsMetrics2' from JSON`,
+    `Failed to parse 'DeploymentCreateMetric2RefusalContentPart' from JSON`,
   );
 }
 
@@ -1026,71 +1038,67 @@ export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
 }
 
 /** @internal */
-export const DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema:
-  z.ZodType<DeploymentCreateMetric2DeploymentsMetrics1, z.ZodTypeDef, unknown> =
-    z.object({
-      type:
-        DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema,
-      text: z.string(),
-    });
+export const DeploymentCreateMetric2TextContentPart$inboundSchema: z.ZodType<
+  DeploymentCreateMetric2TextContentPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema,
+  text: z.string(),
+});
 
 /** @internal */
-export type DeploymentCreateMetric2DeploymentsMetrics1$Outbound = {
+export type DeploymentCreateMetric2TextContentPart$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema:
-  z.ZodType<
-    DeploymentCreateMetric2DeploymentsMetrics1$Outbound,
-    z.ZodTypeDef,
-    DeploymentCreateMetric2DeploymentsMetrics1
-  > = z.object({
-    type:
-      DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema,
-    text: z.string(),
-  });
+export const DeploymentCreateMetric2TextContentPart$outboundSchema: z.ZodType<
+  DeploymentCreateMetric2TextContentPart$Outbound,
+  z.ZodTypeDef,
+  DeploymentCreateMetric2TextContentPart
+> = z.object({
+  type:
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema,
+  text: z.string(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetric2DeploymentsMetrics1$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema` instead. */
+export namespace DeploymentCreateMetric2TextContentPart$ {
+  /** @deprecated use `DeploymentCreateMetric2TextContentPart$inboundSchema` instead. */
   export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema` instead. */
+    DeploymentCreateMetric2TextContentPart$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2TextContentPart$outboundSchema` instead. */
   export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetrics1$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetric2DeploymentsMetrics1$Outbound;
+    DeploymentCreateMetric2TextContentPart$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2TextContentPart$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetric2TextContentPart$Outbound;
 }
 
-export function deploymentCreateMetric2DeploymentsMetrics1ToJSON(
-  deploymentCreateMetric2DeploymentsMetrics1:
-    DeploymentCreateMetric2DeploymentsMetrics1,
+export function deploymentCreateMetric2TextContentPartToJSON(
+  deploymentCreateMetric2TextContentPart:
+    DeploymentCreateMetric2TextContentPart,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema.parse(
-      deploymentCreateMetric2DeploymentsMetrics1,
+    DeploymentCreateMetric2TextContentPart$outboundSchema.parse(
+      deploymentCreateMetric2TextContentPart,
     ),
   );
 }
 
-export function deploymentCreateMetric2DeploymentsMetrics1FromJSON(
+export function deploymentCreateMetric2TextContentPartFromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentCreateMetric2DeploymentsMetrics1,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentCreateMetric2TextContentPart, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentCreateMetric2DeploymentsMetrics1' from JSON`,
+      DeploymentCreateMetric2TextContentPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentCreateMetric2TextContentPart' from JSON`,
   );
 }
 
@@ -1101,14 +1109,14 @@ export const DeploymentCreateMetricContentDeploymentsMetrics2$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema),
-    z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema),
+    z.lazy(() => DeploymentCreateMetric2TextContentPart$inboundSchema),
+    z.lazy(() => DeploymentCreateMetric2RefusalContentPart$inboundSchema),
   ]);
 
 /** @internal */
 export type DeploymentCreateMetricContentDeploymentsMetrics2$Outbound =
-  | DeploymentCreateMetric2DeploymentsMetrics1$Outbound
-  | DeploymentCreateMetric2DeploymentsMetrics2$Outbound;
+  | DeploymentCreateMetric2TextContentPart$Outbound
+  | DeploymentCreateMetric2RefusalContentPart$Outbound;
 
 /** @internal */
 export const DeploymentCreateMetricContentDeploymentsMetrics2$outboundSchema:
@@ -1117,8 +1125,8 @@ export const DeploymentCreateMetricContentDeploymentsMetrics2$outboundSchema:
     z.ZodTypeDef,
     DeploymentCreateMetricContentDeploymentsMetrics2
   > = z.union([
-    z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema),
-    z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema),
+    z.lazy(() => DeploymentCreateMetric2TextContentPart$outboundSchema),
+    z.lazy(() => DeploymentCreateMetric2RefusalContentPart$outboundSchema),
   ]);
 
 /**
@@ -1173,8 +1181,8 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSche
   > = z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema),
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema),
+      z.lazy(() => DeploymentCreateMetric2TextContentPart$inboundSchema),
+      z.lazy(() => DeploymentCreateMetric2RefusalContentPart$inboundSchema),
     ])),
   ]);
 
@@ -1182,8 +1190,8 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsContent$inboundSche
 export type DeploymentCreateMetricMessagesDeploymentsMetricsContent$Outbound =
   | string
   | Array<
-    | DeploymentCreateMetric2DeploymentsMetrics1$Outbound
-    | DeploymentCreateMetric2DeploymentsMetrics2$Outbound
+    | DeploymentCreateMetric2TextContentPart$Outbound
+    | DeploymentCreateMetric2RefusalContentPart$Outbound
   >;
 
 /** @internal */
@@ -1195,8 +1203,8 @@ export const DeploymentCreateMetricMessagesDeploymentsMetricsContent$outboundSch
   > = z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema),
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema),
+      z.lazy(() => DeploymentCreateMetric2TextContentPart$outboundSchema),
+      z.lazy(() => DeploymentCreateMetric2RefusalContentPart$outboundSchema),
     ])),
   ]);
 
@@ -1485,41 +1493,42 @@ export function deploymentCreateMetricMessagesToolCallsFromJSON(
 }
 
 /** @internal */
-export const DeploymentCreateMetricMessages4$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages4,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics1$inboundSchema),
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics2$inboundSchema),
-    ])),
-  ]).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role:
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema,
-  name: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => DeploymentCreateMetricMessagesAudio$inboundSchema),
-  ).optional(),
-  tool_calls: z.array(
-    z.lazy(() => DeploymentCreateMetricMessagesToolCalls$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
+export const DeploymentCreateMetricMessagesAssistantMessage$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesAssistantMessage,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    content: z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => DeploymentCreateMetric2TextContentPart$inboundSchema),
+        z.lazy(() => DeploymentCreateMetric2RefusalContentPart$inboundSchema),
+      ])),
+    ]).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role:
+      DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema,
+    name: z.string().optional(),
+    audio: z.nullable(
+      z.lazy(() => DeploymentCreateMetricMessagesAudio$inboundSchema),
+    ).optional(),
+    tool_calls: z.array(
+      z.lazy(() => DeploymentCreateMetricMessagesToolCalls$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+    });
   });
-});
 
 /** @internal */
-export type DeploymentCreateMetricMessages4$Outbound = {
+export type DeploymentCreateMetricMessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<
-      | DeploymentCreateMetric2DeploymentsMetrics1$Outbound
-      | DeploymentCreateMetric2DeploymentsMetrics2$Outbound
+      | DeploymentCreateMetric2TextContentPart$Outbound
+      | DeploymentCreateMetric2RefusalContentPart$Outbound
     >
     | undefined;
   refusal?: string | null | undefined;
@@ -1532,64 +1541,77 @@ export type DeploymentCreateMetricMessages4$Outbound = {
 };
 
 /** @internal */
-export const DeploymentCreateMetricMessages4$outboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages4$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricMessages4
-> = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics1$outboundSchema),
-      z.lazy(() => DeploymentCreateMetric2DeploymentsMetrics2$outboundSchema),
-    ])),
-  ]).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role:
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema,
-  name: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => DeploymentCreateMetricMessagesAudio$outboundSchema),
-  ).optional(),
-  toolCalls: z.array(
-    z.lazy(() => DeploymentCreateMetricMessagesToolCalls$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCalls: "tool_calls",
+export const DeploymentCreateMetricMessagesAssistantMessage$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesAssistantMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricMessagesAssistantMessage
+  > = z.object({
+    content: z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => DeploymentCreateMetric2TextContentPart$outboundSchema),
+        z.lazy(() =>
+          DeploymentCreateMetric2RefusalContentPart$outboundSchema
+        ),
+      ])),
+    ]).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role:
+      DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema,
+    name: z.string().optional(),
+    audio: z.nullable(
+      z.lazy(() => DeploymentCreateMetricMessagesAudio$outboundSchema),
+    ).optional(),
+    toolCalls: z.array(
+      z.lazy(() => DeploymentCreateMetricMessagesToolCalls$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCalls: "tool_calls",
+    });
   });
-});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetricMessages4$ {
-  /** @deprecated use `DeploymentCreateMetricMessages4$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessages4$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages4$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricMessages4$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages4$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessages4$Outbound;
+export namespace DeploymentCreateMetricMessagesAssistantMessage$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesAssistantMessage$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesAssistantMessage$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesAssistantMessage$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesAssistantMessage$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesAssistantMessage$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetricMessagesAssistantMessage$Outbound;
 }
 
-export function deploymentCreateMetricMessages4ToJSON(
-  deploymentCreateMetricMessages4: DeploymentCreateMetricMessages4,
+export function deploymentCreateMetricMessagesAssistantMessageToJSON(
+  deploymentCreateMetricMessagesAssistantMessage:
+    DeploymentCreateMetricMessagesAssistantMessage,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetricMessages4$outboundSchema.parse(
-      deploymentCreateMetricMessages4,
+    DeploymentCreateMetricMessagesAssistantMessage$outboundSchema.parse(
+      deploymentCreateMetricMessagesAssistantMessage,
     ),
   );
 }
 
-export function deploymentCreateMetricMessages4FromJSON(
+export function deploymentCreateMetricMessagesAssistantMessageFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessages4, SDKValidationError> {
+): SafeParseResult<
+  DeploymentCreateMetricMessagesAssistantMessage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => DeploymentCreateMetricMessages4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessages4' from JSON`,
+    (x) =>
+      DeploymentCreateMetricMessagesAssistantMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricMessagesAssistantMessage' from JSON`,
   );
 }
 
@@ -2168,8 +2190,8 @@ export function deploymentCreateMetricMessagesContentFromJSON(
 }
 
 /** @internal */
-export const DeploymentCreateMetricMessages3$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages3,
+export const DeploymentCreateMetricMessagesUserMessage$inboundSchema: z.ZodType<
+  DeploymentCreateMetricMessagesUserMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2187,7 +2209,7 @@ export const DeploymentCreateMetricMessages3$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentCreateMetricMessages3$Outbound = {
+export type DeploymentCreateMetricMessagesUserMessage$Outbound = {
   role: string;
   name?: string | undefined;
   content:
@@ -2200,54 +2222,64 @@ export type DeploymentCreateMetricMessages3$Outbound = {
 };
 
 /** @internal */
-export const DeploymentCreateMetricMessages3$outboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages3$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricMessages3
-> = z.object({
-  role:
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema,
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentCreateMetric21$outboundSchema),
-      z.lazy(() => DeploymentCreateMetric22$outboundSchema),
-      z.lazy(() => DeploymentCreateMetric23$outboundSchema),
-    ])),
-  ]),
-});
+export const DeploymentCreateMetricMessagesUserMessage$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesUserMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricMessagesUserMessage
+  > = z.object({
+    role:
+      DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema,
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => DeploymentCreateMetric21$outboundSchema),
+        z.lazy(() => DeploymentCreateMetric22$outboundSchema),
+        z.lazy(() => DeploymentCreateMetric23$outboundSchema),
+      ])),
+    ]),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetricMessages3$ {
-  /** @deprecated use `DeploymentCreateMetricMessages3$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessages3$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages3$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricMessages3$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages3$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessages3$Outbound;
+export namespace DeploymentCreateMetricMessagesUserMessage$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesUserMessage$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesUserMessage$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesUserMessage$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesUserMessage$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesUserMessage$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricMessagesUserMessage$Outbound;
 }
 
-export function deploymentCreateMetricMessages3ToJSON(
-  deploymentCreateMetricMessages3: DeploymentCreateMetricMessages3,
+export function deploymentCreateMetricMessagesUserMessageToJSON(
+  deploymentCreateMetricMessagesUserMessage:
+    DeploymentCreateMetricMessagesUserMessage,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetricMessages3$outboundSchema.parse(
-      deploymentCreateMetricMessages3,
+    DeploymentCreateMetricMessagesUserMessage$outboundSchema.parse(
+      deploymentCreateMetricMessagesUserMessage,
     ),
   );
 }
 
-export function deploymentCreateMetricMessages3FromJSON(
+export function deploymentCreateMetricMessagesUserMessageFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessages3, SDKValidationError> {
+): SafeParseResult<
+  DeploymentCreateMetricMessagesUserMessage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => DeploymentCreateMetricMessages3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessages3' from JSON`,
+    (x) =>
+      DeploymentCreateMetricMessagesUserMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricMessagesUserMessage' from JSON`,
   );
 }
 
@@ -2275,64 +2307,75 @@ export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRole$ {
 }
 
 /** @internal */
-export const DeploymentCreateMetricMessages2$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema,
-  content: z.string(),
-  name: z.string().optional(),
-});
+export const DeploymentCreateMetricMessagesSystemMessage$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesSystemMessage,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    role: DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema,
+    content: z.string(),
+    name: z.string().optional(),
+  });
 
 /** @internal */
-export type DeploymentCreateMetricMessages2$Outbound = {
+export type DeploymentCreateMetricMessagesSystemMessage$Outbound = {
   role: string;
   content: string;
   name?: string | undefined;
 };
 
 /** @internal */
-export const DeploymentCreateMetricMessages2$outboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages2$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricMessages2
-> = z.object({
-  role: DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema,
-  content: z.string(),
-  name: z.string().optional(),
-});
+export const DeploymentCreateMetricMessagesSystemMessage$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesSystemMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricMessagesSystemMessage
+  > = z.object({
+    role: DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema,
+    content: z.string(),
+    name: z.string().optional(),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetricMessages2$ {
-  /** @deprecated use `DeploymentCreateMetricMessages2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessages2$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricMessages2$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages2$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessages2$Outbound;
+export namespace DeploymentCreateMetricMessagesSystemMessage$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesSystemMessage$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesSystemMessage$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesSystemMessage$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesSystemMessage$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesSystemMessage$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricMessagesSystemMessage$Outbound;
 }
 
-export function deploymentCreateMetricMessages2ToJSON(
-  deploymentCreateMetricMessages2: DeploymentCreateMetricMessages2,
+export function deploymentCreateMetricMessagesSystemMessageToJSON(
+  deploymentCreateMetricMessagesSystemMessage:
+    DeploymentCreateMetricMessagesSystemMessage,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetricMessages2$outboundSchema.parse(
-      deploymentCreateMetricMessages2,
+    DeploymentCreateMetricMessagesSystemMessage$outboundSchema.parse(
+      deploymentCreateMetricMessagesSystemMessage,
     ),
   );
 }
 
-export function deploymentCreateMetricMessages2FromJSON(
+export function deploymentCreateMetricMessagesSystemMessageFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessages2, SDKValidationError> {
+): SafeParseResult<
+  DeploymentCreateMetricMessagesSystemMessage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => DeploymentCreateMetricMessages2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessages2' from JSON`,
+    (x) =>
+      DeploymentCreateMetricMessagesSystemMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricMessagesSystemMessage' from JSON`,
   );
 }
 
@@ -2359,64 +2402,76 @@ export namespace DeploymentCreateMetricMessagesRole$ {
 }
 
 /** @internal */
-export const DeploymentCreateMetricMessages1$inboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  role: DeploymentCreateMetricMessagesRole$inboundSchema,
-  content: z.string(),
-  name: z.string().optional(),
-});
+export const DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesDeveloperMessage,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    role: DeploymentCreateMetricMessagesRole$inboundSchema,
+    content: z.string(),
+    name: z.string().optional(),
+  });
 
 /** @internal */
-export type DeploymentCreateMetricMessages1$Outbound = {
+export type DeploymentCreateMetricMessagesDeveloperMessage$Outbound = {
   role: string;
   content: string;
   name?: string | undefined;
 };
 
 /** @internal */
-export const DeploymentCreateMetricMessages1$outboundSchema: z.ZodType<
-  DeploymentCreateMetricMessages1$Outbound,
-  z.ZodTypeDef,
-  DeploymentCreateMetricMessages1
-> = z.object({
-  role: DeploymentCreateMetricMessagesRole$outboundSchema,
-  content: z.string(),
-  name: z.string().optional(),
-});
+export const DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricMessagesDeveloperMessage$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricMessagesDeveloperMessage
+  > = z.object({
+    role: DeploymentCreateMetricMessagesRole$outboundSchema,
+    content: z.string(),
+    name: z.string().optional(),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentCreateMetricMessages1$ {
-  /** @deprecated use `DeploymentCreateMetricMessages1$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessages1$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages1$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetricMessages1$outboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessages1$Outbound` instead. */
-  export type Outbound = DeploymentCreateMetricMessages1$Outbound;
+export namespace DeploymentCreateMetricMessagesDeveloperMessage$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesDeveloperMessage$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetricMessagesDeveloperMessage$Outbound;
 }
 
-export function deploymentCreateMetricMessages1ToJSON(
-  deploymentCreateMetricMessages1: DeploymentCreateMetricMessages1,
+export function deploymentCreateMetricMessagesDeveloperMessageToJSON(
+  deploymentCreateMetricMessagesDeveloperMessage:
+    DeploymentCreateMetricMessagesDeveloperMessage,
 ): string {
   return JSON.stringify(
-    DeploymentCreateMetricMessages1$outboundSchema.parse(
-      deploymentCreateMetricMessages1,
+    DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema.parse(
+      deploymentCreateMetricMessagesDeveloperMessage,
     ),
   );
 }
 
-export function deploymentCreateMetricMessages1FromJSON(
+export function deploymentCreateMetricMessagesDeveloperMessageFromJSON(
   jsonString: string,
-): SafeParseResult<DeploymentCreateMetricMessages1, SDKValidationError> {
+): SafeParseResult<
+  DeploymentCreateMetricMessagesDeveloperMessage,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => DeploymentCreateMetricMessages1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentCreateMetricMessages1' from JSON`,
+    (x) =>
+      DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricMessagesDeveloperMessage' from JSON`,
   );
 }
 
@@ -2426,20 +2481,20 @@ export const DeploymentCreateMetricMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentCreateMetricMessages1$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages2$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages3$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages5$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages4$inboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$inboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentCreateMetricMessages$Outbound =
-  | DeploymentCreateMetricMessages1$Outbound
-  | DeploymentCreateMetricMessages2$Outbound
-  | DeploymentCreateMetricMessages3$Outbound
-  | DeploymentCreateMetricMessages5$Outbound
-  | DeploymentCreateMetricMessages4$Outbound;
+  | DeploymentCreateMetricMessagesDeveloperMessage$Outbound
+  | DeploymentCreateMetricMessagesSystemMessage$Outbound
+  | DeploymentCreateMetricMessagesUserMessage$Outbound
+  | DeploymentCreateMetricMessagesToolMessage$Outbound
+  | DeploymentCreateMetricMessagesAssistantMessage$Outbound;
 
 /** @internal */
 export const DeploymentCreateMetricMessages$outboundSchema: z.ZodType<
@@ -2447,11 +2502,11 @@ export const DeploymentCreateMetricMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentCreateMetricMessages
 > = z.union([
-  z.lazy(() => DeploymentCreateMetricMessages1$outboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages2$outboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages3$outboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages5$outboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessages4$outboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$outboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesUserMessage$outboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$outboundSchema),
+  z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$outboundSchema),
 ]);
 
 /**
@@ -3044,11 +3099,15 @@ export const DeploymentCreateMetricRequestBody$inboundSchema: z.ZodType<
   performance: z.lazy(() => Performance$inboundSchema).optional(),
   messages: z.array(
     z.union([
-      z.lazy(() => DeploymentCreateMetricMessages1$inboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages2$inboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages3$inboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages5$inboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages4$inboundSchema),
+      z.lazy(() =>
+        DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema
+      ),
+      z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$inboundSchema),
+      z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
+      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
+      z.lazy(() =>
+        DeploymentCreateMetricMessagesAssistantMessage$inboundSchema
+      ),
     ]),
   ).optional(),
   choices: z.array(z.lazy(() => Choices$inboundSchema)).optional(),
@@ -3062,11 +3121,11 @@ export type DeploymentCreateMetricRequestBody$Outbound = {
   performance?: Performance$Outbound | undefined;
   messages?:
     | Array<
-      | DeploymentCreateMetricMessages1$Outbound
-      | DeploymentCreateMetricMessages2$Outbound
-      | DeploymentCreateMetricMessages3$Outbound
-      | DeploymentCreateMetricMessages5$Outbound
-      | DeploymentCreateMetricMessages4$Outbound
+      | DeploymentCreateMetricMessagesDeveloperMessage$Outbound
+      | DeploymentCreateMetricMessagesSystemMessage$Outbound
+      | DeploymentCreateMetricMessagesUserMessage$Outbound
+      | DeploymentCreateMetricMessagesToolMessage$Outbound
+      | DeploymentCreateMetricMessagesAssistantMessage$Outbound
     >
     | undefined;
   choices?: Array<Choices$Outbound> | undefined;
@@ -3084,11 +3143,15 @@ export const DeploymentCreateMetricRequestBody$outboundSchema: z.ZodType<
   performance: z.lazy(() => Performance$outboundSchema).optional(),
   messages: z.array(
     z.union([
-      z.lazy(() => DeploymentCreateMetricMessages1$outboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages2$outboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages3$outboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages5$outboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessages4$outboundSchema),
+      z.lazy(() =>
+        DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema
+      ),
+      z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$outboundSchema),
+      z.lazy(() => DeploymentCreateMetricMessagesUserMessage$outboundSchema),
+      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$outboundSchema),
+      z.lazy(() =>
+        DeploymentCreateMetricMessagesAssistantMessage$outboundSchema
+      ),
     ]),
   ).optional(),
   choices: z.array(z.lazy(() => Choices$outboundSchema)).optional(),
