@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 9884f8667721b4b43275a8f10a72728a
+  docChecksum: 7219d9b70dd4cc0fbf17c37ac544f82f
   docVersion: "2.0"
-  speakeasyVersion: 1.510.0
-  generationVersion: 2.541.0
-  releaseVersion: 3.2.0-rc.29
-  configChecksum: 551ee92a0bbfb9df54eacf30da7ee6bc
+  speakeasyVersion: 1.512.0
+  generationVersion: 2.544.0
+  releaseVersion: 3.2.0-rc.30
+  configChecksum: 543dcb60baacb0a776ec6d2297aafe1d
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -28,7 +28,7 @@ features:
     hiddenGlobals: 0.1.0
     ignores: 2.81.1
     inputOutputModels: 2.82.0
-    mcpServer: 0.4.1
+    mcpServer: 0.6.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
@@ -811,6 +811,7 @@ generatedFiles:
   - src/mcp-server/cli/start/command.ts
   - src/mcp-server/cli/start/impl.ts
   - src/mcp-server/console-logger.ts
+  - src/mcp-server/extensions.ts
   - src/mcp-server/mcp-server.ts
   - src/mcp-server/resources.ts
   - src/mcp-server/scopes.ts
