@@ -435,6 +435,12 @@ export type DeploymentCreateMetricMessages =
   | DeploymentCreateMetricMessagesToolMessage
   | DeploymentCreateMetricMessagesAssistantMessage;
 
+export const DeploymentCreateMetricMessageDeploymentsMetricsRequestType = {
+  Image: "image",
+} as const;
+export type DeploymentCreateMetricMessageDeploymentsMetricsRequestType =
+  ClosedEnum<typeof DeploymentCreateMetricMessageDeploymentsMetricsRequestType>;
+
 /**
  * The role of the prompt message
  */
@@ -456,12 +462,20 @@ export type DeploymentCreateMetricMessageDeploymentsMetricsRole = ClosedEnum<
 >;
 
 export type Message3 = {
+  type: DeploymentCreateMetricMessageDeploymentsMetricsRequestType;
   /**
    * The role of the prompt message
    */
   role: DeploymentCreateMetricMessageDeploymentsMetricsRole;
   url: string;
 };
+
+export const DeploymentCreateMetricMessageDeploymentsMetricsType = {
+  Content: "content",
+} as const;
+export type DeploymentCreateMetricMessageDeploymentsMetricsType = ClosedEnum<
+  typeof DeploymentCreateMetricMessageDeploymentsMetricsType
+>;
 
 /**
  * The role of the prompt message
@@ -484,12 +498,18 @@ export type DeploymentCreateMetricMessageRole = ClosedEnum<
 >;
 
 export type Message2 = {
+  type: DeploymentCreateMetricMessageDeploymentsMetricsType;
   /**
    * The role of the prompt message
    */
   role: DeploymentCreateMetricMessageRole;
   content: string | null;
 };
+
+export const MessageType = {
+  ToolCalls: "tool_calls",
+} as const;
+export type MessageType = ClosedEnum<typeof MessageType>;
 
 /**
  * The role of the prompt message
@@ -509,10 +529,12 @@ export const MessageRole = {
  */
 export type MessageRole = ClosedEnum<typeof MessageRole>;
 
-export const MessageType = {
+export const DeploymentCreateMetricMessageType = {
   Function: "function",
 } as const;
-export type MessageType = ClosedEnum<typeof MessageType>;
+export type DeploymentCreateMetricMessageType = ClosedEnum<
+  typeof DeploymentCreateMetricMessageType
+>;
 
 export type MessageFunction = {
   name: string;
@@ -525,11 +547,12 @@ export type MessageFunction = {
 export type MessageToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: MessageType;
+  type: DeploymentCreateMetricMessageType;
   function: MessageFunction;
 };
 
 export type Message1 = {
+  type: MessageType;
   /**
    * The role of the prompt message
    */
@@ -542,7 +565,7 @@ export type Message = Message2 | Message3 | Message1;
 
 export type Choices = {
   index: number;
-  message?: Message2 | Message3 | Message1 | undefined;
+  message: Message2 | Message3 | Message1;
   finishReason?: string | null | undefined;
 };
 
@@ -2543,6 +2566,31 @@ export function deploymentCreateMetricMessagesFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricMessageDeploymentsMetricsRequestType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessageDeploymentsMetricsRequestType
+  > = z.nativeEnum(DeploymentCreateMetricMessageDeploymentsMetricsRequestType);
+
+/** @internal */
+export const DeploymentCreateMetricMessageDeploymentsMetricsRequestType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessageDeploymentsMetricsRequestType
+  > = DeploymentCreateMetricMessageDeploymentsMetricsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessageDeploymentsMetricsRequestType$ {
+  /** @deprecated use `DeploymentCreateMetricMessageDeploymentsMetricsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessageDeploymentsMetricsRequestType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessageDeploymentsMetricsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessageDeploymentsMetricsRequestType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetricMessageDeploymentsMetricsRole$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentCreateMetricMessageDeploymentsMetricsRole> =
     z.nativeEnum(DeploymentCreateMetricMessageDeploymentsMetricsRole);
@@ -2571,12 +2619,15 @@ export const Message3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  type:
+    DeploymentCreateMetricMessageDeploymentsMetricsRequestType$inboundSchema,
   role: DeploymentCreateMetricMessageDeploymentsMetricsRole$inboundSchema,
   url: z.string(),
 });
 
 /** @internal */
 export type Message3$Outbound = {
+  type: string;
   role: string;
   url: string;
 };
@@ -2587,6 +2638,8 @@ export const Message3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Message3
 > = z.object({
+  type:
+    DeploymentCreateMetricMessageDeploymentsMetricsRequestType$outboundSchema,
   role: DeploymentCreateMetricMessageDeploymentsMetricsRole$outboundSchema,
   url: z.string(),
 });
@@ -2619,6 +2672,29 @@ export function message3FromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricMessageDeploymentsMetricsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricMessageDeploymentsMetricsType> =
+    z.nativeEnum(DeploymentCreateMetricMessageDeploymentsMetricsType);
+
+/** @internal */
+export const DeploymentCreateMetricMessageDeploymentsMetricsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricMessageDeploymentsMetricsType> =
+    DeploymentCreateMetricMessageDeploymentsMetricsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessageDeploymentsMetricsType$ {
+  /** @deprecated use `DeploymentCreateMetricMessageDeploymentsMetricsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessageDeploymentsMetricsType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessageDeploymentsMetricsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessageDeploymentsMetricsType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetricMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentCreateMetricMessageRole
 > = z.nativeEnum(DeploymentCreateMetricMessageRole);
@@ -2646,12 +2722,14 @@ export const Message2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  type: DeploymentCreateMetricMessageDeploymentsMetricsType$inboundSchema,
   role: DeploymentCreateMetricMessageRole$inboundSchema,
   content: z.nullable(z.string()),
 });
 
 /** @internal */
 export type Message2$Outbound = {
+  type: string;
   role: string;
   content: string | null;
 };
@@ -2662,6 +2740,7 @@ export const Message2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Message2
 > = z.object({
+  type: DeploymentCreateMetricMessageDeploymentsMetricsType$outboundSchema,
   role: DeploymentCreateMetricMessageRole$outboundSchema,
   content: z.nullable(z.string()),
 });
@@ -2694,6 +2773,25 @@ export function message2FromJSON(
 }
 
 /** @internal */
+export const MessageType$inboundSchema: z.ZodNativeEnum<typeof MessageType> = z
+  .nativeEnum(MessageType);
+
+/** @internal */
+export const MessageType$outboundSchema: z.ZodNativeEnum<typeof MessageType> =
+  MessageType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MessageType$ {
+  /** @deprecated use `MessageType$inboundSchema` instead. */
+  export const inboundSchema = MessageType$inboundSchema;
+  /** @deprecated use `MessageType$outboundSchema` instead. */
+  export const outboundSchema = MessageType$outboundSchema;
+}
+
+/** @internal */
 export const MessageRole$inboundSchema: z.ZodNativeEnum<typeof MessageRole> = z
   .nativeEnum(MessageRole);
 
@@ -2713,22 +2811,25 @@ export namespace MessageRole$ {
 }
 
 /** @internal */
-export const MessageType$inboundSchema: z.ZodNativeEnum<typeof MessageType> = z
-  .nativeEnum(MessageType);
+export const DeploymentCreateMetricMessageType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricMessageType
+> = z.nativeEnum(DeploymentCreateMetricMessageType);
 
 /** @internal */
-export const MessageType$outboundSchema: z.ZodNativeEnum<typeof MessageType> =
-  MessageType$inboundSchema;
+export const DeploymentCreateMetricMessageType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricMessageType
+> = DeploymentCreateMetricMessageType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace MessageType$ {
-  /** @deprecated use `MessageType$inboundSchema` instead. */
-  export const inboundSchema = MessageType$inboundSchema;
-  /** @deprecated use `MessageType$outboundSchema` instead. */
-  export const outboundSchema = MessageType$outboundSchema;
+export namespace DeploymentCreateMetricMessageType$ {
+  /** @deprecated use `DeploymentCreateMetricMessageType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetricMessageType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessageType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessageType$outboundSchema;
 }
 
 /** @internal */
@@ -2794,7 +2895,7 @@ export const MessageToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: MessageType$inboundSchema,
+  type: DeploymentCreateMetricMessageType$inboundSchema,
   function: z.lazy(() => MessageFunction$inboundSchema),
 });
 
@@ -2814,7 +2915,7 @@ export const MessageToolCalls$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: MessageType$outboundSchema,
+  type: DeploymentCreateMetricMessageType$outboundSchema,
   function: z.lazy(() => MessageFunction$outboundSchema),
 });
 
@@ -2855,6 +2956,7 @@ export const Message1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  type: MessageType$inboundSchema,
   role: MessageRole$inboundSchema,
   content: z.nullable(z.string()).optional(),
   tool_calls: z.array(z.lazy(() => MessageToolCalls$inboundSchema)),
@@ -2866,6 +2968,7 @@ export const Message1$inboundSchema: z.ZodType<
 
 /** @internal */
 export type Message1$Outbound = {
+  type: string;
   role: string;
   content?: string | null | undefined;
   tool_calls: Array<MessageToolCalls$Outbound>;
@@ -2877,6 +2980,7 @@ export const Message1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Message1
 > = z.object({
+  type: MessageType$outboundSchema,
   role: MessageRole$outboundSchema,
   content: z.nullable(z.string()).optional(),
   toolCalls: z.array(z.lazy(() => MessageToolCalls$outboundSchema)),
@@ -2973,7 +3077,7 @@ export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
       z.lazy(() => Message2$inboundSchema),
       z.lazy(() => Message3$inboundSchema),
       z.lazy(() => Message1$inboundSchema),
-    ]).optional(),
+    ]),
     finish_reason: z.nullable(z.string()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -2984,11 +3088,7 @@ export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
 /** @internal */
 export type Choices$Outbound = {
   index: number;
-  message?:
-    | Message2$Outbound
-    | Message3$Outbound
-    | Message1$Outbound
-    | undefined;
+  message: Message2$Outbound | Message3$Outbound | Message1$Outbound;
   finish_reason?: string | null | undefined;
 };
 
@@ -3003,7 +3103,7 @@ export const Choices$outboundSchema: z.ZodType<
     z.lazy(() => Message2$outboundSchema),
     z.lazy(() => Message3$outboundSchema),
     z.lazy(() => Message1$outboundSchema),
-  ]).optional(),
+  ]),
   finishReason: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {

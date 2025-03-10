@@ -10,11 +10,13 @@ import { PromptConfig } from "@orq-ai/node/models/operations";
 let value: PromptConfig = {
   messages: [
     {
-      role: "exception",
+      role: "correction",
       content: [
         {
-          type: "text",
-          text: "<value>",
+          type: "image_url",
+          imageUrl: {
+            url: "https://unlined-grandson.org/",
+          },
         },
       ],
     },

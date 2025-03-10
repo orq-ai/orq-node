@@ -6,8 +6,15 @@
 import { GetAllPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsMessages = {
-  role: "prompt",
-  content: "<value>",
+  role: "user",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://impressive-airmail.info/",
+      },
+    },
+  ],
 };
 ```
 

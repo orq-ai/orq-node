@@ -11,20 +11,18 @@ let value: GetOnePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "17932d07-17f6-4d14-966a-5ba6691dab81",
+  domainId: "32d0717f-6d14-466a-85ba-6691dab81665",
   created: "<value>",
   updated: "<value>",
-  displayName: "Gussie_Bartell",
+  displayName: "Myriam63",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "system",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://trim-allegation.name/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

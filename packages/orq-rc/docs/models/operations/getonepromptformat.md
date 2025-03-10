@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { GetOnePromptFormat } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptFormat = "url";
+let value: GetOnePromptFormat = "text";
 ```
 
 ## Values

@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetOnePromptModelType } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptModelType = "moderations";
+let value: GetOnePromptModelType = "vision";
 ```
 
 ## Values

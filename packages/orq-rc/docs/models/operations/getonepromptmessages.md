@@ -6,12 +6,12 @@
 import { GetOnePromptMessages } from "@orq-ai/node/models/operations";
 
 let value: GetOnePromptMessages = {
-  role: "tool",
+  role: "correction",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://celebrated-mountain.net/",
+        url: "https://hurtful-chiffonier.net/",
       },
     },
   ],

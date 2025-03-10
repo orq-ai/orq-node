@@ -5,11 +5,11 @@
 ```typescript
 import { MessageType } from "@orq-ai/node/models/operations";
 
-let value: MessageType = "function";
+let value: MessageType = "tool_calls";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"tool_calls"
 ```
