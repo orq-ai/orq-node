@@ -18,7 +18,7 @@ const value: operations.UpdatePromptContentPrompts2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://wretched-ribbon.info",
+      url: "https://definitive-nun.com/",
     },
   },
 ];

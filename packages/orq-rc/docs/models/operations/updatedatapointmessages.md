@@ -6,13 +6,11 @@
 import { UpdateDatapointMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapointMessages = {
-  role: "prompt",
+  role: "expected_output",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://oval-amendment.org",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

@@ -18,7 +18,7 @@ const value: operations.UpdateDatapoint21 = {
 const value: operations.UpdateDatapoint22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://agreeable-anticodon.biz/",
+    url: "https://crafty-tooth.info",
   },
 };
 ```

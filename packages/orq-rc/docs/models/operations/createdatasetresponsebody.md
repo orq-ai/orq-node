@@ -8,13 +8,13 @@ Dataset created successfully. Returns the newly created dataset object.
 import { CreateDatasetResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetResponseBody = {
-  id: "ce4679fb-64f2-4bea-8635-baedde4568a4",
-  displayName: "Green_Weissnat",
-  projectId: "58d1c0dc-0a82-42c9-9fff-1f37c3921150",
-  workspaceId: "a61142f2-c998-4f5c-b86f-916cbe4c79ff",
+  id: "e4568a40-64fe-4da5-b8d1-c0dc0a822c9f",
+  displayName: "Zachery45",
+  projectId: "39211506-a611-442f-a2c9-98f5c86f916c",
+  workspaceId: "e4c79ffd-5ea6-40c8-9cbc-4c87a014f250",
   metadata: {
-    totalVersions: 3590.97,
-    datapointsCount: 8877.01,
+    totalVersions: 3203.26,
+    datapointsCount: 9468.08,
   },
 };
 ```

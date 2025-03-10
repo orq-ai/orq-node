@@ -16,8 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentCreateMetricContentDeploymentsMetrics2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "refusal",
+    refusal: "<value>",
   },
 ];
 ```

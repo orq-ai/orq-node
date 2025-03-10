@@ -6,7 +6,7 @@
 import { GetPromptVersion2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersion2ImageUrl = {
-  url: "https://edible-teriyaki.com",
+  url: "https://delectable-fog.info/",
 };
 ```
 

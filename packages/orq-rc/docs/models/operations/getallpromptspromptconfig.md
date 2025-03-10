@@ -15,7 +15,7 @@ let value: GetAllPromptsPromptConfig = {
         {
           type: "image_url",
           imageUrl: {
-            url: "https://scary-creature.info",
+            url: "https://impressive-airmail.info/",
           },
         },
       ],

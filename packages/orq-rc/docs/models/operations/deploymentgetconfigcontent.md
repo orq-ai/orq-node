@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentGetConfigContentDeploymentsResponse2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://courageous-juggernaut.info/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

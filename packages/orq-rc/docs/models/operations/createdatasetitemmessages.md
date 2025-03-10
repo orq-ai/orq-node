@@ -6,15 +6,8 @@
 import { CreateDatasetItemMessages } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItemMessages = {
-  role: "expected_output",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://shy-rust.org",
-      },
-    },
-  ],
+  role: "prompt",
+  content: "<value>",
 };
 ```
 

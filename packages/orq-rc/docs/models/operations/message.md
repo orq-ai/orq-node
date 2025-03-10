@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.Message1 = {
-  role: "correction",
+  role: "system",
   toolCalls: [
     {
       type: "function",
@@ -24,7 +24,7 @@ const value: operations.Message1 = {
 
 ```typescript
 const value: operations.Message2 = {
-  role: "correction",
+  role: "exception",
   content: "<value>",
 };
 ```
@@ -33,8 +33,8 @@ const value: operations.Message2 = {
 
 ```typescript
 const value: operations.Message3 = {
-  role: "user",
-  url: "https://outstanding-dress.info/",
+  role: "tool",
+  url: "https://responsible-dusk.com",
 };
 ```
 

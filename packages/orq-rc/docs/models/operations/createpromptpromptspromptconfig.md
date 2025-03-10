@@ -10,7 +10,7 @@ import { CreatePromptPromptsPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptPromptsPromptConfig = {
   messages: [
     {
-      role: "prompt",
+      role: "assistant",
       content: "<value>",
     },
   ],

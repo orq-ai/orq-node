@@ -18,7 +18,7 @@ const value: operations.ListDatasetDatapointsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://diligent-cantaloupe.com/",
+      url: "https://nimble-release.net",
     },
   },
 ];

@@ -10,7 +10,7 @@ import { BulkCreateDatapoints2Datasets2 } from "@orq-ai/node/models/operations";
 let value: BulkCreateDatapoints2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://terrible-sauerkraut.biz",
+    url: "https://steep-version.net/",
   },
 };
 ```

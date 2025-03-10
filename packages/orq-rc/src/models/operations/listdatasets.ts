@@ -9,7 +9,25 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * List sorting preference.
+ */
+export const ListDatasetsQueryParamSort = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * List sorting preference.
+ */
+export type ListDatasetsQueryParamSort = ClosedEnum<
+  typeof ListDatasetsQueryParamSort
+>;
+
 export type ListDatasetsRequest = {
+  /**
+   * List sorting preference.
+   */
+  sort?: ListDatasetsQueryParamSort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -80,11 +98,33 @@ export type ListDatasetsResponseBody = {
 };
 
 /** @internal */
+export const ListDatasetsQueryParamSort$inboundSchema: z.ZodNativeEnum<
+  typeof ListDatasetsQueryParamSort
+> = z.nativeEnum(ListDatasetsQueryParamSort);
+
+/** @internal */
+export const ListDatasetsQueryParamSort$outboundSchema: z.ZodNativeEnum<
+  typeof ListDatasetsQueryParamSort
+> = ListDatasetsQueryParamSort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetsQueryParamSort$ {
+  /** @deprecated use `ListDatasetsQueryParamSort$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetsQueryParamSort$inboundSchema;
+  /** @deprecated use `ListDatasetsQueryParamSort$outboundSchema` instead. */
+  export const outboundSchema = ListDatasetsQueryParamSort$outboundSchema;
+}
+
+/** @internal */
 export const ListDatasetsRequest$inboundSchema: z.ZodType<
   ListDatasetsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  sort: ListDatasetsQueryParamSort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -97,6 +137,7 @@ export const ListDatasetsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ListDatasetsRequest$Outbound = {
+  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -108,6 +149,7 @@ export const ListDatasetsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasetsRequest
 > = z.object({
+  sort: ListDatasetsQueryParamSort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
@@ -253,7 +295,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-03-10T09:56:37.933Z",
+    "2025-03-10T11:10:33.958Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -293,7 +335,7 @@ export const ListDatasetsData$outboundSchema: z.ZodType<
   updatedById: z.string().optional(),
   metadata: z.lazy(() => ListDatasetsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-03-10T09:56:37.933Z"))
+  updated: z.date().default(() => new Date("2025-03-10T11:10:33.958Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

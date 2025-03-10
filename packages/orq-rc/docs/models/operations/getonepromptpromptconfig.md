@@ -10,8 +10,15 @@ import { GetOnePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: GetOnePromptPromptConfig = {
   messages: [
     {
-      role: "assistant",
-      content: "<value>",
+      role: "correction",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://hurtful-chiffonier.net/",
+          },
+        },
+      ],
     },
   ],
 };

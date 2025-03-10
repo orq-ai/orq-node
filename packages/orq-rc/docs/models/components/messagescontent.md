@@ -16,10 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.DeploymentsContent2[] = [
   {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "wav",
+    type: "image_url",
+    imageUrl: {
+      url: "https://funny-underneath.biz/",
     },
   },
 ];

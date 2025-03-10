@@ -9,7 +9,23 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * List sorting preference.
+ */
+export const QueryParamSort = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * List sorting preference.
+ */
+export type QueryParamSort = ClosedEnum<typeof QueryParamSort>;
+
 export type FileListRequest = {
+  /**
+   * List sorting preference.
+   */
+  sort?: QueryParamSort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -74,11 +90,33 @@ export type FileListResponseBody = {
 };
 
 /** @internal */
+export const QueryParamSort$inboundSchema: z.ZodNativeEnum<
+  typeof QueryParamSort
+> = z.nativeEnum(QueryParamSort);
+
+/** @internal */
+export const QueryParamSort$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamSort
+> = QueryParamSort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace QueryParamSort$ {
+  /** @deprecated use `QueryParamSort$inboundSchema` instead. */
+  export const inboundSchema = QueryParamSort$inboundSchema;
+  /** @deprecated use `QueryParamSort$outboundSchema` instead. */
+  export const outboundSchema = QueryParamSort$outboundSchema;
+}
+
+/** @internal */
 export const FileListRequest$inboundSchema: z.ZodType<
   FileListRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  sort: QueryParamSort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -91,6 +129,7 @@ export const FileListRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type FileListRequest$Outbound = {
+  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -102,6 +141,7 @@ export const FileListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileListRequest
 > = z.object({
+  sort: QueryParamSort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
@@ -196,7 +236,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-03-10T09:56:39.106Z",
+    "2025-03-10T11:10:35.067Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -230,7 +270,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-03-10T09:56:39.106Z"))
+  created: z.date().default(() => new Date("2025-03-10T11:10:35.067Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

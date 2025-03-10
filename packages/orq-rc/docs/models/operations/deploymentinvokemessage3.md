@@ -6,8 +6,8 @@
 import { DeploymentInvokeMessage3 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeMessage3 = {
-  role: "expected_output",
-  url: "https://grimy-verve.biz",
+  role: "assistant",
+  url: "https://livid-king.name",
 };
 ```
 

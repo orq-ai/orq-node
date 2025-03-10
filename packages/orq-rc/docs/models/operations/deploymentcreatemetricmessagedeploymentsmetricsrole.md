@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { DeploymentCreateMetricMessageDeploymentsMetricsRole } from "@orq-ai/node/models/operations";
 
-let value: DeploymentCreateMetricMessageDeploymentsMetricsRole = "user";
+let value: DeploymentCreateMetricMessageDeploymentsMetricsRole = "assistant";
 ```
 
 ## Values

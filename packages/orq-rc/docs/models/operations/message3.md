@@ -7,7 +7,7 @@ import { Message3 } from "@orq-ai/node/models/operations";
 
 let value: Message3 = {
   role: "exception",
-  url: "https://royal-ectoderm.info",
+  url: "https://steep-best-seller.name/",
 };
 ```
 

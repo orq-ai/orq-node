@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetOnePromptContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://sneaky-precedent.info",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

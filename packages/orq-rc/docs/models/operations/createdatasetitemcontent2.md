@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItem21 = {
 const value: operations.CreateDatasetItem22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://discrete-habit.name/",
+    url: "https://untimely-sediment.biz",
   },
 };
 ```

@@ -16,10 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: components.Two[] = [
   {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "wav",
+    type: "image_url",
+    imageUrl: {
+      url: "https://surprised-sticker.com",
     },
   },
 ];

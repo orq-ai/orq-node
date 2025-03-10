@@ -6,12 +6,12 @@
 import { CreatePromptPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptPromptsMessages = {
-  role: "prompt",
+  role: "user",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://unwritten-asset.biz/",
+        url: "https://gripping-nerve.org/",
       },
     },
   ],

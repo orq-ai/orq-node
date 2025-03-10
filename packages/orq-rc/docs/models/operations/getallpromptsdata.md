@@ -9,22 +9,15 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "840b058e-1605-4943-b19b-af0a99f0bd85",
+  domainId: "319baf0a-99f0-4bd8-a5c1-78b1369e92fd",
   created: "<value>",
   updated: "<value>",
-  displayName: "Avis_Leannon9",
+  displayName: "Theodore96",
   promptConfig: {
     messages: [
       {
-        role: "exception",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://complicated-wear.org",
-            },
-          },
-        ],
+        role: "system",
+        content: "<value>",
       },
     ],
   },

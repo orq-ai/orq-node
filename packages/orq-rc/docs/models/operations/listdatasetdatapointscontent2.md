@@ -18,7 +18,7 @@ const value: operations.ListDatasetDatapoints21 = {
 const value: operations.ListDatasetDatapoints22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://questionable-fort.org/",
+    url: "https://square-farm.org",
   },
 };
 ```

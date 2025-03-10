@@ -6,15 +6,8 @@
 import { ListPromptVersionsMessages } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersionsMessages = {
-  role: "system",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://gray-complication.com/",
-      },
-    },
-  ],
+  role: "correction",
+  content: "<value>",
 };
 ```
 

@@ -18,7 +18,7 @@ const value: operations.GetPromptVersion21 = {
 const value: operations.GetPromptVersion22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://criminal-final.net/",
+    url: "https://chilly-impostor.biz",
   },
 };
 ```
