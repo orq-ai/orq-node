@@ -6,11 +6,11 @@
 import { CreatePromptRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptRequestBody = {
-  displayName: "Carmen63",
+  displayName: "Monroe.Schulist91",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "user",
         content: [
           {
             type: "text",

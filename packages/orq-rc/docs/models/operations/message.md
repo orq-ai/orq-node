@@ -8,7 +8,7 @@
 ```typescript
 const value: operations.Message1 = {
   type: "tool_calls",
-  role: "system",
+  role: "expected_output",
   toolCalls: [
     {
       type: "function",
@@ -26,7 +26,7 @@ const value: operations.Message1 = {
 ```typescript
 const value: operations.Message2 = {
   type: "content",
-  role: "exception",
+  role: "correction",
   content: "<value>",
 };
 ```
@@ -36,8 +36,8 @@ const value: operations.Message2 = {
 ```typescript
 const value: operations.Message3 = {
   type: "image",
-  role: "tool",
-  url: "https://responsible-dusk.com",
+  role: "user",
+  url: "https://impure-department.com/",
 };
 ```
 

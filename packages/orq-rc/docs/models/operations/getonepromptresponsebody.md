@@ -11,20 +11,15 @@ let value: GetOnePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "32d0717f-6d14-466a-85ba-6691dab81665",
+  domainId: "5ba6691d-ab81-4665-80b1-9baf1d086853",
   created: "<value>",
   updated: "<value>",
-  displayName: "Myriam63",
+  displayName: "Joshua.Hintz8",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "assistant",
+        content: "<value>",
       },
     ],
   },

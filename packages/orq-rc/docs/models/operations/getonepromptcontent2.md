@@ -18,7 +18,7 @@ const value: operations.GetOnePrompt21 = {
 const value: operations.GetOnePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ironclad-lender.net/",
+    url: "https://clean-importance.org/",
   },
 };
 ```

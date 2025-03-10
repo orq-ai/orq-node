@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 3d9350b0f0910908b08af6c8ec69ce97
+  docChecksum: e6f38a61e7132fa1917c2de32e4da075
   docVersion: "2.0"
-  speakeasyVersion: 1.513.5
-  generationVersion: 2.545.4
-  releaseVersion: 3.2.0-rc.35
-  configChecksum: bf8117f91053964e8335c40cb38e1651
+  speakeasyVersion: 1.513.6
+  generationVersion: 2.545.7
+  releaseVersion: 3.2.0-rc.36
+  configChecksum: 6dd0345cf62058119a87535a9d02ab66
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -151,6 +151,17 @@ generatedFiles:
   - docs/models/operations/bulkcreatedatapointstoolcalls.md
   - docs/models/operations/bulkcreatedatapointstype.md
   - docs/models/operations/choices.md
+  - docs/models/operations/choicesassistantmessage.md
+  - docs/models/operations/choicesaudio.md
+  - docs/models/operations/choicescontent.md
+  - docs/models/operations/choicesdevelopermessage.md
+  - docs/models/operations/choicesfunction.md
+  - docs/models/operations/choicesrole.md
+  - docs/models/operations/choicessystemmessage.md
+  - docs/models/operations/choicestoolcalls.md
+  - docs/models/operations/choicestoolmessage.md
+  - docs/models/operations/choicestype.md
+  - docs/models/operations/choicesusermessage.md
   - docs/models/operations/cleardatasetrequest.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
@@ -258,9 +269,23 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics1.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics2.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics3.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsdetail.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsformat.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsimageurl.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsinputaudio.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrefusalcontentpart.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3contenttype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3type.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4contenttype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4type.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoicestype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodymessagestype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodytype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequesttype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricstextcontentpart.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstype.md
   - docs/models/operations/deploymentcreatemetric2detail.md
   - docs/models/operations/deploymentcreatemetric2format.md
@@ -269,12 +294,16 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric2refusalcontentpart.md
   - docs/models/operations/deploymentcreatemetric2textcontentpart.md
   - docs/models/operations/deploymentcreatemetric2type.md
+  - docs/models/operations/deploymentcreatemetricchoicescontent.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricscontent.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrequestrequestbodyrole.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrequestrole.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrole.md
+  - docs/models/operations/deploymentcreatemetricchoicesrole.md
   - docs/models/operations/deploymentcreatemetriccontent2.md
   - docs/models/operations/deploymentcreatemetriccontentdeploymentsmetrics2.md
-  - docs/models/operations/deploymentcreatemetricmessagedeploymentsmetricsrequesttype.md
-  - docs/models/operations/deploymentcreatemetricmessagedeploymentsmetricsrole.md
-  - docs/models/operations/deploymentcreatemetricmessagedeploymentsmetricstype.md
-  - docs/models/operations/deploymentcreatemetricmessagerole.md
+  - docs/models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequest2.md
+  - docs/models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequestrequestbody2.md
   - docs/models/operations/deploymentcreatemetricmessages.md
   - docs/models/operations/deploymentcreatemetricmessagesassistantmessage.md
   - docs/models/operations/deploymentcreatemetricmessagesaudio.md
@@ -293,7 +322,6 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetricmessagestoolmessage.md
   - docs/models/operations/deploymentcreatemetricmessagestype.md
   - docs/models/operations/deploymentcreatemetricmessagesusermessage.md
-  - docs/models/operations/deploymentcreatemetricmessagetype.md
   - docs/models/operations/deploymentcreatemetricrequest.md
   - docs/models/operations/deploymentcreatemetricrequestbody.md
   - docs/models/operations/deploymentcreatemetricresponsebody.md
@@ -348,15 +376,10 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigtype.md
   - docs/models/operations/deploymentinvokechoices.md
   - docs/models/operations/deploymentinvokeglobals.md
-  - docs/models/operations/deploymentinvokemessage.md
-  - docs/models/operations/deploymentinvokemessage1.md
-  - docs/models/operations/deploymentinvokemessage2.md
-  - docs/models/operations/deploymentinvokemessage3.md
-  - docs/models/operations/deploymentinvokemessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsresponsetype.md
   - docs/models/operations/deploymentinvokemessagedeploymentsrole.md
-  - docs/models/operations/deploymentinvokemessagefunction.md
+  - docs/models/operations/deploymentinvokemessagedeploymentstype.md
   - docs/models/operations/deploymentinvokemessagerole.md
-  - docs/models/operations/deploymentinvokemessagetoolcalls.md
   - docs/models/operations/deploymentinvokemessagetype.md
   - docs/models/operations/deploymentinvokemetadata.md
   - docs/models/operations/deploymentinvokeobject.md
@@ -958,7 +981,7 @@ examples:
         application/json: {"key": "<key>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12}, {"index": 3047.15}]}
+          application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12, "message": {"type": "content", "role": "exception", "content": "<value>"}}, {"index": 3047.15, "message": {"type": "content", "role": "system", "content": "<value>"}}]}
   DeploymentStream:
     speakeasy-default-deployment-stream:
       requestBody:

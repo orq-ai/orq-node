@@ -9,18 +9,20 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "9baf0a99-f0bd-485c-a178-b1369e92fd8e",
+  domainId: "78b1369e-92fd-48e8-9edf-e026f42e7e2a",
   created: "<value>",
   updated: "<value>",
-  displayName: "Theresia_Wisoky3",
+  displayName: "Arden.Franey5",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "expected_output",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://motionless-exasperation.org",
+            },
           },
         ],
       },

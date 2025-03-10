@@ -5,7 +5,7 @@
 ```typescript
 import { UseCases } from "@orq-ai/node/models/operations";
 
-let value: UseCases = "Multi-modal";
+let value: UseCases = "Extraction";
 ```
 
 ## Values

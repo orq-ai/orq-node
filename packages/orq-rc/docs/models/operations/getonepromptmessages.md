@@ -7,14 +7,7 @@ import { GetOnePromptMessages } from "@orq-ai/node/models/operations";
 
 let value: GetOnePromptMessages = {
   role: "correction",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://hurtful-chiffonier.net/",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

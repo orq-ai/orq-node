@@ -6,7 +6,7 @@
 import { Performance } from "@orq-ai/node/models/operations";
 
 let value: Performance = {
-  latency: 2453.67,
+  latency: 6956.26,
 };
 ```
 

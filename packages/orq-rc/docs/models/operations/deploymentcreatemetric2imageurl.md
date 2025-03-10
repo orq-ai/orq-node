@@ -6,7 +6,7 @@
 import { DeploymentCreateMetric2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetric2ImageUrl = {
-  url: "https://frizzy-diversity.info/",
+  url: "https://sour-disposer.info",
 };
 ```
 

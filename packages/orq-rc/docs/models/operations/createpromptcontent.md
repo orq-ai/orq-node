@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CreatePromptContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://lucky-cd.info",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```
