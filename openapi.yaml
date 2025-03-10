@@ -1181,122 +1181,238 @@ components:
         "choices":
           type: "array"
           items:
-            type: "object"
-            properties:
-              "index":
-                type: "number"
-              "message":
-                oneOf:
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "tool_calls"
-                      "role":
-                        type: "string"
-                        enum:
-                          - "system"
-                          - "assistant"
-                          - "user"
-                          - "exception"
-                          - "tool"
-                          - "prompt"
-                          - "correction"
-                          - "expected_output"
-                        description: "The role of the prompt message"
-                      "content":
-                        type:
-                          - "string"
-                          - "null"
-                      "tool_calls":
-                        type: "array"
+            oneOf:
+              - type: "object"
+                properties:
+                  "role":
+                    type: "string"
+                    enum:
+                      - "developer"
+                    description: "The role of the messages author, in this case  `developer`."
+                  "content":
+                    type: "string"
+                    description: "The contents of the developer message."
+                  "name":
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                required:
+                  - "role"
+                  - "content"
+                title: "Developer message"
+              - type: "object"
+                properties:
+                  "role":
+                    type: "string"
+                    enum:
+                      - "system"
+                    description: "The role of the messages author, in this case `system`."
+                  "content":
+                    type: "string"
+                    description: "The contents of the system message."
+                  "name":
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                required:
+                  - "role"
+                  - "content"
+                title: "System message"
+              - type: "object"
+                properties:
+                  "role":
+                    type: "string"
+                    enum:
+                      - "user"
+                    description: "The role of the messages author, in this case `user`."
+                  "name":
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                  "content":
+                    anyOf:
+                      - type: "string"
+                        description: "The text contents of the message."
+                      - type: "array"
                         items:
+                          oneOf:
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "text"
+                                "text":
+                                  type: "string"
+                              required:
+                                - "type"
+                                - "text"
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "image_url"
+                                "image_url":
+                                  type: "object"
+                                  properties:
+                                    "url":
+                                      type: "string"
+                                      description: "Either a URL of the image or the base64 encoded image data."
+                                    "detail":
+                                      type: "string"
+                                      enum:
+                                        - "low"
+                                        - "high"
+                                        - "auto"
+                                      description: "Specifies the detail level of the image."
+                                  required:
+                                    - "url"
+                              required:
+                                - "type"
+                                - "image_url"
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "input_audio"
+                                "input_audio":
+                                  type: "object"
+                                  properties:
+                                    "data":
+                                      type: "string"
+                                      description: "Base64 encoded audio data."
+                                    "format":
+                                      type: "string"
+                                      enum:
+                                        - "mp3"
+                                        - "wav"
+                                      description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                  required:
+                                    - "data"
+                                    - "format"
+                              required:
+                                - "type"
+                                - "input_audio"
+                        description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                    description: "The contents of the user message."
+                required:
+                  - "role"
+                  - "content"
+                title: "User message"
+              - type: "object"
+                properties:
+                  "content":
+                    anyOf:
+                      - type: "string"
+                        description: "The contents of the assistant message."
+                      - type: "array"
+                        items:
+                          oneOf:
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "text"
+                                  description: "The type of the content part."
+                                "text":
+                                  type: "string"
+                                  description: "The text content."
+                              required:
+                                - "type"
+                                - "text"
+                              title: "Text content part"
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "refusal"
+                                  description: "The type of the content part."
+                                "refusal":
+                                  type: "string"
+                                  description: "The refusal message generated by the model."
+                              required:
+                                - "type"
+                                - "refusal"
+                              title: "Refusal content part"
+                        description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                    description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                  "refusal":
+                    type:
+                      - "string"
+                      - "null"
+                    description: "The refusal message by the assistant."
+                  "role":
+                    type: "string"
+                    enum:
+                      - "assistant"
+                    description: "The role of the messages author, in this case `assistant`."
+                  "name":
+                    type: "string"
+                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                  "audio":
+                    type:
+                      - "object"
+                      - "null"
+                    properties:
+                      "id":
+                        type: "string"
+                        description: "Unique identifier for a previous audio response from the model."
+                    required:
+                      - "id"
+                    description: "Data about a previous audio response from the model. "
+                  "tool_calls":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "id":
+                          type: "string"
+                          description: "The ID of the tool call."
+                        "type":
+                          type: "string"
+                          enum:
+                            - "function"
+                          description: "The type of the tool. Currently, only `function` is supported."
+                        "function":
                           type: "object"
                           properties:
-                            "id":
+                            "name":
                               type: "string"
-                            "index":
-                              type: "number"
-                            "type":
+                              description: "The name of the function to call."
+                            "arguments":
                               type: "string"
-                              enum:
-                                - "function"
-                            "function":
-                              type: "object"
-                              properties:
-                                "name":
-                                  type: "string"
-                                "arguments":
-                                  type: "string"
-                                  description: "JSON string arguments for the functions"
-                              required:
-                                - "name"
-                                - "arguments"
-                          required:
-                            - "type"
-                            - "function"
-                    required:
-                      - "type"
-                      - "role"
-                      - "tool_calls"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "content"
-                      "role":
-                        type: "string"
-                        enum:
-                          - "system"
-                          - "assistant"
-                          - "user"
-                          - "exception"
-                          - "tool"
-                          - "prompt"
-                          - "correction"
-                          - "expected_output"
-                        description: "The role of the prompt message"
-                      "content":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "type"
-                      - "role"
-                      - "content"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "image"
-                      "role":
-                        type: "string"
-                        enum:
-                          - "system"
-                          - "assistant"
-                          - "user"
-                          - "exception"
-                          - "tool"
-                          - "prompt"
-                          - "correction"
-                          - "expected_output"
-                        description: "The role of the prompt message"
-                      "url":
-                        type: "string"
-                    required:
-                      - "type"
-                      - "role"
-                      - "url"
-              "finish_reason":
-                type:
-                  - "string"
-                  - "null"
-            required:
-              - "index"
-              - "message"
+                              description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                      required:
+                        - "id"
+                        - "type"
+                        - "function"
+                    description: "The tool calls generated by the model, such as function calls."
+                required:
+                  - "role"
+                title: "Assistant message"
+              - type: "object"
+                properties:
+                  "role":
+                    type: "string"
+                    enum:
+                      - "tool"
+                    description: "The role of the messages author, in this case tool."
+                  "content":
+                    anyOf:
+                      - type: "string"
+                      - type: "array"
+                        items:
+                          type: "string"
+                    description: "The contents of the tool message."
+                  "tool_call_id":
+                    type: "string"
+                    description: "Tool call that this message is responding to."
+                required:
+                  - "role"
+                  - "content"
+                  - "tool_call_id"
+                title: "Tool message"
           description: "A list of completion choices. If you are using a `completion` model then you must provide the `completion content` with the chat completion format"
         "feedback":
           type: "object"
@@ -3655,7 +3771,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-03-10T14:17:46.578Z"
+          default: "2025-03-10T14:37:51.333Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3716,7 +3832,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-03-10T14:17:46.578Z"
+            default: "2025-03-10T14:37:51.333Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3796,7 +3912,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-03-10T14:17:46.578Z"
+          default: "2025-03-10T14:37:51.333Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3842,7 +3958,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-03-10T14:17:46.578Z"
+                default: "2025-03-10T14:37:51.333Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -3885,7 +4001,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-03-10T14:17:46.578Z"
+          default: "2025-03-10T14:37:51.333Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6171,7 +6287,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-03-10T14:17:45.434Z"
+          default: "2025-03-10T14:37:50.229Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6179,7 +6295,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-03-10T14:17:45.434Z"
+              default: "2025-03-10T14:37:50.230Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6289,7 +6405,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-03-10T14:17:45.434Z"
+                default: "2025-03-10T14:37:50.229Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6297,7 +6413,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.230Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6404,7 +6520,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-03-10T14:17:45.434Z"
+          default: "2025-03-10T14:37:50.229Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6412,7 +6528,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-03-10T14:17:45.434Z"
+              default: "2025-03-10T14:37:50.230Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6513,7 +6629,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-03-10T14:17:45.434Z"
+          default: "2025-03-10T14:37:50.229Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6521,7 +6637,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-03-10T14:17:45.434Z"
+              default: "2025-03-10T14:37:50.230Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7180,7 +7296,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -7188,7 +7304,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -8575,6 +8691,46 @@ paths:
                       - "string"
                       - "null"
                     description: "Provider backed system fingerprint."
+                  "retrievals":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "document":
+                          type: "string"
+                          description: "Content of the retrieved chunk from the knowledge base"
+                        "metadata":
+                          type: "object"
+                          properties:
+                            "file_name":
+                              type: "string"
+                              description: "Name of the file"
+                            "page_number":
+                              type:
+                                - "number"
+                                - "null"
+                              description: "Page number of the chunk"
+                            "file_type":
+                              type: "string"
+                              description: "Type of the file"
+                            "rerank_score":
+                              type: "number"
+                              description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
+                            "search_score":
+                              type: "number"
+                              description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
+                          required:
+                            - "file_name"
+                            - "page_number"
+                            - "file_type"
+                            - "search_score"
+                          description: "Metadata of the retrieved chunk from the knowledge base"
+                      required:
+                        - "document"
+                        - "metadata"
+                    description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
+                  "provider_response":
+                    description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
                   "choices":
                     type: "array"
                     items:
@@ -8583,9 +8739,13 @@ paths:
                         "index":
                           type: "number"
                         "message":
-                          anyOf:
+                          oneOf:
                             - type: "object"
                               properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "tool_calls"
                                 "role":
                                   type: "string"
                                   enum:
@@ -8630,10 +8790,15 @@ paths:
                                       - "type"
                                       - "function"
                               required:
+                                - "type"
                                 - "role"
                                 - "tool_calls"
                             - type: "object"
                               properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "content"
                                 "role":
                                   type: "string"
                                   enum:
@@ -8651,10 +8816,15 @@ paths:
                                     - "string"
                                     - "null"
                               required:
+                                - "type"
                                 - "role"
                                 - "content"
                             - type: "object"
                               properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "image"
                                 "role":
                                   type: "string"
                                   enum:
@@ -8670,6 +8840,7 @@ paths:
                                 "url":
                                   type: "string"
                               required:
+                                - "type"
                                 - "role"
                                 - "url"
                         "finish_reason":
@@ -8678,47 +8849,8 @@ paths:
                             - "null"
                       required:
                         - "index"
+                        - "message"
                     description: "A list of choices generated by the model"
-                  "retrievals":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "document":
-                          type: "string"
-                          description: "Content of the retrieved chunk from the knowledge base"
-                        "metadata":
-                          type: "object"
-                          properties:
-                            "file_name":
-                              type: "string"
-                              description: "Name of the file"
-                            "page_number":
-                              type:
-                                - "number"
-                                - "null"
-                              description: "Page number of the chunk"
-                            "file_type":
-                              type: "string"
-                              description: "Type of the file"
-                            "rerank_score":
-                              type: "number"
-                              description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
-                            "search_score":
-                              type: "number"
-                              description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
-                          required:
-                            - "file_name"
-                            - "page_number"
-                            - "file_type"
-                            - "search_score"
-                          description: "Metadata of the retrieved chunk from the knowledge base"
-                      required:
-                        - "document"
-                        - "metadata"
-                    description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
-                  "provider_response":
-                    description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
                 required:
                   - "id"
                   - "created"
@@ -8727,7 +8859,6 @@ paths:
                   - "provider"
                   - "is_final"
                   - "choices"
-                description: "Response from the gateway"
         "204":
           description: "No content - successful operation"
       security:
@@ -9036,122 +9167,238 @@ paths:
                 "choices":
                   type: "array"
                   items:
-                    type: "object"
-                    properties:
-                      "index":
-                        type: "number"
-                      "message":
-                        oneOf:
-                          - type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "tool_calls"
-                              "role":
-                                type: "string"
-                                enum:
-                                  - "system"
-                                  - "assistant"
-                                  - "user"
-                                  - "exception"
-                                  - "tool"
-                                  - "prompt"
-                                  - "correction"
-                                  - "expected_output"
-                                description: "The role of the prompt message"
-                              "content":
-                                type:
-                                  - "string"
-                                  - "null"
-                              "tool_calls":
-                                type: "array"
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "developer"
+                            description: "The role of the messages author, in this case  `developer`."
+                          "content":
+                            type: "string"
+                            description: "The contents of the developer message."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "Developer message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "system"
+                            description: "The role of the messages author, in this case `system`."
+                          "content":
+                            type: "string"
+                            description: "The contents of the system message."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "System message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "user"
+                            description: "The role of the messages author, in this case `user`."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          "content":
+                            anyOf:
+                              - type: "string"
+                                description: "The text contents of the message."
+                              - type: "array"
                                 items:
+                                  oneOf:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
+                                        "text":
+                                          type: "string"
+                                      required:
+                                        - "type"
+                                        - "text"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "image_url"
+                                        "image_url":
+                                          type: "object"
+                                          properties:
+                                            "url":
+                                              type: "string"
+                                              description: "Either a URL of the image or the base64 encoded image data."
+                                            "detail":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "high"
+                                                - "auto"
+                                              description: "Specifies the detail level of the image."
+                                          required:
+                                            - "url"
+                                      required:
+                                        - "type"
+                                        - "image_url"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "input_audio"
+                                        "input_audio":
+                                          type: "object"
+                                          properties:
+                                            "data":
+                                              type: "string"
+                                              description: "Base64 encoded audio data."
+                                            "format":
+                                              type: "string"
+                                              enum:
+                                                - "mp3"
+                                                - "wav"
+                                              description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                          required:
+                                            - "data"
+                                            - "format"
+                                      required:
+                                        - "type"
+                                        - "input_audio"
+                                description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                            description: "The contents of the user message."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "User message"
+                      - type: "object"
+                        properties:
+                          "content":
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the assistant message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
+                                          description: "The type of the content part."
+                                        "text":
+                                          type: "string"
+                                          description: "The text content."
+                                      required:
+                                        - "type"
+                                        - "text"
+                                      title: "Text content part"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "refusal"
+                                          description: "The type of the content part."
+                                        "refusal":
+                                          type: "string"
+                                          description: "The refusal message generated by the model."
+                                      required:
+                                        - "type"
+                                        - "refusal"
+                                      title: "Refusal content part"
+                                description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                            description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                          "refusal":
+                            type:
+                              - "string"
+                              - "null"
+                            description: "The refusal message by the assistant."
+                          "role":
+                            type: "string"
+                            enum:
+                              - "assistant"
+                            description: "The role of the messages author, in this case `assistant`."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          "audio":
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              "id":
+                                type: "string"
+                                description: "Unique identifier for a previous audio response from the model."
+                            required:
+                              - "id"
+                            description: "Data about a previous audio response from the model. "
+                          "tool_calls":
+                            type: "array"
+                            items:
+                              type: "object"
+                              properties:
+                                "id":
+                                  type: "string"
+                                  description: "The ID of the tool call."
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "function"
+                                  description: "The type of the tool. Currently, only `function` is supported."
+                                "function":
                                   type: "object"
                                   properties:
-                                    "id":
+                                    "name":
                                       type: "string"
-                                    "index":
-                                      type: "number"
-                                    "type":
+                                      description: "The name of the function to call."
+                                    "arguments":
                                       type: "string"
-                                      enum:
-                                        - "function"
-                                    "function":
-                                      type: "object"
-                                      properties:
-                                        "name":
-                                          type: "string"
-                                        "arguments":
-                                          type: "string"
-                                          description: "JSON string arguments for the functions"
-                                      required:
-                                        - "name"
-                                        - "arguments"
-                                  required:
-                                    - "type"
-                                    - "function"
-                            required:
-                              - "type"
-                              - "role"
-                              - "tool_calls"
-                          - type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "content"
-                              "role":
-                                type: "string"
-                                enum:
-                                  - "system"
-                                  - "assistant"
-                                  - "user"
-                                  - "exception"
-                                  - "tool"
-                                  - "prompt"
-                                  - "correction"
-                                  - "expected_output"
-                                description: "The role of the prompt message"
-                              "content":
-                                type:
-                                  - "string"
-                                  - "null"
-                            required:
-                              - "type"
-                              - "role"
-                              - "content"
-                          - type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "image"
-                              "role":
-                                type: "string"
-                                enum:
-                                  - "system"
-                                  - "assistant"
-                                  - "user"
-                                  - "exception"
-                                  - "tool"
-                                  - "prompt"
-                                  - "correction"
-                                  - "expected_output"
-                                description: "The role of the prompt message"
-                              "url":
-                                type: "string"
-                            required:
-                              - "type"
-                              - "role"
-                              - "url"
-                      "finish_reason":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "index"
-                      - "message"
+                                      description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                              required:
+                                - "id"
+                                - "type"
+                                - "function"
+                            description: "The tool calls generated by the model, such as function calls."
+                        required:
+                          - "role"
+                        title: "Assistant message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "tool"
+                            description: "The role of the messages author, in this case tool."
+                          "content":
+                            anyOf:
+                              - type: "string"
+                              - type: "array"
+                                items:
+                                  type: "string"
+                            description: "The contents of the tool message."
+                          "tool_call_id":
+                            type: "string"
+                            description: "Tool call that this message is responding to."
+                        required:
+                          - "role"
+                          - "content"
+                          - "tool_call_id"
+                        title: "Tool message"
                   description: "A list of completion choices. If you are using a `completion` model then you must provide the `completion content` with the chat completion format"
                 "feedback":
                   type: "object"
@@ -9243,7 +9490,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-03-10T14:17:46.578Z"
+                    default: "2025-03-10T14:37:51.333Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -9342,7 +9589,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-03-10T14:17:46.578Z"
+                          default: "2025-03-10T14:37:51.333Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -9409,7 +9656,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-03-10T14:17:46.578Z"
+                    default: "2025-03-10T14:37:51.333Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -12596,7 +12843,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-03-10T14:17:45.434Z"
+                          default: "2025-03-10T14:37:50.229Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -12604,7 +12851,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-03-10T14:17:45.434Z"
+                              default: "2025-03-10T14:37:50.230Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -12728,7 +12975,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -12736,7 +12983,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12846,7 +13093,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -12854,7 +13101,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12992,7 +13239,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13000,7 +13247,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13233,7 +13480,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-03-10T14:17:45.434Z"
+                          default: "2025-03-10T14:37:50.229Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -13241,7 +13488,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-03-10T14:17:45.434Z"
+                              default: "2025-03-10T14:37:50.230Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -13517,7 +13764,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13525,7 +13772,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13691,7 +13938,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13699,7 +13946,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13979,7 +14226,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-10T14:17:45.434Z"
+                    default: "2025-03-10T14:37:50.229Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13987,7 +14234,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-10T14:17:45.434Z"
+                        default: "2025-03-10T14:37:50.230Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14303,7 +14550,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-03-10T14:17:45.434Z"
+                      default: "2025-03-10T14:37:50.229Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -14311,7 +14558,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-03-10T14:17:45.434Z"
+                          default: "2025-03-10T14:37:50.230Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
