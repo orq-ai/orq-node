@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsRetrieve: ToolDefinition<typeof args> = {
-  name: "datasets_retrieve",
+  name: "datasets-retrieve",
   description: `Retrieve a dataset
 
 Retrieves a specific dataset by its unique identifier`,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsUpdate: ToolDefinition<typeof args> = {
-  name: "datasets_update",
+  name: "datasets-update",
   description: `Update a dataset
 
 Update a dataset`,

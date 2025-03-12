@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$deploymentsGetConfig: ToolDefinition<typeof args> = {
-  name: "deployments_get-config",
+  name: "deployments-get-config",
   description: `Get config
 
 Retrieve the deployment configuration`,

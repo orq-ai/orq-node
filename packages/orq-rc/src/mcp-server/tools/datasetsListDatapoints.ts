@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsListDatapoints: ToolDefinition<typeof args> = {
-  name: "datasets_list-datapoints",
+  name: "datasets-list-datapoints",
   description: `List datapoints
 
 Retrieves a paginated list of datapoints from a specific dataset.`,

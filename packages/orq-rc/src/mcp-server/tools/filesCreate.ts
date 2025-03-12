@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$filesCreate: ToolDefinition<typeof args> = {
-  name: "files_create",
+  name: "files-create",
   description: `Create file
 
 Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/post_v2-deployments-get-config).`,

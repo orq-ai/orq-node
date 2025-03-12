@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsCreateDatapoints: ToolDefinition<typeof args> = {
-  name: "datasets_create-datapoints",
+  name: "datasets-create-datapoints",
   description: `Create multiple datapoints
 
 Create multiple datapoints at once.`,

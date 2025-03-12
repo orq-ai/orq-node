@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$deploymentsMetricsCreate: ToolDefinition<typeof args> = {
-  name: "deployments-metrics_create",
+  name: "deployments-metrics-create",
   description: `Add metrics
 
 Add metrics to a deployment`,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsList: ToolDefinition<typeof args> = {
-  name: "datasets_list",
+  name: "datasets-list",
   description: `List datasets
 
 Retrieves a paginated list of datasets for the current workspace. Results can be paginated using cursor-based pagination.`,

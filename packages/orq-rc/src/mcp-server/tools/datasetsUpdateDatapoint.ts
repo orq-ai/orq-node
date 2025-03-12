@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsUpdateDatapoint: ToolDefinition<typeof args> = {
-  name: "datasets_update-datapoint",
+  name: "datasets-update-datapoint",
   description: `Update a datapoint`,
   args,
   tool: async (client, args, ctx) => {

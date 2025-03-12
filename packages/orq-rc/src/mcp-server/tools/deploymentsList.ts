@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$deploymentsList: ToolDefinition<typeof args> = {
-  name: "deployments_list",
+  name: "deployments-list",
   description: `List all deployments
 
 Returns a list of your deployments. The deployments are returned sorted by creation date, with the most recent deployments appearing first.`,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$contactsCreate: ToolDefinition<typeof args> = {
-  name: "contacts_create",
+  name: "contacts-create",
   description: `Update user information
 
 Update or add user information to workspace`,

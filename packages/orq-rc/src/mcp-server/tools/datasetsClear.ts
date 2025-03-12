@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsClear: ToolDefinition<typeof args> = {
-  name: "datasets_clear",
+  name: "datasets-clear",
   description: `Delete all datapoints
 
 Delete all datapoints from a dataset. This action is irreversible.`,

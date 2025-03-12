@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$filesList: ToolDefinition<typeof args> = {
-  name: "files_list",
+  name: "files-list",
   description: `List all files
 
 Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top.`,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsCreate: ToolDefinition<typeof args> = {
-  name: "datasets_create",
+  name: "datasets-create",
   description: `Create a dataset
 
 Creates a new dataset in the specified project.`,

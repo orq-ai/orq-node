@@ -12,7 +12,7 @@ const args = {
 };
 
 export const tool$remoteconfigsRetrieve: ToolDefinition<typeof args> = {
-  name: "remoteconfigs_retrieve",
+  name: "remoteconfigs-retrieve",
   description: `Retrieve a remote config`,
   args,
   tool: async (client, args, ctx) => {

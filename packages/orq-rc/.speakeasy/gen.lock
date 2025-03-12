@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: ec33c6a6f77e94f8826371cd7b8d19f9
+  docChecksum: 05cd9e0fec4cf83c850b2d01a08964e1
   docVersion: "2.0"
-  speakeasyVersion: 1.514.1
-  generationVersion: 2.546.3
-  releaseVersion: 3.2.0-rc.39
-  configChecksum: 858a4f10893b08657949e14be2499379
+  speakeasyVersion: 1.517.0
+  generationVersion: 2.548.1
+  releaseVersion: 3.2.0-rc.40
+  configChecksum: 4a92159c6021552383b6fae6675c58d6
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -15,7 +15,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.3
+    core: 3.21.4
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -28,7 +28,7 @@ features:
     hiddenGlobals: 0.1.0
     ignores: 2.81.1
     inputOutputModels: 2.82.0
-    mcpServer: 0.6.0
+    mcpServer: 0.7.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.1

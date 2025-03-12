@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsListVersions: ToolDefinition<typeof args> = {
-  name: "prompts_list-versions",
+  name: "prompts-list-versions",
   description: `List all prompt versions
 
 Returns a list of your prompt versions. The prompt versions are returned sorted by creation date, with the most recent prompt versions appearing first`,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsDeleteDatapoint: ToolDefinition<typeof args> = {
-  name: "datasets_delete-datapoint",
+  name: "datasets-delete-datapoint",
   description: `Delete a datapoint
 
 Permanently deletes a specific datapoint from a dataset.`,

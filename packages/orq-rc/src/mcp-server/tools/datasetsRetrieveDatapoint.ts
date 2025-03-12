@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$datasetsRetrieveDatapoint: ToolDefinition<typeof args> = {
-  name: "datasets_retrieve-datapoint",
+  name: "datasets-retrieve-datapoint",
   description: `Retrieve a datapoint
 
 Retrieves a datapoint object`,

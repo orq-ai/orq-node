@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsCreate: ToolDefinition<typeof args> = {
-  name: "prompts_create",
+  name: "prompts-create",
   description: `Create a prompt`,
   args,
   tool: async (client, args, ctx) => {
