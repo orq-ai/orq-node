@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$deploymentsStream: ToolDefinition<typeof args> = {
-  name: "deployments_stream",
+  name: "deployments-stream",
   description: `Stream
 
 Stream deployment generation. Only supported for completions and chat completions.`,

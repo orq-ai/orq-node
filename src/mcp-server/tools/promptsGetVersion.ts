@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsGetVersion: ToolDefinition<typeof args> = {
-  name: "prompts_get-version",
+  name: "prompts-get-version",
   description: `Retrieve a prompt version
 
 Retrieves a specific version of a prompt by its ID and version ID.`,

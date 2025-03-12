@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$filesDelete: ToolDefinition<typeof args> = {
-  name: "files_delete",
+  name: "files-delete",
   description: `Delete file`,
   args,
   tool: async (client, args, ctx) => {

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsUpdate: ToolDefinition<typeof args> = {
-  name: "prompts_update",
+  name: "prompts-update",
   description: `Update a prompt`,
   args,
   tool: async (client, args, ctx) => {

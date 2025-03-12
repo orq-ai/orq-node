@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$feedbackCreate: ToolDefinition<typeof args> = {
-  name: "feedback_create",
+  name: "feedback-create",
   description: `Submit feedback
 
 Submit feedback for the LLM transaction via the API`,

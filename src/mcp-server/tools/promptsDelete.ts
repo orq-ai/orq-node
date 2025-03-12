@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsDelete: ToolDefinition<typeof args> = {
-  name: "prompts_delete",
+  name: "prompts-delete",
   description: `Delete a prompt`,
   args,
   tool: async (client, args, ctx) => {

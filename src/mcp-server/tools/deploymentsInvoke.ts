@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$deploymentsInvoke: ToolDefinition<typeof args> = {
-  name: "deployments_invoke",
+  name: "deployments-invoke",
   description: `Invoke
 
 Invoke a deployment with a given payload`,

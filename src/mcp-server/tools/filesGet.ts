@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$filesGet: ToolDefinition<typeof args> = {
-  name: "files_get",
+  name: "files-get",
   description: `Retrieve a file
 
 Retrieves the details of an existing file object. After you supply a unique file ID, orq.ai returns the corresponding file object`,

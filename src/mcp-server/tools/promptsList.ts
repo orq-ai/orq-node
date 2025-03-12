@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsList: ToolDefinition<typeof args> = {
-  name: "prompts_list",
+  name: "prompts-list",
   description: `List all prompts
 
 Returns a list of your prompts. The prompts are returned sorted by creation date, with the most recent prompts appearing first`,

@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$promptsRetrieve: ToolDefinition<typeof args> = {
-  name: "prompts_retrieve",
+  name: "prompts-retrieve",
   description: `Retrieve a prompt
 
 Retrieves a prompt object`,
