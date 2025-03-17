@@ -6,6 +6,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { OrqCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
+import { createRegisterPrompt } from "./prompts.js";
 import {
   createRegisterResource,
   createRegisterResourceTemplate,
@@ -55,7 +56,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.2.0-rc.50",
+    version: "3.2.0-rc.51",
   });
 
   const client = new OrqCore({
@@ -83,7 +84,8 @@ export function createMCPServer(deps: {
     client,
     scopes,
   );
-  const register = { tool, resource, resourceTemplate };
+  const prompt = createRegisterPrompt(deps.logger, server, client, scopes);
+  const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
   tool(tool$contactsCreate);
