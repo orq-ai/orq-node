@@ -56,7 +56,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.2.0-rc.52",
+    version: "3.2.0-rc.53",
   });
 
   const client = new OrqCore({
