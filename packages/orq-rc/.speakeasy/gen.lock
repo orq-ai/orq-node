@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 6188ce29236b6e1adf356ec0b528a2b4
+  docChecksum: 5c4704e01df6a94a5cea13e0a91ca90d
   docVersion: "2.0"
-  speakeasyVersion: 1.519.0
-  generationVersion: 2.552.1
-  releaseVersion: 3.2.0-rc.61
-  configChecksum: 03de3912c94720f39c2796ceab7593f5
+  speakeasyVersion: 1.520.1
+  generationVersion: 2.556.1
+  releaseVersion: 3.2.0-rc.62
+  configChecksum: 6a12f5e765584949fdb61a073df4e5a2
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -28,7 +28,7 @@ features:
     hiddenGlobals: 0.1.0
     ignores: 2.81.1
     inputOutputModels: 2.82.0
-    mcpServer: 0.8.0
+    mcpServer: 0.9.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
