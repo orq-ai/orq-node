@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 51e8a332748bb619b548e03402cb53b2
+  docChecksum: e5e6623b20836de056c3e9ef2f589c9e
   docVersion: "2.0"
-  speakeasyVersion: 1.520.2
-  generationVersion: 2.556.1
-  releaseVersion: 3.2.0
-  configChecksum: 0eb79408a22e616f99e563f655558bc0
+  speakeasyVersion: 1.521.0
+  generationVersion: 2.558.2
+  releaseVersion: 3.2.1
+  configChecksum: 15fd8bc79f6044b9f1a816f3bdcf79e1
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
