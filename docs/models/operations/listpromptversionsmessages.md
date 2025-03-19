@@ -6,8 +6,13 @@
 import { ListPromptVersionsMessages } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersionsMessages = {
-  role: "correction",
-  content: "<value>",
+  role: "exception",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

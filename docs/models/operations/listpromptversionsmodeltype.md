@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { ListPromptVersionsModelType } from "@orq-ai/node/models/operations";
 
-let value: ListPromptVersionsModelType = "embedding";
+let value: ListPromptVersionsModelType = "chat";
 ```
 
 ## Values

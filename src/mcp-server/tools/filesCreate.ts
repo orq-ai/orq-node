@@ -14,7 +14,7 @@ export const tool$filesCreate: ToolDefinition<typeof args> = {
   name: "files-create",
   description: `Create file
 
-Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/post_v2-deployments-get-config).`,
+Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/deploymentinvoke-1).`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await filesCreate(

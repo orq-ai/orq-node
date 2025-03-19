@@ -30,7 +30,7 @@ import { isReadableStream } from "../types/streams.js";
  * Create file
  *
  * @remarks
- * Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/post_v2-deployments-get-config).
+ * Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/deploymentinvoke-1).
  */
 export function filesCreate(
   client: OrqCore,

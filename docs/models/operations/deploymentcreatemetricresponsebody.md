@@ -8,7 +8,6 @@ Successful operation
 import { DeploymentCreateMetricResponseBody } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetricResponseBody = {
-  code: 653.04,
   success: false,
 };
 ```
@@ -17,5 +16,4 @@ let value: DeploymentCreateMetricResponseBody = {
 
 | Field                              | Type                               | Required                           | Description                        |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `code`                             | *number*                           | :heavy_check_mark:                 | The status code of the request     |
 | `success`                          | *boolean*                          | :heavy_check_mark:                 | Whether the request was successful |

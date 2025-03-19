@@ -6,6 +6,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { OrqCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
+import { createRegisterPrompt } from "./prompts.js";
 import {
   createRegisterResource,
   createRegisterResourceTemplate,
@@ -13,11 +14,22 @@ import {
 import { MCPScope, mcpScopes } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
+import { tool$datasetsClear } from "./tools/datasetsClear.js";
+import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
+import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
+import { tool$datasetsCreateDatapoints } from "./tools/datasetsCreateDatapoints.js";
+import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
+import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
+import { tool$datasetsList } from "./tools/datasetsList.js";
+import { tool$datasetsListDatapoints } from "./tools/datasetsListDatapoints.js";
+import { tool$datasetsRetrieve } from "./tools/datasetsRetrieve.js";
+import { tool$datasetsRetrieveDatapoint } from "./tools/datasetsRetrieveDatapoint.js";
+import { tool$datasetsUpdate } from "./tools/datasetsUpdate.js";
+import { tool$datasetsUpdateDatapoint } from "./tools/datasetsUpdateDatapoint.js";
 import { tool$deploymentsGetConfig } from "./tools/deploymentsGetConfig.js";
 import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
 import { tool$deploymentsMetricsCreate } from "./tools/deploymentsMetricsCreate.js";
-import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
@@ -44,7 +56,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.1.14",
+    version: "3.2.0",
   });
 
   const client = new OrqCore({
@@ -72,7 +84,8 @@ export function createMCPServer(deps: {
     client,
     scopes,
   );
-  const register = { tool, resource, resourceTemplate };
+  const prompt = createRegisterPrompt(deps.logger, server, client, scopes);
+  const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
   tool(tool$contactsCreate);
@@ -80,19 +93,30 @@ export function createMCPServer(deps: {
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
   tool(tool$deploymentsInvoke);
-  tool(tool$deploymentsStream);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
   tool(tool$filesDelete);
   tool(tool$promptsList);
-  tool(tool$promptsCreate);
   tool(tool$promptsRetrieve);
   tool(tool$promptsUpdate);
   tool(tool$promptsDelete);
+  tool(tool$promptsCreate);
   tool(tool$promptsListVersions);
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);
+  tool(tool$datasetsList);
+  tool(tool$datasetsCreate);
+  tool(tool$datasetsRetrieve);
+  tool(tool$datasetsUpdate);
+  tool(tool$datasetsDelete);
+  tool(tool$datasetsListDatapoints);
+  tool(tool$datasetsCreateDatapoint);
+  tool(tool$datasetsRetrieveDatapoint);
+  tool(tool$datasetsUpdateDatapoint);
+  tool(tool$datasetsDeleteDatapoint);
+  tool(tool$datasetsCreateDatapoints);
+  tool(tool$datasetsClear);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

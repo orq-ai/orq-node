@@ -7,19 +7,11 @@ import { ListPromptVersionsData } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersionsData = {
   id: "<id>",
-  type: "prompt",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://remarkable-mozzarella.com/",
-            },
-          },
-        ],
+        role: "assistant",
+        content: "<value>",
       },
     ],
   },
@@ -32,7 +24,6 @@ let value: ListPromptVersionsData = {
 | Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                                                                       | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
-| `type`                                                                                                                                                     | [operations.ListPromptVersionsType](../../models/operations/listpromptversionstype.md)                                                                     | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `createdById`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
 | `updatedById`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
 | `description`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |

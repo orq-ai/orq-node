@@ -13,5 +13,5 @@ let value: Purpose = "knowledge_datasource";
 ## Values
 
 ```typescript
-"retrieval" | "knowledge_datasource"
+"retrieval" | "knowledge_datasource" | "batch"
 ```

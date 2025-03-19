@@ -11,22 +11,15 @@ let value: GetOnePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "326b8706-13e3-4dc2-b91b-ac7e04b621d7",
+  domainId: "5ba6691d-ab81-4665-80b1-9baf1d086853",
   created: "<value>",
   updated: "<value>",
-  displayName: "Mozelle88",
+  displayName: "Joshua.Hintz8",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://definite-jazz.com",
-            },
-          },
-        ],
+        role: "assistant",
+        content: "<value>",
       },
     ],
   },

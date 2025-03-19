@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsProvider } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsProvider = "togetherai";
+let value: GetAllPromptsProvider = "cohere";
 ```
 
 ## Values

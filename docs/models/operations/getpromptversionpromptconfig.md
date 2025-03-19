@@ -13,10 +13,8 @@ let value: GetPromptVersionPromptConfig = {
       role: "expected_output",
       content: [
         {
-          type: "image_url",
-          imageUrl: {
-            url: "https://fake-doing.com/",
-          },
+          type: "text",
+          text: "<value>",
         },
       ],
     },

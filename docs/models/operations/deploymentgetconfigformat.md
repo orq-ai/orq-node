@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { DeploymentGetConfigFormat } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigFormat = "json_object";
+let value: DeploymentGetConfigFormat = "b64_json";
 ```
 
 ## Values

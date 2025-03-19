@@ -125,13 +125,13 @@ export type Audio = {
 };
 
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export const Type = {
   Function: "function",
 } as const;
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export type Type = ClosedEnum<typeof Type>;
 
@@ -152,7 +152,7 @@ export type ToolCalls = {
    */
   id: string;
   /**
-   * The type of the tool. Currently, only `5` is supported.
+   * The type of the tool. Currently, only `function` is supported.
    */
   type: Type;
   function: FunctionT;
@@ -474,13 +474,13 @@ export type MessagesAudio = {
 };
 
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export const MessagesType = {
   Function: "function",
 } as const;
 /**
- * The type of the tool. Currently, only `5` is supported.
+ * The type of the tool. Currently, only `function` is supported.
  */
 export type MessagesType = ClosedEnum<typeof MessagesType>;
 
@@ -501,7 +501,7 @@ export type MessagesToolCalls = {
    */
   id: string;
   /**
-   * The type of the tool. Currently, only `5` is supported.
+   * The type of the tool. Currently, only `function` is supported.
    */
   type: MessagesType;
   function: MessagesFunction;

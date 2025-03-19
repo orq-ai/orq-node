@@ -7,7 +7,7 @@ The type of the model. Current `chat`,`completion` and `image` are supported
 ```typescript
 import { DeploymentGetConfigType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigType = "image";
+let value: DeploymentGetConfigType = "stt";
 ```
 
 ## Values

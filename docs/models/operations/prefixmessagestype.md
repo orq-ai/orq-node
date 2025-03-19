@@ -1,6 +1,6 @@
 # PrefixMessagesType
 
-The type of the tool. Currently, only `5` is supported.
+The type of the tool. Currently, only `function` is supported.
 
 ## Example Usage
 

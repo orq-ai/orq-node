@@ -7,7 +7,7 @@ The format of the encoded audio data. Currently supports `wav` and `mp3`.
 ```typescript
 import { DeploymentCreateMetric2Format } from "@orq-ai/node/models/operations";
 
-let value: DeploymentCreateMetric2Format = "wav";
+let value: DeploymentCreateMetric2Format = "mp3";
 ```
 
 ## Values

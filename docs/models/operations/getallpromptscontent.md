@@ -18,7 +18,7 @@ const value: operations.GetAllPromptsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://appropriate-bakeware.com/",
+      url: "https://reckless-unibody.com",
     },
   },
 ];

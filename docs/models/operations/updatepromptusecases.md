@@ -5,7 +5,7 @@
 ```typescript
 import { UpdatePromptUseCases } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptUseCases = "SQL";
+let value: UpdatePromptUseCases = "Code writing";
 ```
 
 ## Values

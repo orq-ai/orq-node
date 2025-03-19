@@ -21,6 +21,7 @@ export type FileT = {
 export const Purpose = {
   Retrieval: "retrieval",
   KnowledgeDatasource: "knowledge_datasource",
+  Batch: "batch",
 } as const;
 /**
  * The intended purpose of the uploaded file.
@@ -44,6 +45,7 @@ export type FileUploadRequestBody = {
 export const FileUploadPurpose = {
   Retrieval: "retrieval",
   KnowledgeDatasource: "knowledge_datasource",
+  Batch: "batch",
 } as const;
 /**
  * The intended purpose of the uploaded file.
@@ -245,7 +247,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-03-14T11:26:07.853Z",
+    "2025-03-19T14:37:12.005Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -279,7 +281,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-03-14T11:26:07.853Z"))
+  created: z.date().default(() => new Date("2025-03-19T14:37:12.005Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

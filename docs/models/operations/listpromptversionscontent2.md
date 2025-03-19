@@ -18,7 +18,7 @@ const value: operations.ListPromptVersions21 = {
 const value: operations.ListPromptVersions22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://strange-puritan.name",
+    url: "https://unsteady-appliance.biz/",
   },
 };
 ```

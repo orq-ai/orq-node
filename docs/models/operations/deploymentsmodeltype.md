@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { DeploymentsModelType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentsModelType = "tts";
+let value: DeploymentsModelType = "image";
 ```
 
 ## Values

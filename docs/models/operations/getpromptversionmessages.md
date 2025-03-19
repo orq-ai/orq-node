@@ -7,7 +7,12 @@ import { GetPromptVersionMessages } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersionMessages = {
   role: "exception",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

@@ -5,7 +5,6 @@
 import { APIError } from "../models/errors/apierror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import { Result } from "../types/fp.js";
-import { discardSentinel } from "./event-streams.js";
 import { matchResponse, matchStatusCode, StatusCodePredicate } from "./http.js";
 import { isPlainObject } from "./is-plain-object.js";
 import { safeParse } from "./schemas.js";
@@ -215,9 +214,7 @@ export function match<T, E>(
         raw = await response.text();
         break;
       case "sse":
-        raw = response.body && matcher.sseSentinel
-          ? discardSentinel(response.body, matcher.sseSentinel)
-          : response.body;
+        raw = response.body;
         break;
       case "nil":
         raw = await discardResponseBody(response);

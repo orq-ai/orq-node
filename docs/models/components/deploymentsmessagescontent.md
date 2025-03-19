@@ -16,8 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.DeploymentsContentMessages2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "refusal",
+    refusal: "<value>",
   },
 ];
 ```

@@ -6,7 +6,7 @@
 import { GetOnePrompt2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: GetOnePrompt2ImageUrl = {
-  url: "https://imaginary-detective.biz",
+  url: "https://busy-king.name",
 };
 ```
 

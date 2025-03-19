@@ -9,7 +9,25 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * List sorting preference.
+ */
+export const GetAllPromptsQueryParamSort = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * List sorting preference.
+ */
+export type GetAllPromptsQueryParamSort = ClosedEnum<
+  typeof GetAllPromptsQueryParamSort
+>;
+
 export type GetAllPromptsRequest = {
+  /**
+   * List sorting preference.
+   */
+  sort?: GetAllPromptsQueryParamSort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -460,8 +478,8 @@ export type GetAllPromptsData = {
   domainId: string;
   created: string;
   updated: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s name, meant to be displayable in the UI.
    */
@@ -487,11 +505,33 @@ export type GetAllPromptsResponseBody = {
 };
 
 /** @internal */
+export const GetAllPromptsQueryParamSort$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsQueryParamSort
+> = z.nativeEnum(GetAllPromptsQueryParamSort);
+
+/** @internal */
+export const GetAllPromptsQueryParamSort$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsQueryParamSort
+> = GetAllPromptsQueryParamSort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsQueryParamSort$ {
+  /** @deprecated use `GetAllPromptsQueryParamSort$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsQueryParamSort$inboundSchema;
+  /** @deprecated use `GetAllPromptsQueryParamSort$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsQueryParamSort$outboundSchema;
+}
+
+/** @internal */
 export const GetAllPromptsRequest$inboundSchema: z.ZodType<
   GetAllPromptsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
+  sort: GetAllPromptsQueryParamSort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -504,6 +544,7 @@ export const GetAllPromptsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetAllPromptsRequest$Outbound = {
+  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -515,6 +556,7 @@ export const GetAllPromptsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsRequest
 > = z.object({
+  sort: GetAllPromptsQueryParamSort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
@@ -1961,8 +2003,8 @@ export const GetAllPromptsData$inboundSchema: z.ZodType<
   domain_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => GetAllPromptsPromptConfig$inboundSchema),
@@ -1986,8 +2028,8 @@ export type GetAllPromptsData$Outbound = {
   domain_id: string;
   created: string;
   updated: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   display_name: string;
   description?: string | null | undefined;
   prompt_config: GetAllPromptsPromptConfig$Outbound;
@@ -2006,8 +2048,8 @@ export const GetAllPromptsData$outboundSchema: z.ZodType<
   domainId: z.string(),
   created: z.string(),
   updated: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => GetAllPromptsPromptConfig$outboundSchema),

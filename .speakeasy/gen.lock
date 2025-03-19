@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 816a1339f4b070ddec5d9aab565884c1
+  docChecksum: 51e8a332748bb619b548e03402cb53b2
   docVersion: "2.0"
-  speakeasyVersion: 1.517.3
-  generationVersion: 2.548.6
-  releaseVersion: 3.1.14
-  configChecksum: 59f756ed8c877cc659bc60b9ec52e937
+  speakeasyVersion: 1.520.2
+  generationVersion: 2.556.1
+  releaseVersion: 3.2.0
+  configChecksum: 0eb79408a22e616f99e563f655558bc0
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -27,7 +27,7 @@ features:
     hiddenGlobals: 0.1.0
     ignores: 2.81.1
     inputOutputModels: 2.82.0
-    mcpServer: 0.7.0
+    mcpServer: 0.9.0
     methodArguments: 0.1.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
@@ -35,8 +35,6 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
-    serverEvents: 0.1.5
-    serverEventsSentinels: 0.1.0
     unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
@@ -125,11 +123,79 @@ generatedFiles:
   - docs/models/errors/updatepromptresponsebody.md
   - docs/models/operations/assistantmessage.md
   - docs/models/operations/audio.md
+  - docs/models/operations/bulkcreatedatapoints21.md
+  - docs/models/operations/bulkcreatedatapoints22.md
+  - docs/models/operations/bulkcreatedatapoints2datasets1.md
+  - docs/models/operations/bulkcreatedatapoints2datasets2.md
+  - docs/models/operations/bulkcreatedatapoints2datasetsimageurl.md
+  - docs/models/operations/bulkcreatedatapoints2datasetsresponse200type.md
+  - docs/models/operations/bulkcreatedatapoints2datasetsresponsetype.md
+  - docs/models/operations/bulkcreatedatapoints2datasetstype.md
+  - docs/models/operations/bulkcreatedatapoints2imageurl.md
+  - docs/models/operations/bulkcreatedatapoints2type.md
+  - docs/models/operations/bulkcreatedatapointscontent.md
+  - docs/models/operations/bulkcreatedatapointscontent2.md
+  - docs/models/operations/bulkcreatedatapointscontentdatasets2.md
+  - docs/models/operations/bulkcreatedatapointsdatasetscontent.md
+  - docs/models/operations/bulkcreatedatapointsdatasetsfunction.md
+  - docs/models/operations/bulkcreatedatapointsdatasetsmessages.md
+  - docs/models/operations/bulkcreatedatapointsdatasetsrole.md
+  - docs/models/operations/bulkcreatedatapointsdatasetstoolcalls.md
+  - docs/models/operations/bulkcreatedatapointsdatasetstype.md
+  - docs/models/operations/bulkcreatedatapointsfunction.md
+  - docs/models/operations/bulkcreatedatapointsmessages.md
+  - docs/models/operations/bulkcreatedatapointsrequest.md
+  - docs/models/operations/bulkcreatedatapointsrequestbody.md
+  - docs/models/operations/bulkcreatedatapointsrole.md
+  - docs/models/operations/bulkcreatedatapointstoolcalls.md
+  - docs/models/operations/bulkcreatedatapointstype.md
   - docs/models/operations/choices.md
+  - docs/models/operations/choicesassistantmessage.md
+  - docs/models/operations/choicesaudio.md
+  - docs/models/operations/choicescontent.md
+  - docs/models/operations/choicesdevelopermessage.md
+  - docs/models/operations/choicesfunction.md
+  - docs/models/operations/choicesrole.md
+  - docs/models/operations/choicessystemmessage.md
+  - docs/models/operations/choicestoolcalls.md
+  - docs/models/operations/choicestoolmessage.md
+  - docs/models/operations/choicestype.md
+  - docs/models/operations/choicesusermessage.md
+  - docs/models/operations/cleardatasetrequest.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
   - docs/models/operations/createcontactrequestbody.md
   - docs/models/operations/createcontactresponsebody.md
+  - docs/models/operations/createdatasetitem21.md
+  - docs/models/operations/createdatasetitem22.md
+  - docs/models/operations/createdatasetitem2datasets1.md
+  - docs/models/operations/createdatasetitem2datasets2.md
+  - docs/models/operations/createdatasetitem2datasetsimageurl.md
+  - docs/models/operations/createdatasetitem2datasetsresponse200type.md
+  - docs/models/operations/createdatasetitem2datasetsresponsetype.md
+  - docs/models/operations/createdatasetitem2datasetstype.md
+  - docs/models/operations/createdatasetitem2imageurl.md
+  - docs/models/operations/createdatasetitem2type.md
+  - docs/models/operations/createdatasetitemcontent.md
+  - docs/models/operations/createdatasetitemcontent2.md
+  - docs/models/operations/createdatasetitemcontentdatasets2.md
+  - docs/models/operations/createdatasetitemdatasetscontent.md
+  - docs/models/operations/createdatasetitemdatasetsfunction.md
+  - docs/models/operations/createdatasetitemdatasetsmessages.md
+  - docs/models/operations/createdatasetitemdatasetsrole.md
+  - docs/models/operations/createdatasetitemdatasetstoolcalls.md
+  - docs/models/operations/createdatasetitemdatasetstype.md
+  - docs/models/operations/createdatasetitemfunction.md
+  - docs/models/operations/createdatasetitemmessages.md
+  - docs/models/operations/createdatasetitemrequest.md
+  - docs/models/operations/createdatasetitemrequestbody.md
+  - docs/models/operations/createdatasetitemresponsebody.md
+  - docs/models/operations/createdatasetitemrole.md
+  - docs/models/operations/createdatasetitemtoolcalls.md
+  - docs/models/operations/createdatasetitemtype.md
+  - docs/models/operations/createdatasetmetadata.md
+  - docs/models/operations/createdatasetrequestbody.md
+  - docs/models/operations/createdatasetresponsebody.md
   - docs/models/operations/createfeedbackrequestbody.md
   - docs/models/operations/createfeedbackresponsebody.md
   - docs/models/operations/createfeedbackvalue.md
@@ -157,14 +223,25 @@ generatedFiles:
   - docs/models/operations/createpromptphotorealversion.md
   - docs/models/operations/createpromptpromptconfig.md
   - docs/models/operations/createpromptpromptscontent.md
+  - docs/models/operations/createpromptpromptsencodingformat.md
   - docs/models/operations/createpromptpromptsformat.md
   - docs/models/operations/createpromptpromptsfunction.md
+  - docs/models/operations/createpromptpromptslanguage.md
   - docs/models/operations/createpromptpromptsmessages.md
   - docs/models/operations/createpromptpromptsmetadata.md
+  - docs/models/operations/createpromptpromptsmodelparameters.md
+  - docs/models/operations/createpromptpromptsmodeltype.md
+  - docs/models/operations/createpromptpromptsphotorealversion.md
+  - docs/models/operations/createpromptpromptspromptconfig.md
+  - docs/models/operations/createpromptpromptsprovider.md
+  - docs/models/operations/createpromptpromptsquality.md
+  - docs/models/operations/createpromptpromptsreasoningeffort.md
+  - docs/models/operations/createpromptpromptsresponseformat.md
   - docs/models/operations/createpromptpromptsresponsetype.md
   - docs/models/operations/createpromptpromptsrole.md
   - docs/models/operations/createpromptpromptstoolcalls.md
   - docs/models/operations/createpromptpromptstype.md
+  - docs/models/operations/createpromptpromptsusecases.md
   - docs/models/operations/createpromptprovider.md
   - docs/models/operations/createpromptquality.md
   - docs/models/operations/createpromptreasoningeffort.md
@@ -174,6 +251,9 @@ generatedFiles:
   - docs/models/operations/createpromptresponseformat1.md
   - docs/models/operations/createpromptresponseformat2.md
   - docs/models/operations/createpromptresponseformatjsonschema.md
+  - docs/models/operations/createpromptresponseformatprompts1.md
+  - docs/models/operations/createpromptresponseformatprompts2.md
+  - docs/models/operations/createpromptresponseformatpromptsresponse200type.md
   - docs/models/operations/createpromptresponseformatpromptsresponsetype.md
   - docs/models/operations/createpromptresponseformatpromptstype.md
   - docs/models/operations/createpromptresponseformattype.md
@@ -182,13 +262,29 @@ generatedFiles:
   - docs/models/operations/createprompttype.md
   - docs/models/operations/createpromptusecases.md
   - docs/models/operations/data.md
+  - docs/models/operations/deletedatapointrequest.md
+  - docs/models/operations/deletedatasetrequest.md
   - docs/models/operations/deletepromptrequest.md
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics1.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics2.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics3.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsdetail.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsformat.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsimageurl.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsinputaudio.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrefusalcontentpart.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3contenttype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3type.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4contenttype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4type.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoicestype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodymessagestype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodytype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequesttype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricstextcontentpart.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstype.md
   - docs/models/operations/deploymentcreatemetric2detail.md
   - docs/models/operations/deploymentcreatemetric2format.md
@@ -197,10 +293,16 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric2refusalcontentpart.md
   - docs/models/operations/deploymentcreatemetric2textcontentpart.md
   - docs/models/operations/deploymentcreatemetric2type.md
+  - docs/models/operations/deploymentcreatemetricchoicescontent.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricscontent.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrequestrequestbodyrole.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrequestrole.md
+  - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrole.md
+  - docs/models/operations/deploymentcreatemetricchoicesrole.md
   - docs/models/operations/deploymentcreatemetriccontent2.md
   - docs/models/operations/deploymentcreatemetriccontentdeploymentsmetrics2.md
-  - docs/models/operations/deploymentcreatemetricmessagedeploymentsmetricsrole.md
-  - docs/models/operations/deploymentcreatemetricmessagerole.md
+  - docs/models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequest2.md
+  - docs/models/operations/deploymentcreatemetriccontentdeploymentsmetricsrequestrequestbody2.md
   - docs/models/operations/deploymentcreatemetricmessages.md
   - docs/models/operations/deploymentcreatemetricmessagesassistantmessage.md
   - docs/models/operations/deploymentcreatemetricmessagesaudio.md
@@ -273,15 +375,10 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigtype.md
   - docs/models/operations/deploymentinvokechoices.md
   - docs/models/operations/deploymentinvokeglobals.md
-  - docs/models/operations/deploymentinvokemessage.md
-  - docs/models/operations/deploymentinvokemessage1.md
-  - docs/models/operations/deploymentinvokemessage2.md
-  - docs/models/operations/deploymentinvokemessage3.md
-  - docs/models/operations/deploymentinvokemessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentinvokemessagedeploymentsresponsetype.md
   - docs/models/operations/deploymentinvokemessagedeploymentsrole.md
-  - docs/models/operations/deploymentinvokemessagefunction.md
+  - docs/models/operations/deploymentinvokemessagedeploymentstype.md
   - docs/models/operations/deploymentinvokemessagerole.md
-  - docs/models/operations/deploymentinvokemessagetoolcalls.md
   - docs/models/operations/deploymentinvokemessagetype.md
   - docs/models/operations/deploymentinvokemetadata.md
   - docs/models/operations/deploymentinvokeobject.md
@@ -320,89 +417,6 @@ generatedFiles:
   - docs/models/operations/deploymentsrole.md
   - docs/models/operations/deploymentstoolcalls.md
   - docs/models/operations/deploymentstools.md
-  - docs/models/operations/deploymentstream21.md
-  - docs/models/operations/deploymentstream22.md
-  - docs/models/operations/deploymentstream23.md
-  - docs/models/operations/deploymentstream2deployments1.md
-  - docs/models/operations/deploymentstream2deployments2.md
-  - docs/models/operations/deploymentstream2deployments3.md
-  - docs/models/operations/deploymentstream2deploymentsdetail.md
-  - docs/models/operations/deploymentstream2deploymentsformat.md
-  - docs/models/operations/deploymentstream2deploymentsimageurl.md
-  - docs/models/operations/deploymentstream2deploymentsinputaudio.md
-  - docs/models/operations/deploymentstream2deploymentsrefusalcontentpart.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3contenttype.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3type.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4contenttype.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4type.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessagestype.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodyprefixmessagestype.md
-  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodytype.md
-  - docs/models/operations/deploymentstream2deploymentsrequesttype.md
-  - docs/models/operations/deploymentstream2deploymentstextcontentpart.md
-  - docs/models/operations/deploymentstream2deploymentstype.md
-  - docs/models/operations/deploymentstream2detail.md
-  - docs/models/operations/deploymentstream2format.md
-  - docs/models/operations/deploymentstream2imageurl.md
-  - docs/models/operations/deploymentstream2inputaudio.md
-  - docs/models/operations/deploymentstream2refusalcontentpart.md
-  - docs/models/operations/deploymentstream2textcontentpart.md
-  - docs/models/operations/deploymentstream2type.md
-  - docs/models/operations/deploymentstreamchoices.md
-  - docs/models/operations/deploymentstreamcontent2.md
-  - docs/models/operations/deploymentstreamcontentdeployments2.md
-  - docs/models/operations/deploymentstreamcontentdeploymentsrequest2.md
-  - docs/models/operations/deploymentstreamcontentdeploymentsrequestrequestbody2.md
-  - docs/models/operations/deploymentstreamdata.md
-  - docs/models/operations/deploymentstreamdeploymentsmetadata.md
-  - docs/models/operations/deploymentstreamdocuments.md
-  - docs/models/operations/deploymentstreamglobals.md
-  - docs/models/operations/deploymentstreaminputs.md
-  - docs/models/operations/deploymentstreaminvokeoptions.md
-  - docs/models/operations/deploymentstreammessage.md
-  - docs/models/operations/deploymentstreammessage1.md
-  - docs/models/operations/deploymentstreammessage2.md
-  - docs/models/operations/deploymentstreammessage3.md
-  - docs/models/operations/deploymentstreammessagedeploymentsresponserole.md
-  - docs/models/operations/deploymentstreammessagedeploymentsrole.md
-  - docs/models/operations/deploymentstreammessagefunction.md
-  - docs/models/operations/deploymentstreammessagerole.md
-  - docs/models/operations/deploymentstreammessages.md
-  - docs/models/operations/deploymentstreammessagesassistantmessage.md
-  - docs/models/operations/deploymentstreammessagesaudio.md
-  - docs/models/operations/deploymentstreammessagescontent.md
-  - docs/models/operations/deploymentstreammessagesdeploymentscontent.md
-  - docs/models/operations/deploymentstreammessagesdeploymentsrequestcontent.md
-  - docs/models/operations/deploymentstreammessagesdeploymentsrequestrequestbody5role.md
-  - docs/models/operations/deploymentstreammessagesdeploymentsrequestrequestbodyrole.md
-  - docs/models/operations/deploymentstreammessagesdeploymentsrequestrole.md
-  - docs/models/operations/deploymentstreammessagesdeploymentsrole.md
-  - docs/models/operations/deploymentstreammessagesdevelopermessage.md
-  - docs/models/operations/deploymentstreammessagesfunction.md
-  - docs/models/operations/deploymentstreammessagesrole.md
-  - docs/models/operations/deploymentstreammessagessystemmessage.md
-  - docs/models/operations/deploymentstreammessagestoolcalls.md
-  - docs/models/operations/deploymentstreammessagestoolmessage.md
-  - docs/models/operations/deploymentstreammessagestype.md
-  - docs/models/operations/deploymentstreammessagesusermessage.md
-  - docs/models/operations/deploymentstreammessagetoolcalls.md
-  - docs/models/operations/deploymentstreammessagetype.md
-  - docs/models/operations/deploymentstreammetadata.md
-  - docs/models/operations/deploymentstreamobject.md
-  - docs/models/operations/deploymentstreamprefixmessages.md
-  - docs/models/operations/deploymentstreamprefixmessagescontent.md
-  - docs/models/operations/deploymentstreamprefixmessagesdeploymentscontent.md
-  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestcontent.md
-  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestrequestbody5role.md
-  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestrequestbodyrole.md
-  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestrole.md
-  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrole.md
-  - docs/models/operations/deploymentstreamprefixmessagesrole.md
-  - docs/models/operations/deploymentstreamprefixmessagestype.md
-  - docs/models/operations/deploymentstreamprovider.md
-  - docs/models/operations/deploymentstreamrequestbody.md
-  - docs/models/operations/deploymentstreamresponsebody.md
-  - docs/models/operations/deploymentstreamretrievals.md
   - docs/models/operations/deploymentstype.md
   - docs/models/operations/detail.md
   - docs/models/operations/developermessage.md
@@ -446,6 +460,7 @@ generatedFiles:
   - docs/models/operations/getallpromptspromptstype.md
   - docs/models/operations/getallpromptsprovider.md
   - docs/models/operations/getallpromptsquality.md
+  - docs/models/operations/getallpromptsqueryparamsort.md
   - docs/models/operations/getallpromptsreasoningeffort.md
   - docs/models/operations/getallpromptsrequest.md
   - docs/models/operations/getallpromptsresponsebody.md
@@ -509,7 +524,6 @@ generatedFiles:
   - docs/models/operations/getpromptversionmodeltype.md
   - docs/models/operations/getpromptversionphotorealversion.md
   - docs/models/operations/getpromptversionpromptconfig.md
-  - docs/models/operations/getpromptversionpromptstype.md
   - docs/models/operations/getpromptversionprovider.md
   - docs/models/operations/getpromptversionquality.md
   - docs/models/operations/getpromptversionreasoningeffort.md
@@ -529,8 +543,32 @@ generatedFiles:
   - docs/models/operations/inputaudio.md
   - docs/models/operations/inputs.md
   - docs/models/operations/invokeoptions.md
+  - docs/models/operations/items.md
   - docs/models/operations/jsonschema.md
   - docs/models/operations/language.md
+  - docs/models/operations/listdatasetdatapoints21.md
+  - docs/models/operations/listdatasetdatapoints22.md
+  - docs/models/operations/listdatasetdatapoints2datasetstype.md
+  - docs/models/operations/listdatasetdatapoints2imageurl.md
+  - docs/models/operations/listdatasetdatapoints2type.md
+  - docs/models/operations/listdatasetdatapointscontent.md
+  - docs/models/operations/listdatasetdatapointscontent2.md
+  - docs/models/operations/listdatasetdatapointsdata.md
+  - docs/models/operations/listdatasetdatapointsfunction.md
+  - docs/models/operations/listdatasetdatapointsmessages.md
+  - docs/models/operations/listdatasetdatapointsobject.md
+  - docs/models/operations/listdatasetdatapointsqueryparamsort.md
+  - docs/models/operations/listdatasetdatapointsrequest.md
+  - docs/models/operations/listdatasetdatapointsresponsebody.md
+  - docs/models/operations/listdatasetdatapointsrole.md
+  - docs/models/operations/listdatasetdatapointstoolcalls.md
+  - docs/models/operations/listdatasetdatapointstype.md
+  - docs/models/operations/listdatasetsdata.md
+  - docs/models/operations/listdatasetsmetadata.md
+  - docs/models/operations/listdatasetsobject.md
+  - docs/models/operations/listdatasetsqueryparamsort.md
+  - docs/models/operations/listdatasetsrequest.md
+  - docs/models/operations/listdatasetsresponsebody.md
   - docs/models/operations/listpromptversions21.md
   - docs/models/operations/listpromptversions22.md
   - docs/models/operations/listpromptversions2imageurl.md
@@ -550,9 +588,9 @@ generatedFiles:
   - docs/models/operations/listpromptversionsobject.md
   - docs/models/operations/listpromptversionsphotorealversion.md
   - docs/models/operations/listpromptversionspromptconfig.md
-  - docs/models/operations/listpromptversionspromptstype.md
   - docs/models/operations/listpromptversionsprovider.md
   - docs/models/operations/listpromptversionsquality.md
+  - docs/models/operations/listpromptversionsqueryparamsort.md
   - docs/models/operations/listpromptversionsreasoningeffort.md
   - docs/models/operations/listpromptversionsrequest.md
   - docs/models/operations/listpromptversionsresponsebody.md
@@ -595,33 +633,45 @@ generatedFiles:
   - docs/models/operations/performance.md
   - docs/models/operations/photorealversion.md
   - docs/models/operations/prefixmessages.md
-  - docs/models/operations/prefixmessagesassistantmessage.md
-  - docs/models/operations/prefixmessagesaudio.md
   - docs/models/operations/prefixmessagescontent.md
-  - docs/models/operations/prefixmessagesdevelopermessage.md
-  - docs/models/operations/prefixmessagesfunction.md
   - docs/models/operations/prefixmessagesrole.md
-  - docs/models/operations/prefixmessagessystemmessage.md
-  - docs/models/operations/prefixmessagestoolcalls.md
-  - docs/models/operations/prefixmessagestoolmessage.md
   - docs/models/operations/prefixmessagestype.md
-  - docs/models/operations/prefixmessagesusermessage.md
   - docs/models/operations/promptconfig.md
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
   - docs/models/operations/quality.md
+  - docs/models/operations/queryparamsort.md
   - docs/models/operations/reasoningeffort.md
   - docs/models/operations/refusalcontentpart.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
+  - docs/models/operations/responsebody.md
   - docs/models/operations/responseformat.md
   - docs/models/operations/responseformat1.md
   - docs/models/operations/responseformat2.md
   - docs/models/operations/responseformatjsonschema.md
   - docs/models/operations/responseformattype.md
   - docs/models/operations/retrievals.md
+  - docs/models/operations/retrievedatapoint21.md
+  - docs/models/operations/retrievedatapoint22.md
+  - docs/models/operations/retrievedatapoint2datasetstype.md
+  - docs/models/operations/retrievedatapoint2imageurl.md
+  - docs/models/operations/retrievedatapoint2type.md
+  - docs/models/operations/retrievedatapointcontent.md
+  - docs/models/operations/retrievedatapointcontent2.md
+  - docs/models/operations/retrievedatapointfunction.md
+  - docs/models/operations/retrievedatapointmessages.md
+  - docs/models/operations/retrievedatapointrequest.md
+  - docs/models/operations/retrievedatapointresponsebody.md
+  - docs/models/operations/retrievedatapointrole.md
+  - docs/models/operations/retrievedatapointtoolcalls.md
+  - docs/models/operations/retrievedatapointtype.md
+  - docs/models/operations/retrievedatasetmetadata.md
+  - docs/models/operations/retrievedatasetrequest.md
+  - docs/models/operations/retrievedatasetresponsebody.md
   - docs/models/operations/role.md
+  - docs/models/operations/sort.md
   - docs/models/operations/systemmessage.md
   - docs/models/operations/textcontentpart.md
   - docs/models/operations/three.md
@@ -640,6 +690,37 @@ generatedFiles:
   - docs/models/operations/twotextcontentpart.md
   - docs/models/operations/twotype.md
   - docs/models/operations/type.md
+  - docs/models/operations/updatedatapoint21.md
+  - docs/models/operations/updatedatapoint22.md
+  - docs/models/operations/updatedatapoint2datasets1.md
+  - docs/models/operations/updatedatapoint2datasets2.md
+  - docs/models/operations/updatedatapoint2datasetsimageurl.md
+  - docs/models/operations/updatedatapoint2datasetsresponse200type.md
+  - docs/models/operations/updatedatapoint2datasetsresponsetype.md
+  - docs/models/operations/updatedatapoint2datasetstype.md
+  - docs/models/operations/updatedatapoint2imageurl.md
+  - docs/models/operations/updatedatapoint2type.md
+  - docs/models/operations/updatedatapointcontent.md
+  - docs/models/operations/updatedatapointcontent2.md
+  - docs/models/operations/updatedatapointcontentdatasets2.md
+  - docs/models/operations/updatedatapointdatasetscontent.md
+  - docs/models/operations/updatedatapointdatasetsfunction.md
+  - docs/models/operations/updatedatapointdatasetsmessages.md
+  - docs/models/operations/updatedatapointdatasetsrole.md
+  - docs/models/operations/updatedatapointdatasetstoolcalls.md
+  - docs/models/operations/updatedatapointdatasetstype.md
+  - docs/models/operations/updatedatapointfunction.md
+  - docs/models/operations/updatedatapointmessages.md
+  - docs/models/operations/updatedatapointrequest.md
+  - docs/models/operations/updatedatapointrequestbody.md
+  - docs/models/operations/updatedatapointresponsebody.md
+  - docs/models/operations/updatedatapointrole.md
+  - docs/models/operations/updatedatapointtoolcalls.md
+  - docs/models/operations/updatedatapointtype.md
+  - docs/models/operations/updatedatasetmetadata.md
+  - docs/models/operations/updatedatasetrequest.md
+  - docs/models/operations/updatedatasetrequestbody.md
+  - docs/models/operations/updatedatasetresponsebody.md
   - docs/models/operations/updateprompt21.md
   - docs/models/operations/updateprompt22.md
   - docs/models/operations/updateprompt2imageurl.md
@@ -664,25 +745,14 @@ generatedFiles:
   - docs/models/operations/updatepromptphotorealversion.md
   - docs/models/operations/updatepromptpromptconfig.md
   - docs/models/operations/updatepromptpromptscontent.md
-  - docs/models/operations/updatepromptpromptsencodingformat.md
   - docs/models/operations/updatepromptpromptsformat.md
   - docs/models/operations/updatepromptpromptsfunction.md
-  - docs/models/operations/updatepromptpromptslanguage.md
   - docs/models/operations/updatepromptpromptsmessages.md
   - docs/models/operations/updatepromptpromptsmetadata.md
-  - docs/models/operations/updatepromptpromptsmodelparameters.md
-  - docs/models/operations/updatepromptpromptsmodeltype.md
-  - docs/models/operations/updatepromptpromptsphotorealversion.md
-  - docs/models/operations/updatepromptpromptspromptconfig.md
-  - docs/models/operations/updatepromptpromptsprovider.md
-  - docs/models/operations/updatepromptpromptsquality.md
-  - docs/models/operations/updatepromptpromptsreasoningeffort.md
-  - docs/models/operations/updatepromptpromptsresponseformat.md
   - docs/models/operations/updatepromptpromptsresponsetype.md
   - docs/models/operations/updatepromptpromptsrole.md
   - docs/models/operations/updatepromptpromptstoolcalls.md
   - docs/models/operations/updatepromptpromptstype.md
-  - docs/models/operations/updatepromptpromptsusecases.md
   - docs/models/operations/updatepromptprovider.md
   - docs/models/operations/updatepromptquality.md
   - docs/models/operations/updatepromptreasoningeffort.md
@@ -693,9 +763,6 @@ generatedFiles:
   - docs/models/operations/updatepromptresponseformat1.md
   - docs/models/operations/updatepromptresponseformat2.md
   - docs/models/operations/updatepromptresponseformatjsonschema.md
-  - docs/models/operations/updatepromptresponseformatprompts1.md
-  - docs/models/operations/updatepromptresponseformatprompts2.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200type.md
   - docs/models/operations/updatepromptresponseformatpromptsresponsetype.md
   - docs/models/operations/updatepromptresponseformatpromptstype.md
   - docs/models/operations/updatepromptresponseformattype.md
@@ -708,6 +775,7 @@ generatedFiles:
   - docs/models/operations/usermessage.md
   - docs/models/operations/value.md
   - docs/sdks/contacts/README.md
+  - docs/sdks/datasets/README.md
   - docs/sdks/deployments/README.md
   - docs/sdks/feedback/README.md
   - docs/sdks/files/README.md
@@ -720,11 +788,22 @@ generatedFiles:
   - package.json
   - src/core.ts
   - src/funcs/contactsCreate.ts
+  - src/funcs/datasetsClear.ts
+  - src/funcs/datasetsCreate.ts
+  - src/funcs/datasetsCreateDatapoint.ts
+  - src/funcs/datasetsCreateDatapoints.ts
+  - src/funcs/datasetsDelete.ts
+  - src/funcs/datasetsDeleteDatapoint.ts
+  - src/funcs/datasetsList.ts
+  - src/funcs/datasetsListDatapoints.ts
+  - src/funcs/datasetsRetrieve.ts
+  - src/funcs/datasetsRetrieveDatapoint.ts
+  - src/funcs/datasetsUpdate.ts
+  - src/funcs/datasetsUpdateDatapoint.ts
   - src/funcs/deploymentsGetConfig.ts
   - src/funcs/deploymentsInvoke.ts
   - src/funcs/deploymentsList.ts
   - src/funcs/deploymentsMetricsCreate.ts
-  - src/funcs/deploymentsStream.ts
   - src/funcs/feedbackCreate.ts
   - src/funcs/filesCreate.ts
   - src/funcs/filesDelete.ts
@@ -747,7 +826,6 @@ generatedFiles:
   - src/lib/dlv.ts
   - src/lib/encodings.ts
   - src/lib/env.ts
-  - src/lib/event-streams.ts
   - src/lib/files.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
@@ -766,17 +844,29 @@ generatedFiles:
   - src/mcp-server/console-logger.ts
   - src/mcp-server/extensions.ts
   - src/mcp-server/mcp-server.ts
+  - src/mcp-server/prompts.ts
   - src/mcp-server/resources.ts
   - src/mcp-server/scopes.ts
   - src/mcp-server/server.ts
   - src/mcp-server/shared.ts
   - src/mcp-server/tools.ts
   - src/mcp-server/tools/contactsCreate.ts
+  - src/mcp-server/tools/datasetsClear.ts
+  - src/mcp-server/tools/datasetsCreate.ts
+  - src/mcp-server/tools/datasetsCreateDatapoint.ts
+  - src/mcp-server/tools/datasetsCreateDatapoints.ts
+  - src/mcp-server/tools/datasetsDelete.ts
+  - src/mcp-server/tools/datasetsDeleteDatapoint.ts
+  - src/mcp-server/tools/datasetsList.ts
+  - src/mcp-server/tools/datasetsListDatapoints.ts
+  - src/mcp-server/tools/datasetsRetrieve.ts
+  - src/mcp-server/tools/datasetsRetrieveDatapoint.ts
+  - src/mcp-server/tools/datasetsUpdate.ts
+  - src/mcp-server/tools/datasetsUpdateDatapoint.ts
   - src/mcp-server/tools/deploymentsGetConfig.ts
   - src/mcp-server/tools/deploymentsInvoke.ts
   - src/mcp-server/tools/deploymentsList.ts
   - src/mcp-server/tools/deploymentsMetricsCreate.ts
-  - src/mcp-server/tools/deploymentsStream.ts
   - src/mcp-server/tools/feedbackCreate.ts
   - src/mcp-server/tools/filesCreate.ts
   - src/mcp-server/tools/filesDelete.ts
@@ -800,15 +890,20 @@ generatedFiles:
   - src/models/errors/index.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/errors/updateprompt.ts
+  - src/models/operations/bulkcreatedatapoints.ts
+  - src/models/operations/cleardataset.ts
   - src/models/operations/createcontact.ts
+  - src/models/operations/createdataset.ts
+  - src/models/operations/createdatasetitem.ts
   - src/models/operations/createfeedback.ts
   - src/models/operations/createprompt.ts
+  - src/models/operations/deletedatapoint.ts
+  - src/models/operations/deletedataset.ts
   - src/models/operations/deleteprompt.ts
   - src/models/operations/deploymentcreatemetric.ts
   - src/models/operations/deploymentgetconfig.ts
   - src/models/operations/deploymentinvoke.ts
   - src/models/operations/deployments.ts
-  - src/models/operations/deploymentstream.ts
   - src/models/operations/filedelete.ts
   - src/models/operations/fileget.ts
   - src/models/operations/filelist.ts
@@ -817,10 +912,17 @@ generatedFiles:
   - src/models/operations/getoneprompt.ts
   - src/models/operations/getpromptversion.ts
   - src/models/operations/index.ts
+  - src/models/operations/listdatasetdatapoints.ts
+  - src/models/operations/listdatasets.ts
   - src/models/operations/listpromptversions.ts
   - src/models/operations/remoteconfigsgetconfig.ts
+  - src/models/operations/retrievedatapoint.ts
+  - src/models/operations/retrievedataset.ts
+  - src/models/operations/updatedatapoint.ts
+  - src/models/operations/updatedataset.ts
   - src/models/operations/updateprompt.ts
   - src/sdk/contacts.ts
+  - src/sdk/datasets.ts
   - src/sdk/deployments.ts
   - src/sdk/feedback.ts
   - src/sdk/files.ts
@@ -859,6 +961,7 @@ examples:
       parameters:
         query:
           limit: 10
+          sort: "asc"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "brook cleverly blossom", "prompt_config": {"tools": [{"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>"}}}}, {"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}}}], "model": "Prius", "model_type": "moderations", "model_parameters": {}, "provider": "openai", "messages": []}, "version": "<value>"}, {"id": "1dc2a4c8-104f-4b45-91a7-0cfc8fe07fbc", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "inasmuch irritably finally", "prompt_config": {"tools": [], "model": "Camaro", "model_type": "completion", "model_parameters": {}, "provider": "fal", "messages": [{"role": "exception", "content": []}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://parched-merit.com/"}}, {"type": "text", "text": "<value>"}]}, {"role": "tool", "content": "<value>"}]}, "version": "<value>"}, {"id": "ebd834b7-d8c2-4236-be08-5944ebceb27b", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "along energetic oddball pasta thread", "prompt_config": {"tools": [], "model": "Element", "model_type": "image", "model_parameters": {}, "provider": "cohere", "messages": [{"role": "assistant", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": "<value>"}]}, "version": "<value>"}], "has_more": false}
@@ -877,7 +980,7 @@ examples:
         application/json: {"key": "<key>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12}, {"index": 3047.15}]}
+          application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12, "message": {"type": "content", "role": "exception", "content": "<value>"}}, {"index": 3047.15, "message": {"type": "content", "role": "system", "content": "<value>"}}]}
   DeploymentStream:
     speakeasy-default-deployment-stream:
       requestBody:
@@ -891,7 +994,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"code": 4865.89, "success": false}
+          application/json: {"success": false}
   FileUpload:
     speakeasy-default-file-upload:
       responses:
@@ -902,6 +1005,7 @@ examples:
       parameters:
         query:
           limit: 50
+          sort: "asc"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 6783.17, "file_name": "example.file", "workspace_id": "232aa0b1-1b8a-4005-b71e-9e705d0e6e21", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 4602.76, "file_name": "example.file", "workspace_id": "66718d6d-4612-4e0a-9ee1-b9ddf121dc2a", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 5446.51, "file_name": "example.file", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "created": "2025-02-11T16:43:22.676Z"}], "has_more": true}
@@ -972,6 +1076,7 @@ examples:
       parameters:
         query:
           limit: 10
+          sort: "asc"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "9a0790cc-23f2-474a-964b-0d278a6af50d", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "738dd1fb-9371-4a92-b8ec-8fb977295586", "updated_by_id": "c2ee924d-279b-42b7-a7a9-5f7873d9e4c4", "display_name": "Dwight_Sipes", "prompt_config": {"messages": [{"role": "prompt", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://jittery-cycle.com"}}, {"type": "image_url", "image_url": {"url": "https://ignorant-knuckle.biz"}}]}, {"role": "tool", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}}, {"_id": "<id>", "type": "prompt", "owner": "vendor", "domain_id": "6194824d-1a0d-400e-9676-8fa9b14911cd", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "aebb8bed-fc99-42df-8bea-7acd6c7aacfb", "updated_by_id": "b8345289-fce7-4447-b8a1-1a67970e6ada", "display_name": "Ewald94", "prompt_config": {"messages": []}, "metadata": {}}, {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "2dae8fbe-e20d-49a8-a4ca-19cf90942c7e", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "d0cf42ff-c8b4-4675-9239-2c048dcba1b2", "updated_by_id": "c8667a70-b6a5-4785-9545-4dca88de9992", "display_name": "Annamarie_Franey75", "prompt_config": {"messages": [{"role": "tool", "content": []}]}, "metadata": {}}], "has_more": false}
@@ -1012,6 +1117,7 @@ examples:
           prompt_id: "<id>"
         query:
           limit: 10
+          sort: "asc"
       responses:
         "200":
           application/json: {"object": "list", "data": [], "has_more": true}
@@ -1023,7 +1129,7 @@ examples:
           version_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "type": "prompt", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}]}, "timestamp": "<value>"}
+          application/json: {"_id": "<id>", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}]}, "timestamp": "<value>"}
         "404":
           application/json: {"message": "<value>"}
   RemoteConfigsGetConfig:
@@ -1064,5 +1170,109 @@ examples:
       parameters:
         path:
           id: "<id>"
+  ListDatasets:
+    speakeasy-default-list-datasets:
+      parameters:
+        query:
+          sort: "asc"
+          limit: 10
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "display_name": "Aracely.Collins", "project_id": "718d6d46-12e0-4aee-a1b9-ddf121dc2a4c", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "metadata": {"total_versions": 4063.91, "datapoints_count": 791.69}, "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "1ff6573e-0a62-4331-aad7-c07cc4819916", "display_name": "Germaine_Rohan50", "project_id": "4b7d8c22-36e0-4859-b44e-bceb27bd4753", "workspace_id": "0a17c478-e329-4a9e-bc97-938e1a630f5f", "metadata": {"total_versions": 2333.58, "datapoints_count": 4159.3}, "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "8082fa02-e087-44e7-8830-7648ec2ed7f3", "display_name": "Clinton_Sipes", "project_id": "f45d97b2-c5d7-4f7b-9cfa-269af2194d58", "workspace_id": "1b3fe575-4c0c-4551-8a92-c7431ddf193e", "metadata": {"total_versions": 1073.35, "datapoints_count": 4955.38}, "updated": "2025-03-19T14:37:10.831Z"}], "has_more": true}
+  CreateDataset:
+    speakeasy-default-create-dataset:
+      requestBody:
+        application/json: {"display_name": "Jed6", "path": "Customer Service/Billing/Refund"}
+      responses:
+        "200":
+          application/json: {"_id": "f021cd9c-f540-4331-b521-1a509a3080a8", "display_name": "Izabella13", "project_id": "ecc37691-775e-4024-9985-613de0ee803d", "workspace_id": "6a1df943-6bfd-4394-a947-98bc19d4c51e", "metadata": {"total_versions": 5694.59, "datapoints_count": 8142.22}, "updated": "2025-03-19T14:37:10.831Z"}
+  RetrieveDataset:
+    speakeasy-default-retrieve-dataset:
+      parameters:
+        path:
+          dataset_id: "<id>"
+      responses:
+        "200":
+          application/json: {"_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "display_name": "Nathen72", "project_id": "c2127fd4-7297-48c0-9f6e-e88aad22b98b", "workspace_id": "0ca835bb-f82d-4f30-8b17-d07263d38994", "metadata": {"total_versions": 6728.15, "datapoints_count": 560.91}, "updated": "2025-03-19T14:37:10.831Z"}
+        "404":
+          application/json: {"message": "<value>"}
+  UpdateDataset:
+    speakeasy-default-update-dataset:
+      parameters:
+        path:
+          dataset_id: "<id>"
+      responses:
+        "200":
+          application/json: {"_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "display_name": "Merlin_Harber", "project_id": "c125a190-71c5-4562-9af6-646dadb3a343", "workspace_id": "a2450617-e6bb-4057-99d6-f9464a3158c8", "metadata": {"total_versions": 4160.23, "datapoints_count": 587.04}, "updated": "2025-03-19T14:37:10.831Z"}
+        "404":
+          application/json: {"message": "<value>"}
+  DeleteDataset:
+    speakeasy-default-delete-dataset:
+      parameters:
+        path:
+          dataset_id: "<id>"
+  ListDatasetDatapoints:
+    speakeasy-default-list-dataset-datapoints:
+      parameters:
+        path:
+          dataset_id: "<id>"
+        query:
+          sort: "asc"
+          limit: 10
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}], "has_more": false}
+  CreateDatasetItem:
+    speakeasy-default-create-dataset-item:
+      parameters:
+        path:
+          dataset_id: "<id>"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}
+  RetrieveDatapoint:
+    speakeasy-default-retrieve-datapoint:
+      parameters:
+        path:
+          dataset_id: "<id>"
+          datapoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}
+        "404":
+          application/json: {"message": "<value>"}
+  UpdateDatapoint:
+    speakeasy-default-update-datapoint:
+      parameters:
+        path:
+          dataset_id: "<id>"
+          datapoint_id: "<id>"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}
+        "404":
+          application/json: {"message": "<value>"}
+  DeleteDatapoint:
+    speakeasy-default-delete-datapoint:
+      parameters:
+        path:
+          dataset_id: "<id>"
+          datapoint_id: "<id>"
+      responses:
+        "404":
+          application/json: {"message": "<value>"}
+  BulkCreateDatapoints:
+    speakeasy-default-bulk-create-datapoints:
+      parameters:
+        path:
+          dataset_id: "<id>"
+      responses:
+        "200":
+          application/json: [{"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}]
+  ClearDataset:
+    speakeasy-default-clear-dataset:
+      parameters:
+        path:
+          dataset_id: "<id>"
 examplesVersion: 1.0.0
 generatedTests: {}

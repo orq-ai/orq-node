@@ -8,7 +8,7 @@ Feedback from the user on the completion
 import { Feedback } from "@orq-ai/node/models/operations";
 
 let value: Feedback = {
-  score: 989410,
+  score: 959167,
 };
 ```
 

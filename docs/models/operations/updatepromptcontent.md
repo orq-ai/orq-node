@@ -18,7 +18,7 @@ const value: operations.UpdatePromptContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://forsaken-minority.net",
+      url: "https://smoggy-freight.name",
     },
   },
 ];

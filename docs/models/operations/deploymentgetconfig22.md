@@ -8,7 +8,7 @@ import { DeploymentGetConfig22 } from "@orq-ai/node/models/operations";
 let value: DeploymentGetConfig22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ideal-mortise.net/",
+    url: "https://tragic-carboxyl.name",
   },
 };
 ```

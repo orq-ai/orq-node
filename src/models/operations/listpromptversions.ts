@@ -9,8 +9,26 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * List sorting preference.
+ */
+export const ListPromptVersionsQueryParamSort = {
+  Asc: "asc",
+  Desc: "desc",
+} as const;
+/**
+ * List sorting preference.
+ */
+export type ListPromptVersionsQueryParamSort = ClosedEnum<
+  typeof ListPromptVersionsQueryParamSort
+>;
+
 export type ListPromptVersionsRequest = {
   promptId: string;
+  /**
+   * List sorting preference.
+   */
+  sort?: ListPromptVersionsQueryParamSort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -31,11 +49,6 @@ export const ListPromptVersionsObject = {
 export type ListPromptVersionsObject = ClosedEnum<
   typeof ListPromptVersionsObject
 >;
-
-export const ListPromptVersionsType = {
-  Prompt: "prompt",
-} as const;
-export type ListPromptVersionsType = ClosedEnum<typeof ListPromptVersionsType>;
 
 /**
  * The type of the model
@@ -359,12 +372,10 @@ export type ListPromptVersionsContent =
   | string
   | Array<ListPromptVersions21 | ListPromptVersions22>;
 
-export const ListPromptVersionsPromptsType = {
+export const ListPromptVersionsType = {
   Function: "function",
 } as const;
-export type ListPromptVersionsPromptsType = ClosedEnum<
-  typeof ListPromptVersionsPromptsType
->;
+export type ListPromptVersionsType = ClosedEnum<typeof ListPromptVersionsType>;
 
 export type ListPromptVersionsFunction = {
   name: string;
@@ -377,7 +388,7 @@ export type ListPromptVersionsFunction = {
 export type ListPromptVersionsToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
-  type: ListPromptVersionsPromptsType;
+  type: ListPromptVersionsType;
   function: ListPromptVersionsFunction;
 };
 
@@ -474,9 +485,8 @@ export type ListPromptVersionsMetadata = {
 
 export type ListPromptVersionsData = {
   id: string;
-  type: ListPromptVersionsType;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
@@ -499,12 +509,34 @@ export type ListPromptVersionsResponseBody = {
 };
 
 /** @internal */
+export const ListPromptVersionsQueryParamSort$inboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsQueryParamSort
+> = z.nativeEnum(ListPromptVersionsQueryParamSort);
+
+/** @internal */
+export const ListPromptVersionsQueryParamSort$outboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsQueryParamSort
+> = ListPromptVersionsQueryParamSort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListPromptVersionsQueryParamSort$ {
+  /** @deprecated use `ListPromptVersionsQueryParamSort$inboundSchema` instead. */
+  export const inboundSchema = ListPromptVersionsQueryParamSort$inboundSchema;
+  /** @deprecated use `ListPromptVersionsQueryParamSort$outboundSchema` instead. */
+  export const outboundSchema = ListPromptVersionsQueryParamSort$outboundSchema;
+}
+
+/** @internal */
 export const ListPromptVersionsRequest$inboundSchema: z.ZodType<
   ListPromptVersionsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   prompt_id: z.string(),
+  sort: ListPromptVersionsQueryParamSort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -519,6 +551,7 @@ export const ListPromptVersionsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ListPromptVersionsRequest$Outbound = {
   prompt_id: string;
+  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -531,6 +564,7 @@ export const ListPromptVersionsRequest$outboundSchema: z.ZodType<
   ListPromptVersionsRequest
 > = z.object({
   promptId: z.string(),
+  sort: ListPromptVersionsQueryParamSort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
@@ -592,27 +626,6 @@ export namespace ListPromptVersionsObject$ {
   export const inboundSchema = ListPromptVersionsObject$inboundSchema;
   /** @deprecated use `ListPromptVersionsObject$outboundSchema` instead. */
   export const outboundSchema = ListPromptVersionsObject$outboundSchema;
-}
-
-/** @internal */
-export const ListPromptVersionsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsType
-> = z.nativeEnum(ListPromptVersionsType);
-
-/** @internal */
-export const ListPromptVersionsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsType
-> = ListPromptVersionsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListPromptVersionsType$ {
-  /** @deprecated use `ListPromptVersionsType$inboundSchema` instead. */
-  export const inboundSchema = ListPromptVersionsType$inboundSchema;
-  /** @deprecated use `ListPromptVersionsType$outboundSchema` instead. */
-  export const outboundSchema = ListPromptVersionsType$outboundSchema;
 }
 
 /** @internal */
@@ -1562,24 +1575,24 @@ export function listPromptVersionsContentFromJSON(
 }
 
 /** @internal */
-export const ListPromptVersionsPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsPromptsType
-> = z.nativeEnum(ListPromptVersionsPromptsType);
+export const ListPromptVersionsType$inboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsType
+> = z.nativeEnum(ListPromptVersionsType);
 
 /** @internal */
-export const ListPromptVersionsPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsPromptsType
-> = ListPromptVersionsPromptsType$inboundSchema;
+export const ListPromptVersionsType$outboundSchema: z.ZodNativeEnum<
+  typeof ListPromptVersionsType
+> = ListPromptVersionsType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ListPromptVersionsPromptsType$ {
-  /** @deprecated use `ListPromptVersionsPromptsType$inboundSchema` instead. */
-  export const inboundSchema = ListPromptVersionsPromptsType$inboundSchema;
-  /** @deprecated use `ListPromptVersionsPromptsType$outboundSchema` instead. */
-  export const outboundSchema = ListPromptVersionsPromptsType$outboundSchema;
+export namespace ListPromptVersionsType$ {
+  /** @deprecated use `ListPromptVersionsType$inboundSchema` instead. */
+  export const inboundSchema = ListPromptVersionsType$inboundSchema;
+  /** @deprecated use `ListPromptVersionsType$outboundSchema` instead. */
+  export const outboundSchema = ListPromptVersionsType$outboundSchema;
 }
 
 /** @internal */
@@ -1647,7 +1660,7 @@ export const ListPromptVersionsToolCalls$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: ListPromptVersionsPromptsType$inboundSchema,
+  type: ListPromptVersionsType$inboundSchema,
   function: z.lazy(() => ListPromptVersionsFunction$inboundSchema),
 });
 
@@ -1667,7 +1680,7 @@ export const ListPromptVersionsToolCalls$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
-  type: ListPromptVersionsPromptsType$outboundSchema,
+  type: ListPromptVersionsType$outboundSchema,
   function: z.lazy(() => ListPromptVersionsFunction$outboundSchema),
 });
 
@@ -2000,9 +2013,8 @@ export const ListPromptVersionsData$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  type: ListPromptVersionsType$inboundSchema,
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => ListPromptVersionsPromptConfig$inboundSchema),
   metadata: z.lazy(() => ListPromptVersionsMetadata$inboundSchema).optional(),
@@ -2019,9 +2031,8 @@ export const ListPromptVersionsData$inboundSchema: z.ZodType<
 /** @internal */
 export type ListPromptVersionsData$Outbound = {
   _id: string;
-  type: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   description?: string | null | undefined;
   prompt_config: ListPromptVersionsPromptConfig$Outbound;
   metadata?: ListPromptVersionsMetadata$Outbound | undefined;
@@ -2035,9 +2046,8 @@ export const ListPromptVersionsData$outboundSchema: z.ZodType<
   ListPromptVersionsData
 > = z.object({
   id: z.string(),
-  type: ListPromptVersionsType$outboundSchema,
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => ListPromptVersionsPromptConfig$outboundSchema),
   metadata: z.lazy(() => ListPromptVersionsMetadata$outboundSchema).optional(),

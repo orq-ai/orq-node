@@ -27,7 +27,6 @@ For more information about the API: [orq.ai Documentation](https://docs.orq.ai)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
-  * [Server-sent event streaming](#server-sent-event-streaming)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -79,7 +78,7 @@ yarn add @orq-ai/node zod
 This SDK is also an installable MCP server where the various SDK methods are
 exposed as tools that can be invoked by AI applications.
 
-> Node.js v20 or greater is required to run the MCP server.
+> Node.js v20 or greater is required to run the MCP server from npm.
 
 <details>
 <summary>Claude installation steps</summary>
@@ -109,16 +108,51 @@ Add the following server definition to your `claude_desktop_config.json` file:
 <details>
 <summary>Cursor installation steps</summary>
 
-Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+Create a `.cursor/mcp.json` file in your project root with the following content:
 
-- Name: Orq
-- Type: `command`
-- Command:
-```sh
-npx -y --package @orq-ai/node -- mcp start --api-key ... --contact-id ... --environment ... 
+```json
+{
+  "mcpServers": {
+    "Orq": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "@orq-ai/node",
+        "--",
+        "mcp", "start",
+        "--api-key", "...",
+        "--contact-id", "...",
+        "--environment", "..."
+      ]
+    }
+  }
+}
 ```
 
 </details>
+
+You can also run MCP servers as a standalone binary with no additional dependencies. You must pull these binaries from available Github releases:
+
+```bash
+curl -L -o mcp-server \
+    https://github.com/{org}/{repo}/releases/download/{tag}/mcp-server-bun-darwin-arm64 && \
+chmod +x mcp-server
+```
+
+If the repo is a private repo you must add your Github PAT to download a release `-H "Authorization: Bearer {GITHUB_PAT}"`.
+
+
+```json
+{
+  "mcpServers": {
+    "Todos": {
+      "command": "./DOWNLOAD/PATH/mcp-server",
+      "args": [
+        "start"
+      ]
+    }
+  }
+}
+```
 
 For a full list of server arguments, run:
 
@@ -202,12 +236,26 @@ run();
 
 * [create](docs/sdks/contacts/README.md#create) - Update user information
 
+### [datasets](docs/sdks/datasets/README.md)
+
+* [list](docs/sdks/datasets/README.md#list) - List datasets
+* [create](docs/sdks/datasets/README.md#create) - Create a dataset
+* [retrieve](docs/sdks/datasets/README.md#retrieve) - Retrieve a dataset
+* [update](docs/sdks/datasets/README.md#update) - Update a dataset
+* [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
+* [listDatapoints](docs/sdks/datasets/README.md#listdatapoints) - List datapoints
+* [createDatapoint](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
+* [retrieveDatapoint](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
+* [updateDatapoint](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
+* [deleteDatapoint](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
+* [createDatapoints](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
+* [clear](docs/sdks/datasets/README.md#clear) - Delete all datapoints
+
 ### [deployments](docs/sdks/deployments/README.md)
 
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
-* [stream](docs/sdks/deployments/README.md#stream) - Stream
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)
 
@@ -228,10 +276,10 @@ run();
 ### [prompts](docs/sdks/prompts/README.md)
 
 * [list](docs/sdks/prompts/README.md#list) - List all prompts
-* [create](docs/sdks/prompts/README.md#create) - Create a prompt
 * [retrieve](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 * [update](docs/sdks/prompts/README.md#update) - Update a prompt
 * [delete](docs/sdks/prompts/README.md#delete) - Delete a prompt
+* [create](docs/sdks/prompts/README.md#create) - Create a prompt
 * [listVersions](docs/sdks/prompts/README.md#listversions) - List all prompt versions
 * [getVersion](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
 
@@ -258,11 +306,22 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <summary>Available standalone functions</summary>
 
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
+- [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
+- [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
+- [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
+- [`datasetsCreateDatapoints`](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
+- [`datasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
+- [`datasetsDeleteDatapoint`](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
+- [`datasetsList`](docs/sdks/datasets/README.md#list) - List datasets
+- [`datasetsListDatapoints`](docs/sdks/datasets/README.md#listdatapoints) - List datapoints
+- [`datasetsRetrieve`](docs/sdks/datasets/README.md#retrieve) - Retrieve a dataset
+- [`datasetsRetrieveDatapoint`](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
+- [`datasetsUpdate`](docs/sdks/datasets/README.md#update) - Update a dataset
+- [`datasetsUpdateDatapoint`](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
 - [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
-- [`deploymentsStream`](docs/sdks/deployments/README.md#stream) - Stream
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Create file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
@@ -279,41 +338,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
-
-<!-- Start Server-sent event streaming [eventstream] -->
-## Server-sent event streaming
-
-[Server-sent events][mdn-sse] are used to stream content from certain
-operations. These operations will expose the stream as an async iterable that
-can be consumed using a [`for await...of`][mdn-for-await-of] loop. The loop will
-terminate when the server no longer has any events to send and closes the
-underlying connection.
-
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.deployments.stream({
-    key: "<key>",
-  });
-
-  for await (const event of result) {
-    // Handle the event
-    console.log(event);
-  }
-}
-
-run();
-
-```
-
-[mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
-[mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
-<!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads

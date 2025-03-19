@@ -18,7 +18,7 @@ const value: operations.DeploymentGetConfig21 = {
 const value: operations.DeploymentGetConfig2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://complete-provision.info",
+    url: "https://vengeful-pile.net/",
   },
 };
 ```

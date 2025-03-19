@@ -4,6 +4,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Contacts } from "./contacts.js";
+import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
@@ -39,5 +40,10 @@ export class Orq extends ClientSDK {
   private _remoteconfigs?: Remoteconfigs;
   get remoteconfigs(): Remoteconfigs {
     return (this._remoteconfigs ??= new Remoteconfigs(this._options));
+  }
+
+  private _datasets?: Datasets;
+  get datasets(): Datasets {
+    return (this._datasets ??= new Datasets(this._options));
   }
 }

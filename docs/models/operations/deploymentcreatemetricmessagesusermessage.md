@@ -7,7 +7,15 @@ import { DeploymentCreateMetricMessagesUserMessage } from "@orq-ai/node/models/o
 
 let value: DeploymentCreateMetricMessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "wav",
+      },
+    },
+  ],
 };
 ```
 

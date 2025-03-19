@@ -8,7 +8,7 @@ import { DeploymentCreateMetric22 } from "@orq-ai/node/models/operations";
 let value: DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://far-flung-steeple.com/",
+    url: "https://first-gallery.biz",
   },
 };
 ```

@@ -26,14 +26,7 @@ const value: components.MessagesSystemMessage = {
 ```typescript
 const value: components.MessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://french-travel.biz",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

@@ -9,9 +9,9 @@ let value: Retrievals = {
   document: "<value>",
   metadata: {
     fileName: "example.file",
-    pageNumber: 3685.84,
-    fileType: "video",
-    searchScore: 8221.18,
+    pageNumber: 4783.7,
+    fileType: "image",
+    searchScore: 6394.73,
   },
 };
 ```

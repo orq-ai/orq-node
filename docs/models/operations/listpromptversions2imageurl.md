@@ -6,7 +6,7 @@
 import { ListPromptVersions2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersions2ImageUrl = {
-  url: "https://meaty-zen.biz",
+  url: "https://lovable-tennis.name",
 };
 ```
 

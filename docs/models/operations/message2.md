@@ -6,14 +6,16 @@
 import { Message2 } from "@orq-ai/node/models/operations";
 
 let value: Message2 = {
-  role: "user",
+  type: "content",
+  role: "correction",
   content: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                       | [operations.DeploymentCreateMetricMessageRole](../../models/operations/deploymentcreatemetricmessagerole.md) | :heavy_check_mark:                                                                                           | The role of the prompt message                                                                               |
-| `content`                                                                                                    | *string*                                                                                                     | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | [operations.DeploymentInvokeMessageType](../../models/operations/deploymentinvokemessagetype.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `role`                                                                                           | [operations.DeploymentInvokeMessageRole](../../models/operations/deploymentinvokemessagerole.md) | :heavy_check_mark:                                                                               | The role of the prompt message                                                                   |
+| `content`                                                                                        | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |

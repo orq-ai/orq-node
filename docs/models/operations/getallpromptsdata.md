@@ -9,19 +9,19 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "25a19743-8575-4f21-859a-6f5badfecb52",
+  domainId: "78b1369e-92fd-48e8-9edf-e026f42e7e2a",
   created: "<value>",
   updated: "<value>",
-  displayName: "Dean_Lebsack95",
+  displayName: "Arden.Franey5",
   promptConfig: {
     messages: [
       {
-        role: "system",
+        role: "expected_output",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://voluminous-whale.info",
+              url: "https://motionless-exasperation.org",
             },
           },
         ],

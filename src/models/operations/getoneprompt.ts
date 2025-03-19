@@ -450,8 +450,8 @@ export type GetOnePromptResponseBody = {
   domainId: string;
   created: string;
   updated: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The prompt’s name, meant to be displayable in the UI.
    */
@@ -1895,8 +1895,8 @@ export const GetOnePromptResponseBody$inboundSchema: z.ZodType<
   domain_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   display_name: z.string(),
   description: z.nullable(z.string()).optional(),
   prompt_config: z.lazy(() => GetOnePromptPromptConfig$inboundSchema),
@@ -1920,8 +1920,8 @@ export type GetOnePromptResponseBody$Outbound = {
   domain_id: string;
   created: string;
   updated: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   display_name: string;
   description?: string | null | undefined;
   prompt_config: GetOnePromptPromptConfig$Outbound;
@@ -1940,8 +1940,8 @@ export const GetOnePromptResponseBody$outboundSchema: z.ZodType<
   domainId: z.string(),
   created: z.string(),
   updated: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   displayName: z.string(),
   description: z.nullable(z.string()).optional(),
   promptConfig: z.lazy(() => GetOnePromptPromptConfig$outboundSchema),
