@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapoints21 = {
 const value: operations.BulkCreateDatapoints22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://superior-skyline.com/",
+    url: "https://educated-remark.biz/",
   },
 };
 ```

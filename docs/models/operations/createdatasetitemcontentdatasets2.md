@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItem2Datasets1 = {
 const value: operations.CreateDatasetItem2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://reckless-instruction.org",
+    url: "https://straight-basket.biz/",
   },
 };
 ```

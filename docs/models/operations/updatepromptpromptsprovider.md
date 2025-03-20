@@ -1,11 +1,11 @@
-# CreatePromptPromptsProvider
+# UpdatePromptPromptsProvider
 
 ## Example Usage
 
 ```typescript
-import { CreatePromptPromptsProvider } from "@orq-ai/node/models/operations";
+import { UpdatePromptPromptsProvider } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsProvider = "nvidia";
+let value: UpdatePromptPromptsProvider = "google";
 ```
 
 ## Values

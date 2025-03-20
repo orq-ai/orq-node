@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { ModelType } from "@orq-ai/node/models/operations";
 
-let value: ModelType = "vision";
+let value: ModelType = "completion";
 ```
 
 ## Values

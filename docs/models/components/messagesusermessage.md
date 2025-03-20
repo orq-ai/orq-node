@@ -9,11 +9,8 @@ let value: MessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "wav",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

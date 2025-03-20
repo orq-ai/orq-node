@@ -6,7 +6,7 @@
 import { CreateDatasetItem2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItem2ImageUrl = {
-  url: "https://funny-suspension.com",
+  url: "https://precious-reach.org",
 };
 ```
 

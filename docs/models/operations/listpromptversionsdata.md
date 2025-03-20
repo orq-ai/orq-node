@@ -10,8 +10,15 @@ let value: ListPromptVersionsData = {
   promptConfig: {
     messages: [
       {
-        role: "prompt",
-        content: "<value>",
+        role: "expected_output",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://fake-doing.com/",
+            },
+          },
+        ],
       },
     ],
   },

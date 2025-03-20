@@ -1,11 +1,11 @@
-# CreatePromptResponseFormatPrompts2
+# UpdatePromptResponseFormatPrompts2
 
 ## Example Usage
 
 ```typescript
-import { CreatePromptResponseFormatPrompts2 } from "@orq-ai/node/models/operations";
+import { UpdatePromptResponseFormatPrompts2 } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormatPrompts2 = {
+let value: UpdatePromptResponseFormatPrompts2 = {
   type: "json_object",
 };
 ```
@@ -14,4 +14,4 @@ let value: CreatePromptResponseFormatPrompts2 = {
 
 | Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                     | [operations.CreatePromptResponseFormatPromptsResponse200Type](../../models/operations/createpromptresponseformatpromptsresponse200type.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `type`                                                                                                                                     | [operations.UpdatePromptResponseFormatPromptsResponse200Type](../../models/operations/updatepromptresponseformatpromptsresponse200type.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |

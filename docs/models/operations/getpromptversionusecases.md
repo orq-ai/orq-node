@@ -5,7 +5,7 @@
 ```typescript
 import { GetPromptVersionUseCases } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionUseCases = "API interaction";
+let value: GetPromptVersionUseCases = "Agents";
 ```
 
 ## Values

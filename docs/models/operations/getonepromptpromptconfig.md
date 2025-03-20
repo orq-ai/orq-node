@@ -10,7 +10,7 @@ import { GetOnePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: GetOnePromptPromptConfig = {
   messages: [
     {
-      role: "tool",
+      role: "exception",
       content: "<value>",
     },
   ],

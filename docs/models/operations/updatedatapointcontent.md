@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdateDatapointContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://soggy-steeple.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

@@ -1,11 +1,11 @@
-# CreatePromptPromptsUseCases
+# UpdatePromptPromptsUseCases
 
 ## Example Usage
 
 ```typescript
-import { CreatePromptPromptsUseCases } from "@orq-ai/node/models/operations";
+import { UpdatePromptPromptsUseCases } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptPromptsUseCases = "Code writing";
+let value: UpdatePromptPromptsUseCases = "Documents QA";
 ```
 
 ## Values

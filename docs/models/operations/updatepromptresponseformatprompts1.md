@@ -1,11 +1,11 @@
-# CreatePromptResponseFormatPrompts1
+# UpdatePromptResponseFormatPrompts1
 
 ## Example Usage
 
 ```typescript
-import { CreatePromptResponseFormatPrompts1 } from "@orq-ai/node/models/operations";
+import { UpdatePromptResponseFormatPrompts1 } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormatPrompts1 = {
+let value: UpdatePromptResponseFormatPrompts1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -21,5 +21,5 @@ let value: CreatePromptResponseFormatPrompts1 = {
 
 | Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                               | [operations.CreatePromptResponseFormatPromptsResponseType](../../models/operations/createpromptresponseformatpromptsresponsetype.md) | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
-| `jsonSchema`                                                                                                                         | [operations.CreatePromptResponseFormatJsonSchema](../../models/operations/createpromptresponseformatjsonschema.md)                   | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
+| `type`                                                                                                                               | [operations.UpdatePromptResponseFormatPromptsResponseType](../../models/operations/updatepromptresponseformatpromptsresponsetype.md) | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
+| `jsonSchema`                                                                                                                         | [operations.UpdatePromptResponseFormatJsonSchema](../../models/operations/updatepromptresponseformatjsonschema.md)                   | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |

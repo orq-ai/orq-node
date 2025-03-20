@@ -57,7 +57,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.2.5",
+    version: "3.2.6",
   });
 
   const client = new OrqCore({
@@ -100,10 +100,10 @@ export function createMCPServer(deps: {
   tool(tool$filesGet);
   tool(tool$filesDelete);
   tool(tool$promptsList);
+  tool(tool$promptsCreate);
   tool(tool$promptsRetrieve);
   tool(tool$promptsUpdate);
   tool(tool$promptsDelete);
-  tool(tool$promptsCreate);
   tool(tool$promptsListVersions);
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);

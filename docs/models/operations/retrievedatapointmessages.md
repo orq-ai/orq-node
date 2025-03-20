@@ -11,7 +11,7 @@ let value: RetrieveDatapointMessages = {
     {
       type: "image_url",
       imageUrl: {
-        url: "https://anguished-developing.info",
+        url: "https://elegant-apricot.info",
       },
     },
   ],

@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt21 = {
 const value: operations.UpdatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://extroverted-jazz.com/",
+    url: "https://grounded-retrospectivity.biz/",
   },
 };
 ```

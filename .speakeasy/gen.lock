@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 2cf5c4395fbe199985510b649c63a342
+  docChecksum: e01cbf6f1cd4341c312dc9d8e7977f36
   docVersion: "2.0"
   speakeasyVersion: 1.521.0
   generationVersion: 2.558.2
-  releaseVersion: 3.2.5
-  configChecksum: 220ab26766fdd3f1a2d8bc38c2f18df6
+  releaseVersion: 3.2.6
+  configChecksum: 2395031ab96e7888236259f29cfa6085
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -225,25 +225,14 @@ generatedFiles:
   - docs/models/operations/createpromptphotorealversion.md
   - docs/models/operations/createpromptpromptconfig.md
   - docs/models/operations/createpromptpromptscontent.md
-  - docs/models/operations/createpromptpromptsencodingformat.md
   - docs/models/operations/createpromptpromptsformat.md
   - docs/models/operations/createpromptpromptsfunction.md
-  - docs/models/operations/createpromptpromptslanguage.md
   - docs/models/operations/createpromptpromptsmessages.md
   - docs/models/operations/createpromptpromptsmetadata.md
-  - docs/models/operations/createpromptpromptsmodelparameters.md
-  - docs/models/operations/createpromptpromptsmodeltype.md
-  - docs/models/operations/createpromptpromptsphotorealversion.md
-  - docs/models/operations/createpromptpromptspromptconfig.md
-  - docs/models/operations/createpromptpromptsprovider.md
-  - docs/models/operations/createpromptpromptsquality.md
-  - docs/models/operations/createpromptpromptsreasoningeffort.md
-  - docs/models/operations/createpromptpromptsresponseformat.md
   - docs/models/operations/createpromptpromptsresponsetype.md
   - docs/models/operations/createpromptpromptsrole.md
   - docs/models/operations/createpromptpromptstoolcalls.md
   - docs/models/operations/createpromptpromptstype.md
-  - docs/models/operations/createpromptpromptsusecases.md
   - docs/models/operations/createpromptprovider.md
   - docs/models/operations/createpromptquality.md
   - docs/models/operations/createpromptreasoningeffort.md
@@ -253,9 +242,6 @@ generatedFiles:
   - docs/models/operations/createpromptresponseformat1.md
   - docs/models/operations/createpromptresponseformat2.md
   - docs/models/operations/createpromptresponseformatjsonschema.md
-  - docs/models/operations/createpromptresponseformatprompts1.md
-  - docs/models/operations/createpromptresponseformatprompts2.md
-  - docs/models/operations/createpromptresponseformatpromptsresponse200type.md
   - docs/models/operations/createpromptresponseformatpromptsresponsetype.md
   - docs/models/operations/createpromptresponseformatpromptstype.md
   - docs/models/operations/createpromptresponseformattype.md
@@ -838,14 +824,25 @@ generatedFiles:
   - docs/models/operations/updatepromptphotorealversion.md
   - docs/models/operations/updatepromptpromptconfig.md
   - docs/models/operations/updatepromptpromptscontent.md
+  - docs/models/operations/updatepromptpromptsencodingformat.md
   - docs/models/operations/updatepromptpromptsformat.md
   - docs/models/operations/updatepromptpromptsfunction.md
+  - docs/models/operations/updatepromptpromptslanguage.md
   - docs/models/operations/updatepromptpromptsmessages.md
   - docs/models/operations/updatepromptpromptsmetadata.md
+  - docs/models/operations/updatepromptpromptsmodelparameters.md
+  - docs/models/operations/updatepromptpromptsmodeltype.md
+  - docs/models/operations/updatepromptpromptsphotorealversion.md
+  - docs/models/operations/updatepromptpromptspromptconfig.md
+  - docs/models/operations/updatepromptpromptsprovider.md
+  - docs/models/operations/updatepromptpromptsquality.md
+  - docs/models/operations/updatepromptpromptsreasoningeffort.md
+  - docs/models/operations/updatepromptpromptsresponseformat.md
   - docs/models/operations/updatepromptpromptsresponsetype.md
   - docs/models/operations/updatepromptpromptsrole.md
   - docs/models/operations/updatepromptpromptstoolcalls.md
   - docs/models/operations/updatepromptpromptstype.md
+  - docs/models/operations/updatepromptpromptsusecases.md
   - docs/models/operations/updatepromptprovider.md
   - docs/models/operations/updatepromptquality.md
   - docs/models/operations/updatepromptreasoningeffort.md
@@ -856,6 +853,9 @@ generatedFiles:
   - docs/models/operations/updatepromptresponseformat1.md
   - docs/models/operations/updatepromptresponseformat2.md
   - docs/models/operations/updatepromptresponseformatjsonschema.md
+  - docs/models/operations/updatepromptresponseformatprompts1.md
+  - docs/models/operations/updatepromptresponseformatprompts2.md
+  - docs/models/operations/updatepromptresponseformatpromptsresponse200type.md
   - docs/models/operations/updatepromptresponseformatpromptsresponsetype.md
   - docs/models/operations/updatepromptresponseformatpromptstype.md
   - docs/models/operations/updatepromptresponseformattype.md

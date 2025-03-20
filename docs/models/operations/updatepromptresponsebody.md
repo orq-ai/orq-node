@@ -11,20 +11,18 @@ let value: UpdatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "eb658eb0-beb2-4725-9ee4-59f24d7e2855",
+  domainId: "e3917557-b1eb-42f8-bf38-449ecb8e7dd3",
   created: "<value>",
   updated: "<value>",
-  displayName: "Horace_Volkman72",
+  displayName: "Adolfo_Fay73",
   promptConfig: {
     messages: [
       {
         role: "tool",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://somber-receptor.com/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },
@@ -47,5 +45,5 @@ let value: UpdatePromptResponseBody = {
 | `updatedById`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
 | `displayName`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | The prompt’s name, meant to be displayable in the UI.                                                                                                      |
 | `description`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
-| `promptConfig`                                                                                                                                             | [operations.UpdatePromptPromptConfig](../../models/operations/updatepromptpromptconfig.md)                                                                 | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
+| `promptConfig`                                                                                                                                             | [operations.UpdatePromptPromptsPromptConfig](../../models/operations/updatepromptpromptspromptconfig.md)                                                   | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
 | `metadata`                                                                                                                                                 | [operations.UpdatePromptPromptsMetadata](../../models/operations/updatepromptpromptsmetadata.md)                                                           | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |

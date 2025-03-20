@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptContentPrompts2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://lone-toaster.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

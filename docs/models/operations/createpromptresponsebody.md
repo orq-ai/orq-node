@@ -11,14 +11,14 @@ let value: CreatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "57b1eb2f-8f38-4449-8ecb-8e7dd3c0538b",
+  domainId: "9391fe63-470a-466c-9bf5-ec594d1326b8",
   created: "<value>",
   updated: "<value>",
-  displayName: "Jordon_Fay59",
+  displayName: "Aaron.Bergnaum93",
   promptConfig: {
     messages: [
       {
-        role: "exception",
+        role: "correction",
         content: [
           {
             type: "text",
@@ -45,5 +45,5 @@ let value: CreatePromptResponseBody = {
 | `updatedById`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
 | `displayName`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | The prompt’s name, meant to be displayable in the UI.                                                                                                      |
 | `description`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
-| `promptConfig`                                                                                                                                             | [operations.CreatePromptPromptsPromptConfig](../../models/operations/createpromptpromptspromptconfig.md)                                                   | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
+| `promptConfig`                                                                                                                                             | [operations.CreatePromptPromptConfig](../../models/operations/createpromptpromptconfig.md)                                                                 | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
 | `metadata`                                                                                                                                                 | [operations.CreatePromptPromptsMetadata](../../models/operations/createpromptpromptsmetadata.md)                                                           | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |

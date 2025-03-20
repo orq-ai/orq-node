@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItem21 = {
 const value: operations.CreateDatasetItem22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://red-sermon.biz/",
+    url: "https://twin-appliance.com/",
   },
 };
 ```

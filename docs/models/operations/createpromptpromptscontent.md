@@ -18,7 +18,7 @@ const value: operations.CreatePromptContentPrompts2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://winged-coil.biz/",
+      url: "https://kosher-kettledrum.net/",
     },
   },
 ];
