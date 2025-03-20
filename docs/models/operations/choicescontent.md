@@ -17,11 +17,8 @@ const value: string = "<value>";
 const value:
   operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[] = [
     {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "wav",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.DeploymentsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://funny-underneath.biz/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

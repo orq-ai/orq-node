@@ -7,7 +7,7 @@ Constrains effort on reasoning for reasoning models. Reducing reasoning effort c
 ```typescript
 import { GetOnePromptReasoningEffort } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptReasoningEffort = "low";
+let value: GetOnePromptReasoningEffort = "high";
 ```
 
 ## Values

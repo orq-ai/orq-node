@@ -10,7 +10,7 @@ import { UpdatePrompt22 } from "@orq-ai/node/models/operations";
 let value: UpdatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://specific-reservation.org/",
+    url: "https://witty-tribe.info/",
   },
 };
 ```

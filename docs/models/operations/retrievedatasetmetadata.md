@@ -6,8 +6,8 @@
 import { RetrieveDatasetMetadata } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatasetMetadata = {
-  totalVersions: 8451.54,
-  datapointsCount: 3827.64,
+  totalVersions: 9657.35,
+  datapointsCount: 6201.26,
 };
 ```
 

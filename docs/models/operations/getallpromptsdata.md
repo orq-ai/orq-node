@@ -9,19 +9,19 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "78b1369e-92fd-48e8-9edf-e026f42e7e2a",
+  domainId: "1368cf11-9bde-4f66-92aa-d17932d0717f",
   created: "<value>",
   updated: "<value>",
-  displayName: "Arden.Franey5",
+  displayName: "Ruth39",
   promptConfig: {
     messages: [
       {
-        role: "expected_output",
+        role: "user",
         content: [
           {
             type: "image_url",
             imageUrl: {
-              url: "https://motionless-exasperation.org",
+              url: "https://intrepid-obesity.com/",
             },
           },
         ],

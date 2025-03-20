@@ -11,15 +11,22 @@ let value: UpdatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "eff6fca3-32e4-477c-bd26-dd1241619391",
+  domainId: "eb658eb0-beb2-4725-9ee4-59f24d7e2855",
   created: "<value>",
   updated: "<value>",
-  displayName: "Torey.Flatley48",
+  displayName: "Horace_Volkman72",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
-        content: "<value>",
+        role: "tool",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://somber-receptor.com/",
+            },
+          },
+        ],
       },
     ],
   },

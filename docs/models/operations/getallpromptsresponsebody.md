@@ -14,20 +14,18 @@ let value: GetAllPromptsResponseBody = {
       id: "<id>",
       type: "prompt",
       owner: "<value>",
-      domainId: "576f25a1-9743-4857-b5f2-159a6f5badfe",
+      domainId: "dab81665-0b19-4baf-81d0-8685308d5311",
       created: "<value>",
       updated: "<value>",
-      displayName: "Maximilian.Corkery",
+      displayName: "Bailey.Bergstrom85",
       promptConfig: {
         messages: [
           {
             role: "tool",
             content: [
               {
-                type: "image_url",
-                imageUrl: {
-                  url: "https://celebrated-mountain.net/",
-                },
+                type: "text",
+                text: "<value>",
               },
             ],
           },

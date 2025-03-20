@@ -6,15 +6,17 @@
 import { CreatePromptRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptRequestBody = {
-  displayName: "Monroe.Schulist91",
+  displayName: "Fredy.Rosenbaum",
   promptConfig: {
     messages: [
       {
-        role: "user",
+        role: "exception",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://serpentine-annual.net",
+            },
           },
         ],
       },

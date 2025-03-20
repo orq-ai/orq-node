@@ -5,6 +5,8 @@
 import { deploymentsGetConfig } from "../funcs/deploymentsGetConfig.js";
 import { deploymentsInvoke } from "../funcs/deploymentsInvoke.js";
 import { deploymentsList } from "../funcs/deploymentsList.js";
+import { deploymentsStream } from "../funcs/deploymentsStream.js";
+import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
@@ -62,6 +64,23 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeploymentInvokeResponseBody | undefined> {
     return unwrapAsync(deploymentsInvoke(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Stream
+   *
+   * @remarks
+   * Stream deployment generation. Only supported for completions and chat completions.
+   */
+  async stream(
+    request: operations.DeploymentStreamRequestBody,
+    options?: RequestOptions,
+  ): Promise<EventStream<operations.DeploymentStreamResponseBody>> {
+    return unwrapAsync(deploymentsStream(
       this,
       request,
       options,

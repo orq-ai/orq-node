@@ -8,13 +8,13 @@ Dataset updated.
 import { UpdateDatasetResponseBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatasetResponseBody = {
-  id: "e10e83aa-1403-423a-a012-544cf8f61647",
-  displayName: "Jairo_Torp48",
-  projectId: "6b41eb9c-d7ee-4498-98f4-fe7dca53ad0a",
-  workspaceId: "e5782bd0-40fa-4f8c-9556-a5ef031037d3",
+  id: "ac8f9036-9c6b-4c5f-aae8-bce286e1fe17",
+  displayName: "Myron49",
+  projectId: "2374d95d-cfd6-42d0-95ef-ab088513569b",
+  workspaceId: "5004bacc-dbfe-4990-bf2b-d531b7be2e64",
   metadata: {
-    totalVersions: 9296.19,
-    datapointsCount: 6672.15,
+    totalVersions: 9906.52,
+    datapointsCount: 1988.92,
   },
 };
 ```

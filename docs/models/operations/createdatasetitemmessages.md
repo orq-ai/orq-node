@@ -6,7 +6,7 @@
 import { CreateDatasetItemMessages } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItemMessages = {
-  role: "prompt",
+  role: "tool",
   content: "<value>",
 };
 ```

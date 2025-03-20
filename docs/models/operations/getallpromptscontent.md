@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetAllPromptsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://reckless-unibody.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

@@ -7,7 +7,7 @@ The language that the prompt is written in. Use this field to categorize the pro
 ```typescript
 import { GetPromptVersionLanguage } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionLanguage = "French";
+let value: GetPromptVersionLanguage = "German";
 ```
 
 ## Values

@@ -7,7 +7,15 @@ import { MessagesUserMessage } from "@orq-ai/node/models/components";
 
 let value: MessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "wav",
+      },
+    },
+  ],
 };
 ```
 

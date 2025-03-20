@@ -16,8 +16,11 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentCreateMetricContent2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "mp3",
+    },
   },
 ];
 ```

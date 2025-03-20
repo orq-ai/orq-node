@@ -18,7 +18,7 @@ const value: operations.DeploymentCreateMetric21 = {
 const value: operations.DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://assured-sediment.com/",
+    url: "https://probable-jungle.org/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.DeploymentCreateMetric23 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

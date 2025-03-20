@@ -10,7 +10,7 @@ import { CreateDatasetItem22 } from "@orq-ai/node/models/operations";
 let value: CreateDatasetItem22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://blind-jungle.net",
+    url: "https://firsthand-individual.name/",
   },
 };
 ```

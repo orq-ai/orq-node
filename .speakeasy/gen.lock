@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 87a0d71ac9d73c0671bf3c03d56a5ae6
+  docChecksum: 2cf5c4395fbe199985510b649c63a342
   docVersion: "2.0"
   speakeasyVersion: 1.521.0
   generationVersion: 2.558.2
-  releaseVersion: 3.2.4
-  configChecksum: 1ea2293db885f87fa2575b25765825f7
+  releaseVersion: 3.2.5
+  configChecksum: 220ab26766fdd3f1a2d8bc38c2f18df6
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -35,6 +35,8 @@ features:
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
+    serverEvents: 0.1.5
+    serverEventsSentinels: 0.1.0
     unions: 2.85.8
     uploadStreams: 0.1.0
 generatedFiles:
@@ -417,6 +419,89 @@ generatedFiles:
   - docs/models/operations/deploymentsrole.md
   - docs/models/operations/deploymentstoolcalls.md
   - docs/models/operations/deploymentstools.md
+  - docs/models/operations/deploymentstream21.md
+  - docs/models/operations/deploymentstream22.md
+  - docs/models/operations/deploymentstream23.md
+  - docs/models/operations/deploymentstream2deployments1.md
+  - docs/models/operations/deploymentstream2deployments2.md
+  - docs/models/operations/deploymentstream2deployments3.md
+  - docs/models/operations/deploymentstream2deploymentsdetail.md
+  - docs/models/operations/deploymentstream2deploymentsformat.md
+  - docs/models/operations/deploymentstream2deploymentsimageurl.md
+  - docs/models/operations/deploymentstream2deploymentsinputaudio.md
+  - docs/models/operations/deploymentstream2deploymentsrefusalcontentpart.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3contenttype.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3type.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4contenttype.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4type.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessagestype.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodyprefixmessagestype.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodytype.md
+  - docs/models/operations/deploymentstream2deploymentsrequesttype.md
+  - docs/models/operations/deploymentstream2deploymentstextcontentpart.md
+  - docs/models/operations/deploymentstream2deploymentstype.md
+  - docs/models/operations/deploymentstream2detail.md
+  - docs/models/operations/deploymentstream2format.md
+  - docs/models/operations/deploymentstream2imageurl.md
+  - docs/models/operations/deploymentstream2inputaudio.md
+  - docs/models/operations/deploymentstream2refusalcontentpart.md
+  - docs/models/operations/deploymentstream2textcontentpart.md
+  - docs/models/operations/deploymentstream2type.md
+  - docs/models/operations/deploymentstreamchoices.md
+  - docs/models/operations/deploymentstreamcontent2.md
+  - docs/models/operations/deploymentstreamcontentdeployments2.md
+  - docs/models/operations/deploymentstreamcontentdeploymentsrequest2.md
+  - docs/models/operations/deploymentstreamcontentdeploymentsrequestrequestbody2.md
+  - docs/models/operations/deploymentstreamdata.md
+  - docs/models/operations/deploymentstreamdeploymentsmetadata.md
+  - docs/models/operations/deploymentstreamdocuments.md
+  - docs/models/operations/deploymentstreamglobals.md
+  - docs/models/operations/deploymentstreaminputs.md
+  - docs/models/operations/deploymentstreaminvokeoptions.md
+  - docs/models/operations/deploymentstreammessage.md
+  - docs/models/operations/deploymentstreammessage1.md
+  - docs/models/operations/deploymentstreammessage2.md
+  - docs/models/operations/deploymentstreammessage3.md
+  - docs/models/operations/deploymentstreammessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentstreammessagedeploymentsrole.md
+  - docs/models/operations/deploymentstreammessagefunction.md
+  - docs/models/operations/deploymentstreammessagerole.md
+  - docs/models/operations/deploymentstreammessages.md
+  - docs/models/operations/deploymentstreammessagesassistantmessage.md
+  - docs/models/operations/deploymentstreammessagesaudio.md
+  - docs/models/operations/deploymentstreammessagescontent.md
+  - docs/models/operations/deploymentstreammessagesdeploymentscontent.md
+  - docs/models/operations/deploymentstreammessagesdeploymentsrequestcontent.md
+  - docs/models/operations/deploymentstreammessagesdeploymentsrequestrequestbody5role.md
+  - docs/models/operations/deploymentstreammessagesdeploymentsrequestrequestbodyrole.md
+  - docs/models/operations/deploymentstreammessagesdeploymentsrequestrole.md
+  - docs/models/operations/deploymentstreammessagesdeploymentsrole.md
+  - docs/models/operations/deploymentstreammessagesdevelopermessage.md
+  - docs/models/operations/deploymentstreammessagesfunction.md
+  - docs/models/operations/deploymentstreammessagesrole.md
+  - docs/models/operations/deploymentstreammessagessystemmessage.md
+  - docs/models/operations/deploymentstreammessagestoolcalls.md
+  - docs/models/operations/deploymentstreammessagestoolmessage.md
+  - docs/models/operations/deploymentstreammessagestype.md
+  - docs/models/operations/deploymentstreammessagesusermessage.md
+  - docs/models/operations/deploymentstreammessagetoolcalls.md
+  - docs/models/operations/deploymentstreammessagetype.md
+  - docs/models/operations/deploymentstreammetadata.md
+  - docs/models/operations/deploymentstreamobject.md
+  - docs/models/operations/deploymentstreamprefixmessages.md
+  - docs/models/operations/deploymentstreamprefixmessagescontent.md
+  - docs/models/operations/deploymentstreamprefixmessagesdeploymentscontent.md
+  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestcontent.md
+  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestrequestbody5role.md
+  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestrequestbodyrole.md
+  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrequestrole.md
+  - docs/models/operations/deploymentstreamprefixmessagesdeploymentsrole.md
+  - docs/models/operations/deploymentstreamprefixmessagesrole.md
+  - docs/models/operations/deploymentstreamprefixmessagestype.md
+  - docs/models/operations/deploymentstreamprovider.md
+  - docs/models/operations/deploymentstreamrequestbody.md
+  - docs/models/operations/deploymentstreamresponsebody.md
+  - docs/models/operations/deploymentstreamretrievals.md
   - docs/models/operations/deploymentstype.md
   - docs/models/operations/detail.md
   - docs/models/operations/developermessage.md
@@ -633,9 +718,17 @@ generatedFiles:
   - docs/models/operations/performance.md
   - docs/models/operations/photorealversion.md
   - docs/models/operations/prefixmessages.md
+  - docs/models/operations/prefixmessagesassistantmessage.md
+  - docs/models/operations/prefixmessagesaudio.md
   - docs/models/operations/prefixmessagescontent.md
+  - docs/models/operations/prefixmessagesdevelopermessage.md
+  - docs/models/operations/prefixmessagesfunction.md
   - docs/models/operations/prefixmessagesrole.md
+  - docs/models/operations/prefixmessagessystemmessage.md
+  - docs/models/operations/prefixmessagestoolcalls.md
+  - docs/models/operations/prefixmessagestoolmessage.md
   - docs/models/operations/prefixmessagestype.md
+  - docs/models/operations/prefixmessagesusermessage.md
   - docs/models/operations/promptconfig.md
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
@@ -804,6 +897,7 @@ generatedFiles:
   - src/funcs/deploymentsInvoke.ts
   - src/funcs/deploymentsList.ts
   - src/funcs/deploymentsMetricsCreate.ts
+  - src/funcs/deploymentsStream.ts
   - src/funcs/feedbackCreate.ts
   - src/funcs/filesCreate.ts
   - src/funcs/filesDelete.ts
@@ -826,6 +920,7 @@ generatedFiles:
   - src/lib/dlv.ts
   - src/lib/encodings.ts
   - src/lib/env.ts
+  - src/lib/event-streams.ts
   - src/lib/files.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
@@ -867,6 +962,7 @@ generatedFiles:
   - src/mcp-server/tools/deploymentsInvoke.ts
   - src/mcp-server/tools/deploymentsList.ts
   - src/mcp-server/tools/deploymentsMetricsCreate.ts
+  - src/mcp-server/tools/deploymentsStream.ts
   - src/mcp-server/tools/feedbackCreate.ts
   - src/mcp-server/tools/filesCreate.ts
   - src/mcp-server/tools/filesDelete.ts
@@ -904,6 +1000,7 @@ generatedFiles:
   - src/models/operations/deploymentgetconfig.ts
   - src/models/operations/deploymentinvoke.ts
   - src/models/operations/deployments.ts
+  - src/models/operations/deploymentstream.ts
   - src/models/operations/filedelete.ts
   - src/models/operations/fileget.ts
   - src/models/operations/filelist.ts

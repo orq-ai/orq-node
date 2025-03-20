@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.RetrieveDatapointContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://soggy-rule.org",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

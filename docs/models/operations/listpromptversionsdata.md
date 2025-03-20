@@ -10,7 +10,7 @@ let value: ListPromptVersionsData = {
   promptConfig: {
     messages: [
       {
-        role: "assistant",
+        role: "prompt",
         content: "<value>",
       },
     ],

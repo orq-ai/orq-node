@@ -18,7 +18,7 @@ const value: operations.ListPromptVersions21 = {
 const value: operations.ListPromptVersions22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://unsteady-appliance.biz/",
+    url: "https://weekly-sauerkraut.org",
   },
 };
 ```

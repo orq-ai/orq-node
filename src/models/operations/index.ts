@@ -16,6 +16,7 @@ export * from "./deploymentcreatemetric.js";
 export * from "./deploymentgetconfig.js";
 export * from "./deploymentinvoke.js";
 export * from "./deployments.js";
+export * from "./deploymentstream.js";
 export * from "./filedelete.js";
 export * from "./fileget.js";
 export * from "./filelist.js";

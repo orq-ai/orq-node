@@ -27,6 +27,7 @@ For more information about the API: [orq.ai Documentation](https://docs.orq.ai)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
+  * [Server-sent event streaming](#server-sent-event-streaming)
   * [File uploads](#file-uploads)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -256,6 +257,7 @@ run();
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
+* [stream](docs/sdks/deployments/README.md#stream) - Stream
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)
 
@@ -322,6 +324,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
 - [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
+- [`deploymentsStream`](docs/sdks/deployments/README.md#stream) - Stream
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Create file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
@@ -338,6 +341,41 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start Server-sent event streaming [eventstream] -->
+## Server-sent event streaming
+
+[Server-sent events][mdn-sse] are used to stream content from certain
+operations. These operations will expose the stream as an async iterable that
+can be consumed using a [`for await...of`][mdn-for-await-of] loop. The loop will
+terminate when the server no longer has any events to send and closes the
+underlying connection.
+
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.deployments.stream({
+    key: "<key>",
+  });
+
+  for await (const event of result) {
+    // Handle the event
+    console.log(event);
+  }
+}
+
+run();
+
+```
+
+[mdn-sse]: https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events
+[mdn-for-await-of]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of
+<!-- End Server-sent event streaming [eventstream] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads

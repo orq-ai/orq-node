@@ -10,8 +10,15 @@ import { CreatePromptPromptsPromptConfig } from "@orq-ai/node/models/operations"
 let value: CreatePromptPromptsPromptConfig = {
   messages: [
     {
-      role: "correction",
-      content: "<value>",
+      role: "exception",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://electric-onset.com",
+          },
+        },
+      ],
     },
   ],
 };

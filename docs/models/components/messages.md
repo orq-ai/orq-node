@@ -26,7 +26,15 @@ const value: components.MessagesSystemMessage = {
 ```typescript
 const value: components.MessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "wav",
+      },
+    },
+  ],
 };
 ```
 

@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.Two[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://surprised-sticker.com",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

@@ -6,7 +6,7 @@
 import { ListPromptVersionsMessages } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersionsMessages = {
-  role: "exception",
+  role: "assistant",
   content: [
     {
       type: "text",
