@@ -32,6 +32,20 @@ export class Prompts extends ClientSDK {
   }
 
   /**
+   * Create a prompt
+   */
+  async create(
+    request?: operations.CreatePromptRequestBody | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.CreatePromptResponseBody> {
+    return unwrapAsync(promptsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Retrieve a prompt
    *
    * @remarks
@@ -70,20 +84,6 @@ export class Prompts extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(promptsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create a prompt
-   */
-  async create(
-    request?: operations.CreatePromptRequestBody | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.CreatePromptResponseBody> {
-    return unwrapAsync(promptsCreate(
       this,
       request,
       options,

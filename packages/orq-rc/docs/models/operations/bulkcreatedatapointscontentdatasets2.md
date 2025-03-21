@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapoints2Datasets1 = {
 const value: operations.BulkCreateDatapoints2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://straight-basket.biz/",
+    url: "https://boring-netsuke.org",
   },
 };
 ```

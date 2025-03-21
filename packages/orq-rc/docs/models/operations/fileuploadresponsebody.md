@@ -10,10 +10,10 @@ import { FileUploadResponseBody } from "@orq-ai/node/models/operations";
 let value: FileUploadResponseBody = {
   id: "<id>",
   objectName: "<value>",
-  purpose: "batch",
-  bytes: 4572.23,
+  purpose: "knowledge_datasource",
+  bytes: 7487.89,
   fileName: "example.file",
-  workspaceId: "f9ded2a6-164d-40f5-8502-6e1fd7539006",
+  workspaceId: "3274d38f-adfc-4bff-a714-26296ef849e6",
 };
 ```
 

@@ -6,15 +6,8 @@
 import { GetAllPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsMessages = {
-  role: "prompt",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://aggressive-possession.net",
-      },
-    },
-  ],
+  role: "expected_output",
+  content: "<value>",
 };
 ```
 

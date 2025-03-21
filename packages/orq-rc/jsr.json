@@ -2,7 +2,7 @@
 
 {
   "name": "@orq-ai/node",
-  "version": "3.2.0-rc.62",
+  "version": "3.3.0-rc.0",
   "exports": {
     ".": "./src/index.ts",    
     "./models/errors": "./src/models/errors/index.ts",    
@@ -12,6 +12,7 @@
     "./lib/http": "./src/lib/http.ts",
     "./lib/retries": "./src/lib/retries.ts",
     "./lib/sdks": "./src/lib/sdks.ts",
+    "./lib/event-streams": "./src/lib/event-streams.ts",
     "./types": "./src/types/index.ts"
   },
   "publish": {

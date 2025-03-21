@@ -10,10 +10,10 @@ import { FileGetResponseBody } from "@orq-ai/node/models/operations";
 let value: FileGetResponseBody = {
   id: "<id>",
   objectName: "<value>",
-  purpose: "retrieval",
-  bytes: 4174.86,
+  purpose: "knowledge_datasource",
+  bytes: 9223.48,
   fileName: "example.file",
-  workspaceId: "296ef849-e684-4763-a845-8c5ed04715ba",
+  workspaceId: "8edfe026-f42e-47e2-9a71-b3000ebea84f",
 };
 ```
 

@@ -10,7 +10,7 @@ import { CreatePrompt22 } from "@orq-ai/node/models/operations";
 let value: CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://dental-gymnast.net/",
+    url: "https://wretched-ribbon.info",
   },
 };
 ```

@@ -6,12 +6,12 @@
 import { CreateDatasetItemDatasetsMessages } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItemDatasetsMessages = {
-  role: "user",
+  role: "assistant",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://robust-appliance.name",
+        url: "https://whimsical-designation.net/",
       },
     },
   ],

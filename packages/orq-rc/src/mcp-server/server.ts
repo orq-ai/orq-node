@@ -30,6 +30,7 @@ import { tool$deploymentsGetConfig } from "./tools/deploymentsGetConfig.js";
 import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
 import { tool$deploymentsMetricsCreate } from "./tools/deploymentsMetricsCreate.js";
+import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
@@ -56,7 +57,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.2.0-rc.62",
+    version: "3.3.0-rc.0",
   });
 
   const client = new OrqCore({
@@ -93,15 +94,16 @@ export function createMCPServer(deps: {
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
   tool(tool$deploymentsInvoke);
+  tool(tool$deploymentsStream);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
   tool(tool$filesDelete);
   tool(tool$promptsList);
+  tool(tool$promptsCreate);
   tool(tool$promptsRetrieve);
   tool(tool$promptsUpdate);
   tool(tool$promptsDelete);
-  tool(tool$promptsCreate);
   tool(tool$promptsListVersions);
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);

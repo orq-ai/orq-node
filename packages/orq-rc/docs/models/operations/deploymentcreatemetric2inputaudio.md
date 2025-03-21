@@ -7,7 +7,7 @@ import { DeploymentCreateMetric2InputAudio } from "@orq-ai/node/models/operation
 
 let value: DeploymentCreateMetric2InputAudio = {
   data: "<value>",
-  format: "wav",
+  format: "mp3",
 };
 ```
 

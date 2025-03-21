@@ -18,7 +18,7 @@ const value: components.DeploymentsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://funny-underneath.biz/",
+      url: "https://flickering-management.biz",
     },
   },
 ];

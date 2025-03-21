@@ -18,8 +18,8 @@ const value:
   operations.DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2[] =
     [
       {
-        type: "refusal",
-        refusal: "<value>",
+        type: "text",
+        text: "<value>",
       },
     ];
 ```

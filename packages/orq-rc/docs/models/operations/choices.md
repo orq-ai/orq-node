@@ -26,7 +26,12 @@ const value: operations.ChoicesSystemMessage = {
 ```typescript
 const value: operations.ChoicesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

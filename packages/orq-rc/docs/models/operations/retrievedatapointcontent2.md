@@ -18,7 +18,7 @@ const value: operations.RetrieveDatapoint21 = {
 const value: operations.RetrieveDatapoint22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://agreeable-anticodon.biz/",
+    url: "https://dazzling-step-mother.net/",
   },
 };
 ```

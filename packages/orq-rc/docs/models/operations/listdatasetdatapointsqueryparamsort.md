@@ -7,7 +7,7 @@ List sorting preference.
 ```typescript
 import { ListDatasetDatapointsQueryParamSort } from "@orq-ai/node/models/operations";
 
-let value: ListDatasetDatapointsQueryParamSort = "desc";
+let value: ListDatasetDatapointsQueryParamSort = "asc";
 ```
 
 ## Values

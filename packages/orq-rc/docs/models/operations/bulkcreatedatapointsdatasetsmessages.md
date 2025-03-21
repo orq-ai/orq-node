@@ -6,12 +6,12 @@
 import { BulkCreateDatapointsDatasetsMessages } from "@orq-ai/node/models/operations";
 
 let value: BulkCreateDatapointsDatasetsMessages = {
-  role: "assistant",
+  role: "correction",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://whimsical-designation.net/",
+        url: "https://admired-cork.biz/",
       },
     },
   ],

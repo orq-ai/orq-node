@@ -10,7 +10,7 @@ import { PromptConfig } from "@orq-ai/node/models/operations";
 let value: PromptConfig = {
   messages: [
     {
-      role: "user",
+      role: "tool",
       content: "<value>",
     },
   ],
@@ -27,4 +27,4 @@ let value: PromptConfig = {
 | `modelParameters`                                                                    | [operations.ModelParameters](../../models/operations/modelparameters.md)             | :heavy_minus_sign:                                                                   | Model Parameters: Not all parameters apply to every model                            |
 | `provider`                                                                           | [operations.Provider](../../models/operations/provider.md)                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |
 | `version`                                                                            | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `messages`                                                                           | [operations.UpdatePromptMessages](../../models/operations/updatepromptmessages.md)[] | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `messages`                                                                           | [operations.CreatePromptMessages](../../models/operations/createpromptmessages.md)[] | :heavy_check_mark:                                                                   | N/A                                                                                  |

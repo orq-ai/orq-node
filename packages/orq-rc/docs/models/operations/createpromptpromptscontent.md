@@ -18,7 +18,7 @@ const value: operations.CreatePromptContentPrompts2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://gripping-nerve.org/",
+      url: "https://kosher-kettledrum.net/",
     },
   },
 ];
