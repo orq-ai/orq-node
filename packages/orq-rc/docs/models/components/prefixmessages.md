@@ -26,7 +26,12 @@ const value: components.SystemMessage = {
 ```typescript
 const value: components.UserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -43,7 +48,9 @@ const value: components.AssistantMessage = {
 ```typescript
 const value: components.ToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

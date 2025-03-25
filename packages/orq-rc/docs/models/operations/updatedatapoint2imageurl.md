@@ -6,7 +6,7 @@
 import { UpdateDatapoint2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapoint2ImageUrl = {
-  url: "https://those-allocation.biz",
+  url: "https://limp-venom.biz",
 };
 ```
 

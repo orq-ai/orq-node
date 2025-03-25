@@ -9,23 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * List sorting preference.
- */
-export const Sort = {
-  Asc: "asc",
-  Desc: "desc",
-} as const;
-/**
- * List sorting preference.
- */
-export type Sort = ClosedEnum<typeof Sort>;
-
 export type DeploymentsRequest = {
-  /**
-   * List sorting preference.
-   */
-  sort?: Sort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -501,32 +485,11 @@ export type DeploymentsResponseBody = {
 };
 
 /** @internal */
-export const Sort$inboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
-  Sort,
-);
-
-/** @internal */
-export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> =
-  Sort$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Sort$ {
-  /** @deprecated use `Sort$inboundSchema` instead. */
-  export const inboundSchema = Sort$inboundSchema;
-  /** @deprecated use `Sort$outboundSchema` instead. */
-  export const outboundSchema = Sort$outboundSchema;
-}
-
-/** @internal */
 export const DeploymentsRequest$inboundSchema: z.ZodType<
   DeploymentsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  sort: Sort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -539,7 +502,6 @@ export const DeploymentsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeploymentsRequest$Outbound = {
-  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -551,7 +513,6 @@ export const DeploymentsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentsRequest
 > = z.object({
-  sort: Sort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),

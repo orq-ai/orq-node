@@ -16,9 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: operations.Two[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://practical-supplier.biz",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "mp3",
     },
   },
 ];

@@ -6,7 +6,7 @@
 import { DeploymentStreamMessage2 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessage2 = {
-  role: "exception",
+  role: "expected_output",
   content: "<value>",
 };
 ```

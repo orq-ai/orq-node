@@ -6,12 +6,11 @@
 import { Data } from "@orq-ai/node/models/operations";
 
 let value: Data = {
-  id: "999fa56b-0aa3-4255-997f-132a47321a23",
+  id: "4c790999-fa56-4b0a-8a32-5597f132a473",
   created: "<value>",
   updated: "<value>",
   key: "<key>",
-  description:
-    "newsstand farm bourgeoisie ah how elliptical aha well-to-do below",
+  description: "gosh arraign barracks",
   promptConfig: {
     tools: [
       {
@@ -27,21 +26,14 @@ let value: Data = {
         },
       },
     ],
-    model: "Land Cruiser",
-    modelType: "vision",
+    model: "Model 3",
+    modelType: "tts",
     modelParameters: {},
-    provider: "anthropic",
+    provider: "replicate",
     messages: [
       {
-        role: "user",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://quarrelsome-pecan.info",
-            },
-          },
-        ],
+        role: "tool",
+        content: "<value>",
       },
     ],
   },

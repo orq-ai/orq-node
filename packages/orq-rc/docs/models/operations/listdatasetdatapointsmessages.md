@@ -6,13 +6,11 @@
 import { ListDatasetDatapointsMessages } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetDatapointsMessages = {
-  role: "tool",
+  role: "prompt",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://delirious-cantaloupe.biz/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

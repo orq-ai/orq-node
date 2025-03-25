@@ -8,7 +8,7 @@
 ```typescript
 const value: operations.Message1 = {
   type: "tool_calls",
-  role: "expected_output",
+  role: "assistant",
   toolCalls: [
     {
       type: "function",
@@ -26,7 +26,7 @@ const value: operations.Message1 = {
 ```typescript
 const value: operations.Message2 = {
   type: "content",
-  role: "correction",
+  role: "expected_output",
   content: "<value>",
 };
 ```
@@ -36,8 +36,8 @@ const value: operations.Message2 = {
 ```typescript
 const value: operations.Message3 = {
   type: "image",
-  role: "user",
-  url: "https://impure-department.com/",
+  role: "exception",
+  url: "https://productive-fundraising.com/",
 };
 ```
 

@@ -7,7 +7,7 @@ The type of the model
 ```typescript
 import { GetPromptVersionModelType } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionModelType = "embedding";
+let value: GetPromptVersionModelType = "rerank";
 ```
 
 ## Values

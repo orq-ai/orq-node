@@ -18,7 +18,7 @@ const value: operations.One = {
 const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://ajar-reward.biz/",
+    url: "https://fake-backburn.info/",
   },
 };
 ```

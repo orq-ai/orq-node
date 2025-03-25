@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { ListPromptVersionsRole } from "@orq-ai/node/models/operations";
 
-let value: ListPromptVersionsRole = "system";
+let value: ListPromptVersionsRole = "tool";
 ```
 
 ## Values

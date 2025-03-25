@@ -43,9 +43,7 @@ const value: operations.DeploymentStreamMessagesAssistantMessage = {
 ```typescript
 const value: operations.DeploymentStreamMessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

@@ -6,7 +6,7 @@
 import { DeploymentStream2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream2ImageUrl = {
-  url: "https://rubbery-sauerkraut.net/",
+  url: "https://rectangular-developmental.info/",
 };
 ```
 

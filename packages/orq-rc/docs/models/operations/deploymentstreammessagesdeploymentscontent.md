@@ -17,8 +17,8 @@ const value: string = "<value>";
 const value:
   operations.DeploymentStreamContentDeploymentsRequestRequestBody2[] = [
     {
-      type: "refusal",
-      refusal: "<value>",
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

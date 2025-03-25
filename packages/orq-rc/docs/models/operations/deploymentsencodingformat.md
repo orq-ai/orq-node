@@ -7,7 +7,7 @@ The format to return the embeddings
 ```typescript
 import { DeploymentsEncodingFormat } from "@orq-ai/node/models/operations";
 
-let value: DeploymentsEncodingFormat = "base64";
+let value: DeploymentsEncodingFormat = "float";
 ```
 
 ## Values

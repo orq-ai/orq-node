@@ -18,7 +18,7 @@ const value: operations.GetOnePrompt21 = {
 const value: operations.GetOnePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://incomparable-gazebo.name",
+    url: "https://lucky-cd.info",
   },
 };
 ```

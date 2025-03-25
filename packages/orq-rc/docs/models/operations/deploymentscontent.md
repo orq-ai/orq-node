@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://productive-charm.org/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

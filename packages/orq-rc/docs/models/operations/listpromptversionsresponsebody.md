@@ -15,7 +15,7 @@ let value: ListPromptVersionsResponseBody = {
       promptConfig: {
         messages: [
           {
-            role: "tool",
+            role: "prompt",
             content: "<value>",
           },
         ],

@@ -33,8 +33,8 @@ const value: operations.DeploymentStreamMessage2 = {
 
 ```typescript
 const value: operations.DeploymentStreamMessage3 = {
-  role: "system",
-  url: "https://happy-go-lucky-formamide.com",
+  role: "prompt",
+  url: "https://cute-secrecy.org/",
 };
 ```
 

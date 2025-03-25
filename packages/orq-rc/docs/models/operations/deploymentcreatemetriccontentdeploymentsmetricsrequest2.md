@@ -18,7 +18,7 @@ const value: operations.DeploymentCreateMetric2DeploymentsMetrics1 = {
 const value: operations.DeploymentCreateMetric2DeploymentsMetrics2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://unsung-entry.org",
+    url: "https://big-scenario.biz",
   },
 };
 ```

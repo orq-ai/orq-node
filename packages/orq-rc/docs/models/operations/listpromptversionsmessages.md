@@ -9,10 +9,8 @@ let value: ListPromptVersionsMessages = {
   role: "tool",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://thick-jungle.biz",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

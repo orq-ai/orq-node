@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 3e079926894a56d336e53a90b7c7ce09
+  docChecksum: e8cbd88b56c9ea99b04c7318808bff8c
   docVersion: "2.0"
-  speakeasyVersion: 1.521.1
-  generationVersion: 2.558.5
-  releaseVersion: 3.3.0-rc.1
-  configChecksum: ec92d40d8b69d2d48f027f5f62ccbc32
+  speakeasyVersion: 1.523.2
+  generationVersion: 2.560.1
+  releaseVersion: 3.3.0-rc.7
+  configChecksum: e393a72984960e7962b50ff9f596aea2
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -532,7 +532,6 @@ generatedFiles:
   - docs/models/operations/getallpromptspromptstype.md
   - docs/models/operations/getallpromptsprovider.md
   - docs/models/operations/getallpromptsquality.md
-  - docs/models/operations/getallpromptsqueryparamsort.md
   - docs/models/operations/getallpromptsreasoningeffort.md
   - docs/models/operations/getallpromptsrequest.md
   - docs/models/operations/getallpromptsresponsebody.md
@@ -629,7 +628,6 @@ generatedFiles:
   - docs/models/operations/listdatasetdatapointsfunction.md
   - docs/models/operations/listdatasetdatapointsmessages.md
   - docs/models/operations/listdatasetdatapointsobject.md
-  - docs/models/operations/listdatasetdatapointsqueryparamsort.md
   - docs/models/operations/listdatasetdatapointsrequest.md
   - docs/models/operations/listdatasetdatapointsresponsebody.md
   - docs/models/operations/listdatasetdatapointsrole.md
@@ -638,7 +636,6 @@ generatedFiles:
   - docs/models/operations/listdatasetsdata.md
   - docs/models/operations/listdatasetsmetadata.md
   - docs/models/operations/listdatasetsobject.md
-  - docs/models/operations/listdatasetsqueryparamsort.md
   - docs/models/operations/listdatasetsrequest.md
   - docs/models/operations/listdatasetsresponsebody.md
   - docs/models/operations/listpromptversions21.md
@@ -662,7 +659,6 @@ generatedFiles:
   - docs/models/operations/listpromptversionspromptconfig.md
   - docs/models/operations/listpromptversionsprovider.md
   - docs/models/operations/listpromptversionsquality.md
-  - docs/models/operations/listpromptversionsqueryparamsort.md
   - docs/models/operations/listpromptversionsreasoningeffort.md
   - docs/models/operations/listpromptversionsrequest.md
   - docs/models/operations/listpromptversionsresponsebody.md
@@ -720,7 +716,6 @@ generatedFiles:
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
   - docs/models/operations/quality.md
-  - docs/models/operations/queryparamsort.md
   - docs/models/operations/reasoningeffort.md
   - docs/models/operations/refusalcontentpart.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
@@ -751,7 +746,6 @@ generatedFiles:
   - docs/models/operations/retrievedatasetrequest.md
   - docs/models/operations/retrievedatasetresponsebody.md
   - docs/models/operations/role.md
-  - docs/models/operations/sort.md
   - docs/models/operations/systemmessage.md
   - docs/models/operations/textcontentpart.md
   - docs/models/operations/three.md

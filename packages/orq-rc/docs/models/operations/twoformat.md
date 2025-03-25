@@ -7,7 +7,7 @@ The format of the encoded audio data. Currently supports `wav` and `mp3`.
 ```typescript
 import { TwoFormat } from "@orq-ai/node/models/operations";
 
-let value: TwoFormat = "mp3";
+let value: TwoFormat = "wav";
 ```
 
 ## Values

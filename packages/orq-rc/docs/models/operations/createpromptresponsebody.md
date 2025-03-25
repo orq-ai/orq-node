@@ -11,20 +11,15 @@ let value: CreatePromptResponseBody = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "9391fe63-470a-466c-9bf5-ec594d1326b8",
+  domainId: "eff6fca3-32e4-477c-bd26-dd1241619391",
   created: "<value>",
   updated: "<value>",
-  displayName: "Aaron.Bergnaum93",
+  displayName: "Torey.Flatley48",
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: [
-          {
-            type: "text",
-            text: "<value>",
-          },
-        ],
+        role: "prompt",
+        content: "<value>",
       },
     ],
   },

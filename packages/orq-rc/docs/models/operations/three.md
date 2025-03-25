@@ -9,7 +9,7 @@ let value: Three = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

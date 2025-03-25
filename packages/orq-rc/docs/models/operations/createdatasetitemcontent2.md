@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItem21 = {
 const value: operations.CreateDatasetItem22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://twin-appliance.com/",
+    url: "https://wavy-word.biz/",
   },
 };
 ```

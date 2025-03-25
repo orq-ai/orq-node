@@ -10,8 +10,15 @@ import { GetPromptVersionPromptConfig } from "@orq-ai/node/models/operations";
 let value: GetPromptVersionPromptConfig = {
   messages: [
     {
-      role: "tool",
-      content: "<value>",
+      role: "expected_output",
+      content: [
+        {
+          type: "image_url",
+          imageUrl: {
+            url: "https://fake-doing.com/",
+          },
+        },
+      ],
     },
   ],
 };

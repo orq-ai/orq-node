@@ -18,7 +18,7 @@ const value: operations.GetPromptVersion21 = {
 const value: operations.GetPromptVersion22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://second-mathematics.net",
+    url: "https://productive-unibody.net",
   },
 };
 ```

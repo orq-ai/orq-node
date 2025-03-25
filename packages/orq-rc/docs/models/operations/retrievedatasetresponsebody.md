@@ -8,13 +8,13 @@ Dataset retrieved successfully. Returns the complete dataset object.
 import { RetrieveDatasetResponseBody } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatasetResponseBody = {
-  id: "5285ff99-fec5-4537-afe1-0e83aa140323",
-  displayName: "Amara.Collier29",
-  projectId: "cf8f6164-7a7e-4eb7-a26b-41eb9cd7ee49",
-  workspaceId: "8f4fe7dc-a53a-4d0a-b7e5-782bd040faf8",
+  id: "bf4ca9cf-02c1-4834-ab0d-788a515285ff",
+  displayName: "Lia.Torphy-Runolfsdottir36",
+  projectId: "7fe10e83-aa14-4032-93a0-12544cf8f616",
+  workspaceId: "7a7eeb72-6b41-4eb9-bcd7-ee4988f4fe7d",
   metadata: {
-    totalVersions: 3744.14,
-    datapointsCount: 3538.19,
+    totalVersions: 6778.95,
+    datapointsCount: 3198.34,
   },
 };
 ```
