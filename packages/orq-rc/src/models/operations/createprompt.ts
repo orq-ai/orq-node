@@ -369,6 +369,9 @@ export const UseCases = {
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
+  SentimentAnalysis: "Sentiment analysis",
 } as const;
 export type UseCases = ClosedEnum<typeof UseCases>;
 
@@ -823,6 +826,9 @@ export const CreatePromptUseCases = {
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
+  SentimentAnalysis: "Sentiment analysis",
 } as const;
 export type CreatePromptUseCases = ClosedEnum<typeof CreatePromptUseCases>;
 

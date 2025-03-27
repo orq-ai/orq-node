@@ -18,13 +18,16 @@ Files are used to upload documents that can be used with features like [Deployme
 
 ```typescript
 import { Orq } from "@orq-ai/node";
+import { openAsBlob } from "node:fs";
 
 const orq = new Orq({
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await orq.files.create();
+  const result = await orq.files.create({
+    file: await openAsBlob("example.file"),
+  });
 
   // Handle the result
   console.log(result);
@@ -40,6 +43,7 @@ The standalone function version of this method:
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
 import { filesCreate } from "@orq-ai/node/funcs/filesCreate.js";
+import { openAsBlob } from "node:fs";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -48,7 +52,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await filesCreate(orq);
+  const res = await filesCreate(orq, {
+    file: await openAsBlob("example.file"),
+  });
 
   if (!res.ok) {
     throw res.error;

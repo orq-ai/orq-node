@@ -409,6 +409,9 @@ export const GetOnePromptUseCases = {
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
+  SentimentAnalysis: "Sentiment analysis",
 } as const;
 export type GetOnePromptUseCases = ClosedEnum<typeof GetOnePromptUseCases>;
 

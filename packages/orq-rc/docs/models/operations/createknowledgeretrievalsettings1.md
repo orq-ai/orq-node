@@ -1,0 +1,20 @@
+# CreateKnowledgeRetrievalSettings1
+
+## Example Usage
+
+```typescript
+import { CreateKnowledgeRetrievalSettings1 } from "@orq-ai/node/models/operations";
+
+let value: CreateKnowledgeRetrievalSettings1 = {
+  type: "vector_search",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                               | [operations.CreateKnowledgeRetrievalSettingsKnowledgeResponseType](../../models/operations/createknowledgeretrievalsettingsknowledgeresponsetype.md) | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `topK`                                                                                                                                               | *number*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Used to filter chunks that are most similar to the query                                                                                             |
+| `threshold`                                                                                                                                          | *number*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.                                                  |
+| `rerankConfig`                                                                                                                                       | [operations.CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig](../../models/operations/createknowledgeretrievalsettingsknowledgererankconfig.md) | :heavy_minus_sign:                                                                                                                                   | N/A                                                                                                                                                  |

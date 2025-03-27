@@ -1,0 +1,20 @@
+# UpdateKnowledgeRetrievalSettingsKnowledge1
+
+## Example Usage
+
+```typescript
+import { UpdateKnowledgeRetrievalSettingsKnowledge1 } from "@orq-ai/node/models/operations";
+
+let value: UpdateKnowledgeRetrievalSettingsKnowledge1 = {
+  type: "vector_search",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                               | [operations.UpdateKnowledgeRetrievalSettingsKnowledgeResponseType](../../models/operations/updateknowledgeretrievalsettingsknowledgeresponsetype.md) | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `topK`                                                                                                                                               | *number*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Used to filter chunks that are most similar to the query                                                                                             |
+| `threshold`                                                                                                                                          | *number*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.                                                  |
+| `rerankConfig`                                                                                                                                       | [operations.UpdateKnowledgeRetrievalSettingsKnowledgeRerankConfig](../../models/operations/updateknowledgeretrievalsettingsknowledgererankconfig.md) | :heavy_minus_sign:                                                                                                                                   | N/A                                                                                                                                                  |

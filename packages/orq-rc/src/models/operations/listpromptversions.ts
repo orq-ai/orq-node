@@ -430,6 +430,9 @@ export const ListPromptVersionsUseCases = {
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
+  SentimentAnalysis: "Sentiment analysis",
 } as const;
 export type ListPromptVersionsUseCases = ClosedEnum<
   typeof ListPromptVersionsUseCases

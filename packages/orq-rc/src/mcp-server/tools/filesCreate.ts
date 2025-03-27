@@ -7,7 +7,7 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.FileUploadRequestBody$inboundSchema.optional(),
+  request: operations.FileUploadRequestBody$inboundSchema,
 };
 
 export const tool$filesCreate: ToolDefinition<typeof args> = {

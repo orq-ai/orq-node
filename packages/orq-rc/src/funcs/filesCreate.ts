@@ -34,7 +34,7 @@ import { isReadableStream } from "../types/streams.js";
  */
 export function filesCreate(
   client: OrqCore,
-  request?: operations.FileUploadRequestBody | undefined,
+  request: operations.FileUploadRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +57,7 @@ export function filesCreate(
 
 async function $do(
   client: OrqCore,
-  request?: operations.FileUploadRequestBody | undefined,
+  request: operations.FileUploadRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
@@ -76,8 +76,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) =>
-      operations.FileUploadRequestBody$outboundSchema.optional().parse(value),
+    (value) => operations.FileUploadRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -86,24 +85,22 @@ async function $do(
   const payload = parsed.value;
   const body = new FormData();
 
-  if (payload?.file !== undefined) {
-    if (isBlobLike(payload?.file)) {
-      appendForm(body, "file", payload?.file);
-    } else if (isReadableStream(payload?.file.content)) {
-      const buffer = await readableStreamToArrayBuffer(payload?.file.content);
-      const blob = new Blob([buffer], { type: "application/octet-stream" });
-      appendForm(body, "file", blob);
-    } else {
-      appendForm(
-        body,
-        "file",
-        new Blob([payload?.file.content], { type: "application/octet-stream" }),
-        payload?.file.fileName,
-      );
-    }
+  if (isBlobLike(payload.file)) {
+    appendForm(body, "file", payload.file);
+  } else if (isReadableStream(payload.file.content)) {
+    const buffer = await readableStreamToArrayBuffer(payload.file.content);
+    const blob = new Blob([buffer], { type: "application/octet-stream" });
+    appendForm(body, "file", blob);
+  } else {
+    appendForm(
+      body,
+      "file",
+      new Blob([payload.file.content], { type: "application/octet-stream" }),
+      payload.file.fileName,
+    );
   }
-  if (payload?.purpose !== undefined) {
-    appendForm(body, "purpose", payload?.purpose);
+  if (payload.purpose !== undefined) {
+    appendForm(body, "purpose", payload.purpose);
   }
 
   const path = pathToFunc("/v2/files")();
@@ -119,7 +116,7 @@ async function $do(
   const context = {
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "FileUpload",
-    oAuth2Scopes: [],
+    oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
 

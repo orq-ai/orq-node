@@ -9,10 +9,9 @@ let value: UserMessage = {
   role: "user",
   content: [
     {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "mp3",
+      type: "image_url",
+      imageUrl: {
+        url: "https://left-plugin.name/",
       },
     },
   ],

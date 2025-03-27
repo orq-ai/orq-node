@@ -26,7 +26,14 @@ const value: components.MessagesSystemMessage = {
 ```typescript
 const value: components.MessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://afraid-nun.net",
+      },
+    },
+  ],
 };
 ```
 
@@ -43,9 +50,7 @@ const value: components.MessagesAssistantMessage = {
 ```typescript
 const value: components.MessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```
