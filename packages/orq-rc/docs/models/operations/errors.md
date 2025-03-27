@@ -6,7 +6,7 @@
 import { Errors } from "@orq-ai/node/models/operations";
 
 let value: Errors = {
-  code: 1835.04,
+  code: 5358.83,
   message: "<value>",
 };
 ```

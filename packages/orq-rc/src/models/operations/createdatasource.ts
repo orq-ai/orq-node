@@ -130,14 +130,14 @@ export type CreateDatasourceRequest = {
   requestBody: CreateDatasourceRequestBody;
 };
 
-export const Status = {
+export const CreateDatasourceStatus = {
   Pending: "pending",
   Processing: "processing",
   Completed: "completed",
   Failed: "failed",
   Queued: "queued",
 } as const;
-export type Status = ClosedEnum<typeof Status>;
+export type CreateDatasourceStatus = ClosedEnum<typeof CreateDatasourceStatus>;
 
 /**
  * Datasource successfully created
@@ -155,7 +155,7 @@ export type CreateDatasourceResponseBody = {
    * The description of the knowledge base
    */
   description?: string | undefined;
-  status: Status;
+  status: CreateDatasourceStatus;
   /**
    * The unique identifier of the file used to create the datasource.
    */
@@ -725,22 +725,24 @@ export function createDatasourceRequestFromJSON(
 }
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const CreateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasourceStatus
+> = z.nativeEnum(CreateDatasourceStatus);
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> =
-  Status$inboundSchema;
+export const CreateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasourceStatus
+> = CreateDatasourceStatus$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Status$ {
-  /** @deprecated use `Status$inboundSchema` instead. */
-  export const inboundSchema = Status$inboundSchema;
-  /** @deprecated use `Status$outboundSchema` instead. */
-  export const outboundSchema = Status$outboundSchema;
+export namespace CreateDatasourceStatus$ {
+  /** @deprecated use `CreateDatasourceStatus$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasourceStatus$inboundSchema;
+  /** @deprecated use `CreateDatasourceStatus$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasourceStatus$outboundSchema;
 }
 
 /** @internal */
@@ -749,10 +751,10 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01JQBZHPBF4F8J8W10J4E7KGSY"),
+  _id: z.string().default("01JQCTRB55NRQE9TA5CZ38G32M"),
   display_name: z.string(),
   description: z.string().optional(),
-  status: Status$inboundSchema,
+  status: CreateDatasourceStatus$inboundSchema,
   file_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
@@ -793,10 +795,10 @@ export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01JQBZHPBF4F8J8W10J4E7KGSY"),
+  id: z.string().default("01JQCTRB55NRQE9TA5CZ38G32M"),
   displayName: z.string(),
   description: z.string().optional(),
-  status: Status$outboundSchema,
+  status: CreateDatasourceStatus$outboundSchema,
   fileId: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),

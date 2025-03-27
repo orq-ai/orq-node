@@ -9,7 +9,15 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Filter datasources by status.
+ */
+export type Status = Array<string> | string;
+
 export type ListDatasourcesRequest = {
+  /**
+   * Unique identifier of the knowledge base
+   */
   knowledgeId: string;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
@@ -23,6 +31,14 @@ export type ListDatasourcesRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Search query to find datasources by name.
+   */
+  q?: string | undefined;
+  /**
+   * Filter datasources by status.
+   */
+  status?: Array<string> | string | undefined;
 };
 
 export const ListDatasourcesObject = {
@@ -93,6 +109,47 @@ export type ListDatasourcesResponseBody = {
 };
 
 /** @internal */
+export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
+  .union([z.array(z.string()), z.string()]);
+
+/** @internal */
+export type Status$Outbound = Array<string> | string;
+
+/** @internal */
+export const Status$outboundSchema: z.ZodType<
+  Status$Outbound,
+  z.ZodTypeDef,
+  Status
+> = z.union([z.array(z.string()), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Status$ {
+  /** @deprecated use `Status$inboundSchema` instead. */
+  export const inboundSchema = Status$inboundSchema;
+  /** @deprecated use `Status$outboundSchema` instead. */
+  export const outboundSchema = Status$outboundSchema;
+  /** @deprecated use `Status$Outbound` instead. */
+  export type Outbound = Status$Outbound;
+}
+
+export function statusToJSON(status: Status): string {
+  return JSON.stringify(Status$outboundSchema.parse(status));
+}
+
+export function statusFromJSON(
+  jsonString: string,
+): SafeParseResult<Status, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Status$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Status' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListDatasourcesRequest$inboundSchema: z.ZodType<
   ListDatasourcesRequest,
   z.ZodTypeDef,
@@ -102,6 +159,8 @@ export const ListDatasourcesRequest$inboundSchema: z.ZodType<
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
+  q: z.string().optional(),
+  status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -116,6 +175,8 @@ export type ListDatasourcesRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  q?: string | undefined;
+  status?: Array<string> | string | undefined;
 };
 
 /** @internal */
@@ -128,6 +189,8 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  q: z.string().optional(),
+  status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -215,7 +278,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01JQBZHPBE7D8M0PHNY5C8ABD0"),
+  _id: z.string().default("01JQCTRB531JQVNWM64H1NSW6S"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -259,7 +322,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01JQBZHPBE7D8M0PHNY5C8ABD0"),
+  id: z.string().default("01JQCTRB531JQVNWM64H1NSW6S"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

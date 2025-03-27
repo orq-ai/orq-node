@@ -7,14 +7,7 @@ import { UserMessage } from "@orq-ai/node/models/components";
 
 let value: UserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://left-plugin.name/",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

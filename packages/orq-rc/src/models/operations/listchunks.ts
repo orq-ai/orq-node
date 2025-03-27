@@ -9,6 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Filter datasources by status.
+ */
+export type QueryParamStatus = Array<string> | string;
+
 export type ListChunksRequest = {
   /**
    * The unique identifier of the knowledge base
@@ -30,6 +35,14 @@ export type ListChunksRequest = {
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
+  /**
+   * Search query to find datasources by name.
+   */
+  q?: string | undefined;
+  /**
+   * Filter datasources by status.
+   */
+  status?: Array<string> | string | undefined;
 };
 
 export const ListChunksObject = {
@@ -101,6 +114,54 @@ export type ListChunksResponseBody = {
 };
 
 /** @internal */
+export const QueryParamStatus$inboundSchema: z.ZodType<
+  QueryParamStatus,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.array(z.string()), z.string()]);
+
+/** @internal */
+export type QueryParamStatus$Outbound = Array<string> | string;
+
+/** @internal */
+export const QueryParamStatus$outboundSchema: z.ZodType<
+  QueryParamStatus$Outbound,
+  z.ZodTypeDef,
+  QueryParamStatus
+> = z.union([z.array(z.string()), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace QueryParamStatus$ {
+  /** @deprecated use `QueryParamStatus$inboundSchema` instead. */
+  export const inboundSchema = QueryParamStatus$inboundSchema;
+  /** @deprecated use `QueryParamStatus$outboundSchema` instead. */
+  export const outboundSchema = QueryParamStatus$outboundSchema;
+  /** @deprecated use `QueryParamStatus$Outbound` instead. */
+  export type Outbound = QueryParamStatus$Outbound;
+}
+
+export function queryParamStatusToJSON(
+  queryParamStatus: QueryParamStatus,
+): string {
+  return JSON.stringify(
+    QueryParamStatus$outboundSchema.parse(queryParamStatus),
+  );
+}
+
+export function queryParamStatusFromJSON(
+  jsonString: string,
+): SafeParseResult<QueryParamStatus, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QueryParamStatus' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListChunksRequest$inboundSchema: z.ZodType<
   ListChunksRequest,
   z.ZodTypeDef,
@@ -111,6 +172,8 @@ export const ListChunksRequest$inboundSchema: z.ZodType<
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
+  q: z.string().optional(),
+  status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -127,6 +190,8 @@ export type ListChunksRequest$Outbound = {
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  q?: string | undefined;
+  status?: Array<string> | string | undefined;
 };
 
 /** @internal */
@@ -140,6 +205,8 @@ export const ListChunksRequest$outboundSchema: z.ZodType<
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
+  q: z.string().optional(),
+  status: z.union([z.array(z.string()), z.string()]).optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",

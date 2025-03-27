@@ -7,7 +7,14 @@ import { MessagesUserMessage } from "@orq-ai/node/models/components";
 
 let value: MessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://afraid-nun.net",
+      },
+    },
+  ],
 };
 ```
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 3f2a965188ca58ad9002265d43d3848a
+  docChecksum: a0310192dd786f8a23469a5c48817a99
   docVersion: "2.0"
-  speakeasyVersion: 1.525.0
+  speakeasyVersion: 1.525.1
   generationVersion: 2.562.2
-  releaseVersion: 3.3.0-rc.12
-  configChecksum: 28a862b96bb298a89d891e7124a2fe94
+  releaseVersion: 3.3.0-rc.13
+  configChecksum: 7a75b7f38f13a8b24afc453f8664bb4a
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -213,6 +213,7 @@ generatedFiles:
   - docs/models/operations/createdatasourcerequest.md
   - docs/models/operations/createdatasourcerequestbody.md
   - docs/models/operations/createdatasourceresponsebody.md
+  - docs/models/operations/createdatasourcestatus.md
   - docs/models/operations/createfeedbackrequestbody.md
   - docs/models/operations/createfeedbackresponsebody.md
   - docs/models/operations/createfeedbackvalue.md
@@ -824,6 +825,7 @@ generatedFiles:
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
   - docs/models/operations/quality.md
+  - docs/models/operations/queryparamstatus.md
   - docs/models/operations/reasoningeffort.md
   - docs/models/operations/refusalcontentpart.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
@@ -1658,6 +1660,7 @@ examples:
           knowledge_id: "<id>"
         query:
           limit: 10
+          status: "completed"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"_id": "01JQBZHPBE7D8M0PHNY5C8ABD0", "display_name": "Mohammad_Brakus85", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 792.15}, {"_id": "01JQBZHPBE7D8M0PHNY5C8ABD0", "display_name": "Ricky53", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8596.21}], "has_more": false}
@@ -1703,6 +1706,7 @@ examples:
           datasource_id: "<id>"
         query:
           limit: 10
+          status: "completed"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"_id": "<id>", "text": "<value>", "enabled": true, "status": "processing", "created": "<value>", "updated": "<value>"}, {"_id": "<id>", "text": "<value>", "enabled": false, "status": "failed", "created": "<value>", "updated": "<value>"}], "has_more": false}

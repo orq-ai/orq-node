@@ -18,7 +18,7 @@ const value: components.Two1 = {
 const value: components.Deployments22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://sweet-squid.info",
+    url: "https://inexperienced-heroine.org",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: components.Two3 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

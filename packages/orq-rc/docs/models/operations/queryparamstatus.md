@@ -1,4 +1,4 @@
-# Status
+# QueryParamStatus
 
 Filter datasources by status.
 
