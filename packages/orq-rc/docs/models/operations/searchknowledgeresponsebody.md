@@ -19,7 +19,7 @@ let value: SearchKnowledgeResponseBody = {
         fileName: "example.file",
         fileType: "image",
       },
-      score: 4866.06,
+      score: 1149.52,
     },
   ],
   knowledgeKey: "<value>",

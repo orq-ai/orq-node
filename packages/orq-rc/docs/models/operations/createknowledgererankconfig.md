@@ -1,13 +1,13 @@
-# RerankConfig
+# CreateKnowledgeRerankConfig
 
 The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
 
 ## Example Usage
 
 ```typescript
-import { RerankConfig } from "@orq-ai/node/models/operations";
+import { CreateKnowledgeRerankConfig } from "@orq-ai/node/models/operations";
 
-let value: RerankConfig = {
+let value: CreateKnowledgeRerankConfig = {
   rerankModel: "<value>",
 };
 ```

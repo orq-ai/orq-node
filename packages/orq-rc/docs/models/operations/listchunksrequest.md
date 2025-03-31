@@ -8,7 +8,10 @@ import { ListChunksRequest } from "@orq-ai/node/models/operations";
 let value: ListChunksRequest = {
   knowledgeId: "<id>",
   datasourceId: "<id>",
-  status: "completed",
+  status: [
+    "completed",
+    "failed",
+  ],
 };
 ```
 

@@ -7,7 +7,7 @@ import { InputAudio } from "@orq-ai/node/models/components";
 
 let value: InputAudio = {
   data: "<value>",
-  format: "mp3",
+  format: "wav",
 };
 ```
 

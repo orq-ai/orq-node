@@ -5,7 +5,7 @@
 ```typescript
 import { SearchKnowledgeRetrievalConfigProvider } from "@orq-ai/node/models/operations";
 
-let value: SearchKnowledgeRetrievalConfigProvider = "anyscale";
+let value: SearchKnowledgeRetrievalConfigProvider = "replicate";
 ```
 
 ## Values

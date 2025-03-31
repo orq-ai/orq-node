@@ -28,7 +28,6 @@ export * from "./fileget.js";
 export * from "./filelist.js";
 export * from "./fileupload.js";
 export * from "./getallprompts.js";
-export * from "./getonefileuploadurl.js";
 export * from "./getoneknowledge.js";
 export * from "./getoneprompt.js";
 export * from "./getpromptversion.js";

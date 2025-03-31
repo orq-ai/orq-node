@@ -13,7 +13,6 @@ import { knowledgeListChunks } from "../funcs/knowledgeListChunks.js";
 import { knowledgeListDatasources } from "../funcs/knowledgeListDatasources.js";
 import { knowledgeRetrieve } from "../funcs/knowledgeRetrieve.js";
 import { knowledgeRetrieveDatasource } from "../funcs/knowledgeRetrieveDatasource.js";
-import { knowledgeRetrieveFileUrl } from "../funcs/knowledgeRetrieveFileUrl.js";
 import { knowledgeSearch } from "../funcs/knowledgeSearch.js";
 import { knowledgeUpdate } from "../funcs/knowledgeUpdate.js";
 import { knowledgeUpdateChunk } from "../funcs/knowledgeUpdateChunk.js";
@@ -109,20 +108,6 @@ export class Knowledge extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.SearchKnowledgeResponseBody> {
     return unwrapAsync(knowledgeSearch(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Retrieves the file upload url
-   */
-  async retrieveFileUrl(
-    request: operations.GetOneFileUploadUrlRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetOneFileUploadUrlResponseBody> {
-    return unwrapAsync(knowledgeRetrieveFileUrl(
       this,
       request,
       options,

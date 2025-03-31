@@ -16,262 +16,56 @@ export type GetOneKnowledgeRequest = {
   knowledgeId: string;
 };
 
-export type GetOneKnowledgeMetadata = {
-  wordCount?: number | undefined;
-  documentCount?: number | undefined;
-  sentencesCount?: number | undefined;
-};
-
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseType = {
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export const GetOneKnowledgeRetrievalType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
   HybridSearch: "hybrid_search",
 } as const;
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseType = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseType
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export type GetOneKnowledgeRetrievalType = ClosedEnum<
+  typeof GetOneKnowledgeRetrievalType
 >;
 
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider =
-  ClosedEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider>;
-
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType = {
-  Rerank: "rerank",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType =
-  ClosedEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType>;
-
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters = {
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
+export type GetOneKnowledgeRerankConfig = {
   /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
-  threshold?: number | undefined;
+  rerankThreshold?: number | undefined;
+  /**
+   * The rerank model to use for the knowledge base.
+   */
+  rerankModel: string;
 };
 
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider
-    | undefined;
+/**
+ * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ */
+export type GetOneKnowledgeRetrievalSettings = {
   /**
-   * The name of the model to use
+   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
-  model?: string | undefined;
+  retrievalType?: GetOneKnowledgeRetrievalType | undefined;
   /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType
-    | undefined;
-  modelParameters?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters
-    | undefined;
-  /**
-   * The id of the resource
-   */
-  integrationId?: string | null | undefined;
-};
-
-export type GetOneKnowledgeRetrievalSettings3 = {
-  type: GetOneKnowledgeRetrievalSettingsKnowledgeResponseType;
-  /**
-   * Used to filter chunks that are most similar to the query
+   * The number of results to return from the search.
    */
   topK?: number | undefined;
   /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
    */
   threshold?: number | undefined;
-  rerankConfig?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig
-    | null
-    | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?: GetOneKnowledgeRerankConfig | undefined;
 };
-
-export const GetOneKnowledgeRetrievalSettingsKnowledgeType = {
-  KeywordSearch: "keyword_search",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsKnowledgeType = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsKnowledgeType
->;
-
-export const GetOneKnowledgeRetrievalSettingsKnowledgeProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsKnowledgeProvider = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsKnowledgeProvider
->;
-
-export const GetOneKnowledgeRetrievalSettingsKnowledgeModelType = {
-  Rerank: "rerank",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsKnowledgeModelType = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsKnowledgeModelType
->;
-
-export type GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters = {
-  /**
-   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-   */
-  threshold?: number | undefined;
-};
-
-export type GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?: GetOneKnowledgeRetrievalSettingsKnowledgeProvider | undefined;
-  /**
-   * The name of the model to use
-   */
-  model?: string | undefined;
-  /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?: GetOneKnowledgeRetrievalSettingsKnowledgeModelType | undefined;
-  modelParameters?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters
-    | undefined;
-  /**
-   * The id of the resource
-   */
-  integrationId?: string | null | undefined;
-};
-
-export type GetOneKnowledgeRetrievalSettings2 = {
-  type: GetOneKnowledgeRetrievalSettingsKnowledgeType;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig
-    | null
-    | undefined;
-};
-
-export const GetOneKnowledgeRetrievalSettingsType = {
-  VectorSearch: "vector_search",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsType = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsType
->;
-
-export const GetOneKnowledgeRetrievalSettingsProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsProvider = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsProvider
->;
-
-export const GetOneKnowledgeRetrievalSettingsModelType = {
-  Rerank: "rerank",
-} as const;
-export type GetOneKnowledgeRetrievalSettingsModelType = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalSettingsModelType
->;
-
-export type GetOneKnowledgeRetrievalSettingsModelParameters = {
-  /**
-   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-   */
-  threshold?: number | undefined;
-};
-
-export type GetOneKnowledgeRetrievalSettingsRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?: GetOneKnowledgeRetrievalSettingsProvider | undefined;
-  /**
-   * The name of the model to use
-   */
-  model?: string | undefined;
-  /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?: GetOneKnowledgeRetrievalSettingsModelType | undefined;
-  modelParameters?: GetOneKnowledgeRetrievalSettingsModelParameters | undefined;
-  /**
-   * The id of the resource
-   */
-  integrationId?: string | null | undefined;
-};
-
-export type GetOneKnowledgeRetrievalSettings1 = {
-  type: GetOneKnowledgeRetrievalSettingsType;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?:
-    | GetOneKnowledgeRetrievalSettingsRerankConfig
-    | null
-    | undefined;
-};
-
-export type GetOneKnowledgeRetrievalSettings =
-  | GetOneKnowledgeRetrievalSettings1
-  | GetOneKnowledgeRetrievalSettings2
-  | GetOneKnowledgeRetrievalSettings3;
 
 /**
  * Knowledge Base object
@@ -297,7 +91,6 @@ export type GetOneKnowledgeResponseBody = {
    * The unique key of the knowledge base.
    */
   key: string;
-  metadata: GetOneKnowledgeMetadata;
   /**
    * The embeddings model used for the knowledge base.
    */
@@ -306,10 +99,10 @@ export type GetOneKnowledgeResponseBody = {
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
   path?: string | undefined;
-  retrievalSettings:
-    | GetOneKnowledgeRetrievalSettings1
-    | GetOneKnowledgeRetrievalSettings2
-    | GetOneKnowledgeRetrievalSettings3;
+  /**
+   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalSettings?: GetOneKnowledgeRetrievalSettings | undefined;
   /**
    * The id of the resource
    */
@@ -383,43 +176,59 @@ export function getOneKnowledgeRequestFromJSON(
 }
 
 /** @internal */
-export const GetOneKnowledgeMetadata$inboundSchema: z.ZodType<
-  GetOneKnowledgeMetadata,
+export const GetOneKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOneKnowledgeRetrievalType
+> = z.nativeEnum(GetOneKnowledgeRetrievalType);
+
+/** @internal */
+export const GetOneKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOneKnowledgeRetrievalType
+> = GetOneKnowledgeRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeRetrievalType$ {
+  /** @deprecated use `GetOneKnowledgeRetrievalType$inboundSchema` instead. */
+  export const inboundSchema = GetOneKnowledgeRetrievalType$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeRetrievalType$outboundSchema` instead. */
+  export const outboundSchema = GetOneKnowledgeRetrievalType$outboundSchema;
+}
+
+/** @internal */
+export const GetOneKnowledgeRerankConfig$inboundSchema: z.ZodType<
+  GetOneKnowledgeRerankConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  word_count: z.number().int().default(0),
-  document_count: z.number().int().default(0),
-  sentences_count: z.number().int().default(0),
+  rerank_threshold: z.number().default(0.5),
+  rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    "word_count": "wordCount",
-    "document_count": "documentCount",
-    "sentences_count": "sentencesCount",
+    "rerank_threshold": "rerankThreshold",
+    "rerank_model": "rerankModel",
   });
 });
 
 /** @internal */
-export type GetOneKnowledgeMetadata$Outbound = {
-  word_count: number;
-  document_count: number;
-  sentences_count: number;
+export type GetOneKnowledgeRerankConfig$Outbound = {
+  rerank_threshold: number;
+  rerank_model: string;
 };
 
 /** @internal */
-export const GetOneKnowledgeMetadata$outboundSchema: z.ZodType<
-  GetOneKnowledgeMetadata$Outbound,
+export const GetOneKnowledgeRerankConfig$outboundSchema: z.ZodType<
+  GetOneKnowledgeRerankConfig$Outbound,
   z.ZodTypeDef,
-  GetOneKnowledgeMetadata
+  GetOneKnowledgeRerankConfig
 > = z.object({
-  wordCount: z.number().int().default(0),
-  documentCount: z.number().int().default(0),
-  sentencesCount: z.number().int().default(0),
+  rerankThreshold: z.number().default(0.5),
+  rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    wordCount: "word_count",
-    documentCount: "document_count",
-    sentencesCount: "sentences_count",
+    rerankThreshold: "rerank_threshold",
+    rerankModel: "rerank_model",
   });
 });
 
@@ -427,1034 +236,32 @@ export const GetOneKnowledgeMetadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetOneKnowledgeMetadata$ {
-  /** @deprecated use `GetOneKnowledgeMetadata$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeMetadata$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeMetadata$outboundSchema` instead. */
-  export const outboundSchema = GetOneKnowledgeMetadata$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeMetadata$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeMetadata$Outbound;
+export namespace GetOneKnowledgeRerankConfig$ {
+  /** @deprecated use `GetOneKnowledgeRerankConfig$inboundSchema` instead. */
+  export const inboundSchema = GetOneKnowledgeRerankConfig$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeRerankConfig$outboundSchema` instead. */
+  export const outboundSchema = GetOneKnowledgeRerankConfig$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeRerankConfig$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeRerankConfig$Outbound;
 }
 
-export function getOneKnowledgeMetadataToJSON(
-  getOneKnowledgeMetadata: GetOneKnowledgeMetadata,
+export function getOneKnowledgeRerankConfigToJSON(
+  getOneKnowledgeRerankConfig: GetOneKnowledgeRerankConfig,
 ): string {
   return JSON.stringify(
-    GetOneKnowledgeMetadata$outboundSchema.parse(getOneKnowledgeMetadata),
-  );
-}
-
-export function getOneKnowledgeMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneKnowledgeMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseType
-  > = z.nativeEnum(GetOneKnowledgeRetrievalSettingsKnowledgeResponseType);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseType
-  > = GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider
-  > = z.nativeEnum(GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider
-  > = GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType
-  > = z.nativeEnum(GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType
-  > = GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound =
-  {
-    threshold?: number | undefined;
-  };
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound` instead. */
-  export type Outbound =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeResponseModelParametersToJSON(
-  getOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters:
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema
-      .parse(getOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeResponseModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema
-        .optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type:
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema
-        .optional(),
-    model_parameters: z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema
-    ).optional(),
-    integration_id: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-      "integration_id": "integrationId",
-    });
-  });
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound =
-  {
-    enabled?: boolean | undefined;
-    provider?: string | undefined;
-    model?: string | undefined;
-    model_db_id?: string | undefined;
-    model_type?: string | undefined;
-    model_parameters?:
-      | GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound
-      | undefined;
-    integration_id?: string | null | undefined;
-  };
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema
-        .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType:
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema
-        .optional(),
-    modelParameters: z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema
-    ).optional(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-      integrationId: "integration_id",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound` instead. */
-  export type Outbound =
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfigToJSON(
-  getOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig:
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema
-      .parse(getOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettings3$inboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettings3$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettings3$outboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings3$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeRetrievalSettings3
-> = z.object({
-  type: GetOneKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettings3$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings3$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRetrievalSettings3$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings3$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettings3$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings3$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeRetrievalSettings3$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettings3ToJSON(
-  getOneKnowledgeRetrievalSettings3: GetOneKnowledgeRetrievalSettings3,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettings3$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettings3,
+    GetOneKnowledgeRerankConfig$outboundSchema.parse(
+      getOneKnowledgeRerankConfig,
     ),
   );
 }
 
-export function getOneKnowledgeRetrievalSettings3FromJSON(
+export function getOneKnowledgeRerankConfigFromJSON(
   jsonString: string,
-): SafeParseResult<GetOneKnowledgeRetrievalSettings3, SDKValidationError> {
+): SafeParseResult<GetOneKnowledgeRerankConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetOneKnowledgeRetrievalSettings3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettings3' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeType> = z
-    .nativeEnum(GetOneKnowledgeRetrievalSettingsKnowledgeType);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeType> =
-    GetOneKnowledgeRetrievalSettingsKnowledgeType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeType$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeProvider> = z
-    .nativeEnum(GetOneKnowledgeRetrievalSettingsKnowledgeProvider);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeProvider> =
-    GetOneKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeProvider$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeModelType> = z
-    .nativeEnum(GetOneKnowledgeRetrievalSettingsKnowledgeModelType);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsKnowledgeModelType> =
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeModelType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound =
-  {
-    threshold?: number | undefined;
-  };
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound` instead. */
-  export type Outbound =
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeModelParametersToJSON(
-  getOneKnowledgeRetrievalSettingsKnowledgeModelParameters:
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema
-      .parse(getOneKnowledgeRetrievalSettingsKnowledgeModelParameters),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider: GetOneKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema
-      .optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type: GetOneKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema
-      .optional(),
-    model_parameters: z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema
-    ).optional(),
-    integration_id: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-      "integration_id": "integrationId",
-    });
-  });
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound = {
-  enabled?: boolean | undefined;
-  provider?: string | undefined;
-  model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
-  model_parameters?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound
-    | undefined;
-  integration_id?: string | null | undefined;
-};
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider: GetOneKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema
-      .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType: GetOneKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema
-      .optional(),
-    modelParameters: z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema
-    ).optional(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-      integrationId: "integration_id",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound =
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeRerankConfigToJSON(
-  getOneKnowledgeRetrievalSettingsKnowledgeRerankConfig:
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-    ),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettingsKnowledgeRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettings2$inboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetOneKnowledgeRetrievalSettingsKnowledgeType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettings2$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettings2$outboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings2$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeRetrievalSettings2
-> = z.object({
-  type: GetOneKnowledgeRetrievalSettingsKnowledgeType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettings2$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings2$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRetrievalSettings2$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings2$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettings2$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings2$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeRetrievalSettings2$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettings2ToJSON(
-  getOneKnowledgeRetrievalSettings2: GetOneKnowledgeRetrievalSettings2,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettings2$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettings2,
-    ),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettings2FromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneKnowledgeRetrievalSettings2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneKnowledgeRetrievalSettings2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettings2' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsType> = z.nativeEnum(
-    GetOneKnowledgeRetrievalSettingsType,
-  );
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsType> =
-    GetOneKnowledgeRetrievalSettingsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsType$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsProvider$inboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsProvider> = z
-    .nativeEnum(GetOneKnowledgeRetrievalSettingsProvider);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsProvider$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsProvider> =
-    GetOneKnowledgeRetrievalSettingsProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsProvider$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsProvider$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsProvider$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsModelType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsModelType> = z
-    .nativeEnum(GetOneKnowledgeRetrievalSettingsModelType);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsModelType$outboundSchema:
-  z.ZodNativeEnum<typeof GetOneKnowledgeRetrievalSettingsModelType> =
-    GetOneKnowledgeRetrievalSettingsModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsModelType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsModelType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsModelType$outboundSchema;
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsModelParameters$inboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettingsModelParameters$Outbound = {
-  threshold?: number | undefined;
-};
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsModelParameters$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsModelParameters$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeRetrievalSettingsModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsModelParameters$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsModelParameters$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsModelParameters$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsModelParameters$Outbound` instead. */
-  export type Outbound =
-    GetOneKnowledgeRetrievalSettingsModelParameters$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettingsModelParametersToJSON(
-  getOneKnowledgeRetrievalSettingsModelParameters:
-    GetOneKnowledgeRetrievalSettingsModelParameters,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettingsModelParameters$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettingsModelParameters,
-    ),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettingsModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetOneKnowledgeRetrievalSettingsModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetOneKnowledgeRetrievalSettingsModelParameters$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettingsModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsRerankConfig$inboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsRerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider: GetOneKnowledgeRetrievalSettingsProvider$inboundSchema.optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type: GetOneKnowledgeRetrievalSettingsModelType$inboundSchema
-      .optional(),
-    model_parameters: z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsModelParameters$inboundSchema
-    ).optional(),
-    integration_id: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-      "integration_id": "integrationId",
-    });
-  });
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettingsRerankConfig$Outbound = {
-  enabled?: boolean | undefined;
-  provider?: string | undefined;
-  model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
-  model_parameters?:
-    | GetOneKnowledgeRetrievalSettingsModelParameters$Outbound
-    | undefined;
-  integration_id?: string | null | undefined;
-};
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettingsRerankConfig$outboundSchema:
-  z.ZodType<
-    GetOneKnowledgeRetrievalSettingsRerankConfig$Outbound,
-    z.ZodTypeDef,
-    GetOneKnowledgeRetrievalSettingsRerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider: GetOneKnowledgeRetrievalSettingsProvider$outboundSchema
-      .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType: GetOneKnowledgeRetrievalSettingsModelType$outboundSchema
-      .optional(),
-    modelParameters: z.lazy(() =>
-      GetOneKnowledgeRetrievalSettingsModelParameters$outboundSchema
-    ).optional(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-      integrationId: "integration_id",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettingsRerankConfig$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    GetOneKnowledgeRetrievalSettingsRerankConfig$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettingsRerankConfig$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettingsRerankConfig$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeRetrievalSettingsRerankConfig$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettingsRerankConfigToJSON(
-  getOneKnowledgeRetrievalSettingsRerankConfig:
-    GetOneKnowledgeRetrievalSettingsRerankConfig,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettingsRerankConfig$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettingsRerankConfig,
-    ),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettingsRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetOneKnowledgeRetrievalSettingsRerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetOneKnowledgeRetrievalSettingsRerankConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettingsRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettings1$inboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetOneKnowledgeRetrievalSettingsType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() => GetOneKnowledgeRetrievalSettingsRerankConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type GetOneKnowledgeRetrievalSettings1$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | GetOneKnowledgeRetrievalSettingsRerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const GetOneKnowledgeRetrievalSettings1$outboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings1$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeRetrievalSettings1
-> = z.object({
-  type: GetOneKnowledgeRetrievalSettingsType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() => GetOneKnowledgeRetrievalSettingsRerankConfig$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalSettings1$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings1$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRetrievalSettings1$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings1$outboundSchema` instead. */
-  export const outboundSchema =
-    GetOneKnowledgeRetrievalSettings1$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings1$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeRetrievalSettings1$Outbound;
-}
-
-export function getOneKnowledgeRetrievalSettings1ToJSON(
-  getOneKnowledgeRetrievalSettings1: GetOneKnowledgeRetrievalSettings1,
-): string {
-  return JSON.stringify(
-    GetOneKnowledgeRetrievalSettings1$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettings1,
-    ),
-  );
-}
-
-export function getOneKnowledgeRetrievalSettings1FromJSON(
-  jsonString: string,
-): SafeParseResult<GetOneKnowledgeRetrievalSettings1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOneKnowledgeRetrievalSettings1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettings1' from JSON`,
+    (x) => GetOneKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOneKnowledgeRerankConfig' from JSON`,
   );
 }
 
@@ -1463,28 +270,50 @@ export const GetOneKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   GetOneKnowledgeRetrievalSettings,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => GetOneKnowledgeRetrievalSettings1$inboundSchema),
-  z.lazy(() => GetOneKnowledgeRetrievalSettings2$inboundSchema),
-  z.lazy(() => GetOneKnowledgeRetrievalSettings3$inboundSchema),
-]);
+> = z.object({
+  retrieval_type: GetOneKnowledgeRetrievalType$inboundSchema.default(
+    "hybrid_search",
+  ),
+  top_k: z.number().int().default(5),
+  threshold: z.number().default(0),
+  rerank_config: z.lazy(() => GetOneKnowledgeRerankConfig$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "retrieval_type": "retrievalType",
+    "top_k": "topK",
+    "rerank_config": "rerankConfig",
+  });
+});
 
 /** @internal */
-export type GetOneKnowledgeRetrievalSettings$Outbound =
-  | GetOneKnowledgeRetrievalSettings1$Outbound
-  | GetOneKnowledgeRetrievalSettings2$Outbound
-  | GetOneKnowledgeRetrievalSettings3$Outbound;
+export type GetOneKnowledgeRetrievalSettings$Outbound = {
+  retrieval_type: string;
+  top_k: number;
+  threshold: number;
+  rerank_config?: GetOneKnowledgeRerankConfig$Outbound | undefined;
+};
 
 /** @internal */
 export const GetOneKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
   GetOneKnowledgeRetrievalSettings$Outbound,
   z.ZodTypeDef,
   GetOneKnowledgeRetrievalSettings
-> = z.union([
-  z.lazy(() => GetOneKnowledgeRetrievalSettings1$outboundSchema),
-  z.lazy(() => GetOneKnowledgeRetrievalSettings2$outboundSchema),
-  z.lazy(() => GetOneKnowledgeRetrievalSettings3$outboundSchema),
-]);
+> = z.object({
+  retrievalType: GetOneKnowledgeRetrievalType$outboundSchema.default(
+    "hybrid_search",
+  ),
+  topK: z.number().int().default(5),
+  threshold: z.number().default(0),
+  rerankConfig: z.lazy(() => GetOneKnowledgeRerankConfig$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    retrievalType: "retrieval_type",
+    topK: "top_k",
+    rerankConfig: "rerank_config",
+  });
+});
 
 /**
  * @internal
@@ -1530,14 +359,11 @@ export const GetOneKnowledgeResponseBody$inboundSchema: z.ZodType<
   created: z.string(),
   description: z.string().optional(),
   key: z.string(),
-  metadata: z.lazy(() => GetOneKnowledgeMetadata$inboundSchema),
   model: z.string(),
   path: z.string().optional(),
-  retrieval_settings: z.union([
-    z.lazy(() => GetOneKnowledgeRetrievalSettings1$inboundSchema),
-    z.lazy(() => GetOneKnowledgeRetrievalSettings2$inboundSchema),
-    z.lazy(() => GetOneKnowledgeRetrievalSettings3$inboundSchema),
-  ]),
+  retrieval_settings: z.lazy(() =>
+    GetOneKnowledgeRetrievalSettings$inboundSchema
+  ).optional(),
   update_by_id: z.string(),
   updated: z.string(),
 }).transform((v) => {
@@ -1556,13 +382,9 @@ export type GetOneKnowledgeResponseBody$Outbound = {
   created: string;
   description?: string | undefined;
   key: string;
-  metadata: GetOneKnowledgeMetadata$Outbound;
   model: string;
   path?: string | undefined;
-  retrieval_settings:
-    | GetOneKnowledgeRetrievalSettings1$Outbound
-    | GetOneKnowledgeRetrievalSettings2$Outbound
-    | GetOneKnowledgeRetrievalSettings3$Outbound;
+  retrieval_settings?: GetOneKnowledgeRetrievalSettings$Outbound | undefined;
   update_by_id: string;
   updated: string;
 };
@@ -1578,14 +400,11 @@ export const GetOneKnowledgeResponseBody$outboundSchema: z.ZodType<
   created: z.string(),
   description: z.string().optional(),
   key: z.string(),
-  metadata: z.lazy(() => GetOneKnowledgeMetadata$outboundSchema),
   model: z.string(),
   path: z.string().optional(),
-  retrievalSettings: z.union([
-    z.lazy(() => GetOneKnowledgeRetrievalSettings1$outboundSchema),
-    z.lazy(() => GetOneKnowledgeRetrievalSettings2$outboundSchema),
-    z.lazy(() => GetOneKnowledgeRetrievalSettings3$outboundSchema),
-  ]),
+  retrievalSettings: z.lazy(() =>
+    GetOneKnowledgeRetrievalSettings$outboundSchema
+  ).optional(),
   updateById: z.string(),
   updated: z.string(),
 }).transform((v) => {

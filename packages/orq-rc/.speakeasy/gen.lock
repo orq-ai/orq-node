@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: e20625589cbed891906a10ee8f7ac1ce
+  docChecksum: ccb25e95b08229fed3ea6c79f84b07f5
   docVersion: "2.0"
-  speakeasyVersion: 1.526.0
+  speakeasyVersion: 1.526.1
   generationVersion: 2.563.0
-  releaseVersion: 3.3.0-rc.14
-  configChecksum: 2a83bb9884ed64604fd47132c0a7d5f3
+  releaseVersion: 3.3.0-rc.15
+  configChecksum: 15059f3b31cc7f4e8b62c77673ccdb63
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -217,37 +217,11 @@ generatedFiles:
   - docs/models/operations/createfeedbackrequestbody.md
   - docs/models/operations/createfeedbackresponsebody.md
   - docs/models/operations/createfeedbackvalue.md
-  - docs/models/operations/createknowledgemetadata.md
   - docs/models/operations/createknowledgerequestbody.md
+  - docs/models/operations/createknowledgererankconfig.md
   - docs/models/operations/createknowledgeresponsebody.md
   - docs/models/operations/createknowledgeretrievalsettings.md
-  - docs/models/operations/createknowledgeretrievalsettings1.md
-  - docs/models/operations/createknowledgeretrievalsettings2.md
-  - docs/models/operations/createknowledgeretrievalsettings3.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgemodelparameters.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgemodeltype.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeprovider.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgererankconfig.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200applicationjsonmodelparameters.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200applicationjsonmodeltype.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200applicationjsonprovider.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200applicationjsontype.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200modelparameters.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200modeltype.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200provider.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200rerankconfig.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponse200type.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponsemodelparameters.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponsemodeltype.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponseprovider.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponsererankconfig.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgeresponsetype.md
-  - docs/models/operations/createknowledgeretrievalsettingsknowledgetype.md
-  - docs/models/operations/createknowledgeretrievalsettingsmodelparameters.md
-  - docs/models/operations/createknowledgeretrievalsettingsmodeltype.md
-  - docs/models/operations/createknowledgeretrievalsettingsprovider.md
-  - docs/models/operations/createknowledgeretrievalsettingsrerankconfig.md
-  - docs/models/operations/createknowledgeretrievalsettingstype.md
+  - docs/models/operations/createknowledgeretrievaltype.md
   - docs/models/operations/createprompt21.md
   - docs/models/operations/createprompt22.md
   - docs/models/operations/createprompt2imageurl.md
@@ -595,30 +569,11 @@ generatedFiles:
   - docs/models/operations/getallpromptstoolcalls.md
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
-  - docs/models/operations/getonefileuploadurlrequest.md
-  - docs/models/operations/getonefileuploadurlresponsebody.md
-  - docs/models/operations/getoneknowledgemetadata.md
   - docs/models/operations/getoneknowledgerequest.md
+  - docs/models/operations/getoneknowledgererankconfig.md
   - docs/models/operations/getoneknowledgeresponsebody.md
   - docs/models/operations/getoneknowledgeretrievalsettings.md
-  - docs/models/operations/getoneknowledgeretrievalsettings1.md
-  - docs/models/operations/getoneknowledgeretrievalsettings2.md
-  - docs/models/operations/getoneknowledgeretrievalsettings3.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgemodelparameters.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgemodeltype.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgeprovider.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgererankconfig.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgeresponsemodelparameters.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgeresponsemodeltype.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgeresponseprovider.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgeresponsererankconfig.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgeresponsetype.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsknowledgetype.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsmodelparameters.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsmodeltype.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsprovider.md
-  - docs/models/operations/getoneknowledgeretrievalsettingsrerankconfig.md
-  - docs/models/operations/getoneknowledgeretrievalsettingstype.md
+  - docs/models/operations/getoneknowledgeretrievaltype.md
   - docs/models/operations/getoneprompt21.md
   - docs/models/operations/getoneprompt22.md
   - docs/models/operations/getoneprompt2imageurl.md
@@ -723,29 +678,12 @@ generatedFiles:
   - docs/models/operations/listdatasourcesresponsebody.md
   - docs/models/operations/listdatasourcesstatus.md
   - docs/models/operations/listknowledgebasesdata.md
-  - docs/models/operations/listknowledgebasesmetadata.md
   - docs/models/operations/listknowledgebasesobject.md
   - docs/models/operations/listknowledgebasesrequest.md
+  - docs/models/operations/listknowledgebasesrerankconfig.md
   - docs/models/operations/listknowledgebasesresponsebody.md
   - docs/models/operations/listknowledgebasesretrievalsettings.md
-  - docs/models/operations/listknowledgebasesretrievalsettings1.md
-  - docs/models/operations/listknowledgebasesretrievalsettings2.md
-  - docs/models/operations/listknowledgebasesretrievalsettings3.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgemodelparameters.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgemodeltype.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgeprovider.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgererankconfig.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgeresponsemodelparameters.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgeresponsemodeltype.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgeresponseprovider.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgeresponsererankconfig.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgeresponsetype.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsknowledgetype.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsmodelparameters.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsmodeltype.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsprovider.md
-  - docs/models/operations/listknowledgebasesretrievalsettingsrerankconfig.md
-  - docs/models/operations/listknowledgebasesretrievalsettingstype.md
+  - docs/models/operations/listknowledgebasesretrievaltype.md
   - docs/models/operations/listpromptversions21.md
   - docs/models/operations/listpromptversions22.md
   - docs/models/operations/listpromptversions2imageurl.md
@@ -850,14 +788,7 @@ generatedFiles:
   - docs/models/operations/retrievalconfigtype.md
   - docs/models/operations/retrievals.md
   - docs/models/operations/retrievalsettings.md
-  - docs/models/operations/retrievalsettings1.md
-  - docs/models/operations/retrievalsettings2.md
-  - docs/models/operations/retrievalsettings3.md
-  - docs/models/operations/retrievalsettingsmodelparameters.md
-  - docs/models/operations/retrievalsettingsmodeltype.md
-  - docs/models/operations/retrievalsettingsprovider.md
-  - docs/models/operations/retrievalsettingsrerankconfig.md
-  - docs/models/operations/retrievalsettingstype.md
+  - docs/models/operations/retrievaltype.md
   - docs/models/operations/retrievedatapoint21.md
   - docs/models/operations/retrievedatapoint22.md
   - docs/models/operations/retrievedatapoint2datasetstype.md
@@ -949,48 +880,15 @@ generatedFiles:
   - docs/models/operations/updatedatasetrequest.md
   - docs/models/operations/updatedatasetrequestbody.md
   - docs/models/operations/updatedatasetresponsebody.md
+  - docs/models/operations/updateknowledgeknowledgererankconfig.md
   - docs/models/operations/updateknowledgeknowledgeretrievalsettings.md
-  - docs/models/operations/updateknowledgemetadata.md
+  - docs/models/operations/updateknowledgeknowledgeretrievaltype.md
   - docs/models/operations/updateknowledgerequest.md
   - docs/models/operations/updateknowledgerequestbody.md
+  - docs/models/operations/updateknowledgererankconfig.md
   - docs/models/operations/updateknowledgeresponsebody.md
   - docs/models/operations/updateknowledgeretrievalsettings.md
-  - docs/models/operations/updateknowledgeretrievalsettings1.md
-  - docs/models/operations/updateknowledgeretrievalsettings2.md
-  - docs/models/operations/updateknowledgeretrievalsettings3.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledge1.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledge2.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledge3.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgemodelparameters.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgemodeltype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeprovider.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgerequestmodelparameters.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgerequestmodeltype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgerequestprovider.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgerequesttype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgererankconfig.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgererankconfiginput.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200applicationjsonmodelparameters.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200applicationjsonmodeltype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200applicationjsonprovider.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200applicationjsontype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200modelparameters.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200modeltype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200provider.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200rerankconfig.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponse200type.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponsemodelparameters.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponsemodeltype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponseprovider.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponsererankconfig.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgeresponsetype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsknowledgetype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsmodelparameters.md
-  - docs/models/operations/updateknowledgeretrievalsettingsmodeltype.md
-  - docs/models/operations/updateknowledgeretrievalsettingsprovider.md
-  - docs/models/operations/updateknowledgeretrievalsettingsrerankconfig.md
-  - docs/models/operations/updateknowledgeretrievalsettingsrerankconfiginput.md
-  - docs/models/operations/updateknowledgeretrievalsettingstype.md
+  - docs/models/operations/updateknowledgeretrievaltype.md
   - docs/models/operations/updateprompt21.md
   - docs/models/operations/updateprompt22.md
   - docs/models/operations/updateprompt2imageurl.md
@@ -1106,7 +1004,6 @@ generatedFiles:
   - src/funcs/knowledgeListDatasources.ts
   - src/funcs/knowledgeRetrieve.ts
   - src/funcs/knowledgeRetrieveDatasource.ts
-  - src/funcs/knowledgeRetrieveFileUrl.ts
   - src/funcs/knowledgeSearch.ts
   - src/funcs/knowledgeUpdate.ts
   - src/funcs/knowledgeUpdateChunk.ts
@@ -1186,7 +1083,6 @@ generatedFiles:
   - src/mcp-server/tools/knowledgeListDatasources.ts
   - src/mcp-server/tools/knowledgeRetrieve.ts
   - src/mcp-server/tools/knowledgeRetrieveDatasource.ts
-  - src/mcp-server/tools/knowledgeRetrieveFileUrl.ts
   - src/mcp-server/tools/knowledgeSearch.ts
   - src/mcp-server/tools/knowledgeUpdate.ts
   - src/mcp-server/tools/knowledgeUpdateChunk.ts
@@ -1234,7 +1130,6 @@ generatedFiles:
   - src/models/operations/filelist.ts
   - src/models/operations/fileupload.ts
   - src/models/operations/getallprompts.ts
-  - src/models/operations/getonefileuploadurl.ts
   - src/models/operations/getoneknowledge.ts
   - src/models/operations/getoneprompt.ts
   - src/models/operations/getpromptversion.ts
@@ -1598,14 +1493,14 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "created_by_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "key": "<key>", "metadata": {"word_count": 0, "document_count": 0, "sentences_count": 0}, "model": "A8", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "2766718d-6d46-412e-80ae-e1b9ddf121dc", "updated": "<value>"}, {"_id": "<id>", "created_by_id": "a4c8104f-b451-4a70-acfc-8fe07fbc60ab", "created": "<value>", "key": "<key>", "metadata": {"word_count": 0, "document_count": 0, "sentences_count": 0}, "model": "Element", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"type": "vector_search", "top_k": 5, "threshold": 0}, "update_by_id": "d5611ff6-573e-40a6-a233-1ad7c07cc481", "updated": "<value>"}, {"_id": "<id>", "created_by_id": "91696ebd-834b-47d8-bc22-36e085944ebc", "created": "<value>", "key": "<key>", "metadata": {"word_count": 0, "document_count": 0, "sentences_count": 0}, "model": "Model 3", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"type": "vector_search", "top_k": 5, "threshold": 0}, "update_by_id": "7bd4753d-0a17-4c47-88e3-29a9ec97938e", "updated": "<value>"}], "has_more": false}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "created_by_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "key": "<key>", "model": "A8", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "2766718d-6d46-412e-80ae-e1b9ddf121dc", "updated": "<value>"}, {"_id": "<id>", "created_by_id": "a4c8104f-b451-4a70-acfc-8fe07fbc60ab", "created": "<value>", "key": "<key>", "model": "Element", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "d5611ff6-573e-40a6-a233-1ad7c07cc481", "updated": "<value>"}, {"_id": "<id>", "created_by_id": "91696ebd-834b-47d8-bc22-36e085944ebc", "created": "<value>", "key": "<key>", "model": "Model 3", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "7bd4753d-0a17-4c47-88e3-29a9ec97938e", "updated": "<value>"}], "has_more": false}
   CreateKnowledge:
     speakeasy-default-create-knowledge:
       requestBody:
-        application/json: {"key": "<key>", "model": "Fiesta", "path": "Customer Service/Billing/Refund"}
+        application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created_by_id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "created": "<value>", "key": "<key>", "metadata": {"word_count": 0, "document_count": 0, "sentences_count": 0}, "model": "Fortwo", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"type": "vector_search", "top_k": 5, "threshold": 0}, "update_by_id": "a8e774c2-becc-4376-b917-75e024985613", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created_by_id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "created": "<value>", "key": "<key>", "model": "Fortwo", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "a8e774c2-becc-4376-b917-75e024985613", "updated": "<value>"}
   GetOneKnowledge:
     speakeasy-default-get-one-knowledge:
       parameters:
@@ -1613,7 +1508,7 @@ examples:
           knowledge_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "created_by_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "created": "<value>", "key": "<key>", "metadata": {"word_count": 0, "document_count": 0, "sentences_count": 0}, "model": "Model X", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"type": "keyword_search", "top_k": 5, "threshold": 0}, "update_by_id": "eebcc212-7fd4-4729-a78c-0f6ee88aad22", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created_by_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "created": "<value>", "key": "<key>", "model": "Model X", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "eebcc212-7fd4-4729-a78c-0f6ee88aad22", "updated": "<value>"}
   UpdateKnowledge:
     speakeasy-default-update-knowledge:
       parameters:
@@ -1623,7 +1518,7 @@ examples:
         application/json: {"path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created_by_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "created": "<value>", "key": "<key>", "metadata": {"word_count": 0, "document_count": 0, "sentences_count": 0}, "model": "Model S", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"type": "keyword_search", "top_k": 5, "threshold": 0}, "update_by_id": "5898c125-a190-471c-a556-2af6646dadb3", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created_by_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "created": "<value>", "key": "<key>", "model": "Model S", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "5898c125-a190-471c-a556-2af6646dadb3", "updated": "<value>"}
   DeleteKnowledge:
     speakeasy-default-delete-knowledge:
       parameters:

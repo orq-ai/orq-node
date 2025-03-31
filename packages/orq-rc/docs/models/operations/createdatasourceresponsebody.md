@@ -8,12 +8,12 @@ Datasource successfully created
 import { CreateDatasourceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasourceResponseBody = {
-  displayName: "Destany.Skiles",
-  status: "completed",
+  displayName: "Reese57",
+  status: "failed",
   created: "<value>",
   updated: "<value>",
   knowledgeId: "<id>",
-  chunksCount: 9747.24,
+  chunksCount: 9682.12,
 };
 ```
 

@@ -18,7 +18,7 @@ const value: components.One = {
 const value: components.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://deficient-fat.net/",
+    url: "https://golden-procurement.info/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: components.Three = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

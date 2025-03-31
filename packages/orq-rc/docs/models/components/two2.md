@@ -8,7 +8,7 @@ import { Two2 } from "@orq-ai/node/models/components";
 let value: Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://educated-cappelletti.net",
+    url: "https://musty-pigpen.net",
   },
 };
 ```

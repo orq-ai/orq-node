@@ -8,12 +8,12 @@ Datasource successfully retrieved
 import { RetrieveDatasourceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatasourceResponseBody = {
-  displayName: "Nadia.Johns-Hermiston18",
-  status: "pending",
+  displayName: "Meda34",
+  status: "processing",
   created: "<value>",
   updated: "<value>",
   knowledgeId: "<id>",
-  chunksCount: 7547.84,
+  chunksCount: 2459.9,
 };
 ```
 

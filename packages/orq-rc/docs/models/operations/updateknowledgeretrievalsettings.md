@@ -1,29 +1,20 @@
 # UpdateKnowledgeRetrievalSettings
 
+The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
 
-## Supported Types
-
-### `operations.UpdateKnowledgeRetrievalSettings1`
-
-```typescript
-const value: operations.UpdateKnowledgeRetrievalSettings1 = {
-  type: "vector_search",
-};
-```
-
-### `operations.UpdateKnowledgeRetrievalSettings2`
+## Example Usage
 
 ```typescript
-const value: operations.UpdateKnowledgeRetrievalSettings2 = {
-  type: "keyword_search",
-};
+import { UpdateKnowledgeRetrievalSettings } from "@orq-ai/node/models/operations";
+
+let value: UpdateKnowledgeRetrievalSettings = {};
 ```
 
-### `operations.UpdateKnowledgeRetrievalSettings3`
+## Fields
 
-```typescript
-const value: operations.UpdateKnowledgeRetrievalSettings3 = {
-  type: "hybrid_search",
-};
-```
-
+| Field                                                                                                                                    | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `retrievalType`                                                                                                                          | [operations.UpdateKnowledgeRetrievalType](../../models/operations/updateknowledgeretrievaltype.md)                                       | :heavy_minus_sign:                                                                                                                       | The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.               |
+| `topK`                                                                                                                                   | *number*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | The number of results to return from the search.                                                                                         |
+| `threshold`                                                                                                                              | *number*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned |
+| `rerankConfig`                                                                                                                           | [operations.UpdateKnowledgeRerankConfig](../../models/operations/updateknowledgererankconfig.md)                                         | :heavy_minus_sign:                                                                                                                       | The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.          |

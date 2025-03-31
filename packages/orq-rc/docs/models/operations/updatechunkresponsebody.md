@@ -11,7 +11,7 @@ let value: UpdateChunkResponseBody = {
   id: "<id>",
   text: "<value>",
   enabled: false,
-  status: "processing",
+  status: "failed",
   created: "<value>",
   updated: "<value>",
 };

@@ -9,532 +9,122 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const CreateKnowledgeRetrievalSettingsKnowledgeType = {
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export const RetrievalType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
   HybridSearch: "hybrid_search",
 } as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeType = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsKnowledgeType
->;
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export type RetrievalType = ClosedEnum<typeof RetrievalType>;
 
-export const CreateKnowledgeRetrievalSettingsKnowledgeProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeProvider = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsKnowledgeProvider
->;
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeModelType = {
-  Rerank: "rerank",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeModelType = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsKnowledgeModelType
->;
-
-export type CreateKnowledgeRetrievalSettingsKnowledgeModelParameters = {
-  /**
-   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-   */
-  threshold?: number | undefined;
-};
-
-export type CreateKnowledgeRetrievalSettingsRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?: CreateKnowledgeRetrievalSettingsKnowledgeProvider | undefined;
-  /**
-   * The name of the model to use
-   */
-  model?: string | undefined;
-  /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?: CreateKnowledgeRetrievalSettingsKnowledgeModelType | undefined;
-  modelParameters?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeModelParameters
-    | undefined;
-};
-
-export type RetrievalSettings3 = {
-  type: CreateKnowledgeRetrievalSettingsKnowledgeType;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?:
-    | CreateKnowledgeRetrievalSettingsRerankConfig
-    | null
-    | undefined;
-};
-
-export const CreateKnowledgeRetrievalSettingsType = {
-  KeywordSearch: "keyword_search",
-} as const;
-export type CreateKnowledgeRetrievalSettingsType = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsType
->;
-
-export const CreateKnowledgeRetrievalSettingsProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type CreateKnowledgeRetrievalSettingsProvider = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsProvider
->;
-
-export const CreateKnowledgeRetrievalSettingsModelType = {
-  Rerank: "rerank",
-} as const;
-export type CreateKnowledgeRetrievalSettingsModelType = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsModelType
->;
-
-export type CreateKnowledgeRetrievalSettingsModelParameters = {
-  /**
-   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-   */
-  threshold?: number | undefined;
-};
-
-export type RetrievalSettingsRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?: CreateKnowledgeRetrievalSettingsProvider | undefined;
-  /**
-   * The name of the model to use
-   */
-  model?: string | undefined;
-  /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?: CreateKnowledgeRetrievalSettingsModelType | undefined;
-  modelParameters?: CreateKnowledgeRetrievalSettingsModelParameters | undefined;
-};
-
-export type RetrievalSettings2 = {
-  type: CreateKnowledgeRetrievalSettingsType;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?: RetrievalSettingsRerankConfig | null | undefined;
-};
-
-export const RetrievalSettingsType = {
-  VectorSearch: "vector_search",
-} as const;
-export type RetrievalSettingsType = ClosedEnum<typeof RetrievalSettingsType>;
-
-export const RetrievalSettingsProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type RetrievalSettingsProvider = ClosedEnum<
-  typeof RetrievalSettingsProvider
->;
-
-export const RetrievalSettingsModelType = {
-  Rerank: "rerank",
-} as const;
-export type RetrievalSettingsModelType = ClosedEnum<
-  typeof RetrievalSettingsModelType
->;
-
-export type RetrievalSettingsModelParameters = {
-  /**
-   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-   */
-  threshold?: number | undefined;
-};
-
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
 export type RerankConfig = {
-  enabled?: boolean | undefined;
-  provider?: RetrievalSettingsProvider | undefined;
   /**
-   * The name of the model to use
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
-  model?: string | undefined;
+  rerankThreshold?: number | undefined;
   /**
-   * The ID of the model in the database
+   * The rerank model to use for the knowledge base.
    */
-  modelDbId?: string | undefined;
-  modelType?: RetrievalSettingsModelType | undefined;
-  modelParameters?: RetrievalSettingsModelParameters | undefined;
-};
-
-export type RetrievalSettings1 = {
-  type: RetrievalSettingsType;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?: RerankConfig | null | undefined;
+  rerankModel: string;
 };
 
 /**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
-export type RetrievalSettings =
-  | RetrievalSettings1
-  | RetrievalSettings2
-  | RetrievalSettings3;
+export type RetrievalSettings = {
+  /**
+   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalType?: RetrievalType | undefined;
+  /**
+   * The number of results to return from the search.
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?: RerankConfig | undefined;
+};
 
 export type CreateKnowledgeRequestBody = {
   key: string;
   description?: string | undefined;
   /**
-   * The embeddings model to use for the knowledge base.
+   * The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base.
    */
-  model: string;
+  embeddingModel: string;
   /**
    * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
    */
-  retrievalSettings?:
-    | RetrievalSettings1
-    | RetrievalSettings2
-    | RetrievalSettings3
-    | undefined;
+  retrievalSettings?: RetrievalSettings | undefined;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
   path: string;
 };
 
-export type CreateKnowledgeMetadata = {
-  wordCount?: number | undefined;
-  documentCount?: number | undefined;
-  sentencesCount?: number | undefined;
-};
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType =
-  {
-    HybridSearch: "hybrid_search",
-  } as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType =
-  ClosedEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType
-  >;
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider =
-  {
-    Cohere: "cohere",
-    Openai: "openai",
-    Anthropic: "anthropic",
-    Huggingface: "huggingface",
-    Replicate: "replicate",
-    Google: "google",
-    GoogleAi: "google-ai",
-    Azure: "azure",
-    Aws: "aws",
-    Anyscale: "anyscale",
-    Perplexity: "perplexity",
-    Groq: "groq",
-    Fal: "fal",
-    Leonardoai: "leonardoai",
-    Nvidia: "nvidia",
-    Jina: "jina",
-    Togetherai: "togetherai",
-    Elevenlabs: "elevenlabs",
-  } as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider =
-  ClosedEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider
-  >;
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType =
-  {
-    Rerank: "rerank",
-  } as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType =
-  ClosedEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType
-  >;
-
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters =
-  {
-    /**
-     * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-     */
-    threshold?: number | undefined;
-  };
-
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig = {
-  enabled?: boolean | undefined;
-  provider?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider
-    | undefined;
-  /**
-   * The name of the model to use
-   */
-  model?: string | undefined;
-  /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType
-    | undefined;
-  modelParameters?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters
-    | undefined;
-  /**
-   * The id of the resource
-   */
-  integrationId?: string | null | undefined;
-};
-
-export type CreateKnowledgeRetrievalSettings3 = {
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig
-    | null
-    | undefined;
-};
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type = {
-  KeywordSearch: "keyword_search",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type =
-  ClosedEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type>;
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider =
-  ClosedEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider
-  >;
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType = {
-  Rerank: "rerank",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType =
-  ClosedEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType
-  >;
-
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters =
-  {
-    /**
-     * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
-     */
-    threshold?: number | undefined;
-  };
-
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider
-    | undefined;
-  /**
-   * The name of the model to use
-   */
-  model?: string | undefined;
-  /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType
-    | undefined;
-  modelParameters?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters
-    | undefined;
-  /**
-   * The id of the resource
-   */
-  integrationId?: string | null | undefined;
-};
-
-export type CreateKnowledgeRetrievalSettings2 = {
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type;
-  /**
-   * Used to filter chunks that are most similar to the query
-   */
-  topK?: number | undefined;
-  /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
-   */
-  threshold?: number | undefined;
-  rerankConfig?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig
-    | null
-    | undefined;
-};
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseType = {
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export const CreateKnowledgeRetrievalType = {
   VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
+  HybridSearch: "hybrid_search",
 } as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseType = ClosedEnum<
-  typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseType
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export type CreateKnowledgeRetrievalType = ClosedEnum<
+  typeof CreateKnowledgeRetrievalType
 >;
 
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider =
-  ClosedEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider>;
-
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType = {
-  Rerank: "rerank",
-} as const;
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType =
-  ClosedEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType>;
-
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters = {
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
+export type CreateKnowledgeRerankConfig = {
   /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
-  threshold?: number | undefined;
+  rerankThreshold?: number | undefined;
+  /**
+   * The rerank model to use for the knowledge base.
+   */
+  rerankModel: string;
 };
 
-export type CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig = {
-  enabled?: boolean | undefined;
-  provider?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider
-    | undefined;
+/**
+ * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ */
+export type CreateKnowledgeRetrievalSettings = {
   /**
-   * The name of the model to use
+   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
-  model?: string | undefined;
+  retrievalType?: CreateKnowledgeRetrievalType | undefined;
   /**
-   * The ID of the model in the database
-   */
-  modelDbId?: string | undefined;
-  modelType?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType
-    | undefined;
-  modelParameters?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters
-    | undefined;
-  /**
-   * The id of the resource
-   */
-  integrationId?: string | null | undefined;
-};
-
-export type CreateKnowledgeRetrievalSettings1 = {
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponseType;
-  /**
-   * Used to filter chunks that are most similar to the query
+   * The number of results to return from the search.
    */
   topK?: number | undefined;
   /**
-   * Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled.
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
    */
   threshold?: number | undefined;
-  rerankConfig?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig
-    | null
-    | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?: CreateKnowledgeRerankConfig | undefined;
 };
-
-export type CreateKnowledgeRetrievalSettings =
-  | CreateKnowledgeRetrievalSettings1
-  | CreateKnowledgeRetrievalSettings2
-  | CreateKnowledgeRetrievalSettings3;
 
 /**
  * Knowledge Base object
@@ -560,7 +150,6 @@ export type CreateKnowledgeResponseBody = {
    * The unique key of the knowledge base.
    */
   key: string;
-  metadata: CreateKnowledgeMetadata;
   /**
    * The embeddings model used for the knowledge base.
    */
@@ -569,10 +158,10 @@ export type CreateKnowledgeResponseBody = {
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
   path?: string | undefined;
-  retrievalSettings:
-    | CreateKnowledgeRetrievalSettings1
-    | CreateKnowledgeRetrievalSettings2
-    | CreateKnowledgeRetrievalSettings3;
+  /**
+   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalSettings?: CreateKnowledgeRetrievalSettings | undefined;
   /**
    * The id of the resource
    */
@@ -584,748 +173,24 @@ export type CreateKnowledgeResponseBody = {
 };
 
 /** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeType> = z
-    .nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeType);
+export const RetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof RetrievalType
+> = z.nativeEnum(RetrievalType);
 
 /** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeType> =
-    CreateKnowledgeRetrievalSettingsKnowledgeType$inboundSchema;
+export const RetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof RetrievalType
+> = RetrievalType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeProvider> = z
-    .nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeProvider);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeProvider> =
-    CreateKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeProvider$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeModelType> = z
-    .nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeModelType);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsKnowledgeModelType> =
-    CreateKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeModelType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound =
-  {
-    threshold?: number | undefined;
-  };
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeModelParametersToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeModelParameters:
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema
-      .parse(createKnowledgeRetrievalSettingsKnowledgeModelParameters),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsRerankConfig$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsRerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider: CreateKnowledgeRetrievalSettingsKnowledgeProvider$inboundSchema
-      .optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type: CreateKnowledgeRetrievalSettingsKnowledgeModelType$inboundSchema
-      .optional(),
-    model_parameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-    });
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsRerankConfig$Outbound = {
-  enabled?: boolean | undefined;
-  provider?: string | undefined;
-  model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
-  model_parameters?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsRerankConfig$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsRerankConfig$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsRerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider: CreateKnowledgeRetrievalSettingsKnowledgeProvider$outboundSchema
-      .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType: CreateKnowledgeRetrievalSettingsKnowledgeModelType$outboundSchema
-      .optional(),
-    modelParameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeModelParameters$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsRerankConfig$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsRerankConfig$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsRerankConfig$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsRerankConfig$Outbound` instead. */
-  export type Outbound = CreateKnowledgeRetrievalSettingsRerankConfig$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsRerankConfigToJSON(
-  createKnowledgeRetrievalSettingsRerankConfig:
-    CreateKnowledgeRetrievalSettingsRerankConfig,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsRerankConfig$outboundSchema.parse(
-      createKnowledgeRetrievalSettingsRerankConfig,
-    ),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsRerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsRerankConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrievalSettings3$inboundSchema: z.ZodType<
-  RetrievalSettings3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsKnowledgeType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() => CreateKnowledgeRetrievalSettingsRerankConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type RetrievalSettings3$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | CreateKnowledgeRetrievalSettingsRerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const RetrievalSettings3$outboundSchema: z.ZodType<
-  RetrievalSettings3$Outbound,
-  z.ZodTypeDef,
-  RetrievalSettings3
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsKnowledgeType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() => CreateKnowledgeRetrievalSettingsRerankConfig$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettings3$ {
-  /** @deprecated use `RetrievalSettings3$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettings3$inboundSchema;
-  /** @deprecated use `RetrievalSettings3$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettings3$outboundSchema;
-  /** @deprecated use `RetrievalSettings3$Outbound` instead. */
-  export type Outbound = RetrievalSettings3$Outbound;
-}
-
-export function retrievalSettings3ToJSON(
-  retrievalSettings3: RetrievalSettings3,
-): string {
-  return JSON.stringify(
-    RetrievalSettings3$outboundSchema.parse(retrievalSettings3),
-  );
-}
-
-export function retrievalSettings3FromJSON(
-  jsonString: string,
-): SafeParseResult<RetrievalSettings3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrievalSettings3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrievalSettings3' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsType> = z.nativeEnum(
-    CreateKnowledgeRetrievalSettingsType,
-  );
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsType> =
-    CreateKnowledgeRetrievalSettingsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsProvider$inboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsProvider> = z
-    .nativeEnum(CreateKnowledgeRetrievalSettingsProvider);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsProvider$outboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsProvider> =
-    CreateKnowledgeRetrievalSettingsProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsProvider$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsProvider$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsProvider$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsModelType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsModelType> = z
-    .nativeEnum(CreateKnowledgeRetrievalSettingsModelType);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsModelType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateKnowledgeRetrievalSettingsModelType> =
-    CreateKnowledgeRetrievalSettingsModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsModelType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsModelType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsModelType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsModelParameters$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsModelParameters$Outbound = {
-  threshold?: number | undefined;
-};
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsModelParameters$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsModelParameters$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsModelParameters$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsModelParameters$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsModelParameters$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsModelParameters$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsModelParameters$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsModelParametersToJSON(
-  createKnowledgeRetrievalSettingsModelParameters:
-    CreateKnowledgeRetrievalSettingsModelParameters,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsModelParameters$outboundSchema.parse(
-      createKnowledgeRetrievalSettingsModelParameters,
-    ),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsModelParameters$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrievalSettingsRerankConfig$inboundSchema: z.ZodType<
-  RetrievalSettingsRerankConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  provider: CreateKnowledgeRetrievalSettingsProvider$inboundSchema.optional(),
-  model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: CreateKnowledgeRetrievalSettingsModelType$inboundSchema
-    .optional(),
-  model_parameters: z.lazy(() =>
-    CreateKnowledgeRetrievalSettingsModelParameters$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-  });
-});
-
-/** @internal */
-export type RetrievalSettingsRerankConfig$Outbound = {
-  enabled?: boolean | undefined;
-  provider?: string | undefined;
-  model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
-  model_parameters?:
-    | CreateKnowledgeRetrievalSettingsModelParameters$Outbound
-    | undefined;
-};
-
-/** @internal */
-export const RetrievalSettingsRerankConfig$outboundSchema: z.ZodType<
-  RetrievalSettingsRerankConfig$Outbound,
-  z.ZodTypeDef,
-  RetrievalSettingsRerankConfig
-> = z.object({
-  enabled: z.boolean().optional(),
-  provider: CreateKnowledgeRetrievalSettingsProvider$outboundSchema.optional(),
-  model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: CreateKnowledgeRetrievalSettingsModelType$outboundSchema
-    .optional(),
-  modelParameters: z.lazy(() =>
-    CreateKnowledgeRetrievalSettingsModelParameters$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettingsRerankConfig$ {
-  /** @deprecated use `RetrievalSettingsRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettingsRerankConfig$inboundSchema;
-  /** @deprecated use `RetrievalSettingsRerankConfig$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettingsRerankConfig$outboundSchema;
-  /** @deprecated use `RetrievalSettingsRerankConfig$Outbound` instead. */
-  export type Outbound = RetrievalSettingsRerankConfig$Outbound;
-}
-
-export function retrievalSettingsRerankConfigToJSON(
-  retrievalSettingsRerankConfig: RetrievalSettingsRerankConfig,
-): string {
-  return JSON.stringify(
-    RetrievalSettingsRerankConfig$outboundSchema.parse(
-      retrievalSettingsRerankConfig,
-    ),
-  );
-}
-
-export function retrievalSettingsRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrievalSettingsRerankConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrievalSettingsRerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrievalSettingsRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrievalSettings2$inboundSchema: z.ZodType<
-  RetrievalSettings2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() => RetrievalSettingsRerankConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type RetrievalSettings2$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?: RetrievalSettingsRerankConfig$Outbound | null | undefined;
-};
-
-/** @internal */
-export const RetrievalSettings2$outboundSchema: z.ZodType<
-  RetrievalSettings2$Outbound,
-  z.ZodTypeDef,
-  RetrievalSettings2
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() => RetrievalSettingsRerankConfig$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettings2$ {
-  /** @deprecated use `RetrievalSettings2$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettings2$inboundSchema;
-  /** @deprecated use `RetrievalSettings2$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettings2$outboundSchema;
-  /** @deprecated use `RetrievalSettings2$Outbound` instead. */
-  export type Outbound = RetrievalSettings2$Outbound;
-}
-
-export function retrievalSettings2ToJSON(
-  retrievalSettings2: RetrievalSettings2,
-): string {
-  return JSON.stringify(
-    RetrievalSettings2$outboundSchema.parse(retrievalSettings2),
-  );
-}
-
-export function retrievalSettings2FromJSON(
-  jsonString: string,
-): SafeParseResult<RetrievalSettings2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrievalSettings2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrievalSettings2' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrievalSettingsType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrievalSettingsType
-> = z.nativeEnum(RetrievalSettingsType);
-
-/** @internal */
-export const RetrievalSettingsType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrievalSettingsType
-> = RetrievalSettingsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettingsType$ {
-  /** @deprecated use `RetrievalSettingsType$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettingsType$inboundSchema;
-  /** @deprecated use `RetrievalSettingsType$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettingsType$outboundSchema;
-}
-
-/** @internal */
-export const RetrievalSettingsProvider$inboundSchema: z.ZodNativeEnum<
-  typeof RetrievalSettingsProvider
-> = z.nativeEnum(RetrievalSettingsProvider);
-
-/** @internal */
-export const RetrievalSettingsProvider$outboundSchema: z.ZodNativeEnum<
-  typeof RetrievalSettingsProvider
-> = RetrievalSettingsProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettingsProvider$ {
-  /** @deprecated use `RetrievalSettingsProvider$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettingsProvider$inboundSchema;
-  /** @deprecated use `RetrievalSettingsProvider$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettingsProvider$outboundSchema;
-}
-
-/** @internal */
-export const RetrievalSettingsModelType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrievalSettingsModelType
-> = z.nativeEnum(RetrievalSettingsModelType);
-
-/** @internal */
-export const RetrievalSettingsModelType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrievalSettingsModelType
-> = RetrievalSettingsModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettingsModelType$ {
-  /** @deprecated use `RetrievalSettingsModelType$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettingsModelType$inboundSchema;
-  /** @deprecated use `RetrievalSettingsModelType$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettingsModelType$outboundSchema;
-}
-
-/** @internal */
-export const RetrievalSettingsModelParameters$inboundSchema: z.ZodType<
-  RetrievalSettingsModelParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  threshold: z.number().optional(),
-});
-
-/** @internal */
-export type RetrievalSettingsModelParameters$Outbound = {
-  threshold?: number | undefined;
-};
-
-/** @internal */
-export const RetrievalSettingsModelParameters$outboundSchema: z.ZodType<
-  RetrievalSettingsModelParameters$Outbound,
-  z.ZodTypeDef,
-  RetrievalSettingsModelParameters
-> = z.object({
-  threshold: z.number().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettingsModelParameters$ {
-  /** @deprecated use `RetrievalSettingsModelParameters$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettingsModelParameters$inboundSchema;
-  /** @deprecated use `RetrievalSettingsModelParameters$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettingsModelParameters$outboundSchema;
-  /** @deprecated use `RetrievalSettingsModelParameters$Outbound` instead. */
-  export type Outbound = RetrievalSettingsModelParameters$Outbound;
-}
-
-export function retrievalSettingsModelParametersToJSON(
-  retrievalSettingsModelParameters: RetrievalSettingsModelParameters,
-): string {
-  return JSON.stringify(
-    RetrievalSettingsModelParameters$outboundSchema.parse(
-      retrievalSettingsModelParameters,
-    ),
-  );
-}
-
-export function retrievalSettingsModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrievalSettingsModelParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrievalSettingsModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrievalSettingsModelParameters' from JSON`,
-  );
+export namespace RetrievalType$ {
+  /** @deprecated use `RetrievalType$inboundSchema` instead. */
+  export const inboundSchema = RetrievalType$inboundSchema;
+  /** @deprecated use `RetrievalType$outboundSchema` instead. */
+  export const outboundSchema = RetrievalType$outboundSchema;
 }
 
 /** @internal */
@@ -1334,29 +199,19 @@ export const RerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  enabled: z.boolean().optional(),
-  provider: RetrievalSettingsProvider$inboundSchema.optional(),
-  model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: RetrievalSettingsModelType$inboundSchema.optional(),
-  model_parameters: z.lazy(() => RetrievalSettingsModelParameters$inboundSchema)
-    .optional(),
+  rerank_threshold: z.number().default(0.5),
+  rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
+    "rerank_threshold": "rerankThreshold",
+    "rerank_model": "rerankModel",
   });
 });
 
 /** @internal */
 export type RerankConfig$Outbound = {
-  enabled?: boolean | undefined;
-  provider?: string | undefined;
-  model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
-  model_parameters?: RetrievalSettingsModelParameters$Outbound | undefined;
+  rerank_threshold: number;
+  rerank_model: string;
 };
 
 /** @internal */
@@ -1365,18 +220,12 @@ export const RerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RerankConfig
 > = z.object({
-  enabled: z.boolean().optional(),
-  provider: RetrievalSettingsProvider$outboundSchema.optional(),
-  model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: RetrievalSettingsModelType$outboundSchema.optional(),
-  modelParameters: z.lazy(() => RetrievalSettingsModelParameters$outboundSchema)
-    .optional(),
+  rerankThreshold: z.number().default(0.5),
+  rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
+    rerankThreshold: "rerank_threshold",
+    rerankModel: "rerank_model",
   });
 });
 
@@ -1408,107 +257,48 @@ export function rerankConfigFromJSON(
 }
 
 /** @internal */
-export const RetrievalSettings1$inboundSchema: z.ZodType<
-  RetrievalSettings1,
+export const RetrievalSettings$inboundSchema: z.ZodType<
+  RetrievalSettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RetrievalSettingsType$inboundSchema,
+  retrieval_type: RetrievalType$inboundSchema.default("hybrid_search"),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.nullable(z.lazy(() => RerankConfig$inboundSchema))
-    .optional(),
+  rerank_config: z.lazy(() => RerankConfig$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
   });
 });
 
 /** @internal */
-export type RetrievalSettings1$Outbound = {
-  type: string;
+export type RetrievalSettings$Outbound = {
+  retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: RerankConfig$Outbound | null | undefined;
+  rerank_config?: RerankConfig$Outbound | undefined;
 };
-
-/** @internal */
-export const RetrievalSettings1$outboundSchema: z.ZodType<
-  RetrievalSettings1$Outbound,
-  z.ZodTypeDef,
-  RetrievalSettings1
-> = z.object({
-  type: RetrievalSettingsType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(z.lazy(() => RerankConfig$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalSettings1$ {
-  /** @deprecated use `RetrievalSettings1$inboundSchema` instead. */
-  export const inboundSchema = RetrievalSettings1$inboundSchema;
-  /** @deprecated use `RetrievalSettings1$outboundSchema` instead. */
-  export const outboundSchema = RetrievalSettings1$outboundSchema;
-  /** @deprecated use `RetrievalSettings1$Outbound` instead. */
-  export type Outbound = RetrievalSettings1$Outbound;
-}
-
-export function retrievalSettings1ToJSON(
-  retrievalSettings1: RetrievalSettings1,
-): string {
-  return JSON.stringify(
-    RetrievalSettings1$outboundSchema.parse(retrievalSettings1),
-  );
-}
-
-export function retrievalSettings1FromJSON(
-  jsonString: string,
-): SafeParseResult<RetrievalSettings1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrievalSettings1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrievalSettings1' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrievalSettings$inboundSchema: z.ZodType<
-  RetrievalSettings,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => RetrievalSettings1$inboundSchema),
-  z.lazy(() => RetrievalSettings2$inboundSchema),
-  z.lazy(() => RetrievalSettings3$inboundSchema),
-]);
-
-/** @internal */
-export type RetrievalSettings$Outbound =
-  | RetrievalSettings1$Outbound
-  | RetrievalSettings2$Outbound
-  | RetrievalSettings3$Outbound;
 
 /** @internal */
 export const RetrievalSettings$outboundSchema: z.ZodType<
   RetrievalSettings$Outbound,
   z.ZodTypeDef,
   RetrievalSettings
-> = z.union([
-  z.lazy(() => RetrievalSettings1$outboundSchema),
-  z.lazy(() => RetrievalSettings2$outboundSchema),
-  z.lazy(() => RetrievalSettings3$outboundSchema),
-]);
+> = z.object({
+  retrievalType: RetrievalType$outboundSchema.default("hybrid_search"),
+  topK: z.number().int().default(5),
+  threshold: z.number().default(0),
+  rerankConfig: z.lazy(() => RerankConfig$outboundSchema).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    retrievalType: "retrieval_type",
+    topK: "top_k",
+    rerankConfig: "rerank_config",
+  });
+});
 
 /**
  * @internal
@@ -1549,15 +339,12 @@ export const CreateKnowledgeRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   key: z.string(),
   description: z.string().optional(),
-  model: z.string(),
-  retrieval_settings: z.union([
-    z.lazy(() => RetrievalSettings1$inboundSchema),
-    z.lazy(() => RetrievalSettings2$inboundSchema),
-    z.lazy(() => RetrievalSettings3$inboundSchema),
-  ]).optional(),
+  embedding_model: z.string(),
+  retrieval_settings: z.lazy(() => RetrievalSettings$inboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "embedding_model": "embeddingModel",
     "retrieval_settings": "retrievalSettings",
   });
 });
@@ -1566,12 +353,8 @@ export const CreateKnowledgeRequestBody$inboundSchema: z.ZodType<
 export type CreateKnowledgeRequestBody$Outbound = {
   key: string;
   description?: string | undefined;
-  model: string;
-  retrieval_settings?:
-    | RetrievalSettings1$Outbound
-    | RetrievalSettings2$Outbound
-    | RetrievalSettings3$Outbound
-    | undefined;
+  embedding_model: string;
+  retrieval_settings?: RetrievalSettings$Outbound | undefined;
   path: string;
 };
 
@@ -1583,15 +366,12 @@ export const CreateKnowledgeRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   key: z.string(),
   description: z.string().optional(),
-  model: z.string(),
-  retrievalSettings: z.union([
-    z.lazy(() => RetrievalSettings1$outboundSchema),
-    z.lazy(() => RetrievalSettings2$outboundSchema),
-    z.lazy(() => RetrievalSettings3$outboundSchema),
-  ]).optional(),
+  embeddingModel: z.string(),
+  retrievalSettings: z.lazy(() => RetrievalSettings$outboundSchema).optional(),
   path: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    embeddingModel: "embedding_model",
     retrievalSettings: "retrieval_settings",
   });
 });
@@ -1628,43 +408,59 @@ export function createKnowledgeRequestBodyFromJSON(
 }
 
 /** @internal */
-export const CreateKnowledgeMetadata$inboundSchema: z.ZodType<
-  CreateKnowledgeMetadata,
+export const CreateKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateKnowledgeRetrievalType
+> = z.nativeEnum(CreateKnowledgeRetrievalType);
+
+/** @internal */
+export const CreateKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateKnowledgeRetrievalType
+> = CreateKnowledgeRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateKnowledgeRetrievalType$ {
+  /** @deprecated use `CreateKnowledgeRetrievalType$inboundSchema` instead. */
+  export const inboundSchema = CreateKnowledgeRetrievalType$inboundSchema;
+  /** @deprecated use `CreateKnowledgeRetrievalType$outboundSchema` instead. */
+  export const outboundSchema = CreateKnowledgeRetrievalType$outboundSchema;
+}
+
+/** @internal */
+export const CreateKnowledgeRerankConfig$inboundSchema: z.ZodType<
+  CreateKnowledgeRerankConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  word_count: z.number().int().default(0),
-  document_count: z.number().int().default(0),
-  sentences_count: z.number().int().default(0),
+  rerank_threshold: z.number().default(0.5),
+  rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    "word_count": "wordCount",
-    "document_count": "documentCount",
-    "sentences_count": "sentencesCount",
+    "rerank_threshold": "rerankThreshold",
+    "rerank_model": "rerankModel",
   });
 });
 
 /** @internal */
-export type CreateKnowledgeMetadata$Outbound = {
-  word_count: number;
-  document_count: number;
-  sentences_count: number;
+export type CreateKnowledgeRerankConfig$Outbound = {
+  rerank_threshold: number;
+  rerank_model: string;
 };
 
 /** @internal */
-export const CreateKnowledgeMetadata$outboundSchema: z.ZodType<
-  CreateKnowledgeMetadata$Outbound,
+export const CreateKnowledgeRerankConfig$outboundSchema: z.ZodType<
+  CreateKnowledgeRerankConfig$Outbound,
   z.ZodTypeDef,
-  CreateKnowledgeMetadata
+  CreateKnowledgeRerankConfig
 > = z.object({
-  wordCount: z.number().int().default(0),
-  documentCount: z.number().int().default(0),
-  sentencesCount: z.number().int().default(0),
+  rerankThreshold: z.number().default(0.5),
+  rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    wordCount: "word_count",
-    documentCount: "document_count",
-    sentencesCount: "sentences_count",
+    rerankThreshold: "rerank_threshold",
+    rerankModel: "rerank_model",
   });
 });
 
@@ -1672,1078 +468,32 @@ export const CreateKnowledgeMetadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateKnowledgeMetadata$ {
-  /** @deprecated use `CreateKnowledgeMetadata$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeMetadata$inboundSchema;
-  /** @deprecated use `CreateKnowledgeMetadata$outboundSchema` instead. */
-  export const outboundSchema = CreateKnowledgeMetadata$outboundSchema;
-  /** @deprecated use `CreateKnowledgeMetadata$Outbound` instead. */
-  export type Outbound = CreateKnowledgeMetadata$Outbound;
+export namespace CreateKnowledgeRerankConfig$ {
+  /** @deprecated use `CreateKnowledgeRerankConfig$inboundSchema` instead. */
+  export const inboundSchema = CreateKnowledgeRerankConfig$inboundSchema;
+  /** @deprecated use `CreateKnowledgeRerankConfig$outboundSchema` instead. */
+  export const outboundSchema = CreateKnowledgeRerankConfig$outboundSchema;
+  /** @deprecated use `CreateKnowledgeRerankConfig$Outbound` instead. */
+  export type Outbound = CreateKnowledgeRerankConfig$Outbound;
 }
 
-export function createKnowledgeMetadataToJSON(
-  createKnowledgeMetadata: CreateKnowledgeMetadata,
+export function createKnowledgeRerankConfigToJSON(
+  createKnowledgeRerankConfig: CreateKnowledgeRerankConfig,
 ): string {
   return JSON.stringify(
-    CreateKnowledgeMetadata$outboundSchema.parse(createKnowledgeMetadata),
-  );
-}
-
-export function createKnowledgeMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateKnowledgeMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType,
-  );
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType
-  > =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider
-  > = z.nativeEnum(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider,
-  );
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider
-  > =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType
-  > = z.nativeEnum(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType,
-  );
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType
-  > =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$Outbound =
-  {
-    threshold?: number | undefined;
-  };
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParametersToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$outboundSchema
-      .parse(
-        createKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters,
-      ),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$inboundSchema
-        .optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$inboundSchema
-        .optional(),
-    model_parameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$inboundSchema
-    ).optional(),
-    integration_id: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-      "integration_id": "integrationId",
-    });
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$Outbound =
-  {
-    enabled?: boolean | undefined;
-    provider?: string | undefined;
-    model?: string | undefined;
-    model_db_id?: string | undefined;
-    model_type?: string | undefined;
-    model_parameters?:
-      | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$Outbound
-      | undefined;
-    integration_id?: string | null | undefined;
-  };
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONProvider$outboundSchema
-        .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelType$outboundSchema
-        .optional(),
-    modelParameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONModelParameters$outboundSchema
-    ).optional(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-      integrationId: "integration_id",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfigToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$outboundSchema
-      .parse(createKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettings3$inboundSchema: z.ZodType<
-  CreateKnowledgeRetrievalSettings3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettings3$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettings3$outboundSchema: z.ZodType<
-  CreateKnowledgeRetrievalSettings3$Outbound,
-  z.ZodTypeDef,
-  CreateKnowledgeRetrievalSettings3
-> = z.object({
-  type:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ApplicationJSONType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200RerankConfig$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettings3$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettings3$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeRetrievalSettings3$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettings3$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettings3$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettings3$Outbound` instead. */
-  export type Outbound = CreateKnowledgeRetrievalSettings3$Outbound;
-}
-
-export function createKnowledgeRetrievalSettings3ToJSON(
-  createKnowledgeRetrievalSettings3: CreateKnowledgeRetrievalSettings3,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettings3$outboundSchema.parse(
-      createKnowledgeRetrievalSettings3,
+    CreateKnowledgeRerankConfig$outboundSchema.parse(
+      createKnowledgeRerankConfig,
     ),
   );
 }
 
-export function createKnowledgeRetrievalSettings3FromJSON(
+export function createKnowledgeRerankConfigFromJSON(
   jsonString: string,
-): SafeParseResult<CreateKnowledgeRetrievalSettings3, SDKValidationError> {
+): SafeParseResult<CreateKnowledgeRerankConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateKnowledgeRetrievalSettings3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettings3' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type
-  > = z.nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type
-  > = CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider
-  > = z.nativeEnum(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider,
-  );
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider
-  > =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType
-  > = z.nativeEnum(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType,
-  );
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType
-  > =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$Outbound =
-  {
-    threshold?: number | undefined;
-  };
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponse200ModelParametersToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$outboundSchema
-      .parse(
-        createKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters,
-      ),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponse200ModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$inboundSchema
-        .optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$inboundSchema
-        .optional(),
-    model_parameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$inboundSchema
-    ).optional(),
-    integration_id: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-      "integration_id": "integrationId",
-    });
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound =
-  {
-    enabled?: boolean | undefined;
-    provider?: string | undefined;
-    model?: string | undefined;
-    model_db_id?: string | undefined;
-    model_type?: string | undefined;
-    model_parameters?:
-      | CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$Outbound
-      | undefined;
-    integration_id?: string | null | undefined;
-  };
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200Provider$outboundSchema
-        .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelType$outboundSchema
-        .optional(),
-    modelParameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponse200ModelParameters$outboundSchema
-    ).optional(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-      integrationId: "integration_id",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponseRerankConfigToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema
-      .parse(createKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponseRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettings2$inboundSchema: z.ZodType<
-  CreateKnowledgeRetrievalSettings2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettings2$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettings2$outboundSchema: z.ZodType<
-  CreateKnowledgeRetrievalSettings2$Outbound,
-  z.ZodTypeDef,
-  CreateKnowledgeRetrievalSettings2
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponse200Type$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseRerankConfig$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettings2$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettings2$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeRetrievalSettings2$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettings2$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettings2$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettings2$Outbound` instead. */
-  export type Outbound = CreateKnowledgeRetrievalSettings2$Outbound;
-}
-
-export function createKnowledgeRetrievalSettings2ToJSON(
-  createKnowledgeRetrievalSettings2: CreateKnowledgeRetrievalSettings2,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettings2$outboundSchema.parse(
-      createKnowledgeRetrievalSettings2,
-    ),
-  );
-}
-
-export function createKnowledgeRetrievalSettings2FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateKnowledgeRetrievalSettings2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateKnowledgeRetrievalSettings2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettings2' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseType
-  > = z.nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeResponseType);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseType
-  > = CreateKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponseType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider
-  > = z.nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider
-  > = CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType
-  > = z.nativeEnum(CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType);
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType
-  > = CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound =
-  {
-    threshold?: number | undefined;
-  };
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters
-  > = z.object({
-    threshold: z.number().optional(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponseModelParametersToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeResponseModelParameters:
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema
-      .parse(createKnowledgeRetrievalSettingsKnowledgeResponseModelParameters),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeResponseModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$inboundSchema
-        .optional(),
-    model: z.string().optional(),
-    model_db_id: z.string().optional(),
-    model_type:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$inboundSchema
-        .optional(),
-    model_parameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$inboundSchema
-    ).optional(),
-    integration_id: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "model_db_id": "modelDbId",
-      "model_type": "modelType",
-      "model_parameters": "modelParameters",
-      "integration_id": "integrationId",
-    });
-  });
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound = {
-  enabled?: boolean | undefined;
-  provider?: string | undefined;
-  model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
-  model_parameters?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$Outbound
-    | undefined;
-  integration_id?: string | null | undefined;
-};
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema:
-  z.ZodType<
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound,
-    z.ZodTypeDef,
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig
-  > = z.object({
-    enabled: z.boolean().optional(),
-    provider:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseProvider$outboundSchema
-        .optional(),
-    model: z.string().optional(),
-    modelDbId: z.string().optional(),
-    modelType:
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseModelType$outboundSchema
-        .optional(),
-    modelParameters: z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeResponseModelParameters$outboundSchema
-    ).optional(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      modelType: "model_type",
-      modelParameters: "model_parameters",
-      integrationId: "integration_id",
-    });
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound =
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound;
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeRerankConfigToJSON(
-  createKnowledgeRetrievalSettingsKnowledgeRerankConfig:
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema.parse(
-      createKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-    ),
-  );
-}
-
-export function createKnowledgeRetrievalSettingsKnowledgeRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettings1$inboundSchema: z.ZodType<
-  CreateKnowledgeRetrievalSettings1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponseType$inboundSchema,
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
-
-/** @internal */
-export type CreateKnowledgeRetrievalSettings1$Outbound = {
-  type: string;
-  top_k: number;
-  threshold: number;
-  rerank_config?:
-    | CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$Outbound
-    | null
-    | undefined;
-};
-
-/** @internal */
-export const CreateKnowledgeRetrievalSettings1$outboundSchema: z.ZodType<
-  CreateKnowledgeRetrievalSettings1$Outbound,
-  z.ZodTypeDef,
-  CreateKnowledgeRetrievalSettings1
-> = z.object({
-  type: CreateKnowledgeRetrievalSettingsKnowledgeResponseType$outboundSchema,
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() =>
-      CreateKnowledgeRetrievalSettingsKnowledgeRerankConfig$outboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalSettings1$ {
-  /** @deprecated use `CreateKnowledgeRetrievalSettings1$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeRetrievalSettings1$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettings1$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateKnowledgeRetrievalSettings1$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalSettings1$Outbound` instead. */
-  export type Outbound = CreateKnowledgeRetrievalSettings1$Outbound;
-}
-
-export function createKnowledgeRetrievalSettings1ToJSON(
-  createKnowledgeRetrievalSettings1: CreateKnowledgeRetrievalSettings1,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRetrievalSettings1$outboundSchema.parse(
-      createKnowledgeRetrievalSettings1,
-    ),
-  );
-}
-
-export function createKnowledgeRetrievalSettings1FromJSON(
-  jsonString: string,
-): SafeParseResult<CreateKnowledgeRetrievalSettings1, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateKnowledgeRetrievalSettings1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRetrievalSettings1' from JSON`,
+    (x) => CreateKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateKnowledgeRerankConfig' from JSON`,
   );
 }
 
@@ -2752,28 +502,50 @@ export const CreateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   CreateKnowledgeRetrievalSettings,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateKnowledgeRetrievalSettings1$inboundSchema),
-  z.lazy(() => CreateKnowledgeRetrievalSettings2$inboundSchema),
-  z.lazy(() => CreateKnowledgeRetrievalSettings3$inboundSchema),
-]);
+> = z.object({
+  retrieval_type: CreateKnowledgeRetrievalType$inboundSchema.default(
+    "hybrid_search",
+  ),
+  top_k: z.number().int().default(5),
+  threshold: z.number().default(0),
+  rerank_config: z.lazy(() => CreateKnowledgeRerankConfig$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "retrieval_type": "retrievalType",
+    "top_k": "topK",
+    "rerank_config": "rerankConfig",
+  });
+});
 
 /** @internal */
-export type CreateKnowledgeRetrievalSettings$Outbound =
-  | CreateKnowledgeRetrievalSettings1$Outbound
-  | CreateKnowledgeRetrievalSettings2$Outbound
-  | CreateKnowledgeRetrievalSettings3$Outbound;
+export type CreateKnowledgeRetrievalSettings$Outbound = {
+  retrieval_type: string;
+  top_k: number;
+  threshold: number;
+  rerank_config?: CreateKnowledgeRerankConfig$Outbound | undefined;
+};
 
 /** @internal */
 export const CreateKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
   CreateKnowledgeRetrievalSettings$Outbound,
   z.ZodTypeDef,
   CreateKnowledgeRetrievalSettings
-> = z.union([
-  z.lazy(() => CreateKnowledgeRetrievalSettings1$outboundSchema),
-  z.lazy(() => CreateKnowledgeRetrievalSettings2$outboundSchema),
-  z.lazy(() => CreateKnowledgeRetrievalSettings3$outboundSchema),
-]);
+> = z.object({
+  retrievalType: CreateKnowledgeRetrievalType$outboundSchema.default(
+    "hybrid_search",
+  ),
+  topK: z.number().int().default(5),
+  threshold: z.number().default(0),
+  rerankConfig: z.lazy(() => CreateKnowledgeRerankConfig$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    retrievalType: "retrieval_type",
+    topK: "top_k",
+    rerankConfig: "rerank_config",
+  });
+});
 
 /**
  * @internal
@@ -2819,14 +591,11 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
   created: z.string(),
   description: z.string().optional(),
   key: z.string(),
-  metadata: z.lazy(() => CreateKnowledgeMetadata$inboundSchema),
   model: z.string(),
   path: z.string().optional(),
-  retrieval_settings: z.union([
-    z.lazy(() => CreateKnowledgeRetrievalSettings1$inboundSchema),
-    z.lazy(() => CreateKnowledgeRetrievalSettings2$inboundSchema),
-    z.lazy(() => CreateKnowledgeRetrievalSettings3$inboundSchema),
-  ]),
+  retrieval_settings: z.lazy(() =>
+    CreateKnowledgeRetrievalSettings$inboundSchema
+  ).optional(),
   update_by_id: z.string(),
   updated: z.string(),
 }).transform((v) => {
@@ -2845,13 +614,9 @@ export type CreateKnowledgeResponseBody$Outbound = {
   created: string;
   description?: string | undefined;
   key: string;
-  metadata: CreateKnowledgeMetadata$Outbound;
   model: string;
   path?: string | undefined;
-  retrieval_settings:
-    | CreateKnowledgeRetrievalSettings1$Outbound
-    | CreateKnowledgeRetrievalSettings2$Outbound
-    | CreateKnowledgeRetrievalSettings3$Outbound;
+  retrieval_settings?: CreateKnowledgeRetrievalSettings$Outbound | undefined;
   update_by_id: string;
   updated: string;
 };
@@ -2867,14 +632,11 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
   created: z.string(),
   description: z.string().optional(),
   key: z.string(),
-  metadata: z.lazy(() => CreateKnowledgeMetadata$outboundSchema),
   model: z.string(),
   path: z.string().optional(),
-  retrievalSettings: z.union([
-    z.lazy(() => CreateKnowledgeRetrievalSettings1$outboundSchema),
-    z.lazy(() => CreateKnowledgeRetrievalSettings2$outboundSchema),
-    z.lazy(() => CreateKnowledgeRetrievalSettings3$outboundSchema),
-  ]),
+  retrievalSettings: z.lazy(() =>
+    CreateKnowledgeRetrievalSettings$outboundSchema
+  ).optional(),
   updateById: z.string(),
   updated: z.string(),
 }).transform((v) => {

@@ -9,10 +9,8 @@ let value: MessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://afraid-nun.net",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

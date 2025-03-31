@@ -7,7 +7,7 @@ The status of the chunk
 ```typescript
 import { UpdateChunkStatus } from "@orq-ai/node/models/operations";
 
-let value: UpdateChunkStatus = "failed";
+let value: UpdateChunkStatus = "completed";
 ```
 
 ## Values

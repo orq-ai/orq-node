@@ -12,18 +12,12 @@ let value: ListKnowledgeBasesResponseBody = {
   data: [
     {
       id: "<id>",
-      createdById: "d484f305-808d-4b9f-8fd9-709fd52cbfd8",
+      createdById: "eb8d484f-3058-408d-bb9f-fd9709fd52cb",
       created: "<value>",
       key: "<key>",
-      metadata: {},
-      model: "Fiesta",
+      model: "Silverado",
       path: "Customer Service/Billing/Refund",
-      retrievalSettings: {
-        type: "vector_search",
-        topK: 5,
-        threshold: 0,
-      },
-      updateById: "84dd596e-2bf2-43bc-8793-71547e269f2e",
+      updateById: "817584dd-596e-42bf-a23b-c79371547e26",
       updated: "<value>",
     },
   ],

@@ -5,7 +5,7 @@
 ```typescript
 import { RetrievalConfigProvider } from "@orq-ai/node/models/operations";
 
-let value: RetrievalConfigProvider = "groq";
+let value: RetrievalConfigProvider = "leonardoai";
 ```
 
 ## Values
