@@ -3787,7 +3787,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-03-29T18:00:58.427Z"
+          default: "2025-03-31T06:21:57.466Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3850,7 +3850,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-03-29T18:00:58.427Z"
+            default: "2025-03-31T06:21:57.466Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3930,7 +3930,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-03-29T18:00:58.427Z"
+          default: "2025-03-31T06:21:57.466Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3976,7 +3976,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-03-29T18:00:58.427Z"
+                default: "2025-03-31T06:21:57.466Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4019,7 +4019,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-03-29T18:00:58.427Z"
+          default: "2025-03-31T06:21:57.466Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6316,7 +6316,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-03-29T18:00:56.879Z"
+          default: "2025-03-31T06:21:55.956Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6324,7 +6324,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-03-29T18:00:56.880Z"
+              default: "2025-03-31T06:21:55.956Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6434,7 +6434,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-03-29T18:00:56.879Z"
+                default: "2025-03-31T06:21:55.956Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6442,7 +6442,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-03-29T18:00:56.880Z"
+                    default: "2025-03-31T06:21:55.956Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6549,7 +6549,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-03-29T18:00:56.879Z"
+          default: "2025-03-31T06:21:55.956Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6557,7 +6557,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-03-29T18:00:56.880Z"
+              default: "2025-03-31T06:21:55.956Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6658,7 +6658,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-03-29T18:00:56.879Z"
+          default: "2025-03-31T06:21:55.956Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6666,7 +6666,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-03-29T18:00:56.880Z"
+              default: "2025-03-31T06:21:55.956Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6684,221 +6684,46 @@ components:
           type: "string"
         "description":
           type: "string"
-        "model":
+        "embedding_model":
           type: "string"
-          description: "The embeddings model to use for the knowledge base."
+          description: "The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base."
         "retrieval_settings":
-          oneOf:
-            - type: "object"
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
               properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "vector_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
+                "rerank_threshold":
                   type: "number"
+                  minimum: 0
                   maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
                   type: "string"
-                  enum:
-                    - "keyword_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
+                  description: "The rerank model to use for the knowledge base."
               required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "hybrid_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
           description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
         "path":
           type: "string"
@@ -6906,7 +6731,7 @@ components:
           example: "Customer Service/Billing/Refund"
       required:
         - "key"
-        - "model"
+        - "embedding_model"
         - "path"
     "KnowledgeUpdateRequestSchema":
       type: "object"
@@ -6914,7 +6739,7 @@ components:
         "description":
           type: "string"
           description: "The description of the knowledge base."
-        "model":
+        "embedding_model":
           type: "string"
           description: "The embeddings model used for the knowledge base. If the models is provided and is different than the previous set model, all the datasources in the knowledge base will be re-embedded."
         "path":
@@ -6922,217 +6747,43 @@ components:
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
           example: "Customer Service/Billing/Refund"
         "retrieval_settings":
-          oneOf:
-            - type: "object"
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
               properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "vector_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
+                "rerank_threshold":
                   type: "number"
+                  minimum: 0
                   maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
                   type: "string"
-                  enum:
-                    - "keyword_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
+                  description: "The rerank model to use for the knowledge base."
               required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "hybrid_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
     "GetFileUploadUrlRequest":
       type: "object"
       properties:
@@ -7386,25 +7037,6 @@ components:
         "key":
           type: "string"
           description: "The unique key of the knowledge base."
-        "metadata":
-          type: "object"
-          properties:
-            "word_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-            "document_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-            "sentences_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-          required:
-            - "word_count"
-            - "document_count"
-            - "sentences_count"
         "model":
           type: "string"
           description: "The embeddings model used for the knowledge base."
@@ -7413,217 +7045,43 @@ components:
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
           example: "Customer Service/Billing/Refund"
         "retrieval_settings":
-          oneOf:
-            - type: "object"
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
               properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "vector_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
+                "rerank_threshold":
                   type: "number"
+                  minimum: 0
                   maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
                   type: "string"
-                  enum:
-                    - "keyword_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
+                  description: "The rerank model to use for the knowledge base."
               required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "hybrid_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
         "update_by_id":
           type: "string"
           format: "uuid"
@@ -7637,9 +7095,7 @@ components:
         - "created_by_id"
         - "created"
         - "key"
-        - "metadata"
         - "model"
-        - "retrieval_settings"
         - "update_by_id"
         - "updated"
     "RetrieveKnowledgeResponse":
@@ -7662,25 +7118,6 @@ components:
         "key":
           type: "string"
           description: "The unique key of the knowledge base."
-        "metadata":
-          type: "object"
-          properties:
-            "word_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-            "document_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-            "sentences_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-          required:
-            - "word_count"
-            - "document_count"
-            - "sentences_count"
         "model":
           type: "string"
           description: "The embeddings model used for the knowledge base."
@@ -7689,217 +7126,43 @@ components:
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
           example: "Customer Service/Billing/Refund"
         "retrieval_settings":
-          oneOf:
-            - type: "object"
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
               properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "vector_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
+                "rerank_threshold":
                   type: "number"
+                  minimum: 0
                   maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
                   type: "string"
-                  enum:
-                    - "keyword_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
+                  description: "The rerank model to use for the knowledge base."
               required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "hybrid_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
         "update_by_id":
           type: "string"
           format: "uuid"
@@ -7913,9 +7176,7 @@ components:
         - "created_by_id"
         - "created"
         - "key"
-        - "metadata"
         - "model"
-        - "retrieval_settings"
         - "update_by_id"
         - "updated"
     "ListKnowledgesResponse":
@@ -7940,25 +7201,6 @@ components:
           "key":
             type: "string"
             description: "The unique key of the knowledge base."
-          "metadata":
-            type: "object"
-            properties:
-              "word_count":
-                type: "integer"
-                exclusiveMinimum: 0
-                default: 0
-              "document_count":
-                type: "integer"
-                exclusiveMinimum: 0
-                default: 0
-              "sentences_count":
-                type: "integer"
-                exclusiveMinimum: 0
-                default: 0
-            required:
-              - "word_count"
-              - "document_count"
-              - "sentences_count"
           "model":
             type: "string"
             description: "The embeddings model used for the knowledge base."
@@ -7967,217 +7209,43 @@ components:
             description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
             example: "Customer Service/Billing/Refund"
           "retrieval_settings":
-            oneOf:
-              - type: "object"
+            type: "object"
+            properties:
+              "retrieval_type":
+                type: "string"
+                enum:
+                  - "vector_search"
+                  - "keyword_search"
+                  - "hybrid_search"
+                default: "hybrid_search"
+                description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+              "top_k":
+                type: "integer"
+                exclusiveMinimum: 0
+                default: 5
+                description: "The number of results to return from the search."
+              "threshold":
+                type: "number"
+                minimum: 0
+                maximum: 1
+                default: 0
+                description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+              "rerank_config":
+                type: "object"
                 properties:
-                  "type":
-                    type: "string"
-                    enum:
-                      - "vector_search"
-                  "top_k":
-                    type: "integer"
-                    minimum: 1
-                    maximum: 20
-                    default: 5
-                    description: "Used to filter chunks that are most similar to the query"
-                  "threshold":
+                  "rerank_threshold":
                     type: "number"
+                    minimum: 0
                     maximum: 1
-                    default: 0
-                    description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                  "rerank_config":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "enabled":
-                        type: "boolean"
-                      "provider":
-                        type: "string"
-                        enum:
-                          - "cohere"
-                          - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
-                          - "azure"
-                          - "aws"
-                          - "anyscale"
-                          - "perplexity"
-                          - "groq"
-                          - "fal"
-                          - "leonardoai"
-                          - "nvidia"
-                          - "jina"
-                          - "togetherai"
-                          - "elevenlabs"
-                      "model":
-                        type: "string"
-                        description: "The name of the model to use"
-                      "model_db_id":
-                        type: "string"
-                        description: "The ID of the model in the database"
-                      "model_type":
-                        type: "string"
-                        enum:
-                          - "rerank"
-                      "model_parameters":
-                        type: "object"
-                        properties:
-                          "threshold":
-                            type: "number"
-                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                      "integration_id":
-                        type:
-                          - "string"
-                          - "null"
-                        format: "uuid"
-                        description: "The id of the resource"
-                        readOnly: true
-                required:
-                  - "type"
-              - type: "object"
-                properties:
-                  "type":
+                    default: 0.5
+                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                  "rerank_model":
                     type: "string"
-                    enum:
-                      - "keyword_search"
-                  "top_k":
-                    type: "integer"
-                    minimum: 1
-                    maximum: 20
-                    default: 5
-                    description: "Used to filter chunks that are most similar to the query"
-                  "threshold":
-                    type: "number"
-                    maximum: 1
-                    default: 0
-                    description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                  "rerank_config":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "enabled":
-                        type: "boolean"
-                      "provider":
-                        type: "string"
-                        enum:
-                          - "cohere"
-                          - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
-                          - "azure"
-                          - "aws"
-                          - "anyscale"
-                          - "perplexity"
-                          - "groq"
-                          - "fal"
-                          - "leonardoai"
-                          - "nvidia"
-                          - "jina"
-                          - "togetherai"
-                          - "elevenlabs"
-                      "model":
-                        type: "string"
-                        description: "The name of the model to use"
-                      "model_db_id":
-                        type: "string"
-                        description: "The ID of the model in the database"
-                      "model_type":
-                        type: "string"
-                        enum:
-                          - "rerank"
-                      "model_parameters":
-                        type: "object"
-                        properties:
-                          "threshold":
-                            type: "number"
-                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                      "integration_id":
-                        type:
-                          - "string"
-                          - "null"
-                        format: "uuid"
-                        description: "The id of the resource"
-                        readOnly: true
+                    description: "The rerank model to use for the knowledge base."
                 required:
-                  - "type"
-              - type: "object"
-                properties:
-                  "type":
-                    type: "string"
-                    enum:
-                      - "hybrid_search"
-                  "top_k":
-                    type: "integer"
-                    minimum: 1
-                    maximum: 20
-                    default: 5
-                    description: "Used to filter chunks that are most similar to the query"
-                  "threshold":
-                    type: "number"
-                    maximum: 1
-                    default: 0
-                    description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                  "rerank_config":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "enabled":
-                        type: "boolean"
-                      "provider":
-                        type: "string"
-                        enum:
-                          - "cohere"
-                          - "openai"
-                          - "anthropic"
-                          - "huggingface"
-                          - "replicate"
-                          - "google"
-                          - "google-ai"
-                          - "azure"
-                          - "aws"
-                          - "anyscale"
-                          - "perplexity"
-                          - "groq"
-                          - "fal"
-                          - "leonardoai"
-                          - "nvidia"
-                          - "jina"
-                          - "togetherai"
-                          - "elevenlabs"
-                      "model":
-                        type: "string"
-                        description: "The name of the model to use"
-                      "model_db_id":
-                        type: "string"
-                        description: "The ID of the model in the database"
-                      "model_type":
-                        type: "string"
-                        enum:
-                          - "rerank"
-                      "model_parameters":
-                        type: "object"
-                        properties:
-                          "threshold":
-                            type: "number"
-                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                      "integration_id":
-                        type:
-                          - "string"
-                          - "null"
-                        format: "uuid"
-                        description: "The id of the resource"
-                        readOnly: true
-                required:
-                  - "type"
+                  - "rerank_model"
+                description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+            description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
           "update_by_id":
             type: "string"
             format: "uuid"
@@ -8191,9 +7259,7 @@ components:
           - "created_by_id"
           - "created"
           - "key"
-          - "metadata"
           - "model"
-          - "retrieval_settings"
           - "update_by_id"
           - "updated"
         description: "Knowledge Base object"
@@ -8217,25 +7283,6 @@ components:
         "key":
           type: "string"
           description: "The unique key of the knowledge base."
-        "metadata":
-          type: "object"
-          properties:
-            "word_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-            "document_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-            "sentences_count":
-              type: "integer"
-              exclusiveMinimum: 0
-              default: 0
-          required:
-            - "word_count"
-            - "document_count"
-            - "sentences_count"
         "model":
           type: "string"
           description: "The embeddings model used for the knowledge base."
@@ -8244,217 +7291,43 @@ components:
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
           example: "Customer Service/Billing/Refund"
         "retrieval_settings":
-          oneOf:
-            - type: "object"
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
               properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "vector_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
+                "rerank_threshold":
                   type: "number"
+                  minimum: 0
                   maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
                   type: "string"
-                  enum:
-                    - "keyword_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
+                  description: "The rerank model to use for the knowledge base."
               required:
-                - "type"
-            - type: "object"
-              properties:
-                "type":
-                  type: "string"
-                  enum:
-                    - "hybrid_search"
-                "top_k":
-                  type: "integer"
-                  minimum: 1
-                  maximum: 20
-                  default: 5
-                  description: "Used to filter chunks that are most similar to the query"
-                "threshold":
-                  type: "number"
-                  maximum: 1
-                  default: 0
-                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                "rerank_config":
-                  type:
-                    - "object"
-                    - "null"
-                  properties:
-                    "enabled":
-                      type: "boolean"
-                    "provider":
-                      type: "string"
-                      enum:
-                        - "cohere"
-                        - "openai"
-                        - "anthropic"
-                        - "huggingface"
-                        - "replicate"
-                        - "google"
-                        - "google-ai"
-                        - "azure"
-                        - "aws"
-                        - "anyscale"
-                        - "perplexity"
-                        - "groq"
-                        - "fal"
-                        - "leonardoai"
-                        - "nvidia"
-                        - "jina"
-                        - "togetherai"
-                        - "elevenlabs"
-                    "model":
-                      type: "string"
-                      description: "The name of the model to use"
-                    "model_db_id":
-                      type: "string"
-                      description: "The ID of the model in the database"
-                    "model_type":
-                      type: "string"
-                      enum:
-                        - "rerank"
-                    "model_parameters":
-                      type: "object"
-                      properties:
-                        "threshold":
-                          type: "number"
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                    "integration_id":
-                      type:
-                        - "string"
-                        - "null"
-                      format: "uuid"
-                      description: "The id of the resource"
-                      readOnly: true
-              required:
-                - "type"
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
         "update_by_id":
           type: "string"
           format: "uuid"
@@ -8468,9 +7341,7 @@ components:
         - "created_by_id"
         - "created"
         - "key"
-        - "metadata"
         - "model"
-        - "retrieval_settings"
         - "update_by_id"
         - "updated"
     "DeleteKnowledgeResponse":
@@ -9202,7 +8073,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -9210,7 +8081,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12169,7 +11040,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-03-29T18:00:58.427Z"
+                    default: "2025-03-31T06:21:57.466Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -12257,7 +11128,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-03-29T18:00:58.427Z"
+                          default: "2025-03-31T06:21:57.466Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -12324,7 +11195,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-03-29T18:00:58.427Z"
+                    default: "2025-03-31T06:21:57.466Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -15501,7 +14372,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-03-29T18:00:56.879Z"
+                          default: "2025-03-31T06:21:55.956Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -15509,7 +14380,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-03-29T18:00:56.880Z"
+                              default: "2025-03-31T06:21:55.956Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -15633,7 +14504,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15641,7 +14512,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15751,7 +14622,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15759,7 +14630,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15897,7 +14768,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15905,7 +14776,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16127,7 +14998,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-03-29T18:00:56.879Z"
+                          default: "2025-03-31T06:21:55.956Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -16135,7 +15006,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-03-29T18:00:56.880Z"
+                              default: "2025-03-31T06:21:55.956Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -16411,7 +15282,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -16419,7 +15290,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16585,7 +15456,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -16593,7 +15464,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16873,7 +15744,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-03-29T18:00:56.879Z"
+                    default: "2025-03-31T06:21:55.956Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -16881,7 +15752,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-03-29T18:00:56.880Z"
+                        default: "2025-03-31T06:21:55.956Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17197,7 +16068,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-03-29T18:00:56.879Z"
+                      default: "2025-03-31T06:21:55.956Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -17205,7 +16076,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-03-29T18:00:56.880Z"
+                          default: "2025-03-31T06:21:55.956Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -17305,25 +16176,6 @@ paths:
                         "key":
                           type: "string"
                           description: "The unique key of the knowledge base."
-                        "metadata":
-                          type: "object"
-                          properties:
-                            "word_count":
-                              type: "integer"
-                              exclusiveMinimum: 0
-                              default: 0
-                            "document_count":
-                              type: "integer"
-                              exclusiveMinimum: 0
-                              default: 0
-                            "sentences_count":
-                              type: "integer"
-                              exclusiveMinimum: 0
-                              default: 0
-                          required:
-                            - "word_count"
-                            - "document_count"
-                            - "sentences_count"
                         "model":
                           type: "string"
                           description: "The embeddings model used for the knowledge base."
@@ -17332,217 +16184,43 @@ paths:
                           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
                           example: "Customer Service/Billing/Refund"
                         "retrieval_settings":
-                          oneOf:
-                            - type: "object"
+                          type: "object"
+                          properties:
+                            "retrieval_type":
+                              type: "string"
+                              enum:
+                                - "vector_search"
+                                - "keyword_search"
+                                - "hybrid_search"
+                              default: "hybrid_search"
+                              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                            "top_k":
+                              type: "integer"
+                              exclusiveMinimum: 0
+                              default: 5
+                              description: "The number of results to return from the search."
+                            "threshold":
+                              type: "number"
+                              minimum: 0
+                              maximum: 1
+                              default: 0
+                              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                            "rerank_config":
+                              type: "object"
                               properties:
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "vector_search"
-                                "top_k":
-                                  type: "integer"
-                                  minimum: 1
-                                  maximum: 20
-                                  default: 5
-                                  description: "Used to filter chunks that are most similar to the query"
-                                "threshold":
+                                "rerank_threshold":
                                   type: "number"
+                                  minimum: 0
                                   maximum: 1
-                                  default: 0
-                                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                                "rerank_config":
-                                  type:
-                                    - "object"
-                                    - "null"
-                                  properties:
-                                    "enabled":
-                                      type: "boolean"
-                                    "provider":
-                                      type: "string"
-                                      enum:
-                                        - "cohere"
-                                        - "openai"
-                                        - "anthropic"
-                                        - "huggingface"
-                                        - "replicate"
-                                        - "google"
-                                        - "google-ai"
-                                        - "azure"
-                                        - "aws"
-                                        - "anyscale"
-                                        - "perplexity"
-                                        - "groq"
-                                        - "fal"
-                                        - "leonardoai"
-                                        - "nvidia"
-                                        - "jina"
-                                        - "togetherai"
-                                        - "elevenlabs"
-                                    "model":
-                                      type: "string"
-                                      description: "The name of the model to use"
-                                    "model_db_id":
-                                      type: "string"
-                                      description: "The ID of the model in the database"
-                                    "model_type":
-                                      type: "string"
-                                      enum:
-                                        - "rerank"
-                                    "model_parameters":
-                                      type: "object"
-                                      properties:
-                                        "threshold":
-                                          type: "number"
-                                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                                    "integration_id":
-                                      type:
-                                        - "string"
-                                        - "null"
-                                      format: "uuid"
-                                      description: "The id of the resource"
-                                      readOnly: true
-                              required:
-                                - "type"
-                            - type: "object"
-                              properties:
-                                "type":
+                                  default: 0.5
+                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                                "rerank_model":
                                   type: "string"
-                                  enum:
-                                    - "keyword_search"
-                                "top_k":
-                                  type: "integer"
-                                  minimum: 1
-                                  maximum: 20
-                                  default: 5
-                                  description: "Used to filter chunks that are most similar to the query"
-                                "threshold":
-                                  type: "number"
-                                  maximum: 1
-                                  default: 0
-                                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                                "rerank_config":
-                                  type:
-                                    - "object"
-                                    - "null"
-                                  properties:
-                                    "enabled":
-                                      type: "boolean"
-                                    "provider":
-                                      type: "string"
-                                      enum:
-                                        - "cohere"
-                                        - "openai"
-                                        - "anthropic"
-                                        - "huggingface"
-                                        - "replicate"
-                                        - "google"
-                                        - "google-ai"
-                                        - "azure"
-                                        - "aws"
-                                        - "anyscale"
-                                        - "perplexity"
-                                        - "groq"
-                                        - "fal"
-                                        - "leonardoai"
-                                        - "nvidia"
-                                        - "jina"
-                                        - "togetherai"
-                                        - "elevenlabs"
-                                    "model":
-                                      type: "string"
-                                      description: "The name of the model to use"
-                                    "model_db_id":
-                                      type: "string"
-                                      description: "The ID of the model in the database"
-                                    "model_type":
-                                      type: "string"
-                                      enum:
-                                        - "rerank"
-                                    "model_parameters":
-                                      type: "object"
-                                      properties:
-                                        "threshold":
-                                          type: "number"
-                                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                                    "integration_id":
-                                      type:
-                                        - "string"
-                                        - "null"
-                                      format: "uuid"
-                                      description: "The id of the resource"
-                                      readOnly: true
+                                  description: "The rerank model to use for the knowledge base."
                               required:
-                                - "type"
-                            - type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "hybrid_search"
-                                "top_k":
-                                  type: "integer"
-                                  minimum: 1
-                                  maximum: 20
-                                  default: 5
-                                  description: "Used to filter chunks that are most similar to the query"
-                                "threshold":
-                                  type: "number"
-                                  maximum: 1
-                                  default: 0
-                                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                                "rerank_config":
-                                  type:
-                                    - "object"
-                                    - "null"
-                                  properties:
-                                    "enabled":
-                                      type: "boolean"
-                                    "provider":
-                                      type: "string"
-                                      enum:
-                                        - "cohere"
-                                        - "openai"
-                                        - "anthropic"
-                                        - "huggingface"
-                                        - "replicate"
-                                        - "google"
-                                        - "google-ai"
-                                        - "azure"
-                                        - "aws"
-                                        - "anyscale"
-                                        - "perplexity"
-                                        - "groq"
-                                        - "fal"
-                                        - "leonardoai"
-                                        - "nvidia"
-                                        - "jina"
-                                        - "togetherai"
-                                        - "elevenlabs"
-                                    "model":
-                                      type: "string"
-                                      description: "The name of the model to use"
-                                    "model_db_id":
-                                      type: "string"
-                                      description: "The ID of the model in the database"
-                                    "model_type":
-                                      type: "string"
-                                      enum:
-                                        - "rerank"
-                                    "model_parameters":
-                                      type: "object"
-                                      properties:
-                                        "threshold":
-                                          type: "number"
-                                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                                    "integration_id":
-                                      type:
-                                        - "string"
-                                        - "null"
-                                      format: "uuid"
-                                      description: "The id of the resource"
-                                      readOnly: true
-                              required:
-                                - "type"
+                                - "rerank_model"
+                              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
                         "update_by_id":
                           type: "string"
                           format: "uuid"
@@ -17556,9 +16234,7 @@ paths:
                         - "created_by_id"
                         - "created"
                         - "key"
-                        - "metadata"
                         - "model"
-                        - "retrieval_settings"
                         - "update_by_id"
                         - "updated"
                       description: "Knowledge Base object"
@@ -17588,221 +16264,46 @@ paths:
                   type: "string"
                 "description":
                   type: "string"
-                "model":
+                "embedding_model":
                   type: "string"
-                  description: "The embeddings model to use for the knowledge base."
+                  description: "The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base."
                 "retrieval_settings":
-                  oneOf:
-                    - type: "object"
+                  type: "object"
+                  properties:
+                    "retrieval_type":
+                      type: "string"
+                      enum:
+                        - "vector_search"
+                        - "keyword_search"
+                        - "hybrid_search"
+                      default: "hybrid_search"
+                      description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                    "top_k":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 5
+                      description: "The number of results to return from the search."
+                    "threshold":
+                      type: "number"
+                      minimum: 0
+                      maximum: 1
+                      default: 0
+                      description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                    "rerank_config":
+                      type: "object"
                       properties:
-                        "type":
-                          type: "string"
-                          enum:
-                            - "vector_search"
-                        "top_k":
-                          type: "integer"
-                          minimum: 1
-                          maximum: 20
-                          default: 5
-                          description: "Used to filter chunks that are most similar to the query"
-                        "threshold":
+                        "rerank_threshold":
                           type: "number"
+                          minimum: 0
                           maximum: 1
-                          default: 0
-                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                        "rerank_config":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "enabled":
-                              type: "boolean"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "model":
-                              type: "string"
-                              description: "The name of the model to use"
-                            "model_db_id":
-                              type: "string"
-                              description: "The ID of the model in the database"
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "rerank"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "threshold":
-                                  type: "number"
-                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
-                      required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
+                          default: 0.5
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                        "rerank_model":
                           type: "string"
-                          enum:
-                            - "keyword_search"
-                        "top_k":
-                          type: "integer"
-                          minimum: 1
-                          maximum: 20
-                          default: 5
-                          description: "Used to filter chunks that are most similar to the query"
-                        "threshold":
-                          type: "number"
-                          maximum: 1
-                          default: 0
-                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                        "rerank_config":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "enabled":
-                              type: "boolean"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "model":
-                              type: "string"
-                              description: "The name of the model to use"
-                            "model_db_id":
-                              type: "string"
-                              description: "The ID of the model in the database"
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "rerank"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "threshold":
-                                  type: "number"
-                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
+                          description: "The rerank model to use for the knowledge base."
                       required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
-                            - "hybrid_search"
-                        "top_k":
-                          type: "integer"
-                          minimum: 1
-                          maximum: 20
-                          default: 5
-                          description: "Used to filter chunks that are most similar to the query"
-                        "threshold":
-                          type: "number"
-                          maximum: 1
-                          default: 0
-                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                        "rerank_config":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "enabled":
-                              type: "boolean"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "model":
-                              type: "string"
-                              description: "The name of the model to use"
-                            "model_db_id":
-                              type: "string"
-                              description: "The ID of the model in the database"
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "rerank"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "threshold":
-                                  type: "number"
-                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
-                      required:
-                        - "type"
+                        - "rerank_model"
+                      description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
                   description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
                 "path":
                   type: "string"
@@ -17810,7 +16311,7 @@ paths:
                   example: "Customer Service/Billing/Refund"
               required:
                 - "key"
-                - "model"
+                - "embedding_model"
                 - "path"
       responses:
         "200":
@@ -17837,25 +16338,6 @@ paths:
                   "key":
                     type: "string"
                     description: "The unique key of the knowledge base."
-                  "metadata":
-                    type: "object"
-                    properties:
-                      "word_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                      "document_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                      "sentences_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                    required:
-                      - "word_count"
-                      - "document_count"
-                      - "sentences_count"
                   "model":
                     type: "string"
                     description: "The embeddings model used for the knowledge base."
@@ -17864,217 +16346,43 @@ paths:
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
                     example: "Customer Service/Billing/Refund"
                   "retrieval_settings":
-                    oneOf:
-                      - type: "object"
+                    type: "object"
+                    properties:
+                      "retrieval_type":
+                        type: "string"
+                        enum:
+                          - "vector_search"
+                          - "keyword_search"
+                          - "hybrid_search"
+                        default: "hybrid_search"
+                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                      "top_k":
+                        type: "integer"
+                        exclusiveMinimum: 0
+                        default: 5
+                        description: "The number of results to return from the search."
+                      "threshold":
+                        type: "number"
+                        minimum: 0
+                        maximum: 1
+                        default: 0
+                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                      "rerank_config":
+                        type: "object"
                         properties:
-                          "type":
-                            type: "string"
-                            enum:
-                              - "vector_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
+                          "rerank_threshold":
                             type: "number"
+                            minimum: 0
                             maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
-                        required:
-                          - "type"
-                      - type: "object"
-                        properties:
-                          "type":
+                            default: 0.5
+                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                          "rerank_model":
                             type: "string"
-                            enum:
-                              - "keyword_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
-                            type: "number"
-                            maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
+                            description: "The rerank model to use for the knowledge base."
                         required:
-                          - "type"
-                      - type: "object"
-                        properties:
-                          "type":
-                            type: "string"
-                            enum:
-                              - "hybrid_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
-                            type: "number"
-                            maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
-                        required:
-                          - "type"
+                          - "rerank_model"
+                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
                   "update_by_id":
                     type: "string"
                     format: "uuid"
@@ -18088,9 +16396,7 @@ paths:
                   - "created_by_id"
                   - "created"
                   - "key"
-                  - "metadata"
                   - "model"
-                  - "retrieval_settings"
                   - "update_by_id"
                   - "updated"
                 description: "Knowledge Base object"
@@ -18138,25 +16444,6 @@ paths:
                   "key":
                     type: "string"
                     description: "The unique key of the knowledge base."
-                  "metadata":
-                    type: "object"
-                    properties:
-                      "word_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                      "document_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                      "sentences_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                    required:
-                      - "word_count"
-                      - "document_count"
-                      - "sentences_count"
                   "model":
                     type: "string"
                     description: "The embeddings model used for the knowledge base."
@@ -18165,217 +16452,43 @@ paths:
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
                     example: "Customer Service/Billing/Refund"
                   "retrieval_settings":
-                    oneOf:
-                      - type: "object"
+                    type: "object"
+                    properties:
+                      "retrieval_type":
+                        type: "string"
+                        enum:
+                          - "vector_search"
+                          - "keyword_search"
+                          - "hybrid_search"
+                        default: "hybrid_search"
+                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                      "top_k":
+                        type: "integer"
+                        exclusiveMinimum: 0
+                        default: 5
+                        description: "The number of results to return from the search."
+                      "threshold":
+                        type: "number"
+                        minimum: 0
+                        maximum: 1
+                        default: 0
+                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                      "rerank_config":
+                        type: "object"
                         properties:
-                          "type":
-                            type: "string"
-                            enum:
-                              - "vector_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
+                          "rerank_threshold":
                             type: "number"
+                            minimum: 0
                             maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
-                        required:
-                          - "type"
-                      - type: "object"
-                        properties:
-                          "type":
+                            default: 0.5
+                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                          "rerank_model":
                             type: "string"
-                            enum:
-                              - "keyword_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
-                            type: "number"
-                            maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
+                            description: "The rerank model to use for the knowledge base."
                         required:
-                          - "type"
-                      - type: "object"
-                        properties:
-                          "type":
-                            type: "string"
-                            enum:
-                              - "hybrid_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
-                            type: "number"
-                            maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
-                        required:
-                          - "type"
+                          - "rerank_model"
+                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
                   "update_by_id":
                     type: "string"
                     format: "uuid"
@@ -18389,9 +16502,7 @@ paths:
                   - "created_by_id"
                   - "created"
                   - "key"
-                  - "metadata"
                   - "model"
-                  - "retrieval_settings"
                   - "update_by_id"
                   - "updated"
                 description: "Knowledge Base object"
@@ -18424,7 +16535,7 @@ paths:
                 "description":
                   type: "string"
                   description: "The description of the knowledge base."
-                "model":
+                "embedding_model":
                   type: "string"
                   description: "The embeddings model used for the knowledge base. If the models is provided and is different than the previous set model, all the datasources in the knowledge base will be re-embedded."
                 "path":
@@ -18432,217 +16543,43 @@ paths:
                   description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
                   example: "Customer Service/Billing/Refund"
                 "retrieval_settings":
-                  oneOf:
-                    - type: "object"
+                  type: "object"
+                  properties:
+                    "retrieval_type":
+                      type: "string"
+                      enum:
+                        - "vector_search"
+                        - "keyword_search"
+                        - "hybrid_search"
+                      default: "hybrid_search"
+                      description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                    "top_k":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 5
+                      description: "The number of results to return from the search."
+                    "threshold":
+                      type: "number"
+                      minimum: 0
+                      maximum: 1
+                      default: 0
+                      description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                    "rerank_config":
+                      type: "object"
                       properties:
-                        "type":
-                          type: "string"
-                          enum:
-                            - "vector_search"
-                        "top_k":
-                          type: "integer"
-                          minimum: 1
-                          maximum: 20
-                          default: 5
-                          description: "Used to filter chunks that are most similar to the query"
-                        "threshold":
+                        "rerank_threshold":
                           type: "number"
+                          minimum: 0
                           maximum: 1
-                          default: 0
-                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                        "rerank_config":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "enabled":
-                              type: "boolean"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "model":
-                              type: "string"
-                              description: "The name of the model to use"
-                            "model_db_id":
-                              type: "string"
-                              description: "The ID of the model in the database"
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "rerank"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "threshold":
-                                  type: "number"
-                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
-                      required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
+                          default: 0.5
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                        "rerank_model":
                           type: "string"
-                          enum:
-                            - "keyword_search"
-                        "top_k":
-                          type: "integer"
-                          minimum: 1
-                          maximum: 20
-                          default: 5
-                          description: "Used to filter chunks that are most similar to the query"
-                        "threshold":
-                          type: "number"
-                          maximum: 1
-                          default: 0
-                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                        "rerank_config":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "enabled":
-                              type: "boolean"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "model":
-                              type: "string"
-                              description: "The name of the model to use"
-                            "model_db_id":
-                              type: "string"
-                              description: "The ID of the model in the database"
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "rerank"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "threshold":
-                                  type: "number"
-                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
+                          description: "The rerank model to use for the knowledge base."
                       required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
-                            - "hybrid_search"
-                        "top_k":
-                          type: "integer"
-                          minimum: 1
-                          maximum: 20
-                          default: 5
-                          description: "Used to filter chunks that are most similar to the query"
-                        "threshold":
-                          type: "number"
-                          maximum: 1
-                          default: 0
-                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                        "rerank_config":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "enabled":
-                              type: "boolean"
-                            "provider":
-                              type: "string"
-                              enum:
-                                - "cohere"
-                                - "openai"
-                                - "anthropic"
-                                - "huggingface"
-                                - "replicate"
-                                - "google"
-                                - "google-ai"
-                                - "azure"
-                                - "aws"
-                                - "anyscale"
-                                - "perplexity"
-                                - "groq"
-                                - "fal"
-                                - "leonardoai"
-                                - "nvidia"
-                                - "jina"
-                                - "togetherai"
-                                - "elevenlabs"
-                            "model":
-                              type: "string"
-                              description: "The name of the model to use"
-                            "model_db_id":
-                              type: "string"
-                              description: "The ID of the model in the database"
-                            "model_type":
-                              type: "string"
-                              enum:
-                                - "rerank"
-                            "model_parameters":
-                              type: "object"
-                              properties:
-                                "threshold":
-                                  type: "number"
-                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                            "integration_id":
-                              type:
-                                - "string"
-                                - "null"
-                              format: "uuid"
-                              description: "The id of the resource"
-                              readOnly: true
-                      required:
-                        - "type"
+                        - "rerank_model"
+                      description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                  description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
       responses:
         "200":
           description: "Knowledge successfully updated"
@@ -18668,25 +16605,6 @@ paths:
                   "key":
                     type: "string"
                     description: "The unique key of the knowledge base."
-                  "metadata":
-                    type: "object"
-                    properties:
-                      "word_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                      "document_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                      "sentences_count":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 0
-                    required:
-                      - "word_count"
-                      - "document_count"
-                      - "sentences_count"
                   "model":
                     type: "string"
                     description: "The embeddings model used for the knowledge base."
@@ -18695,217 +16613,43 @@ paths:
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
                     example: "Customer Service/Billing/Refund"
                   "retrieval_settings":
-                    oneOf:
-                      - type: "object"
+                    type: "object"
+                    properties:
+                      "retrieval_type":
+                        type: "string"
+                        enum:
+                          - "vector_search"
+                          - "keyword_search"
+                          - "hybrid_search"
+                        default: "hybrid_search"
+                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                      "top_k":
+                        type: "integer"
+                        exclusiveMinimum: 0
+                        default: 5
+                        description: "The number of results to return from the search."
+                      "threshold":
+                        type: "number"
+                        minimum: 0
+                        maximum: 1
+                        default: 0
+                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                      "rerank_config":
+                        type: "object"
                         properties:
-                          "type":
-                            type: "string"
-                            enum:
-                              - "vector_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
+                          "rerank_threshold":
                             type: "number"
+                            minimum: 0
                             maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
-                        required:
-                          - "type"
-                      - type: "object"
-                        properties:
-                          "type":
+                            default: 0.5
+                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                          "rerank_model":
                             type: "string"
-                            enum:
-                              - "keyword_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
-                            type: "number"
-                            maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
+                            description: "The rerank model to use for the knowledge base."
                         required:
-                          - "type"
-                      - type: "object"
-                        properties:
-                          "type":
-                            type: "string"
-                            enum:
-                              - "hybrid_search"
-                          "top_k":
-                            type: "integer"
-                            minimum: 1
-                            maximum: 20
-                            default: 5
-                            description: "Used to filter chunks that are most similar to the query"
-                          "threshold":
-                            type: "number"
-                            maximum: 1
-                            default: 0
-                            description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
-                          "rerank_config":
-                            type:
-                              - "object"
-                              - "null"
-                            properties:
-                              "enabled":
-                                type: "boolean"
-                              "provider":
-                                type: "string"
-                                enum:
-                                  - "cohere"
-                                  - "openai"
-                                  - "anthropic"
-                                  - "huggingface"
-                                  - "replicate"
-                                  - "google"
-                                  - "google-ai"
-                                  - "azure"
-                                  - "aws"
-                                  - "anyscale"
-                                  - "perplexity"
-                                  - "groq"
-                                  - "fal"
-                                  - "leonardoai"
-                                  - "nvidia"
-                                  - "jina"
-                                  - "togetherai"
-                                  - "elevenlabs"
-                              "model":
-                                type: "string"
-                                description: "The name of the model to use"
-                              "model_db_id":
-                                type: "string"
-                                description: "The ID of the model in the database"
-                              "model_type":
-                                type: "string"
-                                enum:
-                                  - "rerank"
-                              "model_parameters":
-                                type: "object"
-                                properties:
-                                  "threshold":
-                                    type: "number"
-                                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                              "integration_id":
-                                type:
-                                  - "string"
-                                  - "null"
-                                format: "uuid"
-                                description: "The id of the resource"
-                                readOnly: true
-                        required:
-                          - "type"
+                          - "rerank_model"
+                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
                   "update_by_id":
                     type: "string"
                     format: "uuid"
@@ -18919,9 +16663,7 @@ paths:
                   - "created_by_id"
                   - "created"
                   - "key"
-                  - "metadata"
                   - "model"
-                  - "retrieval_settings"
                   - "update_by_id"
                   - "updated"
                 description: "Knowledge Base object"
@@ -19260,58 +17002,6 @@ paths:
           description: "Contact not found"
       security:
         - ApiKey: []
-  "/v2/knowledge/{knowledge_id}/upload-file":
-    get:
-      tags:
-        - "Knowledge Bases"
-      x-speakeasy-group: "knowledge"
-      x-speakeasy-name-override: "retrieveFileUrl"
-      operationId: "GetOneFileUploadUrl"
-      summary: "Retrieves the file upload url"
-      parameters:
-        - schema:
-            type: "string"
-            description: "The unique identifier of the knowledge base"
-          required: true
-          description: "The unique identifier of the knowledge base"
-          name: "knowledge_id"
-          in: "path"
-        - schema:
-            type: "string"
-          required: true
-          name: "fileName"
-          in: "query"
-        - schema:
-            type: "string"
-          required: true
-          name: "contentType"
-          in: "query"
-        - schema:
-            type: "string"
-          required: true
-          name: "datasourceId"
-          in: "query"
-      responses:
-        "200":
-          description: "File upload url successfully retrieved"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "objectName":
-                    type: "string"
-                  "postPolicy": {}
-                required:
-                  - "objectName"
-                description: "Expected upload request model"
-        "500":
-          description: "An error has occured"
-          content:
-            "application/json":
-              schema: {"$ref": "#/components/schemas/HonoApiError"}
-      security:
-        - ApiKey: []
   "/v2/knowledge/{knowledge_id}/datasources":
     get:
       tags:
@@ -19392,7 +17082,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JQHH0YGF1P8JG9PRB1Q5EMMD"
+                          default: "01JQNDTED7Q668FGWAEE5YN3G1"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -19551,7 +17241,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQHH0YGGVQWD05R0W93SM8RA"
+                    default: "01JQNDTED81QAJ4X2164MP45WR"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -19638,7 +17328,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQHH0YGGFZQSZ9XSQPVH3GCY"
+                    default: "01JQNDTED8RDH1B5H21HPP8ZEQ"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -19797,7 +17487,7 @@ paths:
                       readOnly: true
                     "id":
                       type: "string"
-                      default: "chunk_01JQHH0YGJR4J0WCEYH8TSWS56"
+                      default: "chunk_01JQNDTEDAAEK5C45EGRTRX5N7"
                       description: "Unique identifier for the element"
                     "text":
                       type: "string"
