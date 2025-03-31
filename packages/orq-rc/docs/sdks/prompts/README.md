@@ -317,6 +317,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.prompts.update({
     id: "<id>",
+    requestBody: {
+      path: "Customer Service/Billing/Refund",
+    },
   });
 
   // Handle the result
@@ -343,6 +346,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await promptsUpdate(orq, {
     id: "<id>",
+    requestBody: {
+      path: "Customer Service/Billing/Refund",
+    },
   });
 
   if (!res.ok) {

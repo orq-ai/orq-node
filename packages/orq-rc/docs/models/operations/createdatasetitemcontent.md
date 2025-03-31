@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItemContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://putrid-solution.net/",
+      url: "https://disloyal-peony.com",
     },
   },
 ];

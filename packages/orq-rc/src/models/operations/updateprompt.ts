@@ -437,6 +437,10 @@ export type UpdatePromptRequestBody = {
    */
   promptConfig?: UpdatePromptPromptConfig | undefined;
   metadata?: UpdatePromptMetadata | undefined;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path?: string | undefined;
 };
 
 export type UpdatePromptRequest = {
@@ -2261,6 +2265,7 @@ export const UpdatePromptRequestBody$inboundSchema: z.ZodType<
   prompt_config: z.lazy(() => UpdatePromptPromptConfig$inboundSchema)
     .optional(),
   metadata: z.lazy(() => UpdatePromptMetadata$inboundSchema).optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "domain_id": "domainId",
@@ -2283,6 +2288,7 @@ export type UpdatePromptRequestBody$Outbound = {
   description?: string | null | undefined;
   prompt_config?: UpdatePromptPromptConfig$Outbound | undefined;
   metadata?: UpdatePromptMetadata$Outbound | undefined;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -2302,6 +2308,7 @@ export const UpdatePromptRequestBody$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => UpdatePromptPromptConfig$outboundSchema)
     .optional(),
   metadata: z.lazy(() => UpdatePromptMetadata$outboundSchema).optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     domainId: "domain_id",

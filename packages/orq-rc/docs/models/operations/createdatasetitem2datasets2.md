@@ -10,7 +10,7 @@ import { CreateDatasetItem2Datasets2 } from "@orq-ai/node/models/operations";
 let value: CreateDatasetItem2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://chubby-corporation.info/",
+    url: "https://gruesome-lace.name/",
   },
 };
 ```

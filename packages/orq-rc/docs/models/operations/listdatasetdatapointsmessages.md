@@ -6,13 +6,8 @@
 import { ListDatasetDatapointsMessages } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetDatapointsMessages = {
-  role: "prompt",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  role: "expected_output",
+  content: "<value>",
 };
 ```
 

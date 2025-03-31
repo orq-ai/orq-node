@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 057ca26e63492be780680bbb308f45ed
+  docChecksum: 6e7ad3e77acebf1ac94dc74b3b362287
   docVersion: "2.0"
-  speakeasyVersion: 1.526.1
-  generationVersion: 2.563.0
-  releaseVersion: 3.3.0-rc.16
-  configChecksum: a86e8ee1070a32f2946fd51c25017c51
+  speakeasyVersion: 1.526.6
+  generationVersion: 2.563.1
+  releaseVersion: 3.3.0-rc.17
+  configChecksum: 07b21e2d606fb26e8cb24d81ac966dd6
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -1316,6 +1316,8 @@ examples:
         path:
           id: "<id>"
         header: {}
+      requestBody:
+        application/json: {"path": "Customer Service/Billing/Refund"}
       responses:
         "200":
           application/json: {"_id": "<id>", "type": "prompt", "owner": "vendor", "domain_id": "95fa7f0e-7432-4ce4-a7cb-60cc78135dde", "created": "<value>", "updated": "2025-01-31T07:05:40.814Z", "created_by_id": "85898c12-5a19-4071-8c55-62af6646dadb", "updated_by_id": "2450617e-6bb0-4579-9d6f-9464a3158c87", "display_name": "Margaret33", "prompt_config": {"messages": []}, "metadata": {}}
@@ -1413,6 +1415,8 @@ examples:
       parameters:
         path:
           dataset_id: "<id>"
+      requestBody:
+        application/json: {"path": "Customer Service/Billing/Refund"}
       responses:
         "200":
           application/json: {"_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "display_name": "Merlin_Harber", "project_id": "c125a190-71c5-4562-9af6-646dadb3a343", "workspace_id": "a2450617-e6bb-4057-99d6-f9464a3158c8", "metadata": {"total_versions": 4160.23, "datapoints_count": 587.04}, "updated": "2025-02-27T08:02:43.136Z"}

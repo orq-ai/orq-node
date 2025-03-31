@@ -6,8 +6,13 @@
 import { UpdateDatapointMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapointMessages = {
-  role: "prompt",
-  content: "<value>",
+  role: "correction",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

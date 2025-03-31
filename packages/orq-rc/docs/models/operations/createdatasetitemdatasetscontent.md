@@ -18,7 +18,7 @@ const value: operations.CreateDatasetItemContentDatasets2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://terrible-sauerkraut.biz",
+      url: "https://funny-suspension.com",
     },
   },
 ];

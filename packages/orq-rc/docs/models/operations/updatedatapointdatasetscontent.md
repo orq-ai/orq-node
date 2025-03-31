@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdateDatapointContentDatasets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://exhausted-flat.biz/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

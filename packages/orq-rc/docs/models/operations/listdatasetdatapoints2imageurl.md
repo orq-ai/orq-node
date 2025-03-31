@@ -6,7 +6,7 @@
 import { ListDatasetDatapoints2ImageUrl } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetDatapoints2ImageUrl = {
-  url: "https://practical-runway.net",
+  url: "https://glaring-fibre.com",
 };
 ```
 
