@@ -100,6 +100,7 @@ components:
           description: "The id returned by the [`get_config`]() or [`invoke`](https://docs.orq.ai/reference/post_deployments-invoke-1) endpoints"
         "id":
           type: "string"
+          format: "ulid"
       required:
         - "property"
         - "value"
@@ -2232,6 +2233,8 @@ components:
                     format: "uuid"
                     description: "The id of the resource"
                     readOnly: true
+                  "deployment_variant_key":
+                    type: "string"
                 required:
                   - "type"
                   - "deployment_variant_id"
@@ -2299,6 +2302,8 @@ components:
             "deployment_variant_id":
               type: "string"
               format: "uuid"
+            "deployment_variant_key":
+              type: "string"
             "is_default_matched":
               type: "boolean"
             "choices":
@@ -3473,6 +3478,7 @@ components:
                 properties:
                   "id":
                     type: "string"
+                    format: "ulid"
                   "started_at":
                     type: "string"
                   "queued_at":
@@ -3743,6 +3749,7 @@ components:
             - "deployment_variant_version"
             - "deployment_variant_position"
             - "deployment_variant_id"
+            - "deployment_variant_key"
             - "is_default_matched"
             - "action"
             - "prompt_config"
@@ -3780,7 +3787,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-01T11:31:12.079Z"
+          default: "2025-04-01T13:14:16.426Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3805,6 +3812,8 @@ components:
             - "batch"
           default: "retrieval"
           description: "The intended purpose of the uploaded file."
+      required:
+        - "file"
     "FilePatchRequest":
       type: "object"
       properties:
@@ -3841,7 +3850,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-04-01T11:31:12.079Z"
+            default: "2025-04-01T13:14:16.426Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3921,7 +3930,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-01T11:31:12.079Z"
+          default: "2025-04-01T13:14:16.426Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3967,7 +3976,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-04-01T11:31:12.079Z"
+                default: "2025-04-01T13:14:16.426Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4010,7 +4019,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-01T11:31:12.079Z"
+          default: "2025-04-01T13:14:16.426Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4295,7 +4304,6 @@ components:
           description: "A list of messages compatible with the openAI schema"
         "metadata":
           type: "object"
-          default: {"language": "English"}
           properties:
             "use_cases":
               type: "array"
@@ -4318,6 +4326,9 @@ components:
                   - "SQL"
                   - "Summarization"
                   - "Tagging"
+                  - "Translation (document)"
+                  - "Translation (sentences)"
+                  - "Sentiment analysis"
               description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
             "language":
               type: "string"
@@ -4330,6 +4341,7 @@ components:
                 - "Russian"
                 - "Spanish"
               description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+          default: {"language": "English"}
         "path":
           type: "string"
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -4736,7 +4748,6 @@ components:
           description: "A list of messages compatible with the openAI schema"
         "metadata":
           type: "object"
-          default: {"language": "English"}
           properties:
             "use_cases":
               type: "array"
@@ -4759,6 +4770,9 @@ components:
                   - "SQL"
                   - "Summarization"
                   - "Tagging"
+                  - "Translation (document)"
+                  - "Translation (sentences)"
+                  - "Sentiment analysis"
               description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
             "language":
               type: "string"
@@ -4771,6 +4785,11 @@ components:
                 - "Russian"
                 - "Spanish"
               description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+          default: {"language": "English"}
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
     "RetrievePromptVersionRequest":
       type: "object"
       properties:
@@ -4786,13 +4805,6 @@ components:
     "ListPromptVersionsRequest":
       type: "object"
       properties:
-        "sort":
-          type: "string"
-          enum:
-            - "asc"
-            - "desc"
-          default: "asc"
-          description: "List sorting preference."
         "limit":
           type: "number"
           minimum: 1
@@ -5080,7 +5092,6 @@ components:
           description: "A list of messages compatible with the openAI schema"
         "metadata":
           type: "object"
-          default: {"language": "English"}
           properties:
             "use_cases":
               type: "array"
@@ -5103,6 +5114,9 @@ components:
                   - "SQL"
                   - "Summarization"
                   - "Tagging"
+                  - "Translation (document)"
+                  - "Translation (sentences)"
+                  - "Sentiment analysis"
               description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
             "language":
               type: "string"
@@ -5115,6 +5129,7 @@ components:
                 - "Russian"
                 - "Spanish"
               description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+          default: {"language": "English"}
         "path":
           type: "string"
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -5423,7 +5438,6 @@ components:
           description: "A list of messages compatible with the openAI schema"
         "metadata":
           type: "object"
-          default: {"language": "English"}
           properties:
             "use_cases":
               type: "array"
@@ -5446,6 +5460,9 @@ components:
                   - "SQL"
                   - "Summarization"
                   - "Tagging"
+                  - "Translation (document)"
+                  - "Translation (sentences)"
+                  - "Sentiment analysis"
               description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
             "language":
               type: "string"
@@ -5458,6 +5475,7 @@ components:
                 - "Russian"
                 - "Spanish"
               description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+          default: {"language": "English"}
       required:
         - "_id"
         - "type"
@@ -5760,7 +5778,6 @@ components:
                     description: "A list of messages compatible with the openAI schema"
                   "metadata":
                     type: "object"
-                    default: {"language": "English"}
                     properties:
                       "use_cases":
                         type: "array"
@@ -5783,6 +5800,9 @@ components:
                             - "SQL"
                             - "Summarization"
                             - "Tagging"
+                            - "Translation (document)"
+                            - "Translation (sentences)"
+                            - "Sentiment analysis"
                         description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                       "language":
                         type: "string"
@@ -5795,6 +5815,7 @@ components:
                           - "Russian"
                           - "Spanish"
                         description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                    default: {"language": "English"}
                 required:
                   - "_id"
                   - "prompt_config"
@@ -6094,7 +6115,6 @@ components:
               description: "A list of messages compatible with the openAI schema"
             "metadata":
               type: "object"
-              default: {"language": "English"}
               properties:
                 "use_cases":
                   type: "array"
@@ -6117,6 +6137,9 @@ components:
                       - "SQL"
                       - "Summarization"
                       - "Tagging"
+                      - "Translation (document)"
+                      - "Translation (sentences)"
+                      - "Sentiment analysis"
                   description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                 "language":
                   type: "string"
@@ -6129,6 +6152,7 @@ components:
                     - "Russian"
                     - "Spanish"
                   description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+              default: {"language": "English"}
           required:
             - "_id"
             - "prompt_config"
@@ -6196,8 +6220,22 @@ components:
       properties:
         "display_name":
           type: "string"
-      required:
-        - "display_name"
+          description: "The display name of the dataset"
+        "project_id":
+          anyOf:
+            - type: "string"
+              format: "uuid"
+              description: "The id of the resource"
+              readOnly: true
+            - type: "string"
+              format: "ulid"
+              description: "The id of the resource"
+              readOnly: true
+          description: "The unique identifier of the project it belongs to"
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
     "DatasetDeleteRequest":
       type: "object"
       properties:
@@ -6296,7 +6334,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-01T11:31:10.958Z"
+          default: "2025-04-01T13:14:14.943Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6304,7 +6342,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-01T11:31:10.958Z"
+              default: "2025-04-01T13:14:14.943Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6414,7 +6452,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-04-01T11:31:10.958Z"
+                default: "2025-04-01T13:14:14.943Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6422,7 +6460,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6529,7 +6567,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-01T11:31:10.958Z"
+          default: "2025-04-01T13:14:14.943Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6537,7 +6575,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-01T11:31:10.958Z"
+              default: "2025-04-01T13:14:14.943Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6638,7 +6676,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-01T11:31:10.958Z"
+          default: "2025-04-01T13:14:14.943Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6646,7 +6684,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-01T11:31:10.958Z"
+              default: "2025-04-01T13:14:14.943Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6657,6 +6695,753 @@ components:
         - "project_id"
         - "workspace_id"
         - "metadata"
+    "KnowledgeCreateRequestSchema":
+      type: "object"
+      properties:
+        "key":
+          type: "string"
+        "description":
+          type: "string"
+        "embedding_model":
+          type: "string"
+          description: "The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base."
+        "retrieval_settings":
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
+              properties:
+                "rerank_threshold":
+                  type: "number"
+                  minimum: 0
+                  maximum: 1
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
+                  type: "string"
+                  description: "The rerank model to use for the knowledge base."
+              required:
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
+      required:
+        - "key"
+        - "embedding_model"
+        - "path"
+    "KnowledgeUpdateRequestSchema":
+      type: "object"
+      properties:
+        "description":
+          type: "string"
+          description: "The description of the knowledge base."
+        "embedding_model":
+          type: "string"
+          description: "The embeddings model used for the knowledge base. If the models is provided and is different than the previous set model, all the datasources in the knowledge base will be re-embedded."
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
+        "retrieval_settings":
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
+              properties:
+                "rerank_threshold":
+                  type: "number"
+                  minimum: 0
+                  maximum: 1
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
+                  type: "string"
+                  description: "The rerank model to use for the knowledge base."
+              required:
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+    "GetFileUploadUrlRequest":
+      type: "object"
+      properties:
+        "fileName":
+          type: "string"
+        "contentType":
+          type: "string"
+        "datasourceId":
+          type: "string"
+      required:
+        - "fileName"
+        - "contentType"
+        - "datasourceId"
+    "SearchKnowledgeDocumentsRequest":
+      type: "object"
+      properties:
+        "query":
+          type: "string"
+        "retrieval_config":
+          oneOf:
+            - type: "object"
+              properties:
+                "type":
+                  type: "string"
+                  enum:
+                    - "vector_search"
+                "top_k":
+                  type: "integer"
+                  minimum: 1
+                  maximum: 20
+                  default: 5
+                  description: "Used to filter chunks that are most similar to the query"
+                "threshold":
+                  type: "number"
+                  maximum: 1
+                  default: 0
+                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
+                "rerank_config":
+                  type:
+                    - "object"
+                    - "null"
+                  properties:
+                    "enabled":
+                      type: "boolean"
+                    "provider":
+                      type: "string"
+                      enum:
+                        - "cohere"
+                        - "openai"
+                        - "anthropic"
+                        - "huggingface"
+                        - "replicate"
+                        - "google"
+                        - "google-ai"
+                        - "azure"
+                        - "aws"
+                        - "anyscale"
+                        - "perplexity"
+                        - "groq"
+                        - "fal"
+                        - "leonardoai"
+                        - "nvidia"
+                        - "jina"
+                        - "togetherai"
+                        - "elevenlabs"
+                    "model":
+                      type: "string"
+                      description: "The name of the model to use"
+                    "model_db_id":
+                      type: "string"
+                      description: "The ID of the model in the database"
+                    "model_type":
+                      type: "string"
+                      enum:
+                        - "rerank"
+                    "model_parameters":
+                      type: "object"
+                      properties:
+                        "threshold":
+                          type: "number"
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                    "integration_id":
+                      type:
+                        - "string"
+                        - "null"
+                      format: "uuid"
+                      description: "The id of the resource"
+                      readOnly: true
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "type":
+                  type: "string"
+                  enum:
+                    - "keyword_search"
+                "top_k":
+                  type: "integer"
+                  minimum: 1
+                  maximum: 20
+                  default: 5
+                  description: "Used to filter chunks that are most similar to the query"
+                "threshold":
+                  type: "number"
+                  maximum: 1
+                  default: 0
+                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
+                "rerank_config":
+                  type:
+                    - "object"
+                    - "null"
+                  properties:
+                    "enabled":
+                      type: "boolean"
+                    "provider":
+                      type: "string"
+                      enum:
+                        - "cohere"
+                        - "openai"
+                        - "anthropic"
+                        - "huggingface"
+                        - "replicate"
+                        - "google"
+                        - "google-ai"
+                        - "azure"
+                        - "aws"
+                        - "anyscale"
+                        - "perplexity"
+                        - "groq"
+                        - "fal"
+                        - "leonardoai"
+                        - "nvidia"
+                        - "jina"
+                        - "togetherai"
+                        - "elevenlabs"
+                    "model":
+                      type: "string"
+                      description: "The name of the model to use"
+                    "model_db_id":
+                      type: "string"
+                      description: "The ID of the model in the database"
+                    "model_type":
+                      type: "string"
+                      enum:
+                        - "rerank"
+                    "model_parameters":
+                      type: "object"
+                      properties:
+                        "threshold":
+                          type: "number"
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                    "integration_id":
+                      type:
+                        - "string"
+                        - "null"
+                      format: "uuid"
+                      description: "The id of the resource"
+                      readOnly: true
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "type":
+                  type: "string"
+                  enum:
+                    - "hybrid_search"
+                "top_k":
+                  type: "integer"
+                  minimum: 1
+                  maximum: 20
+                  default: 5
+                  description: "Used to filter chunks that are most similar to the query"
+                "threshold":
+                  type: "number"
+                  maximum: 1
+                  default: 0
+                  description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
+                "rerank_config":
+                  type:
+                    - "object"
+                    - "null"
+                  properties:
+                    "enabled":
+                      type: "boolean"
+                    "provider":
+                      type: "string"
+                      enum:
+                        - "cohere"
+                        - "openai"
+                        - "anthropic"
+                        - "huggingface"
+                        - "replicate"
+                        - "google"
+                        - "google-ai"
+                        - "azure"
+                        - "aws"
+                        - "anyscale"
+                        - "perplexity"
+                        - "groq"
+                        - "fal"
+                        - "leonardoai"
+                        - "nvidia"
+                        - "jina"
+                        - "togetherai"
+                        - "elevenlabs"
+                    "model":
+                      type: "string"
+                      description: "The name of the model to use"
+                    "model_db_id":
+                      type: "string"
+                      description: "The ID of the model in the database"
+                    "model_type":
+                      type: "string"
+                      enum:
+                        - "rerank"
+                    "model_parameters":
+                      type: "object"
+                      properties:
+                        "threshold":
+                          type: "number"
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                    "integration_id":
+                      type:
+                        - "string"
+                        - "null"
+                      format: "uuid"
+                      description: "The id of the resource"
+                      readOnly: true
+              required:
+                - "type"
+      required:
+        - "query"
+        - "retrieval_config"
+    "CreateKnowledgeResponse":
+      type: "object"
+      properties:
+        "_id":
+          type: "string"
+          description: "The unique identifier of the knowledge base."
+        "created_by_id":
+          type: "string"
+          format: "uuid"
+          description: "The id of the resource"
+          readOnly: true
+        "created":
+          type: "string"
+          description: "The creation date of the knowledge base."
+        "description":
+          type: "string"
+          description: "The description of the knowledge base."
+        "key":
+          type: "string"
+          description: "The unique key of the knowledge base."
+        "model":
+          type: "string"
+          description: "The embeddings model used for the knowledge base."
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
+        "retrieval_settings":
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
+              properties:
+                "rerank_threshold":
+                  type: "number"
+                  minimum: 0
+                  maximum: 1
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
+                  type: "string"
+                  description: "The rerank model to use for the knowledge base."
+              required:
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+        "update_by_id":
+          type: "string"
+          format: "uuid"
+          description: "The id of the resource"
+          readOnly: true
+        "updated":
+          type: "string"
+          description: "The last update date of the knowledge base."
+      required:
+        - "_id"
+        - "created_by_id"
+        - "created"
+        - "key"
+        - "model"
+        - "update_by_id"
+        - "updated"
+    "RetrieveKnowledgeResponse":
+      type: "object"
+      properties:
+        "_id":
+          type: "string"
+          description: "The unique identifier of the knowledge base."
+        "created_by_id":
+          type: "string"
+          format: "uuid"
+          description: "The id of the resource"
+          readOnly: true
+        "created":
+          type: "string"
+          description: "The creation date of the knowledge base."
+        "description":
+          type: "string"
+          description: "The description of the knowledge base."
+        "key":
+          type: "string"
+          description: "The unique key of the knowledge base."
+        "model":
+          type: "string"
+          description: "The embeddings model used for the knowledge base."
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
+        "retrieval_settings":
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
+              properties:
+                "rerank_threshold":
+                  type: "number"
+                  minimum: 0
+                  maximum: 1
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
+                  type: "string"
+                  description: "The rerank model to use for the knowledge base."
+              required:
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+        "update_by_id":
+          type: "string"
+          format: "uuid"
+          description: "The id of the resource"
+          readOnly: true
+        "updated":
+          type: "string"
+          description: "The last update date of the knowledge base."
+      required:
+        - "_id"
+        - "created_by_id"
+        - "created"
+        - "key"
+        - "model"
+        - "update_by_id"
+        - "updated"
+    "ListKnowledgesResponse":
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          "_id":
+            type: "string"
+            description: "The unique identifier of the knowledge base."
+          "created_by_id":
+            type: "string"
+            format: "uuid"
+            description: "The id of the resource"
+            readOnly: true
+          "created":
+            type: "string"
+            description: "The creation date of the knowledge base."
+          "description":
+            type: "string"
+            description: "The description of the knowledge base."
+          "key":
+            type: "string"
+            description: "The unique key of the knowledge base."
+          "model":
+            type: "string"
+            description: "The embeddings model used for the knowledge base."
+          "path":
+            type: "string"
+            description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+            example: "Customer Service/Billing/Refund"
+          "retrieval_settings":
+            type: "object"
+            properties:
+              "retrieval_type":
+                type: "string"
+                enum:
+                  - "vector_search"
+                  - "keyword_search"
+                  - "hybrid_search"
+                default: "hybrid_search"
+                description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+              "top_k":
+                type: "integer"
+                exclusiveMinimum: 0
+                default: 5
+                description: "The number of results to return from the search."
+              "threshold":
+                type: "number"
+                minimum: 0
+                maximum: 1
+                default: 0
+                description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+              "rerank_config":
+                type: "object"
+                properties:
+                  "rerank_threshold":
+                    type: "number"
+                    minimum: 0
+                    maximum: 1
+                    default: 0.5
+                    description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                  "rerank_model":
+                    type: "string"
+                    description: "The rerank model to use for the knowledge base."
+                required:
+                  - "rerank_model"
+                description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+            description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+          "update_by_id":
+            type: "string"
+            format: "uuid"
+            description: "The id of the resource"
+            readOnly: true
+          "updated":
+            type: "string"
+            description: "The last update date of the knowledge base."
+        required:
+          - "_id"
+          - "created_by_id"
+          - "created"
+          - "key"
+          - "model"
+          - "update_by_id"
+          - "updated"
+        description: "Knowledge Base object"
+    "UpdateKnowledgeResponse":
+      type: "object"
+      properties:
+        "_id":
+          type: "string"
+          description: "The unique identifier of the knowledge base."
+        "created_by_id":
+          type: "string"
+          format: "uuid"
+          description: "The id of the resource"
+          readOnly: true
+        "created":
+          type: "string"
+          description: "The creation date of the knowledge base."
+        "description":
+          type: "string"
+          description: "The description of the knowledge base."
+        "key":
+          type: "string"
+          description: "The unique key of the knowledge base."
+        "model":
+          type: "string"
+          description: "The embeddings model used for the knowledge base."
+        "path":
+          type: "string"
+          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+          example: "Customer Service/Billing/Refund"
+        "retrieval_settings":
+          type: "object"
+          properties:
+            "retrieval_type":
+              type: "string"
+              enum:
+                - "vector_search"
+                - "keyword_search"
+                - "hybrid_search"
+              default: "hybrid_search"
+              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+            "top_k":
+              type: "integer"
+              exclusiveMinimum: 0
+              default: 5
+              description: "The number of results to return from the search."
+            "threshold":
+              type: "number"
+              minimum: 0
+              maximum: 1
+              default: 0
+              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+            "rerank_config":
+              type: "object"
+              properties:
+                "rerank_threshold":
+                  type: "number"
+                  minimum: 0
+                  maximum: 1
+                  default: 0.5
+                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                "rerank_model":
+                  type: "string"
+                  description: "The rerank model to use for the knowledge base."
+              required:
+                - "rerank_model"
+              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+        "update_by_id":
+          type: "string"
+          format: "uuid"
+          description: "The id of the resource"
+          readOnly: true
+        "updated":
+          type: "string"
+          description: "The last update date of the knowledge base."
+      required:
+        - "_id"
+        - "created_by_id"
+        - "created"
+        - "key"
+        - "model"
+        - "update_by_id"
+        - "updated"
+    "DeleteKnowledgeResponse":
+      type: "object"
+      properties:
+        "success":
+          type: "boolean"
+      required:
+        - "success"
+    "GetFileUploadUrlResponse":
+      type: "object"
+      properties:
+        "objectName":
+          type: "string"
+        "postPolicy": {}
+      required:
+        - "objectName"
+    "SearchKnowledgeDocumentsResponse":
+      type: "object"
+      properties:
+        "knowledge_id":
+          type: "string"
+          description: "Unique id of the knowledge base"
+        "documents":
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              "id":
+                type: "string"
+                description: "Unique identifier for the retrieval"
+              "text":
+                type: "string"
+                description: "Text content of the document"
+              "metadata":
+                type: "object"
+                properties:
+                  "datasource_id":
+                    type: "string"
+                    description: "Unique identifier for the data source"
+                  "chunk_id":
+                    type: "string"
+                    description: "Unique identifier for the chunk"
+                  "file_name":
+                    type: "string"
+                    description: "Name of the uploaded file during the datasource creation."
+                  "page_number":
+                    type:
+                      - "number"
+                      - "null"
+                    description: "Reference to the page number the chunk was extracted from. The property will only be available for `application/pdf` type of files. For other file types, the property will be `null`."
+                  "file_type":
+                    type: "string"
+                    description: "Type of the uploaded file when the datasource was created."
+                required:
+                  - "datasource_id"
+                  - "chunk_id"
+                  - "file_name"
+                  - "file_type"
+              "score":
+                type: "number"
+                description: "The score of the document"
+              "rerank_score":
+                type: "number"
+                description: "The rerank score of the document"
+            required:
+              - "id"
+              - "text"
+              - "metadata"
+              - "score"
+          description: "The documents returned"
+        "knowledge_key":
+          type: "string"
+          description: "The key of the knowledge base"
+        "query":
+          type: "string"
+          description: "The query used to search the knowledge base"
+      required:
+        - "knowledge_id"
+        - "documents"
+        - "knowledge_key"
+        - "query"
     "HonoApiError":
       type: "object"
       properties:
@@ -7269,6 +8054,7 @@ paths:
                 properties:
                   "id":
                     type: "string"
+                    format: "ulid"
                     description: "Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the user"
                   "external_id":
                     type: "string"
@@ -7305,7 +8091,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -7313,7 +8099,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -7381,6 +8167,7 @@ paths:
                     description: "The id returned by the [`get_config`]() or [`invoke`](https://docs.orq.ai/reference/post_deployments-invoke-1) endpoints"
                   "id":
                     type: "string"
+                    format: "ulid"
                 required:
                   - "property"
                   - "value"
@@ -7398,17 +8185,6 @@ paths:
       description: "Returns a list of your deployments. The deployments are returned sorted by creation date, with the most recent deployments appearing first."
       summary: "List all deployments"
       parameters:
-        - schema:
-            type: "string"
-            enum:
-              - "asc"
-              - "desc"
-            default: "asc"
-            description: "List sorting preference."
-          required: false
-          description: "List sorting preference."
-          name: "sort"
-          in: "query"
         - schema:
             type: "number"
             minimum: 1
@@ -10248,6 +11024,8 @@ paths:
                     - "batch"
                   default: "retrieval"
                   description: "The intended purpose of the uploaded file."
+              required:
+                - "file"
       responses:
         "200":
           description: "File uploaded successfully"
@@ -10280,7 +11058,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-01T11:31:12.079Z"
+                    default: "2025-04-01T13:14:16.426Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -10303,17 +11081,6 @@ paths:
       summary: "List all files"
       description: "Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top."
       parameters:
-        - schema:
-            type: "string"
-            enum:
-              - "asc"
-              - "desc"
-            default: "asc"
-            description: "List sorting preference."
-          required: false
-          description: "List sorting preference."
-          name: "sort"
-          in: "query"
         - schema:
             type: "number"
             minimum: 1
@@ -10379,7 +11146,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-04-01T11:31:12.079Z"
+                          default: "2025-04-01T13:14:16.426Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -10446,7 +11213,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-01T11:31:12.079Z"
+                    default: "2025-04-01T13:14:16.426Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -10492,17 +11259,6 @@ paths:
       summary: "List all prompts"
       description: "Returns a list of your prompts. The prompts are returned sorted by creation date, with the most recent prompts appearing first"
       parameters:
-        - schema:
-            type: "string"
-            enum:
-              - "asc"
-              - "desc"
-            default: "asc"
-            description: "List sorting preference."
-          required: false
-          description: "List sorting preference."
-          name: "sort"
-          in: "query"
         - schema:
             type: "number"
             minimum: 1
@@ -10841,7 +11597,6 @@ paths:
                           description: "A list of messages compatible with the openAI schema"
                         "metadata":
                           type: "object"
-                          default: {"language": "English"}
                           properties:
                             "use_cases":
                               type: "array"
@@ -10864,6 +11619,9 @@ paths:
                                   - "SQL"
                                   - "Summarization"
                                   - "Tagging"
+                                  - "Translation (document)"
+                                  - "Translation (sentences)"
+                                  - "Sentiment analysis"
                               description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                             "language":
                               type: "string"
@@ -10876,6 +11634,7 @@ paths:
                                 - "Russian"
                                 - "Spanish"
                               description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                          default: {"language": "English"}
                       required:
                         - "_id"
                         - "type"
@@ -11178,7 +11937,6 @@ paths:
                   description: "A list of messages compatible with the openAI schema"
                 "metadata":
                   type: "object"
-                  default: {"language": "English"}
                   properties:
                     "use_cases":
                       type: "array"
@@ -11201,6 +11959,9 @@ paths:
                           - "SQL"
                           - "Summarization"
                           - "Tagging"
+                          - "Translation (document)"
+                          - "Translation (sentences)"
+                          - "Sentiment analysis"
                       description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                     "language":
                       type: "string"
@@ -11213,6 +11974,7 @@ paths:
                         - "Russian"
                         - "Spanish"
                       description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                  default: {"language": "English"}
                 "path":
                   type: "string"
                   description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -11526,7 +12288,6 @@ paths:
                     description: "A list of messages compatible with the openAI schema"
                   "metadata":
                     type: "object"
-                    default: {"language": "English"}
                     properties:
                       "use_cases":
                         type: "array"
@@ -11549,6 +12310,9 @@ paths:
                             - "SQL"
                             - "Summarization"
                             - "Tagging"
+                            - "Translation (document)"
+                            - "Translation (sentences)"
+                            - "Sentiment analysis"
                         description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                       "language":
                         type: "string"
@@ -11561,6 +12325,7 @@ paths:
                           - "Russian"
                           - "Spanish"
                         description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                    default: {"language": "English"}
                 required:
                   - "_id"
                   - "type"
@@ -11894,7 +12659,6 @@ paths:
                     description: "A list of messages compatible with the openAI schema"
                   "metadata":
                     type: "object"
-                    default: {"language": "English"}
                     properties:
                       "use_cases":
                         type: "array"
@@ -11917,6 +12681,9 @@ paths:
                             - "SQL"
                             - "Summarization"
                             - "Tagging"
+                            - "Translation (document)"
+                            - "Translation (sentences)"
+                            - "Sentiment analysis"
                         description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                       "language":
                         type: "string"
@@ -11929,6 +12696,7 @@ paths:
                           - "Russian"
                           - "Spanish"
                         description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                    default: {"language": "English"}
                 required:
                   - "_id"
                   - "type"
@@ -12252,7 +13020,6 @@ paths:
                   description: "A list of messages compatible with the openAI schema"
                 "metadata":
                   type: "object"
-                  default: {"language": "English"}
                   properties:
                     "use_cases":
                       type: "array"
@@ -12275,6 +13042,9 @@ paths:
                           - "SQL"
                           - "Summarization"
                           - "Tagging"
+                          - "Translation (document)"
+                          - "Translation (sentences)"
+                          - "Sentiment analysis"
                       description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                     "language":
                       type: "string"
@@ -12287,6 +13057,11 @@ paths:
                         - "Russian"
                         - "Spanish"
                       description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                  default: {"language": "English"}
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Customer Service/Billing/Refund"
       responses:
         "200":
           description: "Prompt updated."
@@ -12592,7 +13367,6 @@ paths:
                     description: "A list of messages compatible with the openAI schema"
                   "metadata":
                     type: "object"
-                    default: {"language": "English"}
                     properties:
                       "use_cases":
                         type: "array"
@@ -12615,6 +13389,9 @@ paths:
                             - "SQL"
                             - "Summarization"
                             - "Tagging"
+                            - "Translation (document)"
+                            - "Translation (sentences)"
+                            - "Sentiment analysis"
                         description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                       "language":
                         type: "string"
@@ -12627,6 +13404,7 @@ paths:
                           - "Russian"
                           - "Spanish"
                         description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                    default: {"language": "English"}
                 required:
                   - "_id"
                   - "type"
@@ -12684,17 +13462,6 @@ paths:
           required: true
           name: "prompt_id"
           in: "path"
-        - schema:
-            type: "string"
-            enum:
-              - "asc"
-              - "desc"
-            default: "asc"
-            description: "List sorting preference."
-          required: false
-          description: "List sorting preference."
-          name: "sort"
-          in: "query"
         - schema:
             type: "number"
             minimum: 1
@@ -13017,7 +13784,6 @@ paths:
                               description: "A list of messages compatible with the openAI schema"
                             "metadata":
                               type: "object"
-                              default: {"language": "English"}
                               properties:
                                 "use_cases":
                                   type: "array"
@@ -13040,6 +13806,9 @@ paths:
                                       - "SQL"
                                       - "Summarization"
                                       - "Tagging"
+                                      - "Translation (document)"
+                                      - "Translation (sentences)"
+                                      - "Sentiment analysis"
                                   description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                                 "language":
                                   type: "string"
@@ -13052,6 +13821,7 @@ paths:
                                     - "Russian"
                                     - "Spanish"
                                   description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                              default: {"language": "English"}
                           required:
                             - "_id"
                             - "prompt_config"
@@ -13382,7 +14152,6 @@ paths:
                         description: "A list of messages compatible with the openAI schema"
                       "metadata":
                         type: "object"
-                        default: {"language": "English"}
                         properties:
                           "use_cases":
                             type: "array"
@@ -13405,6 +14174,9 @@ paths:
                                 - "SQL"
                                 - "Summarization"
                                 - "Tagging"
+                                - "Translation (document)"
+                                - "Translation (sentences)"
+                                - "Sentiment analysis"
                             description: "A list of use cases that the prompt is meant to be used for. Use this field to categorize the prompt for your own purpose"
                           "language":
                             type: "string"
@@ -13417,6 +14189,7 @@ paths:
                               - "Russian"
                               - "Spanish"
                             description: "The language that the prompt is written in. Use this field to categorize the prompt for your own purpose"
+                        default: {"language": "English"}
                     required:
                       - "_id"
                       - "prompt_config"
@@ -13507,17 +14280,6 @@ paths:
       summary: "List datasets"
       description: "Retrieves a paginated list of datasets for the current workspace. Results can be paginated using cursor-based pagination."
       parameters:
-        - schema:
-            type: "string"
-            enum:
-              - "asc"
-              - "desc"
-            default: "asc"
-            description: "List sorting preference."
-          required: false
-          description: "List sorting preference."
-          name: "sort"
-          in: "query"
         - schema:
             type: "number"
             minimum: 1
@@ -13632,7 +14394,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-01T11:31:10.958Z"
+                          default: "2025-04-01T13:14:14.943Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -13640,7 +14402,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-01T11:31:10.958Z"
+                              default: "2025-04-01T13:14:14.943Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -13764,7 +14526,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13772,7 +14534,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13882,7 +14644,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13890,7 +14652,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13931,8 +14693,22 @@ paths:
               properties:
                 "display_name":
                   type: "string"
-              required:
-                - "display_name"
+                  description: "The display name of the dataset"
+                "project_id":
+                  anyOf:
+                    - type: "string"
+                      format: "uuid"
+                      description: "The id of the resource"
+                      readOnly: true
+                    - type: "string"
+                      format: "ulid"
+                      description: "The id of the resource"
+                      readOnly: true
+                  description: "The unique identifier of the project it belongs to"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Customer Service/Billing/Refund"
       responses:
         "200":
           description: "Dataset updated."
@@ -14028,7 +14804,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14036,7 +14812,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14092,17 +14868,6 @@ paths:
           required: true
           name: "dataset_id"
           in: "path"
-        - schema:
-            type: "string"
-            enum:
-              - "asc"
-              - "desc"
-            default: "asc"
-            description: "List sorting preference."
-          required: false
-          description: "List sorting preference."
-          name: "sort"
-          in: "query"
         - schema:
             type: "number"
             minimum: 1
@@ -14269,7 +15034,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-01T11:31:10.958Z"
+                          default: "2025-04-01T13:14:14.943Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14277,7 +15042,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-01T11:31:10.958Z"
+                              default: "2025-04-01T13:14:14.943Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14553,7 +15318,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14561,7 +15326,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14727,7 +15492,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14735,7 +15500,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15015,7 +15780,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-01T11:31:10.958Z"
+                    default: "2025-04-01T13:14:14.943Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15023,7 +15788,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-01T11:31:10.958Z"
+                        default: "2025-04-01T13:14:14.943Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15339,7 +16104,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-04-01T11:31:10.958Z"
+                      default: "2025-04-01T13:14:14.943Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -15347,7 +16112,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-04-01T11:31:10.958Z"
+                          default: "2025-04-01T13:14:14.943Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -15377,5 +16142,1939 @@ paths:
       responses:
         "204":
           description: "No content - successful operation"
+      security:
+        - ApiKey: []
+  "/v2/knowledge":
+    get:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "list"
+      operationId: "ListKnowledgeBases"
+      summary: "List all knowledge bases"
+      description: "Returns a list of your knowledge bases. The knowledge bases are returned sorted by creation date, with the most recent knowledge bases appearing first"
+      parameters:
+        - schema:
+            type: "number"
+            minimum: 1
+            maximum: 200
+            default: 10
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          required: false
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          name: "limit"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          required: false
+          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          name: "starting_after"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          required: false
+          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          name: "ending_before"
+          in: "query"
+      responses:
+        "200":
+          description: "Knowledge bases retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "object":
+                    type: "string"
+                    enum:
+                      - "list"
+                  "data":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "_id":
+                          type: "string"
+                          description: "The unique identifier of the knowledge base."
+                        "created_by_id":
+                          type: "string"
+                          format: "uuid"
+                          description: "The id of the resource"
+                          readOnly: true
+                        "created":
+                          type: "string"
+                          description: "The creation date of the knowledge base."
+                        "description":
+                          type: "string"
+                          description: "The description of the knowledge base."
+                        "key":
+                          type: "string"
+                          description: "The unique key of the knowledge base."
+                        "model":
+                          type: "string"
+                          description: "The embeddings model used for the knowledge base."
+                        "path":
+                          type: "string"
+                          description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                          example: "Customer Service/Billing/Refund"
+                        "retrieval_settings":
+                          type: "object"
+                          properties:
+                            "retrieval_type":
+                              type: "string"
+                              enum:
+                                - "vector_search"
+                                - "keyword_search"
+                                - "hybrid_search"
+                              default: "hybrid_search"
+                              description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                            "top_k":
+                              type: "integer"
+                              exclusiveMinimum: 0
+                              default: 5
+                              description: "The number of results to return from the search."
+                            "threshold":
+                              type: "number"
+                              minimum: 0
+                              maximum: 1
+                              default: 0
+                              description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                            "rerank_config":
+                              type: "object"
+                              properties:
+                                "rerank_threshold":
+                                  type: "number"
+                                  minimum: 0
+                                  maximum: 1
+                                  default: 0.5
+                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                                "rerank_model":
+                                  type: "string"
+                                  description: "The rerank model to use for the knowledge base."
+                              required:
+                                - "rerank_model"
+                              description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                          description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+                        "update_by_id":
+                          type: "string"
+                          format: "uuid"
+                          description: "The id of the resource"
+                          readOnly: true
+                        "updated":
+                          type: "string"
+                          description: "The last update date of the knowledge base."
+                      required:
+                        - "_id"
+                        - "created_by_id"
+                        - "created"
+                        - "key"
+                        - "model"
+                        - "update_by_id"
+                        - "updated"
+                      description: "Knowledge Base object"
+                  "has_more":
+                    type: "boolean"
+                required:
+                  - "object"
+                  - "data"
+                  - "has_more"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "create"
+      operationId: "CreateKnowledge"
+      summary: "Create a knowledge"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "key":
+                  type: "string"
+                "description":
+                  type: "string"
+                "embedding_model":
+                  type: "string"
+                  description: "The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base."
+                "retrieval_settings":
+                  type: "object"
+                  properties:
+                    "retrieval_type":
+                      type: "string"
+                      enum:
+                        - "vector_search"
+                        - "keyword_search"
+                        - "hybrid_search"
+                      default: "hybrid_search"
+                      description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                    "top_k":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 5
+                      description: "The number of results to return from the search."
+                    "threshold":
+                      type: "number"
+                      minimum: 0
+                      maximum: 1
+                      default: 0
+                      description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                    "rerank_config":
+                      type: "object"
+                      properties:
+                        "rerank_threshold":
+                          type: "number"
+                          minimum: 0
+                          maximum: 1
+                          default: 0.5
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                        "rerank_model":
+                          type: "string"
+                          description: "The rerank model to use for the knowledge base."
+                      required:
+                        - "rerank_model"
+                      description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                  description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Customer Service/Billing/Refund"
+              required:
+                - "key"
+                - "embedding_model"
+                - "path"
+      responses:
+        "200":
+          description: "Knowledge successfully created"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    description: "The unique identifier of the knowledge base."
+                  "created_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "created":
+                    type: "string"
+                    description: "The creation date of the knowledge base."
+                  "description":
+                    type: "string"
+                    description: "The description of the knowledge base."
+                  "key":
+                    type: "string"
+                    description: "The unique key of the knowledge base."
+                  "model":
+                    type: "string"
+                    description: "The embeddings model used for the knowledge base."
+                  "path":
+                    type: "string"
+                    description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                    example: "Customer Service/Billing/Refund"
+                  "retrieval_settings":
+                    type: "object"
+                    properties:
+                      "retrieval_type":
+                        type: "string"
+                        enum:
+                          - "vector_search"
+                          - "keyword_search"
+                          - "hybrid_search"
+                        default: "hybrid_search"
+                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                      "top_k":
+                        type: "integer"
+                        exclusiveMinimum: 0
+                        default: 5
+                        description: "The number of results to return from the search."
+                      "threshold":
+                        type: "number"
+                        minimum: 0
+                        maximum: 1
+                        default: 0
+                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                      "rerank_config":
+                        type: "object"
+                        properties:
+                          "rerank_threshold":
+                            type: "number"
+                            minimum: 0
+                            maximum: 1
+                            default: 0.5
+                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                          "rerank_model":
+                            type: "string"
+                            description: "The rerank model to use for the knowledge base."
+                        required:
+                          - "rerank_model"
+                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+                  "update_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "updated":
+                    type: "string"
+                    description: "The last update date of the knowledge base."
+                required:
+                  - "_id"
+                  - "created_by_id"
+                  - "created"
+                  - "key"
+                  - "model"
+                  - "update_by_id"
+                  - "updated"
+                description: "Knowledge Base object"
+      security:
+        - ApiKey: []
+  "/v2/knowledge/{knowledge_id}":
+    get:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "retrieve"
+      operationId: "GetOneKnowledge"
+      summary: "Retrieves a knowledge base"
+      description: "Retrieve a knowledge base with the settings."
+      parameters:
+        - schema:
+            type: "string"
+            description: "Unique identifier of the knowledge base"
+          required: true
+          description: "Unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      responses:
+        "200":
+          description: "Knowledge base retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    description: "The unique identifier of the knowledge base."
+                  "created_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "created":
+                    type: "string"
+                    description: "The creation date of the knowledge base."
+                  "description":
+                    type: "string"
+                    description: "The description of the knowledge base."
+                  "key":
+                    type: "string"
+                    description: "The unique key of the knowledge base."
+                  "model":
+                    type: "string"
+                    description: "The embeddings model used for the knowledge base."
+                  "path":
+                    type: "string"
+                    description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                    example: "Customer Service/Billing/Refund"
+                  "retrieval_settings":
+                    type: "object"
+                    properties:
+                      "retrieval_type":
+                        type: "string"
+                        enum:
+                          - "vector_search"
+                          - "keyword_search"
+                          - "hybrid_search"
+                        default: "hybrid_search"
+                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                      "top_k":
+                        type: "integer"
+                        exclusiveMinimum: 0
+                        default: 5
+                        description: "The number of results to return from the search."
+                      "threshold":
+                        type: "number"
+                        minimum: 0
+                        maximum: 1
+                        default: 0
+                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                      "rerank_config":
+                        type: "object"
+                        properties:
+                          "rerank_threshold":
+                            type: "number"
+                            minimum: 0
+                            maximum: 1
+                            default: 0.5
+                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                          "rerank_model":
+                            type: "string"
+                            description: "The rerank model to use for the knowledge base."
+                        required:
+                          - "rerank_model"
+                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+                  "update_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "updated":
+                    type: "string"
+                    description: "The last update date of the knowledge base."
+                required:
+                  - "_id"
+                  - "created_by_id"
+                  - "created"
+                  - "key"
+                  - "model"
+                  - "update_by_id"
+                  - "updated"
+                description: "Knowledge Base object"
+        "404":
+          description: "Knowledge not found"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "update"
+      operationId: "UpdateKnowledge"
+      summary: "Updates a knowledge"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "description":
+                  type: "string"
+                  description: "The description of the knowledge base."
+                "embedding_model":
+                  type: "string"
+                  description: "The embeddings model used for the knowledge base. If the models is provided and is different than the previous set model, all the datasources in the knowledge base will be re-embedded."
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Customer Service/Billing/Refund"
+                "retrieval_settings":
+                  type: "object"
+                  properties:
+                    "retrieval_type":
+                      type: "string"
+                      enum:
+                        - "vector_search"
+                        - "keyword_search"
+                        - "hybrid_search"
+                      default: "hybrid_search"
+                      description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                    "top_k":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 5
+                      description: "The number of results to return from the search."
+                    "threshold":
+                      type: "number"
+                      minimum: 0
+                      maximum: 1
+                      default: 0
+                      description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                    "rerank_config":
+                      type: "object"
+                      properties:
+                        "rerank_threshold":
+                          type: "number"
+                          minimum: 0
+                          maximum: 1
+                          default: 0.5
+                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                        "rerank_model":
+                          type: "string"
+                          description: "The rerank model to use for the knowledge base."
+                      required:
+                        - "rerank_model"
+                      description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                  description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+      responses:
+        "200":
+          description: "Knowledge successfully updated"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    description: "The unique identifier of the knowledge base."
+                  "created_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "created":
+                    type: "string"
+                    description: "The creation date of the knowledge base."
+                  "description":
+                    type: "string"
+                    description: "The description of the knowledge base."
+                  "key":
+                    type: "string"
+                    description: "The unique key of the knowledge base."
+                  "model":
+                    type: "string"
+                    description: "The embeddings model used for the knowledge base."
+                  "path":
+                    type: "string"
+                    description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                    example: "Customer Service/Billing/Refund"
+                  "retrieval_settings":
+                    type: "object"
+                    properties:
+                      "retrieval_type":
+                        type: "string"
+                        enum:
+                          - "vector_search"
+                          - "keyword_search"
+                          - "hybrid_search"
+                        default: "hybrid_search"
+                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
+                      "top_k":
+                        type: "integer"
+                        exclusiveMinimum: 0
+                        default: 5
+                        description: "The number of results to return from the search."
+                      "threshold":
+                        type: "number"
+                        minimum: 0
+                        maximum: 1
+                        default: 0
+                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
+                      "rerank_config":
+                        type: "object"
+                        properties:
+                          "rerank_threshold":
+                            type: "number"
+                            minimum: 0
+                            maximum: 1
+                            default: 0.5
+                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                          "rerank_model":
+                            type: "string"
+                            description: "The rerank model to use for the knowledge base."
+                        required:
+                          - "rerank_model"
+                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
+                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
+                  "update_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "updated":
+                    type: "string"
+                    description: "The last update date of the knowledge base."
+                required:
+                  - "_id"
+                  - "created_by_id"
+                  - "created"
+                  - "key"
+                  - "model"
+                  - "update_by_id"
+                  - "updated"
+                description: "Knowledge Base object"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "delete"
+      operationId: "DeleteKnowledge"
+      description: "Deletes a knowledge base. Deleting a knowledge base will delete all the datasources and chunks associated with it."
+      summary: "Deletes a knowledge"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      responses:
+        "204":
+          description: "Knowledge successfully deleted"
+      security:
+        - ApiKey: []
+  "/v2/knowledge/{knowledge_id}/search":
+    post:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "search"
+      operationId: "SearchKnowledge"
+      summary: "Retrieves the documents used for retrieval"
+      parameters:
+        - schema:
+            type: "string"
+          required: true
+          name: "knowledge_id"
+          in: "path"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "query":
+                  type: "string"
+                "retrieval_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "vector_search"
+                        "top_k":
+                          type: "integer"
+                          minimum: 1
+                          maximum: 20
+                          default: 5
+                          description: "Used to filter chunks that are most similar to the query"
+                        "threshold":
+                          type: "number"
+                          maximum: 1
+                          default: 0
+                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
+                        "rerank_config":
+                          type:
+                            - "object"
+                            - "null"
+                          properties:
+                            "enabled":
+                              type: "boolean"
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "cohere"
+                                - "openai"
+                                - "anthropic"
+                                - "huggingface"
+                                - "replicate"
+                                - "google"
+                                - "google-ai"
+                                - "azure"
+                                - "aws"
+                                - "anyscale"
+                                - "perplexity"
+                                - "groq"
+                                - "fal"
+                                - "leonardoai"
+                                - "nvidia"
+                                - "jina"
+                                - "togetherai"
+                                - "elevenlabs"
+                            "model":
+                              type: "string"
+                              description: "The name of the model to use"
+                            "model_db_id":
+                              type: "string"
+                              description: "The ID of the model in the database"
+                            "model_type":
+                              type: "string"
+                              enum:
+                                - "rerank"
+                            "model_parameters":
+                              type: "object"
+                              properties:
+                                "threshold":
+                                  type: "number"
+                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                            "integration_id":
+                              type:
+                                - "string"
+                                - "null"
+                              format: "uuid"
+                              description: "The id of the resource"
+                              readOnly: true
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "keyword_search"
+                        "top_k":
+                          type: "integer"
+                          minimum: 1
+                          maximum: 20
+                          default: 5
+                          description: "Used to filter chunks that are most similar to the query"
+                        "threshold":
+                          type: "number"
+                          maximum: 1
+                          default: 0
+                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
+                        "rerank_config":
+                          type:
+                            - "object"
+                            - "null"
+                          properties:
+                            "enabled":
+                              type: "boolean"
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "cohere"
+                                - "openai"
+                                - "anthropic"
+                                - "huggingface"
+                                - "replicate"
+                                - "google"
+                                - "google-ai"
+                                - "azure"
+                                - "aws"
+                                - "anyscale"
+                                - "perplexity"
+                                - "groq"
+                                - "fal"
+                                - "leonardoai"
+                                - "nvidia"
+                                - "jina"
+                                - "togetherai"
+                                - "elevenlabs"
+                            "model":
+                              type: "string"
+                              description: "The name of the model to use"
+                            "model_db_id":
+                              type: "string"
+                              description: "The ID of the model in the database"
+                            "model_type":
+                              type: "string"
+                              enum:
+                                - "rerank"
+                            "model_parameters":
+                              type: "object"
+                              properties:
+                                "threshold":
+                                  type: "number"
+                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                            "integration_id":
+                              type:
+                                - "string"
+                                - "null"
+                              format: "uuid"
+                              description: "The id of the resource"
+                              readOnly: true
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "hybrid_search"
+                        "top_k":
+                          type: "integer"
+                          minimum: 1
+                          maximum: 20
+                          default: 5
+                          description: "Used to filter chunks that are most similar to the query"
+                        "threshold":
+                          type: "number"
+                          maximum: 1
+                          default: 0
+                          description: "Used to filter chunks that are most similar to the query. A value of `0` will be consider disabled."
+                        "rerank_config":
+                          type:
+                            - "object"
+                            - "null"
+                          properties:
+                            "enabled":
+                              type: "boolean"
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "cohere"
+                                - "openai"
+                                - "anthropic"
+                                - "huggingface"
+                                - "replicate"
+                                - "google"
+                                - "google-ai"
+                                - "azure"
+                                - "aws"
+                                - "anyscale"
+                                - "perplexity"
+                                - "groq"
+                                - "fal"
+                                - "leonardoai"
+                                - "nvidia"
+                                - "jina"
+                                - "togetherai"
+                                - "elevenlabs"
+                            "model":
+                              type: "string"
+                              description: "The name of the model to use"
+                            "model_db_id":
+                              type: "string"
+                              description: "The ID of the model in the database"
+                            "model_type":
+                              type: "string"
+                              enum:
+                                - "rerank"
+                            "model_parameters":
+                              type: "object"
+                              properties:
+                                "threshold":
+                                  type: "number"
+                                  description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                            "integration_id":
+                              type:
+                                - "string"
+                                - "null"
+                              format: "uuid"
+                              description: "The id of the resource"
+                              readOnly: true
+                      required:
+                        - "type"
+                  description: "Allow to modify the retrieval config for the search. If not provided, the knowledge base configuration set in the database will be used."
+              required:
+                - "query"
+      responses:
+        "200":
+          description: "Knowledge successfully retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "knowledge_id":
+                    type: "string"
+                    description: "Unique id of the knowledge base"
+                  "documents":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "id":
+                          type: "string"
+                          description: "Unique identifier for the retrieval"
+                        "text":
+                          type: "string"
+                          description: "Text content of the document"
+                        "metadata":
+                          type: "object"
+                          properties:
+                            "datasource_id":
+                              type: "string"
+                              description: "Unique identifier for the data source"
+                            "chunk_id":
+                              type: "string"
+                              description: "Unique identifier for the chunk"
+                            "file_name":
+                              type: "string"
+                              description: "Name of the uploaded file during the datasource creation."
+                            "page_number":
+                              type:
+                                - "number"
+                                - "null"
+                              description: "Reference to the page number the chunk was extracted from. The property will only be available for `application/pdf` type of files. For other file types, the property will be `null`."
+                            "file_type":
+                              type: "string"
+                              description: "Type of the uploaded file when the datasource was created."
+                          required:
+                            - "datasource_id"
+                            - "chunk_id"
+                            - "file_name"
+                            - "file_type"
+                        "score":
+                          type: "number"
+                          description: "The score of the document"
+                        "rerank_score":
+                          type: "number"
+                          description: "The rerank score of the document"
+                      required:
+                        - "id"
+                        - "text"
+                        - "metadata"
+                        - "score"
+                    description: "The documents returned"
+                  "knowledge_key":
+                    type: "string"
+                    description: "The key of the knowledge base"
+                  "query":
+                    type: "string"
+                    description: "The query used to search the knowledge base"
+                required:
+                  - "knowledge_id"
+                  - "documents"
+                  - "knowledge_key"
+                  - "query"
+        "404":
+          description: "Contact not found"
+      security:
+        - ApiKey: []
+  "/v2/knowledge/{knowledge_id}/datasources":
+    get:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "listDatasources"
+      operationId: "ListDatasources"
+      summary: "List all datasources"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Unique identifier of the knowledge base"
+          required: true
+          description: "Unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+        - schema:
+            type: "number"
+            minimum: 1
+            maximum: 200
+            default: 10
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          required: false
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          name: "limit"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          required: false
+          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          name: "starting_after"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          required: false
+          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          name: "ending_before"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "Search query to find datasources by name."
+          required: false
+          description: "Search query to find datasources by name."
+          name: "q"
+          in: "query"
+        - schema:
+            anyOf:
+              - type: "array"
+                items:
+                  type: "string"
+                example: ["completed", "failed"]
+              - type: "string"
+                example: "completed"
+            description: "Filter datasources by status."
+          required: false
+          description: "Filter datasources by status."
+          name: "status"
+          in: "query"
+      responses:
+        "200":
+          description: "Datasources successfully retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "object":
+                    type: "string"
+                    enum:
+                      - "list"
+                  "data":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "_id":
+                          type: "string"
+                          format: "ulid"
+                          default: "01JQRQT4K0A0ZTEV4F06V0BMWX"
+                          description: "The id of the resource"
+                          readOnly: true
+                        "display_name":
+                          type: "string"
+                          description: "The display name of the datasource. Normally the name of the uploaded file"
+                        "description":
+                          type: "string"
+                          description: "The description of the knowledge base"
+                        "status":
+                          type: "string"
+                          enum:
+                            - "pending"
+                            - "processing"
+                            - "completed"
+                            - "failed"
+                            - "queued"
+                        "file_id":
+                          type:
+                            - "string"
+                            - "null"
+                          description: "The unique identifier of the file used to create the datasource."
+                        "created":
+                          type: "string"
+                          description: "The date and time the datasource was created"
+                        "updated":
+                          type: "string"
+                          description: "The date and time the datasource was updated"
+                        "created_by_id":
+                          type: "string"
+                          format: "uuid"
+                          description: "The id of the resource"
+                          readOnly: true
+                        "update_by_id":
+                          type: "string"
+                          format: "uuid"
+                          description: "The id of the resource"
+                          readOnly: true
+                        "knowledge_id":
+                          type: "string"
+                          description: "The unique identifier of the knowledge base"
+                        "chunks_count":
+                          type: "number"
+                          description: "The number of chunks in the datasource"
+                      required:
+                        - "display_name"
+                        - "status"
+                        - "created"
+                        - "updated"
+                        - "knowledge_id"
+                        - "chunks_count"
+                  "has_more":
+                    type: "boolean"
+                required:
+                  - "object"
+                  - "data"
+                  - "has_more"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "createDatasource"
+      operationId: "CreateDatasource"
+      summary: "Create a new datasource"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "display_name":
+                  type: "string"
+                  description: "The display name for the datasource visible in the UI. If omitted, the display name is derived from the uploaded file. When both `display_name` and `file_id` are provided, the provided `display_name` is prioritized."
+                "file_id":
+                  type: "string"
+                  description: "The unique identifier of the file used for datasource creation. If provided, the file is immediately queued for chunking."
+                "chunking_options":
+                  type: "object"
+                  properties:
+                    "chunking_configuration":
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "default"
+                          required:
+                            - "type"
+                          description: "Optimized chunking strategy focusing on speed and avoiding duplication of content chunks."
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "advanced"
+                            "chunk_max_characters":
+                              type: "number"
+                              default: 500
+                              description: "Defines the absolute maximum character length per chunk. Text elements exceeding this size will be automatically split into multiple chunks."
+                            "chunk_overlap":
+                              type: "number"
+                              default: 0
+                              description: "Specifies the number of characters to overlap between consecutive chunks. This overlap helps maintain semantic continuity when splitting large text elements."
+                          required:
+                            - "type"
+                          description: "Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs."
+                      description: "The chunking configuration settings for the datasource. Defaults to the system's standard chunking configuration if not specified."
+                    "chunking_cleanup_options":
+                      type: "object"
+                      properties:
+                        "delete_emails":
+                          type: "boolean"
+                          description: "Removes email addresses from the provided text."
+                        "delete_credit_cards":
+                          type: "boolean"
+                          description: "Removes credit card numbers from the provided text."
+                        "delete_phone_numbers":
+                          type: "boolean"
+                          description: "Removes phone numbers from the provided text."
+                        "clean_bullet_points":
+                          type: "boolean"
+                          description: "Removes bullet points formatting from the text."
+                        "clean_numbered_list":
+                          type: "boolean"
+                          description: "Removes numbered list formatting from the text."
+                        "clean_unicode":
+                          type: "boolean"
+                          description: "Normalizes or removes unnecessary unicode characters from the text."
+                        "clean_dashes":
+                          type: "boolean"
+                          description: "Normalizes or removes various dash characters to standardize the text."
+                        "clean_whitespaces":
+                          type: "boolean"
+                          description: "Trims and normalizes excessive whitespace throughout the text."
+                      description: "The cleanup options applied to the datasource content. All options are enabled by default to ensure enhanced security and optimal chunk quality. Defaults to system-standard cleanup options if not specified."
+                  description: "Configuration options specifying how the datasource file is chunked. Required if `file_id` is specified. Defaults to standard chunking options if omitted."
+      responses:
+        "200":
+          description: "Datasource successfully created"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    format: "ulid"
+                    default: "01JQRQT4K2GCYZGPQHBEVC2FVY"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "display_name":
+                    type: "string"
+                    description: "The display name of the datasource. Normally the name of the uploaded file"
+                  "description":
+                    type: "string"
+                    description: "The description of the knowledge base"
+                  "status":
+                    type: "string"
+                    enum:
+                      - "pending"
+                      - "processing"
+                      - "completed"
+                      - "failed"
+                      - "queued"
+                  "file_id":
+                    type:
+                      - "string"
+                      - "null"
+                    description: "The unique identifier of the file used to create the datasource."
+                  "created":
+                    type: "string"
+                    description: "The date and time the datasource was created"
+                  "updated":
+                    type: "string"
+                    description: "The date and time the datasource was updated"
+                  "created_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "update_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "knowledge_id":
+                    type: "string"
+                    description: "The unique identifier of the knowledge base"
+                  "chunks_count":
+                    type: "number"
+                    description: "The number of chunks in the datasource"
+                required:
+                  - "display_name"
+                  - "status"
+                  - "created"
+                  - "updated"
+                  - "knowledge_id"
+                  - "chunks_count"
+      security:
+        - ApiKey: []
+  "/v2/knowledge/{knowledge_id}/datasources/{datasource_id}":
+    get:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "retrieveDatasource"
+      operationId: "RetrieveDatasource"
+      summary: "Retrieve a datasource"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the datasource."
+          required: true
+          description: "The unique identifier of the datasource."
+          name: "datasource_id"
+          in: "path"
+      responses:
+        "200":
+          description: "Datasource successfully retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    format: "ulid"
+                    default: "01JQRQT4K1T031BNVKV1A8471A"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "display_name":
+                    type: "string"
+                    description: "The display name of the datasource. Normally the name of the uploaded file"
+                  "description":
+                    type: "string"
+                    description: "The description of the knowledge base"
+                  "status":
+                    type: "string"
+                    enum:
+                      - "pending"
+                      - "processing"
+                      - "completed"
+                      - "failed"
+                      - "queued"
+                  "file_id":
+                    type:
+                      - "string"
+                      - "null"
+                    description: "The unique identifier of the file used to create the datasource."
+                  "created":
+                    type: "string"
+                    description: "The date and time the datasource was created"
+                  "updated":
+                    type: "string"
+                    description: "The date and time the datasource was updated"
+                  "created_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "update_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "knowledge_id":
+                    type: "string"
+                    description: "The unique identifier of the knowledge base"
+                  "chunks_count":
+                    type: "number"
+                    description: "The number of chunks in the datasource"
+                required:
+                  - "display_name"
+                  - "status"
+                  - "created"
+                  - "updated"
+                  - "knowledge_id"
+                  - "chunks_count"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "deleteDatasource"
+      operationId: "DeleteDatasource"
+      description: "Deletes a datasource from a knowledge base. Deleting a datasource will remove it from the knowledge base and all associated chunks. This action is irreversible and cannot be undone."
+      summary: "Deletes a datasource"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the datasource."
+          required: true
+          description: "The unique identifier of the datasource."
+          name: "datasource_id"
+          in: "path"
+      responses:
+        "200":
+          description: "Datasource successfully deleted"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "updateDatasource"
+      operationId: "UpdateDatasource"
+      summary: "Update a datasource"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the datasource."
+          required: true
+          description: "The unique identifier of the datasource."
+          name: "datasource_id"
+          in: "path"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "display_name":
+                  type: "string"
+              required:
+                - "display_name"
+      responses:
+        "200":
+          description: "Datasource successfully updated"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    format: "ulid"
+                    default: "01JQRQT4K3KEF34NNNZ5AGVEBS"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "display_name":
+                    type: "string"
+                    description: "The display name of the datasource. Normally the name of the uploaded file"
+                  "description":
+                    type: "string"
+                    description: "The description of the knowledge base"
+                  "status":
+                    type: "string"
+                    enum:
+                      - "pending"
+                      - "processing"
+                      - "completed"
+                      - "failed"
+                      - "queued"
+                  "file_id":
+                    type:
+                      - "string"
+                      - "null"
+                    description: "The unique identifier of the file used to create the datasource."
+                  "created":
+                    type: "string"
+                    description: "The date and time the datasource was created"
+                  "updated":
+                    type: "string"
+                    description: "The date and time the datasource was updated"
+                  "created_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "update_by_id":
+                    type: "string"
+                    format: "uuid"
+                    description: "The id of the resource"
+                    readOnly: true
+                  "knowledge_id":
+                    type: "string"
+                    description: "The unique identifier of the knowledge base"
+                  "chunks_count":
+                    type: "number"
+                    description: "The number of chunks in the datasource"
+                required:
+                  - "display_name"
+                  - "status"
+                  - "created"
+                  - "updated"
+                  - "knowledge_id"
+                  - "chunks_count"
+      security:
+        - ApiKey: []
+  "/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks":
+    post:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "createChunks"
+      operationId: "CreateChunk"
+      summary: "Create chunks for a datasource"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Unique identifier of the knowledge"
+          required: true
+          description: "Unique identifier of the knowledge"
+          name: "knowledge_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "Unique identifier of the datasource"
+          required: true
+          description: "Unique identifier of the datasource"
+          name: "datasource_id"
+          in: "path"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  "text":
+                    type: "string"
+                    description: "The text content of the chunk"
+                  "embedding":
+                    type: "array"
+                    items:
+                      type: "number"
+                    description: "The embedding vector of the chunk. If not provided the chunk will be embedded with the knowledge base embeddings model."
+                  "metadata":
+                    type: "object"
+                    properties:
+                      "page_number":
+                        type: "number"
+                        description: "In case you are using PDFs, Word, PowerPoint, etc. this is the page number of the chunk."
+                    description: "Metadata of the chunk"
+                required:
+                  - "text"
+              minItems: 1
+              maxItems: 100
+              description: "Array of chunks to create. Maximum of 100 chunks per request."
+      responses:
+        "200":
+          description: "Chunk successfully created"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    "knowledge_id":
+                      type: "string"
+                      format: "ulid"
+                      description: "The id of the resource"
+                      readOnly: true
+                    "workspace_id":
+                      type: "string"
+                      format: "ulid"
+                      description: "The id of the resource"
+                      readOnly: true
+                    "data_source_id":
+                      type: "string"
+                      format: "ulid"
+                      description: "The id of the resource"
+                      readOnly: true
+                    "id":
+                      type: "string"
+                      default: "chunk_01JQRQT4K4GTXV0AJKGAA82N4Z"
+                      description: "Unique identifier for the element"
+                    "text":
+                      type: "string"
+                      description: "Text content of the element"
+                    "enabled":
+                      type: "boolean"
+                      default: true
+                    "metadata":
+                      type: "object"
+                      properties:
+                        "filename":
+                          type: "string"
+                          description: "Filename"
+                        "last_modified":
+                          type: "string"
+                          description: "Last modified date in ISO 8601 format"
+                        "filetype":
+                          type: "string"
+                          description: "File type"
+                        "languages":
+                          type: "array"
+                          items:
+                            type: "string"
+                          description: "Document Languages. List is ordered by probability of being the primary language of the text."
+                        "page_number":
+                          type:
+                            - "number"
+                            - "null"
+                          description: "Page number. Optional field."
+                        "words_count":
+                          type: "number"
+                          description: "Number of words in the text"
+                        "sentences_count":
+                          type: "number"
+                          description: "Number of sentences in the text"
+                        "paragraphs_count":
+                          type: "number"
+                          description: "Number of paragraphs in the text"
+                        "tokens_count":
+                          type: "number"
+                          description: "Number of tokens in the text"
+                        "characters_count":
+                          type: "number"
+                          description: "Number of characters in the text"
+                        "chunks_count":
+                          type: "number"
+                          description: "Number of total chunks"
+                    "processing_attempts":
+                      type: "array"
+                      items:
+                        type: "object"
+                        properties:
+                          "id":
+                            type: "string"
+                            format: "ulid"
+                          "started_at":
+                            type: "string"
+                          "queued_at":
+                            type: "string"
+                          "completed_at":
+                            type: "string"
+                          "errors":
+                            type: "array"
+                            items:
+                              type: "object"
+                              properties:
+                                "code":
+                                  type: "number"
+                                "message":
+                                  type: "string"
+                              required:
+                                - "code"
+                                - "message"
+                        required:
+                          - "id"
+                          - "started_at"
+                    "created":
+                      type: "string"
+                      description: "The date and time the chunk was created"
+                    "updated":
+                      type: "string"
+                      description: "The date and time the chunk was updated"
+                    "created_by_id":
+                      type: "string"
+                      description: "The unique identifier of the user who created the chunk"
+                    "updated_by_id":
+                      type: "string"
+                      description: "The unique identifier of the user who updated the chunk"
+                  required:
+                    - "knowledge_id"
+                    - "workspace_id"
+                    - "data_source_id"
+                    - "text"
+                    - "processing_attempts"
+                    - "created"
+                    - "updated"
+                    - "created_by_id"
+                    - "updated_by_id"
+                description: "Array of created chunks"
+        "500":
+          description: "Failed to create chunk"
+      security:
+        - ApiKey: []
+    get:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "listChunks"
+      operationId: "ListChunks"
+      summary: "List all chunks for a datasource"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the datasource."
+          required: true
+          description: "The unique identifier of the datasource."
+          name: "datasource_id"
+          in: "path"
+        - schema:
+            type: "number"
+            minimum: 1
+            maximum: 200
+            default: 10
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          required: false
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          name: "limit"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          required: false
+          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          name: "starting_after"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          required: false
+          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          name: "ending_before"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "Search query to find datasources by name."
+          required: false
+          description: "Search query to find datasources by name."
+          name: "q"
+          in: "query"
+        - schema:
+            anyOf:
+              - type: "array"
+                items:
+                  type: "string"
+                example: ["completed", "failed"]
+              - type: "string"
+                example: "completed"
+            description: "Filter datasources by status."
+          required: false
+          description: "Filter datasources by status."
+          name: "status"
+          in: "query"
+      responses:
+        "200":
+          description: "Chunks successfully retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "object":
+                    type: "string"
+                    enum:
+                      - "list"
+                  "data":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "_id":
+                          type: "string"
+                          description: "The unique identifier of the chunk"
+                        "text":
+                          type: "string"
+                          description: "The text content of the chunk"
+                        "metadata":
+                          type: "object"
+                          additionalProperties:
+                            type: "string"
+                          default: {}
+                          description: "Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported."
+                        "enabled":
+                          type: "boolean"
+                          description: "Whether the chunk is enabled"
+                        "status":
+                          type: "string"
+                          enum:
+                            - "pending"
+                            - "processing"
+                            - "completed"
+                            - "failed"
+                            - "queued"
+                          description: "The status of the chunk"
+                        "created":
+                          type: "string"
+                          description: "The date and time the chunk was created"
+                        "updated":
+                          type: "string"
+                          description: "The date and time the chunk was updated"
+                        "created_by_id":
+                          type: "string"
+                          description: "The unique identifier of the user who created the chunk"
+                        "update_by_id":
+                          type: "string"
+                          description: "The unique identifier of the user who updated the chunk"
+                      required:
+                        - "_id"
+                        - "text"
+                        - "enabled"
+                        - "status"
+                        - "created"
+                        - "updated"
+                  "has_more":
+                    type: "boolean"
+                required:
+                  - "object"
+                  - "data"
+                  - "has_more"
+      security:
+        - ApiKey: []
+  "/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks/{chunk_id}":
+    patch:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "updateChunk"
+      operationId: "UpdateChunk"
+      summary: "Update a chunk"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the chunk"
+          required: true
+          description: "The unique identifier of the chunk"
+          name: "chunk_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the data source"
+          required: true
+          description: "The unique identifier of the data source"
+          name: "datasource_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "text":
+                  type: "string"
+                  description: "The text content of the chunk"
+                "embedding":
+                  type: "array"
+                  items:
+                    type: "number"
+                  description: "The embedding vector of the chunk. If not provided the chunk will be embedded with the knowledge base embeddings model."
+                "metadata":
+                  type: "object"
+                  properties:
+                    "page_number":
+                      type: "number"
+                      description: "In case you are using PDFs, Word, PowerPoint, etc. this is the page number of the chunk."
+                  description: "Metadata of the chunk"
+      responses:
+        "200":
+          description: "Chunk successfully updated"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    description: "The unique identifier of the chunk"
+                  "text":
+                    type: "string"
+                    description: "The text content of the chunk"
+                  "metadata":
+                    type: "object"
+                    additionalProperties:
+                      type: "string"
+                    default: {}
+                    description: "Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported."
+                  "enabled":
+                    type: "boolean"
+                    description: "Whether the chunk is enabled"
+                  "status":
+                    type: "string"
+                    enum:
+                      - "pending"
+                      - "processing"
+                      - "completed"
+                      - "failed"
+                      - "queued"
+                    description: "The status of the chunk"
+                  "created":
+                    type: "string"
+                    description: "The date and time the chunk was created"
+                  "updated":
+                    type: "string"
+                    description: "The date and time the chunk was updated"
+                  "created_by_id":
+                    type: "string"
+                    description: "The unique identifier of the user who created the chunk"
+                  "update_by_id":
+                    type: "string"
+                    description: "The unique identifier of the user who updated the chunk"
+                required:
+                  - "_id"
+                  - "text"
+                  - "enabled"
+                  - "status"
+                  - "created"
+                  - "updated"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "deleteChunk"
+      operationId: "DeleteChunk"
+      summary: "Delete a chunk"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the chunk"
+          required: true
+          description: "The unique identifier of the chunk"
+          name: "chunk_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the data source"
+          required: true
+          description: "The unique identifier of the data source"
+          name: "datasource_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      responses:
+        "204":
+          description: "Chunk successfully deleted"
+      security:
+        - ApiKey: []
+    get:
+      tags:
+        - "Knowledge Bases"
+      x-speakeasy-group: "knowledge"
+      x-speakeasy-name-override: "retrieveChunk"
+      operationId: "GetOneChunk"
+      summary: "Retrieve a chunk"
+      parameters:
+        - schema:
+            type: "string"
+            description: "The unique identifier of the chunk"
+          required: true
+          description: "The unique identifier of the chunk"
+          name: "chunk_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the data source"
+          required: true
+          description: "The unique identifier of the data source"
+          name: "datasource_id"
+          in: "path"
+        - schema:
+            type: "string"
+            description: "The unique identifier of the knowledge base"
+          required: true
+          description: "The unique identifier of the knowledge base"
+          name: "knowledge_id"
+          in: "path"
+      responses:
+        "200":
+          description: "Chunk successfully retrieved"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    description: "The unique identifier of the chunk"
+                  "text":
+                    type: "string"
+                    description: "The text content of the chunk"
+                  "metadata":
+                    type: "object"
+                    additionalProperties:
+                      type: "string"
+                    default: {}
+                    description: "Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported."
+                  "enabled":
+                    type: "boolean"
+                    description: "Whether the chunk is enabled"
+                  "status":
+                    type: "string"
+                    enum:
+                      - "pending"
+                      - "processing"
+                      - "completed"
+                      - "failed"
+                      - "queued"
+                    description: "The status of the chunk"
+                  "created":
+                    type: "string"
+                    description: "The date and time the chunk was created"
+                  "updated":
+                    type: "string"
+                    description: "The date and time the chunk was updated"
+                  "created_by_id":
+                    type: "string"
+                    description: "The unique identifier of the user who created the chunk"
+                  "update_by_id":
+                    type: "string"
+                    description: "The unique identifier of the user who updated the chunk"
+                required:
+                  - "_id"
+                  - "text"
+                  - "enabled"
+                  - "status"
+                  - "created"
+                  - "updated"
       security:
         - ApiKey: []
