@@ -19,7 +19,7 @@ const routes = buildRouteMap({
 export const app = buildApplication(routes, {
   name: "mcp",
   versionInfo: {
-    currentVersion: "3.3.0-rc.21",
+    currentVersion: "3.3.0-rc.22",
   },
 });
 
