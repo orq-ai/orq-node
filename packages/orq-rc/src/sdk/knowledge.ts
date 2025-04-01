@@ -12,10 +12,12 @@ import { knowledgeList } from "../funcs/knowledgeList.js";
 import { knowledgeListChunks } from "../funcs/knowledgeListChunks.js";
 import { knowledgeListDatasources } from "../funcs/knowledgeListDatasources.js";
 import { knowledgeRetrieve } from "../funcs/knowledgeRetrieve.js";
+import { knowledgeRetrieveChunk } from "../funcs/knowledgeRetrieveChunk.js";
 import { knowledgeRetrieveDatasource } from "../funcs/knowledgeRetrieveDatasource.js";
 import { knowledgeSearch } from "../funcs/knowledgeSearch.js";
 import { knowledgeUpdate } from "../funcs/knowledgeUpdate.js";
 import { knowledgeUpdateChunk } from "../funcs/knowledgeUpdateChunk.js";
+import { knowledgeUpdateDatasource } from "../funcs/knowledgeUpdateDatasource.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -174,6 +176,20 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
+   * Update a datasource
+   */
+  async updateDatasource(
+    request: operations.UpdateDatasourceRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateDatasourceResponseBody> {
+    return unwrapAsync(knowledgeUpdateDatasource(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create chunks for a datasource
    */
   async createChunks(
@@ -223,6 +239,20 @@ export class Knowledge extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(knowledgeDeleteChunk(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a chunk
+   */
+  async retrieveChunk(
+    request: operations.GetOneChunkRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetOneChunkResponseBody> {
+    return unwrapAsync(knowledgeRetrieveChunk(
       this,
       request,
       options,

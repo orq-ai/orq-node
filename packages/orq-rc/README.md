@@ -286,10 +286,12 @@ run();
 * [createDatasource](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
 * [retrieveDatasource](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
 * [deleteDatasource](docs/sdks/knowledge/README.md#deletedatasource) - Deletes a datasource
+* [updateDatasource](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
 * [createChunks](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
 * [listChunks](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
 * [updateChunk](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
+* [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 
 
 ### [prompts](docs/sdks/prompts/README.md)
@@ -357,10 +359,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`knowledgeListChunks`](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
 - [`knowledgeListDatasources`](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
 - [`knowledgeRetrieve`](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
+- [`knowledgeRetrieveChunk`](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 - [`knowledgeRetrieveDatasource`](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
 - [`knowledgeSearch`](docs/sdks/knowledge/README.md#search) - Retrieves the documents used for retrieval
 - [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 - [`knowledgeUpdateChunk`](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
+- [`knowledgeUpdateDatasource`](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
 - [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version

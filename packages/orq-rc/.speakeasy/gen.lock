@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 6e7ad3e77acebf1ac94dc74b3b362287
+  docChecksum: 39d33c414826ef382fbedc3d301131e0
   docVersion: "2.0"
   speakeasyVersion: 1.526.6
   generationVersion: 2.563.1
-  releaseVersion: 3.3.0-rc.17
-  configChecksum: 07b21e2d606fb26e8cb24d81ac966dd6
+  releaseVersion: 3.3.0-rc.18
+  configChecksum: 19ed9fcde54ffc9b1920a8bfb6791f3f
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -569,6 +569,9 @@ generatedFiles:
   - docs/models/operations/getallpromptstoolcalls.md
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
+  - docs/models/operations/getonechunkrequest.md
+  - docs/models/operations/getonechunkresponsebody.md
+  - docs/models/operations/getonechunkstatus.md
   - docs/models/operations/getoneknowledgerequest.md
   - docs/models/operations/getoneknowledgererankconfig.md
   - docs/models/operations/getoneknowledgeresponsebody.md
@@ -880,6 +883,10 @@ generatedFiles:
   - docs/models/operations/updatedatasetrequest.md
   - docs/models/operations/updatedatasetrequestbody.md
   - docs/models/operations/updatedatasetresponsebody.md
+  - docs/models/operations/updatedatasourcerequest.md
+  - docs/models/operations/updatedatasourcerequestbody.md
+  - docs/models/operations/updatedatasourceresponsebody.md
+  - docs/models/operations/updatedatasourcestatus.md
   - docs/models/operations/updateknowledgeknowledgererankconfig.md
   - docs/models/operations/updateknowledgeknowledgeretrievalsettings.md
   - docs/models/operations/updateknowledgeknowledgeretrievaltype.md
@@ -1003,10 +1010,12 @@ generatedFiles:
   - src/funcs/knowledgeListChunks.ts
   - src/funcs/knowledgeListDatasources.ts
   - src/funcs/knowledgeRetrieve.ts
+  - src/funcs/knowledgeRetrieveChunk.ts
   - src/funcs/knowledgeRetrieveDatasource.ts
   - src/funcs/knowledgeSearch.ts
   - src/funcs/knowledgeUpdate.ts
   - src/funcs/knowledgeUpdateChunk.ts
+  - src/funcs/knowledgeUpdateDatasource.ts
   - src/funcs/promptsCreate.ts
   - src/funcs/promptsDelete.ts
   - src/funcs/promptsGetVersion.ts
@@ -1082,10 +1091,12 @@ generatedFiles:
   - src/mcp-server/tools/knowledgeListChunks.ts
   - src/mcp-server/tools/knowledgeListDatasources.ts
   - src/mcp-server/tools/knowledgeRetrieve.ts
+  - src/mcp-server/tools/knowledgeRetrieveChunk.ts
   - src/mcp-server/tools/knowledgeRetrieveDatasource.ts
   - src/mcp-server/tools/knowledgeSearch.ts
   - src/mcp-server/tools/knowledgeUpdate.ts
   - src/mcp-server/tools/knowledgeUpdateChunk.ts
+  - src/mcp-server/tools/knowledgeUpdateDatasource.ts
   - src/mcp-server/tools/promptsCreate.ts
   - src/mcp-server/tools/promptsDelete.ts
   - src/mcp-server/tools/promptsGetVersion.ts
@@ -1130,6 +1141,7 @@ generatedFiles:
   - src/models/operations/filelist.ts
   - src/models/operations/fileupload.ts
   - src/models/operations/getallprompts.ts
+  - src/models/operations/getonechunk.ts
   - src/models/operations/getoneknowledge.ts
   - src/models/operations/getoneprompt.ts
   - src/models/operations/getpromptversion.ts
@@ -1148,6 +1160,7 @@ generatedFiles:
   - src/models/operations/updatechunk.ts
   - src/models/operations/updatedatapoint.ts
   - src/models/operations/updatedataset.ts
+  - src/models/operations/updatedatasource.ts
   - src/models/operations/updateknowledge.ts
   - src/models/operations/updateprompt.ts
   - src/sdk/contacts.ts
@@ -1626,5 +1639,26 @@ examples:
           chunk_id: "<id>"
           datasource_id: "<id>"
           knowledge_id: "<id>"
+  UpdateDatasource:
+    speakeasy-default-update-datasource:
+      parameters:
+        path:
+          knowledge_id: "<id>"
+          datasource_id: "<id>"
+      requestBody:
+        application/json: {"display_name": "Haylee_Braun"}
+      responses:
+        "200":
+          application/json: {"_id": "01JQRGTRHCJ0H0AWDXZTGNZCJE", "display_name": "Alfred_Ullrich68", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 7179.8}
+  GetOneChunk:
+    speakeasy-default-get-one-chunk:
+      parameters:
+        path:
+          chunk_id: "<id>"
+          datasource_id: "<id>"
+          knowledge_id: "<id>"
+      responses:
+        "200":
+          application/json: {"_id": "<id>", "text": "<value>", "enabled": true, "status": "failed", "created": "<value>", "updated": "<value>"}
 examplesVersion: 1.0.0
 generatedTests: {}

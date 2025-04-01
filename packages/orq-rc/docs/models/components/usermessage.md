@@ -11,7 +11,7 @@ let value: UserMessage = {
     {
       type: "image_url",
       imageUrl: {
-        url: "https://splendid-procurement.org/",
+        url: "https://acidic-almighty.name",
       },
     },
   ],

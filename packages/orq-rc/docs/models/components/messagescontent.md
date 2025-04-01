@@ -16,8 +16,11 @@ const value: string = "<value>";
 ```typescript
 const value: components.DeploymentsContent2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "wav",
+    },
   },
 ];
 ```

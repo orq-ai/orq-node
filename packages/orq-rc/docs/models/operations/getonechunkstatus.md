@@ -1,13 +1,13 @@
-# ListChunksStatus
+# GetOneChunkStatus
 
 The status of the chunk
 
 ## Example Usage
 
 ```typescript
-import { ListChunksStatus } from "@orq-ai/node/models/operations";
+import { GetOneChunkStatus } from "@orq-ai/node/models/operations";
 
-let value: ListChunksStatus = "processing";
+let value: GetOneChunkStatus = "queued";
 ```
 
 ## Values
