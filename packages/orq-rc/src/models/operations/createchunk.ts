@@ -582,7 +582,7 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
   knowledge_id: z.string(),
   workspace_id: z.string(),
   data_source_id: z.string(),
-  id: z.string().default("chunk_01JQTR12W8AX8P0X835MHV8JH9"),
+  id: z.string().default("chunk_01JQTTXB133A23MQBW96KPPXMW"),
   text: z.string(),
   enabled: z.boolean().default(true),
   metadata: z.lazy(() => CreateChunkKnowledgeMetadata$inboundSchema).optional(),
@@ -627,7 +627,7 @@ export const CreateChunkResponseBody$outboundSchema: z.ZodType<
   knowledgeId: z.string(),
   workspaceId: z.string(),
   dataSourceId: z.string(),
-  id: z.string().default("chunk_01JQTR12W8AX8P0X835MHV8JH9"),
+  id: z.string().default("chunk_01JQTTXB133A23MQBW96KPPXMW"),
   text: z.string(),
   enabled: z.boolean().default(true),
   metadata: z.lazy(() => CreateChunkKnowledgeMetadata$outboundSchema)
