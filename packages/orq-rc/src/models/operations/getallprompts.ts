@@ -406,25 +406,26 @@ export type GetAllPromptsPromptConfig = {
 };
 
 export const GetAllPromptsUseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
   TranslationDocument: "Translation (document)",
   TranslationSentences: "Translation (sentences)",
-  SentimentAnalysis: "Sentiment analysis",
 } as const;
 export type GetAllPromptsUseCases = ClosedEnum<typeof GetAllPromptsUseCases>;
 
