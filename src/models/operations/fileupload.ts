@@ -32,7 +32,7 @@ export type FileUploadRequestBody = {
   /**
    * The file to be uploaded.
    */
-  file?: FileT | Blob | undefined;
+  file: FileT | Blob;
   /**
    * The intended purpose of the uploaded file.
    */
@@ -162,13 +162,13 @@ export const FileUploadRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file: z.lazy(() => FileT$inboundSchema).optional(),
+  file: z.lazy(() => FileT$inboundSchema),
   purpose: Purpose$inboundSchema.default("retrieval"),
 });
 
 /** @internal */
 export type FileUploadRequestBody$Outbound = {
-  file?: FileT$Outbound | Blob | undefined;
+  file: FileT$Outbound | Blob;
   purpose: string;
 };
 
@@ -178,7 +178,7 @@ export const FileUploadRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileUploadRequestBody
 > = z.object({
-  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema).optional(),
+  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
   purpose: Purpose$outboundSchema.default("retrieval"),
 });
 
@@ -247,7 +247,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-04-01T11:31:12.079Z",
+    "2025-04-03T19:41:54.685Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -281,7 +281,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-04-01T11:31:12.079Z"))
+  created: z.date().default(() => new Date("2025-04-03T19:41:54.685Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

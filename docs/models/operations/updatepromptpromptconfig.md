@@ -11,7 +11,12 @@ let value: UpdatePromptPromptConfig = {
   messages: [
     {
       role: "correction",
-      content: "<value>",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

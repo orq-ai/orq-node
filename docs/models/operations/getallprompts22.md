@@ -10,7 +10,7 @@ import { GetAllPrompts22 } from "@orq-ai/node/models/operations";
 let value: GetAllPrompts22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://grim-vision.com/",
+    url: "https://zany-freckle.info/",
   },
 };
 ```

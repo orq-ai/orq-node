@@ -26,7 +26,15 @@ const value: operations.MessagesSystemMessage = {
 ```typescript
 const value: operations.MessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "mp3",
+      },
+    },
+  ],
 };
 ```
 
@@ -43,9 +51,7 @@ const value: operations.MessagesAssistantMessage = {
 ```typescript
 const value: operations.MessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

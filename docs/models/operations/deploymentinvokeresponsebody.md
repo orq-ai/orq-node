@@ -9,18 +9,18 @@ import { DeploymentInvokeResponseBody } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeResponseBody = {
   id: "<id>",
-  created: new Date("2025-01-06T13:32:43.889Z"),
+  created: new Date("2023-09-03T20:26:06.468Z"),
   object: "chat",
-  model: "Escalade",
-  provider: "perplexity",
+  model: "Sentra",
+  provider: "elevenlabs",
   isFinal: false,
   choices: [
     {
-      index: 8605.52,
+      index: 9608.35,
       message: {
         type: "image",
-        role: "user",
-        url: "https://babyish-ethyl.biz/",
+        role: "correction",
+        url: "https://bossy-hamburger.biz/",
       },
     },
   ],

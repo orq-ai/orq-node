@@ -6,8 +6,15 @@
 import { UpdateDatapointDatasetsMessages } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapointDatasetsMessages = {
-  role: "user",
-  content: "<value>",
+  role: "correction",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://courageous-tenant.com",
+      },
+    },
+  ],
 };
 ```
 

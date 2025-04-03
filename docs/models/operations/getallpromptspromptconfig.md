@@ -10,15 +10,8 @@ import { GetAllPromptsPromptConfig } from "@orq-ai/node/models/operations";
 let value: GetAllPromptsPromptConfig = {
   messages: [
     {
-      role: "prompt",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://uniform-rosemary.net",
-          },
-        },
-      ],
+      role: "exception",
+      content: "<value>",
     },
   ],
 };

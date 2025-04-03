@@ -20,10 +20,10 @@ let value: DeploymentsPromptConfig = {
       },
     },
   ],
-  model: "Challenger",
-  modelType: "stt",
+  model: "LeBaron",
+  modelType: "completion",
   modelParameters: {},
-  provider: "aws",
+  provider: "elevenlabs",
   messages: [
     {
       role: "tool",

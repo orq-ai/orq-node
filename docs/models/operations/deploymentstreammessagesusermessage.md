@@ -9,10 +9,8 @@ let value: DeploymentStreamMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://cute-secrecy.org/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

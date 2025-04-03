@@ -7,7 +7,7 @@ Specifies the detail level of the image.
 ```typescript
 import { DeploymentCreateMetric2Detail } from "@orq-ai/node/models/operations";
 
-let value: DeploymentCreateMetric2Detail = "low";
+let value: DeploymentCreateMetric2Detail = "auto";
 ```
 
 ## Values

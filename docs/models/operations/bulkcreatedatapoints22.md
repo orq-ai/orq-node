@@ -10,7 +10,7 @@ import { BulkCreateDatapoints22 } from "@orq-ai/node/models/operations";
 let value: BulkCreateDatapoints22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://stark-shoulder.org/",
+    url: "https://unruly-runway.org",
   },
 };
 ```

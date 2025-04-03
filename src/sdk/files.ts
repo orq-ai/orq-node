@@ -18,7 +18,7 @@ export class Files extends ClientSDK {
    * Files are used to upload documents that can be used with features like [Deployments](https://docs.orq.ai/reference/deploymentinvoke-1).
    */
   async create(
-    request?: operations.FileUploadRequestBody | undefined,
+    request: operations.FileUploadRequestBody,
     options?: RequestOptions,
   ): Promise<operations.FileUploadResponseBody> {
     return unwrapAsync(filesCreate(

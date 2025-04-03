@@ -9,26 +9,8 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * List sorting preference.
- */
-export const ListPromptVersionsQueryParamSort = {
-  Asc: "asc",
-  Desc: "desc",
-} as const;
-/**
- * List sorting preference.
- */
-export type ListPromptVersionsQueryParamSort = ClosedEnum<
-  typeof ListPromptVersionsQueryParamSort
->;
-
 export type ListPromptVersionsRequest = {
   promptId: string;
-  /**
-   * List sorting preference.
-   */
-  sort?: ListPromptVersionsQueryParamSort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -432,22 +414,26 @@ export type ListPromptVersionsPromptConfig = {
 };
 
 export const ListPromptVersionsUseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
 } as const;
 export type ListPromptVersionsUseCases = ClosedEnum<
   typeof ListPromptVersionsUseCases
@@ -509,34 +495,12 @@ export type ListPromptVersionsResponseBody = {
 };
 
 /** @internal */
-export const ListPromptVersionsQueryParamSort$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsQueryParamSort
-> = z.nativeEnum(ListPromptVersionsQueryParamSort);
-
-/** @internal */
-export const ListPromptVersionsQueryParamSort$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsQueryParamSort
-> = ListPromptVersionsQueryParamSort$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListPromptVersionsQueryParamSort$ {
-  /** @deprecated use `ListPromptVersionsQueryParamSort$inboundSchema` instead. */
-  export const inboundSchema = ListPromptVersionsQueryParamSort$inboundSchema;
-  /** @deprecated use `ListPromptVersionsQueryParamSort$outboundSchema` instead. */
-  export const outboundSchema = ListPromptVersionsQueryParamSort$outboundSchema;
-}
-
-/** @internal */
 export const ListPromptVersionsRequest$inboundSchema: z.ZodType<
   ListPromptVersionsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
   prompt_id: z.string(),
-  sort: ListPromptVersionsQueryParamSort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -551,7 +515,6 @@ export const ListPromptVersionsRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type ListPromptVersionsRequest$Outbound = {
   prompt_id: string;
-  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -564,7 +527,6 @@ export const ListPromptVersionsRequest$outboundSchema: z.ZodType<
   ListPromptVersionsRequest
 > = z.object({
   promptId: z.string(),
-  sort: ListPromptVersionsQueryParamSort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),

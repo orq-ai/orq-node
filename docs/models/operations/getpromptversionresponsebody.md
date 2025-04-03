@@ -12,8 +12,15 @@ let value: GetPromptVersionResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "correction",
-        content: "<value>",
+        role: "user",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://international-pecan.org/",
+            },
+          },
+        ],
       },
     ],
   },

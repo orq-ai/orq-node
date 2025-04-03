@@ -367,22 +367,26 @@ export type UpdatePromptPromptConfig = {
 };
 
 export const UpdatePromptUseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
 } as const;
 export type UpdatePromptUseCases = ClosedEnum<typeof UpdatePromptUseCases>;
 
@@ -434,6 +438,10 @@ export type UpdatePromptRequestBody = {
    */
   promptConfig?: UpdatePromptPromptConfig | undefined;
   metadata?: UpdatePromptMetadata | undefined;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path?: string | undefined;
 };
 
 export type UpdatePromptRequest = {
@@ -837,22 +845,26 @@ export type UpdatePromptPromptsPromptConfig = {
 };
 
 export const UpdatePromptPromptsUseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
 } as const;
 export type UpdatePromptPromptsUseCases = ClosedEnum<
   typeof UpdatePromptPromptsUseCases
@@ -2255,6 +2267,7 @@ export const UpdatePromptRequestBody$inboundSchema: z.ZodType<
   prompt_config: z.lazy(() => UpdatePromptPromptConfig$inboundSchema)
     .optional(),
   metadata: z.lazy(() => UpdatePromptMetadata$inboundSchema).optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "domain_id": "domainId",
@@ -2277,6 +2290,7 @@ export type UpdatePromptRequestBody$Outbound = {
   description?: string | null | undefined;
   prompt_config?: UpdatePromptPromptConfig$Outbound | undefined;
   metadata?: UpdatePromptMetadata$Outbound | undefined;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -2296,6 +2310,7 @@ export const UpdatePromptRequestBody$outboundSchema: z.ZodType<
   promptConfig: z.lazy(() => UpdatePromptPromptConfig$outboundSchema)
     .optional(),
   metadata: z.lazy(() => UpdatePromptMetadata$outboundSchema).optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     domainId: "domain_id",

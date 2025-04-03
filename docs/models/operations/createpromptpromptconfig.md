@@ -10,15 +10,8 @@ import { CreatePromptPromptConfig } from "@orq-ai/node/models/operations";
 let value: CreatePromptPromptConfig = {
   messages: [
     {
-      role: "exception",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://cuddly-exasperation.com/",
-          },
-        },
-      ],
+      role: "correction",
+      content: "<value>",
     },
   ],
 };

@@ -7,7 +7,9 @@ import { DeploymentStreamMessagesToolMessage } from "@orq-ai/node/models/operati
 
 let value: DeploymentStreamMessagesToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

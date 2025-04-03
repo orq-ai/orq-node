@@ -1,0 +1,18 @@
+# ChunkingOptions
+
+Configuration options specifying how the datasource file is chunked. Required if `file_id` is specified. Defaults to standard chunking options if omitted.
+
+## Example Usage
+
+```typescript
+import { ChunkingOptions } from "@orq-ai/node/models/operations";
+
+let value: ChunkingOptions = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                          | Type                                                                                                                                                                                                           | Required                                                                                                                                                                                                       | Description                                                                                                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chunkingConfiguration`                                                                                                                                                                                        | *operations.ChunkingConfiguration*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                             | The chunking configuration settings for the datasource. Defaults to the system's standard chunking configuration if not specified.                                                                             |
+| `chunkingCleanupOptions`                                                                                                                                                                                       | [operations.ChunkingCleanupOptions](../../models/operations/chunkingcleanupoptions.md)                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                             | The cleanup options applied to the datasource content. All options are enabled by default to ensure enhanced security and optimal chunk quality. Defaults to system-standard cleanup options if not specified. |

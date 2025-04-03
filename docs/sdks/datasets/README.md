@@ -261,6 +261,9 @@ const orq = new Orq({
 async function run() {
   const result = await orq.datasets.update({
     datasetId: "<id>",
+    requestBody: {
+      path: "Customer Service/Billing/Refund",
+    },
   });
 
   // Handle the result
@@ -287,6 +290,9 @@ const orq = new OrqCore({
 async function run() {
   const res = await datasetsUpdate(orq, {
     datasetId: "<id>",
+    requestBody: {
+      path: "Customer Service/Billing/Refund",
+    },
   });
 
   if (!res.ok) {

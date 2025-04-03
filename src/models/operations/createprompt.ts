@@ -353,22 +353,26 @@ export type PromptConfig = {
 };
 
 export const UseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
 } as const;
 export type UseCases = ClosedEnum<typeof UseCases>;
 
@@ -807,22 +811,26 @@ export type CreatePromptPromptConfig = {
 };
 
 export const CreatePromptUseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
 } as const;
 export type CreatePromptUseCases = ClosedEnum<typeof CreatePromptUseCases>;
 

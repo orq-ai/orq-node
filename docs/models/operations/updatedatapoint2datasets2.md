@@ -10,7 +10,7 @@ import { UpdateDatapoint2Datasets2 } from "@orq-ai/node/models/operations";
 let value: UpdateDatapoint2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://anguished-experience.name",
+    url: "https://intrepid-pilot.net/",
   },
 };
 ```

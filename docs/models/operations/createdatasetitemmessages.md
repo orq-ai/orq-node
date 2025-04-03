@@ -6,11 +6,13 @@
 import { CreateDatasetItemMessages } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItemMessages = {
-  role: "exception",
+  role: "prompt",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://ideal-granny.name/",
+      },
     },
   ],
 };

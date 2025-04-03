@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { DeploymentsRole } from "@orq-ai/node/models/operations";
 
-let value: DeploymentsRole = "correction";
+let value: DeploymentsRole = "exception";
 ```
 
 ## Values

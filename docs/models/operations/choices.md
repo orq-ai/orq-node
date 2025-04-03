@@ -28,8 +28,10 @@ const value: operations.ChoicesUserMessage = {
   role: "user",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://surprised-traffic.com/",
+      },
     },
   ],
 };
@@ -48,9 +50,7 @@ const value: operations.ChoicesAssistantMessage = {
 ```typescript
 const value: operations.ChoicesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

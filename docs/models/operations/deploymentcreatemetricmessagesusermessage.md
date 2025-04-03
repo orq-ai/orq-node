@@ -7,7 +7,12 @@ import { DeploymentCreateMetricMessagesUserMessage } from "@orq-ai/node/models/o
 
 let value: DeploymentCreateMetricMessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

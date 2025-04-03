@@ -8,7 +8,7 @@ import { DeploymentStream2Deployments2 } from "@orq-ai/node/models/operations";
 let value: DeploymentStream2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://lasting-swing.info",
+    url: "https://lawful-apricot.net/",
   },
 };
 ```

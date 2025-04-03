@@ -7,9 +7,7 @@ import { ChoicesToolMessage } from "@orq-ai/node/models/operations";
 
 let value: ChoicesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

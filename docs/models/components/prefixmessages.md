@@ -43,7 +43,9 @@ const value: components.AssistantMessage = {
 ```typescript
 const value: components.ToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

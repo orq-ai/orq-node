@@ -26,15 +26,7 @@ const value: operations.PrefixMessagesSystemMessage = {
 ```typescript
 const value: operations.PrefixMessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "wav",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

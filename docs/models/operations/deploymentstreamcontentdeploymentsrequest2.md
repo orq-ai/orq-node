@@ -18,7 +18,7 @@ const value: operations.DeploymentStream2Deployments1 = {
 const value: operations.DeploymentStream2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://impish-term.net",
+    url: "https://minty-executor.name/",
   },
 };
 ```

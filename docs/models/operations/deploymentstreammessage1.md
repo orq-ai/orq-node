@@ -6,7 +6,7 @@
 import { DeploymentStreamMessage1 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessage1 = {
-  role: "exception",
+  role: "prompt",
   toolCalls: [
     {
       type: "function",

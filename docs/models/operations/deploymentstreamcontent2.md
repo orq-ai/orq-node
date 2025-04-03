@@ -18,7 +18,7 @@ const value: operations.DeploymentStream21 = {
 const value: operations.DeploymentStream22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://discrete-in-joke.com/",
+    url: "https://babyish-ethyl.biz/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.DeploymentStream23 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

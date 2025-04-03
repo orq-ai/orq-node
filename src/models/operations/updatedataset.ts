@@ -9,7 +9,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateDatasetRequestBody = {
-  displayName: string;
+  /**
+   * The display name of the dataset
+   */
+  displayName?: string | undefined;
+  /**
+   * The unique identifier of the project it belongs to
+   */
+  projectId?: string | undefined;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path?: string | undefined;
 };
 
 export type UpdateDatasetRequest = {
@@ -75,16 +86,21 @@ export const UpdateDatasetRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  display_name: z.string(),
+  display_name: z.string().optional(),
+  project_id: z.string().optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
+    "project_id": "projectId",
   });
 });
 
 /** @internal */
 export type UpdateDatasetRequestBody$Outbound = {
-  display_name: string;
+  display_name?: string | undefined;
+  project_id?: string | undefined;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -93,10 +109,13 @@ export const UpdateDatasetRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatasetRequestBody
 > = z.object({
-  displayName: z.string(),
+  displayName: z.string().optional(),
+  projectId: z.string().optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
+    projectId: "project_id",
   });
 });
 
@@ -283,7 +302,7 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-04-01T11:31:10.958Z",
+    "2025-04-03T19:41:53.128Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -328,7 +347,7 @@ export const UpdateDatasetResponseBody$outboundSchema: z.ZodType<
   parentId: z.string().optional(),
   version: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-04-01T11:31:10.958Z"))
+  updated: z.date().default(() => new Date("2025-04-03T19:41:53.128Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

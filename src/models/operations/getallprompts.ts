@@ -9,25 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * List sorting preference.
- */
-export const GetAllPromptsQueryParamSort = {
-  Asc: "asc",
-  Desc: "desc",
-} as const;
-/**
- * List sorting preference.
- */
-export type GetAllPromptsQueryParamSort = ClosedEnum<
-  typeof GetAllPromptsQueryParamSort
->;
-
 export type GetAllPromptsRequest = {
-  /**
-   * List sorting preference.
-   */
-  sort?: GetAllPromptsQueryParamSort | undefined;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
@@ -424,22 +406,26 @@ export type GetAllPromptsPromptConfig = {
 };
 
 export const GetAllPromptsUseCases = {
-  Agents: "Agents",
   AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
   APIInteraction: "API interaction",
   AutonomousAgents: "Autonomous Agents",
   Chatbots: "Chatbots",
   Classification: "Classification",
   CodeUnderstanding: "Code understanding",
   CodeWriting: "Code writing",
-  DocumentsQA: "Documents QA",
   Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
   Extraction: "Extraction",
   MultiModal: "Multi-modal",
   SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
   Sql: "SQL",
   Summarization: "Summarization",
   Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
 } as const;
 export type GetAllPromptsUseCases = ClosedEnum<typeof GetAllPromptsUseCases>;
 
@@ -505,33 +491,11 @@ export type GetAllPromptsResponseBody = {
 };
 
 /** @internal */
-export const GetAllPromptsQueryParamSort$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsQueryParamSort
-> = z.nativeEnum(GetAllPromptsQueryParamSort);
-
-/** @internal */
-export const GetAllPromptsQueryParamSort$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsQueryParamSort
-> = GetAllPromptsQueryParamSort$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsQueryParamSort$ {
-  /** @deprecated use `GetAllPromptsQueryParamSort$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsQueryParamSort$inboundSchema;
-  /** @deprecated use `GetAllPromptsQueryParamSort$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsQueryParamSort$outboundSchema;
-}
-
-/** @internal */
 export const GetAllPromptsRequest$inboundSchema: z.ZodType<
   GetAllPromptsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  sort: GetAllPromptsQueryParamSort$inboundSchema.default("asc"),
   limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
@@ -544,7 +508,6 @@ export const GetAllPromptsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetAllPromptsRequest$Outbound = {
-  sort: string;
   limit: number;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
@@ -556,7 +519,6 @@ export const GetAllPromptsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsRequest
 > = z.object({
-  sort: GetAllPromptsQueryParamSort$outboundSchema.default("asc"),
   limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),

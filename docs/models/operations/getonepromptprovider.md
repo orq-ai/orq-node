@@ -5,7 +5,7 @@
 ```typescript
 import { GetOnePromptProvider } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptProvider = "togetherai";
+let value: GetOnePromptProvider = "leonardoai";
 ```
 
 ## Values

@@ -6,17 +6,15 @@
 import { CreatePromptRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptRequestBody = {
-  displayName: "Wallace8",
+  displayName: "Noble.Kuvalis36",
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "exception",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://neighboring-tray.name/",
-            },
+            type: "text",
+            text: "<value>",
           },
         ],
       },

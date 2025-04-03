@@ -7,7 +7,7 @@ Only supported on `image` models.
 ```typescript
 import { Quality } from "@orq-ai/node/models/operations";
 
-let value: Quality = "standard";
+let value: Quality = "hd";
 ```
 
 ## Values

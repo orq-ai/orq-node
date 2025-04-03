@@ -7,7 +7,9 @@ import { DeploymentCreateMetricMessagesToolMessage } from "@orq-ai/node/models/o
 
 let value: DeploymentCreateMetricMessagesToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

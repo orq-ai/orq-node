@@ -274,6 +274,25 @@ run();
 * [get](docs/sdks/files/README.md#get) - Retrieve a file
 * [delete](docs/sdks/files/README.md#delete) - Delete file
 
+### [knowledge](docs/sdks/knowledge/README.md)
+
+* [list](docs/sdks/knowledge/README.md#list) - List all knowledge bases
+* [create](docs/sdks/knowledge/README.md#create) - Create a knowledge
+* [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
+* [update](docs/sdks/knowledge/README.md#update) - Updates a knowledge
+* [delete](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
+* [search](docs/sdks/knowledge/README.md#search) - Retrieves the documents used for retrieval
+* [listDatasources](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
+* [createDatasource](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
+* [retrieveDatasource](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
+* [deleteDatasource](docs/sdks/knowledge/README.md#deletedatasource) - Deletes a datasource
+* [updateDatasource](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
+* [createChunks](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
+* [listChunks](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
+* [updateChunk](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
+* [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
+* [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
+
 
 ### [prompts](docs/sdks/prompts/README.md)
 
@@ -330,6 +349,22 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
 - [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
+- [`knowledgeCreate`](docs/sdks/knowledge/README.md#create) - Create a knowledge
+- [`knowledgeCreateChunks`](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
+- [`knowledgeCreateDatasource`](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
+- [`knowledgeDelete`](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
+- [`knowledgeDeleteChunk`](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
+- [`knowledgeDeleteDatasource`](docs/sdks/knowledge/README.md#deletedatasource) - Deletes a datasource
+- [`knowledgeList`](docs/sdks/knowledge/README.md#list) - List all knowledge bases
+- [`knowledgeListChunks`](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
+- [`knowledgeListDatasources`](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
+- [`knowledgeRetrieve`](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
+- [`knowledgeRetrieveChunk`](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
+- [`knowledgeRetrieveDatasource`](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
+- [`knowledgeSearch`](docs/sdks/knowledge/README.md#search) - Retrieves the documents used for retrieval
+- [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Updates a knowledge
+- [`knowledgeUpdateChunk`](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
+- [`knowledgeUpdateDatasource`](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
 - [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
@@ -393,13 +428,16 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 
 ```typescript
 import { Orq } from "@orq-ai/node";
+import { openAsBlob } from "node:fs";
 
 const orq = new Orq({
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
 async function run() {
-  const result = await orq.files.create();
+  const result = await orq.files.create({
+    file: await openAsBlob("example.file"),
+  });
 
   // Handle the result
   console.log(result);

@@ -16,8 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CreateDatasetItemContentDatasets2[] = [
   {
-    type: "text",
-    text: "<value>",
+    type: "image_url",
+    imageUrl: {
+      url: "https://funny-suspension.com",
+    },
   },
 ];
 ```

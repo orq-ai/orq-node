@@ -9,22 +9,15 @@ let value: GetAllPromptsData = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "1368cf11-9bde-4f66-92aa-d17932d0717f",
+  domainId: "159a6f5b-adfe-4cb5-9213-68cf119bdef6",
   created: "<value>",
   updated: "<value>",
-  displayName: "Ruth39",
+  displayName: "Caleb_OKon",
   promptConfig: {
     messages: [
       {
-        role: "user",
-        content: [
-          {
-            type: "image_url",
-            imageUrl: {
-              url: "https://intrepid-obesity.com/",
-            },
-          },
-        ],
+        role: "tool",
+        content: "<value>",
       },
     ],
   },

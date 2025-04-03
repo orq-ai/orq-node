@@ -6,11 +6,19 @@
 import { DeploymentInvokeChoices } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeChoices = {
-  index: 534.27,
+  index: 8221.18,
   message: {
-    type: "image",
-    role: "system",
-    url: "https://crafty-bin.com",
+    type: "tool_calls",
+    role: "tool",
+    toolCalls: [
+      {
+        type: "function",
+        function: {
+          name: "<value>",
+          arguments: "<value>",
+        },
+      },
+    ],
   },
 };
 ```
