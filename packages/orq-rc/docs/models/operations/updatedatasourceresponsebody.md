@@ -8,12 +8,12 @@ Datasource successfully updated
 import { UpdateDatasourceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatasourceResponseBody = {
-  displayName: "Finn18",
-  status: "completed",
+  displayName: "Duane_Greenholt22",
+  status: "processing",
   created: "<value>",
   updated: "<value>",
   knowledgeId: "<id>",
-  chunksCount: 6676.34,
+  chunksCount: 5025.09,
 };
 ```
 

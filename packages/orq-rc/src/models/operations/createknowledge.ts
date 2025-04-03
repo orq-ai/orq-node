@@ -135,10 +135,6 @@ export type CreateKnowledgeResponseBody = {
    */
   id: string;
   /**
-   * The id of the resource
-   */
-  createdById: string;
-  /**
    * The creation date of the knowledge base.
    */
   created: string;
@@ -162,10 +158,8 @@ export type CreateKnowledgeResponseBody = {
    * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
    */
   retrievalSettings?: CreateKnowledgeRetrievalSettings | undefined;
-  /**
-   * The id of the resource
-   */
-  updateById: string;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   /**
    * The last update date of the knowledge base.
    */
@@ -587,7 +581,6 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
-  created_by_id: z.string(),
   created: z.string(),
   description: z.string().optional(),
   key: z.string(),
@@ -596,28 +589,29 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
   retrieval_settings: z.lazy(() =>
     CreateKnowledgeRetrievalSettings$inboundSchema
   ).optional(),
-  update_by_id: z.string(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   updated: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
-    "created_by_id": "createdById",
     "retrieval_settings": "retrievalSettings",
-    "update_by_id": "updateById",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
   });
 });
 
 /** @internal */
 export type CreateKnowledgeResponseBody$Outbound = {
   _id: string;
-  created_by_id: string;
   created: string;
   description?: string | undefined;
   key: string;
   model: string;
   path?: string | undefined;
   retrieval_settings?: CreateKnowledgeRetrievalSettings$Outbound | undefined;
-  update_by_id: string;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   updated: string;
 };
 
@@ -628,7 +622,6 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
   CreateKnowledgeResponseBody
 > = z.object({
   id: z.string(),
-  createdById: z.string(),
   created: z.string(),
   description: z.string().optional(),
   key: z.string(),
@@ -637,14 +630,15 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
   retrievalSettings: z.lazy(() =>
     CreateKnowledgeRetrievalSettings$outboundSchema
   ).optional(),
-  updateById: z.string(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   updated: z.string(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
-    createdById: "created_by_id",
     retrievalSettings: "retrieval_settings",
-    updateById: "update_by_id",
+    createdById: "created_by_id",
+    updatedById: "updated_by_id",
   });
 });
 

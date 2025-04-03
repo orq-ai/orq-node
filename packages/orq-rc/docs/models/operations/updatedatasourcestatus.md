@@ -5,7 +5,7 @@
 ```typescript
 import { UpdateDatasourceStatus } from "@orq-ai/node/models/operations";
 
-let value: UpdateDatasourceStatus = "completed";
+let value: UpdateDatasourceStatus = "queued";
 ```
 
 ## Values

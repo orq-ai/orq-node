@@ -12,9 +12,9 @@ let value: SearchKnowledgeDocuments = {
     datasourceId: "<id>",
     chunkId: "<id>",
     fileName: "example.file",
-    fileType: "audio",
+    fileType: "video",
   },
-  score: 7491.01,
+  score: 90.6,
 };
 ```
 

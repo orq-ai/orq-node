@@ -7,10 +7,7 @@ import { ListDatasourcesRequest } from "@orq-ai/node/models/operations";
 
 let value: ListDatasourcesRequest = {
   knowledgeId: "<id>",
-  status: [
-    "completed",
-    "failed",
-  ],
+  status: "completed",
 };
 ```
 

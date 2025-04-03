@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 2a2f2a48584a7f3328987ac2848b9f9d
+  docChecksum: 46110b4f428d4f0c92b73a666d7ea726
   docVersion: "2.0"
   speakeasyVersion: 1.528.1
   generationVersion: 2.565.1
-  releaseVersion: 3.3.0-rc.32
-  configChecksum: 01d526767c2424bb15b5e1adf8d27a36
+  releaseVersion: 3.3.0-rc.33
+  configChecksum: d4c8300c747e8a9dcec443963eef28b6
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -1510,14 +1510,14 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "created_by_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "key": "<key>", "model": "A8", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "2766718d-6d46-412e-80ae-e1b9ddf121dc", "updated": "<value>"}, {"_id": "<id>", "created_by_id": "a4c8104f-b451-4a70-acfc-8fe07fbc60ab", "created": "<value>", "key": "<key>", "model": "Element", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "d5611ff6-573e-40a6-a233-1ad7c07cc481", "updated": "<value>"}, {"_id": "<id>", "created_by_id": "91696ebd-834b-47d8-bc22-36e085944ebc", "created": "<value>", "key": "<key>", "model": "Model 3", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "7bd4753d-0a17-4c47-88e3-29a9ec97938e", "updated": "<value>"}], "has_more": false}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "created": "<value>", "key": "<key>", "model": "A8", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "created_by_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Element", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "created_by_id": "a4c8104f-b451-4a70-acfc-8fe07fbc60ab", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model 3", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "created_by_id": "91696ebd-834b-47d8-bc22-36e085944ebc", "updated": "<value>"}], "has_more": false}
   CreateKnowledge:
     speakeasy-default-create-knowledge:
       requestBody:
         application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created_by_id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "created": "<value>", "key": "<key>", "model": "Fortwo", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "a8e774c2-becc-4376-b917-75e024985613", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Fortwo", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "created_by_id": "a621cf02-1cd9-4cf5-8403-315211a509a3", "updated": "<value>"}
   GetOneKnowledge:
     speakeasy-default-get-one-knowledge:
       parameters:
@@ -1525,7 +1525,7 @@ examples:
           knowledge_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "created_by_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "created": "<value>", "key": "<key>", "model": "Model X", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "eebcc212-7fd4-4729-a78c-0f6ee88aad22", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model X", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "created_by_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "updated": "<value>"}
   UpdateKnowledge:
     speakeasy-default-update-knowledge:
       parameters:
@@ -1535,7 +1535,7 @@ examples:
         application/json: {"path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created_by_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "created": "<value>", "key": "<key>", "model": "Model S", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "update_by_id": "5898c125-a190-471c-a556-2af6646dadb3", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model S", "path": "Customer Service/Billing/Refund", "retrieval_settings": {"retrieval_type": "hybrid_search", "top_k": 5, "threshold": 0}, "created_by_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "updated": "<value>"}
   DeleteKnowledge:
     speakeasy-default-delete-knowledge:
       parameters:

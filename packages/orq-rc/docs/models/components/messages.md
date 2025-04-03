@@ -26,12 +26,7 @@ const value: components.MessagesSystemMessage = {
 ```typescript
 const value: components.MessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

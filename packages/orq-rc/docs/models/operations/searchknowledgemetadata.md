@@ -9,7 +9,7 @@ let value: SearchKnowledgeMetadata = {
   datasourceId: "<id>",
   chunkId: "<id>",
   fileName: "example.file",
-  fileType: "video",
+  fileType: "application",
 };
 ```
 

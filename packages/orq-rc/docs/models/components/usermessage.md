@@ -9,10 +9,8 @@ let value: UserMessage = {
   role: "user",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://acidic-almighty.name",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

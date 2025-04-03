@@ -12,12 +12,10 @@ let value: ListKnowledgeBasesResponseBody = {
   data: [
     {
       id: "<id>",
-      createdById: "eb8d484f-3058-408d-bb9f-fd9709fd52cb",
       created: "<value>",
       key: "<key>",
-      model: "Silverado",
+      model: "2",
       path: "Customer Service/Billing/Refund",
-      updateById: "817584dd-596e-42bf-a23b-c79371547e26",
       updated: "<value>",
     },
   ],

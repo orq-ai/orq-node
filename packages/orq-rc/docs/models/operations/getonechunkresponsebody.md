@@ -11,7 +11,7 @@ let value: GetOneChunkResponseBody = {
   id: "<id>",
   text: "<value>",
   enabled: false,
-  status: "completed",
+  status: "failed",
   created: "<value>",
   updated: "<value>",
 };
