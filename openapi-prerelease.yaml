@@ -3784,7 +3784,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-03T19:41:54.685Z"
+          default: "2025-04-03T20:14:13.437Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3847,7 +3847,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-04-03T19:41:54.685Z"
+            default: "2025-04-03T20:14:13.437Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3927,7 +3927,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-03T19:41:54.685Z"
+          default: "2025-04-03T20:14:13.437Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3973,7 +3973,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-04-03T19:41:54.685Z"
+                default: "2025-04-03T20:14:13.437Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4016,7 +4016,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-03T19:41:54.685Z"
+          default: "2025-04-03T20:14:13.437Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6337,7 +6337,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-03T19:41:53.127Z"
+          default: "2025-04-03T20:14:11.820Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6345,7 +6345,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-03T19:41:53.128Z"
+              default: "2025-04-03T20:14:11.820Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6455,7 +6455,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-04-03T19:41:53.127Z"
+                default: "2025-04-03T20:14:11.820Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6463,7 +6463,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-04-03T19:41:53.128Z"
+                    default: "2025-04-03T20:14:11.820Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6570,7 +6570,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-03T19:41:53.127Z"
+          default: "2025-04-03T20:14:11.820Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6578,7 +6578,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-03T19:41:53.128Z"
+              default: "2025-04-03T20:14:11.820Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6679,7 +6679,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-03T19:41:53.127Z"
+          default: "2025-04-03T20:14:11.820Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6687,7 +6687,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-03T19:41:53.128Z"
+              default: "2025-04-03T20:14:11.820Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8086,7 +8086,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -8094,7 +8094,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11053,7 +11053,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-03T19:41:54.685Z"
+                    default: "2025-04-03T20:14:13.437Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -11141,7 +11141,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-04-03T19:41:54.685Z"
+                          default: "2025-04-03T20:14:13.437Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -11208,7 +11208,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-03T19:41:54.685Z"
+                    default: "2025-04-03T20:14:13.437Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -14397,7 +14397,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-03T19:41:53.127Z"
+                          default: "2025-04-03T20:14:11.820Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14405,7 +14405,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-03T19:41:53.128Z"
+                              default: "2025-04-03T20:14:11.820Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14529,7 +14529,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14537,7 +14537,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14647,7 +14647,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14655,7 +14655,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14807,7 +14807,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14815,7 +14815,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15037,7 +15037,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-03T19:41:53.127Z"
+                          default: "2025-04-03T20:14:11.820Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -15045,7 +15045,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-03T19:41:53.128Z"
+                              default: "2025-04-03T20:14:11.820Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -15321,7 +15321,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15329,7 +15329,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15495,7 +15495,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15503,7 +15503,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15783,7 +15783,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T19:41:53.127Z"
+                    default: "2025-04-03T20:14:11.820Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15791,7 +15791,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T19:41:53.128Z"
+                        default: "2025-04-03T20:14:11.820Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16107,7 +16107,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-04-03T19:41:53.127Z"
+                      default: "2025-04-03T20:14:11.820Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -16115,7 +16115,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-04-03T19:41:53.128Z"
+                          default: "2025-04-03T20:14:11.820Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -17113,7 +17113,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JQYJSBSN4X3F1PHYR5FSMP48"
+                          default: "01JQYMMH5RB3HPTQ7Z30X1DDXZ"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -17272,7 +17272,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQYJSBSP85GJ1416S4711XFT"
+                    default: "01JQYMMH5SPWDGY02M3P8AY7RW"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17359,7 +17359,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQYJSBSP8B79Y36675RA2N3N"
+                    default: "01JQYMMH5SQ6XBZZESP5P20RYY"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17436,7 +17436,7 @@ paths:
           name: "datasource_id"
           in: "path"
       responses:
-        "200":
+        "204":
           description: "Datasource successfully deleted"
       security:
         - ApiKey: []
@@ -17484,7 +17484,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQYJSBSRWAV0DTYWJDZNKPQH"
+                    default: "01JQYMMH5V376BM2N7F9ST5MGY"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17598,100 +17598,30 @@ paths:
                 items:
                   type: "object"
                   properties:
-                    "knowledge_id":
+                    "_id":
                       type: "string"
-                      format: "ulid"
-                      description: "The id of the resource"
-                      readOnly: true
-                    "workspace_id":
-                      type: "string"
-                      format: "ulid"
-                      description: "The id of the resource"
-                      readOnly: true
-                    "data_source_id":
-                      type: "string"
-                      format: "ulid"
-                      description: "The id of the resource"
-                      readOnly: true
-                    "id":
-                      type: "string"
-                      default: "chunk_01JQYJSBSRYKECXYPB02KAAFGW"
-                      description: "Unique identifier for the element"
+                      description: "The unique identifier of the chunk"
                     "text":
                       type: "string"
-                      description: "Text content of the element"
-                    "enabled":
-                      type: "boolean"
-                      default: true
+                      description: "The text content of the chunk"
                     "metadata":
                       type: "object"
-                      properties:
-                        "filename":
-                          type: "string"
-                          description: "Filename"
-                        "last_modified":
-                          type: "string"
-                          description: "Last modified date in ISO 8601 format"
-                        "filetype":
-                          type: "string"
-                          description: "File type"
-                        "languages":
-                          type: "array"
-                          items:
-                            type: "string"
-                          description: "Document Languages. List is ordered by probability of being the primary language of the text."
-                        "page_number":
-                          type:
-                            - "number"
-                            - "null"
-                          description: "Page number. Optional field."
-                        "words_count":
-                          type: "number"
-                          description: "Number of words in the text"
-                        "sentences_count":
-                          type: "number"
-                          description: "Number of sentences in the text"
-                        "paragraphs_count":
-                          type: "number"
-                          description: "Number of paragraphs in the text"
-                        "tokens_count":
-                          type: "number"
-                          description: "Number of tokens in the text"
-                        "characters_count":
-                          type: "number"
-                          description: "Number of characters in the text"
-                        "chunks_count":
-                          type: "number"
-                          description: "Number of total chunks"
-                    "processing_attempts":
-                      type: "array"
-                      items:
-                        type: "object"
-                        properties:
-                          "id":
-                            type: "string"
-                            format: "ulid"
-                          "started_at":
-                            type: "string"
-                          "queued_at":
-                            type: "string"
-                          "completed_at":
-                            type: "string"
-                          "errors":
-                            type: "array"
-                            items:
-                              type: "object"
-                              properties:
-                                "code":
-                                  type: "number"
-                                "message":
-                                  type: "string"
-                              required:
-                                - "code"
-                                - "message"
-                        required:
-                          - "id"
-                          - "started_at"
+                      additionalProperties:
+                        type: "string"
+                      default: {}
+                      description: "Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported."
+                    "enabled":
+                      type: "boolean"
+                      description: "Whether the chunk is enabled"
+                    "status":
+                      type: "string"
+                      enum:
+                        - "pending"
+                        - "processing"
+                        - "completed"
+                        - "failed"
+                        - "queued"
+                      description: "The status of the chunk"
                     "created":
                       type: "string"
                       description: "The date and time the chunk was created"
@@ -17701,19 +17631,16 @@ paths:
                     "created_by_id":
                       type: "string"
                       description: "The unique identifier of the user who created the chunk"
-                    "updated_by_id":
+                    "update_by_id":
                       type: "string"
                       description: "The unique identifier of the user who updated the chunk"
                   required:
-                    - "knowledge_id"
-                    - "workspace_id"
-                    - "data_source_id"
+                    - "_id"
                     - "text"
-                    - "processing_attempts"
+                    - "enabled"
+                    - "status"
                     - "created"
                     - "updated"
-                    - "created_by_id"
-                    - "updated_by_id"
                 description: "Array of created chunks"
         "500":
           description: "Failed to create chunk"
