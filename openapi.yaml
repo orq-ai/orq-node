@@ -3784,7 +3784,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-03T11:24:15.585Z"
+          default: "2025-04-03T11:44:02.141Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3847,7 +3847,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-04-03T11:24:15.585Z"
+            default: "2025-04-03T11:44:02.141Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3927,7 +3927,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-03T11:24:15.585Z"
+          default: "2025-04-03T11:44:02.141Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3973,7 +3973,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-04-03T11:24:15.585Z"
+                default: "2025-04-03T11:44:02.141Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4016,7 +4016,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-03T11:24:15.585Z"
+          default: "2025-04-03T11:44:02.141Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6337,7 +6337,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-03T11:24:14.049Z"
+          default: "2025-04-03T11:44:00.595Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6345,7 +6345,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-03T11:24:14.050Z"
+              default: "2025-04-03T11:44:00.596Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6455,7 +6455,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-04-03T11:24:14.049Z"
+                default: "2025-04-03T11:44:00.595Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6463,7 +6463,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-04-03T11:24:14.050Z"
+                    default: "2025-04-03T11:44:00.596Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6570,7 +6570,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-03T11:24:14.049Z"
+          default: "2025-04-03T11:44:00.595Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6578,7 +6578,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-03T11:24:14.050Z"
+              default: "2025-04-03T11:44:00.596Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6679,7 +6679,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-03T11:24:14.049Z"
+          default: "2025-04-03T11:44:00.595Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6687,7 +6687,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-03T11:24:14.050Z"
+              default: "2025-04-03T11:44:00.596Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7044,11 +7044,6 @@ components:
         "_id":
           type: "string"
           description: "The unique identifier of the knowledge base."
-        "created_by_id":
-          type: "string"
-          format: "uuid"
-          description: "The id of the resource"
-          readOnly: true
         "created":
           type: "string"
           description: "The creation date of the knowledge base."
@@ -7103,21 +7098,24 @@ components:
                 - "rerank_model"
               description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
           description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-        "update_by_id":
-          type: "string"
+        "created_by_id":
+          type:
+            - "string"
+            - "null"
           format: "uuid"
-          description: "The id of the resource"
-          readOnly: true
+        "updated_by_id":
+          type:
+            - "string"
+            - "null"
+          format: "uuid"
         "updated":
           type: "string"
           description: "The last update date of the knowledge base."
       required:
         - "_id"
-        - "created_by_id"
         - "created"
         - "key"
         - "model"
-        - "update_by_id"
         - "updated"
     "RetrieveKnowledgeResponse":
       type: "object"
@@ -7125,11 +7123,6 @@ components:
         "_id":
           type: "string"
           description: "The unique identifier of the knowledge base."
-        "created_by_id":
-          type: "string"
-          format: "uuid"
-          description: "The id of the resource"
-          readOnly: true
         "created":
           type: "string"
           description: "The creation date of the knowledge base."
@@ -7184,21 +7177,24 @@ components:
                 - "rerank_model"
               description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
           description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-        "update_by_id":
-          type: "string"
+        "created_by_id":
+          type:
+            - "string"
+            - "null"
           format: "uuid"
-          description: "The id of the resource"
-          readOnly: true
+        "updated_by_id":
+          type:
+            - "string"
+            - "null"
+          format: "uuid"
         "updated":
           type: "string"
           description: "The last update date of the knowledge base."
       required:
         - "_id"
-        - "created_by_id"
         - "created"
         - "key"
         - "model"
-        - "update_by_id"
         - "updated"
     "ListKnowledgesResponse":
       type: "array"
@@ -7208,11 +7204,6 @@ components:
           "_id":
             type: "string"
             description: "The unique identifier of the knowledge base."
-          "created_by_id":
-            type: "string"
-            format: "uuid"
-            description: "The id of the resource"
-            readOnly: true
           "created":
             type: "string"
             description: "The creation date of the knowledge base."
@@ -7267,21 +7258,24 @@ components:
                   - "rerank_model"
                 description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
             description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-          "update_by_id":
-            type: "string"
+          "created_by_id":
+            type:
+              - "string"
+              - "null"
             format: "uuid"
-            description: "The id of the resource"
-            readOnly: true
+          "updated_by_id":
+            type:
+              - "string"
+              - "null"
+            format: "uuid"
           "updated":
             type: "string"
             description: "The last update date of the knowledge base."
         required:
           - "_id"
-          - "created_by_id"
           - "created"
           - "key"
           - "model"
-          - "update_by_id"
           - "updated"
         description: "Knowledge Base object"
     "UpdateKnowledgeResponse":
@@ -7290,11 +7284,6 @@ components:
         "_id":
           type: "string"
           description: "The unique identifier of the knowledge base."
-        "created_by_id":
-          type: "string"
-          format: "uuid"
-          description: "The id of the resource"
-          readOnly: true
         "created":
           type: "string"
           description: "The creation date of the knowledge base."
@@ -7349,21 +7338,24 @@ components:
                 - "rerank_model"
               description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
           description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-        "update_by_id":
-          type: "string"
+        "created_by_id":
+          type:
+            - "string"
+            - "null"
           format: "uuid"
-          description: "The id of the resource"
-          readOnly: true
+        "updated_by_id":
+          type:
+            - "string"
+            - "null"
+          format: "uuid"
         "updated":
           type: "string"
           description: "The last update date of the knowledge base."
       required:
         - "_id"
-        - "created_by_id"
         - "created"
         - "key"
         - "model"
-        - "update_by_id"
         - "updated"
     "DeleteKnowledgeResponse":
       type: "object"
@@ -8094,7 +8086,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -8102,7 +8094,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11061,7 +11053,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-03T11:24:15.585Z"
+                    default: "2025-04-03T11:44:02.141Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -11149,7 +11141,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-04-03T11:24:15.585Z"
+                          default: "2025-04-03T11:44:02.141Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -11216,7 +11208,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-03T11:24:15.585Z"
+                    default: "2025-04-03T11:44:02.141Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -14405,7 +14397,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-03T11:24:14.049Z"
+                          default: "2025-04-03T11:44:00.595Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14413,7 +14405,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-03T11:24:14.050Z"
+                              default: "2025-04-03T11:44:00.596Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14537,7 +14529,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14545,7 +14537,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14655,7 +14647,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14663,7 +14655,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14815,7 +14807,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14823,7 +14815,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15045,7 +15037,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-03T11:24:14.049Z"
+                          default: "2025-04-03T11:44:00.595Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -15053,7 +15045,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-03T11:24:14.050Z"
+                              default: "2025-04-03T11:44:00.596Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -15329,7 +15321,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15337,7 +15329,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15503,7 +15495,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15511,7 +15503,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15791,7 +15783,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-03T11:24:14.049Z"
+                    default: "2025-04-03T11:44:00.595Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15799,7 +15791,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-03T11:24:14.050Z"
+                        default: "2025-04-03T11:44:00.596Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16115,7 +16107,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-04-03T11:24:14.049Z"
+                      default: "2025-04-03T11:44:00.595Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -16123,7 +16115,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-04-03T11:24:14.050Z"
+                          default: "2025-04-03T11:44:00.596Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -16209,11 +16201,6 @@ paths:
                         "_id":
                           type: "string"
                           description: "The unique identifier of the knowledge base."
-                        "created_by_id":
-                          type: "string"
-                          format: "uuid"
-                          description: "The id of the resource"
-                          readOnly: true
                         "created":
                           type: "string"
                           description: "The creation date of the knowledge base."
@@ -16268,21 +16255,24 @@ paths:
                                 - "rerank_model"
                               description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
                           description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-                        "update_by_id":
-                          type: "string"
+                        "created_by_id":
+                          type:
+                            - "string"
+                            - "null"
                           format: "uuid"
-                          description: "The id of the resource"
-                          readOnly: true
+                        "updated_by_id":
+                          type:
+                            - "string"
+                            - "null"
+                          format: "uuid"
                         "updated":
                           type: "string"
                           description: "The last update date of the knowledge base."
                       required:
                         - "_id"
-                        - "created_by_id"
                         - "created"
                         - "key"
                         - "model"
-                        - "update_by_id"
                         - "updated"
                       description: "Knowledge Base object"
                   "has_more":
@@ -16371,11 +16361,6 @@ paths:
                   "_id":
                     type: "string"
                     description: "The unique identifier of the knowledge base."
-                  "created_by_id":
-                    type: "string"
-                    format: "uuid"
-                    description: "The id of the resource"
-                    readOnly: true
                   "created":
                     type: "string"
                     description: "The creation date of the knowledge base."
@@ -16430,21 +16415,24 @@ paths:
                           - "rerank_model"
                         description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
                     description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-                  "update_by_id":
-                    type: "string"
+                  "created_by_id":
+                    type:
+                      - "string"
+                      - "null"
                     format: "uuid"
-                    description: "The id of the resource"
-                    readOnly: true
+                  "updated_by_id":
+                    type:
+                      - "string"
+                      - "null"
+                    format: "uuid"
                   "updated":
                     type: "string"
                     description: "The last update date of the knowledge base."
                 required:
                   - "_id"
-                  - "created_by_id"
                   - "created"
                   - "key"
                   - "model"
-                  - "update_by_id"
                   - "updated"
                 description: "Knowledge Base object"
       security:
@@ -16477,11 +16465,6 @@ paths:
                   "_id":
                     type: "string"
                     description: "The unique identifier of the knowledge base."
-                  "created_by_id":
-                    type: "string"
-                    format: "uuid"
-                    description: "The id of the resource"
-                    readOnly: true
                   "created":
                     type: "string"
                     description: "The creation date of the knowledge base."
@@ -16536,21 +16519,24 @@ paths:
                           - "rerank_model"
                         description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
                     description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-                  "update_by_id":
-                    type: "string"
+                  "created_by_id":
+                    type:
+                      - "string"
+                      - "null"
                     format: "uuid"
-                    description: "The id of the resource"
-                    readOnly: true
+                  "updated_by_id":
+                    type:
+                      - "string"
+                      - "null"
+                    format: "uuid"
                   "updated":
                     type: "string"
                     description: "The last update date of the knowledge base."
                 required:
                   - "_id"
-                  - "created_by_id"
                   - "created"
                   - "key"
                   - "model"
-                  - "update_by_id"
                   - "updated"
                 description: "Knowledge Base object"
         "404":
@@ -16638,11 +16624,6 @@ paths:
                   "_id":
                     type: "string"
                     description: "The unique identifier of the knowledge base."
-                  "created_by_id":
-                    type: "string"
-                    format: "uuid"
-                    description: "The id of the resource"
-                    readOnly: true
                   "created":
                     type: "string"
                     description: "The creation date of the knowledge base."
@@ -16697,21 +16678,24 @@ paths:
                           - "rerank_model"
                         description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
                     description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-                  "update_by_id":
-                    type: "string"
+                  "created_by_id":
+                    type:
+                      - "string"
+                      - "null"
                     format: "uuid"
-                    description: "The id of the resource"
-                    readOnly: true
+                  "updated_by_id":
+                    type:
+                      - "string"
+                      - "null"
+                    format: "uuid"
                   "updated":
                     type: "string"
                     description: "The last update date of the knowledge base."
                 required:
                   - "_id"
-                  - "created_by_id"
                   - "created"
                   - "key"
                   - "model"
-                  - "update_by_id"
                   - "updated"
                 description: "Knowledge Base object"
       security:
@@ -17129,7 +17113,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JQXPA4JTV5JJ9EG57EERTXXJ"
+                          default: "01JQXQEBB75ZQ1QSC3GP9KDFRV"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -17288,7 +17272,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQXPA4JW98641WBQTGB7BK5J"
+                    default: "01JQXQEBB9V9E6DR6BJYVFTXNQ"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17375,7 +17359,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQXPA4JVNC5GB78N92VV13SQ"
+                    default: "01JQXQEBB8JHBJMM8YY0X2KSQG"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17500,7 +17484,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JQXPA4JXA1FHXCBRFW1M385K"
+                    default: "01JQXQEBBAB8S0FB1VGKH4AV4R"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17631,7 +17615,7 @@ paths:
                       readOnly: true
                     "id":
                       type: "string"
-                      default: "chunk_01JQXPA4JY15ZKZTMJS1MX8GBB"
+                      default: "chunk_01JQXQEBBB9BB8J604ZG6RANEA"
                       description: "Unique identifier for the element"
                     "text":
                       type: "string"
