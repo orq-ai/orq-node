@@ -14,7 +14,7 @@ let value: ListChunksResponseBody = {
       id: "<id>",
       text: "<value>",
       enabled: false,
-      status: "failed",
+      status: "queued",
       created: "<value>",
       updated: "<value>",
     },

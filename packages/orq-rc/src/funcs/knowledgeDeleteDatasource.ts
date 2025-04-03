@@ -155,7 +155,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.nil(200, z.void()),
+    M.nil(204, z.void()),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response);

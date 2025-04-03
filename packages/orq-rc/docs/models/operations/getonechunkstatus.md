@@ -7,7 +7,7 @@ The status of the chunk
 ```typescript
 import { GetOneChunkStatus } from "@orq-ai/node/models/operations";
 
-let value: GetOneChunkStatus = "queued";
+let value: GetOneChunkStatus = "failed";
 ```
 
 ## Values

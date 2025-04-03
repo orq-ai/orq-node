@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,90 +46,42 @@ export type CreateChunkRequest = {
   requestBody?: Array<RequestBody> | undefined;
 };
 
-export type CreateChunkKnowledgeMetadata = {
-  /**
-   * Filename
-   */
-  filename?: string | undefined;
-  /**
-   * Last modified date in ISO 8601 format
-   */
-  lastModified?: string | undefined;
-  /**
-   * File type
-   */
-  filetype?: string | undefined;
-  /**
-   * Document Languages. List is ordered by probability of being the primary language of the text.
-   */
-  languages?: Array<string> | undefined;
-  /**
-   * Page number. Optional field.
-   */
-  pageNumber?: number | null | undefined;
-  /**
-   * Number of words in the text
-   */
-  wordsCount?: number | undefined;
-  /**
-   * Number of sentences in the text
-   */
-  sentencesCount?: number | undefined;
-  /**
-   * Number of paragraphs in the text
-   */
-  paragraphsCount?: number | undefined;
-  /**
-   * Number of tokens in the text
-   */
-  tokensCount?: number | undefined;
-  /**
-   * Number of characters in the text
-   */
-  charactersCount?: number | undefined;
-  /**
-   * Number of total chunks
-   */
-  chunksCount?: number | undefined;
-};
-
-export type Errors = {
-  code: number;
-  message: string;
-};
-
-export type ProcessingAttempts = {
-  id: string;
-  startedAt: string;
-  queuedAt?: string | undefined;
-  completedAt?: string | undefined;
-  errors?: Array<Errors> | undefined;
-};
+/**
+ * The status of the chunk
+ */
+export const CreateChunkStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * The status of the chunk
+ */
+export type CreateChunkStatus = ClosedEnum<typeof CreateChunkStatus>;
 
 export type CreateChunkResponseBody = {
   /**
-   * The id of the resource
+   * The unique identifier of the chunk
    */
-  knowledgeId: string;
+  id: string;
   /**
-   * The id of the resource
-   */
-  workspaceId: string;
-  /**
-   * The id of the resource
-   */
-  dataSourceId: string;
-  /**
-   * Unique identifier for the element
-   */
-  id?: string | undefined;
-  /**
-   * Text content of the element
+   * The text content of the chunk
    */
   text: string;
-  enabled?: boolean | undefined;
-  metadata?: CreateChunkKnowledgeMetadata | undefined;
-  processingAttempts: Array<ProcessingAttempts>;
+  /**
+   * Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported.
+   */
+  metadata?: { [k: string]: string } | undefined;
+  /**
+   * Whether the chunk is enabled
+   */
+  enabled: boolean;
+  /**
+   * The status of the chunk
+   */
+  status: CreateChunkStatus;
   /**
    * The date and time the chunk was created
    */
@@ -140,11 +93,11 @@ export type CreateChunkResponseBody = {
   /**
    * The unique identifier of the user who created the chunk
    */
-  createdById: string;
+  createdById?: string | undefined;
   /**
    * The unique identifier of the user who updated the chunk
    */
-  updatedById: string;
+  updateById?: string | undefined;
 };
 
 /** @internal */
@@ -338,239 +291,24 @@ export function createChunkRequestFromJSON(
 }
 
 /** @internal */
-export const CreateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
-  CreateChunkKnowledgeMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  filename: z.string().optional(),
-  last_modified: z.string().optional(),
-  filetype: z.string().optional(),
-  languages: z.array(z.string()).optional(),
-  page_number: z.nullable(z.number()).optional(),
-  words_count: z.number().optional(),
-  sentences_count: z.number().optional(),
-  paragraphs_count: z.number().optional(),
-  tokens_count: z.number().optional(),
-  characters_count: z.number().optional(),
-  chunks_count: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "last_modified": "lastModified",
-    "page_number": "pageNumber",
-    "words_count": "wordsCount",
-    "sentences_count": "sentencesCount",
-    "paragraphs_count": "paragraphsCount",
-    "tokens_count": "tokensCount",
-    "characters_count": "charactersCount",
-    "chunks_count": "chunksCount",
-  });
-});
+export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CreateChunkStatus
+> = z.nativeEnum(CreateChunkStatus);
 
 /** @internal */
-export type CreateChunkKnowledgeMetadata$Outbound = {
-  filename?: string | undefined;
-  last_modified?: string | undefined;
-  filetype?: string | undefined;
-  languages?: Array<string> | undefined;
-  page_number?: number | null | undefined;
-  words_count?: number | undefined;
-  sentences_count?: number | undefined;
-  paragraphs_count?: number | undefined;
-  tokens_count?: number | undefined;
-  characters_count?: number | undefined;
-  chunks_count?: number | undefined;
-};
-
-/** @internal */
-export const CreateChunkKnowledgeMetadata$outboundSchema: z.ZodType<
-  CreateChunkKnowledgeMetadata$Outbound,
-  z.ZodTypeDef,
-  CreateChunkKnowledgeMetadata
-> = z.object({
-  filename: z.string().optional(),
-  lastModified: z.string().optional(),
-  filetype: z.string().optional(),
-  languages: z.array(z.string()).optional(),
-  pageNumber: z.nullable(z.number()).optional(),
-  wordsCount: z.number().optional(),
-  sentencesCount: z.number().optional(),
-  paragraphsCount: z.number().optional(),
-  tokensCount: z.number().optional(),
-  charactersCount: z.number().optional(),
-  chunksCount: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    lastModified: "last_modified",
-    pageNumber: "page_number",
-    wordsCount: "words_count",
-    sentencesCount: "sentences_count",
-    paragraphsCount: "paragraphs_count",
-    tokensCount: "tokens_count",
-    charactersCount: "characters_count",
-    chunksCount: "chunks_count",
-  });
-});
+export const CreateChunkStatus$outboundSchema: z.ZodNativeEnum<
+  typeof CreateChunkStatus
+> = CreateChunkStatus$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateChunkKnowledgeMetadata$ {
-  /** @deprecated use `CreateChunkKnowledgeMetadata$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkKnowledgeMetadata$inboundSchema;
-  /** @deprecated use `CreateChunkKnowledgeMetadata$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkKnowledgeMetadata$outboundSchema;
-  /** @deprecated use `CreateChunkKnowledgeMetadata$Outbound` instead. */
-  export type Outbound = CreateChunkKnowledgeMetadata$Outbound;
-}
-
-export function createChunkKnowledgeMetadataToJSON(
-  createChunkKnowledgeMetadata: CreateChunkKnowledgeMetadata,
-): string {
-  return JSON.stringify(
-    CreateChunkKnowledgeMetadata$outboundSchema.parse(
-      createChunkKnowledgeMetadata,
-    ),
-  );
-}
-
-export function createChunkKnowledgeMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateChunkKnowledgeMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateChunkKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkKnowledgeMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const Errors$inboundSchema: z.ZodType<Errors, z.ZodTypeDef, unknown> = z
-  .object({
-    code: z.number(),
-    message: z.string(),
-  });
-
-/** @internal */
-export type Errors$Outbound = {
-  code: number;
-  message: string;
-};
-
-/** @internal */
-export const Errors$outboundSchema: z.ZodType<
-  Errors$Outbound,
-  z.ZodTypeDef,
-  Errors
-> = z.object({
-  code: z.number(),
-  message: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Errors$ {
-  /** @deprecated use `Errors$inboundSchema` instead. */
-  export const inboundSchema = Errors$inboundSchema;
-  /** @deprecated use `Errors$outboundSchema` instead. */
-  export const outboundSchema = Errors$outboundSchema;
-  /** @deprecated use `Errors$Outbound` instead. */
-  export type Outbound = Errors$Outbound;
-}
-
-export function errorsToJSON(errors: Errors): string {
-  return JSON.stringify(Errors$outboundSchema.parse(errors));
-}
-
-export function errorsFromJSON(
-  jsonString: string,
-): SafeParseResult<Errors, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Errors$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Errors' from JSON`,
-  );
-}
-
-/** @internal */
-export const ProcessingAttempts$inboundSchema: z.ZodType<
-  ProcessingAttempts,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  started_at: z.string(),
-  queued_at: z.string().optional(),
-  completed_at: z.string().optional(),
-  errors: z.array(z.lazy(() => Errors$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "started_at": "startedAt",
-    "queued_at": "queuedAt",
-    "completed_at": "completedAt",
-  });
-});
-
-/** @internal */
-export type ProcessingAttempts$Outbound = {
-  id: string;
-  started_at: string;
-  queued_at?: string | undefined;
-  completed_at?: string | undefined;
-  errors?: Array<Errors$Outbound> | undefined;
-};
-
-/** @internal */
-export const ProcessingAttempts$outboundSchema: z.ZodType<
-  ProcessingAttempts$Outbound,
-  z.ZodTypeDef,
-  ProcessingAttempts
-> = z.object({
-  id: z.string(),
-  startedAt: z.string(),
-  queuedAt: z.string().optional(),
-  completedAt: z.string().optional(),
-  errors: z.array(z.lazy(() => Errors$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startedAt: "started_at",
-    queuedAt: "queued_at",
-    completedAt: "completed_at",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ProcessingAttempts$ {
-  /** @deprecated use `ProcessingAttempts$inboundSchema` instead. */
-  export const inboundSchema = ProcessingAttempts$inboundSchema;
-  /** @deprecated use `ProcessingAttempts$outboundSchema` instead. */
-  export const outboundSchema = ProcessingAttempts$outboundSchema;
-  /** @deprecated use `ProcessingAttempts$Outbound` instead. */
-  export type Outbound = ProcessingAttempts$Outbound;
-}
-
-export function processingAttemptsToJSON(
-  processingAttempts: ProcessingAttempts,
-): string {
-  return JSON.stringify(
-    ProcessingAttempts$outboundSchema.parse(processingAttempts),
-  );
-}
-
-export function processingAttemptsFromJSON(
-  jsonString: string,
-): SafeParseResult<ProcessingAttempts, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ProcessingAttempts$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ProcessingAttempts' from JSON`,
-  );
+export namespace CreateChunkStatus$ {
+  /** @deprecated use `CreateChunkStatus$inboundSchema` instead. */
+  export const inboundSchema = CreateChunkStatus$inboundSchema;
+  /** @deprecated use `CreateChunkStatus$outboundSchema` instead. */
+  export const outboundSchema = CreateChunkStatus$outboundSchema;
 }
 
 /** @internal */
@@ -579,43 +317,34 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  knowledge_id: z.string(),
-  workspace_id: z.string(),
-  data_source_id: z.string(),
-  id: z.string().default("chunk_01JQXQTYP7W7XG2C904M7ZY3P6"),
+  _id: z.string(),
   text: z.string(),
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() => CreateChunkKnowledgeMetadata$inboundSchema).optional(),
-  processing_attempts: z.array(z.lazy(() => ProcessingAttempts$inboundSchema)),
+  metadata: z.record(z.string()).optional(),
+  enabled: z.boolean(),
+  status: CreateChunkStatus$inboundSchema,
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string(),
-  updated_by_id: z.string(),
+  created_by_id: z.string().optional(),
+  update_by_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    "knowledge_id": "knowledgeId",
-    "workspace_id": "workspaceId",
-    "data_source_id": "dataSourceId",
-    "processing_attempts": "processingAttempts",
+    "_id": "id",
     "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
+    "update_by_id": "updateById",
   });
 });
 
 /** @internal */
 export type CreateChunkResponseBody$Outbound = {
-  knowledge_id: string;
-  workspace_id: string;
-  data_source_id: string;
-  id: string;
+  _id: string;
   text: string;
+  metadata?: { [k: string]: string } | undefined;
   enabled: boolean;
-  metadata?: CreateChunkKnowledgeMetadata$Outbound | undefined;
-  processing_attempts: Array<ProcessingAttempts$Outbound>;
+  status: string;
   created: string;
   updated: string;
-  created_by_id: string;
-  updated_by_id: string;
+  created_by_id?: string | undefined;
+  update_by_id?: string | undefined;
 };
 
 /** @internal */
@@ -624,27 +353,20 @@ export const CreateChunkResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChunkResponseBody
 > = z.object({
-  knowledgeId: z.string(),
-  workspaceId: z.string(),
-  dataSourceId: z.string(),
-  id: z.string().default("chunk_01JQXQTYP7W7XG2C904M7ZY3P6"),
+  id: z.string(),
   text: z.string(),
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() => CreateChunkKnowledgeMetadata$outboundSchema)
-    .optional(),
-  processingAttempts: z.array(z.lazy(() => ProcessingAttempts$outboundSchema)),
+  metadata: z.record(z.string()).optional(),
+  enabled: z.boolean(),
+  status: CreateChunkStatus$outboundSchema,
   created: z.string(),
   updated: z.string(),
-  createdById: z.string(),
-  updatedById: z.string(),
+  createdById: z.string().optional(),
+  updateById: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    knowledgeId: "knowledge_id",
-    workspaceId: "workspace_id",
-    dataSourceId: "data_source_id",
-    processingAttempts: "processing_attempts",
+    id: "_id",
     createdById: "created_by_id",
-    updatedById: "updated_by_id",
+    updateById: "update_by_id",
   });
 });
 

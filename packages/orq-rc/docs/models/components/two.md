@@ -18,7 +18,7 @@ const value: components.One = {
 const value: components.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://frizzy-straw.org",
+    url: "https://total-starboard.biz/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: components.Three = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```
