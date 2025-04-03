@@ -1,13 +1,13 @@
-# ListChunksStatus
+# CreateChunkStatus
 
 The status of the chunk
 
 ## Example Usage
 
 ```typescript
-import { ListChunksStatus } from "@orq-ai/node/models/operations";
+import { CreateChunkStatus } from "@orq-ai/node/models/operations";
 
-let value: ListChunksStatus = "failed";
+let value: CreateChunkStatus = "pending";
 ```
 
 ## Values
