@@ -6,7 +6,7 @@
 import { DeploymentStreamChoices } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamChoices = {
-  index: 4581.39,
+  index: 5993.96,
 };
 ```
 

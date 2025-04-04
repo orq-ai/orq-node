@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: f56cbfb13ce2ecaed22fc461be26dd33
+  docChecksum: 068b913906845eb05068e162ce3edb43
   docVersion: "2.0"
-  speakeasyVersion: 1.528.1
-  generationVersion: 2.565.1
-  releaseVersion: 3.3.1
-  configChecksum: 3f3f6898b5a5e61638618d2e85a15eb7
+  speakeasyVersion: 1.529.1
+  generationVersion: 2.566.5
+  releaseVersion: 3.3.3
+  configChecksum: 7135bcaa95aee27c63b920120afa9217
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.4
+    core: 3.21.5
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -1188,7 +1188,7 @@ examples:
         application/json: {"external_id": "<id>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-02-11T16:43:21.610Z"}
+          application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}
   CreateFeedback:
     "":
       requestBody:
@@ -1201,7 +1201,6 @@ examples:
       parameters:
         query:
           limit: 10
-          sort: "asc"
       responses:
         "200":
           application/json: {"object": "list", "data": [{"id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "brook cleverly blossom", "prompt_config": {"tools": [{"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>"}}}}, {"type": "function", "function": {"name": "<value>", "parameters": {"type": "object", "properties": {"key": "<value>", "key1": "<value>", "key2": "<value>"}}}}], "model": "Prius", "model_type": "moderations", "model_parameters": {}, "provider": "openai", "messages": []}, "version": "<value>"}, {"id": "1dc2a4c8-104f-4b45-91a7-0cfc8fe07fbc", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "inasmuch irritably finally", "prompt_config": {"tools": [], "model": "Camaro", "model_type": "completion", "model_parameters": {}, "provider": "fal", "messages": [{"role": "exception", "content": []}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://parched-merit.com/"}}, {"type": "text", "text": "<value>"}]}, {"role": "tool", "content": "<value>"}]}, "version": "<value>"}, {"id": "ebd834b7-d8c2-4236-be08-5944ebceb27b", "created": "<value>", "updated": "<value>", "key": "<key>", "description": "along energetic oddball pasta thread", "prompt_config": {"tools": [], "model": "Element", "model_type": "image", "model_parameters": {}, "provider": "cohere", "messages": [{"role": "assistant", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": "<value>"}]}, "version": "<value>"}], "has_more": false}
@@ -1220,7 +1219,7 @@ examples:
         application/json: {"key": "<key>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12, "message": {"type": "content", "role": "exception", "content": "<value>"}}, {"index": 3047.15, "message": {"type": "content", "role": "system", "content": "<value>"}}]}
+          application/json: {"id": "<id>", "created": "2024-02-27T07:01:10.482Z", "object": "completion", "model": "El Camino", "provider": "cohere", "is_final": false, "choices": [{"index": 1729.12, "message": {"type": "tool_calls", "role": "correction", "tool_calls": [{"type": "function", "function": {"name": "<value>", "arguments": "<value>"}}, {"type": "function", "function": {"name": "<value>", "arguments": "<value>"}}, {"type": "function", "function": {"name": "<value>", "arguments": "<value>"}}]}}, {"index": 5278.02, "message": {"type": "content", "role": "assistant", "content": "<value>"}}]}
   DeploymentStream:
     speakeasy-default-deployment-stream:
       requestBody:
@@ -1234,23 +1233,22 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"success": false}
+          application/json: {"success": true}
   FileUpload:
     speakeasy-default-file-upload:
       requestBody:
         multipart/form-data: {"file": {"": "x-file: example.file"}, "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 5459.09, "file_name": "example.file", "workspace_id": "86a45479-10a2-4b98-9aab-61ec65fc41d9", "created": "2025-02-11T16:43:22.676Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 6384.24, "file_name": "example.file", "workspace_id": "621cf021-cd9c-4f54-a033-15211a509a30", "created": "2025-04-04T15:09:27.484Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
         query:
-          limit: 50
-          sort: "asc"
+          limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 6783.17, "file_name": "example.file", "workspace_id": "232aa0b1-1b8a-4005-b71e-9e705d0e6e21", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 4602.76, "file_name": "example.file", "workspace_id": "66718d6d-4612-4e0a-9ee1-b9ddf121dc2a", "created": "2025-02-11T16:43:22.676Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 5446.51, "file_name": "example.file", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "created": "2025-02-11T16:43:22.676Z"}], "has_more": true}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 6783.17, "file_name": "example.file", "workspace_id": "232aa0b1-1b8a-4005-b71e-9e705d0e6e21", "created": "2025-04-04T15:09:27.484Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 4602.76, "file_name": "example.file", "workspace_id": "66718d6d-4612-4e0a-9ee1-b9ddf121dc2a", "created": "2025-04-04T15:09:27.484Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "batch", "bytes": 5446.51, "file_name": "example.file", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "created": "2025-04-04T15:09:27.484Z"}], "has_more": true}
   FileGet:
     speakeasy-default-file-get:
       parameters:
@@ -1258,77 +1256,27 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 5588.34, "file_name": "example.file", "workspace_id": "88f7743e-7c13-4518-9c6b-985523c4bcbe", "created": "2025-02-11T16:43:22.676Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "batch", "bytes": 5588.34, "file_name": "example.file", "workspace_id": "88f7743e-7c13-4518-9c6b-985523c4bcbe", "created": "2025-04-04T15:09:27.484Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
         path:
           file_id: "<id>"
-  GetAllPromptSnippets:
-    speakeasy-default-get-all-prompt-snippets:
-      parameters:
-        query:
-          limit: 10
-      responses:
-        "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "owner": "vendor", "domain_id": "a232aa0b-11b8-4a00-8571-e9e705d0e6e2", "key": "<key>", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "exception", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "created_by_id": "8d6d4612-e0ae-4e1b-89dd-f121dc2a4c81", "updated_by_id": "4fb451a7-0cfc-48fe-807f-bc60ab960d56", "updated": "2025-02-11T16:43:21.610Z", "type": "snippet", "versions": []}, {"_id": "<id>", "owner": "vendor", "domain_id": "f6573e0a-6233-41ad-b7c0-7cc481991696", "key": "<key>", "prompt_config": {"messages": [{"role": "correction", "content": []}, {"role": "user", "content": [{"type": "image_url", "image_url": {"url": "https://sorrowful-coil.biz"}}]}]}, "metadata": {}, "created_by_id": "36e08594-4ebc-4eb2-a7bd-4753d0a17c47", "updated_by_id": "e329a9ec-9793-48e1-aa63-0f5fe368082f", "updated": "2025-02-11T16:43:21.610Z", "type": "snippet", "versions": []}, {"_id": "<id>", "owner": "<value>", "domain_id": "e0874e78-3076-448e-9c2e-d7f3039dec6f", "key": "<key>", "prompt_config": {"messages": [{"role": "correction", "content": [{"type": "image_url", "image_url": {"url": "https://spherical-gerbil.org/"}}]}]}, "metadata": {}, "created_by_id": "7f7bcfa2-69af-4219-84d5-861b3fe5754c", "updated_by_id": "c551a92c-7431-4ddf-8193-e2177ab4c4d0", "updated": "2025-02-11T16:43:21.610Z", "type": "snippet", "versions": [{"_id": "<id>", "prompt_config": {"messages": [{"role": "correction", "content": [{"type": "text", "text": "<value>"}]}, {"role": "correction", "content": "<value>"}, {"role": "system", "content": "<value>"}]}, "metadata": {}, "created_by_id": "5b0dba7a-30fd-4263-bf0c-cec19e17aef2", "updated_by_id": "28695ca4-33b1-4104-bd1e-faebad1494b3", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": []}, "metadata": {}, "created_by_id": "76b63f80-6d94-4b84-a3a1-ce423bc77dd5", "updated_by_id": "b42fcfa6-f3f7-4b3d-858e-e61458f7304a", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "system", "content": "<value>"}]}, "metadata": {}, "created_by_id": "e54f642e-86b7-4c60-b873-f569812ed552", "updated_by_id": "f7ffa2f9-aacd-4dda-a7da-dae8ecef9614", "timestamp": "<value>"}]}], "has_more": true}
-  CreatePromptSnippet:
-    speakeasy-default-create-prompt-snippet:
-      requestBody:
-        application/json: {"key": "<key>", "prompt_config": {"messages": [{"role": "prompt", "content": "<value>"}]}, "path": "Customer Service/Billing/Refund"}
-      responses:
-        "200":
-          application/json: {"_id": "<id>", "owner": "<value>", "domain_id": "1cf021cd-9cf5-4403-a315-211a509a3080", "key": "<key>", "prompt_config": {"messages": [{"role": "expected_output", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "created_by_id": "c2becc37-6917-475e-8024-985613de0ee8", "updated_by_id": "3d56a1df-9436-4bfd-9394-94798bc19d4c", "updated": "2025-02-11T16:43:21.610Z", "type": "snippet", "versions": []}
-  UpdatePromptSnippet:
-    speakeasy-default-update-prompt-snippet:
-      parameters:
-        path:
-          id: "<id>"
-      requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
-      responses:
-        "200":
-          application/json: {"_id": "<id>", "owner": "vendor", "domain_id": "95fa7f0e-7432-4ce4-a7cb-60cc78135dde", "key": "<key>", "prompt_config": {"messages": [{"role": "user", "content": [{"type": "image_url", "image_url": {"url": "https://bleak-cinema.info"}}, {"type": "image_url", "image_url": {"url": "https://pink-academics.info/"}}]}, {"role": "system", "content": [{"type": "text", "text": "<value>"}]}]}, "metadata": {}, "created_by_id": "62af6646-dadb-43a3-8435-a2450617e6bb", "updated_by_id": "579d6f94-64a3-4158-8c87-60f50e178a77", "updated": "2025-02-11T16:43:21.610Z", "type": "snippet", "versions": []}
-        "404":
-          application/json: {"message": "<value>"}
-  DeletePromptSnippet:
-    speakeasy-default-delete-prompt-snippet:
-      parameters:
-        path:
-          id: "<id>"
-  FindOnePromptSnippet:
-    speakeasy-default-find-one-prompt-snippet:
-      parameters:
-        path:
-          id: "<id>"
-          key: "<key>"
-      responses:
-        "200":
-          application/json: {"_id": "<id>", "owner": "<value>", "domain_id": "c65b0e01-cb71-4bcd-a060-93e7d5b8c93b", "key": "<key>", "prompt_config": {"messages": [{"role": "correction", "content": "<value>"}]}, "metadata": {}, "created_by_id": "7b3823c9-eca7-4b78-a2fc-964f7b3c1870", "updated_by_id": "defaa7aa-3da5-41f8-af17-3dfced0ec663", "updated": "2025-01-02T13:55:01.056Z", "type": "snippet", "versions": [{"_id": "<id>", "prompt_config": {"messages": [{"role": "expected_output", "content": [{"type": "image_url", "image_url": {"url": "https://filthy-siege.biz/"}}, {"type": "image_url", "image_url": {"url": "https://chilly-shadowbox.name"}}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}, "metadata": {}, "created_by_id": "f7014378-d751-45c5-b131-8b1a39e685a4", "updated_by_id": "490937c7-9db3-47d3-b124-67063626b8af", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": [{"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://strange-doing.net"}}]}, {"role": "user", "content": [{"type": "text", "text": "<value>"}]}, {"role": "expected_output", "content": []}]}, "metadata": {}, "created_by_id": "4ee58ee2-19fe-4f51-a1a8-15cc8ea9e661", "updated_by_id": "c3552bea-e34a-482d-9f52-2e81306d8147", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": []}, "metadata": {}, "created_by_id": "24a51bb0-6b66-4b48-9ad5-6c47af968ae4", "updated_by_id": "733ae14d-fdb3-4131-bd5b-8472235c4b22", "timestamp": "<value>"}]}
-  FindOneByKeyPromptSnippet:
-    speakeasy-default-find-one-by-key-prompt-snippet:
-      parameters:
-        path:
-          key: "<key>"
-      responses:
-        "200":
-          application/json: {"_id": "<id>", "owner": "<value>", "domain_id": "d503ba01-c6c3-413a-aa11-ffaecb738c02", "key": "<key>", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}]}, "metadata": {}, "created_by_id": "dbeb9325-3a44-481e-9ace-ae6acfda9855", "updated_by_id": "035406a2-e6e2-405c-9f72-bfe7e18763be", "updated": "2025-02-11T16:43:21.610Z", "type": "snippet", "versions": [{"_id": "<id>", "prompt_config": {"messages": []}, "metadata": {}, "created_by_id": "8404b424-45d2-456f-b5dd-65f5002883f2", "updated_by_id": "6e22c06c-8c8c-4677-a93b-9d900810c013", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": [{"role": "exception", "content": [{"type": "image_url", "image_url": {"url": "https://pushy-individual.info/"}}, {"type": "image_url", "image_url": {"url": "https://ambitious-sustenance.org/"}}, {"type": "image_url", "image_url": {"url": "https://assured-pop.name"}}]}]}, "metadata": {}, "created_by_id": "52e9299d-19e7-462d-ae07-9750a5f4e65e", "updated_by_id": "e14101b3-d8ff-45cd-a390-8e38317b8509", "timestamp": "<value>"}, {"_id": "<id>", "prompt_config": {"messages": [{"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://inferior-pressure.biz"}}]}, {"role": "assistant", "content": "<value>"}, {"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://ill-fated-technologist.org/"}}, {"type": "image_url", "image_url": {"url": "https://criminal-minister.net/"}}, {"type": "image_url", "image_url": {"url": "https://flashy-kinase.net"}}]}]}, "metadata": {}, "created_by_id": "c36323ff-5d17-45fa-a477-18b33966aaf5", "updated_by_id": "98cacf57-318a-424c-b2ea-e6a1b26245a7", "timestamp": "<value>"}]}
   GetAllPrompts:
     speakeasy-default-get-all-prompts:
       parameters:
         query:
           limit: 10
-          sort: "asc"
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "9a0790cc-23f2-474a-964b-0d278a6af50d", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "738dd1fb-9371-4a92-b8ec-8fb977295586", "updated_by_id": "c2ee924d-279b-42b7-a7a9-5f7873d9e4c4", "display_name": "Dwight_Sipes", "prompt_config": {"messages": [{"role": "prompt", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://jittery-cycle.com"}}, {"type": "image_url", "image_url": {"url": "https://ignorant-knuckle.biz"}}]}, {"role": "tool", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}}, {"_id": "<id>", "type": "prompt", "owner": "vendor", "domain_id": "6194824d-1a0d-400e-9676-8fa9b14911cd", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "aebb8bed-fc99-42df-8bea-7acd6c7aacfb", "updated_by_id": "b8345289-fce7-4447-b8a1-1a67970e6ada", "display_name": "Ewald94", "prompt_config": {"messages": []}, "metadata": {}}, {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "2dae8fbe-e20d-49a8-a4ca-19cf90942c7e", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "d0cf42ff-c8b4-4675-9239-2c048dcba1b2", "updated_by_id": "c8667a70-b6a5-4785-9545-4dca88de9992", "display_name": "Annamarie_Franey75", "prompt_config": {"messages": [{"role": "tool", "content": []}]}, "metadata": {}}], "has_more": false}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "created": "<value>", "updated": "<value>", "display_name": "Aracely.Collins", "prompt_config": {"messages": [{"role": "system", "content": [{"type": "text", "text": "<value>"}, {"type": "image_url", "image_url": {"url": "https://imaginative-cap.biz/"}}, {"type": "image_url", "image_url": {"url": "https://practical-trick.org/"}}]}]}}, {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "1b9ddf12-1dc2-4a4c-a810-4fb451a70cfc", "created": "<value>", "updated": "<value>", "display_name": "Uriah99", "prompt_config": {"messages": [{"role": "exception", "content": "<value>"}, {"role": "prompt", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "correction", "content": "<value>"}]}}, {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "611ff657-3e0a-4623-831a-d7c07cc48199", "created": "<value>", "updated": "<value>", "display_name": "Greta74", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "prompt", "content": "<value>"}]}}], "has_more": false}
   CreatePrompt:
     speakeasy-default-create-prompt:
       requestBody:
         application/json: {"display_name": "Jed6", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://well-worn-formation.biz"}}, {"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "ulid-string", "type": "prompt", "owner": "<value>", "domain_id": "uuid-string", "created": "<value>", "updated": "<value>", "display_name": "string", "description": "Sample description for the prompt", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}}
+          application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "5211a509-a308-40a8-9e77-4c2becc37691", "created": "<value>", "updated": "<value>", "display_name": "Jennifer.Walsh12", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}}
   GetOnePrompt:
     speakeasy-default-get-one-prompt:
       parameters:
@@ -1346,7 +1294,7 @@ examples:
         application/json: {"path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "type": "prompt", "owner": "vendor", "domain_id": "5fa7f0e7-432c-4e47-acb6-0cc78135ddeb", "created": "<value>", "updated": "2025-01-02T13:55:01.056Z", "created_by_id": "5898c125-a190-471c-a556-2af6646dadb3", "updated_by_id": "450617e6-bb05-479d-86f9-464a3158c876", "display_name": "Dedric.Donnelly68", "prompt_config": {"messages": [{"role": "user", "content": "<value>"}, {"role": "expected_output", "content": "<value>"}, {"role": "exception", "content": [{"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}]}, "metadata": {}}
+          application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "created": "<value>", "updated": "<value>", "display_name": "Merlin_Harber", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "user", "content": []}, {"role": "tool", "content": "<value>"}]}}
         "404":
           application/json: {"message": "<value>"}
   DeletePrompt:
@@ -1361,7 +1309,6 @@ examples:
           prompt_id: "<id>"
         query:
           limit: 10
-          sort: "asc"
       responses:
         "200":
           application/json: {"object": "list", "data": [], "has_more": true}
@@ -1380,56 +1327,22 @@ examples:
     speakeasy-default-remote-configs-get-config:
       responses:
         "200":
-          application/json: {"type": "boolean"}
-  FileUpdate:
-    speakeasy-default-file-update:
-      parameters:
-        path:
-          file_id: "<id>"
-      responses:
-        "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 5971.29, "file_name": "example.file", "workspace_id": "5fa7f0e7-432c-4e47-acb6-0cc78135ddeb", "created": "2025-01-02T13:55:01.176Z"}
-  BulkFileUpload:
-    speakeasy-default-bulk-file-upload:
-      requestBody:
-        multipart/form-data: {"files": [{"": "x-file: example.file"}], "purpose": "knowledge_datasource"}
-      responses:
-        "200":
-          application/json: [{"_id": "<id>", "object_name": "<value>", "purpose": "knowledge_datasource", "bytes": 561.36, "file_name": "example.file", "workspace_id": "8e47db82-990a-4d91-a419-bf47b9b93cdc", "created": "2025-01-02T13:55:01.176Z"}, {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 752.63, "file_name": "example.file", "workspace_id": "70e45001-5f4b-4f03-8f58-a7d13443cb8d", "created": "2025-01-02T13:55:01.176Z"}]
-  GetAllPromptTemplates:
-    speakeasy-default-get-all-prompt-templates:
-      responses:
-        "200":
-          application/json: {"count": 4610.08, "items": []}
-  CreatePromptVersion:
-    speakeasy-default-create-prompt-version:
-      parameters:
-        path:
-          id: "<id>"
-      responses:
-        "200":
-          application/json: {"_id": "<id>", "display_name": "Carolyne.Beahan71", "prompt_config": {"messages": [{"role": "prompt", "content": "<value>"}, {"role": "prompt", "content": [{"type": "image_url", "image_url": {"url": "https://superior-nudge.biz"}}]}]}, "metadata": {}, "commit": "<value>", "timestamp": "<value>"}
-  DuplicatePrompt:
-    speakeasy-default-duplicate-prompt:
-      parameters:
-        path:
-          id: "<id>"
+          application/json: {"type": "integer"}
   ListDatasets:
     speakeasy-default-list-datasets:
       parameters:
         query:
-          sort: "asc"
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "display_name": "Aracely.Collins", "project_id": "718d6d46-12e0-4aee-a1b9-ddf121dc2a4c", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "metadata": {"total_versions": 4063.91, "datapoints_count": 791.69}, "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "1ff6573e-0a62-4331-aad7-c07cc4819916", "display_name": "Germaine_Rohan50", "project_id": "4b7d8c22-36e0-4859-b44e-bceb27bd4753", "workspace_id": "0a17c478-e329-4a9e-bc97-938e1a630f5f", "metadata": {"total_versions": 2333.58, "datapoints_count": 4159.3}, "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "8082fa02-e087-44e7-8830-7648ec2ed7f3", "display_name": "Clinton_Sipes", "project_id": "f45d97b2-c5d7-4f7b-9cfa-269af2194d58", "workspace_id": "1b3fe575-4c0c-4551-8a92-c7431ddf193e", "metadata": {"total_versions": 1073.35, "datapoints_count": 4955.38}, "updated": "2025-03-19T14:37:10.831Z"}], "has_more": true}
+          application/json: {"object": "list", "data": [{"_id": "8a232aa0-b11b-48a0-8057-1e9e705d0e6e", "display_name": "Aracely.Collins", "project_id": "718d6d46-12e0-4aee-a1b9-ddf121dc2a4c", "workspace_id": "104fb451-a70c-4fc8-9fe0-7fbc60ab960d", "metadata": {"total_versions": 4063.91, "datapoints_count": 791.69}, "updated": "2025-04-04T15:09:25.912Z"}, {"_id": "1ff6573e-0a62-4331-aad7-c07cc4819916", "display_name": "Germaine_Rohan50", "project_id": "4b7d8c22-36e0-4859-b44e-bceb27bd4753", "workspace_id": "0a17c478-e329-4a9e-bc97-938e1a630f5f", "metadata": {"total_versions": 2333.58, "datapoints_count": 4159.3}, "updated": "2025-04-04T15:09:25.912Z"}, {"_id": "8082fa02-e087-44e7-8830-7648ec2ed7f3", "display_name": "Clinton_Sipes", "project_id": "f45d97b2-c5d7-4f7b-9cfa-269af2194d58", "workspace_id": "1b3fe575-4c0c-4551-8a92-c7431ddf193e", "metadata": {"total_versions": 1073.35, "datapoints_count": 4955.38}, "updated": "2025-04-04T15:09:25.912Z"}], "has_more": true}
   CreateDataset:
     speakeasy-default-create-dataset:
       requestBody:
         application/json: {"display_name": "Jed6", "path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "f021cd9c-f540-4331-b521-1a509a3080a8", "display_name": "Izabella13", "project_id": "ecc37691-775e-4024-9985-613de0ee803d", "workspace_id": "6a1df943-6bfd-4394-a947-98bc19d4c51e", "metadata": {"total_versions": 5694.59, "datapoints_count": 8142.22}, "updated": "2025-03-19T14:37:10.831Z"}
+          application/json: {"_id": "f021cd9c-f540-4331-b521-1a509a3080a8", "display_name": "Izabella13", "project_id": "ecc37691-775e-4024-9985-613de0ee803d", "workspace_id": "6a1df943-6bfd-4394-a947-98bc19d4c51e", "metadata": {"total_versions": 5694.59, "datapoints_count": 8142.22}, "updated": "2025-04-04T15:09:25.912Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -1437,7 +1350,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "display_name": "Nathen72", "project_id": "c2127fd4-7297-48c0-9f6e-e88aad22b98b", "workspace_id": "0ca835bb-f82d-4f30-8b17-d07263d38994", "metadata": {"total_versions": 6728.15, "datapoints_count": 560.91}, "updated": "2025-03-19T14:37:10.831Z"}
+          application/json: {"_id": "5e5518a2-d0ce-4221-9a70-713be839d998", "display_name": "Nathen72", "project_id": "c2127fd4-7297-48c0-9f6e-e88aad22b98b", "workspace_id": "0ca835bb-f82d-4f30-8b17-d07263d38994", "metadata": {"total_versions": 6728.15, "datapoints_count": 560.91}, "updated": "2025-04-04T15:09:25.912Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -1449,7 +1362,7 @@ examples:
         application/json: {"path": "Customer Service/Billing/Refund"}
       responses:
         "200":
-          application/json: {"_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "display_name": "Merlin_Harber", "project_id": "c125a190-71c5-4562-9af6-646dadb3a343", "workspace_id": "a2450617-e6bb-4057-99d6-f9464a3158c8", "metadata": {"total_versions": 4160.23, "datapoints_count": 587.04}, "updated": "2025-03-19T14:37:10.831Z"}
+          application/json: {"_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "display_name": "Merlin_Harber", "project_id": "c125a190-71c5-4562-9af6-646dadb3a343", "workspace_id": "a2450617-e6bb-4057-99d6-f9464a3158c8", "metadata": {"total_versions": 4160.23, "datapoints_count": 587.04}, "updated": "2025-04-04T15:09:25.912Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -1463,11 +1376,10 @@ examples:
         path:
           dataset_id: "<id>"
         query:
-          sort: "asc"
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}], "has_more": false}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}], "has_more": false}
   CreateDatasetItem:
     speakeasy-default-create-dataset-item:
       parameters:
@@ -1475,7 +1387,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}
   RetrieveDatapoint:
     speakeasy-default-retrieve-datapoint:
       parameters:
@@ -1484,7 +1396,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -1495,7 +1407,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -1514,7 +1426,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: [{"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-03-19T14:37:10.831Z"}]
+          application/json: [{"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}, {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-04-04T15:09:25.912Z"}]
   ClearDataset:
     speakeasy-default-clear-dataset:
       parameters:
@@ -1578,7 +1490,7 @@ examples:
           status: "completed"
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "01JQYJSBSN4X3F1PHYR5FSMP48", "display_name": "Elias_Towne", "status": "pending", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8313.41}, {"_id": "01JQYJSBSN4X3F1PHYR5FSMP48", "display_name": "Norval77", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8331.66}], "has_more": false}
+          application/json: {"object": "list", "data": [{"_id": "01JR0NK6TCV0P6P4RMZ9ZBYBZV", "display_name": "Elias_Towne", "status": "pending", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8313.41}, {"_id": "01JR0NK6TCV0P6P4RMZ9ZBYBZV", "display_name": "Norval77", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8331.66}], "has_more": false}
   CreateDatasource:
     speakeasy-default-create-datasource:
       parameters:
@@ -1588,7 +1500,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01JQYJSBSP85GJ1416S4711XFT", "display_name": "Pamela.Greenfelder49", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 1636.76}
+          application/json: {"_id": "01JR0NK6TEXWM4VEEHE4B956NR", "display_name": "Pamela.Greenfelder49", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 1636.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -1597,7 +1509,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01JQYJSBSP8B79Y36675RA2N3N", "display_name": "Justice38", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 6087.16}
+          application/json: {"_id": "01JR0NK6TDZYWC1M1D8KEDQCBC", "display_name": "Justice38", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 6087.16}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -1614,7 +1526,7 @@ examples:
         application/json: {"display_name": "Haylee_Braun"}
       responses:
         "200":
-          application/json: {"_id": "01JQYJSBSRWAV0DTYWJDZNKPQH", "display_name": "Alfred_Ullrich68", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 7179.8}
+          application/json: {"_id": "01JR0NK6THJS7T41YVYR0Y4SM1", "display_name": "Alfred_Ullrich68", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 7179.8}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -1623,7 +1535,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: [{"_id": "<id>", "text": "<value>", "enabled": true, "status": "queued", "created": "<value>", "updated": "<value>", "created_by_id": "<id>"}, {"_id": "<id>", "text": "<value>", "enabled": true, "status": "failed", "created": "<value>", "updated": "<value>", "created_by_id": "<id>"}, {"_id": "<id>", "text": "<value>", "enabled": true, "status": "failed", "created": "<value>", "updated": "<value>", "created_by_id": "<id>"}]
+          application/json: [{"_id": "<id>", "text": "<value>", "enabled": false, "status": "failed", "created": "<value>", "updated": "<value>"}, {"_id": "<id>", "text": "<value>", "enabled": true, "status": "completed", "created": "<value>", "updated": "<value>"}, {"_id": "<id>", "text": "<value>", "enabled": true, "status": "queued", "created": "<value>", "updated": "<value>"}]
   ListChunks:
     speakeasy-default-list-chunks:
       parameters:
@@ -1663,5 +1575,5 @@ examples:
       responses:
         "200":
           application/json: {"_id": "<id>", "text": "<value>", "enabled": true, "status": "failed", "created": "<value>", "updated": "<value>"}
-examplesVersion: 1.0.0
+examplesVersion: 1.0.1
 generatedTests: {}

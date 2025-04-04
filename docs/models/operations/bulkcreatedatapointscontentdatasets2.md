@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapoints2Datasets1 = {
 const value: operations.BulkCreateDatapoints2Datasets2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://vast-captain.biz",
+    url: "https://wrong-ownership.info",
   },
 };
 ```

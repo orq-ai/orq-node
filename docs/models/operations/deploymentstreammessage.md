@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentStreamMessage1 = {
-  role: "user",
+  role: "assistant",
   toolCalls: [
     {
       type: "function",
@@ -34,7 +34,7 @@ const value: operations.DeploymentStreamMessage2 = {
 ```typescript
 const value: operations.DeploymentStreamMessage3 = {
   role: "prompt",
-  url: "https://cute-secrecy.org/",
+  url: "https://granular-quinoa.biz/",
 };
 ```
 

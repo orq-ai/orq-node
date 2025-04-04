@@ -18,7 +18,7 @@ const value: operations.Two1 = {
 const value: operations.DeploymentGetConfig22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://trustworthy-drive.net",
+    url: "https://tedious-crocodile.org/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.Two3 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

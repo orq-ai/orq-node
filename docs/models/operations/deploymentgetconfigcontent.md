@@ -18,7 +18,7 @@ const value: operations.DeploymentGetConfigContentDeploymentsResponse2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://courageous-juggernaut.info/",
+      url: "https://carefree-premise.biz",
     },
   },
 ];

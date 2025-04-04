@@ -8,12 +8,12 @@ Datasource successfully retrieved
 import { RetrieveDatasourceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatasourceResponseBody = {
-  displayName: "April_Russel97",
+  displayName: "Eliezer_Hammes",
   status: "failed",
   created: "<value>",
   updated: "<value>",
   knowledgeId: "<id>",
-  chunksCount: 2663.7,
+  chunksCount: 1345.44,
 };
 ```
 

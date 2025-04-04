@@ -7,7 +7,12 @@ import { PrefixMessagesUserMessage } from "@orq-ai/node/models/operations";
 
 let value: PrefixMessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 

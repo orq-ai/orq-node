@@ -43,7 +43,9 @@ const value: operations.PrefixMessagesAssistantMessage = {
 ```typescript
 const value: operations.PrefixMessagesToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

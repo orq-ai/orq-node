@@ -18,7 +18,7 @@ const value: operations.BulkCreateDatapoints21 = {
 const value: operations.BulkCreateDatapoints22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://gaseous-lay.info/",
+    url: "https://advanced-cauliflower.org",
   },
 };
 ```

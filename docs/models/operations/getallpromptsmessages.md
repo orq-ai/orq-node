@@ -6,11 +6,13 @@
 import { GetAllPromptsMessages } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsMessages = {
-  role: "assistant",
+  role: "prompt",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://frivolous-thorn.com",
+      },
     },
   ],
 };

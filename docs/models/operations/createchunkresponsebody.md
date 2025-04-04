@@ -9,7 +9,7 @@ let value: CreateChunkResponseBody = {
   id: "<id>",
   text: "<value>",
   enabled: false,
-  status: "completed",
+  status: "processing",
   created: "<value>",
   updated: "<value>",
 };

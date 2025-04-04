@@ -9,9 +9,7 @@ import { CreateFeedbackResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreateFeedbackResponseBody = {
   property: "<value>",
-  value: [
-    "<value>",
-  ],
+  value: "<value>",
   traceId: "<id>",
   id: "<id>",
 };

@@ -9,8 +9,10 @@ let value: UpdateDatapointMessages = {
   role: "correction",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://memorable-fit.biz/",
+      },
     },
   ],
 };

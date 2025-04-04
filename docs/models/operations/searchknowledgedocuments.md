@@ -14,7 +14,7 @@ let value: SearchKnowledgeDocuments = {
     fileName: "example.file",
     fileType: "video",
   },
-  score: 90.6,
+  score: 997.76,
 };
 ```
 

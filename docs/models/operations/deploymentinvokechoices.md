@@ -6,7 +6,7 @@
 import { DeploymentInvokeChoices } from "@orq-ai/node/models/operations";
 
 let value: DeploymentInvokeChoices = {
-  index: 8221.18,
+  index: 8633.28,
   message: {
     type: "tool_calls",
     role: "tool",

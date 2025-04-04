@@ -8,7 +8,7 @@ import { DeploymentStream22 } from "@orq-ai/node/models/operations";
 let value: DeploymentStream22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://torn-railway.biz",
+    url: "https://unhappy-toothpick.com/",
   },
 };
 ```

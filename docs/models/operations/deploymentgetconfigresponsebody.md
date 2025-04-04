@@ -10,11 +10,11 @@ import { DeploymentGetConfigResponseBody } from "@orq-ai/node/models/operations"
 let value: DeploymentGetConfigResponseBody = {
   id: "<id>",
   provider: "<value>",
-  model: "V90",
+  model: "Challenger",
   version: "<value>",
   messages: [
     {
-      role: "prompt",
+      role: "exception",
       content: [
         {
           type: "text",

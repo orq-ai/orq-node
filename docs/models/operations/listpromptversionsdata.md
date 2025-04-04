@@ -10,8 +10,15 @@ let value: ListPromptVersionsData = {
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: "<value>",
+        role: "exception",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://diligent-plugin.name/",
+            },
+          },
+        ],
       },
     ],
   },

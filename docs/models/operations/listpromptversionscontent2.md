@@ -18,7 +18,7 @@ const value: operations.ListPromptVersions21 = {
 const value: operations.ListPromptVersions22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://some-adrenalin.biz/",
+    url: "https://mediocre-making.net/",
   },
 };
 ```

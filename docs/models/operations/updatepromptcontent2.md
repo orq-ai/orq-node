@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt21 = {
 const value: operations.UpdatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://triangular-husband.info/",
+    url: "https://taut-freckle.net/",
   },
 };
 ```

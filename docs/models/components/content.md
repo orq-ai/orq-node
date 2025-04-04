@@ -16,9 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: components.Two[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://deserted-postbox.org",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "wav",
     },
   },
 ];

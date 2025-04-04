@@ -7,7 +7,9 @@ import { PrefixMessagesToolMessage } from "@orq-ai/node/models/operations";
 
 let value: PrefixMessagesToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

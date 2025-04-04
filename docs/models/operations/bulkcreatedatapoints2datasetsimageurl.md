@@ -6,7 +6,7 @@
 import { BulkCreateDatapoints2DatasetsImageUrl } from "@orq-ai/node/models/operations";
 
 let value: BulkCreateDatapoints2DatasetsImageUrl = {
-  url: "https://terrible-clamp.biz/",
+  url: "https://hungry-printer.com/",
 };
 ```
 

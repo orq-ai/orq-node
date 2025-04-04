@@ -7,12 +7,7 @@ import { ChoicesUserMessage } from "@orq-ai/node/models/operations";
 
 let value: ChoicesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  content: "<value>",
 };
 ```
 

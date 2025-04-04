@@ -10,11 +10,13 @@ import { ListPromptVersionsPromptConfig } from "@orq-ai/node/models/operations";
 let value: ListPromptVersionsPromptConfig = {
   messages: [
     {
-      role: "tool",
+      role: "exception",
       content: [
         {
-          type: "text",
-          text: "<value>",
+          type: "image_url",
+          imageUrl: {
+            url: "https://fixed-championship.biz/",
+          },
         },
       ],
     },

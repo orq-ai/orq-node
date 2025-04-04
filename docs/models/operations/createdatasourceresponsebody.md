@@ -8,12 +8,12 @@ Datasource successfully created
 import { CreateDatasourceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasourceResponseBody = {
-  displayName: "Jasen.Lehner75",
-  status: "pending",
+  displayName: "Lilian19",
+  status: "failed",
   created: "<value>",
   updated: "<value>",
   knowledgeId: "<id>",
-  chunksCount: 4318.43,
+  chunksCount: 3148.35,
 };
 ```
 

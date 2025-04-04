@@ -9,9 +9,9 @@ let value: DeploymentStreamRetrievals = {
   document: "<value>",
   metadata: {
     fileName: "example.file",
-    pageNumber: 9518.75,
+    pageNumber: 9595.11,
     fileType: "image",
-    searchScore: 8207.67,
+    searchScore: 4306.12,
   },
 };
 ```

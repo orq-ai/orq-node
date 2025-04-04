@@ -18,7 +18,7 @@ const value: operations.DeploymentCreateMetric21 = {
 const value: operations.DeploymentCreateMetric22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://weary-summer.info/",
+    url: "https://lighthearted-elver.info/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.DeploymentCreateMetric23 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

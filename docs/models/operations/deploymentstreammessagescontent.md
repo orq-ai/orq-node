@@ -16,9 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentStreamContentDeploymentsRequest2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://international-larva.name/",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "mp3",
     },
   },
 ];

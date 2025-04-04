@@ -7,7 +7,7 @@ The retrieval type to use for the knowledge base. If not provided, Hybrid Search
 ```typescript
 import { UpdateKnowledgeRetrievalType } from "@orq-ai/node/models/operations";
 
-let value: UpdateKnowledgeRetrievalType = "vector_search";
+let value: UpdateKnowledgeRetrievalType = "keyword_search";
 ```
 
 ## Values

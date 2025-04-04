@@ -20,14 +20,19 @@ let value: DeploymentsPromptConfig = {
       },
     },
   ],
-  model: "LeBaron",
-  modelType: "completion",
+  model: "Durango",
+  modelType: "tts",
   modelParameters: {},
-  provider: "elevenlabs",
+  provider: "google-ai",
   messages: [
     {
-      role: "tool",
-      content: "<value>",
+      role: "exception",
+      content: [
+        {
+          type: "text",
+          text: "<value>",
+        },
+      ],
     },
   ],
 };

@@ -9,7 +9,7 @@ let value: DeploymentStream2Deployments3 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```

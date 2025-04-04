@@ -6,12 +6,12 @@
 import { DeploymentGetConfigMessages } from "@orq-ai/node/models/operations";
 
 let value: DeploymentGetConfigMessages = {
-  role: "expected_output",
+  role: "user",
   content: [
     {
       type: "image_url",
       imageUrl: {
-        url: "https://bouncy-marketplace.name",
+        url: "https://noxious-freight.com/",
       },
     },
   ],
