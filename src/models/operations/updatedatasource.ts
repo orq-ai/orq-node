@@ -66,11 +66,11 @@ export type UpdateDatasourceResponseBody = {
   /**
    * The id of the resource
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The id of the resource
    */
-  updateById?: string | undefined;
+  updateById?: string | null | undefined;
   /**
    * The unique identifier of the knowledge base
    */
@@ -244,15 +244,15 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01JRA4NJPBJ28VRVB78R49Q40P"),
+  _id: z.string().default("01JRBK3G4SN7QQAZA52K8XKP56"),
   display_name: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$inboundSchema,
   file_id: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string().optional(),
-  update_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  update_by_id: z.nullable(z.string()).optional(),
   knowledge_id: z.string(),
   chunks_count: z.number(),
 }).transform((v) => {
@@ -276,8 +276,8 @@ export type UpdateDatasourceResponseBody$Outbound = {
   file_id?: string | null | undefined;
   created: string;
   updated: string;
-  created_by_id?: string | undefined;
-  update_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  update_by_id?: string | null | undefined;
   knowledge_id: string;
   chunks_count: number;
 };
@@ -288,15 +288,15 @@ export const UpdateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01JRA4NJPBJ28VRVB78R49Q40P"),
+  id: z.string().default("01JRBK3G4SN7QQAZA52K8XKP56"),
   displayName: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$outboundSchema,
   fileId: z.nullable(z.string()).optional(),
   created: z.string(),
   updated: z.string(),
-  createdById: z.string().optional(),
-  updateById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updateById: z.nullable(z.string()).optional(),
   knowledgeId: z.string(),
   chunksCount: z.number(),
 }).transform((v) => {
