@@ -93,11 +93,11 @@ export type CreateChunkResponseBody = {
   /**
    * The unique identifier of the user who created the chunk
    */
-  createdById?: string | undefined;
+  createdById?: string | null | undefined;
   /**
    * The unique identifier of the user who updated the chunk
    */
-  updateById?: string | undefined;
+  updateById?: string | null | undefined;
 };
 
 /** @internal */
@@ -324,8 +324,8 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
   status: CreateChunkStatus$inboundSchema,
   created: z.string(),
   updated: z.string(),
-  created_by_id: z.string().optional(),
-  update_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  update_by_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -343,8 +343,8 @@ export type CreateChunkResponseBody$Outbound = {
   status: string;
   created: string;
   updated: string;
-  created_by_id?: string | undefined;
-  update_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  update_by_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -360,8 +360,8 @@ export const CreateChunkResponseBody$outboundSchema: z.ZodType<
   status: CreateChunkStatus$outboundSchema,
   created: z.string(),
   updated: z.string(),
-  createdById: z.string().optional(),
-  updateById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updateById: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
