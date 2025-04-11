@@ -3828,7 +3828,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-10T18:01:10.942Z"
+          default: "2025-04-11T12:48:28.871Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3891,7 +3891,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-04-10T18:01:10.942Z"
+            default: "2025-04-11T12:48:28.871Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3971,7 +3971,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-10T18:01:10.942Z"
+          default: "2025-04-11T12:48:28.871Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4017,7 +4017,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-04-10T18:01:10.942Z"
+                default: "2025-04-11T12:48:28.871Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4060,7 +4060,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-10T18:01:10.942Z"
+          default: "2025-04-11T12:48:28.871Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6381,7 +6381,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-10T18:01:08.294Z"
+          default: "2025-04-11T12:48:26.289Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6389,7 +6389,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-10T18:01:08.294Z"
+              default: "2025-04-11T12:48:26.289Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6499,7 +6499,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-04-10T18:01:08.294Z"
+                default: "2025-04-11T12:48:26.289Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6507,7 +6507,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6614,7 +6614,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-10T18:01:08.294Z"
+          default: "2025-04-11T12:48:26.289Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6622,7 +6622,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-10T18:01:08.294Z"
+              default: "2025-04-11T12:48:26.289Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6723,7 +6723,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-10T18:01:08.294Z"
+          default: "2025-04-11T12:48:26.289Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6731,7 +6731,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-10T18:01:08.294Z"
+              default: "2025-04-11T12:48:26.289Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7609,6 +7609,14 @@ components:
             - "string"
             - "null"
           description: "The project id"
+        "started_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was created"
+        "updated_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was updated"
       required:
         - "external_id"
         - "duration"
@@ -7679,6 +7687,14 @@ components:
             - "string"
             - "null"
           description: "The project id"
+        "started_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was created"
+        "updated_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was updated"
       required:
         - "_id"
         - "external_id"
@@ -7759,6 +7775,14 @@ components:
             - "string"
             - "null"
           description: "The project id"
+        "started_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was created"
+        "updated_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was updated"
       required:
         - "_id"
         - "external_id"
@@ -7831,6 +7855,14 @@ components:
             - "string"
             - "null"
           description: "The project id"
+        "started_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was created"
+        "updated_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was updated"
     "UpdateSessionResponse":
       type: "object"
       properties:
@@ -7893,6 +7925,14 @@ components:
             - "string"
             - "null"
           description: "The project id"
+        "started_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was created"
+        "updated_at":
+          type: "string"
+          format: "date-time"
+          description: "The time when the session was updated"
       required:
         - "_id"
         - "external_id"
@@ -7989,6 +8029,14 @@ components:
                   - "string"
                   - "null"
                 description: "The project id"
+              "started_at":
+                type: "string"
+                format: "date-time"
+                description: "The time when the session was created"
+              "updated_at":
+                type: "string"
+                format: "date-time"
+                description: "The time when the session was updated"
             required:
               - "_id"
               - "external_id"
@@ -8673,7 +8721,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -8681,7 +8729,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11680,7 +11728,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-10T18:01:10.942Z"
+                    default: "2025-04-11T12:48:28.871Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -11768,7 +11816,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-04-10T18:01:10.942Z"
+                          default: "2025-04-11T12:48:28.871Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -11835,7 +11883,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-10T18:01:10.942Z"
+                    default: "2025-04-11T12:48:28.871Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -16431,7 +16479,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01JRGDSY7GANSNF053GRF51B9N"
+                              default: "tool_01JRJEA2QRRRBH1C6HKXY2SN0Z"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -16504,7 +16552,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01JRGDSY7H2ENW15AMHY4Q8X22"
+                              default: "tool_01JRJEA2QS8N634NMW1S1A22DE"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -16581,7 +16629,7 @@ paths:
                           properties:
                             "_id":
                               type: "string"
-                              default: "tool_01JRGDSY7HV5S6D7S0N57RVNZG"
+                              default: "tool_01JRJEA2QSXW7Q5SCNXQCMHWHC"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -16936,7 +16984,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY7J3BZ81RA2SDGAH1XW"
+                        default: "tool_01JRJEA2QT3DJR8Z551XPV5FJZ"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17009,7 +17057,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY7KHJ2SPZB0MYDR6HEV"
+                        default: "tool_01JRJEA2QVVZ9NMJPCAG5C06G7"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17086,7 +17134,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY7KX8YYF697328J89NP"
+                        default: "tool_01JRJEA2QW8ASZDYVNZARAQ6JP"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17416,7 +17464,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY7N3VBCBR5X38BTBAFE"
+                        default: "tool_01JRJEA2QYYK7H05JZKVE9FY1B"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17489,7 +17537,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY7PAQ2PRMTM01PM9N76"
+                        default: "tool_01JRJEA2R0DJC6MX8GPC002W2K"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17566,7 +17614,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY7QQW5HG1X9QC135MT7"
+                        default: "tool_01JRJEA2R04R1TMSB4ENJ4W3SS"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17725,7 +17773,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY82YA0WS6232KW9W8CB"
+                        default: "tool_01JRJEA2R2TZA2SJVKXWGRV4CV"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17798,7 +17846,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY83CTD1QF24MBXHVD1S"
+                        default: "tool_01JRJEA2R3WKDB67E0EXNF8AQ4"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17875,7 +17923,7 @@ paths:
                     properties:
                       "_id":
                         type: "string"
-                        default: "tool_01JRGDSY833GS8WRY29GSQNYRQ"
+                        default: "tool_01JRJEA2R3J0GCMKE6J785A7CP"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18114,7 +18162,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-10T18:01:08.294Z"
+                          default: "2025-04-11T12:48:26.289Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -18122,7 +18170,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-10T18:01:08.294Z"
+                              default: "2025-04-11T12:48:26.289Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -18246,7 +18294,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18254,7 +18302,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18364,7 +18412,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18372,7 +18420,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18524,7 +18572,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18532,7 +18580,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18754,7 +18802,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-10T18:01:08.294Z"
+                          default: "2025-04-11T12:48:26.289Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -18762,7 +18810,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-10T18:01:08.294Z"
+                              default: "2025-04-11T12:48:26.289Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -19038,7 +19086,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -19046,7 +19094,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -19212,7 +19260,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -19220,7 +19268,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -19500,7 +19548,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-10T18:01:08.294Z"
+                    default: "2025-04-11T12:48:26.289Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -19508,7 +19556,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-10T18:01:08.294Z"
+                        default: "2025-04-11T12:48:26.289Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -19824,7 +19872,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-04-10T18:01:08.294Z"
+                      default: "2025-04-11T12:48:26.289Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -19832,7 +19880,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-04-10T18:01:08.294Z"
+                          default: "2025-04-11T12:48:26.289Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -20586,7 +20634,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JRGDSY980FSG8H2VPYJR54C9"
+                          default: "01JRJEA2SJH83PVZZVMS2EP5J5"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -20749,7 +20797,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JRGDSY9ANZVZQM49RRQ37YYA"
+                    default: "01JRJEA2SMCMXEB3YWVKGJ6D8K"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -20840,7 +20888,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JRGDSY99WH24SBKAAVV5JR7Q"
+                    default: "01JRJEA2SK672BAC0QAM2PT8VF"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -20969,7 +21017,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JRGDSY9BQZEN03VWFV97HQQE"
+                    default: "01JRJEA2SNY17DZXEF2SB4AZ2D"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -21581,6 +21629,14 @@ paths:
                     - "string"
                     - "null"
                   description: "The project id"
+                "started_at":
+                  type: "string"
+                  format: "date-time"
+                  description: "The time when the session was created"
+                "updated_at":
+                  type: "string"
+                  format: "date-time"
+                  description: "The time when the session was updated"
               required:
                 - "external_id"
                 - "duration"
@@ -21656,6 +21712,14 @@ paths:
                       - "string"
                       - "null"
                     description: "The project id"
+                  "started_at":
+                    type: "string"
+                    format: "date-time"
+                    description: "The time when the session was created"
+                  "updated_at":
+                    type: "string"
+                    format: "date-time"
+                    description: "The time when the session was updated"
                 required:
                   - "_id"
                   - "external_id"
@@ -21778,6 +21842,14 @@ paths:
                       - "string"
                       - "null"
                     description: "The project id"
+                  "started_at":
+                    type: "string"
+                    format: "date-time"
+                    description: "The time when the session was created"
+                  "updated_at":
+                    type: "string"
+                    format: "date-time"
+                    description: "The time when the session was updated"
                 required:
                   - "_id"
                   - "external_id"
@@ -21876,6 +21948,14 @@ paths:
                     - "string"
                     - "null"
                   description: "The project id"
+                "started_at":
+                  type: "string"
+                  format: "date-time"
+                  description: "The time when the session was created"
+                "updated_at":
+                  type: "string"
+                  format: "date-time"
+                  description: "The time when the session was updated"
       responses:
         "200":
           description: "Session"
@@ -21943,6 +22023,14 @@ paths:
                       - "string"
                       - "null"
                     description: "The project id"
+                  "started_at":
+                    type: "string"
+                    format: "date-time"
+                    description: "The time when the session was created"
+                  "updated_at":
+                    type: "string"
+                    format: "date-time"
+                    description: "The time when the session was updated"
                 required:
                   - "_id"
                   - "external_id"
@@ -21960,7 +22048,7 @@ paths:
               schema: {"$ref": "#/components/schemas/HonoApiError"}
       security:
         - ApiKey: []
-  "/v2/traces/sessions/oql":
+  "/v2/traces/sessions/query":
     post:
       tags:
         - "Sessions"
@@ -21975,24 +22063,1171 @@ paths:
             schema:
               type: "object"
               properties:
+                "pagination":
+                  type: "object"
+                  properties:
+                    "page":
+                      type: "number"
+                    "limit":
+                      type: "number"
+                      default: 50
+                    "lastId":
+                      type:
+                        - "string"
+                        - "null"
+                    "firstId":
+                      type:
+                        - "string"
+                        - "null"
+                "sortingProps":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "key":
+                        type: "string"
+                        description: "The path to sort by"
+                      "direction":
+                        type: "string"
+                        enum:
+                          - "asc"
+                          - "desc"
+                        description: "The direction to sort by"
+                    required:
+                      - "key"
                 "query":
-                  type: "string"
-                  default: "*"
-                  description: "The query to search for"
-                "filter_by":
-                  type: "string"
-                  default: ""
-                  description: "The orq OQL query to filter the traces. For more information please refer here."
-                "limit":
-                  type: "integer"
-                  maximum: 200
-                  minimum: 1
-                  default: 100
-                  description: "The number of traces to return"
-                "page":
-                  type: "integer"
-                  default: 1
-                  description: "The page number to return"
+                  type: "object"
+                  properties:
+                    "search":
+                      type: "string"
+                    "operator":
+                      type: "string"
+                      enum:
+                        - "and"
+                        - "or"
+                    "filters":
+                      type: "array"
+                      items:
+                        anyOf:
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                                  - "is_not"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value": {}
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "options":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "optionsMap":
+                                type:
+                                  - "object"
+                                  - "null"
+                                additionalProperties:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "imageUrlMap":
+                                type: "object"
+                                additionalProperties:
+                                  type: "string"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "options"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "contains"
+                                  - "does_not_contain"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                type:
+                                  - "array"
+                                  - "null"
+                                items: {}
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "options":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "optionsMap":
+                                type:
+                                  - "object"
+                                  - "null"
+                                additionalProperties:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "imageUrlMap":
+                                type: "object"
+                                additionalProperties:
+                                  type: "string"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "options"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                                  - "is_before"
+                                  - "is_on_or_before"
+                                  - "is_between"
+                                  - "is_relative_today"
+                                  - "is_relative_time"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                type: "object"
+                                properties:
+                                  "criteria":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "unit":
+                                        anyOf:
+                                          - type: "string"
+                                            enum:
+                                              - "day"
+                                              - "week"
+                                              - "month"
+                                              - "year"
+                                          - type: "string"
+                                            enum:
+                                              - "hours_ago"
+                                              - "minutes_ago"
+                                      "count":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "relativeTime":
+                                        type: "string"
+                                        enum:
+                                          - "today"
+                                          - "yesterday"
+                                          - "one_week_ago"
+                                          - "one_month_ago"
+                                          - "custom_date"
+                                      "customDate":
+                                        type:
+                                          - "string"
+                                          - "null"
+                                      "direction":
+                                        type: "string"
+                                        enum:
+                                          - "present"
+                                          - "past"
+                                      "startDate":
+                                        type:
+                                          - "string"
+                                          - "null"
+                                      "endDate":
+                                        type:
+                                          - "string"
+                                          - "null"
+                                  "mode":
+                                    type: "string"
+                                    enum:
+                                      - "date"
+                                      - "datetime"
+                                required:
+                                  - "criteria"
+                                  - "mode"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "equals"
+                                  - "is_not_equal"
+                                  - "is_greater_than"
+                                  - "is_less_than"
+                                  - "is_greater_than_or_equal_to"
+                                  - "is_less_than_or_equal_to"
+                                  - "is_between"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                anyOf:
+                                  - type: "number"
+                                  - type: "array"
+                                    items:
+                                      type: "number"
+                                  - type: "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                                  - "is_not"
+                                  - "contains"
+                                  - "does_not_contain"
+                                  - "starts_with"
+                                  - "ends_with"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                anyOf:
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                      - "is_not"
+                                      - "contains"
+                                      - "does_not_contain"
+                                      - "starts_with"
+                                      - "ends_with"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                      - "is_not"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "contains"
+                                      - "does_not_contain"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                      - "is_before"
+                                      - "is_on_or_before"
+                                      - "is_between"
+                                      - "is_relative_today"
+                                      - "is_relative_time"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "equals"
+                                      - "is_not_equal"
+                                      - "is_greater_than"
+                                      - "is_less_than"
+                                      - "is_greater_than_or_equal_to"
+                                      - "is_less_than_or_equal_to"
+                                      - "is_between"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                              "value":
+                                anyOf:
+                                  - {}
+                                  - type: "null"
+                                  - type: "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "options":
+                                type: "array"
+                                items:
+                                  allOf:
+                                    - type: "object"
+                                      properties:
+                                        "name":
+                                          type: "string"
+                                        "path":
+                                          type: "string"
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "string"
+                                            - "multi-value-array"
+                                            - "single-value-array"
+                                            - "number"
+                                            - "date"
+                                            - "object"
+                                            - "boolean"
+                                            - "evaluator"
+                                        "hideOperators":
+                                          type: "array"
+                                          items:
+                                            anyOf:
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "starts_with"
+                                                  - "ends_with"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "equals"
+                                                  - "is_not_equal"
+                                                  - "is_greater_than"
+                                                  - "is_less_than"
+                                                  - "is_greater_than_or_equal_to"
+                                                  - "is_less_than_or_equal_to"
+                                                  - "is_between"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_before"
+                                                  - "is_on_or_before"
+                                                  - "is_between"
+                                                  - "is_relative_today"
+                                                  - "is_relative_time"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                      required:
+                                        - "name"
+                                        - "path"
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "id":
+                                          type: "string"
+                                      required:
+                                        - "id"
+                              "selectedOptionId":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "options"
+                              - "selectedOptionId"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                anyOf:
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                  - type: "string"
+                                    enum:
+                                      - "equals"
+                                      - "is_not_equal"
+                                      - "is_greater_than"
+                                      - "is_less_than"
+                                      - "is_greater_than_or_equal_to"
+                                      - "is_less_than_or_equal_to"
+                                      - "is_between"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                              "value":
+                                anyOf:
+                                  - {}
+                                  - type: "null"
+                                  - type: "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "selectedOptionId":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "options":
+                                type: "array"
+                                items:
+                                  allOf:
+                                    - type: "object"
+                                      properties:
+                                        "name":
+                                          type: "string"
+                                        "path":
+                                          type: "string"
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "string"
+                                            - "multi-value-array"
+                                            - "single-value-array"
+                                            - "number"
+                                            - "date"
+                                            - "object"
+                                            - "boolean"
+                                            - "evaluator"
+                                        "hideOperators":
+                                          type: "array"
+                                          items:
+                                            anyOf:
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "starts_with"
+                                                  - "ends_with"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "equals"
+                                                  - "is_not_equal"
+                                                  - "is_greater_than"
+                                                  - "is_less_than"
+                                                  - "is_greater_than_or_equal_to"
+                                                  - "is_less_than_or_equal_to"
+                                                  - "is_between"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_before"
+                                                  - "is_on_or_before"
+                                                  - "is_between"
+                                                  - "is_relative_today"
+                                                  - "is_relative_time"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                      required:
+                                        - "name"
+                                        - "path"
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "id":
+                                          type: "string"
+                                      required:
+                                        - "id"
+                                    - type: "object"
+                                      properties:
+                                        "evaluatorId":
+                                          type: "string"
+                                        "evaluatorType":
+                                          type: "string"
+                                          enum:
+                                            - "function_eval"
+                                            - "http_eval"
+                                            - "json_schema"
+                                            - "llm_eval"
+                                            - "python_eval"
+                                            - "ragas"
+                                            - "typescript_eval"
+                                        "evaluatorOutputType":
+                                          type: "string"
+                                          enum:
+                                            - "boolean"
+                                            - "number"
+                                            - "string"
+                                            - "enum"
+                                      required:
+                                        - "evaluatorId"
+                                        - "evaluatorType"
+                                        - "evaluatorOutputType"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "selectedOptionId"
+                              - "options"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                              "value":
+                                type: "boolean"
+                                default: false
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                      default: []
+                  required:
+                    - "operator"
+                "filters":
+                  type: "array"
+                  items:
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "id"
+                          "id":
+                            type: "string"
+                          "path":
+                            type: "string"
+                        required:
+                          - "type"
+                          - "id"
+                          - "path"
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "search"
+                          "value":
+                            type: "string"
+                          "searchPaths":
+                            type: "array"
+                            items:
+                              type: "string"
+                        required:
+                          - "type"
+                          - "value"
+                          - "searchPaths"
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "string"
+                          "operator":
+                            type: "string"
+                            enum:
+                              - "contains"
+                              - "equals"
+                          "value":
+                            type: "string"
+                          "path":
+                            type: "string"
+                        required:
+                          - "type"
+                          - "operator"
+                          - "value"
+                          - "path"
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "string_array"
+                          "operator":
+                            type: "string"
+                            enum:
+                              - "in"
+                          "values":
+                            type: "array"
+                            items:
+                              type: "string"
+                          "path":
+                            type: "string"
+                        required:
+                          - "type"
+                          - "operator"
+                          - "values"
+                          - "path"
+                "includedFields":
+                  type: "object"
+                  additionalProperties:
+                    type: "string"
+              required:
+                - "filters"
       responses:
         "200":
           description: "Sessions retrieved successfully."
@@ -22069,6 +23304,14 @@ paths:
                             - "string"
                             - "null"
                           description: "The project id"
+                        "started_at":
+                          type: "string"
+                          format: "date-time"
+                          description: "The time when the session was created"
+                        "updated_at":
+                          type: "string"
+                          format: "date-time"
+                          description: "The time when the session was updated"
                       required:
                         - "_id"
                         - "external_id"
@@ -22096,24 +23339,1171 @@ paths:
             schema:
               type: "object"
               properties:
+                "pagination":
+                  type: "object"
+                  properties:
+                    "page":
+                      type: "number"
+                    "limit":
+                      type: "number"
+                      default: 50
+                    "lastId":
+                      type:
+                        - "string"
+                        - "null"
+                    "firstId":
+                      type:
+                        - "string"
+                        - "null"
+                "sortingProps":
+                  type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      "key":
+                        type: "string"
+                        description: "The path to sort by"
+                      "direction":
+                        type: "string"
+                        enum:
+                          - "asc"
+                          - "desc"
+                        description: "The direction to sort by"
+                    required:
+                      - "key"
                 "query":
-                  type: "string"
-                  default: "*"
-                  description: "The query to search for"
-                "filter_by":
-                  type: "string"
-                  default: ""
-                  description: "The orq OQL query to filter the traces. For more information please refer here."
-                "limit":
-                  type: "integer"
-                  maximum: 200
-                  minimum: 1
-                  default: 100
-                  description: "The number of traces to return"
-                "page":
-                  type: "integer"
-                  default: 1
-                  description: "The page number to return"
+                  type: "object"
+                  properties:
+                    "search":
+                      type: "string"
+                    "operator":
+                      type: "string"
+                      enum:
+                        - "and"
+                        - "or"
+                    "filters":
+                      type: "array"
+                      items:
+                        anyOf:
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                                  - "is_not"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value": {}
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "options":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "optionsMap":
+                                type:
+                                  - "object"
+                                  - "null"
+                                additionalProperties:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "imageUrlMap":
+                                type: "object"
+                                additionalProperties:
+                                  type: "string"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "options"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "contains"
+                                  - "does_not_contain"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                type:
+                                  - "array"
+                                  - "null"
+                                items: {}
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "options":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "optionsMap":
+                                type:
+                                  - "object"
+                                  - "null"
+                                additionalProperties:
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "number"
+                              "imageUrlMap":
+                                type: "object"
+                                additionalProperties:
+                                  type: "string"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "options"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                                  - "is_before"
+                                  - "is_on_or_before"
+                                  - "is_between"
+                                  - "is_relative_today"
+                                  - "is_relative_time"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                type: "object"
+                                properties:
+                                  "criteria":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "unit":
+                                        anyOf:
+                                          - type: "string"
+                                            enum:
+                                              - "day"
+                                              - "week"
+                                              - "month"
+                                              - "year"
+                                          - type: "string"
+                                            enum:
+                                              - "hours_ago"
+                                              - "minutes_ago"
+                                      "count":
+                                        type:
+                                          - "number"
+                                          - "null"
+                                      "relativeTime":
+                                        type: "string"
+                                        enum:
+                                          - "today"
+                                          - "yesterday"
+                                          - "one_week_ago"
+                                          - "one_month_ago"
+                                          - "custom_date"
+                                      "customDate":
+                                        type:
+                                          - "string"
+                                          - "null"
+                                      "direction":
+                                        type: "string"
+                                        enum:
+                                          - "present"
+                                          - "past"
+                                      "startDate":
+                                        type:
+                                          - "string"
+                                          - "null"
+                                      "endDate":
+                                        type:
+                                          - "string"
+                                          - "null"
+                                  "mode":
+                                    type: "string"
+                                    enum:
+                                      - "date"
+                                      - "datetime"
+                                required:
+                                  - "criteria"
+                                  - "mode"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "equals"
+                                  - "is_not_equal"
+                                  - "is_greater_than"
+                                  - "is_less_than"
+                                  - "is_greater_than_or_equal_to"
+                                  - "is_less_than_or_equal_to"
+                                  - "is_between"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                anyOf:
+                                  - type: "number"
+                                  - type: "array"
+                                    items:
+                                      type: "number"
+                                  - type: "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                                  - "is_not"
+                                  - "contains"
+                                  - "does_not_contain"
+                                  - "starts_with"
+                                  - "ends_with"
+                                  - "is_empty"
+                                  - "is_not_empty"
+                              "value":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "value"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                anyOf:
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                      - "is_not"
+                                      - "contains"
+                                      - "does_not_contain"
+                                      - "starts_with"
+                                      - "ends_with"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                      - "is_not"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "contains"
+                                      - "does_not_contain"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                      - "is_before"
+                                      - "is_on_or_before"
+                                      - "is_between"
+                                      - "is_relative_today"
+                                      - "is_relative_time"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                                  - type: "string"
+                                    enum:
+                                      - "equals"
+                                      - "is_not_equal"
+                                      - "is_greater_than"
+                                      - "is_less_than"
+                                      - "is_greater_than_or_equal_to"
+                                      - "is_less_than_or_equal_to"
+                                      - "is_between"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                              "value":
+                                anyOf:
+                                  - {}
+                                  - type: "null"
+                                  - type: "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "options":
+                                type: "array"
+                                items:
+                                  allOf:
+                                    - type: "object"
+                                      properties:
+                                        "name":
+                                          type: "string"
+                                        "path":
+                                          type: "string"
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "string"
+                                            - "multi-value-array"
+                                            - "single-value-array"
+                                            - "number"
+                                            - "date"
+                                            - "object"
+                                            - "boolean"
+                                            - "evaluator"
+                                        "hideOperators":
+                                          type: "array"
+                                          items:
+                                            anyOf:
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "starts_with"
+                                                  - "ends_with"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "equals"
+                                                  - "is_not_equal"
+                                                  - "is_greater_than"
+                                                  - "is_less_than"
+                                                  - "is_greater_than_or_equal_to"
+                                                  - "is_less_than_or_equal_to"
+                                                  - "is_between"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_before"
+                                                  - "is_on_or_before"
+                                                  - "is_between"
+                                                  - "is_relative_today"
+                                                  - "is_relative_time"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                      required:
+                                        - "name"
+                                        - "path"
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "id":
+                                          type: "string"
+                                      required:
+                                        - "id"
+                              "selectedOptionId":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "options"
+                              - "selectedOptionId"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                anyOf:
+                                  - type: "string"
+                                    enum:
+                                      - "is"
+                                  - type: "string"
+                                    enum:
+                                      - "equals"
+                                      - "is_not_equal"
+                                      - "is_greater_than"
+                                      - "is_less_than"
+                                      - "is_greater_than_or_equal_to"
+                                      - "is_less_than_or_equal_to"
+                                      - "is_between"
+                                      - "is_empty"
+                                      - "is_not_empty"
+                              "value":
+                                anyOf:
+                                  - {}
+                                  - type: "null"
+                                  - type: "null"
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "selectedOptionId":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "options":
+                                type: "array"
+                                items:
+                                  allOf:
+                                    - type: "object"
+                                      properties:
+                                        "name":
+                                          type: "string"
+                                        "path":
+                                          type: "string"
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "string"
+                                            - "multi-value-array"
+                                            - "single-value-array"
+                                            - "number"
+                                            - "date"
+                                            - "object"
+                                            - "boolean"
+                                            - "evaluator"
+                                        "hideOperators":
+                                          type: "array"
+                                          items:
+                                            anyOf:
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "starts_with"
+                                                  - "ends_with"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "equals"
+                                                  - "is_not_equal"
+                                                  - "is_greater_than"
+                                                  - "is_less_than"
+                                                  - "is_greater_than_or_equal_to"
+                                                  - "is_less_than_or_equal_to"
+                                                  - "is_between"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_not"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "contains"
+                                                  - "does_not_contain"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                              - type: "string"
+                                                enum:
+                                                  - "is"
+                                                  - "is_before"
+                                                  - "is_on_or_before"
+                                                  - "is_between"
+                                                  - "is_relative_today"
+                                                  - "is_relative_time"
+                                                  - "is_empty"
+                                                  - "is_not_empty"
+                                      required:
+                                        - "name"
+                                        - "path"
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "id":
+                                          type: "string"
+                                      required:
+                                        - "id"
+                                    - type: "object"
+                                      properties:
+                                        "evaluatorId":
+                                          type: "string"
+                                        "evaluatorType":
+                                          type: "string"
+                                          enum:
+                                            - "function_eval"
+                                            - "http_eval"
+                                            - "json_schema"
+                                            - "llm_eval"
+                                            - "python_eval"
+                                            - "ragas"
+                                            - "typescript_eval"
+                                        "evaluatorOutputType":
+                                          type: "string"
+                                          enum:
+                                            - "boolean"
+                                            - "number"
+                                            - "string"
+                                            - "enum"
+                                      required:
+                                        - "evaluatorId"
+                                        - "evaluatorType"
+                                        - "evaluatorOutputType"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "selectedOptionId"
+                              - "options"
+                              - "name"
+                              - "path"
+                          - type: "object"
+                            properties:
+                              "operator":
+                                type: "string"
+                                enum:
+                                  - "is"
+                              "value":
+                                type: "boolean"
+                                default: false
+                              "id":
+                                type: "string"
+                                format: "ulid"
+                                description: "The id of the resource"
+                                readOnly: true
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "string"
+                                  - "multi-value-array"
+                                  - "single-value-array"
+                                  - "number"
+                                  - "date"
+                                  - "object"
+                                  - "boolean"
+                                  - "evaluator"
+                              "name":
+                                type: "string"
+                              "path":
+                                type: "string"
+                              "hideOperators":
+                                type: "array"
+                                items:
+                                  anyOf:
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "starts_with"
+                                        - "ends_with"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "equals"
+                                        - "is_not_equal"
+                                        - "is_greater_than"
+                                        - "is_less_than"
+                                        - "is_greater_than_or_equal_to"
+                                        - "is_less_than_or_equal_to"
+                                        - "is_between"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_not"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "contains"
+                                        - "does_not_contain"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                                    - type: "string"
+                                      enum:
+                                        - "is"
+                                        - "is_before"
+                                        - "is_on_or_before"
+                                        - "is_between"
+                                        - "is_relative_today"
+                                        - "is_relative_time"
+                                        - "is_empty"
+                                        - "is_not_empty"
+                            required:
+                              - "operator"
+                              - "id"
+                              - "type"
+                              - "name"
+                              - "path"
+                      default: []
+                  required:
+                    - "operator"
+                "filters":
+                  type: "array"
+                  items:
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "id"
+                          "id":
+                            type: "string"
+                          "path":
+                            type: "string"
+                        required:
+                          - "type"
+                          - "id"
+                          - "path"
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "search"
+                          "value":
+                            type: "string"
+                          "searchPaths":
+                            type: "array"
+                            items:
+                              type: "string"
+                        required:
+                          - "type"
+                          - "value"
+                          - "searchPaths"
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "string"
+                          "operator":
+                            type: "string"
+                            enum:
+                              - "contains"
+                              - "equals"
+                          "value":
+                            type: "string"
+                          "path":
+                            type: "string"
+                        required:
+                          - "type"
+                          - "operator"
+                          - "value"
+                          - "path"
+                      - type: "object"
+                        properties:
+                          "type":
+                            type: "string"
+                            enum:
+                              - "string_array"
+                          "operator":
+                            type: "string"
+                            enum:
+                              - "in"
+                          "values":
+                            type: "array"
+                            items:
+                              type: "string"
+                          "path":
+                            type: "string"
+                        required:
+                          - "type"
+                          - "operator"
+                          - "values"
+                          - "path"
+                "includedFields":
+                  type: "object"
+                  additionalProperties:
+                    type: "string"
+              required:
+                - "filters"
       responses:
         "200":
           description: "Sessions count"
