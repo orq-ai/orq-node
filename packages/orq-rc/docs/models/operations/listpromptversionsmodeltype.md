@@ -1,13 +1,13 @@
 # ListPromptVersionsModelType
 
-The type of the model
+The modality of the model
 
 ## Example Usage
 
 ```typescript
 import { ListPromptVersionsModelType } from "@orq-ai/node/models/operations";
 
-let value: ListPromptVersionsModelType = "moderations";
+let value: ListPromptVersionsModelType = "stt";
 ```
 
 ## Values

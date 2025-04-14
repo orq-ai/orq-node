@@ -11,9 +11,9 @@ let value: FileUploadResponseBody = {
   id: "<id>",
   objectName: "<value>",
   purpose: "batch",
-  bytes: 9049.49,
+  bytes: 8104.02,
   fileName: "example.file",
-  workspaceId: "4f31f3b0-be46-45b3-8274-d38fadfcbff7",
+  workspaceId: "44805dde-fea3-43f7-886d-f460187cd6ed",
 };
 ```
 

@@ -91,7 +91,7 @@ export type DeploymentsTools = {
 };
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const DeploymentsModelType = {
   Chat: "chat",
@@ -105,7 +105,7 @@ export const DeploymentsModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type DeploymentsModelType = ClosedEnum<typeof DeploymentsModelType>;
 
@@ -436,7 +436,7 @@ export type DeploymentsPromptConfig = {
   tools: Array<DeploymentsTools>;
   model: string;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType: DeploymentsModelType;
   /**

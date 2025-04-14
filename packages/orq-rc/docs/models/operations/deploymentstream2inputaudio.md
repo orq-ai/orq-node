@@ -7,7 +7,7 @@ import { DeploymentStream2InputAudio } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream2InputAudio = {
   data: "<value>",
-  format: "wav",
+  format: "mp3",
 };
 ```
 

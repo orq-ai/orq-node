@@ -16,11 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.Two[] = [
   {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "mp3",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

@@ -17,10 +17,8 @@ const value: string = "<value>";
 const value:
   operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[] = [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://rapid-league.info/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ];
 ```

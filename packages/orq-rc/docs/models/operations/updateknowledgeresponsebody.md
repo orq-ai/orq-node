@@ -11,7 +11,7 @@ let value: UpdateKnowledgeResponseBody = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
-  model: "Roadster",
+  model: "A8",
   path: "Customer Service/Billing/Refund",
   updated: "<value>",
 };

@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdatePromptContentPrompts2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://unselfish-markup.net/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

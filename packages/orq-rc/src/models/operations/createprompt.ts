@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const ModelType = {
   Chat: "chat",
@@ -24,7 +24,7 @@ export const ModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type ModelType = ClosedEnum<typeof ModelType>;
 
@@ -340,7 +340,7 @@ export type PromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: ModelType | undefined;
   /**
@@ -432,7 +432,7 @@ export type CreatePromptPromptsType = ClosedEnum<
 >;
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const CreatePromptModelType = {
   Chat: "chat",
@@ -446,7 +446,7 @@ export const CreatePromptModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type CreatePromptModelType = ClosedEnum<typeof CreatePromptModelType>;
 
@@ -794,7 +794,7 @@ export type CreatePromptPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: CreatePromptModelType | undefined;
   /**

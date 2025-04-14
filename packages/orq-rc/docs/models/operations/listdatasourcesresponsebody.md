@@ -11,12 +11,12 @@ let value: ListDatasourcesResponseBody = {
   object: "list",
   data: [
     {
-      displayName: "Dorcas8",
-      status: "failed",
+      displayName: "Vance8",
+      status: "completed",
       created: "<value>",
       updated: "<value>",
       knowledgeId: "<id>",
-      chunksCount: 8418.16,
+      chunksCount: 1275.97,
     },
   ],
   hasMore: false,

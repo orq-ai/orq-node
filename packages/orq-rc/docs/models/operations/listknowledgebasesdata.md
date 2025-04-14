@@ -11,7 +11,7 @@ let value: ListKnowledgeBasesData = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
-  model: "Escalade",
+  model: "Cruze",
   path: "Customer Service/Billing/Refund",
   updated: "<value>",
 };

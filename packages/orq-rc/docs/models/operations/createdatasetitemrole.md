@@ -7,7 +7,7 @@ The role of the prompt message
 ```typescript
 import { CreateDatasetItemRole } from "@orq-ai/node/models/operations";
 
-let value: CreateDatasetItemRole = "prompt";
+let value: CreateDatasetItemRole = "assistant";
 ```
 
 ## Values

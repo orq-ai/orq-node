@@ -10,15 +10,8 @@ import { PromptConfig } from "@orq-ai/node/models/operations";
 let value: PromptConfig = {
   messages: [
     {
-      role: "correction",
-      content: [
-        {
-          type: "image_url",
-          imageUrl: {
-            url: "https://unlined-grandson.org/",
-          },
-        },
-      ],
+      role: "tool",
+      content: "<value>",
     },
   ],
 };
@@ -30,7 +23,7 @@ let value: PromptConfig = {
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `stream`                                                                             | *boolean*                                                                            | :heavy_minus_sign:                                                                   | N/A                                                                                  |
 | `model`                                                                              | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |
-| `modelType`                                                                          | [operations.ModelType](../../models/operations/modeltype.md)                         | :heavy_minus_sign:                                                                   | The type of the model                                                                |
+| `modelType`                                                                          | [operations.ModelType](../../models/operations/modeltype.md)                         | :heavy_minus_sign:                                                                   | The modality of the model                                                            |
 | `modelParameters`                                                                    | [operations.ModelParameters](../../models/operations/modelparameters.md)             | :heavy_minus_sign:                                                                   | Model Parameters: Not all parameters apply to every model                            |
 | `provider`                                                                           | [operations.Provider](../../models/operations/provider.md)                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |
 | `version`                                                                            | *string*                                                                             | :heavy_minus_sign:                                                                   | N/A                                                                                  |

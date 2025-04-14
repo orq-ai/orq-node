@@ -8,7 +8,7 @@ import { Deployments22 } from "@orq-ai/node/models/components";
 let value: Deployments22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://important-object.org/",
+    url: "https://burdensome-horde.biz/",
   },
 };
 ```

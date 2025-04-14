@@ -211,6 +211,7 @@ export type DeploymentCreateMetricMessagesAssistantMessage = {
       | DeploymentCreateMetric2TextContentPart
       | DeploymentCreateMetric2RefusalContentPart
     >
+    | null
     | undefined;
   /**
    * The refusal message by the assistant.
@@ -605,6 +606,7 @@ export type ChoicesAssistantMessage = {
       | DeploymentCreateMetric2DeploymentsMetricsTextContentPart
       | DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart
     >
+    | null
     | undefined;
   /**
    * The refusal message by the assistant.
@@ -1794,13 +1796,19 @@ export const DeploymentCreateMetricMessagesAssistantMessage$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    content: z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => DeploymentCreateMetric2TextContentPart$inboundSchema),
-        z.lazy(() => DeploymentCreateMetric2RefusalContentPart$inboundSchema),
-      ])),
-    ]).optional(),
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            z.lazy(() => DeploymentCreateMetric2TextContentPart$inboundSchema),
+            z.lazy(() =>
+              DeploymentCreateMetric2RefusalContentPart$inboundSchema
+            ),
+          ]),
+        ),
+      ]),
+    ).optional(),
     refusal: z.nullable(z.string()).optional(),
     role:
       DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema,
@@ -1825,6 +1833,7 @@ export type DeploymentCreateMetricMessagesAssistantMessage$Outbound = {
       | DeploymentCreateMetric2TextContentPart$Outbound
       | DeploymentCreateMetric2RefusalContentPart$Outbound
     >
+    | null
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -1842,15 +1851,19 @@ export const DeploymentCreateMetricMessagesAssistantMessage$outboundSchema:
     z.ZodTypeDef,
     DeploymentCreateMetricMessagesAssistantMessage
   > = z.object({
-    content: z.union([
-      z.string(),
-      z.array(z.union([
-        z.lazy(() => DeploymentCreateMetric2TextContentPart$outboundSchema),
-        z.lazy(() =>
-          DeploymentCreateMetric2RefusalContentPart$outboundSchema
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            z.lazy(() => DeploymentCreateMetric2TextContentPart$outboundSchema),
+            z.lazy(() =>
+              DeploymentCreateMetric2RefusalContentPart$outboundSchema
+            ),
+          ]),
         ),
-      ])),
-    ]).optional(),
+      ]),
+    ).optional(),
     refusal: z.nullable(z.string()).optional(),
     role:
       DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema,
@@ -3569,17 +3582,21 @@ export const ChoicesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() =>
-        DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSchema
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() =>
+            DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSchema
+          ),
+          z.lazy(() =>
+            DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema
+          ),
+        ]),
       ),
-      z.lazy(() =>
-        DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema
-      ),
-    ])),
-  ]).optional(),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role:
     DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema,
@@ -3600,6 +3617,7 @@ export type ChoicesAssistantMessage$Outbound = {
       | DeploymentCreateMetric2DeploymentsMetricsTextContentPart$Outbound
       | DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$Outbound
     >
+    | null
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -3614,17 +3632,21 @@ export const ChoicesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChoicesAssistantMessage
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() =>
-        DeploymentCreateMetric2DeploymentsMetricsTextContentPart$outboundSchema
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() =>
+            DeploymentCreateMetric2DeploymentsMetricsTextContentPart$outboundSchema
+          ),
+          z.lazy(() =>
+            DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$outboundSchema
+          ),
+        ]),
       ),
-      z.lazy(() =>
-        DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$outboundSchema
-      ),
-    ])),
-  ]).optional(),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role:
     DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema,

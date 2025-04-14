@@ -5,7 +5,7 @@
 ```typescript
 import { GetAllPromptsUseCases } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsUseCases = "Translation (sentences)";
+let value: GetAllPromptsUseCases = "Autonomous Agents";
 ```
 
 ## Values

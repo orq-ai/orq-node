@@ -1,13 +1,13 @@
 # GetPromptVersionModelType
 
-The type of the model
+The modality of the model
 
 ## Example Usage
 
 ```typescript
 import { GetPromptVersionModelType } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionModelType = "rerank";
+let value: GetPromptVersionModelType = "completion";
 ```
 
 ## Values

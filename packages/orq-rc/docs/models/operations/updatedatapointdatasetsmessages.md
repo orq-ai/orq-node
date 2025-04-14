@@ -9,10 +9,8 @@ let value: UpdateDatapointDatasetsMessages = {
   role: "correction",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://courageous-tenant.com",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

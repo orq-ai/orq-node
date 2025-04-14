@@ -9,8 +9,10 @@ let value: DeploymentCreateMetricMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://unsteady-chops.com",
+      },
     },
   ],
 };

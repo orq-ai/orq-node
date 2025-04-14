@@ -1,0 +1,15 @@
+# PostV2TracesSessionsCountFiltersOperator
+
+## Example Usage
+
+```typescript
+import { PostV2TracesSessionsCountFiltersOperator } from "@orq-ai/node/models/operations";
+
+let value: PostV2TracesSessionsCountFiltersOperator = "is_empty";
+```
+
+## Values
+
+```typescript
+"is" | "is_not" | "is_empty" | "is_not_empty"
+```

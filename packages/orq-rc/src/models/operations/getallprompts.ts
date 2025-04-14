@@ -35,7 +35,7 @@ export const GetAllPromptsType = {
 export type GetAllPromptsType = ClosedEnum<typeof GetAllPromptsType>;
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const GetAllPromptsModelType = {
   Chat: "chat",
@@ -49,7 +49,7 @@ export const GetAllPromptsModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type GetAllPromptsModelType = ClosedEnum<typeof GetAllPromptsModelType>;
 
@@ -389,7 +389,7 @@ export type GetAllPromptsPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: GetAllPromptsModelType | undefined;
   /**

@@ -14,7 +14,7 @@ let value: ListKnowledgeBasesResponseBody = {
       id: "<id>",
       created: "<value>",
       key: "<key>",
-      model: "2",
+      model: "Roadster",
       path: "Customer Service/Billing/Refund",
       updated: "<value>",
     },

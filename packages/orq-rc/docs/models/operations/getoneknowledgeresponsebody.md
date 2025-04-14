@@ -11,7 +11,7 @@ let value: GetOneKnowledgeResponseBody = {
   id: "<id>",
   created: "<value>",
   key: "<key>",
-  model: "Ranchero",
+  model: "Camaro",
   path: "Customer Service/Billing/Refund",
   updated: "<value>",
 };

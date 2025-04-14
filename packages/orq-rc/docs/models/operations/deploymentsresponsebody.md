@@ -11,12 +11,11 @@ let value: DeploymentsResponseBody = {
   object: "list",
   data: [
     {
-      id: "9e5a2b42-90d0-4a4b-bf39-993f7db4d6e9",
+      id: "c6176886-f589-4693-b156-f9710bf5ee7f",
       created: "<value>",
       updated: "<value>",
       key: "<key>",
-      description:
-        "agreeable beneath unlike vastly but inventory sheepishly furthermore",
+      description: "reword sunny other",
       promptConfig: {
         tools: [
           {
@@ -32,10 +31,10 @@ let value: DeploymentsResponseBody = {
             },
           },
         ],
-        model: "Countach",
-        modelType: "moderations",
+        model: "Model 3",
+        modelType: "completion",
         modelParameters: {},
-        provider: "fal",
+        provider: "azure",
         messages: [
           {
             role: "system",

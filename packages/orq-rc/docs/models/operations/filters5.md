@@ -1,0 +1,26 @@
+# Filters5
+
+## Example Usage
+
+```typescript
+import { Filters5 } from "@orq-ai/node/models/operations";
+
+let value: Filters5 = {
+  operator: "contains",
+  value: "<value>",
+  type: "string",
+  name: "<value>",
+  path: "/var/yp",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `operator`                                                                                                                                           | [operations.ListSessionsFiltersSessionsRequestRequestBodyOperator](../../models/operations/listsessionsfilterssessionsrequestrequestbodyoperator.md) | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `value`                                                                                                                                              | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `type`                                                                                                                                               | [operations.ListSessionsFiltersSessionsRequestRequestBodyType](../../models/operations/listsessionsfilterssessionsrequestrequestbodytype.md)         | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `name`                                                                                                                                               | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `path`                                                                                                                                               | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |
+| `hideOperators`                                                                                                                                      | *operations.ListSessionsFiltersSessionsRequestHideOperators*[]                                                                                       | :heavy_minus_sign:                                                                                                                                   | N/A                                                                                                                                                  |

@@ -6,7 +6,7 @@
 import { UpdateDatasourceRequestBody } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatasourceRequestBody = {
-  displayName: "Freeman.Schamberger",
+  displayName: "Jerod.Haley",
 };
 ```
 

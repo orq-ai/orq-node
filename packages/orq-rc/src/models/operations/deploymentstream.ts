@@ -185,6 +185,7 @@ export type PrefixMessagesAssistantMessage = {
     | Array<
       DeploymentStream2TextContentPart | DeploymentStream2RefusalContentPart
     >
+    | null
     | undefined;
   /**
    * The refusal message by the assistant.
@@ -565,6 +566,7 @@ export type DeploymentStreamMessagesAssistantMessage = {
       | DeploymentStream2DeploymentsTextContentPart
       | DeploymentStream2DeploymentsRefusalContentPart
     >
+    | null
     | undefined;
   /**
    * The refusal message by the assistant.
@@ -824,6 +826,21 @@ export type DeploymentStreamInvokeOptions = {
    * Whether to include the retrieved knowledge chunks in the response.
    */
   includeRetrievals?: boolean | undefined;
+  /**
+   * A mock response to use instead of calling the LLM API. This is useful for testing purposes. When provided, the system will return a response object with this content as the completion, without making an actual API call to the LLM provider. This works for both streaming and non-streaming requests. Mock responses will not generate logs, traces or be counted for your plan usage.
+   */
+  mockResponse?: string | undefined;
+};
+
+export type DeploymentStreamThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
 };
 
 export type DeploymentStreamRequestBody = {
@@ -880,6 +897,7 @@ export type DeploymentStreamRequestBody = {
    */
   documents?: Array<DeploymentStreamDocuments> | undefined;
   invokeOptions?: DeploymentStreamInvokeOptions | undefined;
+  thread?: DeploymentStreamThread | undefined;
 };
 
 /**
@@ -1949,13 +1967,17 @@ export const PrefixMessagesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentStream2TextContentPart$inboundSchema),
-      z.lazy(() => DeploymentStream2RefusalContentPart$inboundSchema),
-    ])),
-  ]).optional(),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => DeploymentStream2TextContentPart$inboundSchema),
+          z.lazy(() => DeploymentStream2RefusalContentPart$inboundSchema),
+        ]),
+      ),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role:
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema,
@@ -1977,6 +1999,7 @@ export type PrefixMessagesAssistantMessage$Outbound = {
       | DeploymentStream2TextContentPart$Outbound
       | DeploymentStream2RefusalContentPart$Outbound
     >
+    | null
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -1991,13 +2014,17 @@ export const PrefixMessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PrefixMessagesAssistantMessage
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentStream2TextContentPart$outboundSchema),
-      z.lazy(() => DeploymentStream2RefusalContentPart$outboundSchema),
-    ])),
-  ]).optional(),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => DeploymentStream2TextContentPart$outboundSchema),
+          z.lazy(() => DeploymentStream2RefusalContentPart$outboundSchema),
+        ]),
+      ),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role:
     DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema,
@@ -3667,15 +3694,21 @@ export const DeploymentStreamMessagesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentStream2DeploymentsTextContentPart$inboundSchema),
-      z.lazy(() =>
-        DeploymentStream2DeploymentsRefusalContentPart$inboundSchema
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() =>
+            DeploymentStream2DeploymentsTextContentPart$inboundSchema
+          ),
+          z.lazy(() =>
+            DeploymentStream2DeploymentsRefusalContentPart$inboundSchema
+          ),
+        ]),
       ),
-    ])),
-  ]).optional(),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role: DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema,
   name: z.string().optional(),
@@ -3698,6 +3731,7 @@ export type DeploymentStreamMessagesAssistantMessage$Outbound = {
       | DeploymentStream2DeploymentsTextContentPart$Outbound
       | DeploymentStream2DeploymentsRefusalContentPart$Outbound
     >
+    | null
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -3712,15 +3746,21 @@ export const DeploymentStreamMessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStreamMessagesAssistantMessage
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => DeploymentStream2DeploymentsTextContentPart$outboundSchema),
-      z.lazy(() =>
-        DeploymentStream2DeploymentsRefusalContentPart$outboundSchema
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() =>
+            DeploymentStream2DeploymentsTextContentPart$outboundSchema
+          ),
+          z.lazy(() =>
+            DeploymentStream2DeploymentsRefusalContentPart$outboundSchema
+          ),
+        ]),
       ),
-    ])),
-  ]).optional(),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role:
     DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema,
@@ -4856,15 +4896,18 @@ export const DeploymentStreamInvokeOptions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   include_retrievals: z.boolean().default(false),
+  mock_response: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "include_retrievals": "includeRetrievals",
+    "mock_response": "mockResponse",
   });
 });
 
 /** @internal */
 export type DeploymentStreamInvokeOptions$Outbound = {
   include_retrievals: boolean;
+  mock_response?: string | undefined;
 };
 
 /** @internal */
@@ -4874,9 +4917,11 @@ export const DeploymentStreamInvokeOptions$outboundSchema: z.ZodType<
   DeploymentStreamInvokeOptions
 > = z.object({
   includeRetrievals: z.boolean().default(false),
+  mockResponse: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     includeRetrievals: "include_retrievals",
+    mockResponse: "mock_response",
   });
 });
 
@@ -4914,6 +4959,63 @@ export function deploymentStreamInvokeOptionsFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamThread$inboundSchema: z.ZodType<
+  DeploymentStreamThread,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type DeploymentStreamThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const DeploymentStreamThread$outboundSchema: z.ZodType<
+  DeploymentStreamThread$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamThread$ {
+  /** @deprecated use `DeploymentStreamThread$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamThread$inboundSchema;
+  /** @deprecated use `DeploymentStreamThread$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamThread$outboundSchema;
+  /** @deprecated use `DeploymentStreamThread$Outbound` instead. */
+  export type Outbound = DeploymentStreamThread$Outbound;
+}
+
+export function deploymentStreamThreadToJSON(
+  deploymentStreamThread: DeploymentStreamThread,
+): string {
+  return JSON.stringify(
+    DeploymentStreamThread$outboundSchema.parse(deploymentStreamThread),
+  );
+}
+
+export function deploymentStreamThreadFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamThread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamThread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamThread' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
   DeploymentStreamRequestBody,
   z.ZodTypeDef,
@@ -4947,6 +5049,7 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
     .optional(),
   invoke_options: z.lazy(() => DeploymentStreamInvokeOptions$inboundSchema)
     .optional(),
+  thread: z.lazy(() => DeploymentStreamThread$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prefix_messages": "prefixMessages",
@@ -4984,6 +5087,7 @@ export type DeploymentStreamRequestBody$Outbound = {
   extra_params?: { [k: string]: any } | undefined;
   documents?: Array<DeploymentStreamDocuments$Outbound> | undefined;
   invoke_options?: DeploymentStreamInvokeOptions$Outbound | undefined;
+  thread?: DeploymentStreamThread$Outbound | undefined;
 };
 
 /** @internal */
@@ -5020,6 +5124,7 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
     .optional(),
   invokeOptions: z.lazy(() => DeploymentStreamInvokeOptions$outboundSchema)
     .optional(),
+  thread: z.lazy(() => DeploymentStreamThread$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     prefixMessages: "prefix_messages",

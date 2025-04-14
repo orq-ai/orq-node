@@ -33,7 +33,7 @@ export type ListPromptVersionsObject = ClosedEnum<
 >;
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const ListPromptVersionsModelType = {
   Chat: "chat",
@@ -47,7 +47,7 @@ export const ListPromptVersionsModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type ListPromptVersionsModelType = ClosedEnum<
   typeof ListPromptVersionsModelType
@@ -397,7 +397,7 @@ export type ListPromptVersionsPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: ListPromptVersionsModelType | undefined;
   /**

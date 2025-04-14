@@ -1,13 +1,13 @@
 # ModelType
 
-The type of the model
+The modality of the model
 
 ## Example Usage
 
 ```typescript
 import { ModelType } from "@orq-ai/node/models/operations";
 
-let value: ModelType = "image";
+let value: ModelType = "embedding";
 ```
 
 ## Values

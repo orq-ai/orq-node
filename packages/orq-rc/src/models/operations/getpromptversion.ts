@@ -21,7 +21,7 @@ export type GetPromptVersionRequest = {
 };
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const GetPromptVersionModelType = {
   Chat: "chat",
@@ -35,7 +35,7 @@ export const GetPromptVersionModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type GetPromptVersionModelType = ClosedEnum<
   typeof GetPromptVersionModelType
@@ -379,7 +379,7 @@ export type GetPromptVersionPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: GetPromptVersionModelType | undefined;
   /**

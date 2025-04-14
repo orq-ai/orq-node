@@ -18,7 +18,7 @@ const value: operations.DeploymentStream21 = {
 const value: operations.DeploymentStream22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://babyish-ethyl.biz/",
+    url: "https://glossy-sermon.net",
   },
 };
 ```

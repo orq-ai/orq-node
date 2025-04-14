@@ -18,7 +18,7 @@ const value: operations.RetrieveDatapointContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://esteemed-citizen.biz/",
+      url: "https://enchanted-window.com/",
     },
   },
 ];

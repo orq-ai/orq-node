@@ -10,7 +10,7 @@ import { RetrieveDatapoint22 } from "@orq-ai/node/models/operations";
 let value: RetrieveDatapoint22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://infamous-legging.info/",
+    url: "https://long-term-eggplant.net",
   },
 };
 ```

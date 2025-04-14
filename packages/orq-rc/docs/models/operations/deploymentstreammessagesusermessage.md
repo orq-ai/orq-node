@@ -9,8 +9,11 @@ let value: DeploymentStreamMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "input_audio",
+      inputAudio: {
+        data: "<value>",
+        format: "mp3",
+      },
     },
   ],
 };

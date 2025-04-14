@@ -10,7 +10,7 @@ import { ListDatasetDatapoints22 } from "@orq-ai/node/models/operations";
 let value: ListDatasetDatapoints22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://far-relative.name/",
+    url: "https://gruesome-godfather.com",
   },
 };
 ```

@@ -1,13 +1,13 @@
 # UpdatePromptModelType
 
-The type of the model
+The modality of the model
 
 ## Example Usage
 
 ```typescript
 import { UpdatePromptModelType } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptModelType = "image";
+let value: UpdatePromptModelType = "moderations";
 ```
 
 ## Values

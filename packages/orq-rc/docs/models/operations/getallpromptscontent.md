@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetAllPromptsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://phony-intervention.biz/",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

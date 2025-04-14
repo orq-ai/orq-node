@@ -6,11 +6,11 @@
 import { Data } from "@orq-ai/node/models/operations";
 
 let value: Data = {
-  id: "4c790999-fa56-4b0a-8a32-5597f132a473",
+  id: "9ab092b0-7aaa-47ec-ba5e-bc4ffa1aa96b",
   created: "<value>",
   updated: "<value>",
   key: "<key>",
-  description: "gosh arraign barracks",
+  description: "thankfully blacken considering phew footrest",
   promptConfig: {
     tools: [
       {
@@ -26,13 +26,13 @@ let value: Data = {
         },
       },
     ],
-    model: "Model 3",
+    model: "Land Cruiser",
     modelType: "tts",
     modelParameters: {},
     provider: "replicate",
     messages: [
       {
-        role: "tool",
+        role: "exception",
         content: "<value>",
       },
     ],

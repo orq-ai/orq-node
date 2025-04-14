@@ -39,6 +39,16 @@ export type UpdateKnowledgeRerankConfig = {
 };
 
 /**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type UpdateKnowledgeAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
 export type UpdateKnowledgeRetrievalSettings = {
@@ -57,14 +67,18 @@ export type UpdateKnowledgeRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: UpdateKnowledgeRerankConfig | undefined;
+  rerankConfig?: UpdateKnowledgeRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?: UpdateKnowledgeAgenticRagConfig | null | undefined;
 };
 
 export type UpdateKnowledgeRequestBody = {
   /**
    * The description of the knowledge base.
    */
-  description?: string | undefined;
+  description?: string | null | undefined;
   /**
    * The embeddings model used for the knowledge base. If the models is provided and is different than the previous set model, all the datasources in the knowledge base will be re-embedded.
    */
@@ -117,6 +131,16 @@ export type UpdateKnowledgeKnowledgeRerankConfig = {
 };
 
 /**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type UpdateKnowledgeKnowledgeAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
 export type UpdateKnowledgeKnowledgeRetrievalSettings = {
@@ -135,7 +159,14 @@ export type UpdateKnowledgeKnowledgeRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: UpdateKnowledgeKnowledgeRerankConfig | undefined;
+  rerankConfig?: UpdateKnowledgeKnowledgeRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?:
+    | UpdateKnowledgeKnowledgeAgenticRagConfig
+    | null
+    | undefined;
 };
 
 /**
@@ -205,7 +236,7 @@ export const UpdateKnowledgeRerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  rerank_threshold: z.number().default(0.5),
+  rerank_threshold: z.number().int().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -226,7 +257,7 @@ export const UpdateKnowledgeRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateKnowledgeRerankConfig
 > = z.object({
-  rerankThreshold: z.number().default(0.5),
+  rerankThreshold: z.number().int().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -269,6 +300,62 @@ export function updateKnowledgeRerankConfigFromJSON(
 }
 
 /** @internal */
+export const UpdateKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
+  UpdateKnowledgeAgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type UpdateKnowledgeAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
+  UpdateKnowledgeAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeAgenticRagConfig
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeAgenticRagConfig$ {
+  /** @deprecated use `UpdateKnowledgeAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeAgenticRagConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeAgenticRagConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeAgenticRagConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeAgenticRagConfig$Outbound;
+}
+
+export function updateKnowledgeAgenticRagConfigToJSON(
+  updateKnowledgeAgenticRagConfig: UpdateKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeAgenticRagConfig$outboundSchema.parse(
+      updateKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateKnowledgeAgenticRagConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateKnowledgeAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateKnowledgeAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   UpdateKnowledgeRetrievalSettings,
   z.ZodTypeDef,
@@ -279,13 +366,18 @@ export const UpdateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   ),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.lazy(() => UpdateKnowledgeRerankConfig$inboundSchema)
-    .optional(),
+  rerank_config: z.nullable(
+    z.lazy(() => UpdateKnowledgeRerankConfig$inboundSchema),
+  ).optional(),
+  agentic_rag_config: z.nullable(
+    z.lazy(() => UpdateKnowledgeAgenticRagConfig$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
   });
 });
 
@@ -294,7 +386,11 @@ export type UpdateKnowledgeRetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: UpdateKnowledgeRerankConfig$Outbound | undefined;
+  rerank_config?: UpdateKnowledgeRerankConfig$Outbound | null | undefined;
+  agentic_rag_config?:
+    | UpdateKnowledgeAgenticRagConfig$Outbound
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -308,13 +404,18 @@ export const UpdateKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
   ),
   topK: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerankConfig: z.lazy(() => UpdateKnowledgeRerankConfig$outboundSchema)
-    .optional(),
+  rerankConfig: z.nullable(
+    z.lazy(() => UpdateKnowledgeRerankConfig$outboundSchema),
+  ).optional(),
+  agenticRagConfig: z.nullable(
+    z.lazy(() => UpdateKnowledgeAgenticRagConfig$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     retrievalType: "retrieval_type",
     topK: "top_k",
     rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
   });
 });
 
@@ -357,7 +458,7 @@ export const UpdateKnowledgeRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   embedding_model: z.string().optional(),
   path: z.string().optional(),
   retrieval_settings: z.lazy(() =>
@@ -372,7 +473,7 @@ export const UpdateKnowledgeRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateKnowledgeRequestBody$Outbound = {
-  description?: string | undefined;
+  description?: string | null | undefined;
   embedding_model?: string | undefined;
   path?: string | undefined;
   retrieval_settings?: UpdateKnowledgeRetrievalSettings$Outbound | undefined;
@@ -384,7 +485,7 @@ export const UpdateKnowledgeRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateKnowledgeRequestBody
 > = z.object({
-  description: z.string().optional(),
+  description: z.nullable(z.string()).optional(),
   embeddingModel: z.string().optional(),
   path: z.string().optional(),
   retrievalSettings: z.lazy(() =>
@@ -525,7 +626,7 @@ export const UpdateKnowledgeKnowledgeRerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  rerank_threshold: z.number().default(0.5),
+  rerank_threshold: z.number().int().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -546,7 +647,7 @@ export const UpdateKnowledgeKnowledgeRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateKnowledgeKnowledgeRerankConfig
 > = z.object({
-  rerankThreshold: z.number().default(0.5),
+  rerankThreshold: z.number().int().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -592,6 +693,71 @@ export function updateKnowledgeKnowledgeRerankConfigFromJSON(
 }
 
 /** @internal */
+export const UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
+  UpdateKnowledgeKnowledgeAgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
+  UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeKnowledgeAgenticRagConfig
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeKnowledgeAgenticRagConfig$ {
+  /** @deprecated use `UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound;
+}
+
+export function updateKnowledgeKnowledgeAgenticRagConfigToJSON(
+  updateKnowledgeKnowledgeAgenticRagConfig:
+    UpdateKnowledgeKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema.parse(
+      updateKnowledgeKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeKnowledgeAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeKnowledgeAgenticRagConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeKnowledgeAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   UpdateKnowledgeKnowledgeRetrievalSettings,
   z.ZodTypeDef,
@@ -602,14 +768,18 @@ export const UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   ),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.lazy(() =>
-    UpdateKnowledgeKnowledgeRerankConfig$inboundSchema
+  rerank_config: z.nullable(
+    z.lazy(() => UpdateKnowledgeKnowledgeRerankConfig$inboundSchema),
+  ).optional(),
+  agentic_rag_config: z.nullable(
+    z.lazy(() => UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
   });
 });
 
@@ -618,7 +788,14 @@ export type UpdateKnowledgeKnowledgeRetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: UpdateKnowledgeKnowledgeRerankConfig$Outbound | undefined;
+  rerank_config?:
+    | UpdateKnowledgeKnowledgeRerankConfig$Outbound
+    | null
+    | undefined;
+  agentic_rag_config?:
+    | UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -633,14 +810,18 @@ export const UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema:
     ),
     topK: z.number().int().default(5),
     threshold: z.number().default(0),
-    rerankConfig: z.lazy(() =>
-      UpdateKnowledgeKnowledgeRerankConfig$outboundSchema
+    rerankConfig: z.nullable(
+      z.lazy(() => UpdateKnowledgeKnowledgeRerankConfig$outboundSchema),
+    ).optional(),
+    agenticRagConfig: z.nullable(
+      z.lazy(() => UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
       retrievalType: "retrieval_type",
       topK: "top_k",
       rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
     });
   });
 

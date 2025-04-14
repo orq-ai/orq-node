@@ -10,7 +10,7 @@ import { UpdateDatapoint22 } from "@orq-ai/node/models/operations";
 let value: UpdateDatapoint22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://partial-horde.name/",
+    url: "https://competent-singing.net/",
   },
 };
 ```

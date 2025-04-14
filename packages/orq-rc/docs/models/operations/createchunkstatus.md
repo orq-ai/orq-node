@@ -7,7 +7,7 @@ The status of the chunk
 ```typescript
 import { CreateChunkStatus } from "@orq-ai/node/models/operations";
 
-let value: CreateChunkStatus = "pending";
+let value: CreateChunkStatus = "processing";
 ```
 
 ## Values

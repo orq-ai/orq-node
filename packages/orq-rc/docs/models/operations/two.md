@@ -18,7 +18,7 @@ const value: operations.One = {
 const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://fake-backburn.info/",
+    url: "https://heartfelt-prohibition.biz/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.Three = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

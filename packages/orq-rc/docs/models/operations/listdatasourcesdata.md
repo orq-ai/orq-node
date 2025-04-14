@@ -6,12 +6,12 @@
 import { ListDatasourcesData } from "@orq-ai/node/models/operations";
 
 let value: ListDatasourcesData = {
-  displayName: "Mazie88",
-  status: "processing",
+  displayName: "Nolan_Feil",
+  status: "pending",
   created: "<value>",
   updated: "<value>",
   knowledgeId: "<id>",
-  chunksCount: 7884.69,
+  chunksCount: 5265.2,
 };
 ```
 

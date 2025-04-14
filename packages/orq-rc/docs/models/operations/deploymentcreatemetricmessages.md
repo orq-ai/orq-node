@@ -43,7 +43,9 @@ const value: operations.DeploymentCreateMetricMessagesAssistantMessage = {
 ```typescript
 const value: operations.DeploymentCreateMetricMessagesToolMessage = {
   role: "tool",
-  content: "<value>",
+  content: [
+    "<value>",
+  ],
   toolCallId: "<id>",
 };
 ```

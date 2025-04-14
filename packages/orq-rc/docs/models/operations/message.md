@@ -8,7 +8,7 @@
 ```typescript
 const value: operations.Message1 = {
   type: "tool_calls",
-  role: "assistant",
+  role: "correction",
   toolCalls: [
     {
       type: "function",
@@ -36,8 +36,8 @@ const value: operations.Message2 = {
 ```typescript
 const value: operations.Message3 = {
   type: "image",
-  role: "exception",
-  url: "https://productive-fundraising.com/",
+  role: "correction",
+  url: "https://considerate-battle.biz",
 };
 ```
 

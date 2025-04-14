@@ -1,0 +1,36 @@
+# PostV2TracesSessionsCountFilters6
+
+## Example Usage
+
+```typescript
+import { PostV2TracesSessionsCountFilters6 } from "@orq-ai/node/models/operations";
+
+let value: PostV2TracesSessionsCountFilters6 = {
+  operator: "is_empty",
+  type: "multi-value-array",
+  options: [
+    {
+      name: "<value>",
+      path: "/etc/periodic",
+      type: "date",
+      id: "<id>",
+    },
+  ],
+  selectedOptionId: "<id>",
+  name: "<value>",
+  path: "/sbin",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                              | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `operator`                                                                                                                                                         | *operations.PostV2TracesSessionsCountFiltersRequestRequestBodyQuery6Operator*                                                                                      | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `value`                                                                                                                                                            | *any*                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `type`                                                                                                                                                             | [operations.PostV2TracesSessionsCountFiltersRequestRequestBodyQuery6Type](../../models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery6type.md) | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `options`                                                                                                                                                          | [operations.PostV2TracesSessionsCountFiltersRequestRequestBodyOptions](../../models/operations/postv2tracessessionscountfiltersrequestrequestbodyoptions.md)[]     | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `selectedOptionId`                                                                                                                                                 | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `name`                                                                                                                                                             | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `path`                                                                                                                                                             | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | N/A                                                                                                                                                                |
+| `hideOperators`                                                                                                                                                    | *operations.PostV2TracesSessionsCountFiltersRequestRequestBodyQuery6HideOperators1*[]                                                                              | :heavy_minus_sign:                                                                                                                                                 | N/A                                                                                                                                                                |

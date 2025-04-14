@@ -26,15 +26,7 @@ const value: operations.MessagesSystemMessage = {
 ```typescript
 const value: operations.MessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "mp3",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

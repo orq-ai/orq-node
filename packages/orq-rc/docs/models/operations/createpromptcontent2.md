@@ -18,7 +18,7 @@ const value: operations.CreatePrompt21 = {
 const value: operations.CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://timely-coil.name/",
+    url: "https://rowdy-e-mail.net/",
   },
 };
 ```

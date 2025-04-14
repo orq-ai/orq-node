@@ -7,7 +7,7 @@ The provider used to generate the response
 ```typescript
 import { DeploymentStreamProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamProvider = "huggingface";
+let value: DeploymentStreamProvider = "anyscale";
 ```
 
 ## Values

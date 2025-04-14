@@ -18,7 +18,7 @@ const value: operations.ListDatasetDatapointsContent2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://outrageous-mortise.com",
+      url: "https://shady-charlatan.name",
     },
   },
 ];
