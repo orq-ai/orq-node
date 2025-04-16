@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: ef49e086d6e4fe462e62ca574e306ea2
+  docChecksum: f52e493bcdc5b55993e4cb977e436ef5
   docVersion: "2.0"
   speakeasyVersion: 1.533.0
   generationVersion: 2.578.0
-  releaseVersion: 3.4.0-rc.29
-  configChecksum: ee670338f24b692868b263c4f4e211c9
+  releaseVersion: 3.4.0-rc.30
+  configChecksum: 4339437a5947a92fa992bae9d67937b1
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -175,13 +175,11 @@ generatedFiles:
   - docs/models/operations/chunkingconfiguration2.md
   - docs/models/operations/chunkingconfigurationtype.md
   - docs/models/operations/chunkingoptions.md
-  - docs/models/operations/chunks.md
   - docs/models/operations/cleardatasetrequest.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
   - docs/models/operations/createchunkmetadata.md
   - docs/models/operations/createchunkrequest.md
-  - docs/models/operations/createchunkrequestbody.md
   - docs/models/operations/createchunkresponsebody.md
   - docs/models/operations/createchunkstatus.md
   - docs/models/operations/createcontactrequestbody.md
@@ -1173,6 +1171,7 @@ generatedFiles:
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
+  - docs/models/operations/requestbody.md
   - docs/models/operations/requestbody1.md
   - docs/models/operations/requestbody2.md
   - docs/models/operations/requestbody3.md
@@ -2298,6 +2297,8 @@ examples:
         path:
           knowledge_id: "<id>"
           datasource_id: "<id>"
+      requestBody:
+        application/json: [{"text": "<value>"}, {"text": "<value>"}, {"text": "<value>"}]
       responses:
         "200":
           application/json: [{"_id": "<id>", "text": "<value>", "enabled": false, "status": "failed", "created": "<value>", "updated": "<value>"}, {"_id": "<id>", "text": "<value>", "enabled": true, "status": "completed", "created": "<value>", "updated": "<value>"}, {"_id": "<id>", "text": "<value>", "enabled": true, "status": "queued", "created": "<value>", "updated": "<value>"}]

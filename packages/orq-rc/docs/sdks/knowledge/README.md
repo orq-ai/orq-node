@@ -816,6 +816,17 @@ async function run() {
   const result = await orq.knowledge.createChunks({
     knowledgeId: "<id>",
     datasourceId: "<id>",
+    requestBody: [
+      {
+        text: "<value>",
+      },
+      {
+        text: "<value>",
+      },
+      {
+        text: "<value>",
+      },
+    ],
   });
 
   // Handle the result
@@ -843,6 +854,17 @@ async function run() {
   const res = await knowledgeCreateChunks(orq, {
     knowledgeId: "<id>",
     datasourceId: "<id>",
+    requestBody: [
+      {
+        text: "<value>",
+      },
+      {
+        text: "<value>",
+      },
+      {
+        text: "<value>",
+      },
+    ],
   });
 
   if (!res.ok) {

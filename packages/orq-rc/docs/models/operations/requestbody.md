@@ -1,11 +1,11 @@
-# Chunks
+# RequestBody
 
 ## Example Usage
 
 ```typescript
-import { Chunks } from "@orq-ai/node/models/operations";
+import { RequestBody } from "@orq-ai/node/models/operations";
 
-let value: Chunks = {
+let value: RequestBody = {
   text: "<value>",
 };
 ```
