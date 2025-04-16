@@ -11,7 +11,7 @@ let value: GetAllToolsResponseBody = {
   object: "list",
   data: [
     {
-      id: "tool_01JRZFV2WZGX91P8SV0Q34ZTHS",
+      id: "tool_01JRZX2KD27ZXCV970PDWM9V8Z",
       path: "Customer Service/Billing/Refund",
       key: "<key>",
       description:

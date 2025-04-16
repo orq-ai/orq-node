@@ -415,7 +415,7 @@ export type UpdatePromptMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: UpdatePromptLanguage | undefined;
+  language?: UpdatePromptLanguage | null | undefined;
 };
 
 export type UpdatePromptRequestBody = {
@@ -897,7 +897,7 @@ export type UpdatePromptPromptsMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: UpdatePromptPromptsLanguage | undefined;
+  language?: UpdatePromptPromptsLanguage | null | undefined;
 };
 
 /**
@@ -2192,7 +2192,7 @@ export const UpdatePromptMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(UpdatePromptUseCases$inboundSchema).optional(),
-  language: UpdatePromptLanguage$inboundSchema.optional(),
+  language: z.nullable(UpdatePromptLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -2202,7 +2202,7 @@ export const UpdatePromptMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePromptMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -2212,7 +2212,7 @@ export const UpdatePromptMetadata$outboundSchema: z.ZodType<
   UpdatePromptMetadata
 > = z.object({
   useCases: z.array(UpdatePromptUseCases$outboundSchema).optional(),
-  language: UpdatePromptLanguage$outboundSchema.optional(),
+  language: z.nullable(UpdatePromptLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
@@ -3763,7 +3763,7 @@ export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(UpdatePromptPromptsUseCases$inboundSchema).optional(),
-  language: UpdatePromptPromptsLanguage$inboundSchema.optional(),
+  language: z.nullable(UpdatePromptPromptsLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -3773,7 +3773,7 @@ export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePromptPromptsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -3783,7 +3783,7 @@ export const UpdatePromptPromptsMetadata$outboundSchema: z.ZodType<
   UpdatePromptPromptsMetadata
 > = z.object({
   useCases: z.array(UpdatePromptPromptsUseCases$outboundSchema).optional(),
-  language: UpdatePromptPromptsLanguage$outboundSchema.optional(),
+  language: z.nullable(UpdatePromptPromptsLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",

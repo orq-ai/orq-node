@@ -454,7 +454,7 @@ export type GetAllPromptsMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: GetAllPromptsLanguage | undefined;
+  language?: GetAllPromptsLanguage | null | undefined;
 };
 
 export type GetAllPromptsData = {
@@ -1895,7 +1895,7 @@ export const GetAllPromptsMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(GetAllPromptsUseCases$inboundSchema).optional(),
-  language: GetAllPromptsLanguage$inboundSchema.optional(),
+  language: z.nullable(GetAllPromptsLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -1905,7 +1905,7 @@ export const GetAllPromptsMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -1915,7 +1915,7 @@ export const GetAllPromptsMetadata$outboundSchema: z.ZodType<
   GetAllPromptsMetadata
 > = z.object({
   useCases: z.array(GetAllPromptsUseCases$outboundSchema).optional(),
-  language: GetAllPromptsLanguage$outboundSchema.optional(),
+  language: z.nullable(GetAllPromptsLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
