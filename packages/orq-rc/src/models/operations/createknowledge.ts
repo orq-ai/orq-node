@@ -221,7 +221,7 @@ export const RerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  rerank_threshold: z.number().int().default(0.5),
+  rerank_threshold: z.number().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -242,7 +242,7 @@ export const RerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RerankConfig
 > = z.object({
-  rerankThreshold: z.number().int().default(0.5),
+  rerankThreshold: z.number().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -519,7 +519,7 @@ export const CreateKnowledgeRerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  rerank_threshold: z.number().int().default(0.5),
+  rerank_threshold: z.number().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -540,7 +540,7 @@ export const CreateKnowledgeRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateKnowledgeRerankConfig
 > = z.object({
-  rerankThreshold: z.number().int().default(0.5),
+  rerankThreshold: z.number().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {

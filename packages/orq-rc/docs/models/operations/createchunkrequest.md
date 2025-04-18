@@ -8,11 +8,6 @@ import { CreateChunkRequest } from "@orq-ai/node/models/operations";
 let value: CreateChunkRequest = {
   knowledgeId: "<id>",
   datasourceId: "<id>",
-  requestBody: [
-    {
-      text: "<value>",
-    },
-  ],
 };
 ```
 
@@ -22,4 +17,4 @@ let value: CreateChunkRequest = {
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | `knowledgeId`                                                      | *string*                                                           | :heavy_check_mark:                                                 | Unique identifier of the knowledge                                 |
 | `datasourceId`                                                     | *string*                                                           | :heavy_check_mark:                                                 | Unique identifier of the datasource                                |
-| `requestBody`                                                      | [operations.RequestBody](../../models/operations/requestbody.md)[] | :heavy_check_mark:                                                 | N/A                                                                |
+| `requestBody`                                                      | [operations.RequestBody](../../models/operations/requestbody.md)[] | :heavy_minus_sign:                                                 | N/A                                                                |

@@ -210,7 +210,7 @@ export const GetOneKnowledgeRerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  rerank_threshold: z.number().int().default(0.5),
+  rerank_threshold: z.number().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -231,7 +231,7 @@ export const GetOneKnowledgeRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOneKnowledgeRerankConfig
 > = z.object({
-  rerankThreshold: z.number().int().default(0.5),
+  rerankThreshold: z.number().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {

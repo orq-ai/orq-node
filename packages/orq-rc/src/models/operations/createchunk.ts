@@ -43,7 +43,7 @@ export type CreateChunkRequest = {
    * Unique identifier of the datasource
    */
   datasourceId: string;
-  requestBody: Array<RequestBody>;
+  requestBody?: Array<RequestBody> | undefined;
 };
 
 /**
@@ -226,7 +226,7 @@ export const CreateChunkRequest$inboundSchema: z.ZodType<
 > = z.object({
   knowledge_id: z.string(),
   datasource_id: z.string(),
-  RequestBody: z.array(z.lazy(() => RequestBody$inboundSchema)),
+  RequestBody: z.array(z.lazy(() => RequestBody$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -239,7 +239,7 @@ export const CreateChunkRequest$inboundSchema: z.ZodType<
 export type CreateChunkRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody: Array<RequestBody$Outbound>;
+  RequestBody?: Array<RequestBody$Outbound> | undefined;
 };
 
 /** @internal */
@@ -250,7 +250,7 @@ export const CreateChunkRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)),
+  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
