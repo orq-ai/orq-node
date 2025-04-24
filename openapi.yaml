@@ -784,8 +784,6 @@ components:
                   required:
                     - "type"
                     - "function"
-              "tool_call_id":
-                type: "string"
             required:
               - "role"
               - "content"
@@ -829,9 +827,6 @@ components:
               description: "Only supported on `image` models."
             "quality":
               type: "string"
-              enum:
-                - "standard"
-                - "hd"
               description: "Only supported on `image` models."
             "style":
               type: "string"
@@ -2525,9 +2520,6 @@ components:
                       description: "Only supported on `image` models."
                     "quality":
                       type: "string"
-                      enum:
-                        - "standard"
-                        - "hd"
                       description: "Only supported on `image` models."
                     "style":
                       type: "string"
@@ -2706,8 +2698,6 @@ components:
                           required:
                             - "type"
                             - "function"
-                      "tool_call_id":
-                        type: "string"
                       "id":
                         type: "string"
                         format: "ulid"
@@ -3072,9 +3062,6 @@ components:
                                   description: "Only supported on `image` models."
                                 "quality":
                                   type: "string"
-                                  enum:
-                                    - "standard"
-                                    - "hd"
                                   description: "Only supported on `image` models."
                                 "style":
                                   type: "string"
@@ -3341,9 +3328,6 @@ components:
                                   description: "Only supported on `image` models."
                                 "quality":
                                   type: "string"
-                                  enum:
-                                    - "standard"
-                                    - "hd"
                                   description: "Only supported on `image` models."
                                 "style":
                                   type: "string"
@@ -3665,9 +3649,6 @@ components:
                               description: "Only supported on `image` models."
                             "quality":
                               type: "string"
-                              enum:
-                                - "standard"
-                                - "hd"
                               description: "Only supported on `image` models."
                             "style":
                               type: "string"
@@ -3830,7 +3811,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-24T07:14:20.559Z"
+          default: "2025-04-24T09:59:00.703Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3893,7 +3874,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-04-24T07:14:20.559Z"
+            default: "2025-04-24T09:59:00.703Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3973,7 +3954,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-24T07:14:20.559Z"
+          default: "2025-04-24T09:59:00.703Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4019,7 +4000,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-04-24T07:14:20.559Z"
+                default: "2025-04-24T09:59:00.703Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4062,7 +4043,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-24T07:14:20.559Z"
+          default: "2025-04-24T09:59:00.703Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4149,9 +4130,6 @@ components:
                   description: "Only supported on `image` models."
                 "quality":
                   type: "string"
-                  enum:
-                    - "standard"
-                    - "hd"
                   description: "Only supported on `image` models."
                 "style":
                   type: "string"
@@ -4339,8 +4317,6 @@ components:
                       required:
                         - "type"
                         - "function"
-                  "tool_call_id":
-                    type: "string"
                 required:
                   - "role"
                   - "content"
@@ -4598,9 +4574,6 @@ components:
                   description: "Only supported on `image` models."
                 "quality":
                   type: "string"
-                  enum:
-                    - "standard"
-                    - "hd"
                   description: "Only supported on `image` models."
                 "style":
                   type: "string"
@@ -4788,8 +4761,6 @@ components:
                       required:
                         - "type"
                         - "function"
-                  "tool_call_id":
-                    type: "string"
                 required:
                   - "role"
                   - "content"
@@ -4947,9 +4918,6 @@ components:
                   description: "Only supported on `image` models."
                 "quality":
                   type: "string"
-                  enum:
-                    - "standard"
-                    - "hd"
                   description: "Only supported on `image` models."
                 "style":
                   type: "string"
@@ -5137,8 +5105,6 @@ components:
                       required:
                         - "type"
                         - "function"
-                  "tool_call_id":
-                    type: "string"
                 required:
                   - "role"
                   - "content"
@@ -5298,9 +5264,6 @@ components:
                   description: "Only supported on `image` models."
                 "quality":
                   type: "string"
-                  enum:
-                    - "standard"
-                    - "hd"
                   description: "Only supported on `image` models."
                 "style":
                   type: "string"
@@ -5488,8 +5451,6 @@ components:
                       required:
                         - "type"
                         - "function"
-                  "tool_call_id":
-                    type: "string"
                 required:
                   - "role"
                   - "content"
@@ -5643,9 +5604,6 @@ components:
                             description: "Only supported on `image` models."
                           "quality":
                             type: "string"
-                            enum:
-                              - "standard"
-                              - "hd"
                             description: "Only supported on `image` models."
                           "style":
                             type: "string"
@@ -5833,8 +5791,6 @@ components:
                                 required:
                                   - "type"
                                   - "function"
-                            "tool_call_id":
-                              type: "string"
                           required:
                             - "role"
                             - "content"
@@ -5985,9 +5941,6 @@ components:
                       description: "Only supported on `image` models."
                     "quality":
                       type: "string"
-                      enum:
-                        - "standard"
-                        - "hd"
                       description: "Only supported on `image` models."
                     "style":
                       type: "string"
@@ -6175,8 +6128,6 @@ components:
                           required:
                             - "type"
                             - "function"
-                      "tool_call_id":
-                        type: "string"
                     required:
                       - "role"
                       - "content"
@@ -6407,7 +6358,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-24T07:14:17.830Z"
+          default: "2025-04-24T09:58:58.068Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6415,7 +6366,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-24T07:14:17.831Z"
+              default: "2025-04-24T09:58:58.068Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6525,7 +6476,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-04-24T07:14:17.830Z"
+                default: "2025-04-24T09:58:58.068Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6533,7 +6484,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-04-24T07:14:17.831Z"
+                    default: "2025-04-24T09:58:58.068Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6640,7 +6591,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-24T07:14:17.830Z"
+          default: "2025-04-24T09:58:58.068Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6648,7 +6599,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-24T07:14:17.831Z"
+              default: "2025-04-24T09:58:58.068Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6749,7 +6700,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-24T07:14:17.830Z"
+          default: "2025-04-24T09:58:58.068Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6757,7 +6708,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-24T07:14:17.831Z"
+              default: "2025-04-24T09:58:58.068Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7154,9 +7105,6 @@ components:
         "model":
           type: "string"
           description: "The embeddings model used for the knowledge base."
-        "domain_id":
-          type: "string"
-          description: "The project/domain ID of the knowledge base."
         "path":
           type: "string"
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -7230,7 +7178,6 @@ components:
         - "created"
         - "key"
         - "model"
-        - "domain_id"
         - "updated"
     "RetrieveKnowledgeResponse":
       type: "object"
@@ -7250,9 +7197,6 @@ components:
         "model":
           type: "string"
           description: "The embeddings model used for the knowledge base."
-        "domain_id":
-          type: "string"
-          description: "The project/domain ID of the knowledge base."
         "path":
           type: "string"
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -7326,7 +7270,6 @@ components:
         - "created"
         - "key"
         - "model"
-        - "domain_id"
         - "updated"
     "ListKnowledgesResponse":
       type: "array"
@@ -7348,9 +7291,6 @@ components:
           "model":
             type: "string"
             description: "The embeddings model used for the knowledge base."
-          "domain_id":
-            type: "string"
-            description: "The project/domain ID of the knowledge base."
           "path":
             type: "string"
             description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -7424,7 +7364,6 @@ components:
           - "created"
           - "key"
           - "model"
-          - "domain_id"
           - "updated"
         description: "Knowledge Base object"
     "UpdateKnowledgeResponse":
@@ -7445,9 +7384,6 @@ components:
         "model":
           type: "string"
           description: "The embeddings model used for the knowledge base."
-        "domain_id":
-          type: "string"
-          description: "The project/domain ID of the knowledge base."
         "path":
           type: "string"
           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -7521,7 +7457,6 @@ components:
         - "created"
         - "key"
         - "model"
-        - "domain_id"
         - "updated"
     "DeleteKnowledgeResponse":
       type: "object"
@@ -8273,7 +8208,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -8281,7 +8216,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -8536,9 +8471,6 @@ paths:
                                   description: "Only supported on `image` models."
                                 "quality":
                                   type: "string"
-                                  enum:
-                                    - "standard"
-                                    - "hd"
                                   description: "Only supported on `image` models."
                                 "style":
                                   type: "string"
@@ -8717,8 +8649,6 @@ paths:
                                       required:
                                         - "type"
                                         - "function"
-                                  "tool_call_id":
-                                    type: "string"
                                 required:
                                   - "role"
                                   - "content"
@@ -9448,8 +9378,6 @@ paths:
                             required:
                               - "type"
                               - "function"
-                        "tool_call_id":
-                          type: "string"
                       required:
                         - "role"
                         - "content"
@@ -9493,9 +9421,6 @@ paths:
                         description: "Only supported on `image` models."
                       "quality":
                         type: "string"
-                        enum:
-                          - "standard"
-                          - "hd"
                         description: "Only supported on `image` models."
                       "style":
                         type: "string"
@@ -11282,7 +11207,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-24T07:14:20.559Z"
+                    default: "2025-04-24T09:59:00.703Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -11370,7 +11295,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-04-24T07:14:20.559Z"
+                          default: "2025-04-24T09:59:00.703Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -11437,7 +11362,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-24T07:14:20.559Z"
+                    default: "2025-04-24T09:59:00.703Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -11623,9 +11548,6 @@ paths:
                                   description: "Only supported on `image` models."
                                 "quality":
                                   type: "string"
-                                  enum:
-                                    - "standard"
-                                    - "hd"
                                   description: "Only supported on `image` models."
                                 "style":
                                   type: "string"
@@ -11813,8 +11735,6 @@ paths:
                                       required:
                                         - "type"
                                         - "function"
-                                  "tool_call_id":
-                                    type: "string"
                                 required:
                                   - "role"
                                   - "content"
@@ -11968,9 +11888,6 @@ paths:
                           description: "Only supported on `image` models."
                         "quality":
                           type: "string"
-                          enum:
-                            - "standard"
-                            - "hd"
                           description: "Only supported on `image` models."
                         "style":
                           type: "string"
@@ -12158,8 +12075,6 @@ paths:
                               required:
                                 - "type"
                                 - "function"
-                          "tool_call_id":
-                            type: "string"
                         required:
                           - "role"
                           - "content"
@@ -12324,9 +12239,6 @@ paths:
                             description: "Only supported on `image` models."
                           "quality":
                             type: "string"
-                            enum:
-                              - "standard"
-                              - "hd"
                             description: "Only supported on `image` models."
                           "style":
                             type: "string"
@@ -12514,8 +12426,6 @@ paths:
                                 required:
                                   - "type"
                                   - "function"
-                            "tool_call_id":
-                              type: "string"
                           required:
                             - "role"
                             - "content"
@@ -12700,9 +12610,6 @@ paths:
                             description: "Only supported on `image` models."
                           "quality":
                             type: "string"
-                            enum:
-                              - "standard"
-                              - "hd"
                             description: "Only supported on `image` models."
                           "style":
                             type: "string"
@@ -12890,8 +12797,6 @@ paths:
                                 required:
                                   - "type"
                                   - "function"
-                            "tool_call_id":
-                              type: "string"
                           required:
                             - "role"
                             - "content"
@@ -13066,9 +12971,6 @@ paths:
                           description: "Only supported on `image` models."
                         "quality":
                           type: "string"
-                          enum:
-                            - "standard"
-                            - "hd"
                           description: "Only supported on `image` models."
                         "style":
                           type: "string"
@@ -13256,8 +13158,6 @@ paths:
                               required:
                                 - "type"
                                 - "function"
-                          "tool_call_id":
-                            type: "string"
                         required:
                           - "role"
                           - "content"
@@ -13418,9 +13318,6 @@ paths:
                             description: "Only supported on `image` models."
                           "quality":
                             type: "string"
-                            enum:
-                              - "standard"
-                              - "hd"
                             description: "Only supported on `image` models."
                           "style":
                             type: "string"
@@ -13608,8 +13505,6 @@ paths:
                                 required:
                                   - "type"
                                   - "function"
-                            "tool_call_id":
-                              type: "string"
                           required:
                             - "role"
                             - "content"
@@ -13840,9 +13735,6 @@ paths:
                                       description: "Only supported on `image` models."
                                     "quality":
                                       type: "string"
-                                      enum:
-                                        - "standard"
-                                        - "hd"
                                       description: "Only supported on `image` models."
                                     "style":
                                       type: "string"
@@ -14030,8 +13922,6 @@ paths:
                                           required:
                                             - "type"
                                             - "function"
-                                      "tool_call_id":
-                                        type: "string"
                                     required:
                                       - "role"
                                       - "content"
@@ -14213,9 +14103,6 @@ paths:
                                 description: "Only supported on `image` models."
                               "quality":
                                 type: "string"
-                                enum:
-                                  - "standard"
-                                  - "hd"
                                 description: "Only supported on `image` models."
                               "style":
                                 type: "string"
@@ -14403,8 +14290,6 @@ paths:
                                     required:
                                       - "type"
                                       - "function"
-                                "tool_call_id":
-                                  type: "string"
                               required:
                                 - "role"
                                 - "content"
@@ -14658,7 +14543,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-24T07:14:17.830Z"
+                          default: "2025-04-24T09:58:58.068Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14666,7 +14551,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-24T07:14:17.831Z"
+                              default: "2025-04-24T09:58:58.068Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14790,7 +14675,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14798,7 +14683,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14908,7 +14793,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14916,7 +14801,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15068,7 +14953,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15076,7 +14961,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15278,8 +15163,6 @@ paths:
                                   required:
                                     - "type"
                                     - "function"
-                              "tool_call_id":
-                                type: "string"
                             required:
                               - "role"
                               - "content"
@@ -15300,7 +15183,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-24T07:14:17.830Z"
+                          default: "2025-04-24T09:58:58.068Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -15308,7 +15191,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-24T07:14:17.831Z"
+                              default: "2025-04-24T09:58:58.068Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -15445,8 +15328,6 @@ paths:
                           required:
                             - "type"
                             - "function"
-                      "tool_call_id":
-                        type: "string"
                     required:
                       - "role"
                       - "content"
@@ -15566,8 +15447,6 @@ paths:
                             required:
                               - "type"
                               - "function"
-                        "tool_call_id":
-                          type: "string"
                       required:
                         - "role"
                         - "content"
@@ -15588,7 +15467,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15596,7 +15475,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15742,8 +15621,6 @@ paths:
                             required:
                               - "type"
                               - "function"
-                        "tool_call_id":
-                          type: "string"
                       required:
                         - "role"
                         - "content"
@@ -15764,7 +15641,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15772,7 +15649,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15913,8 +15790,6 @@ paths:
                           required:
                             - "type"
                             - "function"
-                      "tool_call_id":
-                        type: "string"
                     required:
                       - "role"
                       - "content"
@@ -16034,8 +15909,6 @@ paths:
                             required:
                               - "type"
                               - "function"
-                        "tool_call_id":
-                          type: "string"
                       required:
                         - "role"
                         - "content"
@@ -16056,7 +15929,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-24T07:14:17.830Z"
+                    default: "2025-04-24T09:58:58.068Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -16064,7 +15937,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-24T07:14:17.831Z"
+                        default: "2025-04-24T09:58:58.068Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16237,8 +16110,6 @@ paths:
                                 required:
                                   - "type"
                                   - "function"
-                            "tool_call_id":
-                              type: "string"
                           required:
                             - "role"
                             - "content"
@@ -16362,8 +16233,6 @@ paths:
                               required:
                                 - "type"
                                 - "function"
-                          "tool_call_id":
-                            type: "string"
                         required:
                           - "role"
                           - "content"
@@ -16384,7 +16253,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-04-24T07:14:17.830Z"
+                      default: "2025-04-24T09:58:58.068Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -16392,7 +16261,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-04-24T07:14:17.831Z"
+                          default: "2025-04-24T09:58:58.068Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -16490,9 +16359,6 @@ paths:
                         "model":
                           type: "string"
                           description: "The embeddings model used for the knowledge base."
-                        "domain_id":
-                          type: "string"
-                          description: "The project/domain ID of the knowledge base."
                         "path":
                           type: "string"
                           description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -16566,7 +16432,6 @@ paths:
                         - "created"
                         - "key"
                         - "model"
-                        - "domain_id"
                         - "updated"
                       description: "Knowledge Base object"
                   "has_more":
@@ -16680,9 +16545,6 @@ paths:
                   "model":
                     type: "string"
                     description: "The embeddings model used for the knowledge base."
-                  "domain_id":
-                    type: "string"
-                    description: "The project/domain ID of the knowledge base."
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -16756,7 +16618,6 @@ paths:
                   - "created"
                   - "key"
                   - "model"
-                  - "domain_id"
                   - "updated"
                 description: "Knowledge Base object"
       security:
@@ -16801,9 +16662,6 @@ paths:
                   "model":
                     type: "string"
                     description: "The embeddings model used for the knowledge base."
-                  "domain_id":
-                    type: "string"
-                    description: "The project/domain ID of the knowledge base."
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -16877,7 +16735,6 @@ paths:
                   - "created"
                   - "key"
                   - "model"
-                  - "domain_id"
                   - "updated"
                 description: "Knowledge Base object"
         "404":
@@ -16992,9 +16849,6 @@ paths:
                   "model":
                     type: "string"
                     description: "The embeddings model used for the knowledge base."
-                  "domain_id":
-                    type: "string"
-                    description: "The project/domain ID of the knowledge base."
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17068,7 +16922,6 @@ paths:
                   - "created"
                   - "key"
                   - "model"
-                  - "domain_id"
                   - "updated"
                 description: "Knowledge Base object"
       security:
@@ -17174,7 +17027,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JSKABKAKJRQQ0C9Q7EEMTKC5"
+                          default: "01JSKKS3SF97YDZNS5RHV07QCX"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -17337,7 +17190,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JSKABKANWVZWKVNAD0F2E9Z0"
+                    default: "01JSKKS3SG8SKF3N6H4VPEN9R8"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17428,7 +17281,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JSKABKAMF2RSQ7G24WM76PHS"
+                    default: "01JSKKS3SFDS6VB5DH8Q2S0JG2"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17557,7 +17410,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JSKABKAP9E9CQYA0EG4Q3VZV"
+                    default: "01JSKKS3SHSN4R9MWBGJZCV7MA"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
