@@ -1,5 +1,5 @@
 info:
-  title: "[Dev] orq.ai API"
+  title: "orq.ai API"
   version: "2.0"
   description: "orq.ai API documentation"
 security:
@@ -11,7 +11,6 @@ x-speakeasy-timeout: 600000
 externalDocs:
   url: "https://docs.orq.ai"
   description: "orq.ai Documentation"
-x-tagGroups: [{"name": "Core API", "tags": ["Contacts", "Deployments", "Feedback", "Files", "Models", "Memory Stores", "Prompts", "Remote Configs", "Tools"]}, {"name": "Agents API", "tags": ["Agents", "Agent Tasks", "Agent Actions"]}, {"name": "Proxy", "tags": ["Audio", "Chat", "Embeddings", "Batch", "Completions", "Images", "Models", "Moderations"]}]
 x-speakeasy-globals: {"parameters": [{"name": "contactId", "in": "header", "schema": {"type": "string"}, "x-speakeasy-globals-hidden": true}, {"name": "environment", "in": "header", "schema": {"type": "string"}, "x-speakeasy-globals-hidden": true}]}
 components:
   securitySchemes:
@@ -3815,7 +3814,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-30T13:15:35.912Z"
+          default: "2025-04-30T19:47:01.884Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -3878,7 +3877,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-04-30T13:15:35.912Z"
+            default: "2025-04-30T19:47:01.884Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -3958,7 +3957,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-30T13:15:35.912Z"
+          default: "2025-04-30T19:47:01.884Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4004,7 +4003,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-04-30T13:15:35.912Z"
+                default: "2025-04-30T19:47:01.884Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4047,7 +4046,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-04-30T13:15:35.912Z"
+          default: "2025-04-30T19:47:01.884Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6234,6 +6233,39 @@ components:
         "value": {}
       required:
         - "type"
+    "ModelSchema":
+      type: "object"
+      properties:
+        "id":
+          type: "string"
+          description: "The model identifier, which can be referenced in the API endpoints."
+        "created":
+          type: "number"
+          description: "The timestamp of the model creation"
+        "type":
+          type: "string"
+          enum:
+            - "chat"
+            - "completion"
+            - "embedding"
+            - "vision"
+            - "image"
+            - "tts"
+            - "stt"
+            - "rerank"
+            - "moderations"
+          description: "The modality of the model"
+        "owned_by":
+          type: "string"
+          enum:
+            - "vendor"
+            - "workspace"
+          description: "Describe the provider of the model. Every model with `vendor` is publicly available, while models with `workspace` are private."
+      required:
+        - "id"
+        - "created"
+        - "type"
+        - "owned_by"
     "DatasetCreateRequest":
       type: "object"
       properties:
@@ -6374,7 +6406,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-30T13:15:33.173Z"
+          default: "2025-04-30T19:46:58.832Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6382,7 +6414,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-30T13:15:33.173Z"
+              default: "2025-04-30T19:46:58.833Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6492,7 +6524,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-04-30T13:15:33.173Z"
+                default: "2025-04-30T19:46:58.832Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -6500,7 +6532,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.833Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -6607,7 +6639,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-30T13:15:33.173Z"
+          default: "2025-04-30T19:46:58.832Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6615,7 +6647,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-30T13:15:33.173Z"
+              default: "2025-04-30T19:46:58.833Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -6716,7 +6748,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-04-30T13:15:33.173Z"
+          default: "2025-04-30T19:46:58.832Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -6724,7 +6756,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-04-30T13:15:33.173Z"
+              default: "2025-04-30T19:46:58.833Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8240,7 +8272,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -8248,7 +8280,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -11243,7 +11275,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-30T13:15:35.912Z"
+                    default: "2025-04-30T19:47:01.884Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -11331,7 +11363,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-04-30T13:15:35.912Z"
+                          default: "2025-04-30T19:47:01.884Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -11398,7 +11430,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-04-30T13:15:35.912Z"
+                    default: "2025-04-30T19:47:01.884Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -14471,6 +14503,71 @@ paths:
           description: "Internal server error"
       security:
         - ApiKey: []
+  "/v2/models":
+    get:
+      tags:
+        - "Models"
+      x-speakeasy-group: "models"
+      x-speakeasy-name-override: "list"
+      operationId: "ListModels"
+      summary: "List models"
+      description: "Lists the currently available models, and provides basic information about each one such as the owner and availability."
+      responses:
+        "200":
+          description: "A list of model objects."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "object":
+                    type: "string"
+                    enum:
+                      - "list"
+                  "data":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "id":
+                          type: "string"
+                          description: "The model identifier, which can be referenced in the API endpoints."
+                        "created":
+                          type: "number"
+                          description: "The timestamp of the model creation"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "chat"
+                            - "completion"
+                            - "embedding"
+                            - "vision"
+                            - "image"
+                            - "tts"
+                            - "stt"
+                            - "rerank"
+                            - "moderations"
+                          description: "The modality of the model"
+                        "owned_by":
+                          type: "string"
+                          enum:
+                            - "vendor"
+                            - "workspace"
+                          description: "Describe the provider of the model. Every model with `vendor` is publicly available, while models with `workspace` are private."
+                      required:
+                        - "id"
+                        - "created"
+                        - "type"
+                        - "owned_by"
+                      description: "Describes a model offering that can be used with the API"
+                  "has_more":
+                    type: "boolean"
+                required:
+                  - "object"
+                  - "data"
+                  - "has_more"
+      security:
+        - ApiKey: []
   "/v2/datasets":
     get:
       tags:
@@ -14595,7 +14692,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-30T13:15:33.173Z"
+                          default: "2025-04-30T19:46:58.832Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14603,7 +14700,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-30T13:15:33.173Z"
+                              default: "2025-04-30T19:46:58.833Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14727,7 +14824,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14735,7 +14832,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14845,7 +14942,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14853,7 +14950,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15005,7 +15102,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15013,7 +15110,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15237,7 +15334,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-04-30T13:15:33.173Z"
+                          default: "2025-04-30T19:46:58.832Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -15245,7 +15342,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-04-30T13:15:33.173Z"
+                              default: "2025-04-30T19:46:58.833Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -15525,7 +15622,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15533,7 +15630,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15701,7 +15798,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -15709,7 +15806,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -15993,7 +16090,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-04-30T13:15:33.173Z"
+                    default: "2025-04-30T19:46:58.832Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -16001,7 +16098,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-04-30T13:15:33.173Z"
+                        default: "2025-04-30T19:46:58.833Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -16321,7 +16418,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-04-30T13:15:33.173Z"
+                      default: "2025-04-30T19:46:58.832Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -16329,7 +16426,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-04-30T13:15:33.173Z"
+                          default: "2025-04-30T19:46:58.833Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -17111,7 +17208,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JT3DDCPG72HZH40T400ZB2F0"
+                          default: "01JT43T4EW8B1N0T5D6BWGSZ2G"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -17274,7 +17371,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JT3DDCPNDS4H7RGDDRXYZ8BG"
+                    default: "01JT43T4F0HADQBFQ9B3D6RFFH"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17365,7 +17462,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JT3DDCPMG7PEEXGHHNZ9N587"
+                    default: "01JT43T4EX5VN9Q1VM78HD1AT7"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -17494,7 +17591,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JT3DDCPSEAMFKV8E30PEDZYE"
+                    default: "01JT43T4F11E6XQCSQKWJ4GRTK"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
