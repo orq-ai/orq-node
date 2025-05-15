@@ -132,7 +132,7 @@ async function run() {
         },
       ],
     },
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   });
 
   // Handle the result
@@ -190,7 +190,7 @@ async function run() {
         },
       ],
     },
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   });
 
   if (!res.ok) {
@@ -318,7 +318,7 @@ async function run() {
   const result = await orq.prompts.update({
     id: "<id>",
     requestBody: {
-      path: "Customer Service/Billing/Refund",
+      path: "Default",
     },
   });
 
@@ -347,7 +347,7 @@ async function run() {
   const res = await promptsUpdate(orq, {
     id: "<id>",
     requestBody: {
-      path: "Customer Service/Billing/Refund",
+      path: "Default",
     },
   });
 

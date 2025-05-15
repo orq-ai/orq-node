@@ -179,6 +179,10 @@ export type CreateKnowledgeResponseBody = {
    */
   model: string;
   /**
+   * The project/domain ID of the knowledge base.
+   */
+  domainId: string;
+  /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
   path?: string | undefined;
@@ -746,6 +750,7 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
   description: z.string().optional(),
   key: z.string(),
   model: z.string(),
+  domain_id: z.string(),
   path: z.string().optional(),
   retrieval_settings: z.lazy(() =>
     CreateKnowledgeRetrievalSettings$inboundSchema
@@ -756,6 +761,7 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "domain_id": "domainId",
     "retrieval_settings": "retrievalSettings",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -769,6 +775,7 @@ export type CreateKnowledgeResponseBody$Outbound = {
   description?: string | undefined;
   key: string;
   model: string;
+  domain_id: string;
   path?: string | undefined;
   retrieval_settings?: CreateKnowledgeRetrievalSettings$Outbound | undefined;
   created_by_id?: string | null | undefined;
@@ -787,6 +794,7 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
   description: z.string().optional(),
   key: z.string(),
   model: z.string(),
+  domainId: z.string(),
   path: z.string().optional(),
   retrievalSettings: z.lazy(() =>
     CreateKnowledgeRetrievalSettings$outboundSchema
@@ -797,6 +805,7 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    domainId: "domain_id",
     retrievalSettings: "retrieval_settings",
     createdById: "created_by_id",
     updatedById: "updated_by_id",

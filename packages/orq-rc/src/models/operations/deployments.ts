@@ -123,18 +123,6 @@ export const DeploymentsFormat = {
  */
 export type DeploymentsFormat = ClosedEnum<typeof DeploymentsFormat>;
 
-/**
- * Only supported on `image` models.
- */
-export const DeploymentsQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type DeploymentsQuality = ClosedEnum<typeof DeploymentsQuality>;
-
 export const DeploymentsResponseFormatType = {
   JsonObject: "json_object",
 } as const;
@@ -269,7 +257,7 @@ export type DeploymentsModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: DeploymentsQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -430,6 +418,7 @@ export type DeploymentsMessages = {
    */
   content: string | Array<Deployments21 | Deployments22>;
   toolCalls?: Array<DeploymentsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type DeploymentsPromptConfig = {
@@ -845,27 +834,6 @@ export namespace DeploymentsFormat$ {
 }
 
 /** @internal */
-export const DeploymentsQuality$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsQuality
-> = z.nativeEnum(DeploymentsQuality);
-
-/** @internal */
-export const DeploymentsQuality$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentsQuality
-> = DeploymentsQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsQuality$ {
-  /** @deprecated use `DeploymentsQuality$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsQuality$inboundSchema;
-  /** @deprecated use `DeploymentsQuality$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsQuality$outboundSchema;
-}
-
-/** @internal */
 export const DeploymentsResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentsResponseFormatType
 > = z.nativeEnum(DeploymentsResponseFormatType);
@@ -1228,7 +1196,7 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: DeploymentsFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: DeploymentsQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1287,7 +1255,7 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: DeploymentsFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: DeploymentsQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1871,9 +1839,11 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => DeploymentsToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1882,6 +1852,7 @@ export type DeploymentsMessages$Outbound = {
   role: string;
   content: string | Array<Deployments21$Outbound | Deployments22$Outbound>;
   tool_calls?: Array<DeploymentsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1900,9 +1871,11 @@ export const DeploymentsMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => DeploymentsToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 

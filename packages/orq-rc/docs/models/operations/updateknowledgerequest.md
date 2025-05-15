@@ -8,7 +8,7 @@ import { UpdateKnowledgeRequest } from "@orq-ai/node/models/operations";
 let value: UpdateKnowledgeRequest = {
   knowledgeId: "<id>",
   requestBody: {
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   },
 };
 ```

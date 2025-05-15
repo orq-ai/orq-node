@@ -16,9 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentStreamContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://uneven-metal.com",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "wav",
     },
   },
 ];

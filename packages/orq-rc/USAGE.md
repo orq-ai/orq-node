@@ -7,7 +7,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2TracesSessionsCount();
+  const result = await orq.contacts.create({
+    externalId: "<id>",
+  });
 
   // Handle the result
   console.log(result);

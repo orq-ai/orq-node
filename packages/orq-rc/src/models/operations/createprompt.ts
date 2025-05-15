@@ -42,18 +42,6 @@ export const CreatePromptFormat = {
  */
 export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
 
-/**
- * Only supported on `image` models.
- */
-export const Quality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type Quality = ClosedEnum<typeof Quality>;
-
 export const CreatePromptResponseFormatType = {
   JsonObject: "json_object",
 } as const;
@@ -178,7 +166,7 @@ export type ModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: Quality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -331,6 +319,7 @@ export type CreatePromptMessages = {
    */
   content: string | Array<CreatePrompt21 | CreatePrompt22>;
   toolCalls?: Array<CreatePromptToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -466,18 +455,6 @@ export type CreatePromptPromptsFormat = ClosedEnum<
   typeof CreatePromptPromptsFormat
 >;
 
-/**
- * Only supported on `image` models.
- */
-export const CreatePromptQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type CreatePromptQuality = ClosedEnum<typeof CreatePromptQuality>;
-
 export const CreatePromptResponseFormatPromptsResponseType = {
   JsonObject: "json_object",
 } as const;
@@ -612,7 +589,7 @@ export type CreatePromptModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: CreatePromptQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -781,6 +758,7 @@ export type CreatePromptPromptsMessages = {
    */
   content: string | Array<CreatePrompt2Prompts1 | CreatePrompt2Prompts2>;
   toolCalls?: Array<CreatePromptPromptsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -927,25 +905,6 @@ export namespace CreatePromptFormat$ {
   export const inboundSchema = CreatePromptFormat$inboundSchema;
   /** @deprecated use `CreatePromptFormat$outboundSchema` instead. */
   export const outboundSchema = CreatePromptFormat$outboundSchema;
-}
-
-/** @internal */
-export const Quality$inboundSchema: z.ZodNativeEnum<typeof Quality> = z
-  .nativeEnum(Quality);
-
-/** @internal */
-export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> =
-  Quality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Quality$ {
-  /** @deprecated use `Quality$inboundSchema` instead. */
-  export const inboundSchema = Quality$inboundSchema;
-  /** @deprecated use `Quality$outboundSchema` instead. */
-  export const outboundSchema = Quality$outboundSchema;
 }
 
 /** @internal */
@@ -1292,7 +1251,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: CreatePromptFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: Quality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1351,7 +1310,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: CreatePromptFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: Quality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1926,9 +1885,11 @@ export const CreatePromptMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => CreatePromptToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1937,6 +1898,7 @@ export type CreatePromptMessages$Outbound = {
   role: string;
   content: string | Array<CreatePrompt21$Outbound | CreatePrompt22$Outbound>;
   tool_calls?: Array<CreatePromptToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1955,9 +1917,11 @@ export const CreatePromptMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => CreatePromptToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -2310,27 +2274,6 @@ export namespace CreatePromptPromptsFormat$ {
   export const inboundSchema = CreatePromptPromptsFormat$inboundSchema;
   /** @deprecated use `CreatePromptPromptsFormat$outboundSchema` instead. */
   export const outboundSchema = CreatePromptPromptsFormat$outboundSchema;
-}
-
-/** @internal */
-export const CreatePromptQuality$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptQuality
-> = z.nativeEnum(CreatePromptQuality);
-
-/** @internal */
-export const CreatePromptQuality$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptQuality
-> = CreatePromptQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePromptQuality$ {
-  /** @deprecated use `CreatePromptQuality$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptQuality$inboundSchema;
-  /** @deprecated use `CreatePromptQuality$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptQuality$outboundSchema;
 }
 
 /** @internal */
@@ -2703,7 +2646,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: CreatePromptPromptsFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: CreatePromptQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -2762,7 +2705,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: CreatePromptPromptsFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: CreatePromptQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -3364,9 +3307,11 @@ export const CreatePromptPromptsMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -3377,6 +3322,7 @@ export type CreatePromptPromptsMessages$Outbound = {
     | string
     | Array<CreatePrompt2Prompts1$Outbound | CreatePrompt2Prompts2$Outbound>;
   tool_calls?: Array<CreatePromptPromptsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -3395,9 +3341,11 @@ export const CreatePromptPromptsMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 

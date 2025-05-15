@@ -18,6 +18,7 @@ import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
 import { tool$datasetsCreateDatapoints } from "./tools/datasetsCreateDatapoints.js";
+import { tool$datasetsCreateExperiment } from "./tools/datasetsCreateExperiment.js";
 import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
 import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
 import { tool$datasetsList } from "./tools/datasetsList.js";
@@ -26,6 +27,7 @@ import { tool$datasetsRetrieve } from "./tools/datasetsRetrieve.js";
 import { tool$datasetsRetrieveDatapoint } from "./tools/datasetsRetrieveDatapoint.js";
 import { tool$datasetsUpdate } from "./tools/datasetsUpdate.js";
 import { tool$datasetsUpdateDatapoint } from "./tools/datasetsUpdateDatapoint.js";
+import { tool$deploymentsCreateExperiment } from "./tools/deploymentsCreateExperiment.js";
 import { tool$deploymentsGetConfig } from "./tools/deploymentsGetConfig.js";
 import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
@@ -51,22 +53,7 @@ import { tool$knowledgeRetrieveDatasource } from "./tools/knowledgeRetrieveDatas
 import { tool$knowledgeUpdate } from "./tools/knowledgeUpdate.js";
 import { tool$knowledgeUpdateChunk } from "./tools/knowledgeUpdateChunk.js";
 import { tool$knowledgeUpdateDatasource } from "./tools/knowledgeUpdateDatasource.js";
-import { tool$memoryStoresCreate } from "./tools/memoryStoresCreate.js";
-import { tool$memoryStoresCreateDocument } from "./tools/memoryStoresCreateDocument.js";
-import { tool$memoryStoresCreateMemory } from "./tools/memoryStoresCreateMemory.js";
-import { tool$memoryStoresDelete } from "./tools/memoryStoresDelete.js";
-import { tool$memoryStoresDeleteDocument } from "./tools/memoryStoresDeleteDocument.js";
-import { tool$memoryStoresDeleteMemory } from "./tools/memoryStoresDeleteMemory.js";
-import { tool$memoryStoresList } from "./tools/memoryStoresList.js";
-import { tool$memoryStoresListDocuments } from "./tools/memoryStoresListDocuments.js";
-import { tool$memoryStoresListMemories } from "./tools/memoryStoresListMemories.js";
-import { tool$memoryStoresRetrieve } from "./tools/memoryStoresRetrieve.js";
-import { tool$memoryStoresRetrieveDocument } from "./tools/memoryStoresRetrieveDocument.js";
-import { tool$memoryStoresRetrieveMemory } from "./tools/memoryStoresRetrieveMemory.js";
-import { tool$memoryStoresUpdate } from "./tools/memoryStoresUpdate.js";
-import { tool$memoryStoresUpdateDocument } from "./tools/memoryStoresUpdateDocument.js";
-import { tool$memoryStoresUpdateMemory } from "./tools/memoryStoresUpdateMemory.js";
-import { tool$postV2TracesSessionsCount } from "./tools/postV2TracesSessionsCount.js";
+import { tool$modelsList } from "./tools/modelsList.js";
 import { tool$promptsCreate } from "./tools/promptsCreate.js";
 import { tool$promptsDelete } from "./tools/promptsDelete.js";
 import { tool$promptsGetVersion } from "./tools/promptsGetVersion.js";
@@ -75,16 +62,6 @@ import { tool$promptsListVersions } from "./tools/promptsListVersions.js";
 import { tool$promptsRetrieve } from "./tools/promptsRetrieve.js";
 import { tool$promptsUpdate } from "./tools/promptsUpdate.js";
 import { tool$remoteconfigsRetrieve } from "./tools/remoteconfigsRetrieve.js";
-import { tool$sessionsCreate } from "./tools/sessionsCreate.js";
-import { tool$sessionsDelete } from "./tools/sessionsDelete.js";
-import { tool$sessionsGet } from "./tools/sessionsGet.js";
-import { tool$sessionsList } from "./tools/sessionsList.js";
-import { tool$sessionsUpdate } from "./tools/sessionsUpdate.js";
-import { tool$toolsCreate } from "./tools/toolsCreate.js";
-import { tool$toolsDelete } from "./tools/toolsDelete.js";
-import { tool$toolsList } from "./tools/toolsList.js";
-import { tool$toolsRetrieve } from "./tools/toolsRetrieve.js";
-import { tool$toolsUpdate } from "./tools/toolsUpdate.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -98,7 +75,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.4.0-rc.37",
+    version: "3.6.0-rc.7",
   });
 
   const client = new OrqCore({
@@ -130,13 +107,13 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
-  tool(tool$postV2TracesSessionsCount);
   tool(tool$contactsCreate);
   tool(tool$feedbackCreate);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsStream);
+  tool(tool$deploymentsCreateExperiment);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
@@ -149,31 +126,13 @@ export function createMCPServer(deps: {
   tool(tool$promptsListVersions);
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);
-  tool(tool$memoryStoresList);
-  tool(tool$memoryStoresCreate);
-  tool(tool$memoryStoresRetrieve);
-  tool(tool$memoryStoresUpdate);
-  tool(tool$memoryStoresDelete);
-  tool(tool$memoryStoresListMemories);
-  tool(tool$memoryStoresCreateMemory);
-  tool(tool$memoryStoresRetrieveMemory);
-  tool(tool$memoryStoresUpdateMemory);
-  tool(tool$memoryStoresDeleteMemory);
-  tool(tool$memoryStoresListDocuments);
-  tool(tool$memoryStoresCreateDocument);
-  tool(tool$memoryStoresRetrieveDocument);
-  tool(tool$memoryStoresUpdateDocument);
-  tool(tool$memoryStoresDeleteDocument);
-  tool(tool$toolsList);
-  tool(tool$toolsCreate);
-  tool(tool$toolsUpdate);
-  tool(tool$toolsDelete);
-  tool(tool$toolsRetrieve);
+  tool(tool$modelsList);
   tool(tool$datasetsList);
   tool(tool$datasetsCreate);
   tool(tool$datasetsRetrieve);
   tool(tool$datasetsUpdate);
   tool(tool$datasetsDelete);
+  tool(tool$datasetsCreateExperiment);
   tool(tool$datasetsListDatapoints);
   tool(tool$datasetsCreateDatapoint);
   tool(tool$datasetsRetrieveDatapoint);
@@ -196,11 +155,6 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
-  tool(tool$sessionsCreate);
-  tool(tool$sessionsDelete);
-  tool(tool$sessionsGet);
-  tool(tool$sessionsUpdate);
-  tool(tool$sessionsList);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

@@ -12,7 +12,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-[Dev] orq.ai API: orq.ai API documentation
+orq.ai API: orq.ai API documentation
 
 For more information about the API: [orq.ai Documentation](https://docs.orq.ai)
 <!-- End Summary [summary] -->
@@ -181,7 +181,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2TracesSessionsCount();
+  const result = await orq.contacts.create({
+    externalId: "<id>",
+  });
 
   // Handle the result
   console.log(result);
@@ -212,7 +214,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2TracesSessionsCount();
+  const result = await orq.contacts.create({
+    externalId: "<id>",
+  });
 
   // Handle the result
   console.log(result);
@@ -240,6 +244,7 @@ run();
 * [retrieve](docs/sdks/datasets/README.md#retrieve) - Retrieve a dataset
 * [update](docs/sdks/datasets/README.md#update) - Update a dataset
 * [delete](docs/sdks/datasets/README.md#delete) - Delete a dataset
+* [createExperiment](docs/sdks/datasets/README.md#createexperiment) - Create an experiment from a dataset
 * [listDatapoints](docs/sdks/datasets/README.md#listdatapoints) - List datapoints
 * [createDatapoint](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
 * [retrieveDatapoint](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
@@ -254,6 +259,7 @@ run();
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
 * [stream](docs/sdks/deployments/README.md#stream) - Stream
+* [createExperiment](docs/sdks/deployments/README.md#createexperiment) - Create an experiment from a deployment
 
 #### [deployments.metrics](docs/sdks/metrics/README.md)
 
@@ -288,27 +294,10 @@ run();
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 * [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 
-### [memoryStores](docs/sdks/memorystores/README.md)
+### [models](docs/sdks/models/README.md)
 
-* [list](docs/sdks/memorystores/README.md#list) - List memory stores
-* [create](docs/sdks/memorystores/README.md#create) - Create memory store
-* [retrieve](docs/sdks/memorystores/README.md#retrieve) - Retrieve memory store
-* [update](docs/sdks/memorystores/README.md#update) - Update memory store
-* [delete](docs/sdks/memorystores/README.md#delete) - Delete memory store
-* [listMemories](docs/sdks/memorystores/README.md#listmemories) - List all memories
-* [createMemory](docs/sdks/memorystores/README.md#creatememory) - Create a new memory
-* [retrieveMemory](docs/sdks/memorystores/README.md#retrievememory) - Retrieve a specific memory
-* [updateMemory](docs/sdks/memorystores/README.md#updatememory) - Update a specific memory
-* [deleteMemory](docs/sdks/memorystores/README.md#deletememory) - Delete a specific memory
-* [listDocuments](docs/sdks/memorystores/README.md#listdocuments) - List all documents for a memory
-* [createDocument](docs/sdks/memorystores/README.md#createdocument) - Create a new memory document
-* [retrieveDocument](docs/sdks/memorystores/README.md#retrievedocument) - Retrieve a specific memory document
-* [updateDocument](docs/sdks/memorystores/README.md#updatedocument) - Update a specific memory document
-* [deleteDocument](docs/sdks/memorystores/README.md#deletedocument) - Delete a specific memory document
+* [list](docs/sdks/models/README.md#list) - List models
 
-### [Orq SDK](docs/sdks/orq/README.md)
-
-* [postV2TracesSessionsCount](docs/sdks/orq/README.md#postv2tracessessionscount) - Get total count of sessions
 
 ### [prompts](docs/sdks/prompts/README.md)
 
@@ -323,22 +312,6 @@ run();
 ### [remoteconfigs](docs/sdks/remoteconfigs/README.md)
 
 * [retrieve](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
-
-### [sessions](docs/sdks/sessions/README.md)
-
-* [create](docs/sdks/sessions/README.md#create) - Create Trace Session
-* [delete](docs/sdks/sessions/README.md#delete) - Delete Trace Session
-* [get](docs/sdks/sessions/README.md#get) - Get Trace Session
-* [update](docs/sdks/sessions/README.md#update) - Update Trace Session
-* [list](docs/sdks/sessions/README.md#list) - List sessions
-
-### [tools](docs/sdks/tools/README.md)
-
-* [list](docs/sdks/tools/README.md#list) - List tools
-* [create](docs/sdks/tools/README.md#create) - Create tool
-* [update](docs/sdks/tools/README.md#update) - Update tool
-* [delete](docs/sdks/tools/README.md#delete) - Delete tool
-* [retrieve](docs/sdks/tools/README.md#retrieve) - Retrieve tool
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -363,6 +336,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
 - [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
 - [`datasetsCreateDatapoints`](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
+- [`datasetsCreateExperiment`](docs/sdks/datasets/README.md#createexperiment) - Create an experiment from a dataset
 - [`datasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
 - [`datasetsDeleteDatapoint`](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
 - [`datasetsList`](docs/sdks/datasets/README.md#list) - List datasets
@@ -371,6 +345,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`datasetsRetrieveDatapoint`](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
 - [`datasetsUpdate`](docs/sdks/datasets/README.md#update) - Update a dataset
 - [`datasetsUpdateDatapoint`](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
+- [`deploymentsCreateExperiment`](docs/sdks/deployments/README.md#createexperiment) - Create an experiment from a deployment
 - [`deploymentsGetConfig`](docs/sdks/deployments/README.md#getconfig) - Get config
 - [`deploymentsInvoke`](docs/sdks/deployments/README.md#invoke) - Invoke
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
@@ -396,22 +371,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 - [`knowledgeUpdateChunk`](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 - [`knowledgeUpdateDatasource`](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
-- [`memoryStoresCreate`](docs/sdks/memorystores/README.md#create) - Create memory store
-- [`memoryStoresCreateDocument`](docs/sdks/memorystores/README.md#createdocument) - Create a new memory document
-- [`memoryStoresCreateMemory`](docs/sdks/memorystores/README.md#creatememory) - Create a new memory
-- [`memoryStoresDelete`](docs/sdks/memorystores/README.md#delete) - Delete memory store
-- [`memoryStoresDeleteDocument`](docs/sdks/memorystores/README.md#deletedocument) - Delete a specific memory document
-- [`memoryStoresDeleteMemory`](docs/sdks/memorystores/README.md#deletememory) - Delete a specific memory
-- [`memoryStoresList`](docs/sdks/memorystores/README.md#list) - List memory stores
-- [`memoryStoresListDocuments`](docs/sdks/memorystores/README.md#listdocuments) - List all documents for a memory
-- [`memoryStoresListMemories`](docs/sdks/memorystores/README.md#listmemories) - List all memories
-- [`memoryStoresRetrieve`](docs/sdks/memorystores/README.md#retrieve) - Retrieve memory store
-- [`memoryStoresRetrieveDocument`](docs/sdks/memorystores/README.md#retrievedocument) - Retrieve a specific memory document
-- [`memoryStoresRetrieveMemory`](docs/sdks/memorystores/README.md#retrievememory) - Retrieve a specific memory
-- [`memoryStoresUpdate`](docs/sdks/memorystores/README.md#update) - Update memory store
-- [`memoryStoresUpdateDocument`](docs/sdks/memorystores/README.md#updatedocument) - Update a specific memory document
-- [`memoryStoresUpdateMemory`](docs/sdks/memorystores/README.md#updatememory) - Update a specific memory
-- [`postV2TracesSessionsCount`](docs/sdks/orq/README.md#postv2tracessessionscount) - Get total count of sessions
+- [`modelsList`](docs/sdks/models/README.md#list) - List models
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
 - [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version
@@ -420,16 +380,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`promptsRetrieve`](docs/sdks/prompts/README.md#retrieve) - Retrieve a prompt
 - [`promptsUpdate`](docs/sdks/prompts/README.md#update) - Update a prompt
 - [`remoteconfigsRetrieve`](docs/sdks/remoteconfigs/README.md#retrieve) - Retrieve a remote config
-- [`sessionsCreate`](docs/sdks/sessions/README.md#create) - Create Trace Session
-- [`sessionsDelete`](docs/sdks/sessions/README.md#delete) - Delete Trace Session
-- [`sessionsGet`](docs/sdks/sessions/README.md#get) - Get Trace Session
-- [`sessionsList`](docs/sdks/sessions/README.md#list) - List sessions
-- [`sessionsUpdate`](docs/sdks/sessions/README.md#update) - Update Trace Session
-- [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
-- [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
-- [`toolsList`](docs/sdks/tools/README.md#list) - List tools
-- [`toolsRetrieve`](docs/sdks/tools/README.md#retrieve) - Retrieve tool
-- [`toolsUpdate`](docs/sdks/tools/README.md#update) - Update tool
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -519,7 +469,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2TracesSessionsCount({
+  const result = await orq.contacts.create({
+    externalId: "<id>",
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -559,7 +511,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2TracesSessionsCount();
+  const result = await orq.contacts.create({
+    externalId: "<id>",
+  });
 
   // Handle the result
   console.log(result);
@@ -652,7 +606,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.postV2TracesSessionsCount();
+  const result = await orq.contacts.create({
+    externalId: "<id>",
+  });
 
   // Handle the result
   console.log(result);

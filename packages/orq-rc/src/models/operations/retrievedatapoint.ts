@@ -116,6 +116,7 @@ export type RetrieveDatapointMessages = {
    */
   content: string | Array<RetrieveDatapoint21 | RetrieveDatapoint22>;
   toolCalls?: Array<RetrieveDatapointToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -748,9 +749,11 @@ export const RetrieveDatapointMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => RetrieveDatapointToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -761,6 +764,7 @@ export type RetrieveDatapointMessages$Outbound = {
     | string
     | Array<RetrieveDatapoint21$Outbound | RetrieveDatapoint22$Outbound>;
   tool_calls?: Array<RetrieveDatapointToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -779,9 +783,11 @@ export const RetrieveDatapointMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => RetrieveDatapointToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -834,7 +840,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-04-18T08:27:42.154Z",
+    "2025-05-15T06:43:27.397Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -877,7 +883,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-04-18T08:27:42.154Z"))
+  updated: z.date().default(() => new Date("2025-05-15T06:43:27.397Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

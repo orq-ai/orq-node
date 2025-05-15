@@ -9,11 +9,11 @@ import { DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
 
 let value:
   DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType =
-    "refusal";
+    "text";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"text"
 ```

@@ -5,12 +5,14 @@
 ```typescript
 import { FileT } from "@orq-ai/node/models/operations";
 
-// No examples available for this model
+let value: FileT = {
+  fileData: "<value>",
+};
 ```
 
 ## Fields
 
-| Field                        | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `fileName`                   | *string*                     | :heavy_check_mark:           | N/A                          |
-| `content`                    | *ReadableStream<Uint8Array>* | :heavy_check_mark:           | N/A                          |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `fileData`                                                                         | *string*                                                                           | :heavy_check_mark:                                                                 | The base64 encoded file data, used when passing the file to the model as a string. |
+| `filename`                                                                         | *string*                                                                           | :heavy_minus_sign:                                                                 | The name of the file, used when passing the file to the model as a string.         |

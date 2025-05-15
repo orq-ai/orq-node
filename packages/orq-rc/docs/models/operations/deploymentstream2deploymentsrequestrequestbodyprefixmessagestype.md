@@ -8,11 +8,11 @@ The type of the content part.
 import { DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType =
-  "refusal";
+  "text";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"text"
 ```

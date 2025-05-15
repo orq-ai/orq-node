@@ -110,7 +110,7 @@ async function run() {
   const result = await orq.knowledge.create({
     key: "<key>",
     embeddingModel: "<value>",
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   });
 
   // Handle the result
@@ -138,7 +138,7 @@ async function run() {
   const res = await knowledgeCreate(orq, {
     key: "<key>",
     embeddingModel: "<value>",
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   });
 
   if (!res.ok) {
@@ -266,7 +266,7 @@ async function run() {
   const result = await orq.knowledge.update({
     knowledgeId: "<id>",
     requestBody: {
-      path: "Customer Service/Billing/Refund",
+      path: "Default",
     },
   });
 
@@ -295,7 +295,7 @@ async function run() {
   const res = await knowledgeUpdate(orq, {
     knowledgeId: "<id>",
     requestBody: {
-      path: "Customer Service/Billing/Refund",
+      path: "Default",
     },
   });
 

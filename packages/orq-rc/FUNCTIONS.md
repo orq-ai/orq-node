@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { postV2TracesSessionsCount } from "@orq-ai/node/funcs/postV2TracesSessionsCount.js";
+import { contactsCreate } from "@orq-ai/node/funcs/contactsCreate.js";
 import { SDKValidationError } from "@orq-ai/node/models/errors/sdkvalidationerror.js";
 
 // Use `OrqCore` for best tree-shaking performance.
@@ -30,7 +30,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await postV2TracesSessionsCount(orq);
+  const res = await contactsCreate(orq, {
+    externalId: "<id>",
+  });
 
   switch (true) {
     case res.ok:

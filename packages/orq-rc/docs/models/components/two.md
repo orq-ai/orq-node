@@ -35,3 +35,14 @@ const value: components.Three = {
 };
 ```
 
+### `components.Four`
+
+```typescript
+const value: components.Four = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

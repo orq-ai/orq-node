@@ -54,18 +54,6 @@ export const GetOnePromptFormat = {
  */
 export type GetOnePromptFormat = ClosedEnum<typeof GetOnePromptFormat>;
 
-/**
- * Only supported on `image` models.
- */
-export const GetOnePromptQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type GetOnePromptQuality = ClosedEnum<typeof GetOnePromptQuality>;
-
 export const GetOnePromptResponseFormatPromptsType = {
   JsonObject: "json_object",
 } as const;
@@ -200,7 +188,7 @@ export type GetOnePromptModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: GetOnePromptQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -363,6 +351,7 @@ export type GetOnePromptMessages = {
    */
   content: string | Array<GetOnePrompt21 | GetOnePrompt22>;
   toolCalls?: Array<GetOnePromptToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -586,27 +575,6 @@ export namespace GetOnePromptFormat$ {
   export const inboundSchema = GetOnePromptFormat$inboundSchema;
   /** @deprecated use `GetOnePromptFormat$outboundSchema` instead. */
   export const outboundSchema = GetOnePromptFormat$outboundSchema;
-}
-
-/** @internal */
-export const GetOnePromptQuality$inboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptQuality
-> = z.nativeEnum(GetOnePromptQuality);
-
-/** @internal */
-export const GetOnePromptQuality$outboundSchema: z.ZodNativeEnum<
-  typeof GetOnePromptQuality
-> = GetOnePromptQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOnePromptQuality$ {
-  /** @deprecated use `GetOnePromptQuality$inboundSchema` instead. */
-  export const inboundSchema = GetOnePromptQuality$inboundSchema;
-  /** @deprecated use `GetOnePromptQuality$outboundSchema` instead. */
-  export const outboundSchema = GetOnePromptQuality$outboundSchema;
 }
 
 /** @internal */
@@ -977,7 +945,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetOnePromptFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetOnePromptQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1036,7 +1004,7 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetOnePromptFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetOnePromptQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1620,9 +1588,11 @@ export const GetOnePromptMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => GetOnePromptToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1631,6 +1601,7 @@ export type GetOnePromptMessages$Outbound = {
   role: string;
   content: string | Array<GetOnePrompt21$Outbound | GetOnePrompt22$Outbound>;
   tool_calls?: Array<GetOnePromptToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1649,9 +1620,11 @@ export const GetOnePromptMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => GetOnePromptToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 

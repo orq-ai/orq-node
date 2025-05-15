@@ -55,20 +55,6 @@ export const GetPromptVersionFormat = {
  */
 export type GetPromptVersionFormat = ClosedEnum<typeof GetPromptVersionFormat>;
 
-/**
- * Only supported on `image` models.
- */
-export const GetPromptVersionQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type GetPromptVersionQuality = ClosedEnum<
-  typeof GetPromptVersionQuality
->;
-
 export const GetPromptVersionResponseFormatPromptsType = {
   JsonObject: "json_object",
 } as const;
@@ -203,7 +189,7 @@ export type GetPromptVersionModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: GetPromptVersionQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -366,6 +352,7 @@ export type GetPromptVersionMessages = {
    */
   content: string | Array<GetPromptVersion21 | GetPromptVersion22>;
   toolCalls?: Array<GetPromptVersionToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -577,27 +564,6 @@ export namespace GetPromptVersionFormat$ {
   export const inboundSchema = GetPromptVersionFormat$inboundSchema;
   /** @deprecated use `GetPromptVersionFormat$outboundSchema` instead. */
   export const outboundSchema = GetPromptVersionFormat$outboundSchema;
-}
-
-/** @internal */
-export const GetPromptVersionQuality$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionQuality
-> = z.nativeEnum(GetPromptVersionQuality);
-
-/** @internal */
-export const GetPromptVersionQuality$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionQuality
-> = GetPromptVersionQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionQuality$ {
-  /** @deprecated use `GetPromptVersionQuality$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionQuality$inboundSchema;
-  /** @deprecated use `GetPromptVersionQuality$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionQuality$outboundSchema;
 }
 
 /** @internal */
@@ -980,7 +946,7 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetPromptVersionFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetPromptVersionQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1039,7 +1005,7 @@ export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetPromptVersionFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetPromptVersionQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1631,9 +1597,11 @@ export const GetPromptVersionMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => GetPromptVersionToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1644,6 +1612,7 @@ export type GetPromptVersionMessages$Outbound = {
     | string
     | Array<GetPromptVersion21$Outbound | GetPromptVersion22$Outbound>;
   tool_calls?: Array<GetPromptVersionToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1662,9 +1631,11 @@ export const GetPromptVersionMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => GetPromptVersionToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 

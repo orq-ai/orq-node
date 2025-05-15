@@ -35,3 +35,14 @@ const value: operations.Three = {
 };
 ```
 
+### `operations.Four`
+
+```typescript
+const value: operations.Four = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

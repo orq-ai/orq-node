@@ -7,11 +7,11 @@ The type of the content part.
 ```typescript
 import { DeploymentGetConfig2DeploymentsRequestType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfig2DeploymentsRequestType = "refusal";
+let value: DeploymentGetConfig2DeploymentsRequestType = "text";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"text"
 ```

@@ -5,11 +5,17 @@
 ```typescript
 import { Four } from "@orq-ai/node/models/operations";
 
-let value: Four = "cohere/embed-english-v3.0";
+let value: Four = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"cohere/embed-english-v3.0"
-```
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                           | [operations.DeploymentGetConfig2DeploymentsType](../../models/operations/deploymentgetconfig2deploymentstype.md) | :heavy_check_mark:                                                                                               | The type of the content part. Always `file`.                                                                     |
+| `file`                                                                                                           | [operations.FileT](../../models/operations/filet.md)                                                             | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 511bac26e46e10a474939592116711f2
+  docChecksum: aa533abbeb64228afdf4d29513125340
   docVersion: "2.0"
-  speakeasyVersion: 1.535.1
-  generationVersion: 2.585.2
-  releaseVersion: 3.4.0-rc.37
-  configChecksum: 71b187927d4144ec0bce4b5576e4fdcf
+  speakeasyVersion: 1.545.0
+  generationVersion: 2.599.0
+  releaseVersion: 3.6.0-rc.7
+  configChecksum: c2c97589aec4d5b7017ee52e0b5b53dc
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -15,14 +15,14 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.6
+    core: 3.21.7
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.82.5
     globals: 2.82.2
     groups: 2.81.2
     hiddenGlobals: 0.1.0
@@ -53,12 +53,14 @@ generatedFiles:
   - docs/models/components/content2.md
   - docs/models/components/deployments.md
   - docs/models/components/deployments22.md
+  - docs/models/components/deployments2messages3content4type.md
   - docs/models/components/deployments2messages3contenttype.md
   - docs/models/components/deployments2messages3type.md
   - docs/models/components/deployments2messages4contenttype.md
   - docs/models/components/deployments2messages4type.md
   - docs/models/components/deployments2messagestype.md
   - docs/models/components/deployments2prefixmessages3type.md
+  - docs/models/components/deployments2prefixmessages4contenttype.md
   - docs/models/components/deployments2prefixmessages4type.md
   - docs/models/components/deployments2prefixmessagestype.md
   - docs/models/components/deployments2type.md
@@ -77,7 +79,9 @@ generatedFiles:
   - docs/models/components/detail.md
   - docs/models/components/developermessage.md
   - docs/models/components/documents.md
+  - docs/models/components/filet.md
   - docs/models/components/format.md
+  - docs/models/components/four.md
   - docs/models/components/functiont.md
   - docs/models/components/imageurl.md
   - docs/models/components/inputaudio.md
@@ -113,7 +117,9 @@ generatedFiles:
   - docs/models/components/two1.md
   - docs/models/components/two2.md
   - docs/models/components/two3.md
+  - docs/models/components/two4.md
   - docs/models/components/twodetail.md
+  - docs/models/components/twofile.md
   - docs/models/components/twoformat.md
   - docs/models/components/twoimageurl.md
   - docs/models/components/twoinputaudio.md
@@ -126,11 +132,8 @@ generatedFiles:
   - docs/models/errors/honoapierror.md
   - docs/models/errors/updatepromptresponsebody.md
   - docs/models/operations/agenticragconfig.md
-  - docs/models/operations/arguments.md
   - docs/models/operations/assistantmessage.md
   - docs/models/operations/audio.md
-  - docs/models/operations/billing.md
-  - docs/models/operations/blueprint.md
   - docs/models/operations/bulkcreatedatapoints21.md
   - docs/models/operations/bulkcreatedatapoints22.md
   - docs/models/operations/bulkcreatedatapoints2datasets1.md
@@ -184,6 +187,10 @@ generatedFiles:
   - docs/models/operations/createchunkstatus.md
   - docs/models/operations/createcontactrequestbody.md
   - docs/models/operations/createcontactresponsebody.md
+  - docs/models/operations/createdatasetexperimentrequest.md
+  - docs/models/operations/createdatasetexperimentrequestbody.md
+  - docs/models/operations/createdatasetexperimentresponsebody.md
+  - docs/models/operations/createdatasetexperimenttype.md
   - docs/models/operations/createdatasetitem21.md
   - docs/models/operations/createdatasetitem22.md
   - docs/models/operations/createdatasetitem2datasets1.md
@@ -219,6 +226,10 @@ generatedFiles:
   - docs/models/operations/createdatasourcerequestbody.md
   - docs/models/operations/createdatasourceresponsebody.md
   - docs/models/operations/createdatasourcestatus.md
+  - docs/models/operations/createdeploymentexperimentrequest.md
+  - docs/models/operations/createdeploymentexperimentrequestbody.md
+  - docs/models/operations/createdeploymentexperimentresponsebody.md
+  - docs/models/operations/createdeploymentexperimenttype.md
   - docs/models/operations/createfeedbackrequestbody.md
   - docs/models/operations/createfeedbackresponsebody.md
   - docs/models/operations/createfeedbackvalue.md
@@ -228,33 +239,6 @@ generatedFiles:
   - docs/models/operations/createknowledgeresponsebody.md
   - docs/models/operations/createknowledgeretrievalsettings.md
   - docs/models/operations/createknowledgeretrievaltype.md
-  - docs/models/operations/creatememorydocumentrequest.md
-  - docs/models/operations/creatememorydocumentrequestbody.md
-  - docs/models/operations/creatememorydocumentresponsebody.md
-  - docs/models/operations/creatememoryrequest.md
-  - docs/models/operations/creatememoryrequestbody.md
-  - docs/models/operations/creatememoryresponsebody.md
-  - docs/models/operations/creatememorystoreembeddingconfig.md
-  - docs/models/operations/creatememorystoremodel.md
-  - docs/models/operations/creatememorystoremodel1.md
-  - docs/models/operations/creatememorystoremodel10.md
-  - docs/models/operations/creatememorystoremodel11.md
-  - docs/models/operations/creatememorystoremodel12.md
-  - docs/models/operations/creatememorystoremodel13.md
-  - docs/models/operations/creatememorystoremodel14.md
-  - docs/models/operations/creatememorystoremodel15.md
-  - docs/models/operations/creatememorystoremodel16.md
-  - docs/models/operations/creatememorystoremodel17.md
-  - docs/models/operations/creatememorystoremodel2.md
-  - docs/models/operations/creatememorystoremodel3.md
-  - docs/models/operations/creatememorystoremodel4.md
-  - docs/models/operations/creatememorystoremodel5.md
-  - docs/models/operations/creatememorystoremodel6.md
-  - docs/models/operations/creatememorystoremodel7.md
-  - docs/models/operations/creatememorystoremodel8.md
-  - docs/models/operations/creatememorystoremodel9.md
-  - docs/models/operations/creatememorystorerequestbody.md
-  - docs/models/operations/creatememorystoreresponsebody.md
   - docs/models/operations/createprompt21.md
   - docs/models/operations/createprompt22.md
   - docs/models/operations/createprompt2imageurl.md
@@ -288,7 +272,6 @@ generatedFiles:
   - docs/models/operations/createpromptpromptstoolcalls.md
   - docs/models/operations/createpromptpromptstype.md
   - docs/models/operations/createpromptprovider.md
-  - docs/models/operations/createpromptquality.md
   - docs/models/operations/createpromptreasoningeffort.md
   - docs/models/operations/createpromptrequestbody.md
   - docs/models/operations/createpromptresponsebody.md
@@ -303,71 +286,41 @@ generatedFiles:
   - docs/models/operations/createprompttoolcalls.md
   - docs/models/operations/createprompttype.md
   - docs/models/operations/createpromptusecases.md
-  - docs/models/operations/createsessionbilling.md
-  - docs/models/operations/createsessionrequestbody.md
-  - docs/models/operations/createsessionresponsebody.md
-  - docs/models/operations/createsessionsessionsusage.md
-  - docs/models/operations/createsessionusage.md
-  - docs/models/operations/createtoolrequestbody.md
-  - docs/models/operations/createtoolrequestbodystatus.md
-  - docs/models/operations/createtoolrequestbodytoolsrequesttype.md
-  - docs/models/operations/createtoolrequestbodytoolsstatus.md
-  - docs/models/operations/createtoolrequestbodytoolstype.md
-  - docs/models/operations/createtoolrequestbodytype.md
-  - docs/models/operations/createtoolresponsebody.md
-  - docs/models/operations/createtoolresponsebodystatus.md
-  - docs/models/operations/createtoolresponsebodytoolsresponsetype.md
-  - docs/models/operations/createtoolresponsebodytoolsstatus.md
-  - docs/models/operations/createtoolresponsebodytoolstype.md
-  - docs/models/operations/createtoolresponsebodytype.md
-  - docs/models/operations/criteria.md
   - docs/models/operations/data.md
-  - docs/models/operations/data1.md
-  - docs/models/operations/data2.md
-  - docs/models/operations/data3.md
-  - docs/models/operations/dataarguments.md
-  - docs/models/operations/datablueprint.md
-  - docs/models/operations/datadefaultvalue.md
-  - docs/models/operations/datafunction.md
-  - docs/models/operations/datahttp.md
-  - docs/models/operations/datajsonschema.md
-  - docs/models/operations/datamethod.md
-  - docs/models/operations/datastatus.md
-  - docs/models/operations/datatype.md
-  - docs/models/operations/defaultvalue.md
   - docs/models/operations/deletechunkrequest.md
   - docs/models/operations/deletedatapointrequest.md
   - docs/models/operations/deletedatasetrequest.md
   - docs/models/operations/deletedatasourcerequest.md
   - docs/models/operations/deleteknowledgerequest.md
-  - docs/models/operations/deletememorydocumentrequest.md
-  - docs/models/operations/deletememoryrequest.md
-  - docs/models/operations/deletememorystorerequest.md
   - docs/models/operations/deletepromptrequest.md
-  - docs/models/operations/deletesessionrequest.md
-  - docs/models/operations/deletetoolrequest.md
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
+  - docs/models/operations/deploymentcreatemetric24.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics1.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics2.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics3.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics4.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsdetail.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsfile.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsformat.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsimageurl.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsinputaudio.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrefusalcontentpart.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3content4type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3contenttype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4contenttype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoicestype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodymessages4type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodymessagestype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodytype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequesttype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstextcontentpart.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstype.md
   - docs/models/operations/deploymentcreatemetric2detail.md
+  - docs/models/operations/deploymentcreatemetric2file.md
   - docs/models/operations/deploymentcreatemetric2format.md
   - docs/models/operations/deploymentcreatemetric2imageurl.md
   - docs/models/operations/deploymentcreatemetric2inputaudio.md
@@ -408,6 +361,8 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfig21.md
   - docs/models/operations/deploymentgetconfig22.md
   - docs/models/operations/deploymentgetconfig2deployments2.md
+  - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages3content4type.md
+  - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages3contenttype.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages3type.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages4contenttype.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages4type.md
@@ -441,7 +396,6 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigprefixmessagesdeploymentsrequestrole.md
   - docs/models/operations/deploymentgetconfigprefixmessagesdeploymentsrole.md
   - docs/models/operations/deploymentgetconfigprefixmessagesrole.md
-  - docs/models/operations/deploymentgetconfigquality.md
   - docs/models/operations/deploymentgetconfigreasoningeffort.md
   - docs/models/operations/deploymentgetconfigrequestbody.md
   - docs/models/operations/deploymentgetconfigresponsebody.md
@@ -485,7 +439,6 @@ generatedFiles:
   - docs/models/operations/deploymentsphotorealversion.md
   - docs/models/operations/deploymentspromptconfig.md
   - docs/models/operations/deploymentsprovider.md
-  - docs/models/operations/deploymentsquality.md
   - docs/models/operations/deploymentsreasoningeffort.md
   - docs/models/operations/deploymentsrequest.md
   - docs/models/operations/deploymentsresponsebody.md
@@ -501,25 +454,31 @@ generatedFiles:
   - docs/models/operations/deploymentstream21.md
   - docs/models/operations/deploymentstream22.md
   - docs/models/operations/deploymentstream23.md
+  - docs/models/operations/deploymentstream24.md
   - docs/models/operations/deploymentstream2deployments1.md
   - docs/models/operations/deploymentstream2deployments2.md
   - docs/models/operations/deploymentstream2deployments3.md
+  - docs/models/operations/deploymentstream2deployments4.md
   - docs/models/operations/deploymentstream2deploymentsdetail.md
+  - docs/models/operations/deploymentstream2deploymentsfile.md
   - docs/models/operations/deploymentstream2deploymentsformat.md
   - docs/models/operations/deploymentstream2deploymentsimageurl.md
   - docs/models/operations/deploymentstream2deploymentsinputaudio.md
   - docs/models/operations/deploymentstream2deploymentsrefusalcontentpart.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3content4type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3contenttype.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4contenttype.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessagestype.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodyprefixmessages4type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodyprefixmessagestype.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodytype.md
   - docs/models/operations/deploymentstream2deploymentsrequesttype.md
   - docs/models/operations/deploymentstream2deploymentstextcontentpart.md
   - docs/models/operations/deploymentstream2deploymentstype.md
   - docs/models/operations/deploymentstream2detail.md
+  - docs/models/operations/deploymentstream2file.md
   - docs/models/operations/deploymentstream2format.md
   - docs/models/operations/deploymentstream2imageurl.md
   - docs/models/operations/deploymentstream2inputaudio.md
@@ -585,16 +544,9 @@ generatedFiles:
   - docs/models/operations/deploymentstype.md
   - docs/models/operations/detail.md
   - docs/models/operations/developermessage.md
-  - docs/models/operations/direction.md
   - docs/models/operations/documents.md
-  - docs/models/operations/eight.md
-  - docs/models/operations/eleven.md
-  - docs/models/operations/embeddingconfig.md
   - docs/models/operations/encodingformat.md
-  - docs/models/operations/evaluatoroutputtype.md
-  - docs/models/operations/evaluatortype.md
   - docs/models/operations/feedback.md
-  - docs/models/operations/fifteen.md
   - docs/models/operations/filedeleterequest.md
   - docs/models/operations/filegetpurpose.md
   - docs/models/operations/filegetrequest.md
@@ -605,67 +557,13 @@ generatedFiles:
   - docs/models/operations/filelistrequest.md
   - docs/models/operations/filelistresponsebody.md
   - docs/models/operations/filet.md
+  - docs/models/operations/fileuploadfile.md
   - docs/models/operations/fileuploadpurpose.md
   - docs/models/operations/fileuploadrequestbody.md
   - docs/models/operations/fileuploadresponsebody.md
-  - docs/models/operations/filters.md
-  - docs/models/operations/filters1.md
-  - docs/models/operations/filters2.md
-  - docs/models/operations/filters3.md
-  - docs/models/operations/filters4.md
-  - docs/models/operations/filters5.md
-  - docs/models/operations/filters6.md
-  - docs/models/operations/filters7.md
-  - docs/models/operations/filters8.md
-  - docs/models/operations/filterscriteria.md
-  - docs/models/operations/filtersdirection.md
-  - docs/models/operations/filtersevaluatoroutputtype.md
-  - docs/models/operations/filtersevaluatortype.md
-  - docs/models/operations/filtershideoperators.md
-  - docs/models/operations/filtersmode.md
-  - docs/models/operations/filtersoperator.md
-  - docs/models/operations/filtersoptions.md
-  - docs/models/operations/filtersoptionsmap.md
-  - docs/models/operations/filtersrelativetime.md
-  - docs/models/operations/filterstype.md
-  - docs/models/operations/filtersunit.md
-  - docs/models/operations/filtersvalue.md
-  - docs/models/operations/five.md
   - docs/models/operations/format.md
   - docs/models/operations/four.md
-  - docs/models/operations/fourteen.md
   - docs/models/operations/functiont.md
-  - docs/models/operations/getallmemoriesdata.md
-  - docs/models/operations/getallmemoriesobject.md
-  - docs/models/operations/getallmemoriesrequest.md
-  - docs/models/operations/getallmemoriesresponsebody.md
-  - docs/models/operations/getallmemorydocumentsdata.md
-  - docs/models/operations/getallmemorydocumentsobject.md
-  - docs/models/operations/getallmemorydocumentsrequest.md
-  - docs/models/operations/getallmemorydocumentsresponsebody.md
-  - docs/models/operations/getallmemorystoresdata.md
-  - docs/models/operations/getallmemorystoresembeddingconfig.md
-  - docs/models/operations/getallmemorystoresmodel.md
-  - docs/models/operations/getallmemorystoresmodel1.md
-  - docs/models/operations/getallmemorystoresmodel10.md
-  - docs/models/operations/getallmemorystoresmodel11.md
-  - docs/models/operations/getallmemorystoresmodel12.md
-  - docs/models/operations/getallmemorystoresmodel13.md
-  - docs/models/operations/getallmemorystoresmodel14.md
-  - docs/models/operations/getallmemorystoresmodel15.md
-  - docs/models/operations/getallmemorystoresmodel16.md
-  - docs/models/operations/getallmemorystoresmodel17.md
-  - docs/models/operations/getallmemorystoresmodel2.md
-  - docs/models/operations/getallmemorystoresmodel3.md
-  - docs/models/operations/getallmemorystoresmodel4.md
-  - docs/models/operations/getallmemorystoresmodel5.md
-  - docs/models/operations/getallmemorystoresmodel6.md
-  - docs/models/operations/getallmemorystoresmodel7.md
-  - docs/models/operations/getallmemorystoresmodel8.md
-  - docs/models/operations/getallmemorystoresmodel9.md
-  - docs/models/operations/getallmemorystoresobject.md
-  - docs/models/operations/getallmemorystoresrequest.md
-  - docs/models/operations/getallmemorystoresresponsebody.md
   - docs/models/operations/getallprompts21.md
   - docs/models/operations/getallprompts22.md
   - docs/models/operations/getallprompts2imageurl.md
@@ -687,7 +585,6 @@ generatedFiles:
   - docs/models/operations/getallpromptspromptconfig.md
   - docs/models/operations/getallpromptspromptstype.md
   - docs/models/operations/getallpromptsprovider.md
-  - docs/models/operations/getallpromptsquality.md
   - docs/models/operations/getallpromptsreasoningeffort.md
   - docs/models/operations/getallpromptsrequest.md
   - docs/models/operations/getallpromptsresponsebody.md
@@ -701,15 +598,6 @@ generatedFiles:
   - docs/models/operations/getallpromptstoolcalls.md
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
-  - docs/models/operations/getalltoolsdata.md
-  - docs/models/operations/getalltoolsdatastatus.md
-  - docs/models/operations/getalltoolsdatatoolsresponsetype.md
-  - docs/models/operations/getalltoolsdatatoolsstatus.md
-  - docs/models/operations/getalltoolsdatatoolstype.md
-  - docs/models/operations/getalltoolsdatatype.md
-  - docs/models/operations/getalltoolsobject.md
-  - docs/models/operations/getalltoolsrequest.md
-  - docs/models/operations/getalltoolsresponsebody.md
   - docs/models/operations/getonechunkrequest.md
   - docs/models/operations/getonechunkresponsebody.md
   - docs/models/operations/getonechunkstatus.md
@@ -738,7 +626,6 @@ generatedFiles:
   - docs/models/operations/getonepromptpromptconfig.md
   - docs/models/operations/getonepromptpromptstype.md
   - docs/models/operations/getonepromptprovider.md
-  - docs/models/operations/getonepromptquality.md
   - docs/models/operations/getonepromptreasoningeffort.md
   - docs/models/operations/getonepromptrequest.md
   - docs/models/operations/getonepromptresponsebody.md
@@ -770,7 +657,6 @@ generatedFiles:
   - docs/models/operations/getpromptversionphotorealversion.md
   - docs/models/operations/getpromptversionpromptconfig.md
   - docs/models/operations/getpromptversionprovider.md
-  - docs/models/operations/getpromptversionquality.md
   - docs/models/operations/getpromptversionreasoningeffort.md
   - docs/models/operations/getpromptversionrequest.md
   - docs/models/operations/getpromptversionresponsebody.md
@@ -784,17 +670,6 @@ generatedFiles:
   - docs/models/operations/getpromptversiontoolcalls.md
   - docs/models/operations/getpromptversiontype.md
   - docs/models/operations/getpromptversionusecases.md
-  - docs/models/operations/getsessionbilling.md
-  - docs/models/operations/getsessionrequest.md
-  - docs/models/operations/getsessionresponsebody.md
-  - docs/models/operations/getsessionusage.md
-  - docs/models/operations/hideoperators.md
-  - docs/models/operations/hideoperators1.md
-  - docs/models/operations/hideoperators2.md
-  - docs/models/operations/hideoperators3.md
-  - docs/models/operations/hideoperators4.md
-  - docs/models/operations/hideoperators5.md
-  - docs/models/operations/http.md
   - docs/models/operations/imageurl.md
   - docs/models/operations/inputaudio.md
   - docs/models/operations/inputs.md
@@ -841,6 +716,10 @@ generatedFiles:
   - docs/models/operations/listknowledgebasesresponsebody.md
   - docs/models/operations/listknowledgebasesretrievalsettings.md
   - docs/models/operations/listknowledgebasesretrievaltype.md
+  - docs/models/operations/listmodelsdata.md
+  - docs/models/operations/listmodelsobject.md
+  - docs/models/operations/listmodelsresponsebody.md
+  - docs/models/operations/listmodelstype.md
   - docs/models/operations/listpromptversions21.md
   - docs/models/operations/listpromptversions22.md
   - docs/models/operations/listpromptversions2imageurl.md
@@ -861,7 +740,6 @@ generatedFiles:
   - docs/models/operations/listpromptversionsphotorealversion.md
   - docs/models/operations/listpromptversionspromptconfig.md
   - docs/models/operations/listpromptversionsprovider.md
-  - docs/models/operations/listpromptversionsquality.md
   - docs/models/operations/listpromptversionsreasoningeffort.md
   - docs/models/operations/listpromptversionsrequest.md
   - docs/models/operations/listpromptversionsresponsebody.md
@@ -875,97 +753,6 @@ generatedFiles:
   - docs/models/operations/listpromptversionstoolcalls.md
   - docs/models/operations/listpromptversionstype.md
   - docs/models/operations/listpromptversionsusecases.md
-  - docs/models/operations/listsessionsbilling.md
-  - docs/models/operations/listsessionsdata.md
-  - docs/models/operations/listsessionsfilters.md
-  - docs/models/operations/listsessionsfilters1.md
-  - docs/models/operations/listsessionsfilters2.md
-  - docs/models/operations/listsessionsfilters3.md
-  - docs/models/operations/listsessionsfilters4.md
-  - docs/models/operations/listsessionsfiltershideoperators.md
-  - docs/models/operations/listsessionsfiltersoperator.md
-  - docs/models/operations/listsessionsfiltersoptions.md
-  - docs/models/operations/listsessionsfilterssessionshideoperators.md
-  - docs/models/operations/listsessionsfilterssessionsoperator.md
-  - docs/models/operations/listsessionsfilterssessionsoptions.md
-  - docs/models/operations/listsessionsfilterssessionsrequesthideoperators.md
-  - docs/models/operations/listsessionsfilterssessionsrequestoperator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbody1type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbody2type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbody3operator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbody3type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbody4operator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbody4type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyhideoperators.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyoperator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery6type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery7hideoperators.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery7hideoperators1.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery7operator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery7optionstype.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery7type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery8hideoperators.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery8operator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquery8type.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyqueryhideoperators.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyqueryoperator.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodyquerytype.md
-  - docs/models/operations/listsessionsfilterssessionsrequestrequestbodytype.md
-  - docs/models/operations/listsessionsfilterssessionsrequesttype.md
-  - docs/models/operations/listsessionsfilterssessionstype.md
-  - docs/models/operations/listsessionsfilterstype.md
-  - docs/models/operations/listsessionsfiltersvalue.md
-  - docs/models/operations/listsessionshideoperators1.md
-  - docs/models/operations/listsessionshideoperators2.md
-  - docs/models/operations/listsessionshideoperators3.md
-  - docs/models/operations/listsessionshideoperators4.md
-  - docs/models/operations/listsessionshideoperators5.md
-  - docs/models/operations/listsessionshideoperatorssessions1.md
-  - docs/models/operations/listsessionshideoperatorssessions2.md
-  - docs/models/operations/listsessionshideoperatorssessions3.md
-  - docs/models/operations/listsessionshideoperatorssessions4.md
-  - docs/models/operations/listsessionshideoperatorssessions5.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequest1.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequest2.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequest3.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequest4.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequest5.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbody1.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbody2.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbody3.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbody4.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbody5.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyquery1.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyquery2.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyquery3.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyquery4.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyquery5.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters1.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters2.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters3.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters4.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters5.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters71.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters710.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters72.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters73.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters74.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters75.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters76.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters77.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters78.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters79.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters81.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters82.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters83.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters84.md
-  - docs/models/operations/listsessionshideoperatorssessionsrequestrequestbodyqueryfilters85.md
-  - docs/models/operations/listsessionsobject.md
-  - docs/models/operations/listsessionsoperator1.md
-  - docs/models/operations/listsessionsoperator2.md
-  - docs/models/operations/listsessionsrequestbody.md
-  - docs/models/operations/listsessionsresponsebody.md
-  - docs/models/operations/listsessionsusage.md
   - docs/models/operations/message.md
   - docs/models/operations/message1.md
   - docs/models/operations/message2.md
@@ -987,166 +774,14 @@ generatedFiles:
   - docs/models/operations/messagetoolcalls.md
   - docs/models/operations/messagetype.md
   - docs/models/operations/metadata.md
-  - docs/models/operations/method.md
-  - docs/models/operations/mode.md
-  - docs/models/operations/model.md
-  - docs/models/operations/model1.md
-  - docs/models/operations/model10.md
-  - docs/models/operations/model11.md
-  - docs/models/operations/model12.md
-  - docs/models/operations/model13.md
-  - docs/models/operations/model14.md
-  - docs/models/operations/model15.md
-  - docs/models/operations/model16.md
-  - docs/models/operations/model17.md
-  - docs/models/operations/model2.md
-  - docs/models/operations/model3.md
-  - docs/models/operations/model4.md
-  - docs/models/operations/model5.md
-  - docs/models/operations/model6.md
-  - docs/models/operations/model7.md
-  - docs/models/operations/model8.md
-  - docs/models/operations/model9.md
   - docs/models/operations/modelparameters.md
   - docs/models/operations/modeltype.md
-  - docs/models/operations/nine.md
   - docs/models/operations/objectt.md
   - docs/models/operations/one.md
-  - docs/models/operations/operator.md
-  - docs/models/operations/operator1.md
-  - docs/models/operations/operator2.md
-  - docs/models/operations/operator3.md
-  - docs/models/operations/operator4.md
-  - docs/models/operations/operator5.md
-  - docs/models/operations/options.md
-  - docs/models/operations/optionsmap.md
-  - docs/models/operations/pagination.md
+  - docs/models/operations/ownedby.md
   - docs/models/operations/parameterst.md
   - docs/models/operations/performance.md
   - docs/models/operations/photorealversion.md
-  - docs/models/operations/postv2tracessessionscountdirection.md
-  - docs/models/operations/postv2tracessessionscountfilters.md
-  - docs/models/operations/postv2tracessessionscountfilters1.md
-  - docs/models/operations/postv2tracessessionscountfilters2.md
-  - docs/models/operations/postv2tracessessionscountfilters3.md
-  - docs/models/operations/postv2tracessessionscountfilters4.md
-  - docs/models/operations/postv2tracessessionscountfilters5.md
-  - docs/models/operations/postv2tracessessionscountfilters6.md
-  - docs/models/operations/postv2tracessessionscountfilters7.md
-  - docs/models/operations/postv2tracessessionscountfilters8.md
-  - docs/models/operations/postv2tracessessionscountfiltersdirection.md
-  - docs/models/operations/postv2tracessessionscountfiltershideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersoperator.md
-  - docs/models/operations/postv2tracessessionscountfiltersoptions.md
-  - docs/models/operations/postv2tracessessionscountfiltersoptionsmap.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequest1.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequest2.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequest3.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequest4.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequesthideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestoperator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestoptions.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestoptionsmap.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbody1type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbody2type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbody3operator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbody3type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbody4operator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbody4type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyhideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyoperator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyoptions.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery5hideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery5operator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery5type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery6hideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery6hideoperators1.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery6operator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery6optionstype.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery6type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery7hideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery7hideoperators1.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery7operator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery7optionstype.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery7type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery8hideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery8operator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquery8type.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyqueryhideoperators.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyqueryoperator.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyqueryoptions.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodyquerytype.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestrequestbodytype.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequesttype.md
-  - docs/models/operations/postv2tracessessionscountfiltersrequestvalue.md
-  - docs/models/operations/postv2tracessessionscountfilterstype.md
-  - docs/models/operations/postv2tracessessionscountfiltersvalue.md
-  - docs/models/operations/postv2tracessessionscounthideoperators1.md
-  - docs/models/operations/postv2tracessessionscounthideoperators2.md
-  - docs/models/operations/postv2tracessessionscounthideoperators3.md
-  - docs/models/operations/postv2tracessessionscounthideoperators4.md
-  - docs/models/operations/postv2tracessessionscounthideoperators5.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequest1.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequest2.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequest3.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequest4.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequest5.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbody1.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbody2.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbody3.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbody4.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbody5.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyquery1.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyquery2.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyquery3.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyquery4.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyquery5.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters1.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters2.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters3.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters4.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters5.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters61.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters610.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters62.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters63.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters64.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters65.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters66.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters67.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters68.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters69.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters71.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters710.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters72.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters73.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters74.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters75.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters76.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters77.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters78.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters79.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters81.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters82.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters83.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters84.md
-  - docs/models/operations/postv2tracessessionscounthideoperatorsrequestrequestbodyqueryfilters85.md
-  - docs/models/operations/postv2tracessessionscountoperator.md
-  - docs/models/operations/postv2tracessessionscountoperator1.md
-  - docs/models/operations/postv2tracessessionscountoperator2.md
-  - docs/models/operations/postv2tracessessionscountoperator3.md
-  - docs/models/operations/postv2tracessessionscountoperator4.md
-  - docs/models/operations/postv2tracessessionscountoperator5.md
-  - docs/models/operations/postv2tracessessionscountoperatorrequest1.md
-  - docs/models/operations/postv2tracessessionscountoperatorrequest2.md
-  - docs/models/operations/postv2tracessessionscountpagination.md
-  - docs/models/operations/postv2tracessessionscountquery.md
-  - docs/models/operations/postv2tracessessionscountrequestbody.md
-  - docs/models/operations/postv2tracessessionscountrequestfilters.md
-  - docs/models/operations/postv2tracessessionscountresponsebody.md
-  - docs/models/operations/postv2tracessessionscountsortingprops.md
-  - docs/models/operations/postv2tracessessionscountunit1.md
-  - docs/models/operations/postv2tracessessionscountunit2.md
   - docs/models/operations/prefixmessages.md
   - docs/models/operations/prefixmessagesassistantmessage.md
   - docs/models/operations/prefixmessagesaudio.md
@@ -1162,42 +797,15 @@ generatedFiles:
   - docs/models/operations/promptconfig.md
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
-  - docs/models/operations/quality.md
-  - docs/models/operations/query.md
   - docs/models/operations/queryparamstatus.md
   - docs/models/operations/reasoningeffort.md
   - docs/models/operations/refusalcontentpart.md
-  - docs/models/operations/relativetime.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
   - docs/models/operations/requestbody.md
-  - docs/models/operations/requestbody1.md
-  - docs/models/operations/requestbody2.md
-  - docs/models/operations/requestbody3.md
-  - docs/models/operations/requestbodyarguments.md
-  - docs/models/operations/requestbodyblueprint.md
-  - docs/models/operations/requestbodydefaultvalue.md
-  - docs/models/operations/requestbodyfunction.md
-  - docs/models/operations/requestbodyhttp.md
-  - docs/models/operations/requestbodyjsonschema.md
-  - docs/models/operations/requestbodymethod.md
-  - docs/models/operations/requestbodystatus.md
-  - docs/models/operations/requestbodytype.md
   - docs/models/operations/rerankconfig.md
   - docs/models/operations/responsebody.md
-  - docs/models/operations/responsebody1.md
-  - docs/models/operations/responsebody2.md
-  - docs/models/operations/responsebody3.md
-  - docs/models/operations/responsebodyarguments.md
-  - docs/models/operations/responsebodyblueprint.md
-  - docs/models/operations/responsebodydefaultvalue.md
-  - docs/models/operations/responsebodyfunction.md
-  - docs/models/operations/responsebodyhttp.md
-  - docs/models/operations/responsebodyjsonschema.md
-  - docs/models/operations/responsebodymethod.md
-  - docs/models/operations/responsebodystatus.md
-  - docs/models/operations/responsebodytype.md
   - docs/models/operations/responseformat.md
   - docs/models/operations/responseformat1.md
   - docs/models/operations/responseformat2.md
@@ -1226,72 +834,22 @@ generatedFiles:
   - docs/models/operations/retrievedatasourcerequest.md
   - docs/models/operations/retrievedatasourceresponsebody.md
   - docs/models/operations/retrievedatasourcestatus.md
-  - docs/models/operations/retrievememorydocumentrequest.md
-  - docs/models/operations/retrievememorydocumentresponsebody.md
-  - docs/models/operations/retrievememoryrequest.md
-  - docs/models/operations/retrievememoryresponsebody.md
-  - docs/models/operations/retrievememorystoreembeddingconfig.md
-  - docs/models/operations/retrievememorystoremodel.md
-  - docs/models/operations/retrievememorystoremodel1.md
-  - docs/models/operations/retrievememorystoremodel10.md
-  - docs/models/operations/retrievememorystoremodel11.md
-  - docs/models/operations/retrievememorystoremodel12.md
-  - docs/models/operations/retrievememorystoremodel13.md
-  - docs/models/operations/retrievememorystoremodel14.md
-  - docs/models/operations/retrievememorystoremodel15.md
-  - docs/models/operations/retrievememorystoremodel16.md
-  - docs/models/operations/retrievememorystoremodel17.md
-  - docs/models/operations/retrievememorystoremodel2.md
-  - docs/models/operations/retrievememorystoremodel3.md
-  - docs/models/operations/retrievememorystoremodel4.md
-  - docs/models/operations/retrievememorystoremodel5.md
-  - docs/models/operations/retrievememorystoremodel6.md
-  - docs/models/operations/retrievememorystoremodel7.md
-  - docs/models/operations/retrievememorystoremodel8.md
-  - docs/models/operations/retrievememorystoremodel9.md
-  - docs/models/operations/retrievememorystorerequest.md
-  - docs/models/operations/retrievememorystoreresponsebody.md
-  - docs/models/operations/retrievetoolrequest.md
-  - docs/models/operations/retrievetoolresponsebody.md
-  - docs/models/operations/retrievetoolresponsebody1.md
-  - docs/models/operations/retrievetoolresponsebody2.md
-  - docs/models/operations/retrievetoolresponsebody3.md
-  - docs/models/operations/retrievetoolresponsebodyarguments.md
-  - docs/models/operations/retrievetoolresponsebodyblueprint.md
-  - docs/models/operations/retrievetoolresponsebodydefaultvalue.md
-  - docs/models/operations/retrievetoolresponsebodyfunction.md
-  - docs/models/operations/retrievetoolresponsebodyhttp.md
-  - docs/models/operations/retrievetoolresponsebodyjsonschema.md
-  - docs/models/operations/retrievetoolresponsebodymethod.md
-  - docs/models/operations/retrievetoolresponsebodystatus.md
-  - docs/models/operations/retrievetoolresponsebodytoolsresponse200type.md
-  - docs/models/operations/retrievetoolresponsebodytoolsresponsestatus.md
-  - docs/models/operations/retrievetoolresponsebodytoolsresponsetype.md
-  - docs/models/operations/retrievetoolresponsebodytoolsstatus.md
-  - docs/models/operations/retrievetoolresponsebodytoolstype.md
-  - docs/models/operations/retrievetoolresponsebodytype.md
   - docs/models/operations/role.md
-  - docs/models/operations/seven.md
-  - docs/models/operations/seventeen.md
-  - docs/models/operations/six.md
-  - docs/models/operations/sixteen.md
-  - docs/models/operations/sortingprops.md
   - docs/models/operations/status.md
   - docs/models/operations/systemmessage.md
-  - docs/models/operations/ten.md
   - docs/models/operations/textcontentpart.md
-  - docs/models/operations/thirteen.md
   - docs/models/operations/thread.md
   - docs/models/operations/three.md
   - docs/models/operations/toolcalls.md
   - docs/models/operations/toolmessage.md
   - docs/models/operations/tools.md
-  - docs/models/operations/twelve.md
   - docs/models/operations/two.md
   - docs/models/operations/two1.md
   - docs/models/operations/two2.md
   - docs/models/operations/two3.md
+  - docs/models/operations/two4.md
   - docs/models/operations/twodetail.md
+  - docs/models/operations/twofile.md
   - docs/models/operations/twoformat.md
   - docs/models/operations/twoimageurl.md
   - docs/models/operations/twoinputaudio.md
@@ -1299,9 +857,6 @@ generatedFiles:
   - docs/models/operations/twotextcontentpart.md
   - docs/models/operations/twotype.md
   - docs/models/operations/type.md
-  - docs/models/operations/unit.md
-  - docs/models/operations/unit1.md
-  - docs/models/operations/unit2.md
   - docs/models/operations/updatechunkmetadata.md
   - docs/models/operations/updatechunkrequest.md
   - docs/models/operations/updatechunkrequestbody.md
@@ -1353,22 +908,6 @@ generatedFiles:
   - docs/models/operations/updateknowledgeresponsebody.md
   - docs/models/operations/updateknowledgeretrievalsettings.md
   - docs/models/operations/updateknowledgeretrievaltype.md
-  - docs/models/operations/updatememorydocumentrequest.md
-  - docs/models/operations/updatememorydocumentrequestbody.md
-  - docs/models/operations/updatememorydocumentresponsebody.md
-  - docs/models/operations/updatememoryrequest.md
-  - docs/models/operations/updatememoryrequestbody.md
-  - docs/models/operations/updatememoryresponsebody.md
-  - docs/models/operations/updatememorystoreembeddingconfig.md
-  - docs/models/operations/updatememorystorememorystoresembeddingconfig.md
-  - docs/models/operations/updatememorystoremodel.md
-  - docs/models/operations/updatememorystoremodel1.md
-  - docs/models/operations/updatememorystoremodel2.md
-  - docs/models/operations/updatememorystoremodel3.md
-  - docs/models/operations/updatememorystoreprovider.md
-  - docs/models/operations/updatememorystorerequest.md
-  - docs/models/operations/updatememorystorerequestbody.md
-  - docs/models/operations/updatememorystoreresponsebody.md
   - docs/models/operations/updateprompt21.md
   - docs/models/operations/updateprompt22.md
   - docs/models/operations/updateprompt2imageurl.md
@@ -1404,7 +943,6 @@ generatedFiles:
   - docs/models/operations/updatepromptpromptsphotorealversion.md
   - docs/models/operations/updatepromptpromptspromptconfig.md
   - docs/models/operations/updatepromptpromptsprovider.md
-  - docs/models/operations/updatepromptpromptsquality.md
   - docs/models/operations/updatepromptpromptsreasoningeffort.md
   - docs/models/operations/updatepromptpromptsresponseformat.md
   - docs/models/operations/updatepromptpromptsresponsetype.md
@@ -1413,7 +951,6 @@ generatedFiles:
   - docs/models/operations/updatepromptpromptstype.md
   - docs/models/operations/updatepromptpromptsusecases.md
   - docs/models/operations/updatepromptprovider.md
-  - docs/models/operations/updatepromptquality.md
   - docs/models/operations/updatepromptreasoningeffort.md
   - docs/models/operations/updatepromptrequest.md
   - docs/models/operations/updatepromptrequestbody.md
@@ -1432,45 +969,6 @@ generatedFiles:
   - docs/models/operations/updateprompttoolcalls.md
   - docs/models/operations/updateprompttype.md
   - docs/models/operations/updatepromptusecases.md
-  - docs/models/operations/updatesessionbilling.md
-  - docs/models/operations/updatesessionrequest.md
-  - docs/models/operations/updatesessionrequestbody.md
-  - docs/models/operations/updatesessionresponsebody.md
-  - docs/models/operations/updatesessionsessionsbilling.md
-  - docs/models/operations/updatesessionsessionsusage.md
-  - docs/models/operations/updatesessionusage.md
-  - docs/models/operations/updatetoolrequest.md
-  - docs/models/operations/updatetoolrequestbody.md
-  - docs/models/operations/updatetoolrequestbody1.md
-  - docs/models/operations/updatetoolrequestbody2.md
-  - docs/models/operations/updatetoolrequestbody3.md
-  - docs/models/operations/updatetoolrequestbodyfunction.md
-  - docs/models/operations/updatetoolrequestbodyjsonschema.md
-  - docs/models/operations/updatetoolrequestbodystatus.md
-  - docs/models/operations/updatetoolrequestbodytoolsrequest3type.md
-  - docs/models/operations/updatetoolrequestbodytoolsrequeststatus.md
-  - docs/models/operations/updatetoolrequestbodytoolsrequesttype.md
-  - docs/models/operations/updatetoolrequestbodytoolsstatus.md
-  - docs/models/operations/updatetoolrequestbodytoolstype.md
-  - docs/models/operations/updatetoolrequestbodytype.md
-  - docs/models/operations/updatetoolresponsebody.md
-  - docs/models/operations/updatetoolresponsebody1.md
-  - docs/models/operations/updatetoolresponsebody2.md
-  - docs/models/operations/updatetoolresponsebody3.md
-  - docs/models/operations/updatetoolresponsebodyarguments.md
-  - docs/models/operations/updatetoolresponsebodyblueprint.md
-  - docs/models/operations/updatetoolresponsebodydefaultvalue.md
-  - docs/models/operations/updatetoolresponsebodyfunction.md
-  - docs/models/operations/updatetoolresponsebodyhttp.md
-  - docs/models/operations/updatetoolresponsebodyjsonschema.md
-  - docs/models/operations/updatetoolresponsebodymethod.md
-  - docs/models/operations/updatetoolresponsebodystatus.md
-  - docs/models/operations/updatetoolresponsebodytoolsresponse200type.md
-  - docs/models/operations/updatetoolresponsebodytoolsresponsestatus.md
-  - docs/models/operations/updatetoolresponsebodytoolsresponsetype.md
-  - docs/models/operations/updatetoolresponsebodytoolsstatus.md
-  - docs/models/operations/updatetoolresponsebodytoolstype.md
-  - docs/models/operations/updatetoolresponsebodytype.md
   - docs/models/operations/usage.md
   - docs/models/operations/usecases.md
   - docs/models/operations/usermessage.md
@@ -1481,13 +979,11 @@ generatedFiles:
   - docs/sdks/feedback/README.md
   - docs/sdks/files/README.md
   - docs/sdks/knowledge/README.md
-  - docs/sdks/memorystores/README.md
   - docs/sdks/metrics/README.md
+  - docs/sdks/models/README.md
   - docs/sdks/orq/README.md
   - docs/sdks/prompts/README.md
   - docs/sdks/remoteconfigs/README.md
-  - docs/sdks/sessions/README.md
-  - docs/sdks/tools/README.md
   - eslint.config.mjs
   - jsr.json
   - package.json
@@ -1497,6 +993,7 @@ generatedFiles:
   - src/funcs/datasetsCreate.ts
   - src/funcs/datasetsCreateDatapoint.ts
   - src/funcs/datasetsCreateDatapoints.ts
+  - src/funcs/datasetsCreateExperiment.ts
   - src/funcs/datasetsDelete.ts
   - src/funcs/datasetsDeleteDatapoint.ts
   - src/funcs/datasetsList.ts
@@ -1505,6 +1002,7 @@ generatedFiles:
   - src/funcs/datasetsRetrieveDatapoint.ts
   - src/funcs/datasetsUpdate.ts
   - src/funcs/datasetsUpdateDatapoint.ts
+  - src/funcs/deploymentsCreateExperiment.ts
   - src/funcs/deploymentsGetConfig.ts
   - src/funcs/deploymentsInvoke.ts
   - src/funcs/deploymentsList.ts
@@ -1530,22 +1028,7 @@ generatedFiles:
   - src/funcs/knowledgeUpdate.ts
   - src/funcs/knowledgeUpdateChunk.ts
   - src/funcs/knowledgeUpdateDatasource.ts
-  - src/funcs/memoryStoresCreate.ts
-  - src/funcs/memoryStoresCreateDocument.ts
-  - src/funcs/memoryStoresCreateMemory.ts
-  - src/funcs/memoryStoresDelete.ts
-  - src/funcs/memoryStoresDeleteDocument.ts
-  - src/funcs/memoryStoresDeleteMemory.ts
-  - src/funcs/memoryStoresList.ts
-  - src/funcs/memoryStoresListDocuments.ts
-  - src/funcs/memoryStoresListMemories.ts
-  - src/funcs/memoryStoresRetrieve.ts
-  - src/funcs/memoryStoresRetrieveDocument.ts
-  - src/funcs/memoryStoresRetrieveMemory.ts
-  - src/funcs/memoryStoresUpdate.ts
-  - src/funcs/memoryStoresUpdateDocument.ts
-  - src/funcs/memoryStoresUpdateMemory.ts
-  - src/funcs/postV2TracesSessionsCount.ts
+  - src/funcs/modelsList.ts
   - src/funcs/promptsCreate.ts
   - src/funcs/promptsDelete.ts
   - src/funcs/promptsGetVersion.ts
@@ -1554,16 +1037,6 @@ generatedFiles:
   - src/funcs/promptsRetrieve.ts
   - src/funcs/promptsUpdate.ts
   - src/funcs/remoteconfigsRetrieve.ts
-  - src/funcs/sessionsCreate.ts
-  - src/funcs/sessionsDelete.ts
-  - src/funcs/sessionsGet.ts
-  - src/funcs/sessionsList.ts
-  - src/funcs/sessionsUpdate.ts
-  - src/funcs/toolsCreate.ts
-  - src/funcs/toolsDelete.ts
-  - src/funcs/toolsList.ts
-  - src/funcs/toolsRetrieve.ts
-  - src/funcs/toolsUpdate.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -1603,6 +1076,7 @@ generatedFiles:
   - src/mcp-server/tools/datasetsCreate.ts
   - src/mcp-server/tools/datasetsCreateDatapoint.ts
   - src/mcp-server/tools/datasetsCreateDatapoints.ts
+  - src/mcp-server/tools/datasetsCreateExperiment.ts
   - src/mcp-server/tools/datasetsDelete.ts
   - src/mcp-server/tools/datasetsDeleteDatapoint.ts
   - src/mcp-server/tools/datasetsList.ts
@@ -1611,6 +1085,7 @@ generatedFiles:
   - src/mcp-server/tools/datasetsRetrieveDatapoint.ts
   - src/mcp-server/tools/datasetsUpdate.ts
   - src/mcp-server/tools/datasetsUpdateDatapoint.ts
+  - src/mcp-server/tools/deploymentsCreateExperiment.ts
   - src/mcp-server/tools/deploymentsGetConfig.ts
   - src/mcp-server/tools/deploymentsInvoke.ts
   - src/mcp-server/tools/deploymentsList.ts
@@ -1636,22 +1111,7 @@ generatedFiles:
   - src/mcp-server/tools/knowledgeUpdate.ts
   - src/mcp-server/tools/knowledgeUpdateChunk.ts
   - src/mcp-server/tools/knowledgeUpdateDatasource.ts
-  - src/mcp-server/tools/memoryStoresCreate.ts
-  - src/mcp-server/tools/memoryStoresCreateDocument.ts
-  - src/mcp-server/tools/memoryStoresCreateMemory.ts
-  - src/mcp-server/tools/memoryStoresDelete.ts
-  - src/mcp-server/tools/memoryStoresDeleteDocument.ts
-  - src/mcp-server/tools/memoryStoresDeleteMemory.ts
-  - src/mcp-server/tools/memoryStoresList.ts
-  - src/mcp-server/tools/memoryStoresListDocuments.ts
-  - src/mcp-server/tools/memoryStoresListMemories.ts
-  - src/mcp-server/tools/memoryStoresRetrieve.ts
-  - src/mcp-server/tools/memoryStoresRetrieveDocument.ts
-  - src/mcp-server/tools/memoryStoresRetrieveMemory.ts
-  - src/mcp-server/tools/memoryStoresUpdate.ts
-  - src/mcp-server/tools/memoryStoresUpdateDocument.ts
-  - src/mcp-server/tools/memoryStoresUpdateMemory.ts
-  - src/mcp-server/tools/postV2TracesSessionsCount.ts
+  - src/mcp-server/tools/modelsList.ts
   - src/mcp-server/tools/promptsCreate.ts
   - src/mcp-server/tools/promptsDelete.ts
   - src/mcp-server/tools/promptsGetVersion.ts
@@ -1660,16 +1120,6 @@ generatedFiles:
   - src/mcp-server/tools/promptsRetrieve.ts
   - src/mcp-server/tools/promptsUpdate.ts
   - src/mcp-server/tools/remoteconfigsRetrieve.ts
-  - src/mcp-server/tools/sessionsCreate.ts
-  - src/mcp-server/tools/sessionsDelete.ts
-  - src/mcp-server/tools/sessionsGet.ts
-  - src/mcp-server/tools/sessionsList.ts
-  - src/mcp-server/tools/sessionsUpdate.ts
-  - src/mcp-server/tools/toolsCreate.ts
-  - src/mcp-server/tools/toolsDelete.ts
-  - src/mcp-server/tools/toolsList.ts
-  - src/mcp-server/tools/toolsRetrieve.ts
-  - src/mcp-server/tools/toolsUpdate.ts
   - src/models/components/deployments.ts
   - src/models/components/index.ts
   - src/models/components/security.ts
@@ -1685,27 +1135,19 @@ generatedFiles:
   - src/models/operations/createchunk.ts
   - src/models/operations/createcontact.ts
   - src/models/operations/createdataset.ts
+  - src/models/operations/createdatasetexperiment.ts
   - src/models/operations/createdatasetitem.ts
   - src/models/operations/createdatasource.ts
+  - src/models/operations/createdeploymentexperiment.ts
   - src/models/operations/createfeedback.ts
   - src/models/operations/createknowledge.ts
-  - src/models/operations/creatememory.ts
-  - src/models/operations/creatememorydocument.ts
-  - src/models/operations/creatememorystore.ts
   - src/models/operations/createprompt.ts
-  - src/models/operations/createsession.ts
-  - src/models/operations/createtool.ts
   - src/models/operations/deletechunk.ts
   - src/models/operations/deletedatapoint.ts
   - src/models/operations/deletedataset.ts
   - src/models/operations/deletedatasource.ts
   - src/models/operations/deleteknowledge.ts
-  - src/models/operations/deletememory.ts
-  - src/models/operations/deletememorydocument.ts
-  - src/models/operations/deletememorystore.ts
   - src/models/operations/deleteprompt.ts
-  - src/models/operations/deletesession.ts
-  - src/models/operations/deletetool.ts
   - src/models/operations/deploymentcreatemetric.ts
   - src/models/operations/deploymentgetconfig.ts
   - src/models/operations/deploymentinvoke.ts
@@ -1715,44 +1157,29 @@ generatedFiles:
   - src/models/operations/fileget.ts
   - src/models/operations/filelist.ts
   - src/models/operations/fileupload.ts
-  - src/models/operations/getallmemories.ts
-  - src/models/operations/getallmemorydocuments.ts
-  - src/models/operations/getallmemorystores.ts
   - src/models/operations/getallprompts.ts
-  - src/models/operations/getalltools.ts
   - src/models/operations/getonechunk.ts
   - src/models/operations/getoneknowledge.ts
   - src/models/operations/getoneprompt.ts
   - src/models/operations/getpromptversion.ts
-  - src/models/operations/getsession.ts
   - src/models/operations/index.ts
   - src/models/operations/listchunks.ts
   - src/models/operations/listdatasetdatapoints.ts
   - src/models/operations/listdatasets.ts
   - src/models/operations/listdatasources.ts
   - src/models/operations/listknowledgebases.ts
+  - src/models/operations/listmodels.ts
   - src/models/operations/listpromptversions.ts
-  - src/models/operations/listsessions.ts
-  - src/models/operations/postv2tracessessionscount.ts
   - src/models/operations/remoteconfigsgetconfig.ts
   - src/models/operations/retrievedatapoint.ts
   - src/models/operations/retrievedataset.ts
   - src/models/operations/retrievedatasource.ts
-  - src/models/operations/retrievememory.ts
-  - src/models/operations/retrievememorydocument.ts
-  - src/models/operations/retrievememorystore.ts
-  - src/models/operations/retrievetool.ts
   - src/models/operations/updatechunk.ts
   - src/models/operations/updatedatapoint.ts
   - src/models/operations/updatedataset.ts
   - src/models/operations/updatedatasource.ts
   - src/models/operations/updateknowledge.ts
-  - src/models/operations/updatememory.ts
-  - src/models/operations/updatememorydocument.ts
-  - src/models/operations/updatememorystore.ts
   - src/models/operations/updateprompt.ts
-  - src/models/operations/updatesession.ts
-  - src/models/operations/updatetool.ts
   - src/sdk/contacts.ts
   - src/sdk/datasets.ts
   - src/sdk/deployments.ts
@@ -1760,13 +1187,11 @@ generatedFiles:
   - src/sdk/files.ts
   - src/sdk/index.ts
   - src/sdk/knowledge.ts
-  - src/sdk/memorystores.ts
   - src/sdk/metrics.ts
+  - src/sdk/models.ts
   - src/sdk/prompts.ts
   - src/sdk/remoteconfigs.ts
   - src/sdk/sdk.ts
-  - src/sdk/sessions.ts
-  - src/sdk/tools.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
@@ -1874,7 +1299,7 @@ examples:
   CreatePrompt:
     speakeasy-default-create-prompt:
       requestBody:
-        application/json: {"display_name": "Jed6", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://well-worn-formation.biz"}}, {"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "path": "Customer Service/Billing/Refund"}
+        application/json: {"display_name": "Jed6", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "system", "content": [{"type": "image_url", "image_url": {"url": "https://well-worn-formation.biz"}}, {"type": "text", "text": "<value>"}, {"type": "text", "text": "<value>"}]}, {"role": "assistant", "content": "<value>"}]}, "path": "Default"}
       responses:
         "200":
           application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "5211a509-a308-40a8-9e77-4c2becc37691", "created": "<value>", "updated": "<value>", "display_name": "Jennifer.Walsh12", "prompt_config": {"messages": [{"role": "tool", "content": "<value>"}, {"role": "exception", "content": "<value>"}]}}
@@ -1892,7 +1317,7 @@ examples:
         path:
           id: "<id>"
       requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
+        application/json: {"path": "Default"}
       responses:
         "200":
           application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "created": "<value>", "updated": "<value>", "display_name": "Merlin_Harber", "prompt_config": {"messages": [{"role": "system", "content": "<value>"}, {"role": "user", "content": []}, {"role": "tool", "content": "<value>"}]}}
@@ -2113,7 +1538,7 @@ examples:
   CreateDataset:
     speakeasy-default-create-dataset:
       requestBody:
-        application/json: {"display_name": "Jed6", "path": "Customer Service/Billing/Refund"}
+        application/json: {"display_name": "Jed6", "path": "Default"}
       responses:
         "200":
           application/json: {"_id": "f021cd9c-f540-4331-b521-1a509a3080a8", "display_name": "Izabella13", "project_id": "ecc37691-775e-4024-9985-613de0ee803d", "workspace_id": "6a1df943-6bfd-4394-a947-98bc19d4c51e", "metadata": {"total_versions": 5694.59, "datapoints_count": 8142.22}, "updated": "2025-04-14T11:15:16.490Z"}
@@ -2133,7 +1558,7 @@ examples:
         path:
           dataset_id: "<id>"
       requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
+        application/json: {"path": "Default"}
       responses:
         "200":
           application/json: {"_id": "d95fa7f0-e743-42ce-b47c-b60cc78135dd", "display_name": "Merlin_Harber", "project_id": "c125a190-71c5-4562-9af6-646dadb3a343", "workspace_id": "a2450617-e6bb-4057-99d6-f9464a3158c8", "metadata": {"total_versions": 4160.23, "datapoints_count": 587.04}, "updated": "2025-04-14T11:15:16.490Z"}
@@ -2213,14 +1638,14 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Golf", "path": "Customer Service/Billing/Refund", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Mercielago", "path": "Customer Service/Billing/Refund", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Beetle", "path": "Customer Service/Billing/Refund", "updated": "<value>"}], "has_more": true}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Golf", "domain_id": "<id>", "path": "Default", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Mercielago", "domain_id": "<id>", "path": "Default", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Beetle", "domain_id": "<id>", "path": "Default", "updated": "<value>"}], "has_more": true}
   CreateKnowledge:
     speakeasy-default-create-knowledge:
       requestBody:
-        application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Customer Service/Billing/Refund"}
+        application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Fiesta", "path": "Customer Service/Billing/Refund", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Fiesta", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
   GetOneKnowledge:
     speakeasy-default-get-one-knowledge:
       parameters:
@@ -2228,17 +1653,17 @@ examples:
           knowledge_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Durango", "path": "Customer Service/Billing/Refund", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Durango", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
   UpdateKnowledge:
     speakeasy-default-update-knowledge:
       parameters:
         path:
           knowledge_id: "<id>"
       requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
+        application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Sentra", "path": "Customer Service/Billing/Refund", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Sentra", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
   DeleteKnowledge:
     speakeasy-default-delete-knowledge:
       parameters:
@@ -2379,5 +1804,30 @@ examples:
       responses:
         "200":
           application/json: {"object": "list", "data": [{"_id": "<id>", "external_id": "<id>", "duration": 5472.72, "contact_ids": ["<value>", "<value>"], "billing": {"input_cost": 1777.06, "output_cost": 2297.16, "total_cost": 1528.37}, "usage": {"prompt_tokens": 6355.32, "completion_tokens": 6393.87, "total_tokens": 175.77}, "traces_count": 7183.03, "tags": [], "workspace_id": "<id>"}, {"_id": "<id>", "external_id": "<id>", "duration": 685.04, "contact_ids": ["<value>", "<value>"], "billing": {"input_cost": 5098.83, "output_cost": 6339.11, "total_cost": 74.68}, "usage": {"prompt_tokens": 546.07, "completion_tokens": 3677.45, "total_tokens": 4857.29}, "traces_count": 732.27, "tags": ["<value>", "<value>", "<value>"], "workspace_id": "<id>"}, {"_id": "<id>", "external_id": "<id>", "duration": 5674.45, "contact_ids": ["<value>", "<value>", "<value>"], "billing": {"input_cost": 4900.78, "output_cost": 516.81, "total_cost": 3225.96}, "usage": {"prompt_tokens": 8605.96, "completion_tokens": 182.78, "total_tokens": 8971.96}, "traces_count": 4243.67, "tags": ["<value>", "<value>", "<value>"], "workspace_id": "<id>"}], "has_more": true}
+  CreateDeploymentExperiment:
+    speakeasy-default-create-deployment-experiment:
+      parameters:
+        path:
+          deployment_key: "<value>"
+      requestBody:
+        application/json: {"experiment_key": "<value>", "path": "Default/Experiments", "dataset_id": "<id>", "type": "deployment_experiment"}
+      responses:
+        "200":
+          application/json: {"url": "https://lasting-fisherman.org/", "experiment_id": "<id>", "experiment_run_id": "<id>"}
+  ListModels:
+    speakeasy-default-list-models:
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"id": "<id>", "created": 5472.72, "type": "stt", "owned_by": "vendor"}, {"id": "<id>", "created": 2297.16, "type": "completion", "owned_by": "workspace"}, {"id": "<id>", "created": 6393.87, "type": "chat", "owned_by": "workspace"}], "has_more": true}
+  CreateDatasetExperiment:
+    speakeasy-default-create-dataset-experiment:
+      parameters:
+        path:
+          dataset_id: "<id>"
+      requestBody:
+        application/json: {"experiment_key": "<value>", "path": "Default/Experiments", "type": "dataset_experiment"}
+      responses:
+        "200":
+          application/json: {"url": "https://lasting-fisherman.org/", "experiment_id": "<id>", "experiment_run_id": "<id>"}
 examplesVersion: 1.0.1
 generatedTests: {}

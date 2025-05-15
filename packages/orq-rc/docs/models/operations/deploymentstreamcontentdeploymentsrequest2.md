@@ -35,3 +35,14 @@ const value: operations.DeploymentStream2Deployments3 = {
 };
 ```
 
+### `operations.DeploymentStream2Deployments4`
+
+```typescript
+const value: operations.DeploymentStream2Deployments4 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

@@ -113,6 +113,7 @@ export type BulkCreateDatapointsMessages = {
    */
   content: string | Array<BulkCreateDatapoints21 | BulkCreateDatapoints22>;
   toolCalls?: Array<BulkCreateDatapointsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type Items = {
@@ -246,6 +247,7 @@ export type BulkCreateDatapointsDatasetsMessages = {
     | string
     | Array<BulkCreateDatapoints2Datasets1 | BulkCreateDatapoints2Datasets2>;
   toolCalls?: Array<BulkCreateDatapointsDatasetsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type ResponseBody = {
@@ -816,9 +818,11 @@ export const BulkCreateDatapointsMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => BulkCreateDatapointsToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -829,6 +833,7 @@ export type BulkCreateDatapointsMessages$Outbound = {
     | string
     | Array<BulkCreateDatapoints21$Outbound | BulkCreateDatapoints22$Outbound>;
   tool_calls?: Array<BulkCreateDatapointsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -847,9 +852,11 @@ export const BulkCreateDatapointsMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => BulkCreateDatapointsToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1633,9 +1640,11 @@ export const BulkCreateDatapointsDatasetsMessages$inboundSchema: z.ZodType<
   tool_calls: z.array(
     z.lazy(() => BulkCreateDatapointsDatasetsToolCalls$inboundSchema),
   ).optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1651,6 +1660,7 @@ export type BulkCreateDatapointsDatasetsMessages$Outbound = {
   tool_calls?:
     | Array<BulkCreateDatapointsDatasetsToolCalls$Outbound>
     | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1670,9 +1680,11 @@ export const BulkCreateDatapointsDatasetsMessages$outboundSchema: z.ZodType<
   toolCalls: z.array(
     z.lazy(() => BulkCreateDatapointsDatasetsToolCalls$outboundSchema),
   ).optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1731,7 +1743,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-04-18T08:27:42.154Z",
+    "2025-05-15T06:43:27.397Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -1775,7 +1787,7 @@ export const ResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-04-18T08:27:42.154Z"))
+  updated: z.date().default(() => new Date("2025-05-15T06:43:27.397Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

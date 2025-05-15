@@ -105,6 +105,7 @@ export type UpdateDatapointMessages = {
    */
   content: string | Array<UpdateDatapoint21 | UpdateDatapoint22>;
   toolCalls?: Array<UpdateDatapointToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type UpdateDatapointRequestBody = {
@@ -235,6 +236,7 @@ export type UpdateDatapointDatasetsMessages = {
     | string
     | Array<UpdateDatapoint2Datasets1 | UpdateDatapoint2Datasets2>;
   toolCalls?: Array<UpdateDatapointDatasetsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -797,9 +799,11 @@ export const UpdateDatapointMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => UpdateDatapointToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -810,6 +814,7 @@ export type UpdateDatapointMessages$Outbound = {
     | string
     | Array<UpdateDatapoint21$Outbound | UpdateDatapoint22$Outbound>;
   tool_calls?: Array<UpdateDatapointToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -828,9 +833,11 @@ export const UpdateDatapointMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => UpdateDatapointToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1547,9 +1554,11 @@ export const UpdateDatapointDatasetsMessages$inboundSchema: z.ZodType<
   tool_calls: z.array(
     z.lazy(() => UpdateDatapointDatasetsToolCalls$inboundSchema),
   ).optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1562,6 +1571,7 @@ export type UpdateDatapointDatasetsMessages$Outbound = {
       UpdateDatapoint2Datasets1$Outbound | UpdateDatapoint2Datasets2$Outbound
     >;
   tool_calls?: Array<UpdateDatapointDatasetsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1581,9 +1591,11 @@ export const UpdateDatapointDatasetsMessages$outboundSchema: z.ZodType<
   toolCalls: z.array(
     z.lazy(() => UpdateDatapointDatasetsToolCalls$outboundSchema),
   ).optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1638,7 +1650,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-04-18T08:27:42.154Z",
+    "2025-05-15T06:43:27.397Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -1682,7 +1694,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-04-18T08:27:42.154Z"))
+  updated: z.date().default(() => new Date("2025-05-15T06:43:27.397Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
