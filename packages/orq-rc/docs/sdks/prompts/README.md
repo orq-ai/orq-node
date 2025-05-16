@@ -100,31 +100,12 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.prompts.create({
-    displayName: "Jed6",
+    displayName: "Raymundo83",
     promptConfig: {
       messages: [
         {
-          role: "system",
+          role: "assistant",
           content: "<value>",
-        },
-        {
-          role: "system",
-          content: [
-            {
-              type: "image_url",
-              imageUrl: {
-                url: "https://well-worn-formation.biz",
-              },
-            },
-            {
-              type: "text",
-              text: "<value>",
-            },
-            {
-              type: "text",
-              text: "<value>",
-            },
-          ],
         },
         {
           role: "assistant",
@@ -158,31 +139,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await promptsCreate(orq, {
-    displayName: "Jed6",
+    displayName: "Raymundo83",
     promptConfig: {
       messages: [
         {
-          role: "system",
+          role: "assistant",
           content: "<value>",
-        },
-        {
-          role: "system",
-          content: [
-            {
-              type: "image_url",
-              imageUrl: {
-                url: "https://well-worn-formation.biz",
-              },
-            },
-            {
-              type: "text",
-              text: "<value>",
-            },
-            {
-              type: "text",
-              text: "<value>",
-            },
-          ],
         },
         {
           role: "assistant",
