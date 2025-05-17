@@ -14,7 +14,6 @@ import { knowledgeListDatasources } from "../funcs/knowledgeListDatasources.js";
 import { knowledgeRetrieve } from "../funcs/knowledgeRetrieve.js";
 import { knowledgeRetrieveChunk } from "../funcs/knowledgeRetrieveChunk.js";
 import { knowledgeRetrieveDatasource } from "../funcs/knowledgeRetrieveDatasource.js";
-import { knowledgeSearch } from "../funcs/knowledgeSearch.js";
 import { knowledgeUpdate } from "../funcs/knowledgeUpdate.js";
 import { knowledgeUpdateChunk } from "../funcs/knowledgeUpdateChunk.js";
 import { knowledgeUpdateDatasource } from "../funcs/knowledgeUpdateDatasource.js";
@@ -96,20 +95,6 @@ export class Knowledge extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(knowledgeDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Retrieves the documents used for retrieval
-   */
-  async search(
-    request: operations.SearchKnowledgeRequest,
-    options?: RequestOptions,
-  ): Promise<operations.SearchKnowledgeResponseBody> {
-    return unwrapAsync(knowledgeSearch(
       this,
       request,
       options,

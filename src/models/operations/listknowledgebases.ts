@@ -61,6 +61,16 @@ export type ListKnowledgeBasesRerankConfig = {
 };
 
 /**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type ListKnowledgeBasesAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
 export type ListKnowledgeBasesRetrievalSettings = {
@@ -79,7 +89,11 @@ export type ListKnowledgeBasesRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: ListKnowledgeBasesRerankConfig | undefined;
+  rerankConfig?: ListKnowledgeBasesRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?: ListKnowledgeBasesAgenticRagConfig | null | undefined;
 };
 
 /**
@@ -106,6 +120,10 @@ export type ListKnowledgeBasesData = {
    * The embeddings model used for the knowledge base.
    */
   model: string;
+  /**
+   * The project/domain ID of the knowledge base.
+   */
+  domainId: string;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
@@ -313,6 +331,64 @@ export function listKnowledgeBasesRerankConfigFromJSON(
 }
 
 /** @internal */
+export const ListKnowledgeBasesAgenticRagConfig$inboundSchema: z.ZodType<
+  ListKnowledgeBasesAgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type ListKnowledgeBasesAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const ListKnowledgeBasesAgenticRagConfig$outboundSchema: z.ZodType<
+  ListKnowledgeBasesAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  ListKnowledgeBasesAgenticRagConfig
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListKnowledgeBasesAgenticRagConfig$ {
+  /** @deprecated use `ListKnowledgeBasesAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = ListKnowledgeBasesAgenticRagConfig$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    ListKnowledgeBasesAgenticRagConfig$outboundSchema;
+  /** @deprecated use `ListKnowledgeBasesAgenticRagConfig$Outbound` instead. */
+  export type Outbound = ListKnowledgeBasesAgenticRagConfig$Outbound;
+}
+
+export function listKnowledgeBasesAgenticRagConfigToJSON(
+  listKnowledgeBasesAgenticRagConfig: ListKnowledgeBasesAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    ListKnowledgeBasesAgenticRagConfig$outboundSchema.parse(
+      listKnowledgeBasesAgenticRagConfig,
+    ),
+  );
+}
+
+export function listKnowledgeBasesAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<ListKnowledgeBasesAgenticRagConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListKnowledgeBasesAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListKnowledgeBasesAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListKnowledgeBasesRetrievalSettings$inboundSchema: z.ZodType<
   ListKnowledgeBasesRetrievalSettings,
   z.ZodTypeDef,
@@ -323,13 +399,18 @@ export const ListKnowledgeBasesRetrievalSettings$inboundSchema: z.ZodType<
   ),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.lazy(() => ListKnowledgeBasesRerankConfig$inboundSchema)
-    .optional(),
+  rerank_config: z.nullable(
+    z.lazy(() => ListKnowledgeBasesRerankConfig$inboundSchema),
+  ).optional(),
+  agentic_rag_config: z.nullable(
+    z.lazy(() => ListKnowledgeBasesAgenticRagConfig$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
   });
 });
 
@@ -338,7 +419,11 @@ export type ListKnowledgeBasesRetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: ListKnowledgeBasesRerankConfig$Outbound | undefined;
+  rerank_config?: ListKnowledgeBasesRerankConfig$Outbound | null | undefined;
+  agentic_rag_config?:
+    | ListKnowledgeBasesAgenticRagConfig$Outbound
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -352,13 +437,18 @@ export const ListKnowledgeBasesRetrievalSettings$outboundSchema: z.ZodType<
   ),
   topK: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerankConfig: z.lazy(() => ListKnowledgeBasesRerankConfig$outboundSchema)
-    .optional(),
+  rerankConfig: z.nullable(
+    z.lazy(() => ListKnowledgeBasesRerankConfig$outboundSchema),
+  ).optional(),
+  agenticRagConfig: z.nullable(
+    z.lazy(() => ListKnowledgeBasesAgenticRagConfig$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     retrievalType: "retrieval_type",
     topK: "top_k",
     rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
   });
 });
 
@@ -409,6 +499,7 @@ export const ListKnowledgeBasesData$inboundSchema: z.ZodType<
   description: z.string().optional(),
   key: z.string(),
   model: z.string(),
+  domain_id: z.string(),
   path: z.string().optional(),
   retrieval_settings: z.lazy(() =>
     ListKnowledgeBasesRetrievalSettings$inboundSchema
@@ -419,6 +510,7 @@ export const ListKnowledgeBasesData$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "domain_id": "domainId",
     "retrieval_settings": "retrievalSettings",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -432,6 +524,7 @@ export type ListKnowledgeBasesData$Outbound = {
   description?: string | undefined;
   key: string;
   model: string;
+  domain_id: string;
   path?: string | undefined;
   retrieval_settings?: ListKnowledgeBasesRetrievalSettings$Outbound | undefined;
   created_by_id?: string | null | undefined;
@@ -450,6 +543,7 @@ export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
   description: z.string().optional(),
   key: z.string(),
   model: z.string(),
+  domainId: z.string(),
   path: z.string().optional(),
   retrievalSettings: z.lazy(() =>
     ListKnowledgeBasesRetrievalSettings$outboundSchema
@@ -460,6 +554,7 @@ export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    domainId: "domain_id",
     retrievalSettings: "retrieval_settings",
     createdById: "created_by_id",
     updatedById: "updated_by_id",

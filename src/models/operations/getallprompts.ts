@@ -35,7 +35,7 @@ export const GetAllPromptsType = {
 export type GetAllPromptsType = ClosedEnum<typeof GetAllPromptsType>;
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const GetAllPromptsModelType = {
   Chat: "chat",
@@ -49,7 +49,7 @@ export const GetAllPromptsModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type GetAllPromptsModelType = ClosedEnum<typeof GetAllPromptsModelType>;
 
@@ -66,18 +66,6 @@ export const GetAllPromptsFormat = {
  * Only supported on `image` models.
  */
 export type GetAllPromptsFormat = ClosedEnum<typeof GetAllPromptsFormat>;
-
-/**
- * Only supported on `image` models.
- */
-export const GetAllPromptsQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type GetAllPromptsQuality = ClosedEnum<typeof GetAllPromptsQuality>;
 
 export const GetAllPromptsResponseFormatPromptsType = {
   JsonObject: "json_object",
@@ -213,7 +201,7 @@ export type GetAllPromptsModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: GetAllPromptsQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -376,6 +364,7 @@ export type GetAllPromptsMessages = {
    */
   content: string | Array<GetAllPrompts21 | GetAllPrompts22>;
   toolCalls?: Array<GetAllPromptsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -389,7 +378,7 @@ export type GetAllPromptsPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: GetAllPromptsModelType | undefined;
   /**
@@ -454,7 +443,7 @@ export type GetAllPromptsMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: GetAllPromptsLanguage | undefined;
+  language?: GetAllPromptsLanguage | null | undefined;
 };
 
 export type GetAllPromptsData = {
@@ -642,27 +631,6 @@ export namespace GetAllPromptsFormat$ {
   export const inboundSchema = GetAllPromptsFormat$inboundSchema;
   /** @deprecated use `GetAllPromptsFormat$outboundSchema` instead. */
   export const outboundSchema = GetAllPromptsFormat$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsQuality$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsQuality
-> = z.nativeEnum(GetAllPromptsQuality);
-
-/** @internal */
-export const GetAllPromptsQuality$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsQuality
-> = GetAllPromptsQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsQuality$ {
-  /** @deprecated use `GetAllPromptsQuality$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsQuality$inboundSchema;
-  /** @deprecated use `GetAllPromptsQuality$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsQuality$outboundSchema;
 }
 
 /** @internal */
@@ -1039,7 +1007,7 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetAllPromptsFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetAllPromptsQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1098,7 +1066,7 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetAllPromptsFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetAllPromptsQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1686,9 +1654,11 @@ export const GetAllPromptsMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => GetAllPromptsToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1697,6 +1667,7 @@ export type GetAllPromptsMessages$Outbound = {
   role: string;
   content: string | Array<GetAllPrompts21$Outbound | GetAllPrompts22$Outbound>;
   tool_calls?: Array<GetAllPromptsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1715,9 +1686,11 @@ export const GetAllPromptsMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => GetAllPromptsToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1895,7 +1868,7 @@ export const GetAllPromptsMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(GetAllPromptsUseCases$inboundSchema).optional(),
-  language: GetAllPromptsLanguage$inboundSchema.optional(),
+  language: z.nullable(GetAllPromptsLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -1905,7 +1878,7 @@ export const GetAllPromptsMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -1915,7 +1888,7 @@ export const GetAllPromptsMetadata$outboundSchema: z.ZodType<
   GetAllPromptsMetadata
 > = z.object({
   useCases: z.array(GetAllPromptsUseCases$outboundSchema).optional(),
-  language: GetAllPromptsLanguage$outboundSchema.optional(),
+  language: z.nullable(GetAllPromptsLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",

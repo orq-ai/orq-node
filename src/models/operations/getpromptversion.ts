@@ -21,7 +21,7 @@ export type GetPromptVersionRequest = {
 };
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const GetPromptVersionModelType = {
   Chat: "chat",
@@ -35,7 +35,7 @@ export const GetPromptVersionModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type GetPromptVersionModelType = ClosedEnum<
   typeof GetPromptVersionModelType
@@ -54,20 +54,6 @@ export const GetPromptVersionFormat = {
  * Only supported on `image` models.
  */
 export type GetPromptVersionFormat = ClosedEnum<typeof GetPromptVersionFormat>;
-
-/**
- * Only supported on `image` models.
- */
-export const GetPromptVersionQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type GetPromptVersionQuality = ClosedEnum<
-  typeof GetPromptVersionQuality
->;
 
 export const GetPromptVersionResponseFormatPromptsType = {
   JsonObject: "json_object",
@@ -203,7 +189,7 @@ export type GetPromptVersionModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: GetPromptVersionQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -366,6 +352,7 @@ export type GetPromptVersionMessages = {
    */
   content: string | Array<GetPromptVersion21 | GetPromptVersion22>;
   toolCalls?: Array<GetPromptVersionToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -379,7 +366,7 @@ export type GetPromptVersionPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: GetPromptVersionModelType | undefined;
   /**
@@ -448,7 +435,7 @@ export type GetPromptVersionMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: GetPromptVersionLanguage | undefined;
+  language?: GetPromptVersionLanguage | null | undefined;
 };
 
 /**
@@ -577,27 +564,6 @@ export namespace GetPromptVersionFormat$ {
   export const inboundSchema = GetPromptVersionFormat$inboundSchema;
   /** @deprecated use `GetPromptVersionFormat$outboundSchema` instead. */
   export const outboundSchema = GetPromptVersionFormat$outboundSchema;
-}
-
-/** @internal */
-export const GetPromptVersionQuality$inboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionQuality
-> = z.nativeEnum(GetPromptVersionQuality);
-
-/** @internal */
-export const GetPromptVersionQuality$outboundSchema: z.ZodNativeEnum<
-  typeof GetPromptVersionQuality
-> = GetPromptVersionQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPromptVersionQuality$ {
-  /** @deprecated use `GetPromptVersionQuality$inboundSchema` instead. */
-  export const inboundSchema = GetPromptVersionQuality$inboundSchema;
-  /** @deprecated use `GetPromptVersionQuality$outboundSchema` instead. */
-  export const outboundSchema = GetPromptVersionQuality$outboundSchema;
 }
 
 /** @internal */
@@ -980,7 +946,7 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetPromptVersionFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetPromptVersionQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1039,7 +1005,7 @@ export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: GetPromptVersionFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: GetPromptVersionQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1631,9 +1597,11 @@ export const GetPromptVersionMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => GetPromptVersionToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1644,6 +1612,7 @@ export type GetPromptVersionMessages$Outbound = {
     | string
     | Array<GetPromptVersion21$Outbound | GetPromptVersion22$Outbound>;
   tool_calls?: Array<GetPromptVersionToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1662,9 +1631,11 @@ export const GetPromptVersionMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => GetPromptVersionToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1844,7 +1815,7 @@ export const GetPromptVersionMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(GetPromptVersionUseCases$inboundSchema).optional(),
-  language: GetPromptVersionLanguage$inboundSchema.optional(),
+  language: z.nullable(GetPromptVersionLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -1854,7 +1825,7 @@ export const GetPromptVersionMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type GetPromptVersionMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -1864,7 +1835,7 @@ export const GetPromptVersionMetadata$outboundSchema: z.ZodType<
   GetPromptVersionMetadata
 > = z.object({
   useCases: z.array(GetPromptVersionUseCases$outboundSchema).optional(),
-  language: GetPromptVersionLanguage$outboundSchema.optional(),
+  language: z.nullable(GetPromptVersionLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",

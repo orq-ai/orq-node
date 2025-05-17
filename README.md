@@ -12,7 +12,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-[Dev] orq.ai API: orq.ai API documentation
+orq.ai API: orq.ai API documentation
 
 For more information about the API: [orq.ai Documentation](https://docs.orq.ai)
 <!-- End Summary [summary] -->
@@ -281,7 +281,6 @@ run();
 * [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
 * [update](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 * [delete](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
-* [search](docs/sdks/knowledge/README.md#search) - Retrieves the documents used for retrieval
 * [listDatasources](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
 * [createDatasource](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
 * [retrieveDatasource](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
@@ -292,6 +291,10 @@ run();
 * [updateChunk](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 * [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
+
+### [models](docs/sdks/models/README.md)
+
+* [list](docs/sdks/models/README.md#list) - List models
 
 
 ### [prompts](docs/sdks/prompts/README.md)
@@ -361,10 +364,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`knowledgeRetrieve`](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
 - [`knowledgeRetrieveChunk`](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 - [`knowledgeRetrieveDatasource`](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
-- [`knowledgeSearch`](docs/sdks/knowledge/README.md#search) - Retrieves the documents used for retrieval
 - [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 - [`knowledgeUpdateChunk`](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 - [`knowledgeUpdateDatasource`](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
+- [`modelsList`](docs/sdks/models/README.md#list) - List models
 - [`promptsCreate`](docs/sdks/prompts/README.md#create) - Create a prompt
 - [`promptsDelete`](docs/sdks/prompts/README.md#delete) - Delete a prompt
 - [`promptsGetVersion`](docs/sdks/prompts/README.md#getversion) - Retrieve a prompt version

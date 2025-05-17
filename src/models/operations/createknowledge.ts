@@ -37,6 +37,16 @@ export type RerankConfig = {
 };
 
 /**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type AgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
 export type RetrievalSettings = {
@@ -55,7 +65,11 @@ export type RetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: RerankConfig | undefined;
+  rerankConfig?: RerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?: AgenticRagConfig | null | undefined;
 };
 
 export type CreateKnowledgeRequestBody = {
@@ -105,6 +119,16 @@ export type CreateKnowledgeRerankConfig = {
 };
 
 /**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type CreateKnowledgeAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
 export type CreateKnowledgeRetrievalSettings = {
@@ -123,7 +147,11 @@ export type CreateKnowledgeRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: CreateKnowledgeRerankConfig | undefined;
+  rerankConfig?: CreateKnowledgeRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?: CreateKnowledgeAgenticRagConfig | null | undefined;
 };
 
 /**
@@ -150,6 +178,10 @@ export type CreateKnowledgeResponseBody = {
    * The embeddings model used for the knowledge base.
    */
   model: string;
+  /**
+   * The project/domain ID of the knowledge base.
+   */
+  domainId: string;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
@@ -251,6 +283,60 @@ export function rerankConfigFromJSON(
 }
 
 /** @internal */
+export const AgenticRagConfig$inboundSchema: z.ZodType<
+  AgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type AgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const AgenticRagConfig$outboundSchema: z.ZodType<
+  AgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  AgenticRagConfig
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AgenticRagConfig$ {
+  /** @deprecated use `AgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = AgenticRagConfig$inboundSchema;
+  /** @deprecated use `AgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema = AgenticRagConfig$outboundSchema;
+  /** @deprecated use `AgenticRagConfig$Outbound` instead. */
+  export type Outbound = AgenticRagConfig$Outbound;
+}
+
+export function agenticRagConfigToJSON(
+  agenticRagConfig: AgenticRagConfig,
+): string {
+  return JSON.stringify(
+    AgenticRagConfig$outboundSchema.parse(agenticRagConfig),
+  );
+}
+
+export function agenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<AgenticRagConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrievalSettings$inboundSchema: z.ZodType<
   RetrievalSettings,
   z.ZodTypeDef,
@@ -259,12 +345,16 @@ export const RetrievalSettings$inboundSchema: z.ZodType<
   retrieval_type: RetrievalType$inboundSchema.default("hybrid_search"),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.lazy(() => RerankConfig$inboundSchema).optional(),
+  rerank_config: z.nullable(z.lazy(() => RerankConfig$inboundSchema))
+    .optional(),
+  agentic_rag_config: z.nullable(z.lazy(() => AgenticRagConfig$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
   });
 });
 
@@ -273,7 +363,8 @@ export type RetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: RerankConfig$Outbound | undefined;
+  rerank_config?: RerankConfig$Outbound | null | undefined;
+  agentic_rag_config?: AgenticRagConfig$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -285,12 +376,16 @@ export const RetrievalSettings$outboundSchema: z.ZodType<
   retrievalType: RetrievalType$outboundSchema.default("hybrid_search"),
   topK: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerankConfig: z.lazy(() => RerankConfig$outboundSchema).optional(),
+  rerankConfig: z.nullable(z.lazy(() => RerankConfig$outboundSchema))
+    .optional(),
+  agenticRagConfig: z.nullable(z.lazy(() => AgenticRagConfig$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     retrievalType: "retrieval_type",
     topK: "top_k",
     rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
   });
 });
 
@@ -492,6 +587,62 @@ export function createKnowledgeRerankConfigFromJSON(
 }
 
 /** @internal */
+export const CreateKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
+  CreateKnowledgeAgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type CreateKnowledgeAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const CreateKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
+  CreateKnowledgeAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  CreateKnowledgeAgenticRagConfig
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateKnowledgeAgenticRagConfig$ {
+  /** @deprecated use `CreateKnowledgeAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = CreateKnowledgeAgenticRagConfig$inboundSchema;
+  /** @deprecated use `CreateKnowledgeAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema = CreateKnowledgeAgenticRagConfig$outboundSchema;
+  /** @deprecated use `CreateKnowledgeAgenticRagConfig$Outbound` instead. */
+  export type Outbound = CreateKnowledgeAgenticRagConfig$Outbound;
+}
+
+export function createKnowledgeAgenticRagConfigToJSON(
+  createKnowledgeAgenticRagConfig: CreateKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    CreateKnowledgeAgenticRagConfig$outboundSchema.parse(
+      createKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+export function createKnowledgeAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateKnowledgeAgenticRagConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateKnowledgeAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateKnowledgeAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   CreateKnowledgeRetrievalSettings,
   z.ZodTypeDef,
@@ -502,13 +653,18 @@ export const CreateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   ),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.lazy(() => CreateKnowledgeRerankConfig$inboundSchema)
-    .optional(),
+  rerank_config: z.nullable(
+    z.lazy(() => CreateKnowledgeRerankConfig$inboundSchema),
+  ).optional(),
+  agentic_rag_config: z.nullable(
+    z.lazy(() => CreateKnowledgeAgenticRagConfig$inboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
   });
 });
 
@@ -517,7 +673,11 @@ export type CreateKnowledgeRetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: CreateKnowledgeRerankConfig$Outbound | undefined;
+  rerank_config?: CreateKnowledgeRerankConfig$Outbound | null | undefined;
+  agentic_rag_config?:
+    | CreateKnowledgeAgenticRagConfig$Outbound
+    | null
+    | undefined;
 };
 
 /** @internal */
@@ -531,13 +691,18 @@ export const CreateKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
   ),
   topK: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerankConfig: z.lazy(() => CreateKnowledgeRerankConfig$outboundSchema)
-    .optional(),
+  rerankConfig: z.nullable(
+    z.lazy(() => CreateKnowledgeRerankConfig$outboundSchema),
+  ).optional(),
+  agenticRagConfig: z.nullable(
+    z.lazy(() => CreateKnowledgeAgenticRagConfig$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     retrievalType: "retrieval_type",
     topK: "top_k",
     rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
   });
 });
 
@@ -585,6 +750,7 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
   description: z.string().optional(),
   key: z.string(),
   model: z.string(),
+  domain_id: z.string(),
   path: z.string().optional(),
   retrieval_settings: z.lazy(() =>
     CreateKnowledgeRetrievalSettings$inboundSchema
@@ -595,6 +761,7 @@ export const CreateKnowledgeResponseBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "domain_id": "domainId",
     "retrieval_settings": "retrievalSettings",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
@@ -608,6 +775,7 @@ export type CreateKnowledgeResponseBody$Outbound = {
   description?: string | undefined;
   key: string;
   model: string;
+  domain_id: string;
   path?: string | undefined;
   retrieval_settings?: CreateKnowledgeRetrievalSettings$Outbound | undefined;
   created_by_id?: string | null | undefined;
@@ -626,6 +794,7 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
   description: z.string().optional(),
   key: z.string(),
   model: z.string(),
+  domainId: z.string(),
   path: z.string().optional(),
   retrievalSettings: z.lazy(() =>
     CreateKnowledgeRetrievalSettings$outboundSchema
@@ -636,6 +805,7 @@ export const CreateKnowledgeResponseBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    domainId: "domain_id",
     retrievalSettings: "retrieval_settings",
     createdById: "created_by_id",
     updatedById: "updated_by_id",

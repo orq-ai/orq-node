@@ -107,6 +107,7 @@ export type CreateDatasetItemMessages = {
    */
   content: string | Array<CreateDatasetItem21 | CreateDatasetItem22>;
   toolCalls?: Array<CreateDatasetItemToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type CreateDatasetItemRequestBody = {
@@ -236,6 +237,7 @@ export type CreateDatasetItemDatasetsMessages = {
     | string
     | Array<CreateDatasetItem2Datasets1 | CreateDatasetItem2Datasets2>;
   toolCalls?: Array<CreateDatasetItemDatasetsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -798,9 +800,11 @@ export const CreateDatasetItemMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => CreateDatasetItemToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -811,6 +815,7 @@ export type CreateDatasetItemMessages$Outbound = {
     | string
     | Array<CreateDatasetItem21$Outbound | CreateDatasetItem22$Outbound>;
   tool_calls?: Array<CreateDatasetItemToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -829,9 +834,11 @@ export const CreateDatasetItemMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => CreateDatasetItemToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1555,9 +1562,11 @@ export const CreateDatasetItemDatasetsMessages$inboundSchema: z.ZodType<
   tool_calls: z.array(
     z.lazy(() => CreateDatasetItemDatasetsToolCalls$inboundSchema),
   ).optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1571,6 +1580,7 @@ export type CreateDatasetItemDatasetsMessages$Outbound = {
       | CreateDatasetItem2Datasets2$Outbound
     >;
   tool_calls?: Array<CreateDatasetItemDatasetsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1590,9 +1600,11 @@ export const CreateDatasetItemDatasetsMessages$outboundSchema: z.ZodType<
   toolCalls: z.array(
     z.lazy(() => CreateDatasetItemDatasetsToolCalls$outboundSchema),
   ).optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1649,7 +1661,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-04-17T14:46:09.375Z",
+    "2025-05-17T08:03:09.891Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -1693,7 +1705,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-04-17T14:46:09.375Z"))
+  updated: z.date().default(() => new Date("2025-05-17T08:03:09.891Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

@@ -140,6 +140,7 @@ export type ListDatasetDatapointsMessages = {
    */
   content: string | Array<ListDatasetDatapoints21 | ListDatasetDatapoints22>;
   toolCalls?: Array<ListDatasetDatapointsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 export type ListDatasetDatapointsData = {
@@ -821,9 +822,11 @@ export const ListDatasetDatapointsMessages$inboundSchema: z.ZodType<
   tool_calls: z.array(
     z.lazy(() => ListDatasetDatapointsToolCalls$inboundSchema),
   ).optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -836,6 +839,7 @@ export type ListDatasetDatapointsMessages$Outbound = {
       ListDatasetDatapoints21$Outbound | ListDatasetDatapoints22$Outbound
     >;
   tool_calls?: Array<ListDatasetDatapointsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -855,9 +859,11 @@ export const ListDatasetDatapointsMessages$outboundSchema: z.ZodType<
   toolCalls: z.array(
     z.lazy(() => ListDatasetDatapointsToolCalls$outboundSchema),
   ).optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -912,7 +918,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-04-17T14:46:09.375Z",
+    "2025-05-17T08:03:09.891Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -955,7 +961,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-04-17T14:46:09.375Z"))
+  updated: z.date().default(() => new Date("2025-05-17T08:03:09.891Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

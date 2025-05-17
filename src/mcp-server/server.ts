@@ -48,10 +48,10 @@ import { tool$knowledgeListDatasources } from "./tools/knowledgeListDatasources.
 import { tool$knowledgeRetrieve } from "./tools/knowledgeRetrieve.js";
 import { tool$knowledgeRetrieveChunk } from "./tools/knowledgeRetrieveChunk.js";
 import { tool$knowledgeRetrieveDatasource } from "./tools/knowledgeRetrieveDatasource.js";
-import { tool$knowledgeSearch } from "./tools/knowledgeSearch.js";
 import { tool$knowledgeUpdate } from "./tools/knowledgeUpdate.js";
 import { tool$knowledgeUpdateChunk } from "./tools/knowledgeUpdateChunk.js";
 import { tool$knowledgeUpdateDatasource } from "./tools/knowledgeUpdateDatasource.js";
+import { tool$modelsList } from "./tools/modelsList.js";
 import { tool$promptsCreate } from "./tools/promptsCreate.js";
 import { tool$promptsDelete } from "./tools/promptsDelete.js";
 import { tool$promptsGetVersion } from "./tools/promptsGetVersion.js";
@@ -73,7 +73,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.3.15",
+    version: "3.5.11",
   });
 
   const client = new OrqCore({
@@ -123,6 +123,7 @@ export function createMCPServer(deps: {
   tool(tool$promptsListVersions);
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);
+  tool(tool$modelsList);
   tool(tool$datasetsList);
   tool(tool$datasetsCreate);
   tool(tool$datasetsRetrieve);
@@ -140,7 +141,6 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeRetrieve);
   tool(tool$knowledgeUpdate);
   tool(tool$knowledgeDelete);
-  tool(tool$knowledgeSearch);
   tool(tool$knowledgeListDatasources);
   tool(tool$knowledgeCreateDatasource);
   tool(tool$knowledgeRetrieveDatasource);

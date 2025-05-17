@@ -1,6 +1,6 @@
 # GetPromptVersionModelType
 
-The type of the model
+The modality of the model
 
 ## Example Usage
 

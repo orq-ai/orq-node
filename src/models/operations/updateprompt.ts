@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const UpdatePromptModelType = {
   Chat: "chat",
@@ -24,7 +24,7 @@ export const UpdatePromptModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type UpdatePromptModelType = ClosedEnum<typeof UpdatePromptModelType>;
 
@@ -41,18 +41,6 @@ export const UpdatePromptFormat = {
  * Only supported on `image` models.
  */
 export type UpdatePromptFormat = ClosedEnum<typeof UpdatePromptFormat>;
-
-/**
- * Only supported on `image` models.
- */
-export const UpdatePromptQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type UpdatePromptQuality = ClosedEnum<typeof UpdatePromptQuality>;
 
 export const UpdatePromptResponseFormatPromptsType = {
   JsonObject: "json_object",
@@ -188,7 +176,7 @@ export type UpdatePromptModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: UpdatePromptQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -345,6 +333,7 @@ export type UpdatePromptMessages = {
    */
   content: string | Array<UpdatePrompt21 | UpdatePrompt22>;
   toolCalls?: Array<UpdatePromptToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -354,7 +343,7 @@ export type UpdatePromptPromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: UpdatePromptModelType | undefined;
   /**
@@ -415,7 +404,7 @@ export type UpdatePromptMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: UpdatePromptLanguage | undefined;
+  language?: UpdatePromptLanguage | null | undefined;
 };
 
 export type UpdatePromptRequestBody = {
@@ -460,7 +449,7 @@ export type UpdatePromptPromptsType = ClosedEnum<
 >;
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const UpdatePromptPromptsModelType = {
   Chat: "chat",
@@ -474,7 +463,7 @@ export const UpdatePromptPromptsModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type UpdatePromptPromptsModelType = ClosedEnum<
   typeof UpdatePromptPromptsModelType
@@ -494,20 +483,6 @@ export const UpdatePromptPromptsFormat = {
  */
 export type UpdatePromptPromptsFormat = ClosedEnum<
   typeof UpdatePromptPromptsFormat
->;
-
-/**
- * Only supported on `image` models.
- */
-export const UpdatePromptPromptsQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type UpdatePromptPromptsQuality = ClosedEnum<
-  typeof UpdatePromptPromptsQuality
 >;
 
 export const UpdatePromptResponseFormatPromptsResponse200Type = {
@@ -644,7 +619,7 @@ export type UpdatePromptPromptsModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: UpdatePromptPromptsQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -815,6 +790,7 @@ export type UpdatePromptPromptsMessages = {
    */
   content: string | Array<UpdatePrompt2Prompts1 | UpdatePrompt2Prompts2>;
   toolCalls?: Array<UpdatePromptPromptsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -828,7 +804,7 @@ export type UpdatePromptPromptsPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: UpdatePromptPromptsModelType | undefined;
   /**
@@ -897,7 +873,7 @@ export type UpdatePromptPromptsMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: UpdatePromptPromptsLanguage | undefined;
+  language?: UpdatePromptPromptsLanguage | null | undefined;
 };
 
 /**
@@ -967,27 +943,6 @@ export namespace UpdatePromptFormat$ {
   export const inboundSchema = UpdatePromptFormat$inboundSchema;
   /** @deprecated use `UpdatePromptFormat$outboundSchema` instead. */
   export const outboundSchema = UpdatePromptFormat$outboundSchema;
-}
-
-/** @internal */
-export const UpdatePromptQuality$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptQuality
-> = z.nativeEnum(UpdatePromptQuality);
-
-/** @internal */
-export const UpdatePromptQuality$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptQuality
-> = UpdatePromptQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptQuality$ {
-  /** @deprecated use `UpdatePromptQuality$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptQuality$inboundSchema;
-  /** @deprecated use `UpdatePromptQuality$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptQuality$outboundSchema;
 }
 
 /** @internal */
@@ -1353,7 +1308,7 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: UpdatePromptFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: UpdatePromptQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1412,7 +1367,7 @@ export const UpdatePromptModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: UpdatePromptFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: UpdatePromptQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1993,9 +1948,11 @@ export const UpdatePromptMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => UpdatePromptToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -2004,6 +1961,7 @@ export type UpdatePromptMessages$Outbound = {
   role: string;
   content: string | Array<UpdatePrompt21$Outbound | UpdatePrompt22$Outbound>;
   tool_calls?: Array<UpdatePromptToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -2022,9 +1980,11 @@ export const UpdatePromptMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => UpdatePromptToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -2192,7 +2152,7 @@ export const UpdatePromptMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(UpdatePromptUseCases$inboundSchema).optional(),
-  language: UpdatePromptLanguage$inboundSchema.optional(),
+  language: z.nullable(UpdatePromptLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -2202,7 +2162,7 @@ export const UpdatePromptMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePromptMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -2212,7 +2172,7 @@ export const UpdatePromptMetadata$outboundSchema: z.ZodType<
   UpdatePromptMetadata
 > = z.object({
   useCases: z.array(UpdatePromptUseCases$outboundSchema).optional(),
-  language: UpdatePromptLanguage$outboundSchema.optional(),
+  language: z.nullable(UpdatePromptLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
@@ -2478,27 +2438,6 @@ export namespace UpdatePromptPromptsFormat$ {
   export const inboundSchema = UpdatePromptPromptsFormat$inboundSchema;
   /** @deprecated use `UpdatePromptPromptsFormat$outboundSchema` instead. */
   export const outboundSchema = UpdatePromptPromptsFormat$outboundSchema;
-}
-
-/** @internal */
-export const UpdatePromptPromptsQuality$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsQuality
-> = z.nativeEnum(UpdatePromptPromptsQuality);
-
-/** @internal */
-export const UpdatePromptPromptsQuality$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsQuality
-> = UpdatePromptPromptsQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptPromptsQuality$ {
-  /** @deprecated use `UpdatePromptPromptsQuality$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsQuality$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsQuality$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsQuality$outboundSchema;
 }
 
 /** @internal */
@@ -2881,7 +2820,7 @@ export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: UpdatePromptPromptsFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: UpdatePromptPromptsQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -2941,7 +2880,7 @@ export const UpdatePromptPromptsModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: UpdatePromptPromptsFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: UpdatePromptPromptsQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -3546,9 +3485,11 @@ export const UpdatePromptPromptsMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -3559,6 +3500,7 @@ export type UpdatePromptPromptsMessages$Outbound = {
     | string
     | Array<UpdatePrompt2Prompts1$Outbound | UpdatePrompt2Prompts2$Outbound>;
   tool_calls?: Array<UpdatePromptPromptsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -3577,9 +3519,11 @@ export const UpdatePromptPromptsMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -3763,7 +3707,7 @@ export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(UpdatePromptPromptsUseCases$inboundSchema).optional(),
-  language: UpdatePromptPromptsLanguage$inboundSchema.optional(),
+  language: z.nullable(UpdatePromptPromptsLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -3773,7 +3717,7 @@ export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePromptPromptsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -3783,7 +3727,7 @@ export const UpdatePromptPromptsMetadata$outboundSchema: z.ZodType<
   UpdatePromptPromptsMetadata
 > = z.object({
   useCases: z.array(UpdatePromptPromptsUseCases$outboundSchema).optional(),
-  language: UpdatePromptPromptsLanguage$outboundSchema.optional(),
+  language: z.nullable(UpdatePromptPromptsLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",

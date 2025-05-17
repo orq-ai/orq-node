@@ -113,7 +113,7 @@ export const UpdateChunkMetadata$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  page_number: z.number().optional(),
+  page_number: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "page_number": "pageNumber",
@@ -131,7 +131,7 @@ export const UpdateChunkMetadata$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateChunkMetadata
 > = z.object({
-  pageNumber: z.number().optional(),
+  pageNumber: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     pageNumber: "page_number",

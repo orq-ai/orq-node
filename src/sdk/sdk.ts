@@ -9,6 +9,7 @@ import { Deployments } from "./deployments.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { Knowledge } from "./knowledge.js";
+import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
 
@@ -41,6 +42,11 @@ export class Orq extends ClientSDK {
   private _remoteconfigs?: Remoteconfigs;
   get remoteconfigs(): Remoteconfigs {
     return (this._remoteconfigs ??= new Remoteconfigs(this._options));
+  }
+
+  private _models?: Models;
+  get models(): Models {
+    return (this._models ??= new Models(this._options));
   }
 
   private _datasets?: Datasets;

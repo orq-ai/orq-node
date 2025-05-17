@@ -161,7 +161,11 @@ export type AssistantMessage = {
   /**
    * The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified.
    */
-  content?: string | Array<TextContentPart | RefusalContentPart> | undefined;
+  content?:
+    | string
+    | Array<TextContentPart | RefusalContentPart>
+    | null
+    | undefined;
   /**
    * The refusal message by the assistant.
    */
@@ -519,6 +523,7 @@ export type MessagesAssistantMessage = {
   content?:
     | string
     | Array<TwoTextContentPart | TwoRefusalContentPart>
+    | null
     | undefined;
   /**
    * The refusal message by the assistant.
@@ -759,6 +764,21 @@ export type InvokeOptions = {
    * Whether to include the retrieved knowledge chunks in the response.
    */
   includeRetrievals?: boolean | undefined;
+  /**
+   * A mock response to use instead of calling the LLM API. This is useful for testing purposes. When provided, the system will return a response object with this content as the completion, without making an actual API call to the LLM provider. This works for both streaming and non-streaming requests. Mock responses will not generate logs, traces or be counted for your plan usage.
+   */
+  mockResponse?: string | undefined;
+};
+
+export type Thread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
 };
 
 export type DeploymentGetConfigRequestBody = {
@@ -815,6 +835,7 @@ export type DeploymentGetConfigRequestBody = {
    */
   documents?: Array<Documents> | undefined;
   invokeOptions?: InvokeOptions | undefined;
+  thread?: Thread | undefined;
 };
 
 /**
@@ -948,6 +969,7 @@ export type DeploymentGetConfigMessages = {
     | string
     | Array<DeploymentGetConfig21 | DeploymentGetConfig2Deployments2>;
   toolCalls?: Array<DeploymentGetConfigToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -964,20 +986,6 @@ export const DeploymentGetConfigFormat = {
  */
 export type DeploymentGetConfigFormat = ClosedEnum<
   typeof DeploymentGetConfigFormat
->;
-
-/**
- * Only supported on `image` models.
- */
-export const DeploymentGetConfigQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type DeploymentGetConfigQuality = ClosedEnum<
-  typeof DeploymentGetConfigQuality
 >;
 
 export const DeploymentGetConfigResponseFormatType = {
@@ -1114,7 +1122,7 @@ export type ParametersT = {
   /**
    * Only supported on `image` models.
    */
-  quality?: DeploymentGetConfigQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -1897,13 +1905,15 @@ export const AssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => TextContentPart$inboundSchema),
-      z.lazy(() => RefusalContentPart$inboundSchema),
-    ])),
-  ]).optional(),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => TextContentPart$inboundSchema),
+        z.lazy(() => RefusalContentPart$inboundSchema),
+      ])),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role: DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema,
   name: z.string().optional(),
@@ -1920,6 +1930,7 @@ export type AssistantMessage$Outbound = {
   content?:
     | string
     | Array<TextContentPart$Outbound | RefusalContentPart$Outbound>
+    | null
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -1934,13 +1945,17 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AssistantMessage
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => TextContentPart$outboundSchema),
-      z.lazy(() => RefusalContentPart$outboundSchema),
-    ])),
-  ]).optional(),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => TextContentPart$outboundSchema),
+          z.lazy(() => RefusalContentPart$outboundSchema),
+        ]),
+      ),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role: DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema,
   name: z.string().optional(),
@@ -3441,13 +3456,17 @@ export const MessagesAssistantMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => TwoTextContentPart$inboundSchema),
-      z.lazy(() => TwoRefusalContentPart$inboundSchema),
-    ])),
-  ]).optional(),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => TwoTextContentPart$inboundSchema),
+          z.lazy(() => TwoRefusalContentPart$inboundSchema),
+        ]),
+      ),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role: DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema,
   name: z.string().optional(),
@@ -3464,6 +3483,7 @@ export type MessagesAssistantMessage$Outbound = {
   content?:
     | string
     | Array<TwoTextContentPart$Outbound | TwoRefusalContentPart$Outbound>
+    | null
     | undefined;
   refusal?: string | null | undefined;
   role: string;
@@ -3478,13 +3498,17 @@ export const MessagesAssistantMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MessagesAssistantMessage
 > = z.object({
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => TwoTextContentPart$outboundSchema),
-      z.lazy(() => TwoRefusalContentPart$outboundSchema),
-    ])),
-  ]).optional(),
+  content: z.nullable(
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          z.lazy(() => TwoTextContentPart$outboundSchema),
+          z.lazy(() => TwoRefusalContentPart$outboundSchema),
+        ]),
+      ),
+    ]),
+  ).optional(),
   refusal: z.nullable(z.string()).optional(),
   role: DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema,
   name: z.string().optional(),
@@ -4494,15 +4518,18 @@ export const InvokeOptions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   include_retrievals: z.boolean().default(false),
+  mock_response: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "include_retrievals": "includeRetrievals",
+    "mock_response": "mockResponse",
   });
 });
 
 /** @internal */
 export type InvokeOptions$Outbound = {
   include_retrievals: boolean;
+  mock_response?: string | undefined;
 };
 
 /** @internal */
@@ -4512,9 +4539,11 @@ export const InvokeOptions$outboundSchema: z.ZodType<
   InvokeOptions
 > = z.object({
   includeRetrievals: z.boolean().default(false),
+  mockResponse: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     includeRetrievals: "include_retrievals",
+    mockResponse: "mock_response",
   });
 });
 
@@ -4542,6 +4571,56 @@ export function invokeOptionsFromJSON(
     jsonString,
     (x) => InvokeOptions$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InvokeOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const Thread$inboundSchema: z.ZodType<Thread, z.ZodTypeDef, unknown> = z
+  .object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  });
+
+/** @internal */
+export type Thread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const Thread$outboundSchema: z.ZodType<
+  Thread$Outbound,
+  z.ZodTypeDef,
+  Thread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Thread$ {
+  /** @deprecated use `Thread$inboundSchema` instead. */
+  export const inboundSchema = Thread$inboundSchema;
+  /** @deprecated use `Thread$outboundSchema` instead. */
+  export const outboundSchema = Thread$outboundSchema;
+  /** @deprecated use `Thread$Outbound` instead. */
+  export type Outbound = Thread$Outbound;
+}
+
+export function threadToJSON(thread: Thread): string {
+  return JSON.stringify(Thread$outboundSchema.parse(thread));
+}
+
+export function threadFromJSON(
+  jsonString: string,
+): SafeParseResult<Thread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Thread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Thread' from JSON`,
   );
 }
 
@@ -4577,6 +4656,7 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
   extra_params: z.record(z.any()).optional(),
   documents: z.array(z.lazy(() => Documents$inboundSchema)).optional(),
   invoke_options: z.lazy(() => InvokeOptions$inboundSchema).optional(),
+  thread: z.lazy(() => Thread$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prefix_messages": "prefixMessages",
@@ -4614,6 +4694,7 @@ export type DeploymentGetConfigRequestBody$Outbound = {
   extra_params?: { [k: string]: any } | undefined;
   documents?: Array<Documents$Outbound> | undefined;
   invoke_options?: InvokeOptions$Outbound | undefined;
+  thread?: Thread$Outbound | undefined;
 };
 
 /** @internal */
@@ -4648,6 +4729,7 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
   extraParams: z.record(z.any()).optional(),
   documents: z.array(z.lazy(() => Documents$outboundSchema)).optional(),
   invokeOptions: z.lazy(() => InvokeOptions$outboundSchema).optional(),
+  thread: z.lazy(() => Thread$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     prefixMessages: "prefix_messages",
@@ -5265,9 +5347,11 @@ export const DeploymentGetConfigMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -5280,6 +5364,7 @@ export type DeploymentGetConfigMessages$Outbound = {
       DeploymentGetConfig21$Outbound | DeploymentGetConfig2Deployments2$Outbound
     >;
   tool_calls?: Array<DeploymentGetConfigToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -5298,9 +5383,11 @@ export const DeploymentGetConfigMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -5356,27 +5443,6 @@ export namespace DeploymentGetConfigFormat$ {
   export const inboundSchema = DeploymentGetConfigFormat$inboundSchema;
   /** @deprecated use `DeploymentGetConfigFormat$outboundSchema` instead. */
   export const outboundSchema = DeploymentGetConfigFormat$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigQuality$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigQuality
-> = z.nativeEnum(DeploymentGetConfigQuality);
-
-/** @internal */
-export const DeploymentGetConfigQuality$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigQuality
-> = DeploymentGetConfigQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigQuality$ {
-  /** @deprecated use `DeploymentGetConfigQuality$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigQuality$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigQuality$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfigQuality$outboundSchema;
 }
 
 /** @internal */
@@ -5772,7 +5838,7 @@ export const ParametersT$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: DeploymentGetConfigFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: DeploymentGetConfigQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -5832,7 +5898,7 @@ export const ParametersT$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: DeploymentGetConfigFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: DeploymentGetConfigQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([

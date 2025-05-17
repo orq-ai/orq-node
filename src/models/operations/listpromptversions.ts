@@ -33,7 +33,7 @@ export type ListPromptVersionsObject = ClosedEnum<
 >;
 
 /**
- * The type of the model
+ * The modality of the model
  */
 export const ListPromptVersionsModelType = {
   Chat: "chat",
@@ -47,7 +47,7 @@ export const ListPromptVersionsModelType = {
   Moderations: "moderations",
 } as const;
 /**
- * The type of the model
+ * The modality of the model
  */
 export type ListPromptVersionsModelType = ClosedEnum<
   typeof ListPromptVersionsModelType
@@ -67,20 +67,6 @@ export const ListPromptVersionsFormat = {
  */
 export type ListPromptVersionsFormat = ClosedEnum<
   typeof ListPromptVersionsFormat
->;
-
-/**
- * Only supported on `image` models.
- */
-export const ListPromptVersionsQuality = {
-  Standard: "standard",
-  Hd: "hd",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type ListPromptVersionsQuality = ClosedEnum<
-  typeof ListPromptVersionsQuality
 >;
 
 export const ListPromptVersionsResponseFormatPromptsType = {
@@ -217,7 +203,7 @@ export type ListPromptVersionsModelParameters = {
   /**
    * Only supported on `image` models.
    */
-  quality?: ListPromptVersionsQuality | undefined;
+  quality?: string | undefined;
   /**
    * Only supported on `image` models.
    */
@@ -384,6 +370,7 @@ export type ListPromptVersionsMessages = {
    */
   content: string | Array<ListPromptVersions21 | ListPromptVersions22>;
   toolCalls?: Array<ListPromptVersionsToolCalls> | undefined;
+  toolCallId?: string | undefined;
 };
 
 /**
@@ -397,7 +384,7 @@ export type ListPromptVersionsPromptConfig = {
    */
   modelDbId?: string | undefined;
   /**
-   * The type of the model
+   * The modality of the model
    */
   modelType?: ListPromptVersionsModelType | undefined;
   /**
@@ -466,7 +453,7 @@ export type ListPromptVersionsMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: ListPromptVersionsLanguage | undefined;
+  language?: ListPromptVersionsLanguage | null | undefined;
 };
 
 export type ListPromptVersionsData = {
@@ -630,27 +617,6 @@ export namespace ListPromptVersionsFormat$ {
   export const inboundSchema = ListPromptVersionsFormat$inboundSchema;
   /** @deprecated use `ListPromptVersionsFormat$outboundSchema` instead. */
   export const outboundSchema = ListPromptVersionsFormat$outboundSchema;
-}
-
-/** @internal */
-export const ListPromptVersionsQuality$inboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsQuality
-> = z.nativeEnum(ListPromptVersionsQuality);
-
-/** @internal */
-export const ListPromptVersionsQuality$outboundSchema: z.ZodNativeEnum<
-  typeof ListPromptVersionsQuality
-> = ListPromptVersionsQuality$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListPromptVersionsQuality$ {
-  /** @deprecated use `ListPromptVersionsQuality$inboundSchema` instead. */
-  export const inboundSchema = ListPromptVersionsQuality$inboundSchema;
-  /** @deprecated use `ListPromptVersionsQuality$outboundSchema` instead. */
-  export const outboundSchema = ListPromptVersionsQuality$outboundSchema;
 }
 
 /** @internal */
@@ -1038,7 +1004,7 @@ export const ListPromptVersionsModelParameters$inboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: ListPromptVersionsFormat$inboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: ListPromptVersionsQuality$inboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1097,7 +1063,7 @@ export const ListPromptVersionsModelParameters$outboundSchema: z.ZodType<
   seed: z.number().optional(),
   format: ListPromptVersionsFormat$outboundSchema.optional(),
   dimensions: z.string().optional(),
-  quality: ListPromptVersionsQuality$outboundSchema.optional(),
+  quality: z.string().optional(),
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
@@ -1695,9 +1661,11 @@ export const ListPromptVersionsMessages$inboundSchema: z.ZodType<
   ]),
   tool_calls: z.array(z.lazy(() => ListPromptVersionsToolCalls$inboundSchema))
     .optional(),
+  tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tool_calls": "toolCalls",
+    "tool_call_id": "toolCallId",
   });
 });
 
@@ -1708,6 +1676,7 @@ export type ListPromptVersionsMessages$Outbound = {
     | string
     | Array<ListPromptVersions21$Outbound | ListPromptVersions22$Outbound>;
   tool_calls?: Array<ListPromptVersionsToolCalls$Outbound> | undefined;
+  tool_call_id?: string | undefined;
 };
 
 /** @internal */
@@ -1726,9 +1695,11 @@ export const ListPromptVersionsMessages$outboundSchema: z.ZodType<
   ]),
   toolCalls: z.array(z.lazy(() => ListPromptVersionsToolCalls$outboundSchema))
     .optional(),
+  toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     toolCalls: "tool_calls",
+    toolCallId: "tool_call_id",
   });
 });
 
@@ -1910,7 +1881,7 @@ export const ListPromptVersionsMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(ListPromptVersionsUseCases$inboundSchema).optional(),
-  language: ListPromptVersionsLanguage$inboundSchema.optional(),
+  language: z.nullable(ListPromptVersionsLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -1920,7 +1891,7 @@ export const ListPromptVersionsMetadata$inboundSchema: z.ZodType<
 /** @internal */
 export type ListPromptVersionsMetadata$Outbound = {
   use_cases?: Array<string> | undefined;
-  language?: string | undefined;
+  language?: string | null | undefined;
 };
 
 /** @internal */
@@ -1930,7 +1901,7 @@ export const ListPromptVersionsMetadata$outboundSchema: z.ZodType<
   ListPromptVersionsMetadata
 > = z.object({
   useCases: z.array(ListPromptVersionsUseCases$outboundSchema).optional(),
-  language: ListPromptVersionsLanguage$outboundSchema.optional(),
+  language: z.nullable(ListPromptVersionsLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",

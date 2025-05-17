@@ -105,7 +105,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.datasets.create({
-    displayName: "Jed6",
+    displayName: "Neva.Raynor10",
     path: "Customer Service/Billing/Refund",
   });
 
@@ -132,7 +132,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await datasetsCreate(orq, {
-    displayName: "Jed6",
+    displayName: "Neva.Raynor10",
     path: "Customer Service/Billing/Refund",
   });
 
