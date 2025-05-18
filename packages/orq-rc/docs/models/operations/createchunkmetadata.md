@@ -1,17 +1,23 @@
 # CreateChunkMetadata
 
-Metadata of the chunk
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { CreateChunkMetadata } from "@orq-ai/node/models/operations";
-
-let value: CreateChunkMetadata = {};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `pageNumber`                                                                             | *number*                                                                                 | :heavy_minus_sign:                                                                       | In case you are using PDFs, Word, PowerPoint, etc. this is the page number of the chunk. |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = false;
+```
+

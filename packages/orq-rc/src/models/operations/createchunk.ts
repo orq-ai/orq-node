@@ -9,15 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Metadata of the chunk
- */
-export type CreateChunkMetadata = {
-  /**
-   * In case you are using PDFs, Word, PowerPoint, etc. this is the page number of the chunk.
-   */
-  pageNumber?: number | undefined;
-};
+export type CreateChunkMetadata = string | number | boolean;
 
 export type RequestBody = {
   /**
@@ -31,7 +23,7 @@ export type RequestBody = {
   /**
    * Metadata of the chunk
    */
-  metadata?: CreateChunkMetadata | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
 };
 
 export type CreateChunkRequest = {
@@ -45,6 +37,8 @@ export type CreateChunkRequest = {
   datasourceId: string;
   requestBody?: Array<RequestBody> | undefined;
 };
+
+export type CreateChunkKnowledgeMetadata = string | number | boolean;
 
 /**
  * The status of the chunk
@@ -71,9 +65,9 @@ export type CreateChunkResponseBody = {
    */
   text: string;
   /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported.
+   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
    */
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   /**
    * Whether the chunk is enabled
    */
@@ -105,31 +99,17 @@ export const CreateChunkMetadata$inboundSchema: z.ZodType<
   CreateChunkMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  page_number: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_number": "pageNumber",
-  });
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type CreateChunkMetadata$Outbound = {
-  page_number?: number | undefined;
-};
+export type CreateChunkMetadata$Outbound = string | number | boolean;
 
 /** @internal */
 export const CreateChunkMetadata$outboundSchema: z.ZodType<
   CreateChunkMetadata$Outbound,
   z.ZodTypeDef,
   CreateChunkMetadata
-> = z.object({
-  pageNumber: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageNumber: "page_number",
-  });
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
@@ -170,14 +150,14 @@ export const RequestBody$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   embedding: z.array(z.number()).optional(),
-  metadata: z.lazy(() => CreateChunkMetadata$inboundSchema).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 
 /** @internal */
 export type RequestBody$Outbound = {
   text: string;
   embedding?: Array<number> | undefined;
-  metadata?: CreateChunkMetadata$Outbound | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
 };
 
 /** @internal */
@@ -188,7 +168,7 @@ export const RequestBody$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   embedding: z.array(z.number()).optional(),
-  metadata: z.lazy(() => CreateChunkMetadata$outboundSchema).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 
 /**
@@ -291,6 +271,56 @@ export function createChunkRequestFromJSON(
 }
 
 /** @internal */
+export const CreateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
+  CreateChunkKnowledgeMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type CreateChunkKnowledgeMetadata$Outbound = string | number | boolean;
+
+/** @internal */
+export const CreateChunkKnowledgeMetadata$outboundSchema: z.ZodType<
+  CreateChunkKnowledgeMetadata$Outbound,
+  z.ZodTypeDef,
+  CreateChunkKnowledgeMetadata
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateChunkKnowledgeMetadata$ {
+  /** @deprecated use `CreateChunkKnowledgeMetadata$inboundSchema` instead. */
+  export const inboundSchema = CreateChunkKnowledgeMetadata$inboundSchema;
+  /** @deprecated use `CreateChunkKnowledgeMetadata$outboundSchema` instead. */
+  export const outboundSchema = CreateChunkKnowledgeMetadata$outboundSchema;
+  /** @deprecated use `CreateChunkKnowledgeMetadata$Outbound` instead. */
+  export type Outbound = CreateChunkKnowledgeMetadata$Outbound;
+}
+
+export function createChunkKnowledgeMetadataToJSON(
+  createChunkKnowledgeMetadata: CreateChunkKnowledgeMetadata,
+): string {
+  return JSON.stringify(
+    CreateChunkKnowledgeMetadata$outboundSchema.parse(
+      createChunkKnowledgeMetadata,
+    ),
+  );
+}
+
+export function createChunkKnowledgeMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChunkKnowledgeMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChunkKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChunkKnowledgeMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateChunkStatus
 > = z.nativeEnum(CreateChunkStatus);
@@ -319,7 +349,7 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: CreateChunkStatus$inboundSchema,
   created: z.string(),
@@ -338,7 +368,7 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
 export type CreateChunkResponseBody$Outbound = {
   _id: string;
   text: string;
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   enabled: boolean;
   status: string;
   created: string;
@@ -355,7 +385,7 @@ export const CreateChunkResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: CreateChunkStatus$outboundSchema,
   created: z.string(),

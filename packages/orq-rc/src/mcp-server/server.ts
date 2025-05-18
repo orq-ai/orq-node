@@ -50,6 +50,7 @@ import { tool$knowledgeListDatasources } from "./tools/knowledgeListDatasources.
 import { tool$knowledgeRetrieve } from "./tools/knowledgeRetrieve.js";
 import { tool$knowledgeRetrieveChunk } from "./tools/knowledgeRetrieveChunk.js";
 import { tool$knowledgeRetrieveDatasource } from "./tools/knowledgeRetrieveDatasource.js";
+import { tool$knowledgeSearch } from "./tools/knowledgeSearch.js";
 import { tool$knowledgeUpdate } from "./tools/knowledgeUpdate.js";
 import { tool$knowledgeUpdateChunk } from "./tools/knowledgeUpdateChunk.js";
 import { tool$knowledgeUpdateDatasource } from "./tools/knowledgeUpdateDatasource.js";
@@ -75,7 +76,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.6.0-rc.9",
+    version: "3.6.0-rc.10",
   });
 
   const client = new OrqCore({
@@ -145,6 +146,7 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeRetrieve);
   tool(tool$knowledgeUpdate);
   tool(tool$knowledgeDelete);
+  tool(tool$knowledgeSearch);
   tool(tool$knowledgeListDatasources);
   tool(tool$knowledgeCreateDatasource);
   tool(tool$knowledgeRetrieveDatasource);

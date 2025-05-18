@@ -949,6 +949,326 @@ export type DeploymentStreamThread = {
   tags?: Array<string> | undefined;
 };
 
+/**
+ * Exists
+ */
+export type DeploymentStreamDollarOrDollarExists = {
+  dollarExists: boolean;
+};
+
+export type DeploymentStreamDollarOrDeploymentsDollarNin =
+  | string
+  | number
+  | boolean;
+
+/**
+ * Not in
+ */
+export type DeploymentStreamDollarOrDollarNin = {
+  dollarNin: Array<string | number | boolean>;
+};
+
+export type DeploymentStreamDollarOrDeploymentsDollarIn =
+  | string
+  | number
+  | boolean;
+
+/**
+ * In
+ */
+export type DeploymentStreamDollarOrDollarIn = {
+  dollarIn: Array<string | number | boolean>;
+};
+
+/**
+ * Less than or equal to
+ */
+export type DeploymentStreamDollarOrDollarLte = {
+  dollarLte: number;
+};
+
+/**
+ * Less than
+ */
+export type DeploymentStreamDollarOrDollarLt = {
+  dollarLt: number;
+};
+
+/**
+ * Greater than or equal to
+ */
+export type DeploymentStreamDollarOrDollarGte = {
+  dollarGte: number;
+};
+
+export type DeploymentStreamDollarOr3 = {
+  dollarGt: number;
+};
+
+export type DeploymentStreamDollarOrDeploymentsDollarNe =
+  | string
+  | number
+  | boolean;
+
+/**
+ * Not equal to
+ */
+export type DeploymentStreamDollarOrDollarNe = {
+  dollarNe: string | number | boolean;
+};
+
+export type DeploymentStreamDollarOrDeploymentsDollarEq =
+  | string
+  | number
+  | boolean;
+
+/**
+ * Equal to
+ */
+export type DeploymentStreamDollarOrDollarEq = {
+  dollarEq: string | number | boolean;
+};
+
+export type DeploymentStreamKnowledgeFilterDeploymentsDollarOr =
+  | DeploymentStreamDollarOrDollarEq
+  | DeploymentStreamDollarOrDollarNe
+  | DeploymentStreamDollarOr3
+  | DeploymentStreamDollarOrDollarGte
+  | DeploymentStreamDollarOrDollarLt
+  | DeploymentStreamDollarOrDollarLte
+  | DeploymentStreamDollarOrDollarIn
+  | DeploymentStreamDollarOrDollarNin
+  | DeploymentStreamDollarOrDollarExists;
+
+/**
+ * Or
+ */
+export type DeploymentStreamKnowledgeFilterDollarOr = {
+  dollarOr: Array<
+    {
+      [k: string]:
+        | DeploymentStreamDollarOrDollarEq
+        | DeploymentStreamDollarOrDollarNe
+        | DeploymentStreamDollarOr3
+        | DeploymentStreamDollarOrDollarGte
+        | DeploymentStreamDollarOrDollarLt
+        | DeploymentStreamDollarOrDollarLte
+        | DeploymentStreamDollarOrDollarIn
+        | DeploymentStreamDollarOrDollarNin
+        | DeploymentStreamDollarOrDollarExists;
+    }
+  >;
+};
+
+/**
+ * Exists
+ */
+export type DeploymentStreamDollarAndDollarExists = {
+  dollarExists: boolean;
+};
+
+export type DeploymentStreamDollarAndDeploymentsDollarNin =
+  | string
+  | number
+  | boolean;
+
+/**
+ * Not in
+ */
+export type DeploymentStreamDollarAndDollarNin = {
+  dollarNin: Array<string | number | boolean>;
+};
+
+export type DeploymentStreamDollarAndDeploymentsDollarIn =
+  | string
+  | number
+  | boolean;
+
+/**
+ * In
+ */
+export type DeploymentStreamDollarAndDollarIn = {
+  dollarIn: Array<string | number | boolean>;
+};
+
+/**
+ * Less than or equal to
+ */
+export type DeploymentStreamDollarAndDollarLte = {
+  dollarLte: number;
+};
+
+/**
+ * Less than
+ */
+export type DeploymentStreamDollarAndDollarLt = {
+  dollarLt: number;
+};
+
+/**
+ * Greater than or equal to
+ */
+export type DeploymentStreamDollarAndDollarGte = {
+  dollarGte: number;
+};
+
+export type DeploymentStreamDollarAnd3 = {
+  dollarGt: number;
+};
+
+export type DeploymentStreamDollarAndDeploymentsDollarNe =
+  | string
+  | number
+  | boolean;
+
+/**
+ * Not equal to
+ */
+export type DeploymentStreamDollarAndDollarNe = {
+  dollarNe: string | number | boolean;
+};
+
+export type DeploymentStreamDollarAndDeploymentsDollarEq =
+  | string
+  | number
+  | boolean;
+
+/**
+ * Equal to
+ */
+export type DeploymentStreamDollarAndDollarEq = {
+  dollarEq: string | number | boolean;
+};
+
+export type DeploymentStreamKnowledgeFilterDeploymentsDollarAnd =
+  | DeploymentStreamDollarAndDollarEq
+  | DeploymentStreamDollarAndDollarNe
+  | DeploymentStreamDollarAnd3
+  | DeploymentStreamDollarAndDollarGte
+  | DeploymentStreamDollarAndDollarLt
+  | DeploymentStreamDollarAndDollarLte
+  | DeploymentStreamDollarAndDollarIn
+  | DeploymentStreamDollarAndDollarNin
+  | DeploymentStreamDollarAndDollarExists;
+
+/**
+ * And
+ */
+export type DeploymentStreamKnowledgeFilterDollarAnd = {
+  dollarAnd: Array<
+    {
+      [k: string]:
+        | DeploymentStreamDollarAndDollarEq
+        | DeploymentStreamDollarAndDollarNe
+        | DeploymentStreamDollarAnd3
+        | DeploymentStreamDollarAndDollarGte
+        | DeploymentStreamDollarAndDollarLt
+        | DeploymentStreamDollarAndDollarLte
+        | DeploymentStreamDollarAndDollarIn
+        | DeploymentStreamDollarAndDollarNin
+        | DeploymentStreamDollarAndDollarExists;
+    }
+  >;
+};
+
+/**
+ * Exists
+ */
+export type OneDollarExists = {
+  dollarExists: boolean;
+};
+
+export type DeploymentStream1DeploymentsDollarNin = string | number | boolean;
+
+/**
+ * Not in
+ */
+export type DeploymentStream1DollarNin = {
+  dollarNin: Array<string | number | boolean>;
+};
+
+export type DeploymentStream1DeploymentsDollarIn = string | number | boolean;
+
+/**
+ * In
+ */
+export type DeploymentStream1DollarIn = {
+  dollarIn: Array<string | number | boolean>;
+};
+
+/**
+ * Less than or equal to
+ */
+export type OneDollarLte = {
+  dollarLte: number;
+};
+
+/**
+ * Less than
+ */
+export type OneDollarLt = {
+  dollarLt: number;
+};
+
+/**
+ * Greater than or equal to
+ */
+export type OneDollarGte = {
+  dollarGte: number;
+};
+
+export type DeploymentStream13 = {
+  dollarGt: number;
+};
+
+export type DeploymentStream1DeploymentsDollarNe = string | number | boolean;
+
+/**
+ * Not equal to
+ */
+export type DeploymentStream1DollarNe = {
+  dollarNe: string | number | boolean;
+};
+
+export type DeploymentStream1DeploymentsDollarEq = string | number | boolean;
+
+/**
+ * Equal to
+ */
+export type DeploymentStream1DollarEq = {
+  dollarEq: string | number | boolean;
+};
+
+export type DeploymentStreamKnowledgeFilter1 =
+  | DeploymentStream1DollarEq
+  | DeploymentStream1DollarNe
+  | DeploymentStream13
+  | OneDollarGte
+  | OneDollarLt
+  | OneDollarLte
+  | DeploymentStream1DollarIn
+  | DeploymentStream1DollarNin
+  | OneDollarExists;
+
+/**
+ * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
+ */
+export type DeploymentStreamKnowledgeFilter =
+  | DeploymentStreamKnowledgeFilterDollarAnd
+  | DeploymentStreamKnowledgeFilterDollarOr
+  | {
+    [k: string]:
+      | DeploymentStream1DollarEq
+      | DeploymentStream1DollarNe
+      | DeploymentStream13
+      | OneDollarGte
+      | OneDollarLt
+      | OneDollarLte
+      | DeploymentStream1DollarIn
+      | DeploymentStream1DollarNin
+      | OneDollarExists;
+  };
+
 export type DeploymentStreamRequestBody = {
   /**
    * The deployment key to invoke
@@ -1004,6 +1324,25 @@ export type DeploymentStreamRequestBody = {
   documents?: Array<DeploymentStreamDocuments> | undefined;
   invokeOptions?: DeploymentStreamInvokeOptions | undefined;
   thread?: DeploymentStreamThread | undefined;
+  /**
+   * A filter to apply to the knowledge base chunk metadata when using  knowledge bases in the deployment.
+   */
+  knowledgeFilter?:
+    | DeploymentStreamKnowledgeFilterDollarAnd
+    | DeploymentStreamKnowledgeFilterDollarOr
+    | {
+      [k: string]:
+        | DeploymentStream1DollarEq
+        | DeploymentStream1DollarNe
+        | DeploymentStream13
+        | OneDollarGte
+        | OneDollarLt
+        | OneDollarLte
+        | DeploymentStream1DollarIn
+        | DeploymentStream1DollarNin
+        | OneDollarExists;
+    }
+    | undefined;
 };
 
 /**
@@ -5474,6 +5813,3038 @@ export function deploymentStreamThreadFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamDollarOrDollarExists$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarExists,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $exists: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    "$exists": "dollarExists",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarExists$Outbound = {
+  $exists: boolean;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarExists$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarExists$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarExists
+> = z.object({
+  dollarExists: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarExists: "$exists",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarExists$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarExists$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarOrDollarExists$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarExists$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDollarExists$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarExists$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarExists$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarExistsToJSON(
+  deploymentStreamDollarOrDollarExists: DeploymentStreamDollarOrDollarExists,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarExists$outboundSchema.parse(
+      deploymentStreamDollarOrDollarExists,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarExists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarOrDollarExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarExists' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarNin$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarNin,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarOrDeploymentsDollarNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarNin$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarNin$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarOrDeploymentsDollarNin
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDeploymentsDollarNin$ {
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarNin$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarNin$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarNin$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarNin$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarNin$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDeploymentsDollarNin$Outbound;
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarNinToJSON(
+  deploymentStreamDollarOrDeploymentsDollarNin:
+    DeploymentStreamDollarOrDeploymentsDollarNin,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDeploymentsDollarNin$outboundSchema.parse(
+      deploymentStreamDollarOrDeploymentsDollarNin,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarNinFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarOrDeploymentsDollarNin,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarOrDeploymentsDollarNin$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarOrDeploymentsDollarNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarNin$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarNin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    "$nin": "dollarNin",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarNin$Outbound = {
+  $nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarNin$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarNin
+> = z.object({
+  dollarNin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    dollarNin: "$nin",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarNin$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarNin$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarNin$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarNin$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDollarNin$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarNin$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarNin$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarNinToJSON(
+  deploymentStreamDollarOrDollarNin: DeploymentStreamDollarOrDollarNin,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarNin$outboundSchema.parse(
+      deploymentStreamDollarOrDollarNin,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarNinFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarIn$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarIn,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarOrDeploymentsDollarIn$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarIn$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarIn$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarOrDeploymentsDollarIn
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDeploymentsDollarIn$ {
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarIn$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarIn$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarIn$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarIn$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarIn$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDeploymentsDollarIn$Outbound;
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarInToJSON(
+  deploymentStreamDollarOrDeploymentsDollarIn:
+    DeploymentStreamDollarOrDeploymentsDollarIn,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDeploymentsDollarIn$outboundSchema.parse(
+      deploymentStreamDollarOrDeploymentsDollarIn,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarInFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarOrDeploymentsDollarIn,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarOrDeploymentsDollarIn$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarOrDeploymentsDollarIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarIn$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarIn,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    "$in": "dollarIn",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarIn$Outbound = {
+  $in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarIn$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarIn$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarIn
+> = z.object({
+  dollarIn: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    dollarIn: "$in",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarIn$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarIn$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarIn$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarIn$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamDollarOrDollarIn$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarIn$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarIn$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarInToJSON(
+  deploymentStreamDollarOrDollarIn: DeploymentStreamDollarOrDollarIn,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarIn$outboundSchema.parse(
+      deploymentStreamDollarOrDollarIn,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarInFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarLte$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $lte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$lte": "dollarLte",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarLte$Outbound = {
+  $lte: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarLte$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarLte$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarLte
+> = z.object({
+  dollarLte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarLte: "$lte",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarLte$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarLte$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarLte$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarLte$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDollarLte$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarLte$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarLte$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarLteToJSON(
+  deploymentStreamDollarOrDollarLte: DeploymentStreamDollarOrDollarLte,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarLte$outboundSchema.parse(
+      deploymentStreamDollarOrDollarLte,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarLteFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarLt$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $lt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$lt": "dollarLt",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarLt$Outbound = {
+  $lt: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarLt$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarLt$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarLt
+> = z.object({
+  dollarLt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarLt: "$lt",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarLt$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarLt$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarLt$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarLt$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamDollarOrDollarLt$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarLt$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarLt$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarLtToJSON(
+  deploymentStreamDollarOrDollarLt: DeploymentStreamDollarOrDollarLt,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarLt$outboundSchema.parse(
+      deploymentStreamDollarOrDollarLt,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarLtFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarGte$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $gte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$gte": "dollarGte",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarGte$Outbound = {
+  $gte: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarGte$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarGte$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarGte
+> = z.object({
+  dollarGte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarGte: "$gte",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarGte$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarGte$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarGte$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarGte$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDollarGte$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarGte$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarGte$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarGteToJSON(
+  deploymentStreamDollarOrDollarGte: DeploymentStreamDollarOrDollarGte,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarGte$outboundSchema.parse(
+      deploymentStreamDollarOrDollarGte,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarGteFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOr3$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOr3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $gt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$gt": "dollarGt",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOr3$Outbound = {
+  $gt: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOr3$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOr3$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOr3
+> = z.object({
+  dollarGt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarGt: "$gt",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOr3$ {
+  /** @deprecated use `DeploymentStreamDollarOr3$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOr3$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOr3$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamDollarOr3$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOr3$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOr3$Outbound;
+}
+
+export function deploymentStreamDollarOr3ToJSON(
+  deploymentStreamDollarOr3: DeploymentStreamDollarOr3,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOr3$outboundSchema.parse(deploymentStreamDollarOr3),
+  );
+}
+
+export function deploymentStreamDollarOr3FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOr3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOr3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOr3' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarNe$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarNe,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarOrDeploymentsDollarNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarNe$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarNe$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarOrDeploymentsDollarNe
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDeploymentsDollarNe$ {
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarNe$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarNe$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarNe$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarNe$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarNe$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDeploymentsDollarNe$Outbound;
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarNeToJSON(
+  deploymentStreamDollarOrDeploymentsDollarNe:
+    DeploymentStreamDollarOrDeploymentsDollarNe,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDeploymentsDollarNe$outboundSchema.parse(
+      deploymentStreamDollarOrDeploymentsDollarNe,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarNeFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarOrDeploymentsDollarNe,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarOrDeploymentsDollarNe$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarOrDeploymentsDollarNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarNe$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarNe,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $ne: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    "$ne": "dollarNe",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarNe$Outbound = {
+  $ne: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarNe$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarNe
+> = z.object({
+  dollarNe: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    dollarNe: "$ne",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarNe$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarNe$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarNe$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarNe$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamDollarOrDollarNe$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarNe$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarNe$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarNeToJSON(
+  deploymentStreamDollarOrDollarNe: DeploymentStreamDollarOrDollarNe,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarNe$outboundSchema.parse(
+      deploymentStreamDollarOrDollarNe,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarNeFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarEq$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarEq,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarOrDeploymentsDollarEq$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarOrDeploymentsDollarEq$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarOrDeploymentsDollarEq$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarOrDeploymentsDollarEq
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDeploymentsDollarEq$ {
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarEq$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarEq$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarEq$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarOrDeploymentsDollarEq$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDeploymentsDollarEq$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDeploymentsDollarEq$Outbound;
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarEqToJSON(
+  deploymentStreamDollarOrDeploymentsDollarEq:
+    DeploymentStreamDollarOrDeploymentsDollarEq,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDeploymentsDollarEq$outboundSchema.parse(
+      deploymentStreamDollarOrDeploymentsDollarEq,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDeploymentsDollarEqFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarOrDeploymentsDollarEq,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarOrDeploymentsDollarEq$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarOrDeploymentsDollarEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarEq$inboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $eq: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    "$eq": "dollarEq",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarOrDollarEq$Outbound = {
+  $eq: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentStreamDollarOrDollarEq$outboundSchema: z.ZodType<
+  DeploymentStreamDollarOrDollarEq$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarOrDollarEq
+> = z.object({
+  dollarEq: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    dollarEq: "$eq",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarOrDollarEq$ {
+  /** @deprecated use `DeploymentStreamDollarOrDollarEq$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarOrDollarEq$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarEq$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamDollarOrDollarEq$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarOrDollarEq$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarOrDollarEq$Outbound;
+}
+
+export function deploymentStreamDollarOrDollarEqToJSON(
+  deploymentStreamDollarOrDollarEq: DeploymentStreamDollarOrDollarEq,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarOrDollarEq$outboundSchema.parse(
+      deploymentStreamDollarOrDollarEq,
+    ),
+  );
+}
+
+export function deploymentStreamDollarOrDollarEqFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarOrDollarEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarOrDollarEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarOrDollarEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDeploymentsDollarOr$inboundSchema:
+  z.ZodType<
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => DeploymentStreamDollarOrDollarEq$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarNe$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOr3$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarGte$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarLt$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarLte$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarIn$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarNin$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarExists$inboundSchema),
+  ]);
+
+/** @internal */
+export type DeploymentStreamKnowledgeFilterDeploymentsDollarOr$Outbound =
+  | DeploymentStreamDollarOrDollarEq$Outbound
+  | DeploymentStreamDollarOrDollarNe$Outbound
+  | DeploymentStreamDollarOr3$Outbound
+  | DeploymentStreamDollarOrDollarGte$Outbound
+  | DeploymentStreamDollarOrDollarLt$Outbound
+  | DeploymentStreamDollarOrDollarLte$Outbound
+  | DeploymentStreamDollarOrDollarIn$Outbound
+  | DeploymentStreamDollarOrDollarNin$Outbound
+  | DeploymentStreamDollarOrDollarExists$Outbound;
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDeploymentsDollarOr$outboundSchema:
+  z.ZodType<
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr
+  > = z.union([
+    z.lazy(() => DeploymentStreamDollarOrDollarEq$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarNe$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOr3$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarGte$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarLt$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarLte$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarIn$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarNin$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarOrDollarExists$outboundSchema),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamKnowledgeFilterDeploymentsDollarOr$ {
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsDollarOr$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr$inboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsDollarOr$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr$outboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsDollarOr$Outbound` instead. */
+  export type Outbound =
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr$Outbound;
+}
+
+export function deploymentStreamKnowledgeFilterDeploymentsDollarOrToJSON(
+  deploymentStreamKnowledgeFilterDeploymentsDollarOr:
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr,
+): string {
+  return JSON.stringify(
+    DeploymentStreamKnowledgeFilterDeploymentsDollarOr$outboundSchema.parse(
+      deploymentStreamKnowledgeFilterDeploymentsDollarOr,
+    ),
+  );
+}
+
+export function deploymentStreamKnowledgeFilterDeploymentsDollarOrFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamKnowledgeFilterDeploymentsDollarOr,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamKnowledgeFilterDeploymentsDollarOr$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamKnowledgeFilterDeploymentsDollarOr' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDollarOr$inboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilterDollarOr,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $or: z.array(
+    z.record(z.union([
+      z.lazy(() => DeploymentStreamDollarOrDollarEq$inboundSchema),
+      z.lazy(() =>
+        DeploymentStreamDollarOrDollarNe$inboundSchema
+      ),
+      z.lazy(() => DeploymentStreamDollarOr3$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarGte$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarLt$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarLte$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarIn$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarNin$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarExists$inboundSchema),
+    ])),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "$or": "dollarOr",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamKnowledgeFilterDollarOr$Outbound = {
+  $or: Array<
+    {
+      [k: string]:
+        | DeploymentStreamDollarOrDollarEq$Outbound
+        | DeploymentStreamDollarOrDollarNe$Outbound
+        | DeploymentStreamDollarOr3$Outbound
+        | DeploymentStreamDollarOrDollarGte$Outbound
+        | DeploymentStreamDollarOrDollarLt$Outbound
+        | DeploymentStreamDollarOrDollarLte$Outbound
+        | DeploymentStreamDollarOrDollarIn$Outbound
+        | DeploymentStreamDollarOrDollarNin$Outbound
+        | DeploymentStreamDollarOrDollarExists$Outbound;
+    }
+  >;
+};
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDollarOr$outboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilterDollarOr$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamKnowledgeFilterDollarOr
+> = z.object({
+  dollarOr: z.array(
+    z.record(z.union([
+      z.lazy(() => DeploymentStreamDollarOrDollarEq$outboundSchema),
+      z.lazy(() =>
+        DeploymentStreamDollarOrDollarNe$outboundSchema
+      ),
+      z.lazy(() => DeploymentStreamDollarOr3$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarGte$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarLt$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarLte$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarIn$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarNin$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarOrDollarExists$outboundSchema),
+    ])),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    dollarOr: "$or",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamKnowledgeFilterDollarOr$ {
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDollarOr$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamKnowledgeFilterDollarOr$inboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDollarOr$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamKnowledgeFilterDollarOr$outboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDollarOr$Outbound` instead. */
+  export type Outbound = DeploymentStreamKnowledgeFilterDollarOr$Outbound;
+}
+
+export function deploymentStreamKnowledgeFilterDollarOrToJSON(
+  deploymentStreamKnowledgeFilterDollarOr:
+    DeploymentStreamKnowledgeFilterDollarOr,
+): string {
+  return JSON.stringify(
+    DeploymentStreamKnowledgeFilterDollarOr$outboundSchema.parse(
+      deploymentStreamKnowledgeFilterDollarOr,
+    ),
+  );
+}
+
+export function deploymentStreamKnowledgeFilterDollarOrFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamKnowledgeFilterDollarOr,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamKnowledgeFilterDollarOr$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamKnowledgeFilterDollarOr' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarExists$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarExists,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $exists: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    "$exists": "dollarExists",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarExists$Outbound = {
+  $exists: boolean;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarExists$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarExists$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarExists
+> = z.object({
+  dollarExists: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarExists: "$exists",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarExists$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarExists$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarAndDollarExists$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarExists$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarExists$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarExists$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarExists$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarExistsToJSON(
+  deploymentStreamDollarAndDollarExists: DeploymentStreamDollarAndDollarExists,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarExists$outboundSchema.parse(
+      deploymentStreamDollarAndDollarExists,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarExists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDollarExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarExists' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarNin$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarNin,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarAndDeploymentsDollarNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarNin$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarNin$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarAndDeploymentsDollarNin
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDeploymentsDollarNin$ {
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarNin$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarNin$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarNin$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarNin$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarNin$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDeploymentsDollarNin$Outbound;
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarNinToJSON(
+  deploymentStreamDollarAndDeploymentsDollarNin:
+    DeploymentStreamDollarAndDeploymentsDollarNin,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDeploymentsDollarNin$outboundSchema.parse(
+      deploymentStreamDollarAndDeploymentsDollarNin,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarNinFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarAndDeploymentsDollarNin,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDeploymentsDollarNin$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarAndDeploymentsDollarNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarNin$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarNin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    "$nin": "dollarNin",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarNin$Outbound = {
+  $nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarNin$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarNin
+> = z.object({
+  dollarNin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    dollarNin: "$nin",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarNin$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarNin$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarNin$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarNin$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarNin$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarNin$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarNin$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarNinToJSON(
+  deploymentStreamDollarAndDollarNin: DeploymentStreamDollarAndDollarNin,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarNin$outboundSchema.parse(
+      deploymentStreamDollarAndDollarNin,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarNinFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDollarNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarIn$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarIn,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarAndDeploymentsDollarIn$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarIn$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarIn$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarAndDeploymentsDollarIn
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDeploymentsDollarIn$ {
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarIn$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarIn$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarIn$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarIn$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarIn$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDeploymentsDollarIn$Outbound;
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarInToJSON(
+  deploymentStreamDollarAndDeploymentsDollarIn:
+    DeploymentStreamDollarAndDeploymentsDollarIn,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDeploymentsDollarIn$outboundSchema.parse(
+      deploymentStreamDollarAndDeploymentsDollarIn,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarInFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarAndDeploymentsDollarIn,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDeploymentsDollarIn$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarAndDeploymentsDollarIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarIn$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarIn,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    "$in": "dollarIn",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarIn$Outbound = {
+  $in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarIn$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarIn$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarIn
+> = z.object({
+  dollarIn: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    dollarIn: "$in",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarIn$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarIn$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarIn$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarIn$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarIn$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarIn$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarIn$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarInToJSON(
+  deploymentStreamDollarAndDollarIn: DeploymentStreamDollarAndDollarIn,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarIn$outboundSchema.parse(
+      deploymentStreamDollarAndDollarIn,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarInFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarAndDollarIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarLte$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $lte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$lte": "dollarLte",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarLte$Outbound = {
+  $lte: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarLte$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarLte$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarLte
+> = z.object({
+  dollarLte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarLte: "$lte",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarLte$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarLte$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarLte$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarLte$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarLte$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarLte$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarLte$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarLteToJSON(
+  deploymentStreamDollarAndDollarLte: DeploymentStreamDollarAndDollarLte,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarLte$outboundSchema.parse(
+      deploymentStreamDollarAndDollarLte,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarLteFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDollarLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarLt$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $lt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$lt": "dollarLt",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarLt$Outbound = {
+  $lt: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarLt$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarLt$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarLt
+> = z.object({
+  dollarLt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarLt: "$lt",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarLt$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarLt$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarLt$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarLt$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarLt$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarLt$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarLt$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarLtToJSON(
+  deploymentStreamDollarAndDollarLt: DeploymentStreamDollarAndDollarLt,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarLt$outboundSchema.parse(
+      deploymentStreamDollarAndDollarLt,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarLtFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarAndDollarLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarGte$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $gte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$gte": "dollarGte",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarGte$Outbound = {
+  $gte: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarGte$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarGte$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarGte
+> = z.object({
+  dollarGte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarGte: "$gte",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarGte$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarGte$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarGte$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarGte$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarGte$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarGte$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarGte$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarGteToJSON(
+  deploymentStreamDollarAndDollarGte: DeploymentStreamDollarAndDollarGte,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarGte$outboundSchema.parse(
+      deploymentStreamDollarAndDollarGte,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarGteFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDollarGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAnd3$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAnd3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $gt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$gt": "dollarGt",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAnd3$Outbound = {
+  $gt: number;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAnd3$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAnd3$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAnd3
+> = z.object({
+  dollarGt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarGt: "$gt",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAnd3$ {
+  /** @deprecated use `DeploymentStreamDollarAnd3$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAnd3$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAnd3$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamDollarAnd3$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAnd3$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAnd3$Outbound;
+}
+
+export function deploymentStreamDollarAnd3ToJSON(
+  deploymentStreamDollarAnd3: DeploymentStreamDollarAnd3,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAnd3$outboundSchema.parse(deploymentStreamDollarAnd3),
+  );
+}
+
+export function deploymentStreamDollarAnd3FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAnd3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarAnd3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAnd3' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarNe$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarNe,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarAndDeploymentsDollarNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarNe$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarNe$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarAndDeploymentsDollarNe
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDeploymentsDollarNe$ {
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarNe$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarNe$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarNe$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarNe$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarNe$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDeploymentsDollarNe$Outbound;
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarNeToJSON(
+  deploymentStreamDollarAndDeploymentsDollarNe:
+    DeploymentStreamDollarAndDeploymentsDollarNe,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDeploymentsDollarNe$outboundSchema.parse(
+      deploymentStreamDollarAndDeploymentsDollarNe,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarNeFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarAndDeploymentsDollarNe,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDeploymentsDollarNe$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarAndDeploymentsDollarNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarNe$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarNe,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $ne: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    "$ne": "dollarNe",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarNe$Outbound = {
+  $ne: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarNe$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarNe
+> = z.object({
+  dollarNe: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    dollarNe: "$ne",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarNe$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarNe$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarNe$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarNe$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarNe$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarNe$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarNe$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarNeToJSON(
+  deploymentStreamDollarAndDollarNe: DeploymentStreamDollarAndDollarNe,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarNe$outboundSchema.parse(
+      deploymentStreamDollarAndDollarNe,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarNeFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarAndDollarNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarEq$inboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarEq,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStreamDollarAndDeploymentsDollarEq$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStreamDollarAndDeploymentsDollarEq$outboundSchema:
+  z.ZodType<
+    DeploymentStreamDollarAndDeploymentsDollarEq$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamDollarAndDeploymentsDollarEq
+  > = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDeploymentsDollarEq$ {
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarEq$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarEq$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarEq$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDeploymentsDollarEq$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDeploymentsDollarEq$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDeploymentsDollarEq$Outbound;
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarEqToJSON(
+  deploymentStreamDollarAndDeploymentsDollarEq:
+    DeploymentStreamDollarAndDeploymentsDollarEq,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDeploymentsDollarEq$outboundSchema.parse(
+      deploymentStreamDollarAndDeploymentsDollarEq,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDeploymentsDollarEqFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamDollarAndDeploymentsDollarEq,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamDollarAndDeploymentsDollarEq$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamDollarAndDeploymentsDollarEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarEq$inboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $eq: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    "$eq": "dollarEq",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamDollarAndDollarEq$Outbound = {
+  $eq: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentStreamDollarAndDollarEq$outboundSchema: z.ZodType<
+  DeploymentStreamDollarAndDollarEq$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamDollarAndDollarEq
+> = z.object({
+  dollarEq: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    dollarEq: "$eq",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamDollarAndDollarEq$ {
+  /** @deprecated use `DeploymentStreamDollarAndDollarEq$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamDollarAndDollarEq$inboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarEq$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamDollarAndDollarEq$outboundSchema;
+  /** @deprecated use `DeploymentStreamDollarAndDollarEq$Outbound` instead. */
+  export type Outbound = DeploymentStreamDollarAndDollarEq$Outbound;
+}
+
+export function deploymentStreamDollarAndDollarEqToJSON(
+  deploymentStreamDollarAndDollarEq: DeploymentStreamDollarAndDollarEq,
+): string {
+  return JSON.stringify(
+    DeploymentStreamDollarAndDollarEq$outboundSchema.parse(
+      deploymentStreamDollarAndDollarEq,
+    ),
+  );
+}
+
+export function deploymentStreamDollarAndDollarEqFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamDollarAndDollarEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamDollarAndDollarEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamDollarAndDollarEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$inboundSchema:
+  z.ZodType<
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() => DeploymentStreamDollarAndDollarEq$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarNe$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAnd3$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarGte$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarLt$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarLte$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarIn$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarNin$inboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarExists$inboundSchema),
+  ]);
+
+/** @internal */
+export type DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$Outbound =
+  | DeploymentStreamDollarAndDollarEq$Outbound
+  | DeploymentStreamDollarAndDollarNe$Outbound
+  | DeploymentStreamDollarAnd3$Outbound
+  | DeploymentStreamDollarAndDollarGte$Outbound
+  | DeploymentStreamDollarAndDollarLt$Outbound
+  | DeploymentStreamDollarAndDollarLte$Outbound
+  | DeploymentStreamDollarAndDollarIn$Outbound
+  | DeploymentStreamDollarAndDollarNin$Outbound
+  | DeploymentStreamDollarAndDollarExists$Outbound;
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$outboundSchema:
+  z.ZodType<
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$Outbound,
+    z.ZodTypeDef,
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd
+  > = z.union([
+    z.lazy(() => DeploymentStreamDollarAndDollarEq$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarNe$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAnd3$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarGte$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarLt$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarLte$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarIn$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarNin$outboundSchema),
+    z.lazy(() => DeploymentStreamDollarAndDollarExists$outboundSchema),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$ {
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$inboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$outboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$Outbound` instead. */
+  export type Outbound =
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$Outbound;
+}
+
+export function deploymentStreamKnowledgeFilterDeploymentsDollarAndToJSON(
+  deploymentStreamKnowledgeFilterDeploymentsDollarAnd:
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd,
+): string {
+  return JSON.stringify(
+    DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$outboundSchema.parse(
+      deploymentStreamKnowledgeFilterDeploymentsDollarAnd,
+    ),
+  );
+}
+
+export function deploymentStreamKnowledgeFilterDeploymentsDollarAndFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamKnowledgeFilterDeploymentsDollarAnd,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamKnowledgeFilterDeploymentsDollarAnd$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamKnowledgeFilterDeploymentsDollarAnd' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDollarAnd$inboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilterDollarAnd,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $and: z.array(
+    z.record(z.union([
+      z.lazy(() => DeploymentStreamDollarAndDollarEq$inboundSchema),
+      z.lazy(() =>
+        DeploymentStreamDollarAndDollarNe$inboundSchema
+      ),
+      z.lazy(() => DeploymentStreamDollarAnd3$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarGte$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarLt$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarLte$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarIn$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarNin$inboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarExists$inboundSchema),
+    ])),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "$and": "dollarAnd",
+  });
+});
+
+/** @internal */
+export type DeploymentStreamKnowledgeFilterDollarAnd$Outbound = {
+  $and: Array<
+    {
+      [k: string]:
+        | DeploymentStreamDollarAndDollarEq$Outbound
+        | DeploymentStreamDollarAndDollarNe$Outbound
+        | DeploymentStreamDollarAnd3$Outbound
+        | DeploymentStreamDollarAndDollarGte$Outbound
+        | DeploymentStreamDollarAndDollarLt$Outbound
+        | DeploymentStreamDollarAndDollarLte$Outbound
+        | DeploymentStreamDollarAndDollarIn$Outbound
+        | DeploymentStreamDollarAndDollarNin$Outbound
+        | DeploymentStreamDollarAndDollarExists$Outbound;
+    }
+  >;
+};
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilterDollarAnd$outboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilterDollarAnd$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamKnowledgeFilterDollarAnd
+> = z.object({
+  dollarAnd: z.array(
+    z.record(z.union([
+      z.lazy(() => DeploymentStreamDollarAndDollarEq$outboundSchema),
+      z.lazy(() =>
+        DeploymentStreamDollarAndDollarNe$outboundSchema
+      ),
+      z.lazy(() => DeploymentStreamDollarAnd3$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarGte$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarLt$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarLte$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarIn$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarNin$outboundSchema),
+      z.lazy(() => DeploymentStreamDollarAndDollarExists$outboundSchema),
+    ])),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    dollarAnd: "$and",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamKnowledgeFilterDollarAnd$ {
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDollarAnd$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamKnowledgeFilterDollarAnd$inboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDollarAnd$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamKnowledgeFilterDollarAnd$outboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilterDollarAnd$Outbound` instead. */
+  export type Outbound = DeploymentStreamKnowledgeFilterDollarAnd$Outbound;
+}
+
+export function deploymentStreamKnowledgeFilterDollarAndToJSON(
+  deploymentStreamKnowledgeFilterDollarAnd:
+    DeploymentStreamKnowledgeFilterDollarAnd,
+): string {
+  return JSON.stringify(
+    DeploymentStreamKnowledgeFilterDollarAnd$outboundSchema.parse(
+      deploymentStreamKnowledgeFilterDollarAnd,
+    ),
+  );
+}
+
+export function deploymentStreamKnowledgeFilterDollarAndFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentStreamKnowledgeFilterDollarAnd,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStreamKnowledgeFilterDollarAnd$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentStreamKnowledgeFilterDollarAnd' from JSON`,
+  );
+}
+
+/** @internal */
+export const OneDollarExists$inboundSchema: z.ZodType<
+  OneDollarExists,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $exists: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    "$exists": "dollarExists",
+  });
+});
+
+/** @internal */
+export type OneDollarExists$Outbound = {
+  $exists: boolean;
+};
+
+/** @internal */
+export const OneDollarExists$outboundSchema: z.ZodType<
+  OneDollarExists$Outbound,
+  z.ZodTypeDef,
+  OneDollarExists
+> = z.object({
+  dollarExists: z.boolean(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarExists: "$exists",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OneDollarExists$ {
+  /** @deprecated use `OneDollarExists$inboundSchema` instead. */
+  export const inboundSchema = OneDollarExists$inboundSchema;
+  /** @deprecated use `OneDollarExists$outboundSchema` instead. */
+  export const outboundSchema = OneDollarExists$outboundSchema;
+  /** @deprecated use `OneDollarExists$Outbound` instead. */
+  export type Outbound = OneDollarExists$Outbound;
+}
+
+export function oneDollarExistsToJSON(
+  oneDollarExists: OneDollarExists,
+): string {
+  return JSON.stringify(OneDollarExists$outboundSchema.parse(oneDollarExists));
+}
+
+export function oneDollarExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<OneDollarExists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OneDollarExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OneDollarExists' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarNin$inboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarNin,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStream1DeploymentsDollarNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarNin$outboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DeploymentsDollarNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DeploymentsDollarNin$ {
+  /** @deprecated use `DeploymentStream1DeploymentsDollarNin$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream1DeploymentsDollarNin$inboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarNin$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream1DeploymentsDollarNin$outboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarNin$Outbound` instead. */
+  export type Outbound = DeploymentStream1DeploymentsDollarNin$Outbound;
+}
+
+export function deploymentStream1DeploymentsDollarNinToJSON(
+  deploymentStream1DeploymentsDollarNin: DeploymentStream1DeploymentsDollarNin,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DeploymentsDollarNin$outboundSchema.parse(
+      deploymentStream1DeploymentsDollarNin,
+    ),
+  );
+}
+
+export function deploymentStream1DeploymentsDollarNinFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DeploymentsDollarNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream1DeploymentsDollarNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DeploymentsDollarNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DollarNin$inboundSchema: z.ZodType<
+  DeploymentStream1DollarNin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    "$nin": "dollarNin",
+  });
+});
+
+/** @internal */
+export type DeploymentStream1DollarNin$Outbound = {
+  $nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentStream1DollarNin$outboundSchema: z.ZodType<
+  DeploymentStream1DollarNin$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DollarNin
+> = z.object({
+  dollarNin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    dollarNin: "$nin",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DollarNin$ {
+  /** @deprecated use `DeploymentStream1DollarNin$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream1DollarNin$inboundSchema;
+  /** @deprecated use `DeploymentStream1DollarNin$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream1DollarNin$outboundSchema;
+  /** @deprecated use `DeploymentStream1DollarNin$Outbound` instead. */
+  export type Outbound = DeploymentStream1DollarNin$Outbound;
+}
+
+export function deploymentStream1DollarNinToJSON(
+  deploymentStream1DollarNin: DeploymentStream1DollarNin,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DollarNin$outboundSchema.parse(deploymentStream1DollarNin),
+  );
+}
+
+export function deploymentStream1DollarNinFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DollarNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream1DollarNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DollarNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarIn$inboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarIn,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStream1DeploymentsDollarIn$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarIn$outboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarIn$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DeploymentsDollarIn
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DeploymentsDollarIn$ {
+  /** @deprecated use `DeploymentStream1DeploymentsDollarIn$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream1DeploymentsDollarIn$inboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarIn$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream1DeploymentsDollarIn$outboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarIn$Outbound` instead. */
+  export type Outbound = DeploymentStream1DeploymentsDollarIn$Outbound;
+}
+
+export function deploymentStream1DeploymentsDollarInToJSON(
+  deploymentStream1DeploymentsDollarIn: DeploymentStream1DeploymentsDollarIn,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DeploymentsDollarIn$outboundSchema.parse(
+      deploymentStream1DeploymentsDollarIn,
+    ),
+  );
+}
+
+export function deploymentStream1DeploymentsDollarInFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DeploymentsDollarIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream1DeploymentsDollarIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DeploymentsDollarIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DollarIn$inboundSchema: z.ZodType<
+  DeploymentStream1DollarIn,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    "$in": "dollarIn",
+  });
+});
+
+/** @internal */
+export type DeploymentStream1DollarIn$Outbound = {
+  $in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const DeploymentStream1DollarIn$outboundSchema: z.ZodType<
+  DeploymentStream1DollarIn$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DollarIn
+> = z.object({
+  dollarIn: z.array(z.union([z.string(), z.number(), z.boolean()])),
+}).transform((v) => {
+  return remap$(v, {
+    dollarIn: "$in",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DollarIn$ {
+  /** @deprecated use `DeploymentStream1DollarIn$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream1DollarIn$inboundSchema;
+  /** @deprecated use `DeploymentStream1DollarIn$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream1DollarIn$outboundSchema;
+  /** @deprecated use `DeploymentStream1DollarIn$Outbound` instead. */
+  export type Outbound = DeploymentStream1DollarIn$Outbound;
+}
+
+export function deploymentStream1DollarInToJSON(
+  deploymentStream1DollarIn: DeploymentStream1DollarIn,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DollarIn$outboundSchema.parse(deploymentStream1DollarIn),
+  );
+}
+
+export function deploymentStream1DollarInFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DollarIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream1DollarIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DollarIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const OneDollarLte$inboundSchema: z.ZodType<
+  OneDollarLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $lte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$lte": "dollarLte",
+  });
+});
+
+/** @internal */
+export type OneDollarLte$Outbound = {
+  $lte: number;
+};
+
+/** @internal */
+export const OneDollarLte$outboundSchema: z.ZodType<
+  OneDollarLte$Outbound,
+  z.ZodTypeDef,
+  OneDollarLte
+> = z.object({
+  dollarLte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarLte: "$lte",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OneDollarLte$ {
+  /** @deprecated use `OneDollarLte$inboundSchema` instead. */
+  export const inboundSchema = OneDollarLte$inboundSchema;
+  /** @deprecated use `OneDollarLte$outboundSchema` instead. */
+  export const outboundSchema = OneDollarLte$outboundSchema;
+  /** @deprecated use `OneDollarLte$Outbound` instead. */
+  export type Outbound = OneDollarLte$Outbound;
+}
+
+export function oneDollarLteToJSON(oneDollarLte: OneDollarLte): string {
+  return JSON.stringify(OneDollarLte$outboundSchema.parse(oneDollarLte));
+}
+
+export function oneDollarLteFromJSON(
+  jsonString: string,
+): SafeParseResult<OneDollarLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OneDollarLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OneDollarLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const OneDollarLt$inboundSchema: z.ZodType<
+  OneDollarLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $lt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$lt": "dollarLt",
+  });
+});
+
+/** @internal */
+export type OneDollarLt$Outbound = {
+  $lt: number;
+};
+
+/** @internal */
+export const OneDollarLt$outboundSchema: z.ZodType<
+  OneDollarLt$Outbound,
+  z.ZodTypeDef,
+  OneDollarLt
+> = z.object({
+  dollarLt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarLt: "$lt",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OneDollarLt$ {
+  /** @deprecated use `OneDollarLt$inboundSchema` instead. */
+  export const inboundSchema = OneDollarLt$inboundSchema;
+  /** @deprecated use `OneDollarLt$outboundSchema` instead. */
+  export const outboundSchema = OneDollarLt$outboundSchema;
+  /** @deprecated use `OneDollarLt$Outbound` instead. */
+  export type Outbound = OneDollarLt$Outbound;
+}
+
+export function oneDollarLtToJSON(oneDollarLt: OneDollarLt): string {
+  return JSON.stringify(OneDollarLt$outboundSchema.parse(oneDollarLt));
+}
+
+export function oneDollarLtFromJSON(
+  jsonString: string,
+): SafeParseResult<OneDollarLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OneDollarLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OneDollarLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const OneDollarGte$inboundSchema: z.ZodType<
+  OneDollarGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $gte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$gte": "dollarGte",
+  });
+});
+
+/** @internal */
+export type OneDollarGte$Outbound = {
+  $gte: number;
+};
+
+/** @internal */
+export const OneDollarGte$outboundSchema: z.ZodType<
+  OneDollarGte$Outbound,
+  z.ZodTypeDef,
+  OneDollarGte
+> = z.object({
+  dollarGte: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarGte: "$gte",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OneDollarGte$ {
+  /** @deprecated use `OneDollarGte$inboundSchema` instead. */
+  export const inboundSchema = OneDollarGte$inboundSchema;
+  /** @deprecated use `OneDollarGte$outboundSchema` instead. */
+  export const outboundSchema = OneDollarGte$outboundSchema;
+  /** @deprecated use `OneDollarGte$Outbound` instead. */
+  export type Outbound = OneDollarGte$Outbound;
+}
+
+export function oneDollarGteToJSON(oneDollarGte: OneDollarGte): string {
+  return JSON.stringify(OneDollarGte$outboundSchema.parse(oneDollarGte));
+}
+
+export function oneDollarGteFromJSON(
+  jsonString: string,
+): SafeParseResult<OneDollarGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OneDollarGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OneDollarGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream13$inboundSchema: z.ZodType<
+  DeploymentStream13,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $gt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "$gt": "dollarGt",
+  });
+});
+
+/** @internal */
+export type DeploymentStream13$Outbound = {
+  $gt: number;
+};
+
+/** @internal */
+export const DeploymentStream13$outboundSchema: z.ZodType<
+  DeploymentStream13$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream13
+> = z.object({
+  dollarGt: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    dollarGt: "$gt",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream13$ {
+  /** @deprecated use `DeploymentStream13$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream13$inboundSchema;
+  /** @deprecated use `DeploymentStream13$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream13$outboundSchema;
+  /** @deprecated use `DeploymentStream13$Outbound` instead. */
+  export type Outbound = DeploymentStream13$Outbound;
+}
+
+export function deploymentStream13ToJSON(
+  deploymentStream13: DeploymentStream13,
+): string {
+  return JSON.stringify(
+    DeploymentStream13$outboundSchema.parse(deploymentStream13),
+  );
+}
+
+export function deploymentStream13FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream13, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream13' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarNe$inboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarNe,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStream1DeploymentsDollarNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarNe$outboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DeploymentsDollarNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DeploymentsDollarNe$ {
+  /** @deprecated use `DeploymentStream1DeploymentsDollarNe$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream1DeploymentsDollarNe$inboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarNe$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream1DeploymentsDollarNe$outboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarNe$Outbound` instead. */
+  export type Outbound = DeploymentStream1DeploymentsDollarNe$Outbound;
+}
+
+export function deploymentStream1DeploymentsDollarNeToJSON(
+  deploymentStream1DeploymentsDollarNe: DeploymentStream1DeploymentsDollarNe,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DeploymentsDollarNe$outboundSchema.parse(
+      deploymentStream1DeploymentsDollarNe,
+    ),
+  );
+}
+
+export function deploymentStream1DeploymentsDollarNeFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DeploymentsDollarNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream1DeploymentsDollarNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DeploymentsDollarNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DollarNe$inboundSchema: z.ZodType<
+  DeploymentStream1DollarNe,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $ne: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    "$ne": "dollarNe",
+  });
+});
+
+/** @internal */
+export type DeploymentStream1DollarNe$Outbound = {
+  $ne: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentStream1DollarNe$outboundSchema: z.ZodType<
+  DeploymentStream1DollarNe$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DollarNe
+> = z.object({
+  dollarNe: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    dollarNe: "$ne",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DollarNe$ {
+  /** @deprecated use `DeploymentStream1DollarNe$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream1DollarNe$inboundSchema;
+  /** @deprecated use `DeploymentStream1DollarNe$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream1DollarNe$outboundSchema;
+  /** @deprecated use `DeploymentStream1DollarNe$Outbound` instead. */
+  export type Outbound = DeploymentStream1DollarNe$Outbound;
+}
+
+export function deploymentStream1DollarNeToJSON(
+  deploymentStream1DollarNe: DeploymentStream1DollarNe,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DollarNe$outboundSchema.parse(deploymentStream1DollarNe),
+  );
+}
+
+export function deploymentStream1DollarNeFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DollarNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream1DollarNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DollarNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarEq$inboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarEq,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type DeploymentStream1DeploymentsDollarEq$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const DeploymentStream1DeploymentsDollarEq$outboundSchema: z.ZodType<
+  DeploymentStream1DeploymentsDollarEq$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DeploymentsDollarEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DeploymentsDollarEq$ {
+  /** @deprecated use `DeploymentStream1DeploymentsDollarEq$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream1DeploymentsDollarEq$inboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarEq$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream1DeploymentsDollarEq$outboundSchema;
+  /** @deprecated use `DeploymentStream1DeploymentsDollarEq$Outbound` instead. */
+  export type Outbound = DeploymentStream1DeploymentsDollarEq$Outbound;
+}
+
+export function deploymentStream1DeploymentsDollarEqToJSON(
+  deploymentStream1DeploymentsDollarEq: DeploymentStream1DeploymentsDollarEq,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DeploymentsDollarEq$outboundSchema.parse(
+      deploymentStream1DeploymentsDollarEq,
+    ),
+  );
+}
+
+export function deploymentStream1DeploymentsDollarEqFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DeploymentsDollarEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentStream1DeploymentsDollarEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DeploymentsDollarEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStream1DollarEq$inboundSchema: z.ZodType<
+  DeploymentStream1DollarEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  $eq: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    "$eq": "dollarEq",
+  });
+});
+
+/** @internal */
+export type DeploymentStream1DollarEq$Outbound = {
+  $eq: string | number | boolean;
+};
+
+/** @internal */
+export const DeploymentStream1DollarEq$outboundSchema: z.ZodType<
+  DeploymentStream1DollarEq$Outbound,
+  z.ZodTypeDef,
+  DeploymentStream1DollarEq
+> = z.object({
+  dollarEq: z.union([z.string(), z.number(), z.boolean()]),
+}).transform((v) => {
+  return remap$(v, {
+    dollarEq: "$eq",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream1DollarEq$ {
+  /** @deprecated use `DeploymentStream1DollarEq$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream1DollarEq$inboundSchema;
+  /** @deprecated use `DeploymentStream1DollarEq$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream1DollarEq$outboundSchema;
+  /** @deprecated use `DeploymentStream1DollarEq$Outbound` instead. */
+  export type Outbound = DeploymentStream1DollarEq$Outbound;
+}
+
+export function deploymentStream1DollarEqToJSON(
+  deploymentStream1DollarEq: DeploymentStream1DollarEq,
+): string {
+  return JSON.stringify(
+    DeploymentStream1DollarEq$outboundSchema.parse(deploymentStream1DollarEq),
+  );
+}
+
+export function deploymentStream1DollarEqFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStream1DollarEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStream1DollarEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStream1DollarEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilter1$inboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilter1,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentStream1DollarEq$inboundSchema),
+  z.lazy(() => DeploymentStream1DollarNe$inboundSchema),
+  z.lazy(() => DeploymentStream13$inboundSchema),
+  z.lazy(() => OneDollarGte$inboundSchema),
+  z.lazy(() => OneDollarLt$inboundSchema),
+  z.lazy(() => OneDollarLte$inboundSchema),
+  z.lazy(() => DeploymentStream1DollarIn$inboundSchema),
+  z.lazy(() => DeploymentStream1DollarNin$inboundSchema),
+  z.lazy(() => OneDollarExists$inboundSchema),
+]);
+
+/** @internal */
+export type DeploymentStreamKnowledgeFilter1$Outbound =
+  | DeploymentStream1DollarEq$Outbound
+  | DeploymentStream1DollarNe$Outbound
+  | DeploymentStream13$Outbound
+  | OneDollarGte$Outbound
+  | OneDollarLt$Outbound
+  | OneDollarLte$Outbound
+  | DeploymentStream1DollarIn$Outbound
+  | DeploymentStream1DollarNin$Outbound
+  | OneDollarExists$Outbound;
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilter1$outboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilter1$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamKnowledgeFilter1
+> = z.union([
+  z.lazy(() => DeploymentStream1DollarEq$outboundSchema),
+  z.lazy(() => DeploymentStream1DollarNe$outboundSchema),
+  z.lazy(() => DeploymentStream13$outboundSchema),
+  z.lazy(() => OneDollarGte$outboundSchema),
+  z.lazy(() => OneDollarLt$outboundSchema),
+  z.lazy(() => OneDollarLte$outboundSchema),
+  z.lazy(() => DeploymentStream1DollarIn$outboundSchema),
+  z.lazy(() => DeploymentStream1DollarNin$outboundSchema),
+  z.lazy(() => OneDollarExists$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamKnowledgeFilter1$ {
+  /** @deprecated use `DeploymentStreamKnowledgeFilter1$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamKnowledgeFilter1$inboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilter1$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamKnowledgeFilter1$outboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilter1$Outbound` instead. */
+  export type Outbound = DeploymentStreamKnowledgeFilter1$Outbound;
+}
+
+export function deploymentStreamKnowledgeFilter1ToJSON(
+  deploymentStreamKnowledgeFilter1: DeploymentStreamKnowledgeFilter1,
+): string {
+  return JSON.stringify(
+    DeploymentStreamKnowledgeFilter1$outboundSchema.parse(
+      deploymentStreamKnowledgeFilter1,
+    ),
+  );
+}
+
+export function deploymentStreamKnowledgeFilter1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamKnowledgeFilter1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamKnowledgeFilter1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamKnowledgeFilter1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilter$inboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilter,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentStreamKnowledgeFilterDollarAnd$inboundSchema),
+  z.lazy(() => DeploymentStreamKnowledgeFilterDollarOr$inboundSchema),
+  z.record(
+    z.union([
+      z.lazy(() => DeploymentStream1DollarEq$inboundSchema),
+      z.lazy(() => DeploymentStream1DollarNe$inboundSchema),
+      z.lazy(() => DeploymentStream13$inboundSchema),
+      z.lazy(() => OneDollarGte$inboundSchema),
+      z.lazy(() => OneDollarLt$inboundSchema),
+      z.lazy(() => OneDollarLte$inboundSchema),
+      z.lazy(() => DeploymentStream1DollarIn$inboundSchema),
+      z.lazy(() => DeploymentStream1DollarNin$inboundSchema),
+      z.lazy(() => OneDollarExists$inboundSchema),
+    ]),
+  ),
+]);
+
+/** @internal */
+export type DeploymentStreamKnowledgeFilter$Outbound =
+  | DeploymentStreamKnowledgeFilterDollarAnd$Outbound
+  | DeploymentStreamKnowledgeFilterDollarOr$Outbound
+  | {
+    [k: string]:
+      | DeploymentStream1DollarEq$Outbound
+      | DeploymentStream1DollarNe$Outbound
+      | DeploymentStream13$Outbound
+      | OneDollarGte$Outbound
+      | OneDollarLt$Outbound
+      | OneDollarLte$Outbound
+      | DeploymentStream1DollarIn$Outbound
+      | DeploymentStream1DollarNin$Outbound
+      | OneDollarExists$Outbound;
+  };
+
+/** @internal */
+export const DeploymentStreamKnowledgeFilter$outboundSchema: z.ZodType<
+  DeploymentStreamKnowledgeFilter$Outbound,
+  z.ZodTypeDef,
+  DeploymentStreamKnowledgeFilter
+> = z.union([
+  z.lazy(() => DeploymentStreamKnowledgeFilterDollarAnd$outboundSchema),
+  z.lazy(() => DeploymentStreamKnowledgeFilterDollarOr$outboundSchema),
+  z.record(
+    z.union([
+      z.lazy(() => DeploymentStream1DollarEq$outboundSchema),
+      z.lazy(() => DeploymentStream1DollarNe$outboundSchema),
+      z.lazy(() => DeploymentStream13$outboundSchema),
+      z.lazy(() => OneDollarGte$outboundSchema),
+      z.lazy(() => OneDollarLt$outboundSchema),
+      z.lazy(() => OneDollarLte$outboundSchema),
+      z.lazy(() => DeploymentStream1DollarIn$outboundSchema),
+      z.lazy(() => DeploymentStream1DollarNin$outboundSchema),
+      z.lazy(() => OneDollarExists$outboundSchema),
+    ]),
+  ),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamKnowledgeFilter$ {
+  /** @deprecated use `DeploymentStreamKnowledgeFilter$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamKnowledgeFilter$inboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilter$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamKnowledgeFilter$outboundSchema;
+  /** @deprecated use `DeploymentStreamKnowledgeFilter$Outbound` instead. */
+  export type Outbound = DeploymentStreamKnowledgeFilter$Outbound;
+}
+
+export function deploymentStreamKnowledgeFilterToJSON(
+  deploymentStreamKnowledgeFilter: DeploymentStreamKnowledgeFilter,
+): string {
+  return JSON.stringify(
+    DeploymentStreamKnowledgeFilter$outboundSchema.parse(
+      deploymentStreamKnowledgeFilter,
+    ),
+  );
+}
+
+export function deploymentStreamKnowledgeFilterFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentStreamKnowledgeFilter, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentStreamKnowledgeFilter$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamKnowledgeFilter' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
   DeploymentStreamRequestBody,
   z.ZodTypeDef,
@@ -5508,12 +8879,30 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
   invoke_options: z.lazy(() => DeploymentStreamInvokeOptions$inboundSchema)
     .optional(),
   thread: z.lazy(() => DeploymentStreamThread$inboundSchema).optional(),
+  knowledge_filter: z.union([
+    z.lazy(() => DeploymentStreamKnowledgeFilterDollarAnd$inboundSchema),
+    z.lazy(() => DeploymentStreamKnowledgeFilterDollarOr$inboundSchema),
+    z.record(
+      z.union([
+        z.lazy(() => DeploymentStream1DollarEq$inboundSchema),
+        z.lazy(() => DeploymentStream1DollarNe$inboundSchema),
+        z.lazy(() => DeploymentStream13$inboundSchema),
+        z.lazy(() => OneDollarGte$inboundSchema),
+        z.lazy(() => OneDollarLt$inboundSchema),
+        z.lazy(() => OneDollarLte$inboundSchema),
+        z.lazy(() => DeploymentStream1DollarIn$inboundSchema),
+        z.lazy(() => DeploymentStream1DollarNin$inboundSchema),
+        z.lazy(() => OneDollarExists$inboundSchema),
+      ]),
+    ),
+  ]).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prefix_messages": "prefixMessages",
     "file_ids": "fileIds",
     "extra_params": "extraParams",
     "invoke_options": "invokeOptions",
+    "knowledge_filter": "knowledgeFilter",
   });
 });
 
@@ -5546,6 +8935,22 @@ export type DeploymentStreamRequestBody$Outbound = {
   documents?: Array<DeploymentStreamDocuments$Outbound> | undefined;
   invoke_options?: DeploymentStreamInvokeOptions$Outbound | undefined;
   thread?: DeploymentStreamThread$Outbound | undefined;
+  knowledge_filter?:
+    | DeploymentStreamKnowledgeFilterDollarAnd$Outbound
+    | DeploymentStreamKnowledgeFilterDollarOr$Outbound
+    | {
+      [k: string]:
+        | DeploymentStream1DollarEq$Outbound
+        | DeploymentStream1DollarNe$Outbound
+        | DeploymentStream13$Outbound
+        | OneDollarGte$Outbound
+        | OneDollarLt$Outbound
+        | OneDollarLte$Outbound
+        | DeploymentStream1DollarIn$Outbound
+        | DeploymentStream1DollarNin$Outbound
+        | OneDollarExists$Outbound;
+    }
+    | undefined;
 };
 
 /** @internal */
@@ -5583,12 +8988,30 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
   invokeOptions: z.lazy(() => DeploymentStreamInvokeOptions$outboundSchema)
     .optional(),
   thread: z.lazy(() => DeploymentStreamThread$outboundSchema).optional(),
+  knowledgeFilter: z.union([
+    z.lazy(() => DeploymentStreamKnowledgeFilterDollarAnd$outboundSchema),
+    z.lazy(() => DeploymentStreamKnowledgeFilterDollarOr$outboundSchema),
+    z.record(
+      z.union([
+        z.lazy(() => DeploymentStream1DollarEq$outboundSchema),
+        z.lazy(() => DeploymentStream1DollarNe$outboundSchema),
+        z.lazy(() => DeploymentStream13$outboundSchema),
+        z.lazy(() => OneDollarGte$outboundSchema),
+        z.lazy(() => OneDollarLt$outboundSchema),
+        z.lazy(() => OneDollarLte$outboundSchema),
+        z.lazy(() => DeploymentStream1DollarIn$outboundSchema),
+        z.lazy(() => DeploymentStream1DollarNin$outboundSchema),
+        z.lazy(() => OneDollarExists$outboundSchema),
+      ]),
+    ),
+  ]).optional(),
 }).transform((v) => {
   return remap$(v, {
     prefixMessages: "prefix_messages",
     fileIds: "file_ids",
     extraParams: "extra_params",
     invokeOptions: "invoke_options",
+    knowledgeFilter: "knowledge_filter",
   });
 });
 

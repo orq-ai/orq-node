@@ -1,19 +1,81 @@
 # One
 
-## Example Usage
+
+## Supported Types
+
+### `components.OneDollarEq`
 
 ```typescript
-import { One } from "@orq-ai/node/models/components";
-
-let value: One = {
-  type: "text",
-  text: "<value>",
+const value: components.OneDollarEq = {
+  dollarEq: false,
 };
 ```
 
-## Fields
+### `components.OneDollarNe`
 
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                   | [components.Deployments2PrefixMessages3Type](../../models/components/deployments2prefixmessages3type.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `text`                                                                                                   | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
+```typescript
+const value: components.OneDollarNe = {
+  dollarNe: 9463.6,
+};
+```
+
+### `components.Three`
+
+```typescript
+const value: components.Three = {
+  dollarGt: 4508.51,
+};
+```
+
+### `components.DollarGte`
+
+```typescript
+const value: components.DollarGte = {
+  dollarGte: 663.1,
+};
+```
+
+### `components.DollarLt`
+
+```typescript
+const value: components.DollarLt = {
+  dollarLt: 649.19,
+};
+```
+
+### `components.DollarLte`
+
+```typescript
+const value: components.DollarLte = {
+  dollarLte: 9180.38,
+};
+```
+
+### `components.OneDollarIn`
+
+```typescript
+const value: components.OneDollarIn = {
+  dollarIn: [
+    false,
+  ],
+};
+```
+
+### `components.OneDollarNin`
+
+```typescript
+const value: components.OneDollarNin = {
+  dollarNin: [
+    "<value>",
+  ],
+};
+```
+
+### `components.DollarExists`
+
+```typescript
+const value: components.DollarExists = {
+  dollarExists: false,
+};
+```
+

@@ -45,6 +45,7 @@ export * from "./remoteconfigsgetconfig.js";
 export * from "./retrievedatapoint.js";
 export * from "./retrievedataset.js";
 export * from "./retrievedatasource.js";
+export * from "./searchknowledge.js";
 export * from "./updatechunk.js";
 export * from "./updatedatapoint.js";
 export * from "./updatedataset.js";

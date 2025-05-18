@@ -24,6 +24,8 @@ export type GetOneChunkRequest = {
   knowledgeId: string;
 };
 
+export type GetOneChunkMetadata = string | number | boolean;
+
 /**
  * The status of the chunk
  */
@@ -52,9 +54,9 @@ export type GetOneChunkResponseBody = {
    */
   text: string;
   /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported.
+   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
    */
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   /**
    * Whether the chunk is enabled
    */
@@ -154,6 +156,54 @@ export function getOneChunkRequestFromJSON(
 }
 
 /** @internal */
+export const GetOneChunkMetadata$inboundSchema: z.ZodType<
+  GetOneChunkMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type GetOneChunkMetadata$Outbound = string | number | boolean;
+
+/** @internal */
+export const GetOneChunkMetadata$outboundSchema: z.ZodType<
+  GetOneChunkMetadata$Outbound,
+  z.ZodTypeDef,
+  GetOneChunkMetadata
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneChunkMetadata$ {
+  /** @deprecated use `GetOneChunkMetadata$inboundSchema` instead. */
+  export const inboundSchema = GetOneChunkMetadata$inboundSchema;
+  /** @deprecated use `GetOneChunkMetadata$outboundSchema` instead. */
+  export const outboundSchema = GetOneChunkMetadata$outboundSchema;
+  /** @deprecated use `GetOneChunkMetadata$Outbound` instead. */
+  export type Outbound = GetOneChunkMetadata$Outbound;
+}
+
+export function getOneChunkMetadataToJSON(
+  getOneChunkMetadata: GetOneChunkMetadata,
+): string {
+  return JSON.stringify(
+    GetOneChunkMetadata$outboundSchema.parse(getOneChunkMetadata),
+  );
+}
+
+export function getOneChunkMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOneChunkMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOneChunkMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOneChunkMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetOneChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetOneChunkStatus
 > = z.nativeEnum(GetOneChunkStatus);
@@ -182,7 +232,7 @@ export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: GetOneChunkStatus$inboundSchema,
   created: z.string(),
@@ -201,7 +251,7 @@ export const GetOneChunkResponseBody$inboundSchema: z.ZodType<
 export type GetOneChunkResponseBody$Outbound = {
   _id: string;
   text: string;
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   enabled: boolean;
   status: string;
   created: string;
@@ -218,7 +268,7 @@ export const GetOneChunkResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: GetOneChunkStatus$outboundSchema,
   created: z.string(),
