@@ -421,7 +421,10 @@ const orq = new Orq({
 async function run() {
   const result = await orq.knowledge.listDatasources({
     knowledgeId: "<id>",
-    status: "completed",
+    status: [
+      "completed",
+      "failed",
+    ],
   });
 
   // Handle the result
@@ -448,7 +451,10 @@ const orq = new OrqCore({
 async function run() {
   const res = await knowledgeListDatasources(orq, {
     knowledgeId: "<id>",
-    status: "completed",
+    status: [
+      "completed",
+      "failed",
+    ],
   });
 
   if (!res.ok) {
@@ -894,7 +900,10 @@ async function run() {
   const result = await orq.knowledge.listChunks({
     knowledgeId: "<id>",
     datasourceId: "<id>",
-    status: "completed",
+    status: [
+      "completed",
+      "failed",
+    ],
   });
 
   // Handle the result
@@ -922,7 +931,10 @@ async function run() {
   const res = await knowledgeListChunks(orq, {
     knowledgeId: "<id>",
     datasourceId: "<id>",
-    status: "completed",
+    status: [
+      "completed",
+      "failed",
+    ],
   });
 
   if (!res.ok) {
