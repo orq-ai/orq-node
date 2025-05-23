@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.DeploymentStream1DollarEq`
+### `operations.DeploymentStream1Eq`
 
 ```typescript
-const value: operations.DeploymentStream1DollarEq = {
-  dollarEq: 6325.91,
+const value: operations.DeploymentStream1Eq = {
+  eq: false,
 };
 ```
 
-### `operations.DeploymentStream1DollarNe`
+### `operations.DeploymentStream1Ne`
 
 ```typescript
-const value: operations.DeploymentStream1DollarNe = {
-  dollarNe: "<value>",
+const value: operations.DeploymentStream1Ne = {
+  ne: false,
 };
 ```
 
@@ -23,59 +23,59 @@ const value: operations.DeploymentStream1DollarNe = {
 
 ```typescript
 const value: operations.DeploymentStream13 = {
-  dollarGt: 1948.04,
+  gt: 1948.04,
 };
 ```
 
-### `operations.OneDollarGte`
+### `operations.OneGte`
 
 ```typescript
-const value: operations.OneDollarGte = {
-  dollarGte: 4940.72,
+const value: operations.OneGte = {
+  gte: 1682.47,
 };
 ```
 
-### `operations.OneDollarLt`
+### `operations.OneLt`
 
 ```typescript
-const value: operations.OneDollarLt = {
-  dollarLt: 4892.03,
+const value: operations.OneLt = {
+  lt: 5328.81,
 };
 ```
 
-### `operations.OneDollarLte`
+### `operations.OneLte`
 
 ```typescript
-const value: operations.OneDollarLte = {
-  dollarLte: 6938.32,
+const value: operations.OneLte = {
+  lte: 8382.07,
 };
 ```
 
-### `operations.DeploymentStream1DollarIn`
+### `operations.DeploymentStream1In`
 
 ```typescript
-const value: operations.DeploymentStream1DollarIn = {
-  dollarIn: [
+const value: operations.DeploymentStream1In = {
+  in: [
+    false,
+  ],
+};
+```
+
+### `operations.DeploymentStream1Nin`
+
+```typescript
+const value: operations.DeploymentStream1Nin = {
+  nin: [
     "<value>",
   ],
 };
 ```
 
-### `operations.DeploymentStream1DollarNin`
+### `operations.OneExists`
 
 ```typescript
-const value: operations.DeploymentStream1DollarNin = {
-  dollarNin: [
-    4564.11,
-  ],
-};
-```
-
-### `operations.OneDollarExists`
-
-```typescript
-const value: operations.OneDollarExists = {
-  dollarExists: false,
+const value: operations.OneExists = {
+  exists: false,
 };
 ```
 

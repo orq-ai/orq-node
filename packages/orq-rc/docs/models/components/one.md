@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `components.OneDollarEq`
+### `components.OneEq`
 
 ```typescript
-const value: components.OneDollarEq = {
-  dollarEq: false,
+const value: components.OneEq = {
+  eq: 7298.36,
 };
 ```
 
-### `components.OneDollarNe`
+### `components.OneNe`
 
 ```typescript
-const value: components.OneDollarNe = {
-  dollarNe: 9463.6,
+const value: components.OneNe = {
+  ne: false,
 };
 ```
 
@@ -23,59 +23,59 @@ const value: components.OneDollarNe = {
 
 ```typescript
 const value: components.Three = {
-  dollarGt: 4508.51,
+  gt: 4508.51,
 };
 ```
 
-### `components.DollarGte`
+### `components.Gte`
 
 ```typescript
-const value: components.DollarGte = {
-  dollarGte: 663.1,
+const value: components.Gte = {
+  gte: 7859.98,
 };
 ```
 
-### `components.DollarLt`
+### `components.Lt`
 
 ```typescript
-const value: components.DollarLt = {
-  dollarLt: 649.19,
+const value: components.Lt = {
+  lt: 2099.28,
 };
 ```
 
-### `components.DollarLte`
+### `components.Lte`
 
 ```typescript
-const value: components.DollarLte = {
-  dollarLte: 9180.38,
+const value: components.Lte = {
+  lte: 6732.54,
 };
 ```
 
-### `components.OneDollarIn`
+### `components.OneIn`
 
 ```typescript
-const value: components.OneDollarIn = {
-  dollarIn: [
+const value: components.OneIn = {
+  in: [
     false,
   ],
 };
 ```
 
-### `components.OneDollarNin`
+### `components.OneNin`
 
 ```typescript
-const value: components.OneDollarNin = {
-  dollarNin: [
+const value: components.OneNin = {
+  nin: [
     "<value>",
   ],
 };
 ```
 
-### `components.DollarExists`
+### `components.Exists`
 
 ```typescript
-const value: components.DollarExists = {
-  dollarExists: false,
+const value: components.Exists = {
+  exists: false,
 };
 ```
 

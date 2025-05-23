@@ -11,110 +11,98 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Exists
  */
-export type SearchKnowledgeDollarOrDollarExists = {
-  dollarExists: boolean;
+export type SearchKnowledgeOrExists = {
+  exists: boolean;
 };
 
-export type SearchKnowledgeDollarOrKnowledgeDollarNin =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type SearchKnowledgeDollarOrDollarNin = {
-  dollarNin: Array<string | number | boolean>;
+export type SearchKnowledgeOrNin = {
+  nin: Array<string | number | boolean>;
 };
 
-export type SearchKnowledgeDollarOrKnowledgeDollarIn =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeIn = string | number | boolean;
 
 /**
  * In
  */
-export type SearchKnowledgeDollarOrDollarIn = {
-  dollarIn: Array<string | number | boolean>;
+export type SearchKnowledgeOrIn = {
+  in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type SearchKnowledgeDollarOrDollarLte = {
-  dollarLte: number;
+export type SearchKnowledgeOrLte = {
+  lte: number;
 };
 
 /**
  * Less than
  */
-export type SearchKnowledgeDollarOrDollarLt = {
-  dollarLt: number;
+export type SearchKnowledgeOrLt = {
+  lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type SearchKnowledgeDollarOrDollarGte = {
-  dollarGte: number;
+export type SearchKnowledgeOrGte = {
+  gte: number;
 };
 
-export type SearchKnowledgeDollarOr3 = {
-  dollarGt: number;
+export type SearchKnowledgeOr3 = {
+  gt: number;
 };
 
-export type SearchKnowledgeDollarOrKnowledgeDollarNe =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type SearchKnowledgeDollarOrDollarNe = {
-  dollarNe: string | number | boolean;
+export type SearchKnowledgeOrNe = {
+  ne: string | number | boolean;
 };
 
-export type SearchKnowledgeDollarOrKnowledgeDollarEq =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type SearchKnowledgeDollarOrDollarEq = {
-  dollarEq: string | number | boolean;
+export type SearchKnowledgeOrEq = {
+  eq: string | number | boolean;
 };
 
-export type SearchKnowledgeFilterDollarOr =
-  | SearchKnowledgeDollarOrDollarEq
-  | SearchKnowledgeDollarOrDollarNe
-  | SearchKnowledgeDollarOr3
-  | SearchKnowledgeDollarOrDollarGte
-  | SearchKnowledgeDollarOrDollarLt
-  | SearchKnowledgeDollarOrDollarLte
-  | SearchKnowledgeDollarOrDollarIn
-  | SearchKnowledgeDollarOrDollarNin
-  | SearchKnowledgeDollarOrDollarExists;
+export type SearchKnowledgeFilterByOr =
+  | SearchKnowledgeOrEq
+  | SearchKnowledgeOrNe
+  | SearchKnowledgeOr3
+  | SearchKnowledgeOrGte
+  | SearchKnowledgeOrLt
+  | SearchKnowledgeOrLte
+  | SearchKnowledgeOrIn
+  | SearchKnowledgeOrNin
+  | SearchKnowledgeOrExists;
 
 /**
  * Or
  */
-export type FilterDollarOr = {
-  dollarOr: Array<
+export type FilterByOr = {
+  or: Array<
     {
       [k: string]:
-        | SearchKnowledgeDollarOrDollarEq
-        | SearchKnowledgeDollarOrDollarNe
-        | SearchKnowledgeDollarOr3
-        | SearchKnowledgeDollarOrDollarGte
-        | SearchKnowledgeDollarOrDollarLt
-        | SearchKnowledgeDollarOrDollarLte
-        | SearchKnowledgeDollarOrDollarIn
-        | SearchKnowledgeDollarOrDollarNin
-        | SearchKnowledgeDollarOrDollarExists;
+        | SearchKnowledgeOrEq
+        | SearchKnowledgeOrNe
+        | SearchKnowledgeOr3
+        | SearchKnowledgeOrGte
+        | SearchKnowledgeOrLt
+        | SearchKnowledgeOrLte
+        | SearchKnowledgeOrIn
+        | SearchKnowledgeOrNin
+        | SearchKnowledgeOrExists;
     }
   >;
 };
@@ -122,110 +110,98 @@ export type FilterDollarOr = {
 /**
  * Exists
  */
-export type SearchKnowledgeDollarAndDollarExists = {
-  dollarExists: boolean;
+export type SearchKnowledgeAndExists = {
+  exists: boolean;
 };
 
-export type SearchKnowledgeDollarAndKnowledgeDollarNin =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type SearchKnowledgeDollarAndDollarNin = {
-  dollarNin: Array<string | number | boolean>;
+export type SearchKnowledgeAndNin = {
+  nin: Array<string | number | boolean>;
 };
 
-export type SearchKnowledgeDollarAndKnowledgeDollarIn =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeIn = string | number | boolean;
 
 /**
  * In
  */
-export type SearchKnowledgeDollarAndDollarIn = {
-  dollarIn: Array<string | number | boolean>;
+export type SearchKnowledgeAndIn = {
+  in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type SearchKnowledgeDollarAndDollarLte = {
-  dollarLte: number;
+export type SearchKnowledgeAndLte = {
+  lte: number;
 };
 
 /**
  * Less than
  */
-export type SearchKnowledgeDollarAndDollarLt = {
-  dollarLt: number;
+export type SearchKnowledgeAndLt = {
+  lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type SearchKnowledgeDollarAndDollarGte = {
-  dollarGte: number;
+export type SearchKnowledgeAndGte = {
+  gte: number;
 };
 
-export type SearchKnowledgeDollarAnd3 = {
-  dollarGt: number;
+export type SearchKnowledgeAnd3 = {
+  gt: number;
 };
 
-export type SearchKnowledgeDollarAndKnowledgeDollarNe =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type SearchKnowledgeDollarAndDollarNe = {
-  dollarNe: string | number | boolean;
+export type SearchKnowledgeAndNe = {
+  ne: string | number | boolean;
 };
 
-export type SearchKnowledgeDollarAndKnowledgeDollarEq =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type SearchKnowledgeDollarAndDollarEq = {
-  dollarEq: string | number | boolean;
+export type SearchKnowledgeAndEq = {
+  eq: string | number | boolean;
 };
 
-export type SearchKnowledgeFilterDollarAnd =
-  | SearchKnowledgeDollarAndDollarEq
-  | SearchKnowledgeDollarAndDollarNe
-  | SearchKnowledgeDollarAnd3
-  | SearchKnowledgeDollarAndDollarGte
-  | SearchKnowledgeDollarAndDollarLt
-  | SearchKnowledgeDollarAndDollarLte
-  | SearchKnowledgeDollarAndDollarIn
-  | SearchKnowledgeDollarAndDollarNin
-  | SearchKnowledgeDollarAndDollarExists;
+export type SearchKnowledgeFilterByAnd =
+  | SearchKnowledgeAndEq
+  | SearchKnowledgeAndNe
+  | SearchKnowledgeAnd3
+  | SearchKnowledgeAndGte
+  | SearchKnowledgeAndLt
+  | SearchKnowledgeAndLte
+  | SearchKnowledgeAndIn
+  | SearchKnowledgeAndNin
+  | SearchKnowledgeAndExists;
 
 /**
  * And
  */
-export type FilterDollarAnd = {
-  dollarAnd: Array<
+export type FilterByAnd = {
+  and: Array<
     {
       [k: string]:
-        | SearchKnowledgeDollarAndDollarEq
-        | SearchKnowledgeDollarAndDollarNe
-        | SearchKnowledgeDollarAnd3
-        | SearchKnowledgeDollarAndDollarGte
-        | SearchKnowledgeDollarAndDollarLt
-        | SearchKnowledgeDollarAndDollarLte
-        | SearchKnowledgeDollarAndDollarIn
-        | SearchKnowledgeDollarAndDollarNin
-        | SearchKnowledgeDollarAndDollarExists;
+        | SearchKnowledgeAndEq
+        | SearchKnowledgeAndNe
+        | SearchKnowledgeAnd3
+        | SearchKnowledgeAndGte
+        | SearchKnowledgeAndLt
+        | SearchKnowledgeAndLte
+        | SearchKnowledgeAndIn
+        | SearchKnowledgeAndNin
+        | SearchKnowledgeAndExists;
     }
   >;
 };
@@ -233,96 +209,96 @@ export type FilterDollarAnd = {
 /**
  * Exists
  */
-export type SearchKnowledge1DollarExists = {
-  dollarExists: boolean;
+export type SearchKnowledge1Exists = {
+  exists: boolean;
 };
 
-export type SearchKnowledge1KnowledgeDollarNin = string | number | boolean;
+export type SearchKnowledge1KnowledgeNin = string | number | boolean;
 
 /**
  * Not in
  */
-export type SearchKnowledge1DollarNin = {
-  dollarNin: Array<string | number | boolean>;
+export type SearchKnowledge1Nin = {
+  nin: Array<string | number | boolean>;
 };
 
-export type SearchKnowledge1KnowledgeDollarIn = string | number | boolean;
+export type SearchKnowledge1KnowledgeIn = string | number | boolean;
 
 /**
  * In
  */
-export type SearchKnowledge1DollarIn = {
-  dollarIn: Array<string | number | boolean>;
+export type SearchKnowledge1In = {
+  in: Array<string | number | boolean>;
 };
 
 /**
  * Less than or equal to
  */
-export type SearchKnowledge1DollarLte = {
-  dollarLte: number;
+export type SearchKnowledge1Lte = {
+  lte: number;
 };
 
 /**
  * Less than
  */
-export type SearchKnowledge1DollarLt = {
-  dollarLt: number;
+export type SearchKnowledge1Lt = {
+  lt: number;
 };
 
 /**
  * Greater than or equal to
  */
-export type SearchKnowledge1DollarGte = {
-  dollarGte: number;
+export type SearchKnowledge1Gte = {
+  gte: number;
 };
 
 export type SearchKnowledge13 = {
-  dollarGt: number;
+  gt: number;
 };
 
-export type SearchKnowledge1KnowledgeDollarNe = string | number | boolean;
+export type SearchKnowledge1KnowledgeNe = string | number | boolean;
 
 /**
  * Not equal to
  */
-export type SearchKnowledge1DollarNe = {
-  dollarNe: string | number | boolean;
+export type SearchKnowledge1Ne = {
+  ne: string | number | boolean;
 };
 
-export type SearchKnowledge1KnowledgeDollarEq = string | number | boolean;
+export type SearchKnowledge1KnowledgeEq = string | number | boolean;
 
 /**
  * Equal to
  */
-export type SearchKnowledge1DollarEq = {
-  dollarEq: string | number | boolean;
+export type SearchKnowledge1Eq = {
+  eq: string | number | boolean;
 };
 
-export type Filter1 =
-  | SearchKnowledge1DollarEq
-  | SearchKnowledge1DollarNe
+export type FilterBy1 =
+  | SearchKnowledge1Eq
+  | SearchKnowledge1Ne
   | SearchKnowledge13
-  | SearchKnowledge1DollarGte
-  | SearchKnowledge1DollarLt
-  | SearchKnowledge1DollarLte
-  | SearchKnowledge1DollarIn
-  | SearchKnowledge1DollarNin
-  | SearchKnowledge1DollarExists;
+  | SearchKnowledge1Gte
+  | SearchKnowledge1Lt
+  | SearchKnowledge1Lte
+  | SearchKnowledge1In
+  | SearchKnowledge1Nin
+  | SearchKnowledge1Exists;
 
 /**
- * The filter to apply to the search
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
  */
-export type Filter = FilterDollarAnd | FilterDollarOr | {
+export type FilterBy = FilterByAnd | FilterByOr | {
   [k: string]:
-    | SearchKnowledge1DollarEq
-    | SearchKnowledge1DollarNe
+    | SearchKnowledge1Eq
+    | SearchKnowledge1Ne
     | SearchKnowledge13
-    | SearchKnowledge1DollarGte
-    | SearchKnowledge1DollarLt
-    | SearchKnowledge1DollarLte
-    | SearchKnowledge1DollarIn
-    | SearchKnowledge1DollarNin
-    | SearchKnowledge1DollarExists;
+    | SearchKnowledge1Gte
+    | SearchKnowledge1Lt
+    | SearchKnowledge1Lte
+    | SearchKnowledge1In
+    | SearchKnowledge1Nin
+    | SearchKnowledge1Exists;
 };
 
 /**
@@ -360,19 +336,19 @@ export type SearchKnowledgeRequestBody = {
    */
   threshold?: number | undefined;
   /**
-   * The filter to apply to the search
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
    */
-  filter?: FilterDollarAnd | FilterDollarOr | {
+  filterBy?: FilterByAnd | FilterByOr | {
     [k: string]:
-      | SearchKnowledge1DollarEq
-      | SearchKnowledge1DollarNe
+      | SearchKnowledge1Eq
+      | SearchKnowledge1Ne
       | SearchKnowledge13
-      | SearchKnowledge1DollarGte
-      | SearchKnowledge1DollarLt
-      | SearchKnowledge1DollarLte
-      | SearchKnowledge1DollarIn
-      | SearchKnowledge1DollarNin
-      | SearchKnowledge1DollarExists;
+      | SearchKnowledge1Gte
+      | SearchKnowledge1Lt
+      | SearchKnowledge1Lte
+      | SearchKnowledge1In
+      | SearchKnowledge1Nin
+      | SearchKnowledge1Exists;
   } | undefined;
   /**
    * Additional search options
@@ -412,2499 +388,2134 @@ export type SearchKnowledgeResponseBody = {
 };
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarExists$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarExists,
+export const SearchKnowledgeOrExists$inboundSchema: z.ZodType<
+  SearchKnowledgeOrExists,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $exists: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "$exists": "dollarExists",
-  });
+  exists: z.boolean(),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarOrDollarExists$Outbound = {
-  $exists: boolean;
+export type SearchKnowledgeOrExists$Outbound = {
+  exists: boolean;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarExists$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarExists$Outbound,
+export const SearchKnowledgeOrExists$outboundSchema: z.ZodType<
+  SearchKnowledgeOrExists$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarExists
+  SearchKnowledgeOrExists
 > = z.object({
-  dollarExists: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarExists: "$exists",
-  });
+  exists: z.boolean(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrDollarExists$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarExists$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarOrDollarExists$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarExists$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarOrDollarExists$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarExists$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarExists$Outbound;
+export namespace SearchKnowledgeOrExists$ {
+  /** @deprecated use `SearchKnowledgeOrExists$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrExists$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrExists$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrExists$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrExists$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrExists$Outbound;
 }
 
-export function searchKnowledgeDollarOrDollarExistsToJSON(
-  searchKnowledgeDollarOrDollarExists: SearchKnowledgeDollarOrDollarExists,
+export function searchKnowledgeOrExistsToJSON(
+  searchKnowledgeOrExists: SearchKnowledgeOrExists,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrDollarExists$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarExists,
-    ),
+    SearchKnowledgeOrExists$outboundSchema.parse(searchKnowledgeOrExists),
   );
 }
 
-export function searchKnowledgeDollarOrDollarExistsFromJSON(
+export function searchKnowledgeOrExistsFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarExists, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeOrExists, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarOrDollarExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarExists' from JSON`,
+    (x) => SearchKnowledgeOrExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrExists' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarNin$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarNin,
+export const SearchKnowledgeOrKnowledgeNin$inboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeNin,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledgeDollarOrKnowledgeDollarNin$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeNin$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarNin$outboundSchema:
-  z.ZodType<
-    SearchKnowledgeDollarOrKnowledgeDollarNin$Outbound,
-    z.ZodTypeDef,
-    SearchKnowledgeDollarOrKnowledgeDollarNin
-  > = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarOrKnowledgeDollarNin$ {
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarNin$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarNin$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrKnowledgeDollarNin$Outbound;
-}
-
-export function searchKnowledgeDollarOrKnowledgeDollarNinToJSON(
-  searchKnowledgeDollarOrKnowledgeDollarNin:
-    SearchKnowledgeDollarOrKnowledgeDollarNin,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarOrKnowledgeDollarNin$outboundSchema.parse(
-      searchKnowledgeDollarOrKnowledgeDollarNin,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarOrKnowledgeDollarNinFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarOrKnowledgeDollarNin,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      SearchKnowledgeDollarOrKnowledgeDollarNin$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarOrKnowledgeDollarNin' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarNin$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarNin,
+export const SearchKnowledgeOrKnowledgeNin$outboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeNin$Outbound,
   z.ZodTypeDef,
-  unknown
-> = z.object({
-  $nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    "$nin": "dollarNin",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarOrDollarNin$Outbound = {
-  $nin: Array<string | number | boolean>;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarNin$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarNin$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarNin
-> = z.object({
-  dollarNin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    dollarNin: "$nin",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarOrDollarNin$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarNin$Outbound;
-}
-
-export function searchKnowledgeDollarOrDollarNinToJSON(
-  searchKnowledgeDollarOrDollarNin: SearchKnowledgeDollarOrDollarNin,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarOrDollarNin$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarNin,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarOrDollarNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarOrDollarNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarNin' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarIn$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/** @internal */
-export type SearchKnowledgeDollarOrKnowledgeDollarIn$Outbound =
-  | string
-  | number
-  | boolean;
-
-/** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarIn$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarIn$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarOrKnowledgeDollarIn
+  SearchKnowledgeOrKnowledgeNin
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrKnowledgeDollarIn$ {
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarIn$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarIn$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrKnowledgeDollarIn$Outbound;
+export namespace SearchKnowledgeOrKnowledgeNin$ {
+  /** @deprecated use `SearchKnowledgeOrKnowledgeNin$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrKnowledgeNin$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeNin$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrKnowledgeNin$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeNin$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrKnowledgeNin$Outbound;
 }
 
-export function searchKnowledgeDollarOrKnowledgeDollarInToJSON(
-  searchKnowledgeDollarOrKnowledgeDollarIn:
-    SearchKnowledgeDollarOrKnowledgeDollarIn,
+export function searchKnowledgeOrKnowledgeNinToJSON(
+  searchKnowledgeOrKnowledgeNin: SearchKnowledgeOrKnowledgeNin,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrKnowledgeDollarIn$outboundSchema.parse(
-      searchKnowledgeDollarOrKnowledgeDollarIn,
+    SearchKnowledgeOrKnowledgeNin$outboundSchema.parse(
+      searchKnowledgeOrKnowledgeNin,
     ),
   );
 }
 
-export function searchKnowledgeDollarOrKnowledgeDollarInFromJSON(
+export function searchKnowledgeOrKnowledgeNinFromJSON(
   jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarOrKnowledgeDollarIn,
-  SDKValidationError
-> {
+): SafeParseResult<SearchKnowledgeOrKnowledgeNin, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarOrKnowledgeDollarIn$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarOrKnowledgeDollarIn' from JSON`,
+    (x) => SearchKnowledgeOrKnowledgeNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrKnowledgeNin' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarIn$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarIn,
+export const SearchKnowledgeOrNin$inboundSchema: z.ZodType<
+  SearchKnowledgeOrNin,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    "$in": "dollarIn",
-  });
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarOrDollarIn$Outbound = {
-  $in: Array<string | number | boolean>;
+export type SearchKnowledgeOrNin$Outbound = {
+  nin: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarIn$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarIn$Outbound,
+export const SearchKnowledgeOrNin$outboundSchema: z.ZodType<
+  SearchKnowledgeOrNin$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarIn
+  SearchKnowledgeOrNin
 > = z.object({
-  dollarIn: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    dollarIn: "$in",
-  });
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrDollarIn$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarIn$Outbound;
+export namespace SearchKnowledgeOrNin$ {
+  /** @deprecated use `SearchKnowledgeOrNin$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrNin$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrNin$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrNin$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrNin$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrNin$Outbound;
 }
 
-export function searchKnowledgeDollarOrDollarInToJSON(
-  searchKnowledgeDollarOrDollarIn: SearchKnowledgeDollarOrDollarIn,
+export function searchKnowledgeOrNinToJSON(
+  searchKnowledgeOrNin: SearchKnowledgeOrNin,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrDollarIn$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarIn,
-    ),
+    SearchKnowledgeOrNin$outboundSchema.parse(searchKnowledgeOrNin),
   );
 }
 
-export function searchKnowledgeDollarOrDollarInFromJSON(
+export function searchKnowledgeOrNinFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarIn, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeOrNin, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeDollarOrDollarIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarIn' from JSON`,
+    (x) => SearchKnowledgeOrNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrNin' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarLte$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarLte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $lte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$lte": "dollarLte",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarOrDollarLte$Outbound = {
-  $lte: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarLte$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarLte$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarLte
-> = z.object({
-  dollarLte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarLte: "$lte",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarOrDollarLte$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarLte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarLte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarLte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarLte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarLte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarLte$Outbound;
-}
-
-export function searchKnowledgeDollarOrDollarLteToJSON(
-  searchKnowledgeDollarOrDollarLte: SearchKnowledgeDollarOrDollarLte,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarOrDollarLte$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarLte,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarOrDollarLteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarOrDollarLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarLte' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarLt$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarLt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $lt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$lt": "dollarLt",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarOrDollarLt$Outbound = {
-  $lt: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarLt$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarLt$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarLt
-> = z.object({
-  dollarLt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarLt: "$lt",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarOrDollarLt$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarLt$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarLt$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarLt$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarLt$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarLt$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarLt$Outbound;
-}
-
-export function searchKnowledgeDollarOrDollarLtToJSON(
-  searchKnowledgeDollarOrDollarLt: SearchKnowledgeDollarOrDollarLt,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarOrDollarLt$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarLt,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarOrDollarLtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarOrDollarLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarLt' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarGte$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $gte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$gte": "dollarGte",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarOrDollarGte$Outbound = {
-  $gte: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarOrDollarGte$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarGte$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarGte
-> = z.object({
-  dollarGte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarGte: "$gte",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarOrDollarGte$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarGte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarGte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarGte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarGte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarGte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarGte$Outbound;
-}
-
-export function searchKnowledgeDollarOrDollarGteToJSON(
-  searchKnowledgeDollarOrDollarGte: SearchKnowledgeDollarOrDollarGte,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarOrDollarGte$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarGte,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarOrDollarGteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarOrDollarGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarGte' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarOr3$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOr3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $gt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$gt": "dollarGt",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarOr3$Outbound = {
-  $gt: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarOr3$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOr3$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarOr3
-> = z.object({
-  dollarGt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarGt: "$gt",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarOr3$ {
-  /** @deprecated use `SearchKnowledgeDollarOr3$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOr3$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOr3$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOr3$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOr3$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOr3$Outbound;
-}
-
-export function searchKnowledgeDollarOr3ToJSON(
-  searchKnowledgeDollarOr3: SearchKnowledgeDollarOr3,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarOr3$outboundSchema.parse(searchKnowledgeDollarOr3),
-  );
-}
-
-export function searchKnowledgeDollarOr3FromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOr3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarOr3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOr3' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarNe$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarNe,
+export const SearchKnowledgeOrKnowledgeIn$inboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeIn,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledgeDollarOrKnowledgeDollarNe$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeIn$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarNe$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarNe$Outbound,
+export const SearchKnowledgeOrKnowledgeIn$outboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeIn$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarOrKnowledgeDollarNe
+  SearchKnowledgeOrKnowledgeIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrKnowledgeDollarNe$ {
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarNe$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarNe$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrKnowledgeDollarNe$Outbound;
+export namespace SearchKnowledgeOrKnowledgeIn$ {
+  /** @deprecated use `SearchKnowledgeOrKnowledgeIn$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrKnowledgeIn$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeIn$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrKnowledgeIn$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeIn$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrKnowledgeIn$Outbound;
 }
 
-export function searchKnowledgeDollarOrKnowledgeDollarNeToJSON(
-  searchKnowledgeDollarOrKnowledgeDollarNe:
-    SearchKnowledgeDollarOrKnowledgeDollarNe,
+export function searchKnowledgeOrKnowledgeInToJSON(
+  searchKnowledgeOrKnowledgeIn: SearchKnowledgeOrKnowledgeIn,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrKnowledgeDollarNe$outboundSchema.parse(
-      searchKnowledgeDollarOrKnowledgeDollarNe,
+    SearchKnowledgeOrKnowledgeIn$outboundSchema.parse(
+      searchKnowledgeOrKnowledgeIn,
     ),
   );
 }
 
-export function searchKnowledgeDollarOrKnowledgeDollarNeFromJSON(
+export function searchKnowledgeOrKnowledgeInFromJSON(
   jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarOrKnowledgeDollarNe,
-  SDKValidationError
-> {
+): SafeParseResult<SearchKnowledgeOrKnowledgeIn, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarOrKnowledgeDollarNe$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarOrKnowledgeDollarNe' from JSON`,
+    (x) => SearchKnowledgeOrKnowledgeIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrKnowledgeIn' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarNe$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarNe,
+export const SearchKnowledgeOrIn$inboundSchema: z.ZodType<
+  SearchKnowledgeOrIn,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $ne: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    "$ne": "dollarNe",
-  });
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarOrDollarNe$Outbound = {
-  $ne: string | number | boolean;
+export type SearchKnowledgeOrIn$Outbound = {
+  in: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarNe$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarNe$Outbound,
+export const SearchKnowledgeOrIn$outboundSchema: z.ZodType<
+  SearchKnowledgeOrIn$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarNe
+  SearchKnowledgeOrIn
 > = z.object({
-  dollarNe: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    dollarNe: "$ne",
-  });
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrDollarNe$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarNe$Outbound;
+export namespace SearchKnowledgeOrIn$ {
+  /** @deprecated use `SearchKnowledgeOrIn$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrIn$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrIn$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrIn$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrIn$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrIn$Outbound;
 }
 
-export function searchKnowledgeDollarOrDollarNeToJSON(
-  searchKnowledgeDollarOrDollarNe: SearchKnowledgeDollarOrDollarNe,
+export function searchKnowledgeOrInToJSON(
+  searchKnowledgeOrIn: SearchKnowledgeOrIn,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrDollarNe$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarNe,
-    ),
+    SearchKnowledgeOrIn$outboundSchema.parse(searchKnowledgeOrIn),
   );
 }
 
-export function searchKnowledgeDollarOrDollarNeFromJSON(
+export function searchKnowledgeOrInFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarNe, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeOrIn, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeDollarOrDollarNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarNe' from JSON`,
+    (x) => SearchKnowledgeOrIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrIn' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarEq$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarEq,
+export const SearchKnowledgeOrLte$inboundSchema: z.ZodType<
+  SearchKnowledgeOrLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lte: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeOrLte$Outbound = {
+  lte: number;
+};
+
+/** @internal */
+export const SearchKnowledgeOrLte$outboundSchema: z.ZodType<
+  SearchKnowledgeOrLte$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeOrLte
+> = z.object({
+  lte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeOrLte$ {
+  /** @deprecated use `SearchKnowledgeOrLte$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrLte$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrLte$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrLte$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrLte$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrLte$Outbound;
+}
+
+export function searchKnowledgeOrLteToJSON(
+  searchKnowledgeOrLte: SearchKnowledgeOrLte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeOrLte$outboundSchema.parse(searchKnowledgeOrLte),
+  );
+}
+
+export function searchKnowledgeOrLteFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeOrLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeOrLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeOrLt$inboundSchema: z.ZodType<
+  SearchKnowledgeOrLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lt: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeOrLt$Outbound = {
+  lt: number;
+};
+
+/** @internal */
+export const SearchKnowledgeOrLt$outboundSchema: z.ZodType<
+  SearchKnowledgeOrLt$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeOrLt
+> = z.object({
+  lt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeOrLt$ {
+  /** @deprecated use `SearchKnowledgeOrLt$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrLt$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrLt$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrLt$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrLt$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrLt$Outbound;
+}
+
+export function searchKnowledgeOrLtToJSON(
+  searchKnowledgeOrLt: SearchKnowledgeOrLt,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeOrLt$outboundSchema.parse(searchKnowledgeOrLt),
+  );
+}
+
+export function searchKnowledgeOrLtFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeOrLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeOrLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeOrGte$inboundSchema: z.ZodType<
+  SearchKnowledgeOrGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gte: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeOrGte$Outbound = {
+  gte: number;
+};
+
+/** @internal */
+export const SearchKnowledgeOrGte$outboundSchema: z.ZodType<
+  SearchKnowledgeOrGte$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeOrGte
+> = z.object({
+  gte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeOrGte$ {
+  /** @deprecated use `SearchKnowledgeOrGte$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrGte$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrGte$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrGte$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrGte$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrGte$Outbound;
+}
+
+export function searchKnowledgeOrGteToJSON(
+  searchKnowledgeOrGte: SearchKnowledgeOrGte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeOrGte$outboundSchema.parse(searchKnowledgeOrGte),
+  );
+}
+
+export function searchKnowledgeOrGteFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeOrGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeOrGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeOr3$inboundSchema: z.ZodType<
+  SearchKnowledgeOr3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gt: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeOr3$Outbound = {
+  gt: number;
+};
+
+/** @internal */
+export const SearchKnowledgeOr3$outboundSchema: z.ZodType<
+  SearchKnowledgeOr3$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeOr3
+> = z.object({
+  gt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeOr3$ {
+  /** @deprecated use `SearchKnowledgeOr3$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOr3$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOr3$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOr3$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOr3$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOr3$Outbound;
+}
+
+export function searchKnowledgeOr3ToJSON(
+  searchKnowledgeOr3: SearchKnowledgeOr3,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeOr3$outboundSchema.parse(searchKnowledgeOr3),
+  );
+}
+
+export function searchKnowledgeOr3FromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeOr3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeOr3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOr3' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeOrKnowledgeNe$inboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeNe,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledgeDollarOrKnowledgeDollarEq$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeOrKnowledgeNe$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledgeDollarOrKnowledgeDollarEq$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrKnowledgeDollarEq$Outbound,
+export const SearchKnowledgeOrKnowledgeNe$outboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeNe$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarOrKnowledgeDollarEq
+  SearchKnowledgeOrKnowledgeNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrKnowledgeDollarEq$ {
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarEq$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarEq$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarOrKnowledgeDollarEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrKnowledgeDollarEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrKnowledgeDollarEq$Outbound;
+export namespace SearchKnowledgeOrKnowledgeNe$ {
+  /** @deprecated use `SearchKnowledgeOrKnowledgeNe$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrKnowledgeNe$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeNe$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrKnowledgeNe$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeNe$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrKnowledgeNe$Outbound;
 }
 
-export function searchKnowledgeDollarOrKnowledgeDollarEqToJSON(
-  searchKnowledgeDollarOrKnowledgeDollarEq:
-    SearchKnowledgeDollarOrKnowledgeDollarEq,
+export function searchKnowledgeOrKnowledgeNeToJSON(
+  searchKnowledgeOrKnowledgeNe: SearchKnowledgeOrKnowledgeNe,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrKnowledgeDollarEq$outboundSchema.parse(
-      searchKnowledgeDollarOrKnowledgeDollarEq,
+    SearchKnowledgeOrKnowledgeNe$outboundSchema.parse(
+      searchKnowledgeOrKnowledgeNe,
     ),
   );
 }
 
-export function searchKnowledgeDollarOrKnowledgeDollarEqFromJSON(
+export function searchKnowledgeOrKnowledgeNeFromJSON(
   jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarOrKnowledgeDollarEq,
-  SDKValidationError
-> {
+): SafeParseResult<SearchKnowledgeOrKnowledgeNe, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarOrKnowledgeDollarEq$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarOrKnowledgeDollarEq' from JSON`,
+    (x) => SearchKnowledgeOrKnowledgeNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrKnowledgeNe' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarEq$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarEq,
+export const SearchKnowledgeOrNe$inboundSchema: z.ZodType<
+  SearchKnowledgeOrNe,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $eq: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    "$eq": "dollarEq",
-  });
+  ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarOrDollarEq$Outbound = {
-  $eq: string | number | boolean;
+export type SearchKnowledgeOrNe$Outbound = {
+  ne: string | number | boolean;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarOrDollarEq$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarOrDollarEq$Outbound,
+export const SearchKnowledgeOrNe$outboundSchema: z.ZodType<
+  SearchKnowledgeOrNe$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarOrDollarEq
+  SearchKnowledgeOrNe
 > = z.object({
-  dollarEq: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    dollarEq: "$eq",
-  });
+  ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarOrDollarEq$ {
-  /** @deprecated use `SearchKnowledgeDollarOrDollarEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarOrDollarEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarOrDollarEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarOrDollarEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarOrDollarEq$Outbound;
+export namespace SearchKnowledgeOrNe$ {
+  /** @deprecated use `SearchKnowledgeOrNe$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrNe$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrNe$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrNe$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrNe$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrNe$Outbound;
 }
 
-export function searchKnowledgeDollarOrDollarEqToJSON(
-  searchKnowledgeDollarOrDollarEq: SearchKnowledgeDollarOrDollarEq,
+export function searchKnowledgeOrNeToJSON(
+  searchKnowledgeOrNe: SearchKnowledgeOrNe,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarOrDollarEq$outboundSchema.parse(
-      searchKnowledgeDollarOrDollarEq,
-    ),
+    SearchKnowledgeOrNe$outboundSchema.parse(searchKnowledgeOrNe),
   );
 }
 
-export function searchKnowledgeDollarOrDollarEqFromJSON(
+export function searchKnowledgeOrNeFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarOrDollarEq, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeOrNe, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeDollarOrDollarEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarOrDollarEq' from JSON`,
+    (x) => SearchKnowledgeOrNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrNe' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeFilterDollarOr$inboundSchema: z.ZodType<
-  SearchKnowledgeFilterDollarOr,
+export const SearchKnowledgeOrKnowledgeEq$inboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeEq,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type SearchKnowledgeOrKnowledgeEq$Outbound = string | number | boolean;
+
+/** @internal */
+export const SearchKnowledgeOrKnowledgeEq$outboundSchema: z.ZodType<
+  SearchKnowledgeOrKnowledgeEq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeOrKnowledgeEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeOrKnowledgeEq$ {
+  /** @deprecated use `SearchKnowledgeOrKnowledgeEq$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrKnowledgeEq$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeEq$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrKnowledgeEq$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrKnowledgeEq$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrKnowledgeEq$Outbound;
+}
+
+export function searchKnowledgeOrKnowledgeEqToJSON(
+  searchKnowledgeOrKnowledgeEq: SearchKnowledgeOrKnowledgeEq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeOrKnowledgeEq$outboundSchema.parse(
+      searchKnowledgeOrKnowledgeEq,
+    ),
+  );
+}
+
+export function searchKnowledgeOrKnowledgeEqFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeOrKnowledgeEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeOrKnowledgeEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrKnowledgeEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeOrEq$inboundSchema: z.ZodType<
+  SearchKnowledgeOrEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type SearchKnowledgeOrEq$Outbound = {
+  eq: string | number | boolean;
+};
+
+/** @internal */
+export const SearchKnowledgeOrEq$outboundSchema: z.ZodType<
+  SearchKnowledgeOrEq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeOrEq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeOrEq$ {
+  /** @deprecated use `SearchKnowledgeOrEq$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeOrEq$inboundSchema;
+  /** @deprecated use `SearchKnowledgeOrEq$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeOrEq$outboundSchema;
+  /** @deprecated use `SearchKnowledgeOrEq$Outbound` instead. */
+  export type Outbound = SearchKnowledgeOrEq$Outbound;
+}
+
+export function searchKnowledgeOrEqToJSON(
+  searchKnowledgeOrEq: SearchKnowledgeOrEq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeOrEq$outboundSchema.parse(searchKnowledgeOrEq),
+  );
+}
+
+export function searchKnowledgeOrEqFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeOrEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeOrEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeOrEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeFilterByOr$inboundSchema: z.ZodType<
+  SearchKnowledgeFilterByOr,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => SearchKnowledgeDollarOrDollarEq$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarNe$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOr3$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarGte$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarLt$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarLte$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarIn$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarNin$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarExists$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrEq$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrNe$inboundSchema),
+  z.lazy(() => SearchKnowledgeOr3$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrGte$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrLt$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrLte$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrIn$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrNin$inboundSchema),
+  z.lazy(() => SearchKnowledgeOrExists$inboundSchema),
 ]);
 
 /** @internal */
-export type SearchKnowledgeFilterDollarOr$Outbound =
-  | SearchKnowledgeDollarOrDollarEq$Outbound
-  | SearchKnowledgeDollarOrDollarNe$Outbound
-  | SearchKnowledgeDollarOr3$Outbound
-  | SearchKnowledgeDollarOrDollarGte$Outbound
-  | SearchKnowledgeDollarOrDollarLt$Outbound
-  | SearchKnowledgeDollarOrDollarLte$Outbound
-  | SearchKnowledgeDollarOrDollarIn$Outbound
-  | SearchKnowledgeDollarOrDollarNin$Outbound
-  | SearchKnowledgeDollarOrDollarExists$Outbound;
+export type SearchKnowledgeFilterByOr$Outbound =
+  | SearchKnowledgeOrEq$Outbound
+  | SearchKnowledgeOrNe$Outbound
+  | SearchKnowledgeOr3$Outbound
+  | SearchKnowledgeOrGte$Outbound
+  | SearchKnowledgeOrLt$Outbound
+  | SearchKnowledgeOrLte$Outbound
+  | SearchKnowledgeOrIn$Outbound
+  | SearchKnowledgeOrNin$Outbound
+  | SearchKnowledgeOrExists$Outbound;
 
 /** @internal */
-export const SearchKnowledgeFilterDollarOr$outboundSchema: z.ZodType<
-  SearchKnowledgeFilterDollarOr$Outbound,
+export const SearchKnowledgeFilterByOr$outboundSchema: z.ZodType<
+  SearchKnowledgeFilterByOr$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeFilterDollarOr
+  SearchKnowledgeFilterByOr
 > = z.union([
-  z.lazy(() => SearchKnowledgeDollarOrDollarEq$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarNe$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOr3$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarGte$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarLt$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarLte$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarIn$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarNin$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarOrDollarExists$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrEq$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrNe$outboundSchema),
+  z.lazy(() => SearchKnowledgeOr3$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrGte$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrLt$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrLte$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrIn$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrNin$outboundSchema),
+  z.lazy(() => SearchKnowledgeOrExists$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeFilterDollarOr$ {
-  /** @deprecated use `SearchKnowledgeFilterDollarOr$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeFilterDollarOr$inboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterDollarOr$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeFilterDollarOr$outboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterDollarOr$Outbound` instead. */
-  export type Outbound = SearchKnowledgeFilterDollarOr$Outbound;
+export namespace SearchKnowledgeFilterByOr$ {
+  /** @deprecated use `SearchKnowledgeFilterByOr$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeFilterByOr$inboundSchema;
+  /** @deprecated use `SearchKnowledgeFilterByOr$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeFilterByOr$outboundSchema;
+  /** @deprecated use `SearchKnowledgeFilterByOr$Outbound` instead. */
+  export type Outbound = SearchKnowledgeFilterByOr$Outbound;
 }
 
-export function searchKnowledgeFilterDollarOrToJSON(
-  searchKnowledgeFilterDollarOr: SearchKnowledgeFilterDollarOr,
+export function searchKnowledgeFilterByOrToJSON(
+  searchKnowledgeFilterByOr: SearchKnowledgeFilterByOr,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeFilterDollarOr$outboundSchema.parse(
-      searchKnowledgeFilterDollarOr,
-    ),
+    SearchKnowledgeFilterByOr$outboundSchema.parse(searchKnowledgeFilterByOr),
   );
 }
 
-export function searchKnowledgeFilterDollarOrFromJSON(
+export function searchKnowledgeFilterByOrFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeFilterDollarOr, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeFilterByOr, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeFilterDollarOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeFilterDollarOr' from JSON`,
+    (x) => SearchKnowledgeFilterByOr$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeFilterByOr' from JSON`,
   );
 }
 
 /** @internal */
-export const FilterDollarOr$inboundSchema: z.ZodType<
-  FilterDollarOr,
+export const FilterByOr$inboundSchema: z.ZodType<
+  FilterByOr,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $or: z.array(
+  or: z.array(
     z.record(z.union([
-      z.lazy(() => SearchKnowledgeDollarOrDollarEq$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrEq$inboundSchema),
       z.lazy(() =>
-        SearchKnowledgeDollarOrDollarNe$inboundSchema
+        SearchKnowledgeOrNe$inboundSchema
       ),
-      z.lazy(() => SearchKnowledgeDollarOr3$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarGte$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarLt$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarLte$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarIn$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarNin$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarExists$inboundSchema),
+      z.lazy(() => SearchKnowledgeOr3$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrGte$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrLt$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrLte$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrIn$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrNin$inboundSchema),
+      z.lazy(() => SearchKnowledgeOrExists$inboundSchema),
     ])),
   ),
-}).transform((v) => {
-  return remap$(v, {
-    "$or": "dollarOr",
-  });
 });
 
 /** @internal */
-export type FilterDollarOr$Outbound = {
-  $or: Array<
+export type FilterByOr$Outbound = {
+  or: Array<
     {
       [k: string]:
-        | SearchKnowledgeDollarOrDollarEq$Outbound
-        | SearchKnowledgeDollarOrDollarNe$Outbound
-        | SearchKnowledgeDollarOr3$Outbound
-        | SearchKnowledgeDollarOrDollarGte$Outbound
-        | SearchKnowledgeDollarOrDollarLt$Outbound
-        | SearchKnowledgeDollarOrDollarLte$Outbound
-        | SearchKnowledgeDollarOrDollarIn$Outbound
-        | SearchKnowledgeDollarOrDollarNin$Outbound
-        | SearchKnowledgeDollarOrDollarExists$Outbound;
+        | SearchKnowledgeOrEq$Outbound
+        | SearchKnowledgeOrNe$Outbound
+        | SearchKnowledgeOr3$Outbound
+        | SearchKnowledgeOrGte$Outbound
+        | SearchKnowledgeOrLt$Outbound
+        | SearchKnowledgeOrLte$Outbound
+        | SearchKnowledgeOrIn$Outbound
+        | SearchKnowledgeOrNin$Outbound
+        | SearchKnowledgeOrExists$Outbound;
     }
   >;
 };
 
 /** @internal */
-export const FilterDollarOr$outboundSchema: z.ZodType<
-  FilterDollarOr$Outbound,
+export const FilterByOr$outboundSchema: z.ZodType<
+  FilterByOr$Outbound,
   z.ZodTypeDef,
-  FilterDollarOr
+  FilterByOr
 > = z.object({
-  dollarOr: z.array(
+  or: z.array(
     z.record(z.union([
-      z.lazy(() => SearchKnowledgeDollarOrDollarEq$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrEq$outboundSchema),
       z.lazy(() =>
-        SearchKnowledgeDollarOrDollarNe$outboundSchema
+        SearchKnowledgeOrNe$outboundSchema
       ),
-      z.lazy(() => SearchKnowledgeDollarOr3$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarGte$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarLt$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarLte$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarIn$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarNin$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarOrDollarExists$outboundSchema),
+      z.lazy(() => SearchKnowledgeOr3$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrGte$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrLt$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrLte$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrIn$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrNin$outboundSchema),
+      z.lazy(() => SearchKnowledgeOrExists$outboundSchema),
     ])),
   ),
-}).transform((v) => {
-  return remap$(v, {
-    dollarOr: "$or",
-  });
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FilterDollarOr$ {
-  /** @deprecated use `FilterDollarOr$inboundSchema` instead. */
-  export const inboundSchema = FilterDollarOr$inboundSchema;
-  /** @deprecated use `FilterDollarOr$outboundSchema` instead. */
-  export const outboundSchema = FilterDollarOr$outboundSchema;
-  /** @deprecated use `FilterDollarOr$Outbound` instead. */
-  export type Outbound = FilterDollarOr$Outbound;
+export namespace FilterByOr$ {
+  /** @deprecated use `FilterByOr$inboundSchema` instead. */
+  export const inboundSchema = FilterByOr$inboundSchema;
+  /** @deprecated use `FilterByOr$outboundSchema` instead. */
+  export const outboundSchema = FilterByOr$outboundSchema;
+  /** @deprecated use `FilterByOr$Outbound` instead. */
+  export type Outbound = FilterByOr$Outbound;
 }
 
-export function filterDollarOrToJSON(filterDollarOr: FilterDollarOr): string {
-  return JSON.stringify(FilterDollarOr$outboundSchema.parse(filterDollarOr));
+export function filterByOrToJSON(filterByOr: FilterByOr): string {
+  return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
 }
 
-export function filterDollarOrFromJSON(
+export function filterByOrFromJSON(
   jsonString: string,
-): SafeParseResult<FilterDollarOr, SDKValidationError> {
+): SafeParseResult<FilterByOr, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FilterDollarOr$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilterDollarOr' from JSON`,
+    (x) => FilterByOr$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilterByOr' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarExists$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarExists,
+export const SearchKnowledgeAndExists$inboundSchema: z.ZodType<
+  SearchKnowledgeAndExists,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $exists: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "$exists": "dollarExists",
-  });
+  exists: z.boolean(),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarAndDollarExists$Outbound = {
-  $exists: boolean;
+export type SearchKnowledgeAndExists$Outbound = {
+  exists: boolean;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarExists$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarExists$Outbound,
+export const SearchKnowledgeAndExists$outboundSchema: z.ZodType<
+  SearchKnowledgeAndExists$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarExists
+  SearchKnowledgeAndExists
 > = z.object({
-  dollarExists: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarExists: "$exists",
-  });
+  exists: z.boolean(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndDollarExists$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarExists$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarAndDollarExists$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarExists$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndDollarExists$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarExists$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarExists$Outbound;
+export namespace SearchKnowledgeAndExists$ {
+  /** @deprecated use `SearchKnowledgeAndExists$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndExists$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndExists$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndExists$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndExists$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndExists$Outbound;
 }
 
-export function searchKnowledgeDollarAndDollarExistsToJSON(
-  searchKnowledgeDollarAndDollarExists: SearchKnowledgeDollarAndDollarExists,
+export function searchKnowledgeAndExistsToJSON(
+  searchKnowledgeAndExists: SearchKnowledgeAndExists,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndDollarExists$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarExists,
-    ),
+    SearchKnowledgeAndExists$outboundSchema.parse(searchKnowledgeAndExists),
   );
 }
 
-export function searchKnowledgeDollarAndDollarExistsFromJSON(
+export function searchKnowledgeAndExistsFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarExists, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeAndExists, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarAndDollarExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarExists' from JSON`,
+    (x) => SearchKnowledgeAndExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndExists' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarNin$inboundSchema:
-  z.ZodType<SearchKnowledgeDollarAndKnowledgeDollarNin, z.ZodTypeDef, unknown> =
-    z.union([z.string(), z.number(), z.boolean()]);
-
-/** @internal */
-export type SearchKnowledgeDollarAndKnowledgeDollarNin$Outbound =
-  | string
-  | number
-  | boolean;
-
-/** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarNin$outboundSchema:
-  z.ZodType<
-    SearchKnowledgeDollarAndKnowledgeDollarNin$Outbound,
-    z.ZodTypeDef,
-    SearchKnowledgeDollarAndKnowledgeDollarNin
-  > = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarAndKnowledgeDollarNin$ {
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarNin$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarNin$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndKnowledgeDollarNin$Outbound;
-}
-
-export function searchKnowledgeDollarAndKnowledgeDollarNinToJSON(
-  searchKnowledgeDollarAndKnowledgeDollarNin:
-    SearchKnowledgeDollarAndKnowledgeDollarNin,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarAndKnowledgeDollarNin$outboundSchema.parse(
-      searchKnowledgeDollarAndKnowledgeDollarNin,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarAndKnowledgeDollarNinFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarAndKnowledgeDollarNin,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      SearchKnowledgeDollarAndKnowledgeDollarNin$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarAndKnowledgeDollarNin' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarNin$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarNin,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    "$nin": "dollarNin",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarAndDollarNin$Outbound = {
-  $nin: Array<string | number | boolean>;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarNin$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarNin$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarNin
-> = z.object({
-  dollarNin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    dollarNin: "$nin",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarAndDollarNin$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarNin$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarNin$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndDollarNin$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarNin$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarNin$Outbound;
-}
-
-export function searchKnowledgeDollarAndDollarNinToJSON(
-  searchKnowledgeDollarAndDollarNin: SearchKnowledgeDollarAndDollarNin,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarAndDollarNin$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarNin,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarAndDollarNinFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarNin, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarAndDollarNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarNin' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarIn$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndKnowledgeDollarIn,
+export const SearchKnowledgeAndKnowledgeNin$inboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeNin,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledgeDollarAndKnowledgeDollarIn$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeNin$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarIn$outboundSchema:
-  z.ZodType<
-    SearchKnowledgeDollarAndKnowledgeDollarIn$Outbound,
-    z.ZodTypeDef,
-    SearchKnowledgeDollarAndKnowledgeDollarIn
-  > = z.union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeAndKnowledgeNin$outboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeNin$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndKnowledgeNin
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndKnowledgeDollarIn$ {
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarIn$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarIn$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndKnowledgeDollarIn$Outbound;
+export namespace SearchKnowledgeAndKnowledgeNin$ {
+  /** @deprecated use `SearchKnowledgeAndKnowledgeNin$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndKnowledgeNin$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeNin$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndKnowledgeNin$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeNin$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndKnowledgeNin$Outbound;
 }
 
-export function searchKnowledgeDollarAndKnowledgeDollarInToJSON(
-  searchKnowledgeDollarAndKnowledgeDollarIn:
-    SearchKnowledgeDollarAndKnowledgeDollarIn,
+export function searchKnowledgeAndKnowledgeNinToJSON(
+  searchKnowledgeAndKnowledgeNin: SearchKnowledgeAndKnowledgeNin,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndKnowledgeDollarIn$outboundSchema.parse(
-      searchKnowledgeDollarAndKnowledgeDollarIn,
+    SearchKnowledgeAndKnowledgeNin$outboundSchema.parse(
+      searchKnowledgeAndKnowledgeNin,
     ),
   );
 }
 
-export function searchKnowledgeDollarAndKnowledgeDollarInFromJSON(
+export function searchKnowledgeAndKnowledgeNinFromJSON(
   jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarAndKnowledgeDollarIn,
-  SDKValidationError
-> {
+): SafeParseResult<SearchKnowledgeAndKnowledgeNin, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarAndKnowledgeDollarIn$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarAndKnowledgeDollarIn' from JSON`,
+    (x) => SearchKnowledgeAndKnowledgeNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndKnowledgeNin' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarIn$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarIn,
+export const SearchKnowledgeAndNin$inboundSchema: z.ZodType<
+  SearchKnowledgeAndNin,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    "$in": "dollarIn",
-  });
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarAndDollarIn$Outbound = {
-  $in: Array<string | number | boolean>;
+export type SearchKnowledgeAndNin$Outbound = {
+  nin: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarIn$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarIn$Outbound,
+export const SearchKnowledgeAndNin$outboundSchema: z.ZodType<
+  SearchKnowledgeAndNin$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarIn
+  SearchKnowledgeAndNin
 > = z.object({
-  dollarIn: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    dollarIn: "$in",
-  });
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndDollarIn$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarIn$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarAndDollarIn$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarIn$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarIn$Outbound;
+export namespace SearchKnowledgeAndNin$ {
+  /** @deprecated use `SearchKnowledgeAndNin$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndNin$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndNin$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndNin$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndNin$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndNin$Outbound;
 }
 
-export function searchKnowledgeDollarAndDollarInToJSON(
-  searchKnowledgeDollarAndDollarIn: SearchKnowledgeDollarAndDollarIn,
+export function searchKnowledgeAndNinToJSON(
+  searchKnowledgeAndNin: SearchKnowledgeAndNin,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndDollarIn$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarIn,
-    ),
+    SearchKnowledgeAndNin$outboundSchema.parse(searchKnowledgeAndNin),
   );
 }
 
-export function searchKnowledgeDollarAndDollarInFromJSON(
+export function searchKnowledgeAndNinFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarIn, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeAndNin, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeDollarAndDollarIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarIn' from JSON`,
+    (x) => SearchKnowledgeAndNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndNin' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarLte$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarLte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $lte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$lte": "dollarLte",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarAndDollarLte$Outbound = {
-  $lte: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarLte$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarLte$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarLte
-> = z.object({
-  dollarLte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarLte: "$lte",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarAndDollarLte$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarLte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarLte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarLte$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndDollarLte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarLte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarLte$Outbound;
-}
-
-export function searchKnowledgeDollarAndDollarLteToJSON(
-  searchKnowledgeDollarAndDollarLte: SearchKnowledgeDollarAndDollarLte,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarAndDollarLte$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarLte,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarAndDollarLteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarLte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarAndDollarLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarLte' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarLt$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarLt,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $lt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$lt": "dollarLt",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarAndDollarLt$Outbound = {
-  $lt: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarLt$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarLt$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarLt
-> = z.object({
-  dollarLt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarLt: "$lt",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarAndDollarLt$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarLt$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarLt$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarLt$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarAndDollarLt$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarLt$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarLt$Outbound;
-}
-
-export function searchKnowledgeDollarAndDollarLtToJSON(
-  searchKnowledgeDollarAndDollarLt: SearchKnowledgeDollarAndDollarLt,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarAndDollarLt$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarLt,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarAndDollarLtFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarLt, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarAndDollarLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarLt' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarGte$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $gte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$gte": "dollarGte",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarAndDollarGte$Outbound = {
-  $gte: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarAndDollarGte$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarGte$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarGte
-> = z.object({
-  dollarGte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarGte: "$gte",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarAndDollarGte$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarGte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarGte$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarGte$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndDollarGte$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarGte$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarGte$Outbound;
-}
-
-export function searchKnowledgeDollarAndDollarGteToJSON(
-  searchKnowledgeDollarAndDollarGte: SearchKnowledgeDollarAndDollarGte,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarAndDollarGte$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarGte,
-    ),
-  );
-}
-
-export function searchKnowledgeDollarAndDollarGteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarAndDollarGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarGte' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarAnd3$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAnd3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $gt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$gt": "dollarGt",
-  });
-});
-
-/** @internal */
-export type SearchKnowledgeDollarAnd3$Outbound = {
-  $gt: number;
-};
-
-/** @internal */
-export const SearchKnowledgeDollarAnd3$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAnd3$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledgeDollarAnd3
-> = z.object({
-  dollarGt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarGt: "$gt",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledgeDollarAnd3$ {
-  /** @deprecated use `SearchKnowledgeDollarAnd3$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAnd3$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAnd3$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarAnd3$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAnd3$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAnd3$Outbound;
-}
-
-export function searchKnowledgeDollarAnd3ToJSON(
-  searchKnowledgeDollarAnd3: SearchKnowledgeDollarAnd3,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeDollarAnd3$outboundSchema.parse(searchKnowledgeDollarAnd3),
-  );
-}
-
-export function searchKnowledgeDollarAnd3FromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAnd3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledgeDollarAnd3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAnd3' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarNe$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndKnowledgeDollarNe,
+export const SearchKnowledgeAndKnowledgeIn$inboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeIn,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledgeDollarAndKnowledgeDollarNe$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeIn$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarNe$outboundSchema:
-  z.ZodType<
-    SearchKnowledgeDollarAndKnowledgeDollarNe$Outbound,
-    z.ZodTypeDef,
-    SearchKnowledgeDollarAndKnowledgeDollarNe
-  > = z.union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeAndKnowledgeIn$outboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeIn$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndKnowledgeIn
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndKnowledgeDollarNe$ {
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarNe$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarNe$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndKnowledgeDollarNe$Outbound;
+export namespace SearchKnowledgeAndKnowledgeIn$ {
+  /** @deprecated use `SearchKnowledgeAndKnowledgeIn$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndKnowledgeIn$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeIn$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndKnowledgeIn$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeIn$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndKnowledgeIn$Outbound;
 }
 
-export function searchKnowledgeDollarAndKnowledgeDollarNeToJSON(
-  searchKnowledgeDollarAndKnowledgeDollarNe:
-    SearchKnowledgeDollarAndKnowledgeDollarNe,
+export function searchKnowledgeAndKnowledgeInToJSON(
+  searchKnowledgeAndKnowledgeIn: SearchKnowledgeAndKnowledgeIn,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndKnowledgeDollarNe$outboundSchema.parse(
-      searchKnowledgeDollarAndKnowledgeDollarNe,
+    SearchKnowledgeAndKnowledgeIn$outboundSchema.parse(
+      searchKnowledgeAndKnowledgeIn,
     ),
   );
 }
 
-export function searchKnowledgeDollarAndKnowledgeDollarNeFromJSON(
+export function searchKnowledgeAndKnowledgeInFromJSON(
   jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarAndKnowledgeDollarNe,
-  SDKValidationError
-> {
+): SafeParseResult<SearchKnowledgeAndKnowledgeIn, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarAndKnowledgeDollarNe$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarAndKnowledgeDollarNe' from JSON`,
+    (x) => SearchKnowledgeAndKnowledgeIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndKnowledgeIn' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarNe$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarNe,
+export const SearchKnowledgeAndIn$inboundSchema: z.ZodType<
+  SearchKnowledgeAndIn,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $ne: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    "$ne": "dollarNe",
-  });
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarAndDollarNe$Outbound = {
-  $ne: string | number | boolean;
+export type SearchKnowledgeAndIn$Outbound = {
+  in: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarNe$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarNe$Outbound,
+export const SearchKnowledgeAndIn$outboundSchema: z.ZodType<
+  SearchKnowledgeAndIn$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarNe
+  SearchKnowledgeAndIn
 > = z.object({
-  dollarNe: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    dollarNe: "$ne",
-  });
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndDollarNe$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarNe$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarAndDollarNe$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarNe$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarNe$Outbound;
+export namespace SearchKnowledgeAndIn$ {
+  /** @deprecated use `SearchKnowledgeAndIn$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndIn$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndIn$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndIn$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndIn$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndIn$Outbound;
 }
 
-export function searchKnowledgeDollarAndDollarNeToJSON(
-  searchKnowledgeDollarAndDollarNe: SearchKnowledgeDollarAndDollarNe,
+export function searchKnowledgeAndInToJSON(
+  searchKnowledgeAndIn: SearchKnowledgeAndIn,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndDollarNe$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarNe,
-    ),
+    SearchKnowledgeAndIn$outboundSchema.parse(searchKnowledgeAndIn),
   );
 }
 
-export function searchKnowledgeDollarAndDollarNeFromJSON(
+export function searchKnowledgeAndInFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarNe, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeAndIn, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeDollarAndDollarNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarNe' from JSON`,
+    (x) => SearchKnowledgeAndIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndIn' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarEq$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndKnowledgeDollarEq,
+export const SearchKnowledgeAndLte$inboundSchema: z.ZodType<
+  SearchKnowledgeAndLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lte: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeAndLte$Outbound = {
+  lte: number;
+};
+
+/** @internal */
+export const SearchKnowledgeAndLte$outboundSchema: z.ZodType<
+  SearchKnowledgeAndLte$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndLte
+> = z.object({
+  lte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAndLte$ {
+  /** @deprecated use `SearchKnowledgeAndLte$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndLte$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndLte$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndLte$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndLte$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndLte$Outbound;
+}
+
+export function searchKnowledgeAndLteToJSON(
+  searchKnowledgeAndLte: SearchKnowledgeAndLte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAndLte$outboundSchema.parse(searchKnowledgeAndLte),
+  );
+}
+
+export function searchKnowledgeAndLteFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAndLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAndLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeAndLt$inboundSchema: z.ZodType<
+  SearchKnowledgeAndLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lt: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeAndLt$Outbound = {
+  lt: number;
+};
+
+/** @internal */
+export const SearchKnowledgeAndLt$outboundSchema: z.ZodType<
+  SearchKnowledgeAndLt$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndLt
+> = z.object({
+  lt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAndLt$ {
+  /** @deprecated use `SearchKnowledgeAndLt$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndLt$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndLt$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndLt$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndLt$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndLt$Outbound;
+}
+
+export function searchKnowledgeAndLtToJSON(
+  searchKnowledgeAndLt: SearchKnowledgeAndLt,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAndLt$outboundSchema.parse(searchKnowledgeAndLt),
+  );
+}
+
+export function searchKnowledgeAndLtFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAndLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAndLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeAndGte$inboundSchema: z.ZodType<
+  SearchKnowledgeAndGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gte: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeAndGte$Outbound = {
+  gte: number;
+};
+
+/** @internal */
+export const SearchKnowledgeAndGte$outboundSchema: z.ZodType<
+  SearchKnowledgeAndGte$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndGte
+> = z.object({
+  gte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAndGte$ {
+  /** @deprecated use `SearchKnowledgeAndGte$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndGte$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndGte$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndGte$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndGte$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndGte$Outbound;
+}
+
+export function searchKnowledgeAndGteToJSON(
+  searchKnowledgeAndGte: SearchKnowledgeAndGte,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAndGte$outboundSchema.parse(searchKnowledgeAndGte),
+  );
+}
+
+export function searchKnowledgeAndGteFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAndGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAndGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeAnd3$inboundSchema: z.ZodType<
+  SearchKnowledgeAnd3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gt: z.number(),
+});
+
+/** @internal */
+export type SearchKnowledgeAnd3$Outbound = {
+  gt: number;
+};
+
+/** @internal */
+export const SearchKnowledgeAnd3$outboundSchema: z.ZodType<
+  SearchKnowledgeAnd3$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAnd3
+> = z.object({
+  gt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAnd3$ {
+  /** @deprecated use `SearchKnowledgeAnd3$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAnd3$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAnd3$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAnd3$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAnd3$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAnd3$Outbound;
+}
+
+export function searchKnowledgeAnd3ToJSON(
+  searchKnowledgeAnd3: SearchKnowledgeAnd3,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAnd3$outboundSchema.parse(searchKnowledgeAnd3),
+  );
+}
+
+export function searchKnowledgeAnd3FromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAnd3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAnd3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAnd3' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeAndKnowledgeNe$inboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeNe,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledgeDollarAndKnowledgeDollarEq$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledgeAndKnowledgeNe$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledgeDollarAndKnowledgeDollarEq$outboundSchema:
-  z.ZodType<
-    SearchKnowledgeDollarAndKnowledgeDollarEq$Outbound,
-    z.ZodTypeDef,
-    SearchKnowledgeDollarAndKnowledgeDollarEq
-  > = z.union([z.string(), z.number(), z.boolean()]);
+export const SearchKnowledgeAndKnowledgeNe$outboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeNe$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndKnowledgeNe
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndKnowledgeDollarEq$ {
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarEq$inboundSchema` instead. */
-  export const inboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarEq$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledgeDollarAndKnowledgeDollarEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndKnowledgeDollarEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndKnowledgeDollarEq$Outbound;
+export namespace SearchKnowledgeAndKnowledgeNe$ {
+  /** @deprecated use `SearchKnowledgeAndKnowledgeNe$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndKnowledgeNe$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeNe$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndKnowledgeNe$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeNe$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndKnowledgeNe$Outbound;
 }
 
-export function searchKnowledgeDollarAndKnowledgeDollarEqToJSON(
-  searchKnowledgeDollarAndKnowledgeDollarEq:
-    SearchKnowledgeDollarAndKnowledgeDollarEq,
+export function searchKnowledgeAndKnowledgeNeToJSON(
+  searchKnowledgeAndKnowledgeNe: SearchKnowledgeAndKnowledgeNe,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndKnowledgeDollarEq$outboundSchema.parse(
-      searchKnowledgeDollarAndKnowledgeDollarEq,
+    SearchKnowledgeAndKnowledgeNe$outboundSchema.parse(
+      searchKnowledgeAndKnowledgeNe,
     ),
   );
 }
 
-export function searchKnowledgeDollarAndKnowledgeDollarEqFromJSON(
+export function searchKnowledgeAndKnowledgeNeFromJSON(
   jsonString: string,
-): SafeParseResult<
-  SearchKnowledgeDollarAndKnowledgeDollarEq,
-  SDKValidationError
-> {
+): SafeParseResult<SearchKnowledgeAndKnowledgeNe, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledgeDollarAndKnowledgeDollarEq$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'SearchKnowledgeDollarAndKnowledgeDollarEq' from JSON`,
+    (x) => SearchKnowledgeAndKnowledgeNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndKnowledgeNe' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarEq$inboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarEq,
+export const SearchKnowledgeAndNe$inboundSchema: z.ZodType<
+  SearchKnowledgeAndNe,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $eq: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    "$eq": "dollarEq",
-  });
+  ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /** @internal */
-export type SearchKnowledgeDollarAndDollarEq$Outbound = {
-  $eq: string | number | boolean;
+export type SearchKnowledgeAndNe$Outbound = {
+  ne: string | number | boolean;
 };
 
 /** @internal */
-export const SearchKnowledgeDollarAndDollarEq$outboundSchema: z.ZodType<
-  SearchKnowledgeDollarAndDollarEq$Outbound,
+export const SearchKnowledgeAndNe$outboundSchema: z.ZodType<
+  SearchKnowledgeAndNe$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeDollarAndDollarEq
+  SearchKnowledgeAndNe
 > = z.object({
-  dollarEq: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    dollarEq: "$eq",
-  });
+  ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeDollarAndDollarEq$ {
-  /** @deprecated use `SearchKnowledgeDollarAndDollarEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeDollarAndDollarEq$inboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeDollarAndDollarEq$outboundSchema;
-  /** @deprecated use `SearchKnowledgeDollarAndDollarEq$Outbound` instead. */
-  export type Outbound = SearchKnowledgeDollarAndDollarEq$Outbound;
+export namespace SearchKnowledgeAndNe$ {
+  /** @deprecated use `SearchKnowledgeAndNe$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndNe$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndNe$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndNe$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndNe$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndNe$Outbound;
 }
 
-export function searchKnowledgeDollarAndDollarEqToJSON(
-  searchKnowledgeDollarAndDollarEq: SearchKnowledgeDollarAndDollarEq,
+export function searchKnowledgeAndNeToJSON(
+  searchKnowledgeAndNe: SearchKnowledgeAndNe,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeDollarAndDollarEq$outboundSchema.parse(
-      searchKnowledgeDollarAndDollarEq,
-    ),
+    SearchKnowledgeAndNe$outboundSchema.parse(searchKnowledgeAndNe),
   );
 }
 
-export function searchKnowledgeDollarAndDollarEqFromJSON(
+export function searchKnowledgeAndNeFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeDollarAndDollarEq, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeAndNe, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeDollarAndDollarEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeDollarAndDollarEq' from JSON`,
+    (x) => SearchKnowledgeAndNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndNe' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeFilterDollarAnd$inboundSchema: z.ZodType<
-  SearchKnowledgeFilterDollarAnd,
+export const SearchKnowledgeAndKnowledgeEq$inboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeEq,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type SearchKnowledgeAndKnowledgeEq$Outbound = string | number | boolean;
+
+/** @internal */
+export const SearchKnowledgeAndKnowledgeEq$outboundSchema: z.ZodType<
+  SearchKnowledgeAndKnowledgeEq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndKnowledgeEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAndKnowledgeEq$ {
+  /** @deprecated use `SearchKnowledgeAndKnowledgeEq$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndKnowledgeEq$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeEq$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndKnowledgeEq$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndKnowledgeEq$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndKnowledgeEq$Outbound;
+}
+
+export function searchKnowledgeAndKnowledgeEqToJSON(
+  searchKnowledgeAndKnowledgeEq: SearchKnowledgeAndKnowledgeEq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAndKnowledgeEq$outboundSchema.parse(
+      searchKnowledgeAndKnowledgeEq,
+    ),
+  );
+}
+
+export function searchKnowledgeAndKnowledgeEqFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAndKnowledgeEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAndKnowledgeEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndKnowledgeEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeAndEq$inboundSchema: z.ZodType<
+  SearchKnowledgeAndEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type SearchKnowledgeAndEq$Outbound = {
+  eq: string | number | boolean;
+};
+
+/** @internal */
+export const SearchKnowledgeAndEq$outboundSchema: z.ZodType<
+  SearchKnowledgeAndEq$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAndEq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAndEq$ {
+  /** @deprecated use `SearchKnowledgeAndEq$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAndEq$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAndEq$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAndEq$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAndEq$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAndEq$Outbound;
+}
+
+export function searchKnowledgeAndEqToJSON(
+  searchKnowledgeAndEq: SearchKnowledgeAndEq,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAndEq$outboundSchema.parse(searchKnowledgeAndEq),
+  );
+}
+
+export function searchKnowledgeAndEqFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAndEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAndEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAndEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeFilterByAnd$inboundSchema: z.ZodType<
+  SearchKnowledgeFilterByAnd,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => SearchKnowledgeDollarAndDollarEq$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarNe$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAnd3$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarGte$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarLt$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarLte$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarIn$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarNin$inboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarExists$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndEq$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndNe$inboundSchema),
+  z.lazy(() => SearchKnowledgeAnd3$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndGte$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndLt$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndLte$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndIn$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndNin$inboundSchema),
+  z.lazy(() => SearchKnowledgeAndExists$inboundSchema),
 ]);
 
 /** @internal */
-export type SearchKnowledgeFilterDollarAnd$Outbound =
-  | SearchKnowledgeDollarAndDollarEq$Outbound
-  | SearchKnowledgeDollarAndDollarNe$Outbound
-  | SearchKnowledgeDollarAnd3$Outbound
-  | SearchKnowledgeDollarAndDollarGte$Outbound
-  | SearchKnowledgeDollarAndDollarLt$Outbound
-  | SearchKnowledgeDollarAndDollarLte$Outbound
-  | SearchKnowledgeDollarAndDollarIn$Outbound
-  | SearchKnowledgeDollarAndDollarNin$Outbound
-  | SearchKnowledgeDollarAndDollarExists$Outbound;
+export type SearchKnowledgeFilterByAnd$Outbound =
+  | SearchKnowledgeAndEq$Outbound
+  | SearchKnowledgeAndNe$Outbound
+  | SearchKnowledgeAnd3$Outbound
+  | SearchKnowledgeAndGte$Outbound
+  | SearchKnowledgeAndLt$Outbound
+  | SearchKnowledgeAndLte$Outbound
+  | SearchKnowledgeAndIn$Outbound
+  | SearchKnowledgeAndNin$Outbound
+  | SearchKnowledgeAndExists$Outbound;
 
 /** @internal */
-export const SearchKnowledgeFilterDollarAnd$outboundSchema: z.ZodType<
-  SearchKnowledgeFilterDollarAnd$Outbound,
+export const SearchKnowledgeFilterByAnd$outboundSchema: z.ZodType<
+  SearchKnowledgeFilterByAnd$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeFilterDollarAnd
+  SearchKnowledgeFilterByAnd
 > = z.union([
-  z.lazy(() => SearchKnowledgeDollarAndDollarEq$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarNe$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAnd3$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarGte$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarLt$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarLte$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarIn$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarNin$outboundSchema),
-  z.lazy(() => SearchKnowledgeDollarAndDollarExists$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndEq$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndNe$outboundSchema),
+  z.lazy(() => SearchKnowledgeAnd3$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndGte$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndLt$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndLte$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndIn$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndNin$outboundSchema),
+  z.lazy(() => SearchKnowledgeAndExists$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeFilterDollarAnd$ {
-  /** @deprecated use `SearchKnowledgeFilterDollarAnd$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeFilterDollarAnd$inboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterDollarAnd$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeFilterDollarAnd$outboundSchema;
-  /** @deprecated use `SearchKnowledgeFilterDollarAnd$Outbound` instead. */
-  export type Outbound = SearchKnowledgeFilterDollarAnd$Outbound;
+export namespace SearchKnowledgeFilterByAnd$ {
+  /** @deprecated use `SearchKnowledgeFilterByAnd$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeFilterByAnd$inboundSchema;
+  /** @deprecated use `SearchKnowledgeFilterByAnd$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeFilterByAnd$outboundSchema;
+  /** @deprecated use `SearchKnowledgeFilterByAnd$Outbound` instead. */
+  export type Outbound = SearchKnowledgeFilterByAnd$Outbound;
 }
 
-export function searchKnowledgeFilterDollarAndToJSON(
-  searchKnowledgeFilterDollarAnd: SearchKnowledgeFilterDollarAnd,
+export function searchKnowledgeFilterByAndToJSON(
+  searchKnowledgeFilterByAnd: SearchKnowledgeFilterByAnd,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeFilterDollarAnd$outboundSchema.parse(
-      searchKnowledgeFilterDollarAnd,
-    ),
+    SearchKnowledgeFilterByAnd$outboundSchema.parse(searchKnowledgeFilterByAnd),
   );
 }
 
-export function searchKnowledgeFilterDollarAndFromJSON(
+export function searchKnowledgeFilterByAndFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeFilterDollarAnd, SDKValidationError> {
+): SafeParseResult<SearchKnowledgeFilterByAnd, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeFilterDollarAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeFilterDollarAnd' from JSON`,
+    (x) => SearchKnowledgeFilterByAnd$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeFilterByAnd' from JSON`,
   );
 }
 
 /** @internal */
-export const FilterDollarAnd$inboundSchema: z.ZodType<
-  FilterDollarAnd,
+export const FilterByAnd$inboundSchema: z.ZodType<
+  FilterByAnd,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $and: z.array(
+  and: z.array(
     z.record(z.union([
-      z.lazy(() => SearchKnowledgeDollarAndDollarEq$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndEq$inboundSchema),
       z.lazy(() =>
-        SearchKnowledgeDollarAndDollarNe$inboundSchema
+        SearchKnowledgeAndNe$inboundSchema
       ),
-      z.lazy(() => SearchKnowledgeDollarAnd3$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarGte$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarLt$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarLte$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarIn$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarNin$inboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarExists$inboundSchema),
+      z.lazy(() => SearchKnowledgeAnd3$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndGte$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndLt$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndLte$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndIn$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndNin$inboundSchema),
+      z.lazy(() => SearchKnowledgeAndExists$inboundSchema),
     ])),
   ),
-}).transform((v) => {
-  return remap$(v, {
-    "$and": "dollarAnd",
-  });
 });
 
 /** @internal */
-export type FilterDollarAnd$Outbound = {
-  $and: Array<
+export type FilterByAnd$Outbound = {
+  and: Array<
     {
       [k: string]:
-        | SearchKnowledgeDollarAndDollarEq$Outbound
-        | SearchKnowledgeDollarAndDollarNe$Outbound
-        | SearchKnowledgeDollarAnd3$Outbound
-        | SearchKnowledgeDollarAndDollarGte$Outbound
-        | SearchKnowledgeDollarAndDollarLt$Outbound
-        | SearchKnowledgeDollarAndDollarLte$Outbound
-        | SearchKnowledgeDollarAndDollarIn$Outbound
-        | SearchKnowledgeDollarAndDollarNin$Outbound
-        | SearchKnowledgeDollarAndDollarExists$Outbound;
+        | SearchKnowledgeAndEq$Outbound
+        | SearchKnowledgeAndNe$Outbound
+        | SearchKnowledgeAnd3$Outbound
+        | SearchKnowledgeAndGte$Outbound
+        | SearchKnowledgeAndLt$Outbound
+        | SearchKnowledgeAndLte$Outbound
+        | SearchKnowledgeAndIn$Outbound
+        | SearchKnowledgeAndNin$Outbound
+        | SearchKnowledgeAndExists$Outbound;
     }
   >;
 };
 
 /** @internal */
-export const FilterDollarAnd$outboundSchema: z.ZodType<
-  FilterDollarAnd$Outbound,
+export const FilterByAnd$outboundSchema: z.ZodType<
+  FilterByAnd$Outbound,
   z.ZodTypeDef,
-  FilterDollarAnd
+  FilterByAnd
 > = z.object({
-  dollarAnd: z.array(
+  and: z.array(
     z.record(z.union([
-      z.lazy(() => SearchKnowledgeDollarAndDollarEq$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndEq$outboundSchema),
       z.lazy(() =>
-        SearchKnowledgeDollarAndDollarNe$outboundSchema
+        SearchKnowledgeAndNe$outboundSchema
       ),
-      z.lazy(() => SearchKnowledgeDollarAnd3$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarGte$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarLt$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarLte$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarIn$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarNin$outboundSchema),
-      z.lazy(() => SearchKnowledgeDollarAndDollarExists$outboundSchema),
+      z.lazy(() => SearchKnowledgeAnd3$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndGte$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndLt$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndLte$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndIn$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndNin$outboundSchema),
+      z.lazy(() => SearchKnowledgeAndExists$outboundSchema),
     ])),
   ),
-}).transform((v) => {
-  return remap$(v, {
-    dollarAnd: "$and",
-  });
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FilterDollarAnd$ {
-  /** @deprecated use `FilterDollarAnd$inboundSchema` instead. */
-  export const inboundSchema = FilterDollarAnd$inboundSchema;
-  /** @deprecated use `FilterDollarAnd$outboundSchema` instead. */
-  export const outboundSchema = FilterDollarAnd$outboundSchema;
-  /** @deprecated use `FilterDollarAnd$Outbound` instead. */
-  export type Outbound = FilterDollarAnd$Outbound;
+export namespace FilterByAnd$ {
+  /** @deprecated use `FilterByAnd$inboundSchema` instead. */
+  export const inboundSchema = FilterByAnd$inboundSchema;
+  /** @deprecated use `FilterByAnd$outboundSchema` instead. */
+  export const outboundSchema = FilterByAnd$outboundSchema;
+  /** @deprecated use `FilterByAnd$Outbound` instead. */
+  export type Outbound = FilterByAnd$Outbound;
 }
 
-export function filterDollarAndToJSON(
-  filterDollarAnd: FilterDollarAnd,
-): string {
-  return JSON.stringify(FilterDollarAnd$outboundSchema.parse(filterDollarAnd));
+export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
+  return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
 }
 
-export function filterDollarAndFromJSON(
+export function filterByAndFromJSON(
   jsonString: string,
-): SafeParseResult<FilterDollarAnd, SDKValidationError> {
+): SafeParseResult<FilterByAnd, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FilterDollarAnd$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilterDollarAnd' from JSON`,
+    (x) => FilterByAnd$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilterByAnd' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1DollarExists$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarExists,
+export const SearchKnowledge1Exists$inboundSchema: z.ZodType<
+  SearchKnowledge1Exists,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $exists: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "$exists": "dollarExists",
-  });
+  exists: z.boolean(),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarExists$Outbound = {
-  $exists: boolean;
+export type SearchKnowledge1Exists$Outbound = {
+  exists: boolean;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarExists$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarExists$Outbound,
+export const SearchKnowledge1Exists$outboundSchema: z.ZodType<
+  SearchKnowledge1Exists$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarExists
+  SearchKnowledge1Exists
 > = z.object({
-  dollarExists: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarExists: "$exists",
-  });
+  exists: z.boolean(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarExists$ {
-  /** @deprecated use `SearchKnowledge1DollarExists$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarExists$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarExists$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarExists$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarExists$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarExists$Outbound;
+export namespace SearchKnowledge1Exists$ {
+  /** @deprecated use `SearchKnowledge1Exists$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Exists$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Exists$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Exists$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Exists$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Exists$Outbound;
 }
 
-export function searchKnowledge1DollarExistsToJSON(
-  searchKnowledge1DollarExists: SearchKnowledge1DollarExists,
+export function searchKnowledge1ExistsToJSON(
+  searchKnowledge1Exists: SearchKnowledge1Exists,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarExists$outboundSchema.parse(
-      searchKnowledge1DollarExists,
+    SearchKnowledge1Exists$outboundSchema.parse(searchKnowledge1Exists),
+  );
+}
+
+export function searchKnowledge1ExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledge1Exists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledge1Exists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Exists' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledge1KnowledgeNin$inboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeNin,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type SearchKnowledge1KnowledgeNin$Outbound = string | number | boolean;
+
+/** @internal */
+export const SearchKnowledge1KnowledgeNin$outboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeNin$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledge1KnowledgeNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledge1KnowledgeNin$ {
+  /** @deprecated use `SearchKnowledge1KnowledgeNin$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1KnowledgeNin$inboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeNin$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1KnowledgeNin$outboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeNin$Outbound` instead. */
+  export type Outbound = SearchKnowledge1KnowledgeNin$Outbound;
+}
+
+export function searchKnowledge1KnowledgeNinToJSON(
+  searchKnowledge1KnowledgeNin: SearchKnowledge1KnowledgeNin,
+): string {
+  return JSON.stringify(
+    SearchKnowledge1KnowledgeNin$outboundSchema.parse(
+      searchKnowledge1KnowledgeNin,
     ),
   );
 }
 
-export function searchKnowledge1DollarExistsFromJSON(
+export function searchKnowledge1KnowledgeNinFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarExists, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1KnowledgeNin, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarExists$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarExists' from JSON`,
+    (x) => SearchKnowledge1KnowledgeNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1KnowledgeNin' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarNin$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarNin,
+export const SearchKnowledge1Nin$inboundSchema: z.ZodType<
+  SearchKnowledge1Nin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type SearchKnowledge1Nin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const SearchKnowledge1Nin$outboundSchema: z.ZodType<
+  SearchKnowledge1Nin$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledge1Nin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledge1Nin$ {
+  /** @deprecated use `SearchKnowledge1Nin$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Nin$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Nin$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Nin$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Nin$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Nin$Outbound;
+}
+
+export function searchKnowledge1NinToJSON(
+  searchKnowledge1Nin: SearchKnowledge1Nin,
+): string {
+  return JSON.stringify(
+    SearchKnowledge1Nin$outboundSchema.parse(searchKnowledge1Nin),
+  );
+}
+
+export function searchKnowledge1NinFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledge1Nin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledge1Nin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Nin' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledge1KnowledgeIn$inboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeIn,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledge1KnowledgeDollarNin$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledge1KnowledgeIn$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarNin$outboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarNin$Outbound,
+export const SearchKnowledge1KnowledgeIn$outboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeIn$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1KnowledgeDollarNin
+  SearchKnowledge1KnowledgeIn
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1KnowledgeDollarNin$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeDollarNin$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarNin$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledge1KnowledgeDollarNin$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarNin$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeDollarNin$Outbound;
+export namespace SearchKnowledge1KnowledgeIn$ {
+  /** @deprecated use `SearchKnowledge1KnowledgeIn$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1KnowledgeIn$inboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeIn$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1KnowledgeIn$outboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeIn$Outbound` instead. */
+  export type Outbound = SearchKnowledge1KnowledgeIn$Outbound;
 }
 
-export function searchKnowledge1KnowledgeDollarNinToJSON(
-  searchKnowledge1KnowledgeDollarNin: SearchKnowledge1KnowledgeDollarNin,
+export function searchKnowledge1KnowledgeInToJSON(
+  searchKnowledge1KnowledgeIn: SearchKnowledge1KnowledgeIn,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1KnowledgeDollarNin$outboundSchema.parse(
-      searchKnowledge1KnowledgeDollarNin,
+    SearchKnowledge1KnowledgeIn$outboundSchema.parse(
+      searchKnowledge1KnowledgeIn,
     ),
   );
 }
 
-export function searchKnowledge1KnowledgeDollarNinFromJSON(
+export function searchKnowledge1KnowledgeInFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeDollarNin, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1KnowledgeIn, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      SearchKnowledge1KnowledgeDollarNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeDollarNin' from JSON`,
+    (x) => SearchKnowledge1KnowledgeIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1KnowledgeIn' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1DollarNin$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarNin,
+export const SearchKnowledge1In$inboundSchema: z.ZodType<
+  SearchKnowledge1In,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    "$nin": "dollarNin",
-  });
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarNin$Outbound = {
-  $nin: Array<string | number | boolean>;
+export type SearchKnowledge1In$Outbound = {
+  in: Array<string | number | boolean>;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarNin$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarNin$Outbound,
+export const SearchKnowledge1In$outboundSchema: z.ZodType<
+  SearchKnowledge1In$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarNin
+  SearchKnowledge1In
 > = z.object({
-  dollarNin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    dollarNin: "$nin",
-  });
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarNin$ {
-  /** @deprecated use `SearchKnowledge1DollarNin$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarNin$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarNin$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarNin$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarNin$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarNin$Outbound;
+export namespace SearchKnowledge1In$ {
+  /** @deprecated use `SearchKnowledge1In$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1In$inboundSchema;
+  /** @deprecated use `SearchKnowledge1In$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1In$outboundSchema;
+  /** @deprecated use `SearchKnowledge1In$Outbound` instead. */
+  export type Outbound = SearchKnowledge1In$Outbound;
 }
 
-export function searchKnowledge1DollarNinToJSON(
-  searchKnowledge1DollarNin: SearchKnowledge1DollarNin,
+export function searchKnowledge1InToJSON(
+  searchKnowledge1In: SearchKnowledge1In,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarNin$outboundSchema.parse(searchKnowledge1DollarNin),
+    SearchKnowledge1In$outboundSchema.parse(searchKnowledge1In),
   );
 }
 
-export function searchKnowledge1DollarNinFromJSON(
+export function searchKnowledge1InFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarNin, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1In, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarNin$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarNin' from JSON`,
+    (x) => SearchKnowledge1In$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1In' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarIn$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarIn,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/** @internal */
-export type SearchKnowledge1KnowledgeDollarIn$Outbound =
-  | string
-  | number
-  | boolean;
-
-/** @internal */
-export const SearchKnowledge1KnowledgeDollarIn$outboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarIn$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledge1KnowledgeDollarIn
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1KnowledgeDollarIn$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeDollarIn$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarIn$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledge1KnowledgeDollarIn$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarIn$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeDollarIn$Outbound;
-}
-
-export function searchKnowledge1KnowledgeDollarInToJSON(
-  searchKnowledge1KnowledgeDollarIn: SearchKnowledge1KnowledgeDollarIn,
-): string {
-  return JSON.stringify(
-    SearchKnowledge1KnowledgeDollarIn$outboundSchema.parse(
-      searchKnowledge1KnowledgeDollarIn,
-    ),
-  );
-}
-
-export function searchKnowledge1KnowledgeDollarInFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeDollarIn, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1KnowledgeDollarIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeDollarIn' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledge1DollarIn$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarIn,
+export const SearchKnowledge1Lte$inboundSchema: z.ZodType<
+  SearchKnowledge1Lte,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    "$in": "dollarIn",
-  });
+  lte: z.number(),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarIn$Outbound = {
-  $in: Array<string | number | boolean>;
+export type SearchKnowledge1Lte$Outbound = {
+  lte: number;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarIn$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarIn$Outbound,
+export const SearchKnowledge1Lte$outboundSchema: z.ZodType<
+  SearchKnowledge1Lte$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarIn
+  SearchKnowledge1Lte
 > = z.object({
-  dollarIn: z.array(z.union([z.string(), z.number(), z.boolean()])),
-}).transform((v) => {
-  return remap$(v, {
-    dollarIn: "$in",
-  });
+  lte: z.number(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarIn$ {
-  /** @deprecated use `SearchKnowledge1DollarIn$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarIn$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarIn$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarIn$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarIn$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarIn$Outbound;
+export namespace SearchKnowledge1Lte$ {
+  /** @deprecated use `SearchKnowledge1Lte$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Lte$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Lte$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Lte$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Lte$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Lte$Outbound;
 }
 
-export function searchKnowledge1DollarInToJSON(
-  searchKnowledge1DollarIn: SearchKnowledge1DollarIn,
+export function searchKnowledge1LteToJSON(
+  searchKnowledge1Lte: SearchKnowledge1Lte,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarIn$outboundSchema.parse(searchKnowledge1DollarIn),
+    SearchKnowledge1Lte$outboundSchema.parse(searchKnowledge1Lte),
   );
 }
 
-export function searchKnowledge1DollarInFromJSON(
+export function searchKnowledge1LteFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarIn, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1Lte, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarIn$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarIn' from JSON`,
+    (x) => SearchKnowledge1Lte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Lte' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1DollarLte$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarLte,
+export const SearchKnowledge1Lt$inboundSchema: z.ZodType<
+  SearchKnowledge1Lt,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $lte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$lte": "dollarLte",
-  });
+  lt: z.number(),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarLte$Outbound = {
-  $lte: number;
+export type SearchKnowledge1Lt$Outbound = {
+  lt: number;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarLte$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarLte$Outbound,
+export const SearchKnowledge1Lt$outboundSchema: z.ZodType<
+  SearchKnowledge1Lt$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarLte
+  SearchKnowledge1Lt
 > = z.object({
-  dollarLte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarLte: "$lte",
-  });
+  lt: z.number(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarLte$ {
-  /** @deprecated use `SearchKnowledge1DollarLte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarLte$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarLte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarLte$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarLte$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarLte$Outbound;
+export namespace SearchKnowledge1Lt$ {
+  /** @deprecated use `SearchKnowledge1Lt$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Lt$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Lt$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Lt$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Lt$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Lt$Outbound;
 }
 
-export function searchKnowledge1DollarLteToJSON(
-  searchKnowledge1DollarLte: SearchKnowledge1DollarLte,
+export function searchKnowledge1LtToJSON(
+  searchKnowledge1Lt: SearchKnowledge1Lt,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarLte$outboundSchema.parse(searchKnowledge1DollarLte),
+    SearchKnowledge1Lt$outboundSchema.parse(searchKnowledge1Lt),
   );
 }
 
-export function searchKnowledge1DollarLteFromJSON(
+export function searchKnowledge1LtFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarLte, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1Lt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarLte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarLte' from JSON`,
+    (x) => SearchKnowledge1Lt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Lt' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1DollarLt$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarLt,
+export const SearchKnowledge1Gte$inboundSchema: z.ZodType<
+  SearchKnowledge1Gte,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $lt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$lt": "dollarLt",
-  });
+  gte: z.number(),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarLt$Outbound = {
-  $lt: number;
+export type SearchKnowledge1Gte$Outbound = {
+  gte: number;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarLt$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarLt$Outbound,
+export const SearchKnowledge1Gte$outboundSchema: z.ZodType<
+  SearchKnowledge1Gte$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarLt
+  SearchKnowledge1Gte
 > = z.object({
-  dollarLt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarLt: "$lt",
-  });
+  gte: z.number(),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarLt$ {
-  /** @deprecated use `SearchKnowledge1DollarLt$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarLt$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarLt$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarLt$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarLt$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarLt$Outbound;
+export namespace SearchKnowledge1Gte$ {
+  /** @deprecated use `SearchKnowledge1Gte$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Gte$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Gte$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Gte$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Gte$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Gte$Outbound;
 }
 
-export function searchKnowledge1DollarLtToJSON(
-  searchKnowledge1DollarLt: SearchKnowledge1DollarLt,
+export function searchKnowledge1GteToJSON(
+  searchKnowledge1Gte: SearchKnowledge1Gte,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarLt$outboundSchema.parse(searchKnowledge1DollarLt),
+    SearchKnowledge1Gte$outboundSchema.parse(searchKnowledge1Gte),
   );
 }
 
-export function searchKnowledge1DollarLtFromJSON(
+export function searchKnowledge1GteFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarLt, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1Gte, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarLt$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarLt' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchKnowledge1DollarGte$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarGte,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  $gte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$gte": "dollarGte",
-  });
-});
-
-/** @internal */
-export type SearchKnowledge1DollarGte$Outbound = {
-  $gte: number;
-};
-
-/** @internal */
-export const SearchKnowledge1DollarGte$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarGte$Outbound,
-  z.ZodTypeDef,
-  SearchKnowledge1DollarGte
-> = z.object({
-  dollarGte: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarGte: "$gte",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchKnowledge1DollarGte$ {
-  /** @deprecated use `SearchKnowledge1DollarGte$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarGte$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarGte$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarGte$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarGte$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarGte$Outbound;
-}
-
-export function searchKnowledge1DollarGteToJSON(
-  searchKnowledge1DollarGte: SearchKnowledge1DollarGte,
-): string {
-  return JSON.stringify(
-    SearchKnowledge1DollarGte$outboundSchema.parse(searchKnowledge1DollarGte),
-  );
-}
-
-export function searchKnowledge1DollarGteFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarGte, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchKnowledge1DollarGte$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarGte' from JSON`,
+    (x) => SearchKnowledge1Gte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Gte' from JSON`,
   );
 }
 
@@ -2914,16 +2525,12 @@ export const SearchKnowledge13$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $gt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "$gt": "dollarGt",
-  });
+  gt: z.number(),
 });
 
 /** @internal */
 export type SearchKnowledge13$Outbound = {
-  $gt: number;
+  gt: number;
 };
 
 /** @internal */
@@ -2932,11 +2539,7 @@ export const SearchKnowledge13$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchKnowledge13
 > = z.object({
-  dollarGt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    dollarGt: "$gt",
-  });
+  gt: z.number(),
 });
 
 /**
@@ -2971,360 +2574,339 @@ export function searchKnowledge13FromJSON(
 }
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarNe$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarNe,
+export const SearchKnowledge1KnowledgeNe$inboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeNe,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledge1KnowledgeDollarNe$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledge1KnowledgeNe$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarNe$outboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarNe$Outbound,
+export const SearchKnowledge1KnowledgeNe$outboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeNe$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1KnowledgeDollarNe
+  SearchKnowledge1KnowledgeNe
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1KnowledgeDollarNe$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeDollarNe$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarNe$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledge1KnowledgeDollarNe$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarNe$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeDollarNe$Outbound;
+export namespace SearchKnowledge1KnowledgeNe$ {
+  /** @deprecated use `SearchKnowledge1KnowledgeNe$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1KnowledgeNe$inboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeNe$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1KnowledgeNe$outboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeNe$Outbound` instead. */
+  export type Outbound = SearchKnowledge1KnowledgeNe$Outbound;
 }
 
-export function searchKnowledge1KnowledgeDollarNeToJSON(
-  searchKnowledge1KnowledgeDollarNe: SearchKnowledge1KnowledgeDollarNe,
+export function searchKnowledge1KnowledgeNeToJSON(
+  searchKnowledge1KnowledgeNe: SearchKnowledge1KnowledgeNe,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1KnowledgeDollarNe$outboundSchema.parse(
-      searchKnowledge1KnowledgeDollarNe,
+    SearchKnowledge1KnowledgeNe$outboundSchema.parse(
+      searchKnowledge1KnowledgeNe,
     ),
   );
 }
 
-export function searchKnowledge1KnowledgeDollarNeFromJSON(
+export function searchKnowledge1KnowledgeNeFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeDollarNe, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1KnowledgeNe, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1KnowledgeDollarNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeDollarNe' from JSON`,
+    (x) => SearchKnowledge1KnowledgeNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1KnowledgeNe' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1DollarNe$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarNe,
+export const SearchKnowledge1Ne$inboundSchema: z.ZodType<
+  SearchKnowledge1Ne,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $ne: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    "$ne": "dollarNe",
-  });
+  ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarNe$Outbound = {
-  $ne: string | number | boolean;
+export type SearchKnowledge1Ne$Outbound = {
+  ne: string | number | boolean;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarNe$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarNe$Outbound,
+export const SearchKnowledge1Ne$outboundSchema: z.ZodType<
+  SearchKnowledge1Ne$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarNe
+  SearchKnowledge1Ne
 > = z.object({
-  dollarNe: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    dollarNe: "$ne",
-  });
+  ne: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarNe$ {
-  /** @deprecated use `SearchKnowledge1DollarNe$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarNe$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarNe$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarNe$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarNe$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarNe$Outbound;
+export namespace SearchKnowledge1Ne$ {
+  /** @deprecated use `SearchKnowledge1Ne$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Ne$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Ne$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Ne$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Ne$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Ne$Outbound;
 }
 
-export function searchKnowledge1DollarNeToJSON(
-  searchKnowledge1DollarNe: SearchKnowledge1DollarNe,
+export function searchKnowledge1NeToJSON(
+  searchKnowledge1Ne: SearchKnowledge1Ne,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarNe$outboundSchema.parse(searchKnowledge1DollarNe),
+    SearchKnowledge1Ne$outboundSchema.parse(searchKnowledge1Ne),
   );
 }
 
-export function searchKnowledge1DollarNeFromJSON(
+export function searchKnowledge1NeFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarNe, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1Ne, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarNe$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarNe' from JSON`,
+    (x) => SearchKnowledge1Ne$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Ne' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarEq$inboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarEq,
+export const SearchKnowledge1KnowledgeEq$inboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeEq,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type SearchKnowledge1KnowledgeDollarEq$Outbound =
-  | string
-  | number
-  | boolean;
+export type SearchKnowledge1KnowledgeEq$Outbound = string | number | boolean;
 
 /** @internal */
-export const SearchKnowledge1KnowledgeDollarEq$outboundSchema: z.ZodType<
-  SearchKnowledge1KnowledgeDollarEq$Outbound,
+export const SearchKnowledge1KnowledgeEq$outboundSchema: z.ZodType<
+  SearchKnowledge1KnowledgeEq$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1KnowledgeDollarEq
+  SearchKnowledge1KnowledgeEq
 > = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1KnowledgeDollarEq$ {
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1KnowledgeDollarEq$inboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarEq$outboundSchema` instead. */
-  export const outboundSchema =
-    SearchKnowledge1KnowledgeDollarEq$outboundSchema;
-  /** @deprecated use `SearchKnowledge1KnowledgeDollarEq$Outbound` instead. */
-  export type Outbound = SearchKnowledge1KnowledgeDollarEq$Outbound;
+export namespace SearchKnowledge1KnowledgeEq$ {
+  /** @deprecated use `SearchKnowledge1KnowledgeEq$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1KnowledgeEq$inboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeEq$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1KnowledgeEq$outboundSchema;
+  /** @deprecated use `SearchKnowledge1KnowledgeEq$Outbound` instead. */
+  export type Outbound = SearchKnowledge1KnowledgeEq$Outbound;
 }
 
-export function searchKnowledge1KnowledgeDollarEqToJSON(
-  searchKnowledge1KnowledgeDollarEq: SearchKnowledge1KnowledgeDollarEq,
+export function searchKnowledge1KnowledgeEqToJSON(
+  searchKnowledge1KnowledgeEq: SearchKnowledge1KnowledgeEq,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1KnowledgeDollarEq$outboundSchema.parse(
-      searchKnowledge1KnowledgeDollarEq,
+    SearchKnowledge1KnowledgeEq$outboundSchema.parse(
+      searchKnowledge1KnowledgeEq,
     ),
   );
 }
 
-export function searchKnowledge1KnowledgeDollarEqFromJSON(
+export function searchKnowledge1KnowledgeEqFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1KnowledgeDollarEq, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1KnowledgeEq, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1KnowledgeDollarEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1KnowledgeDollarEq' from JSON`,
+    (x) => SearchKnowledge1KnowledgeEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1KnowledgeEq' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledge1DollarEq$inboundSchema: z.ZodType<
-  SearchKnowledge1DollarEq,
+export const SearchKnowledge1Eq$inboundSchema: z.ZodType<
+  SearchKnowledge1Eq,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  $eq: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    "$eq": "dollarEq",
-  });
+  eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /** @internal */
-export type SearchKnowledge1DollarEq$Outbound = {
-  $eq: string | number | boolean;
+export type SearchKnowledge1Eq$Outbound = {
+  eq: string | number | boolean;
 };
 
 /** @internal */
-export const SearchKnowledge1DollarEq$outboundSchema: z.ZodType<
-  SearchKnowledge1DollarEq$Outbound,
+export const SearchKnowledge1Eq$outboundSchema: z.ZodType<
+  SearchKnowledge1Eq$Outbound,
   z.ZodTypeDef,
-  SearchKnowledge1DollarEq
+  SearchKnowledge1Eq
 > = z.object({
-  dollarEq: z.union([z.string(), z.number(), z.boolean()]),
-}).transform((v) => {
-  return remap$(v, {
-    dollarEq: "$eq",
-  });
+  eq: z.union([z.string(), z.number(), z.boolean()]),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledge1DollarEq$ {
-  /** @deprecated use `SearchKnowledge1DollarEq$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledge1DollarEq$inboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarEq$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledge1DollarEq$outboundSchema;
-  /** @deprecated use `SearchKnowledge1DollarEq$Outbound` instead. */
-  export type Outbound = SearchKnowledge1DollarEq$Outbound;
+export namespace SearchKnowledge1Eq$ {
+  /** @deprecated use `SearchKnowledge1Eq$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledge1Eq$inboundSchema;
+  /** @deprecated use `SearchKnowledge1Eq$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledge1Eq$outboundSchema;
+  /** @deprecated use `SearchKnowledge1Eq$Outbound` instead. */
+  export type Outbound = SearchKnowledge1Eq$Outbound;
 }
 
-export function searchKnowledge1DollarEqToJSON(
-  searchKnowledge1DollarEq: SearchKnowledge1DollarEq,
+export function searchKnowledge1EqToJSON(
+  searchKnowledge1Eq: SearchKnowledge1Eq,
 ): string {
   return JSON.stringify(
-    SearchKnowledge1DollarEq$outboundSchema.parse(searchKnowledge1DollarEq),
+    SearchKnowledge1Eq$outboundSchema.parse(searchKnowledge1Eq),
   );
 }
 
-export function searchKnowledge1DollarEqFromJSON(
+export function searchKnowledge1EqFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledge1DollarEq, SDKValidationError> {
+): SafeParseResult<SearchKnowledge1Eq, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledge1DollarEq$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledge1DollarEq' from JSON`,
+    (x) => SearchKnowledge1Eq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledge1Eq' from JSON`,
   );
 }
 
 /** @internal */
-export const Filter1$inboundSchema: z.ZodType<Filter1, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => SearchKnowledge1DollarEq$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarNe$inboundSchema),
-    z.lazy(() => SearchKnowledge13$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarGte$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarLt$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarLte$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarIn$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarNin$inboundSchema),
-    z.lazy(() => SearchKnowledge1DollarExists$inboundSchema),
-  ]);
-
-/** @internal */
-export type Filter1$Outbound =
-  | SearchKnowledge1DollarEq$Outbound
-  | SearchKnowledge1DollarNe$Outbound
-  | SearchKnowledge13$Outbound
-  | SearchKnowledge1DollarGte$Outbound
-  | SearchKnowledge1DollarLt$Outbound
-  | SearchKnowledge1DollarLte$Outbound
-  | SearchKnowledge1DollarIn$Outbound
-  | SearchKnowledge1DollarNin$Outbound
-  | SearchKnowledge1DollarExists$Outbound;
-
-/** @internal */
-export const Filter1$outboundSchema: z.ZodType<
-  Filter1$Outbound,
+export const FilterBy1$inboundSchema: z.ZodType<
+  FilterBy1,
   z.ZodTypeDef,
-  Filter1
+  unknown
 > = z.union([
-  z.lazy(() => SearchKnowledge1DollarEq$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarNe$outboundSchema),
+  z.lazy(() => SearchKnowledge1Eq$inboundSchema),
+  z.lazy(() => SearchKnowledge1Ne$inboundSchema),
+  z.lazy(() => SearchKnowledge13$inboundSchema),
+  z.lazy(() => SearchKnowledge1Gte$inboundSchema),
+  z.lazy(() => SearchKnowledge1Lt$inboundSchema),
+  z.lazy(() => SearchKnowledge1Lte$inboundSchema),
+  z.lazy(() => SearchKnowledge1In$inboundSchema),
+  z.lazy(() => SearchKnowledge1Nin$inboundSchema),
+  z.lazy(() => SearchKnowledge1Exists$inboundSchema),
+]);
+
+/** @internal */
+export type FilterBy1$Outbound =
+  | SearchKnowledge1Eq$Outbound
+  | SearchKnowledge1Ne$Outbound
+  | SearchKnowledge13$Outbound
+  | SearchKnowledge1Gte$Outbound
+  | SearchKnowledge1Lt$Outbound
+  | SearchKnowledge1Lte$Outbound
+  | SearchKnowledge1In$Outbound
+  | SearchKnowledge1Nin$Outbound
+  | SearchKnowledge1Exists$Outbound;
+
+/** @internal */
+export const FilterBy1$outboundSchema: z.ZodType<
+  FilterBy1$Outbound,
+  z.ZodTypeDef,
+  FilterBy1
+> = z.union([
+  z.lazy(() => SearchKnowledge1Eq$outboundSchema),
+  z.lazy(() => SearchKnowledge1Ne$outboundSchema),
   z.lazy(() => SearchKnowledge13$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarGte$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarLt$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarLte$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarIn$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarNin$outboundSchema),
-  z.lazy(() => SearchKnowledge1DollarExists$outboundSchema),
+  z.lazy(() => SearchKnowledge1Gte$outboundSchema),
+  z.lazy(() => SearchKnowledge1Lt$outboundSchema),
+  z.lazy(() => SearchKnowledge1Lte$outboundSchema),
+  z.lazy(() => SearchKnowledge1In$outboundSchema),
+  z.lazy(() => SearchKnowledge1Nin$outboundSchema),
+  z.lazy(() => SearchKnowledge1Exists$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Filter1$ {
-  /** @deprecated use `Filter1$inboundSchema` instead. */
-  export const inboundSchema = Filter1$inboundSchema;
-  /** @deprecated use `Filter1$outboundSchema` instead. */
-  export const outboundSchema = Filter1$outboundSchema;
-  /** @deprecated use `Filter1$Outbound` instead. */
-  export type Outbound = Filter1$Outbound;
+export namespace FilterBy1$ {
+  /** @deprecated use `FilterBy1$inboundSchema` instead. */
+  export const inboundSchema = FilterBy1$inboundSchema;
+  /** @deprecated use `FilterBy1$outboundSchema` instead. */
+  export const outboundSchema = FilterBy1$outboundSchema;
+  /** @deprecated use `FilterBy1$Outbound` instead. */
+  export type Outbound = FilterBy1$Outbound;
 }
 
-export function filter1ToJSON(filter1: Filter1): string {
-  return JSON.stringify(Filter1$outboundSchema.parse(filter1));
+export function filterBy1ToJSON(filterBy1: FilterBy1): string {
+  return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
 }
 
-export function filter1FromJSON(
+export function filterBy1FromJSON(
   jsonString: string,
-): SafeParseResult<Filter1, SDKValidationError> {
+): SafeParseResult<FilterBy1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Filter1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Filter1' from JSON`,
+    (x) => FilterBy1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilterBy1' from JSON`,
   );
 }
 
 /** @internal */
-export const Filter$inboundSchema: z.ZodType<Filter, z.ZodTypeDef, unknown> = z
-  .union([
-    z.lazy(() => FilterDollarAnd$inboundSchema),
-    z.lazy(() => FilterDollarOr$inboundSchema),
-    z.record(z.union([
-      z.lazy(() => SearchKnowledge1DollarEq$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarNe$inboundSchema),
-      z.lazy(() => SearchKnowledge13$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarGte$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarLt$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarLte$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarIn$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarNin$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarExists$inboundSchema),
-    ])),
-  ]);
-
-/** @internal */
-export type Filter$Outbound =
-  | FilterDollarAnd$Outbound
-  | FilterDollarOr$Outbound
-  | {
-    [k: string]:
-      | SearchKnowledge1DollarEq$Outbound
-      | SearchKnowledge1DollarNe$Outbound
-      | SearchKnowledge13$Outbound
-      | SearchKnowledge1DollarGte$Outbound
-      | SearchKnowledge1DollarLt$Outbound
-      | SearchKnowledge1DollarLte$Outbound
-      | SearchKnowledge1DollarIn$Outbound
-      | SearchKnowledge1DollarNin$Outbound
-      | SearchKnowledge1DollarExists$Outbound;
-  };
-
-/** @internal */
-export const Filter$outboundSchema: z.ZodType<
-  Filter$Outbound,
+export const FilterBy$inboundSchema: z.ZodType<
+  FilterBy,
   z.ZodTypeDef,
-  Filter
+  unknown
 > = z.union([
-  z.lazy(() => FilterDollarAnd$outboundSchema),
-  z.lazy(() => FilterDollarOr$outboundSchema),
+  z.lazy(() => FilterByAnd$inboundSchema),
+  z.lazy(() => FilterByOr$inboundSchema),
   z.record(z.union([
-    z.lazy(() => SearchKnowledge1DollarEq$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarNe$outboundSchema),
+    z.lazy(() => SearchKnowledge1Eq$inboundSchema),
+    z.lazy(() => SearchKnowledge1Ne$inboundSchema),
+    z.lazy(() => SearchKnowledge13$inboundSchema),
+    z.lazy(() => SearchKnowledge1Gte$inboundSchema),
+    z.lazy(() => SearchKnowledge1Lt$inboundSchema),
+    z.lazy(() => SearchKnowledge1Lte$inboundSchema),
+    z.lazy(() => SearchKnowledge1In$inboundSchema),
+    z.lazy(() => SearchKnowledge1Nin$inboundSchema),
+    z.lazy(() => SearchKnowledge1Exists$inboundSchema),
+  ])),
+]);
+
+/** @internal */
+export type FilterBy$Outbound = FilterByAnd$Outbound | FilterByOr$Outbound | {
+  [k: string]:
+    | SearchKnowledge1Eq$Outbound
+    | SearchKnowledge1Ne$Outbound
+    | SearchKnowledge13$Outbound
+    | SearchKnowledge1Gte$Outbound
+    | SearchKnowledge1Lt$Outbound
+    | SearchKnowledge1Lte$Outbound
+    | SearchKnowledge1In$Outbound
+    | SearchKnowledge1Nin$Outbound
+    | SearchKnowledge1Exists$Outbound;
+};
+
+/** @internal */
+export const FilterBy$outboundSchema: z.ZodType<
+  FilterBy$Outbound,
+  z.ZodTypeDef,
+  FilterBy
+> = z.union([
+  z.lazy(() => FilterByAnd$outboundSchema),
+  z.lazy(() => FilterByOr$outboundSchema),
+  z.record(z.union([
+    z.lazy(() => SearchKnowledge1Eq$outboundSchema),
+    z.lazy(() => SearchKnowledge1Ne$outboundSchema),
     z.lazy(() => SearchKnowledge13$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarGte$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarLt$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarLte$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarIn$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarNin$outboundSchema),
-    z.lazy(() => SearchKnowledge1DollarExists$outboundSchema),
+    z.lazy(() => SearchKnowledge1Gte$outboundSchema),
+    z.lazy(() => SearchKnowledge1Lt$outboundSchema),
+    z.lazy(() => SearchKnowledge1Lte$outboundSchema),
+    z.lazy(() => SearchKnowledge1In$outboundSchema),
+    z.lazy(() => SearchKnowledge1Nin$outboundSchema),
+    z.lazy(() => SearchKnowledge1Exists$outboundSchema),
   ])),
 ]);
 
@@ -3332,26 +2914,26 @@ export const Filter$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Filter$ {
-  /** @deprecated use `Filter$inboundSchema` instead. */
-  export const inboundSchema = Filter$inboundSchema;
-  /** @deprecated use `Filter$outboundSchema` instead. */
-  export const outboundSchema = Filter$outboundSchema;
-  /** @deprecated use `Filter$Outbound` instead. */
-  export type Outbound = Filter$Outbound;
+export namespace FilterBy$ {
+  /** @deprecated use `FilterBy$inboundSchema` instead. */
+  export const inboundSchema = FilterBy$inboundSchema;
+  /** @deprecated use `FilterBy$outboundSchema` instead. */
+  export const outboundSchema = FilterBy$outboundSchema;
+  /** @deprecated use `FilterBy$Outbound` instead. */
+  export type Outbound = FilterBy$Outbound;
 }
 
-export function filterToJSON(filter: Filter): string {
-  return JSON.stringify(Filter$outboundSchema.parse(filter));
+export function filterByToJSON(filterBy: FilterBy): string {
+  return JSON.stringify(FilterBy$outboundSchema.parse(filterBy));
 }
 
-export function filterFromJSON(
+export function filterByFromJSON(
   jsonString: string,
-): SafeParseResult<Filter, SDKValidationError> {
+): SafeParseResult<FilterBy, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Filter$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Filter' from JSON`,
+    (x) => FilterBy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilterBy' from JSON`,
   );
 }
 
@@ -3432,25 +3014,26 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
   query: z.string(),
   top_k: z.number().int().optional(),
   threshold: z.number().optional(),
-  filter: z.union([
-    z.lazy(() => FilterDollarAnd$inboundSchema),
-    z.lazy(() => FilterDollarOr$inboundSchema),
+  filter_by: z.union([
+    z.lazy(() => FilterByAnd$inboundSchema),
+    z.lazy(() => FilterByOr$inboundSchema),
     z.record(z.union([
-      z.lazy(() => SearchKnowledge1DollarEq$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarNe$inboundSchema),
+      z.lazy(() => SearchKnowledge1Eq$inboundSchema),
+      z.lazy(() => SearchKnowledge1Ne$inboundSchema),
       z.lazy(() => SearchKnowledge13$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarGte$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarLt$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarLte$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarIn$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarNin$inboundSchema),
-      z.lazy(() => SearchKnowledge1DollarExists$inboundSchema),
+      z.lazy(() => SearchKnowledge1Gte$inboundSchema),
+      z.lazy(() => SearchKnowledge1Lt$inboundSchema),
+      z.lazy(() => SearchKnowledge1Lte$inboundSchema),
+      z.lazy(() => SearchKnowledge1In$inboundSchema),
+      z.lazy(() => SearchKnowledge1Nin$inboundSchema),
+      z.lazy(() => SearchKnowledge1Exists$inboundSchema),
     ])),
   ]).optional(),
   search_options: z.lazy(() => SearchOptions$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_k": "topK",
+    "filter_by": "filterBy",
     "search_options": "searchOptions",
   });
 });
@@ -3460,17 +3043,17 @@ export type SearchKnowledgeRequestBody$Outbound = {
   query: string;
   top_k?: number | undefined;
   threshold?: number | undefined;
-  filter?: FilterDollarAnd$Outbound | FilterDollarOr$Outbound | {
+  filter_by?: FilterByAnd$Outbound | FilterByOr$Outbound | {
     [k: string]:
-      | SearchKnowledge1DollarEq$Outbound
-      | SearchKnowledge1DollarNe$Outbound
+      | SearchKnowledge1Eq$Outbound
+      | SearchKnowledge1Ne$Outbound
       | SearchKnowledge13$Outbound
-      | SearchKnowledge1DollarGte$Outbound
-      | SearchKnowledge1DollarLt$Outbound
-      | SearchKnowledge1DollarLte$Outbound
-      | SearchKnowledge1DollarIn$Outbound
-      | SearchKnowledge1DollarNin$Outbound
-      | SearchKnowledge1DollarExists$Outbound;
+      | SearchKnowledge1Gte$Outbound
+      | SearchKnowledge1Lt$Outbound
+      | SearchKnowledge1Lte$Outbound
+      | SearchKnowledge1In$Outbound
+      | SearchKnowledge1Nin$Outbound
+      | SearchKnowledge1Exists$Outbound;
   } | undefined;
   search_options?: SearchOptions$Outbound | undefined;
 };
@@ -3484,25 +3067,26 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
   query: z.string(),
   topK: z.number().int().optional(),
   threshold: z.number().optional(),
-  filter: z.union([
-    z.lazy(() => FilterDollarAnd$outboundSchema),
-    z.lazy(() => FilterDollarOr$outboundSchema),
+  filterBy: z.union([
+    z.lazy(() => FilterByAnd$outboundSchema),
+    z.lazy(() => FilterByOr$outboundSchema),
     z.record(z.union([
-      z.lazy(() => SearchKnowledge1DollarEq$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarNe$outboundSchema),
+      z.lazy(() => SearchKnowledge1Eq$outboundSchema),
+      z.lazy(() => SearchKnowledge1Ne$outboundSchema),
       z.lazy(() => SearchKnowledge13$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarGte$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarLt$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarLte$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarIn$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarNin$outboundSchema),
-      z.lazy(() => SearchKnowledge1DollarExists$outboundSchema),
+      z.lazy(() => SearchKnowledge1Gte$outboundSchema),
+      z.lazy(() => SearchKnowledge1Lt$outboundSchema),
+      z.lazy(() => SearchKnowledge1Lte$outboundSchema),
+      z.lazy(() => SearchKnowledge1In$outboundSchema),
+      z.lazy(() => SearchKnowledge1Nin$outboundSchema),
+      z.lazy(() => SearchKnowledge1Exists$outboundSchema),
     ])),
   ]).optional(),
   searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     topK: "top_k",
+    filterBy: "filter_by",
     searchOptions: "search_options",
   });
 });

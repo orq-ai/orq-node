@@ -10,35 +10,37 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 ```typescript
 const value: { [k: string]: operations.DeploymentStreamKnowledgeFilter1 } = {
   "key": {
-    dollarNin: [
+    nin: [
       3892.14,
     ],
   },
 };
 ```
 
-### `operations.DeploymentStreamKnowledgeFilterDollarAnd`
+### `operations.DeploymentStreamKnowledgeFilterAnd`
 
 ```typescript
-const value: operations.DeploymentStreamKnowledgeFilterDollarAnd = {
-  dollarAnd: [
+const value: operations.DeploymentStreamKnowledgeFilterAnd = {
+  and: [
     {
       "key": {
-        dollarExists: false,
+        gt: 4526.29,
       },
     },
   ],
 };
 ```
 
-### `operations.DeploymentStreamKnowledgeFilterDollarOr`
+### `operations.DeploymentStreamKnowledgeFilterOr`
 
 ```typescript
-const value: operations.DeploymentStreamKnowledgeFilterDollarOr = {
-  dollarOr: [
+const value: operations.DeploymentStreamKnowledgeFilterOr = {
+  or: [
     {
       "key": {
-        dollarLt: 1314.67,
+        in: [
+          8677.26,
+        ],
       },
     },
   ],

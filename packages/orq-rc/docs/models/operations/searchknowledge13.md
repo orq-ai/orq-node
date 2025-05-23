@@ -6,7 +6,7 @@
 import { SearchKnowledge13 } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledge13 = {
-  dollarGt: 2880.67,
+  gt: 2880.67,
 };
 ```
 
@@ -14,4 +14,4 @@ let value: SearchKnowledge13 = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `dollarGt`         | *number*           | :heavy_check_mark: | N/A                |
+| `gt`               | *number*           | :heavy_check_mark: | N/A                |

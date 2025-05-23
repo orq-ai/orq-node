@@ -6,7 +6,7 @@
 import { Three } from "@orq-ai/node/models/components";
 
 let value: Three = {
-  dollarGt: 8279.38,
+  gt: 8279.38,
 };
 ```
 
@@ -14,4 +14,4 @@ let value: Three = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `dollarGt`         | *number*           | :heavy_check_mark: | N/A                |
+| `gt`               | *number*           | :heavy_check_mark: | N/A                |

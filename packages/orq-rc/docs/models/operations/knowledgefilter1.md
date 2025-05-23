@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.DollarEq`
+### `operations.Eq`
 
 ```typescript
-const value: operations.DollarEq = {
-  dollarEq: "<value>",
+const value: operations.Eq = {
+  eq: 9241.39,
 };
 ```
 
-### `operations.DollarNe`
+### `operations.Ne`
 
 ```typescript
-const value: operations.DollarNe = {
-  dollarNe: false,
+const value: operations.Ne = {
+  ne: "<value>",
 };
 ```
 
@@ -23,59 +23,59 @@ const value: operations.DollarNe = {
 
 ```typescript
 const value: operations.One3 = {
-  dollarGt: 4629.79,
+  gt: 4629.79,
 };
 ```
 
-### `operations.DollarGte`
+### `operations.Gte`
 
 ```typescript
-const value: operations.DollarGte = {
-  dollarGte: 9060.5,
+const value: operations.Gte = {
+  gte: 5870.86,
 };
 ```
 
-### `operations.DollarLt`
+### `operations.Lt`
 
 ```typescript
-const value: operations.DollarLt = {
-  dollarLt: 2115.97,
+const value: operations.Lt = {
+  lt: 2757.24,
 };
 ```
 
-### `operations.DollarLte`
+### `operations.Lte`
 
 ```typescript
-const value: operations.DollarLte = {
-  dollarLte: 9830.51,
+const value: operations.Lte = {
+  lte: 261.2,
 };
 ```
 
-### `operations.DollarIn`
+### `operations.In`
 
 ```typescript
-const value: operations.DollarIn = {
-  dollarIn: [
-    false,
+const value: operations.In = {
+  in: [
+    6301.64,
   ],
 };
 ```
 
-### `operations.DollarNin`
+### `operations.Nin`
 
 ```typescript
-const value: operations.DollarNin = {
-  dollarNin: [
-    9725.64,
+const value: operations.Nin = {
+  nin: [
+    6887.85,
   ],
 };
 ```
 
-### `operations.DollarExists`
+### `operations.Exists`
 
 ```typescript
-const value: operations.DollarExists = {
-  dollarExists: false,
+const value: operations.Exists = {
+  exists: false,
 };
 ```
 

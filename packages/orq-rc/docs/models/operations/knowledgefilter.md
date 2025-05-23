@@ -10,34 +10,36 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 ```typescript
 const value: { [k: string]: operations.KnowledgeFilter1 } = {
   "key": {
-    dollarGt: 8696.99,
+    gt: 8696.99,
   },
 };
 ```
 
-### `operations.DollarAnd`
+### `operations.And`
 
 ```typescript
-const value: operations.DollarAnd = {
-  dollarAnd: [
+const value: operations.And = {
+  and: [
     {
       "key": {
-        dollarExists: false,
+        nin: [
+          1426.48,
+        ],
       },
     },
   ],
 };
 ```
 
-### `operations.DollarOr`
+### `operations.Or`
 
 ```typescript
-const value: operations.DollarOr = {
-  dollarOr: [
+const value: operations.Or = {
+  or: [
     {
       "key": {
-        dollarIn: [
-          3802.48,
+        nin: [
+          false,
         ],
       },
     },
