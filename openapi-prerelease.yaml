@@ -1176,6 +1176,27 @@ components:
                             - "type"
                             - "image_url"
                           description: "The image part of the prompt message. Only supported with vision models."
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "file"
+                              description: "The type of the content part. Always `file`."
+                            "file":
+                              type: "object"
+                              properties:
+                                "file_data":
+                                  type: "string"
+                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                "filename":
+                                  type: "string"
+                                  description: "The name of the file, used when passing the file to the model as a string."
+                              required:
+                                - "file_data"
+                          required:
+                            - "type"
+                            - "file"
                 description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
               "tool_calls":
                 type: "array"
@@ -3573,6 +3594,27 @@ components:
                                     - "type"
                                     - "image_url"
                                   description: "The image part of the prompt message. Only supported with vision models."
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "file"
+                                      description: "The type of the content part. Always `file`."
+                                    "file":
+                                      type: "object"
+                                      properties:
+                                        "file_data":
+                                          type: "string"
+                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                        "filename":
+                                          type: "string"
+                                          description: "The name of the file, used when passing the file to the model as a string."
+                                      required:
+                                        - "file_data"
+                                  required:
+                                    - "type"
+                                    - "file"
                         description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                       "tool_calls":
                         type: "array"
@@ -4727,7 +4769,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-05-23T11:32:36.222Z"
+          default: "2025-05-24T19:14:42.496Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4790,7 +4832,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-05-23T11:32:36.222Z"
+            default: "2025-05-24T19:14:42.496Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4870,7 +4912,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-05-23T11:32:36.222Z"
+          default: "2025-05-24T19:14:42.496Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4916,7 +4958,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-05-23T11:32:36.222Z"
+                default: "2025-05-24T19:14:42.496Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -4959,7 +5001,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-05-23T11:32:36.222Z"
+          default: "2025-05-24T19:14:42.496Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5205,6 +5247,27 @@ components:
                                 - "type"
                                 - "image_url"
                               description: "The image part of the prompt message. Only supported with vision models."
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "file"
+                                  description: "The type of the content part. Always `file`."
+                                "file":
+                                  type: "object"
+                                  properties:
+                                    "file_data":
+                                      type: "string"
+                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                    "filename":
+                                      type: "string"
+                                      description: "The name of the file, used when passing the file to the model as a string."
+                                  required:
+                                    - "file_data"
+                              required:
+                                - "type"
+                                - "file"
                     description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                   "tool_calls":
                     type: "array"
@@ -5651,6 +5714,27 @@ components:
                                 - "type"
                                 - "image_url"
                               description: "The image part of the prompt message. Only supported with vision models."
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "file"
+                                  description: "The type of the content part. Always `file`."
+                                "file":
+                                  type: "object"
+                                  properties:
+                                    "file_data":
+                                      type: "string"
+                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                    "filename":
+                                      type: "string"
+                                      description: "The name of the file, used when passing the file to the model as a string."
+                                  required:
+                                    - "file_data"
+                              required:
+                                - "type"
+                                - "file"
                     description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                   "tool_calls":
                     type: "array"
@@ -5997,6 +6081,27 @@ components:
                                 - "type"
                                 - "image_url"
                               description: "The image part of the prompt message. Only supported with vision models."
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "file"
+                                  description: "The type of the content part. Always `file`."
+                                "file":
+                                  type: "object"
+                                  properties:
+                                    "file_data":
+                                      type: "string"
+                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                    "filename":
+                                      type: "string"
+                                      description: "The name of the file, used when passing the file to the model as a string."
+                                  required:
+                                    - "file_data"
+                              required:
+                                - "type"
+                                - "file"
                     description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                   "tool_calls":
                     type: "array"
@@ -6345,6 +6450,27 @@ components:
                                 - "type"
                                 - "image_url"
                               description: "The image part of the prompt message. Only supported with vision models."
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "file"
+                                  description: "The type of the content part. Always `file`."
+                                "file":
+                                  type: "object"
+                                  properties:
+                                    "file_data":
+                                      type: "string"
+                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                    "filename":
+                                      type: "string"
+                                      description: "The name of the file, used when passing the file to the model as a string."
+                                  required:
+                                    - "file_data"
+                              required:
+                                - "type"
+                                - "file"
                     description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                   "tool_calls":
                     type: "array"
@@ -6687,6 +6813,27 @@ components:
                                           - "type"
                                           - "image_url"
                                         description: "The image part of the prompt message. Only supported with vision models."
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
+                                          - "file"
                               description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                             "tool_calls":
                               type: "array"
@@ -7026,6 +7173,27 @@ components:
                                     - "type"
                                     - "image_url"
                                   description: "The image part of the prompt message. Only supported with vision models."
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "file"
+                                      description: "The type of the content part. Always `file`."
+                                    "file":
+                                      type: "object"
+                                      properties:
+                                        "file_data":
+                                          type: "string"
+                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                        "filename":
+                                          type: "string"
+                                          description: "The name of the file, used when passing the file to the model as a string."
+                                      required:
+                                        - "file_data"
+                                  required:
+                                    - "type"
+                                    - "file"
                         description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                       "tool_calls":
                         type: "array"
@@ -7319,7 +7487,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-05-23T11:32:33.440Z"
+          default: "2025-05-24T19:14:39.719Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7327,7 +7495,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-05-23T11:32:33.441Z"
+              default: "2025-05-24T19:14:39.719Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7437,7 +7605,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-05-23T11:32:33.440Z"
+                default: "2025-05-24T19:14:39.719Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7445,7 +7613,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-05-23T11:32:33.441Z"
+                    default: "2025-05-24T19:14:39.719Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7552,7 +7720,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-05-23T11:32:33.440Z"
+          default: "2025-05-24T19:14:39.719Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7560,7 +7728,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-05-23T11:32:33.441Z"
+              default: "2025-05-24T19:14:39.719Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7661,7 +7829,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-05-23T11:32:33.440Z"
+          default: "2025-05-24T19:14:39.719Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7669,7 +7837,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-05-23T11:32:33.441Z"
+              default: "2025-05-24T19:14:39.719Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9617,7 +9785,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -9625,7 +9793,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -10030,6 +10198,27 @@ paths:
                                                 - "type"
                                                 - "image_url"
                                               description: "The image part of the prompt message. Only supported with vision models."
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "file"
+                                                  description: "The type of the content part. Always `file`."
+                                                "file":
+                                                  type: "object"
+                                                  properties:
+                                                    "file_data":
+                                                      type: "string"
+                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                    "filename":
+                                                      type: "string"
+                                                      description: "The name of the file, used when passing the file to the model as a string."
+                                                  required:
+                                                    - "file_data"
+                                              required:
+                                                - "type"
+                                                - "file"
                                     description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                                   "tool_calls":
                                     type: "array"
@@ -11182,6 +11371,27 @@ paths:
                                       - "type"
                                       - "image_url"
                                     description: "The image part of the prompt message. Only supported with vision models."
+                                  - type: "object"
+                                    properties:
+                                      "type":
+                                        type: "string"
+                                        enum:
+                                          - "file"
+                                        description: "The type of the content part. Always `file`."
+                                      "file":
+                                        type: "object"
+                                        properties:
+                                          "file_data":
+                                            type: "string"
+                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          "filename":
+                                            type: "string"
+                                            description: "The name of the file, used when passing the file to the model as a string."
+                                        required:
+                                          - "file_data"
+                                    required:
+                                      - "type"
+                                      - "file"
                           description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                         "tool_calls":
                           type: "array"
@@ -13616,7 +13826,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-05-23T11:32:36.222Z"
+                    default: "2025-05-24T19:14:42.496Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -13704,7 +13914,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-05-23T11:32:36.222Z"
+                          default: "2025-05-24T19:14:42.496Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -13771,7 +13981,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-05-23T11:32:36.222Z"
+                    default: "2025-05-24T19:14:42.496Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -14116,6 +14326,27 @@ paths:
                                                 - "type"
                                                 - "image_url"
                                               description: "The image part of the prompt message. Only supported with vision models."
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "file"
+                                                  description: "The type of the content part. Always `file`."
+                                                "file":
+                                                  type: "object"
+                                                  properties:
+                                                    "file_data":
+                                                      type: "string"
+                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                    "filename":
+                                                      type: "string"
+                                                      description: "The name of the file, used when passing the file to the model as a string."
+                                                  required:
+                                                    - "file_data"
+                                              required:
+                                                - "type"
+                                                - "file"
                                     description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                                   "tool_calls":
                                     type: "array"
@@ -14458,6 +14689,27 @@ paths:
                                         - "type"
                                         - "image_url"
                                       description: "The image part of the prompt message. Only supported with vision models."
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        "file":
+                                          type: "object"
+                                          properties:
+                                            "file_data":
+                                              type: "string"
+                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            "filename":
+                                              type: "string"
+                                              description: "The name of the file, used when passing the file to the model as a string."
+                                          required:
+                                            - "file_data"
+                                      required:
+                                        - "type"
+                                        - "file"
                             description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                           "tool_calls":
                             type: "array"
@@ -14811,6 +15063,27 @@ paths:
                                           - "type"
                                           - "image_url"
                                         description: "The image part of the prompt message. Only supported with vision models."
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
+                                          - "file"
                               description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                             "tool_calls":
                               type: "array"
@@ -15184,6 +15457,27 @@ paths:
                                           - "type"
                                           - "image_url"
                                         description: "The image part of the prompt message. Only supported with vision models."
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
+                                          - "file"
                               description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                             "tool_calls":
                               type: "array"
@@ -15547,6 +15841,27 @@ paths:
                                         - "type"
                                         - "image_url"
                                       description: "The image part of the prompt message. Only supported with vision models."
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        "file":
+                                          type: "object"
+                                          properties:
+                                            "file_data":
+                                              type: "string"
+                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            "filename":
+                                              type: "string"
+                                              description: "The name of the file, used when passing the file to the model as a string."
+                                          required:
+                                            - "file_data"
+                                      required:
+                                        - "type"
+                                        - "file"
                             description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                           "tool_calls":
                             type: "array"
@@ -15896,6 +16211,27 @@ paths:
                                           - "type"
                                           - "image_url"
                                         description: "The image part of the prompt message. Only supported with vision models."
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
+                                          - "file"
                               description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                             "tool_calls":
                               type: "array"
@@ -16315,6 +16651,27 @@ paths:
                                                     - "type"
                                                     - "image_url"
                                                   description: "The image part of the prompt message. Only supported with vision models."
+                                                - type: "object"
+                                                  properties:
+                                                    "type":
+                                                      type: "string"
+                                                      enum:
+                                                        - "file"
+                                                      description: "The type of the content part. Always `file`."
+                                                    "file":
+                                                      type: "object"
+                                                      properties:
+                                                        "file_data":
+                                                          type: "string"
+                                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                        "filename":
+                                                          type: "string"
+                                                          description: "The name of the file, used when passing the file to the model as a string."
+                                                      required:
+                                                        - "file_data"
+                                                  required:
+                                                    - "type"
+                                                    - "file"
                                         description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                                       "tool_calls":
                                         type: "array"
@@ -16685,6 +17042,27 @@ paths:
                                               - "type"
                                               - "image_url"
                                             description: "The image part of the prompt message. Only supported with vision models."
+                                          - type: "object"
+                                            properties:
+                                              "type":
+                                                type: "string"
+                                                enum:
+                                                  - "file"
+                                                description: "The type of the content part. Always `file`."
+                                              "file":
+                                                type: "object"
+                                                properties:
+                                                  "file_data":
+                                                    type: "string"
+                                                    description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                  "filename":
+                                                    type: "string"
+                                                    description: "The name of the file, used when passing the file to the model as a string."
+                                                required:
+                                                  - "file_data"
+                                            required:
+                                              - "type"
+                                              - "file"
                                   description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                                 "tool_calls":
                                   type: "array"
@@ -17033,7 +17411,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-05-23T11:32:33.440Z"
+                          default: "2025-05-24T19:14:39.719Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -17041,7 +17419,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-05-23T11:32:33.441Z"
+                              default: "2025-05-24T19:14:39.719Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -17165,7 +17543,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17173,7 +17551,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17283,7 +17661,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17291,7 +17669,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17443,7 +17821,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17451,7 +17829,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17697,6 +18075,27 @@ paths:
                                             - "type"
                                             - "image_url"
                                           description: "The image part of the prompt message. Only supported with vision models."
+                                        - type: "object"
+                                          properties:
+                                            "type":
+                                              type: "string"
+                                              enum:
+                                                - "file"
+                                              description: "The type of the content part. Always `file`."
+                                            "file":
+                                              type: "object"
+                                              properties:
+                                                "file_data":
+                                                  type: "string"
+                                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                "filename":
+                                                  type: "string"
+                                                  description: "The name of the file, used when passing the file to the model as a string."
+                                              required:
+                                                - "file_data"
+                                          required:
+                                            - "type"
+                                            - "file"
                                 description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                               "tool_calls":
                                 type: "array"
@@ -17747,7 +18146,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-05-23T11:32:33.440Z"
+                          default: "2025-05-24T19:14:39.719Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -17755,7 +18154,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-05-23T11:32:33.441Z"
+                              default: "2025-05-24T19:14:39.719Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -17864,6 +18263,27 @@ paths:
                                     - "type"
                                     - "image_url"
                                   description: "The image part of the prompt message. Only supported with vision models."
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "file"
+                                      description: "The type of the content part. Always `file`."
+                                    "file":
+                                      type: "object"
+                                      properties:
+                                        "file_data":
+                                          type: "string"
+                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                        "filename":
+                                          type: "string"
+                                          description: "The name of the file, used when passing the file to the model as a string."
+                                      required:
+                                        - "file_data"
+                                  required:
+                                    - "type"
+                                    - "file"
                         description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                       "tool_calls":
                         type: "array"
@@ -17985,6 +18405,27 @@ paths:
                                       - "type"
                                       - "image_url"
                                     description: "The image part of the prompt message. Only supported with vision models."
+                                  - type: "object"
+                                    properties:
+                                      "type":
+                                        type: "string"
+                                        enum:
+                                          - "file"
+                                        description: "The type of the content part. Always `file`."
+                                      "file":
+                                        type: "object"
+                                        properties:
+                                          "file_data":
+                                            type: "string"
+                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          "filename":
+                                            type: "string"
+                                            description: "The name of the file, used when passing the file to the model as a string."
+                                        required:
+                                          - "file_data"
+                                    required:
+                                      - "type"
+                                      - "file"
                           description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                         "tool_calls":
                           type: "array"
@@ -18035,7 +18476,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18043,7 +18484,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18161,6 +18602,27 @@ paths:
                                       - "type"
                                       - "image_url"
                                     description: "The image part of the prompt message. Only supported with vision models."
+                                  - type: "object"
+                                    properties:
+                                      "type":
+                                        type: "string"
+                                        enum:
+                                          - "file"
+                                        description: "The type of the content part. Always `file`."
+                                      "file":
+                                        type: "object"
+                                        properties:
+                                          "file_data":
+                                            type: "string"
+                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          "filename":
+                                            type: "string"
+                                            description: "The name of the file, used when passing the file to the model as a string."
+                                        required:
+                                          - "file_data"
+                                    required:
+                                      - "type"
+                                      - "file"
                           description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                         "tool_calls":
                           type: "array"
@@ -18211,7 +18673,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18219,7 +18681,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18332,6 +18794,27 @@ paths:
                                     - "type"
                                     - "image_url"
                                   description: "The image part of the prompt message. Only supported with vision models."
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "file"
+                                      description: "The type of the content part. Always `file`."
+                                    "file":
+                                      type: "object"
+                                      properties:
+                                        "file_data":
+                                          type: "string"
+                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                        "filename":
+                                          type: "string"
+                                          description: "The name of the file, used when passing the file to the model as a string."
+                                      required:
+                                        - "file_data"
+                                  required:
+                                    - "type"
+                                    - "file"
                         description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                       "tool_calls":
                         type: "array"
@@ -18453,6 +18936,27 @@ paths:
                                       - "type"
                                       - "image_url"
                                     description: "The image part of the prompt message. Only supported with vision models."
+                                  - type: "object"
+                                    properties:
+                                      "type":
+                                        type: "string"
+                                        enum:
+                                          - "file"
+                                        description: "The type of the content part. Always `file`."
+                                      "file":
+                                        type: "object"
+                                        properties:
+                                          "file_data":
+                                            type: "string"
+                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          "filename":
+                                            type: "string"
+                                            description: "The name of the file, used when passing the file to the model as a string."
+                                        required:
+                                          - "file_data"
+                                    required:
+                                      - "type"
+                                      - "file"
                           description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                         "tool_calls":
                           type: "array"
@@ -18503,7 +19007,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-05-23T11:32:33.440Z"
+                    default: "2025-05-24T19:14:39.719Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18511,7 +19015,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-05-23T11:32:33.441Z"
+                        default: "2025-05-24T19:14:39.719Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18656,6 +19160,27 @@ paths:
                                           - "type"
                                           - "image_url"
                                         description: "The image part of the prompt message. Only supported with vision models."
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
+                                          - "file"
                               description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                             "tool_calls":
                               type: "array"
@@ -18781,6 +19306,27 @@ paths:
                                         - "type"
                                         - "image_url"
                                       description: "The image part of the prompt message. Only supported with vision models."
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        "file":
+                                          type: "object"
+                                          properties:
+                                            "file_data":
+                                              type: "string"
+                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            "filename":
+                                              type: "string"
+                                              description: "The name of the file, used when passing the file to the model as a string."
+                                          required:
+                                            - "file_data"
+                                      required:
+                                        - "type"
+                                        - "file"
                             description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
                           "tool_calls":
                             type: "array"
@@ -18831,7 +19377,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-05-23T11:32:33.440Z"
+                      default: "2025-05-24T19:14:39.719Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -18839,7 +19385,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-05-23T11:32:33.441Z"
+                          default: "2025-05-24T19:14:39.719Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -20072,7 +20618,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JVYENB9V1Q7WHESH11WX8KQK"
+                          default: "01JW1VG6MWGHWARMC4ZZJKBJ3C"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -20235,7 +20781,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JVYENB9Z6HPR6VQ936KV84Z3"
+                    default: "01JW1VG6MZZXP3EXTG9Z8VNE9T"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -20328,7 +20874,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JVYENB9WJMSS4JGJ5JNBQ1Y3"
+                    default: "01JW1VG6MYV5ARHGTCDW851MNZ"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -20457,7 +21003,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JVYENBA0XC246CP84YTYHT47"
+                    default: "01JW1VG6N08WFJXNGFAV628QC1"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
