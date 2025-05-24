@@ -23,3 +23,14 @@ const value: operations.GetPromptVersion22 = {
 };
 ```
 
+### `operations.GetPromptVersion23`
+
+```typescript
+const value: operations.GetPromptVersion23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

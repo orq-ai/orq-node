@@ -23,3 +23,14 @@ const value: operations.UpdatePrompt2Prompts2 = {
 };
 ```
 
+### `operations.UpdatePrompt2Prompts3`
+
+```typescript
+const value: operations.UpdatePrompt2Prompts3 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

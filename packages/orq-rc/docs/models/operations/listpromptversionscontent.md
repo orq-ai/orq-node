@@ -16,9 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.ListPromptVersionsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://small-swath.net/",
+    type: "file",
+    file: {
+      fileData: "<value>",
     },
   },
 ];

@@ -23,3 +23,14 @@ const value: operations.GetOnePrompt22 = {
 };
 ```
 
+### `operations.GetOnePrompt23`
+
+```typescript
+const value: operations.GetOnePrompt23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

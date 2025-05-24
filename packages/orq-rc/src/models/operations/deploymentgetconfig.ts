@@ -1265,6 +1265,39 @@ export type DeploymentGetConfigRole = ClosedEnum<
   typeof DeploymentGetConfigRole
 >;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
+  >;
+
+export type DeploymentGetConfig2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type DeploymentGetConfig23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType;
+  file: DeploymentGetConfig2File;
+};
+
 export const DeploymentGetConfig2DeploymentsResponse200Type = {
   ImageUrl: "image_url",
 } as const;
@@ -1312,14 +1345,19 @@ export type DeploymentGetConfig21 = {
 
 export type DeploymentGetConfigContentDeploymentsResponse2 =
   | DeploymentGetConfig21
-  | DeploymentGetConfig2Deployments2;
+  | DeploymentGetConfig2Deployments2
+  | DeploymentGetConfig23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type DeploymentGetConfigContent =
   | string
-  | Array<DeploymentGetConfig21 | DeploymentGetConfig2Deployments2>;
+  | Array<
+    | DeploymentGetConfig21
+    | DeploymentGetConfig2Deployments2
+    | DeploymentGetConfig23
+  >;
 
 export const DeploymentGetConfigDeploymentsResponseType = {
   Function: "function",
@@ -1353,7 +1391,11 @@ export type DeploymentGetConfigMessages = {
    */
   content:
     | string
-    | Array<DeploymentGetConfig21 | DeploymentGetConfig2Deployments2>;
+    | Array<
+      | DeploymentGetConfig21
+      | DeploymentGetConfig2Deployments2
+      | DeploymentGetConfig23
+    >;
   toolCalls?: Array<DeploymentGetConfigToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -7832,6 +7874,158 @@ export namespace DeploymentGetConfigRole$ {
 }
 
 /** @internal */
+export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
+  > =
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfig2File$inboundSchema: z.ZodType<
+  DeploymentGetConfig2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type DeploymentGetConfig2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfig2File$outboundSchema: z.ZodType<
+  DeploymentGetConfig2File$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2File$ {
+  /** @deprecated use `DeploymentGetConfig2File$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig2File$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2File$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig2File$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig2File$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig2File$Outbound;
+}
+
+export function deploymentGetConfig2FileToJSON(
+  deploymentGetConfig2File: DeploymentGetConfig2File,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig2File$outboundSchema.parse(deploymentGetConfig2File),
+  );
+}
+
+export function deploymentGetConfig2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfig2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfig2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfig23$inboundSchema: z.ZodType<
+  DeploymentGetConfig23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema,
+  file: z.lazy(() => DeploymentGetConfig2File$inboundSchema),
+});
+
+/** @internal */
+export type DeploymentGetConfig23$Outbound = {
+  type: string;
+  file: DeploymentGetConfig2File$Outbound;
+};
+
+/** @internal */
+export const DeploymentGetConfig23$outboundSchema: z.ZodType<
+  DeploymentGetConfig23$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig23
+> = z.object({
+  type:
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema,
+  file: z.lazy(() => DeploymentGetConfig2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig23$ {
+  /** @deprecated use `DeploymentGetConfig23$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig23$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig23$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig23$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig23$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig23$Outbound;
+}
+
+export function deploymentGetConfig23ToJSON(
+  deploymentGetConfig23: DeploymentGetConfig23,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig23$outboundSchema.parse(deploymentGetConfig23),
+  );
+}
+
+export function deploymentGetConfig23FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfig23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfig23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig23' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponse200Type> = z
     .nativeEnum(DeploymentGetConfig2DeploymentsResponse200Type);
@@ -8072,12 +8266,14 @@ export const DeploymentGetConfigContentDeploymentsResponse2$inboundSchema:
   > = z.union([
     z.lazy(() => DeploymentGetConfig21$inboundSchema),
     z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
+    z.lazy(() => DeploymentGetConfig23$inboundSchema),
   ]);
 
 /** @internal */
 export type DeploymentGetConfigContentDeploymentsResponse2$Outbound =
   | DeploymentGetConfig21$Outbound
-  | DeploymentGetConfig2Deployments2$Outbound;
+  | DeploymentGetConfig2Deployments2$Outbound
+  | DeploymentGetConfig23$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
@@ -8088,6 +8284,7 @@ export const DeploymentGetConfigContentDeploymentsResponse2$outboundSchema:
   > = z.union([
     z.lazy(() => DeploymentGetConfig21$outboundSchema),
     z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
+    z.lazy(() => DeploymentGetConfig23$outboundSchema),
   ]);
 
 /**
@@ -8143,6 +8340,7 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => DeploymentGetConfig21$inboundSchema),
     z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
+    z.lazy(() => DeploymentGetConfig23$inboundSchema),
   ])),
 ]);
 
@@ -8150,7 +8348,9 @@ export const DeploymentGetConfigContent$inboundSchema: z.ZodType<
 export type DeploymentGetConfigContent$Outbound =
   | string
   | Array<
-    DeploymentGetConfig21$Outbound | DeploymentGetConfig2Deployments2$Outbound
+    | DeploymentGetConfig21$Outbound
+    | DeploymentGetConfig2Deployments2$Outbound
+    | DeploymentGetConfig23$Outbound
   >;
 
 /** @internal */
@@ -8163,6 +8363,7 @@ export const DeploymentGetConfigContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => DeploymentGetConfig21$outboundSchema),
     z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
+    z.lazy(() => DeploymentGetConfig23$outboundSchema),
   ])),
 ]);
 
@@ -8360,6 +8561,7 @@ export const DeploymentGetConfigMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => DeploymentGetConfig21$inboundSchema),
       z.lazy(() => DeploymentGetConfig2Deployments2$inboundSchema),
+      z.lazy(() => DeploymentGetConfig23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$inboundSchema))
@@ -8378,7 +8580,9 @@ export type DeploymentGetConfigMessages$Outbound = {
   content:
     | string
     | Array<
-      DeploymentGetConfig21$Outbound | DeploymentGetConfig2Deployments2$Outbound
+      | DeploymentGetConfig21$Outbound
+      | DeploymentGetConfig2Deployments2$Outbound
+      | DeploymentGetConfig23$Outbound
     >;
   tool_calls?: Array<DeploymentGetConfigToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
@@ -8396,6 +8600,7 @@ export const DeploymentGetConfigMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => DeploymentGetConfig21$outboundSchema),
       z.lazy(() => DeploymentGetConfig2Deployments2$outboundSchema),
+      z.lazy(() => DeploymentGetConfig23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => DeploymentGetConfigToolCalls$outboundSchema))

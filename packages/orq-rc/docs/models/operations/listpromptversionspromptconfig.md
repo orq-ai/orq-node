@@ -13,9 +13,9 @@ let value: ListPromptVersionsPromptConfig = {
       role: "exception",
       content: [
         {
-          type: "image_url",
-          imageUrl: {
-            url: "https://fixed-championship.biz/",
+          type: "file",
+          file: {
+            fileData: "<value>",
           },
         },
       ],

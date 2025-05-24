@@ -336,6 +336,38 @@ export const DeploymentsRole = {
  */
 export type DeploymentsRole = ClosedEnum<typeof DeploymentsRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const Deployments2DeploymentsType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type Deployments2DeploymentsType = ClosedEnum<
+  typeof Deployments2DeploymentsType
+>;
+
+export type Deployments2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type Deployments23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: Deployments2DeploymentsType;
+  file: Deployments2File;
+};
+
 export const Deployments2Type = {
   ImageUrl: "image_url",
 } as const;
@@ -364,27 +396,29 @@ export type Deployments22 = {
   imageUrl: Deployments2ImageUrl;
 };
 
-export const Deployments2DeploymentsType = {
+export const Deployments2DeploymentsResponseType = {
   Text: "text",
 } as const;
-export type Deployments2DeploymentsType = ClosedEnum<
-  typeof Deployments2DeploymentsType
+export type Deployments2DeploymentsResponseType = ClosedEnum<
+  typeof Deployments2DeploymentsResponseType
 >;
 
 /**
  * Text content part of a prompt message
  */
 export type Deployments21 = {
-  type: Deployments2DeploymentsType;
+  type: Deployments2DeploymentsResponseType;
   text: string;
 };
 
-export type DeploymentsContent2 = Deployments21 | Deployments22;
+export type DeploymentsContent2 = Deployments21 | Deployments22 | Deployments23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
-export type DeploymentsContent = string | Array<Deployments21 | Deployments22>;
+export type DeploymentsContent =
+  | string
+  | Array<Deployments21 | Deployments22 | Deployments23>;
 
 export const DeploymentsDeploymentsType = {
   Function: "function",
@@ -416,7 +450,7 @@ export type DeploymentsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<Deployments21 | Deployments22>;
+  content: string | Array<Deployments21 | Deployments22 | Deployments23>;
   toolCalls?: Array<DeploymentsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1347,6 +1381,145 @@ export namespace DeploymentsRole$ {
 }
 
 /** @internal */
+export const Deployments2DeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof Deployments2DeploymentsType
+> = z.nativeEnum(Deployments2DeploymentsType);
+
+/** @internal */
+export const Deployments2DeploymentsType$outboundSchema: z.ZodNativeEnum<
+  typeof Deployments2DeploymentsType
+> = Deployments2DeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Deployments2DeploymentsType$ {
+  /** @deprecated use `Deployments2DeploymentsType$inboundSchema` instead. */
+  export const inboundSchema = Deployments2DeploymentsType$inboundSchema;
+  /** @deprecated use `Deployments2DeploymentsType$outboundSchema` instead. */
+  export const outboundSchema = Deployments2DeploymentsType$outboundSchema;
+}
+
+/** @internal */
+export const Deployments2File$inboundSchema: z.ZodType<
+  Deployments2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type Deployments2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const Deployments2File$outboundSchema: z.ZodType<
+  Deployments2File$Outbound,
+  z.ZodTypeDef,
+  Deployments2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Deployments2File$ {
+  /** @deprecated use `Deployments2File$inboundSchema` instead. */
+  export const inboundSchema = Deployments2File$inboundSchema;
+  /** @deprecated use `Deployments2File$outboundSchema` instead. */
+  export const outboundSchema = Deployments2File$outboundSchema;
+  /** @deprecated use `Deployments2File$Outbound` instead. */
+  export type Outbound = Deployments2File$Outbound;
+}
+
+export function deployments2FileToJSON(
+  deployments2File: Deployments2File,
+): string {
+  return JSON.stringify(
+    Deployments2File$outboundSchema.parse(deployments2File),
+  );
+}
+
+export function deployments2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<Deployments2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Deployments2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Deployments2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const Deployments23$inboundSchema: z.ZodType<
+  Deployments23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: Deployments2DeploymentsType$inboundSchema,
+  file: z.lazy(() => Deployments2File$inboundSchema),
+});
+
+/** @internal */
+export type Deployments23$Outbound = {
+  type: string;
+  file: Deployments2File$Outbound;
+};
+
+/** @internal */
+export const Deployments23$outboundSchema: z.ZodType<
+  Deployments23$Outbound,
+  z.ZodTypeDef,
+  Deployments23
+> = z.object({
+  type: Deployments2DeploymentsType$outboundSchema,
+  file: z.lazy(() => Deployments2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Deployments23$ {
+  /** @deprecated use `Deployments23$inboundSchema` instead. */
+  export const inboundSchema = Deployments23$inboundSchema;
+  /** @deprecated use `Deployments23$outboundSchema` instead. */
+  export const outboundSchema = Deployments23$outboundSchema;
+  /** @deprecated use `Deployments23$Outbound` instead. */
+  export type Outbound = Deployments23$Outbound;
+}
+
+export function deployments23ToJSON(deployments23: Deployments23): string {
+  return JSON.stringify(Deployments23$outboundSchema.parse(deployments23));
+}
+
+export function deployments23FromJSON(
+  jsonString: string,
+): SafeParseResult<Deployments23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Deployments23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Deployments23' from JSON`,
+  );
+}
+
+/** @internal */
 export const Deployments2Type$inboundSchema: z.ZodNativeEnum<
   typeof Deployments2Type
 > = z.nativeEnum(Deployments2Type);
@@ -1489,24 +1662,26 @@ export function deployments22FromJSON(
 }
 
 /** @internal */
-export const Deployments2DeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof Deployments2DeploymentsType
-> = z.nativeEnum(Deployments2DeploymentsType);
+export const Deployments2DeploymentsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof Deployments2DeploymentsResponseType
+> = z.nativeEnum(Deployments2DeploymentsResponseType);
 
 /** @internal */
-export const Deployments2DeploymentsType$outboundSchema: z.ZodNativeEnum<
-  typeof Deployments2DeploymentsType
-> = Deployments2DeploymentsType$inboundSchema;
+export const Deployments2DeploymentsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof Deployments2DeploymentsResponseType> =
+    Deployments2DeploymentsResponseType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Deployments2DeploymentsType$ {
-  /** @deprecated use `Deployments2DeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = Deployments2DeploymentsType$inboundSchema;
-  /** @deprecated use `Deployments2DeploymentsType$outboundSchema` instead. */
-  export const outboundSchema = Deployments2DeploymentsType$outboundSchema;
+export namespace Deployments2DeploymentsResponseType$ {
+  /** @deprecated use `Deployments2DeploymentsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    Deployments2DeploymentsResponseType$inboundSchema;
+  /** @deprecated use `Deployments2DeploymentsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    Deployments2DeploymentsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -1515,7 +1690,7 @@ export const Deployments21$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: Deployments2DeploymentsType$inboundSchema,
+  type: Deployments2DeploymentsResponseType$inboundSchema,
   text: z.string(),
 });
 
@@ -1531,7 +1706,7 @@ export const Deployments21$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Deployments21
 > = z.object({
-  type: Deployments2DeploymentsType$outboundSchema,
+  type: Deployments2DeploymentsResponseType$outboundSchema,
   text: z.string(),
 });
 
@@ -1570,12 +1745,14 @@ export const DeploymentsContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Deployments21$inboundSchema),
   z.lazy(() => Deployments22$inboundSchema),
+  z.lazy(() => Deployments23$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentsContent2$Outbound =
   | Deployments21$Outbound
-  | Deployments22$Outbound;
+  | Deployments22$Outbound
+  | Deployments23$Outbound;
 
 /** @internal */
 export const DeploymentsContent2$outboundSchema: z.ZodType<
@@ -1585,6 +1762,7 @@ export const DeploymentsContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Deployments21$outboundSchema),
   z.lazy(() => Deployments22$outboundSchema),
+  z.lazy(() => Deployments23$outboundSchema),
 ]);
 
 /**
@@ -1628,13 +1806,16 @@ export const DeploymentsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => Deployments21$inboundSchema),
     z.lazy(() => Deployments22$inboundSchema),
+    z.lazy(() => Deployments23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type DeploymentsContent$Outbound =
   | string
-  | Array<Deployments21$Outbound | Deployments22$Outbound>;
+  | Array<
+    Deployments21$Outbound | Deployments22$Outbound | Deployments23$Outbound
+  >;
 
 /** @internal */
 export const DeploymentsContent$outboundSchema: z.ZodType<
@@ -1646,6 +1827,7 @@ export const DeploymentsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => Deployments21$outboundSchema),
     z.lazy(() => Deployments22$outboundSchema),
+    z.lazy(() => Deployments23$outboundSchema),
   ])),
 ]);
 
@@ -1835,6 +2017,7 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => Deployments21$inboundSchema),
       z.lazy(() => Deployments22$inboundSchema),
+      z.lazy(() => Deployments23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => DeploymentsToolCalls$inboundSchema))
@@ -1850,7 +2033,11 @@ export const DeploymentsMessages$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentsMessages$Outbound = {
   role: string;
-  content: string | Array<Deployments21$Outbound | Deployments22$Outbound>;
+  content:
+    | string
+    | Array<
+      Deployments21$Outbound | Deployments22$Outbound | Deployments23$Outbound
+    >;
   tool_calls?: Array<DeploymentsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -1867,6 +2054,7 @@ export const DeploymentsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => Deployments21$outboundSchema),
       z.lazy(() => Deployments22$outboundSchema),
+      z.lazy(() => Deployments23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => DeploymentsToolCalls$outboundSchema))

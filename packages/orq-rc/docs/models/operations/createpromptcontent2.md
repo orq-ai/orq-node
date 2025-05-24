@@ -23,3 +23,14 @@ const value: operations.CreatePrompt22 = {
 };
 ```
 
+### `operations.CreatePrompt23`
+
+```typescript
+const value: operations.CreatePrompt23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

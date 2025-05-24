@@ -27,6 +27,38 @@ export const UpdateDatapointRole = {
  */
 export type UpdateDatapointRole = ClosedEnum<typeof UpdateDatapointRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const UpdateDatapoint2DatasetsRequestType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type UpdateDatapoint2DatasetsRequestType = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsRequestType
+>;
+
+export type UpdateDatapoint2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type UpdateDatapoint23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: UpdateDatapoint2DatasetsRequestType;
+  file: UpdateDatapoint2File;
+};
+
 export const UpdateDatapoint2DatasetsType = {
   ImageUrl: "image_url",
 } as const;
@@ -66,14 +98,17 @@ export type UpdateDatapoint21 = {
   text: string;
 };
 
-export type UpdateDatapointContent2 = UpdateDatapoint21 | UpdateDatapoint22;
+export type UpdateDatapointContent2 =
+  | UpdateDatapoint21
+  | UpdateDatapoint22
+  | UpdateDatapoint23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type UpdateDatapointContent =
   | string
-  | Array<UpdateDatapoint21 | UpdateDatapoint22>;
+  | Array<UpdateDatapoint21 | UpdateDatapoint22 | UpdateDatapoint23>;
 
 export const UpdateDatapointType = {
   Function: "function",
@@ -103,7 +138,9 @@ export type UpdateDatapointMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<UpdateDatapoint21 | UpdateDatapoint22>;
+  content:
+    | string
+    | Array<UpdateDatapoint21 | UpdateDatapoint22 | UpdateDatapoint23>;
   toolCalls?: Array<UpdateDatapointToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -145,6 +182,38 @@ export const UpdateDatapointDatasetsRole = {
 export type UpdateDatapointDatasetsRole = ClosedEnum<
   typeof UpdateDatapointDatasetsRole
 >;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type UpdateDatapoint2DatasetsResponse200ApplicationJSONType = ClosedEnum<
+  typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONType
+>;
+
+export type UpdateDatapoint2DatasetsFile = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type UpdateDatapoint2Datasets3 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: UpdateDatapoint2DatasetsResponse200ApplicationJSONType;
+  file: UpdateDatapoint2DatasetsFile;
+};
 
 export const UpdateDatapoint2DatasetsResponse200Type = {
   ImageUrl: "image_url",
@@ -193,14 +262,19 @@ export type UpdateDatapoint2Datasets1 = {
 
 export type UpdateDatapointContentDatasets2 =
   | UpdateDatapoint2Datasets1
-  | UpdateDatapoint2Datasets2;
+  | UpdateDatapoint2Datasets2
+  | UpdateDatapoint2Datasets3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type UpdateDatapointDatasetsContent =
   | string
-  | Array<UpdateDatapoint2Datasets1 | UpdateDatapoint2Datasets2>;
+  | Array<
+    | UpdateDatapoint2Datasets1
+    | UpdateDatapoint2Datasets2
+    | UpdateDatapoint2Datasets3
+  >;
 
 export const UpdateDatapointDatasetsType = {
   Function: "function",
@@ -234,7 +308,11 @@ export type UpdateDatapointDatasetsMessages = {
    */
   content:
     | string
-    | Array<UpdateDatapoint2Datasets1 | UpdateDatapoint2Datasets2>;
+    | Array<
+      | UpdateDatapoint2Datasets1
+      | UpdateDatapoint2Datasets2
+      | UpdateDatapoint2Datasets3
+    >;
   toolCalls?: Array<UpdateDatapointDatasetsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -301,6 +379,151 @@ export namespace UpdateDatapointRole$ {
   export const inboundSchema = UpdateDatapointRole$inboundSchema;
   /** @deprecated use `UpdateDatapointRole$outboundSchema` instead. */
   export const outboundSchema = UpdateDatapointRole$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapoint2DatasetsRequestType
+> = z.nativeEnum(UpdateDatapoint2DatasetsRequestType);
+
+/** @internal */
+export const UpdateDatapoint2DatasetsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapoint2DatasetsRequestType> =
+    UpdateDatapoint2DatasetsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2DatasetsRequestType$ {
+  /** @deprecated use `UpdateDatapoint2DatasetsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapoint2DatasetsRequestType$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2DatasetsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapoint2DatasetsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapoint2File$inboundSchema: z.ZodType<
+  UpdateDatapoint2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type UpdateDatapoint2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2File$outboundSchema: z.ZodType<
+  UpdateDatapoint2File$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2File$ {
+  /** @deprecated use `UpdateDatapoint2File$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapoint2File$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2File$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapoint2File$outboundSchema;
+  /** @deprecated use `UpdateDatapoint2File$Outbound` instead. */
+  export type Outbound = UpdateDatapoint2File$Outbound;
+}
+
+export function updateDatapoint2FileToJSON(
+  updateDatapoint2File: UpdateDatapoint2File,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2File$outboundSchema.parse(updateDatapoint2File),
+  );
+}
+
+export function updateDatapoint2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint23$inboundSchema: z.ZodType<
+  UpdateDatapoint23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapoint2DatasetsRequestType$inboundSchema,
+  file: z.lazy(() => UpdateDatapoint2File$inboundSchema),
+});
+
+/** @internal */
+export type UpdateDatapoint23$Outbound = {
+  type: string;
+  file: UpdateDatapoint2File$Outbound;
+};
+
+/** @internal */
+export const UpdateDatapoint23$outboundSchema: z.ZodType<
+  UpdateDatapoint23$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint23
+> = z.object({
+  type: UpdateDatapoint2DatasetsRequestType$outboundSchema,
+  file: z.lazy(() => UpdateDatapoint2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint23$ {
+  /** @deprecated use `UpdateDatapoint23$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapoint23$inboundSchema;
+  /** @deprecated use `UpdateDatapoint23$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapoint23$outboundSchema;
+  /** @deprecated use `UpdateDatapoint23$Outbound` instead. */
+  export type Outbound = UpdateDatapoint23$Outbound;
+}
+
+export function updateDatapoint23ToJSON(
+  updateDatapoint23: UpdateDatapoint23,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint23$outboundSchema.parse(updateDatapoint23),
+  );
+}
+
+export function updateDatapoint23FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint23' from JSON`,
+  );
 }
 
 /** @internal */
@@ -532,12 +755,14 @@ export const UpdateDatapointContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdateDatapoint21$inboundSchema),
   z.lazy(() => UpdateDatapoint22$inboundSchema),
+  z.lazy(() => UpdateDatapoint23$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateDatapointContent2$Outbound =
   | UpdateDatapoint21$Outbound
-  | UpdateDatapoint22$Outbound;
+  | UpdateDatapoint22$Outbound
+  | UpdateDatapoint23$Outbound;
 
 /** @internal */
 export const UpdateDatapointContent2$outboundSchema: z.ZodType<
@@ -547,6 +772,7 @@ export const UpdateDatapointContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdateDatapoint21$outboundSchema),
   z.lazy(() => UpdateDatapoint22$outboundSchema),
+  z.lazy(() => UpdateDatapoint23$outboundSchema),
 ]);
 
 /**
@@ -590,13 +816,18 @@ export const UpdateDatapointContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdateDatapoint21$inboundSchema),
     z.lazy(() => UpdateDatapoint22$inboundSchema),
+    z.lazy(() => UpdateDatapoint23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type UpdateDatapointContent$Outbound =
   | string
-  | Array<UpdateDatapoint21$Outbound | UpdateDatapoint22$Outbound>;
+  | Array<
+    | UpdateDatapoint21$Outbound
+    | UpdateDatapoint22$Outbound
+    | UpdateDatapoint23$Outbound
+  >;
 
 /** @internal */
 export const UpdateDatapointContent$outboundSchema: z.ZodType<
@@ -608,6 +839,7 @@ export const UpdateDatapointContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdateDatapoint21$outboundSchema),
     z.lazy(() => UpdateDatapoint22$outboundSchema),
+    z.lazy(() => UpdateDatapoint23$outboundSchema),
   ])),
 ]);
 
@@ -795,6 +1027,7 @@ export const UpdateDatapointMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdateDatapoint21$inboundSchema),
       z.lazy(() => UpdateDatapoint22$inboundSchema),
+      z.lazy(() => UpdateDatapoint23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => UpdateDatapointToolCalls$inboundSchema))
@@ -812,7 +1045,11 @@ export type UpdateDatapointMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<UpdateDatapoint21$Outbound | UpdateDatapoint22$Outbound>;
+    | Array<
+      | UpdateDatapoint21$Outbound
+      | UpdateDatapoint22$Outbound
+      | UpdateDatapoint23$Outbound
+    >;
   tool_calls?: Array<UpdateDatapointToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -829,6 +1066,7 @@ export const UpdateDatapointMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdateDatapoint21$outboundSchema),
       z.lazy(() => UpdateDatapoint22$outboundSchema),
+      z.lazy(() => UpdateDatapoint23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => UpdateDatapointToolCalls$outboundSchema))
@@ -1035,6 +1273,155 @@ export namespace UpdateDatapointDatasetsRole$ {
   export const inboundSchema = UpdateDatapointDatasetsRole$inboundSchema;
   /** @deprecated use `UpdateDatapointDatasetsRole$outboundSchema` instead. */
   export const outboundSchema = UpdateDatapointDatasetsRole$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONType
+  > = z.nativeEnum(UpdateDatapoint2DatasetsResponse200ApplicationJSONType);
+
+/** @internal */
+export const UpdateDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONType
+  > = UpdateDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2DatasetsResponse200ApplicationJSONType$ {
+  /** @deprecated use `UpdateDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsFile$inboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type UpdateDatapoint2DatasetsFile$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const UpdateDatapoint2DatasetsFile$outboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsFile$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2DatasetsFile
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2DatasetsFile$ {
+  /** @deprecated use `UpdateDatapoint2DatasetsFile$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapoint2DatasetsFile$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2DatasetsFile$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapoint2DatasetsFile$outboundSchema;
+  /** @deprecated use `UpdateDatapoint2DatasetsFile$Outbound` instead. */
+  export type Outbound = UpdateDatapoint2DatasetsFile$Outbound;
+}
+
+export function updateDatapoint2DatasetsFileToJSON(
+  updateDatapoint2DatasetsFile: UpdateDatapoint2DatasetsFile,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsFile$outboundSchema.parse(
+      updateDatapoint2DatasetsFile,
+    ),
+  );
+}
+
+export function updateDatapoint2DatasetsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2DatasetsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2DatasetsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2Datasets3$inboundSchema: z.ZodType<
+  UpdateDatapoint2Datasets3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema,
+  file: z.lazy(() => UpdateDatapoint2DatasetsFile$inboundSchema),
+});
+
+/** @internal */
+export type UpdateDatapoint2Datasets3$Outbound = {
+  type: string;
+  file: UpdateDatapoint2DatasetsFile$Outbound;
+};
+
+/** @internal */
+export const UpdateDatapoint2Datasets3$outboundSchema: z.ZodType<
+  UpdateDatapoint2Datasets3$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2Datasets3
+> = z.object({
+  type: UpdateDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema,
+  file: z.lazy(() => UpdateDatapoint2DatasetsFile$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2Datasets3$ {
+  /** @deprecated use `UpdateDatapoint2Datasets3$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapoint2Datasets3$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2Datasets3$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapoint2Datasets3$outboundSchema;
+  /** @deprecated use `UpdateDatapoint2Datasets3$Outbound` instead. */
+  export type Outbound = UpdateDatapoint2Datasets3$Outbound;
+}
+
+export function updateDatapoint2Datasets3ToJSON(
+  updateDatapoint2Datasets3: UpdateDatapoint2Datasets3,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2Datasets3$outboundSchema.parse(updateDatapoint2Datasets3),
+  );
+}
+
+export function updateDatapoint2Datasets3FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2Datasets3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2Datasets3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2Datasets3' from JSON`,
+  );
 }
 
 /** @internal */
@@ -1276,12 +1663,14 @@ export const UpdateDatapointContentDatasets2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdateDatapoint2Datasets1$inboundSchema),
   z.lazy(() => UpdateDatapoint2Datasets2$inboundSchema),
+  z.lazy(() => UpdateDatapoint2Datasets3$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateDatapointContentDatasets2$Outbound =
   | UpdateDatapoint2Datasets1$Outbound
-  | UpdateDatapoint2Datasets2$Outbound;
+  | UpdateDatapoint2Datasets2$Outbound
+  | UpdateDatapoint2Datasets3$Outbound;
 
 /** @internal */
 export const UpdateDatapointContentDatasets2$outboundSchema: z.ZodType<
@@ -1291,6 +1680,7 @@ export const UpdateDatapointContentDatasets2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdateDatapoint2Datasets1$outboundSchema),
   z.lazy(() => UpdateDatapoint2Datasets2$outboundSchema),
+  z.lazy(() => UpdateDatapoint2Datasets3$outboundSchema),
 ]);
 
 /**
@@ -1336,6 +1726,7 @@ export const UpdateDatapointDatasetsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdateDatapoint2Datasets1$inboundSchema),
     z.lazy(() => UpdateDatapoint2Datasets2$inboundSchema),
+    z.lazy(() => UpdateDatapoint2Datasets3$inboundSchema),
   ])),
 ]);
 
@@ -1343,7 +1734,9 @@ export const UpdateDatapointDatasetsContent$inboundSchema: z.ZodType<
 export type UpdateDatapointDatasetsContent$Outbound =
   | string
   | Array<
-    UpdateDatapoint2Datasets1$Outbound | UpdateDatapoint2Datasets2$Outbound
+    | UpdateDatapoint2Datasets1$Outbound
+    | UpdateDatapoint2Datasets2$Outbound
+    | UpdateDatapoint2Datasets3$Outbound
   >;
 
 /** @internal */
@@ -1356,6 +1749,7 @@ export const UpdateDatapointDatasetsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdateDatapoint2Datasets1$outboundSchema),
     z.lazy(() => UpdateDatapoint2Datasets2$outboundSchema),
+    z.lazy(() => UpdateDatapoint2Datasets3$outboundSchema),
   ])),
 ]);
 
@@ -1549,6 +1943,7 @@ export const UpdateDatapointDatasetsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdateDatapoint2Datasets1$inboundSchema),
       z.lazy(() => UpdateDatapoint2Datasets2$inboundSchema),
+      z.lazy(() => UpdateDatapoint2Datasets3$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(
@@ -1568,7 +1963,9 @@ export type UpdateDatapointDatasetsMessages$Outbound = {
   content:
     | string
     | Array<
-      UpdateDatapoint2Datasets1$Outbound | UpdateDatapoint2Datasets2$Outbound
+      | UpdateDatapoint2Datasets1$Outbound
+      | UpdateDatapoint2Datasets2$Outbound
+      | UpdateDatapoint2Datasets3$Outbound
     >;
   tool_calls?: Array<UpdateDatapointDatasetsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
@@ -1586,6 +1983,7 @@ export const UpdateDatapointDatasetsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdateDatapoint2Datasets1$outboundSchema),
       z.lazy(() => UpdateDatapoint2Datasets2$outboundSchema),
+      z.lazy(() => UpdateDatapoint2Datasets3$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(
@@ -1650,7 +2048,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-05-23T11:32:33.441Z",
+    "2025-05-24T19:14:39.719Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -1694,7 +2092,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-05-23T11:32:33.441Z"))
+  updated: z.date().default(() => new Date("2025-05-24T19:14:39.719Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

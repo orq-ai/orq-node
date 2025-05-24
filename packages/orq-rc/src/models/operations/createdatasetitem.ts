@@ -27,6 +27,38 @@ export const CreateDatasetItemRole = {
  */
 export type CreateDatasetItemRole = ClosedEnum<typeof CreateDatasetItemRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const CreateDatasetItem2DatasetsRequestType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type CreateDatasetItem2DatasetsRequestType = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsRequestType
+>;
+
+export type CreateDatasetItem2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type CreateDatasetItem23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: CreateDatasetItem2DatasetsRequestType;
+  file: CreateDatasetItem2File;
+};
+
 export const CreateDatasetItem2DatasetsType = {
   ImageUrl: "image_url",
 } as const;
@@ -68,14 +100,15 @@ export type CreateDatasetItem21 = {
 
 export type CreateDatasetItemContent2 =
   | CreateDatasetItem21
-  | CreateDatasetItem22;
+  | CreateDatasetItem22
+  | CreateDatasetItem23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type CreateDatasetItemContent =
   | string
-  | Array<CreateDatasetItem21 | CreateDatasetItem22>;
+  | Array<CreateDatasetItem21 | CreateDatasetItem22 | CreateDatasetItem23>;
 
 export const CreateDatasetItemType = {
   Function: "function",
@@ -105,7 +138,9 @@ export type CreateDatasetItemMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<CreateDatasetItem21 | CreateDatasetItem22>;
+  content:
+    | string
+    | Array<CreateDatasetItem21 | CreateDatasetItem22 | CreateDatasetItem23>;
   toolCalls?: Array<CreateDatasetItemToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -146,6 +181,37 @@ export const CreateDatasetItemDatasetsRole = {
 export type CreateDatasetItemDatasetsRole = ClosedEnum<
   typeof CreateDatasetItemDatasetsRole
 >;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type CreateDatasetItem2DatasetsResponse200ApplicationJSONType =
+  ClosedEnum<typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType>;
+
+export type CreateDatasetItem2DatasetsFile = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type CreateDatasetItem2Datasets3 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: CreateDatasetItem2DatasetsResponse200ApplicationJSONType;
+  file: CreateDatasetItem2DatasetsFile;
+};
 
 export const CreateDatasetItem2DatasetsResponse200Type = {
   ImageUrl: "image_url",
@@ -194,14 +260,19 @@ export type CreateDatasetItem2Datasets1 = {
 
 export type CreateDatasetItemContentDatasets2 =
   | CreateDatasetItem2Datasets1
-  | CreateDatasetItem2Datasets2;
+  | CreateDatasetItem2Datasets2
+  | CreateDatasetItem2Datasets3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type CreateDatasetItemDatasetsContent =
   | string
-  | Array<CreateDatasetItem2Datasets1 | CreateDatasetItem2Datasets2>;
+  | Array<
+    | CreateDatasetItem2Datasets1
+    | CreateDatasetItem2Datasets2
+    | CreateDatasetItem2Datasets3
+  >;
 
 export const CreateDatasetItemDatasetsType = {
   Function: "function",
@@ -235,7 +306,11 @@ export type CreateDatasetItemDatasetsMessages = {
    */
   content:
     | string
-    | Array<CreateDatasetItem2Datasets1 | CreateDatasetItem2Datasets2>;
+    | Array<
+      | CreateDatasetItem2Datasets1
+      | CreateDatasetItem2Datasets2
+      | CreateDatasetItem2Datasets3
+    >;
   toolCalls?: Array<CreateDatasetItemDatasetsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -302,6 +377,152 @@ export namespace CreateDatasetItemRole$ {
   export const inboundSchema = CreateDatasetItemRole$inboundSchema;
   /** @deprecated use `CreateDatasetItemRole$outboundSchema` instead. */
   export const outboundSchema = CreateDatasetItemRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> = z.nativeEnum(
+    CreateDatasetItem2DatasetsRequestType,
+  );
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> =
+    CreateDatasetItem2DatasetsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsRequestType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsRequestType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2File$inboundSchema: z.ZodType<
+  CreateDatasetItem2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItem2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const CreateDatasetItem2File$outboundSchema: z.ZodType<
+  CreateDatasetItem2File$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItem2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2File$ {
+  /** @deprecated use `CreateDatasetItem2File$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2File$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2File$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2File$outboundSchema;
+  /** @deprecated use `CreateDatasetItem2File$Outbound` instead. */
+  export type Outbound = CreateDatasetItem2File$Outbound;
+}
+
+export function createDatasetItem2FileToJSON(
+  createDatasetItem2File: CreateDatasetItem2File,
+): string {
+  return JSON.stringify(
+    CreateDatasetItem2File$outboundSchema.parse(createDatasetItem2File),
+  );
+}
+
+export function createDatasetItem2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItem2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItem2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItem2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItem23$inboundSchema: z.ZodType<
+  CreateDatasetItem23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateDatasetItem2DatasetsRequestType$inboundSchema,
+  file: z.lazy(() => CreateDatasetItem2File$inboundSchema),
+});
+
+/** @internal */
+export type CreateDatasetItem23$Outbound = {
+  type: string;
+  file: CreateDatasetItem2File$Outbound;
+};
+
+/** @internal */
+export const CreateDatasetItem23$outboundSchema: z.ZodType<
+  CreateDatasetItem23$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItem23
+> = z.object({
+  type: CreateDatasetItem2DatasetsRequestType$outboundSchema,
+  file: z.lazy(() => CreateDatasetItem2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem23$ {
+  /** @deprecated use `CreateDatasetItem23$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem23$inboundSchema;
+  /** @deprecated use `CreateDatasetItem23$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem23$outboundSchema;
+  /** @deprecated use `CreateDatasetItem23$Outbound` instead. */
+  export type Outbound = CreateDatasetItem23$Outbound;
+}
+
+export function createDatasetItem23ToJSON(
+  createDatasetItem23: CreateDatasetItem23,
+): string {
+  return JSON.stringify(
+    CreateDatasetItem23$outboundSchema.parse(createDatasetItem23),
+  );
+}
+
+export function createDatasetItem23FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItem23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItem23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItem23' from JSON`,
+  );
 }
 
 /** @internal */
@@ -533,12 +754,14 @@ export const CreateDatasetItemContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreateDatasetItem21$inboundSchema),
   z.lazy(() => CreateDatasetItem22$inboundSchema),
+  z.lazy(() => CreateDatasetItem23$inboundSchema),
 ]);
 
 /** @internal */
 export type CreateDatasetItemContent2$Outbound =
   | CreateDatasetItem21$Outbound
-  | CreateDatasetItem22$Outbound;
+  | CreateDatasetItem22$Outbound
+  | CreateDatasetItem23$Outbound;
 
 /** @internal */
 export const CreateDatasetItemContent2$outboundSchema: z.ZodType<
@@ -548,6 +771,7 @@ export const CreateDatasetItemContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreateDatasetItem21$outboundSchema),
   z.lazy(() => CreateDatasetItem22$outboundSchema),
+  z.lazy(() => CreateDatasetItem23$outboundSchema),
 ]);
 
 /**
@@ -591,13 +815,18 @@ export const CreateDatasetItemContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreateDatasetItem21$inboundSchema),
     z.lazy(() => CreateDatasetItem22$inboundSchema),
+    z.lazy(() => CreateDatasetItem23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type CreateDatasetItemContent$Outbound =
   | string
-  | Array<CreateDatasetItem21$Outbound | CreateDatasetItem22$Outbound>;
+  | Array<
+    | CreateDatasetItem21$Outbound
+    | CreateDatasetItem22$Outbound
+    | CreateDatasetItem23$Outbound
+  >;
 
 /** @internal */
 export const CreateDatasetItemContent$outboundSchema: z.ZodType<
@@ -609,6 +838,7 @@ export const CreateDatasetItemContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreateDatasetItem21$outboundSchema),
     z.lazy(() => CreateDatasetItem22$outboundSchema),
+    z.lazy(() => CreateDatasetItem23$outboundSchema),
   ])),
 ]);
 
@@ -796,6 +1026,7 @@ export const CreateDatasetItemMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreateDatasetItem21$inboundSchema),
       z.lazy(() => CreateDatasetItem22$inboundSchema),
+      z.lazy(() => CreateDatasetItem23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => CreateDatasetItemToolCalls$inboundSchema))
@@ -813,7 +1044,11 @@ export type CreateDatasetItemMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<CreateDatasetItem21$Outbound | CreateDatasetItem22$Outbound>;
+    | Array<
+      | CreateDatasetItem21$Outbound
+      | CreateDatasetItem22$Outbound
+      | CreateDatasetItem23$Outbound
+    >;
   tool_calls?: Array<CreateDatasetItemToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -830,6 +1065,7 @@ export const CreateDatasetItemMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreateDatasetItem21$outboundSchema),
       z.lazy(() => CreateDatasetItem22$outboundSchema),
+      z.lazy(() => CreateDatasetItem23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => CreateDatasetItemToolCalls$outboundSchema))
@@ -1033,6 +1269,157 @@ export namespace CreateDatasetItemDatasetsRole$ {
   export const inboundSchema = CreateDatasetItemDatasetsRole$inboundSchema;
   /** @deprecated use `CreateDatasetItemDatasetsRole$outboundSchema` instead. */
   export const outboundSchema = CreateDatasetItemDatasetsRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
+  > = z.nativeEnum(CreateDatasetItem2DatasetsResponse200ApplicationJSONType);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
+  > = CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsFile$inboundSchema: z.ZodType<
+  CreateDatasetItem2DatasetsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItem2DatasetsFile$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const CreateDatasetItem2DatasetsFile$outboundSchema: z.ZodType<
+  CreateDatasetItem2DatasetsFile$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItem2DatasetsFile
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsFile$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsFile$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2DatasetsFile$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsFile$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2DatasetsFile$outboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsFile$Outbound` instead. */
+  export type Outbound = CreateDatasetItem2DatasetsFile$Outbound;
+}
+
+export function createDatasetItem2DatasetsFileToJSON(
+  createDatasetItem2DatasetsFile: CreateDatasetItem2DatasetsFile,
+): string {
+  return JSON.stringify(
+    CreateDatasetItem2DatasetsFile$outboundSchema.parse(
+      createDatasetItem2DatasetsFile,
+    ),
+  );
+}
+
+export function createDatasetItem2DatasetsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItem2DatasetsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItem2DatasetsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItem2DatasetsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItem2Datasets3$inboundSchema: z.ZodType<
+  CreateDatasetItem2Datasets3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema,
+  file: z.lazy(() => CreateDatasetItem2DatasetsFile$inboundSchema),
+});
+
+/** @internal */
+export type CreateDatasetItem2Datasets3$Outbound = {
+  type: string;
+  file: CreateDatasetItem2DatasetsFile$Outbound;
+};
+
+/** @internal */
+export const CreateDatasetItem2Datasets3$outboundSchema: z.ZodType<
+  CreateDatasetItem2Datasets3$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItem2Datasets3
+> = z.object({
+  type: CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema,
+  file: z.lazy(() => CreateDatasetItem2DatasetsFile$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2Datasets3$ {
+  /** @deprecated use `CreateDatasetItem2Datasets3$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2Datasets3$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2Datasets3$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2Datasets3$outboundSchema;
+  /** @deprecated use `CreateDatasetItem2Datasets3$Outbound` instead. */
+  export type Outbound = CreateDatasetItem2Datasets3$Outbound;
+}
+
+export function createDatasetItem2Datasets3ToJSON(
+  createDatasetItem2Datasets3: CreateDatasetItem2Datasets3,
+): string {
+  return JSON.stringify(
+    CreateDatasetItem2Datasets3$outboundSchema.parse(
+      createDatasetItem2Datasets3,
+    ),
+  );
+}
+
+export function createDatasetItem2Datasets3FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItem2Datasets3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItem2Datasets3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItem2Datasets3' from JSON`,
+  );
 }
 
 /** @internal */
@@ -1280,12 +1667,14 @@ export const CreateDatasetItemContentDatasets2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreateDatasetItem2Datasets1$inboundSchema),
   z.lazy(() => CreateDatasetItem2Datasets2$inboundSchema),
+  z.lazy(() => CreateDatasetItem2Datasets3$inboundSchema),
 ]);
 
 /** @internal */
 export type CreateDatasetItemContentDatasets2$Outbound =
   | CreateDatasetItem2Datasets1$Outbound
-  | CreateDatasetItem2Datasets2$Outbound;
+  | CreateDatasetItem2Datasets2$Outbound
+  | CreateDatasetItem2Datasets3$Outbound;
 
 /** @internal */
 export const CreateDatasetItemContentDatasets2$outboundSchema: z.ZodType<
@@ -1295,6 +1684,7 @@ export const CreateDatasetItemContentDatasets2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreateDatasetItem2Datasets1$outboundSchema),
   z.lazy(() => CreateDatasetItem2Datasets2$outboundSchema),
+  z.lazy(() => CreateDatasetItem2Datasets3$outboundSchema),
 ]);
 
 /**
@@ -1341,6 +1731,7 @@ export const CreateDatasetItemDatasetsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreateDatasetItem2Datasets1$inboundSchema),
     z.lazy(() => CreateDatasetItem2Datasets2$inboundSchema),
+    z.lazy(() => CreateDatasetItem2Datasets3$inboundSchema),
   ])),
 ]);
 
@@ -1348,7 +1739,9 @@ export const CreateDatasetItemDatasetsContent$inboundSchema: z.ZodType<
 export type CreateDatasetItemDatasetsContent$Outbound =
   | string
   | Array<
-    CreateDatasetItem2Datasets1$Outbound | CreateDatasetItem2Datasets2$Outbound
+    | CreateDatasetItem2Datasets1$Outbound
+    | CreateDatasetItem2Datasets2$Outbound
+    | CreateDatasetItem2Datasets3$Outbound
   >;
 
 /** @internal */
@@ -1361,6 +1754,7 @@ export const CreateDatasetItemDatasetsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreateDatasetItem2Datasets1$outboundSchema),
     z.lazy(() => CreateDatasetItem2Datasets2$outboundSchema),
+    z.lazy(() => CreateDatasetItem2Datasets3$outboundSchema),
   ])),
 ]);
 
@@ -1557,6 +1951,7 @@ export const CreateDatasetItemDatasetsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreateDatasetItem2Datasets1$inboundSchema),
       z.lazy(() => CreateDatasetItem2Datasets2$inboundSchema),
+      z.lazy(() => CreateDatasetItem2Datasets3$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(
@@ -1578,6 +1973,7 @@ export type CreateDatasetItemDatasetsMessages$Outbound = {
     | Array<
       | CreateDatasetItem2Datasets1$Outbound
       | CreateDatasetItem2Datasets2$Outbound
+      | CreateDatasetItem2Datasets3$Outbound
     >;
   tool_calls?: Array<CreateDatasetItemDatasetsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
@@ -1595,6 +1991,7 @@ export const CreateDatasetItemDatasetsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreateDatasetItem2Datasets1$outboundSchema),
       z.lazy(() => CreateDatasetItem2Datasets2$outboundSchema),
+      z.lazy(() => CreateDatasetItem2Datasets3$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(
@@ -1661,7 +2058,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-05-23T11:32:33.441Z",
+    "2025-05-24T19:14:39.719Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -1705,7 +2102,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-05-23T11:32:33.441Z"))
+  updated: z.date().default(() => new Date("2025-05-24T19:14:39.719Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

@@ -21,8 +21,10 @@ let value: UpdatePromptResponseBody = {
         role: "tool",
         content: [
           {
-            type: "text",
-            text: "<value>",
+            type: "image_url",
+            imageUrl: {
+              url: "https://windy-gradient.info/",
+            },
           },
         ],
       },

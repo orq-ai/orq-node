@@ -32,6 +32,38 @@ export const RetrieveDatapointRole = {
  */
 export type RetrieveDatapointRole = ClosedEnum<typeof RetrieveDatapointRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const RetrieveDatapoint2DatasetsResponseType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type RetrieveDatapoint2DatasetsResponseType = ClosedEnum<
+  typeof RetrieveDatapoint2DatasetsResponseType
+>;
+
+export type RetrieveDatapoint2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type RetrieveDatapoint23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: RetrieveDatapoint2DatasetsResponseType;
+  file: RetrieveDatapoint2File;
+};
+
 export const RetrieveDatapoint2DatasetsType = {
   ImageUrl: "image_url",
 } as const;
@@ -77,14 +109,15 @@ export type RetrieveDatapoint21 = {
 
 export type RetrieveDatapointContent2 =
   | RetrieveDatapoint21
-  | RetrieveDatapoint22;
+  | RetrieveDatapoint22
+  | RetrieveDatapoint23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type RetrieveDatapointContent =
   | string
-  | Array<RetrieveDatapoint21 | RetrieveDatapoint22>;
+  | Array<RetrieveDatapoint21 | RetrieveDatapoint22 | RetrieveDatapoint23>;
 
 export const RetrieveDatapointType = {
   Function: "function",
@@ -114,7 +147,9 @@ export type RetrieveDatapointMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<RetrieveDatapoint21 | RetrieveDatapoint22>;
+  content:
+    | string
+    | Array<RetrieveDatapoint21 | RetrieveDatapoint22 | RetrieveDatapoint23>;
   toolCalls?: Array<RetrieveDatapointToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -248,6 +283,152 @@ export namespace RetrieveDatapointRole$ {
   export const inboundSchema = RetrieveDatapointRole$inboundSchema;
   /** @deprecated use `RetrieveDatapointRole$outboundSchema` instead. */
   export const outboundSchema = RetrieveDatapointRole$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponseType> = z.nativeEnum(
+    RetrieveDatapoint2DatasetsResponseType,
+  );
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponseType> =
+    RetrieveDatapoint2DatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2DatasetsResponseType$ {
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapoint2DatasetsResponseType$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapoint2DatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2File$inboundSchema: z.ZodType<
+  RetrieveDatapoint2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type RetrieveDatapoint2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const RetrieveDatapoint2File$outboundSchema: z.ZodType<
+  RetrieveDatapoint2File$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapoint2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2File$ {
+  /** @deprecated use `RetrieveDatapoint2File$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint2File$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2File$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint2File$outboundSchema;
+  /** @deprecated use `RetrieveDatapoint2File$Outbound` instead. */
+  export type Outbound = RetrieveDatapoint2File$Outbound;
+}
+
+export function retrieveDatapoint2FileToJSON(
+  retrieveDatapoint2File: RetrieveDatapoint2File,
+): string {
+  return JSON.stringify(
+    RetrieveDatapoint2File$outboundSchema.parse(retrieveDatapoint2File),
+  );
+}
+
+export function retrieveDatapoint2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapoint2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapoint2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapoint2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapoint23$inboundSchema: z.ZodType<
+  RetrieveDatapoint23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RetrieveDatapoint2DatasetsResponseType$inboundSchema,
+  file: z.lazy(() => RetrieveDatapoint2File$inboundSchema),
+});
+
+/** @internal */
+export type RetrieveDatapoint23$Outbound = {
+  type: string;
+  file: RetrieveDatapoint2File$Outbound;
+};
+
+/** @internal */
+export const RetrieveDatapoint23$outboundSchema: z.ZodType<
+  RetrieveDatapoint23$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapoint23
+> = z.object({
+  type: RetrieveDatapoint2DatasetsResponseType$outboundSchema,
+  file: z.lazy(() => RetrieveDatapoint2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint23$ {
+  /** @deprecated use `RetrieveDatapoint23$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint23$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint23$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint23$outboundSchema;
+  /** @deprecated use `RetrieveDatapoint23$Outbound` instead. */
+  export type Outbound = RetrieveDatapoint23$Outbound;
+}
+
+export function retrieveDatapoint23ToJSON(
+  retrieveDatapoint23: RetrieveDatapoint23,
+): string {
+  return JSON.stringify(
+    RetrieveDatapoint23$outboundSchema.parse(retrieveDatapoint23),
+  );
+}
+
+export function retrieveDatapoint23FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapoint23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapoint23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapoint23' from JSON`,
+  );
 }
 
 /** @internal */
@@ -482,12 +663,14 @@ export const RetrieveDatapointContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => RetrieveDatapoint21$inboundSchema),
   z.lazy(() => RetrieveDatapoint22$inboundSchema),
+  z.lazy(() => RetrieveDatapoint23$inboundSchema),
 ]);
 
 /** @internal */
 export type RetrieveDatapointContent2$Outbound =
   | RetrieveDatapoint21$Outbound
-  | RetrieveDatapoint22$Outbound;
+  | RetrieveDatapoint22$Outbound
+  | RetrieveDatapoint23$Outbound;
 
 /** @internal */
 export const RetrieveDatapointContent2$outboundSchema: z.ZodType<
@@ -497,6 +680,7 @@ export const RetrieveDatapointContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => RetrieveDatapoint21$outboundSchema),
   z.lazy(() => RetrieveDatapoint22$outboundSchema),
+  z.lazy(() => RetrieveDatapoint23$outboundSchema),
 ]);
 
 /**
@@ -540,13 +724,18 @@ export const RetrieveDatapointContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => RetrieveDatapoint21$inboundSchema),
     z.lazy(() => RetrieveDatapoint22$inboundSchema),
+    z.lazy(() => RetrieveDatapoint23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type RetrieveDatapointContent$Outbound =
   | string
-  | Array<RetrieveDatapoint21$Outbound | RetrieveDatapoint22$Outbound>;
+  | Array<
+    | RetrieveDatapoint21$Outbound
+    | RetrieveDatapoint22$Outbound
+    | RetrieveDatapoint23$Outbound
+  >;
 
 /** @internal */
 export const RetrieveDatapointContent$outboundSchema: z.ZodType<
@@ -558,6 +747,7 @@ export const RetrieveDatapointContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => RetrieveDatapoint21$outboundSchema),
     z.lazy(() => RetrieveDatapoint22$outboundSchema),
+    z.lazy(() => RetrieveDatapoint23$outboundSchema),
   ])),
 ]);
 
@@ -745,6 +935,7 @@ export const RetrieveDatapointMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => RetrieveDatapoint21$inboundSchema),
       z.lazy(() => RetrieveDatapoint22$inboundSchema),
+      z.lazy(() => RetrieveDatapoint23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => RetrieveDatapointToolCalls$inboundSchema))
@@ -762,7 +953,11 @@ export type RetrieveDatapointMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<RetrieveDatapoint21$Outbound | RetrieveDatapoint22$Outbound>;
+    | Array<
+      | RetrieveDatapoint21$Outbound
+      | RetrieveDatapoint22$Outbound
+      | RetrieveDatapoint23$Outbound
+    >;
   tool_calls?: Array<RetrieveDatapointToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -779,6 +974,7 @@ export const RetrieveDatapointMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => RetrieveDatapoint21$outboundSchema),
       z.lazy(() => RetrieveDatapoint22$outboundSchema),
+      z.lazy(() => RetrieveDatapoint23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => RetrieveDatapointToolCalls$outboundSchema))
@@ -840,7 +1036,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-05-23T11:32:33.441Z",
+    "2025-05-24T19:14:39.719Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -883,7 +1079,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-05-23T11:32:33.441Z"))
+  updated: z.date().default(() => new Date("2025-05-24T19:14:39.719Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

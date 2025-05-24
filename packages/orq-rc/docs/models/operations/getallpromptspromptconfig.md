@@ -13,8 +13,10 @@ let value: GetAllPromptsPromptConfig = {
       role: "expected_output",
       content: [
         {
-          type: "text",
-          text: "<value>",
+          type: "image_url",
+          imageUrl: {
+            url: "https://unlucky-jacket.info/",
+          },
         },
       ],
     },

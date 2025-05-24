@@ -280,6 +280,38 @@ export const GetAllPromptsRole = {
  */
 export type GetAllPromptsRole = ClosedEnum<typeof GetAllPromptsRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const GetAllPrompts2PromptsResponseType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type GetAllPrompts2PromptsResponseType = ClosedEnum<
+  typeof GetAllPrompts2PromptsResponseType
+>;
+
+export type GetAllPrompts2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type GetAllPrompts23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: GetAllPrompts2PromptsResponseType;
+  file: GetAllPrompts2File;
+};
+
 export const GetAllPrompts2PromptsType = {
   ImageUrl: "image_url",
 } as const;
@@ -323,14 +355,17 @@ export type GetAllPrompts21 = {
   text: string;
 };
 
-export type GetAllPromptsContent2 = GetAllPrompts21 | GetAllPrompts22;
+export type GetAllPromptsContent2 =
+  | GetAllPrompts21
+  | GetAllPrompts22
+  | GetAllPrompts23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type GetAllPromptsContent =
   | string
-  | Array<GetAllPrompts21 | GetAllPrompts22>;
+  | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>;
 
 export const GetAllPromptsPromptsType = {
   Function: "function",
@@ -362,7 +397,7 @@ export type GetAllPromptsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<GetAllPrompts21 | GetAllPrompts22>;
+  content: string | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>;
   toolCalls?: Array<GetAllPromptsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1160,6 +1195,148 @@ export namespace GetAllPromptsRole$ {
 }
 
 /** @internal */
+export const GetAllPrompts2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2PromptsResponseType
+> = z.nativeEnum(GetAllPrompts2PromptsResponseType);
+
+/** @internal */
+export const GetAllPrompts2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2PromptsResponseType
+> = GetAllPrompts2PromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts2PromptsResponseType$ {
+  /** @deprecated use `GetAllPrompts2PromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts2PromptsResponseType$inboundSchema;
+  /** @deprecated use `GetAllPrompts2PromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPrompts2PromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPrompts2File$inboundSchema: z.ZodType<
+  GetAllPrompts2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type GetAllPrompts2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const GetAllPrompts2File$outboundSchema: z.ZodType<
+  GetAllPrompts2File$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts2File$ {
+  /** @deprecated use `GetAllPrompts2File$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts2File$inboundSchema;
+  /** @deprecated use `GetAllPrompts2File$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts2File$outboundSchema;
+  /** @deprecated use `GetAllPrompts2File$Outbound` instead. */
+  export type Outbound = GetAllPrompts2File$Outbound;
+}
+
+export function getAllPrompts2FileToJSON(
+  getAllPrompts2File: GetAllPrompts2File,
+): string {
+  return JSON.stringify(
+    GetAllPrompts2File$outboundSchema.parse(getAllPrompts2File),
+  );
+}
+
+export function getAllPrompts2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPrompts23$inboundSchema: z.ZodType<
+  GetAllPrompts23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPrompts2PromptsResponseType$inboundSchema,
+  file: z.lazy(() => GetAllPrompts2File$inboundSchema),
+});
+
+/** @internal */
+export type GetAllPrompts23$Outbound = {
+  type: string;
+  file: GetAllPrompts2File$Outbound;
+};
+
+/** @internal */
+export const GetAllPrompts23$outboundSchema: z.ZodType<
+  GetAllPrompts23$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts23
+> = z.object({
+  type: GetAllPrompts2PromptsResponseType$outboundSchema,
+  file: z.lazy(() => GetAllPrompts2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts23$ {
+  /** @deprecated use `GetAllPrompts23$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts23$inboundSchema;
+  /** @deprecated use `GetAllPrompts23$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts23$outboundSchema;
+  /** @deprecated use `GetAllPrompts23$Outbound` instead. */
+  export type Outbound = GetAllPrompts23$Outbound;
+}
+
+export function getAllPrompts23ToJSON(
+  getAllPrompts23: GetAllPrompts23,
+): string {
+  return JSON.stringify(GetAllPrompts23$outboundSchema.parse(getAllPrompts23));
+}
+
+export function getAllPrompts23FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts23' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPrompts2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetAllPrompts2PromptsType
 > = z.nativeEnum(GetAllPrompts2PromptsType);
@@ -1387,12 +1564,14 @@ export const GetAllPromptsContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetAllPrompts21$inboundSchema),
   z.lazy(() => GetAllPrompts22$inboundSchema),
+  z.lazy(() => GetAllPrompts23$inboundSchema),
 ]);
 
 /** @internal */
 export type GetAllPromptsContent2$Outbound =
   | GetAllPrompts21$Outbound
-  | GetAllPrompts22$Outbound;
+  | GetAllPrompts22$Outbound
+  | GetAllPrompts23$Outbound;
 
 /** @internal */
 export const GetAllPromptsContent2$outboundSchema: z.ZodType<
@@ -1402,6 +1581,7 @@ export const GetAllPromptsContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetAllPrompts21$outboundSchema),
   z.lazy(() => GetAllPrompts22$outboundSchema),
+  z.lazy(() => GetAllPrompts23$outboundSchema),
 ]);
 
 /**
@@ -1445,13 +1625,18 @@ export const GetAllPromptsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => GetAllPrompts21$inboundSchema),
     z.lazy(() => GetAllPrompts22$inboundSchema),
+    z.lazy(() => GetAllPrompts23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type GetAllPromptsContent$Outbound =
   | string
-  | Array<GetAllPrompts21$Outbound | GetAllPrompts22$Outbound>;
+  | Array<
+    | GetAllPrompts21$Outbound
+    | GetAllPrompts22$Outbound
+    | GetAllPrompts23$Outbound
+  >;
 
 /** @internal */
 export const GetAllPromptsContent$outboundSchema: z.ZodType<
@@ -1463,6 +1648,7 @@ export const GetAllPromptsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => GetAllPrompts21$outboundSchema),
     z.lazy(() => GetAllPrompts22$outboundSchema),
+    z.lazy(() => GetAllPrompts23$outboundSchema),
   ])),
 ]);
 
@@ -1650,6 +1836,7 @@ export const GetAllPromptsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => GetAllPrompts21$inboundSchema),
       z.lazy(() => GetAllPrompts22$inboundSchema),
+      z.lazy(() => GetAllPrompts23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => GetAllPromptsToolCalls$inboundSchema))
@@ -1665,7 +1852,13 @@ export const GetAllPromptsMessages$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAllPromptsMessages$Outbound = {
   role: string;
-  content: string | Array<GetAllPrompts21$Outbound | GetAllPrompts22$Outbound>;
+  content:
+    | string
+    | Array<
+      | GetAllPrompts21$Outbound
+      | GetAllPrompts22$Outbound
+      | GetAllPrompts23$Outbound
+    >;
   tool_calls?: Array<GetAllPromptsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -1682,6 +1875,7 @@ export const GetAllPromptsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => GetAllPrompts21$outboundSchema),
       z.lazy(() => GetAllPrompts22$outboundSchema),
+      z.lazy(() => GetAllPrompts23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => GetAllPromptsToolCalls$outboundSchema))
