@@ -10,6 +10,7 @@
 * [retrieve](#retrieve) - Retrieve a dataset
 * [update](#update) - Update a dataset
 * [delete](#delete) - Delete a dataset
+* [createExperiment](#createexperiment) - Create an experiment from a dataset
 * [listDatapoints](#listdatapoints) - List datapoints
 * [createDatapoint](#createdatapoint) - Create a datapoint
 * [retrieveDatapoint](#retrievedatapoint) - Retrieve a datapoint
@@ -106,7 +107,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.datasets.create({
     displayName: "Neva.Raynor10",
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   });
 
   // Handle the result
@@ -133,7 +134,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await datasetsCreate(orq, {
     displayName: "Neva.Raynor10",
-    path: "Customer Service/Billing/Refund",
+    path: "Default",
   });
 
   if (!res.ok) {
@@ -262,7 +263,7 @@ async function run() {
   const result = await orq.datasets.update({
     datasetId: "<id>",
     requestBody: {
-      path: "Customer Service/Billing/Refund",
+      path: "Default",
     },
   });
 
@@ -291,7 +292,7 @@ async function run() {
   const res = await datasetsUpdate(orq, {
     datasetId: "<id>",
     requestBody: {
-      path: "Customer Service/Billing/Refund",
+      path: "Default",
     },
   });
 
@@ -395,6 +396,92 @@ run();
 ### Response
 
 **Promise\<void\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## createExperiment
+
+Create an experiment from a dataset
+
+### Example Usage
+
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.datasets.createExperiment({
+    datasetId: "<id>",
+    requestBody: {
+      experimentKey: "<value>",
+      path: "Default/Experiments",
+      type: "dataset_experiment",
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { datasetsCreateExperiment } from "@orq-ai/node/funcs/datasetsCreateExperiment.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await datasetsCreateExperiment(orq, {
+    datasetId: "<id>",
+    requestBody: {
+      experimentKey: "<value>",
+      path: "Default/Experiments",
+      type: "dataset_experiment",
+    },
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateDatasetExperimentRequest](../../models/operations/createdatasetexperimentrequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.CreateDatasetExperimentResponseBody](../../models/operations/createdatasetexperimentresponsebody.md)\>**
 
 ### Errors
 

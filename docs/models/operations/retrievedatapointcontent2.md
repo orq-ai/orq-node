@@ -23,3 +23,14 @@ const value: operations.RetrieveDatapoint22 = {
 };
 ```
 
+### `operations.RetrieveDatapoint23`
+
+```typescript
+const value: operations.RetrieveDatapoint23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

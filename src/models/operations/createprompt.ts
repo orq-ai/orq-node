@@ -241,6 +241,38 @@ export const CreatePromptRole = {
  */
 export type CreatePromptRole = ClosedEnum<typeof CreatePromptRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const CreatePrompt2PromptsRequestType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type CreatePrompt2PromptsRequestType = ClosedEnum<
+  typeof CreatePrompt2PromptsRequestType
+>;
+
+export type CreatePrompt2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type CreatePrompt23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: CreatePrompt2PromptsRequestType;
+  file: CreatePrompt2File;
+};
+
 export const CreatePrompt2PromptsType = {
   ImageUrl: "image_url",
 } as const;
@@ -280,14 +312,17 @@ export type CreatePrompt21 = {
   text: string;
 };
 
-export type CreatePromptContent2 = CreatePrompt21 | CreatePrompt22;
+export type CreatePromptContent2 =
+  | CreatePrompt21
+  | CreatePrompt22
+  | CreatePrompt23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type CreatePromptContent =
   | string
-  | Array<CreatePrompt21 | CreatePrompt22>;
+  | Array<CreatePrompt21 | CreatePrompt22 | CreatePrompt23>;
 
 export const CreatePromptType = {
   Function: "function",
@@ -317,7 +352,7 @@ export type CreatePromptMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<CreatePrompt21 | CreatePrompt22>;
+  content: string | Array<CreatePrompt21 | CreatePrompt22 | CreatePrompt23>;
   toolCalls?: Array<CreatePromptToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -670,6 +705,38 @@ export type CreatePromptPromptsRole = ClosedEnum<
   typeof CreatePromptPromptsRole
 >;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const CreatePrompt2PromptsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type CreatePrompt2PromptsResponse200ApplicationJSONType = ClosedEnum<
+  typeof CreatePrompt2PromptsResponse200ApplicationJSONType
+>;
+
+export type CreatePrompt2PromptsFile = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type CreatePrompt2Prompts3 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: CreatePrompt2PromptsResponse200ApplicationJSONType;
+  file: CreatePrompt2PromptsFile;
+};
+
 export const CreatePrompt2PromptsResponse200Type = {
   ImageUrl: "image_url",
 } as const;
@@ -717,14 +784,17 @@ export type CreatePrompt2Prompts1 = {
 
 export type CreatePromptContentPrompts2 =
   | CreatePrompt2Prompts1
-  | CreatePrompt2Prompts2;
+  | CreatePrompt2Prompts2
+  | CreatePrompt2Prompts3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type CreatePromptPromptsContent =
   | string
-  | Array<CreatePrompt2Prompts1 | CreatePrompt2Prompts2>;
+  | Array<
+    CreatePrompt2Prompts1 | CreatePrompt2Prompts2 | CreatePrompt2Prompts3
+  >;
 
 export const CreatePromptPromptsResponseType = {
   Function: "function",
@@ -756,7 +826,11 @@ export type CreatePromptPromptsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<CreatePrompt2Prompts1 | CreatePrompt2Prompts2>;
+  content:
+    | string
+    | Array<
+      CreatePrompt2Prompts1 | CreatePrompt2Prompts2 | CreatePrompt2Prompts3
+    >;
   toolCalls?: Array<CreatePromptPromptsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1398,6 +1472,145 @@ export namespace CreatePromptRole$ {
 }
 
 /** @internal */
+export const CreatePrompt2PromptsRequestType$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePrompt2PromptsRequestType
+> = z.nativeEnum(CreatePrompt2PromptsRequestType);
+
+/** @internal */
+export const CreatePrompt2PromptsRequestType$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePrompt2PromptsRequestType
+> = CreatePrompt2PromptsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePrompt2PromptsRequestType$ {
+  /** @deprecated use `CreatePrompt2PromptsRequestType$inboundSchema` instead. */
+  export const inboundSchema = CreatePrompt2PromptsRequestType$inboundSchema;
+  /** @deprecated use `CreatePrompt2PromptsRequestType$outboundSchema` instead. */
+  export const outboundSchema = CreatePrompt2PromptsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const CreatePrompt2File$inboundSchema: z.ZodType<
+  CreatePrompt2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type CreatePrompt2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const CreatePrompt2File$outboundSchema: z.ZodType<
+  CreatePrompt2File$Outbound,
+  z.ZodTypeDef,
+  CreatePrompt2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePrompt2File$ {
+  /** @deprecated use `CreatePrompt2File$inboundSchema` instead. */
+  export const inboundSchema = CreatePrompt2File$inboundSchema;
+  /** @deprecated use `CreatePrompt2File$outboundSchema` instead. */
+  export const outboundSchema = CreatePrompt2File$outboundSchema;
+  /** @deprecated use `CreatePrompt2File$Outbound` instead. */
+  export type Outbound = CreatePrompt2File$Outbound;
+}
+
+export function createPrompt2FileToJSON(
+  createPrompt2File: CreatePrompt2File,
+): string {
+  return JSON.stringify(
+    CreatePrompt2File$outboundSchema.parse(createPrompt2File),
+  );
+}
+
+export function createPrompt2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrompt2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrompt2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePrompt23$inboundSchema: z.ZodType<
+  CreatePrompt23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePrompt2PromptsRequestType$inboundSchema,
+  file: z.lazy(() => CreatePrompt2File$inboundSchema),
+});
+
+/** @internal */
+export type CreatePrompt23$Outbound = {
+  type: string;
+  file: CreatePrompt2File$Outbound;
+};
+
+/** @internal */
+export const CreatePrompt23$outboundSchema: z.ZodType<
+  CreatePrompt23$Outbound,
+  z.ZodTypeDef,
+  CreatePrompt23
+> = z.object({
+  type: CreatePrompt2PromptsRequestType$outboundSchema,
+  file: z.lazy(() => CreatePrompt2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePrompt23$ {
+  /** @deprecated use `CreatePrompt23$inboundSchema` instead. */
+  export const inboundSchema = CreatePrompt23$inboundSchema;
+  /** @deprecated use `CreatePrompt23$outboundSchema` instead. */
+  export const outboundSchema = CreatePrompt23$outboundSchema;
+  /** @deprecated use `CreatePrompt23$Outbound` instead. */
+  export type Outbound = CreatePrompt23$Outbound;
+}
+
+export function createPrompt23ToJSON(createPrompt23: CreatePrompt23): string {
+  return JSON.stringify(CreatePrompt23$outboundSchema.parse(createPrompt23));
+}
+
+export function createPrompt23FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrompt23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrompt23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt23' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreatePrompt2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof CreatePrompt2PromptsType
 > = z.nativeEnum(CreatePrompt2PromptsType);
@@ -1618,12 +1831,14 @@ export const CreatePromptContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreatePrompt21$inboundSchema),
   z.lazy(() => CreatePrompt22$inboundSchema),
+  z.lazy(() => CreatePrompt23$inboundSchema),
 ]);
 
 /** @internal */
 export type CreatePromptContent2$Outbound =
   | CreatePrompt21$Outbound
-  | CreatePrompt22$Outbound;
+  | CreatePrompt22$Outbound
+  | CreatePrompt23$Outbound;
 
 /** @internal */
 export const CreatePromptContent2$outboundSchema: z.ZodType<
@@ -1633,6 +1848,7 @@ export const CreatePromptContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreatePrompt21$outboundSchema),
   z.lazy(() => CreatePrompt22$outboundSchema),
+  z.lazy(() => CreatePrompt23$outboundSchema),
 ]);
 
 /**
@@ -1676,13 +1892,16 @@ export const CreatePromptContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreatePrompt21$inboundSchema),
     z.lazy(() => CreatePrompt22$inboundSchema),
+    z.lazy(() => CreatePrompt23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type CreatePromptContent$Outbound =
   | string
-  | Array<CreatePrompt21$Outbound | CreatePrompt22$Outbound>;
+  | Array<
+    CreatePrompt21$Outbound | CreatePrompt22$Outbound | CreatePrompt23$Outbound
+  >;
 
 /** @internal */
 export const CreatePromptContent$outboundSchema: z.ZodType<
@@ -1694,6 +1913,7 @@ export const CreatePromptContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreatePrompt21$outboundSchema),
     z.lazy(() => CreatePrompt22$outboundSchema),
+    z.lazy(() => CreatePrompt23$outboundSchema),
   ])),
 ]);
 
@@ -1881,6 +2101,7 @@ export const CreatePromptMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreatePrompt21$inboundSchema),
       z.lazy(() => CreatePrompt22$inboundSchema),
+      z.lazy(() => CreatePrompt23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => CreatePromptToolCalls$inboundSchema))
@@ -1896,7 +2117,13 @@ export const CreatePromptMessages$inboundSchema: z.ZodType<
 /** @internal */
 export type CreatePromptMessages$Outbound = {
   role: string;
-  content: string | Array<CreatePrompt21$Outbound | CreatePrompt22$Outbound>;
+  content:
+    | string
+    | Array<
+      | CreatePrompt21$Outbound
+      | CreatePrompt22$Outbound
+      | CreatePrompt23$Outbound
+    >;
   tool_calls?: Array<CreatePromptToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -1913,6 +2140,7 @@ export const CreatePromptMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreatePrompt21$outboundSchema),
       z.lazy(() => CreatePrompt22$outboundSchema),
+      z.lazy(() => CreatePrompt23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => CreatePromptToolCalls$outboundSchema))
@@ -2799,6 +3027,151 @@ export namespace CreatePromptPromptsRole$ {
 }
 
 /** @internal */
+export const CreatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePrompt2PromptsResponse200ApplicationJSONType> = z
+    .nativeEnum(CreatePrompt2PromptsResponse200ApplicationJSONType);
+
+/** @internal */
+export const CreatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<typeof CreatePrompt2PromptsResponse200ApplicationJSONType> =
+    CreatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePrompt2PromptsResponse200ApplicationJSONType$ {
+  /** @deprecated use `CreatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `CreatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const CreatePrompt2PromptsFile$inboundSchema: z.ZodType<
+  CreatePrompt2PromptsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type CreatePrompt2PromptsFile$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const CreatePrompt2PromptsFile$outboundSchema: z.ZodType<
+  CreatePrompt2PromptsFile$Outbound,
+  z.ZodTypeDef,
+  CreatePrompt2PromptsFile
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePrompt2PromptsFile$ {
+  /** @deprecated use `CreatePrompt2PromptsFile$inboundSchema` instead. */
+  export const inboundSchema = CreatePrompt2PromptsFile$inboundSchema;
+  /** @deprecated use `CreatePrompt2PromptsFile$outboundSchema` instead. */
+  export const outboundSchema = CreatePrompt2PromptsFile$outboundSchema;
+  /** @deprecated use `CreatePrompt2PromptsFile$Outbound` instead. */
+  export type Outbound = CreatePrompt2PromptsFile$Outbound;
+}
+
+export function createPrompt2PromptsFileToJSON(
+  createPrompt2PromptsFile: CreatePrompt2PromptsFile,
+): string {
+  return JSON.stringify(
+    CreatePrompt2PromptsFile$outboundSchema.parse(createPrompt2PromptsFile),
+  );
+}
+
+export function createPrompt2PromptsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrompt2PromptsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrompt2PromptsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt2PromptsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePrompt2Prompts3$inboundSchema: z.ZodType<
+  CreatePrompt2Prompts3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
+  file: z.lazy(() => CreatePrompt2PromptsFile$inboundSchema),
+});
+
+/** @internal */
+export type CreatePrompt2Prompts3$Outbound = {
+  type: string;
+  file: CreatePrompt2PromptsFile$Outbound;
+};
+
+/** @internal */
+export const CreatePrompt2Prompts3$outboundSchema: z.ZodType<
+  CreatePrompt2Prompts3$Outbound,
+  z.ZodTypeDef,
+  CreatePrompt2Prompts3
+> = z.object({
+  type: CreatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema,
+  file: z.lazy(() => CreatePrompt2PromptsFile$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePrompt2Prompts3$ {
+  /** @deprecated use `CreatePrompt2Prompts3$inboundSchema` instead. */
+  export const inboundSchema = CreatePrompt2Prompts3$inboundSchema;
+  /** @deprecated use `CreatePrompt2Prompts3$outboundSchema` instead. */
+  export const outboundSchema = CreatePrompt2Prompts3$outboundSchema;
+  /** @deprecated use `CreatePrompt2Prompts3$Outbound` instead. */
+  export type Outbound = CreatePrompt2Prompts3$Outbound;
+}
+
+export function createPrompt2Prompts3ToJSON(
+  createPrompt2Prompts3: CreatePrompt2Prompts3,
+): string {
+  return JSON.stringify(
+    CreatePrompt2Prompts3$outboundSchema.parse(createPrompt2Prompts3),
+  );
+}
+
+export function createPrompt2Prompts3FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePrompt2Prompts3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePrompt2Prompts3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePrompt2Prompts3' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreatePrompt2PromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof CreatePrompt2PromptsResponse200Type
 > = z.nativeEnum(CreatePrompt2PromptsResponse200Type);
@@ -3034,12 +3407,14 @@ export const CreatePromptContentPrompts2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreatePrompt2Prompts1$inboundSchema),
   z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
+  z.lazy(() => CreatePrompt2Prompts3$inboundSchema),
 ]);
 
 /** @internal */
 export type CreatePromptContentPrompts2$Outbound =
   | CreatePrompt2Prompts1$Outbound
-  | CreatePrompt2Prompts2$Outbound;
+  | CreatePrompt2Prompts2$Outbound
+  | CreatePrompt2Prompts3$Outbound;
 
 /** @internal */
 export const CreatePromptContentPrompts2$outboundSchema: z.ZodType<
@@ -3049,6 +3424,7 @@ export const CreatePromptContentPrompts2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreatePrompt2Prompts1$outboundSchema),
   z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
+  z.lazy(() => CreatePrompt2Prompts3$outboundSchema),
 ]);
 
 /**
@@ -3094,13 +3470,18 @@ export const CreatePromptPromptsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreatePrompt2Prompts1$inboundSchema),
     z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
+    z.lazy(() => CreatePrompt2Prompts3$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type CreatePromptPromptsContent$Outbound =
   | string
-  | Array<CreatePrompt2Prompts1$Outbound | CreatePrompt2Prompts2$Outbound>;
+  | Array<
+    | CreatePrompt2Prompts1$Outbound
+    | CreatePrompt2Prompts2$Outbound
+    | CreatePrompt2Prompts3$Outbound
+  >;
 
 /** @internal */
 export const CreatePromptPromptsContent$outboundSchema: z.ZodType<
@@ -3112,6 +3493,7 @@ export const CreatePromptPromptsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => CreatePrompt2Prompts1$outboundSchema),
     z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
+    z.lazy(() => CreatePrompt2Prompts3$outboundSchema),
   ])),
 ]);
 
@@ -3303,6 +3685,7 @@ export const CreatePromptPromptsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreatePrompt2Prompts1$inboundSchema),
       z.lazy(() => CreatePrompt2Prompts2$inboundSchema),
+      z.lazy(() => CreatePrompt2Prompts3$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$inboundSchema))
@@ -3320,7 +3703,11 @@ export type CreatePromptPromptsMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<CreatePrompt2Prompts1$Outbound | CreatePrompt2Prompts2$Outbound>;
+    | Array<
+      | CreatePrompt2Prompts1$Outbound
+      | CreatePrompt2Prompts2$Outbound
+      | CreatePrompt2Prompts3$Outbound
+    >;
   tool_calls?: Array<CreatePromptPromptsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -3337,6 +3724,7 @@ export const CreatePromptPromptsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => CreatePrompt2Prompts1$outboundSchema),
       z.lazy(() => CreatePrompt2Prompts2$outboundSchema),
+      z.lazy(() => CreatePrompt2Prompts3$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => CreatePromptPromptsToolCalls$outboundSchema))

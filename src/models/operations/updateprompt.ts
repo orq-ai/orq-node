@@ -255,6 +255,38 @@ export const UpdatePromptRole = {
  */
 export type UpdatePromptRole = ClosedEnum<typeof UpdatePromptRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const UpdatePrompt2PromptsRequestType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type UpdatePrompt2PromptsRequestType = ClosedEnum<
+  typeof UpdatePrompt2PromptsRequestType
+>;
+
+export type UpdatePrompt2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type UpdatePrompt23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: UpdatePrompt2PromptsRequestType;
+  file: UpdatePrompt2File;
+};
+
 export const UpdatePrompt2PromptsType = {
   ImageUrl: "image_url",
 } as const;
@@ -294,14 +326,17 @@ export type UpdatePrompt21 = {
   text: string;
 };
 
-export type UpdatePromptContent2 = UpdatePrompt21 | UpdatePrompt22;
+export type UpdatePromptContent2 =
+  | UpdatePrompt21
+  | UpdatePrompt22
+  | UpdatePrompt23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type UpdatePromptContent =
   | string
-  | Array<UpdatePrompt21 | UpdatePrompt22>;
+  | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>;
 
 export const UpdatePromptType = {
   Function: "function",
@@ -331,7 +366,7 @@ export type UpdatePromptMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<UpdatePrompt21 | UpdatePrompt22>;
+  content: string | Array<UpdatePrompt21 | UpdatePrompt22 | UpdatePrompt23>;
   toolCalls?: Array<UpdatePromptToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -702,6 +737,38 @@ export type UpdatePromptPromptsRole = ClosedEnum<
   typeof UpdatePromptPromptsRole
 >;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const UpdatePrompt2PromptsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type UpdatePrompt2PromptsResponse200ApplicationJSONType = ClosedEnum<
+  typeof UpdatePrompt2PromptsResponse200ApplicationJSONType
+>;
+
+export type UpdatePrompt2PromptsFile = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type UpdatePrompt2Prompts3 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: UpdatePrompt2PromptsResponse200ApplicationJSONType;
+  file: UpdatePrompt2PromptsFile;
+};
+
 export const UpdatePrompt2PromptsResponse200Type = {
   ImageUrl: "image_url",
 } as const;
@@ -749,14 +816,17 @@ export type UpdatePrompt2Prompts1 = {
 
 export type UpdatePromptContentPrompts2 =
   | UpdatePrompt2Prompts1
-  | UpdatePrompt2Prompts2;
+  | UpdatePrompt2Prompts2
+  | UpdatePrompt2Prompts3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type UpdatePromptPromptsContent =
   | string
-  | Array<UpdatePrompt2Prompts1 | UpdatePrompt2Prompts2>;
+  | Array<
+    UpdatePrompt2Prompts1 | UpdatePrompt2Prompts2 | UpdatePrompt2Prompts3
+  >;
 
 export const UpdatePromptPromptsResponseType = {
   Function: "function",
@@ -788,7 +858,11 @@ export type UpdatePromptPromptsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<UpdatePrompt2Prompts1 | UpdatePrompt2Prompts2>;
+  content:
+    | string
+    | Array<
+      UpdatePrompt2Prompts1 | UpdatePrompt2Prompts2 | UpdatePrompt2Prompts3
+    >;
   toolCalls?: Array<UpdatePromptPromptsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1461,6 +1535,145 @@ export namespace UpdatePromptRole$ {
 }
 
 /** @internal */
+export const UpdatePrompt2PromptsRequestType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePrompt2PromptsRequestType
+> = z.nativeEnum(UpdatePrompt2PromptsRequestType);
+
+/** @internal */
+export const UpdatePrompt2PromptsRequestType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePrompt2PromptsRequestType
+> = UpdatePrompt2PromptsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePrompt2PromptsRequestType$ {
+  /** @deprecated use `UpdatePrompt2PromptsRequestType$inboundSchema` instead. */
+  export const inboundSchema = UpdatePrompt2PromptsRequestType$inboundSchema;
+  /** @deprecated use `UpdatePrompt2PromptsRequestType$outboundSchema` instead. */
+  export const outboundSchema = UpdatePrompt2PromptsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const UpdatePrompt2File$inboundSchema: z.ZodType<
+  UpdatePrompt2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type UpdatePrompt2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const UpdatePrompt2File$outboundSchema: z.ZodType<
+  UpdatePrompt2File$Outbound,
+  z.ZodTypeDef,
+  UpdatePrompt2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePrompt2File$ {
+  /** @deprecated use `UpdatePrompt2File$inboundSchema` instead. */
+  export const inboundSchema = UpdatePrompt2File$inboundSchema;
+  /** @deprecated use `UpdatePrompt2File$outboundSchema` instead. */
+  export const outboundSchema = UpdatePrompt2File$outboundSchema;
+  /** @deprecated use `UpdatePrompt2File$Outbound` instead. */
+  export type Outbound = UpdatePrompt2File$Outbound;
+}
+
+export function updatePrompt2FileToJSON(
+  updatePrompt2File: UpdatePrompt2File,
+): string {
+  return JSON.stringify(
+    UpdatePrompt2File$outboundSchema.parse(updatePrompt2File),
+  );
+}
+
+export function updatePrompt2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePrompt2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePrompt2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePrompt2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePrompt23$inboundSchema: z.ZodType<
+  UpdatePrompt23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdatePrompt2PromptsRequestType$inboundSchema,
+  file: z.lazy(() => UpdatePrompt2File$inboundSchema),
+});
+
+/** @internal */
+export type UpdatePrompt23$Outbound = {
+  type: string;
+  file: UpdatePrompt2File$Outbound;
+};
+
+/** @internal */
+export const UpdatePrompt23$outboundSchema: z.ZodType<
+  UpdatePrompt23$Outbound,
+  z.ZodTypeDef,
+  UpdatePrompt23
+> = z.object({
+  type: UpdatePrompt2PromptsRequestType$outboundSchema,
+  file: z.lazy(() => UpdatePrompt2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePrompt23$ {
+  /** @deprecated use `UpdatePrompt23$inboundSchema` instead. */
+  export const inboundSchema = UpdatePrompt23$inboundSchema;
+  /** @deprecated use `UpdatePrompt23$outboundSchema` instead. */
+  export const outboundSchema = UpdatePrompt23$outboundSchema;
+  /** @deprecated use `UpdatePrompt23$Outbound` instead. */
+  export type Outbound = UpdatePrompt23$Outbound;
+}
+
+export function updatePrompt23ToJSON(updatePrompt23: UpdatePrompt23): string {
+  return JSON.stringify(UpdatePrompt23$outboundSchema.parse(updatePrompt23));
+}
+
+export function updatePrompt23FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePrompt23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePrompt23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePrompt23' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdatePrompt2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsType
 > = z.nativeEnum(UpdatePrompt2PromptsType);
@@ -1681,12 +1894,14 @@ export const UpdatePromptContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdatePrompt21$inboundSchema),
   z.lazy(() => UpdatePrompt22$inboundSchema),
+  z.lazy(() => UpdatePrompt23$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdatePromptContent2$Outbound =
   | UpdatePrompt21$Outbound
-  | UpdatePrompt22$Outbound;
+  | UpdatePrompt22$Outbound
+  | UpdatePrompt23$Outbound;
 
 /** @internal */
 export const UpdatePromptContent2$outboundSchema: z.ZodType<
@@ -1696,6 +1911,7 @@ export const UpdatePromptContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdatePrompt21$outboundSchema),
   z.lazy(() => UpdatePrompt22$outboundSchema),
+  z.lazy(() => UpdatePrompt23$outboundSchema),
 ]);
 
 /**
@@ -1739,13 +1955,16 @@ export const UpdatePromptContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdatePrompt21$inboundSchema),
     z.lazy(() => UpdatePrompt22$inboundSchema),
+    z.lazy(() => UpdatePrompt23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type UpdatePromptContent$Outbound =
   | string
-  | Array<UpdatePrompt21$Outbound | UpdatePrompt22$Outbound>;
+  | Array<
+    UpdatePrompt21$Outbound | UpdatePrompt22$Outbound | UpdatePrompt23$Outbound
+  >;
 
 /** @internal */
 export const UpdatePromptContent$outboundSchema: z.ZodType<
@@ -1757,6 +1976,7 @@ export const UpdatePromptContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdatePrompt21$outboundSchema),
     z.lazy(() => UpdatePrompt22$outboundSchema),
+    z.lazy(() => UpdatePrompt23$outboundSchema),
   ])),
 ]);
 
@@ -1944,6 +2164,7 @@ export const UpdatePromptMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdatePrompt21$inboundSchema),
       z.lazy(() => UpdatePrompt22$inboundSchema),
+      z.lazy(() => UpdatePrompt23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => UpdatePromptToolCalls$inboundSchema))
@@ -1959,7 +2180,13 @@ export const UpdatePromptMessages$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePromptMessages$Outbound = {
   role: string;
-  content: string | Array<UpdatePrompt21$Outbound | UpdatePrompt22$Outbound>;
+  content:
+    | string
+    | Array<
+      | UpdatePrompt21$Outbound
+      | UpdatePrompt22$Outbound
+      | UpdatePrompt23$Outbound
+    >;
   tool_calls?: Array<UpdatePromptToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -1976,6 +2203,7 @@ export const UpdatePromptMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdatePrompt21$outboundSchema),
       z.lazy(() => UpdatePrompt22$outboundSchema),
+      z.lazy(() => UpdatePrompt23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => UpdatePromptToolCalls$outboundSchema))
@@ -2977,6 +3205,151 @@ export namespace UpdatePromptPromptsRole$ {
 }
 
 /** @internal */
+export const UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdatePrompt2PromptsResponse200ApplicationJSONType> = z
+    .nativeEnum(UpdatePrompt2PromptsResponse200ApplicationJSONType);
+
+/** @internal */
+export const UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdatePrompt2PromptsResponse200ApplicationJSONType> =
+    UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePrompt2PromptsResponse200ApplicationJSONType$ {
+  /** @deprecated use `UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const UpdatePrompt2PromptsFile$inboundSchema: z.ZodType<
+  UpdatePrompt2PromptsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type UpdatePrompt2PromptsFile$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const UpdatePrompt2PromptsFile$outboundSchema: z.ZodType<
+  UpdatePrompt2PromptsFile$Outbound,
+  z.ZodTypeDef,
+  UpdatePrompt2PromptsFile
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePrompt2PromptsFile$ {
+  /** @deprecated use `UpdatePrompt2PromptsFile$inboundSchema` instead. */
+  export const inboundSchema = UpdatePrompt2PromptsFile$inboundSchema;
+  /** @deprecated use `UpdatePrompt2PromptsFile$outboundSchema` instead. */
+  export const outboundSchema = UpdatePrompt2PromptsFile$outboundSchema;
+  /** @deprecated use `UpdatePrompt2PromptsFile$Outbound` instead. */
+  export type Outbound = UpdatePrompt2PromptsFile$Outbound;
+}
+
+export function updatePrompt2PromptsFileToJSON(
+  updatePrompt2PromptsFile: UpdatePrompt2PromptsFile,
+): string {
+  return JSON.stringify(
+    UpdatePrompt2PromptsFile$outboundSchema.parse(updatePrompt2PromptsFile),
+  );
+}
+
+export function updatePrompt2PromptsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePrompt2PromptsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePrompt2PromptsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePrompt2PromptsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdatePrompt2Prompts3$inboundSchema: z.ZodType<
+  UpdatePrompt2Prompts3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdatePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
+  file: z.lazy(() => UpdatePrompt2PromptsFile$inboundSchema),
+});
+
+/** @internal */
+export type UpdatePrompt2Prompts3$Outbound = {
+  type: string;
+  file: UpdatePrompt2PromptsFile$Outbound;
+};
+
+/** @internal */
+export const UpdatePrompt2Prompts3$outboundSchema: z.ZodType<
+  UpdatePrompt2Prompts3$Outbound,
+  z.ZodTypeDef,
+  UpdatePrompt2Prompts3
+> = z.object({
+  type: UpdatePrompt2PromptsResponse200ApplicationJSONType$outboundSchema,
+  file: z.lazy(() => UpdatePrompt2PromptsFile$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePrompt2Prompts3$ {
+  /** @deprecated use `UpdatePrompt2Prompts3$inboundSchema` instead. */
+  export const inboundSchema = UpdatePrompt2Prompts3$inboundSchema;
+  /** @deprecated use `UpdatePrompt2Prompts3$outboundSchema` instead. */
+  export const outboundSchema = UpdatePrompt2Prompts3$outboundSchema;
+  /** @deprecated use `UpdatePrompt2Prompts3$Outbound` instead. */
+  export type Outbound = UpdatePrompt2Prompts3$Outbound;
+}
+
+export function updatePrompt2Prompts3ToJSON(
+  updatePrompt2Prompts3: UpdatePrompt2Prompts3,
+): string {
+  return JSON.stringify(
+    UpdatePrompt2Prompts3$outboundSchema.parse(updatePrompt2Prompts3),
+  );
+}
+
+export function updatePrompt2Prompts3FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdatePrompt2Prompts3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdatePrompt2Prompts3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdatePrompt2Prompts3' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdatePrompt2PromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsResponse200Type
 > = z.nativeEnum(UpdatePrompt2PromptsResponse200Type);
@@ -3212,12 +3585,14 @@ export const UpdatePromptContentPrompts2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdatePrompt2Prompts1$inboundSchema),
   z.lazy(() => UpdatePrompt2Prompts2$inboundSchema),
+  z.lazy(() => UpdatePrompt2Prompts3$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdatePromptContentPrompts2$Outbound =
   | UpdatePrompt2Prompts1$Outbound
-  | UpdatePrompt2Prompts2$Outbound;
+  | UpdatePrompt2Prompts2$Outbound
+  | UpdatePrompt2Prompts3$Outbound;
 
 /** @internal */
 export const UpdatePromptContentPrompts2$outboundSchema: z.ZodType<
@@ -3227,6 +3602,7 @@ export const UpdatePromptContentPrompts2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => UpdatePrompt2Prompts1$outboundSchema),
   z.lazy(() => UpdatePrompt2Prompts2$outboundSchema),
+  z.lazy(() => UpdatePrompt2Prompts3$outboundSchema),
 ]);
 
 /**
@@ -3272,13 +3648,18 @@ export const UpdatePromptPromptsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdatePrompt2Prompts1$inboundSchema),
     z.lazy(() => UpdatePrompt2Prompts2$inboundSchema),
+    z.lazy(() => UpdatePrompt2Prompts3$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type UpdatePromptPromptsContent$Outbound =
   | string
-  | Array<UpdatePrompt2Prompts1$Outbound | UpdatePrompt2Prompts2$Outbound>;
+  | Array<
+    | UpdatePrompt2Prompts1$Outbound
+    | UpdatePrompt2Prompts2$Outbound
+    | UpdatePrompt2Prompts3$Outbound
+  >;
 
 /** @internal */
 export const UpdatePromptPromptsContent$outboundSchema: z.ZodType<
@@ -3290,6 +3671,7 @@ export const UpdatePromptPromptsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => UpdatePrompt2Prompts1$outboundSchema),
     z.lazy(() => UpdatePrompt2Prompts2$outboundSchema),
+    z.lazy(() => UpdatePrompt2Prompts3$outboundSchema),
   ])),
 ]);
 
@@ -3481,6 +3863,7 @@ export const UpdatePromptPromptsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdatePrompt2Prompts1$inboundSchema),
       z.lazy(() => UpdatePrompt2Prompts2$inboundSchema),
+      z.lazy(() => UpdatePrompt2Prompts3$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$inboundSchema))
@@ -3498,7 +3881,11 @@ export type UpdatePromptPromptsMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<UpdatePrompt2Prompts1$Outbound | UpdatePrompt2Prompts2$Outbound>;
+    | Array<
+      | UpdatePrompt2Prompts1$Outbound
+      | UpdatePrompt2Prompts2$Outbound
+      | UpdatePrompt2Prompts3$Outbound
+    >;
   tool_calls?: Array<UpdatePromptPromptsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -3515,6 +3902,7 @@ export const UpdatePromptPromptsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => UpdatePrompt2Prompts1$outboundSchema),
       z.lazy(() => UpdatePrompt2Prompts2$outboundSchema),
+      z.lazy(() => UpdatePrompt2Prompts3$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => UpdatePromptPromptsToolCalls$outboundSchema))

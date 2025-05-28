@@ -23,3 +23,14 @@ const value: operations.BulkCreateDatapoints22 = {
 };
 ```
 
+### `operations.BulkCreateDatapoints23`
+
+```typescript
+const value: operations.BulkCreateDatapoints23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

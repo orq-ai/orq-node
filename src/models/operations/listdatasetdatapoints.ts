@@ -52,6 +52,38 @@ export type ListDatasetDatapointsRole = ClosedEnum<
   typeof ListDatasetDatapointsRole
 >;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const ListDatasetDatapoints2DatasetsResponseType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type ListDatasetDatapoints2DatasetsResponseType = ClosedEnum<
+  typeof ListDatasetDatapoints2DatasetsResponseType
+>;
+
+export type ListDatasetDatapoints2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type ListDatasetDatapoints23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: ListDatasetDatapoints2DatasetsResponseType;
+  file: ListDatasetDatapoints2File;
+};
+
 export const ListDatasetDatapoints2DatasetsType = {
   ImageUrl: "image_url",
 } as const;
@@ -99,14 +131,17 @@ export type ListDatasetDatapoints21 = {
 
 export type ListDatasetDatapointsContent2 =
   | ListDatasetDatapoints21
-  | ListDatasetDatapoints22;
+  | ListDatasetDatapoints22
+  | ListDatasetDatapoints23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type ListDatasetDatapointsContent =
   | string
-  | Array<ListDatasetDatapoints21 | ListDatasetDatapoints22>;
+  | Array<
+    ListDatasetDatapoints21 | ListDatasetDatapoints22 | ListDatasetDatapoints23
+  >;
 
 export const ListDatasetDatapointsType = {
   Function: "function",
@@ -138,7 +173,13 @@ export type ListDatasetDatapointsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<ListDatasetDatapoints21 | ListDatasetDatapoints22>;
+  content:
+    | string
+    | Array<
+      | ListDatasetDatapoints21
+      | ListDatasetDatapoints22
+      | ListDatasetDatapoints23
+    >;
   toolCalls?: Array<ListDatasetDatapointsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -309,6 +350,151 @@ export namespace ListDatasetDatapointsRole$ {
   export const inboundSchema = ListDatasetDatapointsRole$inboundSchema;
   /** @deprecated use `ListDatasetDatapointsRole$outboundSchema` instead. */
   export const outboundSchema = ListDatasetDatapointsRole$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapoints2DatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapoints2DatasetsResponseType> = z
+    .nativeEnum(ListDatasetDatapoints2DatasetsResponseType);
+
+/** @internal */
+export const ListDatasetDatapoints2DatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapoints2DatasetsResponseType> =
+    ListDatasetDatapoints2DatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapoints2DatasetsResponseType$ {
+  /** @deprecated use `ListDatasetDatapoints2DatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapoints2DatasetsResponseType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapoints2DatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapoints2DatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapoints2File$inboundSchema: z.ZodType<
+  ListDatasetDatapoints2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type ListDatasetDatapoints2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const ListDatasetDatapoints2File$outboundSchema: z.ZodType<
+  ListDatasetDatapoints2File$Outbound,
+  z.ZodTypeDef,
+  ListDatasetDatapoints2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapoints2File$ {
+  /** @deprecated use `ListDatasetDatapoints2File$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetDatapoints2File$inboundSchema;
+  /** @deprecated use `ListDatasetDatapoints2File$outboundSchema` instead. */
+  export const outboundSchema = ListDatasetDatapoints2File$outboundSchema;
+  /** @deprecated use `ListDatasetDatapoints2File$Outbound` instead. */
+  export type Outbound = ListDatasetDatapoints2File$Outbound;
+}
+
+export function listDatasetDatapoints2FileToJSON(
+  listDatasetDatapoints2File: ListDatasetDatapoints2File,
+): string {
+  return JSON.stringify(
+    ListDatasetDatapoints2File$outboundSchema.parse(listDatasetDatapoints2File),
+  );
+}
+
+export function listDatasetDatapoints2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapoints2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasetDatapoints2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapoints2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListDatasetDatapoints23$inboundSchema: z.ZodType<
+  ListDatasetDatapoints23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListDatasetDatapoints2DatasetsResponseType$inboundSchema,
+  file: z.lazy(() => ListDatasetDatapoints2File$inboundSchema),
+});
+
+/** @internal */
+export type ListDatasetDatapoints23$Outbound = {
+  type: string;
+  file: ListDatasetDatapoints2File$Outbound;
+};
+
+/** @internal */
+export const ListDatasetDatapoints23$outboundSchema: z.ZodType<
+  ListDatasetDatapoints23$Outbound,
+  z.ZodTypeDef,
+  ListDatasetDatapoints23
+> = z.object({
+  type: ListDatasetDatapoints2DatasetsResponseType$outboundSchema,
+  file: z.lazy(() => ListDatasetDatapoints2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapoints23$ {
+  /** @deprecated use `ListDatasetDatapoints23$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetDatapoints23$inboundSchema;
+  /** @deprecated use `ListDatasetDatapoints23$outboundSchema` instead. */
+  export const outboundSchema = ListDatasetDatapoints23$outboundSchema;
+  /** @deprecated use `ListDatasetDatapoints23$Outbound` instead. */
+  export type Outbound = ListDatasetDatapoints23$Outbound;
+}
+
+export function listDatasetDatapoints23ToJSON(
+  listDatasetDatapoints23: ListDatasetDatapoints23,
+): string {
+  return JSON.stringify(
+    ListDatasetDatapoints23$outboundSchema.parse(listDatasetDatapoints23),
+  );
+}
+
+export function listDatasetDatapoints23FromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapoints23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasetDatapoints23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapoints23' from JSON`,
+  );
 }
 
 /** @internal */
@@ -546,12 +732,14 @@ export const ListDatasetDatapointsContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ListDatasetDatapoints21$inboundSchema),
   z.lazy(() => ListDatasetDatapoints22$inboundSchema),
+  z.lazy(() => ListDatasetDatapoints23$inboundSchema),
 ]);
 
 /** @internal */
 export type ListDatasetDatapointsContent2$Outbound =
   | ListDatasetDatapoints21$Outbound
-  | ListDatasetDatapoints22$Outbound;
+  | ListDatasetDatapoints22$Outbound
+  | ListDatasetDatapoints23$Outbound;
 
 /** @internal */
 export const ListDatasetDatapointsContent2$outboundSchema: z.ZodType<
@@ -561,6 +749,7 @@ export const ListDatasetDatapointsContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ListDatasetDatapoints21$outboundSchema),
   z.lazy(() => ListDatasetDatapoints22$outboundSchema),
+  z.lazy(() => ListDatasetDatapoints23$outboundSchema),
 ]);
 
 /**
@@ -606,13 +795,18 @@ export const ListDatasetDatapointsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => ListDatasetDatapoints21$inboundSchema),
     z.lazy(() => ListDatasetDatapoints22$inboundSchema),
+    z.lazy(() => ListDatasetDatapoints23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type ListDatasetDatapointsContent$Outbound =
   | string
-  | Array<ListDatasetDatapoints21$Outbound | ListDatasetDatapoints22$Outbound>;
+  | Array<
+    | ListDatasetDatapoints21$Outbound
+    | ListDatasetDatapoints22$Outbound
+    | ListDatasetDatapoints23$Outbound
+  >;
 
 /** @internal */
 export const ListDatasetDatapointsContent$outboundSchema: z.ZodType<
@@ -624,6 +818,7 @@ export const ListDatasetDatapointsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => ListDatasetDatapoints21$outboundSchema),
     z.lazy(() => ListDatasetDatapoints22$outboundSchema),
+    z.lazy(() => ListDatasetDatapoints23$outboundSchema),
   ])),
 ]);
 
@@ -817,6 +1012,7 @@ export const ListDatasetDatapointsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => ListDatasetDatapoints21$inboundSchema),
       z.lazy(() => ListDatasetDatapoints22$inboundSchema),
+      z.lazy(() => ListDatasetDatapoints23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(
@@ -836,7 +1032,9 @@ export type ListDatasetDatapointsMessages$Outbound = {
   content:
     | string
     | Array<
-      ListDatasetDatapoints21$Outbound | ListDatasetDatapoints22$Outbound
+      | ListDatasetDatapoints21$Outbound
+      | ListDatasetDatapoints22$Outbound
+      | ListDatasetDatapoints23$Outbound
     >;
   tool_calls?: Array<ListDatasetDatapointsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
@@ -854,6 +1052,7 @@ export const ListDatasetDatapointsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => ListDatasetDatapoints21$outboundSchema),
       z.lazy(() => ListDatasetDatapoints22$outboundSchema),
+      z.lazy(() => ListDatasetDatapoints23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(
@@ -918,7 +1117,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-05-27T20:21:12.315Z",
+    "2025-05-28T21:13:36.386Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -961,7 +1160,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-05-27T20:21:12.315Z"))
+  updated: z.date().default(() => new Date("2025-05-28T21:13:36.386Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

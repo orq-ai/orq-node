@@ -23,3 +23,14 @@ const value: operations.DeploymentGetConfig2Deployments2 = {
 };
 ```
 
+### `operations.DeploymentGetConfig23`
+
+```typescript
+const value: operations.DeploymentGetConfig23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

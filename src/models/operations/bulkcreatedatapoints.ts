@@ -29,6 +29,38 @@ export type BulkCreateDatapointsRole = ClosedEnum<
   typeof BulkCreateDatapointsRole
 >;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const BulkCreateDatapoints2DatasetsRequestType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type BulkCreateDatapoints2DatasetsRequestType = ClosedEnum<
+  typeof BulkCreateDatapoints2DatasetsRequestType
+>;
+
+export type BulkCreateDatapoints2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type BulkCreateDatapoints23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: BulkCreateDatapoints2DatasetsRequestType;
+  file: BulkCreateDatapoints2File;
+};
+
 export const BulkCreateDatapoints2DatasetsType = {
   ImageUrl: "image_url",
 } as const;
@@ -72,14 +104,17 @@ export type BulkCreateDatapoints21 = {
 
 export type BulkCreateDatapointsContent2 =
   | BulkCreateDatapoints21
-  | BulkCreateDatapoints22;
+  | BulkCreateDatapoints22
+  | BulkCreateDatapoints23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type BulkCreateDatapointsContent =
   | string
-  | Array<BulkCreateDatapoints21 | BulkCreateDatapoints22>;
+  | Array<
+    BulkCreateDatapoints21 | BulkCreateDatapoints22 | BulkCreateDatapoints23
+  >;
 
 export const BulkCreateDatapointsType = {
   Function: "function",
@@ -111,7 +146,11 @@ export type BulkCreateDatapointsMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<BulkCreateDatapoints21 | BulkCreateDatapoints22>;
+  content:
+    | string
+    | Array<
+      BulkCreateDatapoints21 | BulkCreateDatapoints22 | BulkCreateDatapoints23
+    >;
   toolCalls?: Array<BulkCreateDatapointsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -156,6 +195,39 @@ export const BulkCreateDatapointsDatasetsRole = {
 export type BulkCreateDatapointsDatasetsRole = ClosedEnum<
   typeof BulkCreateDatapointsDatasetsRole
 >;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType
+  >;
+
+export type BulkCreateDatapoints2DatasetsFile = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type BulkCreateDatapoints2Datasets3 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType;
+  file: BulkCreateDatapoints2DatasetsFile;
+};
 
 export const BulkCreateDatapoints2DatasetsResponse200Type = {
   ImageUrl: "image_url",
@@ -204,14 +276,19 @@ export type BulkCreateDatapoints2Datasets1 = {
 
 export type BulkCreateDatapointsContentDatasets2 =
   | BulkCreateDatapoints2Datasets1
-  | BulkCreateDatapoints2Datasets2;
+  | BulkCreateDatapoints2Datasets2
+  | BulkCreateDatapoints2Datasets3;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type BulkCreateDatapointsDatasetsContent =
   | string
-  | Array<BulkCreateDatapoints2Datasets1 | BulkCreateDatapoints2Datasets2>;
+  | Array<
+    | BulkCreateDatapoints2Datasets1
+    | BulkCreateDatapoints2Datasets2
+    | BulkCreateDatapoints2Datasets3
+  >;
 
 export const BulkCreateDatapointsDatasetsType = {
   Function: "function",
@@ -245,7 +322,11 @@ export type BulkCreateDatapointsDatasetsMessages = {
    */
   content:
     | string
-    | Array<BulkCreateDatapoints2Datasets1 | BulkCreateDatapoints2Datasets2>;
+    | Array<
+      | BulkCreateDatapoints2Datasets1
+      | BulkCreateDatapoints2Datasets2
+      | BulkCreateDatapoints2Datasets3
+    >;
   toolCalls?: Array<BulkCreateDatapointsDatasetsToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -309,6 +390,151 @@ export namespace BulkCreateDatapointsRole$ {
   export const inboundSchema = BulkCreateDatapointsRole$inboundSchema;
   /** @deprecated use `BulkCreateDatapointsRole$outboundSchema` instead. */
   export const outboundSchema = BulkCreateDatapointsRole$outboundSchema;
+}
+
+/** @internal */
+export const BulkCreateDatapoints2DatasetsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof BulkCreateDatapoints2DatasetsRequestType> = z
+    .nativeEnum(BulkCreateDatapoints2DatasetsRequestType);
+
+/** @internal */
+export const BulkCreateDatapoints2DatasetsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof BulkCreateDatapoints2DatasetsRequestType> =
+    BulkCreateDatapoints2DatasetsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkCreateDatapoints2DatasetsRequestType$ {
+  /** @deprecated use `BulkCreateDatapoints2DatasetsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    BulkCreateDatapoints2DatasetsRequestType$inboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2DatasetsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    BulkCreateDatapoints2DatasetsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const BulkCreateDatapoints2File$inboundSchema: z.ZodType<
+  BulkCreateDatapoints2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type BulkCreateDatapoints2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const BulkCreateDatapoints2File$outboundSchema: z.ZodType<
+  BulkCreateDatapoints2File$Outbound,
+  z.ZodTypeDef,
+  BulkCreateDatapoints2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkCreateDatapoints2File$ {
+  /** @deprecated use `BulkCreateDatapoints2File$inboundSchema` instead. */
+  export const inboundSchema = BulkCreateDatapoints2File$inboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2File$outboundSchema` instead. */
+  export const outboundSchema = BulkCreateDatapoints2File$outboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2File$Outbound` instead. */
+  export type Outbound = BulkCreateDatapoints2File$Outbound;
+}
+
+export function bulkCreateDatapoints2FileToJSON(
+  bulkCreateDatapoints2File: BulkCreateDatapoints2File,
+): string {
+  return JSON.stringify(
+    BulkCreateDatapoints2File$outboundSchema.parse(bulkCreateDatapoints2File),
+  );
+}
+
+export function bulkCreateDatapoints2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkCreateDatapoints2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkCreateDatapoints2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkCreateDatapoints2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const BulkCreateDatapoints23$inboundSchema: z.ZodType<
+  BulkCreateDatapoints23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: BulkCreateDatapoints2DatasetsRequestType$inboundSchema,
+  file: z.lazy(() => BulkCreateDatapoints2File$inboundSchema),
+});
+
+/** @internal */
+export type BulkCreateDatapoints23$Outbound = {
+  type: string;
+  file: BulkCreateDatapoints2File$Outbound;
+};
+
+/** @internal */
+export const BulkCreateDatapoints23$outboundSchema: z.ZodType<
+  BulkCreateDatapoints23$Outbound,
+  z.ZodTypeDef,
+  BulkCreateDatapoints23
+> = z.object({
+  type: BulkCreateDatapoints2DatasetsRequestType$outboundSchema,
+  file: z.lazy(() => BulkCreateDatapoints2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkCreateDatapoints23$ {
+  /** @deprecated use `BulkCreateDatapoints23$inboundSchema` instead. */
+  export const inboundSchema = BulkCreateDatapoints23$inboundSchema;
+  /** @deprecated use `BulkCreateDatapoints23$outboundSchema` instead. */
+  export const outboundSchema = BulkCreateDatapoints23$outboundSchema;
+  /** @deprecated use `BulkCreateDatapoints23$Outbound` instead. */
+  export type Outbound = BulkCreateDatapoints23$Outbound;
+}
+
+export function bulkCreateDatapoints23ToJSON(
+  bulkCreateDatapoints23: BulkCreateDatapoints23,
+): string {
+  return JSON.stringify(
+    BulkCreateDatapoints23$outboundSchema.parse(bulkCreateDatapoints23),
+  );
+}
+
+export function bulkCreateDatapoints23FromJSON(
+  jsonString: string,
+): SafeParseResult<BulkCreateDatapoints23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkCreateDatapoints23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkCreateDatapoints23' from JSON`,
+  );
 }
 
 /** @internal */
@@ -543,12 +769,14 @@ export const BulkCreateDatapointsContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => BulkCreateDatapoints21$inboundSchema),
   z.lazy(() => BulkCreateDatapoints22$inboundSchema),
+  z.lazy(() => BulkCreateDatapoints23$inboundSchema),
 ]);
 
 /** @internal */
 export type BulkCreateDatapointsContent2$Outbound =
   | BulkCreateDatapoints21$Outbound
-  | BulkCreateDatapoints22$Outbound;
+  | BulkCreateDatapoints22$Outbound
+  | BulkCreateDatapoints23$Outbound;
 
 /** @internal */
 export const BulkCreateDatapointsContent2$outboundSchema: z.ZodType<
@@ -558,6 +786,7 @@ export const BulkCreateDatapointsContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => BulkCreateDatapoints21$outboundSchema),
   z.lazy(() => BulkCreateDatapoints22$outboundSchema),
+  z.lazy(() => BulkCreateDatapoints23$outboundSchema),
 ]);
 
 /**
@@ -603,13 +832,18 @@ export const BulkCreateDatapointsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => BulkCreateDatapoints21$inboundSchema),
     z.lazy(() => BulkCreateDatapoints22$inboundSchema),
+    z.lazy(() => BulkCreateDatapoints23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type BulkCreateDatapointsContent$Outbound =
   | string
-  | Array<BulkCreateDatapoints21$Outbound | BulkCreateDatapoints22$Outbound>;
+  | Array<
+    | BulkCreateDatapoints21$Outbound
+    | BulkCreateDatapoints22$Outbound
+    | BulkCreateDatapoints23$Outbound
+  >;
 
 /** @internal */
 export const BulkCreateDatapointsContent$outboundSchema: z.ZodType<
@@ -621,6 +855,7 @@ export const BulkCreateDatapointsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => BulkCreateDatapoints21$outboundSchema),
     z.lazy(() => BulkCreateDatapoints22$outboundSchema),
+    z.lazy(() => BulkCreateDatapoints23$outboundSchema),
   ])),
 ]);
 
@@ -814,6 +1049,7 @@ export const BulkCreateDatapointsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => BulkCreateDatapoints21$inboundSchema),
       z.lazy(() => BulkCreateDatapoints22$inboundSchema),
+      z.lazy(() => BulkCreateDatapoints23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => BulkCreateDatapointsToolCalls$inboundSchema))
@@ -831,7 +1067,11 @@ export type BulkCreateDatapointsMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<BulkCreateDatapoints21$Outbound | BulkCreateDatapoints22$Outbound>;
+    | Array<
+      | BulkCreateDatapoints21$Outbound
+      | BulkCreateDatapoints22$Outbound
+      | BulkCreateDatapoints23$Outbound
+    >;
   tool_calls?: Array<BulkCreateDatapointsToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -848,6 +1088,7 @@ export const BulkCreateDatapointsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => BulkCreateDatapoints21$outboundSchema),
       z.lazy(() => BulkCreateDatapoints22$outboundSchema),
+      z.lazy(() => BulkCreateDatapoints23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => BulkCreateDatapointsToolCalls$outboundSchema))
@@ -1105,6 +1346,160 @@ export namespace BulkCreateDatapointsDatasetsRole$ {
 }
 
 /** @internal */
+export const BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType
+  > = z.nativeEnum(BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType);
+
+/** @internal */
+export const BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType
+  > = BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$ {
+  /** @deprecated use `BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const BulkCreateDatapoints2DatasetsFile$inboundSchema: z.ZodType<
+  BulkCreateDatapoints2DatasetsFile,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type BulkCreateDatapoints2DatasetsFile$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const BulkCreateDatapoints2DatasetsFile$outboundSchema: z.ZodType<
+  BulkCreateDatapoints2DatasetsFile$Outbound,
+  z.ZodTypeDef,
+  BulkCreateDatapoints2DatasetsFile
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkCreateDatapoints2DatasetsFile$ {
+  /** @deprecated use `BulkCreateDatapoints2DatasetsFile$inboundSchema` instead. */
+  export const inboundSchema = BulkCreateDatapoints2DatasetsFile$inboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2DatasetsFile$outboundSchema` instead. */
+  export const outboundSchema =
+    BulkCreateDatapoints2DatasetsFile$outboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2DatasetsFile$Outbound` instead. */
+  export type Outbound = BulkCreateDatapoints2DatasetsFile$Outbound;
+}
+
+export function bulkCreateDatapoints2DatasetsFileToJSON(
+  bulkCreateDatapoints2DatasetsFile: BulkCreateDatapoints2DatasetsFile,
+): string {
+  return JSON.stringify(
+    BulkCreateDatapoints2DatasetsFile$outboundSchema.parse(
+      bulkCreateDatapoints2DatasetsFile,
+    ),
+  );
+}
+
+export function bulkCreateDatapoints2DatasetsFileFromJSON(
+  jsonString: string,
+): SafeParseResult<BulkCreateDatapoints2DatasetsFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkCreateDatapoints2DatasetsFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkCreateDatapoints2DatasetsFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const BulkCreateDatapoints2Datasets3$inboundSchema: z.ZodType<
+  BulkCreateDatapoints2Datasets3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$inboundSchema,
+  file: z.lazy(() => BulkCreateDatapoints2DatasetsFile$inboundSchema),
+});
+
+/** @internal */
+export type BulkCreateDatapoints2Datasets3$Outbound = {
+  type: string;
+  file: BulkCreateDatapoints2DatasetsFile$Outbound;
+};
+
+/** @internal */
+export const BulkCreateDatapoints2Datasets3$outboundSchema: z.ZodType<
+  BulkCreateDatapoints2Datasets3$Outbound,
+  z.ZodTypeDef,
+  BulkCreateDatapoints2Datasets3
+> = z.object({
+  type:
+    BulkCreateDatapoints2DatasetsResponse200ApplicationJSONType$outboundSchema,
+  file: z.lazy(() => BulkCreateDatapoints2DatasetsFile$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BulkCreateDatapoints2Datasets3$ {
+  /** @deprecated use `BulkCreateDatapoints2Datasets3$inboundSchema` instead. */
+  export const inboundSchema = BulkCreateDatapoints2Datasets3$inboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2Datasets3$outboundSchema` instead. */
+  export const outboundSchema = BulkCreateDatapoints2Datasets3$outboundSchema;
+  /** @deprecated use `BulkCreateDatapoints2Datasets3$Outbound` instead. */
+  export type Outbound = BulkCreateDatapoints2Datasets3$Outbound;
+}
+
+export function bulkCreateDatapoints2Datasets3ToJSON(
+  bulkCreateDatapoints2Datasets3: BulkCreateDatapoints2Datasets3,
+): string {
+  return JSON.stringify(
+    BulkCreateDatapoints2Datasets3$outboundSchema.parse(
+      bulkCreateDatapoints2Datasets3,
+    ),
+  );
+}
+
+export function bulkCreateDatapoints2Datasets3FromJSON(
+  jsonString: string,
+): SafeParseResult<BulkCreateDatapoints2Datasets3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BulkCreateDatapoints2Datasets3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BulkCreateDatapoints2Datasets3' from JSON`,
+  );
+}
+
+/** @internal */
 export const BulkCreateDatapoints2DatasetsResponse200Type$inboundSchema:
   z.ZodNativeEnum<typeof BulkCreateDatapoints2DatasetsResponse200Type> = z
     .nativeEnum(BulkCreateDatapoints2DatasetsResponse200Type);
@@ -1349,12 +1744,14 @@ export const BulkCreateDatapointsContentDatasets2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => BulkCreateDatapoints2Datasets1$inboundSchema),
   z.lazy(() => BulkCreateDatapoints2Datasets2$inboundSchema),
+  z.lazy(() => BulkCreateDatapoints2Datasets3$inboundSchema),
 ]);
 
 /** @internal */
 export type BulkCreateDatapointsContentDatasets2$Outbound =
   | BulkCreateDatapoints2Datasets1$Outbound
-  | BulkCreateDatapoints2Datasets2$Outbound;
+  | BulkCreateDatapoints2Datasets2$Outbound
+  | BulkCreateDatapoints2Datasets3$Outbound;
 
 /** @internal */
 export const BulkCreateDatapointsContentDatasets2$outboundSchema: z.ZodType<
@@ -1364,6 +1761,7 @@ export const BulkCreateDatapointsContentDatasets2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => BulkCreateDatapoints2Datasets1$outboundSchema),
   z.lazy(() => BulkCreateDatapoints2Datasets2$outboundSchema),
+  z.lazy(() => BulkCreateDatapoints2Datasets3$outboundSchema),
 ]);
 
 /**
@@ -1412,6 +1810,7 @@ export const BulkCreateDatapointsDatasetsContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => BulkCreateDatapoints2Datasets1$inboundSchema),
     z.lazy(() => BulkCreateDatapoints2Datasets2$inboundSchema),
+    z.lazy(() => BulkCreateDatapoints2Datasets3$inboundSchema),
   ])),
 ]);
 
@@ -1421,6 +1820,7 @@ export type BulkCreateDatapointsDatasetsContent$Outbound =
   | Array<
     | BulkCreateDatapoints2Datasets1$Outbound
     | BulkCreateDatapoints2Datasets2$Outbound
+    | BulkCreateDatapoints2Datasets3$Outbound
   >;
 
 /** @internal */
@@ -1433,6 +1833,7 @@ export const BulkCreateDatapointsDatasetsContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => BulkCreateDatapoints2Datasets1$outboundSchema),
     z.lazy(() => BulkCreateDatapoints2Datasets2$outboundSchema),
+    z.lazy(() => BulkCreateDatapoints2Datasets3$outboundSchema),
   ])),
 ]);
 
@@ -1635,6 +2036,7 @@ export const BulkCreateDatapointsDatasetsMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => BulkCreateDatapoints2Datasets1$inboundSchema),
       z.lazy(() => BulkCreateDatapoints2Datasets2$inboundSchema),
+      z.lazy(() => BulkCreateDatapoints2Datasets3$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(
@@ -1656,6 +2058,7 @@ export type BulkCreateDatapointsDatasetsMessages$Outbound = {
     | Array<
       | BulkCreateDatapoints2Datasets1$Outbound
       | BulkCreateDatapoints2Datasets2$Outbound
+      | BulkCreateDatapoints2Datasets3$Outbound
     >;
   tool_calls?:
     | Array<BulkCreateDatapointsDatasetsToolCalls$Outbound>
@@ -1675,6 +2078,7 @@ export const BulkCreateDatapointsDatasetsMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => BulkCreateDatapoints2Datasets1$outboundSchema),
       z.lazy(() => BulkCreateDatapoints2Datasets2$outboundSchema),
+      z.lazy(() => BulkCreateDatapoints2Datasets3$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(
@@ -1743,7 +2147,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-05-27T20:21:12.315Z",
+    "2025-05-28T21:13:36.386Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -1787,7 +2191,7 @@ export const ResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-05-27T20:21:12.315Z"))
+  updated: z.date().default(() => new Date("2025-05-28T21:13:36.386Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

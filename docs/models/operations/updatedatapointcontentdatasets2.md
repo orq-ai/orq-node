@@ -23,3 +23,14 @@ const value: operations.UpdateDatapoint2Datasets2 = {
 };
 ```
 
+### `operations.UpdateDatapoint2Datasets3`
+
+```typescript
+const value: operations.UpdateDatapoint2Datasets3 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

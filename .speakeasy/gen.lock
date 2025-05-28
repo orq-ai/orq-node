@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: a84a8e11216bbabccf0f8857d6926f51
+  docChecksum: f0e6893153151b37f4cd798b30676402
   docVersion: "2.0"
   speakeasyVersion: 1.552.0
   generationVersion: 2.610.0
-  releaseVersion: 3.5.24
-  configChecksum: f9a15b0bbf7f5ac4c56868f85508f5c9
+  releaseVersion: 3.6.0
+  configChecksum: b19354c17c593aa3fae7248e4506c474
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -46,21 +46,39 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/models/components/and.md
+  - docs/models/components/and3.md
+  - docs/models/components/andeq.md
+  - docs/models/components/andexists.md
+  - docs/models/components/andgte.md
+  - docs/models/components/andin.md
+  - docs/models/components/andlt.md
+  - docs/models/components/andlte.md
+  - docs/models/components/andne.md
+  - docs/models/components/andnin.md
   - docs/models/components/assistantmessage.md
   - docs/models/components/audio.md
   - docs/models/components/content.md
   - docs/models/components/content2.md
   - docs/models/components/deployments.md
+  - docs/models/components/deployments21.md
   - docs/models/components/deployments22.md
+  - docs/models/components/deployments23.md
+  - docs/models/components/deployments2messages3content4type.md
   - docs/models/components/deployments2messages3contenttype.md
   - docs/models/components/deployments2messages3type.md
   - docs/models/components/deployments2messages4contenttype.md
   - docs/models/components/deployments2messages4type.md
   - docs/models/components/deployments2messagestype.md
   - docs/models/components/deployments2prefixmessages3type.md
+  - docs/models/components/deployments2prefixmessages4contenttype.md
   - docs/models/components/deployments2prefixmessages4type.md
   - docs/models/components/deployments2prefixmessagestype.md
   - docs/models/components/deployments2type.md
+  - docs/models/components/deploymentsandeq.md
+  - docs/models/components/deploymentsandin.md
+  - docs/models/components/deploymentsandne.md
+  - docs/models/components/deploymentsandnin.md
   - docs/models/components/deploymentscontent2.md
   - docs/models/components/deploymentscontentmessages2.md
   - docs/models/components/deploymentsmessages3role.md
@@ -69,6 +87,10 @@ generatedFiles:
   - docs/models/components/deploymentsmessages5role.md
   - docs/models/components/deploymentsmessagescontent.md
   - docs/models/components/deploymentsmessagesrole.md
+  - docs/models/components/deploymentsoreq.md
+  - docs/models/components/deploymentsorin.md
+  - docs/models/components/deploymentsorne.md
+  - docs/models/components/deploymentsornin.md
   - docs/models/components/deploymentsprefixmessages4role.md
   - docs/models/components/deploymentsprefixmessages5role.md
   - docs/models/components/deploymentsprefixmessagescontent.md
@@ -76,12 +98,23 @@ generatedFiles:
   - docs/models/components/detail.md
   - docs/models/components/developermessage.md
   - docs/models/components/documents.md
+  - docs/models/components/eq.md
+  - docs/models/components/exists.md
+  - docs/models/components/filet.md
   - docs/models/components/format.md
+  - docs/models/components/four.md
   - docs/models/components/functiont.md
+  - docs/models/components/gte.md
   - docs/models/components/imageurl.md
+  - docs/models/components/in.md
   - docs/models/components/inputaudio.md
   - docs/models/components/inputs.md
   - docs/models/components/invokeoptions.md
+  - docs/models/components/knowledgefilter.md
+  - docs/models/components/knowledgefilterand.md
+  - docs/models/components/knowledgefilteror.md
+  - docs/models/components/lt.md
+  - docs/models/components/lte.md
   - docs/models/components/messages.md
   - docs/models/components/messagesassistantmessage.md
   - docs/models/components/messagesaudio.md
@@ -95,7 +128,23 @@ generatedFiles:
   - docs/models/components/messagestype.md
   - docs/models/components/messagesusermessage.md
   - docs/models/components/metadata.md
+  - docs/models/components/ne.md
+  - docs/models/components/nin.md
   - docs/models/components/one.md
+  - docs/models/components/oneeq.md
+  - docs/models/components/onein.md
+  - docs/models/components/onene.md
+  - docs/models/components/onenin.md
+  - docs/models/components/or.md
+  - docs/models/components/or3.md
+  - docs/models/components/oreq.md
+  - docs/models/components/orexists.md
+  - docs/models/components/orgte.md
+  - docs/models/components/orin.md
+  - docs/models/components/orlt.md
+  - docs/models/components/orlte.md
+  - docs/models/components/orne.md
+  - docs/models/components/ornin.md
   - docs/models/components/prefixmessages.md
   - docs/models/components/prefixmessagescontent.md
   - docs/models/components/prefixmessagesrole.md
@@ -112,7 +161,9 @@ generatedFiles:
   - docs/models/components/two1.md
   - docs/models/components/two2.md
   - docs/models/components/two3.md
+  - docs/models/components/two4.md
   - docs/models/components/twodetail.md
+  - docs/models/components/twofile.md
   - docs/models/components/twoformat.md
   - docs/models/components/twoimageurl.md
   - docs/models/components/twoinputaudio.md
@@ -125,16 +176,32 @@ generatedFiles:
   - docs/models/errors/honoapierror.md
   - docs/models/errors/updatepromptresponsebody.md
   - docs/models/operations/agenticragconfig.md
+  - docs/models/operations/and.md
+  - docs/models/operations/and3.md
+  - docs/models/operations/andeq.md
+  - docs/models/operations/andexists.md
+  - docs/models/operations/andgte.md
+  - docs/models/operations/andin.md
+  - docs/models/operations/andlt.md
+  - docs/models/operations/andlte.md
+  - docs/models/operations/andne.md
+  - docs/models/operations/andnin.md
   - docs/models/operations/assistantmessage.md
   - docs/models/operations/audio.md
   - docs/models/operations/bulkcreatedatapoints21.md
   - docs/models/operations/bulkcreatedatapoints22.md
+  - docs/models/operations/bulkcreatedatapoints23.md
   - docs/models/operations/bulkcreatedatapoints2datasets1.md
   - docs/models/operations/bulkcreatedatapoints2datasets2.md
+  - docs/models/operations/bulkcreatedatapoints2datasets3.md
+  - docs/models/operations/bulkcreatedatapoints2datasetsfile.md
   - docs/models/operations/bulkcreatedatapoints2datasetsimageurl.md
+  - docs/models/operations/bulkcreatedatapoints2datasetsrequesttype.md
+  - docs/models/operations/bulkcreatedatapoints2datasetsresponse200applicationjsontype.md
   - docs/models/operations/bulkcreatedatapoints2datasetsresponse200type.md
   - docs/models/operations/bulkcreatedatapoints2datasetsresponsetype.md
   - docs/models/operations/bulkcreatedatapoints2datasetstype.md
+  - docs/models/operations/bulkcreatedatapoints2file.md
   - docs/models/operations/bulkcreatedatapoints2imageurl.md
   - docs/models/operations/bulkcreatedatapoints2type.md
   - docs/models/operations/bulkcreatedatapointscontent.md
@@ -174,20 +241,31 @@ generatedFiles:
   - docs/models/operations/cleardatasetrequest.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
+  - docs/models/operations/createchunkknowledgemetadata.md
   - docs/models/operations/createchunkmetadata.md
   - docs/models/operations/createchunkrequest.md
   - docs/models/operations/createchunkresponsebody.md
   - docs/models/operations/createchunkstatus.md
   - docs/models/operations/createcontactrequestbody.md
   - docs/models/operations/createcontactresponsebody.md
+  - docs/models/operations/createdatasetexperimentrequest.md
+  - docs/models/operations/createdatasetexperimentrequestbody.md
+  - docs/models/operations/createdatasetexperimentresponsebody.md
+  - docs/models/operations/createdatasetexperimenttype.md
   - docs/models/operations/createdatasetitem21.md
   - docs/models/operations/createdatasetitem22.md
+  - docs/models/operations/createdatasetitem23.md
   - docs/models/operations/createdatasetitem2datasets1.md
   - docs/models/operations/createdatasetitem2datasets2.md
+  - docs/models/operations/createdatasetitem2datasets3.md
+  - docs/models/operations/createdatasetitem2datasetsfile.md
   - docs/models/operations/createdatasetitem2datasetsimageurl.md
+  - docs/models/operations/createdatasetitem2datasetsrequesttype.md
+  - docs/models/operations/createdatasetitem2datasetsresponse200applicationjsontype.md
   - docs/models/operations/createdatasetitem2datasetsresponse200type.md
   - docs/models/operations/createdatasetitem2datasetsresponsetype.md
   - docs/models/operations/createdatasetitem2datasetstype.md
+  - docs/models/operations/createdatasetitem2file.md
   - docs/models/operations/createdatasetitem2imageurl.md
   - docs/models/operations/createdatasetitem2type.md
   - docs/models/operations/createdatasetitemcontent.md
@@ -215,6 +293,10 @@ generatedFiles:
   - docs/models/operations/createdatasourcerequestbody.md
   - docs/models/operations/createdatasourceresponsebody.md
   - docs/models/operations/createdatasourcestatus.md
+  - docs/models/operations/createdeploymentexperimentrequest.md
+  - docs/models/operations/createdeploymentexperimentrequestbody.md
+  - docs/models/operations/createdeploymentexperimentresponsebody.md
+  - docs/models/operations/createdeploymentexperimenttype.md
   - docs/models/operations/createfeedbackrequestbody.md
   - docs/models/operations/createfeedbackresponsebody.md
   - docs/models/operations/createfeedbackvalue.md
@@ -226,10 +308,16 @@ generatedFiles:
   - docs/models/operations/createknowledgeretrievaltype.md
   - docs/models/operations/createprompt21.md
   - docs/models/operations/createprompt22.md
+  - docs/models/operations/createprompt23.md
+  - docs/models/operations/createprompt2file.md
   - docs/models/operations/createprompt2imageurl.md
   - docs/models/operations/createprompt2prompts1.md
   - docs/models/operations/createprompt2prompts2.md
+  - docs/models/operations/createprompt2prompts3.md
+  - docs/models/operations/createprompt2promptsfile.md
   - docs/models/operations/createprompt2promptsimageurl.md
+  - docs/models/operations/createprompt2promptsrequesttype.md
+  - docs/models/operations/createprompt2promptsresponse200applicationjsontype.md
   - docs/models/operations/createprompt2promptsresponse200type.md
   - docs/models/operations/createprompt2promptsresponsetype.md
   - docs/models/operations/createprompt2promptstype.md
@@ -281,25 +369,31 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
+  - docs/models/operations/deploymentcreatemetric24.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics1.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics2.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics3.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetrics4.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsdetail.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsfile.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsformat.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsimageurl.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsinputaudio.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrefusalcontentpart.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3content4type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3contenttype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices3type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4contenttype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoices4type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodychoicestype.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodymessages4type.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodymessagestype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequestrequestbodytype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsrequesttype.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstextcontentpart.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricstype.md
   - docs/models/operations/deploymentcreatemetric2detail.md
+  - docs/models/operations/deploymentcreatemetric2file.md
   - docs/models/operations/deploymentcreatemetric2format.md
   - docs/models/operations/deploymentcreatemetric2imageurl.md
   - docs/models/operations/deploymentcreatemetric2inputaudio.md
@@ -339,18 +433,27 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetricresponsebody.md
   - docs/models/operations/deploymentgetconfig21.md
   - docs/models/operations/deploymentgetconfig22.md
+  - docs/models/operations/deploymentgetconfig23.md
   - docs/models/operations/deploymentgetconfig2deployments2.md
+  - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages3content4type.md
+  - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages3contenttype.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages3type.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages4contenttype.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessages4type.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodymessagestype.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequestrequestbodytype.md
   - docs/models/operations/deploymentgetconfig2deploymentsrequesttype.md
+  - docs/models/operations/deploymentgetconfig2deploymentsresponse200applicationjsontype.md
   - docs/models/operations/deploymentgetconfig2deploymentsresponse200type.md
   - docs/models/operations/deploymentgetconfig2deploymentsresponsetype.md
   - docs/models/operations/deploymentgetconfig2deploymentstype.md
+  - docs/models/operations/deploymentgetconfig2file.md
   - docs/models/operations/deploymentgetconfig2imageurl.md
   - docs/models/operations/deploymentgetconfig2type.md
+  - docs/models/operations/deploymentgetconfigandeq.md
+  - docs/models/operations/deploymentgetconfigandin.md
+  - docs/models/operations/deploymentgetconfigandne.md
+  - docs/models/operations/deploymentgetconfigandnin.md
   - docs/models/operations/deploymentgetconfigcontent.md
   - docs/models/operations/deploymentgetconfigcontent2.md
   - docs/models/operations/deploymentgetconfigcontentdeployments2.md
@@ -368,6 +471,10 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigmessagesdeploymentsrequestrole.md
   - docs/models/operations/deploymentgetconfigmessagesdeploymentsrole.md
   - docs/models/operations/deploymentgetconfigmessagesrole.md
+  - docs/models/operations/deploymentgetconfigoreq.md
+  - docs/models/operations/deploymentgetconfigorin.md
+  - docs/models/operations/deploymentgetconfigorne.md
+  - docs/models/operations/deploymentgetconfigornin.md
   - docs/models/operations/deploymentgetconfigphotorealversion.md
   - docs/models/operations/deploymentgetconfigprefixmessagescontent.md
   - docs/models/operations/deploymentgetconfigprefixmessagesdeploymentsrequestrole.md
@@ -398,7 +505,10 @@ generatedFiles:
   - docs/models/operations/deploymentinvokeresponsebody.md
   - docs/models/operations/deployments21.md
   - docs/models/operations/deployments22.md
+  - docs/models/operations/deployments23.md
+  - docs/models/operations/deployments2deploymentsresponsetype.md
   - docs/models/operations/deployments2deploymentstype.md
+  - docs/models/operations/deployments2file.md
   - docs/models/operations/deployments2imageurl.md
   - docs/models/operations/deployments2type.md
   - docs/models/operations/deploymentscontent.md
@@ -428,34 +538,62 @@ generatedFiles:
   - docs/models/operations/deploymentsrole.md
   - docs/models/operations/deploymentstoolcalls.md
   - docs/models/operations/deploymentstools.md
+  - docs/models/operations/deploymentstream13.md
+  - docs/models/operations/deploymentstream1deploymentseq.md
+  - docs/models/operations/deploymentstream1deploymentsin.md
+  - docs/models/operations/deploymentstream1deploymentsne.md
+  - docs/models/operations/deploymentstream1deploymentsnin.md
+  - docs/models/operations/deploymentstream1eq.md
+  - docs/models/operations/deploymentstream1in.md
+  - docs/models/operations/deploymentstream1ne.md
+  - docs/models/operations/deploymentstream1nin.md
   - docs/models/operations/deploymentstream21.md
   - docs/models/operations/deploymentstream22.md
   - docs/models/operations/deploymentstream23.md
+  - docs/models/operations/deploymentstream24.md
   - docs/models/operations/deploymentstream2deployments1.md
   - docs/models/operations/deploymentstream2deployments2.md
   - docs/models/operations/deploymentstream2deployments3.md
+  - docs/models/operations/deploymentstream2deployments4.md
   - docs/models/operations/deploymentstream2deploymentsdetail.md
+  - docs/models/operations/deploymentstream2deploymentsfile.md
   - docs/models/operations/deploymentstream2deploymentsformat.md
   - docs/models/operations/deploymentstream2deploymentsimageurl.md
   - docs/models/operations/deploymentstream2deploymentsinputaudio.md
   - docs/models/operations/deploymentstream2deploymentsrefusalcontentpart.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3content4type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3contenttype.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages3type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4contenttype.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessages4type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodymessagestype.md
+  - docs/models/operations/deploymentstream2deploymentsrequestrequestbodyprefixmessages4type.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodyprefixmessagestype.md
   - docs/models/operations/deploymentstream2deploymentsrequestrequestbodytype.md
   - docs/models/operations/deploymentstream2deploymentsrequesttype.md
   - docs/models/operations/deploymentstream2deploymentstextcontentpart.md
   - docs/models/operations/deploymentstream2deploymentstype.md
   - docs/models/operations/deploymentstream2detail.md
+  - docs/models/operations/deploymentstream2file.md
   - docs/models/operations/deploymentstream2format.md
   - docs/models/operations/deploymentstream2imageurl.md
   - docs/models/operations/deploymentstream2inputaudio.md
   - docs/models/operations/deploymentstream2refusalcontentpart.md
   - docs/models/operations/deploymentstream2textcontentpart.md
   - docs/models/operations/deploymentstream2type.md
+  - docs/models/operations/deploymentstreamand3.md
+  - docs/models/operations/deploymentstreamanddeploymentseq.md
+  - docs/models/operations/deploymentstreamanddeploymentsin.md
+  - docs/models/operations/deploymentstreamanddeploymentsne.md
+  - docs/models/operations/deploymentstreamanddeploymentsnin.md
+  - docs/models/operations/deploymentstreamandeq.md
+  - docs/models/operations/deploymentstreamandexists.md
+  - docs/models/operations/deploymentstreamandgte.md
+  - docs/models/operations/deploymentstreamandin.md
+  - docs/models/operations/deploymentstreamandlt.md
+  - docs/models/operations/deploymentstreamandlte.md
+  - docs/models/operations/deploymentstreamandne.md
+  - docs/models/operations/deploymentstreamandnin.md
   - docs/models/operations/deploymentstreamchoices.md
   - docs/models/operations/deploymentstreamcontent2.md
   - docs/models/operations/deploymentstreamcontentdeployments2.md
@@ -467,6 +605,12 @@ generatedFiles:
   - docs/models/operations/deploymentstreamglobals.md
   - docs/models/operations/deploymentstreaminputs.md
   - docs/models/operations/deploymentstreaminvokeoptions.md
+  - docs/models/operations/deploymentstreamknowledgefilter.md
+  - docs/models/operations/deploymentstreamknowledgefilter1.md
+  - docs/models/operations/deploymentstreamknowledgefilterand.md
+  - docs/models/operations/deploymentstreamknowledgefilterdeploymentsand.md
+  - docs/models/operations/deploymentstreamknowledgefilterdeploymentsor.md
+  - docs/models/operations/deploymentstreamknowledgefilteror.md
   - docs/models/operations/deploymentstreammessage.md
   - docs/models/operations/deploymentstreammessage1.md
   - docs/models/operations/deploymentstreammessage2.md
@@ -497,6 +641,19 @@ generatedFiles:
   - docs/models/operations/deploymentstreammessagetype.md
   - docs/models/operations/deploymentstreammetadata.md
   - docs/models/operations/deploymentstreamobject.md
+  - docs/models/operations/deploymentstreamor3.md
+  - docs/models/operations/deploymentstreamordeploymentseq.md
+  - docs/models/operations/deploymentstreamordeploymentsin.md
+  - docs/models/operations/deploymentstreamordeploymentsne.md
+  - docs/models/operations/deploymentstreamordeploymentsnin.md
+  - docs/models/operations/deploymentstreamoreq.md
+  - docs/models/operations/deploymentstreamorexists.md
+  - docs/models/operations/deploymentstreamorgte.md
+  - docs/models/operations/deploymentstreamorin.md
+  - docs/models/operations/deploymentstreamorlt.md
+  - docs/models/operations/deploymentstreamorlte.md
+  - docs/models/operations/deploymentstreamorne.md
+  - docs/models/operations/deploymentstreamornin.md
   - docs/models/operations/deploymentstreamprefixmessages.md
   - docs/models/operations/deploymentstreamprefixmessagescontent.md
   - docs/models/operations/deploymentstreamprefixmessagesdeploymentscontent.md
@@ -517,6 +674,8 @@ generatedFiles:
   - docs/models/operations/developermessage.md
   - docs/models/operations/documents.md
   - docs/models/operations/encodingformat.md
+  - docs/models/operations/eq.md
+  - docs/models/operations/exists.md
   - docs/models/operations/feedback.md
   - docs/models/operations/filedeleterequest.md
   - docs/models/operations/filegetpurpose.md
@@ -528,14 +687,23 @@ generatedFiles:
   - docs/models/operations/filelistrequest.md
   - docs/models/operations/filelistresponsebody.md
   - docs/models/operations/filet.md
+  - docs/models/operations/fileuploadfile.md
   - docs/models/operations/fileuploadpurpose.md
   - docs/models/operations/fileuploadrequestbody.md
   - docs/models/operations/fileuploadresponsebody.md
+  - docs/models/operations/filterby.md
+  - docs/models/operations/filterby1.md
+  - docs/models/operations/filterbyand.md
+  - docs/models/operations/filterbyor.md
   - docs/models/operations/format.md
+  - docs/models/operations/four.md
   - docs/models/operations/functiont.md
   - docs/models/operations/getallprompts21.md
   - docs/models/operations/getallprompts22.md
+  - docs/models/operations/getallprompts23.md
+  - docs/models/operations/getallprompts2file.md
   - docs/models/operations/getallprompts2imageurl.md
+  - docs/models/operations/getallprompts2promptsresponsetype.md
   - docs/models/operations/getallprompts2promptstype.md
   - docs/models/operations/getallprompts2type.md
   - docs/models/operations/getallpromptscontent.md
@@ -567,6 +735,7 @@ generatedFiles:
   - docs/models/operations/getallpromptstoolcalls.md
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
+  - docs/models/operations/getonechunkmetadata.md
   - docs/models/operations/getonechunkrequest.md
   - docs/models/operations/getonechunkresponsebody.md
   - docs/models/operations/getonechunkstatus.md
@@ -578,7 +747,10 @@ generatedFiles:
   - docs/models/operations/getoneknowledgeretrievaltype.md
   - docs/models/operations/getoneprompt21.md
   - docs/models/operations/getoneprompt22.md
+  - docs/models/operations/getoneprompt23.md
+  - docs/models/operations/getoneprompt2file.md
   - docs/models/operations/getoneprompt2imageurl.md
+  - docs/models/operations/getoneprompt2promptsresponsetype.md
   - docs/models/operations/getoneprompt2promptstype.md
   - docs/models/operations/getoneprompt2type.md
   - docs/models/operations/getonepromptcontent.md
@@ -610,7 +782,10 @@ generatedFiles:
   - docs/models/operations/getonepromptusecases.md
   - docs/models/operations/getpromptversion21.md
   - docs/models/operations/getpromptversion22.md
+  - docs/models/operations/getpromptversion23.md
+  - docs/models/operations/getpromptversion2file.md
   - docs/models/operations/getpromptversion2imageurl.md
+  - docs/models/operations/getpromptversion2promptsresponsetype.md
   - docs/models/operations/getpromptversion2promptstype.md
   - docs/models/operations/getpromptversion2type.md
   - docs/models/operations/getpromptversioncontent.md
@@ -639,21 +814,31 @@ generatedFiles:
   - docs/models/operations/getpromptversiontoolcalls.md
   - docs/models/operations/getpromptversiontype.md
   - docs/models/operations/getpromptversionusecases.md
+  - docs/models/operations/gte.md
   - docs/models/operations/imageurl.md
+  - docs/models/operations/in.md
   - docs/models/operations/inputaudio.md
   - docs/models/operations/inputs.md
   - docs/models/operations/invokeoptions.md
   - docs/models/operations/items.md
   - docs/models/operations/jsonschema.md
+  - docs/models/operations/knowledgefilter.md
+  - docs/models/operations/knowledgefilter1.md
+  - docs/models/operations/knowledgefilterand.md
+  - docs/models/operations/knowledgefilteror.md
   - docs/models/operations/language.md
   - docs/models/operations/listchunksdata.md
+  - docs/models/operations/listchunksmetadata.md
   - docs/models/operations/listchunksobject.md
   - docs/models/operations/listchunksrequest.md
   - docs/models/operations/listchunksresponsebody.md
   - docs/models/operations/listchunksstatus.md
   - docs/models/operations/listdatasetdatapoints21.md
   - docs/models/operations/listdatasetdatapoints22.md
+  - docs/models/operations/listdatasetdatapoints23.md
+  - docs/models/operations/listdatasetdatapoints2datasetsresponsetype.md
   - docs/models/operations/listdatasetdatapoints2datasetstype.md
+  - docs/models/operations/listdatasetdatapoints2file.md
   - docs/models/operations/listdatasetdatapoints2imageurl.md
   - docs/models/operations/listdatasetdatapoints2type.md
   - docs/models/operations/listdatasetdatapointscontent.md
@@ -691,7 +876,10 @@ generatedFiles:
   - docs/models/operations/listmodelstype.md
   - docs/models/operations/listpromptversions21.md
   - docs/models/operations/listpromptversions22.md
+  - docs/models/operations/listpromptversions23.md
+  - docs/models/operations/listpromptversions2file.md
   - docs/models/operations/listpromptversions2imageurl.md
+  - docs/models/operations/listpromptversions2promptsresponsetype.md
   - docs/models/operations/listpromptversions2promptstype.md
   - docs/models/operations/listpromptversions2type.md
   - docs/models/operations/listpromptversionscontent.md
@@ -722,6 +910,9 @@ generatedFiles:
   - docs/models/operations/listpromptversionstoolcalls.md
   - docs/models/operations/listpromptversionstype.md
   - docs/models/operations/listpromptversionsusecases.md
+  - docs/models/operations/lt.md
+  - docs/models/operations/lte.md
+  - docs/models/operations/matches.md
   - docs/models/operations/message.md
   - docs/models/operations/message1.md
   - docs/models/operations/message2.md
@@ -745,8 +936,29 @@ generatedFiles:
   - docs/models/operations/metadata.md
   - docs/models/operations/modelparameters.md
   - docs/models/operations/modeltype.md
+  - docs/models/operations/ne.md
+  - docs/models/operations/nin.md
   - docs/models/operations/objectt.md
   - docs/models/operations/one.md
+  - docs/models/operations/one3.md
+  - docs/models/operations/oneeq.md
+  - docs/models/operations/oneexists.md
+  - docs/models/operations/onegte.md
+  - docs/models/operations/onein.md
+  - docs/models/operations/onelt.md
+  - docs/models/operations/onelte.md
+  - docs/models/operations/onene.md
+  - docs/models/operations/onenin.md
+  - docs/models/operations/or.md
+  - docs/models/operations/or3.md
+  - docs/models/operations/oreq.md
+  - docs/models/operations/orexists.md
+  - docs/models/operations/orgte.md
+  - docs/models/operations/orin.md
+  - docs/models/operations/orlt.md
+  - docs/models/operations/orlte.md
+  - docs/models/operations/orne.md
+  - docs/models/operations/ornin.md
   - docs/models/operations/ownedby.md
   - docs/models/operations/parameterst.md
   - docs/models/operations/performance.md
@@ -785,7 +997,10 @@ generatedFiles:
   - docs/models/operations/retrievaltype.md
   - docs/models/operations/retrievedatapoint21.md
   - docs/models/operations/retrievedatapoint22.md
+  - docs/models/operations/retrievedatapoint23.md
+  - docs/models/operations/retrievedatapoint2datasetsresponsetype.md
   - docs/models/operations/retrievedatapoint2datasetstype.md
+  - docs/models/operations/retrievedatapoint2file.md
   - docs/models/operations/retrievedatapoint2imageurl.md
   - docs/models/operations/retrievedatapoint2type.md
   - docs/models/operations/retrievedatapointcontent.md
@@ -804,6 +1019,52 @@ generatedFiles:
   - docs/models/operations/retrievedatasourceresponsebody.md
   - docs/models/operations/retrievedatasourcestatus.md
   - docs/models/operations/role.md
+  - docs/models/operations/scores.md
+  - docs/models/operations/searchknowledge13.md
+  - docs/models/operations/searchknowledge1eq.md
+  - docs/models/operations/searchknowledge1exists.md
+  - docs/models/operations/searchknowledge1gte.md
+  - docs/models/operations/searchknowledge1in.md
+  - docs/models/operations/searchknowledge1knowledgeeq.md
+  - docs/models/operations/searchknowledge1knowledgein.md
+  - docs/models/operations/searchknowledge1knowledgene.md
+  - docs/models/operations/searchknowledge1knowledgenin.md
+  - docs/models/operations/searchknowledge1lt.md
+  - docs/models/operations/searchknowledge1lte.md
+  - docs/models/operations/searchknowledge1ne.md
+  - docs/models/operations/searchknowledge1nin.md
+  - docs/models/operations/searchknowledgeand3.md
+  - docs/models/operations/searchknowledgeandeq.md
+  - docs/models/operations/searchknowledgeandexists.md
+  - docs/models/operations/searchknowledgeandgte.md
+  - docs/models/operations/searchknowledgeandin.md
+  - docs/models/operations/searchknowledgeandknowledgeeq.md
+  - docs/models/operations/searchknowledgeandknowledgein.md
+  - docs/models/operations/searchknowledgeandknowledgene.md
+  - docs/models/operations/searchknowledgeandknowledgenin.md
+  - docs/models/operations/searchknowledgeandlt.md
+  - docs/models/operations/searchknowledgeandlte.md
+  - docs/models/operations/searchknowledgeandne.md
+  - docs/models/operations/searchknowledgeandnin.md
+  - docs/models/operations/searchknowledgefilterbyand.md
+  - docs/models/operations/searchknowledgefilterbyor.md
+  - docs/models/operations/searchknowledgeor3.md
+  - docs/models/operations/searchknowledgeoreq.md
+  - docs/models/operations/searchknowledgeorexists.md
+  - docs/models/operations/searchknowledgeorgte.md
+  - docs/models/operations/searchknowledgeorin.md
+  - docs/models/operations/searchknowledgeorknowledgeeq.md
+  - docs/models/operations/searchknowledgeorknowledgein.md
+  - docs/models/operations/searchknowledgeorknowledgene.md
+  - docs/models/operations/searchknowledgeorknowledgenin.md
+  - docs/models/operations/searchknowledgeorlt.md
+  - docs/models/operations/searchknowledgeorlte.md
+  - docs/models/operations/searchknowledgeorne.md
+  - docs/models/operations/searchknowledgeornin.md
+  - docs/models/operations/searchknowledgerequest.md
+  - docs/models/operations/searchknowledgerequestbody.md
+  - docs/models/operations/searchknowledgeresponsebody.md
+  - docs/models/operations/searchoptions.md
   - docs/models/operations/status.md
   - docs/models/operations/systemmessage.md
   - docs/models/operations/textcontentpart.md
@@ -816,7 +1077,9 @@ generatedFiles:
   - docs/models/operations/two1.md
   - docs/models/operations/two2.md
   - docs/models/operations/two3.md
+  - docs/models/operations/two4.md
   - docs/models/operations/twodetail.md
+  - docs/models/operations/twofile.md
   - docs/models/operations/twoformat.md
   - docs/models/operations/twoimageurl.md
   - docs/models/operations/twoinputaudio.md
@@ -824,6 +1087,7 @@ generatedFiles:
   - docs/models/operations/twotextcontentpart.md
   - docs/models/operations/twotype.md
   - docs/models/operations/type.md
+  - docs/models/operations/updatechunkknowledgemetadata.md
   - docs/models/operations/updatechunkmetadata.md
   - docs/models/operations/updatechunkrequest.md
   - docs/models/operations/updatechunkrequestbody.md
@@ -831,12 +1095,18 @@ generatedFiles:
   - docs/models/operations/updatechunkstatus.md
   - docs/models/operations/updatedatapoint21.md
   - docs/models/operations/updatedatapoint22.md
+  - docs/models/operations/updatedatapoint23.md
   - docs/models/operations/updatedatapoint2datasets1.md
   - docs/models/operations/updatedatapoint2datasets2.md
+  - docs/models/operations/updatedatapoint2datasets3.md
+  - docs/models/operations/updatedatapoint2datasetsfile.md
   - docs/models/operations/updatedatapoint2datasetsimageurl.md
+  - docs/models/operations/updatedatapoint2datasetsrequesttype.md
+  - docs/models/operations/updatedatapoint2datasetsresponse200applicationjsontype.md
   - docs/models/operations/updatedatapoint2datasetsresponse200type.md
   - docs/models/operations/updatedatapoint2datasetsresponsetype.md
   - docs/models/operations/updatedatapoint2datasetstype.md
+  - docs/models/operations/updatedatapoint2file.md
   - docs/models/operations/updatedatapoint2imageurl.md
   - docs/models/operations/updatedatapoint2type.md
   - docs/models/operations/updatedatapointcontent.md
@@ -877,10 +1147,16 @@ generatedFiles:
   - docs/models/operations/updateknowledgeretrievaltype.md
   - docs/models/operations/updateprompt21.md
   - docs/models/operations/updateprompt22.md
+  - docs/models/operations/updateprompt23.md
+  - docs/models/operations/updateprompt2file.md
   - docs/models/operations/updateprompt2imageurl.md
   - docs/models/operations/updateprompt2prompts1.md
   - docs/models/operations/updateprompt2prompts2.md
+  - docs/models/operations/updateprompt2prompts3.md
+  - docs/models/operations/updateprompt2promptsfile.md
   - docs/models/operations/updateprompt2promptsimageurl.md
+  - docs/models/operations/updateprompt2promptsrequesttype.md
+  - docs/models/operations/updateprompt2promptsresponse200applicationjsontype.md
   - docs/models/operations/updateprompt2promptsresponse200type.md
   - docs/models/operations/updateprompt2promptsresponsetype.md
   - docs/models/operations/updateprompt2promptstype.md
@@ -960,6 +1236,7 @@ generatedFiles:
   - src/funcs/datasetsCreate.ts
   - src/funcs/datasetsCreateDatapoint.ts
   - src/funcs/datasetsCreateDatapoints.ts
+  - src/funcs/datasetsCreateExperiment.ts
   - src/funcs/datasetsDelete.ts
   - src/funcs/datasetsDeleteDatapoint.ts
   - src/funcs/datasetsList.ts
@@ -968,6 +1245,7 @@ generatedFiles:
   - src/funcs/datasetsRetrieveDatapoint.ts
   - src/funcs/datasetsUpdate.ts
   - src/funcs/datasetsUpdateDatapoint.ts
+  - src/funcs/deploymentsCreateExperiment.ts
   - src/funcs/deploymentsGetConfig.ts
   - src/funcs/deploymentsInvoke.ts
   - src/funcs/deploymentsList.ts
@@ -990,6 +1268,7 @@ generatedFiles:
   - src/funcs/knowledgeRetrieve.ts
   - src/funcs/knowledgeRetrieveChunk.ts
   - src/funcs/knowledgeRetrieveDatasource.ts
+  - src/funcs/knowledgeSearch.ts
   - src/funcs/knowledgeUpdate.ts
   - src/funcs/knowledgeUpdateChunk.ts
   - src/funcs/knowledgeUpdateDatasource.ts
@@ -1041,6 +1320,7 @@ generatedFiles:
   - src/mcp-server/tools/datasetsCreate.ts
   - src/mcp-server/tools/datasetsCreateDatapoint.ts
   - src/mcp-server/tools/datasetsCreateDatapoints.ts
+  - src/mcp-server/tools/datasetsCreateExperiment.ts
   - src/mcp-server/tools/datasetsDelete.ts
   - src/mcp-server/tools/datasetsDeleteDatapoint.ts
   - src/mcp-server/tools/datasetsList.ts
@@ -1049,6 +1329,7 @@ generatedFiles:
   - src/mcp-server/tools/datasetsRetrieveDatapoint.ts
   - src/mcp-server/tools/datasetsUpdate.ts
   - src/mcp-server/tools/datasetsUpdateDatapoint.ts
+  - src/mcp-server/tools/deploymentsCreateExperiment.ts
   - src/mcp-server/tools/deploymentsGetConfig.ts
   - src/mcp-server/tools/deploymentsInvoke.ts
   - src/mcp-server/tools/deploymentsList.ts
@@ -1071,6 +1352,7 @@ generatedFiles:
   - src/mcp-server/tools/knowledgeRetrieve.ts
   - src/mcp-server/tools/knowledgeRetrieveChunk.ts
   - src/mcp-server/tools/knowledgeRetrieveDatasource.ts
+  - src/mcp-server/tools/knowledgeSearch.ts
   - src/mcp-server/tools/knowledgeUpdate.ts
   - src/mcp-server/tools/knowledgeUpdateChunk.ts
   - src/mcp-server/tools/knowledgeUpdateDatasource.ts
@@ -1098,8 +1380,10 @@ generatedFiles:
   - src/models/operations/createchunk.ts
   - src/models/operations/createcontact.ts
   - src/models/operations/createdataset.ts
+  - src/models/operations/createdatasetexperiment.ts
   - src/models/operations/createdatasetitem.ts
   - src/models/operations/createdatasource.ts
+  - src/models/operations/createdeploymentexperiment.ts
   - src/models/operations/createfeedback.ts
   - src/models/operations/createknowledge.ts
   - src/models/operations/createprompt.ts
@@ -1135,6 +1419,7 @@ generatedFiles:
   - src/models/operations/retrievedatapoint.ts
   - src/models/operations/retrievedataset.ts
   - src/models/operations/retrievedatasource.ts
+  - src/models/operations/searchknowledge.ts
   - src/models/operations/updatechunk.ts
   - src/models/operations/updatedatapoint.ts
   - src/models/operations/updatedataset.ts
@@ -1170,7 +1455,7 @@ examples:
         application/json: {"external_id": "<id>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-05-28T21:13:36.386Z"}
   CreateFeedback:
     "":
       requestBody:
@@ -1222,7 +1507,7 @@ examples:
         multipart/form-data: {"file": {"": "x-file: example.file"}, "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-05-27T20:21:15.054Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-05-28T21:13:39.080Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -1238,7 +1523,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-05-27T20:21:15.054Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-05-28T21:13:39.080Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -1255,7 +1540,7 @@ examples:
   CreatePrompt:
     speakeasy-default-create-prompt:
       requestBody:
-        application/json: {"display_name": "Raymundo83", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "assistant", "content": "<value>"}]}, "path": "Customer Service/Billing/Refund"}
+        application/json: {"display_name": "Raymundo83", "prompt_config": {"messages": [{"role": "assistant", "content": "<value>"}, {"role": "assistant", "content": "<value>"}]}, "path": "Default"}
       responses:
         "200":
           application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "a6f7f356-27b0-432e-b908-0fbcfbcd161b", "created": "<value>", "updated": "<value>", "display_name": "Palma13", "prompt_config": {"messages": [{"role": "prompt", "content": "<value>"}, {"role": "prompt", "content": "<value>"}]}}
@@ -1273,7 +1558,7 @@ examples:
         path:
           id: "<id>"
       requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
+        application/json: {"path": "Default"}
       responses:
         "200":
           application/json: {"_id": "<id>", "type": "prompt", "owner": "<value>", "domain_id": "511bb3cc-2197-477d-9cfe-36a524598f64", "created": "<value>", "updated": "<value>", "display_name": "Brandy.Kunze62", "prompt_config": {"messages": [{"role": "tool", "content": [{"type": "image_url", "image_url": {"url": "https://perfumed-boyfriend.biz"}}]}, {"role": "tool", "content": [{"type": "image_url", "image_url": {"url": "https://perfumed-boyfriend.biz"}}]}]}}
@@ -1326,10 +1611,10 @@ examples:
   CreateDataset:
     speakeasy-default-create-dataset:
       requestBody:
-        application/json: {"display_name": "Neva.Raynor10", "path": "Customer Service/Billing/Refund"}
+        application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-05-28T21:13:36.386Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -1337,7 +1622,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-05-28T21:13:36.386Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -1346,10 +1631,10 @@ examples:
         path:
           dataset_id: "<id>"
       requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
+        application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-05-28T21:13:36.386Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -1374,7 +1659,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-05-28T21:13:36.386Z"}
   RetrieveDatapoint:
     speakeasy-default-retrieve-datapoint:
       parameters:
@@ -1383,7 +1668,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-05-28T21:13:36.386Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -1394,7 +1679,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-05-27T20:21:12.315Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-05-28T21:13:36.386Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -1430,10 +1715,10 @@ examples:
   CreateKnowledge:
     speakeasy-default-create-knowledge:
       requestBody:
-        application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Customer Service/Billing/Refund"}
+        application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Charger", "domain_id": "<id>", "path": "Customer Service/Billing/Refund", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Charger", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
   GetOneKnowledge:
     speakeasy-default-get-one-knowledge:
       parameters:
@@ -1441,17 +1726,17 @@ examples:
           knowledge_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model X", "domain_id": "<id>", "path": "Customer Service/Billing/Refund", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model X", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
   UpdateKnowledge:
     speakeasy-default-update-knowledge:
       parameters:
         path:
           knowledge_id: "<id>"
       requestBody:
-        application/json: {"path": "Customer Service/Billing/Refund"}
+        application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model 3", "domain_id": "<id>", "path": "Customer Service/Billing/Refund", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model 3", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
   DeleteKnowledge:
     speakeasy-default-delete-knowledge:
       parameters:
@@ -1477,7 +1762,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01JW9PG690K1A756HKRQ5GBN5F", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01JWCBWVVHPXEAAGEX0Y84Z9YC", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -1486,7 +1771,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01JW9PG68ZSAWDP501A29REM4G", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01JWCBWVVHRQV1SXJKRQB6XWW5", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -1503,7 +1788,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01JW9PG691T9CES3A7NY1CNBAA", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01JWCBWVVKB6NAPNS2CHGGKD6F", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -1552,5 +1837,33 @@ examples:
       responses:
         "200":
           application/json: {"_id": "<id>", "text": "<value>", "enabled": false, "status": "completed", "created": "<value>", "updated": "<value>"}
+  CreateDeploymentExperiment:
+    speakeasy-default-create-deployment-experiment:
+      parameters:
+        path:
+          deployment_key: "<value>"
+      requestBody:
+        application/json: {"experiment_key": "<value>", "path": "Default/Experiments", "dataset_id": "<id>", "type": "deployment_experiment"}
+      responses:
+        "200":
+          application/json: {"url": "https://outlandish-maintainer.name", "experiment_id": "<id>", "experiment_run_id": "<id>"}
+  CreateDatasetExperiment:
+    speakeasy-default-create-dataset-experiment:
+      parameters:
+        path:
+          dataset_id: "<id>"
+      requestBody:
+        application/json: {"experiment_key": "<value>", "path": "Default/Experiments", "type": "dataset_experiment"}
+      responses:
+        "200":
+          application/json: {"url": "https://sick-entry.net", "experiment_id": "<id>", "experiment_run_id": "<id>"}
+  SearchKnowledge:
+    speakeasy-default-search-knowledge:
+      parameters:
+        path:
+          knowledge_id: "<id>"
+      responses:
+        "200":
+          application/json: {"matches": [{"id": "<id>", "text": "<value>"}, {"id": "<id>", "text": "<value>"}]}
 examplesVersion: 1.0.2
 generatedTests: {}

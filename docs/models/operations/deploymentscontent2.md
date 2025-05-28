@@ -23,3 +23,14 @@ const value: operations.Deployments22 = {
 };
 ```
 
+### `operations.Deployments23`
+
+```typescript
+const value: operations.Deployments23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

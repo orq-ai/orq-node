@@ -6,11 +6,11 @@
 import { DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type } from "@orq-ai/node/models/operations";
 
 let value: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type =
-  "input_audio";
+  "image_url";
 ```
 
 ## Values
 
 ```typescript
-"input_audio"
+"image_url"
 ```

@@ -23,3 +23,14 @@ const value: operations.GetAllPrompts22 = {
 };
 ```
 
+### `operations.GetAllPrompts23`
+
+```typescript
+const value: operations.GetAllPrompts23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

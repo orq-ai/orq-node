@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `components.One`
+### `components.Deployments21`
 
 ```typescript
-const value: components.One = {
+const value: components.Deployments21 = {
   type: "text",
   text: "<value>",
 };
@@ -23,14 +23,25 @@ const value: components.Two2 = {
 };
 ```
 
-### `components.Three`
+### `components.Deployments23`
 
 ```typescript
-const value: components.Three = {
+const value: components.Deployments23 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
+  },
+};
+```
+
+### `components.Four`
+
+```typescript
+const value: components.Four = {
+  type: "file",
+  file: {
+    fileData: "<value>",
   },
 };
 ```

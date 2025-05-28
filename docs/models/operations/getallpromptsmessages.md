@@ -9,9 +9,9 @@ let value: GetAllPromptsMessages = {
   role: "prompt",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://frivolous-thorn.com",
+      type: "file",
+      file: {
+        fileData: "<value>",
       },
     },
   ],

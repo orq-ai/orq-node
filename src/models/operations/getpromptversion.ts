@@ -270,6 +270,38 @@ export const GetPromptVersionRole = {
  */
 export type GetPromptVersionRole = ClosedEnum<typeof GetPromptVersionRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const GetPromptVersion2PromptsResponseType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type GetPromptVersion2PromptsResponseType = ClosedEnum<
+  typeof GetPromptVersion2PromptsResponseType
+>;
+
+export type GetPromptVersion2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type GetPromptVersion23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: GetPromptVersion2PromptsResponseType;
+  file: GetPromptVersion2File;
+};
+
 export const GetPromptVersion2PromptsType = {
   ImageUrl: "image_url",
 } as const;
@@ -313,14 +345,17 @@ export type GetPromptVersion21 = {
   text: string;
 };
 
-export type GetPromptVersionContent2 = GetPromptVersion21 | GetPromptVersion22;
+export type GetPromptVersionContent2 =
+  | GetPromptVersion21
+  | GetPromptVersion22
+  | GetPromptVersion23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type GetPromptVersionContent =
   | string
-  | Array<GetPromptVersion21 | GetPromptVersion22>;
+  | Array<GetPromptVersion21 | GetPromptVersion22 | GetPromptVersion23>;
 
 export const GetPromptVersionType = {
   Function: "function",
@@ -350,7 +385,9 @@ export type GetPromptVersionMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<GetPromptVersion21 | GetPromptVersion22>;
+  content:
+    | string
+    | Array<GetPromptVersion21 | GetPromptVersion22 | GetPromptVersion23>;
   toolCalls?: Array<GetPromptVersionToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1099,6 +1136,152 @@ export namespace GetPromptVersionRole$ {
 }
 
 /** @internal */
+export const GetPromptVersion2PromptsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof GetPromptVersion2PromptsResponseType> = z.nativeEnum(
+    GetPromptVersion2PromptsResponseType,
+  );
+
+/** @internal */
+export const GetPromptVersion2PromptsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof GetPromptVersion2PromptsResponseType> =
+    GetPromptVersion2PromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetPromptVersion2PromptsResponseType$ {
+  /** @deprecated use `GetPromptVersion2PromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetPromptVersion2PromptsResponseType$inboundSchema;
+  /** @deprecated use `GetPromptVersion2PromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetPromptVersion2PromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const GetPromptVersion2File$inboundSchema: z.ZodType<
+  GetPromptVersion2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type GetPromptVersion2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const GetPromptVersion2File$outboundSchema: z.ZodType<
+  GetPromptVersion2File$Outbound,
+  z.ZodTypeDef,
+  GetPromptVersion2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetPromptVersion2File$ {
+  /** @deprecated use `GetPromptVersion2File$inboundSchema` instead. */
+  export const inboundSchema = GetPromptVersion2File$inboundSchema;
+  /** @deprecated use `GetPromptVersion2File$outboundSchema` instead. */
+  export const outboundSchema = GetPromptVersion2File$outboundSchema;
+  /** @deprecated use `GetPromptVersion2File$Outbound` instead. */
+  export type Outbound = GetPromptVersion2File$Outbound;
+}
+
+export function getPromptVersion2FileToJSON(
+  getPromptVersion2File: GetPromptVersion2File,
+): string {
+  return JSON.stringify(
+    GetPromptVersion2File$outboundSchema.parse(getPromptVersion2File),
+  );
+}
+
+export function getPromptVersion2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersion2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersion2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersion2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersion23$inboundSchema: z.ZodType<
+  GetPromptVersion23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetPromptVersion2PromptsResponseType$inboundSchema,
+  file: z.lazy(() => GetPromptVersion2File$inboundSchema),
+});
+
+/** @internal */
+export type GetPromptVersion23$Outbound = {
+  type: string;
+  file: GetPromptVersion2File$Outbound;
+};
+
+/** @internal */
+export const GetPromptVersion23$outboundSchema: z.ZodType<
+  GetPromptVersion23$Outbound,
+  z.ZodTypeDef,
+  GetPromptVersion23
+> = z.object({
+  type: GetPromptVersion2PromptsResponseType$outboundSchema,
+  file: z.lazy(() => GetPromptVersion2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetPromptVersion23$ {
+  /** @deprecated use `GetPromptVersion23$inboundSchema` instead. */
+  export const inboundSchema = GetPromptVersion23$inboundSchema;
+  /** @deprecated use `GetPromptVersion23$outboundSchema` instead. */
+  export const outboundSchema = GetPromptVersion23$outboundSchema;
+  /** @deprecated use `GetPromptVersion23$Outbound` instead. */
+  export type Outbound = GetPromptVersion23$Outbound;
+}
+
+export function getPromptVersion23ToJSON(
+  getPromptVersion23: GetPromptVersion23,
+): string {
+  return JSON.stringify(
+    GetPromptVersion23$outboundSchema.parse(getPromptVersion23),
+  );
+}
+
+export function getPromptVersion23FromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersion23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersion23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersion23' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetPromptVersion2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetPromptVersion2PromptsType
 > = z.nativeEnum(GetPromptVersion2PromptsType);
@@ -1330,12 +1513,14 @@ export const GetPromptVersionContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetPromptVersion21$inboundSchema),
   z.lazy(() => GetPromptVersion22$inboundSchema),
+  z.lazy(() => GetPromptVersion23$inboundSchema),
 ]);
 
 /** @internal */
 export type GetPromptVersionContent2$Outbound =
   | GetPromptVersion21$Outbound
-  | GetPromptVersion22$Outbound;
+  | GetPromptVersion22$Outbound
+  | GetPromptVersion23$Outbound;
 
 /** @internal */
 export const GetPromptVersionContent2$outboundSchema: z.ZodType<
@@ -1345,6 +1530,7 @@ export const GetPromptVersionContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetPromptVersion21$outboundSchema),
   z.lazy(() => GetPromptVersion22$outboundSchema),
+  z.lazy(() => GetPromptVersion23$outboundSchema),
 ]);
 
 /**
@@ -1388,13 +1574,18 @@ export const GetPromptVersionContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => GetPromptVersion21$inboundSchema),
     z.lazy(() => GetPromptVersion22$inboundSchema),
+    z.lazy(() => GetPromptVersion23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type GetPromptVersionContent$Outbound =
   | string
-  | Array<GetPromptVersion21$Outbound | GetPromptVersion22$Outbound>;
+  | Array<
+    | GetPromptVersion21$Outbound
+    | GetPromptVersion22$Outbound
+    | GetPromptVersion23$Outbound
+  >;
 
 /** @internal */
 export const GetPromptVersionContent$outboundSchema: z.ZodType<
@@ -1406,6 +1597,7 @@ export const GetPromptVersionContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => GetPromptVersion21$outboundSchema),
     z.lazy(() => GetPromptVersion22$outboundSchema),
+    z.lazy(() => GetPromptVersion23$outboundSchema),
   ])),
 ]);
 
@@ -1593,6 +1785,7 @@ export const GetPromptVersionMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => GetPromptVersion21$inboundSchema),
       z.lazy(() => GetPromptVersion22$inboundSchema),
+      z.lazy(() => GetPromptVersion23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => GetPromptVersionToolCalls$inboundSchema))
@@ -1610,7 +1803,11 @@ export type GetPromptVersionMessages$Outbound = {
   role: string;
   content:
     | string
-    | Array<GetPromptVersion21$Outbound | GetPromptVersion22$Outbound>;
+    | Array<
+      | GetPromptVersion21$Outbound
+      | GetPromptVersion22$Outbound
+      | GetPromptVersion23$Outbound
+    >;
   tool_calls?: Array<GetPromptVersionToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -1627,6 +1824,7 @@ export const GetPromptVersionMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => GetPromptVersion21$outboundSchema),
       z.lazy(() => GetPromptVersion22$outboundSchema),
+      z.lazy(() => GetPromptVersion23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => GetPromptVersionToolCalls$outboundSchema))

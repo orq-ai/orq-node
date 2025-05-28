@@ -16,10 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentStreamContentDeploymentsRequest2[] = [
   {
-    type: "input_audio",
-    inputAudio: {
-      data: "<value>",
-      format: "mp3",
+    type: "file",
+    file: {
+      fileData: "<value>",
     },
   },
 ];

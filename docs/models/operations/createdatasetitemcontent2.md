@@ -23,3 +23,14 @@ const value: operations.CreateDatasetItem22 = {
 };
 ```
 
+### `operations.CreateDatasetItem23`
+
+```typescript
+const value: operations.CreateDatasetItem23 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

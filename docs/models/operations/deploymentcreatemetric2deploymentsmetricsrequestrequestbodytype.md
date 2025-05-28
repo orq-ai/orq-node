@@ -1,6 +1,6 @@
 # DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
 
-The type of the content part.
+The type of the content part. Always `file`.
 
 ## Example Usage
 
@@ -8,11 +8,11 @@ The type of the content part.
 import { DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType =
-  "text";
+  "file";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"file"
 ```

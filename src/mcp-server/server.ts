@@ -18,6 +18,7 @@ import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
 import { tool$datasetsCreateDatapoints } from "./tools/datasetsCreateDatapoints.js";
+import { tool$datasetsCreateExperiment } from "./tools/datasetsCreateExperiment.js";
 import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
 import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
 import { tool$datasetsList } from "./tools/datasetsList.js";
@@ -26,6 +27,7 @@ import { tool$datasetsRetrieve } from "./tools/datasetsRetrieve.js";
 import { tool$datasetsRetrieveDatapoint } from "./tools/datasetsRetrieveDatapoint.js";
 import { tool$datasetsUpdate } from "./tools/datasetsUpdate.js";
 import { tool$datasetsUpdateDatapoint } from "./tools/datasetsUpdateDatapoint.js";
+import { tool$deploymentsCreateExperiment } from "./tools/deploymentsCreateExperiment.js";
 import { tool$deploymentsGetConfig } from "./tools/deploymentsGetConfig.js";
 import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
@@ -48,6 +50,7 @@ import { tool$knowledgeListDatasources } from "./tools/knowledgeListDatasources.
 import { tool$knowledgeRetrieve } from "./tools/knowledgeRetrieve.js";
 import { tool$knowledgeRetrieveChunk } from "./tools/knowledgeRetrieveChunk.js";
 import { tool$knowledgeRetrieveDatasource } from "./tools/knowledgeRetrieveDatasource.js";
+import { tool$knowledgeSearch } from "./tools/knowledgeSearch.js";
 import { tool$knowledgeUpdate } from "./tools/knowledgeUpdate.js";
 import { tool$knowledgeUpdateChunk } from "./tools/knowledgeUpdateChunk.js";
 import { tool$knowledgeUpdateDatasource } from "./tools/knowledgeUpdateDatasource.js";
@@ -73,7 +76,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.5.24",
+    version: "3.6.0",
   });
 
   const client = new OrqCore({
@@ -111,6 +114,7 @@ export function createMCPServer(deps: {
   tool(tool$deploymentsGetConfig);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsStream);
+  tool(tool$deploymentsCreateExperiment);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
@@ -129,6 +133,7 @@ export function createMCPServer(deps: {
   tool(tool$datasetsRetrieve);
   tool(tool$datasetsUpdate);
   tool(tool$datasetsDelete);
+  tool(tool$datasetsCreateExperiment);
   tool(tool$datasetsListDatapoints);
   tool(tool$datasetsCreateDatapoint);
   tool(tool$datasetsRetrieveDatapoint);
@@ -141,6 +146,7 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeRetrieve);
   tool(tool$knowledgeUpdate);
   tool(tool$knowledgeDelete);
+  tool(tool$knowledgeSearch);
   tool(tool$knowledgeListDatasources);
   tool(tool$knowledgeCreateDatasource);
   tool(tool$knowledgeRetrieveDatasource);

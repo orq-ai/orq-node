@@ -7,11 +7,11 @@ The type of the content part.
 ```typescript
 import { Deployments2PrefixMessages4Type } from "@orq-ai/node/models/components";
 
-let value: Deployments2PrefixMessages4Type = "refusal";
+let value: Deployments2PrefixMessages4Type = "text";
 ```
 
 ## Values
 
 ```typescript
-"refusal"
+"text"
 ```

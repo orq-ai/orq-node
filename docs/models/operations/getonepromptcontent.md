@@ -16,9 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.GetOnePromptContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://deafening-alligator.biz/",
+    type: "file",
+    file: {
+      fileData: "<value>",
     },
   },
 ];

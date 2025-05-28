@@ -267,6 +267,38 @@ export const GetOnePromptRole = {
  */
 export type GetOnePromptRole = ClosedEnum<typeof GetOnePromptRole>;
 
+/**
+ * The type of the content part. Always `file`.
+ */
+export const GetOnePrompt2PromptsResponseType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type GetOnePrompt2PromptsResponseType = ClosedEnum<
+  typeof GetOnePrompt2PromptsResponseType
+>;
+
+export type GetOnePrompt2File = {
+  /**
+   * The base64 encoded file data, used when passing the file to the model as a string.
+   */
+  fileData: string;
+  /**
+   * The name of the file, used when passing the file to the model as a string.
+   */
+  filename?: string | undefined;
+};
+
+export type GetOnePrompt23 = {
+  /**
+   * The type of the content part. Always `file`.
+   */
+  type: GetOnePrompt2PromptsResponseType;
+  file: GetOnePrompt2File;
+};
+
 export const GetOnePrompt2PromptsType = {
   ImageUrl: "image_url",
 } as const;
@@ -310,14 +342,17 @@ export type GetOnePrompt21 = {
   text: string;
 };
 
-export type GetOnePromptContent2 = GetOnePrompt21 | GetOnePrompt22;
+export type GetOnePromptContent2 =
+  | GetOnePrompt21
+  | GetOnePrompt22
+  | GetOnePrompt23;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
 export type GetOnePromptContent =
   | string
-  | Array<GetOnePrompt21 | GetOnePrompt22>;
+  | Array<GetOnePrompt21 | GetOnePrompt22 | GetOnePrompt23>;
 
 export const GetOnePromptPromptsType = {
   Function: "function",
@@ -349,7 +384,7 @@ export type GetOnePromptMessages = {
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<GetOnePrompt21 | GetOnePrompt22>;
+  content: string | Array<GetOnePrompt21 | GetOnePrompt22 | GetOnePrompt23>;
   toolCalls?: Array<GetOnePromptToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
@@ -1098,6 +1133,145 @@ export namespace GetOnePromptRole$ {
 }
 
 /** @internal */
+export const GetOnePrompt2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePrompt2PromptsResponseType
+> = z.nativeEnum(GetOnePrompt2PromptsResponseType);
+
+/** @internal */
+export const GetOnePrompt2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePrompt2PromptsResponseType
+> = GetOnePrompt2PromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOnePrompt2PromptsResponseType$ {
+  /** @deprecated use `GetOnePrompt2PromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema = GetOnePrompt2PromptsResponseType$inboundSchema;
+  /** @deprecated use `GetOnePrompt2PromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema = GetOnePrompt2PromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const GetOnePrompt2File$inboundSchema: z.ZodType<
+  GetOnePrompt2File,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_data: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_data": "fileData",
+  });
+});
+
+/** @internal */
+export type GetOnePrompt2File$Outbound = {
+  file_data: string;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const GetOnePrompt2File$outboundSchema: z.ZodType<
+  GetOnePrompt2File$Outbound,
+  z.ZodTypeDef,
+  GetOnePrompt2File
+> = z.object({
+  fileData: z.string(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOnePrompt2File$ {
+  /** @deprecated use `GetOnePrompt2File$inboundSchema` instead. */
+  export const inboundSchema = GetOnePrompt2File$inboundSchema;
+  /** @deprecated use `GetOnePrompt2File$outboundSchema` instead. */
+  export const outboundSchema = GetOnePrompt2File$outboundSchema;
+  /** @deprecated use `GetOnePrompt2File$Outbound` instead. */
+  export type Outbound = GetOnePrompt2File$Outbound;
+}
+
+export function getOnePrompt2FileToJSON(
+  getOnePrompt2File: GetOnePrompt2File,
+): string {
+  return JSON.stringify(
+    GetOnePrompt2File$outboundSchema.parse(getOnePrompt2File),
+  );
+}
+
+export function getOnePrompt2FileFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePrompt2File, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePrompt2File$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePrompt2File' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOnePrompt23$inboundSchema: z.ZodType<
+  GetOnePrompt23,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetOnePrompt2PromptsResponseType$inboundSchema,
+  file: z.lazy(() => GetOnePrompt2File$inboundSchema),
+});
+
+/** @internal */
+export type GetOnePrompt23$Outbound = {
+  type: string;
+  file: GetOnePrompt2File$Outbound;
+};
+
+/** @internal */
+export const GetOnePrompt23$outboundSchema: z.ZodType<
+  GetOnePrompt23$Outbound,
+  z.ZodTypeDef,
+  GetOnePrompt23
+> = z.object({
+  type: GetOnePrompt2PromptsResponseType$outboundSchema,
+  file: z.lazy(() => GetOnePrompt2File$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOnePrompt23$ {
+  /** @deprecated use `GetOnePrompt23$inboundSchema` instead. */
+  export const inboundSchema = GetOnePrompt23$inboundSchema;
+  /** @deprecated use `GetOnePrompt23$outboundSchema` instead. */
+  export const outboundSchema = GetOnePrompt23$outboundSchema;
+  /** @deprecated use `GetOnePrompt23$Outbound` instead. */
+  export type Outbound = GetOnePrompt23$Outbound;
+}
+
+export function getOnePrompt23ToJSON(getOnePrompt23: GetOnePrompt23): string {
+  return JSON.stringify(GetOnePrompt23$outboundSchema.parse(getOnePrompt23));
+}
+
+export function getOnePrompt23FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePrompt23, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePrompt23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePrompt23' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetOnePrompt2PromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePrompt2PromptsType
 > = z.nativeEnum(GetOnePrompt2PromptsType);
@@ -1321,12 +1495,14 @@ export const GetOnePromptContent2$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetOnePrompt21$inboundSchema),
   z.lazy(() => GetOnePrompt22$inboundSchema),
+  z.lazy(() => GetOnePrompt23$inboundSchema),
 ]);
 
 /** @internal */
 export type GetOnePromptContent2$Outbound =
   | GetOnePrompt21$Outbound
-  | GetOnePrompt22$Outbound;
+  | GetOnePrompt22$Outbound
+  | GetOnePrompt23$Outbound;
 
 /** @internal */
 export const GetOnePromptContent2$outboundSchema: z.ZodType<
@@ -1336,6 +1512,7 @@ export const GetOnePromptContent2$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetOnePrompt21$outboundSchema),
   z.lazy(() => GetOnePrompt22$outboundSchema),
+  z.lazy(() => GetOnePrompt23$outboundSchema),
 ]);
 
 /**
@@ -1379,13 +1556,16 @@ export const GetOnePromptContent$inboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => GetOnePrompt21$inboundSchema),
     z.lazy(() => GetOnePrompt22$inboundSchema),
+    z.lazy(() => GetOnePrompt23$inboundSchema),
   ])),
 ]);
 
 /** @internal */
 export type GetOnePromptContent$Outbound =
   | string
-  | Array<GetOnePrompt21$Outbound | GetOnePrompt22$Outbound>;
+  | Array<
+    GetOnePrompt21$Outbound | GetOnePrompt22$Outbound | GetOnePrompt23$Outbound
+  >;
 
 /** @internal */
 export const GetOnePromptContent$outboundSchema: z.ZodType<
@@ -1397,6 +1577,7 @@ export const GetOnePromptContent$outboundSchema: z.ZodType<
   z.array(z.union([
     z.lazy(() => GetOnePrompt21$outboundSchema),
     z.lazy(() => GetOnePrompt22$outboundSchema),
+    z.lazy(() => GetOnePrompt23$outboundSchema),
   ])),
 ]);
 
@@ -1584,6 +1765,7 @@ export const GetOnePromptMessages$inboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => GetOnePrompt21$inboundSchema),
       z.lazy(() => GetOnePrompt22$inboundSchema),
+      z.lazy(() => GetOnePrompt23$inboundSchema),
     ])),
   ]),
   tool_calls: z.array(z.lazy(() => GetOnePromptToolCalls$inboundSchema))
@@ -1599,7 +1781,13 @@ export const GetOnePromptMessages$inboundSchema: z.ZodType<
 /** @internal */
 export type GetOnePromptMessages$Outbound = {
   role: string;
-  content: string | Array<GetOnePrompt21$Outbound | GetOnePrompt22$Outbound>;
+  content:
+    | string
+    | Array<
+      | GetOnePrompt21$Outbound
+      | GetOnePrompt22$Outbound
+      | GetOnePrompt23$Outbound
+    >;
   tool_calls?: Array<GetOnePromptToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
@@ -1616,6 +1804,7 @@ export const GetOnePromptMessages$outboundSchema: z.ZodType<
     z.array(z.union([
       z.lazy(() => GetOnePrompt21$outboundSchema),
       z.lazy(() => GetOnePrompt22$outboundSchema),
+      z.lazy(() => GetOnePrompt23$outboundSchema),
     ])),
   ]),
   toolCalls: z.array(z.lazy(() => GetOnePromptToolCalls$outboundSchema))

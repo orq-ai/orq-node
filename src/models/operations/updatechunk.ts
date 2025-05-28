@@ -9,15 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * Metadata of the chunk
- */
-export type UpdateChunkMetadata = {
-  /**
-   * In case you are using PDFs, Word, PowerPoint, etc. this is the page number of the chunk.
-   */
-  pageNumber?: number | undefined;
-};
+export type UpdateChunkMetadata = string | number | boolean;
 
 export type UpdateChunkRequestBody = {
   /**
@@ -31,7 +23,7 @@ export type UpdateChunkRequestBody = {
   /**
    * Metadata of the chunk
    */
-  metadata?: UpdateChunkMetadata | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
 };
 
 export type UpdateChunkRequest = {
@@ -49,6 +41,8 @@ export type UpdateChunkRequest = {
   knowledgeId: string;
   requestBody?: UpdateChunkRequestBody | undefined;
 };
+
+export type UpdateChunkKnowledgeMetadata = string | number | boolean;
 
 /**
  * The status of the chunk
@@ -78,9 +72,9 @@ export type UpdateChunkResponseBody = {
    */
   text: string;
   /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported.
+   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
    */
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   /**
    * Whether the chunk is enabled
    */
@@ -112,31 +106,17 @@ export const UpdateChunkMetadata$inboundSchema: z.ZodType<
   UpdateChunkMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  page_number: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "page_number": "pageNumber",
-  });
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /** @internal */
-export type UpdateChunkMetadata$Outbound = {
-  page_number?: number | undefined;
-};
+export type UpdateChunkMetadata$Outbound = string | number | boolean;
 
 /** @internal */
 export const UpdateChunkMetadata$outboundSchema: z.ZodType<
   UpdateChunkMetadata$Outbound,
   z.ZodTypeDef,
   UpdateChunkMetadata
-> = z.object({
-  pageNumber: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageNumber: "page_number",
-  });
-});
+> = z.union([z.string(), z.number(), z.boolean()]);
 
 /**
  * @internal
@@ -177,14 +157,14 @@ export const UpdateChunkRequestBody$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string().optional(),
   embedding: z.array(z.number()).optional(),
-  metadata: z.lazy(() => UpdateChunkMetadata$inboundSchema).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 
 /** @internal */
 export type UpdateChunkRequestBody$Outbound = {
   text?: string | undefined;
   embedding?: Array<number> | undefined;
-  metadata?: UpdateChunkMetadata$Outbound | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
 };
 
 /** @internal */
@@ -195,7 +175,7 @@ export const UpdateChunkRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string().optional(),
   embedding: z.array(z.number()).optional(),
-  metadata: z.lazy(() => UpdateChunkMetadata$outboundSchema).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 
 /**
@@ -307,6 +287,56 @@ export function updateChunkRequestFromJSON(
 }
 
 /** @internal */
+export const UpdateChunkKnowledgeMetadata$inboundSchema: z.ZodType<
+  UpdateChunkKnowledgeMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type UpdateChunkKnowledgeMetadata$Outbound = string | number | boolean;
+
+/** @internal */
+export const UpdateChunkKnowledgeMetadata$outboundSchema: z.ZodType<
+  UpdateChunkKnowledgeMetadata$Outbound,
+  z.ZodTypeDef,
+  UpdateChunkKnowledgeMetadata
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateChunkKnowledgeMetadata$ {
+  /** @deprecated use `UpdateChunkKnowledgeMetadata$inboundSchema` instead. */
+  export const inboundSchema = UpdateChunkKnowledgeMetadata$inboundSchema;
+  /** @deprecated use `UpdateChunkKnowledgeMetadata$outboundSchema` instead. */
+  export const outboundSchema = UpdateChunkKnowledgeMetadata$outboundSchema;
+  /** @deprecated use `UpdateChunkKnowledgeMetadata$Outbound` instead. */
+  export type Outbound = UpdateChunkKnowledgeMetadata$Outbound;
+}
+
+export function updateChunkKnowledgeMetadataToJSON(
+  updateChunkKnowledgeMetadata: UpdateChunkKnowledgeMetadata,
+): string {
+  return JSON.stringify(
+    UpdateChunkKnowledgeMetadata$outboundSchema.parse(
+      updateChunkKnowledgeMetadata,
+    ),
+  );
+}
+
+export function updateChunkKnowledgeMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateChunkKnowledgeMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateChunkKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateChunkKnowledgeMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateChunkStatus
 > = z.nativeEnum(UpdateChunkStatus);
@@ -335,7 +365,7 @@ export const UpdateChunkResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: UpdateChunkStatus$inboundSchema,
   created: z.string(),
@@ -354,7 +384,7 @@ export const UpdateChunkResponseBody$inboundSchema: z.ZodType<
 export type UpdateChunkResponseBody$Outbound = {
   _id: string;
   text: string;
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   enabled: boolean;
   status: string;
   created: string;
@@ -371,7 +401,7 @@ export const UpdateChunkResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: UpdateChunkStatus$outboundSchema,
   created: z.string(),

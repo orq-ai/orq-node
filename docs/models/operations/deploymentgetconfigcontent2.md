@@ -35,3 +35,14 @@ const value: operations.Two3 = {
 };
 ```
 
+### `operations.Two4`
+
+```typescript
+const value: operations.Two4 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

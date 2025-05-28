@@ -13,9 +13,9 @@ let value: ListPromptVersionsData = {
         role: "exception",
         content: [
           {
-            type: "image_url",
-            imageUrl: {
-              url: "https://diligent-plugin.name/",
+            type: "file",
+            file: {
+              fileData: "<value>",
             },
           },
         ],

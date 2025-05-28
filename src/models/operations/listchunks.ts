@@ -50,6 +50,8 @@ export const ListChunksObject = {
 } as const;
 export type ListChunksObject = ClosedEnum<typeof ListChunksObject>;
 
+export type ListChunksMetadata = string | number | boolean;
+
 /**
  * The status of the chunk
  */
@@ -75,9 +77,9 @@ export type ListChunksData = {
    */
   text: string;
   /**
-   * Metadata of the chunk. Can include `page_number` or any other key-value pairs. Only values of type string are supported.
+   * Metadata of the chunk. Can include `page_number` or any other key-value pairs
    */
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   /**
    * Whether the chunk is enabled
    */
@@ -269,6 +271,54 @@ export namespace ListChunksObject$ {
 }
 
 /** @internal */
+export const ListChunksMetadata$inboundSchema: z.ZodType<
+  ListChunksMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type ListChunksMetadata$Outbound = string | number | boolean;
+
+/** @internal */
+export const ListChunksMetadata$outboundSchema: z.ZodType<
+  ListChunksMetadata$Outbound,
+  z.ZodTypeDef,
+  ListChunksMetadata
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListChunksMetadata$ {
+  /** @deprecated use `ListChunksMetadata$inboundSchema` instead. */
+  export const inboundSchema = ListChunksMetadata$inboundSchema;
+  /** @deprecated use `ListChunksMetadata$outboundSchema` instead. */
+  export const outboundSchema = ListChunksMetadata$outboundSchema;
+  /** @deprecated use `ListChunksMetadata$Outbound` instead. */
+  export type Outbound = ListChunksMetadata$Outbound;
+}
+
+export function listChunksMetadataToJSON(
+  listChunksMetadata: ListChunksMetadata,
+): string {
+  return JSON.stringify(
+    ListChunksMetadata$outboundSchema.parse(listChunksMetadata),
+  );
+}
+
+export function listChunksMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<ListChunksMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListChunksMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChunksMetadata' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListChunksStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListChunksStatus
 > = z.nativeEnum(ListChunksStatus);
@@ -297,7 +347,7 @@ export const ListChunksData$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: ListChunksStatus$inboundSchema,
   created: z.string(),
@@ -316,7 +366,7 @@ export const ListChunksData$inboundSchema: z.ZodType<
 export type ListChunksData$Outbound = {
   _id: string;
   text: string;
-  metadata?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string | number | boolean } | undefined;
   enabled: boolean;
   status: string;
   created: string;
@@ -333,7 +383,7 @@ export const ListChunksData$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   text: z.string(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
   enabled: z.boolean(),
   status: ListChunksStatus$outboundSchema,
   created: z.string(),

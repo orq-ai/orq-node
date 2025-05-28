@@ -16,9 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.ListDatasetDatapointsContent2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://shady-charlatan.name",
+    type: "file",
+    file: {
+      fileData: "<value>",
     },
   },
 ];
