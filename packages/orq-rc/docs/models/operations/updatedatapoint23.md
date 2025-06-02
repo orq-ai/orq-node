@@ -6,9 +6,10 @@
 import { UpdateDatapoint23 } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapoint23 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
   },
 };
 ```
@@ -17,5 +18,5 @@ let value: UpdateDatapoint23 = {
 
 | Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                           | [operations.UpdateDatapoint2DatasetsRequestType](../../models/operations/updatedatapoint2datasetsrequesttype.md) | :heavy_check_mark:                                                                                               | The type of the content part. Always `file`.                                                                     |
-| `file`                                                                                                           | [operations.UpdateDatapoint2File](../../models/operations/updatedatapoint2file.md)                               | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `type`                                                                                                           | [operations.UpdateDatapoint2DatasetsRequestType](../../models/operations/updatedatapoint2datasetsrequesttype.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `inputAudio`                                                                                                     | [operations.UpdateDatapoint2InputAudio](../../models/operations/updatedatapoint2inputaudio.md)                   | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

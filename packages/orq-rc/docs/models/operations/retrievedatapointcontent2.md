@@ -27,6 +27,18 @@ const value: operations.RetrieveDatapoint22 = {
 
 ```typescript
 const value: operations.RetrieveDatapoint23 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.RetrieveDatapoint24`
+
+```typescript
+const value: operations.RetrieveDatapoint24 = {
   type: "file",
   file: {
     fileData: "<value>",

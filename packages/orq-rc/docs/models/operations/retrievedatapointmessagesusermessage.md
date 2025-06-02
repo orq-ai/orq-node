@@ -1,0 +1,27 @@
+# RetrieveDatapointMessagesUserMessage
+
+## Example Usage
+
+```typescript
+import { RetrieveDatapointMessagesUserMessage } from "@orq-ai/node/models/operations";
+
+let value: RetrieveDatapointMessagesUserMessage = {
+  role: "user",
+  content: [
+    {
+      type: "image_url",
+      imageUrl: {
+        url: "https://strong-lava.com",
+      },
+    },
+  ],
+};
+```
+
+## Fields
+
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `role`                                                                                                                               | [operations.RetrieveDatapointMessagesDatasetsResponseRole](../../models/operations/retrievedatapointmessagesdatasetsresponserole.md) | :heavy_check_mark:                                                                                                                   | The role of the messages author, in this case `user`.                                                                                |
+| `name`                                                                                                                               | *string*                                                                                                                             | :heavy_minus_sign:                                                                                                                   | An optional name for the participant. Provides the model information to differentiate between participants of the same role.         |
+| `content`                                                                                                                            | *operations.RetrieveDatapointMessagesContent*                                                                                        | :heavy_check_mark:                                                                                                                   | The contents of the user message.                                                                                                    |

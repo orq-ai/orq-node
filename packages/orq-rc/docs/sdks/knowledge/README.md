@@ -952,7 +952,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateChunkResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
 
 ### Errors
 

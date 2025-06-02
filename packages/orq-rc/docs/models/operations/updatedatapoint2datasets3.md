@@ -6,9 +6,10 @@
 import { UpdateDatapoint2Datasets3 } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapoint2Datasets3 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```
@@ -17,5 +18,5 @@ let value: UpdateDatapoint2Datasets3 = {
 
 | Field                                                                                                                                                  | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                 | [operations.UpdateDatapoint2DatasetsResponse200ApplicationJSONType](../../models/operations/updatedatapoint2datasetsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                     | The type of the content part. Always `file`.                                                                                                           |
-| `file`                                                                                                                                                 | [operations.UpdateDatapoint2DatasetsFile](../../models/operations/updatedatapoint2datasetsfile.md)                                                     | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
+| `type`                                                                                                                                                 | [operations.UpdateDatapoint2DatasetsResponse200ApplicationJSONType](../../models/operations/updatedatapoint2datasetsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
+| `inputAudio`                                                                                                                                           | [operations.UpdateDatapoint2DatasetsInputAudio](../../models/operations/updatedatapoint2datasetsinputaudio.md)                                         | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |

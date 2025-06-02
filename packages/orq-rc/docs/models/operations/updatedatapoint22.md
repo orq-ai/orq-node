@@ -1,7 +1,5 @@
 # UpdateDatapoint22
 
-The image part of the prompt message. Only supported with vision models.
-
 ## Example Usage
 
 ```typescript

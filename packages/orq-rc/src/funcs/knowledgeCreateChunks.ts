@@ -33,7 +33,7 @@ export function knowledgeCreateChunks(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<operations.CreateChunkResponseBody>,
+    Array<operations.ResponseBody>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,7 +57,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<operations.CreateChunkResponseBody>,
+      Array<operations.ResponseBody>,
       | APIError
       | SDKValidationError
       | UnexpectedClientError
@@ -146,7 +146,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<operations.CreateChunkResponseBody>,
+    Array<operations.ResponseBody>,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -155,7 +155,7 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, z.array(operations.CreateChunkResponseBody$inboundSchema)),
+    M.json(200, z.array(operations.ResponseBody$inboundSchema)),
     M.fail("4XX"),
     M.fail([500, "5XX"]),
   )(response);

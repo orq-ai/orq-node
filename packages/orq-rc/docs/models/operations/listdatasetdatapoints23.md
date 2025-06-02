@@ -6,9 +6,10 @@
 import { ListDatasetDatapoints23 } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetDatapoints23 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
   },
 };
 ```
@@ -17,5 +18,5 @@ let value: ListDatasetDatapoints23 = {
 
 | Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                         | [operations.ListDatasetDatapoints2DatasetsResponseType](../../models/operations/listdatasetdatapoints2datasetsresponsetype.md) | :heavy_check_mark:                                                                                                             | The type of the content part. Always `file`.                                                                                   |
-| `file`                                                                                                                         | [operations.ListDatasetDatapoints2File](../../models/operations/listdatasetdatapoints2file.md)                                 | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `type`                                                                                                                         | [operations.ListDatasetDatapoints2DatasetsResponseType](../../models/operations/listdatasetdatapoints2datasetsresponsetype.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+| `inputAudio`                                                                                                                   | [operations.ListDatasetDatapoints2InputAudio](../../models/operations/listdatasetdatapoints2inputaudio.md)                     | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |

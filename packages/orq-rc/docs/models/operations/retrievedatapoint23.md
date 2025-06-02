@@ -6,9 +6,10 @@
 import { RetrieveDatapoint23 } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatapoint23 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
   },
 };
 ```
@@ -17,5 +18,5 @@ let value: RetrieveDatapoint23 = {
 
 | Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                 | [operations.RetrieveDatapoint2DatasetsResponseType](../../models/operations/retrievedatapoint2datasetsresponsetype.md) | :heavy_check_mark:                                                                                                     | The type of the content part. Always `file`.                                                                           |
-| `file`                                                                                                                 | [operations.RetrieveDatapoint2File](../../models/operations/retrievedatapoint2file.md)                                 | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `type`                                                                                                                 | [operations.RetrieveDatapoint2DatasetsResponseType](../../models/operations/retrievedatapoint2datasetsresponsetype.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `inputAudio`                                                                                                           | [operations.RetrieveDatapoint2InputAudio](../../models/operations/retrievedatapoint2inputaudio.md)                     | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |

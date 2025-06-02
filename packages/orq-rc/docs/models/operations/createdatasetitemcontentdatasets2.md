@@ -3,34 +3,21 @@
 
 ## Supported Types
 
-### `operations.CreateDatasetItem2Datasets1`
+### `operations.CreateDatasetItem2TextContentPart`
 
 ```typescript
-const value: operations.CreateDatasetItem2Datasets1 = {
+const value: operations.CreateDatasetItem2TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.CreateDatasetItem2Datasets2`
+### `operations.CreateDatasetItem2RefusalContentPart`
 
 ```typescript
-const value: operations.CreateDatasetItem2Datasets2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://respectful-fog.com",
-  },
-};
-```
-
-### `operations.CreateDatasetItem2Datasets3`
-
-```typescript
-const value: operations.CreateDatasetItem2Datasets3 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
-  },
+const value: operations.CreateDatasetItem2RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

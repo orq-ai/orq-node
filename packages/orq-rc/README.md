@@ -250,7 +250,6 @@ run();
 * [retrieveDatapoint](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
 * [updateDatapoint](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
 * [deleteDatapoint](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
-* [createDatapoints](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
 * [clear](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 
 ### [deployments](docs/sdks/deployments/README.md)
@@ -336,7 +335,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 - [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
 - [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
-- [`datasetsCreateDatapoints`](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
 - [`datasetsCreateExperiment`](docs/sdks/datasets/README.md#createexperiment) - Create an experiment from a dataset
 - [`datasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
 - [`datasetsDeleteDatapoint`](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint

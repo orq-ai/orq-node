@@ -17,7 +17,6 @@ import { tool$contactsCreate } from "./tools/contactsCreate.js";
 import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
-import { tool$datasetsCreateDatapoints } from "./tools/datasetsCreateDatapoints.js";
 import { tool$datasetsCreateExperiment } from "./tools/datasetsCreateExperiment.js";
 import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
 import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
@@ -76,7 +75,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.7.0-rc.2",
+    version: "3.7.0-rc.3",
   });
 
   const client = new OrqCore({
@@ -139,7 +138,6 @@ export function createMCPServer(deps: {
   tool(tool$datasetsRetrieveDatapoint);
   tool(tool$datasetsUpdateDatapoint);
   tool(tool$datasetsDeleteDatapoint);
-  tool(tool$datasetsCreateDatapoints);
   tool(tool$datasetsClear);
   tool(tool$knowledgeList);
   tool(tool$knowledgeCreate);

@@ -5,7 +5,6 @@
 import { datasetsClear } from "../funcs/datasetsClear.js";
 import { datasetsCreate } from "../funcs/datasetsCreate.js";
 import { datasetsCreateDatapoint } from "../funcs/datasetsCreateDatapoint.js";
-import { datasetsCreateDatapoints } from "../funcs/datasetsCreateDatapoints.js";
 import { datasetsCreateExperiment } from "../funcs/datasetsCreateExperiment.js";
 import { datasetsDelete } from "../funcs/datasetsDelete.js";
 import { datasetsDeleteDatapoint } from "../funcs/datasetsDeleteDatapoint.js";
@@ -198,23 +197,6 @@ export class Datasets extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(datasetsDeleteDatapoint(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create multiple datapoints
-   *
-   * @remarks
-   * Create multiple datapoints at once.
-   */
-  async createDatapoints(
-    request: operations.BulkCreateDatapointsRequest,
-    options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
-    return unwrapAsync(datasetsCreateDatapoints(
       this,
       request,
       options,

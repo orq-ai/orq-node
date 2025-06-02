@@ -1,0 +1,21 @@
+# CreateDatasetItemMessagesDatasetsToolMessage
+
+## Example Usage
+
+```typescript
+import { CreateDatasetItemMessagesDatasetsToolMessage } from "@orq-ai/node/models/operations";
+
+let value: CreateDatasetItemMessagesDatasetsToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `role`                                                                                                                                                                                             | [operations.CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role](../../models/operations/createdatasetitemmessagesdatasetsresponse200applicationjsonresponsebody5role.md) | :heavy_check_mark:                                                                                                                                                                                 | The role of the messages author, in this case tool.                                                                                                                                                |
+| `content`                                                                                                                                                                                          | *operations.CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent*                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                 | The contents of the tool message.                                                                                                                                                                  |
+| `toolCallId`                                                                                                                                                                                       | *string*                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | Tool call that this message is responding to.                                                                                                                                                      |

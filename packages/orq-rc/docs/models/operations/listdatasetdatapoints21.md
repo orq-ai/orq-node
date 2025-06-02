@@ -1,7 +1,5 @@
 # ListDatasetDatapoints21
 
-Text content part of a prompt message
-
 ## Example Usage
 
 ```typescript

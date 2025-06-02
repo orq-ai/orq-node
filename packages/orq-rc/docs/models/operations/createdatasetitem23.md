@@ -6,9 +6,10 @@
 import { CreateDatasetItem23 } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetItem23 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
 };
 ```
@@ -17,5 +18,5 @@ let value: CreateDatasetItem23 = {
 
 | Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                               | [operations.CreateDatasetItem2DatasetsRequestType](../../models/operations/createdatasetitem2datasetsrequesttype.md) | :heavy_check_mark:                                                                                                   | The type of the content part. Always `file`.                                                                         |
-| `file`                                                                                                               | [operations.CreateDatasetItem2File](../../models/operations/createdatasetitem2file.md)                               | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `type`                                                                                                               | [operations.CreateDatasetItem2DatasetsRequestType](../../models/operations/createdatasetitem2datasetsrequesttype.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `inputAudio`                                                                                                         | [operations.CreateDatasetItem2InputAudio](../../models/operations/createdatasetitem2inputaudio.md)                   | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
