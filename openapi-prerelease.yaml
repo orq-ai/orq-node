@@ -4769,7 +4769,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-01T19:30:01.164Z"
+          default: "2025-06-02T07:48:46.107Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4832,7 +4832,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-06-01T19:30:01.164Z"
+            default: "2025-06-02T07:48:46.107Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4912,7 +4912,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-01T19:30:01.164Z"
+          default: "2025-06-02T07:48:46.107Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4958,7 +4958,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-06-01T19:30:01.164Z"
+                default: "2025-06-02T07:48:46.107Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5001,7 +5001,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-01T19:30:01.164Z"
+          default: "2025-06-02T07:48:46.107Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -7487,7 +7487,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-01T19:29:58.421Z"
+          default: "2025-06-02T07:48:43.271Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7495,7 +7495,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-01T19:29:58.422Z"
+              default: "2025-06-02T07:48:43.271Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7605,7 +7605,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-06-01T19:29:58.421Z"
+                default: "2025-06-02T07:48:43.271Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7613,7 +7613,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-06-01T19:29:58.422Z"
+                    default: "2025-06-02T07:48:43.271Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7720,7 +7720,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-01T19:29:58.421Z"
+          default: "2025-06-02T07:48:43.271Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7728,7 +7728,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-01T19:29:58.422Z"
+              default: "2025-06-02T07:48:43.271Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7829,7 +7829,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-01T19:29:58.421Z"
+          default: "2025-06-02T07:48:43.271Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7837,7 +7837,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-01T19:29:58.422Z"
+              default: "2025-06-02T07:48:43.271Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9785,7 +9785,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -9793,7 +9793,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13826,7 +13826,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-01T19:30:01.164Z"
+                    default: "2025-06-02T07:48:46.107Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -13914,7 +13914,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-06-01T19:30:01.164Z"
+                          default: "2025-06-02T07:48:46.107Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -13981,7 +13981,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-01T19:30:01.164Z"
+                    default: "2025-06-02T07:48:46.107Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -17411,7 +17411,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-01T19:29:58.421Z"
+                          default: "2025-06-02T07:48:43.271Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -17419,7 +17419,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-01T19:29:58.422Z"
+                              default: "2025-06-02T07:48:43.271Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -17543,7 +17543,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17551,7 +17551,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17661,7 +17661,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17669,7 +17669,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17821,7 +17821,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17829,7 +17829,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18011,125 +18011,270 @@ paths:
                         "messages":
                           type: "array"
                           items:
-                            type: "object"
-                            properties:
-                              "role":
-                                type: "string"
-                                enum:
-                                  - "system"
-                                  - "assistant"
-                                  - "user"
-                                  - "exception"
-                                  - "tool"
-                                  - "prompt"
-                                  - "correction"
-                                  - "expected_output"
-                                description: "The role of the prompt message"
-                              "content":
-                                anyOf:
-                                  - type: "string"
-                                  - type: "array"
-                                    items:
-                                      oneOf:
-                                        - type: "object"
-                                          properties:
-                                            "type":
-                                              type: "string"
-                                              enum:
+                            oneOf:
+                              - type: "object"
+                                properties:
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "developer"
+                                    description: "The role of the messages author, in this case  `developer`."
+                                  "content":
+                                    type: "string"
+                                    description: "The contents of the developer message."
+                                  "name":
+                                    type: "string"
+                                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                                required:
+                                  - "role"
+                                  - "content"
+                                title: "Developer message"
+                              - type: "object"
+                                properties:
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "system"
+                                    description: "The role of the messages author, in this case `system`."
+                                  "content":
+                                    type: "string"
+                                    description: "The contents of the system message."
+                                  "name":
+                                    type: "string"
+                                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                                required:
+                                  - "role"
+                                  - "content"
+                                title: "System message"
+                              - type: "object"
+                                properties:
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "user"
+                                    description: "The role of the messages author, in this case `user`."
+                                  "name":
+                                    type: "string"
+                                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                                  "content":
+                                    anyOf:
+                                      - type: "string"
+                                        description: "The text contents of the message."
+                                      - type: "array"
+                                        items:
+                                          oneOf:
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "text"
+                                                "text":
+                                                  type: "string"
+                                              required:
+                                                - "type"
                                                 - "text"
-                                            "text":
-                                              type: "string"
-                                          required:
-                                            - "type"
-                                            - "text"
-                                          description: "Text content part of a prompt message"
-                                        - type: "object"
-                                          properties:
-                                            "type":
-                                              type: "string"
-                                              enum:
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "image_url"
+                                                "image_url":
+                                                  type: "object"
+                                                  properties:
+                                                    "url":
+                                                      type: "string"
+                                                      description: "Either a URL of the image or the base64 encoded image data."
+                                                    "detail":
+                                                      type: "string"
+                                                      enum:
+                                                        - "low"
+                                                        - "high"
+                                                        - "auto"
+                                                      description: "Specifies the detail level of the image."
+                                                  required:
+                                                    - "url"
+                                              required:
+                                                - "type"
                                                 - "image_url"
-                                            "image_url":
-                                              type: "object"
+                                            - type: "object"
                                               properties:
-                                                "id":
+                                                "type":
                                                   type: "string"
-                                                  format: "ulid"
-                                                  description: "The orq.ai id of the image"
-                                                  readOnly: true
-                                                "url":
-                                                  anyOf:
-                                                    - type: "string"
-                                                    - type: "string"
-                                                      format: "uri"
-                                                  description: "Either a URL of the image or the base64 encoded data URI."
-                                                  examples:
-                                                    - "https://picsum.photos/id/1/200/300"
-                                                    - "data:image/jpeg;base64,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"
-                                                "detail":
-                                                  type: "string"
-                                                  description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                                  enum:
+                                                    - "input_audio"
+                                                "input_audio":
+                                                  type: "object"
+                                                  properties:
+                                                    "data":
+                                                      type: "string"
+                                                      description: "Base64 encoded audio data."
+                                                    "format":
+                                                      type: "string"
+                                                      enum:
+                                                        - "mp3"
+                                                        - "wav"
+                                                      description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                                  required:
+                                                    - "data"
+                                                    - "format"
                                               required:
-                                                - "url"
-                                          required:
-                                            - "type"
-                                            - "image_url"
-                                          description: "The image part of the prompt message. Only supported with vision models."
-                                        - type: "object"
-                                          properties:
-                                            "type":
-                                              type: "string"
-                                              enum:
+                                                - "type"
+                                                - "input_audio"
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "file"
+                                                  description: "The type of the content part. Always `file`."
+                                                "file":
+                                                  type: "object"
+                                                  properties:
+                                                    "file_data":
+                                                      type: "string"
+                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                    "filename":
+                                                      type: "string"
+                                                      description: "The name of the file, used when passing the file to the model as a string."
+                                                  required:
+                                                    - "file_data"
+                                              required:
+                                                - "type"
                                                 - "file"
-                                              description: "The type of the content part. Always `file`."
-                                            "file":
-                                              type: "object"
+                                        description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                                    description: "The contents of the user message."
+                                required:
+                                  - "role"
+                                  - "content"
+                                title: "User message"
+                              - type: "object"
+                                properties:
+                                  "content":
+                                    anyOf:
+                                      - type: "string"
+                                        description: "The contents of the assistant message."
+                                      - type: "array"
+                                        items:
+                                          oneOf:
+                                            - type: "object"
                                               properties:
-                                                "file_data":
+                                                "type":
                                                   type: "string"
-                                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                                "filename":
+                                                  enum:
+                                                    - "text"
+                                                  description: "The type of the content part."
+                                                "text":
                                                   type: "string"
-                                                  description: "The name of the file, used when passing the file to the model as a string."
+                                                  description: "The text content."
                                               required:
-                                                - "file_data"
-                                          required:
-                                            - "type"
-                                            - "file"
-                                description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                              "tool_calls":
-                                type: "array"
-                                items:
-                                  type: "object"
-                                  properties:
-                                    "id":
-                                      type: "string"
-                                    "index":
-                                      type: "number"
-                                    "type":
-                                      type: "string"
-                                      enum:
-                                        - "function"
-                                    "function":
+                                                - "type"
+                                                - "text"
+                                              title: "Text content part"
+                                            - type: "object"
+                                              properties:
+                                                "type":
+                                                  type: "string"
+                                                  enum:
+                                                    - "refusal"
+                                                  description: "The type of the content part."
+                                                "refusal":
+                                                  type: "string"
+                                                  description: "The refusal message generated by the model."
+                                              required:
+                                                - "type"
+                                                - "refusal"
+                                              title: "Refusal content part"
+                                        description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                                      - type: "null"
+                                    description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                                  "refusal":
+                                    type:
+                                      - "string"
+                                      - "null"
+                                    description: "The refusal message by the assistant."
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "assistant"
+                                    description: "The role of the messages author, in this case `assistant`."
+                                  "name":
+                                    type: "string"
+                                    description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                                  "audio":
+                                    type:
+                                      - "object"
+                                      - "null"
+                                    properties:
+                                      "id":
+                                        type: "string"
+                                        description: "Unique identifier for a previous audio response from the model."
+                                    required:
+                                      - "id"
+                                    description: "Data about a previous audio response from the model. "
+                                  "tool_calls":
+                                    type: "array"
+                                    items:
                                       type: "object"
                                       properties:
-                                        "name":
+                                        "id":
                                           type: "string"
-                                        "arguments":
+                                          description: "The ID of the tool call."
+                                        "type":
                                           type: "string"
-                                          description: "JSON string arguments for the functions"
+                                          enum:
+                                            - "function"
+                                          description: "The type of the tool. Currently, only `function` is supported."
+                                        "function":
+                                          type: "object"
+                                          properties:
+                                            "name":
+                                              type: "string"
+                                              description: "The name of the function to call."
+                                            "arguments":
+                                              type: "string"
+                                              description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
                                       required:
-                                        - "name"
-                                        - "arguments"
-                                  required:
-                                    - "type"
-                                    - "function"
-                              "tool_call_id":
-                                type: "string"
-                            required:
-                              - "role"
-                              - "content"
-                          description: "The prompt template messages "
+                                        - "id"
+                                        - "type"
+                                        - "function"
+                                    description: "The tool calls generated by the model, such as function calls."
+                                  "reasoning":
+                                    type: "string"
+                                    description: "Internal thought process of the model"
+                                  "reasoning_signature":
+                                    type: "string"
+                                    description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                                  "redacted_reasoning":
+                                    type: "string"
+                                    description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                                required:
+                                  - "role"
+                                title: "Assistant message"
+                              - type: "object"
+                                properties:
+                                  "role":
+                                    type: "string"
+                                    enum:
+                                      - "tool"
+                                    description: "The role of the messages author, in this case tool."
+                                  "content":
+                                    anyOf:
+                                      - type: "string"
+                                      - type: "array"
+                                        items:
+                                          type: "string"
+                                    description: "The contents of the tool message."
+                                  "tool_call_id":
+                                    type: "string"
+                                    description: "Tool call that this message is responding to."
+                                required:
+                                  - "role"
+                                  - "content"
+                                  - "tool_call_id"
+                                title: "Tool message"
+                          description: "A list of messages comprising the conversation so far"
                         "expected_output":
                           type: "string"
                         "dataset_id":
@@ -18146,7 +18291,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-01T19:29:58.421Z"
+                          default: "2025-06-02T07:48:43.271Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -18154,7 +18299,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-01T19:29:58.422Z"
+                              default: "2025-06-02T07:48:43.271Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -18199,125 +18344,270 @@ paths:
                 "messages":
                   type: "array"
                   items:
-                    type: "object"
-                    properties:
-                      "role":
-                        type: "string"
-                        enum:
-                          - "system"
-                          - "assistant"
-                          - "user"
-                          - "exception"
-                          - "tool"
-                          - "prompt"
-                          - "correction"
-                          - "expected_output"
-                        description: "The role of the prompt message"
-                      "content":
-                        anyOf:
-                          - type: "string"
-                          - type: "array"
-                            items:
-                              oneOf:
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "developer"
+                            description: "The role of the messages author, in this case  `developer`."
+                          "content":
+                            type: "string"
+                            description: "The contents of the developer message."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "Developer message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "system"
+                            description: "The role of the messages author, in this case `system`."
+                          "content":
+                            type: "string"
+                            description: "The contents of the system message."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "System message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "user"
+                            description: "The role of the messages author, in this case `user`."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          "content":
+                            anyOf:
+                              - type: "string"
+                                description: "The text contents of the message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
+                                        "text":
+                                          type: "string"
+                                      required:
+                                        - "type"
                                         - "text"
-                                    "text":
-                                      type: "string"
-                                  required:
-                                    - "type"
-                                    - "text"
-                                  description: "Text content part of a prompt message"
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "image_url"
+                                        "image_url":
+                                          type: "object"
+                                          properties:
+                                            "url":
+                                              type: "string"
+                                              description: "Either a URL of the image or the base64 encoded image data."
+                                            "detail":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "high"
+                                                - "auto"
+                                              description: "Specifies the detail level of the image."
+                                          required:
+                                            - "url"
+                                      required:
+                                        - "type"
                                         - "image_url"
-                                    "image_url":
-                                      type: "object"
+                                    - type: "object"
                                       properties:
-                                        "id":
+                                        "type":
                                           type: "string"
-                                          format: "ulid"
-                                          description: "The orq.ai id of the image"
-                                          readOnly: true
-                                        "url":
-                                          anyOf:
-                                            - type: "string"
-                                            - type: "string"
-                                              format: "uri"
-                                          description: "Either a URL of the image or the base64 encoded data URI."
-                                          examples:
-                                            - "https://picsum.photos/id/1/200/300"
-                                            - "data:image/jpeg;base64,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"
-                                        "detail":
-                                          type: "string"
-                                          description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                          enum:
+                                            - "input_audio"
+                                        "input_audio":
+                                          type: "object"
+                                          properties:
+                                            "data":
+                                              type: "string"
+                                              description: "Base64 encoded audio data."
+                                            "format":
+                                              type: "string"
+                                              enum:
+                                                - "mp3"
+                                                - "wav"
+                                              description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                          required:
+                                            - "data"
+                                            - "format"
                                       required:
-                                        - "url"
-                                  required:
-                                    - "type"
-                                    - "image_url"
-                                  description: "The image part of the prompt message. Only supported with vision models."
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
+                                        - "type"
+                                        - "input_audio"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        "file":
+                                          type: "object"
+                                          properties:
+                                            "file_data":
+                                              type: "string"
+                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            "filename":
+                                              type: "string"
+                                              description: "The name of the file, used when passing the file to the model as a string."
+                                          required:
+                                            - "file_data"
+                                      required:
+                                        - "type"
                                         - "file"
-                                      description: "The type of the content part. Always `file`."
-                                    "file":
-                                      type: "object"
+                                description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                            description: "The contents of the user message."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "User message"
+                      - type: "object"
+                        properties:
+                          "content":
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the assistant message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - type: "object"
                                       properties:
-                                        "file_data":
+                                        "type":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                        "filename":
+                                          enum:
+                                            - "text"
+                                          description: "The type of the content part."
+                                        "text":
                                           type: "string"
-                                          description: "The name of the file, used when passing the file to the model as a string."
+                                          description: "The text content."
                                       required:
-                                        - "file_data"
-                                  required:
-                                    - "type"
-                                    - "file"
-                        description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                      "tool_calls":
-                        type: "array"
-                        items:
-                          type: "object"
-                          properties:
-                            "id":
-                              type: "string"
-                            "index":
-                              type: "number"
-                            "type":
-                              type: "string"
-                              enum:
-                                - "function"
-                            "function":
+                                        - "type"
+                                        - "text"
+                                      title: "Text content part"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "refusal"
+                                          description: "The type of the content part."
+                                        "refusal":
+                                          type: "string"
+                                          description: "The refusal message generated by the model."
+                                      required:
+                                        - "type"
+                                        - "refusal"
+                                      title: "Refusal content part"
+                                description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                              - type: "null"
+                            description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                          "refusal":
+                            type:
+                              - "string"
+                              - "null"
+                            description: "The refusal message by the assistant."
+                          "role":
+                            type: "string"
+                            enum:
+                              - "assistant"
+                            description: "The role of the messages author, in this case `assistant`."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          "audio":
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              "id":
+                                type: "string"
+                                description: "Unique identifier for a previous audio response from the model."
+                            required:
+                              - "id"
+                            description: "Data about a previous audio response from the model. "
+                          "tool_calls":
+                            type: "array"
+                            items:
                               type: "object"
                               properties:
-                                "name":
+                                "id":
                                   type: "string"
-                                "arguments":
+                                  description: "The ID of the tool call."
+                                "type":
                                   type: "string"
-                                  description: "JSON string arguments for the functions"
+                                  enum:
+                                    - "function"
+                                  description: "The type of the tool. Currently, only `function` is supported."
+                                "function":
+                                  type: "object"
+                                  properties:
+                                    "name":
+                                      type: "string"
+                                      description: "The name of the function to call."
+                                    "arguments":
+                                      type: "string"
+                                      description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
                               required:
-                                - "name"
-                                - "arguments"
-                          required:
-                            - "type"
-                            - "function"
-                      "tool_call_id":
-                        type: "string"
-                    required:
-                      - "role"
-                      - "content"
-                  description: "The prompt template messages "
+                                - "id"
+                                - "type"
+                                - "function"
+                            description: "The tool calls generated by the model, such as function calls."
+                          "reasoning":
+                            type: "string"
+                            description: "Internal thought process of the model"
+                          "reasoning_signature":
+                            type: "string"
+                            description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                          "redacted_reasoning":
+                            type: "string"
+                            description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                        required:
+                          - "role"
+                        title: "Assistant message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "tool"
+                            description: "The role of the messages author, in this case tool."
+                          "content":
+                            anyOf:
+                              - type: "string"
+                              - type: "array"
+                                items:
+                                  type: "string"
+                            description: "The contents of the tool message."
+                          "tool_call_id":
+                            type: "string"
+                            description: "Tool call that this message is responding to."
+                        required:
+                          - "role"
+                          - "content"
+                          - "tool_call_id"
+                        title: "Tool message"
+                  description: "A list of messages comprising the conversation so far"
                 "expected_output":
                   type: "string"
       responses:
@@ -18341,125 +18631,270 @@ paths:
                   "messages":
                     type: "array"
                     items:
-                      type: "object"
-                      properties:
-                        "role":
-                          type: "string"
-                          enum:
-                            - "system"
-                            - "assistant"
-                            - "user"
-                            - "exception"
-                            - "tool"
-                            - "prompt"
-                            - "correction"
-                            - "expected_output"
-                          description: "The role of the prompt message"
-                        "content":
-                          anyOf:
-                            - type: "string"
-                            - type: "array"
-                              items:
-                                oneOf:
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "developer"
+                              description: "The role of the messages author, in this case  `developer`."
+                            "content":
+                              type: "string"
+                              description: "The contents of the developer message."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "Developer message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "system"
+                              description: "The role of the messages author, in this case `system`."
+                            "content":
+                              type: "string"
+                              description: "The contents of the system message."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "System message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "user"
+                              description: "The role of the messages author, in this case `user`."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                  description: "The text contents of the message."
+                                - type: "array"
+                                  items:
+                                    oneOf:
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "text"
+                                          "text":
+                                            type: "string"
+                                        required:
+                                          - "type"
                                           - "text"
-                                      "text":
-                                        type: "string"
-                                    required:
-                                      - "type"
-                                      - "text"
-                                    description: "Text content part of a prompt message"
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "image_url"
+                                          "image_url":
+                                            type: "object"
+                                            properties:
+                                              "url":
+                                                type: "string"
+                                                description: "Either a URL of the image or the base64 encoded image data."
+                                              "detail":
+                                                type: "string"
+                                                enum:
+                                                  - "low"
+                                                  - "high"
+                                                  - "auto"
+                                                description: "Specifies the detail level of the image."
+                                            required:
+                                              - "url"
+                                        required:
+                                          - "type"
                                           - "image_url"
-                                      "image_url":
-                                        type: "object"
+                                      - type: "object"
                                         properties:
-                                          "id":
+                                          "type":
                                             type: "string"
-                                            format: "ulid"
-                                            description: "The orq.ai id of the image"
-                                            readOnly: true
-                                          "url":
-                                            anyOf:
-                                              - type: "string"
-                                              - type: "string"
-                                                format: "uri"
-                                            description: "Either a URL of the image or the base64 encoded data URI."
-                                            examples:
-                                              - "https://picsum.photos/id/1/200/300"
-                                              - "data:image/jpeg;base64,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"
-                                          "detail":
-                                            type: "string"
-                                            description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                            enum:
+                                              - "input_audio"
+                                          "input_audio":
+                                            type: "object"
+                                            properties:
+                                              "data":
+                                                type: "string"
+                                                description: "Base64 encoded audio data."
+                                              "format":
+                                                type: "string"
+                                                enum:
+                                                  - "mp3"
+                                                  - "wav"
+                                                description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                            required:
+                                              - "data"
+                                              - "format"
                                         required:
-                                          - "url"
-                                    required:
-                                      - "type"
-                                      - "image_url"
-                                    description: "The image part of the prompt message. Only supported with vision models."
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                                          - "type"
+                                          - "input_audio"
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
                                           - "file"
-                                        description: "The type of the content part. Always `file`."
-                                      "file":
-                                        type: "object"
+                                  description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                              description: "The contents of the user message."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "User message"
+                        - type: "object"
+                          properties:
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                  description: "The contents of the assistant message."
+                                - type: "array"
+                                  items:
+                                    oneOf:
+                                      - type: "object"
                                         properties:
-                                          "file_data":
+                                          "type":
                                             type: "string"
-                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                          "filename":
+                                            enum:
+                                              - "text"
+                                            description: "The type of the content part."
+                                          "text":
                                             type: "string"
-                                            description: "The name of the file, used when passing the file to the model as a string."
+                                            description: "The text content."
                                         required:
-                                          - "file_data"
-                                    required:
-                                      - "type"
-                                      - "file"
-                          description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                        "tool_calls":
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              "id":
-                                type: "string"
-                              "index":
-                                type: "number"
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "function"
-                              "function":
+                                          - "type"
+                                          - "text"
+                                        title: "Text content part"
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "refusal"
+                                            description: "The type of the content part."
+                                          "refusal":
+                                            type: "string"
+                                            description: "The refusal message generated by the model."
+                                        required:
+                                          - "type"
+                                          - "refusal"
+                                        title: "Refusal content part"
+                                  description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                                - type: "null"
+                              description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                            "refusal":
+                              type:
+                                - "string"
+                                - "null"
+                              description: "The refusal message by the assistant."
+                            "role":
+                              type: "string"
+                              enum:
+                                - "assistant"
+                              description: "The role of the messages author, in this case `assistant`."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                            "audio":
+                              type:
+                                - "object"
+                                - "null"
+                              properties:
+                                "id":
+                                  type: "string"
+                                  description: "Unique identifier for a previous audio response from the model."
+                              required:
+                                - "id"
+                              description: "Data about a previous audio response from the model. "
+                            "tool_calls":
+                              type: "array"
+                              items:
                                 type: "object"
                                 properties:
-                                  "name":
+                                  "id":
                                     type: "string"
-                                  "arguments":
+                                    description: "The ID of the tool call."
+                                  "type":
                                     type: "string"
-                                    description: "JSON string arguments for the functions"
+                                    enum:
+                                      - "function"
+                                    description: "The type of the tool. Currently, only `function` is supported."
+                                  "function":
+                                    type: "object"
+                                    properties:
+                                      "name":
+                                        type: "string"
+                                        description: "The name of the function to call."
+                                      "arguments":
+                                        type: "string"
+                                        description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
                                 required:
-                                  - "name"
-                                  - "arguments"
-                            required:
-                              - "type"
-                              - "function"
-                        "tool_call_id":
-                          type: "string"
-                      required:
-                        - "role"
-                        - "content"
-                    description: "The prompt template messages "
+                                  - "id"
+                                  - "type"
+                                  - "function"
+                              description: "The tool calls generated by the model, such as function calls."
+                            "reasoning":
+                              type: "string"
+                              description: "Internal thought process of the model"
+                            "reasoning_signature":
+                              type: "string"
+                              description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                            "redacted_reasoning":
+                              type: "string"
+                              description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                          required:
+                            - "role"
+                          title: "Assistant message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "tool"
+                              description: "The role of the messages author, in this case tool."
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                - type: "array"
+                                  items:
+                                    type: "string"
+                              description: "The contents of the tool message."
+                            "tool_call_id":
+                              type: "string"
+                              description: "Tool call that this message is responding to."
+                          required:
+                            - "role"
+                            - "content"
+                            - "tool_call_id"
+                          title: "Tool message"
+                    description: "A list of messages comprising the conversation so far"
                   "expected_output":
                     type: "string"
                   "dataset_id":
@@ -18476,7 +18911,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18484,7 +18919,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18538,125 +18973,270 @@ paths:
                   "messages":
                     type: "array"
                     items:
-                      type: "object"
-                      properties:
-                        "role":
-                          type: "string"
-                          enum:
-                            - "system"
-                            - "assistant"
-                            - "user"
-                            - "exception"
-                            - "tool"
-                            - "prompt"
-                            - "correction"
-                            - "expected_output"
-                          description: "The role of the prompt message"
-                        "content":
-                          anyOf:
-                            - type: "string"
-                            - type: "array"
-                              items:
-                                oneOf:
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "developer"
+                              description: "The role of the messages author, in this case  `developer`."
+                            "content":
+                              type: "string"
+                              description: "The contents of the developer message."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "Developer message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "system"
+                              description: "The role of the messages author, in this case `system`."
+                            "content":
+                              type: "string"
+                              description: "The contents of the system message."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "System message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "user"
+                              description: "The role of the messages author, in this case `user`."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                  description: "The text contents of the message."
+                                - type: "array"
+                                  items:
+                                    oneOf:
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "text"
+                                          "text":
+                                            type: "string"
+                                        required:
+                                          - "type"
                                           - "text"
-                                      "text":
-                                        type: "string"
-                                    required:
-                                      - "type"
-                                      - "text"
-                                    description: "Text content part of a prompt message"
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "image_url"
+                                          "image_url":
+                                            type: "object"
+                                            properties:
+                                              "url":
+                                                type: "string"
+                                                description: "Either a URL of the image or the base64 encoded image data."
+                                              "detail":
+                                                type: "string"
+                                                enum:
+                                                  - "low"
+                                                  - "high"
+                                                  - "auto"
+                                                description: "Specifies the detail level of the image."
+                                            required:
+                                              - "url"
+                                        required:
+                                          - "type"
                                           - "image_url"
-                                      "image_url":
-                                        type: "object"
+                                      - type: "object"
                                         properties:
-                                          "id":
+                                          "type":
                                             type: "string"
-                                            format: "ulid"
-                                            description: "The orq.ai id of the image"
-                                            readOnly: true
-                                          "url":
-                                            anyOf:
-                                              - type: "string"
-                                              - type: "string"
-                                                format: "uri"
-                                            description: "Either a URL of the image or the base64 encoded data URI."
-                                            examples:
-                                              - "https://picsum.photos/id/1/200/300"
-                                              - "data:image/jpeg;base64,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"
-                                          "detail":
-                                            type: "string"
-                                            description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                            enum:
+                                              - "input_audio"
+                                          "input_audio":
+                                            type: "object"
+                                            properties:
+                                              "data":
+                                                type: "string"
+                                                description: "Base64 encoded audio data."
+                                              "format":
+                                                type: "string"
+                                                enum:
+                                                  - "mp3"
+                                                  - "wav"
+                                                description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                            required:
+                                              - "data"
+                                              - "format"
                                         required:
-                                          - "url"
-                                    required:
-                                      - "type"
-                                      - "image_url"
-                                    description: "The image part of the prompt message. Only supported with vision models."
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                                          - "type"
+                                          - "input_audio"
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
                                           - "file"
-                                        description: "The type of the content part. Always `file`."
-                                      "file":
-                                        type: "object"
+                                  description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                              description: "The contents of the user message."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "User message"
+                        - type: "object"
+                          properties:
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                  description: "The contents of the assistant message."
+                                - type: "array"
+                                  items:
+                                    oneOf:
+                                      - type: "object"
                                         properties:
-                                          "file_data":
+                                          "type":
                                             type: "string"
-                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                          "filename":
+                                            enum:
+                                              - "text"
+                                            description: "The type of the content part."
+                                          "text":
                                             type: "string"
-                                            description: "The name of the file, used when passing the file to the model as a string."
+                                            description: "The text content."
                                         required:
-                                          - "file_data"
-                                    required:
-                                      - "type"
-                                      - "file"
-                          description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                        "tool_calls":
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              "id":
-                                type: "string"
-                              "index":
-                                type: "number"
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "function"
-                              "function":
+                                          - "type"
+                                          - "text"
+                                        title: "Text content part"
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "refusal"
+                                            description: "The type of the content part."
+                                          "refusal":
+                                            type: "string"
+                                            description: "The refusal message generated by the model."
+                                        required:
+                                          - "type"
+                                          - "refusal"
+                                        title: "Refusal content part"
+                                  description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                                - type: "null"
+                              description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                            "refusal":
+                              type:
+                                - "string"
+                                - "null"
+                              description: "The refusal message by the assistant."
+                            "role":
+                              type: "string"
+                              enum:
+                                - "assistant"
+                              description: "The role of the messages author, in this case `assistant`."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                            "audio":
+                              type:
+                                - "object"
+                                - "null"
+                              properties:
+                                "id":
+                                  type: "string"
+                                  description: "Unique identifier for a previous audio response from the model."
+                              required:
+                                - "id"
+                              description: "Data about a previous audio response from the model. "
+                            "tool_calls":
+                              type: "array"
+                              items:
                                 type: "object"
                                 properties:
-                                  "name":
+                                  "id":
                                     type: "string"
-                                  "arguments":
+                                    description: "The ID of the tool call."
+                                  "type":
                                     type: "string"
-                                    description: "JSON string arguments for the functions"
+                                    enum:
+                                      - "function"
+                                    description: "The type of the tool. Currently, only `function` is supported."
+                                  "function":
+                                    type: "object"
+                                    properties:
+                                      "name":
+                                        type: "string"
+                                        description: "The name of the function to call."
+                                      "arguments":
+                                        type: "string"
+                                        description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
                                 required:
-                                  - "name"
-                                  - "arguments"
-                            required:
-                              - "type"
-                              - "function"
-                        "tool_call_id":
-                          type: "string"
-                      required:
-                        - "role"
-                        - "content"
-                    description: "The prompt template messages "
+                                  - "id"
+                                  - "type"
+                                  - "function"
+                              description: "The tool calls generated by the model, such as function calls."
+                            "reasoning":
+                              type: "string"
+                              description: "Internal thought process of the model"
+                            "reasoning_signature":
+                              type: "string"
+                              description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                            "redacted_reasoning":
+                              type: "string"
+                              description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                          required:
+                            - "role"
+                          title: "Assistant message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "tool"
+                              description: "The role of the messages author, in this case tool."
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                - type: "array"
+                                  items:
+                                    type: "string"
+                              description: "The contents of the tool message."
+                            "tool_call_id":
+                              type: "string"
+                              description: "Tool call that this message is responding to."
+                          required:
+                            - "role"
+                            - "content"
+                            - "tool_call_id"
+                          title: "Tool message"
+                    description: "A list of messages comprising the conversation so far"
                   "expected_output":
                     type: "string"
                   "dataset_id":
@@ -18673,7 +19253,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -18681,7 +19261,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -18730,125 +19310,270 @@ paths:
                 "messages":
                   type: "array"
                   items:
-                    type: "object"
-                    properties:
-                      "role":
-                        type: "string"
-                        enum:
-                          - "system"
-                          - "assistant"
-                          - "user"
-                          - "exception"
-                          - "tool"
-                          - "prompt"
-                          - "correction"
-                          - "expected_output"
-                        description: "The role of the prompt message"
-                      "content":
-                        anyOf:
-                          - type: "string"
-                          - type: "array"
-                            items:
-                              oneOf:
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
+                    oneOf:
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "developer"
+                            description: "The role of the messages author, in this case  `developer`."
+                          "content":
+                            type: "string"
+                            description: "The contents of the developer message."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "Developer message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "system"
+                            description: "The role of the messages author, in this case `system`."
+                          "content":
+                            type: "string"
+                            description: "The contents of the system message."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "System message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "user"
+                            description: "The role of the messages author, in this case `user`."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          "content":
+                            anyOf:
+                              - type: "string"
+                                description: "The text contents of the message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
+                                        "text":
+                                          type: "string"
+                                      required:
+                                        - "type"
                                         - "text"
-                                    "text":
-                                      type: "string"
-                                  required:
-                                    - "type"
-                                    - "text"
-                                  description: "Text content part of a prompt message"
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "image_url"
+                                        "image_url":
+                                          type: "object"
+                                          properties:
+                                            "url":
+                                              type: "string"
+                                              description: "Either a URL of the image or the base64 encoded image data."
+                                            "detail":
+                                              type: "string"
+                                              enum:
+                                                - "low"
+                                                - "high"
+                                                - "auto"
+                                              description: "Specifies the detail level of the image."
+                                          required:
+                                            - "url"
+                                      required:
+                                        - "type"
                                         - "image_url"
-                                    "image_url":
-                                      type: "object"
+                                    - type: "object"
                                       properties:
-                                        "id":
+                                        "type":
                                           type: "string"
-                                          format: "ulid"
-                                          description: "The orq.ai id of the image"
-                                          readOnly: true
-                                        "url":
-                                          anyOf:
-                                            - type: "string"
-                                            - type: "string"
-                                              format: "uri"
-                                          description: "Either a URL of the image or the base64 encoded data URI."
-                                          examples:
-                                            - "https://picsum.photos/id/1/200/300"
-                                            - "data:image/jpeg;base64,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"
-                                        "detail":
-                                          type: "string"
-                                          description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                          enum:
+                                            - "input_audio"
+                                        "input_audio":
+                                          type: "object"
+                                          properties:
+                                            "data":
+                                              type: "string"
+                                              description: "Base64 encoded audio data."
+                                            "format":
+                                              type: "string"
+                                              enum:
+                                                - "mp3"
+                                                - "wav"
+                                              description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                          required:
+                                            - "data"
+                                            - "format"
                                       required:
-                                        - "url"
-                                  required:
-                                    - "type"
-                                    - "image_url"
-                                  description: "The image part of the prompt message. Only supported with vision models."
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
+                                        - "type"
+                                        - "input_audio"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "file"
+                                          description: "The type of the content part. Always `file`."
+                                        "file":
+                                          type: "object"
+                                          properties:
+                                            "file_data":
+                                              type: "string"
+                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            "filename":
+                                              type: "string"
+                                              description: "The name of the file, used when passing the file to the model as a string."
+                                          required:
+                                            - "file_data"
+                                      required:
+                                        - "type"
                                         - "file"
-                                      description: "The type of the content part. Always `file`."
-                                    "file":
-                                      type: "object"
+                                description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                            description: "The contents of the user message."
+                        required:
+                          - "role"
+                          - "content"
+                        title: "User message"
+                      - type: "object"
+                        properties:
+                          "content":
+                            anyOf:
+                              - type: "string"
+                                description: "The contents of the assistant message."
+                              - type: "array"
+                                items:
+                                  oneOf:
+                                    - type: "object"
                                       properties:
-                                        "file_data":
+                                        "type":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                        "filename":
+                                          enum:
+                                            - "text"
+                                          description: "The type of the content part."
+                                        "text":
                                           type: "string"
-                                          description: "The name of the file, used when passing the file to the model as a string."
+                                          description: "The text content."
                                       required:
-                                        - "file_data"
-                                  required:
-                                    - "type"
-                                    - "file"
-                        description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                      "tool_calls":
-                        type: "array"
-                        items:
-                          type: "object"
-                          properties:
-                            "id":
-                              type: "string"
-                            "index":
-                              type: "number"
-                            "type":
-                              type: "string"
-                              enum:
-                                - "function"
-                            "function":
+                                        - "type"
+                                        - "text"
+                                      title: "Text content part"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "refusal"
+                                          description: "The type of the content part."
+                                        "refusal":
+                                          type: "string"
+                                          description: "The refusal message generated by the model."
+                                      required:
+                                        - "type"
+                                        - "refusal"
+                                      title: "Refusal content part"
+                                description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                              - type: "null"
+                            description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                          "refusal":
+                            type:
+                              - "string"
+                              - "null"
+                            description: "The refusal message by the assistant."
+                          "role":
+                            type: "string"
+                            enum:
+                              - "assistant"
+                            description: "The role of the messages author, in this case `assistant`."
+                          "name":
+                            type: "string"
+                            description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          "audio":
+                            type:
+                              - "object"
+                              - "null"
+                            properties:
+                              "id":
+                                type: "string"
+                                description: "Unique identifier for a previous audio response from the model."
+                            required:
+                              - "id"
+                            description: "Data about a previous audio response from the model. "
+                          "tool_calls":
+                            type: "array"
+                            items:
                               type: "object"
                               properties:
-                                "name":
+                                "id":
                                   type: "string"
-                                "arguments":
+                                  description: "The ID of the tool call."
+                                "type":
                                   type: "string"
-                                  description: "JSON string arguments for the functions"
+                                  enum:
+                                    - "function"
+                                  description: "The type of the tool. Currently, only `function` is supported."
+                                "function":
+                                  type: "object"
+                                  properties:
+                                    "name":
+                                      type: "string"
+                                      description: "The name of the function to call."
+                                    "arguments":
+                                      type: "string"
+                                      description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
                               required:
-                                - "name"
-                                - "arguments"
-                          required:
-                            - "type"
-                            - "function"
-                      "tool_call_id":
-                        type: "string"
-                    required:
-                      - "role"
-                      - "content"
-                  description: "The prompt template messages "
+                                - "id"
+                                - "type"
+                                - "function"
+                            description: "The tool calls generated by the model, such as function calls."
+                          "reasoning":
+                            type: "string"
+                            description: "Internal thought process of the model"
+                          "reasoning_signature":
+                            type: "string"
+                            description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                          "redacted_reasoning":
+                            type: "string"
+                            description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                        required:
+                          - "role"
+                        title: "Assistant message"
+                      - type: "object"
+                        properties:
+                          "role":
+                            type: "string"
+                            enum:
+                              - "tool"
+                            description: "The role of the messages author, in this case tool."
+                          "content":
+                            anyOf:
+                              - type: "string"
+                              - type: "array"
+                                items:
+                                  type: "string"
+                            description: "The contents of the tool message."
+                          "tool_call_id":
+                            type: "string"
+                            description: "Tool call that this message is responding to."
+                        required:
+                          - "role"
+                          - "content"
+                          - "tool_call_id"
+                        title: "Tool message"
+                  description: "A list of messages comprising the conversation so far"
                 "expected_output":
                   type: "string"
       responses:
@@ -18872,125 +19597,270 @@ paths:
                   "messages":
                     type: "array"
                     items:
-                      type: "object"
-                      properties:
-                        "role":
-                          type: "string"
-                          enum:
-                            - "system"
-                            - "assistant"
-                            - "user"
-                            - "exception"
-                            - "tool"
-                            - "prompt"
-                            - "correction"
-                            - "expected_output"
-                          description: "The role of the prompt message"
-                        "content":
-                          anyOf:
-                            - type: "string"
-                            - type: "array"
-                              items:
-                                oneOf:
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "developer"
+                              description: "The role of the messages author, in this case  `developer`."
+                            "content":
+                              type: "string"
+                              description: "The contents of the developer message."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "Developer message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "system"
+                              description: "The role of the messages author, in this case `system`."
+                            "content":
+                              type: "string"
+                              description: "The contents of the system message."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "System message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "user"
+                              description: "The role of the messages author, in this case `user`."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                  description: "The text contents of the message."
+                                - type: "array"
+                                  items:
+                                    oneOf:
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "text"
+                                          "text":
+                                            type: "string"
+                                        required:
+                                          - "type"
                                           - "text"
-                                      "text":
-                                        type: "string"
-                                    required:
-                                      - "type"
-                                      - "text"
-                                    description: "Text content part of a prompt message"
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "image_url"
+                                          "image_url":
+                                            type: "object"
+                                            properties:
+                                              "url":
+                                                type: "string"
+                                                description: "Either a URL of the image or the base64 encoded image data."
+                                              "detail":
+                                                type: "string"
+                                                enum:
+                                                  - "low"
+                                                  - "high"
+                                                  - "auto"
+                                                description: "Specifies the detail level of the image."
+                                            required:
+                                              - "url"
+                                        required:
+                                          - "type"
                                           - "image_url"
-                                      "image_url":
-                                        type: "object"
+                                      - type: "object"
                                         properties:
-                                          "id":
+                                          "type":
                                             type: "string"
-                                            format: "ulid"
-                                            description: "The orq.ai id of the image"
-                                            readOnly: true
-                                          "url":
-                                            anyOf:
-                                              - type: "string"
-                                              - type: "string"
-                                                format: "uri"
-                                            description: "Either a URL of the image or the base64 encoded data URI."
-                                            examples:
-                                              - "https://picsum.photos/id/1/200/300"
-                                              - "data:image/jpeg;base64,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"
-                                          "detail":
-                                            type: "string"
-                                            description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                                            enum:
+                                              - "input_audio"
+                                          "input_audio":
+                                            type: "object"
+                                            properties:
+                                              "data":
+                                                type: "string"
+                                                description: "Base64 encoded audio data."
+                                              "format":
+                                                type: "string"
+                                                enum:
+                                                  - "mp3"
+                                                  - "wav"
+                                                description: "The format of the encoded audio data. Currently supports `wav` and `mp3`."
+                                            required:
+                                              - "data"
+                                              - "format"
                                         required:
-                                          - "url"
-                                    required:
-                                      - "type"
-                                      - "image_url"
-                                    description: "The image part of the prompt message. Only supported with vision models."
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
+                                          - "type"
+                                          - "input_audio"
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "file"
+                                            description: "The type of the content part. Always `file`."
+                                          "file":
+                                            type: "object"
+                                            properties:
+                                              "file_data":
+                                                type: "string"
+                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              "filename":
+                                                type: "string"
+                                                description: "The name of the file, used when passing the file to the model as a string."
+                                            required:
+                                              - "file_data"
+                                        required:
+                                          - "type"
                                           - "file"
-                                        description: "The type of the content part. Always `file`."
-                                      "file":
-                                        type: "object"
+                                  description: "An array of content parts with a defined type. Supported options differ based on the model being used to generate the response. Can contain text, image, or audio inputs."
+                              description: "The contents of the user message."
+                          required:
+                            - "role"
+                            - "content"
+                          title: "User message"
+                        - type: "object"
+                          properties:
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                  description: "The contents of the assistant message."
+                                - type: "array"
+                                  items:
+                                    oneOf:
+                                      - type: "object"
                                         properties:
-                                          "file_data":
+                                          "type":
                                             type: "string"
-                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                          "filename":
+                                            enum:
+                                              - "text"
+                                            description: "The type of the content part."
+                                          "text":
                                             type: "string"
-                                            description: "The name of the file, used when passing the file to the model as a string."
+                                            description: "The text content."
                                         required:
-                                          - "file_data"
-                                    required:
-                                      - "type"
-                                      - "file"
-                          description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                        "tool_calls":
-                          type: "array"
-                          items:
-                            type: "object"
-                            properties:
-                              "id":
-                                type: "string"
-                              "index":
-                                type: "number"
-                              "type":
-                                type: "string"
-                                enum:
-                                  - "function"
-                              "function":
+                                          - "type"
+                                          - "text"
+                                        title: "Text content part"
+                                      - type: "object"
+                                        properties:
+                                          "type":
+                                            type: "string"
+                                            enum:
+                                              - "refusal"
+                                            description: "The type of the content part."
+                                          "refusal":
+                                            type: "string"
+                                            description: "The refusal message generated by the model."
+                                        required:
+                                          - "type"
+                                          - "refusal"
+                                        title: "Refusal content part"
+                                  description: "An array of content parts with a defined type. Can be one or more of type `text`, or exactly one of type `refusal`."
+                                - type: "null"
+                              description: "The contents of the assistant message. Required unless `tool_calls` or `function_call` is specified."
+                            "refusal":
+                              type:
+                                - "string"
+                                - "null"
+                              description: "The refusal message by the assistant."
+                            "role":
+                              type: "string"
+                              enum:
+                                - "assistant"
+                              description: "The role of the messages author, in this case `assistant`."
+                            "name":
+                              type: "string"
+                              description: "An optional name for the participant. Provides the model information to differentiate between participants of the same role."
+                            "audio":
+                              type:
+                                - "object"
+                                - "null"
+                              properties:
+                                "id":
+                                  type: "string"
+                                  description: "Unique identifier for a previous audio response from the model."
+                              required:
+                                - "id"
+                              description: "Data about a previous audio response from the model. "
+                            "tool_calls":
+                              type: "array"
+                              items:
                                 type: "object"
                                 properties:
-                                  "name":
+                                  "id":
                                     type: "string"
-                                  "arguments":
+                                    description: "The ID of the tool call."
+                                  "type":
                                     type: "string"
-                                    description: "JSON string arguments for the functions"
+                                    enum:
+                                      - "function"
+                                    description: "The type of the tool. Currently, only `function` is supported."
+                                  "function":
+                                    type: "object"
+                                    properties:
+                                      "name":
+                                        type: "string"
+                                        description: "The name of the function to call."
+                                      "arguments":
+                                        type: "string"
+                                        description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
                                 required:
-                                  - "name"
-                                  - "arguments"
-                            required:
-                              - "type"
-                              - "function"
-                        "tool_call_id":
-                          type: "string"
-                      required:
-                        - "role"
-                        - "content"
-                    description: "The prompt template messages "
+                                  - "id"
+                                  - "type"
+                                  - "function"
+                              description: "The tool calls generated by the model, such as function calls."
+                            "reasoning":
+                              type: "string"
+                              description: "Internal thought process of the model"
+                            "reasoning_signature":
+                              type: "string"
+                              description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                            "redacted_reasoning":
+                              type: "string"
+                              description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                          required:
+                            - "role"
+                          title: "Assistant message"
+                        - type: "object"
+                          properties:
+                            "role":
+                              type: "string"
+                              enum:
+                                - "tool"
+                              description: "The role of the messages author, in this case tool."
+                            "content":
+                              anyOf:
+                                - type: "string"
+                                - type: "array"
+                                  items:
+                                    type: "string"
+                              description: "The contents of the tool message."
+                            "tool_call_id":
+                              type: "string"
+                              description: "Tool call that this message is responding to."
+                          required:
+                            - "role"
+                            - "content"
+                            - "tool_call_id"
+                          title: "Tool message"
+                    description: "A list of messages comprising the conversation so far"
                   "expected_output":
                     type: "string"
                   "dataset_id":
@@ -19007,7 +19877,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-01T19:29:58.421Z"
+                    default: "2025-06-02T07:48:43.271Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -19015,7 +19885,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-01T19:29:58.422Z"
+                        default: "2025-06-02T07:48:43.271Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -19060,340 +19930,6 @@ paths:
           content:
             "application/json":
               schema: {"$ref": "#/components/schemas/HonoApiError"}
-      security:
-        - ApiKey: []
-  "/v2/datasets/{dataset_id}/datapoints/bulk":
-    post:
-      tags:
-        - "Datasets"
-      x-speakeasy-group: "datasets"
-      x-speakeasy-name-override: "createDatapoints"
-      operationId: "BulkCreateDatapoints"
-      description: "Create multiple datapoints at once."
-      summary: "Create multiple datapoints"
-      parameters:
-        - schema:
-            type: "string"
-            description: "The unique identifier of the dataset"
-          required: true
-          name: "dataset_id"
-          in: "path"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "items":
-                  type: "array"
-                  items:
-                    type: "object"
-                    properties:
-                      "inputs":
-                        type: "object"
-                        additionalProperties: {}
-                        description: "The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported."
-                      "messages":
-                        type: "array"
-                        items:
-                          type: "object"
-                          properties:
-                            "role":
-                              type: "string"
-                              enum:
-                                - "system"
-                                - "assistant"
-                                - "user"
-                                - "exception"
-                                - "tool"
-                                - "prompt"
-                                - "correction"
-                                - "expected_output"
-                              description: "The role of the prompt message"
-                            "content":
-                              anyOf:
-                                - type: "string"
-                                - type: "array"
-                                  items:
-                                    oneOf:
-                                      - type: "object"
-                                        properties:
-                                          "type":
-                                            type: "string"
-                                            enum:
-                                              - "text"
-                                          "text":
-                                            type: "string"
-                                        required:
-                                          - "type"
-                                          - "text"
-                                        description: "Text content part of a prompt message"
-                                      - type: "object"
-                                        properties:
-                                          "type":
-                                            type: "string"
-                                            enum:
-                                              - "image_url"
-                                          "image_url":
-                                            type: "object"
-                                            properties:
-                                              "id":
-                                                type: "string"
-                                                format: "ulid"
-                                                description: "The orq.ai id of the image"
-                                                readOnly: true
-                                              "url":
-                                                anyOf:
-                                                  - type: "string"
-                                                  - type: "string"
-                                                    format: "uri"
-                                                description: "Either a URL of the image or the base64 encoded data URI."
-                                                examples:
-                                                  - "https://picsum.photos/id/1/200/300"
-                                                  - "data:image/jpeg;base64,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"
-                                              "detail":
-                                                type: "string"
-                                                description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
-                                            required:
-                                              - "url"
-                                        required:
-                                          - "type"
-                                          - "image_url"
-                                        description: "The image part of the prompt message. Only supported with vision models."
-                                      - type: "object"
-                                        properties:
-                                          "type":
-                                            type: "string"
-                                            enum:
-                                              - "file"
-                                            description: "The type of the content part. Always `file`."
-                                          "file":
-                                            type: "object"
-                                            properties:
-                                              "file_data":
-                                                type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                              "filename":
-                                                type: "string"
-                                                description: "The name of the file, used when passing the file to the model as a string."
-                                            required:
-                                              - "file_data"
-                                        required:
-                                          - "type"
-                                          - "file"
-                              description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                            "tool_calls":
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  "id":
-                                    type: "string"
-                                  "index":
-                                    type: "number"
-                                  "type":
-                                    type: "string"
-                                    enum:
-                                      - "function"
-                                  "function":
-                                    type: "object"
-                                    properties:
-                                      "name":
-                                        type: "string"
-                                      "arguments":
-                                        type: "string"
-                                        description: "JSON string arguments for the functions"
-                                    required:
-                                      - "name"
-                                      - "arguments"
-                                required:
-                                  - "type"
-                                  - "function"
-                            "tool_call_id":
-                              type: "string"
-                          required:
-                            - "role"
-                            - "content"
-                        description: "The prompt template messages "
-                      "expected_output":
-                        type: "string"
-              required:
-                - "items"
-      responses:
-        "200":
-          description: "Datapoints created."
-          content:
-            "application/json":
-              schema:
-                type: "array"
-                items:
-                  type: "object"
-                  properties:
-                    "_id":
-                      type: "string"
-                      description: "The unique identifier of the dataset item"
-                    "workspace_id":
-                      type: "string"
-                      description: "The unique identifier of the workspace it belongs to"
-                    "inputs":
-                      type: "object"
-                      additionalProperties: {}
-                      description: "The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported."
-                    "messages":
-                      type: "array"
-                      items:
-                        type: "object"
-                        properties:
-                          "role":
-                            type: "string"
-                            enum:
-                              - "system"
-                              - "assistant"
-                              - "user"
-                              - "exception"
-                              - "tool"
-                              - "prompt"
-                              - "correction"
-                              - "expected_output"
-                            description: "The role of the prompt message"
-                          "content":
-                            anyOf:
-                              - type: "string"
-                              - type: "array"
-                                items:
-                                  oneOf:
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "text"
-                                        "text":
-                                          type: "string"
-                                      required:
-                                        - "type"
-                                        - "text"
-                                      description: "Text content part of a prompt message"
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "image_url"
-                                        "image_url":
-                                          type: "object"
-                                          properties:
-                                            "id":
-                                              type: "string"
-                                              format: "ulid"
-                                              description: "The orq.ai id of the image"
-                                              readOnly: true
-                                            "url":
-                                              anyOf:
-                                                - type: "string"
-                                                - type: "string"
-                                                  format: "uri"
-                                              description: "Either a URL of the image or the base64 encoded data URI."
-                                              examples:
-                                                - "https://picsum.photos/id/1/200/300"
-                                                - "data:image/jpeg;base64,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"
-                                            "detail":
-                                              type: "string"
-                                              description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
-                                          required:
-                                            - "url"
-                                      required:
-                                        - "type"
-                                        - "image_url"
-                                      description: "The image part of the prompt message. Only supported with vision models."
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
-                                            - "file"
-                                          description: "The type of the content part. Always `file`."
-                                        "file":
-                                          type: "object"
-                                          properties:
-                                            "file_data":
-                                              type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
-                                            "filename":
-                                              type: "string"
-                                              description: "The name of the file, used when passing the file to the model as a string."
-                                          required:
-                                            - "file_data"
-                                      required:
-                                        - "type"
-                                        - "file"
-                            description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                          "tool_calls":
-                            type: "array"
-                            items:
-                              type: "object"
-                              properties:
-                                "id":
-                                  type: "string"
-                                "index":
-                                  type: "number"
-                                "type":
-                                  type: "string"
-                                  enum:
-                                    - "function"
-                                "function":
-                                  type: "object"
-                                  properties:
-                                    "name":
-                                      type: "string"
-                                    "arguments":
-                                      type: "string"
-                                      description: "JSON string arguments for the functions"
-                                  required:
-                                    - "name"
-                                    - "arguments"
-                              required:
-                                - "type"
-                                - "function"
-                          "tool_call_id":
-                            type: "string"
-                        required:
-                          - "role"
-                          - "content"
-                      description: "The prompt template messages "
-                    "expected_output":
-                      type: "string"
-                    "dataset_id":
-                      type: "string"
-                      description: "The unique identifier of the dataset"
-                    "created_by_id":
-                      type: "string"
-                      description: "The unique identifier of the user who created the dataset"
-                    "updated_by_id":
-                      type: "string"
-                      description: "The unique identifier of the user who last updated the dataset"
-                    "created":
-                      anyOf:
-                        - type: "string"
-                          format: "date-time"
-                        - type: "string"
-                      default: "2025-06-01T19:29:58.421Z"
-                      description: "The date and time the resource was created"
-                      readOnly: true
-                      format: "date-time"
-                    "updated":
-                      anyOf:
-                        - type: "string"
-                          format: "date-time"
-                          default: "2025-06-01T19:29:58.422Z"
-                        - type: "string"
-                      description: "The date and time the resource was last updated"
-                      readOnly: true
-                      format: "date-time"
-                  required:
-                    - "_id"
-                    - "workspace_id"
-                    - "dataset_id"
       security:
         - ApiKey: []
   "/v2/datasets/{dataset_id}/clear":
@@ -20618,7 +21154,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JWPFHZSHVB9X7X4KHPF7NT8W"
+                          default: "01JWQSTP59RKB9JQ2FG6YAZXHA"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -20781,7 +21317,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JWPFHZSJBPBDZW2AT01QWP55"
+                    default: "01JWQSTP5ABT64EWVNNSV5KQZT"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -20874,7 +21410,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JWPFHZSH92P54ZH4RKVJH9Y9"
+                    default: "01JWQSTP5AF6E2443F07JX3Q90"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -21003,7 +21539,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JWPFHZSKEVTFDWV54TS9ZGP9"
+                    default: "01JWQSTP5BSX89207V8YQN7RC7"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
