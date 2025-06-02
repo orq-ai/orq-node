@@ -32,6 +32,41 @@ import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
 import { tool$deploymentsMetricsCreate } from "./tools/deploymentsMetricsCreate.js";
 import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
+import { tool$evalsAgeAppropriate } from "./tools/evalsAgeAppropriate.js";
+import { tool$evalsBleuScore } from "./tools/evalsBleuScore.js";
+import { tool$evalsBotDetection } from "./tools/evalsBotDetection.js";
+import { tool$evalsContains } from "./tools/evalsContains.js";
+import { tool$evalsContainsAll } from "./tools/evalsContainsAll.js";
+import { tool$evalsContainsAny } from "./tools/evalsContainsAny.js";
+import { tool$evalsContainsEmail } from "./tools/evalsContainsEmail.js";
+import { tool$evalsContainsNone } from "./tools/evalsContainsNone.js";
+import { tool$evalsContainsUrl } from "./tools/evalsContainsUrl.js";
+import { tool$evalsContainsValidLink } from "./tools/evalsContainsValidLink.js";
+import { tool$evalsCreate } from "./tools/evalsCreate.js";
+import { tool$evalsEndsWith } from "./tools/evalsEndsWith.js";
+import { tool$evalsExactMatch } from "./tools/evalsExactMatch.js";
+import { tool$evalsFactCheckingKnowledgeBase } from "./tools/evalsFactCheckingKnowledgeBase.js";
+import { tool$evalsGrammar } from "./tools/evalsGrammar.js";
+import { tool$evalsLengthBetween } from "./tools/evalsLengthBetween.js";
+import { tool$evalsLengthGreaterThan } from "./tools/evalsLengthGreaterThan.js";
+import { tool$evalsLengthLessThan } from "./tools/evalsLengthLessThan.js";
+import { tool$evalsLocalization } from "./tools/evalsLocalization.js";
+import { tool$evalsPii } from "./tools/evalsPii.js";
+import { tool$evalsRagasCoherence } from "./tools/evalsRagasCoherence.js";
+import { tool$evalsRagasConciseness } from "./tools/evalsRagasConciseness.js";
+import { tool$evalsRagasContextPrecision } from "./tools/evalsRagasContextPrecision.js";
+import { tool$evalsRagasCorrectness } from "./tools/evalsRagasCorrectness.js";
+import { tool$evalsRagasFaithfulness } from "./tools/evalsRagasFaithfulness.js";
+import { tool$evalsRagasHarmfulness } from "./tools/evalsRagasHarmfulness.js";
+import { tool$evalsRagasMaliciousness } from "./tools/evalsRagasMaliciousness.js";
+import { tool$evalsRagasResponseRelevancy } from "./tools/evalsRagasResponseRelevancy.js";
+import { tool$evalsRagasSummarization } from "./tools/evalsRagasSummarization.js";
+import { tool$evalsRunBertScore } from "./tools/evalsRunBertScore.js";
+import { tool$evalsSentimentClassification } from "./tools/evalsSentimentClassification.js";
+import { tool$evalsSummarization } from "./tools/evalsSummarization.js";
+import { tool$evalsToneOfVoice } from "./tools/evalsToneOfVoice.js";
+import { tool$evalsTranslation } from "./tools/evalsTranslation.js";
+import { tool$evalsValidJson } from "./tools/evalsValidJson.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
@@ -75,7 +110,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.7.0-rc.4",
+    version: "3.7.0-rc.5",
   });
 
   const client = new OrqCore({
@@ -155,6 +190,41 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
+  tool(tool$evalsCreate);
+  tool(tool$evalsRunBertScore);
+  tool(tool$evalsBleuScore);
+  tool(tool$evalsContainsAll);
+  tool(tool$evalsContainsAny);
+  tool(tool$evalsContainsEmail);
+  tool(tool$evalsContainsNone);
+  tool(tool$evalsContainsUrl);
+  tool(tool$evalsContainsValidLink);
+  tool(tool$evalsContains);
+  tool(tool$evalsEndsWith);
+  tool(tool$evalsExactMatch);
+  tool(tool$evalsLengthBetween);
+  tool(tool$evalsLengthGreaterThan);
+  tool(tool$evalsLengthLessThan);
+  tool(tool$evalsValidJson);
+  tool(tool$evalsAgeAppropriate);
+  tool(tool$evalsBotDetection);
+  tool(tool$evalsFactCheckingKnowledgeBase);
+  tool(tool$evalsGrammar);
+  tool(tool$evalsLocalization);
+  tool(tool$evalsPii);
+  tool(tool$evalsSentimentClassification);
+  tool(tool$evalsSummarization);
+  tool(tool$evalsToneOfVoice);
+  tool(tool$evalsTranslation);
+  tool(tool$evalsRagasCoherence);
+  tool(tool$evalsRagasConciseness);
+  tool(tool$evalsRagasContextPrecision);
+  tool(tool$evalsRagasCorrectness);
+  tool(tool$evalsRagasFaithfulness);
+  tool(tool$evalsRagasHarmfulness);
+  tool(tool$evalsRagasMaliciousness);
+  tool(tool$evalsRagasResponseRelevancy);
+  tool(tool$evalsRagasSummarization);
   tool(tool$deploymentsMetricsCreate);
 
   return server;
