@@ -4,6 +4,7 @@
 
 export * from "./apierror.js";
 export * from "./createeval.js";
+export * from "./deletecontact.js";
 export * from "./evalsageappropriate.js";
 export * from "./evalsbleuscore.js";
 export * from "./evalsbotdetection.js";
@@ -40,6 +41,8 @@ export * from "./evalsvalidjson.js";
 export * from "./getpromptversion.js";
 export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
+export * from "./retrievecontact.js";
 export * from "./runbertscore.js";
 export * from "./sdkvalidationerror.js";
+export * from "./updatecontact.js";
 export * from "./updateprompt.js";

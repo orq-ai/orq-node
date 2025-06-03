@@ -3,22 +3,94 @@
  */
 
 import { contactsCreate } from "../funcs/contactsCreate.js";
+import { contactsDelete } from "../funcs/contactsDelete.js";
+import { contactsList } from "../funcs/contactsList.js";
+import { contactsRetrieve } from "../funcs/contactsRetrieve.js";
+import { contactsUpdate } from "../funcs/contactsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Contacts extends ClientSDK {
   /**
-   * Update user information
+   * Create a contact
    *
    * @remarks
-   * Update or add user information to workspace
+   * Creates a new contact or updates an existing one based on external_id. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
    */
   async create(
-    request: operations.CreateContactRequestBody,
+    request?: operations.CreateContactRequestBody | undefined,
     options?: RequestOptions,
   ): Promise<operations.CreateContactResponseBody> {
     return unwrapAsync(contactsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List contacts
+   *
+   * @remarks
+   * Retrieves a paginated list of contacts in your workspace. Use pagination parameters to navigate through large contact lists efficiently.
+   */
+  async list(
+    request?: operations.ListContactsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.ListContactsResponseBody> {
+    return unwrapAsync(contactsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Retrieve a contact
+   *
+   * @remarks
+   * Retrieves detailed information about a specific contact using their contact ID or external ID from your system.
+   */
+  async retrieve(
+    request: operations.RetrieveContactRequest,
+    options?: RequestOptions,
+  ): Promise<operations.RetrieveContactResponseBody> {
+    return unwrapAsync(contactsRetrieve(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a contact
+   *
+   * @remarks
+   * Updates specific fields of an existing contact. Only the fields provided in the request body will be updated.
+   */
+  async update(
+    request: operations.UpdateContactRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateContactResponseBody> {
+    return unwrapAsync(contactsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a contact
+   *
+   * @remarks
+   * Permanently deletes a contact from your workspace. This action cannot be undone.
+   */
+  async delete(
+    request: operations.DeleteContactRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(contactsDelete(
       this,
       request,
       options,

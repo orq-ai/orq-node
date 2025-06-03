@@ -235,7 +235,11 @@ run();
 
 ### [contacts](docs/sdks/contacts/README.md)
 
-* [create](docs/sdks/contacts/README.md#create) - Update user information
+* [create](docs/sdks/contacts/README.md#create) - Create a contact
+* [list](docs/sdks/contacts/README.md#list) - List contacts
+* [retrieve](docs/sdks/contacts/README.md#retrieve) - Retrieve a contact
+* [update](docs/sdks/contacts/README.md#update) - Update a contact
+* [delete](docs/sdks/contacts/README.md#delete) - Delete a contact
 
 ### [datasets](docs/sdks/datasets/README.md)
 
@@ -369,7 +373,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
+- [`contactsCreate`](docs/sdks/contacts/README.md#create) - Create a contact
+- [`contactsDelete`](docs/sdks/contacts/README.md#delete) - Delete a contact
+- [`contactsList`](docs/sdks/contacts/README.md#list) - List contacts
+- [`contactsRetrieve`](docs/sdks/contacts/README.md#retrieve) - Retrieve a contact
+- [`contactsUpdate`](docs/sdks/contacts/README.md#update) - Update a contact
 - [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 - [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
 - [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
@@ -600,18 +608,21 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `list` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `retrieve` method may throw the following errors:
 
-| Error Type          | Status Code | Content Type     |
-| ------------------- | ----------- | ---------------- |
-| errors.HonoApiError | 500         | application/json |
-| errors.APIError     | 4XX, 5XX    | \*/\*            |
+| Error Type                         | Status Code | Content Type     |
+| ---------------------------------- | ----------- | ---------------- |
+| errors.RetrieveContactResponseBody | 404         | application/json |
+| errors.APIError                    | 4XX, 5XX    | \*/\*            |
 
 If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
 
 ```typescript
 import { Orq } from "@orq-ai/node";
-import { HonoApiError, SDKValidationError } from "@orq-ai/node/models/errors";
+import {
+  RetrieveContactResponseBody,
+  SDKValidationError,
+} from "@orq-ai/node/models/errors";
 
 const orq = new Orq({
   apiKey: process.env["ORQ_API_KEY"] ?? "",
@@ -620,7 +631,9 @@ const orq = new Orq({
 async function run() {
   let result;
   try {
-    result = await orq.deployments.list({});
+    result = await orq.contacts.retrieve({
+      id: "<id>",
+    });
 
     // Handle the result
     console.log(result);
@@ -634,8 +647,8 @@ async function run() {
         console.error(err.rawValue);
         return;
       }
-      case (err instanceof HonoApiError): {
-        // Handle err.data$: HonoApiErrorData
+      case (err instanceof RetrieveContactResponseBody): {
+        // Handle err.data$: RetrieveContactResponseBodyData
         console.error(err);
         return;
       }

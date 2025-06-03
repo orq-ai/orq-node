@@ -6,49 +6,42 @@
 import { Data } from "@orq-ai/node/models/operations";
 
 let value: Data = {
-  id: "9ab092b0-7aaa-47ec-ba5e-bc4ffa1aa96b",
-  created: "<value>",
-  updated: "<value>",
-  key: "<key>",
-  description: "thankfully blacken considering phew footrest",
-  promptConfig: {
-    tools: [
-      {
-        type: "function",
-        function: {
-          name: "<value>",
-          parameters: {
-            type: "object",
-            properties: {
-              "key": "<value>",
-            },
-          },
-        },
-      },
-    ],
-    model: "Land Cruiser",
-    modelType: "tts",
-    modelParameters: {},
-    provider: "replicate",
-    messages: [
-      {
-        role: "exception",
-        content: "<value>",
-      },
-    ],
+  id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  externalId: "user_12345",
+  displayName: "Jane Smith",
+  email: "jane.smith@example.com",
+  avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+  tags: [
+    "premium",
+    "beta-user",
+    "enterprise",
+  ],
+  metadata: {
+    "department": "Engineering",
+    "role": "Senior Developer",
+    "subscription_tier": "premium",
+    "last_login": "2024-01-15T10:30:00Z",
   },
-  version: "<value>",
+  metrics: {
+    totalCost: 100,
+    totalTokens: 1000,
+    totalRequests: 1000,
+    errorRate: 22,
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `id`                                                                                     | *string*                                                                                 | :heavy_check_mark:                                                                       | Unique identifier for the object.                                                        |
-| `created`                                                                                | *string*                                                                                 | :heavy_check_mark:                                                                       | Date in ISO 8601 format at which the object was created.                                 |
-| `updated`                                                                                | *string*                                                                                 | :heavy_check_mark:                                                                       | Date in ISO 8601 format at which the object was last updated.                            |
-| `key`                                                                                    | *string*                                                                                 | :heavy_check_mark:                                                                       | The deployment unique key                                                                |
-| `description`                                                                            | *string*                                                                                 | :heavy_check_mark:                                                                       | An arbitrary string attached to the object. Often useful for displaying to users.        |
-| `promptConfig`                                                                           | [operations.DeploymentsPromptConfig](../../models/operations/deploymentspromptconfig.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `version`                                                                                | *string*                                                                                 | :heavy_check_mark:                                                                       | THe version of the deployment                                                            |
+| Field                                                                                                                                                | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          | Example                                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                 | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact                                                               | contact_01ARZ3NDEKTSV4RRFFQ69G5FAV                                                                                                                   |
+| `externalId`                                                                                                                                         | *string*                                                                                                                                             | :heavy_check_mark:                                                                                                                                   | Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user. | user_12345                                                                                                                                           |
+| `displayName`                                                                                                                                        | *string*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Display name or nickname of the contact user. This is typically shown in user interfaces.                                                            | Jane Smith                                                                                                                                           |
+| `email`                                                                                                                                              | *string*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | Email address of the contact user                                                                                                                    | jane.smith@example.com                                                                                                                               |
+| `avatarUrl`                                                                                                                                          | *string*                                                                                                                                             | :heavy_minus_sign:                                                                                                                                   | URL linking to the contact user's avatar image                                                                                                       | https://example.com/avatars/jane-smith.jpg                                                                                                           |
+| `tags`                                                                                                                                               | *string*[]                                                                                                                                           | :heavy_minus_sign:                                                                                                                                   | Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications.       | [<br/>"premium",<br/>"beta-user",<br/>"enterprise"<br/>]                                                                                             |
+| `metadata`                                                                                                                                           | Record<string, *any*>                                                                                                                                | :heavy_minus_sign:                                                                                                                                   | Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application.     | {<br/>"department": "Engineering",<br/>"role": "Senior Developer",<br/>"subscription_tier": "premium",<br/>"last_login": "2024-01-15T10:30:00Z"<br/>} |
+| `created`                                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                        | :heavy_minus_sign:                                                                                                                                   | The date and time the resource was created                                                                                                           |                                                                                                                                                      |
+| `updated`                                                                                                                                            | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                        | :heavy_minus_sign:                                                                                                                                   | The date and time the resource was last updated                                                                                                      |                                                                                                                                                      |
+| `metrics`                                                                                                                                            | [operations.Metrics](../../models/operations/metrics.md)                                                                                             | :heavy_check_mark:                                                                                                                                   | N/A                                                                                                                                                  |                                                                                                                                                      |

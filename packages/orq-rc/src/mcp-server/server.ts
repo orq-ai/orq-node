@@ -14,6 +14,10 @@ import {
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
+import { tool$contactsDelete } from "./tools/contactsDelete.js";
+import { tool$contactsList } from "./tools/contactsList.js";
+import { tool$contactsRetrieve } from "./tools/contactsRetrieve.js";
+import { tool$contactsUpdate } from "./tools/contactsUpdate.js";
 import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
@@ -110,7 +114,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.7.0-rc.8",
+    version: "3.7.0-rc.9",
   });
 
   const client = new OrqCore({
@@ -143,6 +147,10 @@ export function createMCPServer(deps: {
   void register; // suppress unused warnings
 
   tool(tool$contactsCreate);
+  tool(tool$contactsList);
+  tool(tool$contactsRetrieve);
+  tool(tool$contactsUpdate);
+  tool(tool$contactsDelete);
   tool(tool$feedbackCreate);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
