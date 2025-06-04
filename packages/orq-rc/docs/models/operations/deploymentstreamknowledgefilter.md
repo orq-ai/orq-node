@@ -10,9 +10,7 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 ```typescript
 const value: { [k: string]: operations.DeploymentStreamKnowledgeFilter1 } = {
   "key": {
-    nin: [
-      3892.14,
-    ],
+    lt: 3892.14,
   },
 };
 ```
@@ -21,13 +19,7 @@ const value: { [k: string]: operations.DeploymentStreamKnowledgeFilter1 } = {
 
 ```typescript
 const value: operations.DeploymentStreamKnowledgeFilterAnd = {
-  and: [
-    {
-      "key": {
-        gt: 4526.29,
-      },
-    },
-  ],
+  and: [],
 };
 ```
 
@@ -36,13 +28,7 @@ const value: operations.DeploymentStreamKnowledgeFilterAnd = {
 ```typescript
 const value: operations.DeploymentStreamKnowledgeFilterOr = {
   or: [
-    {
-      "key": {
-        in: [
-          8677.26,
-        ],
-      },
-    },
+    {},
   ],
 };
 ```

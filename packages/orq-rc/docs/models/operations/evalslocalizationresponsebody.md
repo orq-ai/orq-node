@@ -9,7 +9,7 @@ import { EvalsLocalizationResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsLocalizationResponseBody = {
   value: {
-    value: false,
+    value: 5535.45,
   },
 };
 ```

@@ -9,7 +9,7 @@ import { EvalsToneOfVoiceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsToneOfVoiceResponseBody = {
   value: {
-    value: false,
+    value: true,
   },
 };
 ```

@@ -11,9 +11,12 @@ let value: KnowledgeFilterOr = {
   or: [
     {
       "key": {
-        in: [
-          false,
-        ],
+        ne: true,
+      },
+    },
+    {
+      "key": {
+        lte: 2414.33,
       },
     },
   ],

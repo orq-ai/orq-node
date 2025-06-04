@@ -11,9 +11,7 @@ let value: DeploymentsTools = {
     name: "<value>",
     parameters: {
       type: "object",
-      properties: {
-        "key": "<value>",
-      },
+      properties: {},
     },
   },
 };

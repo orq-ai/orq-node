@@ -18,7 +18,7 @@ const value: operations.DeploymentCreateMetric2DeploymentsMetrics1 = {
 const value: operations.DeploymentCreateMetric2DeploymentsMetrics2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://dark-phrase.info/",
+    url: "https://frail-roundabout.com",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.DeploymentCreateMetric2DeploymentsMetrics3 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

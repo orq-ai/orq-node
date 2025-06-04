@@ -17,10 +17,10 @@ const value: operations.Boolean = {
 
 ```typescript
 const value: operations.NumberT = {
-  enabled: false,
+  enabled: true,
   type: "number",
-  value: 9661.59,
-  operator: "lt",
+  value: 3019.07,
+  operator: "gte",
 };
 ```
 

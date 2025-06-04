@@ -34,7 +34,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.datasets.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -57,15 +56,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await datasetsList(orq, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -109,7 +105,6 @@ async function run() {
     path: "Default",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -135,15 +130,12 @@ async function run() {
     displayName: "Neva.Raynor10",
     path: "Default",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -186,7 +178,6 @@ async function run() {
     datasetId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -211,15 +202,12 @@ async function run() {
   const res = await datasetsRetrieve(orq, {
     datasetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -266,7 +254,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -294,15 +281,12 @@ async function run() {
       path: "Default",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -370,14 +354,12 @@ async function run() {
   const res = await datasetsDelete(orq, {
     datasetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("datasetsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -425,7 +407,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -455,15 +436,12 @@ async function run() {
       type: "dataset_experiment",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsCreateExperiment failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -506,7 +484,6 @@ async function run() {
     datasetId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -531,15 +508,12 @@ async function run() {
   const res = await datasetsListDatapoints(orq, {
     datasetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsListDatapoints failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -582,7 +556,6 @@ async function run() {
     datasetId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -607,15 +580,12 @@ async function run() {
   const res = await datasetsCreateDatapoint(orq, {
     datasetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsCreateDatapoint failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -659,7 +629,6 @@ async function run() {
     datapointId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -685,15 +654,12 @@ async function run() {
     datasetId: "<id>",
     datapointId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsRetrieveDatapoint failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -738,7 +704,6 @@ async function run() {
     datapointId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -764,15 +729,12 @@ async function run() {
     datasetId: "<id>",
     datapointId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("datasetsUpdateDatapoint failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -842,14 +804,12 @@ async function run() {
     datasetId: "<id>",
     datapointId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("datasetsDeleteDatapoint failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -917,14 +877,12 @@ async function run() {
   const res = await datasetsClear(orq, {
     datasetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("datasetsClear failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

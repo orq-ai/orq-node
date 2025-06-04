@@ -21,6 +21,7 @@ const value: operations.ResponseFormat1 = {
     strict: false,
     schema: {
       "key": "<value>",
+      "key1": "<value>",
     },
   },
 };

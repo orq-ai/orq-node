@@ -11,7 +11,6 @@ async function run() {
     externalId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 

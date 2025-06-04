@@ -12,17 +12,7 @@ let value: DeploymentGetConfigResponseBody = {
   provider: "<value>",
   model: "Challenger",
   version: "<value>",
-  messages: [
-    {
-      role: "exception",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
-    },
-  ],
+  messages: [],
   parameters: {},
 };
 ```

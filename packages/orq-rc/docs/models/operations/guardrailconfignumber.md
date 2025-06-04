@@ -8,8 +8,8 @@ import { GuardrailConfigNumber } from "@orq-ai/node/models/operations";
 let value: GuardrailConfigNumber = {
   enabled: false,
   type: "number",
-  value: 8372.37,
-  operator: "ne",
+  value: 1669.19,
+  operator: "lte",
 };
 ```
 

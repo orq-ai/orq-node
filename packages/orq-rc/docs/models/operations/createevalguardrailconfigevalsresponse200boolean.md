@@ -6,7 +6,7 @@
 import { CreateEvalGuardrailConfigEvalsResponse200Boolean } from "@orq-ai/node/models/operations";
 
 let value: CreateEvalGuardrailConfigEvalsResponse200Boolean = {
-  enabled: false,
+  enabled: true,
   type: "boolean",
   value: false,
 };

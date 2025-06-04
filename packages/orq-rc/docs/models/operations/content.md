@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `operations.Two[]`
 
 ```typescript
-const value: operations.Two[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.Two[] = [];
 ```
 

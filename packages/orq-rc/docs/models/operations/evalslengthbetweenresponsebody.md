@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsLengthBetweenResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsLengthBetweenResponseBody = {
-  value: 1413.25,
+  value: true,
 };
 ```
 

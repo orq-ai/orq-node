@@ -185,7 +185,6 @@ async function run() {
     externalId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -218,7 +217,6 @@ async function run() {
     externalId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -478,6 +476,8 @@ underlying connection.
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
+  environment: "<value>",
+  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -527,7 +527,6 @@ async function run() {
     file: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -565,7 +564,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -596,7 +594,6 @@ async function run() {
     externalId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -608,54 +605,47 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `retrieve` method may throw the following errors:
+This table shows properties which are common on error classes. For full details see [error classes](#error-classes).
 
-| Error Type                         | Status Code | Content Type     |
-| ---------------------------------- | ----------- | ---------------- |
-| errors.RetrieveContactResponseBody | 404         | application/json |
-| errors.APIError                    | 4XX, 5XX    | \*/\*            |
+| Property            | Type       | Description                                                                             |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.name`        | `string`   | Error class name eg `APIError`                                                          |
+| `error.message`     | `string`   | Error message                                                                           |
+| `error.statusCode`  | `number`   | HTTP status code eg `404`                                                               |
+| `error.contentType` | `string`   | HTTP content type eg `application/json`                                                 |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
+| `error.rawResponse` | `Response` | Raw HTTP response. Access to headers and more.                                          |
+| `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
-If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
-
+### Example
 ```typescript
 import { Orq } from "@orq-ai/node";
-import {
-  RetrieveContactResponseBody,
-  SDKValidationError,
-} from "@orq-ai/node/models/errors";
+import * as errors from "@orq-ai/node/models/errors";
 
 const orq = new Orq({
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
 async function run() {
-  let result;
   try {
-    result = await orq.contacts.retrieve({
+    const result = await orq.contacts.retrieve({
       id: "<id>",
     });
 
-    // Handle the result
     console.log(result);
-  } catch (err) {
-    switch (true) {
-      // The server response does not match the expected SDK schema
-      case (err instanceof SDKValidationError): {
-        // Pretty-print will provide a human-readable multi-line error message
-        console.error(err.pretty());
-        // Raw value may also be inspected
-        console.error(err.rawValue);
-        return;
-      }
-      case (err instanceof RetrieveContactResponseBody): {
-        // Handle err.data$: RetrieveContactResponseBodyData
-        console.error(err);
-        return;
-      }
-      default: {
-        // Other errors such as network errors, see HTTPClientErrors for more details
-        throw err;
-      }
+  } catch (error) {
+    // Depending on the method different errors may be thrown
+    if (error instanceof errors.RetrieveContactResponseBody) {
+      console.log(error.message);
+      console.log(error.data$.error); // string
+    }
+
+    // Fallback error class, if no other more specific error class is matched
+    if (error instanceof errors.APIError) {
+      console.log(error.message);
+      console.log(error.statusCode);
+      console.log(error.body);
+      console.log(error.rawResponse.headers);
     }
   }
 }
@@ -664,17 +654,97 @@ run();
 
 ```
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted multi-line string since validation errors can list many issues and the plain error string may be difficult read when debugging.
+### Error Classes
+* `APIError`: The fallback error class, if no other more specific error class is matched.
+* `SDKValidationError`: Type mismatch between the data returned from the server and the structure expected by the SDK. This can also be thrown for invalid method arguments. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+* Network errors:
+    * `ConnectionError`: HTTP client was unable to make a request to a server.
+    * `RequestTimeoutError`: HTTP request timed out due to an AbortSignal signal.
+    * `RequestAbortedError`: HTTP request was aborted by the client.
+    * `InvalidRequestError`: Any input used to create a request is invalid.
+    * `UnexpectedClientError`: Unrecognised or unexpected error.
 
-In some rare cases, the SDK can fail to get a response from the server or even make the request due to unexpected circumstances such as network conditions. These types of errors are captured in the `models/errors/httpclienterrors.ts` module:
+<details><summary>Less common errors, applicable to a subset of methods (75)</summary>
 
-| HTTP Client Error                                    | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- |
-| RequestAbortedError                                  | HTTP request was aborted by the client               |
-| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
-| ConnectionError                                      | HTTP client was unable to make a request to a server |
-| InvalidRequestError                                  | Any input used to create a request is invalid        |
-| UnexpectedClientError                                | Unrecognised or unexpected error                     |
+* [`HonoApiError`](docs/models/errors/honoapierror.md): Applicable to 6 of 88 methods.*
+* [`RetrieveContactResponseBody`](docs/models/errors/retrievecontactresponsebody.md): Contact not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`UpdateContactResponseBody`](docs/models/errors/updatecontactresponsebody.md): Contact not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`DeleteContactResponseBody`](docs/models/errors/deletecontactresponsebody.md): Contact not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`UpdatePromptResponseBody`](docs/models/errors/updatepromptresponsebody.md): Prompt not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`GetPromptVersionResponseBody`](docs/models/errors/getpromptversionresponsebody.md): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 88 methods.*
+* [`CreateEvalResponseBody`](docs/models/errors/createevalresponsebody.md): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 88 methods.*
+* [`RunBertScoreResponseBody`](docs/models/errors/runbertscoreresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsBleuScoreResponseBody`](docs/models/errors/evalsbleuscoreresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsAllResponseBody`](docs/models/errors/evalscontainsallresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsAnyResponseBody`](docs/models/errors/evalscontainsanyresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsEmailResponseBody`](docs/models/errors/evalscontainsemailresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsNoneResponseBody`](docs/models/errors/evalscontainsnoneresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsUrlResponseBody`](docs/models/errors/evalscontainsurlresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsValidLinkResponseBody`](docs/models/errors/evalscontainsvalidlinkresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsResponseBody`](docs/models/errors/evalscontainsresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsEndsWithResponseBody`](docs/models/errors/evalsendswithresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsExactMatchResponseBody`](docs/models/errors/evalsexactmatchresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsLengthBetweenResponseBody`](docs/models/errors/evalslengthbetweenresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsLengthGreaterThanResponseBody`](docs/models/errors/evalslengthgreaterthanresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsLengthLessThanResponseBody`](docs/models/errors/evalslengthlessthanresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsValidJsonResponseBody`](docs/models/errors/evalsvalidjsonresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsAgeAppropriateResponseBody`](docs/models/errors/evalsageappropriateresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsBotDetectionResponseBody`](docs/models/errors/evalsbotdetectionresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsFactCheckingKnowledgeBaseResponseBody`](docs/models/errors/evalsfactcheckingknowledgebaseresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsGrammarResponseBody`](docs/models/errors/evalsgrammarresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsLocalizationResponseBody`](docs/models/errors/evalslocalizationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsPiiResponseBody`](docs/models/errors/evalspiiresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsSentimentClassificationResponseBody`](docs/models/errors/evalssentimentclassificationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsSummarizationResponseBody`](docs/models/errors/evalssummarizationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsToneOfVoiceResponseBody`](docs/models/errors/evalstoneofvoiceresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsTranslationResponseBody`](docs/models/errors/evalstranslationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasCoherenceResponseBody`](docs/models/errors/evalsragascoherenceresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasConcisenessResponseBody`](docs/models/errors/evalsragasconcisenessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasContextPrecisionResponseBody`](docs/models/errors/evalsragascontextprecisionresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasCorrectnessResponseBody`](docs/models/errors/evalsragascorrectnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasFaithfulnessResponseBody`](docs/models/errors/evalsragasfaithfulnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasHarmfulnessResponseBody`](docs/models/errors/evalsragasharmfulnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasMaliciousnessResponseBody`](docs/models/errors/evalsragasmaliciousnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasResponseRelevancyResponseBody`](docs/models/errors/evalsragasresponserelevancyresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasSummarizationResponseBody`](docs/models/errors/evalsragassummarizationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 88 methods.*
+* [`RunBertScoreEvalsResponseBody`](docs/models/errors/runbertscoreevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsBleuScoreEvalsResponseBody`](docs/models/errors/evalsbleuscoreevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsAllEvalsResponseBody`](docs/models/errors/evalscontainsallevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsAnyEvalsResponseBody`](docs/models/errors/evalscontainsanyevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsEmailEvalsResponseBody`](docs/models/errors/evalscontainsemailevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsNoneEvalsResponseBody`](docs/models/errors/evalscontainsnoneevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsUrlEvalsResponseBody`](docs/models/errors/evalscontainsurlevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsValidLinkEvalsResponseBody`](docs/models/errors/evalscontainsvalidlinkevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsContainsEvalsResponseBody`](docs/models/errors/evalscontainsevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsEndsWithEvalsResponseBody`](docs/models/errors/evalsendswithevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsExactMatchEvalsResponseBody`](docs/models/errors/evalsexactmatchevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsLengthBetweenEvalsResponseBody`](docs/models/errors/evalslengthbetweenevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsLengthGreaterThanEvalsResponseBody`](docs/models/errors/evalslengthgreaterthanevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsLengthLessThanEvalsResponseBody`](docs/models/errors/evalslengthlessthanevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsValidJsonEvalsResponseBody`](docs/models/errors/evalsvalidjsonevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsAgeAppropriateEvalsResponseBody`](docs/models/errors/evalsageappropriateevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsBotDetectionEvalsResponseBody`](docs/models/errors/evalsbotdetectionevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsFactCheckingKnowledgeBaseEvalsResponseBody`](docs/models/errors/evalsfactcheckingknowledgebaseevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsGrammarEvalsResponseBody`](docs/models/errors/evalsgrammarevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsLocalizationEvalsResponseBody`](docs/models/errors/evalslocalizationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsPiiEvalsResponseBody`](docs/models/errors/evalspiievalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsSentimentClassificationEvalsResponseBody`](docs/models/errors/evalssentimentclassificationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsSummarizationEvalsResponseBody`](docs/models/errors/evalssummarizationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsToneOfVoiceEvalsResponseBody`](docs/models/errors/evalstoneofvoiceevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsTranslationEvalsResponseBody`](docs/models/errors/evalstranslationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasCoherenceEvalsResponseBody`](docs/models/errors/evalsragascoherenceevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasConcisenessEvalsResponseBody`](docs/models/errors/evalsragasconcisenessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasContextPrecisionEvalsResponseBody`](docs/models/errors/evalsragascontextprecisionevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasCorrectnessEvalsResponseBody`](docs/models/errors/evalsragascorrectnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasFaithfulnessEvalsResponseBody`](docs/models/errors/evalsragasfaithfulnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasHarmfulnessEvalsResponseBody`](docs/models/errors/evalsragasharmfulnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasMaliciousnessEvalsResponseBody`](docs/models/errors/evalsragasmaliciousnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasResponseRelevancyEvalsResponseBody`](docs/models/errors/evalsragasresponserelevancyevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+* [`EvalsRagasSummarizationEvalsResponseBody`](docs/models/errors/evalsragassummarizationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 88 methods.*
+</details>
+
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -696,7 +766,6 @@ async function run() {
     externalId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 

@@ -19,9 +19,7 @@ const value: operations.ListPromptVersionsResponseFormat1 = {
   jsonSchema: {
     name: "<value>",
     strict: false,
-    schema: {
-      "key": "<value>",
-    },
+    schema: {},
   },
 };
 ```

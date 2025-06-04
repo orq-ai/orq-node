@@ -9,7 +9,7 @@ import { OrIn } from "@orq-ai/node/models/operations";
 
 let value: OrIn = {
   in: [
-    false,
+    9840.33,
   ],
 };
 ```

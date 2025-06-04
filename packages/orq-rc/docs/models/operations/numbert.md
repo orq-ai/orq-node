@@ -6,10 +6,10 @@
 import { NumberT } from "@orq-ai/node/models/operations";
 
 let value: NumberT = {
-  enabled: false,
+  enabled: true,
   type: "number",
-  value: 3883.98,
-  operator: "ne",
+  value: 3019.07,
+  operator: "gte",
 };
 ```
 

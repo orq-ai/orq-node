@@ -19,23 +19,16 @@ let value: DeploymentsData = {
           name: "<value>",
           parameters: {
             type: "object",
-            properties: {
-              "key": "<value>",
-            },
+            properties: {},
           },
         },
       },
     ],
     model: "LeBaron",
-    modelType: "tts",
+    modelType: "stt",
     modelParameters: {},
-    provider: "fal",
-    messages: [
-      {
-        role: "assistant",
-        content: "<value>",
-      },
-    ],
+    provider: "huggingface",
+    messages: [],
   },
   version: "<value>",
 };

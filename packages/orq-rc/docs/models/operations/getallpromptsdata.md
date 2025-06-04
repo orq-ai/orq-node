@@ -14,12 +14,7 @@ let value: GetAllPromptsData = {
   updated: "<value>",
   displayName: "Itzel7",
   promptConfig: {
-    messages: [
-      {
-        role: "user",
-        content: "<value>",
-      },
-    ],
+    messages: [],
   },
 };
 ```

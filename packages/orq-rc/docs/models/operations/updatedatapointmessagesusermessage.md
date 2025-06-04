@@ -7,14 +7,7 @@ import { UpdateDatapointMessagesUserMessage } from "@orq-ai/node/models/operatio
 
 let value: UpdateDatapointMessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://rusty-switch.biz/",
-      },
-    },
-  ],
+  content: [],
 };
 ```
 

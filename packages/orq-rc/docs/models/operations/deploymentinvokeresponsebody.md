@@ -14,24 +14,7 @@ let value: DeploymentInvokeResponseBody = {
   model: "Model Y",
   provider: "togetherai",
   isFinal: false,
-  choices: [
-    {
-      index: 8767.76,
-      message: {
-        type: "tool_calls",
-        role: "prompt",
-        toolCalls: [
-          {
-            type: "function",
-            function: {
-              name: "<value>",
-              arguments: "<value>",
-            },
-          },
-        ],
-      },
-    },
-  ],
+  choices: [],
 };
 ```
 

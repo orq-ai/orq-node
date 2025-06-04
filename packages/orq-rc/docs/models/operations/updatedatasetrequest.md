@@ -7,9 +7,6 @@ import { UpdateDatasetRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatasetRequest = {
   datasetId: "<id>",
-  requestBody: {
-    path: "Default",
-  },
 };
 ```
 

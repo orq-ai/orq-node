@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsLengthGreaterThanResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsLengthGreaterThanResponseBody = {
-  value: 615.2,
+  value: true,
 };
 ```
 

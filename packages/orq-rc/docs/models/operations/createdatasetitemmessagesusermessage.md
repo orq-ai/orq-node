@@ -9,9 +9,9 @@ let value: CreateDatasetItemMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "file",
-      file: {
-        fileData: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://earnest-baseboard.com",
       },
     },
   ],

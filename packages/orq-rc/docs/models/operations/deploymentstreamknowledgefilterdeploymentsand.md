@@ -15,7 +15,7 @@ const value: operations.DeploymentStreamAndEq = {
 
 ```typescript
 const value: operations.DeploymentStreamAndNe = {
-  ne: 1484.24,
+  ne: "<value>",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.DeploymentStreamAndNe = {
 
 ```typescript
 const value: operations.DeploymentStreamAnd3 = {
-  gt: 7310.62,
+  gt: 107.55,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.DeploymentStreamAnd3 = {
 
 ```typescript
 const value: operations.DeploymentStreamAndGte = {
-  gte: 5152.33,
+  gte: 8129.84,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.DeploymentStreamAndGte = {
 
 ```typescript
 const value: operations.DeploymentStreamAndLt = {
-  lt: 4051.44,
+  lt: 2607.52,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.DeploymentStreamAndLt = {
 
 ```typescript
 const value: operations.DeploymentStreamAndLte = {
-  lte: 5494.24,
+  lte: 1095.86,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: operations.DeploymentStreamAndLte = {
 
 ```typescript
 const value: operations.DeploymentStreamAndIn = {
-  in: [
-    "<value>",
-  ],
+  in: [],
 };
 ```
 
@@ -66,7 +64,7 @@ const value: operations.DeploymentStreamAndIn = {
 ```typescript
 const value: operations.DeploymentStreamAndNin = {
   nin: [
-    758.76,
+    true,
   ],
 };
 ```

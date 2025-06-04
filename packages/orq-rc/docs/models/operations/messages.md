@@ -26,7 +26,7 @@ const value: operations.MessagesSystemMessage = {
 ```typescript
 const value: operations.MessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [],
 };
 ```
 

@@ -11,10 +11,9 @@ let value: Http = {
   method: "GET",
   headers: {
     "key": "<value>",
+    "key1": "<value>",
   },
-  payload: {
-    "key": "<value>",
-  },
+  payload: {},
   path: "Default",
   key: "<key>",
 };

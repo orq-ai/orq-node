@@ -9,7 +9,7 @@ import { EvalsAgeAppropriateResponseBody } from "@orq-ai/node/models/operations"
 
 let value: EvalsAgeAppropriateResponseBody = {
   value: {
-    value: false,
+    value: true,
   },
 };
 ```

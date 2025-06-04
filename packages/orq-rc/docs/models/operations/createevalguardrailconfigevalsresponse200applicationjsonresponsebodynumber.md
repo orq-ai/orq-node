@@ -7,10 +7,10 @@ import { CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNum
 
 let value:
   CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber = {
-    enabled: false,
+    enabled: true,
     type: "number",
-    value: 2504.52,
-    operator: "gte",
+    value: 5119.87,
+    operator: "ne",
   };
 ```
 

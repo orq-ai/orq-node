@@ -8,7 +8,7 @@ Returns the coherence evaluation result
 import { EvalsRagasCoherenceResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasCoherenceResponseBody = {
-  value: 2113.62,
+  value: 4096.05,
 };
 ```
 

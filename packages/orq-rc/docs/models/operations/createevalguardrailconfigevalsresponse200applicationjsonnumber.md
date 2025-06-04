@@ -6,9 +6,9 @@
 import { CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber } from "@orq-ai/node/models/operations";
 
 let value: CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
-  enabled: false,
+  enabled: true,
   type: "number",
-  value: 3420.76,
+  value: 7479.09,
   operator: "lt",
 };
 ```

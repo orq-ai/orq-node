@@ -8,7 +8,7 @@ Returns the harmfulness evaluation result
 import { EvalsRagasHarmfulnessResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasHarmfulnessResponseBody = {
-  value: 3688.66,
+  value: 7216.08,
 };
 ```
 

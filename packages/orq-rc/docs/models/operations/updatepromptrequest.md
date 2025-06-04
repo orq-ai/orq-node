@@ -7,9 +7,6 @@ import { UpdatePromptRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptRequest = {
   id: "<id>",
-  requestBody: {
-    path: "Default",
-  },
 };
 ```
 

@@ -8,9 +8,7 @@ import { DeploymentsResponseFormatJsonSchema } from "@orq-ai/node/models/operati
 let value: DeploymentsResponseFormatJsonSchema = {
   name: "<value>",
   strict: false,
-  schema: {
-    "key": "<value>",
-  },
+  schema: {},
 };
 ```
 

@@ -8,9 +8,7 @@ In
 import { SearchKnowledgeAndIn } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledgeAndIn = {
-  in: [
-    "<value>",
-  ],
+  in: [],
 };
 ```
 

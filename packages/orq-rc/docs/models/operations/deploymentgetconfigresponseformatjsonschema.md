@@ -7,9 +7,11 @@ import { DeploymentGetConfigResponseFormatJsonSchema } from "@orq-ai/node/models
 
 let value: DeploymentGetConfigResponseFormatJsonSchema = {
   name: "<value>",
-  strict: false,
+  strict: true,
   schema: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```

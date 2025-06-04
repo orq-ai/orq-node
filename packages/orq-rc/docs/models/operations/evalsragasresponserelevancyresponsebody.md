@@ -8,7 +8,7 @@ Returns the response relevancy evaluation result
 import { EvalsRagasResponseRelevancyResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasResponseRelevancyResponseBody = {
-  value: 4671.63,
+  value: 2902.39,
 };
 ```
 

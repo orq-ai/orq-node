@@ -29,7 +29,6 @@ async function run() {
     traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -58,15 +57,12 @@ async function run() {
     ],
     traceId: "67HTZ65Z9W91HSF51CW68KK1QH",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("feedbackCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

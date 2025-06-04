@@ -6,9 +6,7 @@
 import { EvalsContainsAnyFunctionParams } from "@orq-ai/node/models/operations";
 
 let value: EvalsContainsAnyFunctionParams = {
-  keywords: [
-    "<value>",
-  ],
+  keywords: [],
 };
 ```
 

@@ -8,7 +8,7 @@ Exists
 import { SearchKnowledgeOrExists } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledgeOrExists = {
-  exists: false,
+  exists: true,
 };
 ```
 

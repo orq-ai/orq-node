@@ -14,13 +14,13 @@ let value: ListKnowledgeBasesResponseBody = {
       id: "<id>",
       created: "<value>",
       key: "<key>",
-      model: "Roadster",
+      model: "Civic",
       domainId: "<id>",
       path: "Default",
       updated: "<value>",
     },
   ],
-  hasMore: false,
+  hasMore: true,
 };
 ```
 

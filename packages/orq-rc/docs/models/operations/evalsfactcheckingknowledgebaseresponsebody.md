@@ -9,7 +9,7 @@ import { EvalsFactCheckingKnowledgeBaseResponseBody } from "@orq-ai/node/models/
 
 let value: EvalsFactCheckingKnowledgeBaseResponseBody = {
   value: {
-    value: "<value>",
+    value: false,
   },
 };
 ```

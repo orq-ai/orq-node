@@ -7,7 +7,7 @@ import { EvalsContainsNoneFunctionParams } from "@orq-ai/node/models/operations"
 
 let value: EvalsContainsNoneFunctionParams = {
   keywords: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```

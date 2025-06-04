@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsBleuScoreResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsBleuScoreResponseBody = {
-  value: 9803.7,
+  value: 4048.14,
 };
 ```
 

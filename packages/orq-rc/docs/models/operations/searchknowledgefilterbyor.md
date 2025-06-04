@@ -15,7 +15,7 @@ const value: operations.SearchKnowledgeOrEq = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrNe = {
-  ne: 8478.31,
+  ne: true,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.SearchKnowledgeOrNe = {
 
 ```typescript
 const value: operations.SearchKnowledgeOr3 = {
-  gt: 2956.31,
+  gt: 4734.64,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.SearchKnowledgeOr3 = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrGte = {
-  gte: 196.37,
+  gte: 3592.62,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.SearchKnowledgeOrGte = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrLt = {
-  lt: 9787.99,
+  lt: 8230.67,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.SearchKnowledgeOrLt = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrLte = {
-  lte: 64.35,
+  lte: 2246.58,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: operations.SearchKnowledgeOrLte = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrIn = {
-  in: [
-    false,
-  ],
+  in: [],
 };
 ```
 
@@ -65,9 +63,7 @@ const value: operations.SearchKnowledgeOrIn = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrNin = {
-  nin: [
-    7843.71,
-  ],
+  nin: [],
 };
 ```
 
@@ -75,7 +71,7 @@ const value: operations.SearchKnowledgeOrNin = {
 
 ```typescript
 const value: operations.SearchKnowledgeOrExists = {
-  exists: false,
+  exists: true,
 };
 ```
 

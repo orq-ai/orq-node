@@ -16,8 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.UpdateDatapointContentDatasets2[] = [
   {
-    type: "refusal",
-    refusal: "<value>",
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

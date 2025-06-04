@@ -7,15 +7,7 @@ import { DeploymentStreamMessage1 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessage1 = {
   role: "system",
-  toolCalls: [
-    {
-      type: "function",
-      function: {
-        name: "<value>",
-        arguments: "<value>",
-      },
-    },
-  ],
+  toolCalls: [],
 };
 ```
 

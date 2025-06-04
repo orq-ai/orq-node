@@ -26,12 +26,7 @@ const value: operations.UpdateDatapointMessagesDatasetsSystemMessage = {
 ```typescript
 const value: operations.UpdateDatapointMessagesDatasetsUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+  content: [],
 };
 ```
 
@@ -48,9 +43,7 @@ const value: operations.UpdateDatapointMessagesDatasetsAssistantMessage = {
 ```typescript
 const value: operations.UpdateDatapointMessagesDatasetsToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

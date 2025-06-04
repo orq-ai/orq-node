@@ -15,13 +15,6 @@ const value: string = "<value>";
 
 ```typescript
 const value:
-  operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[] = [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://infatuated-dash.org",
-      },
-    },
-  ];
+  operations.DeploymentCreateMetricContentDeploymentsMetricsRequest2[] = [];
 ```
 

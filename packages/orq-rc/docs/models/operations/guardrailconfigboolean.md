@@ -6,7 +6,7 @@
 import { GuardrailConfigBoolean } from "@orq-ai/node/models/operations";
 
 let value: GuardrailConfigBoolean = {
-  enabled: false,
+  enabled: true,
   type: "boolean",
   value: false,
 };

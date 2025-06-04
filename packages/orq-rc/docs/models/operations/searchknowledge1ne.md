@@ -8,7 +8,7 @@ Not equal to
 import { SearchKnowledge1Ne } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledge1Ne = {
-  ne: false,
+  ne: true,
 };
 ```
 

@@ -6,10 +6,10 @@
 import { CreateEvalGuardrailConfigEvalsNumber } from "@orq-ai/node/models/operations";
 
 let value: CreateEvalGuardrailConfigEvalsNumber = {
-  enabled: false,
+  enabled: true,
   type: "number",
-  value: 2626.43,
-  operator: "gte",
+  value: 5525.08,
+  operator: "lte",
 };
 ```
 

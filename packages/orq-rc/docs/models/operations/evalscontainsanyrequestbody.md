@@ -8,9 +8,7 @@ import { EvalsContainsAnyRequestBody } from "@orq-ai/node/models/operations";
 let value: EvalsContainsAnyRequestBody = {
   output: "<value>",
   functionParams: {
-    keywords: [
-      "<value>",
-    ],
+    keywords: [],
   },
 };
 ```

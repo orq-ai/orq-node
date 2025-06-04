@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsContainsUrlResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsContainsUrlResponseBody = {
-  value: false,
+  value: "<value>",
 };
 ```
 

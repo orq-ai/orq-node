@@ -7,12 +7,6 @@ import { CreateDeploymentExperimentRequest } from "@orq-ai/node/models/operation
 
 let value: CreateDeploymentExperimentRequest = {
   deploymentKey: "<value>",
-  requestBody: {
-    experimentKey: "<value>",
-    path: "Default/Experiments",
-    datasetId: "<id>",
-    type: "deployment_experiment",
-  },
 };
 ```
 

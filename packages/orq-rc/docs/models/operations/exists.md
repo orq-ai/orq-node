@@ -8,7 +8,7 @@ Exists
 import { Exists } from "@orq-ai/node/models/operations";
 
 let value: Exists = {
-  exists: false,
+  exists: true,
 };
 ```
 

@@ -9,7 +9,7 @@ let value: ResponseBody = {
   id: "<id>",
   text: "<value>",
   enabled: false,
-  status: "queued",
+  status: "pending",
   created: "<value>",
   updated: "<value>",
 };

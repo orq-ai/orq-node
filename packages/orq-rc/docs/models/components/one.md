@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.OneEq = {
-  eq: 7298.36,
+  eq: "<value>",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.OneEq = {
 
 ```typescript
 const value: components.OneNe = {
-  ne: false,
+  ne: 2953.7,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: components.OneNe = {
 
 ```typescript
 const value: components.Three = {
-  gt: 4508.51,
+  gt: 8279.38,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: components.Three = {
 
 ```typescript
 const value: components.Gte = {
-  gte: 7859.98,
+  gte: 9700.59,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: components.Gte = {
 
 ```typescript
 const value: components.Lt = {
-  lt: 2099.28,
+  lt: 854.37,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: components.Lt = {
 
 ```typescript
 const value: components.Lte = {
-  lte: 6732.54,
+  lte: 454.79,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: components.Lte = {
 
 ```typescript
 const value: components.OneIn = {
-  in: [
-    false,
-  ],
+  in: [],
 };
 ```
 
@@ -66,7 +64,7 @@ const value: components.OneIn = {
 ```typescript
 const value: components.OneNin = {
   nin: [
-    "<value>",
+    true,
   ],
 };
 ```
@@ -75,7 +73,7 @@ const value: components.OneNin = {
 
 ```typescript
 const value: components.Exists = {
-  exists: false,
+  exists: true,
 };
 ```
 

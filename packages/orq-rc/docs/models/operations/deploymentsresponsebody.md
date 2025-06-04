@@ -11,11 +11,11 @@ let value: DeploymentsResponseBody = {
   object: "list",
   data: [
     {
-      id: "c6176886-f589-4693-b156-f9710bf5ee7f",
+      id: "6176886f-5896-4931-856f-9710bf5ee7fd",
       created: "<value>",
       updated: "<value>",
       key: "<key>",
-      description: "reword sunny other",
+      description: "since snappy robust exaggerate unto",
       promptConfig: {
         tools: [
           {
@@ -24,23 +24,16 @@ let value: DeploymentsResponseBody = {
               name: "<value>",
               parameters: {
                 type: "object",
-                properties: {
-                  "key": "<value>",
-                },
+                properties: {},
               },
             },
           },
         ],
-        model: "Model 3",
-        modelType: "completion",
+        model: "LeBaron",
+        modelType: "stt",
         modelParameters: {},
-        provider: "azure",
-        messages: [
-          {
-            role: "system",
-            content: "<value>",
-          },
-        ],
+        provider: "huggingface",
+        messages: [],
       },
       version: "<value>",
     },

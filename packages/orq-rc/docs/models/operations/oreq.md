@@ -8,7 +8,7 @@ Equal to
 import { OrEq } from "@orq-ai/node/models/operations";
 
 let value: OrEq = {
-  eq: false,
+  eq: true,
 };
 ```
 

@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsContainsValidLinkResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsContainsValidLinkResponseBody = {
-  value: 7212.94,
+  value: 9744.86,
 };
 ```
 

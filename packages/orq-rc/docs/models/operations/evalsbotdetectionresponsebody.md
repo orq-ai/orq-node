@@ -9,7 +9,7 @@ import { EvalsBotDetectionResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsBotDetectionResponseBody = {
   value: {
-    value: "<value>",
+    value: 2512.43,
   },
 };
 ```

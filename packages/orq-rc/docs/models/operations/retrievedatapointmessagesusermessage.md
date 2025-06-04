@@ -7,14 +7,7 @@ import { RetrieveDatapointMessagesUserMessage } from "@orq-ai/node/models/operat
 
 let value: RetrieveDatapointMessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://strong-lava.com",
-      },
-    },
-  ],
+  content: [],
 };
 ```
 

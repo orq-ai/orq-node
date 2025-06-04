@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsExactMatchResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsExactMatchResponseBody = {
-  value: 2229.11,
+  value: true,
 };
 ```
 

@@ -9,7 +9,7 @@ import { SearchKnowledge1Nin } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledge1Nin = {
   nin: [
-    false,
+    8483.55,
   ],
 };
 ```

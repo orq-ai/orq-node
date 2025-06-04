@@ -7,9 +7,11 @@ import { ResponseFormatJsonSchema } from "@orq-ai/node/models/operations";
 
 let value: ResponseFormatJsonSchema = {
   name: "<value>",
-  strict: false,
+  strict: true,
   schema: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
 };
 ```

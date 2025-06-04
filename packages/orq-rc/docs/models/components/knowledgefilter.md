@@ -8,11 +8,7 @@ A filter to apply to the knowledge base chunk metadata when using  knowledge bas
 ### `{ [k: string]: components.One }`
 
 ```typescript
-const value: { [k: string]: components.One } = {
-  "key": {
-    ne: 2685.96,
-  },
-};
+const value: { [k: string]: components.One } = {};
 ```
 
 ### `components.KnowledgeFilterAnd`
@@ -20,9 +16,12 @@ const value: { [k: string]: components.One } = {
 ```typescript
 const value: components.KnowledgeFilterAnd = {
   and: [
+    {},
     {
       "key": {
-        lt: 5617.19,
+        nin: [
+          "<value>",
+        ],
       },
     },
   ],
@@ -36,9 +35,12 @@ const value: components.KnowledgeFilterOr = {
   or: [
     {
       "key": {
-        nin: [
-          false,
-        ],
+        ne: true,
+      },
+    },
+    {
+      "key": {
+        lte: 2414.33,
       },
     },
   ],

@@ -7,11 +7,6 @@ import { CreateDatasetExperimentRequest } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasetExperimentRequest = {
   datasetId: "<id>",
-  requestBody: {
-    experimentKey: "<value>",
-    path: "Default/Experiments",
-    type: "dataset_experiment",
-  },
 };
 ```
 

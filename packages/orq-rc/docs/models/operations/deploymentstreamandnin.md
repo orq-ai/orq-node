@@ -9,7 +9,7 @@ import { DeploymentStreamAndNin } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamAndNin = {
   nin: [
-    false,
+    true,
   ],
 };
 ```

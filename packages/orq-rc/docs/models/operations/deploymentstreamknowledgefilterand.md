@@ -8,13 +8,7 @@ And
 import { DeploymentStreamKnowledgeFilterAnd } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamKnowledgeFilterAnd = {
-  and: [
-    {
-      "key": {
-        ne: 4814.74,
-      },
-    },
-  ],
+  and: [],
 };
 ```
 

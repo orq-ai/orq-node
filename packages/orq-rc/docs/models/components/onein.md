@@ -8,9 +8,7 @@ In
 import { OneIn } from "@orq-ai/node/models/components";
 
 let value: OneIn = {
-  in: [
-    4948.82,
-  ],
+  in: [],
 };
 ```
 

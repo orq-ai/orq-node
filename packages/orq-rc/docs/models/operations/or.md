@@ -11,9 +11,12 @@ let value: Or = {
   or: [
     {
       "key": {
-        in: [
-          false,
-        ],
+        ne: 551.63,
+      },
+    },
+    {
+      "key": {
+        exists: false,
       },
     },
   ],

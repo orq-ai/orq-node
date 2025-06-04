@@ -8,7 +8,7 @@ Returns the maliciousness evaluation result
 import { EvalsRagasMaliciousnessResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasMaliciousnessResponseBody = {
-  value: 7511.41,
+  value: 2144.18,
 };
 ```
 

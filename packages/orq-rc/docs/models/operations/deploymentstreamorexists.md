@@ -8,7 +8,7 @@ Exists
 import { DeploymentStreamOrExists } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamOrExists = {
-  exists: false,
+  exists: true,
 };
 ```
 

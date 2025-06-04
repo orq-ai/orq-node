@@ -8,19 +8,7 @@ import { ListPromptVersionsData } from "@orq-ai/node/models/operations";
 let value: ListPromptVersionsData = {
   id: "<id>",
   promptConfig: {
-    messages: [
-      {
-        role: "exception",
-        content: [
-          {
-            type: "file",
-            file: {
-              fileData: "<value>",
-            },
-          },
-        ],
-      },
-    ],
+    messages: [],
   },
   timestamp: "<value>",
 };

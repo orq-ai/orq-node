@@ -8,7 +8,7 @@ Returns the result of the evaluator run
 import { EvalsContainsNoneResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsContainsNoneResponseBody = {
-  value: 4216.18,
+  value: "<value>",
 };
 ```
 

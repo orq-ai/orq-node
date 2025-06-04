@@ -8,12 +8,7 @@ A list of messages compatible with the openAI schema
 import { GetPromptVersionPromptConfig } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersionPromptConfig = {
-  messages: [
-    {
-      role: "user",
-      content: "<value>",
-    },
-  ],
+  messages: [],
 };
 ```
 

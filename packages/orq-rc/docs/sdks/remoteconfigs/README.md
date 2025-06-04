@@ -23,7 +23,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.remoteconfigs.retrieve();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -46,15 +45,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await remoteconfigsRetrieve(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("remoteconfigsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

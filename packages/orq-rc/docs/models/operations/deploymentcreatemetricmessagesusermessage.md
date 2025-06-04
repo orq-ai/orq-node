@@ -7,14 +7,7 @@ import { DeploymentCreateMetricMessagesUserMessage } from "@orq-ai/node/models/o
 
 let value: DeploymentCreateMetricMessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://unsteady-chops.com",
-      },
-    },
-  ],
+  content: [],
 };
 ```
 

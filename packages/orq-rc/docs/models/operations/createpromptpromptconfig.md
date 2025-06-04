@@ -8,12 +8,7 @@ A list of messages compatible with the openAI schema
 import { CreatePromptPromptConfig } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptPromptConfig = {
-  messages: [
-    {
-      role: "exception",
-      content: "<value>",
-    },
-  ],
+  messages: [],
 };
 ```
 

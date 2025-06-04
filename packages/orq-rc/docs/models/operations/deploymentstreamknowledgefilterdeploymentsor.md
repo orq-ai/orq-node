@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.DeploymentStreamOrEq = {
-  eq: 3744.85,
+  eq: false,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.DeploymentStreamOrNe = {
 
 ```typescript
 const value: operations.DeploymentStreamOr3 = {
-  gt: 4303.45,
+  gt: 7657.93,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.DeploymentStreamOr3 = {
 
 ```typescript
 const value: operations.DeploymentStreamOrGte = {
-  gte: 5917.75,
+  gte: 4075.8,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.DeploymentStreamOrGte = {
 
 ```typescript
 const value: operations.DeploymentStreamOrLt = {
-  lt: 7848.82,
+  lt: 9658.27,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.DeploymentStreamOrLt = {
 
 ```typescript
 const value: operations.DeploymentStreamOrLte = {
-  lte: 3450.32,
+  lte: 3897.42,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: operations.DeploymentStreamOrLte = {
 
 ```typescript
 const value: operations.DeploymentStreamOrIn = {
-  in: [
-    "<value>",
-  ],
+  in: [],
 };
 ```
 
@@ -75,7 +73,7 @@ const value: operations.DeploymentStreamOrNin = {
 
 ```typescript
 const value: operations.DeploymentStreamOrExists = {
-  exists: false,
+  exists: true,
 };
 ```
 

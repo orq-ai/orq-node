@@ -8,7 +8,7 @@ Returns the correctness evaluation result
 import { EvalsRagasCorrectnessResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasCorrectnessResponseBody = {
-  value: 8534.13,
+  value: 5631.47,
 };
 ```
 

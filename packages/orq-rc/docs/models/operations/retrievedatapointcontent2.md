@@ -18,7 +18,7 @@ const value: operations.RetrieveDatapoint21 = {
 const value: operations.RetrieveDatapoint22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://thorny-step-mother.name",
+    url: "https://long-term-eggplant.net",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.RetrieveDatapoint23 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

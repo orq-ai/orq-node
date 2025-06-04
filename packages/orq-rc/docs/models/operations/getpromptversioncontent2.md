@@ -18,7 +18,7 @@ const value: operations.GetPromptVersion21 = {
 const value: operations.GetPromptVersion22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://orderly-slipper.name",
+    url: "https://windy-programme.org",
   },
 };
 ```

@@ -8,7 +8,7 @@ Returns the faithfulness evaluation result
 import { EvalsRagasFaithfulnessResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasFaithfulnessResponseBody = {
-  value: 748.18,
+  value: null,
 };
 ```
 

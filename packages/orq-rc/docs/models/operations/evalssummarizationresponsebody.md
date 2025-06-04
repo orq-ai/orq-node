@@ -9,7 +9,7 @@ import { EvalsSummarizationResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsSummarizationResponseBody = {
   value: {
-    value: false,
+    value: 9849.28,
   },
 };
 ```

@@ -26,14 +26,7 @@ const value: operations.CreateDatasetItemMessagesDatasetsSystemMessage = {
 ```typescript
 const value: operations.CreateDatasetItemMessagesDatasetsUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://untidy-orchid.net",
-      },
-    },
-  ],
+  content: "<value>",
 };
 ```
 

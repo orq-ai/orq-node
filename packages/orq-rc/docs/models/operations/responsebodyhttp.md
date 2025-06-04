@@ -11,11 +11,10 @@ let value: ResponseBodyHTTP = {
   type: "http_eval",
   url: "https://terrible-backbone.info",
   method: "POST",
-  headers: {
-    "key": "<value>",
-  },
+  headers: {},
   payload: {
     "key": "<value>",
+    "key1": "<value>",
   },
   key: "<key>",
 };

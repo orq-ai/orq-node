@@ -11,7 +11,9 @@ let value: FilterByOr = {
   or: [
     {
       "key": {
-        gte: 5872.9,
+        nin: [
+          true,
+        ],
       },
     },
   ],

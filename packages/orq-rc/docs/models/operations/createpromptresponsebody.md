@@ -18,7 +18,7 @@ let value: CreatePromptResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "prompt",
+        role: "exception",
         content: "<value>",
       },
     ],

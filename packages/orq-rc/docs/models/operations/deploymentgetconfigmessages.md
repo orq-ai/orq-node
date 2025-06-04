@@ -9,10 +9,8 @@ let value: DeploymentGetConfigMessages = {
   role: "user",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://noxious-freight.com/",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

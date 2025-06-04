@@ -10,7 +10,7 @@ const value: operations.Llm = {
   type: "llm_eval",
   prompt: "<value>",
   path: "Default",
-  model: "Accord",
+  model: "Model S",
   key: "<key>",
 };
 ```
@@ -31,14 +31,13 @@ const value: operations.Json = {
 ```typescript
 const value: operations.Http = {
   type: "http_eval",
-  url: "https://oddball-ravioli.net/",
+  url: "https://weary-sprinkles.net",
   method: "GET",
   headers: {
     "key": "<value>",
+    "key1": "<value>",
   },
-  payload: {
-    "key": "<value>",
-  },
+  payload: {},
   path: "Default",
   key: "<key>",
 };

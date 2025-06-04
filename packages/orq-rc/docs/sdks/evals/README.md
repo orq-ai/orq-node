@@ -72,7 +72,6 @@ async function run() {
     key: "<key>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -110,15 +109,12 @@ async function run() {
     description: "",
     key: "<key>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -160,7 +156,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.runBertScore();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -183,15 +178,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRunBertScore(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRunBertScore failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -234,7 +226,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.bleuScore();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -257,15 +248,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsBleuScore(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsBleuScore failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -308,7 +296,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.containsAll();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -331,15 +318,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContainsAll(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContainsAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -382,7 +366,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.containsAny();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -405,15 +388,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContainsAny(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContainsAny failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -456,7 +436,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.containsEmail();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -479,15 +458,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContainsEmail(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContainsEmail failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -530,7 +506,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.containsNone();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -553,15 +528,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContainsNone(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContainsNone failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -604,7 +576,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.containsUrl();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -627,15 +598,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContainsUrl(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContainsUrl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -678,7 +646,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.containsValidLink();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -701,15 +668,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContainsValidLink(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContainsValidLink failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -752,7 +716,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.contains();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -775,15 +738,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsContains(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsContains failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -826,7 +786,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.endsWith();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -849,15 +808,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsEndsWith(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsEndsWith failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -900,7 +856,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.exactMatch();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -923,15 +878,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsExactMatch(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsExactMatch failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -974,7 +926,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.lengthBetween();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -997,15 +948,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsLengthBetween(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsLengthBetween failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1048,7 +996,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.lengthGreaterThan();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1071,15 +1018,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsLengthGreaterThan(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsLengthGreaterThan failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1122,7 +1066,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.lengthLessThan();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1145,15 +1088,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsLengthLessThan(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsLengthLessThan failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1196,7 +1136,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.validJson();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1219,15 +1158,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsValidJson(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsValidJson failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1270,7 +1206,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ageAppropriate();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1293,15 +1228,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsAgeAppropriate(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsAgeAppropriate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1344,7 +1276,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.botDetection();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1367,15 +1298,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsBotDetection(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsBotDetection failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1418,7 +1346,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.factCheckingKnowledgeBase();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1441,15 +1368,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsFactCheckingKnowledgeBase(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsFactCheckingKnowledgeBase failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1492,7 +1416,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.grammar();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1515,15 +1438,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsGrammar(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsGrammar failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1566,7 +1486,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.localization();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1589,15 +1508,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsLocalization(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsLocalization failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1640,7 +1556,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.pii();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1663,15 +1578,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsPii(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsPii failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1714,7 +1626,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.sentimentClassification();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1737,15 +1648,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsSentimentClassification(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsSentimentClassification failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1788,7 +1696,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.summarization();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1811,15 +1718,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsSummarization(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsSummarization failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1862,7 +1766,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.toneOfVoice();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1885,15 +1788,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsToneOfVoice(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsToneOfVoice failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1936,7 +1836,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.translation();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1959,15 +1858,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsTranslation(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsTranslation failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2010,7 +1906,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasCoherence();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2033,15 +1928,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasCoherence(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasCoherence failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2084,7 +1976,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasConciseness();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2107,15 +1998,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasConciseness(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasConciseness failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2158,7 +2046,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasContextPrecision();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2181,15 +2068,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasContextPrecision(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasContextPrecision failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2232,7 +2116,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasCorrectness();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2255,15 +2138,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasCorrectness(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasCorrectness failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2306,7 +2186,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasFaithfulness();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2329,15 +2208,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasFaithfulness(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasFaithfulness failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2380,7 +2256,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasHarmfulness();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2403,15 +2278,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasHarmfulness(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasHarmfulness failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2454,7 +2326,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasMaliciousness();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2477,15 +2348,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasMaliciousness(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasMaliciousness failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2528,7 +2396,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasResponseRelevancy();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2551,15 +2418,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasResponseRelevancy(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasResponseRelevancy failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -2602,7 +2466,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.ragasSummarization();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -2625,15 +2488,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsRagasSummarization(orq);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasSummarization failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

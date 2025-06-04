@@ -12,6 +12,8 @@ let value: DeploymentGetConfigResponseFormat1 = {
     strict: false,
     schema: {
       "key": "<value>",
+      "key1": "<value>",
+      "key2": "<value>",
     },
   },
 };

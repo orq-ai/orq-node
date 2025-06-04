@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `operations.CreateDatasetItemContentDatasets2[]`
 
 ```typescript
-const value: operations.CreateDatasetItemContentDatasets2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.CreateDatasetItemContentDatasets2[] = [];
 ```
 

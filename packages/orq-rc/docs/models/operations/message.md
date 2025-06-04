@@ -8,7 +8,7 @@
 ```typescript
 const value: operations.Message1 = {
   type: "tool_calls",
-  role: "correction",
+  role: "user",
   toolCalls: [
     {
       type: "function",
@@ -36,8 +36,8 @@ const value: operations.Message2 = {
 ```typescript
 const value: operations.Message3 = {
   type: "image",
-  role: "correction",
-  url: "https://considerate-battle.biz",
+  role: "user",
+  url: "https://massive-hunt.biz",
 };
 ```
 

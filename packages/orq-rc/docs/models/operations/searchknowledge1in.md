@@ -9,7 +9,7 @@ import { SearchKnowledge1In } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledge1In = {
   in: [
-    2434.25,
+    "<value>",
   ],
 };
 ```

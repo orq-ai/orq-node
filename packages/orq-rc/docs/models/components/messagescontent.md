@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: components.DeploymentsContent2[] = [
   {
-    type: "file",
-    file: {
-      fileData: "<value>",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

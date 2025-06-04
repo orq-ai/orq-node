@@ -10,11 +10,11 @@ Successfully created an evaluator
 ```typescript
 const value: operations.ResponseBodyLLM = {
   id: "<id>",
-  description: "bah mechanically save nice",
+  description: "duh unexpectedly famously handful helplessly around yum qua",
   type: "llm_eval",
   prompt: "<value>",
   key: "<key>",
-  model: "Sentra",
+  model: "Model Y",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.ResponseBodyLLM = {
 ```typescript
 const value: operations.ResponseBodyJSON = {
   id: "<id>",
-  description: "stir-fry vain afford aggravating joshingly which metal",
+  description: "qua but till diagram",
   type: "json_schema",
   schema: "<value>",
   key: "<key>",
@@ -35,15 +35,14 @@ const value: operations.ResponseBodyJSON = {
 ```typescript
 const value: operations.ResponseBodyHTTP = {
   id: "<id>",
-  description: "openly juicy and",
+  description: "how which eek overload respectful clear",
   type: "http_eval",
-  url: "https://incomplete-ceramics.name/",
-  method: "GET",
-  headers: {
-    "key": "<value>",
-  },
+  url: "https://terrible-backbone.info",
+  method: "POST",
+  headers: {},
   payload: {
     "key": "<value>",
+    "key1": "<value>",
   },
   key: "<key>",
 };
@@ -54,7 +53,7 @@ const value: operations.ResponseBodyHTTP = {
 ```typescript
 const value: operations.ResponseBodyPython = {
   id: "<id>",
-  description: "yesterday meal puppet hm generously blank",
+  description: "considerate whoa scale overfeed ultimately shakily",
   code: "<value>",
   type: "python_eval",
   key: "<key>",

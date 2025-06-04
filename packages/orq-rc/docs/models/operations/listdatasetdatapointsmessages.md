@@ -28,9 +28,9 @@ const value: operations.ListDatasetDatapointsMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "image_url",
-      imageUrl: {
-        url: "https://next-doorpost.biz/",
+      type: "file",
+      file: {
+        fileData: "<value>",
       },
     },
   ],
@@ -50,9 +50,7 @@ const value: operations.ListDatasetDatapointsMessagesAssistantMessage = {
 ```typescript
 const value: operations.ListDatasetDatapointsMessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

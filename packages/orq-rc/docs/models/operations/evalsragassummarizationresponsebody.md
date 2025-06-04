@@ -8,7 +8,7 @@ Returns the summarization evaluation result
 import { EvalsRagasSummarizationResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasSummarizationResponseBody = {
-  value: 3927.83,
+  value: 7780.61,
 };
 ```
 

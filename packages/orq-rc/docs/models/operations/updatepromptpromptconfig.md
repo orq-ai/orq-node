@@ -8,12 +8,7 @@ A list of messages compatible with the openAI schema
 import { UpdatePromptPromptConfig } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptPromptConfig = {
-  messages: [
-    {
-      role: "assistant",
-      content: "<value>",
-    },
-  ],
+  messages: [],
 };
 ```
 

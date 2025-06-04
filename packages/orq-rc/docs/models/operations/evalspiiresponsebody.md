@@ -9,7 +9,7 @@ import { EvalsPiiResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsPiiResponseBody = {
   value: {
-    value: false,
+    value: "<value>",
   },
 };
 ```

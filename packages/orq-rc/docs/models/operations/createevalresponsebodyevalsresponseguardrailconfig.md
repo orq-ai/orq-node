@@ -11,7 +11,7 @@ const value:
     {
       enabled: false,
       type: "boolean",
-      value: false,
+      value: true,
     };
 ```
 
@@ -21,10 +21,10 @@ const value:
 const value:
   operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
     {
-      enabled: false,
+      enabled: true,
       type: "number",
-      value: 7260.09,
-      operator: "eq",
+      value: 5119.87,
+      operator: "ne",
     };
 ```
 

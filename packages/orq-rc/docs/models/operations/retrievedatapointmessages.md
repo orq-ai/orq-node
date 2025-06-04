@@ -26,15 +26,7 @@ const value: operations.RetrieveDatapointMessagesSystemMessage = {
 ```typescript
 const value: operations.RetrieveDatapointMessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "input_audio",
-      inputAudio: {
-        data: "<value>",
-        format: "wav",
-      },
-    },
-  ],
+  content: [],
 };
 ```
 
@@ -52,7 +44,9 @@ const value: operations.RetrieveDatapointMessagesAssistantMessage = {
 const value: operations.RetrieveDatapointMessagesToolMessage = {
   role: "tool",
   content: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   toolCallId: "<id>",
 };

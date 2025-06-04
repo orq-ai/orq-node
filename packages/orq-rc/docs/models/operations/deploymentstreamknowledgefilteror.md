@@ -9,11 +9,7 @@ import { DeploymentStreamKnowledgeFilterOr } from "@orq-ai/node/models/operation
 
 let value: DeploymentStreamKnowledgeFilterOr = {
   or: [
-    {
-      "key": {
-        gte: 1750.14,
-      },
-    },
+    {},
   ],
 };
 ```

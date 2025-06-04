@@ -26,14 +26,7 @@ const value: operations.UpdateDatapointMessagesSystemMessage = {
 ```typescript
 const value: operations.UpdateDatapointMessagesUserMessage = {
   role: "user",
-  content: [
-    {
-      type: "image_url",
-      imageUrl: {
-        url: "https://suburban-vein.info",
-      },
-    },
-  ],
+  content: [],
 };
 ```
 
@@ -50,9 +43,7 @@ const value: operations.UpdateDatapointMessagesAssistantMessage = {
 ```typescript
 const value: operations.UpdateDatapointMessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

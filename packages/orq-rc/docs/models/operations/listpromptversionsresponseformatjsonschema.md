@@ -7,9 +7,10 @@ import { ListPromptVersionsResponseFormatJsonSchema } from "@orq-ai/node/models/
 
 let value: ListPromptVersionsResponseFormatJsonSchema = {
   name: "<value>",
-  strict: false,
+  strict: true,
   schema: {
     "key": "<value>",
+    "key1": "<value>",
   },
 };
 ```

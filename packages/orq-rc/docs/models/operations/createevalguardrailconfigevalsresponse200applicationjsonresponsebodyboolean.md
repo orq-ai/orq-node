@@ -10,7 +10,7 @@ let value:
     {
       enabled: false,
       type: "boolean",
-      value: false,
+      value: true,
     };
 ```
 

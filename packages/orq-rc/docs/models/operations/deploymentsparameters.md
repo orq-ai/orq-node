@@ -13,6 +13,7 @@ let value: DeploymentsParameters = {
   type: "object",
   properties: {
     "key": "<value>",
+    "key1": "<value>",
   },
 };
 ```

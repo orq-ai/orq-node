@@ -16,9 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.DeploymentGetConfigContentDeploymentsResponse2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://carefree-premise.biz",
+    type: "file",
+    file: {
+      fileData: "<value>",
     },
   },
 ];

@@ -16,9 +16,10 @@ const value: string = "<value>";
 ```typescript
 const value: operations.ListDatasetDatapointsContent2[] = [
   {
-    type: "file",
-    file: {
-      fileData: "<value>",
+    type: "input_audio",
+    inputAudio: {
+      data: "<value>",
+      format: "wav",
     },
   },
 ];

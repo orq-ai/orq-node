@@ -8,9 +8,7 @@ In
 import { DeploymentStreamAndIn } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamAndIn = {
-  in: [
-    "<value>",
-  ],
+  in: [],
 };
 ```
 

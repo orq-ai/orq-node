@@ -29,7 +29,6 @@ async function run() {
     file: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ async function run() {
   const res = await filesCreate(orq, {
     file: await openAsBlob("example.file"),
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -104,7 +100,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.files.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -127,15 +122,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await filesList(orq, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -178,7 +170,6 @@ async function run() {
     fileId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -203,15 +194,12 @@ async function run() {
   const res = await filesGet(orq, {
     fileId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("filesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -278,14 +266,12 @@ async function run() {
   const res = await filesDelete(orq, {
     fileId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("filesDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

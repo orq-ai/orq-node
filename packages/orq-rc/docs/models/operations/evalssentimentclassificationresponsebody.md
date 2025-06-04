@@ -9,7 +9,7 @@ import { EvalsSentimentClassificationResponseBody } from "@orq-ai/node/models/op
 
 let value: EvalsSentimentClassificationResponseBody = {
   value: {
-    value: false,
+    value: 4087.66,
   },
 };
 ```

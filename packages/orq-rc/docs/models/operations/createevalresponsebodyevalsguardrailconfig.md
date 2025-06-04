@@ -8,7 +8,7 @@
 ```typescript
 const value:
   operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
-    enabled: false,
+    enabled: true,
     type: "boolean",
     value: false,
   };
@@ -19,9 +19,9 @@ const value:
 ```typescript
 const value:
   operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
-    enabled: false,
+    enabled: true,
     type: "number",
-    value: 5624.4,
+    value: 7479.09,
     operator: "lt",
   };
 ```

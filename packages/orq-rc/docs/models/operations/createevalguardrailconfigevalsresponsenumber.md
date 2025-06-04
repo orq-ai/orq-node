@@ -8,7 +8,7 @@ import { CreateEvalGuardrailConfigEvalsResponseNumber } from "@orq-ai/node/model
 let value: CreateEvalGuardrailConfigEvalsResponseNumber = {
   enabled: false,
   type: "number",
-  value: 5135.09,
+  value: 2054.81,
   operator: "ne",
 };
 ```

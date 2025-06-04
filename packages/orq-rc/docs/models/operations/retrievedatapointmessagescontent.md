@@ -16,9 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.RetrieveDatapointContent2[] = [
   {
-    type: "file",
-    file: {
-      fileData: "<value>",
+    type: "image_url",
+    imageUrl: {
+      url: "https://long-term-eggplant.net",
     },
   },
 ];

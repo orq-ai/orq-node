@@ -9,9 +9,10 @@ import { KnowledgeFilterAnd } from "@orq-ai/node/models/components";
 
 let value: KnowledgeFilterAnd = {
   and: [
+    {},
     {
       "key": {
-        in: [
+        nin: [
           "<value>",
         ],
       },

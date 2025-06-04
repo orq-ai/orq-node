@@ -6,33 +6,15 @@
 import { DeploymentsPromptConfig } from "@orq-ai/node/models/operations";
 
 let value: DeploymentsPromptConfig = {
-  tools: [
-    {
-      type: "function",
-      function: {
-        name: "<value>",
-        parameters: {
-          type: "object",
-          properties: {
-            "key": "<value>",
-          },
-        },
-      },
-    },
-  ],
-  model: "Durango",
-  modelType: "tts",
+  tools: [],
+  model: "Grand Caravan",
+  modelType: "vision",
   modelParameters: {},
-  provider: "google-ai",
+  provider: "aws",
   messages: [
     {
-      role: "exception",
-      content: [
-        {
-          type: "text",
-          text: "<value>",
-        },
-      ],
+      role: "system",
+      content: "<value>",
     },
   ],
 };

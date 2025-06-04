@@ -18,7 +18,7 @@ const value: operations.DeploymentStream21 = {
 const value: operations.DeploymentStream22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://glossy-sermon.net",
+    url: "https://unhappy-toothpick.com/",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.DeploymentStream23 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "mp3",
+    format: "wav",
   },
 };
 ```

@@ -9,7 +9,7 @@ import { EvalsGrammarResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsGrammarResponseBody = {
   value: {
-    value: false,
+    value: "<value>",
   },
 };
 ```

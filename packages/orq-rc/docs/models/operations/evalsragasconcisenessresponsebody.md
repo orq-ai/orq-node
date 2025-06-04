@@ -8,7 +8,7 @@ Returns the conciseness evaluation result
 import { EvalsRagasConcisenessResponseBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasConcisenessResponseBody = {
-  value: 1227.58,
+  value: 3898.24,
 };
 ```
 

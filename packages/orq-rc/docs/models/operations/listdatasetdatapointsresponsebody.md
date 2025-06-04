@@ -16,7 +16,7 @@ let value: ListDatasetDatapointsResponseBody = {
       datasetId: "<id>",
     },
   ],
-  hasMore: false,
+  hasMore: true,
 };
 ```
 

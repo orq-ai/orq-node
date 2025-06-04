@@ -7,7 +7,7 @@ import { FunctionParams } from "@orq-ai/node/models/operations";
 
 let value: FunctionParams = {
   keywords: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```

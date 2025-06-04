@@ -28,8 +28,10 @@ const value: operations.CreateDatasetItemMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "text",
-      text: "<value>",
+      type: "image_url",
+      imageUrl: {
+        url: "https://earnest-baseboard.com",
+      },
     },
   ],
 };
@@ -49,7 +51,7 @@ const value: operations.CreateDatasetItemMessagesAssistantMessage = {
 const value: operations.CreateDatasetItemMessagesToolMessage = {
   role: "tool",
   content: [
-    "<value>",
+    "<value 1>",
   ],
   toolCallId: "<id>",
 };
