@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `operations.CreatePromptContentPrompts2[]`
 
 ```typescript
-const value: operations.CreatePromptContentPrompts2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.CreatePromptContentPrompts2[] = [];
 ```
 

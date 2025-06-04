@@ -19,23 +19,16 @@ let value: Data = {
           name: "<value>",
           parameters: {
             type: "object",
-            properties: {
-              "key": "<value>",
-            },
+            properties: {},
           },
         },
       },
     ],
-    model: "Land Cruiser",
-    modelType: "tts",
+    model: "Grand Caravan",
+    modelType: "embedding",
     modelParameters: {},
-    provider: "replicate",
-    messages: [
-      {
-        role: "exception",
-        content: "<value>",
-      },
-    ],
+    provider: "aws",
+    messages: [],
   },
   version: "<value>",
 };

@@ -8,9 +8,7 @@ Not in
 import { DeploymentsAndNin } from "@orq-ai/node/models/components";
 
 let value: DeploymentsAndNin = {
-  nin: [
-    "<value>",
-  ],
+  nin: [],
 };
 ```
 

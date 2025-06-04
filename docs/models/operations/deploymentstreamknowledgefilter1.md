@@ -23,7 +23,7 @@ const value: operations.DeploymentStream1Ne = {
 
 ```typescript
 const value: operations.DeploymentStream13 = {
-  gt: 1948.04,
+  gt: 3168.95,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.DeploymentStream13 = {
 
 ```typescript
 const value: operations.OneGte = {
-  gte: 1682.47,
+  gte: 6469.31,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.OneGte = {
 
 ```typescript
 const value: operations.OneLt = {
-  lt: 5328.81,
+  lt: 5264,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.OneLt = {
 
 ```typescript
 const value: operations.OneLte = {
-  lte: 8382.07,
+  lte: 8379.2,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: operations.OneLte = {
 
 ```typescript
 const value: operations.DeploymentStream1In = {
-  in: [
-    false,
-  ],
+  in: [],
 };
 ```
 
@@ -65,9 +63,7 @@ const value: operations.DeploymentStream1In = {
 
 ```typescript
 const value: operations.DeploymentStream1Nin = {
-  nin: [
-    "<value>",
-  ],
+  nin: [],
 };
 ```
 

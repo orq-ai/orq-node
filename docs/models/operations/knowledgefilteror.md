@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.OrEq = {
-  eq: "<value>",
+  eq: true,
 };
 ```
 
@@ -15,7 +15,7 @@ const value: operations.OrEq = {
 
 ```typescript
 const value: operations.OrNe = {
-  ne: "<value>",
+  ne: false,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.OrNe = {
 
 ```typescript
 const value: operations.Or3 = {
-  gt: 371.01,
+  gt: 1544.58,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.Or3 = {
 
 ```typescript
 const value: operations.OrGte = {
-  gte: 6791.47,
+  gte: 7219.72,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.OrGte = {
 
 ```typescript
 const value: operations.OrLt = {
-  lt: 9003.96,
+  lt: 4000.19,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.OrLt = {
 
 ```typescript
 const value: operations.OrLte = {
-  lte: 8564.23,
+  lte: 1914.16,
 };
 ```
 
@@ -56,7 +56,7 @@ const value: operations.OrLte = {
 ```typescript
 const value: operations.OrIn = {
   in: [
-    8270.52,
+    9840.33,
   ],
 };
 ```
@@ -65,9 +65,7 @@ const value: operations.OrIn = {
 
 ```typescript
 const value: operations.OrNin = {
-  nin: [
-    519.98,
-  ],
+  nin: [],
 };
 ```
 

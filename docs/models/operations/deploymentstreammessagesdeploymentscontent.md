@@ -15,11 +15,6 @@ const value: string = "<value>";
 
 ```typescript
 const value:
-  operations.DeploymentStreamContentDeploymentsRequestRequestBody2[] = [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ];
+  operations.DeploymentStreamContentDeploymentsRequestRequestBody2[] = [];
 ```
 

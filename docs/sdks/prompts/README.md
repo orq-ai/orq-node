@@ -29,7 +29,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.prompts.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,15 +51,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await promptsList(orq, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("promptsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -116,7 +112,6 @@ async function run() {
     path: "Default",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -154,15 +149,12 @@ async function run() {
     },
     path: "Default",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("promptsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -205,7 +197,6 @@ async function run() {
     id: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -230,15 +221,12 @@ async function run() {
   const res = await promptsRetrieve(orq, {
     id: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("promptsRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -284,7 +272,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -312,15 +299,12 @@ async function run() {
       path: "Default",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("promptsUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -388,14 +372,12 @@ async function run() {
   const res = await promptsDelete(orq, {
     id: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("promptsDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -438,7 +420,6 @@ async function run() {
     promptId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -463,15 +444,12 @@ async function run() {
   const res = await promptsListVersions(orq, {
     promptId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("promptsListVersions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -515,7 +493,6 @@ async function run() {
     versionId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -541,15 +518,12 @@ async function run() {
     promptId: "<id>",
     versionId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("promptsGetVersion failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

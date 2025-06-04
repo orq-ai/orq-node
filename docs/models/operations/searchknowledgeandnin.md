@@ -8,9 +8,7 @@ Not in
 import { SearchKnowledgeAndNin } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledgeAndNin = {
-  nin: [
-    5131.72,
-  ],
+  nin: [],
 };
 ```
 

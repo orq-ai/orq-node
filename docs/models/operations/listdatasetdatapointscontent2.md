@@ -18,7 +18,7 @@ const value: operations.ListDatasetDatapoints21 = {
 const value: operations.ListDatasetDatapoints22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://upset-netsuke.info/",
+    url: "https://gruesome-godfather.com",
   },
 };
 ```

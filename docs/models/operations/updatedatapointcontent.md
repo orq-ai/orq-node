@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `operations.UpdateDatapointContent2[]`
 
 ```typescript
-const value: operations.UpdateDatapointContent2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.UpdateDatapointContent2[] = [];
 ```
 

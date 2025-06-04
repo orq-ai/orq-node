@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `components.DeploymentsContentMessages2[]`
 
 ```typescript
-const value: components.DeploymentsContentMessages2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: components.DeploymentsContentMessages2[] = [];
 ```
 

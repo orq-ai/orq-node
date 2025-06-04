@@ -11,11 +11,11 @@ let value: DeploymentsResponseBody = {
   object: "list",
   data: [
     {
-      id: "c6176886-f589-4693-b156-f9710bf5ee7f",
+      id: "9ab092b0-7aaa-47ec-ba5e-bc4ffa1aa96b",
       created: "<value>",
       updated: "<value>",
       key: "<key>",
-      description: "reword sunny other",
+      description: "thankfully blacken considering phew footrest",
       promptConfig: {
         tools: [
           {
@@ -24,28 +24,21 @@ let value: DeploymentsResponseBody = {
               name: "<value>",
               parameters: {
                 type: "object",
-                properties: {
-                  "key": "<value>",
-                },
+                properties: {},
               },
             },
           },
         ],
-        model: "Model 3",
-        modelType: "completion",
+        model: "Grand Caravan",
+        modelType: "embedding",
         modelParameters: {},
-        provider: "azure",
-        messages: [
-          {
-            role: "system",
-            content: "<value>",
-          },
-        ],
+        provider: "aws",
+        messages: [],
       },
       version: "<value>",
     },
   ],
-  hasMore: false,
+  hasMore: true,
 };
 ```
 

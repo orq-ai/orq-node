@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.DeploymentsAndEq = {
-  eq: 8280.16,
+  eq: "<value>",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.DeploymentsAndEq = {
 
 ```typescript
 const value: components.DeploymentsAndNe = {
-  ne: 532.84,
+  ne: false,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: components.DeploymentsAndNe = {
 
 ```typescript
 const value: components.And3 = {
-  gt: 5809.86,
+  gt: 71.84,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: components.And3 = {
 
 ```typescript
 const value: components.AndGte = {
-  gte: 3374.45,
+  gte: 4792.86,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: components.AndGte = {
 
 ```typescript
 const value: components.AndLt = {
-  lt: 6503.81,
+  lt: 3185.64,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: components.AndLt = {
 
 ```typescript
 const value: components.AndLte = {
-  lte: 7625.13,
+  lte: 5910.19,
 };
 ```
 
@@ -65,9 +65,7 @@ const value: components.DeploymentsAndIn = {
 
 ```typescript
 const value: components.DeploymentsAndNin = {
-  nin: [
-    6621.02,
-  ],
+  nin: [],
 };
 ```
 

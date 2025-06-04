@@ -7,7 +7,7 @@ import { GetOnePromptResponseFormatJsonSchema } from "@orq-ai/node/models/operat
 
 let value: GetOnePromptResponseFormatJsonSchema = {
   name: "<value>",
-  strict: false,
+  strict: true,
   schema: {
     "key": "<value>",
   },

@@ -18,7 +18,7 @@ const value: components.Deployments21 = {
 const value: components.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://classic-cuckoo.net/",
+    url: "https://frequent-passport.com",
   },
 };
 ```

@@ -8,9 +8,7 @@ import { JsonSchema } from "@orq-ai/node/models/operations";
 let value: JsonSchema = {
   name: "<value>",
   strict: false,
-  schema: {
-    "key": "<value>",
-  },
+  schema: {},
 };
 ```
 

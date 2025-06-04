@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `operations.GetPromptVersionContent2[]`
 
 ```typescript
-const value: operations.GetPromptVersionContent2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.GetPromptVersionContent2[] = [];
 ```
 

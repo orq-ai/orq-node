@@ -8,11 +8,7 @@ The metadata filter to apply to the search. Check the [Searching a Knowledge Bas
 ### `{ [k: string]: operations.FilterBy1 }`
 
 ```typescript
-const value: { [k: string]: operations.FilterBy1 } = {
-  "key": {
-    eq: "<value>",
-  },
-};
+const value: { [k: string]: operations.FilterBy1 } = {};
 ```
 
 ### `operations.FilterByAnd`
@@ -22,11 +18,11 @@ const value: operations.FilterByAnd = {
   and: [
     {
       "key": {
-        in: [
-          "<value>",
-        ],
+        nin: [],
       },
     },
+    {},
+    {},
   ],
 };
 ```
@@ -38,7 +34,9 @@ const value: operations.FilterByOr = {
   or: [
     {
       "key": {
-        ne: false,
+        nin: [
+          true,
+        ],
       },
     },
   ],

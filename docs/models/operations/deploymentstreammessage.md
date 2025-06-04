@@ -7,16 +7,8 @@
 
 ```typescript
 const value: operations.DeploymentStreamMessage1 = {
-  role: "assistant",
-  toolCalls: [
-    {
-      type: "function",
-      function: {
-        name: "<value>",
-        arguments: "<value>",
-      },
-    },
-  ],
+  role: "system",
+  toolCalls: [],
 };
 ```
 
@@ -24,7 +16,7 @@ const value: operations.DeploymentStreamMessage1 = {
 
 ```typescript
 const value: operations.DeploymentStreamMessage2 = {
-  role: "correction",
+  role: "expected_output",
   content: "<value>",
 };
 ```
@@ -33,8 +25,8 @@ const value: operations.DeploymentStreamMessage2 = {
 
 ```typescript
 const value: operations.DeploymentStreamMessage3 = {
-  role: "prompt",
-  url: "https://granular-quinoa.biz/",
+  role: "exception",
+  url: "https://unhappy-restaurant.info/",
 };
 ```
 

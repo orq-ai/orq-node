@@ -7,7 +7,7 @@
 
 ```typescript
 const value: components.DeploymentsOrEq = {
-  eq: "<value>",
+  eq: 9960.4,
 };
 ```
 
@@ -15,7 +15,7 @@ const value: components.DeploymentsOrEq = {
 
 ```typescript
 const value: components.DeploymentsOrNe = {
-  ne: "<value>",
+  ne: 8296.56,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: components.DeploymentsOrNe = {
 
 ```typescript
 const value: components.Or3 = {
-  gt: 7552.71,
+  gt: 1544.58,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: components.Or3 = {
 
 ```typescript
 const value: components.OrGte = {
-  gte: 3627.31,
+  gte: 7219.72,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: components.OrGte = {
 
 ```typescript
 const value: components.OrLt = {
-  lt: 2206.41,
+  lt: 4000.19,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: components.OrLt = {
 
 ```typescript
 const value: components.OrLte = {
-  lte: 7560.48,
+  lte: 1914.16,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: components.OrLte = {
 
 ```typescript
 const value: components.DeploymentsOrIn = {
-  in: [
-    1377.7,
-  ],
+  in: [],
 };
 ```
 
@@ -65,9 +63,7 @@ const value: components.DeploymentsOrIn = {
 
 ```typescript
 const value: components.DeploymentsOrNin = {
-  nin: [
-    "<value>",
-  ],
+  nin: [],
 };
 ```
 

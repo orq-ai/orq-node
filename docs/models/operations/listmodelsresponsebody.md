@@ -9,14 +9,7 @@ import { ListModelsResponseBody } from "@orq-ai/node/models/operations";
 
 let value: ListModelsResponseBody = {
   object: "list",
-  data: [
-    {
-      id: "<id>",
-      created: 580.37,
-      type: "tts",
-      ownedBy: "vendor",
-    },
-  ],
+  data: [],
   hasMore: false,
 };
 ```

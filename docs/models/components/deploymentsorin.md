@@ -8,9 +8,7 @@ In
 import { DeploymentsOrIn } from "@orq-ai/node/models/components";
 
 let value: DeploymentsOrIn = {
-  in: [
-    "<value>",
-  ],
+  in: [],
 };
 ```
 

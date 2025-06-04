@@ -9,17 +9,8 @@ import { ListChunksResponseBody } from "@orq-ai/node/models/operations";
 
 let value: ListChunksResponseBody = {
   object: "list",
-  data: [
-    {
-      id: "<id>",
-      text: "<value>",
-      enabled: false,
-      status: "pending",
-      created: "<value>",
-      updated: "<value>",
-    },
-  ],
-  hasMore: false,
+  data: [],
+  hasMore: true,
 };
 ```
 

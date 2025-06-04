@@ -38,7 +38,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.knowledge.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -61,15 +60,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await knowledgeList(orq, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -114,7 +110,6 @@ async function run() {
     path: "Default",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -141,15 +136,12 @@ async function run() {
     embeddingModel: "<value>",
     path: "Default",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -192,7 +184,6 @@ async function run() {
     knowledgeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -217,15 +208,12 @@ async function run() {
   const res = await knowledgeRetrieve(orq, {
     knowledgeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeRetrieve failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -271,7 +259,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -299,15 +286,12 @@ async function run() {
       path: "Default",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -374,14 +358,12 @@ async function run() {
   const res = await knowledgeDelete(orq, {
     knowledgeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("knowledgeDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -424,7 +406,6 @@ async function run() {
     knowledgeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -449,15 +430,12 @@ async function run() {
   const res = await knowledgeSearch(orq, {
     knowledgeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeSearch failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -504,7 +482,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -533,15 +510,12 @@ async function run() {
       "failed",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeListDatasources failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -585,7 +559,6 @@ async function run() {
     requestBody: {},
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -611,15 +584,12 @@ async function run() {
     knowledgeId: "<id>",
     requestBody: {},
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeCreateDatasource failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -663,7 +633,6 @@ async function run() {
     datasourceId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -689,15 +658,12 @@ async function run() {
     knowledgeId: "<id>",
     datasourceId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeRetrieveDatasource failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -766,14 +732,12 @@ async function run() {
     knowledgeId: "<id>",
     datasourceId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("knowledgeDeleteDatasource failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -820,7 +784,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -849,15 +812,12 @@ async function run() {
       displayName: "Tony_Roberts",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeUpdateDatasource failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -901,7 +861,6 @@ async function run() {
     datasourceId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -927,15 +886,12 @@ async function run() {
     knowledgeId: "<id>",
     datasourceId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeCreateChunks failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -983,7 +939,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1013,15 +968,12 @@ async function run() {
       "failed",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeListChunks failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1066,7 +1018,6 @@ async function run() {
     knowledgeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1093,15 +1044,12 @@ async function run() {
     datasourceId: "<id>",
     knowledgeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeUpdateChunk failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1172,14 +1120,12 @@ async function run() {
     datasourceId: "<id>",
     knowledgeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("knowledgeDeleteChunk failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1224,7 +1170,6 @@ async function run() {
     knowledgeId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1251,15 +1196,12 @@ async function run() {
     datasourceId: "<id>",
     knowledgeId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeRetrieveChunk failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

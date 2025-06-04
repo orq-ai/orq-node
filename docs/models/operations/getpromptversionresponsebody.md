@@ -12,8 +12,15 @@ let value: GetPromptVersionResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "tool",
-        content: "<value>",
+        role: "exception",
+        content: [
+          {
+            type: "file",
+            file: {
+              fileData: "<value>",
+            },
+          },
+        ],
       },
     ],
   },

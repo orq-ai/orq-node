@@ -9,7 +9,7 @@ import { Nin } from "@orq-ai/node/models/operations";
 
 let value: Nin = {
   nin: [
-    false,
+    3990,
   ],
 };
 ```

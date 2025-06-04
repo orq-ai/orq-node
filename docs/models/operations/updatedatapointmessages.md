@@ -9,10 +9,8 @@ let value: UpdateDatapointMessages = {
   role: "correction",
   content: [
     {
-      type: "file",
-      file: {
-        fileData: "<value>",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

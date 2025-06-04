@@ -15,7 +15,7 @@ const value: operations.AndEq = {
 
 ```typescript
 const value: operations.AndNe = {
-  ne: 6779.68,
+  ne: "<value>",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.AndNe = {
 
 ```typescript
 const value: operations.And3 = {
-  gt: 3692.34,
+  gt: 71.84,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.And3 = {
 
 ```typescript
 const value: operations.AndGte = {
-  gte: 4891.71,
+  gte: 4792.86,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.AndGte = {
 
 ```typescript
 const value: operations.AndLt = {
-  lt: 5310.58,
+  lt: 3185.64,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.AndLt = {
 
 ```typescript
 const value: operations.AndLte = {
-  lte: 4735.01,
+  lte: 5910.19,
 };
 ```
 
@@ -55,9 +55,7 @@ const value: operations.AndLte = {
 
 ```typescript
 const value: operations.AndIn = {
-  in: [
-    false,
-  ],
+  in: [],
 };
 ```
 
@@ -66,7 +64,7 @@ const value: operations.AndIn = {
 ```typescript
 const value: operations.AndNin = {
   nin: [
-    false,
+    6790.4,
   ],
 };
 ```

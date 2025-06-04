@@ -9,7 +9,7 @@ let value: Retrievals = {
   document: "<value>",
   metadata: {
     fileName: "example.file",
-    pageNumber: 143.01,
+    pageNumber: null,
     fileType: "audio",
     searchScore: 7228.99,
   },

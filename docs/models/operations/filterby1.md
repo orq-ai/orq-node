@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.SearchKnowledge1Eq = {
-  eq: "<value>",
+  eq: false,
 };
 ```
 
@@ -15,7 +15,7 @@ const value: operations.SearchKnowledge1Eq = {
 
 ```typescript
 const value: operations.SearchKnowledge1Ne = {
-  ne: false,
+  ne: true,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.SearchKnowledge1Ne = {
 
 ```typescript
 const value: operations.SearchKnowledge13 = {
-  gt: 8435.87,
+  gt: 2880.67,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.SearchKnowledge13 = {
 
 ```typescript
 const value: operations.SearchKnowledge1Gte = {
-  gte: 2464.42,
+  gte: 5150.72,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.SearchKnowledge1Gte = {
 
 ```typescript
 const value: operations.SearchKnowledge1Lt = {
-  lt: 3546.64,
+  lt: 6257.71,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.SearchKnowledge1Lt = {
 
 ```typescript
 const value: operations.SearchKnowledge1Lte = {
-  lte: 7762.12,
+  lte: 9589.68,
 };
 ```
 
@@ -66,7 +66,7 @@ const value: operations.SearchKnowledge1In = {
 ```typescript
 const value: operations.SearchKnowledge1Nin = {
   nin: [
-    "<value>",
+    8483.55,
   ],
 };
 ```

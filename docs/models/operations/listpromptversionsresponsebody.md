@@ -13,17 +13,7 @@ let value: ListPromptVersionsResponseBody = {
     {
       id: "<id>",
       promptConfig: {
-        messages: [
-          {
-            role: "expected_output",
-            content: [
-              {
-                type: "text",
-                text: "<value>",
-              },
-            ],
-          },
-        ],
+        messages: [],
       },
       timestamp: "<value>",
     },

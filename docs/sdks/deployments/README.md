@@ -27,7 +27,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.deployments.list({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -50,15 +49,12 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await deploymentsList(orq, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -102,7 +98,6 @@ async function run() {
     key: "<key>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -127,15 +122,12 @@ async function run() {
   const res = await deploymentsGetConfig(orq, {
     key: "<key>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsGetConfig failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -170,6 +162,8 @@ Invoke a deployment with a given payload
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
+  environment: "<value>",
+  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -178,7 +172,6 @@ async function run() {
     key: "<key>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -196,6 +189,8 @@ import { deploymentsInvoke } from "@orq-ai/node/funcs/deploymentsInvoke.js";
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const orq = new OrqCore({
+  environment: "<value>",
+  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -203,15 +198,12 @@ async function run() {
   const res = await deploymentsInvoke(orq, {
     key: "<key>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsInvoke failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -246,6 +238,8 @@ Stream deployment generation. Only supported for completions and chat completion
 import { Orq } from "@orq-ai/node";
 
 const orq = new Orq({
+  environment: "<value>",
+  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -274,6 +268,8 @@ import { deploymentsStream } from "@orq-ai/node/funcs/deploymentsStream.js";
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const orq = new OrqCore({
+  environment: "<value>",
+  contactId: "<id>",
   apiKey: process.env["ORQ_API_KEY"] ?? "",
 });
 
@@ -281,16 +277,14 @@ async function run() {
   const res = await deploymentsStream(orq, {
     key: "<key>",
   });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  for await (const event of result) {
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
     // Handle the event
     console.log(event);
+  }
+  } else {
+    console.log("deploymentsStream failed:", res.error);
   }
 }
 
@@ -340,7 +334,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -371,15 +364,12 @@ async function run() {
       type: "deployment_experiment",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("deploymentsCreateExperiment failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -8,9 +8,7 @@ Not in
 import { DeploymentStream1Nin } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream1Nin = {
-  nin: [
-    "<value>",
-  ],
+  nin: [],
 };
 ```
 

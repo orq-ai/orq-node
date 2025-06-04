@@ -7,7 +7,7 @@
 
 ```typescript
 const value: operations.Eq = {
-  eq: 9241.39,
+  eq: "<value>",
 };
 ```
 
@@ -15,7 +15,7 @@ const value: operations.Eq = {
 
 ```typescript
 const value: operations.Ne = {
-  ne: "<value>",
+  ne: false,
 };
 ```
 
@@ -23,7 +23,7 @@ const value: operations.Ne = {
 
 ```typescript
 const value: operations.One3 = {
-  gt: 4629.79,
+  gt: 2853.99,
 };
 ```
 
@@ -31,7 +31,7 @@ const value: operations.One3 = {
 
 ```typescript
 const value: operations.Gte = {
-  gte: 5870.86,
+  gte: 9700.59,
 };
 ```
 
@@ -39,7 +39,7 @@ const value: operations.Gte = {
 
 ```typescript
 const value: operations.Lt = {
-  lt: 2757.24,
+  lt: 854.37,
 };
 ```
 
@@ -47,7 +47,7 @@ const value: operations.Lt = {
 
 ```typescript
 const value: operations.Lte = {
-  lte: 261.2,
+  lte: 454.79,
 };
 ```
 
@@ -56,7 +56,7 @@ const value: operations.Lte = {
 ```typescript
 const value: operations.In = {
   in: [
-    6301.64,
+    false,
   ],
 };
 ```
@@ -66,7 +66,7 @@ const value: operations.In = {
 ```typescript
 const value: operations.Nin = {
   nin: [
-    6887.85,
+    3990,
   ],
 };
 ```
@@ -75,7 +75,7 @@ const value: operations.Nin = {
 
 ```typescript
 const value: operations.Exists = {
-  exists: false,
+  exists: true,
 };
 ```
 

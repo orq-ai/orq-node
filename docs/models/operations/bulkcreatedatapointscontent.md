@@ -14,11 +14,6 @@ const value: string = "<value>";
 ### `operations.BulkCreateDatapointsContent2[]`
 
 ```typescript
-const value: operations.BulkCreateDatapointsContent2[] = [
-  {
-    type: "text",
-    text: "<value>",
-  },
-];
+const value: operations.BulkCreateDatapointsContent2[] = [];
 ```
 

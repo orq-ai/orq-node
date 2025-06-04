@@ -9,9 +9,9 @@ import { DeploymentStreamDeploymentsMetadata } from "@orq-ai/node/models/operati
 
 let value: DeploymentStreamDeploymentsMetadata = {
   fileName: "example.file",
-  pageNumber: 2660.77,
-  fileType: "audio",
-  searchScore: 671.81,
+  pageNumber: 3665.72,
+  fileType: "video",
+  searchScore: 837.23,
 };
 ```
 

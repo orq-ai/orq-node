@@ -8,9 +8,7 @@ import { UpdatePromptResponseFormatJsonSchema } from "@orq-ai/node/models/operat
 let value: UpdatePromptResponseFormatJsonSchema = {
   name: "<value>",
   strict: false,
-  schema: {
-    "key": "<value>",
-  },
+  schema: {},
 };
 ```
 

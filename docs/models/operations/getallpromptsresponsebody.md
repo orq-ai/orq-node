@@ -9,26 +9,8 @@ import { GetAllPromptsResponseBody } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsResponseBody = {
   object: "list",
-  data: [
-    {
-      id: "<id>",
-      type: "prompt",
-      owner: "<value>",
-      domainId: "35164546-2f91-45e7-aafc-0c72cc4fae22",
-      created: "<value>",
-      updated: "<value>",
-      displayName: "Shayna45",
-      promptConfig: {
-        messages: [
-          {
-            role: "system",
-            content: "<value>",
-          },
-        ],
-      },
-    },
-  ],
-  hasMore: false,
+  data: [],
+  hasMore: true,
 };
 ```
 

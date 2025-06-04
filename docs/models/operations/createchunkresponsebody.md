@@ -8,8 +8,8 @@ import { CreateChunkResponseBody } from "@orq-ai/node/models/operations";
 let value: CreateChunkResponseBody = {
   id: "<id>",
   text: "<value>",
-  enabled: false,
-  status: "processing",
+  enabled: true,
+  status: "failed",
   created: "<value>",
   updated: "<value>",
 };

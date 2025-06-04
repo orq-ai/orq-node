@@ -16,10 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.RetrieveDatapointContent2[] = [
   {
-    type: "file",
-    file: {
-      fileData: "<value>",
-    },
+    type: "text",
+    text: "<value>",
   },
 ];
 ```

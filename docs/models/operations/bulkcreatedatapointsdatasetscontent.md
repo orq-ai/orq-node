@@ -16,9 +16,9 @@ const value: string = "<value>";
 ```typescript
 const value: operations.BulkCreateDatapointsContentDatasets2[] = [
   {
-    type: "image_url",
-    imageUrl: {
-      url: "https://superior-creature.name",
+    type: "file",
+    file: {
+      fileData: "<value>",
     },
   },
 ];

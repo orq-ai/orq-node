@@ -43,9 +43,7 @@ const value: operations.ChoicesAssistantMessage = {
 ```typescript
 const value: operations.ChoicesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

@@ -10,6 +10,7 @@ let value: GetPromptVersionResponseFormatJsonSchema = {
   strict: false,
   schema: {
     "key": "<value>",
+    "key1": "<value>",
   },
 };
 ```

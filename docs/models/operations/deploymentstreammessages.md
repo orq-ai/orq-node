@@ -26,7 +26,12 @@ const value: operations.DeploymentStreamMessagesSystemMessage = {
 ```typescript
 const value: operations.DeploymentStreamMessagesUserMessage = {
   role: "user",
-  content: "<value>",
+  content: [
+    {
+      type: "text",
+      text: "<value>",
+    },
+  ],
 };
 ```
 
@@ -43,9 +48,7 @@ const value: operations.DeploymentStreamMessagesAssistantMessage = {
 ```typescript
 const value: operations.DeploymentStreamMessagesToolMessage = {
   role: "tool",
-  content: [
-    "<value>",
-  ],
+  content: "<value>",
   toolCallId: "<id>",
 };
 ```

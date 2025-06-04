@@ -9,7 +9,7 @@ import { OneNin } from "@orq-ai/node/models/components";
 
 let value: OneNin = {
   nin: [
-    false,
+    true,
   ],
 };
 ```

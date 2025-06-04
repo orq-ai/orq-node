@@ -9,7 +9,7 @@ import { AndNin } from "@orq-ai/node/models/operations";
 
 let value: AndNin = {
   nin: [
-    false,
+    6790.4,
   ],
 };
 ```

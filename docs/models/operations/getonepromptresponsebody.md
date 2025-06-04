@@ -18,7 +18,7 @@ let value: GetOnePromptResponseBody = {
   promptConfig: {
     messages: [
       {
-        role: "correction",
+        role: "system",
         content: "<value>",
       },
     ],

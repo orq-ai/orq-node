@@ -9,10 +9,8 @@ let value: DeploymentStreamMessagesUserMessage = {
   role: "user",
   content: [
     {
-      type: "file",
-      file: {
-        fileData: "<value>",
-      },
+      type: "text",
+      text: "<value>",
     },
   ],
 };

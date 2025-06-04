@@ -18,7 +18,7 @@ const value: operations.DeploymentStream2Deployments1 = {
 const value: operations.DeploymentStream2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://adolescent-countess.name/",
+    url: "https://mad-tomb.net",
   },
 };
 ```
@@ -30,7 +30,7 @@ const value: operations.DeploymentStream2Deployments3 = {
   type: "input_audio",
   inputAudio: {
     data: "<value>",
-    format: "wav",
+    format: "mp3",
   },
 };
 ```
