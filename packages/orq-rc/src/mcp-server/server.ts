@@ -37,6 +37,8 @@ import { tool$deploymentsList } from "./tools/deploymentsList.js";
 import { tool$deploymentsMetricsCreate } from "./tools/deploymentsMetricsCreate.js";
 import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
 import { tool$evalsAgeAppropriate } from "./tools/evalsAgeAppropriate.js";
+import { tool$evalsAll } from "./tools/evalsAll.js";
+import { tool$evalsBertScore } from "./tools/evalsBertScore.js";
 import { tool$evalsBleuScore } from "./tools/evalsBleuScore.js";
 import { tool$evalsBotDetection } from "./tools/evalsBotDetection.js";
 import { tool$evalsContains } from "./tools/evalsContains.js";
@@ -47,10 +49,12 @@ import { tool$evalsContainsNone } from "./tools/evalsContainsNone.js";
 import { tool$evalsContainsUrl } from "./tools/evalsContainsUrl.js";
 import { tool$evalsContainsValidLink } from "./tools/evalsContainsValidLink.js";
 import { tool$evalsCreate } from "./tools/evalsCreate.js";
+import { tool$evalsDelete } from "./tools/evalsDelete.js";
 import { tool$evalsEndsWith } from "./tools/evalsEndsWith.js";
 import { tool$evalsExactMatch } from "./tools/evalsExactMatch.js";
 import { tool$evalsFactCheckingKnowledgeBase } from "./tools/evalsFactCheckingKnowledgeBase.js";
 import { tool$evalsGrammar } from "./tools/evalsGrammar.js";
+import { tool$evalsInvoke } from "./tools/evalsInvoke.js";
 import { tool$evalsLengthBetween } from "./tools/evalsLengthBetween.js";
 import { tool$evalsLengthGreaterThan } from "./tools/evalsLengthGreaterThan.js";
 import { tool$evalsLengthLessThan } from "./tools/evalsLengthLessThan.js";
@@ -65,11 +69,11 @@ import { tool$evalsRagasHarmfulness } from "./tools/evalsRagasHarmfulness.js";
 import { tool$evalsRagasMaliciousness } from "./tools/evalsRagasMaliciousness.js";
 import { tool$evalsRagasResponseRelevancy } from "./tools/evalsRagasResponseRelevancy.js";
 import { tool$evalsRagasSummarization } from "./tools/evalsRagasSummarization.js";
-import { tool$evalsRunBertScore } from "./tools/evalsRunBertScore.js";
 import { tool$evalsSentimentClassification } from "./tools/evalsSentimentClassification.js";
 import { tool$evalsSummarization } from "./tools/evalsSummarization.js";
 import { tool$evalsToneOfVoice } from "./tools/evalsToneOfVoice.js";
 import { tool$evalsTranslation } from "./tools/evalsTranslation.js";
+import { tool$evalsUpdate } from "./tools/evalsUpdate.js";
 import { tool$evalsValidJson } from "./tools/evalsValidJson.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
@@ -114,7 +118,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.8.0-rc.1",
+    version: "3.8.0-rc.2",
   });
 
   const client = new OrqCore({
@@ -198,8 +202,11 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
+  tool(tool$evalsAll);
   tool(tool$evalsCreate);
-  tool(tool$evalsRunBertScore);
+  tool(tool$evalsUpdate);
+  tool(tool$evalsDelete);
+  tool(tool$evalsBertScore);
   tool(tool$evalsBleuScore);
   tool(tool$evalsContainsAll);
   tool(tool$evalsContainsAny);
@@ -233,6 +240,7 @@ export function createMCPServer(deps: {
   tool(tool$evalsRagasMaliciousness);
   tool(tool$evalsRagasResponseRelevancy);
   tool(tool$evalsRagasSummarization);
+  tool(tool$evalsInvoke);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

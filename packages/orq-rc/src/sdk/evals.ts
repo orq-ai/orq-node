@@ -3,6 +3,8 @@
  */
 
 import { evalsAgeAppropriate } from "../funcs/evalsAgeAppropriate.js";
+import { evalsAll } from "../funcs/evalsAll.js";
+import { evalsBertScore } from "../funcs/evalsBertScore.js";
 import { evalsBleuScore } from "../funcs/evalsBleuScore.js";
 import { evalsBotDetection } from "../funcs/evalsBotDetection.js";
 import { evalsContains } from "../funcs/evalsContains.js";
@@ -13,10 +15,12 @@ import { evalsContainsNone } from "../funcs/evalsContainsNone.js";
 import { evalsContainsUrl } from "../funcs/evalsContainsUrl.js";
 import { evalsContainsValidLink } from "../funcs/evalsContainsValidLink.js";
 import { evalsCreate } from "../funcs/evalsCreate.js";
+import { evalsDelete } from "../funcs/evalsDelete.js";
 import { evalsEndsWith } from "../funcs/evalsEndsWith.js";
 import { evalsExactMatch } from "../funcs/evalsExactMatch.js";
 import { evalsFactCheckingKnowledgeBase } from "../funcs/evalsFactCheckingKnowledgeBase.js";
 import { evalsGrammar } from "../funcs/evalsGrammar.js";
+import { evalsInvoke } from "../funcs/evalsInvoke.js";
 import { evalsLengthBetween } from "../funcs/evalsLengthBetween.js";
 import { evalsLengthGreaterThan } from "../funcs/evalsLengthGreaterThan.js";
 import { evalsLengthLessThan } from "../funcs/evalsLengthLessThan.js";
@@ -31,17 +35,31 @@ import { evalsRagasHarmfulness } from "../funcs/evalsRagasHarmfulness.js";
 import { evalsRagasMaliciousness } from "../funcs/evalsRagasMaliciousness.js";
 import { evalsRagasResponseRelevancy } from "../funcs/evalsRagasResponseRelevancy.js";
 import { evalsRagasSummarization } from "../funcs/evalsRagasSummarization.js";
-import { evalsRunBertScore } from "../funcs/evalsRunBertScore.js";
 import { evalsSentimentClassification } from "../funcs/evalsSentimentClassification.js";
 import { evalsSummarization } from "../funcs/evalsSummarization.js";
 import { evalsToneOfVoice } from "../funcs/evalsToneOfVoice.js";
 import { evalsTranslation } from "../funcs/evalsTranslation.js";
+import { evalsUpdate } from "../funcs/evalsUpdate.js";
 import { evalsValidJson } from "../funcs/evalsValidJson.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Evals extends ClientSDK {
+  /**
+   * Get all Evaluators
+   */
+  async all(
+    request?: operations.GetEvalsRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetEvalsResponseBody> {
+    return unwrapAsync(evalsAll(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * Create an Evaluator
    */
@@ -57,13 +75,41 @@ export class Evals extends ClientSDK {
   }
 
   /**
+   * Update an Evaluator
+   */
+  async update(
+    request: operations.UpdateEvalRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateEvalResponseBody> {
+    return unwrapAsync(evalsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete an Evaluator
+   */
+  async delete(
+    request: operations.DeleteEvalRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(evalsDelete(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Run BertScore Evaluator
    */
-  async runBertScore(
-    request?: operations.RunBertScoreRequestBody | undefined,
+  async bertScore(
+    request?: operations.EvalsBertScoreRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.RunBertScoreResponseBody> {
-    return unwrapAsync(evalsRunBertScore(
+  ): Promise<operations.EvalsBertScoreResponseBody> {
+    return unwrapAsync(evalsBertScore(
       this,
       request,
       options,
@@ -526,6 +572,20 @@ export class Evals extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.EvalsRagasSummarizationResponseBody> {
     return unwrapAsync(evalsRagasSummarization(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Invoke a Custom Evaluator
+   */
+  async invoke(
+    request: operations.InvokeEvalRequest,
+    options?: RequestOptions,
+  ): Promise<operations.InvokeEvalResponseBody> {
+    return unwrapAsync(evalsInvoke(
       this,
       request,
       options,
