@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsBertScoreEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsBertScoreEvalsResponseBody extends Error {
+export class EvalsBertScoreEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsBertScoreEvalsResponseBodyData;
 
-  constructor(err: EvalsBertScoreEvalsResponseBodyData) {
+  constructor(
+    err: EvalsBertScoreEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsBertScoreEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsBertScoreResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsBertScoreResponseBody extends Error {
+export class EvalsBertScoreResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsBertScoreResponseBodyData;
 
-  constructor(err: EvalsBertScoreResponseBodyData) {
+  constructor(
+    err: EvalsBertScoreResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsBertScoreResponseBody";
@@ -61,9 +68,16 @@ export const EvalsBertScoreEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsBertScoreEvalsResponseBody(v);
+    return new EvalsBertScoreEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -102,9 +116,16 @@ export const EvalsBertScoreResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsBertScoreResponseBody(v);
+    return new EvalsBertScoreResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

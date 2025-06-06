@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsRagasSummarizationEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsRagasSummarizationEvalsResponseBody extends Error {
+export class EvalsRagasSummarizationEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsRagasSummarizationEvalsResponseBodyData;
 
-  constructor(err: EvalsRagasSummarizationEvalsResponseBodyData) {
+  constructor(
+    err: EvalsRagasSummarizationEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsRagasSummarizationEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsRagasSummarizationResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsRagasSummarizationResponseBody extends Error {
+export class EvalsRagasSummarizationResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsRagasSummarizationResponseBodyData;
 
-  constructor(err: EvalsRagasSummarizationResponseBodyData) {
+  constructor(
+    err: EvalsRagasSummarizationResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsRagasSummarizationResponseBody";
@@ -61,9 +68,16 @@ export const EvalsRagasSummarizationEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsRagasSummarizationEvalsResponseBody(v);
+    return new EvalsRagasSummarizationEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -104,9 +118,16 @@ export const EvalsRagasSummarizationResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsRagasSummarizationResponseBody(v);
+    return new EvalsRagasSummarizationResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

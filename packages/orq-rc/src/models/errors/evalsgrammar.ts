@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsGrammarEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsGrammarEvalsResponseBody extends Error {
+export class EvalsGrammarEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsGrammarEvalsResponseBodyData;
 
-  constructor(err: EvalsGrammarEvalsResponseBodyData) {
+  constructor(
+    err: EvalsGrammarEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsGrammarEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsGrammarResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsGrammarResponseBody extends Error {
+export class EvalsGrammarResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsGrammarResponseBodyData;
 
-  constructor(err: EvalsGrammarResponseBodyData) {
+  constructor(
+    err: EvalsGrammarResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsGrammarResponseBody";
@@ -61,9 +68,16 @@ export const EvalsGrammarEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsGrammarEvalsResponseBody(v);
+    return new EvalsGrammarEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -102,9 +116,16 @@ export const EvalsGrammarResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsGrammarResponseBody(v);
+    return new EvalsGrammarResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

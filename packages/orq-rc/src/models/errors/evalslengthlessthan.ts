@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsLengthLessThanEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsLengthLessThanEvalsResponseBody extends Error {
+export class EvalsLengthLessThanEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsLengthLessThanEvalsResponseBodyData;
 
-  constructor(err: EvalsLengthLessThanEvalsResponseBodyData) {
+  constructor(
+    err: EvalsLengthLessThanEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsLengthLessThanEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsLengthLessThanResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsLengthLessThanResponseBody extends Error {
+export class EvalsLengthLessThanResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsLengthLessThanResponseBodyData;
 
-  constructor(err: EvalsLengthLessThanResponseBodyData) {
+  constructor(
+    err: EvalsLengthLessThanResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsLengthLessThanResponseBody";
@@ -61,9 +68,16 @@ export const EvalsLengthLessThanEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsLengthLessThanEvalsResponseBody(v);
+    return new EvalsLengthLessThanEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -104,9 +118,16 @@ export const EvalsLengthLessThanResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsLengthLessThanResponseBody(v);
+    return new EvalsLengthLessThanResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

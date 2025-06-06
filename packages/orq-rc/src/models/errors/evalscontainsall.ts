@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsContainsAllEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsContainsAllEvalsResponseBody extends Error {
+export class EvalsContainsAllEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsContainsAllEvalsResponseBodyData;
 
-  constructor(err: EvalsContainsAllEvalsResponseBodyData) {
+  constructor(
+    err: EvalsContainsAllEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsContainsAllEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsContainsAllResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsContainsAllResponseBody extends Error {
+export class EvalsContainsAllResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsContainsAllResponseBodyData;
 
-  constructor(err: EvalsContainsAllResponseBodyData) {
+  constructor(
+    err: EvalsContainsAllResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsContainsAllResponseBody";
@@ -61,9 +68,16 @@ export const EvalsContainsAllEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsContainsAllEvalsResponseBody(v);
+    return new EvalsContainsAllEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -103,9 +117,16 @@ export const EvalsContainsAllResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsContainsAllResponseBody(v);
+    return new EvalsContainsAllResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

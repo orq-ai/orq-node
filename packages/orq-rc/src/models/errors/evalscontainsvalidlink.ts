@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsContainsValidLinkEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsContainsValidLinkEvalsResponseBody extends Error {
+export class EvalsContainsValidLinkEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsContainsValidLinkEvalsResponseBodyData;
 
-  constructor(err: EvalsContainsValidLinkEvalsResponseBodyData) {
+  constructor(
+    err: EvalsContainsValidLinkEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsContainsValidLinkEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsContainsValidLinkResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsContainsValidLinkResponseBody extends Error {
+export class EvalsContainsValidLinkResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsContainsValidLinkResponseBodyData;
 
-  constructor(err: EvalsContainsValidLinkResponseBodyData) {
+  constructor(
+    err: EvalsContainsValidLinkResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsContainsValidLinkResponseBody";
@@ -61,9 +68,16 @@ export const EvalsContainsValidLinkEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsContainsValidLinkEvalsResponseBody(v);
+    return new EvalsContainsValidLinkEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -104,9 +118,16 @@ export const EvalsContainsValidLinkResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsContainsValidLinkResponseBody(v);
+    return new EvalsContainsValidLinkResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

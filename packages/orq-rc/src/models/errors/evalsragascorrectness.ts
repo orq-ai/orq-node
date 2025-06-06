@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsRagasCorrectnessEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsRagasCorrectnessEvalsResponseBody extends Error {
+export class EvalsRagasCorrectnessEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsRagasCorrectnessEvalsResponseBodyData;
 
-  constructor(err: EvalsRagasCorrectnessEvalsResponseBodyData) {
+  constructor(
+    err: EvalsRagasCorrectnessEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsRagasCorrectnessEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsRagasCorrectnessResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsRagasCorrectnessResponseBody extends Error {
+export class EvalsRagasCorrectnessResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsRagasCorrectnessResponseBodyData;
 
-  constructor(err: EvalsRagasCorrectnessResponseBodyData) {
+  constructor(
+    err: EvalsRagasCorrectnessResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsRagasCorrectnessResponseBody";
@@ -61,9 +68,16 @@ export const EvalsRagasCorrectnessEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsRagasCorrectnessEvalsResponseBody(v);
+    return new EvalsRagasCorrectnessEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -104,9 +118,16 @@ export const EvalsRagasCorrectnessResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsRagasCorrectnessResponseBody(v);
+    return new EvalsRagasCorrectnessResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

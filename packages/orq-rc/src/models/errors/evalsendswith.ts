@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsEndsWithEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsEndsWithEvalsResponseBody extends Error {
+export class EvalsEndsWithEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsEndsWithEvalsResponseBodyData;
 
-  constructor(err: EvalsEndsWithEvalsResponseBodyData) {
+  constructor(
+    err: EvalsEndsWithEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsEndsWithEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsEndsWithResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsEndsWithResponseBody extends Error {
+export class EvalsEndsWithResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsEndsWithResponseBodyData;
 
-  constructor(err: EvalsEndsWithResponseBodyData) {
+  constructor(
+    err: EvalsEndsWithResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsEndsWithResponseBody";
@@ -61,9 +68,16 @@ export const EvalsEndsWithEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsEndsWithEvalsResponseBody(v);
+    return new EvalsEndsWithEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -102,9 +116,16 @@ export const EvalsEndsWithResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsEndsWithResponseBody(v);
+    return new EvalsEndsWithResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Error running the evaluator
@@ -14,15 +15,18 @@ export type InvokeEvalEvalsResponseBodyData = {
 /**
  * Error running the evaluator
  */
-export class InvokeEvalEvalsResponseBody extends Error {
+export class InvokeEvalEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: InvokeEvalEvalsResponseBodyData;
 
-  constructor(err: InvokeEvalEvalsResponseBodyData) {
+  constructor(
+    err: InvokeEvalEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "InvokeEvalEvalsResponseBody";
@@ -39,15 +43,18 @@ export type InvokeEvalResponseBodyData = {
 /**
  * Workspace ID is not found on the request
  */
-export class InvokeEvalResponseBody extends Error {
+export class InvokeEvalResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: InvokeEvalResponseBodyData;
 
-  constructor(err: InvokeEvalResponseBodyData) {
+  constructor(
+    err: InvokeEvalResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "InvokeEvalResponseBody";
@@ -61,9 +68,16 @@ export const InvokeEvalEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new InvokeEvalEvalsResponseBody(v);
+    return new InvokeEvalEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -102,9 +116,16 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new InvokeEvalResponseBody(v);
+    return new InvokeEvalResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

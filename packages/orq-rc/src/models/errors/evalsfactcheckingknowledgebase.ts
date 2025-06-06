@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsFactCheckingKnowledgeBaseEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsFactCheckingKnowledgeBaseEvalsResponseBody extends Error {
+export class EvalsFactCheckingKnowledgeBaseEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsFactCheckingKnowledgeBaseEvalsResponseBodyData;
 
-  constructor(err: EvalsFactCheckingKnowledgeBaseEvalsResponseBodyData) {
+  constructor(
+    err: EvalsFactCheckingKnowledgeBaseEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsFactCheckingKnowledgeBaseEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsFactCheckingKnowledgeBaseResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsFactCheckingKnowledgeBaseResponseBody extends Error {
+export class EvalsFactCheckingKnowledgeBaseResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsFactCheckingKnowledgeBaseResponseBodyData;
 
-  constructor(err: EvalsFactCheckingKnowledgeBaseResponseBodyData) {
+  constructor(
+    err: EvalsFactCheckingKnowledgeBaseResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsFactCheckingKnowledgeBaseResponseBody";
@@ -62,9 +69,16 @@ export const EvalsFactCheckingKnowledgeBaseEvalsResponseBody$inboundSchema:
     unknown
   > = z.object({
     message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
   })
     .transform((v) => {
-      return new EvalsFactCheckingKnowledgeBaseEvalsResponseBody(v);
+      return new EvalsFactCheckingKnowledgeBaseEvalsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
     });
 
 /** @internal */
@@ -105,9 +119,16 @@ export const EvalsFactCheckingKnowledgeBaseResponseBody$inboundSchema:
   z.ZodType<EvalsFactCheckingKnowledgeBaseResponseBody, z.ZodTypeDef, unknown> =
     z.object({
       message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
     })
       .transform((v) => {
-        return new EvalsFactCheckingKnowledgeBaseResponseBody(v);
+        return new EvalsFactCheckingKnowledgeBaseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
       });
 
 /** @internal */

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Workspace ID is not found on the request
@@ -14,15 +15,18 @@ export type UpdateEvalResponseBodyData = {
 /**
  * Workspace ID is not found on the request
  */
-export class UpdateEvalResponseBody extends Error {
+export class UpdateEvalResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: UpdateEvalResponseBodyData;
 
-  constructor(err: UpdateEvalResponseBodyData) {
+  constructor(
+    err: UpdateEvalResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "UpdateEvalResponseBody";
@@ -36,9 +40,16 @@ export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new UpdateEvalResponseBody(v);
+    return new UpdateEvalResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

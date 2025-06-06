@@ -45,6 +45,7 @@ export * from "./getpromptversion.js";
 export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
 export * from "./invokeeval.js";
+export * from "./responsevalidationerror.js";
 export * from "./retrievecontact.js";
 export * from "./sdkvalidationerror.js";
 export * from "./updatecontact.js";

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsToneOfVoiceEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsToneOfVoiceEvalsResponseBody extends Error {
+export class EvalsToneOfVoiceEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsToneOfVoiceEvalsResponseBodyData;
 
-  constructor(err: EvalsToneOfVoiceEvalsResponseBodyData) {
+  constructor(
+    err: EvalsToneOfVoiceEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsToneOfVoiceEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsToneOfVoiceResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsToneOfVoiceResponseBody extends Error {
+export class EvalsToneOfVoiceResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsToneOfVoiceResponseBodyData;
 
-  constructor(err: EvalsToneOfVoiceResponseBodyData) {
+  constructor(
+    err: EvalsToneOfVoiceResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsToneOfVoiceResponseBody";
@@ -61,9 +68,16 @@ export const EvalsToneOfVoiceEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsToneOfVoiceEvalsResponseBody(v);
+    return new EvalsToneOfVoiceEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -103,9 +117,16 @@ export const EvalsToneOfVoiceResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsToneOfVoiceResponseBody(v);
+    return new EvalsToneOfVoiceResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsRagasResponseRelevancyEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsRagasResponseRelevancyEvalsResponseBody extends Error {
+export class EvalsRagasResponseRelevancyEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsRagasResponseRelevancyEvalsResponseBodyData;
 
-  constructor(err: EvalsRagasResponseRelevancyEvalsResponseBodyData) {
+  constructor(
+    err: EvalsRagasResponseRelevancyEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsRagasResponseRelevancyEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsRagasResponseRelevancyResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsRagasResponseRelevancyResponseBody extends Error {
+export class EvalsRagasResponseRelevancyResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsRagasResponseRelevancyResponseBodyData;
 
-  constructor(err: EvalsRagasResponseRelevancyResponseBodyData) {
+  constructor(
+    err: EvalsRagasResponseRelevancyResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsRagasResponseRelevancyResponseBody";
@@ -62,9 +69,16 @@ export const EvalsRagasResponseRelevancyEvalsResponseBody$inboundSchema:
     unknown
   > = z.object({
     message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
   })
     .transform((v) => {
-      return new EvalsRagasResponseRelevancyEvalsResponseBody(v);
+      return new EvalsRagasResponseRelevancyEvalsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
     });
 
 /** @internal */
@@ -106,9 +120,16 @@ export const EvalsRagasResponseRelevancyResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsRagasResponseRelevancyResponseBody(v);
+    return new EvalsRagasResponseRelevancyResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

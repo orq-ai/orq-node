@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Contact not found
@@ -17,15 +18,18 @@ export type UpdateContactResponseBodyData = {
 /**
  * Contact not found
  */
-export class UpdateContactResponseBody extends Error {
+export class UpdateContactResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: UpdateContactResponseBodyData;
 
-  constructor(err: UpdateContactResponseBodyData) {
+  constructor(
+    err: UpdateContactResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "UpdateContactResponseBody";
@@ -39,9 +43,16 @@ export const UpdateContactResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new UpdateContactResponseBody(v);
+    return new UpdateContactResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

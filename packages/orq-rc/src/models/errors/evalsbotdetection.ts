@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Internal server error
@@ -14,15 +15,18 @@ export type EvalsBotDetectionEvalsResponseBodyData = {
 /**
  * Internal server error
  */
-export class EvalsBotDetectionEvalsResponseBody extends Error {
+export class EvalsBotDetectionEvalsResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsBotDetectionEvalsResponseBodyData;
 
-  constructor(err: EvalsBotDetectionEvalsResponseBodyData) {
+  constructor(
+    err: EvalsBotDetectionEvalsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsBotDetectionEvalsResponseBody";
@@ -39,15 +43,18 @@ export type EvalsBotDetectionResponseBodyData = {
 /**
  * Evaluator not found
  */
-export class EvalsBotDetectionResponseBody extends Error {
+export class EvalsBotDetectionResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: EvalsBotDetectionResponseBodyData;
 
-  constructor(err: EvalsBotDetectionResponseBodyData) {
+  constructor(
+    err: EvalsBotDetectionResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "EvalsBotDetectionResponseBody";
@@ -61,9 +68,16 @@ export const EvalsBotDetectionEvalsResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsBotDetectionEvalsResponseBody(v);
+    return new EvalsBotDetectionEvalsResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
@@ -103,9 +117,16 @@ export const EvalsBotDetectionResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new EvalsBotDetectionResponseBody(v);
+    return new EvalsBotDetectionResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */
