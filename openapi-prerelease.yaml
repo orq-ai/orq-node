@@ -4777,7 +4777,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-06T07:27:01.978Z"
+          default: "2025-06-07T15:37:59.886Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4840,7 +4840,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-06-06T07:27:01.978Z"
+            default: "2025-06-07T15:37:59.886Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4920,7 +4920,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-06T07:27:01.978Z"
+          default: "2025-06-07T15:37:59.886Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4966,7 +4966,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-06-06T07:27:01.978Z"
+                default: "2025-06-07T15:37:59.886Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5009,7 +5009,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-06T07:27:01.978Z"
+          default: "2025-06-07T15:37:59.886Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -7495,7 +7495,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-06T07:26:58.867Z"
+          default: "2025-06-07T15:37:56.964Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7503,7 +7503,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-06T07:26:58.868Z"
+              default: "2025-06-07T15:37:56.964Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7613,7 +7613,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-06-06T07:26:58.867Z"
+                default: "2025-06-07T15:37:56.964Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7621,7 +7621,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-06-06T07:26:58.868Z"
+                    default: "2025-06-07T15:37:56.964Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7728,7 +7728,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-06T07:26:58.867Z"
+          default: "2025-06-07T15:37:56.964Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7736,7 +7736,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-06T07:26:58.868Z"
+              default: "2025-06-07T15:37:56.964Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7837,7 +7837,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-06T07:26:58.867Z"
+          default: "2025-06-07T15:37:56.964Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7845,7 +7845,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-06T07:26:58.868Z"
+              default: "2025-06-07T15:37:56.964Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8995,10 +8995,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9067,10 +9067,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9136,10 +9136,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9220,10 +9220,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9315,10 +9315,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9387,10 +9387,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9456,10 +9456,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9540,10 +9540,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-06T07:27:01.143Z"
+                    default: "2025-06-07T15:37:59.102Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9903,10 +9903,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9975,10 +9975,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10044,10 +10044,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10128,10 +10128,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "updated":
               type: "string"
-              default: "2025-06-06T07:27:01.143Z"
+              default: "2025-06-07T15:37:59.102Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11429,6 +11429,1185 @@ components:
                 - "value"
           required:
             - "type"
+    "EvaluateRequest":
+      type: "object"
+      properties:
+        "input":
+          type: "string"
+          description: "Latest user message"
+        "output":
+          type: "string"
+          description: "The generated response from the model"
+        "reference":
+          type: "string"
+          description: "The reference used to compare the output"
+        "retrievals":
+          type: "array"
+          items:
+            type: "string"
+          description: "Knowledge base retrievals"
+        "messages":
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              "role":
+                type: "string"
+                enum:
+                  - "system"
+                  - "assistant"
+                  - "user"
+                  - "exception"
+                  - "tool"
+                  - "prompt"
+                  - "correction"
+                  - "expected_output"
+                description: "The role of the prompt message"
+              "content":
+                anyOf:
+                  - type: "string"
+                  - type: "array"
+                    items:
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "text"
+                            "text":
+                              type: "string"
+                          required:
+                            - "type"
+                            - "text"
+                          description: "Text content part of a prompt message"
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "image_url"
+                            "image_url":
+                              type: "object"
+                              properties:
+                                "id":
+                                  type: "string"
+                                  format: "ulid"
+                                  description: "The orq.ai id of the image"
+                                  readOnly: true
+                                "url":
+                                  anyOf:
+                                    - type: "string"
+                                    - type: "string"
+                                      format: "uri"
+                                  description: "Either a URL of the image or the base64 encoded data URI."
+                                  examples:
+                                    - "https://picsum.photos/id/1/200/300"
+                                    - "data:image/jpeg;base64,/9j/4QDcRXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABIAAAAAQAAAEgAAAABAAAABwAAkAcABAAAADAyMTABkQcABAAAAAECAwCGkgcAFAAAAMAAAAAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAQAAQAAADIAAAADoAQAAQAAADIAAAAAAAAAQVNDSUkAAABQaWNzdW0gSUQ6IDH/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAAyADIDASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAAUGBAMCAf/EABgBAAMBAQAAAAAAAAAAAAAAAAACAwEE/9oADAMBAAIQAxAAAAGJ8VqTNw8a3ojTukdLSJLgZZlZdd6TV3CHYj9EWPM6bhUaNGKXfClLIL11F7/cfh02i8CpWBzWy5A6I+PgAAB//8QAIhAAAQQCAgIDAQAAAAAAAAAAAQACAwQSEwURFDIgISIj/9oACAEBAAEFAnQPYtaw6HSrfpk1Zpi6U1uqwOvALjX+aJeJ6RjdEYR/LS1X2a7q4WGdtkqbVqFlkbfMcrVEWn16sDBsmY+e+GQvsPmOYWSF47i5rI4ZjhycvcuZWX1sTao2TGJsBsvCL8iSs12nk4D2se/w/8QAHhEAAgIBBQEAAAAAAAAAAAAAAAECESEQEhMgMUH/2gAIAQMBAT8BErRHKo4is0RwSk2b5CT+lrWXnT//xAAbEQACAgMBAAAAAAAAAAAAAAAAAQIREiExIP/aAAgBAgEBPwEbpj1szFtWTVkYJGMRyiuFMssh3x//xAAqEAABAwIEBQMFAAAAAAAAAAABAAIRAxIQITFREyAiI2EyQXEEQlJigf/aAAgBAQAGPwLqGGYOeDmbqWDMYFjiah2aF2aFNnk9RVVv1HcjMSrqOmzlDha7D0hVNjnhfw3WFuqzU1Yt+FbTogjdxXoCFVz7Q0Q5TRYC78no3hwj3jpVwDS8+VLzOIMRC4tIxP27fHhERcVaCMtYHJ+moVmU+wC1IKnm/nL/AP/EACIQAAICAgEEAwEAAAAAAAAAAAERACExQVEQYXGBobHB0f/aAAgBAQABPyEgQjvByg05hUo2LiFjFYI7W43EDiVaHswr6T+yviNWy8EGiuNR40cj6MPOzDuOGmTHfziwMq+76EShwYJ8LmPkvUA0DK7y8RUIwU4Wf1moJxadQT0/YfMYyGLPkJiCZ6Rw+gHEOyLDRUgnkkfo7QoEZmabf4SsxCxwB3gBm9QgAYBbhGy6dySFOwYVeIcGHyxFUUo4LJ6JIxoBUkQiSuY4Ooc9f//aAAwDAQACAAMAAAAQK/6xMJVNTaRAi9cA/8QAHBEBAQEAAgMBAAAAAAAAAAAAAQARECExQVFh/9oACAEDAQE/ENJdCAjLX2X0Wzsr5v0mqx7MJOb3z//EAB0RAQEBAAAHAAAAAAAAAAAAAAEAERAgITFhcaH/2gAIAQIBAT8QxhwZqxessJqwhet4oA+Y0FeQTtx//8QAIxABAAICAQUAAgMAAAAAAAAAAQARITFBUWFxgZEQobHB0f/aAAgBAQABPxB2tTC0xLVUH7haUN2g1vP+RNGh8gq4UTGuGBUZ4MHv3iLSr8RIRqqi6Yv1carl4onc0eoWxjg8RD1aVFzk6f6b9/Y70zAti+Kx71GvjJeYuVsc6QwgBr5D/a/xfW1rFYoOcjjrK7p8CjoUUGXu5eMk0ZEmr6iVhzq4Hhj0LyLoGUvPiDGiXFOoUx6C6YKtA/EOTpu4FoAQGnL1SFVoWNDsQt27RtZg8GOQ6mm5/hiDjAW62BbV23sLxFbn20oMclu8B8lPIPaU4y+1hNDrowVllngQ2LIsGVq3iXxdrsPZu+8NsVhdHaO+tLVdwQ3CKME80BZTdNRSUt7WbPXP6zm5YlVv5//Z"
+                                "detail":
+                                  type: "string"
+                                  description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
+                              required:
+                                - "url"
+                          required:
+                            - "type"
+                            - "image_url"
+                          description: "The image part of the prompt message. Only supported with vision models."
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "file"
+                              description: "The type of the content part. Always `file`."
+                            "file":
+                              type: "object"
+                              properties:
+                                "file_data":
+                                  type: "string"
+                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                "filename":
+                                  type: "string"
+                                  description: "The name of the file, used when passing the file to the model as a string."
+                              required:
+                                - "file_data"
+                          required:
+                            - "type"
+                            - "file"
+                description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
+              "tool_calls":
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    "id":
+                      type: "string"
+                    "index":
+                      type: "number"
+                    "type":
+                      type: "string"
+                      enum:
+                        - "function"
+                    "function":
+                      type: "object"
+                      properties:
+                        "name":
+                          type: "string"
+                        "arguments":
+                          type: "string"
+                          description: "JSON string arguments for the functions"
+                      required:
+                        - "name"
+                        - "arguments"
+                  required:
+                    - "type"
+                    - "function"
+              "tool_call_id":
+                type: "string"
+            required:
+              - "role"
+              - "content"
+          description: "The messages used to generate the output, without the last user message"
+        "evaluator_overrides":
+          oneOf:
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "boolean"
+                    - "number"
+                    - "string"
+                    - "enum"
+                "type":
+                  type: "string"
+                  enum:
+                    - "llm_eval"
+                "model":
+                  type: "object"
+                  properties:
+                    "id":
+                      type: "string"
+                    "integration_id":
+                      type:
+                        - "string"
+                        - "null"
+                  required:
+                    - "id"
+                "prompt":
+                  type: "string"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "number"
+                "type":
+                  type: "string"
+                  enum:
+                    - "ragas"
+                "model":
+                  type: "object"
+                  properties:
+                    "id":
+                      type: "string"
+                    "integration_id":
+                      type:
+                        - "string"
+                        - "null"
+                  required:
+                    - "id"
+                "ragas_metric":
+                  type: "string"
+                  enum:
+                    - "context_precision"
+                    - "context_recall"
+                    - "context_entities_recall"
+                    - "harmfulness"
+                    - "maliciousness"
+                    - "coherence"
+                    - "correctness"
+                    - "conciseness"
+                    - "response_relevancy"
+                    - "faithfulness"
+                    - "summarization"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "boolean"
+                "type":
+                  type: "string"
+                  enum:
+                    - "json_schema"
+                "schema":
+                  type: "string"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "boolean"
+                    - "number"
+                    - "string"
+                    - "enum"
+                "type":
+                  type: "string"
+                  enum:
+                    - "http_eval"
+                "url":
+                  type: "string"
+                "method":
+                  type: "string"
+                  enum:
+                    - "GET"
+                    - "POST"
+                "headers":
+                  type: "object"
+                  additionalProperties:
+                    type: "string"
+                "payload":
+                  type: "object"
+                  additionalProperties: {}
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "boolean"
+                    - "number"
+                    - "string"
+                    - "enum"
+                "code":
+                  type: "string"
+                "type":
+                  type: "string"
+                  enum:
+                    - "python_eval"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "boolean"
+                    - "number"
+                    - "string"
+                    - "enum"
+                "code":
+                  type: "string"
+                "type":
+                  type: "string"
+                  enum:
+                    - "typescript_eval"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+            - type: "object"
+              properties:
+                "enabled":
+                  type: "boolean"
+                  default: true
+                "metadata":
+                  type: "object"
+                  properties:
+                    "required_model_with_tools_support":
+                      type: "boolean"
+                    "required_retrieval_context":
+                      type: "boolean"
+                    "required_expected_output":
+                      type: "boolean"
+                    "supported_on_input_type":
+                      type: "boolean"
+                    "supported_on_output_type":
+                      type: "boolean"
+                "display_name":
+                  type: "string"
+                "description":
+                  type: "string"
+                "guardrail_config":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "boolean"
+                        "value":
+                          type: "boolean"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                      title: "Boolean"
+                    - type: "object"
+                      properties:
+                        "enabled":
+                          type: "boolean"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "number"
+                        "value":
+                          type: "number"
+                        "operator":
+                          type: "string"
+                          enum:
+                            - "eq"
+                            - "ne"
+                            - "gt"
+                            - "gte"
+                            - "lt"
+                            - "lte"
+                      required:
+                        - "enabled"
+                        - "type"
+                        - "value"
+                        - "operator"
+                      title: "Number"
+                "output_type":
+                  type: "string"
+                  enum:
+                    - "boolean"
+                    - "number"
+                    - "string"
+                    - "enum"
+                "type":
+                  type: "string"
+                  enum:
+                    - "function_eval"
+                "function_params":
+                  oneOf:
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains"
+                        "value":
+                          type: "string"
+                      required:
+                        - "type"
+                        - "value"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains_none"
+                        "keywords":
+                          type: "array"
+                          items:
+                            type: "string"
+                      required:
+                        - "type"
+                        - "keywords"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains_all"
+                        "keywords":
+                          type: "array"
+                          items:
+                            type: "string"
+                      required:
+                        - "type"
+                        - "keywords"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains_any"
+                        "keywords":
+                          type: "array"
+                          items:
+                            type: "string"
+                      required:
+                        - "type"
+                        - "keywords"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains_email"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains_url"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "contains_valid_link"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "start_with"
+                        "value":
+                          type: "string"
+                      required:
+                        - "type"
+                        - "value"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "ends_with"
+                        "value":
+                          type: "string"
+                      required:
+                        - "type"
+                        - "value"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "exact_match"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "length_less_than"
+                        "value":
+                          type: "number"
+                      required:
+                        - "type"
+                        - "value"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "length_between"
+                        "min":
+                          type: "number"
+                        "max":
+                          type: "number"
+                      required:
+                        - "type"
+                        - "min"
+                        - "max"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "length_greater_than"
+                        "value":
+                          type: "number"
+                      required:
+                        - "type"
+                        - "value"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "one_line"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "regex"
+                        "pattern":
+                          type: "string"
+                      required:
+                        - "type"
+                        - "pattern"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "is_valid_json"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "moderations_openai"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "moderations_google"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "bert_score"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "bleu_score"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "rouge_n"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "meteor_score"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "cosine_similarity"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "levenshtein_distance"
+                      required:
+                        - "type"
+                "path":
+                  type: "string"
+                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
+                  example: "Default"
+              required:
+                - "type"
+          description: "Optional evaluator configuration overrides for playground testing"
+    "EvaluateResponse":
+      oneOf:
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "string"
+            "value":
+              type:
+                - "string"
+                - "null"
+          required:
+            - "type"
+            - "value"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "number"
+            "value":
+              type:
+                - "number"
+                - "null"
+          required:
+            - "type"
+            - "value"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "boolean"
+            "value":
+              anyOf:
+                - type: "boolean"
+                - type: "string"
+                - type: "number"
+                - type: "null"
+          required:
+            - "type"
+            - "value"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "string_array"
+            "values":
+              type: "array"
+              items:
+                type:
+                  - "string"
+                  - "null"
+          required:
+            - "type"
+            - "values"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "rouge_n"
+            "value":
+              type: "object"
+              properties:
+                "rouge_1":
+                  type: "object"
+                  properties:
+                    "f1":
+                      type: "number"
+                    "precision":
+                      type: "number"
+                    "recall":
+                      type: "number"
+                  required:
+                    - "f1"
+                    - "precision"
+                    - "recall"
+                "rouge_2":
+                  type: "object"
+                  properties:
+                    "f1":
+                      type: "number"
+                    "precision":
+                      type: "number"
+                    "recall":
+                      type: "number"
+                  required:
+                    - "f1"
+                    - "precision"
+                    - "recall"
+                "rouge_l":
+                  type: "object"
+                  properties:
+                    "f1":
+                      type: "number"
+                    "precision":
+                      type: "number"
+                    "recall":
+                      type: "number"
+                  required:
+                    - "f1"
+                    - "precision"
+                    - "recall"
+              required:
+                - "rouge_1"
+                - "rouge_2"
+                - "rouge_l"
+          required:
+            - "type"
+            - "value"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "bert_score"
+            "value":
+              type: "object"
+              properties:
+                "f1":
+                  type: "number"
+                "precision":
+                  type: "number"
+                "recall":
+                  type: "number"
+              required:
+                - "f1"
+                - "precision"
+                - "recall"
+          required:
+            - "type"
+            - "value"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "llm_evaluator"
+            "value":
+              type:
+                - "object"
+                - "null"
+              properties:
+                "workflow_run_id":
+                  type: "string"
+                "value":
+                  anyOf:
+                    - type: "number"
+                    - type: "boolean"
+                    - type: "string"
+                "explanation":
+                  type:
+                    - "string"
+                    - "null"
+              required:
+                - "workflow_run_id"
+                - "value"
+          required:
+            - "type"
+            - "value"
+        - type: "object"
+          properties:
+            "type":
+              type: "string"
+              enum:
+                - "http_eval"
+            "value":
+              type:
+                - "object"
+                - "null"
+              properties:
+                "type":
+                  type: "string"
+                "value":
+                  anyOf:
+                    - type: "number"
+                    - type: "boolean"
+              required:
+                - "type"
+                - "value"
+          required:
+            - "type"
     "HonoApiError":
       type: "object"
       properties:
@@ -12538,7 +13717,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -12546,7 +13725,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -12677,7 +13856,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-06T07:26:58.867Z"
+                          default: "2025-06-07T15:37:56.964Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -12685,7 +13864,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-06T07:26:58.868Z"
+                              default: "2025-06-07T15:37:56.964Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -16750,7 +17929,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-06T07:27:01.978Z"
+                    default: "2025-06-07T15:37:59.886Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -16838,7 +18017,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-06-06T07:27:01.978Z"
+                          default: "2025-06-07T15:37:59.886Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -16905,7 +18084,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-06T07:27:01.978Z"
+                    default: "2025-06-07T15:37:59.886Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -20335,7 +21514,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-06T07:26:58.867Z"
+                          default: "2025-06-07T15:37:56.964Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -20343,7 +21522,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-06T07:26:58.868Z"
+                              default: "2025-06-07T15:37:56.964Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -20467,7 +21646,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -20475,7 +21654,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -20585,7 +21764,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -20593,7 +21772,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -20745,7 +21924,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -20753,7 +21932,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21215,7 +22394,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-06T07:26:58.867Z"
+                          default: "2025-06-07T15:37:56.964Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21223,7 +22402,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-06T07:26:58.868Z"
+                              default: "2025-06-07T15:37:56.964Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21835,7 +23014,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21843,7 +23022,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22177,7 +23356,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22185,7 +23364,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22801,7 +23980,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22809,7 +23988,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -24078,7 +25257,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JX225RQT1GCK2TA7W4J67SX6"
+                          default: "01JX5GNF2GZKQ45P6G56JARM5F"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -24241,7 +25420,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JX225RQV7K6RRPKMCCAFPK1M"
+                    default: "01JX5GNF2H2ZFJA4CAAFSN9JB6"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -24334,7 +25513,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JX225RQVSXGR09XJE38Q6GCK"
+                    default: "01JX5GNF2HB6XTZV4ZQJSZF9Z1"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -24463,7 +25642,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JX225RR0ZX7SSTECTZJFHWP1"
+                    default: "01JX5GNF2JMF3EDCRZ1H98WV3G"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25072,10 +26251,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -25144,10 +26323,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -25213,10 +26392,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -25297,10 +26476,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -25366,10 +26545,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -25666,10 +26845,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -25750,10 +26929,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-06T07:27:01.143Z"
+                              default: "2025-06-07T15:37:59.102Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26135,10 +27314,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26207,10 +27386,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26276,10 +27455,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26360,10 +27539,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26732,10 +27911,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26804,10 +27983,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26873,10 +28052,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -26957,10 +28136,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-06T07:27:01.143Z"
+                        default: "2025-06-07T15:37:59.102Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -29806,7 +30985,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -29814,7 +30993,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -29948,7 +31127,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-06T07:26:58.867Z"
+                    default: "2025-06-07T15:37:56.964Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -29956,7 +31135,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-06T07:26:58.868Z"
+                        default: "2025-06-07T15:37:56.964Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
