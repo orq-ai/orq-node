@@ -80,6 +80,7 @@ import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
 import { tool$filesGet } from "./tools/filesGet.js";
 import { tool$filesList } from "./tools/filesList.js";
+import { tool$getV2ModelsLitellmModels } from "./tools/getV2ModelsLitellmModels.js";
 import { tool$knowledgeCreate } from "./tools/knowledgeCreate.js";
 import { tool$knowledgeCreateChunks } from "./tools/knowledgeCreateChunks.js";
 import { tool$knowledgeCreateDatasource } from "./tools/knowledgeCreateDatasource.js";
@@ -97,6 +98,7 @@ import { tool$knowledgeUpdate } from "./tools/knowledgeUpdate.js";
 import { tool$knowledgeUpdateChunk } from "./tools/knowledgeUpdateChunk.js";
 import { tool$knowledgeUpdateDatasource } from "./tools/knowledgeUpdateDatasource.js";
 import { tool$modelsList } from "./tools/modelsList.js";
+import { tool$postV2ModelsLitellmImport } from "./tools/postV2ModelsLitellmImport.js";
 import { tool$promptsCreate } from "./tools/promptsCreate.js";
 import { tool$promptsDelete } from "./tools/promptsDelete.js";
 import { tool$promptsGetVersion } from "./tools/promptsGetVersion.js";
@@ -118,7 +120,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.8.0-rc.6",
+    version: "3.8.0-rc.7",
   });
 
   const client = new OrqCore({
@@ -150,6 +152,8 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$getV2ModelsLitellmModels);
+  tool(tool$postV2ModelsLitellmImport);
   tool(tool$contactsCreate);
   tool(tool$contactsList);
   tool(tool$contactsRetrieve);

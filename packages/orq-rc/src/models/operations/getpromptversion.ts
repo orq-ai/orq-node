@@ -247,6 +247,7 @@ export const GetPromptVersionProvider = {
   Jina: "jina",
   Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
 } as const;
 export type GetPromptVersionProvider = ClosedEnum<
   typeof GetPromptVersionProvider

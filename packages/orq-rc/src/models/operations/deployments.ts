@@ -315,6 +315,7 @@ export const DeploymentsProvider = {
   Jina: "jina",
   Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 

@@ -198,7 +198,7 @@ export class Knowledge extends ClientSDK {
   async createChunks(
     request: operations.CreateChunkRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
+  ): Promise<Array<operations.CreateChunkResponseBody>> {
     return unwrapAsync(knowledgeCreateChunks(
       this,
       request,

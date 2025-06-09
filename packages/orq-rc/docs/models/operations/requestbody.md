@@ -6,14 +6,27 @@
 import { RequestBody } from "@orq-ai/node/models/operations";
 
 let value: RequestBody = {
-  text: "<value>",
+  modelName: "<value>",
+  litellmParams: {
+    useInPassThrough: true,
+    useLitellmProxy: false,
+    mergeReasoningContentInChoices: false,
+    model: "Sentra",
+  },
+  modelInfo: {
+    id: "<id>",
+    dbModel: true,
+    key: "<key>",
+    litellmProvider: "<value>",
+    mode: "<value>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `text`                                                                                                                  | *string*                                                                                                                | :heavy_check_mark:                                                                                                      | The text content of the chunk                                                                                           |
-| `embedding`                                                                                                             | *number*[]                                                                                                              | :heavy_minus_sign:                                                                                                      | The embedding vector of the chunk. If not provided the chunk will be embedded with the knowledge base embeddings model. |
-| `metadata`                                                                                                              | Record<string, *operations.CreateChunkMetadata*>                                                                        | :heavy_minus_sign:                                                                                                      | Metadata of the chunk                                                                                                   |
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `modelName`                                                          | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `litellmParams`                                                      | [operations.LitellmParams](../../models/operations/litellmparams.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `modelInfo`                                                          | [operations.ModelInfo](../../models/operations/modelinfo.md)         | :heavy_check_mark:                                                   | N/A                                                                  |

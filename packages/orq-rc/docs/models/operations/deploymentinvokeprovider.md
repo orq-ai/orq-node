@@ -7,11 +7,11 @@ The provider used to generate the response
 ```typescript
 import { DeploymentInvokeProvider } from "@orq-ai/node/models/operations";
 
-let value: DeploymentInvokeProvider = "aws";
+let value: DeploymentInvokeProvider = "anyscale";
 ```
 
 ## Values
 
 ```typescript
-"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs"
+"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm"
 ```

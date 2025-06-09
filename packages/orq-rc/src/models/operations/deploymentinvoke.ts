@@ -50,6 +50,7 @@ export const DeploymentInvokeProvider = {
   Jina: "jina",
   Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
 } as const;
 /**
  * The provider used to generate the response

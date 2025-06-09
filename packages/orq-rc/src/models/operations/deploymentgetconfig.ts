@@ -1506,7 +1506,7 @@ export type DeploymentGetConfigReasoningEffort = ClosedEnum<
 /**
  * Model Parameters: Not all parameters apply to every model
  */
-export type ParametersT = {
+export type DeploymentGetConfigParameters = {
   /**
    * Only supported on `chat` and `completion` models.
    */
@@ -1657,7 +1657,7 @@ export type DeploymentGetConfigResponseBody = {
   /**
    * Model Parameters: Not all parameters apply to every model
    */
-  parameters: ParametersT;
+  parameters: DeploymentGetConfigParameters;
   /**
    * A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.
    */
@@ -9045,8 +9045,8 @@ export namespace DeploymentGetConfigReasoningEffort$ {
 }
 
 /** @internal */
-export const ParametersT$inboundSchema: z.ZodType<
-  ParametersT,
+export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
+  DeploymentGetConfigParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -9080,7 +9080,7 @@ export const ParametersT$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ParametersT$Outbound = {
+export type DeploymentGetConfigParameters$Outbound = {
   temperature?: number | undefined;
   maxTokens?: number | undefined;
   topK?: number | undefined;
@@ -9105,10 +9105,10 @@ export type ParametersT$Outbound = {
 };
 
 /** @internal */
-export const ParametersT$outboundSchema: z.ZodType<
-  ParametersT$Outbound,
+export const DeploymentGetConfigParameters$outboundSchema: z.ZodType<
+  DeploymentGetConfigParameters$Outbound,
   z.ZodTypeDef,
-  ParametersT
+  DeploymentGetConfigParameters
 > = z.object({
   temperature: z.number().optional(),
   maxTokens: z.number().optional(),
@@ -9143,26 +9143,32 @@ export const ParametersT$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ParametersT$ {
-  /** @deprecated use `ParametersT$inboundSchema` instead. */
-  export const inboundSchema = ParametersT$inboundSchema;
-  /** @deprecated use `ParametersT$outboundSchema` instead. */
-  export const outboundSchema = ParametersT$outboundSchema;
-  /** @deprecated use `ParametersT$Outbound` instead. */
-  export type Outbound = ParametersT$Outbound;
+export namespace DeploymentGetConfigParameters$ {
+  /** @deprecated use `DeploymentGetConfigParameters$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigParameters$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigParameters$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigParameters$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigParameters$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigParameters$Outbound;
 }
 
-export function parametersToJSON(parametersT: ParametersT): string {
-  return JSON.stringify(ParametersT$outboundSchema.parse(parametersT));
+export function deploymentGetConfigParametersToJSON(
+  deploymentGetConfigParameters: DeploymentGetConfigParameters,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigParameters$outboundSchema.parse(
+      deploymentGetConfigParameters,
+    ),
+  );
 }
 
-export function parametersFromJSON(
+export function deploymentGetConfigParametersFromJSON(
   jsonString: string,
-): SafeParseResult<ParametersT, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfigParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ParametersT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ParametersT' from JSON`,
+    (x) => DeploymentGetConfigParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigParameters' from JSON`,
   );
 }
 
@@ -9312,7 +9318,7 @@ export const DeploymentGetConfigResponseBody$inboundSchema: z.ZodType<
   type: DeploymentGetConfigType$inboundSchema.optional(),
   version: z.string(),
   messages: z.array(z.lazy(() => DeploymentGetConfigMessages$inboundSchema)),
-  parameters: z.lazy(() => ParametersT$inboundSchema),
+  parameters: z.lazy(() => DeploymentGetConfigParameters$inboundSchema),
   tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
 });
 
@@ -9324,7 +9330,7 @@ export type DeploymentGetConfigResponseBody$Outbound = {
   type?: string | undefined;
   version: string;
   messages: Array<DeploymentGetConfigMessages$Outbound>;
-  parameters: ParametersT$Outbound;
+  parameters: DeploymentGetConfigParameters$Outbound;
   tools?: Array<Tools$Outbound> | undefined;
 };
 
@@ -9340,7 +9346,7 @@ export const DeploymentGetConfigResponseBody$outboundSchema: z.ZodType<
   type: DeploymentGetConfigType$outboundSchema.optional(),
   version: z.string(),
   messages: z.array(z.lazy(() => DeploymentGetConfigMessages$outboundSchema)),
-  parameters: z.lazy(() => ParametersT$outboundSchema),
+  parameters: z.lazy(() => DeploymentGetConfigParameters$outboundSchema),
   tools: z.array(z.lazy(() => Tools$outboundSchema)).optional(),
 });
 

@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { contactsCreate } from "@orq-ai/node/funcs/contactsCreate.js";
+import { getV2ModelsLitellmModels } from "@orq-ai/node/funcs/getV2ModelsLitellmModels.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,14 +29,12 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await contactsCreate(orq, {
-    externalId: "<id>",
-  });
+  const res = await getV2ModelsLitellmModels(orq);
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("contactsCreate failed:", res.error);
+    console.log("getV2ModelsLitellmModels failed:", res.error);
   }
 }
 
