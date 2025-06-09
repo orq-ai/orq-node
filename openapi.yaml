@@ -2986,6 +2986,7 @@ components:
             - "jina"
             - "togetherai"
             - "elevenlabs"
+            - "litellm"
           description: "The provider used to generate the response"
         "is_final":
           type: "boolean"
@@ -3535,6 +3536,7 @@ components:
                     - "jina"
                     - "togetherai"
                     - "elevenlabs"
+                    - "litellm"
                 "messages":
                   type: "array"
                   items:
@@ -4111,6 +4113,7 @@ components:
                                 - "jina"
                                 - "togetherai"
                                 - "elevenlabs"
+                                - "litellm"
                             "integration_id":
                               type:
                                 - "string"
@@ -4377,6 +4380,7 @@ components:
                                 - "jina"
                                 - "togetherai"
                                 - "elevenlabs"
+                                - "litellm"
                             "integration_id":
                               type:
                                 - "string"
@@ -4698,6 +4702,7 @@ components:
                             - "jina"
                             - "togetherai"
                             - "elevenlabs"
+                            - "litellm"
                         "integration_id":
                           type:
                             - "string"
@@ -4777,7 +4782,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-09T09:58:56.682Z"
+          default: "2025-06-09T16:37:12.907Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4840,7 +4845,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-06-09T09:58:56.682Z"
+            default: "2025-06-09T16:37:12.907Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4920,7 +4925,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-09T09:58:56.682Z"
+          default: "2025-06-09T16:37:12.907Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4966,7 +4971,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-06-09T09:58:56.682Z"
+                default: "2025-06-09T16:37:12.907Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5009,7 +5014,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-09T09:58:56.682Z"
+          default: "2025-06-09T16:37:12.907Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5179,6 +5184,7 @@ components:
                 - "jina"
                 - "togetherai"
                 - "elevenlabs"
+                - "litellm"
             "integration_id":
               type:
                 - "string"
@@ -5646,6 +5652,7 @@ components:
                 - "jina"
                 - "togetherai"
                 - "elevenlabs"
+                - "litellm"
             "integration_id":
               type:
                 - "string"
@@ -6013,6 +6020,7 @@ components:
                 - "jina"
                 - "togetherai"
                 - "elevenlabs"
+                - "litellm"
             "integration_id":
               type:
                 - "string"
@@ -6382,6 +6390,7 @@ components:
                 - "jina"
                 - "togetherai"
                 - "elevenlabs"
+                - "litellm"
             "integration_id":
               type:
                 - "string"
@@ -6745,6 +6754,7 @@ components:
                           - "jina"
                           - "togetherai"
                           - "elevenlabs"
+                          - "litellm"
                       "integration_id":
                         type:
                           - "string"
@@ -7105,6 +7115,7 @@ components:
                     - "jina"
                     - "togetherai"
                     - "elevenlabs"
+                    - "litellm"
                 "integration_id":
                   type:
                     - "string"
@@ -7495,7 +7506,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-09T09:58:53.740Z"
+          default: "2025-06-09T16:37:09.913Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7503,7 +7514,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-09T09:58:53.740Z"
+              default: "2025-06-09T16:37:09.913Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7613,7 +7624,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-06-09T09:58:53.740Z"
+                default: "2025-06-09T16:37:09.913Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7621,7 +7632,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7728,7 +7739,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-09T09:58:53.740Z"
+          default: "2025-06-09T16:37:09.913Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7736,7 +7747,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-09T09:58:53.740Z"
+              default: "2025-06-09T16:37:09.913Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7837,7 +7848,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-09T09:58:53.740Z"
+          default: "2025-06-09T16:37:09.913Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7845,7 +7856,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-09T09:58:53.740Z"
+              default: "2025-06-09T16:37:09.913Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8056,6 +8067,7 @@ components:
                         - "jina"
                         - "togetherai"
                         - "elevenlabs"
+                        - "litellm"
                     "model":
                       type: "string"
                       description: "The name of the model to use"
@@ -8126,6 +8138,7 @@ components:
                         - "jina"
                         - "togetherai"
                         - "elevenlabs"
+                        - "litellm"
                     "model":
                       type: "string"
                       description: "The name of the model to use"
@@ -8196,6 +8209,7 @@ components:
                         - "jina"
                         - "togetherai"
                         - "elevenlabs"
+                        - "litellm"
                     "model":
                       type: "string"
                       description: "The name of the model to use"
@@ -8995,10 +9009,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9067,10 +9081,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9136,10 +9150,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9220,10 +9234,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9315,10 +9329,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9387,10 +9401,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9456,10 +9470,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9540,10 +9554,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-09T09:58:55.923Z"
+                    default: "2025-06-09T16:37:12.117Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9903,10 +9917,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9975,10 +9989,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10044,10 +10058,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10128,10 +10142,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "updated":
               type: "string"
-              default: "2025-06-09T09:58:55.923Z"
+              default: "2025-06-09T16:37:12.117Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13717,7 +13731,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13725,7 +13739,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13856,7 +13870,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-09T09:58:53.740Z"
+                          default: "2025-06-09T16:37:09.913Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -13864,7 +13878,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-09T09:58:53.740Z"
+                              default: "2025-06-09T16:37:09.913Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14234,6 +14248,7 @@ paths:
                                 - "jina"
                                 - "togetherai"
                                 - "elevenlabs"
+                                - "litellm"
                             "messages":
                               type: "array"
                               items:
@@ -15736,6 +15751,7 @@ paths:
                       - "jina"
                       - "togetherai"
                       - "elevenlabs"
+                      - "litellm"
                     description: "The provider used to generate the response"
                   "is_final":
                     type: "boolean"
@@ -17929,7 +17945,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-09T09:58:56.682Z"
+                    default: "2025-06-09T16:37:12.907Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18017,7 +18033,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-06-09T09:58:56.682Z"
+                          default: "2025-06-09T16:37:12.907Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18084,7 +18100,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-09T09:58:56.682Z"
+                    default: "2025-06-09T16:37:12.907Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18353,6 +18369,7 @@ paths:
                                 - "jina"
                                 - "togetherai"
                                 - "elevenlabs"
+                                - "litellm"
                             "integration_id":
                               type:
                                 - "string"
@@ -18716,6 +18733,7 @@ paths:
                         - "jina"
                         - "togetherai"
                         - "elevenlabs"
+                        - "litellm"
                     "integration_id":
                       type:
                         - "string"
@@ -19090,6 +19108,7 @@ paths:
                           - "jina"
                           - "togetherai"
                           - "elevenlabs"
+                          - "litellm"
                       "integration_id":
                         type:
                           - "string"
@@ -19484,6 +19503,7 @@ paths:
                           - "jina"
                           - "togetherai"
                           - "elevenlabs"
+                          - "litellm"
                       "integration_id":
                         type:
                           - "string"
@@ -19868,6 +19888,7 @@ paths:
                         - "jina"
                         - "togetherai"
                         - "elevenlabs"
+                        - "litellm"
                     "integration_id":
                       type:
                         - "string"
@@ -20238,6 +20259,7 @@ paths:
                           - "jina"
                           - "togetherai"
                           - "elevenlabs"
+                          - "litellm"
                       "integration_id":
                         type:
                           - "string"
@@ -20678,6 +20700,7 @@ paths:
                                     - "jina"
                                     - "togetherai"
                                     - "elevenlabs"
+                                    - "litellm"
                                 "integration_id":
                                   type:
                                     - "string"
@@ -21069,6 +21092,7 @@ paths:
                               - "jina"
                               - "togetherai"
                               - "elevenlabs"
+                              - "litellm"
                           "integration_id":
                             type:
                               - "string"
@@ -21390,6 +21414,941 @@ paths:
                   - "has_more"
       security:
         - ApiKey: []
+  "/v2/models/litellm/models":
+    get:
+      summary: "Get available models from LiteLLM"
+      description: "Fetches all available models from the configured LiteLLM instance"
+      responses:
+        "200":
+          description: "List of available LiteLLM models"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    "model_name":
+                      type: "string"
+                    "litellm_params":
+                      type: "object"
+                      properties:
+                        "use_in_pass_through":
+                          type: "boolean"
+                        "use_litellm_proxy":
+                          type: "boolean"
+                        "merge_reasoning_content_in_choices":
+                          type: "boolean"
+                        "model":
+                          type: "string"
+                      required:
+                        - "use_in_pass_through"
+                        - "use_litellm_proxy"
+                        - "merge_reasoning_content_in_choices"
+                        - "model"
+                    "model_info":
+                      type: "object"
+                      properties:
+                        "id":
+                          type:
+                            - "string"
+                            - "null"
+                        "db_model":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "key":
+                          type:
+                            - "string"
+                            - "null"
+                        "max_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "max_input_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "max_output_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_token":
+                          type:
+                            - "number"
+                            - "null"
+                        "cache_creation_input_token_cost":
+                          type:
+                            - "number"
+                            - "null"
+                        "cache_read_input_token_cost":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_character":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_token_above_128k_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_token_above_200k_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_query":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_second":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_audio_token":
+                          type:
+                            - "number"
+                            - "null"
+                        "input_cost_per_token_batches":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_token_batches":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_token":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_audio_token":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_character":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_reasoning_token":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_token_above_128k_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_character_above_128k_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_token_above_200k_tokens":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_second":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_cost_per_image":
+                          type:
+                            - "number"
+                            - "null"
+                        "output_vector_size":
+                          type:
+                            - "number"
+                            - "null"
+                        "litellm_provider":
+                          type:
+                            - "string"
+                            - "null"
+                        "mode":
+                          type:
+                            - "string"
+                            - "null"
+                        "supports_system_messages":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_response_schema":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_vision":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_function_calling":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_tool_choice":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_assistant_prefill":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_prompt_caching":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_audio_input":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_audio_output":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_pdf_input":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_embedding_image_input":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_native_streaming":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_web_search":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_url_context":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_reasoning":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "supports_computer_use":
+                          type:
+                            - "boolean"
+                            - "null"
+                        "search_context_cost_per_query":
+                          type:
+                            - "number"
+                            - "null"
+                        "tpm":
+                          type:
+                            - "number"
+                            - "null"
+                        "rpm":
+                          type:
+                            - "number"
+                            - "null"
+                        "supported_openai_params":
+                          type:
+                            - "array"
+                            - "null"
+                          items:
+                            type: "string"
+                      required:
+                        - "id"
+                        - "db_model"
+                        - "key"
+                        - "litellm_provider"
+                        - "mode"
+                  required:
+                    - "model_name"
+                    - "litellm_params"
+                    - "model_info"
+      security:
+        - ApiKey: []
+  "/v2/models/litellm/import":
+    post:
+      summary: "Import models from LiteLLM"
+      description: "Imports selected models from LiteLLM instance into the model garden"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  "model_name":
+                    type: "string"
+                  "litellm_params":
+                    type: "object"
+                    properties:
+                      "use_in_pass_through":
+                        type: "boolean"
+                      "use_litellm_proxy":
+                        type: "boolean"
+                      "merge_reasoning_content_in_choices":
+                        type: "boolean"
+                      "model":
+                        type: "string"
+                    required:
+                      - "use_in_pass_through"
+                      - "use_litellm_proxy"
+                      - "merge_reasoning_content_in_choices"
+                      - "model"
+                  "model_info":
+                    type: "object"
+                    properties:
+                      "id":
+                        type:
+                          - "string"
+                          - "null"
+                      "db_model":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "key":
+                        type:
+                          - "string"
+                          - "null"
+                      "max_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "max_input_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "max_output_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_token":
+                        type:
+                          - "number"
+                          - "null"
+                      "cache_creation_input_token_cost":
+                        type:
+                          - "number"
+                          - "null"
+                      "cache_read_input_token_cost":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_character":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_token_above_128k_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_token_above_200k_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_query":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_second":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_audio_token":
+                        type:
+                          - "number"
+                          - "null"
+                      "input_cost_per_token_batches":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_token_batches":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_token":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_audio_token":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_character":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_reasoning_token":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_token_above_128k_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_character_above_128k_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_token_above_200k_tokens":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_second":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_cost_per_image":
+                        type:
+                          - "number"
+                          - "null"
+                      "output_vector_size":
+                        type:
+                          - "number"
+                          - "null"
+                      "litellm_provider":
+                        type:
+                          - "string"
+                          - "null"
+                      "mode":
+                        type:
+                          - "string"
+                          - "null"
+                      "supports_system_messages":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_response_schema":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_vision":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_function_calling":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_tool_choice":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_assistant_prefill":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_prompt_caching":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_audio_input":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_audio_output":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_pdf_input":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_embedding_image_input":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_native_streaming":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_web_search":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_url_context":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_reasoning":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "supports_computer_use":
+                        type:
+                          - "boolean"
+                          - "null"
+                      "search_context_cost_per_query":
+                        type:
+                          - "number"
+                          - "null"
+                      "tpm":
+                        type:
+                          - "number"
+                          - "null"
+                      "rpm":
+                        type:
+                          - "number"
+                          - "null"
+                      "supported_openai_params":
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                    required:
+                      - "id"
+                      - "db_model"
+                      - "key"
+                      - "litellm_provider"
+                      - "mode"
+                required:
+                  - "model_name"
+                  - "litellm_params"
+                  - "model_info"
+      responses:
+        "200":
+          description: "Successfully imported models"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    "id":
+                      type: "string"
+                      format: "uuid"
+                      description: "Unique identifier of the model"
+                    "created":
+                      type: "string"
+                      format: "date-time"
+                      description: "A timestamp reflecting when the model was created"
+                    "updated":
+                      type: "string"
+                      format: "date-time"
+                      description: "Indicates the last time the model was updated"
+                    "display_name":
+                      type: "string"
+                      maxLength: 128
+                      description: "The display name of the model in the UI"
+                    "model_id":
+                      type: "string"
+                      maxLength: 256
+                      description: "The model id for the provider"
+                    "model_revision":
+                      type: "string"
+                      maxLength: 256
+                      description: "The current revision of the model"
+                    "model_developer":
+                      type: "string"
+                      description: "The developer of the model"
+                    "model_family":
+                      type: "string"
+                      description: "The model family"
+                    "model_type":
+                      type: "string"
+                      enum:
+                        - "chat"
+                        - "completion"
+                        - "embedding"
+                        - "vision"
+                        - "image"
+                        - "tts"
+                        - "stt"
+                        - "rerank"
+                        - "moderations"
+                      description: "The modality of the model"
+                    "provider":
+                      type: "string"
+                      enum:
+                        - "cohere"
+                        - "openai"
+                        - "anthropic"
+                        - "huggingface"
+                        - "replicate"
+                        - "google"
+                        - "google-ai"
+                        - "azure"
+                        - "aws"
+                        - "anyscale"
+                        - "perplexity"
+                        - "groq"
+                        - "fal"
+                        - "leonardoai"
+                        - "nvidia"
+                        - "jina"
+                        - "togetherai"
+                        - "elevenlabs"
+                        - "litellm"
+                      description: "The provider of the AI service"
+                    "is_active":
+                      type: "boolean"
+                      default: true
+                      description: "Indicates if the model is active"
+                    "input_cost":
+                      type: "number"
+                      description: "The cost per 1000 input tokens"
+                    "input_currency":
+                      type: "string"
+                      maxLength: 3
+                      default: "USD"
+                      description: "Input currency"
+                    "output_cost":
+                      type: "number"
+                      description: "The cost per 1000 output tokens"
+                    "output_currency":
+                      type: "string"
+                      maxLength: 3
+                      default: "USD"
+                      description: "Output currency"
+                    "description":
+                      type: "string"
+                      description: "Description"
+                    "has_functions":
+                      type: "boolean"
+                      default: false
+                      description: "Indicates if this model supports function calling"
+                    "has_cpu_pricing":
+                      type: "boolean"
+                      default: false
+                      description: "Indicates if this model pricing is based on time"
+                    "pricing_url":
+                      type: "string"
+                      format: "uri"
+                      description: "The url of the pricing for the model"
+                    "docs_url":
+                      type: "string"
+                      format: "uri"
+                      description: "The link for the endpoint documentation"
+                    "enabled":
+                      type: "boolean"
+                      description: "Indicates if the model is enabled"
+                    "enabled_for_endpoints":
+                      type: "boolean"
+                      default: false
+                      description: "If the value is `true` the model will be visible in the Prompt Studio"
+                    "enabled_for_playground":
+                      type: "boolean"
+                      default: false
+                      description: "If the value is `true` the model will be visible in the Playground"
+                    "owner":
+                      type: "string"
+                      maxLength: 128
+                      default: "system"
+                      description: "The owner of the model. If the value is `system` the model is provider by Orq.ai, otherwise is a private model"
+                    "metadata":
+                      type: "object"
+                      properties:
+                        "context_window":
+                          type: "number"
+                        "is_private":
+                          type: "boolean"
+                        "region":
+                          type: "string"
+                          enum:
+                            - "us"
+                            - "europe"
+                            - "rest"
+                        "has_functions":
+                          type: "boolean"
+                        "strict_tool_supported":
+                          type: "boolean"
+                        "json_mode_response_format_supported":
+                          type: "boolean"
+                        "json_schema_response_format_supported":
+                          type: "boolean"
+                        "support_system_message":
+                          type: "boolean"
+                        "streaming_not_supported":
+                          type: "boolean"
+                        "db_match":
+                          type: "boolean"
+                          default: false
+                          description: "Indicates if the model was in our database during creation of the private model"
+                        "image_token_cost":
+                          type: "number"
+                      required:
+                        - "is_private"
+                        - "region"
+                    "configuration":
+                      oneOf:
+                        - type: "object"
+                          properties:
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "azure"
+                            "endpoint":
+                              type: "string"
+                            "api_key":
+                              type: "string"
+                          required:
+                            - "provider"
+                            - "endpoint"
+                            - "api_key"
+                        - type: "object"
+                          properties:
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "google"
+                            "service_account":
+                              type: "string"
+                            "region":
+                              type: "string"
+                            "location":
+                              type: "string"
+                            "should_use_beta_features":
+                              type: "boolean"
+                            "project_id":
+                              type: "string"
+                            "is_openai_compatible":
+                              type: "boolean"
+                            "is_tuned_model":
+                              type: "boolean"
+                          required:
+                            - "provider"
+                            - "service_account"
+                            - "region"
+                            - "location"
+                            - "should_use_beta_features"
+                            - "project_id"
+                        - type: "object"
+                          properties:
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "aws"
+                            "region":
+                              type: "string"
+                          required:
+                            - "provider"
+                            - "region"
+                        - type: "object"
+                          properties:
+                            "provider":
+                              type: "string"
+                              enum:
+                                - "nvidia"
+                            "host_url":
+                              type: "string"
+                          required:
+                            - "provider"
+                            - "host_url"
+                      description: "The configuration of the model"
+                    "parameters":
+                      type: "array"
+                      items:
+                        oneOf:
+                          - type: "object"
+                            properties:
+                              "id":
+                                type: "string"
+                                format: "uuid"
+                              "name":
+                                type: "string"
+                              "parameter":
+                                type: "string"
+                                enum:
+                                  - "topK"
+                                  - "topP"
+                                  - "temperature"
+                                  - "frequencyPenalty"
+                                  - "presencePenalty"
+                                  - "maxTokens"
+                                  - "numImages"
+                                  - "format"
+                                  - "dimensions"
+                                  - "quality"
+                                  - "style"
+                                  - "seed"
+                                  - "photoRealVersion"
+                                  - "responseFormat"
+                                  - "reasoningEffort"
+                                  - "budgetTokens"
+                                description: "Parameters value"
+                              "description":
+                                type: "string"
+                              "hints":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "is_active":
+                                type: "boolean"
+                              "position":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "parameter_type":
+                                type: "string"
+                                enum:
+                                  - "slider"
+                              "config":
+                                type: "object"
+                                properties:
+                                  "default":
+                                    type: "number"
+                                  "max":
+                                    type: "number"
+                                  "min":
+                                    type: "number"
+                                  "step":
+                                    type: "number"
+                                required:
+                                  - "default"
+                                  - "max"
+                                  - "min"
+                                  - "step"
+                            required:
+                              - "id"
+                              - "name"
+                              - "parameter"
+                              - "description"
+                              - "is_active"
+                              - "parameter_type"
+                              - "config"
+                          - type: "object"
+                            properties:
+                              "id":
+                                type: "string"
+                                format: "uuid"
+                              "name":
+                                type: "string"
+                              "parameter":
+                                type: "string"
+                                enum:
+                                  - "topK"
+                                  - "topP"
+                                  - "temperature"
+                                  - "frequencyPenalty"
+                                  - "presencePenalty"
+                                  - "maxTokens"
+                                  - "numImages"
+                                  - "format"
+                                  - "dimensions"
+                                  - "quality"
+                                  - "style"
+                                  - "seed"
+                                  - "photoRealVersion"
+                                  - "responseFormat"
+                                  - "reasoningEffort"
+                                  - "budgetTokens"
+                                description: "Parameters value"
+                              "description":
+                                type: "string"
+                              "hints":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "is_active":
+                                type: "boolean"
+                              "position":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "parameter_type":
+                                type: "string"
+                                enum:
+                                  - "switch"
+                              "config":
+                                type: "object"
+                                properties:
+                                  "default":
+                                    type: "boolean"
+                                required:
+                                  - "default"
+                            required:
+                              - "id"
+                              - "name"
+                              - "parameter"
+                              - "description"
+                              - "is_active"
+                              - "parameter_type"
+                              - "config"
+                          - type: "object"
+                            properties:
+                              "id":
+                                type: "string"
+                                format: "uuid"
+                              "name":
+                                type: "string"
+                              "parameter":
+                                type: "string"
+                                enum:
+                                  - "topK"
+                                  - "topP"
+                                  - "temperature"
+                                  - "frequencyPenalty"
+                                  - "presencePenalty"
+                                  - "maxTokens"
+                                  - "numImages"
+                                  - "format"
+                                  - "dimensions"
+                                  - "quality"
+                                  - "style"
+                                  - "seed"
+                                  - "photoRealVersion"
+                                  - "responseFormat"
+                                  - "reasoningEffort"
+                                  - "budgetTokens"
+                                description: "Parameters value"
+                              "description":
+                                type: "string"
+                              "hints":
+                                type:
+                                  - "string"
+                                  - "null"
+                              "is_active":
+                                type: "boolean"
+                              "position":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "parameter_type":
+                                type: "string"
+                                enum:
+                                  - "select"
+                              "config":
+                                type: "object"
+                                properties:
+                                  "default":
+                                    type: "string"
+                                  "options":
+                                    type: "array"
+                                    items:
+                                      type: "object"
+                                      properties:
+                                        "display_name":
+                                          type: "string"
+                                        "value":
+                                          type: "string"
+                                      required:
+                                        - "display_name"
+                                        - "value"
+                                required:
+                                  - "default"
+                                  - "options"
+                            required:
+                              - "id"
+                              - "name"
+                              - "parameter"
+                              - "description"
+                              - "is_active"
+                              - "parameter_type"
+                              - "config"
+                      description: "The parameters of the model"
+                  required:
+                    - "id"
+                    - "created"
+                    - "updated"
+                    - "display_name"
+                    - "model_id"
+                    - "model_developer"
+                    - "model_family"
+                    - "model_type"
+                    - "provider"
+                    - "input_cost"
+                    - "output_cost"
+                    - "enabled"
+                    - "metadata"
+                    - "parameters"
+      security:
+        - ApiKey: []
   "/v2/datasets":
     get:
       tags:
@@ -21514,7 +22473,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-09T09:58:53.740Z"
+                          default: "2025-06-09T16:37:09.913Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21522,7 +22481,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-09T09:58:53.740Z"
+                              default: "2025-06-09T16:37:09.913Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21646,7 +22605,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21654,7 +22613,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21764,7 +22723,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21772,7 +22731,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21924,7 +22883,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21932,7 +22891,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22394,7 +23353,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-09T09:58:53.740Z"
+                          default: "2025-06-09T16:37:09.913Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22402,7 +23361,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-09T09:58:53.740Z"
+                              default: "2025-06-09T16:37:09.913Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -23014,7 +23973,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23022,7 +23981,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23356,7 +24315,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23364,7 +24323,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23980,7 +24939,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23988,7 +24947,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -25257,7 +26216,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JXA222QNVXZ7H8NW962BVBM9"
+                          default: "01JXARVATW5D4RWPG5NKE5WPT2"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -25420,7 +26379,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JXA222QQY1RSARZFRG2MN62R"
+                    default: "01JXARVATWWB2J80FC0KSW3PZ3"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25513,7 +26472,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JXA222QPC86XE3833XX8BYCF"
+                    default: "01JXARVATWNYNX6APB2BR3P2NG"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25642,7 +26601,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JXA222QRZYTXJMXQMZTPN1DH"
+                    default: "01JXARVATXD7H5FWA9Y03FQPK6"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26251,10 +27210,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26323,10 +27282,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26392,10 +27351,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26476,10 +27435,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26545,10 +27504,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26845,10 +27804,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26929,10 +27888,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-09T09:58:55.923Z"
+                              default: "2025-06-09T16:37:12.117Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27314,10 +28273,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27386,10 +28345,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27455,10 +28414,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27539,10 +28498,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27911,10 +28870,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27983,10 +28942,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28052,10 +29011,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28136,10 +29095,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-09T09:58:55.923Z"
+                        default: "2025-06-09T16:37:12.117Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -30985,7 +31944,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -30993,7 +31952,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -31127,7 +32086,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-09T09:58:53.740Z"
+                    default: "2025-06-09T16:37:09.913Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31135,7 +32094,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-09T09:58:53.740Z"
+                        default: "2025-06-09T16:37:09.913Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
