@@ -2481,7 +2481,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-10T02:00:58.492Z",
+    "2025-06-10T06:26:33.054Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2539,7 +2539,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-10T02:00:58.492Z"))
+  updated: z.date().default(() => new Date("2025-06-10T06:26:33.054Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
