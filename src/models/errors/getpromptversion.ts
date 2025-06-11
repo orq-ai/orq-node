@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { OrqError } from "./orqerror.js";
 
 /**
  * Not Found - The prompt or prompt version does not exist.
@@ -14,15 +15,18 @@ export type GetPromptVersionResponseBodyData = {
 /**
  * Not Found - The prompt or prompt version does not exist.
  */
-export class GetPromptVersionResponseBody extends Error {
+export class GetPromptVersionResponseBody extends OrqError {
   /** The original data that was passed to this error instance. */
   data$: GetPromptVersionResponseBodyData;
 
-  constructor(err: GetPromptVersionResponseBodyData) {
+  constructor(
+    err: GetPromptVersionResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
 
     this.name = "GetPromptVersionResponseBody";
@@ -36,9 +40,16 @@ export const GetPromptVersionResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   message: z.string(),
+  request$: z.instanceof(Request),
+  response$: z.instanceof(Response),
+  body$: z.string(),
 })
   .transform((v) => {
-    return new GetPromptVersionResponseBody(v);
+    return new GetPromptVersionResponseBody(v, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

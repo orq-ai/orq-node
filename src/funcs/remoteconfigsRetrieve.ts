@@ -10,7 +10,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,6 +17,8 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { OrqError } from "../models/errors/orqerror.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -33,13 +34,14 @@ export function remoteconfigsRetrieve(
 ): APIPromise<
   Result<
     operations.RemoteConfigsGetConfigResponseBody,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | OrqError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -57,13 +59,14 @@ async function $do(
   [
     Result<
       operations.RemoteConfigsGetConfigResponseBody,
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | OrqError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -137,18 +140,19 @@ async function $do(
 
   const [result] = await M.match<
     operations.RemoteConfigsGetConfigResponseBody,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | OrqError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json(200, operations.RemoteConfigsGetConfigResponseBody$inboundSchema),
     M.fail([400, 401, 404, "4XX"]),
     M.fail([500, "5XX"]),
-  )(response);
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

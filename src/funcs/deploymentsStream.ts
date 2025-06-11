@@ -12,7 +12,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -20,6 +19,8 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import { OrqError } from "../models/errors/orqerror.js";
+import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
@@ -38,13 +39,14 @@ export function deploymentsStream(
 ): APIPromise<
   Result<
     EventStream<operations.DeploymentStreamResponseBody>,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | OrqError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -62,13 +64,14 @@ async function $do(
   [
     Result<
       EventStream<operations.DeploymentStreamResponseBody>,
-      | APIError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | OrqError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -147,13 +150,14 @@ async function $do(
 
   const [result] = await M.match<
     EventStream<operations.DeploymentStreamResponseBody>,
-    | APIError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | OrqError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.sse(
       200,
@@ -171,7 +175,7 @@ async function $do(
     ),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response);
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

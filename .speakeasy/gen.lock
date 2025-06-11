@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 48c983353d8adb1e92b2624d990fb18c
+  docChecksum: e217b0e4c8d5f703545071ebbac06745
   docVersion: "2.0"
-  speakeasyVersion: 1.556.2
-  generationVersion: 2.621.3
-  releaseVersion: 3.6.11
-  configChecksum: f8a4bc952fad9912bab9010f145dae1f
+  speakeasyVersion: 1.561.0
+  generationVersion: 2.628.0
+  releaseVersion: 3.6.12
+  configChecksum: a0b0749e136c1336dc092bcba4d043d4
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -14,7 +14,7 @@ features:
   typescript:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.10
+    core: 3.21.11
     defaultEnabledRetries: 0.1.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -37,7 +37,7 @@ features:
     sdkHooks: 0.3.0
     serverEvents: 0.1.5
     serverEventsSentinels: 0.1.0
-    unions: 2.85.8
+    unions: 2.85.9
     uploadStreams: 0.1.0
 generatedFiles:
   - .gitattributes
@@ -1373,6 +1373,8 @@ generatedFiles:
   - src/models/errors/honoapierror.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
+  - src/models/errors/orqerror.ts
+  - src/models/errors/responsevalidationerror.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/errors/updateprompt.ts
   - src/models/operations/bulkcreatedatapoints.ts
@@ -1455,11 +1457,17 @@ examples:
         application/json: {"external_id": "<id>"}
       responses:
         "200":
-          application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-11T21:56:34.577Z"}
   CreateFeedback:
     "":
       requestBody:
         application/json: {"property": "rating", "value": ["good"], "trace_id": "67HTZ65Z9W91HSF51CW68KK1QH"}
+      responses:
+        "200":
+          application/json: {"property": "<value>", "value": "<value>", "trace_id": "<id>", "id": "<id>"}
+    speakeasy-default-create-feedback:
+      requestBody:
+        application/json: {"property": "<value>", "value": "<value>", "trace_id": "<id>"}
       responses:
         "200":
           application/json: {"property": "<value>", "value": "<value>", "trace_id": "<id>", "id": "<id>"}
@@ -1507,7 +1515,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-06-05T22:08:11.074Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-06-11T21:56:37.320Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -1523,7 +1531,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-06-05T22:08:11.074Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-06-11T21:56:37.320Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -1614,7 +1622,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-06-11T21:56:34.577Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -1622,7 +1630,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-06-11T21:56:34.577Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -1634,7 +1642,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-06-11T21:56:34.577Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -1659,7 +1667,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-11T21:56:34.577Z"}
   RetrieveDatapoint:
     speakeasy-default-retrieve-datapoint:
       parameters:
@@ -1668,7 +1676,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-11T21:56:34.577Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -1679,7 +1687,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-05T22:08:08.052Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-11T21:56:34.577Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -1762,7 +1770,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01JX126FMWDFPHVEHKJJVQK9GS", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01JXGFXKSBFPB2M5M1Q5TD17W0", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -1771,7 +1779,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01JX126FMVGBD6183BB2JZ79H5", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01JXGFXKSABSRM0CN4YEJGC62R", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -1788,7 +1796,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01JX126FMX3WE2Z5HDBMDGCZTB", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01JXGFXKSC5XGJT53ATDVQHKRT", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
