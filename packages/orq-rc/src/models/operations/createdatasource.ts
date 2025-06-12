@@ -751,7 +751,7 @@ export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01JXJ2DR3S8WP4TRSWDNC3QYS3"),
+  _id: z.string().default("01JXJ5J5EJW9Y2N9VWPFPE36ZM"),
   display_name: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$inboundSchema,
@@ -795,7 +795,7 @@ export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01JXJ2DR3S8WP4TRSWDNC3QYS3"),
+  id: z.string().default("01JXJ5J5EJW9Y2N9VWPFPE36ZM"),
   displayName: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$outboundSchema,
