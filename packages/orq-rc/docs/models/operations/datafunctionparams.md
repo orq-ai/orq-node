@@ -46,34 +46,34 @@ const value: operations.FunctionParams4 = {
 };
 ```
 
-### `operations.FunctionParams5`
+### `operations.Five`
 
 ```typescript
-const value: operations.FunctionParams5 = {
+const value: operations.Five = {
   type: "contains_email",
 };
 ```
 
-### `operations.FunctionParams6`
+### `operations.Six`
 
 ```typescript
-const value: operations.FunctionParams6 = {
+const value: operations.Six = {
   type: "contains_url",
 };
 ```
 
-### `operations.FunctionParams7`
+### `operations.Seven`
 
 ```typescript
-const value: operations.FunctionParams7 = {
+const value: operations.Seven = {
   type: "contains_valid_link",
 };
 ```
 
-### `operations.FunctionParams8`
+### `operations.Eight`
 
 ```typescript
-const value: operations.FunctionParams8 = {
+const value: operations.Eight = {
   type: "start_with",
   value: "<value>",
 };

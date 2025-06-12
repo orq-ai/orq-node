@@ -6,7 +6,7 @@
 import { EvalsRagasFaithfulnessRequestBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasFaithfulnessRequestBody = {
-  input: "<value>",
+  query: "<value>",
   output: "<value>",
   model: "XTS",
 };
@@ -16,7 +16,7 @@ let value: EvalsRagasFaithfulnessRequestBody = {
 
 | Field                                 | Type                                  | Required                              | Description                           |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `input`                               | *string*                              | :heavy_check_mark:                    | Latest user message                   |
+| `query`                               | *string*                              | :heavy_check_mark:                    | Latest user message                   |
 | `output`                              | *string*                              | :heavy_check_mark:                    | The generated response from the model |
 | `model`                               | *string*                              | :heavy_check_mark:                    | N/A                                   |
 | `retrievals`                          | *string*[]                            | :heavy_minus_sign:                    | Knowledge base retrievals             |

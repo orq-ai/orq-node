@@ -11,7 +11,7 @@ export type EvalsRagasCoherenceRequestBody = {
   /**
    * Latest user message
    */
-  input: string;
+  query: string;
   /**
    * The generated response from the model
    */
@@ -36,7 +36,7 @@ export const EvalsRagasCoherenceRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   reference: z.string().optional(),
@@ -44,7 +44,7 @@ export const EvalsRagasCoherenceRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type EvalsRagasCoherenceRequestBody$Outbound = {
-  input: string;
+  query: string;
   output: string;
   model: string;
   reference?: string | undefined;
@@ -56,7 +56,7 @@ export const EvalsRagasCoherenceRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvalsRagasCoherenceRequestBody
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   reference: z.string().optional(),

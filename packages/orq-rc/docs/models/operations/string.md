@@ -1,11 +1,11 @@
-# ResponseBody1
+# String
 
 ## Example Usage
 
 ```typescript
-import { ResponseBody1 } from "@orq-ai/node/models/operations";
+import { String } from "@orq-ai/node/models/operations";
 
-let value: ResponseBody1 = {
+let value: String = {
   type: "string",
   value: "<value>",
 };

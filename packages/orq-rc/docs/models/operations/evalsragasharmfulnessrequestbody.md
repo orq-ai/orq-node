@@ -6,7 +6,7 @@
 import { EvalsRagasHarmfulnessRequestBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsRagasHarmfulnessRequestBody = {
-  input: "<value>",
+  query: "<value>",
   output: "<value>",
   model: "Explorer",
 };
@@ -16,6 +16,6 @@ let value: EvalsRagasHarmfulnessRequestBody = {
 
 | Field                                 | Type                                  | Required                              | Description                           |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `input`                               | *string*                              | :heavy_check_mark:                    | Latest user message                   |
+| `query`                               | *string*                              | :heavy_check_mark:                    | Latest user message                   |
 | `output`                              | *string*                              | :heavy_check_mark:                    | The generated response from the model |
 | `model`                               | *string*                              | :heavy_check_mark:                    | N/A                                   |

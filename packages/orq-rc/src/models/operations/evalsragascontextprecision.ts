@@ -11,7 +11,7 @@ export type EvalsRagasContextPrecisionRequestBody = {
   /**
    * Latest user message
    */
-  input: string;
+  query: string;
   /**
    * The generated response from the model
    */
@@ -40,7 +40,7 @@ export const EvalsRagasContextPrecisionRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   reference: z.string().optional(),
@@ -49,7 +49,7 @@ export const EvalsRagasContextPrecisionRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type EvalsRagasContextPrecisionRequestBody$Outbound = {
-  input: string;
+  query: string;
   output: string;
   model: string;
   reference?: string | undefined;
@@ -62,7 +62,7 @@ export const EvalsRagasContextPrecisionRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvalsRagasContextPrecisionRequestBody
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   reference: z.string().optional(),

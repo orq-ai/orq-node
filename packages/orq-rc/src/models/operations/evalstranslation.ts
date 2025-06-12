@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EvalsTranslationRequestBody = {
-  input: string;
+  query: string;
   output: string;
   model: string;
 };
@@ -33,14 +33,14 @@ export const EvalsTranslationRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
 });
 
 /** @internal */
 export type EvalsTranslationRequestBody$Outbound = {
-  input: string;
+  query: string;
   output: string;
   model: string;
 };
@@ -51,7 +51,7 @@ export const EvalsTranslationRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvalsTranslationRequestBody
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
 });

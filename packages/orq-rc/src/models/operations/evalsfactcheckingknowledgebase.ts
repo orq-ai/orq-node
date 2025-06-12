@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EvalsFactCheckingKnowledgeBaseRequestBody = {
-  input: string;
+  query: string;
   output: string;
   model: string;
   reference: string;
@@ -37,7 +37,7 @@ export const EvalsFactCheckingKnowledgeBaseRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   reference: z.string(),
@@ -45,7 +45,7 @@ export const EvalsFactCheckingKnowledgeBaseRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type EvalsFactCheckingKnowledgeBaseRequestBody$Outbound = {
-  input: string;
+  query: string;
   output: string;
   model: string;
   reference: string;
@@ -58,7 +58,7 @@ export const EvalsFactCheckingKnowledgeBaseRequestBody$outboundSchema:
     z.ZodTypeDef,
     EvalsFactCheckingKnowledgeBaseRequestBody
   > = z.object({
-    input: z.string(),
+    query: z.string(),
     output: z.string(),
     model: z.string(),
     reference: z.string(),

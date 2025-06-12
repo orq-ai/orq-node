@@ -11,7 +11,7 @@ export type EvalsRagasResponseRelevancyRequestBody = {
   /**
    * Latest user message
    */
-  input: string;
+  query: string;
   /**
    * The generated response from the model
    */
@@ -36,7 +36,7 @@ export const EvalsRagasResponseRelevancyRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   retrievals: z.array(z.string()).optional(),
@@ -44,7 +44,7 @@ export const EvalsRagasResponseRelevancyRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type EvalsRagasResponseRelevancyRequestBody$Outbound = {
-  input: string;
+  query: string;
   output: string;
   model: string;
   retrievals?: Array<string> | undefined;
@@ -56,7 +56,7 @@ export const EvalsRagasResponseRelevancyRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvalsRagasResponseRelevancyRequestBody
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
   retrievals: z.array(z.string()).optional(),

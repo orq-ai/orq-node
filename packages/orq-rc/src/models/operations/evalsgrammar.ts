@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EvalsGrammarRequestBody = {
-  input: string;
+  query: string;
   model: string;
 };
 
@@ -32,13 +32,13 @@ export const EvalsGrammarRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   model: z.string(),
 });
 
 /** @internal */
 export type EvalsGrammarRequestBody$Outbound = {
-  input: string;
+  query: string;
   model: string;
 };
 
@@ -48,7 +48,7 @@ export const EvalsGrammarRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvalsGrammarRequestBody
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   model: z.string(),
 });
 

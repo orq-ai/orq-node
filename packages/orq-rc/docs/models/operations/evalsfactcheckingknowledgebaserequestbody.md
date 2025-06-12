@@ -6,7 +6,7 @@
 import { EvalsFactCheckingKnowledgeBaseRequestBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsFactCheckingKnowledgeBaseRequestBody = {
-  input: "<value>",
+  query: "<value>",
   output: "<value>",
   model: "Silverado",
   reference: "<value>",
@@ -17,7 +17,7 @@ let value: EvalsFactCheckingKnowledgeBaseRequestBody = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `input`            | *string*           | :heavy_check_mark: | N/A                |
+| `query`            | *string*           | :heavy_check_mark: | N/A                |
 | `output`           | *string*           | :heavy_check_mark: | N/A                |
 | `model`            | *string*           | :heavy_check_mark: | N/A                |
 | `reference`        | *string*           | :heavy_check_mark: | N/A                |

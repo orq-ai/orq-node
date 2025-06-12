@@ -1,13 +1,13 @@
-# ResponseBody2
+# ResponseBodyNumber
 
 ## Example Usage
 
 ```typescript
-import { ResponseBody2 } from "@orq-ai/node/models/operations";
+import { ResponseBodyNumber } from "@orq-ai/node/models/operations";
 
-let value: ResponseBody2 = {
+let value: ResponseBodyNumber = {
   type: "number",
-  value: 6694.72,
+  value: null,
 };
 ```
 

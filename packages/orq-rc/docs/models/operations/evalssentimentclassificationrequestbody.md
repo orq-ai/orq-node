@@ -6,7 +6,7 @@
 import { EvalsSentimentClassificationRequestBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsSentimentClassificationRequestBody = {
-  input: "<value>",
+  query: "<value>",
   output: "<value>",
   model: "LeBaron",
 };
@@ -16,6 +16,6 @@ let value: EvalsSentimentClassificationRequestBody = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `input`            | *string*           | :heavy_check_mark: | N/A                |
+| `query`            | *string*           | :heavy_check_mark: | N/A                |
 | `output`           | *string*           | :heavy_check_mark: | N/A                |
 | `model`            | *string*           | :heavy_check_mark: | N/A                |

@@ -1,11 +1,11 @@
-# ResponseBody3
+# ResponseBodyBoolean
 
 ## Example Usage
 
 ```typescript
-import { ResponseBody3 } from "@orq-ai/node/models/operations";
+import { ResponseBodyBoolean } from "@orq-ai/node/models/operations";
 
-let value: ResponseBody3 = {
+let value: ResponseBodyBoolean = {
   type: "boolean",
   value: "<value>",
 };

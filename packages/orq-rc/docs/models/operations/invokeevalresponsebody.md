@@ -5,46 +5,46 @@ Returns the result of the evaluator run
 
 ## Supported Types
 
-### `operations.ResponseBody1`
+### `operations.String`
 
 ```typescript
-const value: operations.ResponseBody1 = {
+const value: operations.String = {
   type: "string",
   value: "<value>",
 };
 ```
 
-### `operations.ResponseBody2`
+### `operations.ResponseBodyNumber`
 
 ```typescript
-const value: operations.ResponseBody2 = {
+const value: operations.ResponseBodyNumber = {
   type: "number",
-  value: 6694.72,
+  value: null,
 };
 ```
 
-### `operations.ResponseBody3`
+### `operations.ResponseBodyBoolean`
 
 ```typescript
-const value: operations.ResponseBody3 = {
+const value: operations.ResponseBodyBoolean = {
   type: "boolean",
   value: "<value>",
 };
 ```
 
-### `operations.ResponseBody4`
+### `operations.StringArray`
 
 ```typescript
-const value: operations.ResponseBody4 = {
+const value: operations.StringArray = {
   type: "string_array",
   values: [],
 };
 ```
 
-### `operations.Five`
+### `operations.RougeN`
 
 ```typescript
-const value: operations.Five = {
+const value: operations.RougeN = {
   type: "rouge_n",
   value: {
     rouge1: {
@@ -66,35 +66,35 @@ const value: operations.Five = {
 };
 ```
 
-### `operations.Six`
+### `operations.BERTScore`
 
 ```typescript
-const value: operations.Six = {
+const value: operations.BERTScore = {
   type: "bert_score",
   value: {
-    f1: 9978.04,
-    precision: 4866.53,
-    recall: 8809.51,
+    f1: 6062.58,
+    precision: 420.31,
+    recall: 8918.05,
   },
 };
 ```
 
-### `operations.Seven`
+### `operations.InvokeEvalResponseBodyLLM`
 
 ```typescript
-const value: operations.Seven = {
+const value: operations.InvokeEvalResponseBodyLLM = {
   type: "llm_evaluator",
   value: {
     workflowRunId: "<id>",
-    value: 1965.49,
+    value: "<value>",
   },
 };
 ```
 
-### `operations.Eight`
+### `operations.InvokeEvalResponseBodyHTTP`
 
 ```typescript
-const value: operations.Eight = {
+const value: operations.InvokeEvalResponseBodyHTTP = {
   type: "http_eval",
 };
 ```

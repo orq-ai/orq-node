@@ -6,7 +6,7 @@
 import { EvalsLocalizationRequestBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsLocalizationRequestBody = {
-  input: "<value>",
+  query: "<value>",
   output: "<value>",
   model: "Camaro",
 };
@@ -16,6 +16,6 @@ let value: EvalsLocalizationRequestBody = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `input`            | *string*           | :heavy_check_mark: | N/A                |
+| `query`            | *string*           | :heavy_check_mark: | N/A                |
 | `output`           | *string*           | :heavy_check_mark: | N/A                |
 | `model`            | *string*           | :heavy_check_mark: | N/A                |

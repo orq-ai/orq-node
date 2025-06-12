@@ -6,7 +6,7 @@
 import { EvalsGrammarRequestBody } from "@orq-ai/node/models/operations";
 
 let value: EvalsGrammarRequestBody = {
-  input: "<value>",
+  query: "<value>",
   model: "Roadster",
 };
 ```
@@ -15,5 +15,5 @@ let value: EvalsGrammarRequestBody = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `input`            | *string*           | :heavy_check_mark: | N/A                |
+| `query`            | *string*           | :heavy_check_mark: | N/A                |
 | `model`            | *string*           | :heavy_check_mark: | N/A                |

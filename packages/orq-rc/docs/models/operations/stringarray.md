@@ -1,11 +1,11 @@
-# ResponseBody4
+# StringArray
 
 ## Example Usage
 
 ```typescript
-import { ResponseBody4 } from "@orq-ai/node/models/operations";
+import { StringArray } from "@orq-ai/node/models/operations";
 
-let value: ResponseBody4 = {
+let value: StringArray = {
   type: "string_array",
   values: [],
 };

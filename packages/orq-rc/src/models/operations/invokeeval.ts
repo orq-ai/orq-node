@@ -142,7 +142,7 @@ export type InvokeEvalRequestBody = {
   /**
    * Latest user message
    */
-  input?: string | undefined;
+  query?: string | undefined;
   /**
    * The generated response from the model
    */
@@ -184,7 +184,7 @@ export type InvokeEvalResponseBodyEvalsResponse200Value = {
   value: number | boolean;
 };
 
-export type Eight = {
+export type InvokeEvalResponseBodyHTTP = {
   type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type;
   value?: InvokeEvalResponseBodyEvalsResponse200Value | null | undefined;
 };
@@ -206,7 +206,7 @@ export type InvokeEvalResponseBodyEvalsResponseValue = {
   explanation?: string | null | undefined;
 };
 
-export type Seven = {
+export type InvokeEvalResponseBodyLLM = {
   type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type;
   value: InvokeEvalResponseBodyEvalsResponseValue | null;
 };
@@ -223,7 +223,7 @@ export type InvokeEvalResponseBodyEvalsValue = {
   recall: number;
 };
 
-export type Six = {
+export type BERTScore = {
   type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type;
   value: InvokeEvalResponseBodyEvalsValue;
 };
@@ -258,7 +258,7 @@ export type InvokeEvalResponseBodyValue = {
   rougeL: RougeL;
 };
 
-export type Five = {
+export type RougeN = {
   type: InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType;
   value: InvokeEvalResponseBodyValue;
 };
@@ -270,7 +270,7 @@ export type InvokeEvalResponseBodyEvalsResponse200Type = ClosedEnum<
   typeof InvokeEvalResponseBodyEvalsResponse200Type
 >;
 
-export type ResponseBody4 = {
+export type StringArray = {
   type: InvokeEvalResponseBodyEvalsResponse200Type;
   values: Array<string | null>;
 };
@@ -284,7 +284,7 @@ export type InvokeEvalResponseBodyEvalsResponseType = ClosedEnum<
 
 export type ResponseBodyValue = boolean | string | number;
 
-export type ResponseBody3 = {
+export type ResponseBodyBoolean = {
   type: InvokeEvalResponseBodyEvalsResponseType;
   value: boolean | string | number | null;
 };
@@ -296,7 +296,7 @@ export type InvokeEvalResponseBodyEvalsType = ClosedEnum<
   typeof InvokeEvalResponseBodyEvalsType
 >;
 
-export type ResponseBody2 = {
+export type ResponseBodyNumber = {
   type: InvokeEvalResponseBodyEvalsType;
   value: number | null;
 };
@@ -308,7 +308,7 @@ export type InvokeEvalResponseBodyType = ClosedEnum<
   typeof InvokeEvalResponseBodyType
 >;
 
-export type ResponseBody1 = {
+export type String = {
   type: InvokeEvalResponseBodyType;
   value: string | null;
 };
@@ -317,14 +317,14 @@ export type ResponseBody1 = {
  * Returns the result of the evaluator run
  */
 export type InvokeEvalResponseBody =
-  | ResponseBody1
-  | ResponseBody2
-  | ResponseBody3
-  | ResponseBody4
-  | Five
-  | Six
-  | Seven
-  | Eight;
+  | String
+  | ResponseBodyNumber
+  | ResponseBodyBoolean
+  | StringArray
+  | RougeN
+  | BERTScore
+  | InvokeEvalResponseBodyLLM
+  | InvokeEvalResponseBodyHTTP;
 
 /** @internal */
 export const InvokeEvalRole$inboundSchema: z.ZodNativeEnum<
@@ -1062,7 +1062,7 @@ export const InvokeEvalRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string().optional(),
+  query: z.string().optional(),
   output: z.string().optional(),
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
@@ -1071,7 +1071,7 @@ export const InvokeEvalRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type InvokeEvalRequestBody$Outbound = {
-  input?: string | undefined;
+  query?: string | undefined;
   output?: string | undefined;
   reference?: string | undefined;
   retrievals?: Array<string> | undefined;
@@ -1084,7 +1084,7 @@ export const InvokeEvalRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeEvalRequestBody
 > = z.object({
-  input: z.string().optional(),
+  query: z.string().optional(),
   output: z.string().optional(),
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
@@ -1345,17 +1345,20 @@ export function invokeEvalResponseBodyEvalsResponse200ValueFromJSON(
 }
 
 /** @internal */
-export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema,
-    value: z.nullable(
-      z.lazy(() => InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema),
-    ).optional(),
-  });
+export const InvokeEvalResponseBodyHTTP$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyHTTP,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema,
+  value: z.nullable(
+    z.lazy(() => InvokeEvalResponseBodyEvalsResponse200Value$inboundSchema),
+  ).optional(),
+});
 
 /** @internal */
-export type Eight$Outbound = {
+export type InvokeEvalResponseBodyHTTP$Outbound = {
   type: string;
   value?:
     | InvokeEvalResponseBodyEvalsResponse200Value$Outbound
@@ -1364,10 +1367,10 @@ export type Eight$Outbound = {
 };
 
 /** @internal */
-export const Eight$outboundSchema: z.ZodType<
-  Eight$Outbound,
+export const InvokeEvalResponseBodyHTTP$outboundSchema: z.ZodType<
+  InvokeEvalResponseBodyHTTP$Outbound,
   z.ZodTypeDef,
-  Eight
+  InvokeEvalResponseBodyHTTP
 > = z.object({
   type:
     InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema,
@@ -1380,26 +1383,30 @@ export const Eight$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Eight$ {
-  /** @deprecated use `Eight$inboundSchema` instead. */
-  export const inboundSchema = Eight$inboundSchema;
-  /** @deprecated use `Eight$outboundSchema` instead. */
-  export const outboundSchema = Eight$outboundSchema;
-  /** @deprecated use `Eight$Outbound` instead. */
-  export type Outbound = Eight$Outbound;
+export namespace InvokeEvalResponseBodyHTTP$ {
+  /** @deprecated use `InvokeEvalResponseBodyHTTP$inboundSchema` instead. */
+  export const inboundSchema = InvokeEvalResponseBodyHTTP$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyHTTP$outboundSchema` instead. */
+  export const outboundSchema = InvokeEvalResponseBodyHTTP$outboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyHTTP$Outbound` instead. */
+  export type Outbound = InvokeEvalResponseBodyHTTP$Outbound;
 }
 
-export function eightToJSON(eight: Eight): string {
-  return JSON.stringify(Eight$outboundSchema.parse(eight));
+export function invokeEvalResponseBodyHTTPToJSON(
+  invokeEvalResponseBodyHTTP: InvokeEvalResponseBodyHTTP,
+): string {
+  return JSON.stringify(
+    InvokeEvalResponseBodyHTTP$outboundSchema.parse(invokeEvalResponseBodyHTTP),
+  );
 }
 
-export function eightFromJSON(
+export function invokeEvalResponseBodyHTTPFromJSON(
   jsonString: string,
-): SafeParseResult<Eight, SDKValidationError> {
+): SafeParseResult<InvokeEvalResponseBodyHTTP, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Eight$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Eight' from JSON`,
+    (x) => InvokeEvalResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyHTTP' from JSON`,
   );
 }
 
@@ -1571,26 +1578,29 @@ export function invokeEvalResponseBodyEvalsResponseValueFromJSON(
 }
 
 /** @internal */
-export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema,
-    value: z.nullable(
-      z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
-    ),
-  });
+export const InvokeEvalResponseBodyLLM$inboundSchema: z.ZodType<
+  InvokeEvalResponseBodyLLM,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema,
+  value: z.nullable(
+    z.lazy(() => InvokeEvalResponseBodyEvalsResponseValue$inboundSchema),
+  ),
+});
 
 /** @internal */
-export type Seven$Outbound = {
+export type InvokeEvalResponseBodyLLM$Outbound = {
   type: string;
   value: InvokeEvalResponseBodyEvalsResponseValue$Outbound | null;
 };
 
 /** @internal */
-export const Seven$outboundSchema: z.ZodType<
-  Seven$Outbound,
+export const InvokeEvalResponseBodyLLM$outboundSchema: z.ZodType<
+  InvokeEvalResponseBodyLLM$Outbound,
   z.ZodTypeDef,
-  Seven
+  InvokeEvalResponseBodyLLM
 > = z.object({
   type:
     InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema,
@@ -1603,26 +1613,30 @@ export const Seven$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Seven$ {
-  /** @deprecated use `Seven$inboundSchema` instead. */
-  export const inboundSchema = Seven$inboundSchema;
-  /** @deprecated use `Seven$outboundSchema` instead. */
-  export const outboundSchema = Seven$outboundSchema;
-  /** @deprecated use `Seven$Outbound` instead. */
-  export type Outbound = Seven$Outbound;
+export namespace InvokeEvalResponseBodyLLM$ {
+  /** @deprecated use `InvokeEvalResponseBodyLLM$inboundSchema` instead. */
+  export const inboundSchema = InvokeEvalResponseBodyLLM$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyLLM$outboundSchema` instead. */
+  export const outboundSchema = InvokeEvalResponseBodyLLM$outboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyLLM$Outbound` instead. */
+  export type Outbound = InvokeEvalResponseBodyLLM$Outbound;
 }
 
-export function sevenToJSON(seven: Seven): string {
-  return JSON.stringify(Seven$outboundSchema.parse(seven));
+export function invokeEvalResponseBodyLLMToJSON(
+  invokeEvalResponseBodyLLM: InvokeEvalResponseBodyLLM,
+): string {
+  return JSON.stringify(
+    InvokeEvalResponseBodyLLM$outboundSchema.parse(invokeEvalResponseBodyLLM),
+  );
 }
 
-export function sevenFromJSON(
+export function invokeEvalResponseBodyLLMFromJSON(
   jsonString: string,
-): SafeParseResult<Seven, SDKValidationError> {
+): SafeParseResult<InvokeEvalResponseBodyLLM, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Seven$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Seven' from JSON`,
+    (x) => InvokeEvalResponseBodyLLM$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InvokeEvalResponseBodyLLM' from JSON`,
   );
 }
 
@@ -1714,51 +1728,57 @@ export function invokeEvalResponseBodyEvalsValueFromJSON(
 }
 
 /** @internal */
-export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema,
-    value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$inboundSchema),
-  });
+export const BERTScore$inboundSchema: z.ZodType<
+  BERTScore,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema,
+  value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$inboundSchema),
+});
 
 /** @internal */
-export type Six$Outbound = {
+export type BERTScore$Outbound = {
   type: string;
   value: InvokeEvalResponseBodyEvalsValue$Outbound;
 };
 
 /** @internal */
-export const Six$outboundSchema: z.ZodType<Six$Outbound, z.ZodTypeDef, Six> = z
-  .object({
-    type:
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema,
-    value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$outboundSchema),
-  });
+export const BERTScore$outboundSchema: z.ZodType<
+  BERTScore$Outbound,
+  z.ZodTypeDef,
+  BERTScore
+> = z.object({
+  type:
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema,
+  value: z.lazy(() => InvokeEvalResponseBodyEvalsValue$outboundSchema),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Six$ {
-  /** @deprecated use `Six$inboundSchema` instead. */
-  export const inboundSchema = Six$inboundSchema;
-  /** @deprecated use `Six$outboundSchema` instead. */
-  export const outboundSchema = Six$outboundSchema;
-  /** @deprecated use `Six$Outbound` instead. */
-  export type Outbound = Six$Outbound;
+export namespace BERTScore$ {
+  /** @deprecated use `BERTScore$inboundSchema` instead. */
+  export const inboundSchema = BERTScore$inboundSchema;
+  /** @deprecated use `BERTScore$outboundSchema` instead. */
+  export const outboundSchema = BERTScore$outboundSchema;
+  /** @deprecated use `BERTScore$Outbound` instead. */
+  export type Outbound = BERTScore$Outbound;
 }
 
-export function sixToJSON(six: Six): string {
-  return JSON.stringify(Six$outboundSchema.parse(six));
+export function bertScoreToJSON(bertScore: BERTScore): string {
+  return JSON.stringify(BERTScore$outboundSchema.parse(bertScore));
 }
 
-export function sixFromJSON(
+export function bertScoreFromJSON(
   jsonString: string,
-): SafeParseResult<Six, SDKValidationError> {
+): SafeParseResult<BERTScore, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Six$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Six' from JSON`,
+    (x) => BERTScore$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BERTScore' from JSON`,
   );
 }
 
@@ -2021,7 +2041,7 @@ export function invokeEvalResponseBodyValueFromJSON(
 }
 
 /** @internal */
-export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
+export const RougeN$inboundSchema: z.ZodType<RougeN, z.ZodTypeDef, unknown> = z
   .object({
     type:
       InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema,
@@ -2029,43 +2049,46 @@ export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
   });
 
 /** @internal */
-export type Five$Outbound = {
+export type RougeN$Outbound = {
   type: string;
   value: InvokeEvalResponseBodyValue$Outbound;
 };
 
 /** @internal */
-export const Five$outboundSchema: z.ZodType<Five$Outbound, z.ZodTypeDef, Five> =
-  z.object({
-    type:
-      InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema,
-    value: z.lazy(() => InvokeEvalResponseBodyValue$outboundSchema),
-  });
+export const RougeN$outboundSchema: z.ZodType<
+  RougeN$Outbound,
+  z.ZodTypeDef,
+  RougeN
+> = z.object({
+  type:
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema,
+  value: z.lazy(() => InvokeEvalResponseBodyValue$outboundSchema),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Five$ {
-  /** @deprecated use `Five$inboundSchema` instead. */
-  export const inboundSchema = Five$inboundSchema;
-  /** @deprecated use `Five$outboundSchema` instead. */
-  export const outboundSchema = Five$outboundSchema;
-  /** @deprecated use `Five$Outbound` instead. */
-  export type Outbound = Five$Outbound;
+export namespace RougeN$ {
+  /** @deprecated use `RougeN$inboundSchema` instead. */
+  export const inboundSchema = RougeN$inboundSchema;
+  /** @deprecated use `RougeN$outboundSchema` instead. */
+  export const outboundSchema = RougeN$outboundSchema;
+  /** @deprecated use `RougeN$Outbound` instead. */
+  export type Outbound = RougeN$Outbound;
 }
 
-export function fiveToJSON(five: Five): string {
-  return JSON.stringify(Five$outboundSchema.parse(five));
+export function rougeNToJSON(rougeN: RougeN): string {
+  return JSON.stringify(RougeN$outboundSchema.parse(rougeN));
 }
 
-export function fiveFromJSON(
+export function rougeNFromJSON(
   jsonString: string,
-): SafeParseResult<Five, SDKValidationError> {
+): SafeParseResult<RougeN, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Five$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Five' from JSON`,
+    (x) => RougeN$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RougeN' from JSON`,
   );
 }
 
@@ -2093,8 +2116,8 @@ export namespace InvokeEvalResponseBodyEvalsResponse200Type$ {
 }
 
 /** @internal */
-export const ResponseBody4$inboundSchema: z.ZodType<
-  ResponseBody4,
+export const StringArray$inboundSchema: z.ZodType<
+  StringArray,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2103,16 +2126,16 @@ export const ResponseBody4$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ResponseBody4$Outbound = {
+export type StringArray$Outbound = {
   type: string;
   values: Array<string | null>;
 };
 
 /** @internal */
-export const ResponseBody4$outboundSchema: z.ZodType<
-  ResponseBody4$Outbound,
+export const StringArray$outboundSchema: z.ZodType<
+  StringArray$Outbound,
   z.ZodTypeDef,
-  ResponseBody4
+  StringArray
 > = z.object({
   type: InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema,
   values: z.array(z.nullable(z.string())),
@@ -2122,26 +2145,26 @@ export const ResponseBody4$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ResponseBody4$ {
-  /** @deprecated use `ResponseBody4$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody4$inboundSchema;
-  /** @deprecated use `ResponseBody4$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody4$outboundSchema;
-  /** @deprecated use `ResponseBody4$Outbound` instead. */
-  export type Outbound = ResponseBody4$Outbound;
+export namespace StringArray$ {
+  /** @deprecated use `StringArray$inboundSchema` instead. */
+  export const inboundSchema = StringArray$inboundSchema;
+  /** @deprecated use `StringArray$outboundSchema` instead. */
+  export const outboundSchema = StringArray$outboundSchema;
+  /** @deprecated use `StringArray$Outbound` instead. */
+  export type Outbound = StringArray$Outbound;
 }
 
-export function responseBody4ToJSON(responseBody4: ResponseBody4): string {
-  return JSON.stringify(ResponseBody4$outboundSchema.parse(responseBody4));
+export function stringArrayToJSON(stringArray: StringArray): string {
+  return JSON.stringify(StringArray$outboundSchema.parse(stringArray));
 }
 
-export function responseBody4FromJSON(
+export function stringArrayFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody4, SDKValidationError> {
+): SafeParseResult<StringArray, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody4' from JSON`,
+    (x) => StringArray$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StringArray' from JSON`,
   );
 }
 
@@ -2217,8 +2240,8 @@ export function responseBodyValueFromJSON(
 }
 
 /** @internal */
-export const ResponseBody3$inboundSchema: z.ZodType<
-  ResponseBody3,
+export const ResponseBodyBoolean$inboundSchema: z.ZodType<
+  ResponseBodyBoolean,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2227,16 +2250,16 @@ export const ResponseBody3$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ResponseBody3$Outbound = {
+export type ResponseBodyBoolean$Outbound = {
   type: string;
   value: boolean | string | number | null;
 };
 
 /** @internal */
-export const ResponseBody3$outboundSchema: z.ZodType<
-  ResponseBody3$Outbound,
+export const ResponseBodyBoolean$outboundSchema: z.ZodType<
+  ResponseBodyBoolean$Outbound,
   z.ZodTypeDef,
-  ResponseBody3
+  ResponseBodyBoolean
 > = z.object({
   type: InvokeEvalResponseBodyEvalsResponseType$outboundSchema,
   value: z.nullable(z.union([z.boolean(), z.string(), z.number()])),
@@ -2246,26 +2269,30 @@ export const ResponseBody3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ResponseBody3$ {
-  /** @deprecated use `ResponseBody3$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody3$inboundSchema;
-  /** @deprecated use `ResponseBody3$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody3$outboundSchema;
-  /** @deprecated use `ResponseBody3$Outbound` instead. */
-  export type Outbound = ResponseBody3$Outbound;
+export namespace ResponseBodyBoolean$ {
+  /** @deprecated use `ResponseBodyBoolean$inboundSchema` instead. */
+  export const inboundSchema = ResponseBodyBoolean$inboundSchema;
+  /** @deprecated use `ResponseBodyBoolean$outboundSchema` instead. */
+  export const outboundSchema = ResponseBodyBoolean$outboundSchema;
+  /** @deprecated use `ResponseBodyBoolean$Outbound` instead. */
+  export type Outbound = ResponseBodyBoolean$Outbound;
 }
 
-export function responseBody3ToJSON(responseBody3: ResponseBody3): string {
-  return JSON.stringify(ResponseBody3$outboundSchema.parse(responseBody3));
+export function responseBodyBooleanToJSON(
+  responseBodyBoolean: ResponseBodyBoolean,
+): string {
+  return JSON.stringify(
+    ResponseBodyBoolean$outboundSchema.parse(responseBodyBoolean),
+  );
 }
 
-export function responseBody3FromJSON(
+export function responseBodyBooleanFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody3, SDKValidationError> {
+): SafeParseResult<ResponseBodyBoolean, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody3' from JSON`,
+    (x) => ResponseBodyBoolean$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyBoolean' from JSON`,
   );
 }
 
@@ -2291,8 +2318,8 @@ export namespace InvokeEvalResponseBodyEvalsType$ {
 }
 
 /** @internal */
-export const ResponseBody2$inboundSchema: z.ZodType<
-  ResponseBody2,
+export const ResponseBodyNumber$inboundSchema: z.ZodType<
+  ResponseBodyNumber,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2301,16 +2328,16 @@ export const ResponseBody2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ResponseBody2$Outbound = {
+export type ResponseBodyNumber$Outbound = {
   type: string;
   value: number | null;
 };
 
 /** @internal */
-export const ResponseBody2$outboundSchema: z.ZodType<
-  ResponseBody2$Outbound,
+export const ResponseBodyNumber$outboundSchema: z.ZodType<
+  ResponseBodyNumber$Outbound,
   z.ZodTypeDef,
-  ResponseBody2
+  ResponseBodyNumber
 > = z.object({
   type: InvokeEvalResponseBodyEvalsType$outboundSchema,
   value: z.nullable(z.number()),
@@ -2320,26 +2347,30 @@ export const ResponseBody2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ResponseBody2$ {
-  /** @deprecated use `ResponseBody2$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody2$inboundSchema;
-  /** @deprecated use `ResponseBody2$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody2$outboundSchema;
-  /** @deprecated use `ResponseBody2$Outbound` instead. */
-  export type Outbound = ResponseBody2$Outbound;
+export namespace ResponseBodyNumber$ {
+  /** @deprecated use `ResponseBodyNumber$inboundSchema` instead. */
+  export const inboundSchema = ResponseBodyNumber$inboundSchema;
+  /** @deprecated use `ResponseBodyNumber$outboundSchema` instead. */
+  export const outboundSchema = ResponseBodyNumber$outboundSchema;
+  /** @deprecated use `ResponseBodyNumber$Outbound` instead. */
+  export type Outbound = ResponseBodyNumber$Outbound;
 }
 
-export function responseBody2ToJSON(responseBody2: ResponseBody2): string {
-  return JSON.stringify(ResponseBody2$outboundSchema.parse(responseBody2));
+export function responseBodyNumberToJSON(
+  responseBodyNumber: ResponseBodyNumber,
+): string {
+  return JSON.stringify(
+    ResponseBodyNumber$outboundSchema.parse(responseBodyNumber),
+  );
 }
 
-export function responseBody2FromJSON(
+export function responseBodyNumberFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody2, SDKValidationError> {
+): SafeParseResult<ResponseBodyNumber, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody2' from JSON`,
+    (x) => ResponseBodyNumber$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyNumber' from JSON`,
   );
 }
 
@@ -2365,26 +2396,23 @@ export namespace InvokeEvalResponseBodyType$ {
 }
 
 /** @internal */
-export const ResponseBody1$inboundSchema: z.ZodType<
-  ResponseBody1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeEvalResponseBodyType$inboundSchema,
-  value: z.nullable(z.string()),
-});
+export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
+  .object({
+    type: InvokeEvalResponseBodyType$inboundSchema,
+    value: z.nullable(z.string()),
+  });
 
 /** @internal */
-export type ResponseBody1$Outbound = {
+export type String$Outbound = {
   type: string;
   value: string | null;
 };
 
 /** @internal */
-export const ResponseBody1$outboundSchema: z.ZodType<
-  ResponseBody1$Outbound,
+export const String$outboundSchema: z.ZodType<
+  String$Outbound,
   z.ZodTypeDef,
-  ResponseBody1
+  String
 > = z.object({
   type: InvokeEvalResponseBodyType$outboundSchema,
   value: z.nullable(z.string()),
@@ -2394,26 +2422,26 @@ export const ResponseBody1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ResponseBody1$ {
-  /** @deprecated use `ResponseBody1$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody1$inboundSchema;
-  /** @deprecated use `ResponseBody1$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody1$outboundSchema;
-  /** @deprecated use `ResponseBody1$Outbound` instead. */
-  export type Outbound = ResponseBody1$Outbound;
+export namespace String$ {
+  /** @deprecated use `String$inboundSchema` instead. */
+  export const inboundSchema = String$inboundSchema;
+  /** @deprecated use `String$outboundSchema` instead. */
+  export const outboundSchema = String$outboundSchema;
+  /** @deprecated use `String$Outbound` instead. */
+  export type Outbound = String$Outbound;
 }
 
-export function responseBody1ToJSON(responseBody1: ResponseBody1): string {
-  return JSON.stringify(ResponseBody1$outboundSchema.parse(responseBody1));
+export function stringToJSON(string: String): string {
+  return JSON.stringify(String$outboundSchema.parse(string));
 }
 
-export function responseBody1FromJSON(
+export function stringFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody1, SDKValidationError> {
+): SafeParseResult<String, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody1' from JSON`,
+    (x) => String$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'String' from JSON`,
   );
 }
 
@@ -2423,26 +2451,26 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ResponseBody1$inboundSchema),
-  z.lazy(() => ResponseBody2$inboundSchema),
-  z.lazy(() => ResponseBody3$inboundSchema),
-  z.lazy(() => ResponseBody4$inboundSchema),
-  z.lazy(() => Five$inboundSchema),
-  z.lazy(() => Six$inboundSchema),
-  z.lazy(() => Seven$inboundSchema),
-  z.lazy(() => Eight$inboundSchema),
+  z.lazy(() => String$inboundSchema),
+  z.lazy(() => ResponseBodyNumber$inboundSchema),
+  z.lazy(() => ResponseBodyBoolean$inboundSchema),
+  z.lazy(() => StringArray$inboundSchema),
+  z.lazy(() => RougeN$inboundSchema),
+  z.lazy(() => BERTScore$inboundSchema),
+  z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
+  z.lazy(() => InvokeEvalResponseBodyHTTP$inboundSchema),
 ]);
 
 /** @internal */
 export type InvokeEvalResponseBody$Outbound =
-  | ResponseBody1$Outbound
-  | ResponseBody2$Outbound
-  | ResponseBody3$Outbound
-  | ResponseBody4$Outbound
-  | Five$Outbound
-  | Six$Outbound
-  | Seven$Outbound
-  | Eight$Outbound;
+  | String$Outbound
+  | ResponseBodyNumber$Outbound
+  | ResponseBodyBoolean$Outbound
+  | StringArray$Outbound
+  | RougeN$Outbound
+  | BERTScore$Outbound
+  | InvokeEvalResponseBodyLLM$Outbound
+  | InvokeEvalResponseBodyHTTP$Outbound;
 
 /** @internal */
 export const InvokeEvalResponseBody$outboundSchema: z.ZodType<
@@ -2450,14 +2478,14 @@ export const InvokeEvalResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeEvalResponseBody
 > = z.union([
-  z.lazy(() => ResponseBody1$outboundSchema),
-  z.lazy(() => ResponseBody2$outboundSchema),
-  z.lazy(() => ResponseBody3$outboundSchema),
-  z.lazy(() => ResponseBody4$outboundSchema),
-  z.lazy(() => Five$outboundSchema),
-  z.lazy(() => Six$outboundSchema),
-  z.lazy(() => Seven$outboundSchema),
-  z.lazy(() => Eight$outboundSchema),
+  z.lazy(() => String$outboundSchema),
+  z.lazy(() => ResponseBodyNumber$outboundSchema),
+  z.lazy(() => ResponseBodyBoolean$outboundSchema),
+  z.lazy(() => StringArray$outboundSchema),
+  z.lazy(() => RougeN$outboundSchema),
+  z.lazy(() => BERTScore$outboundSchema),
+  z.lazy(() => InvokeEvalResponseBodyLLM$outboundSchema),
+  z.lazy(() => InvokeEvalResponseBodyHTTP$outboundSchema),
 ]);
 
 /**

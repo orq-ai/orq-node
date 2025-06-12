@@ -11,7 +11,7 @@ export type EvalsRagasHarmfulnessRequestBody = {
   /**
    * Latest user message
    */
-  input: string;
+  query: string;
   /**
    * The generated response from the model
    */
@@ -32,14 +32,14 @@ export const EvalsRagasHarmfulnessRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
 });
 
 /** @internal */
 export type EvalsRagasHarmfulnessRequestBody$Outbound = {
-  input: string;
+  query: string;
   output: string;
   model: string;
 };
@@ -50,7 +50,7 @@ export const EvalsRagasHarmfulnessRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvalsRagasHarmfulnessRequestBody
 > = z.object({
-  input: z.string(),
+  query: z.string(),
   output: z.string(),
   model: z.string(),
 });
