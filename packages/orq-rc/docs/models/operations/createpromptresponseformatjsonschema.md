@@ -7,10 +7,7 @@ import { CreatePromptResponseFormatJsonSchema } from "@orq-ai/node/models/operat
 
 let value: CreatePromptResponseFormatJsonSchema = {
   name: "<value>",
-  strict: true,
-  schema: {
-    "key": "<value>",
-  },
+  schema: {},
 };
 ```
 
@@ -19,5 +16,5 @@ let value: CreatePromptResponseFormatJsonSchema = {
 | Field                 | Type                  | Required              | Description           |
 | --------------------- | --------------------- | --------------------- | --------------------- |
 | `name`                | *string*              | :heavy_check_mark:    | N/A                   |
-| `strict`              | *boolean*             | :heavy_check_mark:    | N/A                   |
+| `strict`              | *boolean*             | :heavy_minus_sign:    | N/A                   |
 | `schema`              | Record<string, *any*> | :heavy_check_mark:    | N/A                   |

@@ -1436,7 +1436,7 @@ export type DeploymentGetConfigResponseFormatDeploymentsType = ClosedEnum<
 
 export type DeploymentGetConfigResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -8780,14 +8780,14 @@ export const DeploymentGetConfigResponseFormatJsonSchema$inboundSchema:
     unknown
   > = z.object({
     name: z.string(),
-    strict: z.boolean(),
+    strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
 
 /** @internal */
 export type DeploymentGetConfigResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -8799,7 +8799,7 @@ export const DeploymentGetConfigResponseFormatJsonSchema$outboundSchema:
     DeploymentGetConfigResponseFormatJsonSchema
   > = z.object({
     name: z.string(),
-    strict: z.boolean(),
+    strict: z.boolean().optional(),
     schema: z.record(z.any()),
   });
 

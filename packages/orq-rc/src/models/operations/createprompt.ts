@@ -60,7 +60,7 @@ export type ResponseFormatType = ClosedEnum<typeof ResponseFormatType>;
 
 export type JsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -511,7 +511,7 @@ export type CreatePromptResponseFormatPromptsType = ClosedEnum<
 
 export type CreatePromptResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -1084,14 +1084,14 @@ export const JsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type JsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -1102,7 +1102,7 @@ export const JsonSchema$outboundSchema: z.ZodType<
   JsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
@@ -2616,14 +2616,14 @@ export const CreatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type CreatePromptResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -2634,7 +2634,7 @@ export const CreatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
   CreatePromptResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 

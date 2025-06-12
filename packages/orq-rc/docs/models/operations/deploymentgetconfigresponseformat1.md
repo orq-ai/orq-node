@@ -9,11 +9,9 @@ let value: DeploymentGetConfigResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    strict: false,
     schema: {
       "key": "<value>",
       "key1": "<value>",
-      "key2": "<value>",
     },
   },
 };

@@ -7,12 +7,7 @@ import { DeploymentGetConfigResponseFormatJsonSchema } from "@orq-ai/node/models
 
 let value: DeploymentGetConfigResponseFormatJsonSchema = {
   name: "<value>",
-  strict: true,
-  schema: {
-    "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
-  },
+  schema: {},
 };
 ```
 
@@ -21,5 +16,5 @@ let value: DeploymentGetConfigResponseFormatJsonSchema = {
 | Field                 | Type                  | Required              | Description           |
 | --------------------- | --------------------- | --------------------- | --------------------- |
 | `name`                | *string*              | :heavy_check_mark:    | N/A                   |
-| `strict`              | *boolean*             | :heavy_check_mark:    | N/A                   |
+| `strict`              | *boolean*             | :heavy_minus_sign:    | N/A                   |
 | `schema`              | Record<string, *any*> | :heavy_check_mark:    | N/A                   |

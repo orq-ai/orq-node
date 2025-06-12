@@ -143,7 +143,7 @@ export type DeploymentsResponseFormatDeploymentsType = ClosedEnum<
 
 export type DeploymentsResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -975,14 +975,14 @@ export const DeploymentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type DeploymentsResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -993,7 +993,7 @@ export const DeploymentsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   DeploymentsResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 

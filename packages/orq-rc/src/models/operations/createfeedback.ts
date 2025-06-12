@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
  */
-export type Value = string | Array<string>;
+export type Value = string | number | Array<string>;
 
 /**
  * Feedback submission payload
@@ -24,7 +24,7 @@ export type CreateFeedbackRequestBody = {
   /**
    * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
    */
-  value: string | Array<string>;
+  value: string | number | Array<string>;
   /**
    * The id returned by the [`get_config`]() or [`invoke`](https://docs.orq.ai/reference/post_deployments-invoke-1) endpoints
    */
@@ -34,7 +34,7 @@ export type CreateFeedbackRequestBody = {
 /**
  * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
  */
-export type CreateFeedbackValue = string | Array<string>;
+export type CreateFeedbackValue = string | number | Array<string>;
 
 /**
  * Successful operation
@@ -47,7 +47,7 @@ export type CreateFeedbackResponseBody = {
   /**
    * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
    */
-  value: string | Array<string>;
+  value: string | number | Array<string>;
   /**
    * The id returned by the [`get_config`]() or [`invoke`](https://docs.orq.ai/reference/post_deployments-invoke-1) endpoints
    */
@@ -57,17 +57,17 @@ export type CreateFeedbackResponseBody = {
 
 /** @internal */
 export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
+  .union([z.string(), z.number(), z.array(z.string())]);
 
 /** @internal */
-export type Value$Outbound = string | Array<string>;
+export type Value$Outbound = string | number | Array<string>;
 
 /** @internal */
 export const Value$outboundSchema: z.ZodType<
   Value$Outbound,
   z.ZodTypeDef,
   Value
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.number(), z.array(z.string())]);
 
 /**
  * @internal
@@ -103,7 +103,7 @@ export const CreateFeedbackRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   property: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
+  value: z.union([z.string(), z.number(), z.array(z.string())]),
   trace_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -115,7 +115,7 @@ export const CreateFeedbackRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateFeedbackRequestBody$Outbound = {
   property: string;
-  value: string | Array<string>;
+  value: string | number | Array<string>;
   trace_id: string;
 };
 
@@ -126,7 +126,7 @@ export const CreateFeedbackRequestBody$outboundSchema: z.ZodType<
   CreateFeedbackRequestBody
 > = z.object({
   field: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
+  value: z.union([z.string(), z.number(), z.array(z.string())]),
   traceId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -171,17 +171,17 @@ export const CreateFeedbackValue$inboundSchema: z.ZodType<
   CreateFeedbackValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.number(), z.array(z.string())]);
 
 /** @internal */
-export type CreateFeedbackValue$Outbound = string | Array<string>;
+export type CreateFeedbackValue$Outbound = string | number | Array<string>;
 
 /** @internal */
 export const CreateFeedbackValue$outboundSchema: z.ZodType<
   CreateFeedbackValue$Outbound,
   z.ZodTypeDef,
   CreateFeedbackValue
-> = z.union([z.string(), z.array(z.string())]);
+> = z.union([z.string(), z.number(), z.array(z.string())]);
 
 /**
  * @internal
@@ -221,7 +221,7 @@ export const CreateFeedbackResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   property: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
+  value: z.union([z.string(), z.number(), z.array(z.string())]),
   trace_id: z.string(),
   id: z.string(),
 }).transform((v) => {
@@ -233,7 +233,7 @@ export const CreateFeedbackResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateFeedbackResponseBody$Outbound = {
   property: string;
-  value: string | Array<string>;
+  value: string | number | Array<string>;
   trace_id: string;
   id: string;
 };
@@ -245,7 +245,7 @@ export const CreateFeedbackResponseBody$outboundSchema: z.ZodType<
   CreateFeedbackResponseBody
 > = z.object({
   property: z.string(),
-  value: z.union([z.string(), z.array(z.string())]),
+  value: z.union([z.string(), z.number(), z.array(z.string())]),
   traceId: z.string(),
   id: z.string(),
 }).transform((v) => {

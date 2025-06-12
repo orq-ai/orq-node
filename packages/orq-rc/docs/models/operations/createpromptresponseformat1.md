@@ -9,8 +9,9 @@ let value: CreatePromptResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    strict: true,
-    schema: {},
+    schema: {
+      "key": "<value>",
+    },
   },
 };
 ```

@@ -11,6 +11,12 @@ The feedback value. For single selection of multiple choice, the value should be
 const value: string = "<value>";
 ```
 
+### `number`
+
+```typescript
+const value: number = 1284.03;
+```
+
 ### `string[]`
 
 ```typescript

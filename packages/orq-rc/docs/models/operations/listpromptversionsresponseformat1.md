@@ -9,8 +9,10 @@ let value: ListPromptVersionsResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    strict: false,
-    schema: {},
+    schema: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
   },
 };
 ```

@@ -74,7 +74,7 @@ export type GetOnePromptResponseFormatType = ClosedEnum<
 
 export type GetOnePromptResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -721,14 +721,14 @@ export const GetOnePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type GetOnePromptResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -739,7 +739,7 @@ export const GetOnePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
   GetOnePromptResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 

@@ -87,7 +87,7 @@ export type GetAllPromptsResponseFormatType = ClosedEnum<
 
 export type GetAllPromptsResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -777,14 +777,14 @@ export const GetAllPromptsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type GetAllPromptsResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -795,7 +795,7 @@ export const GetAllPromptsResponseFormatJsonSchema$outboundSchema: z.ZodType<
   GetAllPromptsResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
