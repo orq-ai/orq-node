@@ -402,11 +402,11 @@ export type GetPromptVersionPromptConfig = {
   /**
    * The id of the resource
    */
-  modelDbId?: string | undefined;
+  modelDbId?: string | null | undefined;
   /**
    * The modality of the model
    */
-  modelType?: GetPromptVersionModelType | undefined;
+  modelType?: GetPromptVersionModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -1877,8 +1877,8 @@ export const GetPromptVersionPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: GetPromptVersionModelType$inboundSchema.optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(GetPromptVersionModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => GetPromptVersionModelParameters$inboundSchema)
     .optional(),
   provider: GetPromptVersionProvider$inboundSchema.optional(),
@@ -1898,8 +1898,8 @@ export const GetPromptVersionPromptConfig$inboundSchema: z.ZodType<
 export type GetPromptVersionPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: GetPromptVersionModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
@@ -1915,8 +1915,8 @@ export const GetPromptVersionPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: GetPromptVersionModelType$outboundSchema.optional(),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(GetPromptVersionModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => GetPromptVersionModelParameters$outboundSchema)
     .optional(),
   provider: GetPromptVersionProvider$outboundSchema.optional(),

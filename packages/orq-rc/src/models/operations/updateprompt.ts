@@ -10,25 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The modality of the model
- */
-export const UpdatePromptModelType = {
-  Chat: "chat",
-  Completion: "completion",
-  Embedding: "embedding",
-  Vision: "vision",
-  Image: "image",
-  Tts: "tts",
-  Stt: "stt",
-  Rerank: "rerank",
-  Moderations: "moderations",
-} as const;
-/**
- * The modality of the model
- */
-export type UpdatePromptModelType = ClosedEnum<typeof UpdatePromptModelType>;
-
-/**
  * Only supported on `image` models.
  */
 export const UpdatePromptFormat = {
@@ -372,16 +353,9 @@ export type UpdatePromptMessages = {
   toolCallId?: string | undefined;
 };
 
-/**
- * A list of messages compatible with the openAI schema
- */
 export type UpdatePromptPromptConfig = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  /**
-   * The modality of the model
-   */
-  modelType?: UpdatePromptModelType | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -389,6 +363,8 @@ export type UpdatePromptPromptConfig = {
   provider?: UpdatePromptProvider | undefined;
   version?: string | undefined;
   messages: Array<UpdatePromptMessages>;
+  modelDbId?: string | null | undefined;
+  modelType?: string | null | undefined;
 };
 
 export const UpdatePromptUseCases = {
@@ -458,9 +434,6 @@ export type UpdatePromptRequestBody = {
    * The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose
    */
   description?: string | null | undefined;
-  /**
-   * A list of messages compatible with the openAI schema
-   */
   promptConfig?: UpdatePromptPromptConfig | undefined;
   metadata?: UpdatePromptMetadata | undefined;
   /**
@@ -487,7 +460,7 @@ export type UpdatePromptPromptsType = ClosedEnum<
 /**
  * The modality of the model
  */
-export const UpdatePromptPromptsModelType = {
+export const UpdatePromptModelType = {
   Chat: "chat",
   Completion: "completion",
   Embedding: "embedding",
@@ -501,9 +474,7 @@ export const UpdatePromptPromptsModelType = {
 /**
  * The modality of the model
  */
-export type UpdatePromptPromptsModelType = ClosedEnum<
-  typeof UpdatePromptPromptsModelType
->;
+export type UpdatePromptModelType = ClosedEnum<typeof UpdatePromptModelType>;
 
 /**
  * Only supported on `image` models.
@@ -878,11 +849,11 @@ export type UpdatePromptPromptsPromptConfig = {
   /**
    * The id of the resource
    */
-  modelDbId?: string | undefined;
+  modelDbId?: string | null | undefined;
   /**
    * The modality of the model
    */
-  modelType?: UpdatePromptPromptsModelType | undefined;
+  modelType?: UpdatePromptModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -978,27 +949,6 @@ export type UpdatePromptResponseBody = {
   promptConfig: UpdatePromptPromptsPromptConfig;
   metadata?: UpdatePromptPromptsMetadata | undefined;
 };
-
-/** @internal */
-export const UpdatePromptModelType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptModelType
-> = z.nativeEnum(UpdatePromptModelType);
-
-/** @internal */
-export const UpdatePromptModelType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptModelType
-> = UpdatePromptModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdatePromptModelType$ {
-  /** @deprecated use `UpdatePromptModelType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptModelType$inboundSchema;
-  /** @deprecated use `UpdatePromptModelType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptModelType$outboundSchema;
-}
 
 /** @internal */
 export const UpdatePromptFormat$inboundSchema: z.ZodNativeEnum<
@@ -2257,16 +2207,18 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_type: UpdatePromptModelType$inboundSchema.optional(),
   model_parameters: z.lazy(() => UpdatePromptModelParameters$inboundSchema)
     .optional(),
   provider: UpdatePromptProvider$inboundSchema.optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => UpdatePromptMessages$inboundSchema)),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "model_type": "modelType",
     "model_parameters": "modelParameters",
+    "model_db_id": "modelDbId",
+    "model_type": "modelType",
   });
 });
 
@@ -2274,11 +2226,12 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
 export type UpdatePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_type?: string | undefined;
   model_parameters?: UpdatePromptModelParameters$Outbound | undefined;
   provider?: string | undefined;
   version?: string | undefined;
   messages: Array<UpdatePromptMessages$Outbound>;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
 };
 
 /** @internal */
@@ -2289,16 +2242,18 @@ export const UpdatePromptPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelType: UpdatePromptModelType$outboundSchema.optional(),
   modelParameters: z.lazy(() => UpdatePromptModelParameters$outboundSchema)
     .optional(),
   provider: UpdatePromptProvider$outboundSchema.optional(),
   version: z.string().optional(),
   messages: z.array(z.lazy(() => UpdatePromptMessages$outboundSchema)),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
-    modelType: "model_type",
     modelParameters: "model_parameters",
+    modelDbId: "model_db_id",
+    modelType: "model_type",
   });
 });
 
@@ -2629,24 +2584,24 @@ export namespace UpdatePromptPromptsType$ {
 }
 
 /** @internal */
-export const UpdatePromptPromptsModelType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsModelType
-> = z.nativeEnum(UpdatePromptPromptsModelType);
+export const UpdatePromptModelType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptModelType
+> = z.nativeEnum(UpdatePromptModelType);
 
 /** @internal */
-export const UpdatePromptPromptsModelType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdatePromptPromptsModelType
-> = UpdatePromptPromptsModelType$inboundSchema;
+export const UpdatePromptModelType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptModelType
+> = UpdatePromptModelType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdatePromptPromptsModelType$ {
-  /** @deprecated use `UpdatePromptPromptsModelType$inboundSchema` instead. */
-  export const inboundSchema = UpdatePromptPromptsModelType$inboundSchema;
-  /** @deprecated use `UpdatePromptPromptsModelType$outboundSchema` instead. */
-  export const outboundSchema = UpdatePromptPromptsModelType$outboundSchema;
+export namespace UpdatePromptModelType$ {
+  /** @deprecated use `UpdatePromptModelType$inboundSchema` instead. */
+  export const inboundSchema = UpdatePromptModelType$inboundSchema;
+  /** @deprecated use `UpdatePromptModelType$outboundSchema` instead. */
+  export const outboundSchema = UpdatePromptModelType$outboundSchema;
 }
 
 /** @internal */
@@ -3958,8 +3913,8 @@ export const UpdatePromptPromptsPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: UpdatePromptPromptsModelType$inboundSchema.optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(UpdatePromptModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() =>
     UpdatePromptPromptsModelParameters$inboundSchema
   ).optional(),
@@ -3980,8 +3935,8 @@ export const UpdatePromptPromptsPromptConfig$inboundSchema: z.ZodType<
 export type UpdatePromptPromptsPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: UpdatePromptPromptsModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
@@ -3997,8 +3952,8 @@ export const UpdatePromptPromptsPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: UpdatePromptPromptsModelType$outboundSchema.optional(),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(UpdatePromptModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() =>
     UpdatePromptPromptsModelParameters$outboundSchema
   ).optional(),

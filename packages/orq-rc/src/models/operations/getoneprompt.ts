@@ -399,11 +399,11 @@ export type GetOnePromptPromptConfig = {
   /**
    * The id of the resource
    */
-  modelDbId?: string | undefined;
+  modelDbId?: string | null | undefined;
   /**
    * The modality of the model
    */
-  modelType?: GetOnePromptModelType | undefined;
+  modelType?: GetOnePromptModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -1857,8 +1857,8 @@ export const GetOnePromptPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: GetOnePromptModelType$inboundSchema.optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(GetOnePromptModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => GetOnePromptModelParameters$inboundSchema)
     .optional(),
   provider: GetOnePromptProvider$inboundSchema.optional(),
@@ -1878,8 +1878,8 @@ export const GetOnePromptPromptConfig$inboundSchema: z.ZodType<
 export type GetOnePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: GetOnePromptModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
@@ -1895,8 +1895,8 @@ export const GetOnePromptPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: GetOnePromptModelType$outboundSchema.optional(),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(GetOnePromptModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => GetOnePromptModelParameters$outboundSchema)
     .optional(),
   provider: GetOnePromptProvider$outboundSchema.optional(),

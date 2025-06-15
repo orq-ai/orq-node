@@ -367,7 +367,7 @@ export type PromptConfig = {
   /**
    * The modality of the model
    */
-  modelType?: ModelType | undefined;
+  modelType?: ModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -846,11 +846,11 @@ export type CreatePromptPromptConfig = {
   /**
    * The id of the resource
    */
-  modelDbId?: string | undefined;
+  modelDbId?: string | null | undefined;
   /**
    * The modality of the model
    */
-  modelType?: CreatePromptModelType | undefined;
+  modelType?: CreatePromptModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -2194,7 +2194,7 @@ export const PromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_type: ModelType$inboundSchema.optional(),
+  model_type: z.nullable(ModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => ModelParameters$inboundSchema).optional(),
   provider: Provider$inboundSchema.optional(),
   version: z.string().optional(),
@@ -2210,7 +2210,7 @@ export const PromptConfig$inboundSchema: z.ZodType<
 export type PromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_type?: string | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: ModelParameters$Outbound | undefined;
   provider?: string | undefined;
   version?: string | undefined;
@@ -2225,7 +2225,7 @@ export const PromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelType: ModelType$outboundSchema.optional(),
+  modelType: z.nullable(ModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => ModelParameters$outboundSchema).optional(),
   provider: Provider$outboundSchema.optional(),
   version: z.string().optional(),
@@ -3780,8 +3780,8 @@ export const CreatePromptPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: CreatePromptModelType$inboundSchema.optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(CreatePromptModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => CreatePromptModelParameters$inboundSchema)
     .optional(),
   provider: CreatePromptProvider$inboundSchema.optional(),
@@ -3801,8 +3801,8 @@ export const CreatePromptPromptConfig$inboundSchema: z.ZodType<
 export type CreatePromptPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: CreatePromptModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
@@ -3818,8 +3818,8 @@ export const CreatePromptPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: CreatePromptModelType$outboundSchema.optional(),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(CreatePromptModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => CreatePromptModelParameters$outboundSchema)
     .optional(),
   provider: CreatePromptProvider$outboundSchema.optional(),

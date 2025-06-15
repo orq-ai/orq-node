@@ -412,11 +412,11 @@ export type GetAllPromptsPromptConfig = {
   /**
    * The id of the resource
    */
-  modelDbId?: string | undefined;
+  modelDbId?: string | null | undefined;
   /**
    * The modality of the model
    */
-  modelType?: GetAllPromptsModelType | undefined;
+  modelType?: GetAllPromptsModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -1928,8 +1928,8 @@ export const GetAllPromptsPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: GetAllPromptsModelType$inboundSchema.optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(GetAllPromptsModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() => GetAllPromptsModelParameters$inboundSchema)
     .optional(),
   provider: GetAllPromptsProvider$inboundSchema.optional(),
@@ -1949,8 +1949,8 @@ export const GetAllPromptsPromptConfig$inboundSchema: z.ZodType<
 export type GetAllPromptsPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: GetAllPromptsModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
@@ -1966,8 +1966,8 @@ export const GetAllPromptsPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: GetAllPromptsModelType$outboundSchema.optional(),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(GetAllPromptsModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() => GetAllPromptsModelParameters$outboundSchema)
     .optional(),
   provider: GetAllPromptsProvider$outboundSchema.optional(),
