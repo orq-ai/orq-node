@@ -18,7 +18,6 @@ const value: operations.UpdatePromptResponseFormatPrompts1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    strict: false,
     schema: {
       "key": "<value>",
       "key1": "<value>",

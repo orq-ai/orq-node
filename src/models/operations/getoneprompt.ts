@@ -74,7 +74,7 @@ export type GetOnePromptResponseFormatType = ClosedEnum<
 
 export type GetOnePromptResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -95,8 +95,8 @@ export type GetOnePromptResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type GetOnePromptResponseFormat =
-  | GetOnePromptResponseFormat2
-  | GetOnePromptResponseFormat1;
+  | GetOnePromptResponseFormat1
+  | GetOnePromptResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -205,8 +205,8 @@ export type GetOnePromptModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | GetOnePromptResponseFormat2
     | GetOnePromptResponseFormat1
+    | GetOnePromptResponseFormat2
     | null
     | undefined;
   /**
@@ -720,14 +720,14 @@ export const GetOnePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type GetOnePromptResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -738,7 +738,7 @@ export const GetOnePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
   GetOnePromptResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
@@ -851,14 +851,14 @@ export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
   z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
+  z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type GetOnePromptResponseFormat$Outbound =
-  | GetOnePromptResponseFormat2$Outbound
-  | GetOnePromptResponseFormat1$Outbound;
+  | GetOnePromptResponseFormat1$Outbound
+  | GetOnePromptResponseFormat2$Outbound;
 
 /** @internal */
 export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
@@ -866,8 +866,8 @@ export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePromptResponseFormat
 > = z.union([
-  z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
   z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
+  z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -984,8 +984,8 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
       z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
+      z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$inboundSchema.optional(),
@@ -1013,8 +1013,8 @@ export type GetOnePromptModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | GetOnePromptResponseFormat2$Outbound
     | GetOnePromptResponseFormat1$Outbound
+    | GetOnePromptResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1043,8 +1043,8 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
       z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
+      z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$outboundSchema.optional(),

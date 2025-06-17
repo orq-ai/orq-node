@@ -402,10 +402,10 @@ export type DeveloperMessage = {
 };
 
 export type PrefixMessages =
+  | ToolMessage
   | DeveloperMessage
   | SystemMessage
   | UserMessage
-  | ToolMessage
   | AssistantMessage;
 
 /**
@@ -807,10 +807,10 @@ export type MessagesDeveloperMessage = {
 };
 
 export type Messages =
+  | MessagesToolMessage
   | MessagesDeveloperMessage
   | MessagesSystemMessage
   | MessagesUserMessage
-  | MessagesToolMessage
   | MessagesAssistantMessage;
 
 /**
@@ -1169,10 +1169,10 @@ export type Deployments = {
    */
   prefixMessages?:
     | Array<
+      | ToolMessage
       | DeveloperMessage
       | SystemMessage
       | UserMessage
-      | ToolMessage
       | AssistantMessage
     >
     | undefined;
@@ -1181,10 +1181,10 @@ export type Deployments = {
    */
   messages?:
     | Array<
+      | MessagesToolMessage
       | MessagesDeveloperMessage
       | MessagesSystemMessage
       | MessagesUserMessage
-      | MessagesToolMessage
       | MessagesAssistantMessage
     >
     | undefined;
@@ -2859,19 +2859,19 @@ export const PrefixMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => ToolMessage$inboundSchema),
   z.lazy(() => DeveloperMessage$inboundSchema),
   z.lazy(() => SystemMessage$inboundSchema),
   z.lazy(() => UserMessage$inboundSchema),
-  z.lazy(() => ToolMessage$inboundSchema),
   z.lazy(() => AssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type PrefixMessages$Outbound =
+  | ToolMessage$Outbound
   | DeveloperMessage$Outbound
   | SystemMessage$Outbound
   | UserMessage$Outbound
-  | ToolMessage$Outbound
   | AssistantMessage$Outbound;
 
 /** @internal */
@@ -2880,10 +2880,10 @@ export const PrefixMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PrefixMessages
 > = z.union([
+  z.lazy(() => ToolMessage$outboundSchema),
   z.lazy(() => DeveloperMessage$outboundSchema),
   z.lazy(() => SystemMessage$outboundSchema),
   z.lazy(() => UserMessage$outboundSchema),
-  z.lazy(() => ToolMessage$outboundSchema),
   z.lazy(() => AssistantMessage$outboundSchema),
 ]);
 
@@ -4542,19 +4542,19 @@ export const Messages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => MessagesToolMessage$inboundSchema),
   z.lazy(() => MessagesDeveloperMessage$inboundSchema),
   z.lazy(() => MessagesSystemMessage$inboundSchema),
   z.lazy(() => MessagesUserMessage$inboundSchema),
-  z.lazy(() => MessagesToolMessage$inboundSchema),
   z.lazy(() => MessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type Messages$Outbound =
+  | MessagesToolMessage$Outbound
   | MessagesDeveloperMessage$Outbound
   | MessagesSystemMessage$Outbound
   | MessagesUserMessage$Outbound
-  | MessagesToolMessage$Outbound
   | MessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -4563,10 +4563,10 @@ export const Messages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Messages
 > = z.union([
+  z.lazy(() => MessagesToolMessage$outboundSchema),
   z.lazy(() => MessagesDeveloperMessage$outboundSchema),
   z.lazy(() => MessagesSystemMessage$outboundSchema),
   z.lazy(() => MessagesUserMessage$outboundSchema),
-  z.lazy(() => MessagesToolMessage$outboundSchema),
   z.lazy(() => MessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -7109,19 +7109,19 @@ export const Deployments$inboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(
     z.union([
+      z.lazy(() => ToolMessage$inboundSchema),
       z.lazy(() => DeveloperMessage$inboundSchema),
       z.lazy(() => SystemMessage$inboundSchema),
       z.lazy(() => UserMessage$inboundSchema),
-      z.lazy(() => ToolMessage$inboundSchema),
       z.lazy(() => AssistantMessage$inboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => MessagesToolMessage$inboundSchema),
       z.lazy(() => MessagesDeveloperMessage$inboundSchema),
       z.lazy(() => MessagesSystemMessage$inboundSchema),
       z.lazy(() => MessagesUserMessage$inboundSchema),
-      z.lazy(() => MessagesToolMessage$inboundSchema),
       z.lazy(() => MessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -7163,19 +7163,19 @@ export type Deployments$Outbound = {
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
+      | ToolMessage$Outbound
       | DeveloperMessage$Outbound
       | SystemMessage$Outbound
       | UserMessage$Outbound
-      | ToolMessage$Outbound
       | AssistantMessage$Outbound
     >
     | undefined;
   messages?:
     | Array<
+      | MessagesToolMessage$Outbound
       | MessagesDeveloperMessage$Outbound
       | MessagesSystemMessage$Outbound
       | MessagesUserMessage$Outbound
-      | MessagesToolMessage$Outbound
       | MessagesAssistantMessage$Outbound
     >
     | undefined;
@@ -7214,19 +7214,19 @@ export const Deployments$outboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
+      z.lazy(() => ToolMessage$outboundSchema),
       z.lazy(() => DeveloperMessage$outboundSchema),
       z.lazy(() => SystemMessage$outboundSchema),
       z.lazy(() => UserMessage$outboundSchema),
-      z.lazy(() => ToolMessage$outboundSchema),
       z.lazy(() => AssistantMessage$outboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => MessagesToolMessage$outboundSchema),
       z.lazy(() => MessagesDeveloperMessage$outboundSchema),
       z.lazy(() => MessagesSystemMessage$outboundSchema),
       z.lazy(() => MessagesUserMessage$outboundSchema),
-      z.lazy(() => MessagesToolMessage$outboundSchema),
       z.lazy(() => MessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),

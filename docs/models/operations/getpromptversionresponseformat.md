@@ -18,10 +18,8 @@ const value: operations.GetPromptVersionResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    strict: true,
     schema: {
       "key": "<value>",
-      "key1": "<value>",
     },
   },
 };

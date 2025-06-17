@@ -62,7 +62,7 @@ export type UpdatePromptResponseFormatType = ClosedEnum<
 
 export type ResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -83,8 +83,8 @@ export type UpdatePromptResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type UpdatePromptResponseFormat =
-  | UpdatePromptResponseFormat2
-  | UpdatePromptResponseFormat1;
+  | UpdatePromptResponseFormat1
+  | UpdatePromptResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -193,8 +193,8 @@ export type UpdatePromptModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | UpdatePromptResponseFormat2
     | UpdatePromptResponseFormat1
+    | UpdatePromptResponseFormat2
     | null
     | undefined;
   /**
@@ -540,7 +540,7 @@ export type UpdatePromptResponseFormatPromptsResponseType = ClosedEnum<
 
 export type UpdatePromptResponseFormatJsonSchema = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -561,8 +561,8 @@ export type UpdatePromptResponseFormatPrompts1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type UpdatePromptPromptsResponseFormat =
-  | UpdatePromptResponseFormatPrompts2
-  | UpdatePromptResponseFormatPrompts1;
+  | UpdatePromptResponseFormatPrompts1
+  | UpdatePromptResponseFormatPrompts2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -671,8 +671,8 @@ export type UpdatePromptPromptsModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | UpdatePromptResponseFormatPrompts2
     | UpdatePromptResponseFormatPrompts1
+    | UpdatePromptResponseFormatPrompts2
     | null
     | undefined;
   /**
@@ -1127,14 +1127,14 @@ export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type ResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -1145,7 +1145,7 @@ export const ResponseFormatJsonSchema$outboundSchema: z.ZodType<
   ResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
@@ -1253,14 +1253,14 @@ export const UpdatePromptResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
   z.lazy(() => UpdatePromptResponseFormat1$inboundSchema),
+  z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdatePromptResponseFormat$Outbound =
-  | UpdatePromptResponseFormat2$Outbound
-  | UpdatePromptResponseFormat1$Outbound;
+  | UpdatePromptResponseFormat1$Outbound
+  | UpdatePromptResponseFormat2$Outbound;
 
 /** @internal */
 export const UpdatePromptResponseFormat$outboundSchema: z.ZodType<
@@ -1268,8 +1268,8 @@ export const UpdatePromptResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdatePromptResponseFormat
 > = z.union([
-  z.lazy(() => UpdatePromptResponseFormat2$outboundSchema),
   z.lazy(() => UpdatePromptResponseFormat1$outboundSchema),
+  z.lazy(() => UpdatePromptResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -1386,8 +1386,8 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
       z.lazy(() => UpdatePromptResponseFormat1$inboundSchema),
+      z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: UpdatePromptPhotoRealVersion$inboundSchema.optional(),
@@ -1415,8 +1415,8 @@ export type UpdatePromptModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | UpdatePromptResponseFormat2$Outbound
     | UpdatePromptResponseFormat1$Outbound
+    | UpdatePromptResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1445,8 +1445,8 @@ export const UpdatePromptModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => UpdatePromptResponseFormat2$outboundSchema),
       z.lazy(() => UpdatePromptResponseFormat1$outboundSchema),
+      z.lazy(() => UpdatePromptResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: UpdatePromptPhotoRealVersion$outboundSchema.optional(),
@@ -2779,14 +2779,14 @@ export const UpdatePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
 /** @internal */
 export type UpdatePromptResponseFormatJsonSchema$Outbound = {
   name: string;
-  strict: boolean;
+  strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
@@ -2797,7 +2797,7 @@ export const UpdatePromptResponseFormatJsonSchema$outboundSchema: z.ZodType<
   UpdatePromptResponseFormatJsonSchema
 > = z.object({
   name: z.string(),
-  strict: z.boolean(),
+  strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
 
@@ -2912,14 +2912,14 @@ export const UpdatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdatePromptResponseFormatPrompts2$inboundSchema),
   z.lazy(() => UpdatePromptResponseFormatPrompts1$inboundSchema),
+  z.lazy(() => UpdatePromptResponseFormatPrompts2$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdatePromptPromptsResponseFormat$Outbound =
-  | UpdatePromptResponseFormatPrompts2$Outbound
-  | UpdatePromptResponseFormatPrompts1$Outbound;
+  | UpdatePromptResponseFormatPrompts1$Outbound
+  | UpdatePromptResponseFormatPrompts2$Outbound;
 
 /** @internal */
 export const UpdatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
@@ -2927,8 +2927,8 @@ export const UpdatePromptPromptsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdatePromptPromptsResponseFormat
 > = z.union([
-  z.lazy(() => UpdatePromptResponseFormatPrompts2$outboundSchema),
   z.lazy(() => UpdatePromptResponseFormatPrompts1$outboundSchema),
+  z.lazy(() => UpdatePromptResponseFormatPrompts2$outboundSchema),
 ]);
 
 /**
@@ -3052,8 +3052,8 @@ export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => UpdatePromptResponseFormatPrompts2$inboundSchema),
       z.lazy(() => UpdatePromptResponseFormatPrompts1$inboundSchema),
+      z.lazy(() => UpdatePromptResponseFormatPrompts2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: UpdatePromptPromptsPhotoRealVersion$inboundSchema
@@ -3082,8 +3082,8 @@ export type UpdatePromptPromptsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | UpdatePromptResponseFormatPrompts2$Outbound
     | UpdatePromptResponseFormatPrompts1$Outbound
+    | UpdatePromptResponseFormatPrompts2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -3112,8 +3112,8 @@ export const UpdatePromptPromptsModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => UpdatePromptResponseFormatPrompts2$outboundSchema),
       z.lazy(() => UpdatePromptResponseFormatPrompts1$outboundSchema),
+      z.lazy(() => UpdatePromptResponseFormatPrompts2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: UpdatePromptPromptsPhotoRealVersion$outboundSchema

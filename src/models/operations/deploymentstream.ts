@@ -450,10 +450,10 @@ export type PrefixMessagesDeveloperMessage = {
 };
 
 export type DeploymentStreamPrefixMessages =
+  | PrefixMessagesToolMessage
   | PrefixMessagesDeveloperMessage
   | PrefixMessagesSystemMessage
   | PrefixMessagesUserMessage
-  | PrefixMessagesToolMessage
   | PrefixMessagesAssistantMessage;
 
 /**
@@ -892,10 +892,10 @@ export type DeploymentStreamMessagesDeveloperMessage = {
 };
 
 export type DeploymentStreamMessages =
+  | DeploymentStreamMessagesToolMessage
   | DeploymentStreamMessagesDeveloperMessage
   | DeploymentStreamMessagesSystemMessage
   | DeploymentStreamMessagesUserMessage
-  | DeploymentStreamMessagesToolMessage
   | DeploymentStreamMessagesAssistantMessage;
 
 /**
@@ -1263,10 +1263,10 @@ export type DeploymentStreamRequestBody = {
    */
   prefixMessages?:
     | Array<
+      | PrefixMessagesToolMessage
       | PrefixMessagesDeveloperMessage
       | PrefixMessagesSystemMessage
       | PrefixMessagesUserMessage
-      | PrefixMessagesToolMessage
       | PrefixMessagesAssistantMessage
     >
     | undefined;
@@ -1275,10 +1275,10 @@ export type DeploymentStreamRequestBody = {
    */
   messages?:
     | Array<
+      | DeploymentStreamMessagesToolMessage
       | DeploymentStreamMessagesDeveloperMessage
       | DeploymentStreamMessagesSystemMessage
       | DeploymentStreamMessagesUserMessage
-      | DeploymentStreamMessagesToolMessage
       | DeploymentStreamMessagesAssistantMessage
     >
     | undefined;
@@ -1473,16 +1473,16 @@ export type DeploymentStreamMessage1 = {
 };
 
 export type DeploymentStreamMessage =
+  | DeploymentStreamMessage1
   | DeploymentStreamMessage2
-  | DeploymentStreamMessage3
-  | DeploymentStreamMessage1;
+  | DeploymentStreamMessage3;
 
 export type DeploymentStreamChoices = {
   index: number;
   message?:
+    | DeploymentStreamMessage1
     | DeploymentStreamMessage2
     | DeploymentStreamMessage3
-    | DeploymentStreamMessage1
     | undefined;
   finishReason?: string | null | undefined;
 };
@@ -3487,19 +3487,19 @@ export const DeploymentStreamPrefixMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => PrefixMessagesToolMessage$inboundSchema),
   z.lazy(() => PrefixMessagesDeveloperMessage$inboundSchema),
   z.lazy(() => PrefixMessagesSystemMessage$inboundSchema),
   z.lazy(() => PrefixMessagesUserMessage$inboundSchema),
-  z.lazy(() => PrefixMessagesToolMessage$inboundSchema),
   z.lazy(() => PrefixMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentStreamPrefixMessages$Outbound =
+  | PrefixMessagesToolMessage$Outbound
   | PrefixMessagesDeveloperMessage$Outbound
   | PrefixMessagesSystemMessage$Outbound
   | PrefixMessagesUserMessage$Outbound
-  | PrefixMessagesToolMessage$Outbound
   | PrefixMessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -3508,10 +3508,10 @@ export const DeploymentStreamPrefixMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStreamPrefixMessages
 > = z.union([
+  z.lazy(() => PrefixMessagesToolMessage$outboundSchema),
   z.lazy(() => PrefixMessagesDeveloperMessage$outboundSchema),
   z.lazy(() => PrefixMessagesSystemMessage$outboundSchema),
   z.lazy(() => PrefixMessagesUserMessage$outboundSchema),
-  z.lazy(() => PrefixMessagesToolMessage$outboundSchema),
   z.lazy(() => PrefixMessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -5474,19 +5474,19 @@ export const DeploymentStreamMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => DeploymentStreamMessagesToolMessage$inboundSchema),
   z.lazy(() => DeploymentStreamMessagesDeveloperMessage$inboundSchema),
   z.lazy(() => DeploymentStreamMessagesSystemMessage$inboundSchema),
   z.lazy(() => DeploymentStreamMessagesUserMessage$inboundSchema),
-  z.lazy(() => DeploymentStreamMessagesToolMessage$inboundSchema),
   z.lazy(() => DeploymentStreamMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentStreamMessages$Outbound =
+  | DeploymentStreamMessagesToolMessage$Outbound
   | DeploymentStreamMessagesDeveloperMessage$Outbound
   | DeploymentStreamMessagesSystemMessage$Outbound
   | DeploymentStreamMessagesUserMessage$Outbound
-  | DeploymentStreamMessagesToolMessage$Outbound
   | DeploymentStreamMessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -5495,10 +5495,10 @@ export const DeploymentStreamMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStreamMessages
 > = z.union([
+  z.lazy(() => DeploymentStreamMessagesToolMessage$outboundSchema),
   z.lazy(() => DeploymentStreamMessagesDeveloperMessage$outboundSchema),
   z.lazy(() => DeploymentStreamMessagesSystemMessage$outboundSchema),
   z.lazy(() => DeploymentStreamMessagesUserMessage$outboundSchema),
-  z.lazy(() => DeploymentStreamMessagesToolMessage$outboundSchema),
   z.lazy(() => DeploymentStreamMessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -8408,19 +8408,19 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(
     z.union([
+      z.lazy(() => PrefixMessagesToolMessage$inboundSchema),
       z.lazy(() => PrefixMessagesDeveloperMessage$inboundSchema),
       z.lazy(() => PrefixMessagesSystemMessage$inboundSchema),
       z.lazy(() => PrefixMessagesUserMessage$inboundSchema),
-      z.lazy(() => PrefixMessagesToolMessage$inboundSchema),
       z.lazy(() => PrefixMessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => DeploymentStreamMessagesToolMessage$inboundSchema),
       z.lazy(() => DeploymentStreamMessagesDeveloperMessage$inboundSchema),
       z.lazy(() => DeploymentStreamMessagesSystemMessage$inboundSchema),
       z.lazy(() => DeploymentStreamMessagesUserMessage$inboundSchema),
-      z.lazy(() => DeploymentStreamMessagesToolMessage$inboundSchema),
       z.lazy(() => DeploymentStreamMessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -8466,19 +8466,19 @@ export type DeploymentStreamRequestBody$Outbound = {
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
+      | PrefixMessagesToolMessage$Outbound
       | PrefixMessagesDeveloperMessage$Outbound
       | PrefixMessagesSystemMessage$Outbound
       | PrefixMessagesUserMessage$Outbound
-      | PrefixMessagesToolMessage$Outbound
       | PrefixMessagesAssistantMessage$Outbound
     >
     | undefined;
   messages?:
     | Array<
+      | DeploymentStreamMessagesToolMessage$Outbound
       | DeploymentStreamMessagesDeveloperMessage$Outbound
       | DeploymentStreamMessagesSystemMessage$Outbound
       | DeploymentStreamMessagesUserMessage$Outbound
-      | DeploymentStreamMessagesToolMessage$Outbound
       | DeploymentStreamMessagesAssistantMessage$Outbound
     >
     | undefined;
@@ -8517,19 +8517,19 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
+      z.lazy(() => PrefixMessagesToolMessage$outboundSchema),
       z.lazy(() => PrefixMessagesDeveloperMessage$outboundSchema),
       z.lazy(() => PrefixMessagesSystemMessage$outboundSchema),
       z.lazy(() => PrefixMessagesUserMessage$outboundSchema),
-      z.lazy(() => PrefixMessagesToolMessage$outboundSchema),
       z.lazy(() => PrefixMessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => DeploymentStreamMessagesToolMessage$outboundSchema),
       z.lazy(() => DeploymentStreamMessagesDeveloperMessage$outboundSchema),
       z.lazy(() => DeploymentStreamMessagesSystemMessage$outboundSchema),
       z.lazy(() => DeploymentStreamMessagesUserMessage$outboundSchema),
-      z.lazy(() => DeploymentStreamMessagesToolMessage$outboundSchema),
       z.lazy(() => DeploymentStreamMessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
@@ -9048,16 +9048,16 @@ export const DeploymentStreamMessage$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => DeploymentStreamMessage1$inboundSchema),
   z.lazy(() => DeploymentStreamMessage2$inboundSchema),
   z.lazy(() => DeploymentStreamMessage3$inboundSchema),
-  z.lazy(() => DeploymentStreamMessage1$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentStreamMessage$Outbound =
+  | DeploymentStreamMessage1$Outbound
   | DeploymentStreamMessage2$Outbound
-  | DeploymentStreamMessage3$Outbound
-  | DeploymentStreamMessage1$Outbound;
+  | DeploymentStreamMessage3$Outbound;
 
 /** @internal */
 export const DeploymentStreamMessage$outboundSchema: z.ZodType<
@@ -9065,9 +9065,9 @@ export const DeploymentStreamMessage$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStreamMessage
 > = z.union([
+  z.lazy(() => DeploymentStreamMessage1$outboundSchema),
   z.lazy(() => DeploymentStreamMessage2$outboundSchema),
   z.lazy(() => DeploymentStreamMessage3$outboundSchema),
-  z.lazy(() => DeploymentStreamMessage1$outboundSchema),
 ]);
 
 /**
@@ -9109,9 +9109,9 @@ export const DeploymentStreamChoices$inboundSchema: z.ZodType<
 > = z.object({
   index: z.number(),
   message: z.union([
+    z.lazy(() => DeploymentStreamMessage1$inboundSchema),
     z.lazy(() => DeploymentStreamMessage2$inboundSchema),
     z.lazy(() => DeploymentStreamMessage3$inboundSchema),
-    z.lazy(() => DeploymentStreamMessage1$inboundSchema),
   ]).optional(),
   finish_reason: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -9124,9 +9124,9 @@ export const DeploymentStreamChoices$inboundSchema: z.ZodType<
 export type DeploymentStreamChoices$Outbound = {
   index: number;
   message?:
+    | DeploymentStreamMessage1$Outbound
     | DeploymentStreamMessage2$Outbound
     | DeploymentStreamMessage3$Outbound
-    | DeploymentStreamMessage1$Outbound
     | undefined;
   finish_reason?: string | null | undefined;
 };
@@ -9139,9 +9139,9 @@ export const DeploymentStreamChoices$outboundSchema: z.ZodType<
 > = z.object({
   index: z.number(),
   message: z.union([
+    z.lazy(() => DeploymentStreamMessage1$outboundSchema),
     z.lazy(() => DeploymentStreamMessage2$outboundSchema),
     z.lazy(() => DeploymentStreamMessage3$outboundSchema),
-    z.lazy(() => DeploymentStreamMessage1$outboundSchema),
   ]).optional(),
   finishReason: z.nullable(z.string()).optional(),
 }).transform((v) => {

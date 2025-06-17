@@ -9,7 +9,6 @@ let value: UpdatePromptResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    strict: true,
     schema: {},
   },
 };

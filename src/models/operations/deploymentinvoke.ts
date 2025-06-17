@@ -246,11 +246,11 @@ export type Message1 = {
   redactedReasoning?: string | undefined;
 };
 
-export type Message = Message3 | Message2 | Message1;
+export type Message = Message1 | Message2 | Message3;
 
 export type DeploymentInvokeChoices = {
   index: number;
-  message: Message3 | Message2 | Message1;
+  message: Message1 | Message2 | Message3;
   finishReason?: string | null | undefined;
 };
 
@@ -1025,16 +1025,16 @@ export function message1FromJSON(
 /** @internal */
 export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
   z.union([
-    z.lazy(() => Message3$inboundSchema),
-    z.lazy(() => Message2$inboundSchema),
     z.lazy(() => Message1$inboundSchema),
+    z.lazy(() => Message2$inboundSchema),
+    z.lazy(() => Message3$inboundSchema),
   ]);
 
 /** @internal */
 export type Message$Outbound =
-  | Message3$Outbound
+  | Message1$Outbound
   | Message2$Outbound
-  | Message1$Outbound;
+  | Message3$Outbound;
 
 /** @internal */
 export const Message$outboundSchema: z.ZodType<
@@ -1042,9 +1042,9 @@ export const Message$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Message
 > = z.union([
-  z.lazy(() => Message3$outboundSchema),
-  z.lazy(() => Message2$outboundSchema),
   z.lazy(() => Message1$outboundSchema),
+  z.lazy(() => Message2$outboundSchema),
+  z.lazy(() => Message3$outboundSchema),
 ]);
 
 /**
@@ -1082,9 +1082,9 @@ export const DeploymentInvokeChoices$inboundSchema: z.ZodType<
 > = z.object({
   index: z.number(),
   message: z.union([
-    z.lazy(() => Message3$inboundSchema),
-    z.lazy(() => Message2$inboundSchema),
     z.lazy(() => Message1$inboundSchema),
+    z.lazy(() => Message2$inboundSchema),
+    z.lazy(() => Message3$inboundSchema),
   ]),
   finish_reason: z.nullable(z.string()).optional(),
 }).transform((v) => {
@@ -1096,7 +1096,7 @@ export const DeploymentInvokeChoices$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentInvokeChoices$Outbound = {
   index: number;
-  message: Message3$Outbound | Message2$Outbound | Message1$Outbound;
+  message: Message1$Outbound | Message2$Outbound | Message3$Outbound;
   finish_reason?: string | null | undefined;
 };
 
@@ -1108,9 +1108,9 @@ export const DeploymentInvokeChoices$outboundSchema: z.ZodType<
 > = z.object({
   index: z.number(),
   message: z.union([
-    z.lazy(() => Message3$outboundSchema),
-    z.lazy(() => Message2$outboundSchema),
     z.lazy(() => Message1$outboundSchema),
+    z.lazy(() => Message2$outboundSchema),
+    z.lazy(() => Message3$outboundSchema),
   ]),
   finishReason: z.nullable(z.string()).optional(),
 }).transform((v) => {
