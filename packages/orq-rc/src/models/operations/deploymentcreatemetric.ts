@@ -285,7 +285,7 @@ export type DeploymentCreateMetric2File = {
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename?: string | undefined;
+  filename: string;
 };
 
 export type DeploymentCreateMetric24 = {
@@ -728,7 +728,7 @@ export type DeploymentCreateMetric2DeploymentsMetricsFile = {
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename?: string | undefined;
+  filename: string;
 };
 
 export type DeploymentCreateMetric2DeploymentsMetrics4 = {
@@ -2096,7 +2096,7 @@ export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   file_data: z.string(),
-  filename: z.string().optional(),
+  filename: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -2106,7 +2106,7 @@ export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentCreateMetric2File$Outbound = {
   file_data: string;
-  filename?: string | undefined;
+  filename: string;
 };
 
 /** @internal */
@@ -2116,7 +2116,7 @@ export const DeploymentCreateMetric2File$outboundSchema: z.ZodType<
   DeploymentCreateMetric2File
 > = z.object({
   fileData: z.string(),
-  filename: z.string().optional(),
+  filename: z.string(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -4038,7 +4038,7 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
     unknown
   > = z.object({
     file_data: z.string(),
-    filename: z.string().optional(),
+    filename: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "file_data": "fileData",
@@ -4048,7 +4048,7 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsFile$Outbound = {
   file_data: string;
-  filename?: string | undefined;
+  filename: string;
 };
 
 /** @internal */
@@ -4059,7 +4059,7 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$outboundSchema:
     DeploymentCreateMetric2DeploymentsMetricsFile
   > = z.object({
     fileData: z.string(),
-    filename: z.string().optional(),
+    filename: z.string(),
   }).transform((v) => {
     return remap$(v, {
       fileData: "file_data",

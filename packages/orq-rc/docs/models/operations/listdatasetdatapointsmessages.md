@@ -31,6 +31,7 @@ const value: operations.ListDatasetDatapointsMessagesUserMessage = {
       type: "file",
       file: {
         fileData: "<value>",
+        filename: "example.file",
       },
     },
   ],

@@ -42,6 +42,7 @@ const value: components.Four = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

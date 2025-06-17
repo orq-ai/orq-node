@@ -42,6 +42,7 @@ const value: operations.RetrieveDatapoint24 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

@@ -9,6 +9,7 @@ let value: RetrieveDatapoint24 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

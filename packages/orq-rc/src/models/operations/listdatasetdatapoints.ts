@@ -274,7 +274,7 @@ export type ListDatasetDatapoints2File = {
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename?: string | undefined;
+  filename: string;
 };
 
 export type ListDatasetDatapoints24 = {
@@ -1560,7 +1560,7 @@ export const ListDatasetDatapoints2File$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   file_data: z.string(),
-  filename: z.string().optional(),
+  filename: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -1570,7 +1570,7 @@ export const ListDatasetDatapoints2File$inboundSchema: z.ZodType<
 /** @internal */
 export type ListDatasetDatapoints2File$Outbound = {
   file_data: string;
-  filename?: string | undefined;
+  filename: string;
 };
 
 /** @internal */
@@ -1580,7 +1580,7 @@ export const ListDatasetDatapoints2File$outboundSchema: z.ZodType<
   ListDatasetDatapoints2File
 > = z.object({
   fileData: z.string(),
-  filename: z.string().optional(),
+  filename: z.string(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -2604,7 +2604,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-17T09:09:46.815Z",
+    "2025-06-17T22:56:18.095Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2668,7 +2668,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-17T09:09:46.815Z"))
+  updated: z.date().default(() => new Date("2025-06-17T22:56:18.095Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

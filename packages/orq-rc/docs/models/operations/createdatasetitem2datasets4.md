@@ -9,6 +9,7 @@ let value: CreateDatasetItem2Datasets4 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

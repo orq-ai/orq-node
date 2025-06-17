@@ -12,6 +12,7 @@ let value: ListDatasetDatapointsMessagesUserMessage = {
       type: "file",
       file: {
         fileData: "<value>",
+        filename: "example.file",
       },
     },
   ],
