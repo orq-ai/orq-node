@@ -96,8 +96,8 @@ export type GetPromptVersionResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type GetPromptVersionResponseFormat =
-  | GetPromptVersionResponseFormat2
-  | GetPromptVersionResponseFormat1;
+  | GetPromptVersionResponseFormat1
+  | GetPromptVersionResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -206,8 +206,8 @@ export type GetPromptVersionModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | GetPromptVersionResponseFormat2
     | GetPromptVersionResponseFormat1
+    | GetPromptVersionResponseFormat2
     | null
     | undefined;
   /**
@@ -853,14 +853,14 @@ export const GetPromptVersionResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetPromptVersionResponseFormat2$inboundSchema),
   z.lazy(() => GetPromptVersionResponseFormat1$inboundSchema),
+  z.lazy(() => GetPromptVersionResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type GetPromptVersionResponseFormat$Outbound =
-  | GetPromptVersionResponseFormat2$Outbound
-  | GetPromptVersionResponseFormat1$Outbound;
+  | GetPromptVersionResponseFormat1$Outbound
+  | GetPromptVersionResponseFormat2$Outbound;
 
 /** @internal */
 export const GetPromptVersionResponseFormat$outboundSchema: z.ZodType<
@@ -868,8 +868,8 @@ export const GetPromptVersionResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetPromptVersionResponseFormat
 > = z.union([
-  z.lazy(() => GetPromptVersionResponseFormat2$outboundSchema),
   z.lazy(() => GetPromptVersionResponseFormat1$outboundSchema),
+  z.lazy(() => GetPromptVersionResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -988,8 +988,8 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetPromptVersionResponseFormat2$inboundSchema),
       z.lazy(() => GetPromptVersionResponseFormat1$inboundSchema),
+      z.lazy(() => GetPromptVersionResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetPromptVersionPhotoRealVersion$inboundSchema.optional(),
@@ -1017,8 +1017,8 @@ export type GetPromptVersionModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | GetPromptVersionResponseFormat2$Outbound
     | GetPromptVersionResponseFormat1$Outbound
+    | GetPromptVersionResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1047,8 +1047,8 @@ export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetPromptVersionResponseFormat2$outboundSchema),
       z.lazy(() => GetPromptVersionResponseFormat1$outboundSchema),
+      z.lazy(() => GetPromptVersionResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetPromptVersionPhotoRealVersion$outboundSchema.optional(),

@@ -443,10 +443,10 @@ export type RetrieveDatapointMessagesDeveloperMessage = {
 };
 
 export type RetrieveDatapointMessages =
+  | RetrieveDatapointMessagesToolMessage
   | RetrieveDatapointMessagesDeveloperMessage
   | RetrieveDatapointMessagesSystemMessage
   | RetrieveDatapointMessagesUserMessage
-  | RetrieveDatapointMessagesToolMessage
   | RetrieveDatapointMessagesAssistantMessage;
 
 /**
@@ -470,10 +470,10 @@ export type RetrieveDatapointResponseBody = {
    */
   messages?:
     | Array<
+      | RetrieveDatapointMessagesToolMessage
       | RetrieveDatapointMessagesDeveloperMessage
       | RetrieveDatapointMessagesSystemMessage
       | RetrieveDatapointMessagesUserMessage
-      | RetrieveDatapointMessagesToolMessage
       | RetrieveDatapointMessagesAssistantMessage
     >
     | undefined;
@@ -2397,19 +2397,19 @@ export const RetrieveDatapointMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => RetrieveDatapointMessagesToolMessage$inboundSchema),
   z.lazy(() => RetrieveDatapointMessagesDeveloperMessage$inboundSchema),
   z.lazy(() => RetrieveDatapointMessagesSystemMessage$inboundSchema),
   z.lazy(() => RetrieveDatapointMessagesUserMessage$inboundSchema),
-  z.lazy(() => RetrieveDatapointMessagesToolMessage$inboundSchema),
   z.lazy(() => RetrieveDatapointMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type RetrieveDatapointMessages$Outbound =
+  | RetrieveDatapointMessagesToolMessage$Outbound
   | RetrieveDatapointMessagesDeveloperMessage$Outbound
   | RetrieveDatapointMessagesSystemMessage$Outbound
   | RetrieveDatapointMessagesUserMessage$Outbound
-  | RetrieveDatapointMessagesToolMessage$Outbound
   | RetrieveDatapointMessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -2418,10 +2418,10 @@ export const RetrieveDatapointMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveDatapointMessages
 > = z.union([
+  z.lazy(() => RetrieveDatapointMessagesToolMessage$outboundSchema),
   z.lazy(() => RetrieveDatapointMessagesDeveloperMessage$outboundSchema),
   z.lazy(() => RetrieveDatapointMessagesSystemMessage$outboundSchema),
   z.lazy(() => RetrieveDatapointMessagesUserMessage$outboundSchema),
-  z.lazy(() => RetrieveDatapointMessagesToolMessage$outboundSchema),
   z.lazy(() => RetrieveDatapointMessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -2467,10 +2467,10 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => RetrieveDatapointMessagesToolMessage$inboundSchema),
       z.lazy(() => RetrieveDatapointMessagesDeveloperMessage$inboundSchema),
       z.lazy(() => RetrieveDatapointMessagesSystemMessage$inboundSchema),
       z.lazy(() => RetrieveDatapointMessagesUserMessage$inboundSchema),
-      z.lazy(() => RetrieveDatapointMessagesToolMessage$inboundSchema),
       z.lazy(() => RetrieveDatapointMessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -2481,7 +2481,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-16T13:25:07.062Z",
+    "2025-06-17T09:09:46.815Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2501,10 +2501,10 @@ export type RetrieveDatapointResponseBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
+      | RetrieveDatapointMessagesToolMessage$Outbound
       | RetrieveDatapointMessagesDeveloperMessage$Outbound
       | RetrieveDatapointMessagesSystemMessage$Outbound
       | RetrieveDatapointMessagesUserMessage$Outbound
-      | RetrieveDatapointMessagesToolMessage$Outbound
       | RetrieveDatapointMessagesAssistantMessage$Outbound
     >
     | undefined;
@@ -2527,10 +2527,10 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => RetrieveDatapointMessagesToolMessage$outboundSchema),
       z.lazy(() => RetrieveDatapointMessagesDeveloperMessage$outboundSchema),
       z.lazy(() => RetrieveDatapointMessagesSystemMessage$outboundSchema),
       z.lazy(() => RetrieveDatapointMessagesUserMessage$outboundSchema),
-      z.lazy(() => RetrieveDatapointMessagesToolMessage$outboundSchema),
       z.lazy(() => RetrieveDatapointMessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
@@ -2539,7 +2539,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-16T13:25:07.062Z"))
+  updated: z.date().default(() => new Date("2025-06-17T09:09:46.815Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

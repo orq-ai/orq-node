@@ -429,10 +429,10 @@ export type UpdateDatapointMessagesDeveloperMessage = {
 };
 
 export type UpdateDatapointMessages =
+  | UpdateDatapointMessagesToolMessage
   | UpdateDatapointMessagesDeveloperMessage
   | UpdateDatapointMessagesSystemMessage
   | UpdateDatapointMessagesUserMessage
-  | UpdateDatapointMessagesToolMessage
   | UpdateDatapointMessagesAssistantMessage;
 
 export type UpdateDatapointRequestBody = {
@@ -445,10 +445,10 @@ export type UpdateDatapointRequestBody = {
    */
   messages?:
     | Array<
+      | UpdateDatapointMessagesToolMessage
       | UpdateDatapointMessagesDeveloperMessage
       | UpdateDatapointMessagesSystemMessage
       | UpdateDatapointMessagesUserMessage
-      | UpdateDatapointMessagesToolMessage
       | UpdateDatapointMessagesAssistantMessage
     >
     | undefined;
@@ -907,10 +907,10 @@ export type UpdateDatapointMessagesDatasetsDeveloperMessage = {
 };
 
 export type UpdateDatapointDatasetsMessages =
+  | UpdateDatapointMessagesDatasetsToolMessage
   | UpdateDatapointMessagesDatasetsDeveloperMessage
   | UpdateDatapointMessagesDatasetsSystemMessage
   | UpdateDatapointMessagesDatasetsUserMessage
-  | UpdateDatapointMessagesDatasetsToolMessage
   | UpdateDatapointMessagesDatasetsAssistantMessage;
 
 /**
@@ -934,10 +934,10 @@ export type UpdateDatapointResponseBody = {
    */
   messages?:
     | Array<
+      | UpdateDatapointMessagesDatasetsToolMessage
       | UpdateDatapointMessagesDatasetsDeveloperMessage
       | UpdateDatapointMessagesDatasetsSystemMessage
       | UpdateDatapointMessagesDatasetsUserMessage
-      | UpdateDatapointMessagesDatasetsToolMessage
       | UpdateDatapointMessagesDatasetsAssistantMessage
     >
     | undefined;
@@ -2764,19 +2764,19 @@ export const UpdateDatapointMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => UpdateDatapointMessagesToolMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesDeveloperMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesSystemMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesUserMessage$inboundSchema),
-  z.lazy(() => UpdateDatapointMessagesToolMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateDatapointMessages$Outbound =
+  | UpdateDatapointMessagesToolMessage$Outbound
   | UpdateDatapointMessagesDeveloperMessage$Outbound
   | UpdateDatapointMessagesSystemMessage$Outbound
   | UpdateDatapointMessagesUserMessage$Outbound
-  | UpdateDatapointMessagesToolMessage$Outbound
   | UpdateDatapointMessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -2785,10 +2785,10 @@ export const UpdateDatapointMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapointMessages
 > = z.union([
+  z.lazy(() => UpdateDatapointMessagesToolMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesDeveloperMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesSystemMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesUserMessage$outboundSchema),
-  z.lazy(() => UpdateDatapointMessagesToolMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -2832,10 +2832,10 @@ export const UpdateDatapointRequestBody$inboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => UpdateDatapointMessagesToolMessage$inboundSchema),
       z.lazy(() => UpdateDatapointMessagesDeveloperMessage$inboundSchema),
       z.lazy(() => UpdateDatapointMessagesSystemMessage$inboundSchema),
       z.lazy(() => UpdateDatapointMessagesUserMessage$inboundSchema),
-      z.lazy(() => UpdateDatapointMessagesToolMessage$inboundSchema),
       z.lazy(() => UpdateDatapointMessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -2851,10 +2851,10 @@ export type UpdateDatapointRequestBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
+      | UpdateDatapointMessagesToolMessage$Outbound
       | UpdateDatapointMessagesDeveloperMessage$Outbound
       | UpdateDatapointMessagesSystemMessage$Outbound
       | UpdateDatapointMessagesUserMessage$Outbound
-      | UpdateDatapointMessagesToolMessage$Outbound
       | UpdateDatapointMessagesAssistantMessage$Outbound
     >
     | undefined;
@@ -2870,10 +2870,10 @@ export const UpdateDatapointRequestBody$outboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => UpdateDatapointMessagesToolMessage$outboundSchema),
       z.lazy(() => UpdateDatapointMessagesDeveloperMessage$outboundSchema),
       z.lazy(() => UpdateDatapointMessagesSystemMessage$outboundSchema),
       z.lazy(() => UpdateDatapointMessagesUserMessage$outboundSchema),
-      z.lazy(() => UpdateDatapointMessagesToolMessage$outboundSchema),
       z.lazy(() => UpdateDatapointMessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
@@ -4954,19 +4954,19 @@ export const UpdateDatapointDatasetsMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsDeveloperMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsSystemMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsUserMessage$inboundSchema),
-  z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$inboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateDatapointDatasetsMessages$Outbound =
+  | UpdateDatapointMessagesDatasetsToolMessage$Outbound
   | UpdateDatapointMessagesDatasetsDeveloperMessage$Outbound
   | UpdateDatapointMessagesDatasetsSystemMessage$Outbound
   | UpdateDatapointMessagesDatasetsUserMessage$Outbound
-  | UpdateDatapointMessagesDatasetsToolMessage$Outbound
   | UpdateDatapointMessagesDatasetsAssistantMessage$Outbound;
 
 /** @internal */
@@ -4975,10 +4975,10 @@ export const UpdateDatapointDatasetsMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapointDatasetsMessages
 > = z.union([
+  z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsDeveloperMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsSystemMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsUserMessage$outboundSchema),
-  z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$outboundSchema),
   z.lazy(() => UpdateDatapointMessagesDatasetsAssistantMessage$outboundSchema),
 ]);
 
@@ -5026,12 +5026,14 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$inboundSchema),
       z.lazy(() =>
         UpdateDatapointMessagesDatasetsDeveloperMessage$inboundSchema
       ),
-      z.lazy(() => UpdateDatapointMessagesDatasetsSystemMessage$inboundSchema),
+      z.lazy(() =>
+        UpdateDatapointMessagesDatasetsSystemMessage$inboundSchema
+      ),
       z.lazy(() => UpdateDatapointMessagesDatasetsUserMessage$inboundSchema),
-      z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$inboundSchema),
       z.lazy(() =>
         UpdateDatapointMessagesDatasetsAssistantMessage$inboundSchema
       ),
@@ -5044,7 +5046,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-16T13:25:07.062Z",
+    "2025-06-17T09:09:46.815Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5064,10 +5066,10 @@ export type UpdateDatapointResponseBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
+      | UpdateDatapointMessagesDatasetsToolMessage$Outbound
       | UpdateDatapointMessagesDatasetsDeveloperMessage$Outbound
       | UpdateDatapointMessagesDatasetsSystemMessage$Outbound
       | UpdateDatapointMessagesDatasetsUserMessage$Outbound
-      | UpdateDatapointMessagesDatasetsToolMessage$Outbound
       | UpdateDatapointMessagesDatasetsAssistantMessage$Outbound
     >
     | undefined;
@@ -5090,12 +5092,12 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$outboundSchema),
       z.lazy(() =>
         UpdateDatapointMessagesDatasetsDeveloperMessage$outboundSchema
       ),
       z.lazy(() => UpdateDatapointMessagesDatasetsSystemMessage$outboundSchema),
       z.lazy(() => UpdateDatapointMessagesDatasetsUserMessage$outboundSchema),
-      z.lazy(() => UpdateDatapointMessagesDatasetsToolMessage$outboundSchema),
       z.lazy(() =>
         UpdateDatapointMessagesDatasetsAssistantMessage$outboundSchema
       ),
@@ -5106,7 +5108,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-16T13:25:07.062Z"))
+  updated: z.date().default(() => new Date("2025-06-17T09:09:46.815Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

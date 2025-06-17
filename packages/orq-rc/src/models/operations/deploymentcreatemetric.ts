@@ -480,10 +480,10 @@ export type DeploymentCreateMetricMessagesDeveloperMessage = {
 };
 
 export type DeploymentCreateMetricMessages =
+  | DeploymentCreateMetricMessagesToolMessage
   | DeploymentCreateMetricMessagesDeveloperMessage
   | DeploymentCreateMetricMessagesSystemMessage
   | DeploymentCreateMetricMessagesUserMessage
-  | DeploymentCreateMetricMessagesToolMessage
   | DeploymentCreateMetricMessagesAssistantMessage;
 
 /**
@@ -929,10 +929,10 @@ export type ChoicesDeveloperMessage = {
 };
 
 export type Choices =
+  | ChoicesToolMessage
   | ChoicesDeveloperMessage
   | ChoicesSystemMessage
   | ChoicesUserMessage
-  | ChoicesToolMessage
   | ChoicesAssistantMessage;
 
 /**
@@ -963,10 +963,10 @@ export type DeploymentCreateMetricRequestBody = {
    */
   messages?:
     | Array<
+      | DeploymentCreateMetricMessagesToolMessage
       | DeploymentCreateMetricMessagesDeveloperMessage
       | DeploymentCreateMetricMessagesSystemMessage
       | DeploymentCreateMetricMessagesUserMessage
-      | DeploymentCreateMetricMessagesToolMessage
       | DeploymentCreateMetricMessagesAssistantMessage
     >
     | undefined;
@@ -975,10 +975,10 @@ export type DeploymentCreateMetricRequestBody = {
    */
   choices?:
     | Array<
+      | ChoicesToolMessage
       | ChoicesDeveloperMessage
       | ChoicesSystemMessage
       | ChoicesUserMessage
-      | ChoicesToolMessage
       | ChoicesAssistantMessage
     >
     | undefined;
@@ -3065,19 +3065,19 @@ export const DeploymentCreateMetricMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$inboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentCreateMetricMessages$Outbound =
+  | DeploymentCreateMetricMessagesToolMessage$Outbound
   | DeploymentCreateMetricMessagesDeveloperMessage$Outbound
   | DeploymentCreateMetricMessagesSystemMessage$Outbound
   | DeploymentCreateMetricMessagesUserMessage$Outbound
-  | DeploymentCreateMetricMessagesToolMessage$Outbound
   | DeploymentCreateMetricMessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -3086,10 +3086,10 @@ export const DeploymentCreateMetricMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentCreateMetricMessages
 > = z.union([
+  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$outboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$outboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesUserMessage$outboundSchema),
-  z.lazy(() => DeploymentCreateMetricMessagesToolMessage$outboundSchema),
   z.lazy(() => DeploymentCreateMetricMessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -5076,19 +5076,19 @@ export function choicesDeveloperMessageFromJSON(
 /** @internal */
 export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
   z.union([
+    z.lazy(() => ChoicesToolMessage$inboundSchema),
     z.lazy(() => ChoicesDeveloperMessage$inboundSchema),
     z.lazy(() => ChoicesSystemMessage$inboundSchema),
     z.lazy(() => ChoicesUserMessage$inboundSchema),
-    z.lazy(() => ChoicesToolMessage$inboundSchema),
     z.lazy(() => ChoicesAssistantMessage$inboundSchema),
   ]);
 
 /** @internal */
 export type Choices$Outbound =
+  | ChoicesToolMessage$Outbound
   | ChoicesDeveloperMessage$Outbound
   | ChoicesSystemMessage$Outbound
   | ChoicesUserMessage$Outbound
-  | ChoicesToolMessage$Outbound
   | ChoicesAssistantMessage$Outbound;
 
 /** @internal */
@@ -5097,10 +5097,10 @@ export const Choices$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Choices
 > = z.union([
+  z.lazy(() => ChoicesToolMessage$outboundSchema),
   z.lazy(() => ChoicesDeveloperMessage$outboundSchema),
   z.lazy(() => ChoicesSystemMessage$outboundSchema),
   z.lazy(() => ChoicesUserMessage$outboundSchema),
-  z.lazy(() => ChoicesToolMessage$outboundSchema),
   z.lazy(() => ChoicesAssistantMessage$outboundSchema),
 ]);
 
@@ -5192,12 +5192,14 @@ export const DeploymentCreateMetricRequestBody$inboundSchema: z.ZodType<
   performance: z.lazy(() => Performance$inboundSchema).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
       z.lazy(() =>
         DeploymentCreateMetricMessagesDeveloperMessage$inboundSchema
       ),
-      z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$inboundSchema),
+      z.lazy(() =>
+        DeploymentCreateMetricMessagesSystemMessage$inboundSchema
+      ),
       z.lazy(() => DeploymentCreateMetricMessagesUserMessage$inboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$inboundSchema),
       z.lazy(() =>
         DeploymentCreateMetricMessagesAssistantMessage$inboundSchema
       ),
@@ -5205,10 +5207,10 @@ export const DeploymentCreateMetricRequestBody$inboundSchema: z.ZodType<
   ).optional(),
   choices: z.array(
     z.union([
+      z.lazy(() => ChoicesToolMessage$inboundSchema),
       z.lazy(() => ChoicesDeveloperMessage$inboundSchema),
       z.lazy(() => ChoicesSystemMessage$inboundSchema),
       z.lazy(() => ChoicesUserMessage$inboundSchema),
-      z.lazy(() => ChoicesToolMessage$inboundSchema),
       z.lazy(() => ChoicesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -5222,19 +5224,19 @@ export type DeploymentCreateMetricRequestBody$Outbound = {
   performance?: Performance$Outbound | undefined;
   messages?:
     | Array<
+      | DeploymentCreateMetricMessagesToolMessage$Outbound
       | DeploymentCreateMetricMessagesDeveloperMessage$Outbound
       | DeploymentCreateMetricMessagesSystemMessage$Outbound
       | DeploymentCreateMetricMessagesUserMessage$Outbound
-      | DeploymentCreateMetricMessagesToolMessage$Outbound
       | DeploymentCreateMetricMessagesAssistantMessage$Outbound
     >
     | undefined;
   choices?:
     | Array<
+      | ChoicesToolMessage$Outbound
       | ChoicesDeveloperMessage$Outbound
       | ChoicesSystemMessage$Outbound
       | ChoicesUserMessage$Outbound
-      | ChoicesToolMessage$Outbound
       | ChoicesAssistantMessage$Outbound
     >
     | undefined;
@@ -5252,12 +5254,14 @@ export const DeploymentCreateMetricRequestBody$outboundSchema: z.ZodType<
   performance: z.lazy(() => Performance$outboundSchema).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$outboundSchema),
       z.lazy(() =>
         DeploymentCreateMetricMessagesDeveloperMessage$outboundSchema
       ),
-      z.lazy(() => DeploymentCreateMetricMessagesSystemMessage$outboundSchema),
+      z.lazy(() =>
+        DeploymentCreateMetricMessagesSystemMessage$outboundSchema
+      ),
       z.lazy(() => DeploymentCreateMetricMessagesUserMessage$outboundSchema),
-      z.lazy(() => DeploymentCreateMetricMessagesToolMessage$outboundSchema),
       z.lazy(() =>
         DeploymentCreateMetricMessagesAssistantMessage$outboundSchema
       ),
@@ -5265,10 +5269,10 @@ export const DeploymentCreateMetricRequestBody$outboundSchema: z.ZodType<
   ).optional(),
   choices: z.array(
     z.union([
+      z.lazy(() => ChoicesToolMessage$outboundSchema),
       z.lazy(() => ChoicesDeveloperMessage$outboundSchema),
       z.lazy(() => ChoicesSystemMessage$outboundSchema),
       z.lazy(() => ChoicesUserMessage$outboundSchema),
-      z.lazy(() => ChoicesToolMessage$outboundSchema),
       z.lazy(() => ChoicesAssistantMessage$outboundSchema),
     ]),
   ).optional(),

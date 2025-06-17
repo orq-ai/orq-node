@@ -432,10 +432,10 @@ export type CreateDatasetItemMessagesDeveloperMessage = {
 };
 
 export type CreateDatasetItemMessages =
+  | CreateDatasetItemMessagesToolMessage
   | CreateDatasetItemMessagesDeveloperMessage
   | CreateDatasetItemMessagesSystemMessage
   | CreateDatasetItemMessagesUserMessage
-  | CreateDatasetItemMessagesToolMessage
   | CreateDatasetItemMessagesAssistantMessage;
 
 export type CreateDatasetItemRequestBody = {
@@ -448,10 +448,10 @@ export type CreateDatasetItemRequestBody = {
    */
   messages?:
     | Array<
+      | CreateDatasetItemMessagesToolMessage
       | CreateDatasetItemMessagesDeveloperMessage
       | CreateDatasetItemMessagesSystemMessage
       | CreateDatasetItemMessagesUserMessage
-      | CreateDatasetItemMessagesToolMessage
       | CreateDatasetItemMessagesAssistantMessage
     >
     | undefined;
@@ -908,10 +908,10 @@ export type CreateDatasetItemMessagesDatasetsDeveloperMessage = {
 };
 
 export type CreateDatasetItemDatasetsMessages =
+  | CreateDatasetItemMessagesDatasetsToolMessage
   | CreateDatasetItemMessagesDatasetsDeveloperMessage
   | CreateDatasetItemMessagesDatasetsSystemMessage
   | CreateDatasetItemMessagesDatasetsUserMessage
-  | CreateDatasetItemMessagesDatasetsToolMessage
   | CreateDatasetItemMessagesDatasetsAssistantMessage;
 
 /**
@@ -935,10 +935,10 @@ export type CreateDatasetItemResponseBody = {
    */
   messages?:
     | Array<
+      | CreateDatasetItemMessagesDatasetsToolMessage
       | CreateDatasetItemMessagesDatasetsDeveloperMessage
       | CreateDatasetItemMessagesDatasetsSystemMessage
       | CreateDatasetItemMessagesDatasetsUserMessage
-      | CreateDatasetItemMessagesDatasetsToolMessage
       | CreateDatasetItemMessagesDatasetsAssistantMessage
     >
     | undefined;
@@ -2789,19 +2789,19 @@ export const CreateDatasetItemMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => CreateDatasetItemMessagesToolMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDeveloperMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesSystemMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesUserMessage$inboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesToolMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type CreateDatasetItemMessages$Outbound =
+  | CreateDatasetItemMessagesToolMessage$Outbound
   | CreateDatasetItemMessagesDeveloperMessage$Outbound
   | CreateDatasetItemMessagesSystemMessage$Outbound
   | CreateDatasetItemMessagesUserMessage$Outbound
-  | CreateDatasetItemMessagesToolMessage$Outbound
   | CreateDatasetItemMessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -2810,10 +2810,10 @@ export const CreateDatasetItemMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasetItemMessages
 > = z.union([
+  z.lazy(() => CreateDatasetItemMessagesToolMessage$outboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDeveloperMessage$outboundSchema),
   z.lazy(() => CreateDatasetItemMessagesSystemMessage$outboundSchema),
   z.lazy(() => CreateDatasetItemMessagesUserMessage$outboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesToolMessage$outboundSchema),
   z.lazy(() => CreateDatasetItemMessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -2857,10 +2857,10 @@ export const CreateDatasetItemRequestBody$inboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => CreateDatasetItemMessagesToolMessage$inboundSchema),
       z.lazy(() => CreateDatasetItemMessagesDeveloperMessage$inboundSchema),
       z.lazy(() => CreateDatasetItemMessagesSystemMessage$inboundSchema),
       z.lazy(() => CreateDatasetItemMessagesUserMessage$inboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesToolMessage$inboundSchema),
       z.lazy(() => CreateDatasetItemMessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -2876,10 +2876,10 @@ export type CreateDatasetItemRequestBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
+      | CreateDatasetItemMessagesToolMessage$Outbound
       | CreateDatasetItemMessagesDeveloperMessage$Outbound
       | CreateDatasetItemMessagesSystemMessage$Outbound
       | CreateDatasetItemMessagesUserMessage$Outbound
-      | CreateDatasetItemMessagesToolMessage$Outbound
       | CreateDatasetItemMessagesAssistantMessage$Outbound
     >
     | undefined;
@@ -2895,10 +2895,10 @@ export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => CreateDatasetItemMessagesToolMessage$outboundSchema),
       z.lazy(() => CreateDatasetItemMessagesDeveloperMessage$outboundSchema),
       z.lazy(() => CreateDatasetItemMessagesSystemMessage$outboundSchema),
       z.lazy(() => CreateDatasetItemMessagesUserMessage$outboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesToolMessage$outboundSchema),
       z.lazy(() => CreateDatasetItemMessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
@@ -5014,19 +5014,19 @@ export const CreateDatasetItemDatasetsMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type CreateDatasetItemDatasetsMessages$Outbound =
+  | CreateDatasetItemMessagesDatasetsToolMessage$Outbound
   | CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound
   | CreateDatasetItemMessagesDatasetsSystemMessage$Outbound
   | CreateDatasetItemMessagesDatasetsUserMessage$Outbound
-  | CreateDatasetItemMessagesDatasetsToolMessage$Outbound
   | CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound;
 
 /** @internal */
@@ -5035,12 +5035,12 @@ export const CreateDatasetItemDatasetsMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasetItemDatasetsMessages
 > = z.union([
+  z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema),
   z.lazy(() =>
     CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema
   ),
   z.lazy(() => CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema),
   z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema),
-  z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema),
   z.lazy(() =>
     CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema
   ),
@@ -5091,6 +5091,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema),
       z.lazy(() =>
         CreateDatasetItemMessagesDatasetsDeveloperMessage$inboundSchema
       ),
@@ -5098,7 +5099,6 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
         CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema
       ),
       z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$inboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$inboundSchema),
       z.lazy(() =>
         CreateDatasetItemMessagesDatasetsAssistantMessage$inboundSchema
       ),
@@ -5111,7 +5111,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-16T13:25:07.062Z",
+    "2025-06-17T09:09:46.815Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5131,10 +5131,10 @@ export type CreateDatasetItemResponseBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
+      | CreateDatasetItemMessagesDatasetsToolMessage$Outbound
       | CreateDatasetItemMessagesDatasetsDeveloperMessage$Outbound
       | CreateDatasetItemMessagesDatasetsSystemMessage$Outbound
       | CreateDatasetItemMessagesDatasetsUserMessage$Outbound
-      | CreateDatasetItemMessagesDatasetsToolMessage$Outbound
       | CreateDatasetItemMessagesDatasetsAssistantMessage$Outbound
     >
     | undefined;
@@ -5157,6 +5157,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   inputs: z.record(z.any()).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema),
       z.lazy(() =>
         CreateDatasetItemMessagesDatasetsDeveloperMessage$outboundSchema
       ),
@@ -5164,7 +5165,6 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
         CreateDatasetItemMessagesDatasetsSystemMessage$outboundSchema
       ),
       z.lazy(() => CreateDatasetItemMessagesDatasetsUserMessage$outboundSchema),
-      z.lazy(() => CreateDatasetItemMessagesDatasetsToolMessage$outboundSchema),
       z.lazy(() =>
         CreateDatasetItemMessagesDatasetsAssistantMessage$outboundSchema
       ),
@@ -5175,7 +5175,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-16T13:25:07.062Z"))
+  updated: z.date().default(() => new Date("2025-06-17T09:09:46.815Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

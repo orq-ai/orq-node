@@ -206,10 +206,10 @@ export type Configuration1 = {
  * The configuration of the model
  */
 export type Configuration =
-  | Configuration3
-  | Configuration4
+  | Configuration2
   | Configuration1
-  | Configuration2;
+  | Configuration3
+  | Configuration4;
 
 /**
  * Parameters value
@@ -480,10 +480,10 @@ export type PostV2ModelsLitellmImportResponseBody = {
    * The configuration of the model
    */
   configuration?:
+    | Configuration2
+    | Configuration1
     | Configuration3
     | Configuration4
-    | Configuration1
-    | Configuration2
     | undefined;
   /**
    * The parameters of the model
@@ -1473,18 +1473,18 @@ export const Configuration$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => Configuration2$inboundSchema),
+  z.lazy(() => Configuration1$inboundSchema),
   z.lazy(() => Configuration3$inboundSchema),
   z.lazy(() => Configuration4$inboundSchema),
-  z.lazy(() => Configuration1$inboundSchema),
-  z.lazy(() => Configuration2$inboundSchema),
 ]);
 
 /** @internal */
 export type Configuration$Outbound =
-  | Configuration3$Outbound
-  | Configuration4$Outbound
+  | Configuration2$Outbound
   | Configuration1$Outbound
-  | Configuration2$Outbound;
+  | Configuration3$Outbound
+  | Configuration4$Outbound;
 
 /** @internal */
 export const Configuration$outboundSchema: z.ZodType<
@@ -1492,10 +1492,10 @@ export const Configuration$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Configuration
 > = z.union([
+  z.lazy(() => Configuration2$outboundSchema),
+  z.lazy(() => Configuration1$outboundSchema),
   z.lazy(() => Configuration3$outboundSchema),
   z.lazy(() => Configuration4$outboundSchema),
-  z.lazy(() => Configuration1$outboundSchema),
-  z.lazy(() => Configuration2$outboundSchema),
 ]);
 
 /**
@@ -2233,10 +2233,10 @@ export const PostV2ModelsLitellmImportResponseBody$inboundSchema: z.ZodType<
   owner: z.string().default("system"),
   metadata: z.lazy(() => PostV2ModelsLitellmImportMetadata$inboundSchema),
   configuration: z.union([
+    z.lazy(() => Configuration2$inboundSchema),
+    z.lazy(() => Configuration1$inboundSchema),
     z.lazy(() => Configuration3$inboundSchema),
     z.lazy(() => Configuration4$inboundSchema),
-    z.lazy(() => Configuration1$inboundSchema),
-    z.lazy(() => Configuration2$inboundSchema),
   ]).optional(),
   parameters: z.array(
     z.union([
@@ -2295,10 +2295,10 @@ export type PostV2ModelsLitellmImportResponseBody$Outbound = {
   owner: string;
   metadata: PostV2ModelsLitellmImportMetadata$Outbound;
   configuration?:
+    | Configuration2$Outbound
+    | Configuration1$Outbound
     | Configuration3$Outbound
     | Configuration4$Outbound
-    | Configuration1$Outbound
-    | Configuration2$Outbound
     | undefined;
   parameters: Array<
     Parameters1$Outbound | Parameters2$Outbound | Parameters3$Outbound
@@ -2337,10 +2337,10 @@ export const PostV2ModelsLitellmImportResponseBody$outboundSchema: z.ZodType<
   owner: z.string().default("system"),
   metadata: z.lazy(() => PostV2ModelsLitellmImportMetadata$outboundSchema),
   configuration: z.union([
+    z.lazy(() => Configuration2$outboundSchema),
+    z.lazy(() => Configuration1$outboundSchema),
     z.lazy(() => Configuration3$outboundSchema),
     z.lazy(() => Configuration4$outboundSchema),
-    z.lazy(() => Configuration1$outboundSchema),
-    z.lazy(() => Configuration2$outboundSchema),
   ]).optional(),
   parameters: z.array(
     z.union([

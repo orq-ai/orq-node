@@ -80,7 +80,7 @@ export type ResponseFormat1 = {
  *
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
-export type ResponseFormat = ResponseFormat2 | ResponseFormat1;
+export type ResponseFormat = ResponseFormat1 | ResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -182,7 +182,7 @@ export type ModelParameters = {
    *
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
-  responseFormat?: ResponseFormat2 | ResponseFormat1 | null | undefined;
+  responseFormat?: ResponseFormat1 | ResponseFormat2 | null | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -532,8 +532,8 @@ export type CreatePromptResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type CreatePromptResponseFormat =
-  | CreatePromptResponseFormat2
-  | CreatePromptResponseFormat1;
+  | CreatePromptResponseFormat1
+  | CreatePromptResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -642,8 +642,8 @@ export type CreatePromptModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | CreatePromptResponseFormat2
     | CreatePromptResponseFormat1
+    | CreatePromptResponseFormat2
     | null
     | undefined;
   /**
@@ -1202,14 +1202,14 @@ export const ResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => ResponseFormat2$inboundSchema),
   z.lazy(() => ResponseFormat1$inboundSchema),
+  z.lazy(() => ResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type ResponseFormat$Outbound =
-  | ResponseFormat2$Outbound
-  | ResponseFormat1$Outbound;
+  | ResponseFormat1$Outbound
+  | ResponseFormat2$Outbound;
 
 /** @internal */
 export const ResponseFormat$outboundSchema: z.ZodType<
@@ -1217,8 +1217,8 @@ export const ResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseFormat
 > = z.union([
-  z.lazy(() => ResponseFormat2$outboundSchema),
   z.lazy(() => ResponseFormat1$outboundSchema),
+  z.lazy(() => ResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -1331,8 +1331,8 @@ export const ModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => ResponseFormat2$inboundSchema),
       z.lazy(() => ResponseFormat1$inboundSchema),
+      z.lazy(() => ResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
@@ -1360,8 +1360,8 @@ export type ModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | ResponseFormat2$Outbound
     | ResponseFormat1$Outbound
+    | ResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1390,8 +1390,8 @@ export const ModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => ResponseFormat2$outboundSchema),
       z.lazy(() => ResponseFormat1$outboundSchema),
+      z.lazy(() => ResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
@@ -2747,14 +2747,14 @@ export const CreatePromptResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
   z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type CreatePromptResponseFormat$Outbound =
-  | CreatePromptResponseFormat2$Outbound
-  | CreatePromptResponseFormat1$Outbound;
+  | CreatePromptResponseFormat1$Outbound
+  | CreatePromptResponseFormat2$Outbound;
 
 /** @internal */
 export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
@@ -2762,8 +2762,8 @@ export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptResponseFormat
 > = z.union([
-  z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
   z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -2880,8 +2880,8 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
       z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
@@ -2909,8 +2909,8 @@ export type CreatePromptModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | CreatePromptResponseFormat2$Outbound
     | CreatePromptResponseFormat1$Outbound
+    | CreatePromptResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -2939,8 +2939,8 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
       z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),

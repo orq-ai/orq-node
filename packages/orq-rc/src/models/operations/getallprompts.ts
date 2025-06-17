@@ -108,8 +108,8 @@ export type GetAllPromptsResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type GetAllPromptsResponseFormat =
-  | GetAllPromptsResponseFormat2
-  | GetAllPromptsResponseFormat1;
+  | GetAllPromptsResponseFormat1
+  | GetAllPromptsResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -218,8 +218,8 @@ export type GetAllPromptsModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | GetAllPromptsResponseFormat2
     | GetAllPromptsResponseFormat1
+    | GetAllPromptsResponseFormat2
     | null
     | undefined;
   /**
@@ -912,14 +912,14 @@ export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type GetAllPromptsResponseFormat$Outbound =
-  | GetAllPromptsResponseFormat2$Outbound
-  | GetAllPromptsResponseFormat1$Outbound;
+  | GetAllPromptsResponseFormat1$Outbound
+  | GetAllPromptsResponseFormat2$Outbound;
 
 /** @internal */
 export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
@@ -927,8 +927,8 @@ export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsResponseFormat
 > = z.union([
-  z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -1047,8 +1047,8 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
+      z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$inboundSchema.optional(),
@@ -1076,8 +1076,8 @@ export type GetAllPromptsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | GetAllPromptsResponseFormat2$Outbound
     | GetAllPromptsResponseFormat1$Outbound
+    | GetAllPromptsResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1106,8 +1106,8 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
+      z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$outboundSchema.optional(),

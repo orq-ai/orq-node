@@ -164,8 +164,8 @@ export type DeploymentsResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type DeploymentsResponseFormat =
-  | DeploymentsResponseFormat2
-  | DeploymentsResponseFormat1;
+  | DeploymentsResponseFormat1
+  | DeploymentsResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -274,8 +274,8 @@ export type DeploymentsModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | DeploymentsResponseFormat2
     | DeploymentsResponseFormat1
+    | DeploymentsResponseFormat2
     | null
     | undefined;
   /**
@@ -1104,14 +1104,14 @@ export const DeploymentsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
   z.lazy(() => DeploymentsResponseFormat1$inboundSchema),
+  z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentsResponseFormat$Outbound =
-  | DeploymentsResponseFormat2$Outbound
-  | DeploymentsResponseFormat1$Outbound;
+  | DeploymentsResponseFormat1$Outbound
+  | DeploymentsResponseFormat2$Outbound;
 
 /** @internal */
 export const DeploymentsResponseFormat$outboundSchema: z.ZodType<
@@ -1119,8 +1119,8 @@ export const DeploymentsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentsResponseFormat
 > = z.union([
-  z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
   z.lazy(() => DeploymentsResponseFormat1$outboundSchema),
+  z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -1237,8 +1237,8 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
       z.lazy(() => DeploymentsResponseFormat1$inboundSchema),
+      z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$inboundSchema.optional(),
@@ -1266,8 +1266,8 @@ export type DeploymentsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | DeploymentsResponseFormat2$Outbound
     | DeploymentsResponseFormat1$Outbound
+    | DeploymentsResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1296,8 +1296,8 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
       z.lazy(() => DeploymentsResponseFormat1$outboundSchema),
+      z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: DeploymentsPhotoRealVersion$outboundSchema.optional(),

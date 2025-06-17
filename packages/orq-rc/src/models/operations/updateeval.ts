@@ -48,8 +48,8 @@ export type UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean = {
 };
 
 export type UpdateEvalRequestBodyEvalsRequest4GuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean
-  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber;
+  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber
+  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean;
 
 export const UpdateEvalRequestBodyEvalsRequest4Type = {
   PythonEval: "python_eval",
@@ -60,8 +60,8 @@ export type UpdateEvalRequestBodyEvalsRequest4Type = ClosedEnum<
 
 export type RequestBodyPython = {
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean
     | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber
+    | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean
     | undefined;
   code?: string | undefined;
   type: UpdateEvalRequestBodyEvalsRequest4Type;
@@ -113,8 +113,8 @@ export type UpdateEvalGuardrailConfigEvalsRequestBoolean = {
 };
 
 export type UpdateEvalRequestBodyEvalsRequestGuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsRequestBoolean
-  | UpdateEvalGuardrailConfigEvalsRequestNumber;
+  | UpdateEvalGuardrailConfigEvalsRequestNumber
+  | UpdateEvalGuardrailConfigEvalsRequestBoolean;
 
 export const UpdateEvalRequestBodyEvalsRequestType = {
   HttpEval: "http_eval",
@@ -131,8 +131,8 @@ export type RequestBodyMethod = ClosedEnum<typeof RequestBodyMethod>;
 
 export type RequestBodyHTTP = {
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsRequestBoolean
     | UpdateEvalGuardrailConfigEvalsRequestNumber
+    | UpdateEvalGuardrailConfigEvalsRequestBoolean
     | undefined;
   type: UpdateEvalRequestBodyEvalsRequestType;
   url?: string | undefined;
@@ -187,8 +187,8 @@ export type UpdateEvalGuardrailConfigEvalsBoolean = {
 };
 
 export type UpdateEvalRequestBodyEvalsGuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsBoolean
-  | UpdateEvalGuardrailConfigEvalsNumber;
+  | UpdateEvalGuardrailConfigEvalsNumber
+  | UpdateEvalGuardrailConfigEvalsBoolean;
 
 export const UpdateEvalRequestBodyEvalsType = {
   JsonSchema: "json_schema",
@@ -199,8 +199,8 @@ export type UpdateEvalRequestBodyEvalsType = ClosedEnum<
 
 export type RequestBodyJSON = {
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsBoolean
     | UpdateEvalGuardrailConfigEvalsNumber
+    | UpdateEvalGuardrailConfigEvalsBoolean
     | undefined;
   type: UpdateEvalRequestBodyEvalsType;
   schema?: string | undefined;
@@ -252,8 +252,8 @@ export type UpdateEvalGuardrailConfigBoolean = {
 };
 
 export type UpdateEvalRequestBodyGuardrailConfig =
-  | UpdateEvalGuardrailConfigBoolean
-  | UpdateEvalGuardrailConfigNumber;
+  | UpdateEvalGuardrailConfigNumber
+  | UpdateEvalGuardrailConfigBoolean;
 
 export const UpdateEvalRequestBodyType = {
   LlmEval: "llm_eval",
@@ -264,8 +264,8 @@ export type UpdateEvalRequestBodyType = ClosedEnum<
 
 export type RequestBodyLLM = {
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigBoolean
     | UpdateEvalGuardrailConfigNumber
+    | UpdateEvalGuardrailConfigBoolean
     | undefined;
   type: UpdateEvalRequestBodyType;
   prompt?: string | undefined;
@@ -279,18 +279,18 @@ export type RequestBodyLLM = {
 };
 
 export type UpdateEvalRequestBody =
-  | RequestBodyJSON
-  | RequestBodyPython
   | RequestBodyLLM
-  | RequestBodyHTTP;
+  | RequestBodyJSON
+  | RequestBodyHTTP
+  | RequestBodyPython;
 
 export type UpdateEvalRequest = {
   id: string;
   requestBody?:
-    | RequestBodyJSON
-    | RequestBodyPython
     | RequestBodyLLM
+    | RequestBodyJSON
     | RequestBodyHTTP
+    | RequestBodyPython
     | undefined;
 };
 
@@ -345,8 +345,8 @@ export type UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
   };
 
 export type UpdateEvalResponseBodyEvalsResponse200GuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber;
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean;
 
 export const UpdateEvalResponseBodyEvalsResponse200Type = {
   PythonEval: "python_eval",
@@ -361,8 +361,8 @@ export type UpdateEvalResponseBodyPython = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
+    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
     | undefined;
   code: string;
   type: UpdateEvalResponseBodyEvalsResponse200Type;
@@ -417,8 +417,8 @@ export type UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
 };
 
 export type UpdateEvalResponseBodyEvalsResponseGuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber;
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean;
 
 export const UpdateEvalResponseBodyEvalsResponseType = {
   HttpEval: "http_eval",
@@ -441,8 +441,8 @@ export type UpdateEvalResponseBodyHTTP = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
+    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
     | undefined;
   type: UpdateEvalResponseBodyEvalsResponseType;
   url: string;
@@ -496,8 +496,8 @@ export type UpdateEvalGuardrailConfigEvalsResponse200Boolean = {
 };
 
 export type UpdateEvalResponseBodyEvalsGuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsResponse200Boolean
-  | UpdateEvalGuardrailConfigEvalsResponse200Number;
+  | UpdateEvalGuardrailConfigEvalsResponse200Number
+  | UpdateEvalGuardrailConfigEvalsResponse200Boolean;
 
 export const UpdateEvalResponseBodyEvalsType = {
   JsonSchema: "json_schema",
@@ -512,8 +512,8 @@ export type UpdateEvalResponseBodyJSON = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsResponse200Boolean
     | UpdateEvalGuardrailConfigEvalsResponse200Number
+    | UpdateEvalGuardrailConfigEvalsResponse200Boolean
     | undefined;
   type: UpdateEvalResponseBodyEvalsType;
   schema: string;
@@ -560,8 +560,8 @@ export type UpdateEvalGuardrailConfigEvalsResponseBoolean = {
 };
 
 export type UpdateEvalResponseBodyGuardrailConfig =
-  | UpdateEvalGuardrailConfigEvalsResponseBoolean
-  | UpdateEvalGuardrailConfigEvalsResponseNumber;
+  | UpdateEvalGuardrailConfigEvalsResponseNumber
+  | UpdateEvalGuardrailConfigEvalsResponseBoolean;
 
 export const UpdateEvalResponseBodyType = {
   LlmEval: "llm_eval",
@@ -576,8 +576,8 @@ export type UpdateEvalResponseBodyLLM = {
   created?: string | undefined;
   updated?: string | undefined;
   guardrailConfig?:
-    | UpdateEvalGuardrailConfigEvalsResponseBoolean
     | UpdateEvalGuardrailConfigEvalsResponseNumber
+    | UpdateEvalGuardrailConfigEvalsResponseBoolean
     | undefined;
   type: UpdateEvalResponseBodyType;
   prompt: string;
@@ -589,10 +589,10 @@ export type UpdateEvalResponseBodyLLM = {
  * Successfully updated an eval
  */
 export type UpdateEvalResponseBody =
-  | UpdateEvalResponseBodyJSON
-  | UpdateEvalResponseBodyPython
+  | UpdateEvalResponseBodyHTTP
   | UpdateEvalResponseBodyLLM
-  | UpdateEvalResponseBodyHTTP;
+  | UpdateEvalResponseBodyJSON
+  | UpdateEvalResponseBodyPython;
 
 /** @internal */
 export const UpdateEvalGuardrailConfigEvalsRequestRequestBody42Type$inboundSchema:
@@ -827,17 +827,17 @@ export const UpdateEvalRequestBodyEvalsRequest4GuardrailConfig$inboundSchema:
     unknown
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$inboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$inboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$inboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$inboundSchema
     ),
   ]);
 
 /** @internal */
 export type UpdateEvalRequestBodyEvalsRequest4GuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$Outbound;
+  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$Outbound
+  | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalRequestBodyEvalsRequest4GuardrailConfig$outboundSchema:
@@ -847,10 +847,10 @@ export const UpdateEvalRequestBodyEvalsRequest4GuardrailConfig$outboundSchema:
     UpdateEvalRequestBodyEvalsRequest4GuardrailConfig
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$outboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$outboundSchema
     ),
   ]);
 
@@ -929,10 +929,10 @@ export const RequestBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   guardrail_config: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$inboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$inboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$inboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$inboundSchema
     ),
   ]).optional(),
   code: z.string().optional(),
@@ -949,8 +949,8 @@ export const RequestBodyPython$inboundSchema: z.ZodType<
 /** @internal */
 export type RequestBodyPython$Outbound = {
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$Outbound
     | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$Outbound
+    | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$Outbound
     | undefined;
   code?: string | undefined;
   type: string;
@@ -967,10 +967,10 @@ export const RequestBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   guardrailConfig: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$outboundSchema
+      UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$outboundSchema
     ),
   ]).optional(),
   code: z.string().optional(),
@@ -1244,14 +1244,14 @@ export const UpdateEvalRequestBodyEvalsRequestGuardrailConfig$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$inboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$inboundSchema),
   ]);
 
 /** @internal */
 export type UpdateEvalRequestBodyEvalsRequestGuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsRequestBoolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsRequestNumber$Outbound;
+  | UpdateEvalGuardrailConfigEvalsRequestNumber$Outbound
+  | UpdateEvalGuardrailConfigEvalsRequestBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalRequestBodyEvalsRequestGuardrailConfig$outboundSchema:
@@ -1260,8 +1260,8 @@ export const UpdateEvalRequestBodyEvalsRequestGuardrailConfig$outboundSchema:
     z.ZodTypeDef,
     UpdateEvalRequestBodyEvalsRequestGuardrailConfig
   > = z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$outboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
   ]);
 
 /**
@@ -1359,8 +1359,8 @@ export const RequestBodyHTTP$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$inboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$inboundSchema),
   ]).optional(),
   type: UpdateEvalRequestBodyEvalsRequestType$inboundSchema,
   url: z.string().optional(),
@@ -1379,8 +1379,8 @@ export const RequestBodyHTTP$inboundSchema: z.ZodType<
 /** @internal */
 export type RequestBodyHTTP$Outbound = {
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsRequestBoolean$Outbound
     | UpdateEvalGuardrailConfigEvalsRequestNumber$Outbound
+    | UpdateEvalGuardrailConfigEvalsRequestBoolean$Outbound
     | undefined;
   type: string;
   url?: string | undefined;
@@ -1399,8 +1399,8 @@ export const RequestBodyHTTP$outboundSchema: z.ZodType<
   RequestBodyHTTP
 > = z.object({
   guardrailConfig: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$outboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
   ]).optional(),
   type: UpdateEvalRequestBodyEvalsRequestType$outboundSchema,
   url: z.string().optional(),
@@ -1654,14 +1654,14 @@ export const UpdateEvalRequestBodyEvalsGuardrailConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
   z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$inboundSchema),
+  z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateEvalRequestBodyEvalsGuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsBoolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsNumber$Outbound;
+  | UpdateEvalGuardrailConfigEvalsNumber$Outbound
+  | UpdateEvalGuardrailConfigEvalsBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalRequestBodyEvalsGuardrailConfig$outboundSchema:
@@ -1670,8 +1670,8 @@ export const UpdateEvalRequestBodyEvalsGuardrailConfig$outboundSchema:
     z.ZodTypeDef,
     UpdateEvalRequestBodyEvalsGuardrailConfig
   > = z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$outboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$outboundSchema),
   ]);
 
 /**
@@ -1744,8 +1744,8 @@ export const RequestBodyJSON$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$inboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
   ]).optional(),
   type: UpdateEvalRequestBodyEvalsType$inboundSchema,
   schema: z.string().optional(),
@@ -1761,8 +1761,8 @@ export const RequestBodyJSON$inboundSchema: z.ZodType<
 /** @internal */
 export type RequestBodyJSON$Outbound = {
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsBoolean$Outbound
     | UpdateEvalGuardrailConfigEvalsNumber$Outbound
+    | UpdateEvalGuardrailConfigEvalsBoolean$Outbound
     | undefined;
   type: string;
   schema?: string | undefined;
@@ -1778,8 +1778,8 @@ export const RequestBodyJSON$outboundSchema: z.ZodType<
   RequestBodyJSON
 > = z.object({
   guardrailConfig: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$outboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$outboundSchema),
   ]).optional(),
   type: UpdateEvalRequestBodyEvalsType$outboundSchema,
   schema: z.string().optional(),
@@ -2019,14 +2019,14 @@ export const UpdateEvalRequestBodyGuardrailConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
   z.lazy(() => UpdateEvalGuardrailConfigNumber$inboundSchema),
+  z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateEvalRequestBodyGuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigBoolean$Outbound
-  | UpdateEvalGuardrailConfigNumber$Outbound;
+  | UpdateEvalGuardrailConfigNumber$Outbound
+  | UpdateEvalGuardrailConfigBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalRequestBodyGuardrailConfig$outboundSchema: z.ZodType<
@@ -2034,8 +2034,8 @@ export const UpdateEvalRequestBodyGuardrailConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateEvalRequestBodyGuardrailConfig
 > = z.union([
-  z.lazy(() => UpdateEvalGuardrailConfigBoolean$outboundSchema),
   z.lazy(() => UpdateEvalGuardrailConfigNumber$outboundSchema),
+  z.lazy(() => UpdateEvalGuardrailConfigBoolean$outboundSchema),
 ]);
 
 /**
@@ -2102,8 +2102,8 @@ export const RequestBodyLLM$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigNumber$inboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
   ]).optional(),
   type: UpdateEvalRequestBodyType$inboundSchema,
   prompt: z.string().optional(),
@@ -2120,8 +2120,8 @@ export const RequestBodyLLM$inboundSchema: z.ZodType<
 /** @internal */
 export type RequestBodyLLM$Outbound = {
   guardrail_config?:
-    | UpdateEvalGuardrailConfigBoolean$Outbound
     | UpdateEvalGuardrailConfigNumber$Outbound
+    | UpdateEvalGuardrailConfigBoolean$Outbound
     | undefined;
   type: string;
   prompt?: string | undefined;
@@ -2138,8 +2138,8 @@ export const RequestBodyLLM$outboundSchema: z.ZodType<
   RequestBodyLLM
 > = z.object({
   guardrailConfig: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigBoolean$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigNumber$outboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigBoolean$outboundSchema),
   ]).optional(),
   type: UpdateEvalRequestBodyType$outboundSchema,
   prompt: z.string().optional(),
@@ -2186,18 +2186,18 @@ export const UpdateEvalRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => RequestBodyJSON$inboundSchema),
-  z.lazy(() => RequestBodyPython$inboundSchema),
   z.lazy(() => RequestBodyLLM$inboundSchema),
+  z.lazy(() => RequestBodyJSON$inboundSchema),
   z.lazy(() => RequestBodyHTTP$inboundSchema),
+  z.lazy(() => RequestBodyPython$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateEvalRequestBody$Outbound =
-  | RequestBodyJSON$Outbound
-  | RequestBodyPython$Outbound
   | RequestBodyLLM$Outbound
-  | RequestBodyHTTP$Outbound;
+  | RequestBodyJSON$Outbound
+  | RequestBodyHTTP$Outbound
+  | RequestBodyPython$Outbound;
 
 /** @internal */
 export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
@@ -2205,10 +2205,10 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateEvalRequestBody
 > = z.union([
-  z.lazy(() => RequestBodyJSON$outboundSchema),
-  z.lazy(() => RequestBodyPython$outboundSchema),
   z.lazy(() => RequestBodyLLM$outboundSchema),
+  z.lazy(() => RequestBodyJSON$outboundSchema),
   z.lazy(() => RequestBodyHTTP$outboundSchema),
+  z.lazy(() => RequestBodyPython$outboundSchema),
 ]);
 
 /**
@@ -2250,10 +2250,10 @@ export const UpdateEvalRequest$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   RequestBody: z.union([
-    z.lazy(() => RequestBodyJSON$inboundSchema),
-    z.lazy(() => RequestBodyPython$inboundSchema),
     z.lazy(() => RequestBodyLLM$inboundSchema),
+    z.lazy(() => RequestBodyJSON$inboundSchema),
     z.lazy(() => RequestBodyHTTP$inboundSchema),
+    z.lazy(() => RequestBodyPython$inboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2265,10 +2265,10 @@ export const UpdateEvalRequest$inboundSchema: z.ZodType<
 export type UpdateEvalRequest$Outbound = {
   id: string;
   RequestBody?:
-    | RequestBodyJSON$Outbound
-    | RequestBodyPython$Outbound
     | RequestBodyLLM$Outbound
+    | RequestBodyJSON$Outbound
     | RequestBodyHTTP$Outbound
+    | RequestBodyPython$Outbound
     | undefined;
 };
 
@@ -2280,10 +2280,10 @@ export const UpdateEvalRequest$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   requestBody: z.union([
-    z.lazy(() => RequestBodyJSON$outboundSchema),
-    z.lazy(() => RequestBodyPython$outboundSchema),
     z.lazy(() => RequestBodyLLM$outboundSchema),
+    z.lazy(() => RequestBodyJSON$outboundSchema),
     z.lazy(() => RequestBodyHTTP$outboundSchema),
+    z.lazy(() => RequestBodyPython$outboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2573,17 +2573,17 @@ export const UpdateEvalResponseBodyEvalsResponse200GuardrailConfig$inboundSchema
     unknown
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
     ),
   ]);
 
 /** @internal */
 export type UpdateEvalResponseBodyEvalsResponse200GuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound;
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalResponseBodyEvalsResponse200GuardrailConfig$outboundSchema:
@@ -2593,10 +2593,10 @@ export const UpdateEvalResponseBodyEvalsResponse200GuardrailConfig$outboundSchem
     UpdateEvalResponseBodyEvalsResponse200GuardrailConfig
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
     ),
   ]);
 
@@ -2674,14 +2674,14 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrail_config: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
     ),
   ]).optional(),
   code: z.string(),
@@ -2701,8 +2701,8 @@ export type UpdateEvalResponseBodyPython$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$Outbound
+    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$Outbound
     | undefined;
   code: string;
   type: string;
@@ -2717,14 +2717,14 @@ export const UpdateEvalResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
     ),
   ]).optional(),
   code: z.string(),
@@ -3017,17 +3017,17 @@ export const UpdateEvalResponseBodyEvalsResponseGuardrailConfig$inboundSchema:
     unknown
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
     ),
   ]);
 
 /** @internal */
 export type UpdateEvalResponseBodyEvalsResponseGuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound;
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound
+  | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalResponseBodyEvalsResponseGuardrailConfig$outboundSchema:
@@ -3037,10 +3037,10 @@ export const UpdateEvalResponseBodyEvalsResponseGuardrailConfig$outboundSchema:
     UpdateEvalResponseBodyEvalsResponseGuardrailConfig
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
     ),
   ]);
 
@@ -3139,14 +3139,14 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrail_config: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$inboundSchema
     ),
   ]).optional(),
   type: UpdateEvalResponseBodyEvalsResponseType$inboundSchema,
@@ -3169,8 +3169,8 @@ export type UpdateEvalResponseBodyHTTP$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound
     | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$Outbound
+    | UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$Outbound
     | undefined;
   type: string;
   url: string;
@@ -3188,14 +3188,14 @@ export const UpdateEvalResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean$outboundSchema
     ),
   ]).optional(),
   type: UpdateEvalResponseBodyEvalsResponseType$outboundSchema,
@@ -3481,17 +3481,17 @@ export const UpdateEvalResponseBodyEvalsGuardrailConfig$inboundSchema:
   z.ZodType<UpdateEvalResponseBodyEvalsGuardrailConfig, z.ZodTypeDef, unknown> =
     z.union([
       z.lazy(() =>
-        UpdateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
+        UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema
       ),
       z.lazy(() =>
-        UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema
+        UpdateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
       ),
     ]);
 
 /** @internal */
 export type UpdateEvalResponseBodyEvalsGuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsResponse200Boolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsResponse200Number$Outbound;
+  | UpdateEvalGuardrailConfigEvalsResponse200Number$Outbound
+  | UpdateEvalGuardrailConfigEvalsResponse200Boolean$Outbound;
 
 /** @internal */
 export const UpdateEvalResponseBodyEvalsGuardrailConfig$outboundSchema:
@@ -3501,10 +3501,10 @@ export const UpdateEvalResponseBodyEvalsGuardrailConfig$outboundSchema:
     UpdateEvalResponseBodyEvalsGuardrailConfig
   > = z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema
     ),
   ]);
 
@@ -3579,13 +3579,13 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrail_config: z.union([
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200Boolean$inboundSchema
     ),
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
   ]).optional(),
   type: UpdateEvalResponseBodyEvalsType$inboundSchema,
   schema: z.string(),
@@ -3604,8 +3604,8 @@ export type UpdateEvalResponseBodyJSON$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsResponse200Boolean$Outbound
     | UpdateEvalGuardrailConfigEvalsResponse200Number$Outbound
+    | UpdateEvalGuardrailConfigEvalsResponse200Boolean$Outbound
     | undefined;
   type: string;
   schema: string;
@@ -3620,14 +3620,14 @@ export const UpdateEvalResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
     ),
     z.lazy(() =>
-      UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
+      UpdateEvalGuardrailConfigEvalsResponse200Boolean$outboundSchema
     ),
   ]).optional(),
   type: UpdateEvalResponseBodyEvalsType$outboundSchema,
@@ -3895,14 +3895,14 @@ export const UpdateEvalResponseBodyGuardrailConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
   z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
+  z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateEvalResponseBodyGuardrailConfig$Outbound =
-  | UpdateEvalGuardrailConfigEvalsResponseBoolean$Outbound
-  | UpdateEvalGuardrailConfigEvalsResponseNumber$Outbound;
+  | UpdateEvalGuardrailConfigEvalsResponseNumber$Outbound
+  | UpdateEvalGuardrailConfigEvalsResponseBoolean$Outbound;
 
 /** @internal */
 export const UpdateEvalResponseBodyGuardrailConfig$outboundSchema: z.ZodType<
@@ -3910,8 +3910,8 @@ export const UpdateEvalResponseBodyGuardrailConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateEvalResponseBodyGuardrailConfig
 > = z.union([
-  z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
   z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
+  z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
 ]);
 
 /**
@@ -3979,11 +3979,11 @@ export const UpdateEvalResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrail_config: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
   ]).optional(),
   type: UpdateEvalResponseBodyType$inboundSchema,
   prompt: z.string(),
@@ -4003,8 +4003,8 @@ export type UpdateEvalResponseBodyLLM$Outbound = {
   created: string;
   updated: string;
   guardrail_config?:
-    | UpdateEvalGuardrailConfigEvalsResponseBoolean$Outbound
     | UpdateEvalGuardrailConfigEvalsResponseNumber$Outbound
+    | UpdateEvalGuardrailConfigEvalsResponseBoolean$Outbound
     | undefined;
   type: string;
   prompt: string;
@@ -4020,11 +4020,11 @@ export const UpdateEvalResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-06-16T13:25:09.055Z"),
-  updated: z.string().default("2025-06-16T13:25:09.055Z"),
+  created: z.string().default("2025-06-17T09:09:48.835Z"),
+  updated: z.string().default("2025-06-17T09:09:48.835Z"),
   guardrailConfig: z.union([
-    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
+    z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
   ]).optional(),
   type: UpdateEvalResponseBodyType$outboundSchema,
   prompt: z.string(),
@@ -4074,18 +4074,18 @@ export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => UpdateEvalResponseBodyHTTP$inboundSchema),
+  z.lazy(() => UpdateEvalResponseBodyLLM$inboundSchema),
   z.lazy(() => UpdateEvalResponseBodyJSON$inboundSchema),
   z.lazy(() => UpdateEvalResponseBodyPython$inboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyLLM$inboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyHTTP$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateEvalResponseBody$Outbound =
-  | UpdateEvalResponseBodyJSON$Outbound
-  | UpdateEvalResponseBodyPython$Outbound
+  | UpdateEvalResponseBodyHTTP$Outbound
   | UpdateEvalResponseBodyLLM$Outbound
-  | UpdateEvalResponseBodyHTTP$Outbound;
+  | UpdateEvalResponseBodyJSON$Outbound
+  | UpdateEvalResponseBodyPython$Outbound;
 
 /** @internal */
 export const UpdateEvalResponseBody$outboundSchema: z.ZodType<
@@ -4093,10 +4093,10 @@ export const UpdateEvalResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateEvalResponseBody
 > = z.union([
+  z.lazy(() => UpdateEvalResponseBodyHTTP$outboundSchema),
+  z.lazy(() => UpdateEvalResponseBodyLLM$outboundSchema),
   z.lazy(() => UpdateEvalResponseBodyJSON$outboundSchema),
   z.lazy(() => UpdateEvalResponseBodyPython$outboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyLLM$outboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyHTTP$outboundSchema),
 ]);
 
 /**

@@ -399,10 +399,10 @@ export type DeveloperMessage = {
 };
 
 export type PrefixMessages =
+  | ToolMessage
   | DeveloperMessage
   | SystemMessage
   | UserMessage
-  | ToolMessage
   | AssistantMessage;
 
 /**
@@ -820,10 +820,10 @@ export type MessagesDeveloperMessage = {
 };
 
 export type Messages =
+  | MessagesToolMessage
   | MessagesDeveloperMessage
   | MessagesSystemMessage
   | MessagesUserMessage
-  | MessagesToolMessage
   | MessagesAssistantMessage;
 
 /**
@@ -1179,10 +1179,10 @@ export type DeploymentGetConfigRequestBody = {
    */
   prefixMessages?:
     | Array<
+      | ToolMessage
       | DeveloperMessage
       | SystemMessage
       | UserMessage
-      | ToolMessage
       | AssistantMessage
     >
     | undefined;
@@ -1191,10 +1191,10 @@ export type DeploymentGetConfigRequestBody = {
    */
   messages?:
     | Array<
+      | MessagesToolMessage
       | MessagesDeveloperMessage
       | MessagesSystemMessage
       | MessagesUserMessage
-      | MessagesToolMessage
       | MessagesAssistantMessage
     >
     | undefined;
@@ -1457,8 +1457,8 @@ export type DeploymentGetConfigResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type DeploymentGetConfigResponseFormat =
-  | DeploymentGetConfigResponseFormat2
-  | DeploymentGetConfigResponseFormat1;
+  | DeploymentGetConfigResponseFormat1
+  | DeploymentGetConfigResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -1567,8 +1567,8 @@ export type DeploymentGetConfigParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | DeploymentGetConfigResponseFormat2
     | DeploymentGetConfigResponseFormat1
+    | DeploymentGetConfigResponseFormat2
     | null
     | undefined;
   /**
@@ -3306,19 +3306,19 @@ export const PrefixMessages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => ToolMessage$inboundSchema),
   z.lazy(() => DeveloperMessage$inboundSchema),
   z.lazy(() => SystemMessage$inboundSchema),
   z.lazy(() => UserMessage$inboundSchema),
-  z.lazy(() => ToolMessage$inboundSchema),
   z.lazy(() => AssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type PrefixMessages$Outbound =
+  | ToolMessage$Outbound
   | DeveloperMessage$Outbound
   | SystemMessage$Outbound
   | UserMessage$Outbound
-  | ToolMessage$Outbound
   | AssistantMessage$Outbound;
 
 /** @internal */
@@ -3327,10 +3327,10 @@ export const PrefixMessages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PrefixMessages
 > = z.union([
+  z.lazy(() => ToolMessage$outboundSchema),
   z.lazy(() => DeveloperMessage$outboundSchema),
   z.lazy(() => SystemMessage$outboundSchema),
   z.lazy(() => UserMessage$outboundSchema),
-  z.lazy(() => ToolMessage$outboundSchema),
   z.lazy(() => AssistantMessage$outboundSchema),
 ]);
 
@@ -5088,19 +5088,19 @@ export const Messages$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  z.lazy(() => MessagesToolMessage$inboundSchema),
   z.lazy(() => MessagesDeveloperMessage$inboundSchema),
   z.lazy(() => MessagesSystemMessage$inboundSchema),
   z.lazy(() => MessagesUserMessage$inboundSchema),
-  z.lazy(() => MessagesToolMessage$inboundSchema),
   z.lazy(() => MessagesAssistantMessage$inboundSchema),
 ]);
 
 /** @internal */
 export type Messages$Outbound =
+  | MessagesToolMessage$Outbound
   | MessagesDeveloperMessage$Outbound
   | MessagesSystemMessage$Outbound
   | MessagesUserMessage$Outbound
-  | MessagesToolMessage$Outbound
   | MessagesAssistantMessage$Outbound;
 
 /** @internal */
@@ -5109,10 +5109,10 @@ export const Messages$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Messages
 > = z.union([
+  z.lazy(() => MessagesToolMessage$outboundSchema),
   z.lazy(() => MessagesDeveloperMessage$outboundSchema),
   z.lazy(() => MessagesSystemMessage$outboundSchema),
   z.lazy(() => MessagesUserMessage$outboundSchema),
-  z.lazy(() => MessagesToolMessage$outboundSchema),
   z.lazy(() => MessagesAssistantMessage$outboundSchema),
 ]);
 
@@ -7650,19 +7650,19 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(
     z.union([
+      z.lazy(() => ToolMessage$inboundSchema),
       z.lazy(() => DeveloperMessage$inboundSchema),
       z.lazy(() => SystemMessage$inboundSchema),
       z.lazy(() => UserMessage$inboundSchema),
-      z.lazy(() => ToolMessage$inboundSchema),
       z.lazy(() => AssistantMessage$inboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => MessagesToolMessage$inboundSchema),
       z.lazy(() => MessagesDeveloperMessage$inboundSchema),
       z.lazy(() => MessagesSystemMessage$inboundSchema),
       z.lazy(() => MessagesUserMessage$inboundSchema),
-      z.lazy(() => MessagesToolMessage$inboundSchema),
       z.lazy(() => MessagesAssistantMessage$inboundSchema),
     ]),
   ).optional(),
@@ -7704,19 +7704,19 @@ export type DeploymentGetConfigRequestBody$Outbound = {
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
+      | ToolMessage$Outbound
       | DeveloperMessage$Outbound
       | SystemMessage$Outbound
       | UserMessage$Outbound
-      | ToolMessage$Outbound
       | AssistantMessage$Outbound
     >
     | undefined;
   messages?:
     | Array<
+      | MessagesToolMessage$Outbound
       | MessagesDeveloperMessage$Outbound
       | MessagesSystemMessage$Outbound
       | MessagesUserMessage$Outbound
-      | MessagesToolMessage$Outbound
       | MessagesAssistantMessage$Outbound
     >
     | undefined;
@@ -7751,19 +7751,19 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
+      z.lazy(() => ToolMessage$outboundSchema),
       z.lazy(() => DeveloperMessage$outboundSchema),
       z.lazy(() => SystemMessage$outboundSchema),
       z.lazy(() => UserMessage$outboundSchema),
-      z.lazy(() => ToolMessage$outboundSchema),
       z.lazy(() => AssistantMessage$outboundSchema),
     ]),
   ).optional(),
   messages: z.array(
     z.union([
+      z.lazy(() => MessagesToolMessage$outboundSchema),
       z.lazy(() => MessagesDeveloperMessage$outboundSchema),
       z.lazy(() => MessagesSystemMessage$outboundSchema),
       z.lazy(() => MessagesUserMessage$outboundSchema),
-      z.lazy(() => MessagesToolMessage$outboundSchema),
       z.lazy(() => MessagesAssistantMessage$outboundSchema),
     ]),
   ).optional(),
@@ -8924,14 +8924,14 @@ export const DeploymentGetConfigResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
   z.lazy(() => DeploymentGetConfigResponseFormat1$inboundSchema),
+  z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentGetConfigResponseFormat$Outbound =
-  | DeploymentGetConfigResponseFormat2$Outbound
-  | DeploymentGetConfigResponseFormat1$Outbound;
+  | DeploymentGetConfigResponseFormat1$Outbound
+  | DeploymentGetConfigResponseFormat2$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigResponseFormat$outboundSchema: z.ZodType<
@@ -8939,8 +8939,8 @@ export const DeploymentGetConfigResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentGetConfigResponseFormat
 > = z.union([
-  z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
   z.lazy(() => DeploymentGetConfigResponseFormat1$outboundSchema),
+  z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
 ]);
 
 /**
@@ -9064,8 +9064,8 @@ export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
       z.lazy(() => DeploymentGetConfigResponseFormat1$inboundSchema),
+      z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: DeploymentGetConfigPhotoRealVersion$inboundSchema
@@ -9094,8 +9094,8 @@ export type DeploymentGetConfigParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | DeploymentGetConfigResponseFormat2$Outbound
     | DeploymentGetConfigResponseFormat1$Outbound
+    | DeploymentGetConfigResponseFormat2$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -9124,8 +9124,8 @@ export const DeploymentGetConfigParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
       z.lazy(() => DeploymentGetConfigResponseFormat1$outboundSchema),
+      z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: DeploymentGetConfigPhotoRealVersion$outboundSchema
