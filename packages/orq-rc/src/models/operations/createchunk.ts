@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateChunkMetadata = string | number | boolean;
 
-export type CreateChunkRequestBody = {
+export type RequestBody = {
   /**
    * The text content of the chunk
    */
@@ -35,7 +35,7 @@ export type CreateChunkRequest = {
    * Unique identifier of the datasource
    */
   datasourceId: string;
-  requestBody?: Array<CreateChunkRequestBody> | undefined;
+  requestBody?: Array<RequestBody> | undefined;
 };
 
 export type CreateChunkKnowledgeMetadata = string | number | boolean;
@@ -55,7 +55,7 @@ export const CreateChunkStatus = {
  */
 export type CreateChunkStatus = ClosedEnum<typeof CreateChunkStatus>;
 
-export type CreateChunkResponseBody = {
+export type ResponseBody = {
   /**
    * The unique identifier of the chunk
    */
@@ -143,8 +143,8 @@ export function createChunkMetadataFromJSON(
 }
 
 /** @internal */
-export const CreateChunkRequestBody$inboundSchema: z.ZodType<
-  CreateChunkRequestBody,
+export const RequestBody$inboundSchema: z.ZodType<
+  RequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -154,17 +154,17 @@ export const CreateChunkRequestBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateChunkRequestBody$Outbound = {
+export type RequestBody$Outbound = {
   text: string;
   embedding?: Array<number> | undefined;
   metadata?: { [k: string]: string | number | boolean } | undefined;
 };
 
 /** @internal */
-export const CreateChunkRequestBody$outboundSchema: z.ZodType<
-  CreateChunkRequestBody$Outbound,
+export const RequestBody$outboundSchema: z.ZodType<
+  RequestBody$Outbound,
   z.ZodTypeDef,
-  CreateChunkRequestBody
+  RequestBody
 > = z.object({
   text: z.string(),
   embedding: z.array(z.number()).optional(),
@@ -175,30 +175,26 @@ export const CreateChunkRequestBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateChunkRequestBody$ {
-  /** @deprecated use `CreateChunkRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkRequestBody$inboundSchema;
-  /** @deprecated use `CreateChunkRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkRequestBody$outboundSchema;
-  /** @deprecated use `CreateChunkRequestBody$Outbound` instead. */
-  export type Outbound = CreateChunkRequestBody$Outbound;
+export namespace RequestBody$ {
+  /** @deprecated use `RequestBody$inboundSchema` instead. */
+  export const inboundSchema = RequestBody$inboundSchema;
+  /** @deprecated use `RequestBody$outboundSchema` instead. */
+  export const outboundSchema = RequestBody$outboundSchema;
+  /** @deprecated use `RequestBody$Outbound` instead. */
+  export type Outbound = RequestBody$Outbound;
 }
 
-export function createChunkRequestBodyToJSON(
-  createChunkRequestBody: CreateChunkRequestBody,
-): string {
-  return JSON.stringify(
-    CreateChunkRequestBody$outboundSchema.parse(createChunkRequestBody),
-  );
+export function requestBodyToJSON(requestBody: RequestBody): string {
+  return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
 }
 
-export function createChunkRequestBodyFromJSON(
+export function requestBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChunkRequestBody, SDKValidationError> {
+): SafeParseResult<RequestBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateChunkRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkRequestBody' from JSON`,
+    (x) => RequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody' from JSON`,
   );
 }
 
@@ -210,8 +206,7 @@ export const CreateChunkRequest$inboundSchema: z.ZodType<
 > = z.object({
   knowledge_id: z.string(),
   datasource_id: z.string(),
-  RequestBody: z.array(z.lazy(() => CreateChunkRequestBody$inboundSchema))
-    .optional(),
+  RequestBody: z.array(z.lazy(() => RequestBody$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -224,7 +219,7 @@ export const CreateChunkRequest$inboundSchema: z.ZodType<
 export type CreateChunkRequest$Outbound = {
   knowledge_id: string;
   datasource_id: string;
-  RequestBody?: Array<CreateChunkRequestBody$Outbound> | undefined;
+  RequestBody?: Array<RequestBody$Outbound> | undefined;
 };
 
 /** @internal */
@@ -235,8 +230,7 @@ export const CreateChunkRequest$outboundSchema: z.ZodType<
 > = z.object({
   knowledgeId: z.string(),
   datasourceId: z.string(),
-  requestBody: z.array(z.lazy(() => CreateChunkRequestBody$outboundSchema))
-    .optional(),
+  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -348,8 +342,8 @@ export namespace CreateChunkStatus$ {
 }
 
 /** @internal */
-export const CreateChunkResponseBody$inboundSchema: z.ZodType<
-  CreateChunkResponseBody,
+export const ResponseBody$inboundSchema: z.ZodType<
+  ResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -371,7 +365,7 @@ export const CreateChunkResponseBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateChunkResponseBody$Outbound = {
+export type ResponseBody$Outbound = {
   _id: string;
   text: string;
   metadata?: { [k: string]: string | number | boolean } | undefined;
@@ -384,10 +378,10 @@ export type CreateChunkResponseBody$Outbound = {
 };
 
 /** @internal */
-export const CreateChunkResponseBody$outboundSchema: z.ZodType<
-  CreateChunkResponseBody$Outbound,
+export const ResponseBody$outboundSchema: z.ZodType<
+  ResponseBody$Outbound,
   z.ZodTypeDef,
-  CreateChunkResponseBody
+  ResponseBody
 > = z.object({
   id: z.string(),
   text: z.string(),
@@ -410,29 +404,25 @@ export const CreateChunkResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateChunkResponseBody$ {
-  /** @deprecated use `CreateChunkResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkResponseBody$inboundSchema;
-  /** @deprecated use `CreateChunkResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkResponseBody$outboundSchema;
-  /** @deprecated use `CreateChunkResponseBody$Outbound` instead. */
-  export type Outbound = CreateChunkResponseBody$Outbound;
+export namespace ResponseBody$ {
+  /** @deprecated use `ResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ResponseBody$inboundSchema;
+  /** @deprecated use `ResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ResponseBody$outboundSchema;
+  /** @deprecated use `ResponseBody$Outbound` instead. */
+  export type Outbound = ResponseBody$Outbound;
 }
 
-export function createChunkResponseBodyToJSON(
-  createChunkResponseBody: CreateChunkResponseBody,
-): string {
-  return JSON.stringify(
-    CreateChunkResponseBody$outboundSchema.parse(createChunkResponseBody),
-  );
+export function responseBodyToJSON(responseBody: ResponseBody): string {
+  return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
 }
 
-export function createChunkResponseBodyFromJSON(
+export function responseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateChunkResponseBody, SDKValidationError> {
+): SafeParseResult<ResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateChunkResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateChunkResponseBody' from JSON`,
+    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

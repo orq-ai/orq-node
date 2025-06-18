@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 2c293e1423148d3ee83fa1013e647c98
+  docChecksum: c277d929819f42e55bde117cbdd8f13a
   docVersion: "2.0"
   speakeasyVersion: 1.564.0
   generationVersion: 2.630.8
-  releaseVersion: 3.8.0-rc.32
-  configChecksum: c2b89944e304c204adbb96dcfeb77f75
+  releaseVersion: 3.8.0-rc.33
+  configChecksum: a47d8994963f3857f4638f3aa1487445
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -287,20 +287,11 @@ generatedFiles:
   - docs/models/operations/chunkingconfigurationtype.md
   - docs/models/operations/chunkingoptions.md
   - docs/models/operations/cleardatasetrequest.md
-  - docs/models/operations/config.md
-  - docs/models/operations/configuration.md
-  - docs/models/operations/configuration1.md
-  - docs/models/operations/configuration2.md
-  - docs/models/operations/configuration3.md
-  - docs/models/operations/configuration4.md
-  - docs/models/operations/configurationprovider.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
   - docs/models/operations/createchunkknowledgemetadata.md
   - docs/models/operations/createchunkmetadata.md
   - docs/models/operations/createchunkrequest.md
-  - docs/models/operations/createchunkrequestbody.md
-  - docs/models/operations/createchunkresponsebody.md
   - docs/models/operations/createchunkstatus.md
   - docs/models/operations/createcontactrequestbody.md
   - docs/models/operations/createcontactresponsebody.md
@@ -632,7 +623,6 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigorin.md
   - docs/models/operations/deploymentgetconfigorne.md
   - docs/models/operations/deploymentgetconfigornin.md
-  - docs/models/operations/deploymentgetconfigparameters.md
   - docs/models/operations/deploymentgetconfigphotorealversion.md
   - docs/models/operations/deploymentgetconfigprefixmessagescontent.md
   - docs/models/operations/deploymentgetconfigprefixmessagesdeploymentsrequestrole.md
@@ -1169,8 +1159,6 @@ generatedFiles:
   - docs/models/operations/getpromptversiontoolcalls.md
   - docs/models/operations/getpromptversiontype.md
   - docs/models/operations/getpromptversionusecases.md
-  - docs/models/operations/getv2modelslitellmmodelslitellmparams.md
-  - docs/models/operations/getv2modelslitellmmodelsmodelinfo.md
   - docs/models/operations/gte.md
   - docs/models/operations/guardrailconfig.md
   - docs/models/operations/guardrailconfigboolean.md
@@ -1331,7 +1319,6 @@ generatedFiles:
   - docs/models/operations/listpromptversionstoolcalls.md
   - docs/models/operations/listpromptversionstype.md
   - docs/models/operations/listpromptversionsusecases.md
-  - docs/models/operations/litellmparams.md
   - docs/models/operations/llm.md
   - docs/models/operations/lt.md
   - docs/models/operations/lte.md
@@ -1359,7 +1346,6 @@ generatedFiles:
   - docs/models/operations/metadata.md
   - docs/models/operations/method.md
   - docs/models/operations/metrics.md
-  - docs/models/operations/modelinfo.md
   - docs/models/operations/modelparameters.md
   - docs/models/operations/modeltype.md
   - docs/models/operations/ne.md
@@ -1379,7 +1365,6 @@ generatedFiles:
   - docs/models/operations/onene.md
   - docs/models/operations/onenin.md
   - docs/models/operations/operator.md
-  - docs/models/operations/options.md
   - docs/models/operations/or.md
   - docs/models/operations/or3.md
   - docs/models/operations/oreq.md
@@ -1391,27 +1376,9 @@ generatedFiles:
   - docs/models/operations/orne.md
   - docs/models/operations/ornin.md
   - docs/models/operations/ownedby.md
-  - docs/models/operations/parameter.md
-  - docs/models/operations/parameters1.md
-  - docs/models/operations/parameters2.md
-  - docs/models/operations/parameters3.md
-  - docs/models/operations/parametersconfig.md
-  - docs/models/operations/parametersparameter.md
-  - docs/models/operations/parametersparametertype.md
   - docs/models/operations/parameterst.md
-  - docs/models/operations/parametertype.md
   - docs/models/operations/performance.md
   - docs/models/operations/photorealversion.md
-  - docs/models/operations/postv2modelslitellmimportconfigurationprovider.md
-  - docs/models/operations/postv2modelslitellmimportconfigurationresponse200provider.md
-  - docs/models/operations/postv2modelslitellmimportconfigurationresponseprovider.md
-  - docs/models/operations/postv2modelslitellmimportmetadata.md
-  - docs/models/operations/postv2modelslitellmimportmodeltype.md
-  - docs/models/operations/postv2modelslitellmimportparametersconfig.md
-  - docs/models/operations/postv2modelslitellmimportparametersparameter.md
-  - docs/models/operations/postv2modelslitellmimportparametersparametertype.md
-  - docs/models/operations/postv2modelslitellmimportprovider.md
-  - docs/models/operations/postv2modelslitellmimportresponsebody.md
   - docs/models/operations/prefixmessages.md
   - docs/models/operations/prefixmessagesassistantmessage.md
   - docs/models/operations/prefixmessagesaudio.md
@@ -1434,7 +1401,6 @@ generatedFiles:
   - docs/models/operations/ragasmetric.md
   - docs/models/operations/reasoningeffort.md
   - docs/models/operations/refusalcontentpart.md
-  - docs/models/operations/region.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
@@ -1923,7 +1889,6 @@ generatedFiles:
   - src/funcs/filesDelete.ts
   - src/funcs/filesGet.ts
   - src/funcs/filesList.ts
-  - src/funcs/getV2ModelsLitellmModels.ts
   - src/funcs/knowledgeCreate.ts
   - src/funcs/knowledgeCreateChunks.ts
   - src/funcs/knowledgeCreateDatasource.ts
@@ -1941,7 +1906,6 @@ generatedFiles:
   - src/funcs/knowledgeUpdateChunk.ts
   - src/funcs/knowledgeUpdateDatasource.ts
   - src/funcs/modelsList.ts
-  - src/funcs/postV2ModelsLitellmImport.ts
   - src/funcs/promptsCreate.ts
   - src/funcs/promptsDelete.ts
   - src/funcs/promptsGetVersion.ts
@@ -2051,7 +2015,6 @@ generatedFiles:
   - src/mcp-server/tools/filesDelete.ts
   - src/mcp-server/tools/filesGet.ts
   - src/mcp-server/tools/filesList.ts
-  - src/mcp-server/tools/getV2ModelsLitellmModels.ts
   - src/mcp-server/tools/knowledgeCreate.ts
   - src/mcp-server/tools/knowledgeCreateChunks.ts
   - src/mcp-server/tools/knowledgeCreateDatasource.ts
@@ -2069,7 +2032,6 @@ generatedFiles:
   - src/mcp-server/tools/knowledgeUpdateChunk.ts
   - src/mcp-server/tools/knowledgeUpdateDatasource.ts
   - src/mcp-server/tools/modelsList.ts
-  - src/mcp-server/tools/postV2ModelsLitellmImport.ts
   - src/mcp-server/tools/promptsCreate.ts
   - src/mcp-server/tools/promptsDelete.ts
   - src/mcp-server/tools/promptsGetVersion.ts
@@ -2201,7 +2163,6 @@ generatedFiles:
   - src/models/operations/getoneknowledge.ts
   - src/models/operations/getoneprompt.ts
   - src/models/operations/getpromptversion.ts
-  - src/models/operations/getv2modelslitellmmodels.ts
   - src/models/operations/index.ts
   - src/models/operations/invokeeval.ts
   - src/models/operations/listchunks.ts
@@ -2212,7 +2173,6 @@ generatedFiles:
   - src/models/operations/listknowledgebases.ts
   - src/models/operations/listmodels.ts
   - src/models/operations/listpromptversions.ts
-  - src/models/operations/postv2modelslitellmimport.ts
   - src/models/operations/remoteconfigsgetconfig.ts
   - src/models/operations/retrievecontact.ts
   - src/models/operations/retrievedatapoint.ts
@@ -2259,7 +2219,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-03T12:31:41.205Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-06-18T06:45:23.200Z"}
     "":
       requestBody:
         application/json: {"external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
@@ -2333,7 +2293,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-06-17T22:56:21.116Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-06-18T06:45:26.188Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -2349,7 +2309,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-06-17T22:56:21.116Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-06-18T06:45:26.188Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -2440,7 +2400,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-06-18T06:45:23.200Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -2448,7 +2408,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-06-18T06:45:23.200Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -2460,7 +2420,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-06-18T06:45:23.200Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -2495,7 +2455,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-18T06:45:23.200Z"}
   RetrieveDatapoint:
     speakeasy-default-retrieve-datapoint:
       parameters:
@@ -2504,7 +2464,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-18T06:45:23.200Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -2515,7 +2475,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-06-18T06:45:23.200Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -2598,7 +2558,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01JY01QA01WPK76HY1YF6NV1X1", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01JY0WJ7BEV61RN3244JYZ4AVV", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -2607,7 +2567,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01JY01QA00A81Z0T8KNDPKX4F9", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01JY0WJ7BEWGT3F90VR95CFRRX", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -2624,7 +2584,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01JY01QA01RRHH0T6M1HAJWK17", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01JY0WJ7BF3EEJ47JAVSFZ2QVT", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -3031,7 +2991,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-06-18T06:45:23.200Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -3052,7 +3012,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-06-17T22:56:18.095Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-06-18T06:45:23.200Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
