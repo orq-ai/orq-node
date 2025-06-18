@@ -3,34 +3,21 @@
 
 ## Supported Types
 
-### `operations.UpdateDatapoint2Datasets1`
+### `operations.UpdateDatapoint2TextContentPart`
 
 ```typescript
-const value: operations.UpdateDatapoint2Datasets1 = {
+const value: operations.UpdateDatapoint2TextContentPart = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.UpdateDatapoint2Datasets2`
+### `operations.UpdateDatapoint2RefusalContentPart`
 
 ```typescript
-const value: operations.UpdateDatapoint2Datasets2 = {
-  type: "image_url",
-  imageUrl: {
-    url: "https://shameful-knight.org/",
-  },
-};
-```
-
-### `operations.UpdateDatapoint2Datasets3`
-
-```typescript
-const value: operations.UpdateDatapoint2Datasets3 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
-  },
+const value: operations.UpdateDatapoint2RefusalContentPart = {
+  type: "refusal",
+  refusal: "<value>",
 };
 ```
 

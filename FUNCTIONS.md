@@ -30,7 +30,21 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await contactsCreate(orq, {
-    externalId: "<id>",
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
+    ],
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
   if (res.ok) {
     const { value: result } = res;

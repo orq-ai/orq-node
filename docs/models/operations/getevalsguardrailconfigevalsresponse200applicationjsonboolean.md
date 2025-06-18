@@ -1,0 +1,21 @@
+# GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean
+
+## Example Usage
+
+```typescript
+import { GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean } from "@orq-ai/node/models/operations";
+
+let value: GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
+  enabled: false,
+  type: "boolean",
+  value: true,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                            | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `enabled`                                                                                                                                                                                        | *boolean*                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |
+| `type`                                                                                                                                                                                           | [operations.GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData7Type](../../models/operations/getevalsguardrailconfigevalsresponse200applicationjsonresponsebodydata7type.md) | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |
+| `value`                                                                                                                                                                                          | *boolean*                                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |

@@ -42,6 +42,7 @@ const value: operations.DeploymentCreateMetric24 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

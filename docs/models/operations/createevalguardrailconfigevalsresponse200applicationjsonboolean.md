@@ -1,0 +1,21 @@
+# CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
+
+## Example Usage
+
+```typescript
+import { CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean } from "@orq-ai/node/models/operations";
+
+let value: CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
+  enabled: true,
+  type: "boolean",
+  value: false,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                        | Type                                                                                                                                                                                         | Required                                                                                                                                                                                     | Description                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`                                                                                                                                                                                    | *boolean*                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |
+| `type`                                                                                                                                                                                       | [operations.CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type](../../models/operations/createevalguardrailconfigevalsresponse200applicationjsonresponsebody3type.md) | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |
+| `value`                                                                                                                                                                                      | *boolean*                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |

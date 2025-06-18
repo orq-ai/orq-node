@@ -42,6 +42,7 @@ const value: operations.Two4 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

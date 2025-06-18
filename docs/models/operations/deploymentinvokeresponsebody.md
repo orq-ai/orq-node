@@ -12,7 +12,7 @@ let value: DeploymentInvokeResponseBody = {
   created: new Date("2025-06-29T20:07:01.844Z"),
   object: "completion",
   model: "Model Y",
-  provider: "togetherai",
+  provider: "elevenlabs",
   isFinal: false,
   choices: [],
 };

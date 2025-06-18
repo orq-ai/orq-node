@@ -26,6 +26,7 @@ typescript:
   author: Orq
   baseErrorName: OrqError
   clientServerStatusCodesAsErrors: true
+  constFieldsAlwaysOptional: true
   defaultErrorName: APIError
   enableCustomCodeRegions: false
   enableMCPServer: true

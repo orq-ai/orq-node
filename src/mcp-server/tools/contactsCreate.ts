@@ -7,14 +7,14 @@ import * as operations from "../../models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
-  request: operations.CreateContactRequestBody$inboundSchema,
+  request: operations.CreateContactRequestBody$inboundSchema.optional(),
 };
 
 export const tool$contactsCreate: ToolDefinition<typeof args> = {
   name: "contacts-create",
-  description: `Update user information
+  description: `Create a contact
 
-Update or add user information to workspace`,
+Creates a new contact or updates an existing one based on external_id. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await contactsCreate(

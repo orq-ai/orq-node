@@ -27,9 +27,22 @@ const value: operations.ListDatasetDatapoints22 = {
 
 ```typescript
 const value: operations.ListDatasetDatapoints23 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
+  },
+};
+```
+
+### `operations.ListDatasetDatapoints24`
+
+```typescript
+const value: operations.ListDatasetDatapoints24 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

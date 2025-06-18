@@ -1,21 +1,50 @@
 # CreateDatasetItemDatasetsMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.CreateDatasetItemMessagesDatasetsDeveloperMessage`
 
 ```typescript
-import { CreateDatasetItemDatasetsMessages } from "@orq-ai/node/models/operations";
-
-let value: CreateDatasetItemDatasetsMessages = {
-  role: "expected_output",
+const value: operations.CreateDatasetItemMessagesDatasetsDeveloperMessage = {
+  role: "developer",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.CreateDatasetItemMessagesDatasetsSystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.CreateDatasetItemDatasetsRole](../../models/operations/createdatasetitemdatasetsrole.md)                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.CreateDatasetItemDatasetsContent*                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.CreateDatasetItemDatasetsToolCalls](../../models/operations/createdatasetitemdatasetstoolcalls.md)[]                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
-| `toolCallId`                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.CreateDatasetItemMessagesDatasetsSystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.CreateDatasetItemMessagesDatasetsUserMessage`
+
+```typescript
+const value: operations.CreateDatasetItemMessagesDatasetsUserMessage = {
+  role: "user",
+  content: "<value>",
+};
+```
+
+### `operations.CreateDatasetItemMessagesDatasetsAssistantMessage`
+
+```typescript
+const value: operations.CreateDatasetItemMessagesDatasetsAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.CreateDatasetItemMessagesDatasetsToolMessage`
+
+```typescript
+const value: operations.CreateDatasetItemMessagesDatasetsToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

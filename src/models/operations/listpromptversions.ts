@@ -261,6 +261,7 @@ export const ListPromptVersionsProvider = {
   Jina: "jina",
   Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
 } as const;
 export type ListPromptVersionsProvider = ClosedEnum<
   typeof ListPromptVersionsProvider
@@ -417,11 +418,11 @@ export type ListPromptVersionsPromptConfig = {
   /**
    * The id of the resource
    */
-  modelDbId?: string | undefined;
+  modelDbId?: string | null | undefined;
   /**
    * The modality of the model
    */
-  modelType?: ListPromptVersionsModelType | undefined;
+  modelType?: ListPromptVersionsModelType | null | undefined;
   /**
    * Model Parameters: Not all parameters apply to every model
    */
@@ -1938,8 +1939,8 @@ export const ListPromptVersionsPromptConfig$inboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: ListPromptVersionsModelType$inboundSchema.optional(),
+  model_db_id: z.nullable(z.string()).optional(),
+  model_type: z.nullable(ListPromptVersionsModelType$inboundSchema).optional(),
   model_parameters: z.lazy(() =>
     ListPromptVersionsModelParameters$inboundSchema
   ).optional(),
@@ -1960,8 +1961,8 @@ export const ListPromptVersionsPromptConfig$inboundSchema: z.ZodType<
 export type ListPromptVersionsPromptConfig$Outbound = {
   stream?: boolean | undefined;
   model?: string | undefined;
-  model_db_id?: string | undefined;
-  model_type?: string | undefined;
+  model_db_id?: string | null | undefined;
+  model_type?: string | null | undefined;
   model_parameters?: ListPromptVersionsModelParameters$Outbound | undefined;
   provider?: string | undefined;
   integration_id?: string | null | undefined;
@@ -1977,8 +1978,8 @@ export const ListPromptVersionsPromptConfig$outboundSchema: z.ZodType<
 > = z.object({
   stream: z.boolean().optional(),
   model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: ListPromptVersionsModelType$outboundSchema.optional(),
+  modelDbId: z.nullable(z.string()).optional(),
+  modelType: z.nullable(ListPromptVersionsModelType$outboundSchema).optional(),
   modelParameters: z.lazy(() =>
     ListPromptVersionsModelParameters$outboundSchema
   ).optional(),

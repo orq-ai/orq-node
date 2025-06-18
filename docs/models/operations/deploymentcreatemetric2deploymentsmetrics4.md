@@ -9,6 +9,7 @@ let value: DeploymentCreateMetric2DeploymentsMetrics4 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

@@ -9,7 +9,7 @@ import { CreateFeedbackRequestBody } from "@orq-ai/node/models/operations";
 
 let value: CreateFeedbackRequestBody = {
   field: "<value>",
-  value: [],
+  value: 1814.73,
   traceId: "<id>",
 };
 ```

@@ -1,17 +1,15 @@
 # RetrieveDatapoint2DatasetsResponseType
 
-The type of the content part. Always `file`.
-
 ## Example Usage
 
 ```typescript
 import { RetrieveDatapoint2DatasetsResponseType } from "@orq-ai/node/models/operations";
 
-let value: RetrieveDatapoint2DatasetsResponseType = "file";
+let value: RetrieveDatapoint2DatasetsResponseType = "input_audio";
 ```
 
 ## Values
 
 ```typescript
-"file"
+"input_audio"
 ```

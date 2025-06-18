@@ -234,7 +234,7 @@ export type FileT = {
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename?: string | undefined;
+  filename: string;
 };
 
 export type Four = {
@@ -639,7 +639,7 @@ export type TwoFile = {
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename?: string | undefined;
+  filename: string;
 };
 
 export type Two4 = {
@@ -2492,7 +2492,7 @@ export namespace DeploymentGetConfig2DeploymentsType$ {
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
     file_data: z.string(),
-    filename: z.string().optional(),
+    filename: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "file_data": "fileData",
@@ -2502,7 +2502,7 @@ export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
 /** @internal */
 export type FileT$Outbound = {
   file_data: string;
-  filename?: string | undefined;
+  filename: string;
 };
 
 /** @internal */
@@ -2512,7 +2512,7 @@ export const FileT$outboundSchema: z.ZodType<
   FileT
 > = z.object({
   fileData: z.string(),
-  filename: z.string().optional(),
+  filename: z.string(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -4202,7 +4202,7 @@ export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Conte
 export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
   z.object({
     file_data: z.string(),
-    filename: z.string().optional(),
+    filename: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "file_data": "fileData",
@@ -4212,7 +4212,7 @@ export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
 /** @internal */
 export type TwoFile$Outbound = {
   file_data: string;
-  filename?: string | undefined;
+  filename: string;
 };
 
 /** @internal */
@@ -4222,7 +4222,7 @@ export const TwoFile$outboundSchema: z.ZodType<
   TwoFile
 > = z.object({
   fileData: z.string(),
-  filename: z.string().optional(),
+  filename: z.string(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",

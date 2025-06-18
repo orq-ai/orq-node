@@ -9,6 +9,7 @@ let value: Four = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

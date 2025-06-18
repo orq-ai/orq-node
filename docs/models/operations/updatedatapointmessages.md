@@ -1,26 +1,50 @@
 # UpdateDatapointMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.UpdateDatapointMessagesDeveloperMessage`
 
 ```typescript
-import { UpdateDatapointMessages } from "@orq-ai/node/models/operations";
-
-let value: UpdateDatapointMessages = {
-  role: "correction",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+const value: operations.UpdateDatapointMessagesDeveloperMessage = {
+  role: "developer",
+  content: "<value>",
 };
 ```
 
-## Fields
+### `operations.UpdateDatapointMessagesSystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.UpdateDatapointRole](../../models/operations/updatedatapointrole.md)                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.UpdateDatapointContent*                                                                                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.UpdateDatapointToolCalls](../../models/operations/updatedatapointtoolcalls.md)[]                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
-| `toolCallId`                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.UpdateDatapointMessagesSystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.UpdateDatapointMessagesUserMessage`
+
+```typescript
+const value: operations.UpdateDatapointMessagesUserMessage = {
+  role: "user",
+  content: [],
+};
+```
+
+### `operations.UpdateDatapointMessagesAssistantMessage`
+
+```typescript
+const value: operations.UpdateDatapointMessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.UpdateDatapointMessagesToolMessage`
+
+```typescript
+const value: operations.UpdateDatapointMessagesToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

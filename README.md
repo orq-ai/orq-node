@@ -182,7 +182,21 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.contacts.create({
-    externalId: "<id>",
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
+    ],
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
@@ -214,7 +228,21 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.contacts.create({
-    externalId: "<id>",
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
+    ],
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
@@ -233,7 +261,11 @@ run();
 
 ### [contacts](docs/sdks/contacts/README.md)
 
-* [create](docs/sdks/contacts/README.md#create) - Update user information
+* [create](docs/sdks/contacts/README.md#create) - Create a contact
+* [list](docs/sdks/contacts/README.md#list) - List contacts
+* [retrieve](docs/sdks/contacts/README.md#retrieve) - Retrieve a contact
+* [update](docs/sdks/contacts/README.md#update) - Update a contact
+* [delete](docs/sdks/contacts/README.md#delete) - Delete a contact
 
 ### [datasets](docs/sdks/datasets/README.md)
 
@@ -248,7 +280,6 @@ run();
 * [retrieveDatapoint](docs/sdks/datasets/README.md#retrievedatapoint) - Retrieve a datapoint
 * [updateDatapoint](docs/sdks/datasets/README.md#updatedatapoint) - Update a datapoint
 * [deleteDatapoint](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
-* [createDatapoints](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
 * [clear](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 
 ### [deployments](docs/sdks/deployments/README.md)
@@ -262,6 +293,48 @@ run();
 #### [deployments.metrics](docs/sdks/metrics/README.md)
 
 * [create](docs/sdks/metrics/README.md#create) - Add metrics
+
+### [evals](docs/sdks/evals/README.md)
+
+* [all](docs/sdks/evals/README.md#all) - Get all Evaluators
+* [create](docs/sdks/evals/README.md#create) - Create an Evaluator
+* [update](docs/sdks/evals/README.md#update) - Update an Evaluator
+* [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
+* [bertScore](docs/sdks/evals/README.md#bertscore) - Run BertScore Evaluator
+* [bleuScore](docs/sdks/evals/README.md#bleuscore) - Run BLEU Score Evaluator
+* [containsAll](docs/sdks/evals/README.md#containsall) - Run Contains All Evaluator
+* [containsAny](docs/sdks/evals/README.md#containsany) - Run Contains Any Evaluator
+* [containsEmail](docs/sdks/evals/README.md#containsemail) - Run Contains Email Evaluator
+* [containsNone](docs/sdks/evals/README.md#containsnone) - Run Contains None Evaluator
+* [containsUrl](docs/sdks/evals/README.md#containsurl) - Run Contains URL Evaluator
+* [containsValidLink](docs/sdks/evals/README.md#containsvalidlink) - Run Contains Valid Link Evaluator
+* [contains](docs/sdks/evals/README.md#contains) - Run Contains Evaluator
+* [endsWith](docs/sdks/evals/README.md#endswith) - Run Ends With Evaluator
+* [exactMatch](docs/sdks/evals/README.md#exactmatch) - Run Exact Match Evaluator
+* [lengthBetween](docs/sdks/evals/README.md#lengthbetween) - Run Length Between Evaluator
+* [lengthGreaterThan](docs/sdks/evals/README.md#lengthgreaterthan) - Run Length Greater Than Evaluator
+* [lengthLessThan](docs/sdks/evals/README.md#lengthlessthan) - Run Length Less Than Evaluator
+* [validJson](docs/sdks/evals/README.md#validjson) - Run JSON Validation Evaluator
+* [ageAppropriate](docs/sdks/evals/README.md#ageappropriate) - Run Age Appropriate Evaluator
+* [botDetection](docs/sdks/evals/README.md#botdetection) - Run Bot Detection Evaluator
+* [factCheckingKnowledgeBase](docs/sdks/evals/README.md#factcheckingknowledgebase) - Run Fact Checking Knowledge Base Evaluator
+* [grammar](docs/sdks/evals/README.md#grammar) - Run Grammar Evaluator
+* [localization](docs/sdks/evals/README.md#localization) - Run Localization Evaluator
+* [pii](docs/sdks/evals/README.md#pii) - Run PII Evaluator
+* [sentimentClassification](docs/sdks/evals/README.md#sentimentclassification) - Run Sentiment Classification Evaluator
+* [summarization](docs/sdks/evals/README.md#summarization) - Run Summarization Evaluator
+* [toneOfVoice](docs/sdks/evals/README.md#toneofvoice) - Run Tone of Voice Evaluator
+* [translation](docs/sdks/evals/README.md#translation) - Run Translation Evaluator
+* [ragasCoherence](docs/sdks/evals/README.md#ragascoherence) - Run Coherence Evaluator
+* [ragasConciseness](docs/sdks/evals/README.md#ragasconciseness) - Run Conciseness Evaluator
+* [ragasContextPrecision](docs/sdks/evals/README.md#ragascontextprecision) - Run Context Precision Evaluator
+* [ragasCorrectness](docs/sdks/evals/README.md#ragascorrectness) - Run Correctness Evaluator
+* [ragasFaithfulness](docs/sdks/evals/README.md#ragasfaithfulness) - Run Faithfulness Evaluator
+* [ragasHarmfulness](docs/sdks/evals/README.md#ragasharmfulness) - Run Harmfulness Evaluator
+* [ragasMaliciousness](docs/sdks/evals/README.md#ragasmaliciousness) - Run Maliciousness Evaluator
+* [ragasResponseRelevancy](docs/sdks/evals/README.md#ragasresponserelevancy) - Run Response Relevancy Evaluator
+* [ragasSummarization](docs/sdks/evals/README.md#ragassummarization) - Run Summarization Evaluator
+* [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 
 ### [feedback](docs/sdks/feedback/README.md)
 
@@ -330,11 +403,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`contactsCreate`](docs/sdks/contacts/README.md#create) - Update user information
+- [`contactsCreate`](docs/sdks/contacts/README.md#create) - Create a contact
+- [`contactsDelete`](docs/sdks/contacts/README.md#delete) - Delete a contact
+- [`contactsList`](docs/sdks/contacts/README.md#list) - List contacts
+- [`contactsRetrieve`](docs/sdks/contacts/README.md#retrieve) - Retrieve a contact
+- [`contactsUpdate`](docs/sdks/contacts/README.md#update) - Update a contact
 - [`datasetsClear`](docs/sdks/datasets/README.md#clear) - Delete all datapoints
 - [`datasetsCreate`](docs/sdks/datasets/README.md#create) - Create a dataset
 - [`datasetsCreateDatapoint`](docs/sdks/datasets/README.md#createdatapoint) - Create a datapoint
-- [`datasetsCreateDatapoints`](docs/sdks/datasets/README.md#createdatapoints) - Create multiple datapoints
 - [`datasetsCreateExperiment`](docs/sdks/datasets/README.md#createexperiment) - Create an experiment from a dataset
 - [`datasetsDelete`](docs/sdks/datasets/README.md#delete) - Delete a dataset
 - [`datasetsDeleteDatapoint`](docs/sdks/datasets/README.md#deletedatapoint) - Delete a datapoint
@@ -350,6 +426,45 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`deploymentsList`](docs/sdks/deployments/README.md#list) - List all deployments
 - [`deploymentsMetricsCreate`](docs/sdks/metrics/README.md#create) - Add metrics
 - [`deploymentsStream`](docs/sdks/deployments/README.md#stream) - Stream
+- [`evalsAgeAppropriate`](docs/sdks/evals/README.md#ageappropriate) - Run Age Appropriate Evaluator
+- [`evalsAll`](docs/sdks/evals/README.md#all) - Get all Evaluators
+- [`evalsBertScore`](docs/sdks/evals/README.md#bertscore) - Run BertScore Evaluator
+- [`evalsBleuScore`](docs/sdks/evals/README.md#bleuscore) - Run BLEU Score Evaluator
+- [`evalsBotDetection`](docs/sdks/evals/README.md#botdetection) - Run Bot Detection Evaluator
+- [`evalsContains`](docs/sdks/evals/README.md#contains) - Run Contains Evaluator
+- [`evalsContainsAll`](docs/sdks/evals/README.md#containsall) - Run Contains All Evaluator
+- [`evalsContainsAny`](docs/sdks/evals/README.md#containsany) - Run Contains Any Evaluator
+- [`evalsContainsEmail`](docs/sdks/evals/README.md#containsemail) - Run Contains Email Evaluator
+- [`evalsContainsNone`](docs/sdks/evals/README.md#containsnone) - Run Contains None Evaluator
+- [`evalsContainsUrl`](docs/sdks/evals/README.md#containsurl) - Run Contains URL Evaluator
+- [`evalsContainsValidLink`](docs/sdks/evals/README.md#containsvalidlink) - Run Contains Valid Link Evaluator
+- [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
+- [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
+- [`evalsEndsWith`](docs/sdks/evals/README.md#endswith) - Run Ends With Evaluator
+- [`evalsExactMatch`](docs/sdks/evals/README.md#exactmatch) - Run Exact Match Evaluator
+- [`evalsFactCheckingKnowledgeBase`](docs/sdks/evals/README.md#factcheckingknowledgebase) - Run Fact Checking Knowledge Base Evaluator
+- [`evalsGrammar`](docs/sdks/evals/README.md#grammar) - Run Grammar Evaluator
+- [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
+- [`evalsLengthBetween`](docs/sdks/evals/README.md#lengthbetween) - Run Length Between Evaluator
+- [`evalsLengthGreaterThan`](docs/sdks/evals/README.md#lengthgreaterthan) - Run Length Greater Than Evaluator
+- [`evalsLengthLessThan`](docs/sdks/evals/README.md#lengthlessthan) - Run Length Less Than Evaluator
+- [`evalsLocalization`](docs/sdks/evals/README.md#localization) - Run Localization Evaluator
+- [`evalsPii`](docs/sdks/evals/README.md#pii) - Run PII Evaluator
+- [`evalsRagasCoherence`](docs/sdks/evals/README.md#ragascoherence) - Run Coherence Evaluator
+- [`evalsRagasConciseness`](docs/sdks/evals/README.md#ragasconciseness) - Run Conciseness Evaluator
+- [`evalsRagasContextPrecision`](docs/sdks/evals/README.md#ragascontextprecision) - Run Context Precision Evaluator
+- [`evalsRagasCorrectness`](docs/sdks/evals/README.md#ragascorrectness) - Run Correctness Evaluator
+- [`evalsRagasFaithfulness`](docs/sdks/evals/README.md#ragasfaithfulness) - Run Faithfulness Evaluator
+- [`evalsRagasHarmfulness`](docs/sdks/evals/README.md#ragasharmfulness) - Run Harmfulness Evaluator
+- [`evalsRagasMaliciousness`](docs/sdks/evals/README.md#ragasmaliciousness) - Run Maliciousness Evaluator
+- [`evalsRagasResponseRelevancy`](docs/sdks/evals/README.md#ragasresponserelevancy) - Run Response Relevancy Evaluator
+- [`evalsRagasSummarization`](docs/sdks/evals/README.md#ragassummarization) - Run Summarization Evaluator
+- [`evalsSentimentClassification`](docs/sdks/evals/README.md#sentimentclassification) - Run Sentiment Classification Evaluator
+- [`evalsSummarization`](docs/sdks/evals/README.md#summarization) - Run Summarization Evaluator
+- [`evalsToneOfVoice`](docs/sdks/evals/README.md#toneofvoice) - Run Tone of Voice Evaluator
+- [`evalsTranslation`](docs/sdks/evals/README.md#translation) - Run Translation Evaluator
+- [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
+- [`evalsValidJson`](docs/sdks/evals/README.md#validjson) - Run JSON Validation Evaluator
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Create file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
@@ -471,7 +586,21 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.contacts.create({
-    externalId: "<id>",
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
+    ],
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   }, {
     retries: {
       strategy: "backoff",
@@ -512,7 +641,21 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.contacts.create({
-    externalId: "<id>",
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
+    ],
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);
@@ -548,7 +691,9 @@ const orq = new Orq({
 
 async function run() {
   try {
-    const result = await orq.deployments.list({});
+    const result = await orq.contacts.retrieve({
+      id: "<id>",
+    });
 
     console.log(result);
   } catch (error) {
@@ -560,9 +705,8 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.HonoApiError) {
-        console.log(error.data$.code); // string
-        console.log(error.data$.message); // string
+      if (error instanceof errors.RetrieveContactResponseBody) {
+        console.log(error.data$.error); // string
       }
     }
   }
@@ -576,7 +720,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (9)</summary>
+<details><summary>Less common errors (86)</summary>
 
 <br />
 
@@ -589,9 +733,86 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](docs/models/errors/honoapierror.md): Applicable to 6 of 50 methods.*
-* [`UpdatePromptResponseBody`](docs/models/errors/updatepromptresponsebody.md): Prompt not found. Status code `404`. Applicable to 1 of 50 methods.*
-* [`GetPromptVersionResponseBody`](docs/models/errors/getpromptversionresponsebody.md): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 50 methods.*
+* [`HonoApiError`](docs/models/errors/honoapierror.md): Applicable to 6 of 92 methods.*
+* [`RetrieveContactResponseBody`](docs/models/errors/retrievecontactresponsebody.md): Contact not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`UpdateContactResponseBody`](docs/models/errors/updatecontactresponsebody.md): Contact not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`DeleteContactResponseBody`](docs/models/errors/deletecontactresponsebody.md): Contact not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`UpdatePromptResponseBody`](docs/models/errors/updatepromptresponsebody.md): Prompt not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`GetPromptVersionResponseBody`](docs/models/errors/getpromptversionresponsebody.md): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 92 methods.*
+* [`GetEvalsResponseBody`](docs/models/errors/getevalsresponsebody.md): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 92 methods.*
+* [`CreateEvalResponseBody`](docs/models/errors/createevalresponsebody.md): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 92 methods.*
+* [`UpdateEvalResponseBody`](docs/models/errors/updateevalresponsebody.md): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 92 methods.*
+* [`DeleteEvalResponseBody`](docs/models/errors/deleteevalresponsebody.md): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsBertScoreResponseBody`](docs/models/errors/evalsbertscoreresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsBleuScoreResponseBody`](docs/models/errors/evalsbleuscoreresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsAllResponseBody`](docs/models/errors/evalscontainsallresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsAnyResponseBody`](docs/models/errors/evalscontainsanyresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsEmailResponseBody`](docs/models/errors/evalscontainsemailresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsNoneResponseBody`](docs/models/errors/evalscontainsnoneresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsUrlResponseBody`](docs/models/errors/evalscontainsurlresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsValidLinkResponseBody`](docs/models/errors/evalscontainsvalidlinkresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsResponseBody`](docs/models/errors/evalscontainsresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsEndsWithResponseBody`](docs/models/errors/evalsendswithresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsExactMatchResponseBody`](docs/models/errors/evalsexactmatchresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsLengthBetweenResponseBody`](docs/models/errors/evalslengthbetweenresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsLengthGreaterThanResponseBody`](docs/models/errors/evalslengthgreaterthanresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsLengthLessThanResponseBody`](docs/models/errors/evalslengthlessthanresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsValidJsonResponseBody`](docs/models/errors/evalsvalidjsonresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsAgeAppropriateResponseBody`](docs/models/errors/evalsageappropriateresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsBotDetectionResponseBody`](docs/models/errors/evalsbotdetectionresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsFactCheckingKnowledgeBaseResponseBody`](docs/models/errors/evalsfactcheckingknowledgebaseresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsGrammarResponseBody`](docs/models/errors/evalsgrammarresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsLocalizationResponseBody`](docs/models/errors/evalslocalizationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsPiiResponseBody`](docs/models/errors/evalspiiresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsSentimentClassificationResponseBody`](docs/models/errors/evalssentimentclassificationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsSummarizationResponseBody`](docs/models/errors/evalssummarizationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsToneOfVoiceResponseBody`](docs/models/errors/evalstoneofvoiceresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsTranslationResponseBody`](docs/models/errors/evalstranslationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasCoherenceResponseBody`](docs/models/errors/evalsragascoherenceresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasConcisenessResponseBody`](docs/models/errors/evalsragasconcisenessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasContextPrecisionResponseBody`](docs/models/errors/evalsragascontextprecisionresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasCorrectnessResponseBody`](docs/models/errors/evalsragascorrectnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasFaithfulnessResponseBody`](docs/models/errors/evalsragasfaithfulnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasHarmfulnessResponseBody`](docs/models/errors/evalsragasharmfulnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasMaliciousnessResponseBody`](docs/models/errors/evalsragasmaliciousnessresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasResponseRelevancyResponseBody`](docs/models/errors/evalsragasresponserelevancyresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasSummarizationResponseBody`](docs/models/errors/evalsragassummarizationresponsebody.md): Evaluator not found. Status code `404`. Applicable to 1 of 92 methods.*
+* [`InvokeEvalResponseBody`](docs/models/errors/invokeevalresponsebody.md): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 92 methods.*
+* [`EvalsBertScoreEvalsResponseBody`](docs/models/errors/evalsbertscoreevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsBleuScoreEvalsResponseBody`](docs/models/errors/evalsbleuscoreevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsAllEvalsResponseBody`](docs/models/errors/evalscontainsallevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsAnyEvalsResponseBody`](docs/models/errors/evalscontainsanyevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsEmailEvalsResponseBody`](docs/models/errors/evalscontainsemailevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsNoneEvalsResponseBody`](docs/models/errors/evalscontainsnoneevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsUrlEvalsResponseBody`](docs/models/errors/evalscontainsurlevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsValidLinkEvalsResponseBody`](docs/models/errors/evalscontainsvalidlinkevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsContainsEvalsResponseBody`](docs/models/errors/evalscontainsevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsEndsWithEvalsResponseBody`](docs/models/errors/evalsendswithevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsExactMatchEvalsResponseBody`](docs/models/errors/evalsexactmatchevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsLengthBetweenEvalsResponseBody`](docs/models/errors/evalslengthbetweenevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsLengthGreaterThanEvalsResponseBody`](docs/models/errors/evalslengthgreaterthanevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsLengthLessThanEvalsResponseBody`](docs/models/errors/evalslengthlessthanevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsValidJsonEvalsResponseBody`](docs/models/errors/evalsvalidjsonevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsAgeAppropriateEvalsResponseBody`](docs/models/errors/evalsageappropriateevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsBotDetectionEvalsResponseBody`](docs/models/errors/evalsbotdetectionevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsFactCheckingKnowledgeBaseEvalsResponseBody`](docs/models/errors/evalsfactcheckingknowledgebaseevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsGrammarEvalsResponseBody`](docs/models/errors/evalsgrammarevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsLocalizationEvalsResponseBody`](docs/models/errors/evalslocalizationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsPiiEvalsResponseBody`](docs/models/errors/evalspiievalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsSentimentClassificationEvalsResponseBody`](docs/models/errors/evalssentimentclassificationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsSummarizationEvalsResponseBody`](docs/models/errors/evalssummarizationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsToneOfVoiceEvalsResponseBody`](docs/models/errors/evalstoneofvoiceevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsTranslationEvalsResponseBody`](docs/models/errors/evalstranslationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasCoherenceEvalsResponseBody`](docs/models/errors/evalsragascoherenceevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasConcisenessEvalsResponseBody`](docs/models/errors/evalsragasconcisenessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasContextPrecisionEvalsResponseBody`](docs/models/errors/evalsragascontextprecisionevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasCorrectnessEvalsResponseBody`](docs/models/errors/evalsragascorrectnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasFaithfulnessEvalsResponseBody`](docs/models/errors/evalsragasfaithfulnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasHarmfulnessEvalsResponseBody`](docs/models/errors/evalsragasharmfulnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasMaliciousnessEvalsResponseBody`](docs/models/errors/evalsragasmaliciousnessevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasResponseRelevancyEvalsResponseBody`](docs/models/errors/evalsragasresponserelevancyevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`EvalsRagasSummarizationEvalsResponseBody`](docs/models/errors/evalsragassummarizationevalsresponsebody.md): Internal server error. Status code `500`. Applicable to 1 of 92 methods.*
+* [`InvokeEvalEvalsResponseBody`](docs/models/errors/invokeevalevalsresponsebody.md): Error running the evaluator. Status code `500`. Applicable to 1 of 92 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -615,7 +836,21 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.contacts.create({
-    externalId: "<id>",
+    externalId: "user_12345",
+    displayName: "Jane Smith",
+    email: "jane.smith@example.com",
+    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
+    tags: [
+      "premium",
+      "beta-user",
+      "enterprise",
+    ],
+    metadata: {
+      "department": "Engineering",
+      "role": "Senior Developer",
+      "subscription_tier": "premium",
+      "last_login": "2024-01-15T10:30:00Z",
+    },
   });
 
   console.log(result);

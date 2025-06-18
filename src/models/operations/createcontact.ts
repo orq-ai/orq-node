@@ -9,65 +9,69 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Update user information payload
+ * Contact profile information
  */
 export type CreateContactRequestBody = {
   /**
-   * Unique string value to identify the contact user in the customer's system
+   * Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user.
    */
   externalId: string;
   /**
-   * Display name or nickname of the user
+   * Display name or nickname of the contact user. This is typically shown in user interfaces.
    */
   displayName?: string | null | undefined;
   /**
-   * Email address of the user
+   * Email address of the contact user
    */
   email?: string | null | undefined;
   /**
-   * URL linking to the user's avatar image
+   * URL linking to the contact user's avatar image
    */
   avatarUrl?: string | null | undefined;
   /**
-   * Array of UUIDs representing tags associated with the user
+   * Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications.
    */
   tags?: Array<string> | undefined;
   /**
-   * Additional custom metadata associated with the user as key-value pairs
+   * Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application.
    */
   metadata?: { [k: string]: any } | undefined;
 };
 
 /**
- * Successful operation
+ * Created Contact
  */
 export type CreateContactResponseBody = {
   /**
-   * Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the user
+   * Unique ULID (Universally Unique Lexicographically Sortable Identifier) for the contact
    */
   id: string;
   /**
-   * Unique string value to identify the contact user in the customer's system
+   * Unique string value to identify the contact user in the customer's system. This should be the same ID you use in your system to reference this user.
    */
   externalId: string;
   /**
-   * Display name or nickname of the user
+   * Unique identifier for the workspace to which the contact belongs
+   */
+  workspaceId: string;
+  /**
+   * Display name or nickname of the contact user. This is typically shown in user interfaces.
    */
   displayName?: string | null | undefined;
   /**
-   * Email address of the user
+   * Email address of the contact user
    */
   email?: string | null | undefined;
   /**
-   * URL linking to the user's avatar image
+   * URL linking to the contact user's avatar image
    */
   avatarUrl?: string | null | undefined;
   /**
-   * Array of UUIDs representing tags associated with the user
+   * Array of tags associated with the contact. Useful for organizing and filtering contacts by categories, departments, or custom classifications.
    */
   tags?: Array<string> | undefined;
   /**
-   * Additional custom metadata associated with the user as key-value pairs
+   * Additional custom metadata associated with the contact as key-value pairs. Use this to store any extra information specific to your application.
    */
   metadata?: { [k: string]: any } | undefined;
   /**
@@ -167,8 +171,9 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string(),
+  _id: z.string(),
   external_id: z.string(),
+  workspace_id: z.string(),
   display_name: z.nullable(z.string()).optional(),
   email: z.nullable(z.string()).optional(),
   avatar_url: z.nullable(z.string()).optional(),
@@ -177,11 +182,13 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-17T14:04:15.852Z",
+    "2025-06-18T19:39:01.473Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
+    "_id": "id",
     "external_id": "externalId",
+    "workspace_id": "workspaceId",
     "display_name": "displayName",
     "avatar_url": "avatarUrl",
   });
@@ -189,8 +196,9 @@ export const CreateContactResponseBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateContactResponseBody$Outbound = {
-  id: string;
+  _id: string;
   external_id: string;
+  workspace_id: string;
   display_name?: string | null | undefined;
   email?: string | null | undefined;
   avatar_url?: string | null | undefined;
@@ -208,17 +216,20 @@ export const CreateContactResponseBody$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   externalId: z.string(),
+  workspaceId: z.string(),
   displayName: z.nullable(z.string()).optional(),
   email: z.nullable(z.string()).optional(),
   avatarUrl: z.nullable(z.string()).optional(),
   tags: z.array(z.string()).optional(),
   metadata: z.record(z.any()).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-17T14:04:15.852Z"))
+  updated: z.date().default(() => new Date("2025-06-18T19:39:01.473Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
+    id: "_id",
     externalId: "external_id",
+    workspaceId: "workspace_id",
     displayName: "display_name",
     avatarUrl: "avatar_url",
   });

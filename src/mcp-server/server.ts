@@ -14,10 +14,13 @@ import {
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
+import { tool$contactsDelete } from "./tools/contactsDelete.js";
+import { tool$contactsList } from "./tools/contactsList.js";
+import { tool$contactsRetrieve } from "./tools/contactsRetrieve.js";
+import { tool$contactsUpdate } from "./tools/contactsUpdate.js";
 import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
-import { tool$datasetsCreateDatapoints } from "./tools/datasetsCreateDatapoints.js";
 import { tool$datasetsCreateExperiment } from "./tools/datasetsCreateExperiment.js";
 import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
 import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
@@ -33,6 +36,45 @@ import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
 import { tool$deploymentsMetricsCreate } from "./tools/deploymentsMetricsCreate.js";
 import { tool$deploymentsStream } from "./tools/deploymentsStream.js";
+import { tool$evalsAgeAppropriate } from "./tools/evalsAgeAppropriate.js";
+import { tool$evalsAll } from "./tools/evalsAll.js";
+import { tool$evalsBertScore } from "./tools/evalsBertScore.js";
+import { tool$evalsBleuScore } from "./tools/evalsBleuScore.js";
+import { tool$evalsBotDetection } from "./tools/evalsBotDetection.js";
+import { tool$evalsContains } from "./tools/evalsContains.js";
+import { tool$evalsContainsAll } from "./tools/evalsContainsAll.js";
+import { tool$evalsContainsAny } from "./tools/evalsContainsAny.js";
+import { tool$evalsContainsEmail } from "./tools/evalsContainsEmail.js";
+import { tool$evalsContainsNone } from "./tools/evalsContainsNone.js";
+import { tool$evalsContainsUrl } from "./tools/evalsContainsUrl.js";
+import { tool$evalsContainsValidLink } from "./tools/evalsContainsValidLink.js";
+import { tool$evalsCreate } from "./tools/evalsCreate.js";
+import { tool$evalsDelete } from "./tools/evalsDelete.js";
+import { tool$evalsEndsWith } from "./tools/evalsEndsWith.js";
+import { tool$evalsExactMatch } from "./tools/evalsExactMatch.js";
+import { tool$evalsFactCheckingKnowledgeBase } from "./tools/evalsFactCheckingKnowledgeBase.js";
+import { tool$evalsGrammar } from "./tools/evalsGrammar.js";
+import { tool$evalsInvoke } from "./tools/evalsInvoke.js";
+import { tool$evalsLengthBetween } from "./tools/evalsLengthBetween.js";
+import { tool$evalsLengthGreaterThan } from "./tools/evalsLengthGreaterThan.js";
+import { tool$evalsLengthLessThan } from "./tools/evalsLengthLessThan.js";
+import { tool$evalsLocalization } from "./tools/evalsLocalization.js";
+import { tool$evalsPii } from "./tools/evalsPii.js";
+import { tool$evalsRagasCoherence } from "./tools/evalsRagasCoherence.js";
+import { tool$evalsRagasConciseness } from "./tools/evalsRagasConciseness.js";
+import { tool$evalsRagasContextPrecision } from "./tools/evalsRagasContextPrecision.js";
+import { tool$evalsRagasCorrectness } from "./tools/evalsRagasCorrectness.js";
+import { tool$evalsRagasFaithfulness } from "./tools/evalsRagasFaithfulness.js";
+import { tool$evalsRagasHarmfulness } from "./tools/evalsRagasHarmfulness.js";
+import { tool$evalsRagasMaliciousness } from "./tools/evalsRagasMaliciousness.js";
+import { tool$evalsRagasResponseRelevancy } from "./tools/evalsRagasResponseRelevancy.js";
+import { tool$evalsRagasSummarization } from "./tools/evalsRagasSummarization.js";
+import { tool$evalsSentimentClassification } from "./tools/evalsSentimentClassification.js";
+import { tool$evalsSummarization } from "./tools/evalsSummarization.js";
+import { tool$evalsToneOfVoice } from "./tools/evalsToneOfVoice.js";
+import { tool$evalsTranslation } from "./tools/evalsTranslation.js";
+import { tool$evalsUpdate } from "./tools/evalsUpdate.js";
+import { tool$evalsValidJson } from "./tools/evalsValidJson.js";
 import { tool$feedbackCreate } from "./tools/feedbackCreate.js";
 import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
@@ -76,7 +118,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.6.17",
+    version: "3.8.0",
   });
 
   const client = new OrqCore({
@@ -109,6 +151,10 @@ export function createMCPServer(deps: {
   void register; // suppress unused warnings
 
   tool(tool$contactsCreate);
+  tool(tool$contactsList);
+  tool(tool$contactsRetrieve);
+  tool(tool$contactsUpdate);
+  tool(tool$contactsDelete);
   tool(tool$feedbackCreate);
   tool(tool$deploymentsList);
   tool(tool$deploymentsGetConfig);
@@ -139,7 +185,6 @@ export function createMCPServer(deps: {
   tool(tool$datasetsRetrieveDatapoint);
   tool(tool$datasetsUpdateDatapoint);
   tool(tool$datasetsDeleteDatapoint);
-  tool(tool$datasetsCreateDatapoints);
   tool(tool$datasetsClear);
   tool(tool$knowledgeList);
   tool(tool$knowledgeCreate);
@@ -157,6 +202,45 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
+  tool(tool$evalsAll);
+  tool(tool$evalsCreate);
+  tool(tool$evalsUpdate);
+  tool(tool$evalsDelete);
+  tool(tool$evalsBertScore);
+  tool(tool$evalsBleuScore);
+  tool(tool$evalsContainsAll);
+  tool(tool$evalsContainsAny);
+  tool(tool$evalsContainsEmail);
+  tool(tool$evalsContainsNone);
+  tool(tool$evalsContainsUrl);
+  tool(tool$evalsContainsValidLink);
+  tool(tool$evalsContains);
+  tool(tool$evalsEndsWith);
+  tool(tool$evalsExactMatch);
+  tool(tool$evalsLengthBetween);
+  tool(tool$evalsLengthGreaterThan);
+  tool(tool$evalsLengthLessThan);
+  tool(tool$evalsValidJson);
+  tool(tool$evalsAgeAppropriate);
+  tool(tool$evalsBotDetection);
+  tool(tool$evalsFactCheckingKnowledgeBase);
+  tool(tool$evalsGrammar);
+  tool(tool$evalsLocalization);
+  tool(tool$evalsPii);
+  tool(tool$evalsSentimentClassification);
+  tool(tool$evalsSummarization);
+  tool(tool$evalsToneOfVoice);
+  tool(tool$evalsTranslation);
+  tool(tool$evalsRagasCoherence);
+  tool(tool$evalsRagasConciseness);
+  tool(tool$evalsRagasContextPrecision);
+  tool(tool$evalsRagasCorrectness);
+  tool(tool$evalsRagasFaithfulness);
+  tool(tool$evalsRagasHarmfulness);
+  tool(tool$evalsRagasMaliciousness);
+  tool(tool$evalsRagasResponseRelevancy);
+  tool(tool$evalsRagasSummarization);
+  tool(tool$evalsInvoke);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

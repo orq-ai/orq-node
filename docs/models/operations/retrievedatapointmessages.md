@@ -1,21 +1,54 @@
 # RetrieveDatapointMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.RetrieveDatapointMessagesDeveloperMessage`
 
 ```typescript
-import { RetrieveDatapointMessages } from "@orq-ai/node/models/operations";
+const value: operations.RetrieveDatapointMessagesDeveloperMessage = {
+  role: "developer",
+  content: "<value>",
+};
+```
 
-let value: RetrieveDatapointMessages = {
+### `operations.RetrieveDatapointMessagesSystemMessage`
+
+```typescript
+const value: operations.RetrieveDatapointMessagesSystemMessage = {
   role: "system",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.RetrieveDatapointMessagesUserMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.RetrieveDatapointRole](../../models/operations/retrievedatapointrole.md)                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.RetrieveDatapointContent*                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.RetrieveDatapointToolCalls](../../models/operations/retrievedatapointtoolcalls.md)[]                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
-| `toolCallId`                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.RetrieveDatapointMessagesUserMessage = {
+  role: "user",
+  content: [],
+};
+```
+
+### `operations.RetrieveDatapointMessagesAssistantMessage`
+
+```typescript
+const value: operations.RetrieveDatapointMessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.RetrieveDatapointMessagesToolMessage`
+
+```typescript
+const value: operations.RetrieveDatapointMessagesToolMessage = {
+  role: "tool",
+  content: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  toolCallId: "<id>",
+};
+```
+

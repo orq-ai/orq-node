@@ -27,9 +27,22 @@ const value: operations.CreateDatasetItem22 = {
 
 ```typescript
 const value: operations.CreateDatasetItem23 = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
+  },
+};
+```
+
+### `operations.CreateDatasetItem24`
+
+```typescript
+const value: operations.CreateDatasetItem24 = {
   type: "file",
   file: {
     fileData: "<value>",
+    filename: "example.file",
   },
 };
 ```

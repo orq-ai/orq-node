@@ -1,7 +1,5 @@
 # UpdateDatapoint2Datasets1
 
-Text content part of a prompt message
-
 ## Example Usage
 
 ```typescript

@@ -25,14 +25,14 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update user information
+ * Create a contact
  *
  * @remarks
- * Update or add user information to workspace
+ * Creates a new contact or updates an existing one based on external_id. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
  */
 export function contactsCreate(
   client: OrqCore,
-  request: operations.CreateContactRequestBody,
+  request?: operations.CreateContactRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -56,7 +56,7 @@ export function contactsCreate(
 
 async function $do(
   client: OrqCore,
-  request: operations.CreateContactRequestBody,
+  request?: operations.CreateContactRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -76,14 +76,19 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.CreateContactRequestBody$outboundSchema.parse(value),
+    (value) =>
+      operations.CreateContactRequestBody$outboundSchema.optional().parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/contacts")();
 
@@ -148,7 +153,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateContactResponseBody$inboundSchema),
+    M.json(201, operations.CreateContactResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

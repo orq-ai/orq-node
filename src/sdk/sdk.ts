@@ -6,6 +6,7 @@ import { ClientSDK } from "../lib/sdks.js";
 import { Contacts } from "./contacts.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
+import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { Knowledge } from "./knowledge.js";
@@ -57,5 +58,10 @@ export class Orq extends ClientSDK {
   private _knowledge?: Knowledge;
   get knowledge(): Knowledge {
     return (this._knowledge ??= new Knowledge(this._options));
+  }
+
+  private _evals?: Evals;
+  get evals(): Evals {
+    return (this._evals ??= new Evals(this._options));
   }
 }
