@@ -4785,7 +4785,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-22T18:59:51.954Z"
+          default: "2025-06-23T12:22:11.975Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4848,7 +4848,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-06-22T18:59:51.954Z"
+            default: "2025-06-23T12:22:11.975Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4928,7 +4928,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-22T18:59:51.954Z"
+          default: "2025-06-23T12:22:11.975Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4974,7 +4974,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-06-22T18:59:51.954Z"
+                default: "2025-06-23T12:22:11.975Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5017,7 +5017,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-22T18:59:51.954Z"
+          default: "2025-06-23T12:22:11.975Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -7512,7 +7512,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-22T18:59:48.897Z"
+          default: "2025-06-23T12:22:08.974Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7520,7 +7520,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-22T18:59:48.897Z"
+              default: "2025-06-23T12:22:08.975Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7630,7 +7630,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-06-22T18:59:48.897Z"
+                default: "2025-06-23T12:22:08.974Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7638,7 +7638,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.975Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7745,7 +7745,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-22T18:59:48.897Z"
+          default: "2025-06-23T12:22:08.974Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7753,7 +7753,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-22T18:59:48.897Z"
+              default: "2025-06-23T12:22:08.975Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7854,7 +7854,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-22T18:59:48.897Z"
+          default: "2025-06-23T12:22:08.974Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7862,7 +7862,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-22T18:59:48.897Z"
+              default: "2025-06-23T12:22:08.975Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9015,10 +9015,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9087,10 +9087,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9156,10 +9156,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9240,10 +9240,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9335,10 +9335,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9407,10 +9407,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9476,10 +9476,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9560,10 +9560,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-22T18:59:50.944Z"
+                    default: "2025-06-23T12:22:10.982Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9923,10 +9923,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9995,10 +9995,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10064,10 +10064,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10148,10 +10148,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "updated":
               type: "string"
-              default: "2025-06-22T18:59:50.944Z"
+              default: "2025-06-23T12:22:10.982Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11125,6 +11125,64 @@ components:
             - "null"
       required:
         - "value"
+    "RunNoiseSensitivityRequest":
+      type: "object"
+      properties:
+        "query":
+          type: "string"
+          description: "Latest user message"
+        "output":
+          type: "string"
+          description: "The generated response from the model"
+        "model":
+          type: "string"
+        "reference":
+          type: "string"
+          description: "The ground truth answer to evaluate noise sensitivity against"
+        "retrievals":
+          type: "array"
+          items:
+            type: "string"
+          description: "Knowledge base retrievals that may contain irrelevant information"
+      required:
+        - "query"
+        - "output"
+        - "model"
+        - "reference"
+    "RunNoiseSensitivityResponse":
+      type: "object"
+      properties:
+        "value":
+          type:
+            - "number"
+            - "null"
+      required:
+        - "value"
+    "RunContextEntitiesRecallRequest":
+      type: "object"
+      properties:
+        "reference":
+          type: "string"
+          description: "The ground truth answer to evaluate entity recall against"
+        "retrievals":
+          type: "array"
+          items:
+            type: "string"
+          description: "Knowledge base retrievals containing entities to evaluate"
+        "model":
+          type: "string"
+      required:
+        - "reference"
+        - "model"
+    "RunContextEntitiesRecallResponse":
+      type: "object"
+      properties:
+        "value":
+          type:
+            - "number"
+            - "null"
+      required:
+        - "value"
     "RunCustomEvaluatorRequest":
       type: "object"
       properties:
@@ -11792,6 +11850,7 @@ components:
                     - "response_relevancy"
                     - "faithfulness"
                     - "summarization"
+                    - "noise_sensitivity"
                 "path":
                   type: "string"
                   description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -13758,7 +13817,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13766,7 +13825,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13897,7 +13956,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-22T18:59:48.897Z"
+                          default: "2025-06-23T12:22:08.974Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -13905,7 +13964,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-22T18:59:48.897Z"
+                              default: "2025-06-23T12:22:08.975Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -17978,7 +18037,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-22T18:59:51.954Z"
+                    default: "2025-06-23T12:22:11.975Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18066,7 +18125,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-06-22T18:59:51.954Z"
+                          default: "2025-06-23T12:22:11.975Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18133,7 +18192,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-22T18:59:51.954Z"
+                    default: "2025-06-23T12:22:11.975Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -21580,7 +21639,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-22T18:59:48.897Z"
+                          default: "2025-06-23T12:22:08.974Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21588,7 +21647,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-22T18:59:48.897Z"
+                              default: "2025-06-23T12:22:08.975Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21712,7 +21771,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21720,7 +21779,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21830,7 +21889,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21838,7 +21897,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21990,7 +22049,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21998,7 +22057,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22461,7 +22520,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-22T18:59:48.897Z"
+                          default: "2025-06-23T12:22:08.974Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22469,7 +22528,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-22T18:59:48.897Z"
+                              default: "2025-06-23T12:22:08.975Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -23083,7 +23142,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23091,7 +23150,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23426,7 +23485,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23434,7 +23493,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -24052,7 +24111,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -24060,7 +24119,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -25487,7 +25546,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JYCG5WBR6W96AMXC0ZH08YCC"
+                          default: "01JYEBTEGR10GMFBM81AQT7KWW"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -25650,7 +25709,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JYCG5WBTNSQGSE7XNEX9G56Y"
+                    default: "01JYEBTEGT6J6MH1V5TQMR8HJV"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25743,7 +25802,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JYCG5WBSMFAKC9XP4NRFC09R"
+                    default: "01JYEBTEGSY9P86WYJT1ZETQM6"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25872,7 +25931,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JYCG5WBVVJ87C6YJEVP88D1B"
+                    default: "01JYEBTEGVZ7QTRR2V5FNJE7WT"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26481,10 +26540,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26553,10 +26612,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26622,10 +26681,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26706,10 +26765,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26775,10 +26834,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27075,10 +27134,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27139,6 +27198,7 @@ paths:
                                 - "response_relevancy"
                                 - "faithfulness"
                                 - "summarization"
+                                - "noise_sensitivity"
                             "key":
                               type: "string"
                             "model":
@@ -27159,10 +27219,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-22T18:59:50.944Z"
+                              default: "2025-06-23T12:22:10.982Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27544,10 +27604,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27616,10 +27676,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27685,10 +27745,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27769,10 +27829,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28141,10 +28201,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28213,10 +28273,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28282,10 +28342,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28366,10 +28426,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-22T18:59:50.944Z"
+                        default: "2025-06-23T12:22:10.982Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -30369,6 +30429,142 @@ paths:
                   - "message"
       security:
         - ApiKey: []
+  "/v2/evaluators/ragas_context_recall":
+    post:
+      tags:
+        - "Evaluators Hub"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "ragasContextRecall"
+      operationId: "EvalsRagasContextRecall"
+      summary: "Run Context Recall Evaluator"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "query":
+                  type: "string"
+                  description: "Latest user message"
+                "output":
+                  type: "string"
+                  description: "The generated response from the model"
+                "model":
+                  type: "string"
+                "reference":
+                  type: "string"
+                  description: "The ground truth answer to evaluate context recall against"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals"
+              required:
+                - "model"
+                - "reference"
+      responses:
+        "200":
+          description: "Returns the context recall evaluation result"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "value":
+                    type:
+                      - "number"
+                      - "null"
+                required:
+                  - "value"
+        "404":
+          description: "Evaluator not found"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Internal server error"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
+  "/v2/evaluators/ragas_context_entities_recall":
+    post:
+      tags:
+        - "Evaluators Hub"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "ragasContextEntitiesRecall"
+      operationId: "EvalsRagasContextEntitiesRecall"
+      summary: "Run Context Entities Recall Evaluator"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "reference":
+                  type: "string"
+                  description: "The ground truth answer to evaluate entity recall against"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals containing entities to evaluate"
+                "model":
+                  type: "string"
+              required:
+                - "reference"
+                - "model"
+      responses:
+        "200":
+          description: "Returns the context entities recall evaluation result"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "value":
+                    type:
+                      - "number"
+                      - "null"
+                required:
+                  - "value"
+        "404":
+          description: "Evaluator not found"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Internal server error"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
   "/v2/evaluators/ragas_correctness":
     post:
       tags:
@@ -30601,6 +30797,79 @@ paths:
       responses:
         "200":
           description: "Returns the maliciousness evaluation result"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "value":
+                    type:
+                      - "number"
+                      - "null"
+                required:
+                  - "value"
+        "404":
+          description: "Evaluator not found"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Internal server error"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
+  "/v2/evaluators/ragas_noise_sensitivity":
+    post:
+      tags:
+        - "Evaluators Hub"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "ragasNoiseSensitivity"
+      operationId: "EvalsRagasNoiseSensitivity"
+      summary: "Run Noise Sensitivity Evaluator"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "query":
+                  type: "string"
+                  description: "Latest user message"
+                "output":
+                  type: "string"
+                  description: "The generated response from the model"
+                "model":
+                  type: "string"
+                "reference":
+                  type: "string"
+                  description: "The ground truth answer to evaluate noise sensitivity against"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals that may contain irrelevant information"
+              required:
+                - "query"
+                - "output"
+                - "model"
+                - "reference"
+      responses:
+        "200":
+          description: "Returns the noise sensitivity evaluation result"
           content:
             "application/json":
               schema:
@@ -31223,7 +31492,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31231,7 +31500,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -31365,7 +31634,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-22T18:59:48.897Z"
+                    default: "2025-06-23T12:22:08.974Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31373,7 +31642,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-22T18:59:48.897Z"
+                        default: "2025-06-23T12:22:08.975Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
