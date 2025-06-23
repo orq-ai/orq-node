@@ -62,11 +62,14 @@ import { tool$evalsLocalization } from "./tools/evalsLocalization.js";
 import { tool$evalsPii } from "./tools/evalsPii.js";
 import { tool$evalsRagasCoherence } from "./tools/evalsRagasCoherence.js";
 import { tool$evalsRagasConciseness } from "./tools/evalsRagasConciseness.js";
+import { tool$evalsRagasContextEntitiesRecall } from "./tools/evalsRagasContextEntitiesRecall.js";
 import { tool$evalsRagasContextPrecision } from "./tools/evalsRagasContextPrecision.js";
+import { tool$evalsRagasContextRecall } from "./tools/evalsRagasContextRecall.js";
 import { tool$evalsRagasCorrectness } from "./tools/evalsRagasCorrectness.js";
 import { tool$evalsRagasFaithfulness } from "./tools/evalsRagasFaithfulness.js";
 import { tool$evalsRagasHarmfulness } from "./tools/evalsRagasHarmfulness.js";
 import { tool$evalsRagasMaliciousness } from "./tools/evalsRagasMaliciousness.js";
+import { tool$evalsRagasNoiseSensitivity } from "./tools/evalsRagasNoiseSensitivity.js";
 import { tool$evalsRagasResponseRelevancy } from "./tools/evalsRagasResponseRelevancy.js";
 import { tool$evalsRagasSummarization } from "./tools/evalsRagasSummarization.js";
 import { tool$evalsSentimentClassification } from "./tools/evalsSentimentClassification.js";
@@ -118,7 +121,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.9.0-rc.0",
+    version: "3.9.0-rc.1",
   });
 
   const client = new OrqCore({
@@ -234,10 +237,13 @@ export function createMCPServer(deps: {
   tool(tool$evalsRagasCoherence);
   tool(tool$evalsRagasConciseness);
   tool(tool$evalsRagasContextPrecision);
+  tool(tool$evalsRagasContextRecall);
+  tool(tool$evalsRagasContextEntitiesRecall);
   tool(tool$evalsRagasCorrectness);
   tool(tool$evalsRagasFaithfulness);
   tool(tool$evalsRagasHarmfulness);
   tool(tool$evalsRagasMaliciousness);
+  tool(tool$evalsRagasNoiseSensitivity);
   tool(tool$evalsRagasResponseRelevancy);
   tool(tool$evalsRagasSummarization);
   tool(tool$evalsInvoke);

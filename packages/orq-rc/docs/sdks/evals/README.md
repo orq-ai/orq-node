@@ -37,10 +37,13 @@
 * [ragasCoherence](#ragascoherence) - Run Coherence Evaluator
 * [ragasConciseness](#ragasconciseness) - Run Conciseness Evaluator
 * [ragasContextPrecision](#ragascontextprecision) - Run Context Precision Evaluator
+* [ragasContextRecall](#ragascontextrecall) - Run Context Recall Evaluator
+* [ragasContextEntitiesRecall](#ragascontextentitiesrecall) - Run Context Entities Recall Evaluator
 * [ragasCorrectness](#ragascorrectness) - Run Correctness Evaluator
 * [ragasFaithfulness](#ragasfaithfulness) - Run Faithfulness Evaluator
 * [ragasHarmfulness](#ragasharmfulness) - Run Harmfulness Evaluator
 * [ragasMaliciousness](#ragasmaliciousness) - Run Maliciousness Evaluator
+* [ragasNoiseSensitivity](#ragasnoisesensitivity) - Run Noise Sensitivity Evaluator
 * [ragasResponseRelevancy](#ragasresponserelevancy) - Run Response Relevancy Evaluator
 * [ragasSummarization](#ragassummarization) - Run Summarization Evaluator
 * [invoke](#invoke) - Invoke a Custom Evaluator
@@ -2327,6 +2330,146 @@ run();
 | errors.EvalsRagasContextPrecisionEvalsResponseBody | 500                                                | application/json                                   |
 | errors.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
+## ragasContextRecall
+
+Run Context Recall Evaluator
+
+### Example Usage
+
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.evals.ragasContextRecall();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsRagasContextRecall } from "@orq-ai/node/funcs/evalsRagasContextRecall.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsRagasContextRecall(orq);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasContextRecall failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.EvalsRagasContextRecallRequestBody](../../models/operations/evalsragascontextrecallrequestbody.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.EvalsRagasContextRecallResponseBody](../../models/operations/evalsragascontextrecallresponsebody.md)\>**
+
+### Errors
+
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| errors.EvalsRagasContextRecallResponseBody      | 404                                             | application/json                                |
+| errors.EvalsRagasContextRecallEvalsResponseBody | 500                                             | application/json                                |
+| errors.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
+
+## ragasContextEntitiesRecall
+
+Run Context Entities Recall Evaluator
+
+### Example Usage
+
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.evals.ragasContextEntitiesRecall();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsRagasContextEntitiesRecall } from "@orq-ai/node/funcs/evalsRagasContextEntitiesRecall.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsRagasContextEntitiesRecall(orq);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasContextEntitiesRecall failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.EvalsRagasContextEntitiesRecallRequestBody](../../models/operations/evalsragascontextentitiesrecallrequestbody.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.EvalsRagasContextEntitiesRecallResponseBody](../../models/operations/evalsragascontextentitiesrecallresponsebody.md)\>**
+
+### Errors
+
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| errors.EvalsRagasContextEntitiesRecallResponseBody      | 404                                                     | application/json                                        |
+| errors.EvalsRagasContextEntitiesRecallEvalsResponseBody | 500                                                     | application/json                                        |
+| errors.APIError                                         | 4XX, 5XX                                                | \*/\*                                                   |
+
 ## ragasCorrectness
 
 Run Correctness Evaluator
@@ -2606,6 +2749,76 @@ run();
 | errors.EvalsRagasMaliciousnessResponseBody      | 404                                             | application/json                                |
 | errors.EvalsRagasMaliciousnessEvalsResponseBody | 500                                             | application/json                                |
 | errors.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
+
+## ragasNoiseSensitivity
+
+Run Noise Sensitivity Evaluator
+
+### Example Usage
+
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.evals.ragasNoiseSensitivity();
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { evalsRagasNoiseSensitivity } from "@orq-ai/node/funcs/evalsRagasNoiseSensitivity.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await evalsRagasNoiseSensitivity(orq);
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("evalsRagasNoiseSensitivity failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.EvalsRagasNoiseSensitivityRequestBody](../../models/operations/evalsragasnoisesensitivityrequestbody.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.EvalsRagasNoiseSensitivityResponseBody](../../models/operations/evalsragasnoisesensitivityresponsebody.md)\>**
+
+### Errors
+
+| Error Type                                         | Status Code                                        | Content Type                                       |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| errors.EvalsRagasNoiseSensitivityResponseBody      | 404                                                | application/json                                   |
+| errors.EvalsRagasNoiseSensitivityEvalsResponseBody | 500                                                | application/json                                   |
+| errors.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
 ## ragasResponseRelevancy
 

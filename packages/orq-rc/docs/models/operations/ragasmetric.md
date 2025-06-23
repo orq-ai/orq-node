@@ -11,5 +11,5 @@ let value: RagasMetric = "response_relevancy";
 ## Values
 
 ```typescript
-"context_precision" | "context_recall" | "context_entities_recall" | "harmfulness" | "maliciousness" | "coherence" | "correctness" | "conciseness" | "response_relevancy" | "faithfulness" | "summarization"
+"context_precision" | "context_recall" | "context_entities_recall" | "harmfulness" | "maliciousness" | "coherence" | "correctness" | "conciseness" | "response_relevancy" | "faithfulness" | "summarization" | "noise_sensitivity"
 ```
