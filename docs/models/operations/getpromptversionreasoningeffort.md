@@ -13,5 +13,5 @@ let value: GetPromptVersionReasoningEffort = "medium";
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"disable" | "low" | "medium" | "high"
 ```

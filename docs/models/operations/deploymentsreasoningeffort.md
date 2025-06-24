@@ -13,5 +13,5 @@ let value: DeploymentsReasoningEffort = "high";
 ## Values
 
 ```typescript
-"low" | "medium" | "high"
+"disable" | "low" | "medium" | "high"
 ```
