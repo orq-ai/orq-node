@@ -13,8 +13,8 @@ let value: GetEvalsResponseBody = {
     {
       id: "<id>",
       description: "ah boo tame ethyl without consequently",
-      created: "2025-06-24T09:07:27.531Z",
-      updated: "2025-06-24T09:07:27.531Z",
+      created: "2025-06-24T11:53:52.514Z",
+      updated: "2025-06-24T11:53:52.514Z",
       type: "function_eval",
       functionParams: {
         type: "moderations_openai",
