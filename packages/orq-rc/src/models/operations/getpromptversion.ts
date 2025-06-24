@@ -131,6 +131,7 @@ export type GetPromptVersionEncodingFormat = ClosedEnum<
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const GetPromptVersionReasoningEffort = {
+  Disable: "disable",
   Low: "low",
   Medium: "medium",
   High: "high",

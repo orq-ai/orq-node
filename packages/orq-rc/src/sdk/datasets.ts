@@ -5,7 +5,6 @@
 import { datasetsClear } from "../funcs/datasetsClear.js";
 import { datasetsCreate } from "../funcs/datasetsCreate.js";
 import { datasetsCreateDatapoint } from "../funcs/datasetsCreateDatapoint.js";
-import { datasetsCreateExperiment } from "../funcs/datasetsCreateExperiment.js";
 import { datasetsDelete } from "../funcs/datasetsDelete.js";
 import { datasetsDeleteDatapoint } from "../funcs/datasetsDeleteDatapoint.js";
 import { datasetsList } from "../funcs/datasetsList.js";
@@ -98,23 +97,6 @@ export class Datasets extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(datasetsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create an experiment from a dataset
-   *
-   * @remarks
-   * Create an experiment from a dataset
-   */
-  async createExperiment(
-    request: operations.CreateDatasetExperimentRequest,
-    options?: RequestOptions,
-  ): Promise<operations.CreateDatasetExperimentResponseBody> {
-    return unwrapAsync(datasetsCreateExperiment(
       this,
       request,
       options,

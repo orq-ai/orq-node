@@ -21,7 +21,6 @@ import { tool$contactsUpdate } from "./tools/contactsUpdate.js";
 import { tool$datasetsClear } from "./tools/datasetsClear.js";
 import { tool$datasetsCreate } from "./tools/datasetsCreate.js";
 import { tool$datasetsCreateDatapoint } from "./tools/datasetsCreateDatapoint.js";
-import { tool$datasetsCreateExperiment } from "./tools/datasetsCreateExperiment.js";
 import { tool$datasetsDelete } from "./tools/datasetsDelete.js";
 import { tool$datasetsDeleteDatapoint } from "./tools/datasetsDeleteDatapoint.js";
 import { tool$datasetsList } from "./tools/datasetsList.js";
@@ -30,7 +29,6 @@ import { tool$datasetsRetrieve } from "./tools/datasetsRetrieve.js";
 import { tool$datasetsRetrieveDatapoint } from "./tools/datasetsRetrieveDatapoint.js";
 import { tool$datasetsUpdate } from "./tools/datasetsUpdate.js";
 import { tool$datasetsUpdateDatapoint } from "./tools/datasetsUpdateDatapoint.js";
-import { tool$deploymentsCreateExperiment } from "./tools/deploymentsCreateExperiment.js";
 import { tool$deploymentsGetConfig } from "./tools/deploymentsGetConfig.js";
 import { tool$deploymentsInvoke } from "./tools/deploymentsInvoke.js";
 import { tool$deploymentsList } from "./tools/deploymentsList.js";
@@ -121,7 +119,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.9.0-rc.5",
+    version: "3.9.0-rc.6",
   });
 
   const client = new OrqCore({
@@ -163,7 +161,6 @@ export function createMCPServer(deps: {
   tool(tool$deploymentsGetConfig);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsStream);
-  tool(tool$deploymentsCreateExperiment);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
@@ -182,7 +179,6 @@ export function createMCPServer(deps: {
   tool(tool$datasetsRetrieve);
   tool(tool$datasetsUpdate);
   tool(tool$datasetsDelete);
-  tool(tool$datasetsCreateExperiment);
   tool(tool$datasetsListDatapoints);
   tool(tool$datasetsCreateDatapoint);
   tool(tool$datasetsRetrieveDatapoint);
