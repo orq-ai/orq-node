@@ -4785,7 +4785,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-23T15:00:38.260Z"
+          default: "2025-06-24T05:41:49.240Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4848,7 +4848,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-06-23T15:00:38.260Z"
+            default: "2025-06-24T05:41:49.240Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4928,7 +4928,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-23T15:00:38.260Z"
+          default: "2025-06-24T05:41:49.240Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4974,7 +4974,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-06-23T15:00:38.260Z"
+                default: "2025-06-24T05:41:49.240Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5017,7 +5017,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-06-23T15:00:38.260Z"
+          default: "2025-06-24T05:41:49.240Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -7512,7 +7512,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-23T15:00:35.149Z"
+          default: "2025-06-24T05:41:46.101Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7520,7 +7520,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-23T15:00:35.149Z"
+              default: "2025-06-24T05:41:46.101Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7630,7 +7630,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-06-23T15:00:35.149Z"
+                default: "2025-06-24T05:41:46.101Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7638,7 +7638,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7745,7 +7745,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-23T15:00:35.149Z"
+          default: "2025-06-24T05:41:46.101Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7753,7 +7753,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-23T15:00:35.149Z"
+              default: "2025-06-24T05:41:46.101Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7854,7 +7854,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-06-23T15:00:35.149Z"
+          default: "2025-06-24T05:41:46.101Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7862,7 +7862,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-06-23T15:00:35.149Z"
+              default: "2025-06-24T05:41:46.101Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9015,10 +9015,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9087,10 +9087,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9156,10 +9156,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9240,10 +9240,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9335,10 +9335,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9407,10 +9407,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9476,10 +9476,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9560,10 +9560,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "updated":
                     type: "string"
-                    default: "2025-06-23T15:00:37.224Z"
+                    default: "2025-06-24T05:41:48.250Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9923,10 +9923,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9995,10 +9995,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10064,10 +10064,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10148,10 +10148,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "updated":
               type: "string"
-              default: "2025-06-23T15:00:37.224Z"
+              default: "2025-06-24T05:41:48.250Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11125,6 +11125,64 @@ components:
             - "null"
       required:
         - "value"
+    "RunNoiseSensitivityRequest":
+      type: "object"
+      properties:
+        "query":
+          type: "string"
+          description: "Latest user message"
+        "output":
+          type: "string"
+          description: "The generated response from the model"
+        "model":
+          type: "string"
+        "reference":
+          type: "string"
+          description: "The ground truth answer to evaluate noise sensitivity against"
+        "retrievals":
+          type: "array"
+          items:
+            type: "string"
+          description: "Knowledge base retrievals that may contain irrelevant information"
+      required:
+        - "query"
+        - "output"
+        - "model"
+        - "reference"
+    "RunNoiseSensitivityResponse":
+      type: "object"
+      properties:
+        "value":
+          type:
+            - "number"
+            - "null"
+      required:
+        - "value"
+    "RunContextEntitiesRecallRequest":
+      type: "object"
+      properties:
+        "reference":
+          type: "string"
+          description: "The ground truth answer to evaluate entity recall against"
+        "retrievals":
+          type: "array"
+          items:
+            type: "string"
+          description: "Knowledge base retrievals containing entities to evaluate"
+        "model":
+          type: "string"
+      required:
+        - "reference"
+        - "model"
+    "RunContextEntitiesRecallResponse":
+      type: "object"
+      properties:
+        "value":
+          type:
+            - "number"
+            - "null"
+      required:
+        - "value"
     "RunCustomEvaluatorRequest":
       type: "object"
       properties:
@@ -11792,6 +11850,7 @@ components:
                     - "response_relevancy"
                     - "faithfulness"
                     - "summarization"
+                    - "noise_sensitivity"
                 "path":
                   type: "string"
                   description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -13758,7 +13817,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13766,7 +13825,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13897,7 +13956,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-23T15:00:35.149Z"
+                          default: "2025-06-24T05:41:46.101Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -13905,7 +13964,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-23T15:00:35.149Z"
+                              default: "2025-06-24T05:41:46.101Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -17978,7 +18037,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-23T15:00:38.260Z"
+                    default: "2025-06-24T05:41:49.240Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18066,7 +18125,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-06-23T15:00:38.260Z"
+                          default: "2025-06-24T05:41:49.240Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18133,7 +18192,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-06-23T15:00:38.260Z"
+                    default: "2025-06-24T05:41:49.240Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -21580,7 +21639,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-23T15:00:35.149Z"
+                          default: "2025-06-24T05:41:46.101Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21588,7 +21647,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-23T15:00:35.149Z"
+                              default: "2025-06-24T05:41:46.101Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21712,7 +21771,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21720,7 +21779,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21830,7 +21889,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21838,7 +21897,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21990,7 +22049,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21998,7 +22057,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22461,7 +22520,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-06-23T15:00:35.149Z"
+                          default: "2025-06-24T05:41:46.101Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22469,7 +22528,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-06-23T15:00:35.149Z"
+                              default: "2025-06-24T05:41:46.101Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -23083,7 +23142,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23091,7 +23150,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23426,7 +23485,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23434,7 +23493,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -24052,7 +24111,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -24060,7 +24119,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -24283,186 +24342,344 @@ paths:
         - ApiKey: []
     post:
       tags:
-        - "Knowledge Bases"
-      x-speakeasy-group: "knowledge"
-      x-speakeasy-name-override: "create"
-      operationId: "CreateKnowledge"
-      summary: "Create a knowledge"
+        - "Knowledge"
+      x-speakeasy-name-override: "chunkText"
+      x-code-samples: [{"lang": "typescript", "label": "Node.js", "source": "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst result = await orq.chunkText({\n  text: \"Your long text content here...\",\n  strategy: \"semantic\",\n  chunk_size: 256,\n  threshold: 0.8,\n  embedding_model: \"openai/text-embedding-3-small\"\n});\n\nconsole.log(result.chunks);"}, {"lang": "python", "label": "Python", "source": "from orq_ai_sdk import Orq\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nresult = orq.chunk_text(\n    text=\"Your long text content here...\",\n    strategy=\"semantic\",\n    chunk_size=256,\n    threshold=0.8,\n    embedding_model=\"openai/text-embedding-3-small\"\n)\n\nfor chunk in result.chunks:\n    print(f\"Chunk {chunk.index}: {chunk.text[:50]}...\")"}]
+      operationId: "ChunkText"
+      summary: "Chunk text content using various strategies"
+      description: "Split large text documents into smaller, manageable chunks using different chunking strategies optimized for RAG (Retrieval-Augmented Generation) workflows. This endpoint supports multiple chunking algorithms including token-based, sentence-based, recursive, semantic, and specialized strategies."
       requestBody:
         required: true
         content:
           "application/json":
             schema:
-              type: "object"
-              properties:
-                "key":
-                  type: "string"
-                "description":
-                  type: "string"
-                "embedding_model":
-                  type: "string"
-                  description: "The embeddings model to use for the knowledge base. This model will be used to embed the chunks when they are added to the knowledge base."
-                "retrieval_settings":
-                  type: "object"
+              oneOf:
+                - type: "object"
                   properties:
-                    "retrieval_type":
+                    "text":
+                      type: "string"
+                      description: "The text content to be chunked"
+                    "metadata":
+                      type: "boolean"
+                      default: true
+                      description: "Whether to include metadata for each chunk"
+                    "return_type":
                       type: "string"
                       enum:
-                        - "vector_search"
-                        - "keyword_search"
-                        - "hybrid_search"
-                      default: "hybrid_search"
-                      description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
-                    "top_k":
+                        - "chunks"
+                        - "texts"
+                      default: "chunks"
+                      description: "Return format: chunks (with metadata) or texts (plain strings)"
+                    "strategy":
+                      type: "string"
+                      enum:
+                        - "token"
+                      title: "Token Chunker"
+                    "chunk_size":
                       type: "integer"
                       exclusiveMinimum: 0
-                      default: 5
-                      description: "The number of results to return from the search."
-                    "threshold":
-                      type: "number"
+                      default: 512
+                      description: "Maximum tokens per chunk"
+                    "chunk_overlap":
+                      type: "integer"
                       minimum: 0
-                      maximum: 1
                       default: 0
-                      description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
-                    "rerank_config":
-                      type:
-                        - "object"
-                        - "null"
-                      properties:
-                        "rerank_threshold":
-                          type: "number"
+                      description: "Number of tokens to overlap between chunks"
+                  required:
+                    - "text"
+                    - "strategy"
+                  description: "Splits text based on token count. Best for ensuring chunks fit within LLM context windows and maintaining consistent chunk sizes for embedding models."
+                  title: "Token Chunker Strategy"
+                - type: "object"
+                  properties:
+                    "text":
+                      type: "string"
+                      description: "The text content to be chunked"
+                    "metadata":
+                      type: "boolean"
+                      default: true
+                      description: "Whether to include metadata for each chunk"
+                    "return_type":
+                      type: "string"
+                      enum:
+                        - "chunks"
+                        - "texts"
+                      default: "chunks"
+                      description: "Return format: chunks (with metadata) or texts (plain strings)"
+                    "strategy":
+                      type: "string"
+                      enum:
+                        - "sentence"
+                      title: "Sentence Chunker"
+                    "chunk_size":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 512
+                      description: "Maximum tokens per chunk"
+                    "chunk_overlap":
+                      type: "integer"
+                      minimum: 0
+                      default: 0
+                      description: "Number of overlapping tokens between chunks"
+                    "min_sentences_per_chunk":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 1
+                      description: "Minimum number of sentences per chunk"
+                  required:
+                    - "text"
+                    - "strategy"
+                  description: "Splits text at sentence boundaries while respecting token limits. Ideal for maintaining semantic coherence and readability."
+                  title: "Sentence Chunker Strategy"
+                - type: "object"
+                  properties:
+                    "text":
+                      type: "string"
+                      description: "The text content to be chunked"
+                    "metadata":
+                      type: "boolean"
+                      default: true
+                      description: "Whether to include metadata for each chunk"
+                    "return_type":
+                      type: "string"
+                      enum:
+                        - "chunks"
+                        - "texts"
+                      default: "chunks"
+                      description: "Return format: chunks (with metadata) or texts (plain strings)"
+                    "strategy":
+                      type: "string"
+                      enum:
+                        - "recursive"
+                      title: "Recursive Chunker"
+                    "chunk_size":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 512
+                      description: "Maximum tokens per chunk"
+                    "separators":
+                      type: "array"
+                      items:
+                        type: "string"
+                      default: ["\n\n", "\n", " ", ""]
+                      description: "Hierarchy of separators to use for splitting"
+                    "min_characters_per_chunk":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 24
+                      description: "Minimum characters allowed per chunk"
+                  required:
+                    - "text"
+                    - "strategy"
+                  description: "Recursively splits text using a hierarchy of separators (paragraphs, sentences, words). Versatile general-purpose chunker that preserves document structure."
+                  title: "Recursive Chunker Strategy"
+                - type: "object"
+                  properties:
+                    "text":
+                      type: "string"
+                      description: "The text content to be chunked"
+                    "metadata":
+                      type: "boolean"
+                      default: true
+                      description: "Whether to include metadata for each chunk"
+                    "return_type":
+                      type: "string"
+                      enum:
+                        - "chunks"
+                        - "texts"
+                      default: "chunks"
+                      description: "Return format: chunks (with metadata) or texts (plain strings)"
+                    "strategy":
+                      type: "string"
+                      enum:
+                        - "semantic"
+                      title: "Semantic Chunker"
+                    "chunk_size":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 512
+                      description: "Maximum tokens per chunk"
+                    "threshold":
+                      anyOf:
+                        - type: "number"
                           minimum: 0
                           maximum: 1
-                          default: 0.5
-                          description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                        "rerank_model":
-                          type: "string"
-                          description: "The rerank model to use for the knowledge base."
-                      required:
-                        - "rerank_model"
-                      description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
-                    "agentic_rag_config":
-                      type:
-                        - "object"
-                        - "null"
-                      properties:
-                        "model":
-                          type: "string"
-                          description: "The model to use for the Agentic RAG"
-                      required:
-                        - "model"
-                      description: "The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled."
-                  description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-                "path":
-                  type: "string"
-                  description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
-                  example: "Default"
-              required:
-                - "key"
-                - "embedding_model"
-                - "path"
+                        - type: "string"
+                          enum:
+                            - "auto"
+                      default: "auto"
+                      description: "Similarity threshold for grouping (0-1) or \"auto\" for automatic detection"
+                    "embedding_model":
+                      type: "string"
+                      description: "Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy#embedding-models]"
+                    "mode":
+                      type: "string"
+                      enum:
+                        - "window"
+                        - "sentence"
+                      default: "window"
+                      description: "Chunking mode: window-based or sentence-based similarity"
+                    "similarity_window":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 1
+                      description: "Window size for similarity comparison"
+                  required:
+                    - "text"
+                    - "strategy"
+                    - "embedding_model"
+                  description: "Groups semantically similar sentences using embeddings. Excellent for maintaining topic coherence and context within chunks."
+                  title: "Semantic Chunker Strategy"
+                - type: "object"
+                  properties:
+                    "text":
+                      type: "string"
+                      description: "The text content to be chunked"
+                    "metadata":
+                      type: "boolean"
+                      default: true
+                      description: "Whether to include metadata for each chunk"
+                    "return_type":
+                      type: "string"
+                      enum:
+                        - "chunks"
+                        - "texts"
+                      default: "chunks"
+                      description: "Return format: chunks (with metadata) or texts (plain strings)"
+                    "strategy":
+                      type: "string"
+                      enum:
+                        - "sdpm"
+                      title: "SDPM Chunker"
+                    "chunk_size":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 512
+                      description: "Maximum tokens per chunk"
+                    "skip_window":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 1
+                      description: "Window size for skip-gram patterns"
+                    "threshold":
+                      anyOf:
+                        - type: "number"
+                          minimum: 0
+                          maximum: 1
+                        - type: "string"
+                          enum:
+                            - "auto"
+                      default: "auto"
+                      description: "Similarity threshold for grouping (0-1) or \"auto\" for automatic detection"
+                    "embedding_model":
+                      type: "string"
+                      description: "Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy#embedding-models]"
+                    "mode":
+                      type: "string"
+                      enum:
+                        - "window"
+                        - "sentence"
+                      default: "window"
+                      description: "Chunking mode: window-based or sentence-based similarity"
+                  required:
+                    - "text"
+                    - "strategy"
+                    - "embedding_model"
+                  description: "Sub-Document Prose Model chunker that uses skip-gram patterns to identify optimal split points. Good for technical documents with structured content."
+                  title: "SDPM Chunker Strategy"
+                - type: "object"
+                  properties:
+                    "text":
+                      type: "string"
+                      description: "The text content to be chunked"
+                    "metadata":
+                      type: "boolean"
+                      default: true
+                      description: "Whether to include metadata for each chunk"
+                    "return_type":
+                      type: "string"
+                      enum:
+                        - "chunks"
+                        - "texts"
+                      default: "chunks"
+                      description: "Return format: chunks (with metadata) or texts (plain strings)"
+                    "strategy":
+                      type: "string"
+                      enum:
+                        - "agentic"
+                      title: "Agentic Chunker"
+                    "model":
+                      type: "string"
+                      description: "Chat model to use for chunking. (Available models)[https://docs.orq.ai/docs/proxy#chat-models]"
+                      example: "openai/gpt-4.1"
+                    "chunk_size":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 1024
+                      description: "Maximum tokens per chunk"
+                    "candidate_size":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 128
+                      description: "Size of candidate splits for LLM evaluation"
+                    "min_characters_per_chunk":
+                      type: "integer"
+                      exclusiveMinimum: 0
+                      default: 24
+                      description: "Minimum characters allowed per chunk"
+                  required:
+                    - "text"
+                    - "strategy"
+                    - "model"
+                  description: "Agentic LLM-powered chunker that uses AI to determine optimal split points. Best for complex documents requiring intelligent segmentation."
+                  title: "Agentic Chunker Strategy"
+              description: "Request payload for text chunking with strategy-specific configuration"
+              title: "Chunking Request"
+            example: {"text": "The quick brown fox jumps over the lazy dog. This is a sample text that will be chunked into smaller pieces. Each chunk will maintain context while respecting the maximum chunk size.", "strategy": "semantic", "chunk_size": 256, "threshold": 0.8, "embedding_model": "openai/text-embedding-3-small", "mode": "window", "similarity_window": 1, "metadata": true}
       responses:
         "200":
-          description: "Knowledge successfully created"
+          description: "Text successfully chunked"
           content:
             "application/json":
               schema:
                 type: "object"
                 properties:
-                  "_id":
-                    type: "string"
-                    description: "The unique identifier of the knowledge base."
-                  "created":
-                    type: "string"
-                    description: "The creation date of the knowledge base."
-                  "description":
-                    type: "string"
-                    description: "The description of the knowledge base."
-                  "key":
-                    type: "string"
-                    description: "The unique key of the knowledge base."
-                  "model":
-                    type: "string"
-                    description: "The embeddings model used for the knowledge base."
-                  "domain_id":
-                    type: "string"
-                    description: "The project/domain ID of the knowledge base."
-                  "path":
-                    type: "string"
-                    description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
-                    example: "Default"
-                  "retrieval_settings":
-                    type: "object"
-                    properties:
-                      "retrieval_type":
-                        type: "string"
-                        enum:
-                          - "vector_search"
-                          - "keyword_search"
-                          - "hybrid_search"
-                        default: "hybrid_search"
-                        description: "The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy."
-                      "top_k":
-                        type: "integer"
-                        exclusiveMinimum: 0
-                        default: 5
-                        description: "The number of results to return from the search."
-                      "threshold":
-                        type: "number"
-                        minimum: 0
-                        maximum: 1
-                        default: 0
-                        description: "The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned"
-                      "rerank_config":
-                        type:
-                          - "object"
-                          - "null"
-                        properties:
-                          "rerank_threshold":
-                            type: "number"
-                            minimum: 0
-                            maximum: 1
-                            default: 0.5
-                            description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
-                          "rerank_model":
-                            type: "string"
-                            description: "The rerank model to use for the knowledge base."
-                        required:
-                          - "rerank_model"
-                        description: "The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision."
-                      "agentic_rag_config":
-                        type:
-                          - "object"
-                          - "null"
-                        properties:
-                          "model":
-                            type: "string"
-                            description: "The model to use for the Agentic RAG"
-                        required:
-                          - "model"
-                        description: "The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled."
-                    description: "The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy."
-                  "created_by_id":
-                    type:
-                      - "string"
-                      - "null"
-                    format: "uuid"
-                  "updated_by_id":
-                    type:
-                      - "string"
-                      - "null"
-                    format: "uuid"
-                  "updated":
-                    type: "string"
-                    description: "The last update date of the knowledge base."
+                  "chunks":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "text":
+                          type: "string"
+                          description: "The text content of the chunk"
+                        "index":
+                          type: "number"
+                          description: "The position index of this chunk in the sequence"
+                        "metadata":
+                          type: "object"
+                          properties:
+                            "start_index":
+                              type:
+                                - "number"
+                                - "null"
+                            "end_index":
+                              type:
+                                - "number"
+                                - "null"
+                            "token_count":
+                              type:
+                                - "number"
+                                - "null"
+                          required:
+                            - "start_index"
+                            - "end_index"
+                            - "token_count"
+                      required:
+                        - "text"
+                        - "index"
                 required:
-                  - "_id"
-                  - "created"
-                  - "key"
-                  - "model"
-                  - "domain_id"
-                  - "updated"
-                description: "Knowledge Base object"
+                  - "chunks"
+              example: {"chunks": [{"id": "01HQ3K4M5N6P7Q8R9SATBVCWDX", "text": "The quick brown fox jumps over the lazy dog.", "index": 0, "metadata": {"start_index": 0, "end_index": 44, "token_count": 10}}, {"id": "01HQ3K4M5N6P7Q8R9SATBVCWDY", "text": "This is a sample text that will be chunked into smaller pieces.", "index": 1, "metadata": {"start_index": 45, "end_index": 108, "token_count": 12}}]}
       security:
         - ApiKey: []
   "/v2/knowledge/{knowledge_id}":
@@ -25329,7 +25546,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01JYEMWJ9B6Z14YWCK9HWRGQ9G"
+                          default: "01JYG7A271PPGPQN77TKE4QSRB"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -25492,7 +25709,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JYEMWJ9D8JRTPN7T29CSMHMW"
+                    default: "01JYG7A2723QFD7R1HQAVHFWTS"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25585,7 +25802,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JYEMWJ9CV7GM21RVJJ9EPY0C"
+                    default: "01JYG7A271SNN4806MFKMYFQ6H"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25714,7 +25931,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01JYEMWJ9ECAT9A8Q3NZFZMP2W"
+                    default: "01JYG7A273MM30ZS0VB5Q5QQQB"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26323,10 +26540,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26395,10 +26612,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26464,10 +26681,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26548,10 +26765,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26617,10 +26834,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26917,10 +27134,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26981,6 +27198,7 @@ paths:
                                 - "response_relevancy"
                                 - "faithfulness"
                                 - "summarization"
+                                - "noise_sensitivity"
                             "key":
                               type: "string"
                             "model":
@@ -27001,10 +27219,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "updated":
                               type: "string"
-                              default: "2025-06-23T15:00:37.224Z"
+                              default: "2025-06-24T05:41:48.250Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27386,10 +27604,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27458,10 +27676,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27527,10 +27745,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27611,10 +27829,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27983,10 +28201,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28055,10 +28273,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28124,10 +28342,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28208,10 +28426,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "updated":
                         type: "string"
-                        default: "2025-06-23T15:00:37.224Z"
+                        default: "2025-06-24T05:41:48.250Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -30211,6 +30429,142 @@ paths:
                   - "message"
       security:
         - ApiKey: []
+  "/v2/evaluators/ragas_context_recall":
+    post:
+      tags:
+        - "Evaluators Hub"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "ragasContextRecall"
+      operationId: "EvalsRagasContextRecall"
+      summary: "Run Context Recall Evaluator"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "query":
+                  type: "string"
+                  description: "Latest user message"
+                "output":
+                  type: "string"
+                  description: "The generated response from the model"
+                "model":
+                  type: "string"
+                "reference":
+                  type: "string"
+                  description: "The ground truth answer to evaluate context recall against"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals"
+              required:
+                - "model"
+                - "reference"
+      responses:
+        "200":
+          description: "Returns the context recall evaluation result"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "value":
+                    type:
+                      - "number"
+                      - "null"
+                required:
+                  - "value"
+        "404":
+          description: "Evaluator not found"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Internal server error"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
+  "/v2/evaluators/ragas_context_entities_recall":
+    post:
+      tags:
+        - "Evaluators Hub"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "ragasContextEntitiesRecall"
+      operationId: "EvalsRagasContextEntitiesRecall"
+      summary: "Run Context Entities Recall Evaluator"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "reference":
+                  type: "string"
+                  description: "The ground truth answer to evaluate entity recall against"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals containing entities to evaluate"
+                "model":
+                  type: "string"
+              required:
+                - "reference"
+                - "model"
+      responses:
+        "200":
+          description: "Returns the context entities recall evaluation result"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "value":
+                    type:
+                      - "number"
+                      - "null"
+                required:
+                  - "value"
+        "404":
+          description: "Evaluator not found"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Internal server error"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
   "/v2/evaluators/ragas_correctness":
     post:
       tags:
@@ -30443,6 +30797,79 @@ paths:
       responses:
         "200":
           description: "Returns the maliciousness evaluation result"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "value":
+                    type:
+                      - "number"
+                      - "null"
+                required:
+                  - "value"
+        "404":
+          description: "Evaluator not found"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+        "500":
+          description: "Internal server error"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "message":
+                    type: "string"
+                required:
+                  - "message"
+      security:
+        - ApiKey: []
+  "/v2/evaluators/ragas_noise_sensitivity":
+    post:
+      tags:
+        - "Evaluators Hub"
+      x-speakeasy-group: "evals"
+      x-speakeasy-name-override: "ragasNoiseSensitivity"
+      operationId: "EvalsRagasNoiseSensitivity"
+      summary: "Run Noise Sensitivity Evaluator"
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "query":
+                  type: "string"
+                  description: "Latest user message"
+                "output":
+                  type: "string"
+                  description: "The generated response from the model"
+                "model":
+                  type: "string"
+                "reference":
+                  type: "string"
+                  description: "The ground truth answer to evaluate noise sensitivity against"
+                "retrievals":
+                  type: "array"
+                  items:
+                    type: "string"
+                  description: "Knowledge base retrievals that may contain irrelevant information"
+              required:
+                - "query"
+                - "output"
+                - "model"
+                - "reference"
+      responses:
+        "200":
+          description: "Returns the noise sensitivity evaluation result"
           content:
             "application/json":
               schema:
@@ -31065,7 +31492,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31073,7 +31500,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -31207,7 +31634,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-06-23T15:00:35.149Z"
+                    default: "2025-06-24T05:41:46.101Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31215,7 +31642,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-06-23T15:00:35.149Z"
+                        default: "2025-06-24T05:41:46.101Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
