@@ -253,7 +253,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-06-30T06:34:51.594Z",
+    "2025-06-30T13:00:26.696Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -293,7 +293,7 @@ export const ListDatasetsData$outboundSchema: z.ZodType<
   updatedById: z.string().optional(),
   metadata: z.lazy(() => ListDatasetsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-06-30T06:34:51.594Z"))
+  updated: z.date().default(() => new Date("2025-06-30T13:00:26.696Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
