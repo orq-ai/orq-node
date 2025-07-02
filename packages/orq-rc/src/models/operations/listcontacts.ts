@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Filter contacts by tags
+ * Filter contacts by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
  */
 export type QueryParamFilterBy = {
   tags?: Array<string> | undefined;
@@ -30,7 +30,7 @@ export type ListContactsRequest = {
    */
   endingBefore?: string | undefined;
   /**
-   * Filter contacts by tags
+   * Filter contacts by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
    */
   filterBy?: QueryParamFilterBy | undefined;
   includeMetrics?: boolean | null | undefined;
@@ -345,7 +345,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-06-30T19:05:21.426Z",
+      "2025-07-02T05:47:39.504Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => Metrics$inboundSchema),
   }).transform((v) => {
@@ -382,7 +382,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2025-06-30T19:05:21.426Z"))
+    updated: z.date().default(() => new Date("2025-07-02T05:47:39.504Z"))
       .transform(v => v.toISOString()),
     metrics: z.lazy(() => Metrics$outboundSchema),
   }).transform((v) => {
