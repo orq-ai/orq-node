@@ -60,11 +60,14 @@ import { tool$evalsLocalization } from "./tools/evalsLocalization.js";
 import { tool$evalsPii } from "./tools/evalsPii.js";
 import { tool$evalsRagasCoherence } from "./tools/evalsRagasCoherence.js";
 import { tool$evalsRagasConciseness } from "./tools/evalsRagasConciseness.js";
+import { tool$evalsRagasContextEntitiesRecall } from "./tools/evalsRagasContextEntitiesRecall.js";
 import { tool$evalsRagasContextPrecision } from "./tools/evalsRagasContextPrecision.js";
+import { tool$evalsRagasContextRecall } from "./tools/evalsRagasContextRecall.js";
 import { tool$evalsRagasCorrectness } from "./tools/evalsRagasCorrectness.js";
 import { tool$evalsRagasFaithfulness } from "./tools/evalsRagasFaithfulness.js";
 import { tool$evalsRagasHarmfulness } from "./tools/evalsRagasHarmfulness.js";
 import { tool$evalsRagasMaliciousness } from "./tools/evalsRagasMaliciousness.js";
+import { tool$evalsRagasNoiseSensitivity } from "./tools/evalsRagasNoiseSensitivity.js";
 import { tool$evalsRagasResponseRelevancy } from "./tools/evalsRagasResponseRelevancy.js";
 import { tool$evalsRagasSummarization } from "./tools/evalsRagasSummarization.js";
 import { tool$evalsSentimentClassification } from "./tools/evalsSentimentClassification.js";
@@ -78,7 +81,7 @@ import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
 import { tool$filesGet } from "./tools/filesGet.js";
 import { tool$filesList } from "./tools/filesList.js";
-import { tool$knowledgeCreate } from "./tools/knowledgeCreate.js";
+import { tool$knowledgeChunkText } from "./tools/knowledgeChunkText.js";
 import { tool$knowledgeCreateChunks } from "./tools/knowledgeCreateChunks.js";
 import { tool$knowledgeCreateDatasource } from "./tools/knowledgeCreateDatasource.js";
 import { tool$knowledgeDelete } from "./tools/knowledgeDelete.js";
@@ -116,7 +119,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.8.9",
+    version: "3.9.0",
   });
 
   const client = new OrqCore({
@@ -183,7 +186,6 @@ export function createMCPServer(deps: {
   tool(tool$datasetsDeleteDatapoint);
   tool(tool$datasetsClear);
   tool(tool$knowledgeList);
-  tool(tool$knowledgeCreate);
   tool(tool$knowledgeRetrieve);
   tool(tool$knowledgeUpdate);
   tool(tool$knowledgeDelete);
@@ -198,6 +200,7 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
+  tool(tool$knowledgeChunkText);
   tool(tool$evalsAll);
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);
@@ -230,10 +233,13 @@ export function createMCPServer(deps: {
   tool(tool$evalsRagasCoherence);
   tool(tool$evalsRagasConciseness);
   tool(tool$evalsRagasContextPrecision);
+  tool(tool$evalsRagasContextRecall);
+  tool(tool$evalsRagasContextEntitiesRecall);
   tool(tool$evalsRagasCorrectness);
   tool(tool$evalsRagasFaithfulness);
   tool(tool$evalsRagasHarmfulness);
   tool(tool$evalsRagasMaliciousness);
+  tool(tool$evalsRagasNoiseSensitivity);
   tool(tool$evalsRagasResponseRelevancy);
   tool(tool$evalsRagasSummarization);
   tool(tool$evalsInvoke);

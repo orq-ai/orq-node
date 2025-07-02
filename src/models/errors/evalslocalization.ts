@@ -23,9 +23,7 @@ export class EvalsLocalizationEvalsResponseBody extends OrqError {
     err: EvalsLocalizationEvalsResponseBodyData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
-    const message = "message" in err && typeof err.message === "string"
-      ? err.message
-      : `API error occurred: ${JSON.stringify(err)}`;
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
 
@@ -51,9 +49,7 @@ export class EvalsLocalizationResponseBody extends OrqError {
     err: EvalsLocalizationResponseBodyData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
-    const message = "message" in err && typeof err.message === "string"
-      ? err.message
-      : `API error occurred: ${JSON.stringify(err)}`;
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
 

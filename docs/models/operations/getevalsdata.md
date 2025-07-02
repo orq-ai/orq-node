@@ -84,7 +84,7 @@ const value: operations.Ragas = {
   id: "<id>",
   description: "truthfully deselect until",
   type: "ragas",
-  ragasMetric: "context_recall",
+  ragasMetric: "context_entities_recall",
   key: "<key>",
   model: "Model S",
 };

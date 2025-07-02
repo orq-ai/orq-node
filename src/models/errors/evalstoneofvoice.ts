@@ -23,9 +23,7 @@ export class EvalsToneOfVoiceEvalsResponseBody extends OrqError {
     err: EvalsToneOfVoiceEvalsResponseBodyData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
-    const message = "message" in err && typeof err.message === "string"
-      ? err.message
-      : `API error occurred: ${JSON.stringify(err)}`;
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
 
@@ -51,9 +49,7 @@ export class EvalsToneOfVoiceResponseBody extends OrqError {
     err: EvalsToneOfVoiceResponseBodyData,
     httpMeta: { response: Response; request: Request; body: string },
   ) {
-    const message = "message" in err && typeof err.message === "string"
-      ? err.message
-      : `API error occurred: ${JSON.stringify(err)}`;
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
     super(message, httpMeta);
     this.data$ = err;
 

@@ -28,11 +28,14 @@ import { evalsLocalization } from "../funcs/evalsLocalization.js";
 import { evalsPii } from "../funcs/evalsPii.js";
 import { evalsRagasCoherence } from "../funcs/evalsRagasCoherence.js";
 import { evalsRagasConciseness } from "../funcs/evalsRagasConciseness.js";
+import { evalsRagasContextEntitiesRecall } from "../funcs/evalsRagasContextEntitiesRecall.js";
 import { evalsRagasContextPrecision } from "../funcs/evalsRagasContextPrecision.js";
+import { evalsRagasContextRecall } from "../funcs/evalsRagasContextRecall.js";
 import { evalsRagasCorrectness } from "../funcs/evalsRagasCorrectness.js";
 import { evalsRagasFaithfulness } from "../funcs/evalsRagasFaithfulness.js";
 import { evalsRagasHarmfulness } from "../funcs/evalsRagasHarmfulness.js";
 import { evalsRagasMaliciousness } from "../funcs/evalsRagasMaliciousness.js";
+import { evalsRagasNoiseSensitivity } from "../funcs/evalsRagasNoiseSensitivity.js";
 import { evalsRagasResponseRelevancy } from "../funcs/evalsRagasResponseRelevancy.js";
 import { evalsRagasSummarization } from "../funcs/evalsRagasSummarization.js";
 import { evalsSentimentClassification } from "../funcs/evalsSentimentClassification.js";
@@ -495,6 +498,34 @@ export class Evals extends ClientSDK {
   }
 
   /**
+   * Run Context Recall Evaluator
+   */
+  async ragasContextRecall(
+    request?: operations.EvalsRagasContextRecallRequestBody | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.EvalsRagasContextRecallResponseBody> {
+    return unwrapAsync(evalsRagasContextRecall(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Run Context Entities Recall Evaluator
+   */
+  async ragasContextEntitiesRecall(
+    request?: operations.EvalsRagasContextEntitiesRecallRequestBody | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.EvalsRagasContextEntitiesRecallResponseBody> {
+    return unwrapAsync(evalsRagasContextEntitiesRecall(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Run Correctness Evaluator
    */
   async ragasCorrectness(
@@ -544,6 +575,20 @@ export class Evals extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.EvalsRagasMaliciousnessResponseBody> {
     return unwrapAsync(evalsRagasMaliciousness(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Run Noise Sensitivity Evaluator
+   */
+  async ragasNoiseSensitivity(
+    request?: operations.EvalsRagasNoiseSensitivityRequestBody | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.EvalsRagasNoiseSensitivityResponseBody> {
+    return unwrapAsync(evalsRagasNoiseSensitivity(
       this,
       request,
       options,

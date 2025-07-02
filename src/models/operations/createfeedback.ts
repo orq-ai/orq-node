@@ -26,7 +26,7 @@ export type CreateFeedbackRequestBody = {
    */
   value: string | number | Array<string>;
   /**
-   * The id returned by the [`get_config`]() or [`invoke`](https://docs.orq.ai/reference/post_deployments-invoke-1) endpoints
+   * The id returned by the [`get_config`](https://docs.orq.ai/reference/deploymentgetconfig-1) or [`invoke`](https://docs.orq.ai/reference/deploymentinvoke-1) endpoints
    */
   traceId: string;
 };
@@ -49,7 +49,7 @@ export type CreateFeedbackResponseBody = {
    */
   value: string | number | Array<string>;
   /**
-   * The id returned by the [`get_config`]() or [`invoke`](https://docs.orq.ai/reference/post_deployments-invoke-1) endpoints
+   * The id returned by the [`get_config`](https://docs.orq.ai/reference/deploymentgetconfig-1) or [`invoke`](https://docs.orq.ai/reference/deploymentinvoke-1) endpoints
    */
   traceId: string;
   id: string;
