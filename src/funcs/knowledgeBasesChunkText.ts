@@ -25,12 +25,12 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Chunk text content using various strategies
+ * Chunk text
  *
  * @remarks
  * Split large text documents into smaller, manageable chunks using different chunking strategies optimized for RAG (Retrieval-Augmented Generation) workflows. This endpoint supports multiple chunking algorithms including token-based, sentence-based, recursive, semantic, and specialized strategies.
  */
-export function knowledgeChunkText(
+export function knowledgeBasesChunkText(
   client: OrqCore,
   request: operations.ChunkTextChunkingRequest,
   options?: RequestOptions,

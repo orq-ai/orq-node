@@ -12,16 +12,17 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType = {
-  Chunks: "chunks",
-  Texts: "texts",
-} as const;
+export const ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType =
+  {
+    Chunks: "chunks",
+    Texts: "texts",
+  } as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType =
+export type ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType =
   ClosedEnum<
-    typeof ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType
+    typeof ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
   >;
 
 export const AgenticChunker = {
@@ -45,7 +46,7 @@ export type AgenticChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?:
-    | ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType
+    | ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
     | undefined;
   strategy: AgenticChunker;
   /**
@@ -69,16 +70,15 @@ export type AgenticChunkerStrategy = {
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestKnowledgeRequestReturnType = {
+export const ChunkTextChunkingRequestKnowledgeBasesRequestReturnType = {
   Chunks: "chunks",
   Texts: "texts",
 } as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestKnowledgeRequestReturnType = ClosedEnum<
-  typeof ChunkTextChunkingRequestKnowledgeRequestReturnType
->;
+export type ChunkTextChunkingRequestKnowledgeBasesRequestReturnType =
+  ClosedEnum<typeof ChunkTextChunkingRequestKnowledgeBasesRequestReturnType>;
 
 export const SDPMChunker = {
   Sdpm: "sdpm",
@@ -122,7 +122,9 @@ export type SDPMChunkerStrategy = {
   /**
    * Return format: chunks (with metadata) or texts (plain strings)
    */
-  returnType?: ChunkTextChunkingRequestKnowledgeRequestReturnType | undefined;
+  returnType?:
+    | ChunkTextChunkingRequestKnowledgeBasesRequestReturnType
+    | undefined;
   strategy: SDPMChunker;
   /**
    * Maximum tokens per chunk
@@ -149,15 +151,15 @@ export type SDPMChunkerStrategy = {
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestKnowledgeReturnType = {
+export const ChunkTextChunkingRequestKnowledgeBasesReturnType = {
   Chunks: "chunks",
   Texts: "texts",
 } as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestKnowledgeReturnType = ClosedEnum<
-  typeof ChunkTextChunkingRequestKnowledgeReturnType
+export type ChunkTextChunkingRequestKnowledgeBasesReturnType = ClosedEnum<
+  typeof ChunkTextChunkingRequestKnowledgeBasesReturnType
 >;
 
 export const SemanticChunker = {
@@ -202,7 +204,7 @@ export type SemanticChunkerStrategy = {
   /**
    * Return format: chunks (with metadata) or texts (plain strings)
    */
-  returnType?: ChunkTextChunkingRequestKnowledgeReturnType | undefined;
+  returnType?: ChunkTextChunkingRequestKnowledgeBasesReturnType | undefined;
   strategy: SemanticChunker;
   /**
    * Maximum tokens per chunk
@@ -407,31 +409,31 @@ export type ChunkTextResponseBody = {
 };
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$inboundSchema:
+export const ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema:
   z.ZodNativeEnum<
-    typeof ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType
+    typeof ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
   > = z.nativeEnum(
-    ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType,
+    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType,
   );
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$outboundSchema:
+export const ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema:
   z.ZodNativeEnum<
-    typeof ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType
+    typeof ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
   > =
-    ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$inboundSchema;
+    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$inboundSchema` instead. */
+export namespace ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$ {
+  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema` instead. */
   export const inboundSchema =
-    ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$outboundSchema` instead. */
+    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema;
+  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema` instead. */
   export const outboundSchema =
-    ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$outboundSchema;
+    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -464,7 +466,7 @@ export const AgenticChunkerStrategy$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   return_type:
-    ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$inboundSchema
+    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema
       .default("chunks"),
   strategy: AgenticChunker$inboundSchema,
   model: z.string(),
@@ -501,7 +503,7 @@ export const AgenticChunkerStrategy$outboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   returnType:
-    ChunkTextChunkingRequestKnowledgeRequestRequestBodyReturnType$outboundSchema
+    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema
       .default("chunks"),
   strategy: AgenticChunker$outboundSchema,
   model: z.string(),
@@ -549,26 +551,28 @@ export function agenticChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeRequestReturnType$inboundSchema:
-  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeRequestReturnType> = z
-    .nativeEnum(ChunkTextChunkingRequestKnowledgeRequestReturnType);
+export const ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ChunkTextChunkingRequestKnowledgeBasesRequestReturnType
+  > = z.nativeEnum(ChunkTextChunkingRequestKnowledgeBasesRequestReturnType);
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeRequestReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeRequestReturnType> =
-    ChunkTextChunkingRequestKnowledgeRequestReturnType$inboundSchema;
+export const ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ChunkTextChunkingRequestKnowledgeBasesRequestReturnType
+  > = ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestKnowledgeRequestReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeRequestReturnType$inboundSchema` instead. */
+export namespace ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$ {
+  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema` instead. */
   export const inboundSchema =
-    ChunkTextChunkingRequestKnowledgeRequestReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeRequestReturnType$outboundSchema` instead. */
+    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema;
+  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema` instead. */
   export const outboundSchema =
-    ChunkTextChunkingRequestKnowledgeRequestReturnType$outboundSchema;
+    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -688,8 +692,9 @@ export const SDPMChunkerStrategy$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  return_type: ChunkTextChunkingRequestKnowledgeRequestReturnType$inboundSchema
-    .default("chunks"),
+  return_type:
+    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema
+      .default("chunks"),
   strategy: SDPMChunker$inboundSchema,
   chunk_size: z.number().int().default(512),
   skip_window: z.number().int().default(1),
@@ -727,8 +732,9 @@ export const SDPMChunkerStrategy$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  returnType: ChunkTextChunkingRequestKnowledgeRequestReturnType$outboundSchema
-    .default("chunks"),
+  returnType:
+    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema
+      .default("chunks"),
   strategy: SDPMChunker$outboundSchema,
   chunkSize: z.number().int().default(512),
   skipWindow: z.number().int().default(1),
@@ -777,26 +783,26 @@ export function sdpmChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeReturnType$inboundSchema:
-  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeReturnType> = z
-    .nativeEnum(ChunkTextChunkingRequestKnowledgeReturnType);
+export const ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema:
+  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeBasesReturnType> = z
+    .nativeEnum(ChunkTextChunkingRequestKnowledgeBasesReturnType);
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeReturnType> =
-    ChunkTextChunkingRequestKnowledgeReturnType$inboundSchema;
+export const ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema:
+  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeBasesReturnType> =
+    ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestKnowledgeReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeReturnType$inboundSchema` instead. */
+export namespace ChunkTextChunkingRequestKnowledgeBasesReturnType$ {
+  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema` instead. */
   export const inboundSchema =
-    ChunkTextChunkingRequestKnowledgeReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeReturnType$outboundSchema` instead. */
+    ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema;
+  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema` instead. */
   export const outboundSchema =
-    ChunkTextChunkingRequestKnowledgeReturnType$outboundSchema;
+    ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -911,7 +917,7 @@ export const SemanticChunkerStrategy$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  return_type: ChunkTextChunkingRequestKnowledgeReturnType$inboundSchema
+  return_type: ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema
     .default("chunks"),
   strategy: SemanticChunker$inboundSchema,
   chunk_size: z.number().int().default(512),
@@ -949,7 +955,7 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  returnType: ChunkTextChunkingRequestKnowledgeReturnType$outboundSchema
+  returnType: ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema
     .default("chunks"),
   strategy: SemanticChunker$outboundSchema,
   chunkSize: z.number().int().default(512),
