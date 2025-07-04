@@ -81,7 +81,7 @@ import { tool$filesCreate } from "./tools/filesCreate.js";
 import { tool$filesDelete } from "./tools/filesDelete.js";
 import { tool$filesGet } from "./tools/filesGet.js";
 import { tool$filesList } from "./tools/filesList.js";
-import { tool$knowledgeChunkText } from "./tools/knowledgeChunkText.js";
+import { tool$knowledgeBasesChunkText } from "./tools/knowledgeBasesChunkText.js";
 import { tool$knowledgeCreateChunks } from "./tools/knowledgeCreateChunks.js";
 import { tool$knowledgeCreateDatasource } from "./tools/knowledgeCreateDatasource.js";
 import { tool$knowledgeDelete } from "./tools/knowledgeDelete.js";
@@ -119,7 +119,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.9.0-rc.13",
+    version: "3.10.0-rc.0",
   });
 
   const client = new OrqCore({
@@ -200,7 +200,7 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
-  tool(tool$knowledgeChunkText);
+  tool(tool$knowledgeBasesChunkText);
   tool(tool$evalsAll);
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);
