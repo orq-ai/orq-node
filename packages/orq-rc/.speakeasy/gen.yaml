@@ -39,6 +39,7 @@ typescript:
   envVarPrefix: ORQ
   flattenGlobalSecurity: true
   flatteningOrder: body-first
+  generateExamples: true
   imports:
     option: openapi
     paths:
