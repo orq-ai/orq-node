@@ -25,7 +25,9 @@ typescript:
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
-    peerDependencies: {}
+    peerDependencies: {
+      "zod": ">= 3 <4"
+    }
   additionalPackageJSON: {}
   author: Orq
   baseErrorName: OrqError
