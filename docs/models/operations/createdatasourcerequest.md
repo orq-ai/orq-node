@@ -7,6 +7,7 @@ import { CreateDatasourceRequest } from "@orq-ai/node/models/operations";
 
 let value: CreateDatasourceRequest = {
   knowledgeId: "<id>",
+  requestBody: {},
 };
 ```
 

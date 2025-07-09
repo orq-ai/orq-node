@@ -8,6 +8,9 @@ import { UpdateDatasourceRequest } from "@orq-ai/node/models/operations";
 let value: UpdateDatasourceRequest = {
   knowledgeId: "<id>",
   datasourceId: "<id>",
+  requestBody: {
+    displayName: "Caleigh_Graham-Breitenberg84",
+  },
 };
 ```
 

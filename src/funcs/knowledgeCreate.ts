@@ -25,18 +25,15 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Chunk text
- *
- * @remarks
- * Split large text documents into smaller, manageable chunks using different chunking strategies optimized for RAG (Retrieval-Augmented Generation) workflows. This endpoint supports multiple chunking algorithms including token-based, sentence-based, recursive, semantic, and specialized strategies.
+ * Create a knowledge
  */
-export function knowledgeBasesChunkText(
+export function knowledgeCreate(
   client: OrqCore,
-  request: operations.ChunkTextChunkingRequest,
+  request: operations.CreateKnowledgeRequestBody,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.ChunkTextResponseBody,
+    operations.CreateKnowledgeResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -56,12 +53,12 @@ export function knowledgeBasesChunkText(
 
 async function $do(
   client: OrqCore,
-  request: operations.ChunkTextChunkingRequest,
+  request: operations.CreateKnowledgeRequestBody,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.ChunkTextResponseBody,
+      operations.CreateKnowledgeResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -76,7 +73,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.ChunkTextChunkingRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.CreateKnowledgeRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -99,7 +97,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "ChunkText",
+    operationID: "CreateKnowledge",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -138,7 +136,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.ChunkTextResponseBody,
+    operations.CreateKnowledgeResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -148,7 +146,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.ChunkTextResponseBody$inboundSchema),
+    M.json(200, operations.CreateKnowledgeResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

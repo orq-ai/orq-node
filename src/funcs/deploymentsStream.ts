@@ -162,16 +162,15 @@ async function $do(
     M.sse(
       200,
       z.instanceof(ReadableStream<Uint8Array>).transform(stream => {
-        return new EventStream({
-          stream,
-          decoder(rawEvent) {
-            const schema =
-              operations.DeploymentStreamResponseBody$inboundSchema;
-            return schema.parse(rawEvent);
-          },
+        return new EventStream(stream, rawEvent => {
+          if (rawEvent.data === "[DONE]") return { done: true };
+          return {
+            value: operations.DeploymentStreamResponseBody$inboundSchema.parse(
+              rawEvent,
+            ),
+          };
         });
       }),
-      { sseSentinel: "[DONE]" },
     ),
     M.fail("4XX"),
     M.fail("5XX"),

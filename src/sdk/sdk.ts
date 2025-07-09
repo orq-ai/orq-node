@@ -10,7 +10,6 @@ import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { Knowledge } from "./knowledge.js";
-import { KnowledgeBases } from "./knowledgebases.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
@@ -59,11 +58,6 @@ export class Orq extends ClientSDK {
   private _knowledge?: Knowledge;
   get knowledge(): Knowledge {
     return (this._knowledge ??= new Knowledge(this._options));
-  }
-
-  private _knowledgeBases?: KnowledgeBases;
-  get knowledgeBases(): KnowledgeBases {
-    return (this._knowledgeBases ??= new KnowledgeBases(this._options));
   }
 
   private _evals?: Evals;

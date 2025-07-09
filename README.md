@@ -351,6 +351,7 @@ run();
 ### [knowledge](docs/sdks/knowledge/README.md)
 
 * [list](docs/sdks/knowledge/README.md#list) - List all knowledge bases
+* [create](docs/sdks/knowledge/README.md#create) - Create a knowledge
 * [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
 * [update](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 * [delete](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
@@ -365,10 +366,6 @@ run();
 * [updateChunk](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 * [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
-
-### [knowledgeBases](docs/sdks/knowledgebases/README.md)
-
-* [chunkText](docs/sdks/knowledgebases/README.md#chunktext) - Chunk text
 
 ### [models](docs/sdks/models/README.md)
 
@@ -475,7 +472,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
 - [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
-- [`knowledgeBasesChunkText`](docs/sdks/knowledgebases/README.md#chunktext) - Chunk text
+- [`knowledgeCreate`](docs/sdks/knowledge/README.md#create) - Create a knowledge
 - [`knowledgeCreateChunks`](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
 - [`knowledgeCreateDatasource`](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
 - [`knowledgeDelete`](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
