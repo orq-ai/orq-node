@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
@@ -58,6 +59,11 @@ export class Orq extends ClientSDK {
   private _knowledge?: Knowledge;
   get knowledge(): Knowledge {
     return (this._knowledge ??= new Knowledge(this._options));
+  }
+
+  private _chunking?: Chunking;
+  get chunking(): Chunking {
+    return (this._chunking ??= new Chunking(this._options));
   }
 
   private _evals?: Evals;

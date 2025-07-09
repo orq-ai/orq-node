@@ -13,6 +13,7 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$chunkingParse } from "./tools/chunkingParse.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
 import { tool$contactsDelete } from "./tools/contactsDelete.js";
 import { tool$contactsList } from "./tools/contactsList.js";
@@ -119,7 +120,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.9.6",
+    version: "3.9.7",
   });
 
   const client = new OrqCore({
@@ -201,6 +202,7 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
+  tool(tool$chunkingParse);
   tool(tool$evalsAll);
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);

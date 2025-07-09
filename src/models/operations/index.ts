@@ -81,6 +81,7 @@ export * from "./listdatasources.js";
 export * from "./listknowledgebases.js";
 export * from "./listmodels.js";
 export * from "./listpromptversions.js";
+export * from "./parse.js";
 export * from "./remoteconfigsgetconfig.js";
 export * from "./retrievecontact.js";
 export * from "./retrievedatapoint.js";
