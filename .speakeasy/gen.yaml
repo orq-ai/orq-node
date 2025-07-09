@@ -21,13 +21,11 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 3.9.7
+  version: 3.9.9
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
-    peerDependencies: {
-      "zod": ">= 3 <4"
-    }
+    peerDependencies: {"zod": ">= 3 <4"}
   additionalPackageJSON: {}
   author: Orq
   baseErrorName: OrqError
