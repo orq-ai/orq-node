@@ -7,6 +7,7 @@ import { DeploymentCreateMetricRequest } from "@orq-ai/node/models/operations";
 
 let value: DeploymentCreateMetricRequest = {
   id: "<id>",
+  requestBody: {},
 };
 ```
 

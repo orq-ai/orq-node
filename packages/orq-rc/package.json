@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "3.10.0-rc.2",
+  "version": "3.10.0-rc.3",
   "author": "Orq",
   "bin": {
     "mcp": "bin/mcp-server.js"
@@ -20,7 +20,7 @@
   },
   "peerDependencies": {
     "@modelcontextprotocol/sdk": ">=1.5.0 <1.10.0",
-    "zod": ">= 3"
+    "zod": "^3"
   },
   "peerDependenciesMeta": {
     "@modelcontextprotocol/sdk": {"optional":true}
