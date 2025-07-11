@@ -213,3 +213,93 @@ const value: operations.TwentyFour = {
 };
 ```
 
+### `operations.TwentyFive`
+
+```typescript
+const value: operations.TwentyFive = {
+  type: "topic_match",
+  topic: "<value>",
+};
+```
+
+### `operations.TwentySix`
+
+```typescript
+const value: operations.TwentySix = {
+  type: "keywords_match",
+  keywords: [],
+};
+```
+
+### `operations.TwentySeven`
+
+```typescript
+const value: operations.TwentySeven = {
+  type: "most_repeated_words",
+};
+```
+
+### `operations.TwentyEight`
+
+```typescript
+const value: operations.TwentyEight = {
+  type: "flesch_reading_ease",
+};
+```
+
+### `operations.TwentyNine`
+
+```typescript
+const value: operations.TwentyNine = {
+  type: "gse_english_level",
+};
+```
+
+### `operations.Thirty`
+
+```typescript
+const value: operations.Thirty = {
+  type: "words_count",
+};
+```
+
+### `operations.ThirtyOne`
+
+```typescript
+const value: operations.ThirtyOne = {
+  type: "sentences_count",
+};
+```
+
+### `operations.ThirtyTwo`
+
+```typescript
+const value: operations.ThirtyTwo = {
+  type: "lexical_repetition",
+};
+```
+
+### `operations.ThirtyThree`
+
+```typescript
+const value: operations.ThirtyThree = {
+  type: "semantic_repetition",
+};
+```
+
+### `operations.ThirtyFour`
+
+```typescript
+const value: operations.ThirtyFour = {
+  type: "grammar_diversity",
+};
+```
+
+### `operations.ThirtyFive`
+
+```typescript
+const value: operations.ThirtyFive = {
+  type: "bert_coherence",
+};
+```
+

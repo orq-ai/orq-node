@@ -13,11 +13,11 @@ let value: GetEvalsResponseBody = {
     {
       id: "<id>",
       description: "ah boo tame ethyl without consequently",
-      created: "2025-07-11T05:52:13.709Z",
-      updated: "2025-07-11T05:52:13.709Z",
+      created: "2025-07-11T07:27:35.915Z",
+      updated: "2025-07-11T07:27:35.915Z",
       type: "function_eval",
       functionParams: {
-        type: "moderations_openai",
+        type: "levenshtein_distance",
       },
       key: "<key>",
     },
