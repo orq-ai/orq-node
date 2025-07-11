@@ -310,20 +310,20 @@ export type InvokeEvalResponseBodyType = ClosedEnum<
 
 export type String = {
   type: InvokeEvalResponseBodyType;
-  value: string | null;
+  value?: string | null | undefined;
 };
 
 /**
  * Returns the result of the evaluator run
  */
 export type InvokeEvalResponseBody =
-  | String
   | ResponseBodyNumber
   | ResponseBodyBoolean
   | StringArray
   | RougeN
   | BERTScore
   | InvokeEvalResponseBodyLLM
+  | String
   | InvokeEvalResponseBodyHTTP;
 
 /** @internal */
@@ -2399,13 +2399,13 @@ export namespace InvokeEvalResponseBodyType$ {
 export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
   .object({
     type: InvokeEvalResponseBodyType$inboundSchema,
-    value: z.nullable(z.string()),
+    value: z.nullable(z.string()).optional(),
   });
 
 /** @internal */
 export type String$Outbound = {
   type: string;
-  value: string | null;
+  value?: string | null | undefined;
 };
 
 /** @internal */
@@ -2415,7 +2415,7 @@ export const String$outboundSchema: z.ZodType<
   String
 > = z.object({
   type: InvokeEvalResponseBodyType$outboundSchema,
-  value: z.nullable(z.string()),
+  value: z.nullable(z.string()).optional(),
 });
 
 /**
@@ -2451,25 +2451,25 @@ export const InvokeEvalResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => String$inboundSchema),
   z.lazy(() => ResponseBodyNumber$inboundSchema),
   z.lazy(() => ResponseBodyBoolean$inboundSchema),
   z.lazy(() => StringArray$inboundSchema),
   z.lazy(() => RougeN$inboundSchema),
   z.lazy(() => BERTScore$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyLLM$inboundSchema),
+  z.lazy(() => String$inboundSchema),
   z.lazy(() => InvokeEvalResponseBodyHTTP$inboundSchema),
 ]);
 
 /** @internal */
 export type InvokeEvalResponseBody$Outbound =
-  | String$Outbound
   | ResponseBodyNumber$Outbound
   | ResponseBodyBoolean$Outbound
   | StringArray$Outbound
   | RougeN$Outbound
   | BERTScore$Outbound
   | InvokeEvalResponseBodyLLM$Outbound
+  | String$Outbound
   | InvokeEvalResponseBodyHTTP$Outbound;
 
 /** @internal */
@@ -2478,13 +2478,13 @@ export const InvokeEvalResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   InvokeEvalResponseBody
 > = z.union([
-  z.lazy(() => String$outboundSchema),
   z.lazy(() => ResponseBodyNumber$outboundSchema),
   z.lazy(() => ResponseBodyBoolean$outboundSchema),
   z.lazy(() => StringArray$outboundSchema),
   z.lazy(() => RougeN$outboundSchema),
   z.lazy(() => BERTScore$outboundSchema),
   z.lazy(() => InvokeEvalResponseBodyLLM$outboundSchema),
+  z.lazy(() => String$outboundSchema),
   z.lazy(() => InvokeEvalResponseBodyHTTP$outboundSchema),
 ]);
 
