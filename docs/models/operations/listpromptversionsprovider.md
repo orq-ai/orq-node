@@ -5,11 +5,11 @@
 ```typescript
 import { ListPromptVersionsProvider } from "@orq-ai/node/models/operations";
 
-let value: ListPromptVersionsProvider = "replicate";
+let value: ListPromptVersionsProvider = "google";
 ```
 
 ## Values
 
 ```typescript
-"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm"
+"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm" | "openailike"
 ```
