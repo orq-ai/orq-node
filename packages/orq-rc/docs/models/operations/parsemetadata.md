@@ -1,14 +1,14 @@
-# ChunkTextMetadata
+# ParseMetadata
 
 ## Example Usage
 
 ```typescript
-import { ChunkTextMetadata } from "@orq-ai/node/models/operations";
+import { ParseMetadata } from "@orq-ai/node/models/operations";
 
-let value: ChunkTextMetadata = {
-  startIndex: 2676.67,
-  endIndex: 9419.24,
-  tokenCount: 1087.62,
+let value: ParseMetadata = {
+  startIndex: 885.57,
+  endIndex: 6710.16,
+  tokenCount: 4824.57,
 };
 ```
 

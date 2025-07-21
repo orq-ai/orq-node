@@ -12,18 +12,15 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType =
-  {
-    Chunks: "chunks",
-    Texts: "texts",
-  } as const;
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType =
-  ClosedEnum<
-    typeof ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
-  >;
+export type ParseChunkingRequestChunkingRequestRequestBodyReturnType =
+  ClosedEnum<typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType>;
 
 export const AgenticChunker = {
   Agentic: "agentic",
@@ -46,7 +43,7 @@ export type AgenticChunkerStrategy = {
    * Return format: chunks (with metadata) or texts (plain strings)
    */
   returnType?:
-    | ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
+    | ParseChunkingRequestChunkingRequestRequestBodyReturnType
     | undefined;
   strategy: AgenticChunker;
   /**
@@ -70,30 +67,31 @@ export type AgenticChunkerStrategy = {
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestKnowledgeBasesRequestReturnType = {
+export const ParseChunkingRequestChunkingRequestReturnType = {
   Chunks: "chunks",
   Texts: "texts",
 } as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestKnowledgeBasesRequestReturnType =
-  ClosedEnum<typeof ChunkTextChunkingRequestKnowledgeBasesRequestReturnType>;
+export type ParseChunkingRequestChunkingRequestReturnType = ClosedEnum<
+  typeof ParseChunkingRequestChunkingRequestReturnType
+>;
 
 export const SDPMChunker = {
   Sdpm: "sdpm",
 } as const;
 export type SDPMChunker = ClosedEnum<typeof SDPMChunker>;
 
-export const ChunkTextThreshold2 = {
+export const ParseThreshold2 = {
   Auto: "auto",
 } as const;
-export type ChunkTextThreshold2 = ClosedEnum<typeof ChunkTextThreshold2>;
+export type ParseThreshold2 = ClosedEnum<typeof ParseThreshold2>;
 
 /**
  * Similarity threshold for grouping (0-1) or "auto" for automatic detection
  */
-export type ChunkingRequestThreshold = number | ChunkTextThreshold2;
+export type ChunkingRequestThreshold = number | ParseThreshold2;
 
 /**
  * Chunking mode: window-based or sentence-based similarity
@@ -122,9 +120,7 @@ export type SDPMChunkerStrategy = {
   /**
    * Return format: chunks (with metadata) or texts (plain strings)
    */
-  returnType?:
-    | ChunkTextChunkingRequestKnowledgeBasesRequestReturnType
-    | undefined;
+  returnType?: ParseChunkingRequestChunkingRequestReturnType | undefined;
   strategy: SDPMChunker;
   /**
    * Maximum tokens per chunk
@@ -137,7 +133,7 @@ export type SDPMChunkerStrategy = {
   /**
    * Similarity threshold for grouping (0-1) or "auto" for automatic detection
    */
-  threshold?: number | ChunkTextThreshold2 | undefined;
+  threshold?: number | ParseThreshold2 | undefined;
   /**
    * Embedding model to use for semantic similarity. (Available embedding models)[https://docs.orq.ai/docs/proxy#embedding-models]
    */
@@ -151,15 +147,15 @@ export type SDPMChunkerStrategy = {
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestKnowledgeBasesReturnType = {
+export const ParseChunkingRequestChunkingReturnType = {
   Chunks: "chunks",
   Texts: "texts",
 } as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestKnowledgeBasesReturnType = ClosedEnum<
-  typeof ChunkTextChunkingRequestKnowledgeBasesReturnType
+export type ParseChunkingRequestChunkingReturnType = ClosedEnum<
+  typeof ParseChunkingRequestChunkingReturnType
 >;
 
 export const SemanticChunker = {
@@ -204,7 +200,7 @@ export type SemanticChunkerStrategy = {
   /**
    * Return format: chunks (with metadata) or texts (plain strings)
    */
-  returnType?: ChunkTextChunkingRequestKnowledgeBasesReturnType | undefined;
+  returnType?: ParseChunkingRequestChunkingReturnType | undefined;
   strategy: SemanticChunker;
   /**
    * Maximum tokens per chunk
@@ -231,15 +227,15 @@ export type SemanticChunkerStrategy = {
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export const ChunkTextChunkingRequestReturnType = {
+export const ParseChunkingRequestReturnType = {
   Chunks: "chunks",
   Texts: "texts",
 } as const;
 /**
  * Return format: chunks (with metadata) or texts (plain strings)
  */
-export type ChunkTextChunkingRequestReturnType = ClosedEnum<
-  typeof ChunkTextChunkingRequestReturnType
+export type ParseChunkingRequestReturnType = ClosedEnum<
+  typeof ParseChunkingRequestReturnType
 >;
 
 export const RecursiveChunker = {
@@ -262,7 +258,7 @@ export type RecursiveChunkerStrategy = {
   /**
    * Return format: chunks (with metadata) or texts (plain strings)
    */
-  returnType?: ChunkTextChunkingRequestReturnType | undefined;
+  returnType?: ParseChunkingRequestReturnType | undefined;
   strategy: RecursiveChunker;
   /**
    * Maximum tokens per chunk
@@ -375,7 +371,7 @@ export type TokenChunkerStrategy = {
 /**
  * Request payload for text chunking with strategy-specific configuration
  */
-export type ChunkTextChunkingRequest =
+export type ParseChunkingRequest =
   | SemanticChunkerStrategy
   | SDPMChunkerStrategy
   | AgenticChunkerStrategy
@@ -383,7 +379,7 @@ export type ChunkTextChunkingRequest =
   | SentenceChunkerStrategy
   | RecursiveChunkerStrategy;
 
-export type ChunkTextMetadata = {
+export type ParseMetadata = {
   startIndex: number | null;
   endIndex: number | null;
   tokenCount: number | null;
@@ -398,42 +394,39 @@ export type Chunks = {
    * The position index of this chunk in the sequence
    */
   index: number;
-  metadata?: ChunkTextMetadata | undefined;
+  metadata?: ParseMetadata | undefined;
 };
 
 /**
  * Text successfully chunked
  */
-export type ChunkTextResponseBody = {
+export type ParseResponseBody = {
   chunks: Array<Chunks>;
 };
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema:
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema:
   z.ZodNativeEnum<
-    typeof ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
-  > = z.nativeEnum(
-    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType,
-  );
+    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
+  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBodyReturnType);
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema:
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema:
   z.ZodNativeEnum<
-    typeof ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType
-  > =
-    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema;
+    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
+  > = ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema` instead. */
+export namespace ParseChunkingRequestChunkingRequestRequestBodyReturnType$ {
+  /** @deprecated use `ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema` instead. */
   export const inboundSchema =
-    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema` instead. */
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema` instead. */
   export const outboundSchema =
-    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema;
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -466,7 +459,7 @@ export const AgenticChunkerStrategy$inboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   return_type:
-    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$inboundSchema
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema
       .default("chunks"),
   strategy: AgenticChunker$inboundSchema,
   model: z.string(),
@@ -503,7 +496,7 @@ export const AgenticChunkerStrategy$outboundSchema: z.ZodType<
   text: z.string(),
   metadata: z.boolean().default(true),
   returnType:
-    ChunkTextChunkingRequestKnowledgeBasesRequestRequestBodyReturnType$outboundSchema
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema
       .default("chunks"),
   strategy: AgenticChunker$outboundSchema,
   model: z.string(),
@@ -551,28 +544,26 @@ export function agenticChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof ChunkTextChunkingRequestKnowledgeBasesRequestReturnType
-  > = z.nativeEnum(ChunkTextChunkingRequestKnowledgeBasesRequestReturnType);
+export const ParseChunkingRequestChunkingRequestReturnType$inboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> = z
+    .nativeEnum(ParseChunkingRequestChunkingRequestReturnType);
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof ChunkTextChunkingRequestKnowledgeBasesRequestReturnType
-  > = ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema;
+export const ParseChunkingRequestChunkingRequestReturnType$outboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> =
+    ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema` instead. */
+export namespace ParseChunkingRequestChunkingRequestReturnType$ {
+  /** @deprecated use `ParseChunkingRequestChunkingRequestReturnType$inboundSchema` instead. */
   export const inboundSchema =
-    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema` instead. */
+    ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestChunkingRequestReturnType$outboundSchema` instead. */
   export const outboundSchema =
-    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema;
+    ParseChunkingRequestChunkingRequestReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -595,24 +586,24 @@ export namespace SDPMChunker$ {
 }
 
 /** @internal */
-export const ChunkTextThreshold2$inboundSchema: z.ZodNativeEnum<
-  typeof ChunkTextThreshold2
-> = z.nativeEnum(ChunkTextThreshold2);
+export const ParseThreshold2$inboundSchema: z.ZodNativeEnum<
+  typeof ParseThreshold2
+> = z.nativeEnum(ParseThreshold2);
 
 /** @internal */
-export const ChunkTextThreshold2$outboundSchema: z.ZodNativeEnum<
-  typeof ChunkTextThreshold2
-> = ChunkTextThreshold2$inboundSchema;
+export const ParseThreshold2$outboundSchema: z.ZodNativeEnum<
+  typeof ParseThreshold2
+> = ParseThreshold2$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextThreshold2$ {
-  /** @deprecated use `ChunkTextThreshold2$inboundSchema` instead. */
-  export const inboundSchema = ChunkTextThreshold2$inboundSchema;
-  /** @deprecated use `ChunkTextThreshold2$outboundSchema` instead. */
-  export const outboundSchema = ChunkTextThreshold2$outboundSchema;
+export namespace ParseThreshold2$ {
+  /** @deprecated use `ParseThreshold2$inboundSchema` instead. */
+  export const inboundSchema = ParseThreshold2$inboundSchema;
+  /** @deprecated use `ParseThreshold2$outboundSchema` instead. */
+  export const outboundSchema = ParseThreshold2$outboundSchema;
 }
 
 /** @internal */
@@ -620,7 +611,7 @@ export const ChunkingRequestThreshold$inboundSchema: z.ZodType<
   ChunkingRequestThreshold,
   z.ZodTypeDef,
   unknown
-> = z.union([z.number(), ChunkTextThreshold2$inboundSchema]);
+> = z.union([z.number(), ParseThreshold2$inboundSchema]);
 
 /** @internal */
 export type ChunkingRequestThreshold$Outbound = number | string;
@@ -630,7 +621,7 @@ export const ChunkingRequestThreshold$outboundSchema: z.ZodType<
   ChunkingRequestThreshold$Outbound,
   z.ZodTypeDef,
   ChunkingRequestThreshold
-> = z.union([z.number(), ChunkTextThreshold2$outboundSchema]);
+> = z.union([z.number(), ParseThreshold2$outboundSchema]);
 
 /**
  * @internal
@@ -692,14 +683,12 @@ export const SDPMChunkerStrategy$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  return_type:
-    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$inboundSchema
-      .default("chunks"),
+  return_type: ParseChunkingRequestChunkingRequestReturnType$inboundSchema
+    .default("chunks"),
   strategy: SDPMChunker$inboundSchema,
   chunk_size: z.number().int().default(512),
   skip_window: z.number().int().default(1),
-  threshold: z.union([z.number(), ChunkTextThreshold2$inboundSchema])
-    .optional(),
+  threshold: z.union([z.number(), ParseThreshold2$inboundSchema]).optional(),
   embedding_model: z.string(),
   mode: ChunkingRequestMode$inboundSchema.default("window"),
 }).transform((v) => {
@@ -732,14 +721,12 @@ export const SDPMChunkerStrategy$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  returnType:
-    ChunkTextChunkingRequestKnowledgeBasesRequestReturnType$outboundSchema
-      .default("chunks"),
+  returnType: ParseChunkingRequestChunkingRequestReturnType$outboundSchema
+    .default("chunks"),
   strategy: SDPMChunker$outboundSchema,
   chunkSize: z.number().int().default(512),
   skipWindow: z.number().int().default(1),
-  threshold: z.union([z.number(), ChunkTextThreshold2$outboundSchema])
-    .optional(),
+  threshold: z.union([z.number(), ParseThreshold2$outboundSchema]).optional(),
   embeddingModel: z.string(),
   mode: ChunkingRequestMode$outboundSchema.default("window"),
 }).transform((v) => {
@@ -783,26 +770,27 @@ export function sdpmChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema:
-  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeBasesReturnType> = z
-    .nativeEnum(ChunkTextChunkingRequestKnowledgeBasesReturnType);
+export const ParseChunkingRequestChunkingReturnType$inboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> = z.nativeEnum(
+    ParseChunkingRequestChunkingReturnType,
+  );
 
 /** @internal */
-export const ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ChunkTextChunkingRequestKnowledgeBasesReturnType> =
-    ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema;
+export const ParseChunkingRequestChunkingReturnType$outboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> =
+    ParseChunkingRequestChunkingReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestKnowledgeBasesReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema` instead. */
+export namespace ParseChunkingRequestChunkingReturnType$ {
+  /** @deprecated use `ParseChunkingRequestChunkingReturnType$inboundSchema` instead. */
   export const inboundSchema =
-    ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema` instead. */
+    ParseChunkingRequestChunkingReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestChunkingReturnType$outboundSchema` instead. */
   export const outboundSchema =
-    ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema;
+    ParseChunkingRequestChunkingReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -917,8 +905,9 @@ export const SemanticChunkerStrategy$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  return_type: ChunkTextChunkingRequestKnowledgeBasesReturnType$inboundSchema
-    .default("chunks"),
+  return_type: ParseChunkingRequestChunkingReturnType$inboundSchema.default(
+    "chunks",
+  ),
   strategy: SemanticChunker$inboundSchema,
   chunk_size: z.number().int().default(512),
   threshold: z.union([z.number(), Threshold2$inboundSchema]).optional(),
@@ -955,8 +944,9 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  returnType: ChunkTextChunkingRequestKnowledgeBasesReturnType$outboundSchema
-    .default("chunks"),
+  returnType: ParseChunkingRequestChunkingReturnType$outboundSchema.default(
+    "chunks",
+  ),
   strategy: SemanticChunker$outboundSchema,
   chunkSize: z.number().int().default(512),
   threshold: z.union([z.number(), Threshold2$outboundSchema]).optional(),
@@ -1004,25 +994,24 @@ export function semanticChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ChunkTextChunkingRequestReturnType$inboundSchema: z.ZodNativeEnum<
-  typeof ChunkTextChunkingRequestReturnType
-> = z.nativeEnum(ChunkTextChunkingRequestReturnType);
+export const ParseChunkingRequestReturnType$inboundSchema: z.ZodNativeEnum<
+  typeof ParseChunkingRequestReturnType
+> = z.nativeEnum(ParseChunkingRequestReturnType);
 
 /** @internal */
-export const ChunkTextChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
-  typeof ChunkTextChunkingRequestReturnType
-> = ChunkTextChunkingRequestReturnType$inboundSchema;
+export const ParseChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
+  typeof ParseChunkingRequestReturnType
+> = ParseChunkingRequestReturnType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequestReturnType$ {
-  /** @deprecated use `ChunkTextChunkingRequestReturnType$inboundSchema` instead. */
-  export const inboundSchema = ChunkTextChunkingRequestReturnType$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequestReturnType$outboundSchema` instead. */
-  export const outboundSchema =
-    ChunkTextChunkingRequestReturnType$outboundSchema;
+export namespace ParseChunkingRequestReturnType$ {
+  /** @deprecated use `ParseChunkingRequestReturnType$inboundSchema` instead. */
+  export const inboundSchema = ParseChunkingRequestReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestReturnType$outboundSchema` instead. */
+  export const outboundSchema = ParseChunkingRequestReturnType$outboundSchema;
 }
 
 /** @internal */
@@ -1054,9 +1043,7 @@ export const RecursiveChunkerStrategy$inboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  return_type: ChunkTextChunkingRequestReturnType$inboundSchema.default(
-    "chunks",
-  ),
+  return_type: ParseChunkingRequestReturnType$inboundSchema.default("chunks"),
   strategy: RecursiveChunker$inboundSchema,
   chunk_size: z.number().int().default(512),
   separators: z.array(z.string()).optional(),
@@ -1088,9 +1075,7 @@ export const RecursiveChunkerStrategy$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   metadata: z.boolean().default(true),
-  returnType: ChunkTextChunkingRequestReturnType$outboundSchema.default(
-    "chunks",
-  ),
+  returnType: ParseChunkingRequestReturnType$outboundSchema.default("chunks"),
   strategy: RecursiveChunker$outboundSchema,
   chunkSize: z.number().int().default(512),
   separators: z.array(z.string()).optional(),
@@ -1382,8 +1367,8 @@ export function tokenChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ChunkTextChunkingRequest$inboundSchema: z.ZodType<
-  ChunkTextChunkingRequest,
+export const ParseChunkingRequest$inboundSchema: z.ZodType<
+  ParseChunkingRequest,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -1396,7 +1381,7 @@ export const ChunkTextChunkingRequest$inboundSchema: z.ZodType<
 ]);
 
 /** @internal */
-export type ChunkTextChunkingRequest$Outbound =
+export type ParseChunkingRequest$Outbound =
   | SemanticChunkerStrategy$Outbound
   | SDPMChunkerStrategy$Outbound
   | AgenticChunkerStrategy$Outbound
@@ -1405,10 +1390,10 @@ export type ChunkTextChunkingRequest$Outbound =
   | RecursiveChunkerStrategy$Outbound;
 
 /** @internal */
-export const ChunkTextChunkingRequest$outboundSchema: z.ZodType<
-  ChunkTextChunkingRequest$Outbound,
+export const ParseChunkingRequest$outboundSchema: z.ZodType<
+  ParseChunkingRequest$Outbound,
   z.ZodTypeDef,
-  ChunkTextChunkingRequest
+  ParseChunkingRequest
 > = z.union([
   z.lazy(() => SemanticChunkerStrategy$outboundSchema),
   z.lazy(() => SDPMChunkerStrategy$outboundSchema),
@@ -1422,36 +1407,36 @@ export const ChunkTextChunkingRequest$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextChunkingRequest$ {
-  /** @deprecated use `ChunkTextChunkingRequest$inboundSchema` instead. */
-  export const inboundSchema = ChunkTextChunkingRequest$inboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequest$outboundSchema` instead. */
-  export const outboundSchema = ChunkTextChunkingRequest$outboundSchema;
-  /** @deprecated use `ChunkTextChunkingRequest$Outbound` instead. */
-  export type Outbound = ChunkTextChunkingRequest$Outbound;
+export namespace ParseChunkingRequest$ {
+  /** @deprecated use `ParseChunkingRequest$inboundSchema` instead. */
+  export const inboundSchema = ParseChunkingRequest$inboundSchema;
+  /** @deprecated use `ParseChunkingRequest$outboundSchema` instead. */
+  export const outboundSchema = ParseChunkingRequest$outboundSchema;
+  /** @deprecated use `ParseChunkingRequest$Outbound` instead. */
+  export type Outbound = ParseChunkingRequest$Outbound;
 }
 
-export function chunkTextChunkingRequestToJSON(
-  chunkTextChunkingRequest: ChunkTextChunkingRequest,
+export function parseChunkingRequestToJSON(
+  parseChunkingRequest: ParseChunkingRequest,
 ): string {
   return JSON.stringify(
-    ChunkTextChunkingRequest$outboundSchema.parse(chunkTextChunkingRequest),
+    ParseChunkingRequest$outboundSchema.parse(parseChunkingRequest),
   );
 }
 
-export function chunkTextChunkingRequestFromJSON(
+export function parseChunkingRequestFromJSON(
   jsonString: string,
-): SafeParseResult<ChunkTextChunkingRequest, SDKValidationError> {
+): SafeParseResult<ParseChunkingRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ChunkTextChunkingRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkTextChunkingRequest' from JSON`,
+    (x) => ParseChunkingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ParseChunkingRequest' from JSON`,
   );
 }
 
 /** @internal */
-export const ChunkTextMetadata$inboundSchema: z.ZodType<
-  ChunkTextMetadata,
+export const ParseMetadata$inboundSchema: z.ZodType<
+  ParseMetadata,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1467,17 +1452,17 @@ export const ChunkTextMetadata$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ChunkTextMetadata$Outbound = {
+export type ParseMetadata$Outbound = {
   start_index: number | null;
   end_index: number | null;
   token_count: number | null;
 };
 
 /** @internal */
-export const ChunkTextMetadata$outboundSchema: z.ZodType<
-  ChunkTextMetadata$Outbound,
+export const ParseMetadata$outboundSchema: z.ZodType<
+  ParseMetadata$Outbound,
   z.ZodTypeDef,
-  ChunkTextMetadata
+  ParseMetadata
 > = z.object({
   startIndex: z.nullable(z.number()),
   endIndex: z.nullable(z.number()),
@@ -1494,30 +1479,26 @@ export const ChunkTextMetadata$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextMetadata$ {
-  /** @deprecated use `ChunkTextMetadata$inboundSchema` instead. */
-  export const inboundSchema = ChunkTextMetadata$inboundSchema;
-  /** @deprecated use `ChunkTextMetadata$outboundSchema` instead. */
-  export const outboundSchema = ChunkTextMetadata$outboundSchema;
-  /** @deprecated use `ChunkTextMetadata$Outbound` instead. */
-  export type Outbound = ChunkTextMetadata$Outbound;
+export namespace ParseMetadata$ {
+  /** @deprecated use `ParseMetadata$inboundSchema` instead. */
+  export const inboundSchema = ParseMetadata$inboundSchema;
+  /** @deprecated use `ParseMetadata$outboundSchema` instead. */
+  export const outboundSchema = ParseMetadata$outboundSchema;
+  /** @deprecated use `ParseMetadata$Outbound` instead. */
+  export type Outbound = ParseMetadata$Outbound;
 }
 
-export function chunkTextMetadataToJSON(
-  chunkTextMetadata: ChunkTextMetadata,
-): string {
-  return JSON.stringify(
-    ChunkTextMetadata$outboundSchema.parse(chunkTextMetadata),
-  );
+export function parseMetadataToJSON(parseMetadata: ParseMetadata): string {
+  return JSON.stringify(ParseMetadata$outboundSchema.parse(parseMetadata));
 }
 
-export function chunkTextMetadataFromJSON(
+export function parseMetadataFromJSON(
   jsonString: string,
-): SafeParseResult<ChunkTextMetadata, SDKValidationError> {
+): SafeParseResult<ParseMetadata, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ChunkTextMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkTextMetadata' from JSON`,
+    (x) => ParseMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ParseMetadata' from JSON`,
   );
 }
 
@@ -1526,14 +1507,14 @@ export const Chunks$inboundSchema: z.ZodType<Chunks, z.ZodTypeDef, unknown> = z
   .object({
     text: z.string(),
     index: z.number(),
-    metadata: z.lazy(() => ChunkTextMetadata$inboundSchema).optional(),
+    metadata: z.lazy(() => ParseMetadata$inboundSchema).optional(),
   });
 
 /** @internal */
 export type Chunks$Outbound = {
   text: string;
   index: number;
-  metadata?: ChunkTextMetadata$Outbound | undefined;
+  metadata?: ParseMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -1544,7 +1525,7 @@ export const Chunks$outboundSchema: z.ZodType<
 > = z.object({
   text: z.string(),
   index: z.number(),
-  metadata: z.lazy(() => ChunkTextMetadata$outboundSchema).optional(),
+  metadata: z.lazy(() => ParseMetadata$outboundSchema).optional(),
 });
 
 /**
@@ -1575,8 +1556,8 @@ export function chunksFromJSON(
 }
 
 /** @internal */
-export const ChunkTextResponseBody$inboundSchema: z.ZodType<
-  ChunkTextResponseBody,
+export const ParseResponseBody$inboundSchema: z.ZodType<
+  ParseResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1584,15 +1565,15 @@ export const ChunkTextResponseBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ChunkTextResponseBody$Outbound = {
+export type ParseResponseBody$Outbound = {
   chunks: Array<Chunks$Outbound>;
 };
 
 /** @internal */
-export const ChunkTextResponseBody$outboundSchema: z.ZodType<
-  ChunkTextResponseBody$Outbound,
+export const ParseResponseBody$outboundSchema: z.ZodType<
+  ParseResponseBody$Outbound,
   z.ZodTypeDef,
-  ChunkTextResponseBody
+  ParseResponseBody
 > = z.object({
   chunks: z.array(z.lazy(() => Chunks$outboundSchema)),
 });
@@ -1601,29 +1582,29 @@ export const ChunkTextResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ChunkTextResponseBody$ {
-  /** @deprecated use `ChunkTextResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ChunkTextResponseBody$inboundSchema;
-  /** @deprecated use `ChunkTextResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ChunkTextResponseBody$outboundSchema;
-  /** @deprecated use `ChunkTextResponseBody$Outbound` instead. */
-  export type Outbound = ChunkTextResponseBody$Outbound;
+export namespace ParseResponseBody$ {
+  /** @deprecated use `ParseResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ParseResponseBody$inboundSchema;
+  /** @deprecated use `ParseResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ParseResponseBody$outboundSchema;
+  /** @deprecated use `ParseResponseBody$Outbound` instead. */
+  export type Outbound = ParseResponseBody$Outbound;
 }
 
-export function chunkTextResponseBodyToJSON(
-  chunkTextResponseBody: ChunkTextResponseBody,
+export function parseResponseBodyToJSON(
+  parseResponseBody: ParseResponseBody,
 ): string {
   return JSON.stringify(
-    ChunkTextResponseBody$outboundSchema.parse(chunkTextResponseBody),
+    ParseResponseBody$outboundSchema.parse(parseResponseBody),
   );
 }
 
-export function chunkTextResponseBodyFromJSON(
+export function parseResponseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<ChunkTextResponseBody, SDKValidationError> {
+): SafeParseResult<ParseResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ChunkTextResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ChunkTextResponseBody' from JSON`,
+    (x) => ParseResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ParseResponseBody' from JSON`,
   );
 }

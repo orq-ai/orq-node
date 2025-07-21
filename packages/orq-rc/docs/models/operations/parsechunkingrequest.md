@@ -1,4 +1,4 @@
-# ChunkTextChunkingRequest
+# ParseChunkingRequest
 
 Request payload for text chunking with strategy-specific configuration
 

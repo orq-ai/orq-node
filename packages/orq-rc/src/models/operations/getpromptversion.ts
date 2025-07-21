@@ -249,6 +249,7 @@ export const GetPromptVersionProvider = {
   Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
+  Openailike: "openailike",
 } as const;
 export type GetPromptVersionProvider = ClosedEnum<
   typeof GetPromptVersionProvider

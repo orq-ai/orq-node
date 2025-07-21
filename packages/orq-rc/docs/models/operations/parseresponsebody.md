@@ -1,13 +1,13 @@
-# ChunkTextResponseBody
+# ParseResponseBody
 
 Text successfully chunked
 
 ## Example Usage
 
 ```typescript
-import { ChunkTextResponseBody } from "@orq-ai/node/models/operations";
+import { ParseResponseBody } from "@orq-ai/node/models/operations";
 
-let value: ChunkTextResponseBody = {
+let value: ParseResponseBody = {
   chunks: [],
 };
 ```

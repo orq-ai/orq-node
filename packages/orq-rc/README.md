@@ -259,6 +259,10 @@ run();
 <details open>
 <summary>Available methods</summary>
 
+### [chunking](docs/sdks/chunking/README.md)
+
+* [parse](docs/sdks/chunking/README.md#parse) - Parse text
+
 ### [contacts](docs/sdks/contacts/README.md)
 
 * [create](docs/sdks/contacts/README.md#create) - Create a contact
@@ -351,6 +355,7 @@ run();
 ### [knowledge](docs/sdks/knowledge/README.md)
 
 * [list](docs/sdks/knowledge/README.md#list) - List all knowledge bases
+* [create](docs/sdks/knowledge/README.md#create) - Create a knowledge
 * [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
 * [update](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 * [delete](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
@@ -365,10 +370,6 @@ run();
 * [updateChunk](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 * [deleteChunk](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 * [retrieveChunk](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
-
-### [knowledgeBases](docs/sdks/knowledgebases/README.md)
-
-* [chunkText](docs/sdks/knowledgebases/README.md#chunktext) - Chunk text
 
 ### [models](docs/sdks/models/README.md)
 
@@ -407,6 +408,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`chunkingParse`](docs/sdks/chunking/README.md#parse) - Parse text
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Create a contact
 - [`contactsDelete`](docs/sdks/contacts/README.md#delete) - Delete a contact
 - [`contactsList`](docs/sdks/contacts/README.md#list) - List contacts
@@ -475,7 +477,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete file
 - [`filesGet`](docs/sdks/files/README.md#get) - Retrieve a file
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
-- [`knowledgeBasesChunkText`](docs/sdks/knowledgebases/README.md#chunktext) - Chunk text
+- [`knowledgeCreate`](docs/sdks/knowledge/README.md#create) - Create a knowledge
 - [`knowledgeCreateChunks`](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
 - [`knowledgeCreateDatasource`](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
 - [`knowledgeDelete`](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
@@ -738,92 +740,92 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 6 of 93 methods.*
-* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 93 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 93 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 93 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 93 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsBertScoreResponseBody`](./src/models/errors/evalsbertscoreresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsBleuScoreResponseBody`](./src/models/errors/evalsbleuscoreresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsAllResponseBody`](./src/models/errors/evalscontainsallresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsAnyResponseBody`](./src/models/errors/evalscontainsanyresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsEmailResponseBody`](./src/models/errors/evalscontainsemailresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsNoneResponseBody`](./src/models/errors/evalscontainsnoneresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsUrlResponseBody`](./src/models/errors/evalscontainsurlresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsValidLinkResponseBody`](./src/models/errors/evalscontainsvalidlinkresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsResponseBody`](./src/models/errors/evalscontainsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsEndsWithResponseBody`](./src/models/errors/evalsendswithresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsExactMatchResponseBody`](./src/models/errors/evalsexactmatchresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsLengthBetweenResponseBody`](./src/models/errors/evalslengthbetweenresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsLengthGreaterThanResponseBody`](./src/models/errors/evalslengthgreaterthanresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsLengthLessThanResponseBody`](./src/models/errors/evalslengthlessthanresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsValidJsonResponseBody`](./src/models/errors/evalsvalidjsonresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsAgeAppropriateResponseBody`](./src/models/errors/evalsageappropriateresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsBotDetectionResponseBody`](./src/models/errors/evalsbotdetectionresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsFactCheckingKnowledgeBaseResponseBody`](./src/models/errors/evalsfactcheckingknowledgebaseresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsGrammarResponseBody`](./src/models/errors/evalsgrammarresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsLocalizationResponseBody`](./src/models/errors/evalslocalizationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsPiiResponseBody`](./src/models/errors/evalspiiresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsSentimentClassificationResponseBody`](./src/models/errors/evalssentimentclassificationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsSummarizationResponseBody`](./src/models/errors/evalssummarizationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsToneOfVoiceResponseBody`](./src/models/errors/evalstoneofvoiceresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsTranslationResponseBody`](./src/models/errors/evalstranslationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasCoherenceResponseBody`](./src/models/errors/evalsragascoherenceresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasConcisenessResponseBody`](./src/models/errors/evalsragasconcisenessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasContextPrecisionResponseBody`](./src/models/errors/evalsragascontextprecisionresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasContextRecallResponseBody`](./src/models/errors/evalsragascontextrecallresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasContextEntitiesRecallResponseBody`](./src/models/errors/evalsragascontextentitiesrecallresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasCorrectnessResponseBody`](./src/models/errors/evalsragascorrectnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasFaithfulnessResponseBody`](./src/models/errors/evalsragasfaithfulnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasHarmfulnessResponseBody`](./src/models/errors/evalsragasharmfulnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasMaliciousnessResponseBody`](./src/models/errors/evalsragasmaliciousnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasNoiseSensitivityResponseBody`](./src/models/errors/evalsragasnoisesensitivityresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasResponseRelevancyResponseBody`](./src/models/errors/evalsragasresponserelevancyresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasSummarizationResponseBody`](./src/models/errors/evalsragassummarizationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 93 methods.*
-* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 93 methods.*
-* [`EvalsBertScoreEvalsResponseBody`](./src/models/errors/evalsbertscoreevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsBleuScoreEvalsResponseBody`](./src/models/errors/evalsbleuscoreevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsAllEvalsResponseBody`](./src/models/errors/evalscontainsallevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsAnyEvalsResponseBody`](./src/models/errors/evalscontainsanyevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsEmailEvalsResponseBody`](./src/models/errors/evalscontainsemailevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsNoneEvalsResponseBody`](./src/models/errors/evalscontainsnoneevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsUrlEvalsResponseBody`](./src/models/errors/evalscontainsurlevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsValidLinkEvalsResponseBody`](./src/models/errors/evalscontainsvalidlinkevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsContainsEvalsResponseBody`](./src/models/errors/evalscontainsevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsEndsWithEvalsResponseBody`](./src/models/errors/evalsendswithevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsExactMatchEvalsResponseBody`](./src/models/errors/evalsexactmatchevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsLengthBetweenEvalsResponseBody`](./src/models/errors/evalslengthbetweenevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsLengthGreaterThanEvalsResponseBody`](./src/models/errors/evalslengthgreaterthanevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsLengthLessThanEvalsResponseBody`](./src/models/errors/evalslengthlessthanevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsValidJsonEvalsResponseBody`](./src/models/errors/evalsvalidjsonevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsAgeAppropriateEvalsResponseBody`](./src/models/errors/evalsageappropriateevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsBotDetectionEvalsResponseBody`](./src/models/errors/evalsbotdetectionevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsFactCheckingKnowledgeBaseEvalsResponseBody`](./src/models/errors/evalsfactcheckingknowledgebaseevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsGrammarEvalsResponseBody`](./src/models/errors/evalsgrammarevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsLocalizationEvalsResponseBody`](./src/models/errors/evalslocalizationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsPiiEvalsResponseBody`](./src/models/errors/evalspiievalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsSentimentClassificationEvalsResponseBody`](./src/models/errors/evalssentimentclassificationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsSummarizationEvalsResponseBody`](./src/models/errors/evalssummarizationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsToneOfVoiceEvalsResponseBody`](./src/models/errors/evalstoneofvoiceevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsTranslationEvalsResponseBody`](./src/models/errors/evalstranslationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasCoherenceEvalsResponseBody`](./src/models/errors/evalsragascoherenceevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasConcisenessEvalsResponseBody`](./src/models/errors/evalsragasconcisenessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasContextPrecisionEvalsResponseBody`](./src/models/errors/evalsragascontextprecisionevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasContextRecallEvalsResponseBody`](./src/models/errors/evalsragascontextrecallevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasContextEntitiesRecallEvalsResponseBody`](./src/models/errors/evalsragascontextentitiesrecallevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasCorrectnessEvalsResponseBody`](./src/models/errors/evalsragascorrectnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasFaithfulnessEvalsResponseBody`](./src/models/errors/evalsragasfaithfulnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasHarmfulnessEvalsResponseBody`](./src/models/errors/evalsragasharmfulnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasMaliciousnessEvalsResponseBody`](./src/models/errors/evalsragasmaliciousnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasNoiseSensitivityEvalsResponseBody`](./src/models/errors/evalsragasnoisesensitivityevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasResponseRelevancyEvalsResponseBody`](./src/models/errors/evalsragasresponserelevancyevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`EvalsRagasSummarizationEvalsResponseBody`](./src/models/errors/evalsragassummarizationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 93 methods.*
-* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 93 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 6 of 94 methods.*
+* [`RetrieveContactResponseBody`](./src/models/errors/retrievecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`UpdateContactResponseBody`](./src/models/errors/updatecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`DeleteContactResponseBody`](./src/models/errors/deletecontactresponsebody.ts): Contact not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 94 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 94 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 94 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 94 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsBertScoreResponseBody`](./src/models/errors/evalsbertscoreresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsBleuScoreResponseBody`](./src/models/errors/evalsbleuscoreresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsAllResponseBody`](./src/models/errors/evalscontainsallresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsAnyResponseBody`](./src/models/errors/evalscontainsanyresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsEmailResponseBody`](./src/models/errors/evalscontainsemailresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsNoneResponseBody`](./src/models/errors/evalscontainsnoneresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsUrlResponseBody`](./src/models/errors/evalscontainsurlresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsValidLinkResponseBody`](./src/models/errors/evalscontainsvalidlinkresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsResponseBody`](./src/models/errors/evalscontainsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsEndsWithResponseBody`](./src/models/errors/evalsendswithresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsExactMatchResponseBody`](./src/models/errors/evalsexactmatchresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsLengthBetweenResponseBody`](./src/models/errors/evalslengthbetweenresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsLengthGreaterThanResponseBody`](./src/models/errors/evalslengthgreaterthanresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsLengthLessThanResponseBody`](./src/models/errors/evalslengthlessthanresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsValidJsonResponseBody`](./src/models/errors/evalsvalidjsonresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsAgeAppropriateResponseBody`](./src/models/errors/evalsageappropriateresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsBotDetectionResponseBody`](./src/models/errors/evalsbotdetectionresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsFactCheckingKnowledgeBaseResponseBody`](./src/models/errors/evalsfactcheckingknowledgebaseresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsGrammarResponseBody`](./src/models/errors/evalsgrammarresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsLocalizationResponseBody`](./src/models/errors/evalslocalizationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsPiiResponseBody`](./src/models/errors/evalspiiresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsSentimentClassificationResponseBody`](./src/models/errors/evalssentimentclassificationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsSummarizationResponseBody`](./src/models/errors/evalssummarizationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsToneOfVoiceResponseBody`](./src/models/errors/evalstoneofvoiceresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsTranslationResponseBody`](./src/models/errors/evalstranslationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasCoherenceResponseBody`](./src/models/errors/evalsragascoherenceresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasConcisenessResponseBody`](./src/models/errors/evalsragasconcisenessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasContextPrecisionResponseBody`](./src/models/errors/evalsragascontextprecisionresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasContextRecallResponseBody`](./src/models/errors/evalsragascontextrecallresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasContextEntitiesRecallResponseBody`](./src/models/errors/evalsragascontextentitiesrecallresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasCorrectnessResponseBody`](./src/models/errors/evalsragascorrectnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasFaithfulnessResponseBody`](./src/models/errors/evalsragasfaithfulnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasHarmfulnessResponseBody`](./src/models/errors/evalsragasharmfulnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasMaliciousnessResponseBody`](./src/models/errors/evalsragasmaliciousnessresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasNoiseSensitivityResponseBody`](./src/models/errors/evalsragasnoisesensitivityresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasResponseRelevancyResponseBody`](./src/models/errors/evalsragasresponserelevancyresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasSummarizationResponseBody`](./src/models/errors/evalsragassummarizationresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 94 methods.*
+* [`InvokeEvalResponseBody`](./src/models/errors/invokeevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 94 methods.*
+* [`EvalsBertScoreEvalsResponseBody`](./src/models/errors/evalsbertscoreevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsBleuScoreEvalsResponseBody`](./src/models/errors/evalsbleuscoreevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsAllEvalsResponseBody`](./src/models/errors/evalscontainsallevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsAnyEvalsResponseBody`](./src/models/errors/evalscontainsanyevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsEmailEvalsResponseBody`](./src/models/errors/evalscontainsemailevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsNoneEvalsResponseBody`](./src/models/errors/evalscontainsnoneevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsUrlEvalsResponseBody`](./src/models/errors/evalscontainsurlevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsValidLinkEvalsResponseBody`](./src/models/errors/evalscontainsvalidlinkevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsContainsEvalsResponseBody`](./src/models/errors/evalscontainsevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsEndsWithEvalsResponseBody`](./src/models/errors/evalsendswithevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsExactMatchEvalsResponseBody`](./src/models/errors/evalsexactmatchevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsLengthBetweenEvalsResponseBody`](./src/models/errors/evalslengthbetweenevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsLengthGreaterThanEvalsResponseBody`](./src/models/errors/evalslengthgreaterthanevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsLengthLessThanEvalsResponseBody`](./src/models/errors/evalslengthlessthanevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsValidJsonEvalsResponseBody`](./src/models/errors/evalsvalidjsonevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsAgeAppropriateEvalsResponseBody`](./src/models/errors/evalsageappropriateevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsBotDetectionEvalsResponseBody`](./src/models/errors/evalsbotdetectionevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsFactCheckingKnowledgeBaseEvalsResponseBody`](./src/models/errors/evalsfactcheckingknowledgebaseevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsGrammarEvalsResponseBody`](./src/models/errors/evalsgrammarevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsLocalizationEvalsResponseBody`](./src/models/errors/evalslocalizationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsPiiEvalsResponseBody`](./src/models/errors/evalspiievalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsSentimentClassificationEvalsResponseBody`](./src/models/errors/evalssentimentclassificationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsSummarizationEvalsResponseBody`](./src/models/errors/evalssummarizationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsToneOfVoiceEvalsResponseBody`](./src/models/errors/evalstoneofvoiceevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsTranslationEvalsResponseBody`](./src/models/errors/evalstranslationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasCoherenceEvalsResponseBody`](./src/models/errors/evalsragascoherenceevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasConcisenessEvalsResponseBody`](./src/models/errors/evalsragasconcisenessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasContextPrecisionEvalsResponseBody`](./src/models/errors/evalsragascontextprecisionevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasContextRecallEvalsResponseBody`](./src/models/errors/evalsragascontextrecallevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasContextEntitiesRecallEvalsResponseBody`](./src/models/errors/evalsragascontextentitiesrecallevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasCorrectnessEvalsResponseBody`](./src/models/errors/evalsragascorrectnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasFaithfulnessEvalsResponseBody`](./src/models/errors/evalsragasfaithfulnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasHarmfulnessEvalsResponseBody`](./src/models/errors/evalsragasharmfulnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasMaliciousnessEvalsResponseBody`](./src/models/errors/evalsragasmaliciousnessevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasNoiseSensitivityEvalsResponseBody`](./src/models/errors/evalsragasnoisesensitivityevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasResponseRelevancyEvalsResponseBody`](./src/models/errors/evalsragasresponserelevancyevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`EvalsRagasSummarizationEvalsResponseBody`](./src/models/errors/evalsragassummarizationevalsresponsebody.ts): Internal server error. Status code `500`. Applicable to 1 of 94 methods.*
+* [`InvokeEvalEvalsResponseBody`](./src/models/errors/invokeevalevalsresponsebody.ts): Error running the evaluator. Status code `500`. Applicable to 1 of 94 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

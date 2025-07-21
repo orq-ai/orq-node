@@ -1,13 +1,13 @@
-# KnowledgeBases
-(*knowledgeBases*)
+# Chunking
+(*chunking*)
 
 ## Overview
 
 ### Available Operations
 
-* [chunkText](#chunktext) - Chunk text
+* [parse](#parse) - Parse text
 
-## chunkText
+## parse
 
 Split large text documents into smaller, manageable chunks using different chunking strategies optimized for RAG (Retrieval-Augmented Generation) workflows. This endpoint supports multiple chunking algorithms including token-based, sentence-based, recursive, semantic, and specialized strategies.
 
@@ -21,7 +21,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.knowledgeBases.chunkText({
+  const result = await orq.chunking.parse({
     text: "The quick brown fox jumps over the lazy dog. This is a sample text that will be chunked into smaller pieces. Each chunk will maintain context while respecting the maximum chunk size.",
     metadata: true,
     strategy: "semantic",
@@ -44,7 +44,7 @@ The standalone function version of this method:
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { knowledgeBasesChunkText } from "@orq-ai/node/funcs/knowledgeBasesChunkText.js";
+import { chunkingParse } from "@orq-ai/node/funcs/chunkingParse.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -53,7 +53,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await knowledgeBasesChunkText(orq, {
+  const res = await chunkingParse(orq, {
     text: "The quick brown fox jumps over the lazy dog. This is a sample text that will be chunked into smaller pieces. Each chunk will maintain context while respecting the maximum chunk size.",
     metadata: true,
     strategy: "semantic",
@@ -67,7 +67,7 @@ async function run() {
     const { value: result } = res;
     console.log(result);
   } else {
-    console.log("knowledgeBasesChunkText failed:", res.error);
+    console.log("chunkingParse failed:", res.error);
   }
 }
 
@@ -78,14 +78,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.ChunkTextChunkingRequest](../../models/operations/chunktextchunkingrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.ParseChunkingRequest](../../models/operations/parsechunkingrequest.md)                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[operations.ChunkTextResponseBody](../../models/operations/chunktextresponsebody.md)\>**
+**Promise\<[operations.ParseResponseBody](../../models/operations/parseresponsebody.md)\>**
 
 ### Errors
 

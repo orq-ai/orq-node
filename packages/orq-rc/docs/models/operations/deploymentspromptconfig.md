@@ -10,7 +10,7 @@ let value: DeploymentsPromptConfig = {
   model: "Grand Caravan",
   modelType: "vision",
   modelParameters: {},
-  provider: "aws",
+  provider: "anyscale",
   messages: [
     {
       role: "system",

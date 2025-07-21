@@ -11,9 +11,9 @@ Similarity threshold for grouping (0-1) or "auto" for automatic detection
 const value: number = 1284.03;
 ```
 
-### `operations.ChunkTextThreshold2`
+### `operations.ParseThreshold2`
 
 ```typescript
-const value: operations.ChunkTextThreshold2 = "auto";
+const value: operations.ParseThreshold2 = "auto";
 ```
 

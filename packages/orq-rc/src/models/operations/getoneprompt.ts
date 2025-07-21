@@ -248,6 +248,7 @@ export const GetOnePromptProvider = {
   Togetherai: "togetherai",
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
+  Openailike: "openailike",
 } as const;
 export type GetOnePromptProvider = ClosedEnum<typeof GetOnePromptProvider>;
 
