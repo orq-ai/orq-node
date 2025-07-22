@@ -223,6 +223,7 @@ export const Provider = {
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
   Openailike: "openailike",
+  Cerebras: "cerebras",
 } as const;
 export type Provider = ClosedEnum<typeof Provider>;
 
@@ -688,6 +689,7 @@ export const CreatePromptProvider = {
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
   Openailike: "openailike",
+  Cerebras: "cerebras",
 } as const;
 export type CreatePromptProvider = ClosedEnum<typeof CreatePromptProvider>;
 

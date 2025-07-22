@@ -218,6 +218,7 @@ export const UpdatePromptProvider = {
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
   Openailike: "openailike",
+  Cerebras: "cerebras",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -689,6 +690,7 @@ export const UpdatePromptPromptsProvider = {
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
   Openailike: "openailike",
+  Cerebras: "cerebras",
 } as const;
 export type UpdatePromptPromptsProvider = ClosedEnum<
   typeof UpdatePromptPromptsProvider
