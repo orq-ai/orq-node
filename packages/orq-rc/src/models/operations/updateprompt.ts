@@ -255,7 +255,7 @@ export type UpdatePrompt2PromptsRequestType = ClosedEnum<
 
 export type UpdatePrompt2File = {
   /**
-   * The base64 encoded file data, used when passing the file to the model as a string.
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData: string;
   /**
@@ -731,7 +731,7 @@ export type UpdatePrompt2PromptsResponse200ApplicationJSONType = ClosedEnum<
 
 export type UpdatePrompt2PromptsFile = {
   /**
-   * The base64 encoded file data, used when passing the file to the model as a string.
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData: string;
   /**

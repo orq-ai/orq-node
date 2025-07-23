@@ -251,7 +251,7 @@ export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
 
 export type DeploymentStream2File = {
   /**
-   * The base64 encoded file data, used when passing the file to the model as a string.
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData: string;
   /**
@@ -689,7 +689,7 @@ export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type 
 
 export type DeploymentStream2DeploymentsFile = {
   /**
-   * The base64 encoded file data, used when passing the file to the model as a string.
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData: string;
   /**

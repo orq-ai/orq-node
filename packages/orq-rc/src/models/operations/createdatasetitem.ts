@@ -233,7 +233,7 @@ export type CreateDatasetItem2DatasetsRequestRequestBodyType = ClosedEnum<
 
 export type CreateDatasetItem2File = {
   /**
-   * The base64 encoded file data, used when passing the file to the model as a string.
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData: string;
   /**
@@ -708,7 +708,7 @@ export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
 
 export type CreateDatasetItem2DatasetsFile = {
   /**
-   * The base64 encoded file data, used when passing the file to the model as a string.
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData: string;
   /**
@@ -5111,7 +5111,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-07-22T10:23:13.475Z",
+    "2025-07-23T08:49:25.849Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5175,7 +5175,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-07-22T10:23:13.475Z"))
+  updated: z.date().default(() => new Date("2025-07-23T08:49:25.849Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
