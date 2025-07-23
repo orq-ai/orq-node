@@ -260,7 +260,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -528,7 +528,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -1200,7 +1200,7 @@ components:
                               properties:
                                 "file_data":
                                   type: "string"
-                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                  description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                 "filename":
                                   type: "string"
                                   description: "The name of the file, used when passing the file to the model as a string."
@@ -1540,7 +1540,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -1808,7 +1808,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -2117,7 +2117,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -2385,7 +2385,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -3628,7 +3628,7 @@ components:
                                       properties:
                                         "file_data":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                         "filename":
                                           type: "string"
                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -4800,7 +4800,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-07-22T10:23:16.443Z"
+          default: "2025-07-23T08:47:46.647Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4863,7 +4863,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-07-22T10:23:16.443Z"
+            default: "2025-07-23T08:47:46.647Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4943,7 +4943,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-07-22T10:23:16.443Z"
+          default: "2025-07-23T08:47:46.647Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4989,7 +4989,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-07-22T10:23:16.443Z"
+                default: "2025-07-23T08:47:46.647Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5032,7 +5032,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-07-22T10:23:16.443Z"
+          default: "2025-07-23T08:47:46.647Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5297,7 +5297,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -5749,7 +5749,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -6130,7 +6130,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -6506,7 +6506,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -6876,7 +6876,7 @@ components:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -7243,7 +7243,7 @@ components:
                                       properties:
                                         "file_data":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                         "filename":
                                           type: "string"
                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -7545,7 +7545,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-07-22T10:23:13.475Z"
+          default: "2025-07-23T08:47:43.663Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7553,7 +7553,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-07-22T10:23:13.475Z"
+              default: "2025-07-23T08:47:43.664Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7663,7 +7663,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-07-22T10:23:13.475Z"
+                default: "2025-07-23T08:47:43.663Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7671,7 +7671,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.664Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7778,7 +7778,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-07-22T10:23:13.475Z"
+          default: "2025-07-23T08:47:43.663Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7786,7 +7786,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-07-22T10:23:13.475Z"
+              default: "2025-07-23T08:47:43.664Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7887,7 +7887,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-07-22T10:23:13.475Z"
+          default: "2025-07-23T08:47:43.663Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7895,7 +7895,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-07-22T10:23:13.475Z"
+              default: "2025-07-23T08:47:43.664Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9058,10 +9058,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9130,10 +9130,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9199,10 +9199,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9283,10 +9283,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9378,10 +9378,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9450,10 +9450,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9519,10 +9519,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9603,10 +9603,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-22T10:23:15.612Z"
+                    default: "2025-07-23T08:47:45.850Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9970,10 +9970,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10042,10 +10042,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10111,10 +10111,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10195,10 +10195,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "updated":
               type: "string"
-              default: "2025-07-22T10:23:15.612Z"
+              default: "2025-07-23T08:47:45.850Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11326,7 +11326,7 @@ components:
                               properties:
                                 "file_data":
                                   type: "string"
-                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                  description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                 "filename":
                                   type: "string"
                                   description: "The name of the file, used when passing the file to the model as a string."
@@ -11660,7 +11660,7 @@ components:
                               properties:
                                 "file_data":
                                   type: "string"
-                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                  description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                 "filename":
                                   type: "string"
                                   description: "The name of the file, used when passing the file to the model as a string."
@@ -13021,7 +13021,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -13289,7 +13289,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -13972,7 +13972,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13980,7 +13980,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14111,7 +14111,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-07-22T10:23:13.475Z"
+                          default: "2025-07-23T08:47:43.663Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14119,7 +14119,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-07-22T10:23:13.475Z"
+                              default: "2025-07-23T08:47:43.664Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14573,7 +14573,7 @@ paths:
                                                   properties:
                                                     "file_data":
                                                       type: "string"
-                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                     "filename":
                                                       type: "string"
                                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -14803,7 +14803,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -15071,7 +15071,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -15748,7 +15748,7 @@ paths:
                                         properties:
                                           "file_data":
                                             type: "string"
-                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                           "filename":
                                             type: "string"
                                             description: "The name of the file, used when passing the file to the model as a string."
@@ -16398,7 +16398,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -16666,7 +16666,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -16995,7 +16995,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -17263,7 +17263,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -18122,7 +18122,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-07-22T10:23:16.443Z"
+                    default: "2025-07-23T08:47:46.647Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18210,7 +18210,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-07-22T10:23:16.443Z"
+                          default: "2025-07-23T08:47:46.647Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18277,7 +18277,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-07-22T10:23:16.443Z"
+                    default: "2025-07-23T08:47:46.647Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18641,7 +18641,7 @@ paths:
                                                   properties:
                                                     "file_data":
                                                       type: "string"
-                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                     "filename":
                                                       type: "string"
                                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -19011,7 +19011,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -19392,7 +19392,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -19793,7 +19793,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -20162,7 +20162,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -20546,7 +20546,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -20993,7 +20993,7 @@ paths:
                                                       properties:
                                                         "file_data":
                                                           type: "string"
-                                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                         "filename":
                                                           type: "string"
                                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -21391,7 +21391,7 @@ paths:
                                                 properties:
                                                   "file_data":
                                                     type: "string"
-                                                    description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                    description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                   "filename":
                                                     type: "string"
                                                     description: "The name of the file, used when passing the file to the model as a string."
@@ -21748,7 +21748,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-07-22T10:23:13.475Z"
+                          default: "2025-07-23T08:47:43.663Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21756,7 +21756,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-07-22T10:23:13.475Z"
+                              default: "2025-07-23T08:47:43.664Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21880,7 +21880,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21888,7 +21888,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21998,7 +21998,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22006,7 +22006,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22158,7 +22158,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22166,7 +22166,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22399,7 +22399,7 @@ paths:
                                                   properties:
                                                     "file_data":
                                                       type: "string"
-                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                     "filename":
                                                       type: "string"
                                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -22557,7 +22557,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-07-22T10:23:13.475Z"
+                          default: "2025-07-23T08:47:43.663Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22565,7 +22565,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-07-22T10:23:13.475Z"
+                              default: "2025-07-23T08:47:43.664Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -22733,7 +22733,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -23021,7 +23021,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -23179,7 +23179,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23187,7 +23187,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23364,7 +23364,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -23522,7 +23522,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23530,7 +23530,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23702,7 +23702,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -23990,7 +23990,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -24148,7 +24148,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -24156,7 +24156,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -25425,7 +25425,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K0RTHHQ0V227ASD5PPRFCGKY"
+                          default: "01K0V7FDTP77NSXX2YPBQCKZ3Q"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -25588,7 +25588,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K0RTHHQ1Y2T7Z7P69GB1A4YX"
+                    default: "01K0V7FDTQ91WVABVCRGDZWCEQ"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25681,7 +25681,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K0RTHHQ06ZBJEV075XP3191T"
+                    default: "01K0V7FDTQFREK55JA4VB038ZX"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25810,7 +25810,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K0RTHHQ2GD6J6EXQYATYYPDH"
+                    default: "01K0V7FDTRFHPJDTGYSTW8V96A"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26763,10 +26763,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26835,10 +26835,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26904,10 +26904,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26988,10 +26988,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27057,10 +27057,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27453,10 +27453,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27538,10 +27538,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-22T10:23:15.612Z"
+                              default: "2025-07-23T08:47:45.850Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27927,10 +27927,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27999,10 +27999,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28068,10 +28068,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28152,10 +28152,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28528,10 +28528,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28600,10 +28600,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28669,10 +28669,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28753,10 +28753,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-22T10:23:15.612Z"
+                        default: "2025-07-23T08:47:45.850Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -31481,7 +31481,7 @@ paths:
                                       properties:
                                         "file_data":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                         "filename":
                                           type: "string"
                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -31818,7 +31818,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31826,7 +31826,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -31960,7 +31960,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-22T10:23:13.475Z"
+                    default: "2025-07-23T08:47:43.663Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31968,7 +31968,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-22T10:23:13.475Z"
+                        default: "2025-07-23T08:47:43.664Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
