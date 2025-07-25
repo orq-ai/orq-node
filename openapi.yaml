@@ -260,7 +260,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -528,7 +528,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -1200,7 +1200,7 @@ components:
                               properties:
                                 "file_data":
                                   type: "string"
-                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                  description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                 "filename":
                                   type: "string"
                                   description: "The name of the file, used when passing the file to the model as a string."
@@ -1540,7 +1540,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -1808,7 +1808,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -2117,7 +2117,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -2385,7 +2385,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -2996,6 +2996,7 @@ components:
             - "elevenlabs"
             - "litellm"
             - "openailike"
+            - "cerebras"
           description: "The provider used to generate the response"
         "is_final":
           type: "boolean"
@@ -3547,6 +3548,7 @@ components:
                     - "elevenlabs"
                     - "litellm"
                     - "openailike"
+                    - "cerebras"
                 "messages":
                   type: "array"
                   items:
@@ -3626,7 +3628,7 @@ components:
                                       properties:
                                         "file_data":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                         "filename":
                                           type: "string"
                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -4131,6 +4133,7 @@ components:
                                 - "elevenlabs"
                                 - "litellm"
                                 - "openailike"
+                                - "cerebras"
                             "integration_id":
                               type:
                                 - "string"
@@ -4399,6 +4402,7 @@ components:
                                 - "elevenlabs"
                                 - "litellm"
                                 - "openailike"
+                                - "cerebras"
                             "integration_id":
                               type:
                                 - "string"
@@ -4722,6 +4726,7 @@ components:
                             - "elevenlabs"
                             - "litellm"
                             - "openailike"
+                            - "cerebras"
                         "integration_id":
                           type:
                             - "string"
@@ -4801,7 +4806,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-07-24T20:26:39.802Z"
+          default: "2025-07-25T09:42:12.369Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4864,7 +4869,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-07-24T20:26:39.802Z"
+            default: "2025-07-25T09:42:12.369Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -4944,7 +4949,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-07-24T20:26:39.802Z"
+          default: "2025-07-25T09:42:12.369Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4990,7 +4995,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-07-24T20:26:39.802Z"
+                default: "2025-07-25T09:42:12.369Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5033,7 +5038,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-07-24T20:26:39.802Z"
+          default: "2025-07-25T09:42:12.369Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5209,6 +5214,7 @@ components:
                 - "elevenlabs"
                 - "litellm"
                 - "openailike"
+                - "cerebras"
             "integration_id":
               type:
                 - "string"
@@ -5297,7 +5303,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -5660,6 +5666,7 @@ components:
                 - "elevenlabs"
                 - "litellm"
                 - "openailike"
+                - "cerebras"
             "integration_id":
               type:
                 - "string"
@@ -5748,7 +5755,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -6040,6 +6047,7 @@ components:
                 - "elevenlabs"
                 - "litellm"
                 - "openailike"
+                - "cerebras"
             "integration_id":
               type:
                 - "string"
@@ -6128,7 +6136,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -6415,6 +6423,7 @@ components:
                 - "elevenlabs"
                 - "litellm"
                 - "openailike"
+                - "cerebras"
             "integration_id":
               type:
                 - "string"
@@ -6503,7 +6512,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -6784,6 +6793,7 @@ components:
                           - "elevenlabs"
                           - "litellm"
                           - "openailike"
+                          - "cerebras"
                       "integration_id":
                         type:
                           - "string"
@@ -6872,7 +6882,7 @@ components:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -7150,6 +7160,7 @@ components:
                     - "elevenlabs"
                     - "litellm"
                     - "openailike"
+                    - "cerebras"
                 "integration_id":
                   type:
                     - "string"
@@ -7238,7 +7249,7 @@ components:
                                       properties:
                                         "file_data":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                         "filename":
                                           type: "string"
                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -7540,7 +7551,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-07-24T20:26:36.843Z"
+          default: "2025-07-25T09:42:09.308Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7548,7 +7559,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-07-24T20:26:36.843Z"
+              default: "2025-07-25T09:42:09.309Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7658,7 +7669,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-07-24T20:26:36.843Z"
+                default: "2025-07-25T09:42:09.308Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7666,7 +7677,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.309Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7773,7 +7784,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-07-24T20:26:36.843Z"
+          default: "2025-07-25T09:42:09.308Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7781,7 +7792,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-07-24T20:26:36.843Z"
+              default: "2025-07-25T09:42:09.309Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7882,7 +7893,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-07-24T20:26:36.843Z"
+          default: "2025-07-25T09:42:09.308Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7890,7 +7901,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-07-24T20:26:36.843Z"
+              default: "2025-07-25T09:42:09.309Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8103,6 +8114,7 @@ components:
                         - "elevenlabs"
                         - "litellm"
                         - "openailike"
+                        - "cerebras"
                     "model":
                       type: "string"
                       description: "The name of the model to use"
@@ -8175,6 +8187,7 @@ components:
                         - "elevenlabs"
                         - "litellm"
                         - "openailike"
+                        - "cerebras"
                     "model":
                       type: "string"
                       description: "The name of the model to use"
@@ -8247,6 +8260,7 @@ components:
                         - "elevenlabs"
                         - "litellm"
                         - "openailike"
+                        - "cerebras"
                     "model":
                       type: "string"
                       description: "The name of the model to use"
@@ -8819,6 +8833,7 @@ components:
               type: "string"
             "key":
               type: "string"
+              pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
           required:
             - "type"
             - "prompt"
@@ -8885,6 +8900,7 @@ components:
               default: ""
             "key":
               type: "string"
+              pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
           required:
             - "type"
             - "schema"
@@ -8962,6 +8978,7 @@ components:
               default: ""
             "key":
               type: "string"
+              pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
           required:
             - "type"
             - "url"
@@ -9030,6 +9047,7 @@ components:
               default: ""
             "key":
               type: "string"
+              pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
           required:
             - "code"
             - "type"
@@ -9046,10 +9064,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9118,10 +9136,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9187,10 +9205,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9271,10 +9289,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9366,10 +9384,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9438,10 +9456,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9507,10 +9525,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9591,10 +9609,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "updated":
                     type: "string"
-                    default: "2025-07-24T20:26:38.930Z"
+                    default: "2025-07-25T09:42:11.510Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9739,6 +9757,7 @@ components:
                   type: "string"
                 "key":
                   type: "string"
+                  pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
               required:
                 - "type"
                 - "path"
@@ -9801,6 +9820,7 @@ components:
                   type: "string"
                 "key":
                   type: "string"
+                  pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
               required:
                 - "type"
                 - "path"
@@ -9875,6 +9895,7 @@ components:
                   type: "string"
                 "key":
                   type: "string"
+                  pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
               required:
                 - "type"
                 - "path"
@@ -9937,6 +9958,7 @@ components:
                   type: "string"
                 "key":
                   type: "string"
+                  pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
               required:
                 - "type"
                 - "path"
@@ -9954,10 +9976,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10026,10 +10048,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10095,10 +10117,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10179,10 +10201,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "updated":
               type: "string"
-              default: "2025-07-24T20:26:38.930Z"
+              default: "2025-07-25T09:42:11.510Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11310,7 +11332,7 @@ components:
                               properties:
                                 "file_data":
                                   type: "string"
-                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                  description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                 "filename":
                                   type: "string"
                                   description: "The name of the file, used when passing the file to the model as a string."
@@ -11367,7 +11389,6 @@ components:
                 - "null"
           required:
             - "type"
-            - "value"
           title: "String"
         - type: "object"
           properties:
@@ -11645,7 +11666,7 @@ components:
                               properties:
                                 "file_data":
                                   type: "string"
-                                  description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                  description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                 "filename":
                                   type: "string"
                                   description: "The name of the file, used when passing the file to the model as a string."
@@ -11707,6 +11728,8 @@ components:
                     "supported_on_input_type":
                       type: "boolean"
                     "supported_on_output_type":
+                      type: "boolean"
+                    "support_use_as_guardrail":
                       type: "boolean"
                 "display_name":
                   type: "string"
@@ -11801,6 +11824,8 @@ components:
                     "supported_on_input_type":
                       type: "boolean"
                     "supported_on_output_type":
+                      type: "boolean"
+                    "support_use_as_guardrail":
                       type: "boolean"
                 "display_name":
                   type: "string"
@@ -11906,6 +11931,8 @@ components:
                       type: "boolean"
                     "supported_on_output_type":
                       type: "boolean"
+                    "support_use_as_guardrail":
+                      type: "boolean"
                 "display_name":
                   type: "string"
                 "description":
@@ -11985,6 +12012,8 @@ components:
                     "supported_on_input_type":
                       type: "boolean"
                     "supported_on_output_type":
+                      type: "boolean"
+                    "support_use_as_guardrail":
                       type: "boolean"
                 "display_name":
                   type: "string"
@@ -12081,6 +12110,8 @@ components:
                       type: "boolean"
                     "supported_on_output_type":
                       type: "boolean"
+                    "support_use_as_guardrail":
+                      type: "boolean"
                 "display_name":
                   type: "string"
                 "description":
@@ -12164,6 +12195,8 @@ components:
                       type: "boolean"
                     "supported_on_output_type":
                       type: "boolean"
+                    "support_use_as_guardrail":
+                      type: "boolean"
                 "display_name":
                   type: "string"
                 "description":
@@ -12246,6 +12279,8 @@ components:
                     "supported_on_input_type":
                       type: "boolean"
                     "supported_on_output_type":
+                      type: "boolean"
+                    "support_use_as_guardrail":
                       type: "boolean"
                 "display_name":
                   type: "string"
@@ -12537,6 +12572,102 @@ components:
                             - "levenshtein_distance"
                       required:
                         - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "topic_match"
+                        "topic":
+                          type: "string"
+                      required:
+                        - "type"
+                        - "topic"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "keywords_match"
+                        "keywords":
+                          type: "array"
+                          items:
+                            type: "string"
+                      required:
+                        - "type"
+                        - "keywords"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "most_repeated_words"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "flesch_reading_ease"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "gse_english_level"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "words_count"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "sentences_count"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "lexical_repetition"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "semantic_repetition"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "grammar_diversity"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "bert_coherence"
+                      required:
+                        - "type"
                 "path":
                   type: "string"
                   description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -12558,7 +12689,6 @@ components:
                 - "null"
           required:
             - "type"
-            - "value"
           title: "String"
         - type: "object"
           properties:
@@ -12897,7 +13027,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -13165,7 +13295,7 @@ components:
                                   properties:
                                     "file_data":
                                       type: "string"
-                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                     "filename":
                                       type: "string"
                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -13848,7 +13978,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -13856,7 +13986,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -13987,7 +14117,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-07-24T20:26:36.843Z"
+                          default: "2025-07-25T09:42:09.308Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -13995,7 +14125,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-07-24T20:26:36.843Z"
+                              default: "2025-07-25T09:42:09.309Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14369,6 +14499,7 @@ paths:
                                 - "elevenlabs"
                                 - "litellm"
                                 - "openailike"
+                                - "cerebras"
                             "messages":
                               type: "array"
                               items:
@@ -14448,7 +14579,7 @@ paths:
                                                   properties:
                                                     "file_data":
                                                       type: "string"
-                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                     "filename":
                                                       type: "string"
                                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -14678,7 +14809,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -14946,7 +15077,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -15623,7 +15754,7 @@ paths:
                                         properties:
                                           "file_data":
                                             type: "string"
-                                            description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                            description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                           "filename":
                                             type: "string"
                                             description: "The name of the file, used when passing the file to the model as a string."
@@ -15875,6 +16006,7 @@ paths:
                       - "elevenlabs"
                       - "litellm"
                       - "openailike"
+                      - "cerebras"
                     description: "The provider used to generate the response"
                   "is_final":
                     type: "boolean"
@@ -16272,7 +16404,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -16540,7 +16672,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -16869,7 +17001,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -17137,7 +17269,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -17996,7 +18128,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-07-24T20:26:39.802Z"
+                    default: "2025-07-25T09:42:12.369Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18084,7 +18216,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-07-24T20:26:39.802Z"
+                          default: "2025-07-25T09:42:12.369Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18151,7 +18283,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-07-24T20:26:39.802Z"
+                    default: "2025-07-25T09:42:12.369Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18426,6 +18558,7 @@ paths:
                                 - "elevenlabs"
                                 - "litellm"
                                 - "openailike"
+                                - "cerebras"
                             "integration_id":
                               type:
                                 - "string"
@@ -18514,7 +18647,7 @@ paths:
                                                   properties:
                                                     "file_data":
                                                       type: "string"
-                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                     "filename":
                                                       type: "string"
                                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -18795,6 +18928,7 @@ paths:
                         - "elevenlabs"
                         - "litellm"
                         - "openailike"
+                        - "cerebras"
                     "integration_id":
                       type:
                         - "string"
@@ -18883,7 +19017,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -19175,6 +19309,7 @@ paths:
                           - "elevenlabs"
                           - "litellm"
                           - "openailike"
+                          - "cerebras"
                       "integration_id":
                         type:
                           - "string"
@@ -19263,7 +19398,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -19575,6 +19710,7 @@ paths:
                           - "elevenlabs"
                           - "litellm"
                           - "openailike"
+                          - "cerebras"
                       "integration_id":
                         type:
                           - "string"
@@ -19663,7 +19799,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -19943,6 +20079,7 @@ paths:
                         - "elevenlabs"
                         - "litellm"
                         - "openailike"
+                        - "cerebras"
                     "integration_id":
                       type:
                         - "string"
@@ -20031,7 +20168,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -20326,6 +20463,7 @@ paths:
                           - "elevenlabs"
                           - "litellm"
                           - "openailike"
+                          - "cerebras"
                       "integration_id":
                         type:
                           - "string"
@@ -20414,7 +20552,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -20772,6 +20910,7 @@ paths:
                                     - "elevenlabs"
                                     - "litellm"
                                     - "openailike"
+                                    - "cerebras"
                                 "integration_id":
                                   type:
                                     - "string"
@@ -20860,7 +20999,7 @@ paths:
                                                       properties:
                                                         "file_data":
                                                           type: "string"
-                                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                         "filename":
                                                           type: "string"
                                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -21169,6 +21308,7 @@ paths:
                               - "elevenlabs"
                               - "litellm"
                               - "openailike"
+                              - "cerebras"
                           "integration_id":
                             type:
                               - "string"
@@ -21257,7 +21397,7 @@ paths:
                                                 properties:
                                                   "file_data":
                                                     type: "string"
-                                                    description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                    description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                   "filename":
                                                     type: "string"
                                                     description: "The name of the file, used when passing the file to the model as a string."
@@ -21614,7 +21754,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-07-24T20:26:36.843Z"
+                          default: "2025-07-25T09:42:09.308Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21622,7 +21762,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-07-24T20:26:36.843Z"
+                              default: "2025-07-25T09:42:09.309Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21746,7 +21886,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21754,7 +21894,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21864,7 +22004,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21872,7 +22012,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22024,7 +22164,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22032,7 +22172,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22265,7 +22405,7 @@ paths:
                                                   properties:
                                                     "file_data":
                                                       type: "string"
-                                                      description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                      description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                                     "filename":
                                                       type: "string"
                                                       description: "The name of the file, used when passing the file to the model as a string."
@@ -22423,7 +22563,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-07-24T20:26:36.843Z"
+                          default: "2025-07-25T09:42:09.308Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22431,7 +22571,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-07-24T20:26:36.843Z"
+                              default: "2025-07-25T09:42:09.309Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -22599,7 +22739,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -22887,7 +23027,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -23045,7 +23185,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23053,7 +23193,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23230,7 +23370,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -23388,7 +23528,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23396,7 +23536,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -23568,7 +23708,7 @@ paths:
                                           properties:
                                             "file_data":
                                               type: "string"
-                                              description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                              description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                             "filename":
                                               type: "string"
                                               description: "The name of the file, used when passing the file to the model as a string."
@@ -23856,7 +23996,7 @@ paths:
                                             properties:
                                               "file_data":
                                                 type: "string"
-                                                description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                                description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                               "filename":
                                                 type: "string"
                                                 description: "The name of the file, used when passing the file to the model as a string."
@@ -24014,7 +24154,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -24022,7 +24162,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -25291,7 +25431,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K0Z1VTADH3ME57N0AJRX5C7M"
+                          default: "01K10FCGXNGTDQ3Q9RV28J7K60"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -25454,7 +25594,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K0Z1VTAFV5AG49H5MBDHMG71"
+                    default: "01K10FCGXPKCJ9PVHMGPJZKA5R"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25547,7 +25687,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K0Z1VTAE3HGVXGN163G9J0PS"
+                    default: "01K10FCGXP1WXE4160RMF4CDQN"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25676,7 +25816,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K0Z1VTAGEMXZ1ACZNAX603N4"
+                    default: "01K10FCGXQ2XZ0389R1VVNJ3FF"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26629,10 +26769,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26701,10 +26841,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26770,10 +26910,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26854,10 +26994,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -26923,10 +27063,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27206,6 +27346,102 @@ paths:
                                         - "levenshtein_distance"
                                   required:
                                     - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "topic_match"
+                                    "topic":
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                    - "topic"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "keywords_match"
+                                    "keywords":
+                                      type: "array"
+                                      items:
+                                        type: "string"
+                                  required:
+                                    - "type"
+                                    - "keywords"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "most_repeated_words"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "flesch_reading_ease"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "gse_english_level"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "words_count"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "sentences_count"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "lexical_repetition"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "semantic_repetition"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "grammar_diversity"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "bert_coherence"
+                                  required:
+                                    - "type"
                             "key":
                               type: "string"
                           required:
@@ -27223,10 +27459,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27308,10 +27544,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "updated":
                               type: "string"
-                              default: "2025-07-24T20:26:38.930Z"
+                              default: "2025-07-25T09:42:11.510Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27461,6 +27697,7 @@ paths:
                       type: "string"
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "prompt"
@@ -27527,6 +27764,7 @@ paths:
                       default: ""
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "schema"
@@ -27604,6 +27842,7 @@ paths:
                       default: ""
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "url"
@@ -27672,6 +27911,7 @@ paths:
                       default: ""
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "code"
                     - "type"
@@ -27693,10 +27933,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27765,10 +28005,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27834,10 +28074,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -27918,10 +28158,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28073,6 +28313,7 @@ paths:
                       type: "string"
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "path"
@@ -28135,6 +28376,7 @@ paths:
                       type: "string"
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "path"
@@ -28209,6 +28451,7 @@ paths:
                       type: "string"
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "path"
@@ -28271,6 +28514,7 @@ paths:
                       type: "string"
                     "key":
                       type: "string"
+                      pattern: "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"
                   required:
                     - "type"
                     - "path"
@@ -28290,10 +28534,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28362,10 +28606,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28431,10 +28675,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28515,10 +28759,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "updated":
                         type: "string"
-                        default: "2025-07-24T20:26:38.930Z"
+                        default: "2025-07-25T09:42:11.510Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -31243,7 +31487,7 @@ paths:
                                       properties:
                                         "file_data":
                                           type: "string"
-                                          description: "The base64 encoded file data, used when passing the file to the model as a string."
+                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
                                         "filename":
                                           type: "string"
                                           description: "The name of the file, used when passing the file to the model as a string."
@@ -31305,7 +31549,6 @@ paths:
                           - "null"
                     required:
                       - "type"
-                      - "value"
                     title: "String"
                   - type: "object"
                     properties:
@@ -31581,7 +31824,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31589,7 +31832,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -31723,7 +31966,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-07-24T20:26:36.843Z"
+                    default: "2025-07-25T09:42:09.308Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -31731,7 +31974,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-07-24T20:26:36.843Z"
+                        default: "2025-07-25T09:42:09.309Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
