@@ -14,8 +14,6 @@ export type DeploymentStreamGlobals = {
   contactId?: string | undefined;
 };
 
-export type DeploymentStreamInputs = string | number | boolean;
-
 /**
  * The role of the messages author, in this case tool.
  */
@@ -1253,7 +1251,7 @@ export type DeploymentStreamRequestBody = {
   /**
    * Key-value pairs variables to replace in your prompts. If a variable is not provided that is defined in the prompt, the default variables are used.
    */
-  inputs?: { [k: string]: string | number | boolean } | undefined;
+  inputs?: { [k: string]: any } | undefined;
   /**
    * Key-value pairs that match your data model and fields declared in your deployment routing configuration
    */
@@ -1636,54 +1634,6 @@ export function deploymentStreamGlobalsFromJSON(
     jsonString,
     (x) => DeploymentStreamGlobals$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStreamGlobals' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentStreamInputs$inboundSchema: z.ZodType<
-  DeploymentStreamInputs,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/** @internal */
-export type DeploymentStreamInputs$Outbound = string | number | boolean;
-
-/** @internal */
-export const DeploymentStreamInputs$outboundSchema: z.ZodType<
-  DeploymentStreamInputs$Outbound,
-  z.ZodTypeDef,
-  DeploymentStreamInputs
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamInputs$ {
-  /** @deprecated use `DeploymentStreamInputs$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamInputs$inboundSchema;
-  /** @deprecated use `DeploymentStreamInputs$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamInputs$outboundSchema;
-  /** @deprecated use `DeploymentStreamInputs$Outbound` instead. */
-  export type Outbound = DeploymentStreamInputs$Outbound;
-}
-
-export function deploymentStreamInputsToJSON(
-  deploymentStreamInputs: DeploymentStreamInputs,
-): string {
-  return JSON.stringify(
-    DeploymentStreamInputs$outboundSchema.parse(deploymentStreamInputs),
-  );
-}
-
-export function deploymentStreamInputsFromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentStreamInputs, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentStreamInputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentStreamInputs' from JSON`,
   );
 }
 
@@ -8404,7 +8354,7 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string(),
-  inputs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
+  inputs: z.record(z.any()).optional(),
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(
     z.union([
@@ -8462,7 +8412,7 @@ export const DeploymentStreamRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentStreamRequestBody$Outbound = {
   key: string;
-  inputs?: { [k: string]: string | number | boolean } | undefined;
+  inputs?: { [k: string]: any } | undefined;
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
@@ -8513,7 +8463,7 @@ export const DeploymentStreamRequestBody$outboundSchema: z.ZodType<
   DeploymentStreamRequestBody
 > = z.object({
   key: z.string(),
-  inputs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
+  inputs: z.record(z.any()).optional(),
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
