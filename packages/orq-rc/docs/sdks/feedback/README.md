@@ -13,6 +13,7 @@ Submit feedback for the LLM transaction via the API
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateFeedback" method="post" path="/v2/feedback" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

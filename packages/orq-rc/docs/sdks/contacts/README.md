@@ -17,6 +17,7 @@ Creates a new contact or updates an existing one based on external_id. Use this 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateContact" method="post" path="/v2/contacts" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -117,6 +118,7 @@ Retrieves a paginated list of contacts in your workspace. Use pagination paramet
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListContacts" method="get" path="/v2/contacts" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -199,6 +201,7 @@ Retrieves detailed information about a specific contact using their contact ID o
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="RetrieveContact" method="get" path="/v2/contacts/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -272,6 +275,7 @@ Updates specific fields of an existing contact. Only the fields provided in the 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateContact" method="patch" path="/v2/contacts/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -377,6 +381,7 @@ Permanently deletes a contact from your workspace. This action cannot be undone.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteContact" method="delete" path="/v2/contacts/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

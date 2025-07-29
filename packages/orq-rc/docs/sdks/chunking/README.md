@@ -13,6 +13,7 @@ Split large text documents into smaller, manageable chunks using different chunk
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="parse" method="post" path="/v2/chunking" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

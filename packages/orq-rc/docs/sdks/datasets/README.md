@@ -23,6 +23,7 @@ Retrieves a paginated list of datasets for the current workspace. Results can be
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListDatasets" method="get" path="/v2/datasets" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -91,6 +92,7 @@ Creates a new dataset in the specified project.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateDataset" method="post" path="/v2/datasets" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -165,6 +167,7 @@ Retrieves a specific dataset by its unique identifier
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="RetrieveDataset" method="get" path="/v2/datasets/{dataset_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -238,6 +241,7 @@ Update a dataset
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateDataset" method="patch" path="/v2/datasets/{dataset_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -317,6 +321,7 @@ Permanently deletes a dataset and all its datapoints. This action is irreversibl
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteDataset" method="delete" path="/v2/datasets/{dataset_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -389,6 +394,7 @@ Retrieves a paginated list of datapoints from a specific dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListDatasetDatapoints" method="get" path="/v2/datasets/{dataset_id}/datapoints" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -461,6 +467,7 @@ Creates a new datapoint in the specified dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateDatasetItem" method="post" path="/v2/datasets/{dataset_id}/datapoints" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -533,6 +540,7 @@ Retrieves a datapoint object
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="RetrieveDatapoint" method="get" path="/v2/datasets/{dataset_id}/datapoints/{datapoint_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -608,6 +616,7 @@ Update a datapoint
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateDatapoint" method="patch" path="/v2/datasets/{dataset_id}/datapoints/{datapoint_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -683,6 +692,7 @@ Permanently deletes a specific datapoint from a dataset.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteDatapoint" method="delete" path="/v2/datasets/{dataset_id}/datapoints/{datapoint_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -758,6 +768,7 @@ Delete all datapoints from a dataset. This action is irreversible.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ClearDataset" method="delete" path="/v2/datasets/{dataset_id}/clear" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

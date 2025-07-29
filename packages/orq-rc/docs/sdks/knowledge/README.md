@@ -28,6 +28,7 @@ Returns a list of your knowledge bases. The knowledge bases are returned sorted 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListKnowledgeBases" method="get" path="/v2/knowledge" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -96,6 +97,7 @@ Create a knowledge
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateKnowledge" method="post" path="/v2/knowledge" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -172,6 +174,7 @@ Retrieve a knowledge base with the settings.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="GetOneKnowledge" method="get" path="/v2/knowledge/{knowledge_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -244,6 +247,7 @@ Updates a knowledge
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateKnowledge" method="patch" path="/v2/knowledge/{knowledge_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -322,6 +326,7 @@ Deletes a knowledge base. Deleting a knowledge base will delete all the datasour
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteKnowledge" method="delete" path="/v2/knowledge/{knowledge_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -394,6 +399,7 @@ Search a Knowledge Base and return the most similar chunks, along with their sea
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="SearchKnowledge" method="post" path="/v2/knowledge/{knowledge_id}/search" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -466,6 +472,7 @@ List all datasources
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListDatasources" method="get" path="/v2/knowledge/{knowledge_id}/datasources" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -546,6 +553,7 @@ Create a new datasource
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateDatasource" method="post" path="/v2/knowledge/{knowledge_id}/datasources" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -620,6 +628,7 @@ Retrieve a datasource
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="RetrieveDatasource" method="get" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -694,6 +703,7 @@ Deletes a datasource from a knowledge base. Deleting a datasource will remove it
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteDatasource" method="delete" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -768,6 +778,7 @@ Update a datasource
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateDatasource" method="patch" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -848,6 +859,7 @@ Create chunks for a datasource
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateChunk" method="post" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -922,6 +934,7 @@ List all chunks for a datasource
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListChunks" method="get" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1004,6 +1017,7 @@ Update a chunk
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateChunk" method="patch" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks/{chunk_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1080,6 +1094,7 @@ Delete a chunk
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteChunk" method="delete" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks/{chunk_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1156,6 +1171,7 @@ Retrieve a chunk
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="GetOneChunk" method="get" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks/{chunk_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

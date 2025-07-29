@@ -19,6 +19,7 @@ Returns a list of your prompts. The prompts are returned sorted by creation date
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="GetAllPrompts" method="get" path="/v2/prompts" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -87,6 +88,7 @@ Create a prompt
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreatePrompt" method="post" path="/v2/prompts" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -185,6 +187,7 @@ Retrieves a prompt object
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="GetOnePrompt" method="get" path="/v2/prompts/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -257,6 +260,7 @@ Update a prompt
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdatePrompt" method="patch" path="/v2/prompts/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -336,6 +340,7 @@ Delete a prompt
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeletePrompt" method="delete" path="/v2/prompts/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -408,6 +413,7 @@ Returns a list of your prompt versions. The prompt versions are returned sorted 
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ListPromptVersions" method="get" path="/v2/prompts/{prompt_id}/versions" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -480,6 +486,7 @@ Retrieves a specific version of a prompt by its ID and version ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="GetPromptVersion" method="get" path="/v2/prompts/{prompt_id}/versions/{version_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

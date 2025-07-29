@@ -16,6 +16,7 @@ Returns a list of your deployments. The deployments are returned sorted by creat
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="Deployments" method="get" path="/v2/deployments" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -85,6 +86,7 @@ Retrieve the deployment configuration
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeploymentGetConfig" method="post" path="/v2/deployments/get_config" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -157,6 +159,7 @@ Invoke a deployment with a given payload
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeploymentInvoke" method="post" path="/v2/deployments/invoke" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -233,6 +236,7 @@ Stream deployment generation. Only supported for completions and chat completion
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeploymentStream" method="post" path="/v2/deployments/stream" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

@@ -9,8 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Inputs = string | number | boolean;
-
 /**
  * The role of the messages author, in this case tool.
  */
@@ -1169,7 +1167,7 @@ export type DeploymentGetConfigRequestBody = {
   /**
    * Key-value pairs variables to replace in your prompts. If a variable is not provided that is defined in the prompt, the default variables are used.
    */
-  inputs?: { [k: string]: string | number | boolean } | undefined;
+  inputs?: { [k: string]: any } | undefined;
   /**
    * Key-value pairs that match your data model and fields declared in your deployment routing configuration
    */
@@ -1664,47 +1662,6 @@ export type DeploymentGetConfigResponseBody = {
    */
   tools?: Array<Tools> | undefined;
 };
-
-/** @internal */
-export const Inputs$inboundSchema: z.ZodType<Inputs, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
-
-/** @internal */
-export type Inputs$Outbound = string | number | boolean;
-
-/** @internal */
-export const Inputs$outboundSchema: z.ZodType<
-  Inputs$Outbound,
-  z.ZodTypeDef,
-  Inputs
-> = z.union([z.string(), z.number(), z.boolean()]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Inputs$ {
-  /** @deprecated use `Inputs$inboundSchema` instead. */
-  export const inboundSchema = Inputs$inboundSchema;
-  /** @deprecated use `Inputs$outboundSchema` instead. */
-  export const outboundSchema = Inputs$outboundSchema;
-  /** @deprecated use `Inputs$Outbound` instead. */
-  export type Outbound = Inputs$Outbound;
-}
-
-export function inputsToJSON(inputs: Inputs): string {
-  return JSON.stringify(Inputs$outboundSchema.parse(inputs));
-}
-
-export function inputsFromJSON(
-  jsonString: string,
-): SafeParseResult<Inputs, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Inputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Inputs' from JSON`,
-  );
-}
 
 /** @internal */
 export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema:
@@ -7647,7 +7604,7 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   key: z.string(),
-  inputs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
+  inputs: z.record(z.any()).optional(),
   context: z.record(z.any()).optional(),
   prefix_messages: z.array(
     z.union([
@@ -7701,7 +7658,7 @@ export const DeploymentGetConfigRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type DeploymentGetConfigRequestBody$Outbound = {
   key: string;
-  inputs?: { [k: string]: string | number | boolean } | undefined;
+  inputs?: { [k: string]: any } | undefined;
   context?: { [k: string]: any } | undefined;
   prefix_messages?:
     | Array<
@@ -7748,7 +7705,7 @@ export const DeploymentGetConfigRequestBody$outboundSchema: z.ZodType<
   DeploymentGetConfigRequestBody
 > = z.object({
   key: z.string(),
-  inputs: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
+  inputs: z.record(z.any()).optional(),
   context: z.record(z.any()).optional(),
   prefixMessages: z.array(
     z.union([
