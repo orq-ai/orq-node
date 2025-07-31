@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "3.10.0-rc.29",
+  "version": "3.10.0-rc.30",
   "author": "Orq",
   "bin": {
     "mcp": "bin/mcp-server.js"
@@ -19,8 +19,7 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "@modelcontextprotocol/sdk": ">=1.5.0 <1.10.0",
-    "zod": "^3"
+    "@modelcontextprotocol/sdk": ">=1.5.0 <1.10.0"
   },
   "peerDependenciesMeta": {
     "@modelcontextprotocol/sdk": {"optional":true}
@@ -36,10 +35,9 @@
     "express": "^4.21.2",
     "globals": "^15.14.0",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^8.22.0",
-    "zod": "^3.25.17"
+    "typescript-eslint": "^8.22.0"
   },
   "dependencies": {
-    
+    "zod": "^3.20.0"
   }
 }
