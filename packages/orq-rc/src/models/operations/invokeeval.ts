@@ -40,6 +40,366 @@ export type InvokeEval2EvalsRequestType = ClosedEnum<
   typeof InvokeEval2EvalsRequestType
 >;
 
+export const InvokeEval2EvalsType = {
+  ImageUrl: "image_url",
+} as const;
+export type InvokeEval2EvalsType = ClosedEnum<typeof InvokeEval2EvalsType>;
+
+export const InvokeEval2Type = {
+  Text: "text",
+} as const;
+export type InvokeEval2Type = ClosedEnum<typeof InvokeEval2Type>;
+
+export const InvokeEvalType = {
+  Function: "function",
+} as const;
+export type InvokeEvalType = ClosedEnum<typeof InvokeEvalType>;
+
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type = {
+  HttpEval: "http_eval",
+} as const;
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type =
+  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type>;
+
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type = {
+  LlmEvaluator: "llm_evaluator",
+} as const;
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type =
+  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type>;
+
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type = {
+  BertScore: "bert_score",
+} as const;
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type =
+  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type>;
+
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType = {
+  RougeN: "rouge_n",
+} as const;
+export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType =
+  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType>;
+
+export const InvokeEvalResponseBodyEvalsResponse200Type = {
+  StringArray: "string_array",
+} as const;
+export type InvokeEvalResponseBodyEvalsResponse200Type = ClosedEnum<
+  typeof InvokeEvalResponseBodyEvalsResponse200Type
+>;
+
+export const InvokeEvalResponseBodyEvalsResponseType = {
+  Boolean: "boolean",
+} as const;
+export type InvokeEvalResponseBodyEvalsResponseType = ClosedEnum<
+  typeof InvokeEvalResponseBodyEvalsResponseType
+>;
+
+export const InvokeEvalResponseBodyEvalsType = {
+  Number: "number",
+} as const;
+export type InvokeEvalResponseBodyEvalsType = ClosedEnum<
+  typeof InvokeEvalResponseBodyEvalsType
+>;
+
+export const InvokeEvalResponseBodyType = {
+  String: "string",
+} as const;
+export type InvokeEvalResponseBodyType = ClosedEnum<
+  typeof InvokeEvalResponseBodyType
+>;
+
+/** @internal */
+export const InvokeEvalRole$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalRole
+> = z.nativeEnum(InvokeEvalRole);
+
+/** @internal */
+export const InvokeEvalRole$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalRole
+> = InvokeEvalRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalRole$ {
+  /** @deprecated use `InvokeEvalRole$inboundSchema` instead. */
+  export const inboundSchema = InvokeEvalRole$inboundSchema;
+  /** @deprecated use `InvokeEvalRole$outboundSchema` instead. */
+  export const outboundSchema = InvokeEvalRole$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEval2EvalsRequestType$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEval2EvalsRequestType
+> = z.nativeEnum(InvokeEval2EvalsRequestType);
+
+/** @internal */
+export const InvokeEval2EvalsRequestType$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEval2EvalsRequestType
+> = InvokeEval2EvalsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEval2EvalsRequestType$ {
+  /** @deprecated use `InvokeEval2EvalsRequestType$inboundSchema` instead. */
+  export const inboundSchema = InvokeEval2EvalsRequestType$inboundSchema;
+  /** @deprecated use `InvokeEval2EvalsRequestType$outboundSchema` instead. */
+  export const outboundSchema = InvokeEval2EvalsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEval2EvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEval2EvalsType
+> = z.nativeEnum(InvokeEval2EvalsType);
+
+/** @internal */
+export const InvokeEval2EvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEval2EvalsType
+> = InvokeEval2EvalsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEval2EvalsType$ {
+  /** @deprecated use `InvokeEval2EvalsType$inboundSchema` instead. */
+  export const inboundSchema = InvokeEval2EvalsType$inboundSchema;
+  /** @deprecated use `InvokeEval2EvalsType$outboundSchema` instead. */
+  export const outboundSchema = InvokeEval2EvalsType$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEval2Type$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEval2Type
+> = z.nativeEnum(InvokeEval2Type);
+
+/** @internal */
+export const InvokeEval2Type$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEval2Type
+> = InvokeEval2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEval2Type$ {
+  /** @deprecated use `InvokeEval2Type$inboundSchema` instead. */
+  export const inboundSchema = InvokeEval2Type$inboundSchema;
+  /** @deprecated use `InvokeEval2Type$outboundSchema` instead. */
+  export const outboundSchema = InvokeEval2Type$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalType$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalType
+> = z.nativeEnum(InvokeEvalType);
+
+/** @internal */
+export const InvokeEvalType$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalType
+> = InvokeEvalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalType$ {
+  /** @deprecated use `InvokeEvalType$inboundSchema` instead. */
+  export const inboundSchema = InvokeEvalType$inboundSchema;
+  /** @deprecated use `InvokeEvalType$outboundSchema` instead. */
+  export const outboundSchema = InvokeEvalType$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type
+  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type
+  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema` instead. */
+  export const inboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema` instead. */
+  export const outboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type
+  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type
+  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema` instead. */
+  export const inboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema` instead. */
+  export const outboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type
+  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type
+  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema` instead. */
+  export const inboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema` instead. */
+  export const outboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType
+  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType
+  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponse200Type> = z
+    .nativeEnum(InvokeEvalResponseBodyEvalsResponse200Type);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponse200Type> =
+    InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsResponse200Type$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponseType> = z
+    .nativeEnum(InvokeEvalResponseBodyEvalsResponseType);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponseType> =
+    InvokeEvalResponseBodyEvalsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsResponseType$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    InvokeEvalResponseBodyEvalsResponseType$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    InvokeEvalResponseBodyEvalsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalResponseBodyEvalsType
+> = z.nativeEnum(InvokeEvalResponseBodyEvalsType);
+
+/** @internal */
+export const InvokeEvalResponseBodyEvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalResponseBodyEvalsType
+> = InvokeEvalResponseBodyEvalsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyEvalsType$ {
+  /** @deprecated use `InvokeEvalResponseBodyEvalsType$inboundSchema` instead. */
+  export const inboundSchema = InvokeEvalResponseBodyEvalsType$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyEvalsType$outboundSchema` instead. */
+  export const outboundSchema = InvokeEvalResponseBodyEvalsType$outboundSchema;
+}
+
+/** @internal */
+export const InvokeEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalResponseBodyType
+> = z.nativeEnum(InvokeEvalResponseBodyType);
+
+/** @internal */
+export const InvokeEvalResponseBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof InvokeEvalResponseBodyType
+> = InvokeEvalResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace InvokeEvalResponseBodyType$ {
+  /** @deprecated use `InvokeEvalResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema = InvokeEvalResponseBodyType$inboundSchema;
+  /** @deprecated use `InvokeEvalResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema = InvokeEvalResponseBodyType$outboundSchema;
+}
+
 export type InvokeEval2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -58,11 +418,6 @@ export type InvokeEval23 = {
   type: InvokeEval2EvalsRequestType;
   file: InvokeEval2File;
 };
-
-export const InvokeEval2EvalsType = {
-  ImageUrl: "image_url",
-} as const;
-export type InvokeEval2EvalsType = ClosedEnum<typeof InvokeEval2EvalsType>;
 
 export type InvokeEval2ImageUrl = {
   /**
@@ -83,11 +438,6 @@ export type InvokeEval22 = {
   imageUrl: InvokeEval2ImageUrl;
 };
 
-export const InvokeEval2Type = {
-  Text: "text",
-} as const;
-export type InvokeEval2Type = ClosedEnum<typeof InvokeEval2Type>;
-
 /**
  * Text content part of a prompt message
  */
@@ -104,11 +454,6 @@ export type InvokeEvalContent2 = InvokeEval21 | InvokeEval22 | InvokeEval23;
 export type InvokeEvalContent =
   | string
   | Array<InvokeEval21 | InvokeEval22 | InvokeEval23>;
-
-export const InvokeEvalType = {
-  Function: "function",
-} as const;
-export type InvokeEvalType = ClosedEnum<typeof InvokeEvalType>;
 
 export type InvokeEvalFunction = {
   name: string;
@@ -169,12 +514,6 @@ export type InvokeEvalRequest = {
   requestBody?: InvokeEvalRequestBody | undefined;
 };
 
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type = {
-  HttpEval: "http_eval",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type>;
-
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue =
   | number
   | boolean;
@@ -188,12 +527,6 @@ export type InvokeEvalResponseBodyHTTP = {
   type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type;
   value?: InvokeEvalResponseBodyEvalsResponse200Value | null | undefined;
 };
-
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type = {
-  LlmEvaluator: "llm_evaluator",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type>;
 
 export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value =
   | number
@@ -211,12 +544,6 @@ export type InvokeEvalResponseBodyLLM = {
   value: InvokeEvalResponseBodyEvalsResponseValue | null;
 };
 
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type = {
-  BertScore: "bert_score",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type>;
-
 export type InvokeEvalResponseBodyEvalsValue = {
   f1: number;
   precision: number;
@@ -227,12 +554,6 @@ export type BERTScore = {
   type: InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type;
   value: InvokeEvalResponseBodyEvalsValue;
 };
-
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType = {
-  RougeN: "rouge_n",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType =
-  ClosedEnum<typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType>;
 
 export type Rouge1 = {
   f1: number;
@@ -263,24 +584,10 @@ export type RougeN = {
   value: InvokeEvalResponseBodyValue;
 };
 
-export const InvokeEvalResponseBodyEvalsResponse200Type = {
-  StringArray: "string_array",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponse200Type = ClosedEnum<
-  typeof InvokeEvalResponseBodyEvalsResponse200Type
->;
-
 export type StringArray = {
   type: InvokeEvalResponseBodyEvalsResponse200Type;
   values: Array<string | null>;
 };
-
-export const InvokeEvalResponseBodyEvalsResponseType = {
-  Boolean: "boolean",
-} as const;
-export type InvokeEvalResponseBodyEvalsResponseType = ClosedEnum<
-  typeof InvokeEvalResponseBodyEvalsResponseType
->;
 
 export type ResponseBodyValue = boolean | string | number;
 
@@ -289,24 +596,10 @@ export type ResponseBodyBoolean = {
   value: boolean | string | number | null;
 };
 
-export const InvokeEvalResponseBodyEvalsType = {
-  Number: "number",
-} as const;
-export type InvokeEvalResponseBodyEvalsType = ClosedEnum<
-  typeof InvokeEvalResponseBodyEvalsType
->;
-
 export type ResponseBodyNumber = {
   type: InvokeEvalResponseBodyEvalsType;
   value: number | null;
 };
-
-export const InvokeEvalResponseBodyType = {
-  String: "string",
-} as const;
-export type InvokeEvalResponseBodyType = ClosedEnum<
-  typeof InvokeEvalResponseBodyType
->;
 
 export type String = {
   type: InvokeEvalResponseBodyType;
@@ -325,48 +618,6 @@ export type InvokeEvalResponseBody =
   | InvokeEvalResponseBodyLLM
   | String
   | InvokeEvalResponseBodyHTTP;
-
-/** @internal */
-export const InvokeEvalRole$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalRole
-> = z.nativeEnum(InvokeEvalRole);
-
-/** @internal */
-export const InvokeEvalRole$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalRole
-> = InvokeEvalRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalRole$ {
-  /** @deprecated use `InvokeEvalRole$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalRole$inboundSchema;
-  /** @deprecated use `InvokeEvalRole$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalRole$outboundSchema;
-}
-
-/** @internal */
-export const InvokeEval2EvalsRequestType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsRequestType
-> = z.nativeEnum(InvokeEval2EvalsRequestType);
-
-/** @internal */
-export const InvokeEval2EvalsRequestType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsRequestType
-> = InvokeEval2EvalsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2EvalsRequestType$ {
-  /** @deprecated use `InvokeEval2EvalsRequestType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2EvalsRequestType$inboundSchema;
-  /** @deprecated use `InvokeEval2EvalsRequestType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2EvalsRequestType$outboundSchema;
-}
 
 /** @internal */
 export const InvokeEval2File$inboundSchema: z.ZodType<
@@ -485,27 +736,6 @@ export function invokeEval23FromJSON(
 }
 
 /** @internal */
-export const InvokeEval2EvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsType
-> = z.nativeEnum(InvokeEval2EvalsType);
-
-/** @internal */
-export const InvokeEval2EvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsType
-> = InvokeEval2EvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2EvalsType$ {
-  /** @deprecated use `InvokeEval2EvalsType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2EvalsType$inboundSchema;
-  /** @deprecated use `InvokeEval2EvalsType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2EvalsType$outboundSchema;
-}
-
-/** @internal */
 export const InvokeEval2ImageUrl$inboundSchema: z.ZodType<
   InvokeEval2ImageUrl,
   z.ZodTypeDef,
@@ -621,27 +851,6 @@ export function invokeEval22FromJSON(
     (x) => InvokeEval22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InvokeEval22' from JSON`,
   );
-}
-
-/** @internal */
-export const InvokeEval2Type$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2Type
-> = z.nativeEnum(InvokeEval2Type);
-
-/** @internal */
-export const InvokeEval2Type$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2Type
-> = InvokeEval2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2Type$ {
-  /** @deprecated use `InvokeEval2Type$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2Type$inboundSchema;
-  /** @deprecated use `InvokeEval2Type$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2Type$outboundSchema;
 }
 
 /** @internal */
@@ -820,27 +1029,6 @@ export function invokeEvalContentFromJSON(
     (x) => InvokeEvalContent$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InvokeEvalContent' from JSON`,
   );
-}
-
-/** @internal */
-export const InvokeEvalType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalType
-> = z.nativeEnum(InvokeEvalType);
-
-/** @internal */
-export const InvokeEvalType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalType
-> = InvokeEvalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalType$ {
-  /** @deprecated use `InvokeEvalType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalType$inboundSchema;
-  /** @deprecated use `InvokeEvalType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalType$outboundSchema;
 }
 
 /** @internal */
@@ -1188,31 +1376,6 @@ export function invokeEvalRequestFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema` instead. */
-  export const inboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema` instead. */
-  export const outboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson8Type$outboundSchema;
-}
-
-/** @internal */
 export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue$inboundSchema:
   z.ZodType<
     InvokeEvalResponseBodyEvalsResponse200ApplicationJSONValue,
@@ -1408,31 +1571,6 @@ export function invokeEvalResponseBodyHTTPFromJSON(
     (x) => InvokeEvalResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'InvokeEvalResponseBodyHTTP' from JSON`,
   );
-}
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema` instead. */
-  export const inboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema` instead. */
-  export const outboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Type$outboundSchema;
 }
 
 /** @internal */
@@ -1641,31 +1779,6 @@ export function invokeEvalResponseBodyLLMFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema` instead. */
-  export const inboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema` instead. */
-  export const outboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJson6Type$outboundSchema;
-}
-
-/** @internal */
 export const InvokeEvalResponseBodyEvalsValue$inboundSchema: z.ZodType<
   InvokeEvalResponseBodyEvalsValue,
   z.ZodTypeDef,
@@ -1780,31 +1893,6 @@ export function bertScoreFromJSON(
     (x) => BERTScore$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'BERTScore' from JSON`,
   );
-}
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType
-  > = z.nativeEnum(InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType
-  > = InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema;
 }
 
 /** @internal */
@@ -2093,29 +2181,6 @@ export function rougeNFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponse200Type> = z
-    .nativeEnum(InvokeEvalResponseBodyEvalsResponse200Type);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponse200Type> =
-    InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsResponse200Type$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200Type$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    InvokeEvalResponseBodyEvalsResponse200Type$outboundSchema;
-}
-
-/** @internal */
 export const StringArray$inboundSchema: z.ZodType<
   StringArray,
   z.ZodTypeDef,
@@ -2166,29 +2231,6 @@ export function stringArrayFromJSON(
     (x) => StringArray$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'StringArray' from JSON`,
   );
-}
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponseType> = z
-    .nativeEnum(InvokeEvalResponseBodyEvalsResponseType);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeEvalResponseBodyEvalsResponseType> =
-    InvokeEvalResponseBodyEvalsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsResponseType$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    InvokeEvalResponseBodyEvalsResponseType$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    InvokeEvalResponseBodyEvalsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -2297,27 +2339,6 @@ export function responseBodyBooleanFromJSON(
 }
 
 /** @internal */
-export const InvokeEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyEvalsType
-> = z.nativeEnum(InvokeEvalResponseBodyEvalsType);
-
-/** @internal */
-export const InvokeEvalResponseBodyEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyEvalsType
-> = InvokeEvalResponseBodyEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyEvalsType$ {
-  /** @deprecated use `InvokeEvalResponseBodyEvalsType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalResponseBodyEvalsType$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyEvalsType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalResponseBodyEvalsType$outboundSchema;
-}
-
-/** @internal */
 export const ResponseBodyNumber$inboundSchema: z.ZodType<
   ResponseBodyNumber,
   z.ZodTypeDef,
@@ -2372,27 +2393,6 @@ export function responseBodyNumberFromJSON(
     (x) => ResponseBodyNumber$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ResponseBodyNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const InvokeEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyType
-> = z.nativeEnum(InvokeEvalResponseBodyType);
-
-/** @internal */
-export const InvokeEvalResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalResponseBodyType
-> = InvokeEvalResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEvalResponseBodyType$ {
-  /** @deprecated use `InvokeEvalResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalResponseBodyType$inboundSchema;
-  /** @deprecated use `InvokeEvalResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalResponseBodyType$outboundSchema;
 }
 
 /** @internal */

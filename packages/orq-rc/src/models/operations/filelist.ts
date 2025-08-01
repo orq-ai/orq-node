@@ -9,21 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileListRequest = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
-  limit?: number | undefined;
-  /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
-   */
-  startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
-   */
-  endingBefore?: string | undefined;
-};
-
 export const FileListObject = {
   List: "list",
 } as const;
@@ -41,6 +26,63 @@ export const FileListPurpose = {
  * The intended purpose of the uploaded file.
  */
 export type FileListPurpose = ClosedEnum<typeof FileListPurpose>;
+
+/** @internal */
+export const FileListObject$inboundSchema: z.ZodNativeEnum<
+  typeof FileListObject
+> = z.nativeEnum(FileListObject);
+
+/** @internal */
+export const FileListObject$outboundSchema: z.ZodNativeEnum<
+  typeof FileListObject
+> = FileListObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileListObject$ {
+  /** @deprecated use `FileListObject$inboundSchema` instead. */
+  export const inboundSchema = FileListObject$inboundSchema;
+  /** @deprecated use `FileListObject$outboundSchema` instead. */
+  export const outboundSchema = FileListObject$outboundSchema;
+}
+
+/** @internal */
+export const FileListPurpose$inboundSchema: z.ZodNativeEnum<
+  typeof FileListPurpose
+> = z.nativeEnum(FileListPurpose);
+
+/** @internal */
+export const FileListPurpose$outboundSchema: z.ZodNativeEnum<
+  typeof FileListPurpose
+> = FileListPurpose$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileListPurpose$ {
+  /** @deprecated use `FileListPurpose$inboundSchema` instead. */
+  export const inboundSchema = FileListPurpose$inboundSchema;
+  /** @deprecated use `FileListPurpose$outboundSchema` instead. */
+  export const outboundSchema = FileListPurpose$outboundSchema;
+}
+
+export type FileListRequest = {
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   */
+  limit?: number | undefined;
+  /**
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   */
+  startingAfter?: string | undefined;
+  /**
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   */
+  endingBefore?: string | undefined;
+};
 
 export type FileListData = {
   id: string;
@@ -142,48 +184,6 @@ export function fileListRequestFromJSON(
 }
 
 /** @internal */
-export const FileListObject$inboundSchema: z.ZodNativeEnum<
-  typeof FileListObject
-> = z.nativeEnum(FileListObject);
-
-/** @internal */
-export const FileListObject$outboundSchema: z.ZodNativeEnum<
-  typeof FileListObject
-> = FileListObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListObject$ {
-  /** @deprecated use `FileListObject$inboundSchema` instead. */
-  export const inboundSchema = FileListObject$inboundSchema;
-  /** @deprecated use `FileListObject$outboundSchema` instead. */
-  export const outboundSchema = FileListObject$outboundSchema;
-}
-
-/** @internal */
-export const FileListPurpose$inboundSchema: z.ZodNativeEnum<
-  typeof FileListPurpose
-> = z.nativeEnum(FileListPurpose);
-
-/** @internal */
-export const FileListPurpose$outboundSchema: z.ZodNativeEnum<
-  typeof FileListPurpose
-> = FileListPurpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileListPurpose$ {
-  /** @deprecated use `FileListPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileListPurpose$inboundSchema;
-  /** @deprecated use `FileListPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileListPurpose$outboundSchema;
-}
-
-/** @internal */
 export const FileListData$inboundSchema: z.ZodType<
   FileListData,
   z.ZodTypeDef,
@@ -196,7 +196,7 @@ export const FileListData$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-07-31T13:37:26.617Z",
+    "2025-08-01T05:13:14.051Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -230,7 +230,7 @@ export const FileListData$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-07-31T13:37:26.617Z"))
+  created: z.date().default(() => new Date("2025-08-01T05:13:14.051Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

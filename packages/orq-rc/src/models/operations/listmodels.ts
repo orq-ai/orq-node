@@ -45,37 +45,6 @@ export const OwnedBy = {
  */
 export type OwnedBy = ClosedEnum<typeof OwnedBy>;
 
-/**
- * Describes a model offering that can be used with the API
- */
-export type ListModelsData = {
-  /**
-   * The model identifier, which can be referenced in the API endpoints.
-   */
-  id: string;
-  /**
-   * The timestamp of the model creation
-   */
-  created: number;
-  /**
-   * The modality of the model
-   */
-  type: ListModelsType;
-  /**
-   * Describe the provider of the model. Every model with `vendor` is publicly available, while models with `workspace` are private.
-   */
-  ownedBy: OwnedBy;
-};
-
-/**
- * A list of model objects.
- */
-export type ListModelsResponseBody = {
-  object: ListModelsObject;
-  data: Array<ListModelsData>;
-  hasMore: boolean;
-};
-
 /** @internal */
 export const ListModelsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsObject
@@ -136,6 +105,37 @@ export namespace OwnedBy$ {
   /** @deprecated use `OwnedBy$outboundSchema` instead. */
   export const outboundSchema = OwnedBy$outboundSchema;
 }
+
+/**
+ * Describes a model offering that can be used with the API
+ */
+export type ListModelsData = {
+  /**
+   * The model identifier, which can be referenced in the API endpoints.
+   */
+  id: string;
+  /**
+   * The timestamp of the model creation
+   */
+  created: number;
+  /**
+   * The modality of the model
+   */
+  type: ListModelsType;
+  /**
+   * Describe the provider of the model. Every model with `vendor` is publicly available, while models with `workspace` are private.
+   */
+  ownedBy: OwnedBy;
+};
+
+/**
+ * A list of model objects.
+ */
+export type ListModelsResponseBody = {
+  object: ListModelsObject;
+  data: Array<ListModelsData>;
+  hasMore: boolean;
+};
 
 /** @internal */
 export const ListModelsData$inboundSchema: z.ZodType<

@@ -22,6 +22,1004 @@ export type CreateDatasetItemMessagesDatasetsRequestRequestBody5Role =
   ClosedEnum<typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role>;
 
 /**
+ * The type of the content part.
+ */
+export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type = {
+  Refusal: "refusal",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type =
+  ClosedEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type>;
+
+/**
+ * The type of the content part.
+ */
+export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType = {
+  Text: "text",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type CreateDatasetItem2DatasetsRequestRequestBodyMessagesType =
+  ClosedEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType>;
+
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type CreateDatasetItemMessagesDatasetsRequestRequestBodyRole =
+  ClosedEnum<typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole>;
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const CreateDatasetItemMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type CreateDatasetItemMessagesType = ClosedEnum<
+  typeof CreateDatasetItemMessagesType
+>;
+
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const CreateDatasetItemMessagesDatasetsRequestRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type CreateDatasetItemMessagesDatasetsRequestRole = ClosedEnum<
+  typeof CreateDatasetItemMessagesDatasetsRequestRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const CreateDatasetItem2DatasetsRequestRequestBodyType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type CreateDatasetItem2DatasetsRequestRequestBodyType = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsRequestRequestBodyType
+>;
+
+export const CreateDatasetItem2DatasetsRequestType = {
+  InputAudio: "input_audio",
+} as const;
+export type CreateDatasetItem2DatasetsRequestType = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsRequestType
+>;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const CreateDatasetItem2Format = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type CreateDatasetItem2Format = ClosedEnum<
+  typeof CreateDatasetItem2Format
+>;
+
+export const CreateDatasetItem2DatasetsType = {
+  ImageUrl: "image_url",
+} as const;
+export type CreateDatasetItem2DatasetsType = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsType
+>;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const CreateDatasetItem2Detail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type CreateDatasetItem2Detail = ClosedEnum<
+  typeof CreateDatasetItem2Detail
+>;
+
+export const CreateDatasetItem2Type = {
+  Text: "text",
+} as const;
+export type CreateDatasetItem2Type = ClosedEnum<typeof CreateDatasetItem2Type>;
+
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const CreateDatasetItemMessagesDatasetsRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type CreateDatasetItemMessagesDatasetsRole = ClosedEnum<
+  typeof CreateDatasetItemMessagesDatasetsRole
+>;
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const CreateDatasetItemMessagesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type CreateDatasetItemMessagesRole = ClosedEnum<
+  typeof CreateDatasetItemMessagesRole
+>;
+
+/**
+ * The role of the messages author, in this case tool.
+ */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role =
+  {
+    Tool: "tool",
+  } as const;
+/**
+ * The role of the messages author, in this case tool.
+ */
+export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role =
+  ClosedEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
+  >;
+
+/**
+ * The type of the content part.
+ */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type =
+  ClosedEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
+  >;
+
+/**
+ * The type of the content part.
+ */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType =
+  {
+    Text: "text",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType =
+  ClosedEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
+  >;
+
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
+  {
+    Assistant: "assistant",
+  } as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
+  ClosedEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
+  >;
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const CreateDatasetItemMessagesDatasetsType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type CreateDatasetItemMessagesDatasetsType = ClosedEnum<
+  typeof CreateDatasetItemMessagesDatasetsType
+>;
+
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole =
+  ClosedEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
+  >;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType =
+  {
+    File: "file",
+  } as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
+  >;
+
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType = {
+  InputAudio: "input_audio",
+} as const;
+export type CreateDatasetItem2DatasetsResponse200ApplicationJSONType =
+  ClosedEnum<typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType>;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const CreateDatasetItem2DatasetsFormat = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type CreateDatasetItem2DatasetsFormat = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsFormat
+>;
+
+export const CreateDatasetItem2DatasetsResponse200Type = {
+  ImageUrl: "image_url",
+} as const;
+export type CreateDatasetItem2DatasetsResponse200Type = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsResponse200Type
+>;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const CreateDatasetItem2DatasetsDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type CreateDatasetItem2DatasetsDetail = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsDetail
+>;
+
+export const CreateDatasetItem2DatasetsResponseType = {
+  Text: "text",
+} as const;
+export type CreateDatasetItem2DatasetsResponseType = ClosedEnum<
+  typeof CreateDatasetItem2DatasetsResponseType
+>;
+
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const CreateDatasetItemMessagesDatasetsResponse200Role = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type CreateDatasetItemMessagesDatasetsResponse200Role = ClosedEnum<
+  typeof CreateDatasetItemMessagesDatasetsResponse200Role
+>;
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const CreateDatasetItemMessagesDatasetsResponseRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type CreateDatasetItemMessagesDatasetsResponseRole = ClosedEnum<
+  typeof CreateDatasetItemMessagesDatasetsResponseRole
+>;
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role
+  > = z.nativeEnum(CreateDatasetItemMessagesDatasetsRequestRequestBody5Role);
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role
+  > = CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type
+  > = z.nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type
+  > = CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType
+  > = z.nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyMessagesType);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType
+  > = CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole
+  > = z.nativeEnum(CreateDatasetItemMessagesDatasetsRequestRequestBodyRole);
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole
+  > = CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemMessagesType
+> = z.nativeEnum(CreateDatasetItemMessagesType);
+
+/** @internal */
+export const CreateDatasetItemMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemMessagesType
+> = CreateDatasetItemMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesType$ {
+  /** @deprecated use `CreateDatasetItemMessagesType$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemMessagesType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesType$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemMessagesType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRequestRole> = z
+    .nativeEnum(CreateDatasetItemMessagesDatasetsRequestRole);
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRequestRole> =
+    CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsRequestRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyType> = z
+    .nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyType);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyType> =
+    CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsRequestRequestBodyType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> = z.nativeEnum(
+    CreateDatasetItem2DatasetsRequestType,
+  );
+
+/** @internal */
+export const CreateDatasetItem2DatasetsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> =
+    CreateDatasetItem2DatasetsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsRequestType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsRequestType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2Format$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2Format
+> = z.nativeEnum(CreateDatasetItem2Format);
+
+/** @internal */
+export const CreateDatasetItem2Format$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2Format
+> = CreateDatasetItem2Format$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2Format$ {
+  /** @deprecated use `CreateDatasetItem2Format$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2Format$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2Format$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2Format$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2DatasetsType
+> = z.nativeEnum(CreateDatasetItem2DatasetsType);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2DatasetsType
+> = CreateDatasetItem2DatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsType$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2DatasetsType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsType$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2DatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2Detail$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2Detail
+> = z.nativeEnum(CreateDatasetItem2Detail);
+
+/** @internal */
+export const CreateDatasetItem2Detail$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2Detail
+> = CreateDatasetItem2Detail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2Detail$ {
+  /** @deprecated use `CreateDatasetItem2Detail$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2Detail$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2Detail$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2Detail$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2Type$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2Type
+> = z.nativeEnum(CreateDatasetItem2Type);
+
+/** @internal */
+export const CreateDatasetItem2Type$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2Type
+> = CreateDatasetItem2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2Type$ {
+  /** @deprecated use `CreateDatasetItem2Type$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2Type$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2Type$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRole$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRole> = z.nativeEnum(
+    CreateDatasetItemMessagesDatasetsRole,
+  );
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsRole$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRole> =
+    CreateDatasetItemMessagesDatasetsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemMessagesRole
+> = z.nativeEnum(CreateDatasetItemMessagesRole);
+
+/** @internal */
+export const CreateDatasetItemMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemMessagesRole
+> = CreateDatasetItemMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemMessagesRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesRole$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemMessagesRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
+  > = z.nativeEnum(
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role,
+  );
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
+  > =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
+  > = z.nativeEnum(
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type,
+  );
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
+  > =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
+  > = z.nativeEnum(
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType,
+  );
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
+  > =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
+  > = z.nativeEnum(
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole,
+  );
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
+  > =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> = z.nativeEnum(
+    CreateDatasetItemMessagesDatasetsType,
+  );
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> =
+    CreateDatasetItemMessagesDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsType$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
+  > = z.nativeEnum(
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole,
+  );
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
+  > =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType,
+  );
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
+  > =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
+  > = z.nativeEnum(CreateDatasetItem2DatasetsResponse200ApplicationJSONType);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
+  > = CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2DatasetsFormat
+> = z.nativeEnum(CreateDatasetItem2DatasetsFormat);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2DatasetsFormat
+> = CreateDatasetItem2DatasetsFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsFormat$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsFormat$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2DatasetsFormat$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsFormat$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2DatasetsFormat$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> = z
+    .nativeEnum(CreateDatasetItem2DatasetsResponse200Type);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> =
+    CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponse200Type$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsDetail$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2DatasetsDetail
+> = z.nativeEnum(CreateDatasetItem2DatasetsDetail);
+
+/** @internal */
+export const CreateDatasetItem2DatasetsDetail$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItem2DatasetsDetail
+> = CreateDatasetItem2DatasetsDetail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsDetail$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsDetail$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2DatasetsDetail$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsDetail$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2DatasetsDetail$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponseType> = z.nativeEnum(
+    CreateDatasetItem2DatasetsResponseType,
+  );
+
+/** @internal */
+export const CreateDatasetItem2DatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponseType> =
+    CreateDatasetItem2DatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsResponseType$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsResponseType$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Role> = z
+    .nativeEnum(CreateDatasetItemMessagesDatasetsResponse200Role);
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Role> =
+    CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsResponse200Role$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseRole> = z
+    .nativeEnum(CreateDatasetItemMessagesDatasetsResponseRole);
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseRole> =
+    CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemMessagesDatasetsResponseRole$ {
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema;
+  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema;
+}
+
+/**
  * The contents of the tool message.
  */
 export type CreateDatasetItemMessagesDatasetsRequestContent =
@@ -43,18 +1041,6 @@ export type CreateDatasetItemMessagesToolMessage = {
   toolCallId: string;
 };
 
-/**
- * The type of the content part.
- */
-export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type = {
-  Refusal: "refusal",
-} as const;
-/**
- * The type of the content part.
- */
-export type CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type =
-  ClosedEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type>;
-
 export type CreateDatasetItem2RefusalContentPart = {
   /**
    * The type of the content part.
@@ -65,18 +1051,6 @@ export type CreateDatasetItem2RefusalContentPart = {
    */
   refusal: string;
 };
-
-/**
- * The type of the content part.
- */
-export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType = {
-  Text: "text",
-} as const;
-/**
- * The type of the content part.
- */
-export type CreateDatasetItem2DatasetsRequestRequestBodyMessagesType =
-  ClosedEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType>;
 
 export type CreateDatasetItem2TextContentPart = {
   /**
@@ -103,18 +1077,6 @@ export type CreateDatasetItemMessagesDatasetsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
- */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type CreateDatasetItemMessagesDatasetsRequestRequestBodyRole =
-  ClosedEnum<typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole>;
-
-/**
  * Data about a previous audio response from the model.
  */
 export type CreateDatasetItemMessagesAudio = {
@@ -123,19 +1085,6 @@ export type CreateDatasetItemMessagesAudio = {
    */
   id: string;
 };
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const CreateDatasetItemMessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type CreateDatasetItemMessagesType = ClosedEnum<
-  typeof CreateDatasetItemMessagesType
->;
 
 export type CreateDatasetItemMessagesFunction = {
   /**
@@ -205,32 +1154,6 @@ export type CreateDatasetItemMessagesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
-/**
- * The role of the messages author, in this case `user`.
- */
-export const CreateDatasetItemMessagesDatasetsRequestRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type CreateDatasetItemMessagesDatasetsRequestRole = ClosedEnum<
-  typeof CreateDatasetItemMessagesDatasetsRequestRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const CreateDatasetItem2DatasetsRequestRequestBodyType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type CreateDatasetItem2DatasetsRequestRequestBodyType = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsRequestRequestBodyType
->;
-
 export type CreateDatasetItem2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -250,27 +1173,6 @@ export type CreateDatasetItem24 = {
   file: CreateDatasetItem2File;
 };
 
-export const CreateDatasetItem2DatasetsRequestType = {
-  InputAudio: "input_audio",
-} as const;
-export type CreateDatasetItem2DatasetsRequestType = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsRequestType
->;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const CreateDatasetItem2Format = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type CreateDatasetItem2Format = ClosedEnum<
-  typeof CreateDatasetItem2Format
->;
-
 export type CreateDatasetItem2InputAudio = {
   /**
    * Base64 encoded audio data.
@@ -287,28 +1189,6 @@ export type CreateDatasetItem23 = {
   inputAudio: CreateDatasetItem2InputAudio;
 };
 
-export const CreateDatasetItem2DatasetsType = {
-  ImageUrl: "image_url",
-} as const;
-export type CreateDatasetItem2DatasetsType = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsType
->;
-
-/**
- * Specifies the detail level of the image.
- */
-export const CreateDatasetItem2Detail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type CreateDatasetItem2Detail = ClosedEnum<
-  typeof CreateDatasetItem2Detail
->;
-
 export type CreateDatasetItem2ImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -324,11 +1204,6 @@ export type CreateDatasetItem22 = {
   type: CreateDatasetItem2DatasetsType;
   imageUrl: CreateDatasetItem2ImageUrl;
 };
-
-export const CreateDatasetItem2Type = {
-  Text: "text",
-} as const;
-export type CreateDatasetItem2Type = ClosedEnum<typeof CreateDatasetItem2Type>;
 
 export type CreateDatasetItem21 = {
   type: CreateDatasetItem2Type;
@@ -375,19 +1250,6 @@ export type CreateDatasetItemMessagesUserMessage = {
     >;
 };
 
-/**
- * The role of the messages author, in this case `system`.
- */
-export const CreateDatasetItemMessagesDatasetsRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type CreateDatasetItemMessagesDatasetsRole = ClosedEnum<
-  typeof CreateDatasetItemMessagesDatasetsRole
->;
-
 export type CreateDatasetItemMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -402,19 +1264,6 @@ export type CreateDatasetItemMessagesSystemMessage = {
    */
   name?: string | undefined;
 };
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const CreateDatasetItemMessagesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type CreateDatasetItemMessagesRole = ClosedEnum<
-  typeof CreateDatasetItemMessagesRole
->;
 
 export type CreateDatasetItemMessagesDeveloperMessage = {
   /**
@@ -464,21 +1313,6 @@ export type CreateDatasetItemRequest = {
 };
 
 /**
- * The role of the messages author, in this case tool.
- */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role =
-  {
-    Tool: "tool",
-  } as const;
-/**
- * The role of the messages author, in this case tool.
- */
-export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role =
-  ClosedEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
-  >;
-
-/**
  * The contents of the tool message.
  */
 export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent =
@@ -501,21 +1335,6 @@ export type CreateDatasetItemMessagesDatasetsToolMessage = {
   toolCallId: string;
 };
 
-/**
- * The type of the content part.
- */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type =
-  ClosedEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
-  >;
-
 export type CreateDatasetItem2DatasetsRefusalContentPart = {
   /**
    * The type of the content part.
@@ -527,21 +1346,6 @@ export type CreateDatasetItem2DatasetsRefusalContentPart = {
    */
   refusal: string;
 };
-
-/**
- * The type of the content part.
- */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType =
-  {
-    Text: "text",
-  } as const;
-/**
- * The type of the content part.
- */
-export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType =
-  ClosedEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
-  >;
 
 export type CreateDatasetItem2DatasetsTextContentPart = {
   /**
@@ -570,21 +1374,6 @@ export type CreateDatasetItemMessagesDatasetsResponse200Content =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
- */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
-  {
-    Assistant: "assistant",
-  } as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
-  ClosedEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
-  >;
-
-/**
  * Data about a previous audio response from the model.
  */
 export type CreateDatasetItemMessagesDatasetsAudio = {
@@ -593,19 +1382,6 @@ export type CreateDatasetItemMessagesDatasetsAudio = {
    */
   id: string;
 };
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const CreateDatasetItemMessagesDatasetsType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type CreateDatasetItemMessagesDatasetsType = ClosedEnum<
-  typeof CreateDatasetItemMessagesDatasetsType
->;
 
 export type CreateDatasetItemMessagesDatasetsFunction = {
   /**
@@ -677,35 +1453,6 @@ export type CreateDatasetItemMessagesDatasetsAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
-/**
- * The role of the messages author, in this case `user`.
- */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole =
-  ClosedEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
-  >;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType =
-  {
-    File: "file",
-  } as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
-  >;
-
 export type CreateDatasetItem2DatasetsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -725,26 +1472,6 @@ export type CreateDatasetItem2Datasets4 = {
   file: CreateDatasetItem2DatasetsFile;
 };
 
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType = {
-  InputAudio: "input_audio",
-} as const;
-export type CreateDatasetItem2DatasetsResponse200ApplicationJSONType =
-  ClosedEnum<typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType>;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const CreateDatasetItem2DatasetsFormat = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type CreateDatasetItem2DatasetsFormat = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsFormat
->;
-
 export type CreateDatasetItem2DatasetsInputAudio = {
   /**
    * Base64 encoded audio data.
@@ -761,28 +1488,6 @@ export type CreateDatasetItem2Datasets3 = {
   inputAudio: CreateDatasetItem2DatasetsInputAudio;
 };
 
-export const CreateDatasetItem2DatasetsResponse200Type = {
-  ImageUrl: "image_url",
-} as const;
-export type CreateDatasetItem2DatasetsResponse200Type = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsResponse200Type
->;
-
-/**
- * Specifies the detail level of the image.
- */
-export const CreateDatasetItem2DatasetsDetail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type CreateDatasetItem2DatasetsDetail = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsDetail
->;
-
 export type CreateDatasetItem2DatasetsImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -798,13 +1503,6 @@ export type CreateDatasetItem2Datasets2 = {
   type: CreateDatasetItem2DatasetsResponse200Type;
   imageUrl: CreateDatasetItem2DatasetsImageUrl;
 };
-
-export const CreateDatasetItem2DatasetsResponseType = {
-  Text: "text",
-} as const;
-export type CreateDatasetItem2DatasetsResponseType = ClosedEnum<
-  typeof CreateDatasetItem2DatasetsResponseType
->;
 
 export type CreateDatasetItem2Datasets1 = {
   type: CreateDatasetItem2DatasetsResponseType;
@@ -851,19 +1549,6 @@ export type CreateDatasetItemMessagesDatasetsUserMessage = {
     >;
 };
 
-/**
- * The role of the messages author, in this case `system`.
- */
-export const CreateDatasetItemMessagesDatasetsResponse200Role = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type CreateDatasetItemMessagesDatasetsResponse200Role = ClosedEnum<
-  typeof CreateDatasetItemMessagesDatasetsResponse200Role
->;
-
 export type CreateDatasetItemMessagesDatasetsSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -878,19 +1563,6 @@ export type CreateDatasetItemMessagesDatasetsSystemMessage = {
    */
   name?: string | undefined;
 };
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const CreateDatasetItemMessagesDatasetsResponseRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type CreateDatasetItemMessagesDatasetsResponseRole = ClosedEnum<
-  typeof CreateDatasetItemMessagesDatasetsResponseRole
->;
 
 export type CreateDatasetItemMessagesDatasetsDeveloperMessage = {
   /**
@@ -964,31 +1636,6 @@ export type CreateDatasetItemResponseBody = {
    */
   updated?: Date | undefined;
 };
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role
-  > = z.nativeEnum(CreateDatasetItemMessagesDatasetsRequestRequestBody5Role);
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsRequestRequestBody5Role
-  > = CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBody5Role$outboundSchema;
-}
 
 /** @internal */
 export const CreateDatasetItemMessagesDatasetsRequestContent$inboundSchema:
@@ -1128,31 +1775,6 @@ export function createDatasetItemMessagesToolMessageFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type
-  > = z.nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type
-  > = CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessages4Type$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItem2RefusalContentPart$inboundSchema: z.ZodType<
   CreateDatasetItem2RefusalContentPart,
   z.ZodTypeDef,
@@ -1213,31 +1835,6 @@ export function createDatasetItem2RefusalContentPartFromJSON(
       CreateDatasetItem2RefusalContentPart$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItem2RefusalContentPart' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType
-  > = z.nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyMessagesType);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType
-  > = CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -1436,31 +2033,6 @@ export function createDatasetItemMessagesDatasetsContentFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole
-  > = z.nativeEnum(CreateDatasetItemMessagesDatasetsRequestRequestBodyRole);
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole
-  > = CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRequestBodyRole$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItemMessagesAudio$inboundSchema: z.ZodType<
   CreateDatasetItemMessagesAudio,
   z.ZodTypeDef,
@@ -1514,27 +2086,6 @@ export function createDatasetItemMessagesAudioFromJSON(
     (x) => CreateDatasetItemMessagesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItemMessagesAudio' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItemMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemMessagesType
-> = z.nativeEnum(CreateDatasetItemMessagesType);
-
-/** @internal */
-export const CreateDatasetItemMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemMessagesType
-> = CreateDatasetItemMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesType$ {
-  /** @deprecated use `CreateDatasetItemMessagesType$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesType$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -1799,52 +2350,6 @@ export function createDatasetItemMessagesAssistantMessageFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRequestRole> = z
-    .nativeEnum(CreateDatasetItemMessagesDatasetsRequestRole);
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRequestRole> =
-    CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRequestRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyType> = z
-    .nativeEnum(CreateDatasetItem2DatasetsRequestRequestBodyType);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyType> =
-    CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestRequestBodyType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestRequestBodyType$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItem2File$inboundSchema: z.ZodType<
   CreateDatasetItem2File,
   z.ZodTypeDef,
@@ -1964,51 +2469,6 @@ export function createDatasetItem24FromJSON(
     (x) => CreateDatasetItem24$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItem24' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> = z.nativeEnum(
-    CreateDatasetItem2DatasetsRequestType,
-  );
-
-/** @internal */
-export const CreateDatasetItem2DatasetsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsRequestType> =
-    CreateDatasetItem2DatasetsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsRequestType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsRequestType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsRequestType$outboundSchema;
-}
-
-/** @internal */
-export const CreateDatasetItem2Format$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Format
-> = z.nativeEnum(CreateDatasetItem2Format);
-
-/** @internal */
-export const CreateDatasetItem2Format$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Format
-> = CreateDatasetItem2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Format$ {
-  /** @deprecated use `CreateDatasetItem2Format$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Format$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Format$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Format$outboundSchema;
 }
 
 /** @internal */
@@ -2136,48 +2596,6 @@ export function createDatasetItem23FromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItem2DatasetsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsType
-> = z.nativeEnum(CreateDatasetItem2DatasetsType);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsType
-> = CreateDatasetItem2DatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsType$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsType$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsType$outboundSchema;
-}
-
-/** @internal */
-export const CreateDatasetItem2Detail$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Detail
-> = z.nativeEnum(CreateDatasetItem2Detail);
-
-/** @internal */
-export const CreateDatasetItem2Detail$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Detail
-> = CreateDatasetItem2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Detail$ {
-  /** @deprecated use `CreateDatasetItem2Detail$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Detail$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Detail$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Detail$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItem2ImageUrl$inboundSchema: z.ZodType<
   CreateDatasetItem2ImageUrl,
   z.ZodTypeDef,
@@ -2297,27 +2715,6 @@ export function createDatasetItem22FromJSON(
     (x) => CreateDatasetItem22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItem22' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItem2Type$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Type
-> = z.nativeEnum(CreateDatasetItem2Type);
-
-/** @internal */
-export const CreateDatasetItem2Type$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2Type
-> = CreateDatasetItem2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2Type$ {
-  /** @deprecated use `CreateDatasetItem2Type$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2Type$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2Type$outboundSchema;
 }
 
 /** @internal */
@@ -2601,30 +2998,6 @@ export function createDatasetItemMessagesUserMessageFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsRole$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRole> = z.nativeEnum(
-    CreateDatasetItemMessagesDatasetsRole,
-  );
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsRole$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsRole> =
-    CreateDatasetItemMessagesDatasetsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsRole$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItemMessagesSystemMessage$inboundSchema: z.ZodType<
   CreateDatasetItemMessagesSystemMessage,
   z.ZodTypeDef,
@@ -2688,27 +3061,6 @@ export function createDatasetItemMessagesSystemMessageFromJSON(
       CreateDatasetItemMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItemMessagesSystemMessage' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItemMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemMessagesRole
-> = z.nativeEnum(CreateDatasetItemMessagesRole);
-
-/** @internal */
-export const CreateDatasetItemMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItemMessagesRole
-> = CreateDatasetItemMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemMessagesRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemMessagesRole$outboundSchema;
 }
 
 /** @internal */
@@ -3012,34 +3364,6 @@ export function createDatasetItemRequestFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
-  > = z.nativeEnum(
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role,
-  );
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role
-  > =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBody5Role$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent$inboundSchema:
   z.ZodType<
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONContent,
@@ -3187,34 +3511,6 @@ export function createDatasetItemMessagesDatasetsToolMessageFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
-  > = z.nativeEnum(
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type,
-  );
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type
-  > =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessages4Type$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItem2DatasetsRefusalContentPart$inboundSchema:
   z.ZodType<
     CreateDatasetItem2DatasetsRefusalContentPart,
@@ -3284,34 +3580,6 @@ export function createDatasetItem2DatasetsRefusalContentPartFromJSON(
       ),
     `Failed to parse 'CreateDatasetItem2DatasetsRefusalContentPart' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
-  > = z.nativeEnum(
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType,
-  );
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
-  > =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -3538,34 +3806,6 @@ export function createDatasetItemMessagesDatasetsResponse200ContentFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
-  > = z.nativeEnum(
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole,
-  );
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole
-  > =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItemMessagesDatasetsAudio$inboundSchema: z.ZodType<
   CreateDatasetItemMessagesDatasetsAudio,
   z.ZodTypeDef,
@@ -3623,30 +3863,6 @@ export function createDatasetItemMessagesDatasetsAudioFromJSON(
       CreateDatasetItemMessagesDatasetsAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItemMessagesDatasetsAudio' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> = z.nativeEnum(
-    CreateDatasetItemMessagesDatasetsType,
-  );
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsType> =
-    CreateDatasetItemMessagesDatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsType$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsType$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsType$outboundSchema;
 }
 
 /** @internal */
@@ -3944,62 +4160,6 @@ export function createDatasetItemMessagesDatasetsAssistantMessageFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
-  > = z.nativeEnum(
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole,
-  );
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole
-  > =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema;
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType,
-  );
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
-  > =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItem2DatasetsFile$inboundSchema: z.ZodType<
   CreateDatasetItem2DatasetsFile,
   z.ZodTypeDef,
@@ -4125,52 +4285,6 @@ export function createDatasetItem2Datasets4FromJSON(
     (x) => CreateDatasetItem2Datasets4$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItem2Datasets4' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
-  > = z.nativeEnum(CreateDatasetItem2DatasetsResponse200ApplicationJSONType);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONType
-  > = CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200ApplicationJSONType$outboundSchema;
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsFormat
-> = z.nativeEnum(CreateDatasetItem2DatasetsFormat);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsFormat
-> = CreateDatasetItem2DatasetsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsFormat$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsFormat$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsFormat$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsFormat$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsFormat$outboundSchema;
 }
 
 /** @internal */
@@ -4303,50 +4417,6 @@ export function createDatasetItem2Datasets3FromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItem2DatasetsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> = z
-    .nativeEnum(CreateDatasetItem2DatasetsResponse200Type);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponse200Type> =
-    CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponse200Type$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponse200Type$outboundSchema;
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsDetail$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsDetail
-> = z.nativeEnum(CreateDatasetItem2DatasetsDetail);
-
-/** @internal */
-export const CreateDatasetItem2DatasetsDetail$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasetItem2DatasetsDetail
-> = CreateDatasetItem2DatasetsDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsDetail$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsDetail$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItem2DatasetsDetail$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsDetail$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItem2DatasetsDetail$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItem2DatasetsImageUrl$inboundSchema: z.ZodType<
   CreateDatasetItem2DatasetsImageUrl,
   z.ZodTypeDef,
@@ -4472,30 +4542,6 @@ export function createDatasetItem2Datasets2FromJSON(
     (x) => CreateDatasetItem2Datasets2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateDatasetItem2Datasets2' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponseType> = z.nativeEnum(
-    CreateDatasetItem2DatasetsResponseType,
-  );
-
-/** @internal */
-export const CreateDatasetItem2DatasetsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItem2DatasetsResponseType> =
-    CreateDatasetItem2DatasetsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItem2DatasetsResponseType$ {
-  /** @deprecated use `CreateDatasetItem2DatasetsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItem2DatasetsResponseType$inboundSchema;
-  /** @deprecated use `CreateDatasetItem2DatasetsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItem2DatasetsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -4815,29 +4861,6 @@ export function createDatasetItemMessagesDatasetsUserMessageFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Role> = z
-    .nativeEnum(CreateDatasetItemMessagesDatasetsResponse200Role);
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponse200Role> =
-    CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponse200Role$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200Role$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponse200Role$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasetItemMessagesDatasetsSystemMessage$inboundSchema:
   z.ZodType<
     CreateDatasetItemMessagesDatasetsSystemMessage,
@@ -4909,29 +4932,6 @@ export function createDatasetItemMessagesDatasetsSystemMessageFromJSON(
       ),
     `Failed to parse 'CreateDatasetItemMessagesDatasetsSystemMessage' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseRole> = z
-    .nativeEnum(CreateDatasetItemMessagesDatasetsResponseRole);
-
-/** @internal */
-export const CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasetItemMessagesDatasetsResponseRole> =
-    CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasetItemMessagesDatasetsResponseRole$ {
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasetItemMessagesDatasetsResponseRole$inboundSchema;
-  /** @deprecated use `CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasetItemMessagesDatasetsResponseRole$outboundSchema;
 }
 
 /** @internal */
@@ -5111,7 +5111,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-07-31T13:37:23.611Z",
+    "2025-08-01T05:13:10.957Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5175,7 +5175,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-07-31T13:37:23.611Z"))
+  updated: z.date().default(() => new Date("2025-08-01T05:13:10.957Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

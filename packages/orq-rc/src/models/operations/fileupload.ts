@@ -10,11 +10,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileUploadFile = {
-  fileName: string;
-  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
-};
-
 /**
  * The intended purpose of the uploaded file.
  */
@@ -28,17 +23,6 @@ export const Purpose = {
  */
 export type Purpose = ClosedEnum<typeof Purpose>;
 
-export type FileUploadRequestBody = {
-  /**
-   * The file to be uploaded.
-   */
-  file: FileUploadFile | Blob;
-  /**
-   * The intended purpose of the uploaded file.
-   */
-  purpose?: Purpose | undefined;
-};
-
 /**
  * The intended purpose of the uploaded file.
  */
@@ -51,6 +35,62 @@ export const FileUploadPurpose = {
  * The intended purpose of the uploaded file.
  */
 export type FileUploadPurpose = ClosedEnum<typeof FileUploadPurpose>;
+
+/** @internal */
+export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> = z
+  .nativeEnum(Purpose);
+
+/** @internal */
+export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> =
+  Purpose$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Purpose$ {
+  /** @deprecated use `Purpose$inboundSchema` instead. */
+  export const inboundSchema = Purpose$inboundSchema;
+  /** @deprecated use `Purpose$outboundSchema` instead. */
+  export const outboundSchema = Purpose$outboundSchema;
+}
+
+/** @internal */
+export const FileUploadPurpose$inboundSchema: z.ZodNativeEnum<
+  typeof FileUploadPurpose
+> = z.nativeEnum(FileUploadPurpose);
+
+/** @internal */
+export const FileUploadPurpose$outboundSchema: z.ZodNativeEnum<
+  typeof FileUploadPurpose
+> = FileUploadPurpose$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileUploadPurpose$ {
+  /** @deprecated use `FileUploadPurpose$inboundSchema` instead. */
+  export const inboundSchema = FileUploadPurpose$inboundSchema;
+  /** @deprecated use `FileUploadPurpose$outboundSchema` instead. */
+  export const outboundSchema = FileUploadPurpose$outboundSchema;
+}
+
+export type FileUploadFile = {
+  fileName: string;
+  content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
+};
+
+export type FileUploadRequestBody = {
+  /**
+   * The file to be uploaded.
+   */
+  file: FileUploadFile | Blob;
+  /**
+   * The intended purpose of the uploaded file.
+   */
+  purpose?: Purpose | undefined;
+};
 
 /**
  * File uploaded successfully
@@ -141,25 +181,6 @@ export function fileUploadFileFromJSON(
 }
 
 /** @internal */
-export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> = z
-  .nativeEnum(Purpose);
-
-/** @internal */
-export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> =
-  Purpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Purpose$ {
-  /** @deprecated use `Purpose$inboundSchema` instead. */
-  export const inboundSchema = Purpose$inboundSchema;
-  /** @deprecated use `Purpose$outboundSchema` instead. */
-  export const outboundSchema = Purpose$outboundSchema;
-}
-
-/** @internal */
 export const FileUploadRequestBody$inboundSchema: z.ZodType<
   FileUploadRequestBody,
   z.ZodTypeDef,
@@ -217,27 +238,6 @@ export function fileUploadRequestBodyFromJSON(
 }
 
 /** @internal */
-export const FileUploadPurpose$inboundSchema: z.ZodNativeEnum<
-  typeof FileUploadPurpose
-> = z.nativeEnum(FileUploadPurpose);
-
-/** @internal */
-export const FileUploadPurpose$outboundSchema: z.ZodNativeEnum<
-  typeof FileUploadPurpose
-> = FileUploadPurpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileUploadPurpose$ {
-  /** @deprecated use `FileUploadPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileUploadPurpose$inboundSchema;
-  /** @deprecated use `FileUploadPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileUploadPurpose$outboundSchema;
-}
-
-/** @internal */
 export const FileUploadResponseBody$inboundSchema: z.ZodType<
   FileUploadResponseBody,
   z.ZodTypeDef,
@@ -250,7 +250,7 @@ export const FileUploadResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-07-31T13:37:26.617Z",
+    "2025-08-01T05:13:14.051Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -284,7 +284,7 @@ export const FileUploadResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-07-31T13:37:26.617Z"))
+  created: z.date().default(() => new Date("2025-08-01T05:13:14.051Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

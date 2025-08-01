@@ -9,21 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GetAllPromptsRequest = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
-  limit?: number | undefined;
-  /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
-   */
-  startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
-   */
-  endingBefore?: string | undefined;
-};
-
 export const GetAllPromptsObject = {
   List: "list",
 } as const;
@@ -74,42 +59,12 @@ export type GetAllPromptsResponseFormatPromptsType = ClosedEnum<
   typeof GetAllPromptsResponseFormatPromptsType
 >;
 
-export type GetAllPromptsResponseFormat2 = {
-  type: GetAllPromptsResponseFormatPromptsType;
-};
-
 export const GetAllPromptsResponseFormatType = {
   JsonSchema: "json_schema",
 } as const;
 export type GetAllPromptsResponseFormatType = ClosedEnum<
   typeof GetAllPromptsResponseFormatType
 >;
-
-export type GetAllPromptsResponseFormatJsonSchema = {
-  name: string;
-  strict?: boolean | undefined;
-  schema: { [k: string]: any };
-};
-
-export type GetAllPromptsResponseFormat1 = {
-  type: GetAllPromptsResponseFormatType;
-  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
-};
-
-/**
- * An object specifying the format that the model must output.
- *
- * @remarks
- *
- *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
- *
- *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
- *
- * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
- */
-export type GetAllPromptsResponseFormat =
-  | GetAllPromptsResponseFormat1
-  | GetAllPromptsResponseFormat2;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -154,6 +109,528 @@ export const GetAllPromptsReasoningEffort = {
 export type GetAllPromptsReasoningEffort = ClosedEnum<
   typeof GetAllPromptsReasoningEffort
 >;
+
+export const GetAllPromptsProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
+  Openailike: "openailike",
+  Cerebras: "cerebras",
+} as const;
+export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
+
+/**
+ * The role of the prompt message
+ */
+export const GetAllPromptsRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type GetAllPromptsRole = ClosedEnum<typeof GetAllPromptsRole>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const GetAllPrompts2PromptsResponseType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type GetAllPrompts2PromptsResponseType = ClosedEnum<
+  typeof GetAllPrompts2PromptsResponseType
+>;
+
+export const GetAllPrompts2PromptsType = {
+  ImageUrl: "image_url",
+} as const;
+export type GetAllPrompts2PromptsType = ClosedEnum<
+  typeof GetAllPrompts2PromptsType
+>;
+
+export const GetAllPrompts2Type = {
+  Text: "text",
+} as const;
+export type GetAllPrompts2Type = ClosedEnum<typeof GetAllPrompts2Type>;
+
+export const GetAllPromptsPromptsType = {
+  Function: "function",
+} as const;
+export type GetAllPromptsPromptsType = ClosedEnum<
+  typeof GetAllPromptsPromptsType
+>;
+
+export const GetAllPromptsUseCases = {
+  AgentsSimulations: "Agents simulations",
+  Agents: "Agents",
+  APIInteraction: "API interaction",
+  AutonomousAgents: "Autonomous Agents",
+  Chatbots: "Chatbots",
+  Classification: "Classification",
+  CodeUnderstanding: "Code understanding",
+  CodeWriting: "Code writing",
+  Conversation: "Conversation",
+  DocumentsQA: "Documents QA",
+  Evaluation: "Evaluation",
+  Extraction: "Extraction",
+  MultiModal: "Multi-modal",
+  SelfChecking: "Self-checking",
+  SentimentAnalysis: "Sentiment analysis",
+  Sql: "SQL",
+  Summarization: "Summarization",
+  Tagging: "Tagging",
+  TranslationDocument: "Translation (document)",
+  TranslationSentences: "Translation (sentences)",
+} as const;
+export type GetAllPromptsUseCases = ClosedEnum<typeof GetAllPromptsUseCases>;
+
+/**
+ * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
+ */
+export const GetAllPromptsLanguage = {
+  Chinese: "Chinese",
+  Dutch: "Dutch",
+  English: "English",
+  French: "French",
+  German: "German",
+  Russian: "Russian",
+  Spanish: "Spanish",
+} as const;
+/**
+ * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
+ */
+export type GetAllPromptsLanguage = ClosedEnum<typeof GetAllPromptsLanguage>;
+
+/** @internal */
+export const GetAllPromptsObject$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsObject
+> = z.nativeEnum(GetAllPromptsObject);
+
+/** @internal */
+export const GetAllPromptsObject$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsObject
+> = GetAllPromptsObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsObject$ {
+  /** @deprecated use `GetAllPromptsObject$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsObject$inboundSchema;
+  /** @deprecated use `GetAllPromptsObject$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsObject$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsType
+> = z.nativeEnum(GetAllPromptsType);
+
+/** @internal */
+export const GetAllPromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsType
+> = GetAllPromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsType$ {
+  /** @deprecated use `GetAllPromptsType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsType$inboundSchema;
+  /** @deprecated use `GetAllPromptsType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsModelType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsModelType
+> = z.nativeEnum(GetAllPromptsModelType);
+
+/** @internal */
+export const GetAllPromptsModelType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsModelType
+> = GetAllPromptsModelType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsModelType$ {
+  /** @deprecated use `GetAllPromptsModelType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsModelType$inboundSchema;
+  /** @deprecated use `GetAllPromptsModelType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsModelType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsFormat
+> = z.nativeEnum(GetAllPromptsFormat);
+
+/** @internal */
+export const GetAllPromptsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsFormat
+> = GetAllPromptsFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsFormat$ {
+  /** @deprecated use `GetAllPromptsFormat$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsFormat$inboundSchema;
+  /** @deprecated use `GetAllPromptsFormat$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsFormat$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatPromptsType$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> = z.nativeEnum(
+    GetAllPromptsResponseFormatPromptsType,
+  );
+
+/** @internal */
+export const GetAllPromptsResponseFormatPromptsType$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> =
+    GetAllPromptsResponseFormatPromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsResponseFormatPromptsType$ {
+  /** @deprecated use `GetAllPromptsResponseFormatPromptsType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetAllPromptsResponseFormatPromptsType$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormatPromptsType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPromptsResponseFormatPromptsType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormatType
+> = z.nativeEnum(GetAllPromptsResponseFormatType);
+
+/** @internal */
+export const GetAllPromptsResponseFormatType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormatType
+> = GetAllPromptsResponseFormatType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsResponseFormatType$ {
+  /** @deprecated use `GetAllPromptsResponseFormatType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsResponseFormatType$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormatType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsResponseFormatType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPhotoRealVersion
+> = z.nativeEnum(GetAllPromptsPhotoRealVersion);
+
+/** @internal */
+export const GetAllPromptsPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPhotoRealVersion
+> = GetAllPromptsPhotoRealVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsPhotoRealVersion$ {
+  /** @deprecated use `GetAllPromptsPhotoRealVersion$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsPhotoRealVersion$inboundSchema;
+  /** @deprecated use `GetAllPromptsPhotoRealVersion$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsPhotoRealVersion$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsEncodingFormat$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsEncodingFormat
+> = z.nativeEnum(GetAllPromptsEncodingFormat);
+
+/** @internal */
+export const GetAllPromptsEncodingFormat$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsEncodingFormat
+> = GetAllPromptsEncodingFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsEncodingFormat$ {
+  /** @deprecated use `GetAllPromptsEncodingFormat$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsEncodingFormat$inboundSchema;
+  /** @deprecated use `GetAllPromptsEncodingFormat$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsEncodingFormat$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsReasoningEffort
+> = z.nativeEnum(GetAllPromptsReasoningEffort);
+
+/** @internal */
+export const GetAllPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsReasoningEffort
+> = GetAllPromptsReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsReasoningEffort$ {
+  /** @deprecated use `GetAllPromptsReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsReasoningEffort$inboundSchema;
+  /** @deprecated use `GetAllPromptsReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsReasoningEffort$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsProvider$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsProvider
+> = z.nativeEnum(GetAllPromptsProvider);
+
+/** @internal */
+export const GetAllPromptsProvider$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsProvider
+> = GetAllPromptsProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsProvider$ {
+  /** @deprecated use `GetAllPromptsProvider$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsProvider$inboundSchema;
+  /** @deprecated use `GetAllPromptsProvider$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsProvider$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsRole$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsRole
+> = z.nativeEnum(GetAllPromptsRole);
+
+/** @internal */
+export const GetAllPromptsRole$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsRole
+> = GetAllPromptsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsRole$ {
+  /** @deprecated use `GetAllPromptsRole$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsRole$inboundSchema;
+  /** @deprecated use `GetAllPromptsRole$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsRole$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPrompts2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2PromptsResponseType
+> = z.nativeEnum(GetAllPrompts2PromptsResponseType);
+
+/** @internal */
+export const GetAllPrompts2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2PromptsResponseType
+> = GetAllPrompts2PromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts2PromptsResponseType$ {
+  /** @deprecated use `GetAllPrompts2PromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts2PromptsResponseType$inboundSchema;
+  /** @deprecated use `GetAllPrompts2PromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPrompts2PromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPrompts2PromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2PromptsType
+> = z.nativeEnum(GetAllPrompts2PromptsType);
+
+/** @internal */
+export const GetAllPrompts2PromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2PromptsType
+> = GetAllPrompts2PromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts2PromptsType$ {
+  /** @deprecated use `GetAllPrompts2PromptsType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts2PromptsType$inboundSchema;
+  /** @deprecated use `GetAllPrompts2PromptsType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts2PromptsType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPrompts2Type$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2Type
+> = z.nativeEnum(GetAllPrompts2Type);
+
+/** @internal */
+export const GetAllPrompts2Type$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts2Type
+> = GetAllPrompts2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts2Type$ {
+  /** @deprecated use `GetAllPrompts2Type$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts2Type$inboundSchema;
+  /** @deprecated use `GetAllPrompts2Type$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts2Type$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsPromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsType
+> = z.nativeEnum(GetAllPromptsPromptsType);
+
+/** @internal */
+export const GetAllPromptsPromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsPromptsType
+> = GetAllPromptsPromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsPromptsType$ {
+  /** @deprecated use `GetAllPromptsPromptsType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsPromptsType$inboundSchema;
+  /** @deprecated use `GetAllPromptsPromptsType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsPromptsType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsUseCases$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsUseCases
+> = z.nativeEnum(GetAllPromptsUseCases);
+
+/** @internal */
+export const GetAllPromptsUseCases$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsUseCases
+> = GetAllPromptsUseCases$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsUseCases$ {
+  /** @deprecated use `GetAllPromptsUseCases$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsUseCases$inboundSchema;
+  /** @deprecated use `GetAllPromptsUseCases$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsUseCases$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsLanguage$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsLanguage
+> = z.nativeEnum(GetAllPromptsLanguage);
+
+/** @internal */
+export const GetAllPromptsLanguage$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsLanguage
+> = GetAllPromptsLanguage$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsLanguage$ {
+  /** @deprecated use `GetAllPromptsLanguage$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsLanguage$inboundSchema;
+  /** @deprecated use `GetAllPromptsLanguage$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsLanguage$outboundSchema;
+}
+
+export type GetAllPromptsRequest = {
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   */
+  limit?: number | undefined;
+  /**
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   */
+  startingAfter?: string | undefined;
+  /**
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   */
+  endingBefore?: string | undefined;
+};
+
+export type GetAllPromptsResponseFormat2 = {
+  type: GetAllPromptsResponseFormatPromptsType;
+};
+
+export type GetAllPromptsResponseFormatJsonSchema = {
+  name: string;
+  strict?: boolean | undefined;
+  schema: { [k: string]: any };
+};
+
+export type GetAllPromptsResponseFormat1 = {
+  type: GetAllPromptsResponseFormatType;
+  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
+};
+
+/**
+ * An object specifying the format that the model must output.
+ *
+ * @remarks
+ *
+ *  Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON schema
+ *
+ *  Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
+ *
+ * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
+ */
+export type GetAllPromptsResponseFormat =
+  | GetAllPromptsResponseFormat1
+  | GetAllPromptsResponseFormat2;
 
 /**
  * Model Parameters: Not all parameters apply to every model
@@ -241,62 +718,6 @@ export type GetAllPromptsModelParameters = {
   budgetTokens?: number | undefined;
 };
 
-export const GetAllPromptsProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-  Litellm: "litellm",
-  Openailike: "openailike",
-  Cerebras: "cerebras",
-} as const;
-export type GetAllPromptsProvider = ClosedEnum<typeof GetAllPromptsProvider>;
-
-/**
- * The role of the prompt message
- */
-export const GetAllPromptsRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type GetAllPromptsRole = ClosedEnum<typeof GetAllPromptsRole>;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const GetAllPrompts2PromptsResponseType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type GetAllPrompts2PromptsResponseType = ClosedEnum<
-  typeof GetAllPrompts2PromptsResponseType
->;
-
 export type GetAllPrompts2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -315,13 +736,6 @@ export type GetAllPrompts23 = {
   type: GetAllPrompts2PromptsResponseType;
   file: GetAllPrompts2File;
 };
-
-export const GetAllPrompts2PromptsType = {
-  ImageUrl: "image_url",
-} as const;
-export type GetAllPrompts2PromptsType = ClosedEnum<
-  typeof GetAllPrompts2PromptsType
->;
 
 export type GetAllPrompts2ImageUrl = {
   /**
@@ -346,11 +760,6 @@ export type GetAllPrompts22 = {
   imageUrl: GetAllPrompts2ImageUrl;
 };
 
-export const GetAllPrompts2Type = {
-  Text: "text",
-} as const;
-export type GetAllPrompts2Type = ClosedEnum<typeof GetAllPrompts2Type>;
-
 /**
  * Text content part of a prompt message
  */
@@ -370,13 +779,6 @@ export type GetAllPromptsContent2 =
 export type GetAllPromptsContent =
   | string
   | Array<GetAllPrompts21 | GetAllPrompts22 | GetAllPrompts23>;
-
-export const GetAllPromptsPromptsType = {
-  Function: "function",
-} as const;
-export type GetAllPromptsPromptsType = ClosedEnum<
-  typeof GetAllPromptsPromptsType
->;
 
 export type GetAllPromptsFunction = {
   name: string;
@@ -432,47 +834,6 @@ export type GetAllPromptsPromptConfig = {
   version?: string | undefined;
   messages: Array<GetAllPromptsMessages>;
 };
-
-export const GetAllPromptsUseCases = {
-  AgentsSimulations: "Agents simulations",
-  Agents: "Agents",
-  APIInteraction: "API interaction",
-  AutonomousAgents: "Autonomous Agents",
-  Chatbots: "Chatbots",
-  Classification: "Classification",
-  CodeUnderstanding: "Code understanding",
-  CodeWriting: "Code writing",
-  Conversation: "Conversation",
-  DocumentsQA: "Documents QA",
-  Evaluation: "Evaluation",
-  Extraction: "Extraction",
-  MultiModal: "Multi-modal",
-  SelfChecking: "Self-checking",
-  SentimentAnalysis: "Sentiment analysis",
-  Sql: "SQL",
-  Summarization: "Summarization",
-  Tagging: "Tagging",
-  TranslationDocument: "Translation (document)",
-  TranslationSentences: "Translation (sentences)",
-} as const;
-export type GetAllPromptsUseCases = ClosedEnum<typeof GetAllPromptsUseCases>;
-
-/**
- * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
- */
-export const GetAllPromptsLanguage = {
-  Chinese: "Chinese",
-  Dutch: "Dutch",
-  English: "English",
-  French: "French",
-  German: "German",
-  Russian: "Russian",
-  Spanish: "Spanish",
-} as const;
-/**
- * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
- */
-export type GetAllPromptsLanguage = ClosedEnum<typeof GetAllPromptsLanguage>;
 
 export type GetAllPromptsMetadata = {
   /**
@@ -589,114 +950,6 @@ export function getAllPromptsRequestFromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsObject$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsObject
-> = z.nativeEnum(GetAllPromptsObject);
-
-/** @internal */
-export const GetAllPromptsObject$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsObject
-> = GetAllPromptsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsObject$ {
-  /** @deprecated use `GetAllPromptsObject$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsObject$inboundSchema;
-  /** @deprecated use `GetAllPromptsObject$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsObject$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsType
-> = z.nativeEnum(GetAllPromptsType);
-
-/** @internal */
-export const GetAllPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsType
-> = GetAllPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsType$ {
-  /** @deprecated use `GetAllPromptsType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsType$inboundSchema;
-  /** @deprecated use `GetAllPromptsType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsType$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsModelType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsModelType
-> = z.nativeEnum(GetAllPromptsModelType);
-
-/** @internal */
-export const GetAllPromptsModelType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsModelType
-> = GetAllPromptsModelType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsModelType$ {
-  /** @deprecated use `GetAllPromptsModelType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsModelType$inboundSchema;
-  /** @deprecated use `GetAllPromptsModelType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsModelType$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsFormat
-> = z.nativeEnum(GetAllPromptsFormat);
-
-/** @internal */
-export const GetAllPromptsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsFormat
-> = GetAllPromptsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsFormat$ {
-  /** @deprecated use `GetAllPromptsFormat$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsFormat$inboundSchema;
-  /** @deprecated use `GetAllPromptsFormat$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsFormat$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> = z.nativeEnum(
-    GetAllPromptsResponseFormatPromptsType,
-  );
-
-/** @internal */
-export const GetAllPromptsResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> =
-    GetAllPromptsResponseFormatPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsResponseFormatPromptsType$ {
-  /** @deprecated use `GetAllPromptsResponseFormatPromptsType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllPromptsResponseFormatPromptsType$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatPromptsType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllPromptsResponseFormatPromptsType$outboundSchema;
-}
-
-/** @internal */
 export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
   GetAllPromptsResponseFormat2,
   z.ZodTypeDef,
@@ -750,27 +1003,6 @@ export function getAllPromptsResponseFormat2FromJSON(
     (x) => GetAllPromptsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPromptsResponseFormat2' from JSON`,
   );
-}
-
-/** @internal */
-export const GetAllPromptsResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = z.nativeEnum(GetAllPromptsResponseFormatType);
-
-/** @internal */
-export const GetAllPromptsResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = GetAllPromptsResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsResponseFormatType$ {
-  /** @deprecated use `GetAllPromptsResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsResponseFormatType$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsResponseFormatType$outboundSchema;
 }
 
 /** @internal */
@@ -968,69 +1200,6 @@ export function getAllPromptsResponseFormatFromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsPhotoRealVersion
-> = z.nativeEnum(GetAllPromptsPhotoRealVersion);
-
-/** @internal */
-export const GetAllPromptsPhotoRealVersion$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsPhotoRealVersion
-> = GetAllPromptsPhotoRealVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsPhotoRealVersion$ {
-  /** @deprecated use `GetAllPromptsPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsPhotoRealVersion$inboundSchema;
-  /** @deprecated use `GetAllPromptsPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsPhotoRealVersion$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsEncodingFormat$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsEncodingFormat
-> = z.nativeEnum(GetAllPromptsEncodingFormat);
-
-/** @internal */
-export const GetAllPromptsEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsEncodingFormat
-> = GetAllPromptsEncodingFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsEncodingFormat$ {
-  /** @deprecated use `GetAllPromptsEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsEncodingFormat$inboundSchema;
-  /** @deprecated use `GetAllPromptsEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsEncodingFormat$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsReasoningEffort
-> = z.nativeEnum(GetAllPromptsReasoningEffort);
-
-/** @internal */
-export const GetAllPromptsReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsReasoningEffort
-> = GetAllPromptsReasoningEffort$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsReasoningEffort$ {
-  /** @deprecated use `GetAllPromptsReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsReasoningEffort$inboundSchema;
-  /** @deprecated use `GetAllPromptsReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsReasoningEffort$outboundSchema;
-}
-
-/** @internal */
 export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   GetAllPromptsModelParameters,
   z.ZodTypeDef,
@@ -1157,70 +1326,6 @@ export function getAllPromptsModelParametersFromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsProvider$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsProvider
-> = z.nativeEnum(GetAllPromptsProvider);
-
-/** @internal */
-export const GetAllPromptsProvider$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsProvider
-> = GetAllPromptsProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsProvider$ {
-  /** @deprecated use `GetAllPromptsProvider$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsProvider$inboundSchema;
-  /** @deprecated use `GetAllPromptsProvider$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsProvider$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsRole$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsRole
-> = z.nativeEnum(GetAllPromptsRole);
-
-/** @internal */
-export const GetAllPromptsRole$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsRole
-> = GetAllPromptsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsRole$ {
-  /** @deprecated use `GetAllPromptsRole$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsRole$inboundSchema;
-  /** @deprecated use `GetAllPromptsRole$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsRole$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPrompts2PromptsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsResponseType
-> = z.nativeEnum(GetAllPrompts2PromptsResponseType);
-
-/** @internal */
-export const GetAllPrompts2PromptsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsResponseType
-> = GetAllPrompts2PromptsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPrompts2PromptsResponseType$ {
-  /** @deprecated use `GetAllPrompts2PromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPrompts2PromptsResponseType$inboundSchema;
-  /** @deprecated use `GetAllPrompts2PromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllPrompts2PromptsResponseType$outboundSchema;
-}
-
-/** @internal */
 export const GetAllPrompts2File$inboundSchema: z.ZodType<
   GetAllPrompts2File,
   z.ZodTypeDef,
@@ -1338,27 +1443,6 @@ export function getAllPrompts23FromJSON(
     (x) => GetAllPrompts23$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPrompts23' from JSON`,
   );
-}
-
-/** @internal */
-export const GetAllPrompts2PromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsType
-> = z.nativeEnum(GetAllPrompts2PromptsType);
-
-/** @internal */
-export const GetAllPrompts2PromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2PromptsType
-> = GetAllPrompts2PromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPrompts2PromptsType$ {
-  /** @deprecated use `GetAllPrompts2PromptsType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPrompts2PromptsType$inboundSchema;
-  /** @deprecated use `GetAllPrompts2PromptsType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPrompts2PromptsType$outboundSchema;
 }
 
 /** @internal */
@@ -1482,27 +1566,6 @@ export function getAllPrompts22FromJSON(
     (x) => GetAllPrompts22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPrompts22' from JSON`,
   );
-}
-
-/** @internal */
-export const GetAllPrompts2Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2Type
-> = z.nativeEnum(GetAllPrompts2Type);
-
-/** @internal */
-export const GetAllPrompts2Type$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPrompts2Type
-> = GetAllPrompts2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPrompts2Type$ {
-  /** @deprecated use `GetAllPrompts2Type$inboundSchema` instead. */
-  export const inboundSchema = GetAllPrompts2Type$inboundSchema;
-  /** @deprecated use `GetAllPrompts2Type$outboundSchema` instead. */
-  export const outboundSchema = GetAllPrompts2Type$outboundSchema;
 }
 
 /** @internal */
@@ -1685,27 +1748,6 @@ export function getAllPromptsContentFromJSON(
     (x) => GetAllPromptsContent$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPromptsContent' from JSON`,
   );
-}
-
-/** @internal */
-export const GetAllPromptsPromptsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsPromptsType
-> = z.nativeEnum(GetAllPromptsPromptsType);
-
-/** @internal */
-export const GetAllPromptsPromptsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsPromptsType
-> = GetAllPromptsPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsPromptsType$ {
-  /** @deprecated use `GetAllPromptsPromptsType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsPromptsType$inboundSchema;
-  /** @deprecated use `GetAllPromptsPromptsType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsPromptsType$outboundSchema;
 }
 
 /** @internal */
@@ -2015,48 +2057,6 @@ export function getAllPromptsPromptConfigFromJSON(
     (x) => GetAllPromptsPromptConfig$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAllPromptsPromptConfig' from JSON`,
   );
-}
-
-/** @internal */
-export const GetAllPromptsUseCases$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsUseCases
-> = z.nativeEnum(GetAllPromptsUseCases);
-
-/** @internal */
-export const GetAllPromptsUseCases$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsUseCases
-> = GetAllPromptsUseCases$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsUseCases$ {
-  /** @deprecated use `GetAllPromptsUseCases$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsUseCases$inboundSchema;
-  /** @deprecated use `GetAllPromptsUseCases$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsUseCases$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsLanguage
-> = z.nativeEnum(GetAllPromptsLanguage);
-
-/** @internal */
-export const GetAllPromptsLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsLanguage
-> = GetAllPromptsLanguage$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsLanguage$ {
-  /** @deprecated use `GetAllPromptsLanguage$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsLanguage$inboundSchema;
-  /** @deprecated use `GetAllPromptsLanguage$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsLanguage$outboundSchema;
 }
 
 /** @internal */

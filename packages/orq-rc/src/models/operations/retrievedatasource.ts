@@ -9,17 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RetrieveDatasourceRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
-  knowledgeId: string;
-  /**
-   * The unique identifier of the datasource.
-   */
-  datasourceId: string;
-};
-
 export const RetrieveDatasourceStatus = {
   Pending: "pending",
   Processing: "processing",
@@ -30,6 +19,38 @@ export const RetrieveDatasourceStatus = {
 export type RetrieveDatasourceStatus = ClosedEnum<
   typeof RetrieveDatasourceStatus
 >;
+
+/** @internal */
+export const RetrieveDatasourceStatus$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatasourceStatus
+> = z.nativeEnum(RetrieveDatasourceStatus);
+
+/** @internal */
+export const RetrieveDatasourceStatus$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatasourceStatus
+> = RetrieveDatasourceStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatasourceStatus$ {
+  /** @deprecated use `RetrieveDatasourceStatus$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatasourceStatus$inboundSchema;
+  /** @deprecated use `RetrieveDatasourceStatus$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatasourceStatus$outboundSchema;
+}
+
+export type RetrieveDatasourceRequest = {
+  /**
+   * The unique identifier of the knowledge base
+   */
+  knowledgeId: string;
+  /**
+   * The unique identifier of the datasource.
+   */
+  datasourceId: string;
+};
 
 /**
  * Datasource successfully retrieved
@@ -146,33 +167,12 @@ export function retrieveDatasourceRequestFromJSON(
 }
 
 /** @internal */
-export const RetrieveDatasourceStatus$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatasourceStatus
-> = z.nativeEnum(RetrieveDatasourceStatus);
-
-/** @internal */
-export const RetrieveDatasourceStatus$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatasourceStatus
-> = RetrieveDatasourceStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatasourceStatus$ {
-  /** @deprecated use `RetrieveDatasourceStatus$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatasourceStatus$inboundSchema;
-  /** @deprecated use `RetrieveDatasourceStatus$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatasourceStatus$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatasourceResponseBody$inboundSchema: z.ZodType<
   RetrieveDatasourceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K1GB7HWNS70M94D0K5MAT1HA"),
+  _id: z.string().default("01K1J0S1K6RDBC1BCZT0E7WXXX"),
   display_name: z.string(),
   description: z.string().optional(),
   status: RetrieveDatasourceStatus$inboundSchema,
@@ -216,7 +216,7 @@ export const RetrieveDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K1GB7HWNS70M94D0K5MAT1HA"),
+  id: z.string().default("01K1J0S1K6RDBC1BCZT0E7WXXX"),
   displayName: z.string(),
   description: z.string().optional(),
   status: RetrieveDatasourceStatus$outboundSchema,

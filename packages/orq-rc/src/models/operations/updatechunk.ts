@@ -9,6 +9,42 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The status of the chunk
+ */
+export const UpdateChunkStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * The status of the chunk
+ */
+export type UpdateChunkStatus = ClosedEnum<typeof UpdateChunkStatus>;
+
+/** @internal */
+export const UpdateChunkStatus$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateChunkStatus
+> = z.nativeEnum(UpdateChunkStatus);
+
+/** @internal */
+export const UpdateChunkStatus$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateChunkStatus
+> = UpdateChunkStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateChunkStatus$ {
+  /** @deprecated use `UpdateChunkStatus$inboundSchema` instead. */
+  export const inboundSchema = UpdateChunkStatus$inboundSchema;
+  /** @deprecated use `UpdateChunkStatus$outboundSchema` instead. */
+  export const outboundSchema = UpdateChunkStatus$outboundSchema;
+}
+
 export type UpdateChunkMetadata = string | number | boolean;
 
 export type UpdateChunkRequestBody = {
@@ -43,21 +79,6 @@ export type UpdateChunkRequest = {
 };
 
 export type UpdateChunkKnowledgeMetadata = string | number | boolean;
-
-/**
- * The status of the chunk
- */
-export const UpdateChunkStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type UpdateChunkStatus = ClosedEnum<typeof UpdateChunkStatus>;
 
 /**
  * Chunk successfully updated
@@ -334,27 +355,6 @@ export function updateChunkKnowledgeMetadataFromJSON(
     (x) => UpdateChunkKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateChunkKnowledgeMetadata' from JSON`,
   );
-}
-
-/** @internal */
-export const UpdateChunkStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateChunkStatus
-> = z.nativeEnum(UpdateChunkStatus);
-
-/** @internal */
-export const UpdateChunkStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateChunkStatus
-> = UpdateChunkStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateChunkStatus$ {
-  /** @deprecated use `UpdateChunkStatus$inboundSchema` instead. */
-  export const inboundSchema = UpdateChunkStatus$inboundSchema;
-  /** @deprecated use `UpdateChunkStatus$outboundSchema` instead. */
-  export const outboundSchema = UpdateChunkStatus$outboundSchema;
 }
 
 /** @internal */

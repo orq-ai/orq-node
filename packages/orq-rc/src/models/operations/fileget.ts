@@ -9,13 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type FileGetRequest = {
-  /**
-   * The ID of the file
-   */
-  fileId: string;
-};
-
 /**
  * The intended purpose of the uploaded file.
  */
@@ -28,6 +21,34 @@ export const FileGetPurpose = {
  * The intended purpose of the uploaded file.
  */
 export type FileGetPurpose = ClosedEnum<typeof FileGetPurpose>;
+
+/** @internal */
+export const FileGetPurpose$inboundSchema: z.ZodNativeEnum<
+  typeof FileGetPurpose
+> = z.nativeEnum(FileGetPurpose);
+
+/** @internal */
+export const FileGetPurpose$outboundSchema: z.ZodNativeEnum<
+  typeof FileGetPurpose
+> = FileGetPurpose$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileGetPurpose$ {
+  /** @deprecated use `FileGetPurpose$inboundSchema` instead. */
+  export const inboundSchema = FileGetPurpose$inboundSchema;
+  /** @deprecated use `FileGetPurpose$outboundSchema` instead. */
+  export const outboundSchema = FileGetPurpose$outboundSchema;
+}
+
+export type FileGetRequest = {
+  /**
+   * The ID of the file
+   */
+  fileId: string;
+};
 
 /**
  * File details retrieved successfully
@@ -113,27 +134,6 @@ export function fileGetRequestFromJSON(
 }
 
 /** @internal */
-export const FileGetPurpose$inboundSchema: z.ZodNativeEnum<
-  typeof FileGetPurpose
-> = z.nativeEnum(FileGetPurpose);
-
-/** @internal */
-export const FileGetPurpose$outboundSchema: z.ZodNativeEnum<
-  typeof FileGetPurpose
-> = FileGetPurpose$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileGetPurpose$ {
-  /** @deprecated use `FileGetPurpose$inboundSchema` instead. */
-  export const inboundSchema = FileGetPurpose$inboundSchema;
-  /** @deprecated use `FileGetPurpose$outboundSchema` instead. */
-  export const outboundSchema = FileGetPurpose$outboundSchema;
-}
-
-/** @internal */
 export const FileGetResponseBody$inboundSchema: z.ZodType<
   FileGetResponseBody,
   z.ZodTypeDef,
@@ -146,7 +146,7 @@ export const FileGetResponseBody$inboundSchema: z.ZodType<
   file_name: z.string(),
   workspace_id: z.string(),
   created: z.string().datetime({ offset: true }).default(
-    "2025-07-31T13:37:26.617Z",
+    "2025-08-01T05:13:14.051Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -180,7 +180,7 @@ export const FileGetResponseBody$outboundSchema: z.ZodType<
   bytes: z.number(),
   fileName: z.string(),
   workspaceId: z.string(),
-  created: z.date().default(() => new Date("2025-07-31T13:37:26.617Z"))
+  created: z.date().default(() => new Date("2025-08-01T05:13:14.051Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

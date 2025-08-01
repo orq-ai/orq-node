@@ -21,16 +21,18 @@ export class EventStream<T extends ServerEvent<unknown>>
     super({
       async pull(controller) {
         try {
-          const r = await reader.read();
-          if (r.done) return controller.close();
-          buffer = concatBuffer(buffer, r.value);
-          for (const { chunk, remainder } of chunks(buffer)) {
-            buffer = remainder;
-            const item = parseChunk(chunk, parse);
-            if (item?.value) controller.enqueue(item.value);
-            if (item?.done) {
-              await reader.cancel("done");
-              return controller.close();
+          while (true) {
+            const r = await reader.read();
+            if (r.done) return controller.close();
+            buffer = concatBuffer(buffer, r.value);
+            for (const { chunk, remainder } of chunks(buffer)) {
+              buffer = remainder;
+              const item = parseChunk(chunk, parse);
+              if (item?.value) controller.enqueue(item.value);
+              if (item?.done) {
+                await reader.cancel("done");
+                return controller.close();
+              }
             }
           }
         } catch (e) {

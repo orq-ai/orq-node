@@ -9,6 +9,62 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const ListDatasourcesObject = {
+  List: "list",
+} as const;
+export type ListDatasourcesObject = ClosedEnum<typeof ListDatasourcesObject>;
+
+export const ListDatasourcesStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type ListDatasourcesStatus = ClosedEnum<typeof ListDatasourcesStatus>;
+
+/** @internal */
+export const ListDatasourcesObject$inboundSchema: z.ZodNativeEnum<
+  typeof ListDatasourcesObject
+> = z.nativeEnum(ListDatasourcesObject);
+
+/** @internal */
+export const ListDatasourcesObject$outboundSchema: z.ZodNativeEnum<
+  typeof ListDatasourcesObject
+> = ListDatasourcesObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasourcesObject$ {
+  /** @deprecated use `ListDatasourcesObject$inboundSchema` instead. */
+  export const inboundSchema = ListDatasourcesObject$inboundSchema;
+  /** @deprecated use `ListDatasourcesObject$outboundSchema` instead. */
+  export const outboundSchema = ListDatasourcesObject$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasourcesStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ListDatasourcesStatus
+> = z.nativeEnum(ListDatasourcesStatus);
+
+/** @internal */
+export const ListDatasourcesStatus$outboundSchema: z.ZodNativeEnum<
+  typeof ListDatasourcesStatus
+> = ListDatasourcesStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasourcesStatus$ {
+  /** @deprecated use `ListDatasourcesStatus$inboundSchema` instead. */
+  export const inboundSchema = ListDatasourcesStatus$inboundSchema;
+  /** @deprecated use `ListDatasourcesStatus$outboundSchema` instead. */
+  export const outboundSchema = ListDatasourcesStatus$outboundSchema;
+}
+
 /**
  * Filter datasources by status.
  */
@@ -40,20 +96,6 @@ export type ListDatasourcesRequest = {
    */
   status?: Array<string> | string | undefined;
 };
-
-export const ListDatasourcesObject = {
-  List: "list",
-} as const;
-export type ListDatasourcesObject = ClosedEnum<typeof ListDatasourcesObject>;
-
-export const ListDatasourcesStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type ListDatasourcesStatus = ClosedEnum<typeof ListDatasourcesStatus>;
 
 export type ListDatasourcesData = {
   /**
@@ -231,54 +273,12 @@ export function listDatasourcesRequestFromJSON(
 }
 
 /** @internal */
-export const ListDatasourcesObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesObject
-> = z.nativeEnum(ListDatasourcesObject);
-
-/** @internal */
-export const ListDatasourcesObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesObject
-> = ListDatasourcesObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesObject$ {
-  /** @deprecated use `ListDatasourcesObject$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesObject$inboundSchema;
-  /** @deprecated use `ListDatasourcesObject$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesObject$outboundSchema;
-}
-
-/** @internal */
-export const ListDatasourcesStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesStatus
-> = z.nativeEnum(ListDatasourcesStatus);
-
-/** @internal */
-export const ListDatasourcesStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ListDatasourcesStatus
-> = ListDatasourcesStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasourcesStatus$ {
-  /** @deprecated use `ListDatasourcesStatus$inboundSchema` instead. */
-  export const inboundSchema = ListDatasourcesStatus$inboundSchema;
-  /** @deprecated use `ListDatasourcesStatus$outboundSchema` instead. */
-  export const outboundSchema = ListDatasourcesStatus$outboundSchema;
-}
-
-/** @internal */
 export const ListDatasourcesData$inboundSchema: z.ZodType<
   ListDatasourcesData,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K1GB7HWNS5GSD8TG12F61GKT"),
+  _id: z.string().default("01K1J0S1K6NQQ6Y039SHQY5A13"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -322,7 +322,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01K1GB7HWNS5GSD8TG12F61GKT"),
+  id: z.string().default("01K1J0S1K6NQQ6Y039SHQY5A13"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

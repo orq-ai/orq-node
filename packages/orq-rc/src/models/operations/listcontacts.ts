@@ -9,6 +9,30 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const ObjectT = {
+  List: "list",
+} as const;
+export type ObjectT = ClosedEnum<typeof ObjectT>;
+
+/** @internal */
+export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
+  .nativeEnum(ObjectT);
+
+/** @internal */
+export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
+  ObjectT$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ObjectT$ {
+  /** @deprecated use `ObjectT$inboundSchema` instead. */
+  export const inboundSchema = ObjectT$inboundSchema;
+  /** @deprecated use `ObjectT$outboundSchema` instead. */
+  export const outboundSchema = ObjectT$outboundSchema;
+}
+
 /**
  * Filter contacts by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
  */
@@ -35,11 +59,6 @@ export type ListContactsRequest = {
   filterBy?: QueryParamFilterBy | undefined;
   includeMetrics?: boolean | null | undefined;
 };
-
-export const ObjectT = {
-  List: "list",
-} as const;
-export type ObjectT = ClosedEnum<typeof ObjectT>;
 
 export type Metrics = {
   /**
@@ -244,25 +263,6 @@ export function listContactsRequestFromJSON(
 }
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
-
-/** @internal */
-export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
-  ObjectT$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ObjectT$ {
-  /** @deprecated use `ObjectT$inboundSchema` instead. */
-  export const inboundSchema = ObjectT$inboundSchema;
-  /** @deprecated use `ObjectT$outboundSchema` instead. */
-  export const outboundSchema = ObjectT$outboundSchema;
-}
-
-/** @internal */
 export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
   z.object({
     total_cost: z.number(),
@@ -345,7 +345,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-07-31T13:37:23.611Z",
+      "2025-08-01T05:13:10.957Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => Metrics$inboundSchema),
   }).transform((v) => {
@@ -382,7 +382,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2025-07-31T13:37:23.611Z"))
+    updated: z.date().default(() => new Date("2025-08-01T05:13:10.957Z"))
       .transform(v => v.toISOString()),
     metrics: z.lazy(() => Metrics$outboundSchema),
   }).transform((v) => {

@@ -9,11 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RetrieveDatapointRequest = {
-  datasetId: string;
-  datapointId: string;
-};
-
 /**
  * The role of the messages author, in this case tool.
  */
@@ -27,6 +22,488 @@ export type RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole =
   ClosedEnum<
     typeof RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole
   >;
+
+/**
+ * The type of the content part.
+ */
+export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
+  >;
+
+/**
+ * The type of the content part.
+ */
+export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType = {
+  Text: "text",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type RetrieveDatapoint2DatasetsResponse200ApplicationJSONType =
+  ClosedEnum<typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType>;
+
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const RetrieveDatapointMessagesDatasetsResponse200Role = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type RetrieveDatapointMessagesDatasetsResponse200Role = ClosedEnum<
+  typeof RetrieveDatapointMessagesDatasetsResponse200Role
+>;
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const RetrieveDatapointMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type RetrieveDatapointMessagesType = ClosedEnum<
+  typeof RetrieveDatapointMessagesType
+>;
+
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const RetrieveDatapointMessagesDatasetsResponseRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type RetrieveDatapointMessagesDatasetsResponseRole = ClosedEnum<
+  typeof RetrieveDatapointMessagesDatasetsResponseRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const RetrieveDatapoint2DatasetsResponse200Type = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type RetrieveDatapoint2DatasetsResponse200Type = ClosedEnum<
+  typeof RetrieveDatapoint2DatasetsResponse200Type
+>;
+
+export const RetrieveDatapoint2DatasetsResponseType = {
+  InputAudio: "input_audio",
+} as const;
+export type RetrieveDatapoint2DatasetsResponseType = ClosedEnum<
+  typeof RetrieveDatapoint2DatasetsResponseType
+>;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const RetrieveDatapoint2Format = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type RetrieveDatapoint2Format = ClosedEnum<
+  typeof RetrieveDatapoint2Format
+>;
+
+export const RetrieveDatapoint2DatasetsType = {
+  ImageUrl: "image_url",
+} as const;
+export type RetrieveDatapoint2DatasetsType = ClosedEnum<
+  typeof RetrieveDatapoint2DatasetsType
+>;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const RetrieveDatapoint2Detail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type RetrieveDatapoint2Detail = ClosedEnum<
+  typeof RetrieveDatapoint2Detail
+>;
+
+export const RetrieveDatapoint2Type = {
+  Text: "text",
+} as const;
+export type RetrieveDatapoint2Type = ClosedEnum<typeof RetrieveDatapoint2Type>;
+
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const RetrieveDatapointMessagesDatasetsRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type RetrieveDatapointMessagesDatasetsRole = ClosedEnum<
+  typeof RetrieveDatapointMessagesDatasetsRole
+>;
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const RetrieveDatapointMessagesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type RetrieveDatapointMessagesRole = ClosedEnum<
+  typeof RetrieveDatapointMessagesRole
+>;
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole
+  > = z.nativeEnum(
+    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole,
+  );
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole
+  > =
+    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$ {
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType,
+  );
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
+  > =
+    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$ {
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType
+  > = z.nativeEnum(RetrieveDatapoint2DatasetsResponse200ApplicationJSONType);
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType
+  > = RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$ {
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponse200Role> = z
+    .nativeEnum(RetrieveDatapointMessagesDatasetsResponse200Role);
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsResponse200Role$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponse200Role> =
+    RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointMessagesDatasetsResponse200Role$ {
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema;
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200Role$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointMessagesDatasetsResponse200Role$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapointMessagesType
+> = z.nativeEnum(RetrieveDatapointMessagesType);
+
+/** @internal */
+export const RetrieveDatapointMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapointMessagesType
+> = RetrieveDatapointMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointMessagesType$ {
+  /** @deprecated use `RetrieveDatapointMessagesType$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapointMessagesType$inboundSchema;
+  /** @deprecated use `RetrieveDatapointMessagesType$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapointMessagesType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponseRole> = z
+    .nativeEnum(RetrieveDatapointMessagesDatasetsResponseRole);
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsResponseRole$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponseRole> =
+    RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointMessagesDatasetsResponseRole$ {
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema;
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponseRole$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointMessagesDatasetsResponseRole$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponse200Type> = z
+    .nativeEnum(RetrieveDatapoint2DatasetsResponse200Type);
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponse200Type> =
+    RetrieveDatapoint2DatasetsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2DatasetsResponse200Type$ {
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapoint2DatasetsResponse200Type$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapoint2DatasetsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponseType> = z.nativeEnum(
+    RetrieveDatapoint2DatasetsResponseType,
+  );
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponseType> =
+    RetrieveDatapoint2DatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2DatasetsResponseType$ {
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapoint2DatasetsResponseType$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2DatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapoint2DatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2Format$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2Format
+> = z.nativeEnum(RetrieveDatapoint2Format);
+
+/** @internal */
+export const RetrieveDatapoint2Format$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2Format
+> = RetrieveDatapoint2Format$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2Format$ {
+  /** @deprecated use `RetrieveDatapoint2Format$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint2Format$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2Format$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint2Format$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsType$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2DatasetsType
+> = z.nativeEnum(RetrieveDatapoint2DatasetsType);
+
+/** @internal */
+export const RetrieveDatapoint2DatasetsType$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2DatasetsType
+> = RetrieveDatapoint2DatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2DatasetsType$ {
+  /** @deprecated use `RetrieveDatapoint2DatasetsType$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint2DatasetsType$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2DatasetsType$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint2DatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2Detail$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2Detail
+> = z.nativeEnum(RetrieveDatapoint2Detail);
+
+/** @internal */
+export const RetrieveDatapoint2Detail$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2Detail
+> = RetrieveDatapoint2Detail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2Detail$ {
+  /** @deprecated use `RetrieveDatapoint2Detail$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint2Detail$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2Detail$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint2Detail$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapoint2Type$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2Type
+> = z.nativeEnum(RetrieveDatapoint2Type);
+
+/** @internal */
+export const RetrieveDatapoint2Type$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapoint2Type
+> = RetrieveDatapoint2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2Type$ {
+  /** @deprecated use `RetrieveDatapoint2Type$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint2Type$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2Type$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint2Type$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsRole$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsRole> = z.nativeEnum(
+    RetrieveDatapointMessagesDatasetsRole,
+  );
+
+/** @internal */
+export const RetrieveDatapointMessagesDatasetsRole$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsRole> =
+    RetrieveDatapointMessagesDatasetsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointMessagesDatasetsRole$ {
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointMessagesDatasetsRole$inboundSchema;
+  /** @deprecated use `RetrieveDatapointMessagesDatasetsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointMessagesDatasetsRole$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapointMessagesRole
+> = z.nativeEnum(RetrieveDatapointMessagesRole);
+
+/** @internal */
+export const RetrieveDatapointMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapointMessagesRole
+> = RetrieveDatapointMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointMessagesRole$ {
+  /** @deprecated use `RetrieveDatapointMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapointMessagesRole$inboundSchema;
+  /** @deprecated use `RetrieveDatapointMessagesRole$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapointMessagesRole$outboundSchema;
+}
+
+export type RetrieveDatapointRequest = {
+  datasetId: string;
+  datapointId: string;
+};
 
 /**
  * The contents of the tool message.
@@ -50,21 +527,6 @@ export type RetrieveDatapointMessagesToolMessage = {
   toolCallId: string;
 };
 
-/**
- * The type of the content part.
- */
-export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
-  >;
-
 export type RetrieveDatapoint2RefusalContentPart = {
   /**
    * The type of the content part.
@@ -75,18 +537,6 @@ export type RetrieveDatapoint2RefusalContentPart = {
    */
   refusal: string;
 };
-
-/**
- * The type of the content part.
- */
-export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType = {
-  Text: "text",
-} as const;
-/**
- * The type of the content part.
- */
-export type RetrieveDatapoint2DatasetsResponse200ApplicationJSONType =
-  ClosedEnum<typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType>;
 
 export type RetrieveDatapoint2TextContentPart = {
   /**
@@ -113,19 +563,6 @@ export type RetrieveDatapointMessagesDatasetsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
- */
-export const RetrieveDatapointMessagesDatasetsResponse200Role = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type RetrieveDatapointMessagesDatasetsResponse200Role = ClosedEnum<
-  typeof RetrieveDatapointMessagesDatasetsResponse200Role
->;
-
-/**
  * Data about a previous audio response from the model.
  */
 export type RetrieveDatapointMessagesAudio = {
@@ -134,19 +571,6 @@ export type RetrieveDatapointMessagesAudio = {
    */
   id: string;
 };
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const RetrieveDatapointMessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type RetrieveDatapointMessagesType = ClosedEnum<
-  typeof RetrieveDatapointMessagesType
->;
 
 export type RetrieveDatapointMessagesFunction = {
   /**
@@ -216,32 +640,6 @@ export type RetrieveDatapointMessagesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
-/**
- * The role of the messages author, in this case `user`.
- */
-export const RetrieveDatapointMessagesDatasetsResponseRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type RetrieveDatapointMessagesDatasetsResponseRole = ClosedEnum<
-  typeof RetrieveDatapointMessagesDatasetsResponseRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const RetrieveDatapoint2DatasetsResponse200Type = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type RetrieveDatapoint2DatasetsResponse200Type = ClosedEnum<
-  typeof RetrieveDatapoint2DatasetsResponse200Type
->;
-
 export type RetrieveDatapoint2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -261,27 +659,6 @@ export type RetrieveDatapoint24 = {
   file: RetrieveDatapoint2File;
 };
 
-export const RetrieveDatapoint2DatasetsResponseType = {
-  InputAudio: "input_audio",
-} as const;
-export type RetrieveDatapoint2DatasetsResponseType = ClosedEnum<
-  typeof RetrieveDatapoint2DatasetsResponseType
->;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const RetrieveDatapoint2Format = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type RetrieveDatapoint2Format = ClosedEnum<
-  typeof RetrieveDatapoint2Format
->;
-
 export type RetrieveDatapoint2InputAudio = {
   /**
    * Base64 encoded audio data.
@@ -298,28 +675,6 @@ export type RetrieveDatapoint23 = {
   inputAudio: RetrieveDatapoint2InputAudio;
 };
 
-export const RetrieveDatapoint2DatasetsType = {
-  ImageUrl: "image_url",
-} as const;
-export type RetrieveDatapoint2DatasetsType = ClosedEnum<
-  typeof RetrieveDatapoint2DatasetsType
->;
-
-/**
- * Specifies the detail level of the image.
- */
-export const RetrieveDatapoint2Detail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type RetrieveDatapoint2Detail = ClosedEnum<
-  typeof RetrieveDatapoint2Detail
->;
-
 export type RetrieveDatapoint2ImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -335,11 +690,6 @@ export type RetrieveDatapoint22 = {
   type: RetrieveDatapoint2DatasetsType;
   imageUrl: RetrieveDatapoint2ImageUrl;
 };
-
-export const RetrieveDatapoint2Type = {
-  Text: "text",
-} as const;
-export type RetrieveDatapoint2Type = ClosedEnum<typeof RetrieveDatapoint2Type>;
 
 export type RetrieveDatapoint21 = {
   type: RetrieveDatapoint2Type;
@@ -386,19 +736,6 @@ export type RetrieveDatapointMessagesUserMessage = {
     >;
 };
 
-/**
- * The role of the messages author, in this case `system`.
- */
-export const RetrieveDatapointMessagesDatasetsRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type RetrieveDatapointMessagesDatasetsRole = ClosedEnum<
-  typeof RetrieveDatapointMessagesDatasetsRole
->;
-
 export type RetrieveDatapointMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -413,19 +750,6 @@ export type RetrieveDatapointMessagesSystemMessage = {
    */
   name?: string | undefined;
 };
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const RetrieveDatapointMessagesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type RetrieveDatapointMessagesRole = ClosedEnum<
-  typeof RetrieveDatapointMessagesRole
->;
 
 export type RetrieveDatapointMessagesDeveloperMessage = {
   /**
@@ -568,34 +892,6 @@ export function retrieveDatapointRequestFromJSON(
 }
 
 /** @internal */
-export const RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole
-  > = z.nativeEnum(
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole,
-  );
-
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole
-  > =
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$ {
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$inboundSchema;
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapointMessagesDatasetsResponse200ApplicationJSONRole$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatapointMessagesDatasetsResponseContent$inboundSchema:
   z.ZodType<
     RetrieveDatapointMessagesDatasetsResponseContent,
@@ -735,34 +1031,6 @@ export function retrieveDatapointMessagesToolMessageFromJSON(
 }
 
 /** @internal */
-export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType,
-  );
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
-  > =
-    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatapoint2RefusalContentPart$inboundSchema: z.ZodType<
   RetrieveDatapoint2RefusalContentPart,
   z.ZodTypeDef,
@@ -824,31 +1092,6 @@ export function retrieveDatapoint2RefusalContentPartFromJSON(
       RetrieveDatapoint2RefusalContentPart$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveDatapoint2RefusalContentPart' from JSON`,
   );
-}
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType
-  > = z.nativeEnum(RetrieveDatapoint2DatasetsResponse200ApplicationJSONType);
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType
-  > = RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$ {
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema;
 }
 
 /** @internal */
@@ -1047,29 +1290,6 @@ export function retrieveDatapointMessagesDatasetsContentFromJSON(
 }
 
 /** @internal */
-export const RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponse200Role> = z
-    .nativeEnum(RetrieveDatapointMessagesDatasetsResponse200Role);
-
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsResponse200Role$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponse200Role> =
-    RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapointMessagesDatasetsResponse200Role$ {
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapointMessagesDatasetsResponse200Role$inboundSchema;
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponse200Role$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapointMessagesDatasetsResponse200Role$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatapointMessagesAudio$inboundSchema: z.ZodType<
   RetrieveDatapointMessagesAudio,
   z.ZodTypeDef,
@@ -1123,27 +1343,6 @@ export function retrieveDatapointMessagesAudioFromJSON(
     (x) => RetrieveDatapointMessagesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveDatapointMessagesAudio' from JSON`,
   );
-}
-
-/** @internal */
-export const RetrieveDatapointMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointMessagesType
-> = z.nativeEnum(RetrieveDatapointMessagesType);
-
-/** @internal */
-export const RetrieveDatapointMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointMessagesType
-> = RetrieveDatapointMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapointMessagesType$ {
-  /** @deprecated use `RetrieveDatapointMessagesType$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatapointMessagesType$inboundSchema;
-  /** @deprecated use `RetrieveDatapointMessagesType$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatapointMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -1407,52 +1606,6 @@ export function retrieveDatapointMessagesAssistantMessageFromJSON(
 }
 
 /** @internal */
-export const RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponseRole> = z
-    .nativeEnum(RetrieveDatapointMessagesDatasetsResponseRole);
-
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsResponseRole$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsResponseRole> =
-    RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapointMessagesDatasetsResponseRole$ {
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapointMessagesDatasetsResponseRole$inboundSchema;
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsResponseRole$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapointMessagesDatasetsResponseRole$outboundSchema;
-}
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponse200Type> = z
-    .nativeEnum(RetrieveDatapoint2DatasetsResponse200Type);
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponse200Type> =
-    RetrieveDatapoint2DatasetsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2DatasetsResponse200Type$ {
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapoint2DatasetsResponse200Type$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapoint2DatasetsResponse200Type$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatapoint2File$inboundSchema: z.ZodType<
   RetrieveDatapoint2File,
   z.ZodTypeDef,
@@ -1572,51 +1725,6 @@ export function retrieveDatapoint24FromJSON(
     (x) => RetrieveDatapoint24$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveDatapoint24' from JSON`,
   );
-}
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponseType> = z.nativeEnum(
-    RetrieveDatapoint2DatasetsResponseType,
-  );
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapoint2DatasetsResponseType> =
-    RetrieveDatapoint2DatasetsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2DatasetsResponseType$ {
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapoint2DatasetsResponseType$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2DatasetsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapoint2DatasetsResponseType$outboundSchema;
-}
-
-/** @internal */
-export const RetrieveDatapoint2Format$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Format
-> = z.nativeEnum(RetrieveDatapoint2Format);
-
-/** @internal */
-export const RetrieveDatapoint2Format$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Format
-> = RetrieveDatapoint2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2Format$ {
-  /** @deprecated use `RetrieveDatapoint2Format$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatapoint2Format$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2Format$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatapoint2Format$outboundSchema;
 }
 
 /** @internal */
@@ -1744,48 +1852,6 @@ export function retrieveDatapoint23FromJSON(
 }
 
 /** @internal */
-export const RetrieveDatapoint2DatasetsType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2DatasetsType
-> = z.nativeEnum(RetrieveDatapoint2DatasetsType);
-
-/** @internal */
-export const RetrieveDatapoint2DatasetsType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2DatasetsType
-> = RetrieveDatapoint2DatasetsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2DatasetsType$ {
-  /** @deprecated use `RetrieveDatapoint2DatasetsType$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatapoint2DatasetsType$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2DatasetsType$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatapoint2DatasetsType$outboundSchema;
-}
-
-/** @internal */
-export const RetrieveDatapoint2Detail$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Detail
-> = z.nativeEnum(RetrieveDatapoint2Detail);
-
-/** @internal */
-export const RetrieveDatapoint2Detail$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Detail
-> = RetrieveDatapoint2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2Detail$ {
-  /** @deprecated use `RetrieveDatapoint2Detail$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatapoint2Detail$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2Detail$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatapoint2Detail$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatapoint2ImageUrl$inboundSchema: z.ZodType<
   RetrieveDatapoint2ImageUrl,
   z.ZodTypeDef,
@@ -1905,27 +1971,6 @@ export function retrieveDatapoint22FromJSON(
     (x) => RetrieveDatapoint22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveDatapoint22' from JSON`,
   );
-}
-
-/** @internal */
-export const RetrieveDatapoint2Type$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Type
-> = z.nativeEnum(RetrieveDatapoint2Type);
-
-/** @internal */
-export const RetrieveDatapoint2Type$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapoint2Type
-> = RetrieveDatapoint2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapoint2Type$ {
-  /** @deprecated use `RetrieveDatapoint2Type$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatapoint2Type$inboundSchema;
-  /** @deprecated use `RetrieveDatapoint2Type$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatapoint2Type$outboundSchema;
 }
 
 /** @internal */
@@ -2209,30 +2254,6 @@ export function retrieveDatapointMessagesUserMessageFromJSON(
 }
 
 /** @internal */
-export const RetrieveDatapointMessagesDatasetsRole$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsRole> = z.nativeEnum(
-    RetrieveDatapointMessagesDatasetsRole,
-  );
-
-/** @internal */
-export const RetrieveDatapointMessagesDatasetsRole$outboundSchema:
-  z.ZodNativeEnum<typeof RetrieveDatapointMessagesDatasetsRole> =
-    RetrieveDatapointMessagesDatasetsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapointMessagesDatasetsRole$ {
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    RetrieveDatapointMessagesDatasetsRole$inboundSchema;
-  /** @deprecated use `RetrieveDatapointMessagesDatasetsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    RetrieveDatapointMessagesDatasetsRole$outboundSchema;
-}
-
-/** @internal */
 export const RetrieveDatapointMessagesSystemMessage$inboundSchema: z.ZodType<
   RetrieveDatapointMessagesSystemMessage,
   z.ZodTypeDef,
@@ -2296,27 +2317,6 @@ export function retrieveDatapointMessagesSystemMessageFromJSON(
       RetrieveDatapointMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveDatapointMessagesSystemMessage' from JSON`,
   );
-}
-
-/** @internal */
-export const RetrieveDatapointMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointMessagesRole
-> = z.nativeEnum(RetrieveDatapointMessagesRole);
-
-/** @internal */
-export const RetrieveDatapointMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveDatapointMessagesRole
-> = RetrieveDatapointMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrieveDatapointMessagesRole$ {
-  /** @deprecated use `RetrieveDatapointMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = RetrieveDatapointMessagesRole$inboundSchema;
-  /** @deprecated use `RetrieveDatapointMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = RetrieveDatapointMessagesRole$outboundSchema;
 }
 
 /** @internal */
@@ -2481,7 +2481,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-07-31T13:37:23.611Z",
+    "2025-08-01T05:13:10.957Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2539,7 +2539,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-07-31T13:37:23.611Z"))
+  updated: z.date().default(() => new Date("2025-08-01T05:13:10.957Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

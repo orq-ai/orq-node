@@ -28,6 +28,469 @@ export const AgenticChunker = {
 export type AgenticChunker = ClosedEnum<typeof AgenticChunker>;
 
 /**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export const ParseChunkingRequestChunkingRequestReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ParseChunkingRequestChunkingRequestReturnType = ClosedEnum<
+  typeof ParseChunkingRequestChunkingRequestReturnType
+>;
+
+export const SDPMChunker = {
+  Sdpm: "sdpm",
+} as const;
+export type SDPMChunker = ClosedEnum<typeof SDPMChunker>;
+
+export const ParseThreshold2 = {
+  Auto: "auto",
+} as const;
+export type ParseThreshold2 = ClosedEnum<typeof ParseThreshold2>;
+
+/**
+ * Chunking mode: window-based or sentence-based similarity
+ */
+export const ChunkingRequestMode = {
+  Window: "window",
+  Sentence: "sentence",
+} as const;
+/**
+ * Chunking mode: window-based or sentence-based similarity
+ */
+export type ChunkingRequestMode = ClosedEnum<typeof ChunkingRequestMode>;
+
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export const ParseChunkingRequestChunkingReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ParseChunkingRequestChunkingReturnType = ClosedEnum<
+  typeof ParseChunkingRequestChunkingReturnType
+>;
+
+export const SemanticChunker = {
+  Semantic: "semantic",
+} as const;
+export type SemanticChunker = ClosedEnum<typeof SemanticChunker>;
+
+export const Threshold2 = {
+  Auto: "auto",
+} as const;
+export type Threshold2 = ClosedEnum<typeof Threshold2>;
+
+/**
+ * Chunking mode: window-based or sentence-based similarity
+ */
+export const Mode = {
+  Window: "window",
+  Sentence: "sentence",
+} as const;
+/**
+ * Chunking mode: window-based or sentence-based similarity
+ */
+export type Mode = ClosedEnum<typeof Mode>;
+
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export const ParseChunkingRequestReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ParseChunkingRequestReturnType = ClosedEnum<
+  typeof ParseChunkingRequestReturnType
+>;
+
+export const RecursiveChunker = {
+  Recursive: "recursive",
+} as const;
+export type RecursiveChunker = ClosedEnum<typeof RecursiveChunker>;
+
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export const ChunkingRequestReturnType = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ChunkingRequestReturnType = ClosedEnum<
+  typeof ChunkingRequestReturnType
+>;
+
+export const SentenceChunker = {
+  Sentence: "sentence",
+} as const;
+export type SentenceChunker = ClosedEnum<typeof SentenceChunker>;
+
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export const ReturnTypeT = {
+  Chunks: "chunks",
+  Texts: "texts",
+} as const;
+/**
+ * Return format: chunks (with metadata) or texts (plain strings)
+ */
+export type ReturnTypeT = ClosedEnum<typeof ReturnTypeT>;
+
+export const TokenChunker = {
+  Token: "token",
+} as const;
+export type TokenChunker = ClosedEnum<typeof TokenChunker>;
+
+/** @internal */
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
+  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBodyReturnType);
+
+/** @internal */
+export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
+  > = ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ParseChunkingRequestChunkingRequestRequestBodyReturnType$ {
+  /** @deprecated use `ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema` instead. */
+  export const inboundSchema =
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema` instead. */
+  export const outboundSchema =
+    ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema;
+}
+
+/** @internal */
+export const AgenticChunker$inboundSchema: z.ZodNativeEnum<
+  typeof AgenticChunker
+> = z.nativeEnum(AgenticChunker);
+
+/** @internal */
+export const AgenticChunker$outboundSchema: z.ZodNativeEnum<
+  typeof AgenticChunker
+> = AgenticChunker$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AgenticChunker$ {
+  /** @deprecated use `AgenticChunker$inboundSchema` instead. */
+  export const inboundSchema = AgenticChunker$inboundSchema;
+  /** @deprecated use `AgenticChunker$outboundSchema` instead. */
+  export const outboundSchema = AgenticChunker$outboundSchema;
+}
+
+/** @internal */
+export const ParseChunkingRequestChunkingRequestReturnType$inboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> = z
+    .nativeEnum(ParseChunkingRequestChunkingRequestReturnType);
+
+/** @internal */
+export const ParseChunkingRequestChunkingRequestReturnType$outboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> =
+    ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ParseChunkingRequestChunkingRequestReturnType$ {
+  /** @deprecated use `ParseChunkingRequestChunkingRequestReturnType$inboundSchema` instead. */
+  export const inboundSchema =
+    ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestChunkingRequestReturnType$outboundSchema` instead. */
+  export const outboundSchema =
+    ParseChunkingRequestChunkingRequestReturnType$outboundSchema;
+}
+
+/** @internal */
+export const SDPMChunker$inboundSchema: z.ZodNativeEnum<typeof SDPMChunker> = z
+  .nativeEnum(SDPMChunker);
+
+/** @internal */
+export const SDPMChunker$outboundSchema: z.ZodNativeEnum<typeof SDPMChunker> =
+  SDPMChunker$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SDPMChunker$ {
+  /** @deprecated use `SDPMChunker$inboundSchema` instead. */
+  export const inboundSchema = SDPMChunker$inboundSchema;
+  /** @deprecated use `SDPMChunker$outboundSchema` instead. */
+  export const outboundSchema = SDPMChunker$outboundSchema;
+}
+
+/** @internal */
+export const ParseThreshold2$inboundSchema: z.ZodNativeEnum<
+  typeof ParseThreshold2
+> = z.nativeEnum(ParseThreshold2);
+
+/** @internal */
+export const ParseThreshold2$outboundSchema: z.ZodNativeEnum<
+  typeof ParseThreshold2
+> = ParseThreshold2$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ParseThreshold2$ {
+  /** @deprecated use `ParseThreshold2$inboundSchema` instead. */
+  export const inboundSchema = ParseThreshold2$inboundSchema;
+  /** @deprecated use `ParseThreshold2$outboundSchema` instead. */
+  export const outboundSchema = ParseThreshold2$outboundSchema;
+}
+
+/** @internal */
+export const ChunkingRequestMode$inboundSchema: z.ZodNativeEnum<
+  typeof ChunkingRequestMode
+> = z.nativeEnum(ChunkingRequestMode);
+
+/** @internal */
+export const ChunkingRequestMode$outboundSchema: z.ZodNativeEnum<
+  typeof ChunkingRequestMode
+> = ChunkingRequestMode$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ChunkingRequestMode$ {
+  /** @deprecated use `ChunkingRequestMode$inboundSchema` instead. */
+  export const inboundSchema = ChunkingRequestMode$inboundSchema;
+  /** @deprecated use `ChunkingRequestMode$outboundSchema` instead. */
+  export const outboundSchema = ChunkingRequestMode$outboundSchema;
+}
+
+/** @internal */
+export const ParseChunkingRequestChunkingReturnType$inboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> = z.nativeEnum(
+    ParseChunkingRequestChunkingReturnType,
+  );
+
+/** @internal */
+export const ParseChunkingRequestChunkingReturnType$outboundSchema:
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> =
+    ParseChunkingRequestChunkingReturnType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ParseChunkingRequestChunkingReturnType$ {
+  /** @deprecated use `ParseChunkingRequestChunkingReturnType$inboundSchema` instead. */
+  export const inboundSchema =
+    ParseChunkingRequestChunkingReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestChunkingReturnType$outboundSchema` instead. */
+  export const outboundSchema =
+    ParseChunkingRequestChunkingReturnType$outboundSchema;
+}
+
+/** @internal */
+export const SemanticChunker$inboundSchema: z.ZodNativeEnum<
+  typeof SemanticChunker
+> = z.nativeEnum(SemanticChunker);
+
+/** @internal */
+export const SemanticChunker$outboundSchema: z.ZodNativeEnum<
+  typeof SemanticChunker
+> = SemanticChunker$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SemanticChunker$ {
+  /** @deprecated use `SemanticChunker$inboundSchema` instead. */
+  export const inboundSchema = SemanticChunker$inboundSchema;
+  /** @deprecated use `SemanticChunker$outboundSchema` instead. */
+  export const outboundSchema = SemanticChunker$outboundSchema;
+}
+
+/** @internal */
+export const Threshold2$inboundSchema: z.ZodNativeEnum<typeof Threshold2> = z
+  .nativeEnum(Threshold2);
+
+/** @internal */
+export const Threshold2$outboundSchema: z.ZodNativeEnum<typeof Threshold2> =
+  Threshold2$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Threshold2$ {
+  /** @deprecated use `Threshold2$inboundSchema` instead. */
+  export const inboundSchema = Threshold2$inboundSchema;
+  /** @deprecated use `Threshold2$outboundSchema` instead. */
+  export const outboundSchema = Threshold2$outboundSchema;
+}
+
+/** @internal */
+export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
+  Mode,
+);
+
+/** @internal */
+export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
+  Mode$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Mode$ {
+  /** @deprecated use `Mode$inboundSchema` instead. */
+  export const inboundSchema = Mode$inboundSchema;
+  /** @deprecated use `Mode$outboundSchema` instead. */
+  export const outboundSchema = Mode$outboundSchema;
+}
+
+/** @internal */
+export const ParseChunkingRequestReturnType$inboundSchema: z.ZodNativeEnum<
+  typeof ParseChunkingRequestReturnType
+> = z.nativeEnum(ParseChunkingRequestReturnType);
+
+/** @internal */
+export const ParseChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
+  typeof ParseChunkingRequestReturnType
+> = ParseChunkingRequestReturnType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ParseChunkingRequestReturnType$ {
+  /** @deprecated use `ParseChunkingRequestReturnType$inboundSchema` instead. */
+  export const inboundSchema = ParseChunkingRequestReturnType$inboundSchema;
+  /** @deprecated use `ParseChunkingRequestReturnType$outboundSchema` instead. */
+  export const outboundSchema = ParseChunkingRequestReturnType$outboundSchema;
+}
+
+/** @internal */
+export const RecursiveChunker$inboundSchema: z.ZodNativeEnum<
+  typeof RecursiveChunker
+> = z.nativeEnum(RecursiveChunker);
+
+/** @internal */
+export const RecursiveChunker$outboundSchema: z.ZodNativeEnum<
+  typeof RecursiveChunker
+> = RecursiveChunker$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RecursiveChunker$ {
+  /** @deprecated use `RecursiveChunker$inboundSchema` instead. */
+  export const inboundSchema = RecursiveChunker$inboundSchema;
+  /** @deprecated use `RecursiveChunker$outboundSchema` instead. */
+  export const outboundSchema = RecursiveChunker$outboundSchema;
+}
+
+/** @internal */
+export const ChunkingRequestReturnType$inboundSchema: z.ZodNativeEnum<
+  typeof ChunkingRequestReturnType
+> = z.nativeEnum(ChunkingRequestReturnType);
+
+/** @internal */
+export const ChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
+  typeof ChunkingRequestReturnType
+> = ChunkingRequestReturnType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ChunkingRequestReturnType$ {
+  /** @deprecated use `ChunkingRequestReturnType$inboundSchema` instead. */
+  export const inboundSchema = ChunkingRequestReturnType$inboundSchema;
+  /** @deprecated use `ChunkingRequestReturnType$outboundSchema` instead. */
+  export const outboundSchema = ChunkingRequestReturnType$outboundSchema;
+}
+
+/** @internal */
+export const SentenceChunker$inboundSchema: z.ZodNativeEnum<
+  typeof SentenceChunker
+> = z.nativeEnum(SentenceChunker);
+
+/** @internal */
+export const SentenceChunker$outboundSchema: z.ZodNativeEnum<
+  typeof SentenceChunker
+> = SentenceChunker$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SentenceChunker$ {
+  /** @deprecated use `SentenceChunker$inboundSchema` instead. */
+  export const inboundSchema = SentenceChunker$inboundSchema;
+  /** @deprecated use `SentenceChunker$outboundSchema` instead. */
+  export const outboundSchema = SentenceChunker$outboundSchema;
+}
+
+/** @internal */
+export const ReturnTypeT$inboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> = z
+  .nativeEnum(ReturnTypeT);
+
+/** @internal */
+export const ReturnTypeT$outboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> =
+  ReturnTypeT$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ReturnTypeT$ {
+  /** @deprecated use `ReturnTypeT$inboundSchema` instead. */
+  export const inboundSchema = ReturnTypeT$inboundSchema;
+  /** @deprecated use `ReturnTypeT$outboundSchema` instead. */
+  export const outboundSchema = ReturnTypeT$outboundSchema;
+}
+
+/** @internal */
+export const TokenChunker$inboundSchema: z.ZodNativeEnum<typeof TokenChunker> =
+  z.nativeEnum(TokenChunker);
+
+/** @internal */
+export const TokenChunker$outboundSchema: z.ZodNativeEnum<typeof TokenChunker> =
+  TokenChunker$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TokenChunker$ {
+  /** @deprecated use `TokenChunker$inboundSchema` instead. */
+  export const inboundSchema = TokenChunker$inboundSchema;
+  /** @deprecated use `TokenChunker$outboundSchema` instead. */
+  export const outboundSchema = TokenChunker$outboundSchema;
+}
+
+/**
  * Agentic LLM-powered chunker that uses AI to determine optimal split points. Best for complex documents requiring intelligent segmentation.
  */
 export type AgenticChunkerStrategy = {
@@ -65,45 +528,9 @@ export type AgenticChunkerStrategy = {
 };
 
 /**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export const ParseChunkingRequestChunkingRequestReturnType = {
-  Chunks: "chunks",
-  Texts: "texts",
-} as const;
-/**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export type ParseChunkingRequestChunkingRequestReturnType = ClosedEnum<
-  typeof ParseChunkingRequestChunkingRequestReturnType
->;
-
-export const SDPMChunker = {
-  Sdpm: "sdpm",
-} as const;
-export type SDPMChunker = ClosedEnum<typeof SDPMChunker>;
-
-export const ParseThreshold2 = {
-  Auto: "auto",
-} as const;
-export type ParseThreshold2 = ClosedEnum<typeof ParseThreshold2>;
-
-/**
  * Similarity threshold for grouping (0-1) or "auto" for automatic detection
  */
 export type ChunkingRequestThreshold = number | ParseThreshold2;
-
-/**
- * Chunking mode: window-based or sentence-based similarity
- */
-export const ChunkingRequestMode = {
-  Window: "window",
-  Sentence: "sentence",
-} as const;
-/**
- * Chunking mode: window-based or sentence-based similarity
- */
-export type ChunkingRequestMode = ClosedEnum<typeof ChunkingRequestMode>;
 
 /**
  * Sub-Document Prose Model chunker that uses skip-gram patterns to identify optimal split points. Good for technical documents with structured content.
@@ -145,45 +572,9 @@ export type SDPMChunkerStrategy = {
 };
 
 /**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export const ParseChunkingRequestChunkingReturnType = {
-  Chunks: "chunks",
-  Texts: "texts",
-} as const;
-/**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export type ParseChunkingRequestChunkingReturnType = ClosedEnum<
-  typeof ParseChunkingRequestChunkingReturnType
->;
-
-export const SemanticChunker = {
-  Semantic: "semantic",
-} as const;
-export type SemanticChunker = ClosedEnum<typeof SemanticChunker>;
-
-export const Threshold2 = {
-  Auto: "auto",
-} as const;
-export type Threshold2 = ClosedEnum<typeof Threshold2>;
-
-/**
  * Similarity threshold for grouping (0-1) or "auto" for automatic detection
  */
 export type Threshold = number | Threshold2;
-
-/**
- * Chunking mode: window-based or sentence-based similarity
- */
-export const Mode = {
-  Window: "window",
-  Sentence: "sentence",
-} as const;
-/**
- * Chunking mode: window-based or sentence-based similarity
- */
-export type Mode = ClosedEnum<typeof Mode>;
 
 /**
  * Groups semantically similar sentences using embeddings. Excellent for maintaining topic coherence and context within chunks.
@@ -225,25 +616,6 @@ export type SemanticChunkerStrategy = {
 };
 
 /**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export const ParseChunkingRequestReturnType = {
-  Chunks: "chunks",
-  Texts: "texts",
-} as const;
-/**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export type ParseChunkingRequestReturnType = ClosedEnum<
-  typeof ParseChunkingRequestReturnType
->;
-
-export const RecursiveChunker = {
-  Recursive: "recursive",
-} as const;
-export type RecursiveChunker = ClosedEnum<typeof RecursiveChunker>;
-
-/**
  * Recursively splits text using a hierarchy of separators (paragraphs, sentences, words). Versatile general-purpose chunker that preserves document structure.
  */
 export type RecursiveChunkerStrategy = {
@@ -275,25 +647,6 @@ export type RecursiveChunkerStrategy = {
 };
 
 /**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export const ChunkingRequestReturnType = {
-  Chunks: "chunks",
-  Texts: "texts",
-} as const;
-/**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export type ChunkingRequestReturnType = ClosedEnum<
-  typeof ChunkingRequestReturnType
->;
-
-export const SentenceChunker = {
-  Sentence: "sentence",
-} as const;
-export type SentenceChunker = ClosedEnum<typeof SentenceChunker>;
-
-/**
  * Splits text at sentence boundaries while respecting token limits. Ideal for maintaining semantic coherence and readability.
  */
 export type SentenceChunkerStrategy = {
@@ -323,23 +676,6 @@ export type SentenceChunkerStrategy = {
    */
   minSentencesPerChunk?: number | undefined;
 };
-
-/**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export const ReturnTypeT = {
-  Chunks: "chunks",
-  Texts: "texts",
-} as const;
-/**
- * Return format: chunks (with metadata) or texts (plain strings)
- */
-export type ReturnTypeT = ClosedEnum<typeof ReturnTypeT>;
-
-export const TokenChunker = {
-  Token: "token",
-} as const;
-export type TokenChunker = ClosedEnum<typeof TokenChunker>;
 
 /**
  * Splits text based on token count. Best for ensuring chunks fit within LLM context windows and maintaining consistent chunk sizes for embedding models.
@@ -403,52 +739,6 @@ export type Chunks = {
 export type ParseResponseBody = {
   chunks: Array<Chunks>;
 };
-
-/** @internal */
-export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
-  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBodyReturnType);
-
-/** @internal */
-export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
-  > = ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ParseChunkingRequestChunkingRequestRequestBodyReturnType$ {
-  /** @deprecated use `ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema` instead. */
-  export const inboundSchema =
-    ParseChunkingRequestChunkingRequestRequestBodyReturnType$inboundSchema;
-  /** @deprecated use `ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema` instead. */
-  export const outboundSchema =
-    ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema;
-}
-
-/** @internal */
-export const AgenticChunker$inboundSchema: z.ZodNativeEnum<
-  typeof AgenticChunker
-> = z.nativeEnum(AgenticChunker);
-
-/** @internal */
-export const AgenticChunker$outboundSchema: z.ZodNativeEnum<
-  typeof AgenticChunker
-> = AgenticChunker$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AgenticChunker$ {
-  /** @deprecated use `AgenticChunker$inboundSchema` instead. */
-  export const inboundSchema = AgenticChunker$inboundSchema;
-  /** @deprecated use `AgenticChunker$outboundSchema` instead. */
-  export const outboundSchema = AgenticChunker$outboundSchema;
-}
 
 /** @internal */
 export const AgenticChunkerStrategy$inboundSchema: z.ZodType<
@@ -544,69 +834,6 @@ export function agenticChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ParseChunkingRequestChunkingRequestReturnType$inboundSchema:
-  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> = z
-    .nativeEnum(ParseChunkingRequestChunkingRequestReturnType);
-
-/** @internal */
-export const ParseChunkingRequestChunkingRequestReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> =
-    ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ParseChunkingRequestChunkingRequestReturnType$ {
-  /** @deprecated use `ParseChunkingRequestChunkingRequestReturnType$inboundSchema` instead. */
-  export const inboundSchema =
-    ParseChunkingRequestChunkingRequestReturnType$inboundSchema;
-  /** @deprecated use `ParseChunkingRequestChunkingRequestReturnType$outboundSchema` instead. */
-  export const outboundSchema =
-    ParseChunkingRequestChunkingRequestReturnType$outboundSchema;
-}
-
-/** @internal */
-export const SDPMChunker$inboundSchema: z.ZodNativeEnum<typeof SDPMChunker> = z
-  .nativeEnum(SDPMChunker);
-
-/** @internal */
-export const SDPMChunker$outboundSchema: z.ZodNativeEnum<typeof SDPMChunker> =
-  SDPMChunker$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SDPMChunker$ {
-  /** @deprecated use `SDPMChunker$inboundSchema` instead. */
-  export const inboundSchema = SDPMChunker$inboundSchema;
-  /** @deprecated use `SDPMChunker$outboundSchema` instead. */
-  export const outboundSchema = SDPMChunker$outboundSchema;
-}
-
-/** @internal */
-export const ParseThreshold2$inboundSchema: z.ZodNativeEnum<
-  typeof ParseThreshold2
-> = z.nativeEnum(ParseThreshold2);
-
-/** @internal */
-export const ParseThreshold2$outboundSchema: z.ZodNativeEnum<
-  typeof ParseThreshold2
-> = ParseThreshold2$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ParseThreshold2$ {
-  /** @deprecated use `ParseThreshold2$inboundSchema` instead. */
-  export const inboundSchema = ParseThreshold2$inboundSchema;
-  /** @deprecated use `ParseThreshold2$outboundSchema` instead. */
-  export const outboundSchema = ParseThreshold2$outboundSchema;
-}
-
-/** @internal */
 export const ChunkingRequestThreshold$inboundSchema: z.ZodType<
   ChunkingRequestThreshold,
   z.ZodTypeDef,
@@ -652,27 +879,6 @@ export function chunkingRequestThresholdFromJSON(
     (x) => ChunkingRequestThreshold$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ChunkingRequestThreshold' from JSON`,
   );
-}
-
-/** @internal */
-export const ChunkingRequestMode$inboundSchema: z.ZodNativeEnum<
-  typeof ChunkingRequestMode
-> = z.nativeEnum(ChunkingRequestMode);
-
-/** @internal */
-export const ChunkingRequestMode$outboundSchema: z.ZodNativeEnum<
-  typeof ChunkingRequestMode
-> = ChunkingRequestMode$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingRequestMode$ {
-  /** @deprecated use `ChunkingRequestMode$inboundSchema` instead. */
-  export const inboundSchema = ChunkingRequestMode$inboundSchema;
-  /** @deprecated use `ChunkingRequestMode$outboundSchema` instead. */
-  export const outboundSchema = ChunkingRequestMode$outboundSchema;
 }
 
 /** @internal */
@@ -770,70 +976,6 @@ export function sdpmChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ParseChunkingRequestChunkingReturnType$inboundSchema:
-  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> = z.nativeEnum(
-    ParseChunkingRequestChunkingReturnType,
-  );
-
-/** @internal */
-export const ParseChunkingRequestChunkingReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> =
-    ParseChunkingRequestChunkingReturnType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ParseChunkingRequestChunkingReturnType$ {
-  /** @deprecated use `ParseChunkingRequestChunkingReturnType$inboundSchema` instead. */
-  export const inboundSchema =
-    ParseChunkingRequestChunkingReturnType$inboundSchema;
-  /** @deprecated use `ParseChunkingRequestChunkingReturnType$outboundSchema` instead. */
-  export const outboundSchema =
-    ParseChunkingRequestChunkingReturnType$outboundSchema;
-}
-
-/** @internal */
-export const SemanticChunker$inboundSchema: z.ZodNativeEnum<
-  typeof SemanticChunker
-> = z.nativeEnum(SemanticChunker);
-
-/** @internal */
-export const SemanticChunker$outboundSchema: z.ZodNativeEnum<
-  typeof SemanticChunker
-> = SemanticChunker$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SemanticChunker$ {
-  /** @deprecated use `SemanticChunker$inboundSchema` instead. */
-  export const inboundSchema = SemanticChunker$inboundSchema;
-  /** @deprecated use `SemanticChunker$outboundSchema` instead. */
-  export const outboundSchema = SemanticChunker$outboundSchema;
-}
-
-/** @internal */
-export const Threshold2$inboundSchema: z.ZodNativeEnum<typeof Threshold2> = z
-  .nativeEnum(Threshold2);
-
-/** @internal */
-export const Threshold2$outboundSchema: z.ZodNativeEnum<typeof Threshold2> =
-  Threshold2$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Threshold2$ {
-  /** @deprecated use `Threshold2$inboundSchema` instead. */
-  export const inboundSchema = Threshold2$inboundSchema;
-  /** @deprecated use `Threshold2$outboundSchema` instead. */
-  export const outboundSchema = Threshold2$outboundSchema;
-}
-
-/** @internal */
 export const Threshold$inboundSchema: z.ZodType<
   Threshold,
   z.ZodTypeDef,
@@ -875,26 +1017,6 @@ export function thresholdFromJSON(
     (x) => Threshold$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Threshold' from JSON`,
   );
-}
-
-/** @internal */
-export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
-
-/** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
-  Mode$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Mode$ {
-  /** @deprecated use `Mode$inboundSchema` instead. */
-  export const inboundSchema = Mode$inboundSchema;
-  /** @deprecated use `Mode$outboundSchema` instead. */
-  export const outboundSchema = Mode$outboundSchema;
 }
 
 /** @internal */
@@ -994,48 +1116,6 @@ export function semanticChunkerStrategyFromJSON(
 }
 
 /** @internal */
-export const ParseChunkingRequestReturnType$inboundSchema: z.ZodNativeEnum<
-  typeof ParseChunkingRequestReturnType
-> = z.nativeEnum(ParseChunkingRequestReturnType);
-
-/** @internal */
-export const ParseChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
-  typeof ParseChunkingRequestReturnType
-> = ParseChunkingRequestReturnType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ParseChunkingRequestReturnType$ {
-  /** @deprecated use `ParseChunkingRequestReturnType$inboundSchema` instead. */
-  export const inboundSchema = ParseChunkingRequestReturnType$inboundSchema;
-  /** @deprecated use `ParseChunkingRequestReturnType$outboundSchema` instead. */
-  export const outboundSchema = ParseChunkingRequestReturnType$outboundSchema;
-}
-
-/** @internal */
-export const RecursiveChunker$inboundSchema: z.ZodNativeEnum<
-  typeof RecursiveChunker
-> = z.nativeEnum(RecursiveChunker);
-
-/** @internal */
-export const RecursiveChunker$outboundSchema: z.ZodNativeEnum<
-  typeof RecursiveChunker
-> = RecursiveChunker$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RecursiveChunker$ {
-  /** @deprecated use `RecursiveChunker$inboundSchema` instead. */
-  export const inboundSchema = RecursiveChunker$inboundSchema;
-  /** @deprecated use `RecursiveChunker$outboundSchema` instead. */
-  export const outboundSchema = RecursiveChunker$outboundSchema;
-}
-
-/** @internal */
 export const RecursiveChunkerStrategy$inboundSchema: z.ZodType<
   RecursiveChunkerStrategy,
   z.ZodTypeDef,
@@ -1117,48 +1197,6 @@ export function recursiveChunkerStrategyFromJSON(
     (x) => RecursiveChunkerStrategy$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RecursiveChunkerStrategy' from JSON`,
   );
-}
-
-/** @internal */
-export const ChunkingRequestReturnType$inboundSchema: z.ZodNativeEnum<
-  typeof ChunkingRequestReturnType
-> = z.nativeEnum(ChunkingRequestReturnType);
-
-/** @internal */
-export const ChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
-  typeof ChunkingRequestReturnType
-> = ChunkingRequestReturnType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingRequestReturnType$ {
-  /** @deprecated use `ChunkingRequestReturnType$inboundSchema` instead. */
-  export const inboundSchema = ChunkingRequestReturnType$inboundSchema;
-  /** @deprecated use `ChunkingRequestReturnType$outboundSchema` instead. */
-  export const outboundSchema = ChunkingRequestReturnType$outboundSchema;
-}
-
-/** @internal */
-export const SentenceChunker$inboundSchema: z.ZodNativeEnum<
-  typeof SentenceChunker
-> = z.nativeEnum(SentenceChunker);
-
-/** @internal */
-export const SentenceChunker$outboundSchema: z.ZodNativeEnum<
-  typeof SentenceChunker
-> = SentenceChunker$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SentenceChunker$ {
-  /** @deprecated use `SentenceChunker$inboundSchema` instead. */
-  export const inboundSchema = SentenceChunker$inboundSchema;
-  /** @deprecated use `SentenceChunker$outboundSchema` instead. */
-  export const outboundSchema = SentenceChunker$outboundSchema;
 }
 
 /** @internal */
@@ -1245,44 +1283,6 @@ export function sentenceChunkerStrategyFromJSON(
     (x) => SentenceChunkerStrategy$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SentenceChunkerStrategy' from JSON`,
   );
-}
-
-/** @internal */
-export const ReturnTypeT$inboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> = z
-  .nativeEnum(ReturnTypeT);
-
-/** @internal */
-export const ReturnTypeT$outboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> =
-  ReturnTypeT$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ReturnTypeT$ {
-  /** @deprecated use `ReturnTypeT$inboundSchema` instead. */
-  export const inboundSchema = ReturnTypeT$inboundSchema;
-  /** @deprecated use `ReturnTypeT$outboundSchema` instead. */
-  export const outboundSchema = ReturnTypeT$outboundSchema;
-}
-
-/** @internal */
-export const TokenChunker$inboundSchema: z.ZodNativeEnum<typeof TokenChunker> =
-  z.nativeEnum(TokenChunker);
-
-/** @internal */
-export const TokenChunker$outboundSchema: z.ZodNativeEnum<typeof TokenChunker> =
-  TokenChunker$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TokenChunker$ {
-  /** @deprecated use `TokenChunker$inboundSchema` instead. */
-  export const inboundSchema = TokenChunker$inboundSchema;
-  /** @deprecated use `TokenChunker$outboundSchema` instead. */
-  export const outboundSchema = TokenChunker$outboundSchema;
 }
 
 /** @internal */

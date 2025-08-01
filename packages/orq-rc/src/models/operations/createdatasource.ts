@@ -16,6 +16,87 @@ export type CreateDatasourceChunkingConfigurationType = ClosedEnum<
   typeof CreateDatasourceChunkingConfigurationType
 >;
 
+export const ChunkingConfigurationType = {
+  Default: "default",
+} as const;
+export type ChunkingConfigurationType = ClosedEnum<
+  typeof ChunkingConfigurationType
+>;
+
+export const CreateDatasourceStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type CreateDatasourceStatus = ClosedEnum<typeof CreateDatasourceStatus>;
+
+/** @internal */
+export const CreateDatasourceChunkingConfigurationType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> = z
+    .nativeEnum(CreateDatasourceChunkingConfigurationType);
+
+/** @internal */
+export const CreateDatasourceChunkingConfigurationType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> =
+    CreateDatasourceChunkingConfigurationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasourceChunkingConfigurationType$ {
+  /** @deprecated use `CreateDatasourceChunkingConfigurationType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasourceChunkingConfigurationType$inboundSchema;
+  /** @deprecated use `CreateDatasourceChunkingConfigurationType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasourceChunkingConfigurationType$outboundSchema;
+}
+
+/** @internal */
+export const ChunkingConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof ChunkingConfigurationType
+> = z.nativeEnum(ChunkingConfigurationType);
+
+/** @internal */
+export const ChunkingConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof ChunkingConfigurationType
+> = ChunkingConfigurationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ChunkingConfigurationType$ {
+  /** @deprecated use `ChunkingConfigurationType$inboundSchema` instead. */
+  export const inboundSchema = ChunkingConfigurationType$inboundSchema;
+  /** @deprecated use `ChunkingConfigurationType$outboundSchema` instead. */
+  export const outboundSchema = ChunkingConfigurationType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasourceStatus
+> = z.nativeEnum(CreateDatasourceStatus);
+
+/** @internal */
+export const CreateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasourceStatus
+> = CreateDatasourceStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasourceStatus$ {
+  /** @deprecated use `CreateDatasourceStatus$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasourceStatus$inboundSchema;
+  /** @deprecated use `CreateDatasourceStatus$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasourceStatus$outboundSchema;
+}
+
 /**
  * Provides advanced settings for customizing chunking behavior, enabling fine-grained control to better meet specific data processing needs.
  */
@@ -30,13 +111,6 @@ export type ChunkingConfiguration2 = {
    */
   chunkOverlap?: number | undefined;
 };
-
-export const ChunkingConfigurationType = {
-  Default: "default",
-} as const;
-export type ChunkingConfigurationType = ClosedEnum<
-  typeof ChunkingConfigurationType
->;
 
 /**
  * Optimized chunking strategy focusing on speed and avoiding duplication of content chunks.
@@ -130,15 +204,6 @@ export type CreateDatasourceRequest = {
   requestBody: CreateDatasourceRequestBody;
 };
 
-export const CreateDatasourceStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type CreateDatasourceStatus = ClosedEnum<typeof CreateDatasourceStatus>;
-
 /**
  * Datasource successfully created
  */
@@ -185,29 +250,6 @@ export type CreateDatasourceResponseBody = {
    */
   chunksCount: number;
 };
-
-/** @internal */
-export const CreateDatasourceChunkingConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> = z
-    .nativeEnum(CreateDatasourceChunkingConfigurationType);
-
-/** @internal */
-export const CreateDatasourceChunkingConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateDatasourceChunkingConfigurationType> =
-    CreateDatasourceChunkingConfigurationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceChunkingConfigurationType$ {
-  /** @deprecated use `CreateDatasourceChunkingConfigurationType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateDatasourceChunkingConfigurationType$inboundSchema;
-  /** @deprecated use `CreateDatasourceChunkingConfigurationType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateDatasourceChunkingConfigurationType$outboundSchema;
-}
 
 /** @internal */
 export const ChunkingConfiguration2$inboundSchema: z.ZodType<
@@ -277,27 +319,6 @@ export function chunkingConfiguration2FromJSON(
     (x) => ChunkingConfiguration2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ChunkingConfiguration2' from JSON`,
   );
-}
-
-/** @internal */
-export const ChunkingConfigurationType$inboundSchema: z.ZodNativeEnum<
-  typeof ChunkingConfigurationType
-> = z.nativeEnum(ChunkingConfigurationType);
-
-/** @internal */
-export const ChunkingConfigurationType$outboundSchema: z.ZodNativeEnum<
-  typeof ChunkingConfigurationType
-> = ChunkingConfigurationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChunkingConfigurationType$ {
-  /** @deprecated use `ChunkingConfigurationType$inboundSchema` instead. */
-  export const inboundSchema = ChunkingConfigurationType$inboundSchema;
-  /** @deprecated use `ChunkingConfigurationType$outboundSchema` instead. */
-  export const outboundSchema = ChunkingConfigurationType$outboundSchema;
 }
 
 /** @internal */
@@ -725,33 +746,12 @@ export function createDatasourceRequestFromJSON(
 }
 
 /** @internal */
-export const CreateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasourceStatus
-> = z.nativeEnum(CreateDatasourceStatus);
-
-/** @internal */
-export const CreateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CreateDatasourceStatus
-> = CreateDatasourceStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateDatasourceStatus$ {
-  /** @deprecated use `CreateDatasourceStatus$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasourceStatus$inboundSchema;
-  /** @deprecated use `CreateDatasourceStatus$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasourceStatus$outboundSchema;
-}
-
-/** @internal */
 export const CreateDatasourceResponseBody$inboundSchema: z.ZodType<
   CreateDatasourceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K1GB7HWPM925Z37F1H4W0YJB"),
+  _id: z.string().default("01K1J0S1K7XSVJFSJS7JNKDK79"),
   display_name: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$inboundSchema,
@@ -795,7 +795,7 @@ export const CreateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K1GB7HWPM925Z37F1H4W0YJB"),
+  id: z.string().default("01K1J0S1K7XSVJFSJS7JNKDK79"),
   displayName: z.string(),
   description: z.string().optional(),
   status: CreateDatasourceStatus$outboundSchema,

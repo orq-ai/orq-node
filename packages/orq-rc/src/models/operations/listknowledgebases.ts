@@ -9,21 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ListKnowledgeBasesRequest = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
-   */
-  limit?: number | undefined;
-  /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
-   */
-  startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
-   */
-  endingBefore?: string | undefined;
-};
-
 export const ListKnowledgeBasesObject = {
   List: "list",
 } as const;
@@ -45,6 +30,63 @@ export const ListKnowledgeBasesRetrievalType = {
 export type ListKnowledgeBasesRetrievalType = ClosedEnum<
   typeof ListKnowledgeBasesRetrievalType
 >;
+
+/** @internal */
+export const ListKnowledgeBasesObject$inboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesObject
+> = z.nativeEnum(ListKnowledgeBasesObject);
+
+/** @internal */
+export const ListKnowledgeBasesObject$outboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesObject
+> = ListKnowledgeBasesObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListKnowledgeBasesObject$ {
+  /** @deprecated use `ListKnowledgeBasesObject$inboundSchema` instead. */
+  export const inboundSchema = ListKnowledgeBasesObject$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesObject$outboundSchema` instead. */
+  export const outboundSchema = ListKnowledgeBasesObject$outboundSchema;
+}
+
+/** @internal */
+export const ListKnowledgeBasesRetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesRetrievalType
+> = z.nativeEnum(ListKnowledgeBasesRetrievalType);
+
+/** @internal */
+export const ListKnowledgeBasesRetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesRetrievalType
+> = ListKnowledgeBasesRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListKnowledgeBasesRetrievalType$ {
+  /** @deprecated use `ListKnowledgeBasesRetrievalType$inboundSchema` instead. */
+  export const inboundSchema = ListKnowledgeBasesRetrievalType$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesRetrievalType$outboundSchema` instead. */
+  export const outboundSchema = ListKnowledgeBasesRetrievalType$outboundSchema;
+}
+
+export type ListKnowledgeBasesRequest = {
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   */
+  limit?: number | undefined;
+  /**
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   */
+  startingAfter?: string | undefined;
+  /**
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   */
+  endingBefore?: string | undefined;
+};
 
 /**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
@@ -217,48 +259,6 @@ export function listKnowledgeBasesRequestFromJSON(
     (x) => ListKnowledgeBasesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListKnowledgeBasesRequest' from JSON`,
   );
-}
-
-/** @internal */
-export const ListKnowledgeBasesObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListKnowledgeBasesObject
-> = z.nativeEnum(ListKnowledgeBasesObject);
-
-/** @internal */
-export const ListKnowledgeBasesObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListKnowledgeBasesObject
-> = ListKnowledgeBasesObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesObject$ {
-  /** @deprecated use `ListKnowledgeBasesObject$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesObject$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesObject$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesObject$outboundSchema;
-}
-
-/** @internal */
-export const ListKnowledgeBasesRetrievalType$inboundSchema: z.ZodNativeEnum<
-  typeof ListKnowledgeBasesRetrievalType
-> = z.nativeEnum(ListKnowledgeBasesRetrievalType);
-
-/** @internal */
-export const ListKnowledgeBasesRetrievalType$outboundSchema: z.ZodNativeEnum<
-  typeof ListKnowledgeBasesRetrievalType
-> = ListKnowledgeBasesRetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListKnowledgeBasesRetrievalType$ {
-  /** @deprecated use `ListKnowledgeBasesRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesRetrievalType$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesRetrievalType$outboundSchema;
 }
 
 /** @internal */

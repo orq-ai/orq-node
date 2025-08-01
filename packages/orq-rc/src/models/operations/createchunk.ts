@@ -9,6 +9,42 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The status of the chunk
+ */
+export const CreateChunkStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * The status of the chunk
+ */
+export type CreateChunkStatus = ClosedEnum<typeof CreateChunkStatus>;
+
+/** @internal */
+export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
+  typeof CreateChunkStatus
+> = z.nativeEnum(CreateChunkStatus);
+
+/** @internal */
+export const CreateChunkStatus$outboundSchema: z.ZodNativeEnum<
+  typeof CreateChunkStatus
+> = CreateChunkStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateChunkStatus$ {
+  /** @deprecated use `CreateChunkStatus$inboundSchema` instead. */
+  export const inboundSchema = CreateChunkStatus$inboundSchema;
+  /** @deprecated use `CreateChunkStatus$outboundSchema` instead. */
+  export const outboundSchema = CreateChunkStatus$outboundSchema;
+}
+
 export type CreateChunkMetadata = string | number | boolean;
 
 export type RequestBody = {
@@ -39,21 +75,6 @@ export type CreateChunkRequest = {
 };
 
 export type CreateChunkKnowledgeMetadata = string | number | boolean;
-
-/**
- * The status of the chunk
- */
-export const CreateChunkStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type CreateChunkStatus = ClosedEnum<typeof CreateChunkStatus>;
 
 export type ResponseBody = {
   /**
@@ -318,27 +339,6 @@ export function createChunkKnowledgeMetadataFromJSON(
     (x) => CreateChunkKnowledgeMetadata$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateChunkKnowledgeMetadata' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateChunkStatus$inboundSchema: z.ZodNativeEnum<
-  typeof CreateChunkStatus
-> = z.nativeEnum(CreateChunkStatus);
-
-/** @internal */
-export const CreateChunkStatus$outboundSchema: z.ZodNativeEnum<
-  typeof CreateChunkStatus
-> = CreateChunkStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateChunkStatus$ {
-  /** @deprecated use `CreateChunkStatus$inboundSchema` instead. */
-  export const inboundSchema = CreateChunkStatus$inboundSchema;
-  /** @deprecated use `CreateChunkStatus$outboundSchema` instead. */
-  export const outboundSchema = CreateChunkStatus$outboundSchema;
 }
 
 /** @internal */

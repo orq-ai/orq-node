@@ -28,13 +28,6 @@ export type CreateEvalGuardrailConfigEvalsOperator = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsOperator
 >;
 
-export type CreateEvalGuardrailConfigEvalsNumber = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsRequestRequestBody42Type;
-  value: number;
-  operator: CreateEvalGuardrailConfigEvalsOperator;
-};
-
 export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type = {
   Boolean: "boolean",
 } as const;
@@ -42,37 +35,12 @@ export type CreateEvalGuardrailConfigEvalsRequestRequestBody4Type = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
 >;
 
-export type CreateEvalGuardrailConfigEvalsBoolean = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsRequestRequestBody4Type;
-  value: boolean;
-};
-
-export type CreateEvalRequestBodyEvalsGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsNumber
-  | CreateEvalGuardrailConfigEvalsBoolean;
-
 export const CreateEvalRequestBodyEvalsRequestType = {
   PythonEval: "python_eval",
 } as const;
 export type CreateEvalRequestBodyEvalsRequestType = ClosedEnum<
   typeof CreateEvalRequestBodyEvalsRequestType
 >;
-
-export type Python = {
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsNumber
-    | CreateEvalGuardrailConfigEvalsBoolean
-    | undefined;
-  code: string;
-  type: CreateEvalRequestBodyEvalsRequestType;
-  /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
-   */
-  path: string;
-  description?: string | undefined;
-  key: string;
-};
 
 export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type = {
   Number: "number",
@@ -93,29 +61,12 @@ export type CreateEvalGuardrailConfigOperator = ClosedEnum<
   typeof CreateEvalGuardrailConfigOperator
 >;
 
-export type CreateEvalGuardrailConfigNumber = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsRequestRequestBody3Type;
-  value: number;
-  operator: CreateEvalGuardrailConfigOperator;
-};
-
 export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType = {
   Boolean: "boolean",
 } as const;
 export type CreateEvalGuardrailConfigEvalsRequestRequestBodyType = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType
 >;
-
-export type CreateEvalGuardrailConfigBoolean = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsRequestRequestBodyType;
-  value: boolean;
-};
-
-export type CreateEvalRequestBodyGuardrailConfig =
-  | CreateEvalGuardrailConfigNumber
-  | CreateEvalGuardrailConfigBoolean;
 
 export const CreateEvalRequestBodyEvalsType = {
   HttpEval: "http_eval",
@@ -129,24 +80,6 @@ export const Method = {
   Post: "POST",
 } as const;
 export type Method = ClosedEnum<typeof Method>;
-
-export type Http = {
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigNumber
-    | CreateEvalGuardrailConfigBoolean
-    | undefined;
-  type: CreateEvalRequestBodyEvalsType;
-  url: string;
-  method: Method;
-  headers: { [k: string]: string };
-  payload: { [k: string]: any };
-  /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
-   */
-  path: string;
-  description?: string | undefined;
-  key: string;
-};
 
 export const CreateEvalGuardrailConfigEvalsRequestType = {
   Number: "number",
@@ -167,13 +100,6 @@ export type GuardrailConfigOperator = ClosedEnum<
   typeof GuardrailConfigOperator
 >;
 
-export type GuardrailConfigNumber = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsRequestType;
-  value: number;
-  operator: GuardrailConfigOperator;
-};
-
 export const CreateEvalGuardrailConfigEvalsType = {
   Boolean: "boolean",
 } as const;
@@ -181,34 +107,12 @@ export type CreateEvalGuardrailConfigEvalsType = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsType
 >;
 
-export type GuardrailConfigBoolean = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsType;
-  value: boolean;
-};
-
-export type RequestBodyGuardrailConfig =
-  | GuardrailConfigNumber
-  | GuardrailConfigBoolean;
-
 export const CreateEvalRequestBodyType = {
   JsonSchema: "json_schema",
 } as const;
 export type CreateEvalRequestBodyType = ClosedEnum<
   typeof CreateEvalRequestBodyType
 >;
-
-export type Json = {
-  guardrailConfig?: GuardrailConfigNumber | GuardrailConfigBoolean | undefined;
-  type: CreateEvalRequestBodyType;
-  schema: string;
-  /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
-   */
-  path: string;
-  description?: string | undefined;
-  key: string;
-};
 
 export const CreateEvalGuardrailConfigType = {
   Number: "number",
@@ -227,45 +131,15 @@ export const Operator = {
 } as const;
 export type Operator = ClosedEnum<typeof Operator>;
 
-export type NumberT = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigType;
-  value: number;
-  operator: Operator;
-};
-
 export const GuardrailConfigType = {
   Boolean: "boolean",
 } as const;
 export type GuardrailConfigType = ClosedEnum<typeof GuardrailConfigType>;
 
-export type Boolean = {
-  enabled: boolean;
-  type: GuardrailConfigType;
-  value: boolean;
-};
-
-export type GuardrailConfig = NumberT | Boolean;
-
 export const RequestBodyType = {
   LlmEval: "llm_eval",
 } as const;
 export type RequestBodyType = ClosedEnum<typeof RequestBodyType>;
-
-export type Llm = {
-  guardrailConfig?: NumberT | Boolean | undefined;
-  type: RequestBodyType;
-  prompt: string;
-  /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
-   */
-  path: string;
-  description?: string | undefined;
-  model: string;
-  key: string;
-};
-
-export type CreateEvalRequestBody = Http | Llm | Json | Python;
 
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type =
   {
@@ -290,16 +164,6 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
   >;
 
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
-  {
-    enabled: boolean;
-    type:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type;
-    value: number;
-    operator:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator;
-  };
-
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type =
   {
     Boolean: "boolean",
@@ -309,38 +173,12 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type
   >;
 
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
-  {
-    enabled: boolean;
-    type:
-      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type;
-    value: boolean;
-  };
-
-export type CreateEvalResponseBodyEvalsResponseGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean;
-
 export const CreateEvalResponseBodyEvalsResponseType = {
   PythonEval: "python_eval",
 } as const;
 export type CreateEvalResponseBodyEvalsResponseType = ClosedEnum<
   typeof CreateEvalResponseBodyEvalsResponseType
 >;
-
-export type ResponseBodyPython = {
-  id: string;
-  description: string;
-  created?: string | undefined;
-  updated?: string | undefined;
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
-    | undefined;
-  code: string;
-  type: CreateEvalResponseBodyEvalsResponseType;
-  key: string;
-};
 
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type =
   {
@@ -365,14 +203,6 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator =
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator
   >;
 
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
-  enabled: boolean;
-  type:
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type;
-  value: number;
-  operator: CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator;
-};
-
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type =
   {
     Boolean: "boolean",
@@ -381,17 +211,6 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody
   ClosedEnum<
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type
   >;
-
-export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
-  enabled: boolean;
-  type:
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type;
-  value: boolean;
-};
-
-export type CreateEvalResponseBodyEvalsGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
-  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean;
 
 export const CreateEvalResponseBodyEvalsType = {
   HttpEval: "http_eval",
@@ -405,23 +224,6 @@ export const ResponseBodyMethod = {
   Post: "POST",
 } as const;
 export type ResponseBodyMethod = ClosedEnum<typeof ResponseBodyMethod>;
-
-export type ResponseBodyHTTP = {
-  id: string;
-  description: string;
-  created?: string | undefined;
-  updated?: string | undefined;
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
-    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
-    | undefined;
-  type: CreateEvalResponseBodyEvalsType;
-  url: string;
-  method: ResponseBodyMethod;
-  headers: { [k: string]: string };
-  payload: { [k: string]: any };
-  key: string;
-};
 
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType =
   {
@@ -444,14 +246,6 @@ export type CreateEvalGuardrailConfigEvalsResponse200Operator = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsResponse200Operator
 >;
 
-export type CreateEvalGuardrailConfigEvalsResponse200Number = {
-  enabled: boolean;
-  type:
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType;
-  value: number;
-  operator: CreateEvalGuardrailConfigEvalsResponse200Operator;
-};
-
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType = {
   Boolean: "boolean",
 } as const;
@@ -460,36 +254,12 @@ export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType =
     typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType
   >;
 
-export type CreateEvalGuardrailConfigEvalsResponse200Boolean = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType;
-  value: boolean;
-};
-
-export type CreateEvalResponseBodyGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsResponse200Number
-  | CreateEvalGuardrailConfigEvalsResponse200Boolean;
-
 export const CreateEvalResponseBodyType = {
   JsonSchema: "json_schema",
 } as const;
 export type CreateEvalResponseBodyType = ClosedEnum<
   typeof CreateEvalResponseBodyType
 >;
-
-export type ResponseBodyJSON = {
-  id: string;
-  description: string;
-  created?: string | undefined;
-  updated?: string | undefined;
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsResponse200Number
-    | CreateEvalGuardrailConfigEvalsResponse200Boolean
-    | undefined;
-  type: CreateEvalResponseBodyType;
-  schema: string;
-  key: string;
-};
 
 export const CreateEvalGuardrailConfigEvalsResponse200Type = {
   Number: "number",
@@ -510,13 +280,6 @@ export type CreateEvalGuardrailConfigEvalsResponseOperator = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsResponseOperator
 >;
 
-export type CreateEvalGuardrailConfigEvalsResponseNumber = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsResponse200Type;
-  value: number;
-  operator: CreateEvalGuardrailConfigEvalsResponseOperator;
-};
-
 export const CreateEvalGuardrailConfigEvalsResponseType = {
   Boolean: "boolean",
 } as const;
@@ -524,44 +287,10 @@ export type CreateEvalGuardrailConfigEvalsResponseType = ClosedEnum<
   typeof CreateEvalGuardrailConfigEvalsResponseType
 >;
 
-export type CreateEvalGuardrailConfigEvalsResponseBoolean = {
-  enabled: boolean;
-  type: CreateEvalGuardrailConfigEvalsResponseType;
-  value: boolean;
-};
-
-export type ResponseBodyGuardrailConfig =
-  | CreateEvalGuardrailConfigEvalsResponseNumber
-  | CreateEvalGuardrailConfigEvalsResponseBoolean;
-
 export const ResponseBodyType = {
   LlmEval: "llm_eval",
 } as const;
 export type ResponseBodyType = ClosedEnum<typeof ResponseBodyType>;
-
-export type ResponseBodyLLM = {
-  id: string;
-  description: string;
-  created?: string | undefined;
-  updated?: string | undefined;
-  guardrailConfig?:
-    | CreateEvalGuardrailConfigEvalsResponseNumber
-    | CreateEvalGuardrailConfigEvalsResponseBoolean
-    | undefined;
-  type: ResponseBodyType;
-  prompt: string;
-  key: string;
-  model: string;
-};
-
-/**
- * Successfully created an evaluator
- */
-export type CreateEvalResponseBody =
-  | ResponseBodyHTTP
-  | ResponseBodyLLM
-  | ResponseBodyJSON
-  | ResponseBodyPython;
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsRequestRequestBody42Type$inboundSchema:
@@ -611,6 +340,1028 @@ export namespace CreateEvalGuardrailConfigEvalsOperator$ {
   export const outboundSchema =
     CreateEvalGuardrailConfigEvalsOperator$outboundSchema;
 }
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
+  > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody4Type);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
+  > = CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalRequestBodyEvalsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> = z.nativeEnum(
+    CreateEvalRequestBodyEvalsRequestType,
+  );
+
+/** @internal */
+export const CreateEvalRequestBodyEvalsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> =
+    CreateEvalRequestBodyEvalsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalRequestBodyEvalsRequestType$ {
+  /** @deprecated use `CreateEvalRequestBodyEvalsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalRequestBodyEvalsRequestType$inboundSchema;
+  /** @deprecated use `CreateEvalRequestBodyEvalsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalRequestBodyEvalsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody3Type
+  > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody3Type);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody3Type
+  > = CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalGuardrailConfigOperator
+> = z.nativeEnum(CreateEvalGuardrailConfigOperator);
+
+/** @internal */
+export const CreateEvalGuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalGuardrailConfigOperator
+> = CreateEvalGuardrailConfigOperator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigOperator$ {
+  /** @deprecated use `CreateEvalGuardrailConfigOperator$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalGuardrailConfigOperator$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigOperator$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigOperator$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType> =
+    z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBodyType);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType> =
+    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsRequestRequestBodyType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalRequestBodyEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyEvalsType
+> = z.nativeEnum(CreateEvalRequestBodyEvalsType);
+
+/** @internal */
+export const CreateEvalRequestBodyEvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyEvalsType
+> = CreateEvalRequestBodyEvalsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalRequestBodyEvalsType$ {
+  /** @deprecated use `CreateEvalRequestBodyEvalsType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalRequestBodyEvalsType$inboundSchema;
+  /** @deprecated use `CreateEvalRequestBodyEvalsType$outboundSchema` instead. */
+  export const outboundSchema = CreateEvalRequestBodyEvalsType$outboundSchema;
+}
+
+/** @internal */
+export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> = z
+  .nativeEnum(Method);
+
+/** @internal */
+export const Method$outboundSchema: z.ZodNativeEnum<typeof Method> =
+  Method$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Method$ {
+  /** @deprecated use `Method$inboundSchema` instead. */
+  export const inboundSchema = Method$inboundSchema;
+  /** @deprecated use `Method$outboundSchema` instead. */
+  export const outboundSchema = Method$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestType> = z
+    .nativeEnum(CreateEvalGuardrailConfigEvalsRequestType);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestType> =
+    CreateEvalGuardrailConfigEvalsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsRequestType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const GuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
+  typeof GuardrailConfigOperator
+> = z.nativeEnum(GuardrailConfigOperator);
+
+/** @internal */
+export const GuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
+  typeof GuardrailConfigOperator
+> = GuardrailConfigOperator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GuardrailConfigOperator$ {
+  /** @deprecated use `GuardrailConfigOperator$inboundSchema` instead. */
+  export const inboundSchema = GuardrailConfigOperator$inboundSchema;
+  /** @deprecated use `GuardrailConfigOperator$outboundSchema` instead. */
+  export const outboundSchema = GuardrailConfigOperator$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalGuardrailConfigEvalsType
+> = z.nativeEnum(CreateEvalGuardrailConfigEvalsType);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalGuardrailConfigEvalsType
+> = CreateEvalGuardrailConfigEvalsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalGuardrailConfigEvalsType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalRequestBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyType
+> = z.nativeEnum(CreateEvalRequestBodyType);
+
+/** @internal */
+export const CreateEvalRequestBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyType
+> = CreateEvalRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalRequestBodyType$ {
+  /** @deprecated use `CreateEvalRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalRequestBodyType$inboundSchema;
+  /** @deprecated use `CreateEvalRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema = CreateEvalRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalGuardrailConfigType
+> = z.nativeEnum(CreateEvalGuardrailConfigType);
+
+/** @internal */
+export const CreateEvalGuardrailConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalGuardrailConfigType
+> = CreateEvalGuardrailConfigType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalGuardrailConfigType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigType$outboundSchema` instead. */
+  export const outboundSchema = CreateEvalGuardrailConfigType$outboundSchema;
+}
+
+/** @internal */
+export const Operator$inboundSchema: z.ZodNativeEnum<typeof Operator> = z
+  .nativeEnum(Operator);
+
+/** @internal */
+export const Operator$outboundSchema: z.ZodNativeEnum<typeof Operator> =
+  Operator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Operator$ {
+  /** @deprecated use `Operator$inboundSchema` instead. */
+  export const inboundSchema = Operator$inboundSchema;
+  /** @deprecated use `Operator$outboundSchema` instead. */
+  export const outboundSchema = Operator$outboundSchema;
+}
+
+/** @internal */
+export const GuardrailConfigType$inboundSchema: z.ZodNativeEnum<
+  typeof GuardrailConfigType
+> = z.nativeEnum(GuardrailConfigType);
+
+/** @internal */
+export const GuardrailConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof GuardrailConfigType
+> = GuardrailConfigType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GuardrailConfigType$ {
+  /** @deprecated use `GuardrailConfigType$inboundSchema` instead. */
+  export const inboundSchema = GuardrailConfigType$inboundSchema;
+  /** @deprecated use `GuardrailConfigType$outboundSchema` instead. */
+  export const outboundSchema = GuardrailConfigType$outboundSchema;
+}
+
+/** @internal */
+export const RequestBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyType
+> = z.nativeEnum(RequestBodyType);
+
+/** @internal */
+export const RequestBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyType
+> = RequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RequestBodyType$ {
+  /** @deprecated use `RequestBodyType$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyType$inboundSchema;
+  /** @deprecated use `RequestBodyType$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> = z
+    .nativeEnum(CreateEvalResponseBodyEvalsResponseType);
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> =
+    CreateEvalResponseBodyEvalsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalResponseBodyEvalsResponseType$ {
+  /** @deprecated use `CreateEvalResponseBodyEvalsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalResponseBodyEvalsResponseType$inboundSchema;
+  /** @deprecated use `CreateEvalResponseBodyEvalsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalResponseBodyEvalsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalResponseBodyEvalsType
+> = z.nativeEnum(CreateEvalResponseBodyEvalsType);
+
+/** @internal */
+export const CreateEvalResponseBodyEvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalResponseBodyEvalsType
+> = CreateEvalResponseBodyEvalsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalResponseBodyEvalsType$ {
+  /** @deprecated use `CreateEvalResponseBodyEvalsType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalResponseBodyEvalsType$inboundSchema;
+  /** @deprecated use `CreateEvalResponseBodyEvalsType$outboundSchema` instead. */
+  export const outboundSchema = CreateEvalResponseBodyEvalsType$outboundSchema;
+}
+
+/** @internal */
+export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyMethod
+> = z.nativeEnum(ResponseBodyMethod);
+
+/** @internal */
+export const ResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyMethod
+> = ResponseBodyMethod$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ResponseBodyMethod$ {
+  /** @deprecated use `ResponseBodyMethod$inboundSchema` instead. */
+  export const inboundSchema = ResponseBodyMethod$inboundSchema;
+  /** @deprecated use `ResponseBodyMethod$outboundSchema` instead. */
+  export const outboundSchema = ResponseBodyMethod$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Operator> = z
+    .nativeEnum(CreateEvalGuardrailConfigEvalsResponse200Operator);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Operator> =
+    CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200Operator$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType
+  > =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalResponseBodyType
+> = z.nativeEnum(CreateEvalResponseBodyType);
+
+/** @internal */
+export const CreateEvalResponseBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalResponseBodyType
+> = CreateEvalResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalResponseBodyType$ {
+  /** @deprecated use `CreateEvalResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalResponseBodyType$inboundSchema;
+  /** @deprecated use `CreateEvalResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema = CreateEvalResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Type> = z
+    .nativeEnum(CreateEvalGuardrailConfigEvalsResponse200Type);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Type> =
+    CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponse200Type$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseOperator> = z
+    .nativeEnum(CreateEvalGuardrailConfigEvalsResponseOperator);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseOperator> =
+    CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponseOperator$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema;
+}
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseType> = z
+    .nativeEnum(CreateEvalGuardrailConfigEvalsResponseType);
+
+/** @internal */
+export const CreateEvalGuardrailConfigEvalsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseType> =
+    CreateEvalGuardrailConfigEvalsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalGuardrailConfigEvalsResponseType$ {
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalGuardrailConfigEvalsResponseType$inboundSchema;
+  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalGuardrailConfigEvalsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const ResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyType
+> = z.nativeEnum(ResponseBodyType);
+
+/** @internal */
+export const ResponseBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyType
+> = ResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ResponseBodyType$ {
+  /** @deprecated use `ResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema = ResponseBodyType$inboundSchema;
+  /** @deprecated use `ResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema = ResponseBodyType$outboundSchema;
+}
+
+export type CreateEvalGuardrailConfigEvalsNumber = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsRequestRequestBody42Type;
+  value: number;
+  operator: CreateEvalGuardrailConfigEvalsOperator;
+};
+
+export type CreateEvalGuardrailConfigEvalsBoolean = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsRequestRequestBody4Type;
+  value: boolean;
+};
+
+export type CreateEvalRequestBodyEvalsGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsNumber
+  | CreateEvalGuardrailConfigEvalsBoolean;
+
+export type Python = {
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsNumber
+    | CreateEvalGuardrailConfigEvalsBoolean
+    | undefined;
+  code: string;
+  type: CreateEvalRequestBodyEvalsRequestType;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path: string;
+  description?: string | undefined;
+  key: string;
+};
+
+export type CreateEvalGuardrailConfigNumber = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsRequestRequestBody3Type;
+  value: number;
+  operator: CreateEvalGuardrailConfigOperator;
+};
+
+export type CreateEvalGuardrailConfigBoolean = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsRequestRequestBodyType;
+  value: boolean;
+};
+
+export type CreateEvalRequestBodyGuardrailConfig =
+  | CreateEvalGuardrailConfigNumber
+  | CreateEvalGuardrailConfigBoolean;
+
+export type Http = {
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigNumber
+    | CreateEvalGuardrailConfigBoolean
+    | undefined;
+  type: CreateEvalRequestBodyEvalsType;
+  url: string;
+  method: Method;
+  headers: { [k: string]: string };
+  payload: { [k: string]: any };
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path: string;
+  description?: string | undefined;
+  key: string;
+};
+
+export type GuardrailConfigNumber = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsRequestType;
+  value: number;
+  operator: GuardrailConfigOperator;
+};
+
+export type GuardrailConfigBoolean = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsType;
+  value: boolean;
+};
+
+export type RequestBodyGuardrailConfig =
+  | GuardrailConfigNumber
+  | GuardrailConfigBoolean;
+
+export type Json = {
+  guardrailConfig?: GuardrailConfigNumber | GuardrailConfigBoolean | undefined;
+  type: CreateEvalRequestBodyType;
+  schema: string;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path: string;
+  description?: string | undefined;
+  key: string;
+};
+
+export type NumberT = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigType;
+  value: number;
+  operator: Operator;
+};
+
+export type Boolean = {
+  enabled: boolean;
+  type: GuardrailConfigType;
+  value: boolean;
+};
+
+export type GuardrailConfig = NumberT | Boolean;
+
+export type Llm = {
+  guardrailConfig?: NumberT | Boolean | undefined;
+  type: RequestBodyType;
+  prompt: string;
+  /**
+   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   */
+  path: string;
+  description?: string | undefined;
+  model: string;
+  key: string;
+};
+
+export type CreateEvalRequestBody = Http | Llm | Json | Python;
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
+  {
+    enabled: boolean;
+    type:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type;
+    value: number;
+    operator:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator;
+  };
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
+  {
+    enabled: boolean;
+    type:
+      CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type;
+    value: boolean;
+  };
+
+export type CreateEvalResponseBodyEvalsResponseGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean;
+
+export type ResponseBodyPython = {
+  id: string;
+  description: string;
+  created?: string | undefined;
+  updated?: string | undefined;
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
+    | undefined;
+  code: string;
+  type: CreateEvalResponseBodyEvalsResponseType;
+  key: string;
+};
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber = {
+  enabled: boolean;
+  type:
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type;
+  value: number;
+  operator: CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator;
+};
+
+export type CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean = {
+  enabled: boolean;
+  type:
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type;
+  value: boolean;
+};
+
+export type CreateEvalResponseBodyEvalsGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
+  | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean;
+
+export type ResponseBodyHTTP = {
+  id: string;
+  description: string;
+  created?: string | undefined;
+  updated?: string | undefined;
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber
+    | CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONBoolean
+    | undefined;
+  type: CreateEvalResponseBodyEvalsType;
+  url: string;
+  method: ResponseBodyMethod;
+  headers: { [k: string]: string };
+  payload: { [k: string]: any };
+  key: string;
+};
+
+export type CreateEvalGuardrailConfigEvalsResponse200Number = {
+  enabled: boolean;
+  type:
+    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType;
+  value: number;
+  operator: CreateEvalGuardrailConfigEvalsResponse200Operator;
+};
+
+export type CreateEvalGuardrailConfigEvalsResponse200Boolean = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType;
+  value: boolean;
+};
+
+export type CreateEvalResponseBodyGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponse200Number
+  | CreateEvalGuardrailConfigEvalsResponse200Boolean;
+
+export type ResponseBodyJSON = {
+  id: string;
+  description: string;
+  created?: string | undefined;
+  updated?: string | undefined;
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsResponse200Number
+    | CreateEvalGuardrailConfigEvalsResponse200Boolean
+    | undefined;
+  type: CreateEvalResponseBodyType;
+  schema: string;
+  key: string;
+};
+
+export type CreateEvalGuardrailConfigEvalsResponseNumber = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsResponse200Type;
+  value: number;
+  operator: CreateEvalGuardrailConfigEvalsResponseOperator;
+};
+
+export type CreateEvalGuardrailConfigEvalsResponseBoolean = {
+  enabled: boolean;
+  type: CreateEvalGuardrailConfigEvalsResponseType;
+  value: boolean;
+};
+
+export type ResponseBodyGuardrailConfig =
+  | CreateEvalGuardrailConfigEvalsResponseNumber
+  | CreateEvalGuardrailConfigEvalsResponseBoolean;
+
+export type ResponseBodyLLM = {
+  id: string;
+  description: string;
+  created?: string | undefined;
+  updated?: string | undefined;
+  guardrailConfig?:
+    | CreateEvalGuardrailConfigEvalsResponseNumber
+    | CreateEvalGuardrailConfigEvalsResponseBoolean
+    | undefined;
+  type: ResponseBodyType;
+  prompt: string;
+  key: string;
+  model: string;
+};
+
+/**
+ * Successfully created an evaluator
+ */
+export type CreateEvalResponseBody =
+  | ResponseBodyHTTP
+  | ResponseBodyLLM
+  | ResponseBodyJSON
+  | ResponseBodyPython;
 
 /** @internal */
 export const CreateEvalGuardrailConfigEvalsNumber$inboundSchema: z.ZodType<
@@ -678,31 +1429,6 @@ export function createEvalGuardrailConfigEvalsNumberFromJSON(
       CreateEvalGuardrailConfigEvalsNumber$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateEvalGuardrailConfigEvalsNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
-  > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody4Type);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody4Type
-  > = CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody4Type$outboundSchema;
 }
 
 /** @internal */
@@ -839,30 +1565,6 @@ export function createEvalRequestBodyEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const CreateEvalRequestBodyEvalsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> = z.nativeEnum(
-    CreateEvalRequestBodyEvalsRequestType,
-  );
-
-/** @internal */
-export const CreateEvalRequestBodyEvalsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> =
-    CreateEvalRequestBodyEvalsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyEvalsRequestType$ {
-  /** @deprecated use `CreateEvalRequestBodyEvalsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalRequestBodyEvalsRequestType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalRequestBodyEvalsRequestType$outboundSchema;
-}
-
-/** @internal */
 export const Python$inboundSchema: z.ZodType<Python, z.ZodTypeDef, unknown> = z
   .object({
     guardrail_config: z.union([
@@ -942,53 +1644,6 @@ export function pythonFromJSON(
 }
 
 /** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody3Type
-  > = z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBody3Type);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsRequestRequestBody3Type
-  > = CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBody3Type$outboundSchema;
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalGuardrailConfigOperator
-> = z.nativeEnum(CreateEvalGuardrailConfigOperator);
-
-/** @internal */
-export const CreateEvalGuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalGuardrailConfigOperator
-> = CreateEvalGuardrailConfigOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigOperator$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigOperator$outboundSchema;
-}
-
-/** @internal */
 export const CreateEvalGuardrailConfigNumber$inboundSchema: z.ZodType<
   CreateEvalGuardrailConfigNumber,
   z.ZodTypeDef,
@@ -1051,29 +1706,6 @@ export function createEvalGuardrailConfigNumberFromJSON(
     (x) => CreateEvalGuardrailConfigNumber$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateEvalGuardrailConfigNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType> =
-    z.nativeEnum(CreateEvalGuardrailConfigEvalsRequestRequestBodyType);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestRequestBodyType> =
-    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestRequestBodyType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestRequestBodyType$outboundSchema;
 }
 
 /** @internal */
@@ -1200,46 +1832,6 @@ export function createEvalRequestBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const CreateEvalRequestBodyEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalRequestBodyEvalsType
-> = z.nativeEnum(CreateEvalRequestBodyEvalsType);
-
-/** @internal */
-export const CreateEvalRequestBodyEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalRequestBodyEvalsType
-> = CreateEvalRequestBodyEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyEvalsType$ {
-  /** @deprecated use `CreateEvalRequestBodyEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyEvalsType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyEvalsType$outboundSchema;
-}
-
-/** @internal */
-export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> = z
-  .nativeEnum(Method);
-
-/** @internal */
-export const Method$outboundSchema: z.ZodNativeEnum<typeof Method> =
-  Method$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Method$ {
-  /** @deprecated use `Method$inboundSchema` instead. */
-  export const inboundSchema = Method$inboundSchema;
-  /** @deprecated use `Method$outboundSchema` instead. */
-  export const outboundSchema = Method$outboundSchema;
-}
-
-/** @internal */
 export const Http$inboundSchema: z.ZodType<Http, z.ZodTypeDef, unknown> = z
   .object({
     guardrail_config: z.union([
@@ -1325,50 +1917,6 @@ export function httpFromJSON(
 }
 
 /** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestType> = z
-    .nativeEnum(CreateEvalGuardrailConfigEvalsRequestType);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsRequestType> =
-    CreateEvalGuardrailConfigEvalsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsRequestType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsRequestType$outboundSchema;
-}
-
-/** @internal */
-export const GuardrailConfigOperator$inboundSchema: z.ZodNativeEnum<
-  typeof GuardrailConfigOperator
-> = z.nativeEnum(GuardrailConfigOperator);
-
-/** @internal */
-export const GuardrailConfigOperator$outboundSchema: z.ZodNativeEnum<
-  typeof GuardrailConfigOperator
-> = GuardrailConfigOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfigOperator$ {
-  /** @deprecated use `GuardrailConfigOperator$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfigOperator$inboundSchema;
-  /** @deprecated use `GuardrailConfigOperator$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfigOperator$outboundSchema;
-}
-
-/** @internal */
 export const GuardrailConfigNumber$inboundSchema: z.ZodType<
   GuardrailConfigNumber,
   z.ZodTypeDef,
@@ -1429,28 +1977,6 @@ export function guardrailConfigNumberFromJSON(
     (x) => GuardrailConfigNumber$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GuardrailConfigNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalGuardrailConfigEvalsType
-> = z.nativeEnum(CreateEvalGuardrailConfigEvalsType);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalGuardrailConfigEvalsType
-> = CreateEvalGuardrailConfigEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsType$outboundSchema;
 }
 
 /** @internal */
@@ -1570,27 +2096,6 @@ export function requestBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const CreateEvalRequestBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalRequestBodyType
-> = z.nativeEnum(CreateEvalRequestBodyType);
-
-/** @internal */
-export const CreateEvalRequestBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalRequestBodyType
-> = CreateEvalRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalRequestBodyType$ {
-  /** @deprecated use `CreateEvalRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalRequestBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalRequestBodyType$outboundSchema;
-}
-
-/** @internal */
 export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   .object({
     guardrail_config: z.union([
@@ -1667,46 +2172,6 @@ export function jsonFromJSON(
 }
 
 /** @internal */
-export const CreateEvalGuardrailConfigType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalGuardrailConfigType
-> = z.nativeEnum(CreateEvalGuardrailConfigType);
-
-/** @internal */
-export const CreateEvalGuardrailConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalGuardrailConfigType
-> = CreateEvalGuardrailConfigType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalGuardrailConfigType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalGuardrailConfigType$outboundSchema;
-}
-
-/** @internal */
-export const Operator$inboundSchema: z.ZodNativeEnum<typeof Operator> = z
-  .nativeEnum(Operator);
-
-/** @internal */
-export const Operator$outboundSchema: z.ZodNativeEnum<typeof Operator> =
-  Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Operator$ {
-  /** @deprecated use `Operator$inboundSchema` instead. */
-  export const inboundSchema = Operator$inboundSchema;
-  /** @deprecated use `Operator$outboundSchema` instead. */
-  export const outboundSchema = Operator$outboundSchema;
-}
-
-/** @internal */
 export const NumberT$inboundSchema: z.ZodType<NumberT, z.ZodTypeDef, unknown> =
   z.object({
     enabled: z.boolean(),
@@ -1760,27 +2225,6 @@ export function numberFromJSON(
     (x) => NumberT$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'NumberT' from JSON`,
   );
-}
-
-/** @internal */
-export const GuardrailConfigType$inboundSchema: z.ZodNativeEnum<
-  typeof GuardrailConfigType
-> = z.nativeEnum(GuardrailConfigType);
-
-/** @internal */
-export const GuardrailConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof GuardrailConfigType
-> = GuardrailConfigType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GuardrailConfigType$ {
-  /** @deprecated use `GuardrailConfigType$inboundSchema` instead. */
-  export const inboundSchema = GuardrailConfigType$inboundSchema;
-  /** @deprecated use `GuardrailConfigType$outboundSchema` instead. */
-  export const outboundSchema = GuardrailConfigType$outboundSchema;
 }
 
 /** @internal */
@@ -1886,27 +2330,6 @@ export function guardrailConfigFromJSON(
     (x) => GuardrailConfig$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GuardrailConfig' from JSON`,
   );
-}
-
-/** @internal */
-export const RequestBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof RequestBodyType
-> = z.nativeEnum(RequestBodyType);
-
-/** @internal */
-export const RequestBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof RequestBodyType
-> = RequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RequestBodyType$ {
-  /** @deprecated use `RequestBodyType$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyType$inboundSchema;
-  /** @deprecated use `RequestBodyType$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyType$outboundSchema;
 }
 
 /** @internal */
@@ -2048,62 +2471,6 @@ export function createEvalRequestBodyFromJSON(
 }
 
 /** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody42Type$outboundSchema;
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema;
-}
-
-/** @internal */
 export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema:
   z.ZodType<
     CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber,
@@ -2183,34 +2550,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONResponse
         .parse(JSON.parse(x)),
     `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody4Type$outboundSchema;
 }
 
 /** @internal */
@@ -2369,29 +2708,6 @@ export function createEvalResponseBodyEvalsResponseGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const CreateEvalResponseBodyEvalsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> = z
-    .nativeEnum(CreateEvalResponseBodyEvalsResponseType);
-
-/** @internal */
-export const CreateEvalResponseBodyEvalsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalResponseBodyEvalsResponseType> =
-    CreateEvalResponseBodyEvalsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsResponseType$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalResponseBodyEvalsResponseType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalResponseBodyEvalsResponseType$outboundSchema;
-}
-
-/** @internal */
 export const ResponseBodyPython$inboundSchema: z.ZodType<
   ResponseBodyPython,
   z.ZodTypeDef,
@@ -2399,8 +2715,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -2442,8 +2758,8 @@ export const ResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -2491,62 +2807,6 @@ export function responseBodyPythonFromJSON(
     (x) => ResponseBodyPython$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ResponseBodyPython' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody32Type$outboundSchema;
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONOperator$outboundSchema;
 }
 
 /** @internal */
@@ -2627,34 +2887,6 @@ export function createEvalGuardrailConfigEvalsResponse200ApplicationJSONNumberFr
         .parse(JSON.parse(x)),
     `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody3Type$outboundSchema;
 }
 
 /** @internal */
@@ -2807,48 +3039,6 @@ export function createEvalResponseBodyEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const CreateEvalResponseBodyEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalResponseBodyEvalsType
-> = z.nativeEnum(CreateEvalResponseBodyEvalsType);
-
-/** @internal */
-export const CreateEvalResponseBodyEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalResponseBodyEvalsType
-> = CreateEvalResponseBodyEvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyEvalsType$ {
-  /** @deprecated use `CreateEvalResponseBodyEvalsType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalResponseBodyEvalsType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyEvalsType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalResponseBodyEvalsType$outboundSchema;
-}
-
-/** @internal */
-export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyMethod
-> = z.nativeEnum(ResponseBodyMethod);
-
-/** @internal */
-export const ResponseBodyMethod$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyMethod
-> = ResponseBodyMethod$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyMethod$ {
-  /** @deprecated use `ResponseBodyMethod$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyMethod$inboundSchema;
-  /** @deprecated use `ResponseBodyMethod$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyMethod$outboundSchema;
-}
-
-/** @internal */
 export const ResponseBodyHTTP$inboundSchema: z.ZodType<
   ResponseBodyHTTP,
   z.ZodTypeDef,
@@ -2856,8 +3046,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -2905,8 +3095,8 @@ export const ResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -2957,57 +3147,6 @@ export function responseBodyHTTPFromJSON(
     (x) => ResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ResponseBodyHTTP' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema;
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Operator> = z
-    .nativeEnum(CreateEvalGuardrailConfigEvalsResponse200Operator);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Operator> =
-    CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200Operator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Operator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Operator$outboundSchema;
 }
 
 /** @internal */
@@ -3087,34 +3226,6 @@ export function createEvalGuardrailConfigEvalsResponse200NumberFromJSON(
       ),
     `Failed to parse 'CreateEvalGuardrailConfigEvalsResponse200Number' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType,
-  );
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType
-  > =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONType$outboundSchema;
 }
 
 /** @internal */
@@ -3255,27 +3366,6 @@ export function createEvalResponseBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const CreateEvalResponseBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalResponseBodyType
-> = z.nativeEnum(CreateEvalResponseBodyType);
-
-/** @internal */
-export const CreateEvalResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateEvalResponseBodyType
-> = CreateEvalResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalResponseBodyType$ {
-  /** @deprecated use `CreateEvalResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = CreateEvalResponseBodyType$inboundSchema;
-  /** @deprecated use `CreateEvalResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = CreateEvalResponseBodyType$outboundSchema;
-}
-
-/** @internal */
 export const ResponseBodyJSON$inboundSchema: z.ZodType<
   ResponseBodyJSON,
   z.ZodTypeDef,
@@ -3283,8 +3373,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -3324,8 +3414,8 @@ export const ResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -3373,52 +3463,6 @@ export function responseBodyJSONFromJSON(
     (x) => ResponseBodyJSON$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ResponseBodyJSON' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Type> = z
-    .nativeEnum(CreateEvalGuardrailConfigEvalsResponse200Type);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponse200Type> =
-    CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponse200Type$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Type$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponse200Type$outboundSchema;
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseOperator> = z
-    .nativeEnum(CreateEvalGuardrailConfigEvalsResponseOperator);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseOperator> =
-    CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponseOperator$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseOperator$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseOperator$outboundSchema;
 }
 
 /** @internal */
@@ -3495,29 +3539,6 @@ export function createEvalGuardrailConfigEvalsResponseNumberFromJSON(
       ),
     `Failed to parse 'CreateEvalGuardrailConfigEvalsResponseNumber' from JSON`,
   );
-}
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseType> = z
-    .nativeEnum(CreateEvalGuardrailConfigEvalsResponseType);
-
-/** @internal */
-export const CreateEvalGuardrailConfigEvalsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateEvalGuardrailConfigEvalsResponseType> =
-    CreateEvalGuardrailConfigEvalsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateEvalGuardrailConfigEvalsResponseType$ {
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseType$inboundSchema;
-  /** @deprecated use `CreateEvalGuardrailConfigEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    CreateEvalGuardrailConfigEvalsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -3652,27 +3673,6 @@ export function responseBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyType
-> = z.nativeEnum(ResponseBodyType);
-
-/** @internal */
-export const ResponseBodyType$outboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyType
-> = ResponseBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ResponseBodyType$ {
-  /** @deprecated use `ResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema = ResponseBodyType$inboundSchema;
-  /** @deprecated use `ResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema = ResponseBodyType$outboundSchema;
-}
-
-/** @internal */
 export const ResponseBodyLLM$inboundSchema: z.ZodType<
   ResponseBodyLLM,
   z.ZodTypeDef,
@@ -3680,8 +3680,8 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -3721,8 +3721,8 @@ export const ResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-07-31T13:37:25.780Z"),
-  updated: z.string().default("2025-07-31T13:37:25.780Z"),
+  created: z.string().default("2025-08-01T05:13:13.131Z"),
+  updated: z.string().default("2025-08-01T05:13:13.131Z"),
   guardrailConfig: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
