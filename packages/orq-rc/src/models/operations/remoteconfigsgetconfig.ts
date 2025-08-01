@@ -8,40 +8,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const RemoteConfigsGetConfigType = {
-  Boolean: "boolean",
-  String: "string",
-  Integer: "integer",
-  Decimal: "decimal",
-  List: "list",
-  Json: "json",
-  Deployment: "deployment",
-} as const;
-export type RemoteConfigsGetConfigType = ClosedEnum<
-  typeof RemoteConfigsGetConfigType
->;
-
-/** @internal */
-export const RemoteConfigsGetConfigType$inboundSchema: z.ZodNativeEnum<
-  typeof RemoteConfigsGetConfigType
-> = z.nativeEnum(RemoteConfigsGetConfigType);
-
-/** @internal */
-export const RemoteConfigsGetConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof RemoteConfigsGetConfigType
-> = RemoteConfigsGetConfigType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RemoteConfigsGetConfigType$ {
-  /** @deprecated use `RemoteConfigsGetConfigType$inboundSchema` instead. */
-  export const inboundSchema = RemoteConfigsGetConfigType$inboundSchema;
-  /** @deprecated use `RemoteConfigsGetConfigType$outboundSchema` instead. */
-  export const outboundSchema = RemoteConfigsGetConfigType$outboundSchema;
-}
-
 export type RemoteConfigsGetConfigRequestBody = {
   /**
    * Remote configuration key
@@ -56,6 +22,19 @@ export type RemoteConfigsGetConfigRequestBody = {
    */
   metadata?: { [k: string]: any } | undefined;
 };
+
+export const RemoteConfigsGetConfigType = {
+  Boolean: "boolean",
+  String: "string",
+  Integer: "integer",
+  Decimal: "decimal",
+  List: "list",
+  Json: "json",
+  Deployment: "deployment",
+} as const;
+export type RemoteConfigsGetConfigType = ClosedEnum<
+  typeof RemoteConfigsGetConfigType
+>;
 
 /**
  * An individual remote config
@@ -126,6 +105,27 @@ export function remoteConfigsGetConfigRequestBodyFromJSON(
     (x) => RemoteConfigsGetConfigRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RemoteConfigsGetConfigRequestBody' from JSON`,
   );
+}
+
+/** @internal */
+export const RemoteConfigsGetConfigType$inboundSchema: z.ZodNativeEnum<
+  typeof RemoteConfigsGetConfigType
+> = z.nativeEnum(RemoteConfigsGetConfigType);
+
+/** @internal */
+export const RemoteConfigsGetConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof RemoteConfigsGetConfigType
+> = RemoteConfigsGetConfigType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RemoteConfigsGetConfigType$ {
+  /** @deprecated use `RemoteConfigsGetConfigType$inboundSchema` instead. */
+  export const inboundSchema = RemoteConfigsGetConfigType$inboundSchema;
+  /** @deprecated use `RemoteConfigsGetConfigType$outboundSchema` instead. */
+  export const outboundSchema = RemoteConfigsGetConfigType$outboundSchema;
 }
 
 /** @internal */

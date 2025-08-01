@@ -9,6 +9,13 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type GetOneKnowledgeRequest = {
+  /**
+   * Unique identifier of the knowledge base
+   */
+  knowledgeId: string;
+};
+
 /**
  * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
@@ -23,34 +30,6 @@ export const GetOneKnowledgeRetrievalType = {
 export type GetOneKnowledgeRetrievalType = ClosedEnum<
   typeof GetOneKnowledgeRetrievalType
 >;
-
-/** @internal */
-export const GetOneKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOneKnowledgeRetrievalType
-> = z.nativeEnum(GetOneKnowledgeRetrievalType);
-
-/** @internal */
-export const GetOneKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOneKnowledgeRetrievalType
-> = GetOneKnowledgeRetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneKnowledgeRetrievalType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRetrievalType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = GetOneKnowledgeRetrievalType$outboundSchema;
-}
-
-export type GetOneKnowledgeRequest = {
-  /**
-   * Unique identifier of the knowledge base
-   */
-  knowledgeId: string;
-};
 
 /**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
@@ -206,6 +185,27 @@ export function getOneKnowledgeRequestFromJSON(
     (x) => GetOneKnowledgeRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetOneKnowledgeRequest' from JSON`,
   );
+}
+
+/** @internal */
+export const GetOneKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOneKnowledgeRetrievalType
+> = z.nativeEnum(GetOneKnowledgeRetrievalType);
+
+/** @internal */
+export const GetOneKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOneKnowledgeRetrievalType
+> = GetOneKnowledgeRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeRetrievalType$ {
+  /** @deprecated use `GetOneKnowledgeRetrievalType$inboundSchema` instead. */
+  export const inboundSchema = GetOneKnowledgeRetrievalType$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeRetrievalType$outboundSchema` instead. */
+  export const outboundSchema = GetOneKnowledgeRetrievalType$outboundSchema;
 }
 
 /** @internal */

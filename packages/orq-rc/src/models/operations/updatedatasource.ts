@@ -9,36 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const UpdateDatasourceStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-export type UpdateDatasourceStatus = ClosedEnum<typeof UpdateDatasourceStatus>;
-
-/** @internal */
-export const UpdateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateDatasourceStatus
-> = z.nativeEnum(UpdateDatasourceStatus);
-
-/** @internal */
-export const UpdateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateDatasourceStatus
-> = UpdateDatasourceStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateDatasourceStatus$ {
-  /** @deprecated use `UpdateDatasourceStatus$inboundSchema` instead. */
-  export const inboundSchema = UpdateDatasourceStatus$inboundSchema;
-  /** @deprecated use `UpdateDatasourceStatus$outboundSchema` instead. */
-  export const outboundSchema = UpdateDatasourceStatus$outboundSchema;
-}
-
 export type UpdateDatasourceRequestBody = {
   displayName: string;
 };
@@ -54,6 +24,15 @@ export type UpdateDatasourceRequest = {
   datasourceId: string;
   requestBody: UpdateDatasourceRequestBody;
 };
+
+export const UpdateDatasourceStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+export type UpdateDatasourceStatus = ClosedEnum<typeof UpdateDatasourceStatus>;
 
 /**
  * Datasource successfully updated
@@ -239,12 +218,33 @@ export function updateDatasourceRequestFromJSON(
 }
 
 /** @internal */
+export const UpdateDatasourceStatus$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatasourceStatus
+> = z.nativeEnum(UpdateDatasourceStatus);
+
+/** @internal */
+export const UpdateDatasourceStatus$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatasourceStatus
+> = UpdateDatasourceStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatasourceStatus$ {
+  /** @deprecated use `UpdateDatasourceStatus$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatasourceStatus$inboundSchema;
+  /** @deprecated use `UpdateDatasourceStatus$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatasourceStatus$outboundSchema;
+}
+
+/** @internal */
 export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   UpdateDatasourceResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K1JMGKWY7HCC6ZB2D9WR63WW"),
+  _id: z.string().default("01K1JTD35PMY3MM0Y07DG68HHH"),
   display_name: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$inboundSchema,
@@ -288,7 +288,7 @@ export const UpdateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K1JMGKWY7HCC6ZB2D9WR63WW"),
+  id: z.string().default("01K1JTD35PMY3MM0Y07DG68HHH"),
   displayName: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$outboundSchema,

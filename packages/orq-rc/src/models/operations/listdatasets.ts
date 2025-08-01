@@ -9,32 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ListDatasetsObject = {
-  List: "list",
-} as const;
-export type ListDatasetsObject = ClosedEnum<typeof ListDatasetsObject>;
-
-/** @internal */
-export const ListDatasetsObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListDatasetsObject
-> = z.nativeEnum(ListDatasetsObject);
-
-/** @internal */
-export const ListDatasetsObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListDatasetsObject
-> = ListDatasetsObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListDatasetsObject$ {
-  /** @deprecated use `ListDatasetsObject$inboundSchema` instead. */
-  export const inboundSchema = ListDatasetsObject$inboundSchema;
-  /** @deprecated use `ListDatasetsObject$outboundSchema` instead. */
-  export const outboundSchema = ListDatasetsObject$outboundSchema;
-}
-
 export type ListDatasetsRequest = {
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
@@ -49,6 +23,11 @@ export type ListDatasetsRequest = {
    */
   endingBefore?: string | undefined;
 };
+
+export const ListDatasetsObject = {
+  List: "list",
+} as const;
+export type ListDatasetsObject = ClosedEnum<typeof ListDatasetsObject>;
 
 export type ListDatasetsMetadata = {
   totalVersions: number;
@@ -171,6 +150,27 @@ export function listDatasetsRequestFromJSON(
 }
 
 /** @internal */
+export const ListDatasetsObject$inboundSchema: z.ZodNativeEnum<
+  typeof ListDatasetsObject
+> = z.nativeEnum(ListDatasetsObject);
+
+/** @internal */
+export const ListDatasetsObject$outboundSchema: z.ZodNativeEnum<
+  typeof ListDatasetsObject
+> = ListDatasetsObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetsObject$ {
+  /** @deprecated use `ListDatasetsObject$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetsObject$inboundSchema;
+  /** @deprecated use `ListDatasetsObject$outboundSchema` instead. */
+  export const outboundSchema = ListDatasetsObject$outboundSchema;
+}
+
+/** @internal */
 export const ListDatasetsMetadata$inboundSchema: z.ZodType<
   ListDatasetsMetadata,
   z.ZodTypeDef,
@@ -253,7 +253,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-08-01T10:58:06.552Z",
+    "2025-08-01T12:41:02.385Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -293,7 +293,7 @@ export const ListDatasetsData$outboundSchema: z.ZodType<
   updatedById: z.string().optional(),
   metadata: z.lazy(() => ListDatasetsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-08-01T10:58:06.552Z"))
+  updated: z.date().default(() => new Date("2025-08-01T12:41:02.385Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

@@ -23,63 +23,6 @@ export const RetrievalType = {
 export type RetrievalType = ClosedEnum<typeof RetrievalType>;
 
 /**
- * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
- */
-export const CreateKnowledgeRetrievalType = {
-  VectorSearch: "vector_search",
-  KeywordSearch: "keyword_search",
-  HybridSearch: "hybrid_search",
-} as const;
-/**
- * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
- */
-export type CreateKnowledgeRetrievalType = ClosedEnum<
-  typeof CreateKnowledgeRetrievalType
->;
-
-/** @internal */
-export const RetrievalType$inboundSchema: z.ZodNativeEnum<
-  typeof RetrievalType
-> = z.nativeEnum(RetrievalType);
-
-/** @internal */
-export const RetrievalType$outboundSchema: z.ZodNativeEnum<
-  typeof RetrievalType
-> = RetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace RetrievalType$ {
-  /** @deprecated use `RetrievalType$inboundSchema` instead. */
-  export const inboundSchema = RetrievalType$inboundSchema;
-  /** @deprecated use `RetrievalType$outboundSchema` instead. */
-  export const outboundSchema = RetrievalType$outboundSchema;
-}
-
-/** @internal */
-export const CreateKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
-  typeof CreateKnowledgeRetrievalType
-> = z.nativeEnum(CreateKnowledgeRetrievalType);
-
-/** @internal */
-export const CreateKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
-  typeof CreateKnowledgeRetrievalType
-> = CreateKnowledgeRetrievalType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateKnowledgeRetrievalType$ {
-  /** @deprecated use `CreateKnowledgeRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeRetrievalType$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = CreateKnowledgeRetrievalType$outboundSchema;
-}
-
-/**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
  */
 export type RerankConfig = {
@@ -145,6 +88,21 @@ export type CreateKnowledgeRequestBody = {
    */
   path: string;
 };
+
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export const CreateKnowledgeRetrievalType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
+  HybridSearch: "hybrid_search",
+} as const;
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export type CreateKnowledgeRetrievalType = ClosedEnum<
+  typeof CreateKnowledgeRetrievalType
+>;
 
 /**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
@@ -239,6 +197,27 @@ export type CreateKnowledgeResponseBody = {
    */
   updated: string;
 };
+
+/** @internal */
+export const RetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof RetrievalType
+> = z.nativeEnum(RetrievalType);
+
+/** @internal */
+export const RetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof RetrievalType
+> = RetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrievalType$ {
+  /** @deprecated use `RetrievalType$inboundSchema` instead. */
+  export const inboundSchema = RetrievalType$inboundSchema;
+  /** @deprecated use `RetrievalType$outboundSchema` instead. */
+  export const outboundSchema = RetrievalType$outboundSchema;
+}
 
 /** @internal */
 export const RerankConfig$inboundSchema: z.ZodType<
@@ -515,6 +494,27 @@ export function createKnowledgeRequestBodyFromJSON(
     (x) => CreateKnowledgeRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateKnowledgeRequestBody' from JSON`,
   );
+}
+
+/** @internal */
+export const CreateKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateKnowledgeRetrievalType
+> = z.nativeEnum(CreateKnowledgeRetrievalType);
+
+/** @internal */
+export const CreateKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateKnowledgeRetrievalType
+> = CreateKnowledgeRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateKnowledgeRetrievalType$ {
+  /** @deprecated use `CreateKnowledgeRetrievalType$inboundSchema` instead. */
+  export const inboundSchema = CreateKnowledgeRetrievalType$inboundSchema;
+  /** @deprecated use `CreateKnowledgeRetrievalType$outboundSchema` instead. */
+  export const outboundSchema = CreateKnowledgeRetrievalType$outboundSchema;
 }
 
 /** @internal */

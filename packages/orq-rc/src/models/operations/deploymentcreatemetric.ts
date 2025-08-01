@@ -10,1050 +10,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The role of the messages author, in this case tool.
- */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role =
-  {
-    Tool: "tool",
-  } as const;
-/**
- * The role of the messages author, in this case tool.
- */
-export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role =
-  ClosedEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType =
-  {
-    Text: "text",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
-  >;
-
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
-  {
-    Assistant: "assistant",
-  } as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
-  ClosedEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
-  >;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const DeploymentCreateMetricMessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type DeploymentCreateMetricMessagesType = ClosedEnum<
-  typeof DeploymentCreateMetricMessagesType
->;
-
-/**
- * The role of the messages author, in this case `user`.
- */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole =
-  ClosedEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
-  >;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
-  >;
-
-export const DeploymentCreateMetric2DeploymentsMetricsRequestType = {
-  InputAudio: "input_audio",
-} as const;
-export type DeploymentCreateMetric2DeploymentsMetricsRequestType = ClosedEnum<
-  typeof DeploymentCreateMetric2DeploymentsMetricsRequestType
->;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const DeploymentCreateMetric2Format = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type DeploymentCreateMetric2Format = ClosedEnum<
-  typeof DeploymentCreateMetric2Format
->;
-
-export const DeploymentCreateMetric2DeploymentsMetricsType = {
-  ImageUrl: "image_url",
-} as const;
-export type DeploymentCreateMetric2DeploymentsMetricsType = ClosedEnum<
-  typeof DeploymentCreateMetric2DeploymentsMetricsType
->;
-
-/**
- * Specifies the detail level of the image.
- */
-export const DeploymentCreateMetric2Detail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type DeploymentCreateMetric2Detail = ClosedEnum<
-  typeof DeploymentCreateMetric2Detail
->;
-
-export const DeploymentCreateMetric2Type = {
-  Text: "text",
-} as const;
-export type DeploymentCreateMetric2Type = ClosedEnum<
-  typeof DeploymentCreateMetric2Type
->;
-
-/**
- * The role of the messages author, in this case `system`.
- */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type DeploymentCreateMetricMessagesDeploymentsMetricsRole = ClosedEnum<
-  typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole
->;
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const DeploymentCreateMetricMessagesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type DeploymentCreateMetricMessagesRole = ClosedEnum<
-  typeof DeploymentCreateMetricMessagesRole
->;
-
-/**
- * The role of the messages author, in this case tool.
- */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole =
-  {
-    Tool: "tool",
-  } as const;
-/**
- * The role of the messages author, in this case tool.
- */
-export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole =
-  ClosedEnum<
-    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type =
-  {
-    Text: "text",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
-  >;
-
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole =
-  ClosedEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole>;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const ChoicesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type ChoicesType = ClosedEnum<typeof ChoicesType>;
-
-/**
- * The role of the messages author, in this case `user`.
- */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type DeploymentCreateMetricChoicesDeploymentsMetricsRole = ClosedEnum<
-  typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type =
-  {
-    File: "file",
-  } as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
-  >;
-
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType =
-  {
-    InputAudio: "input_audio",
-  } as const;
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType
-  >;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsFormat = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsFormat = ClosedEnum<
-  typeof DeploymentCreateMetric2DeploymentsMetricsFormat
->;
-
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type =
-  {
-    ImageUrl: "image_url",
-  } as const;
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
-  >;
-
-/**
- * Specifies the detail level of the image.
- */
-export const DeploymentCreateMetric2DeploymentsMetricsDetail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type DeploymentCreateMetric2DeploymentsMetricsDetail = ClosedEnum<
-  typeof DeploymentCreateMetric2DeploymentsMetricsDetail
->;
-
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType =
-  {
-    Text: "text",
-  } as const;
-export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType =
-  ClosedEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
-  >;
-
-/**
- * The role of the messages author, in this case `system`.
- */
-export const DeploymentCreateMetricChoicesRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type DeploymentCreateMetricChoicesRole = ClosedEnum<
-  typeof DeploymentCreateMetricChoicesRole
->;
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const ChoicesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type ChoicesRole = ClosedEnum<typeof ChoicesRole>;
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
-  > = z.nativeEnum(
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role,
-  );
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
-  > =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
-  > = z.nativeEnum(
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole,
-  );
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
-  > =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricMessagesType
-> = z.nativeEnum(DeploymentCreateMetricMessagesType);
-
-/** @internal */
-export const DeploymentCreateMetricMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricMessagesType
-> = DeploymentCreateMetricMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesType$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
-  > = z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole);
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
-  > = DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsRequestType> =
-    z.nativeEnum(DeploymentCreateMetric2DeploymentsMetricsRequestType);
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsRequestType> =
-    DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2Format$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Format
-> = z.nativeEnum(DeploymentCreateMetric2Format);
-
-/** @internal */
-export const DeploymentCreateMetric2Format$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Format
-> = DeploymentCreateMetric2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Format$ {
-  /** @deprecated use `DeploymentCreateMetric2Format$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Format$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Format$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2Format$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> = z
-    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsType);
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> =
-    DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2Detail$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Detail
-> = z.nativeEnum(DeploymentCreateMetric2Detail);
-
-/** @internal */
-export const DeploymentCreateMetric2Detail$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Detail
-> = DeploymentCreateMetric2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Detail$ {
-  /** @deprecated use `DeploymentCreateMetric2Detail$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Detail$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Detail$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2Detail$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2Type$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Type
-> = z.nativeEnum(DeploymentCreateMetric2Type);
-
-/** @internal */
-export const DeploymentCreateMetric2Type$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetric2Type
-> = DeploymentCreateMetric2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2Type$ {
-  /** @deprecated use `DeploymentCreateMetric2Type$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetric2Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2Type$outboundSchema` instead. */
-  export const outboundSchema = DeploymentCreateMetric2Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole> =
-    z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsRole);
-
-/** @internal */
-export const DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole> =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricMessagesRole
-> = z.nativeEnum(DeploymentCreateMetricMessagesRole);
-
-/** @internal */
-export const DeploymentCreateMetricMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricMessagesRole
-> = DeploymentCreateMetricMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricMessagesRole$ {
-  /** @deprecated use `DeploymentCreateMetricMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricMessagesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricMessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
-  > = z.nativeEnum(
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole,
-  );
-
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
-  > =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
-  > = z.nativeEnum(DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole);
-
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
-  > = DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const ChoicesType$inboundSchema: z.ZodNativeEnum<typeof ChoicesType> = z
-  .nativeEnum(ChoicesType);
-
-/** @internal */
-export const ChoicesType$outboundSchema: z.ZodNativeEnum<typeof ChoicesType> =
-  ChoicesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesType$ {
-  /** @deprecated use `ChoicesType$inboundSchema` instead. */
-  export const inboundSchema = ChoicesType$inboundSchema;
-  /** @deprecated use `ChoicesType$outboundSchema` instead. */
-  export const outboundSchema = ChoicesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole> =
-    z.nativeEnum(DeploymentCreateMetricChoicesDeploymentsMetricsRole);
-
-/** @internal */
-export const DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole> =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsFormat> = z
-    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsFormat);
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsFormat> =
-    DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsFormat$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsDetail> = z
-    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsDetail);
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsDetail> =
-    DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsDetail$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
-  > = z.nativeEnum(
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType,
-  );
-
-/** @internal */
-export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
-  > =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$ {
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentCreateMetricChoicesRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricChoicesRole
-> = z.nativeEnum(DeploymentCreateMetricChoicesRole);
-
-/** @internal */
-export const DeploymentCreateMetricChoicesRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentCreateMetricChoicesRole
-> = DeploymentCreateMetricChoicesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentCreateMetricChoicesRole$ {
-  /** @deprecated use `DeploymentCreateMetricChoicesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentCreateMetricChoicesRole$inboundSchema;
-  /** @deprecated use `DeploymentCreateMetricChoicesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentCreateMetricChoicesRole$outboundSchema;
-}
-
-/** @internal */
-export const ChoicesRole$inboundSchema: z.ZodNativeEnum<typeof ChoicesRole> = z
-  .nativeEnum(ChoicesRole);
-
-/** @internal */
-export const ChoicesRole$outboundSchema: z.ZodNativeEnum<typeof ChoicesRole> =
-  ChoicesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ChoicesRole$ {
-  /** @deprecated use `ChoicesRole$inboundSchema` instead. */
-  export const inboundSchema = ChoicesRole$inboundSchema;
-  /** @deprecated use `ChoicesRole$outboundSchema` instead. */
-  export const outboundSchema = ChoicesRole$outboundSchema;
-}
-
-/**
  * Usage statistics to add to the deployment
  */
 export type Usage = {
@@ -1083,6 +39,21 @@ export type Performance = {
 };
 
 /**
+ * The role of the messages author, in this case tool.
+ */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role =
+  {
+    Tool: "tool",
+  } as const;
+/**
+ * The role of the messages author, in this case tool.
+ */
+export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role =
+  ClosedEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
+  >;
+
+/**
  * The contents of the tool message.
  */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent =
@@ -1104,6 +75,21 @@ export type DeploymentCreateMetricMessagesToolMessage = {
   toolCallId: string;
 };
 
+/**
+ * The type of the content part.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
+  >;
+
 export type DeploymentCreateMetric2RefusalContentPart = {
   /**
    * The type of the content part.
@@ -1115,6 +101,21 @@ export type DeploymentCreateMetric2RefusalContentPart = {
    */
   refusal: string;
 };
+
+/**
+ * The type of the content part.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType =
+  {
+    Text: "text",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
+  >;
 
 export type DeploymentCreateMetric2TextContentPart = {
   /**
@@ -1142,6 +143,21 @@ export type DeploymentCreateMetricMessagesDeploymentsMetricsContent =
   >;
 
 /**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
+  {
+    Assistant: "assistant",
+  } as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
+  ClosedEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
+  >;
+
+/**
  * Data about a previous audio response from the model.
  */
 export type DeploymentCreateMetricMessagesAudio = {
@@ -1150,6 +166,19 @@ export type DeploymentCreateMetricMessagesAudio = {
    */
   id: string;
 };
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const DeploymentCreateMetricMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type DeploymentCreateMetricMessagesType = ClosedEnum<
+  typeof DeploymentCreateMetricMessagesType
+>;
 
 export type DeploymentCreateMetricMessagesFunction = {
   /**
@@ -1220,6 +249,34 @@ export type DeploymentCreateMetricMessagesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole =
+  ClosedEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
+  >;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
+  >;
+
 export type DeploymentCreateMetric2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -1239,6 +296,27 @@ export type DeploymentCreateMetric24 = {
   file: DeploymentCreateMetric2File;
 };
 
+export const DeploymentCreateMetric2DeploymentsMetricsRequestType = {
+  InputAudio: "input_audio",
+} as const;
+export type DeploymentCreateMetric2DeploymentsMetricsRequestType = ClosedEnum<
+  typeof DeploymentCreateMetric2DeploymentsMetricsRequestType
+>;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const DeploymentCreateMetric2Format = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type DeploymentCreateMetric2Format = ClosedEnum<
+  typeof DeploymentCreateMetric2Format
+>;
+
 export type DeploymentCreateMetric2InputAudio = {
   /**
    * Base64 encoded audio data.
@@ -1255,6 +333,28 @@ export type DeploymentCreateMetric23 = {
   inputAudio: DeploymentCreateMetric2InputAudio;
 };
 
+export const DeploymentCreateMetric2DeploymentsMetricsType = {
+  ImageUrl: "image_url",
+} as const;
+export type DeploymentCreateMetric2DeploymentsMetricsType = ClosedEnum<
+  typeof DeploymentCreateMetric2DeploymentsMetricsType
+>;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const DeploymentCreateMetric2Detail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type DeploymentCreateMetric2Detail = ClosedEnum<
+  typeof DeploymentCreateMetric2Detail
+>;
+
 export type DeploymentCreateMetric2ImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -1270,6 +370,13 @@ export type DeploymentCreateMetric22 = {
   type: DeploymentCreateMetric2DeploymentsMetricsType;
   imageUrl: DeploymentCreateMetric2ImageUrl;
 };
+
+export const DeploymentCreateMetric2Type = {
+  Text: "text",
+} as const;
+export type DeploymentCreateMetric2Type = ClosedEnum<
+  typeof DeploymentCreateMetric2Type
+>;
 
 export type DeploymentCreateMetric21 = {
   type: DeploymentCreateMetric2Type;
@@ -1316,6 +423,19 @@ export type DeploymentCreateMetricMessagesUserMessage = {
     >;
 };
 
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type DeploymentCreateMetricMessagesDeploymentsMetricsRole = ClosedEnum<
+  typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole
+>;
+
 export type DeploymentCreateMetricMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -1330,6 +450,19 @@ export type DeploymentCreateMetricMessagesSystemMessage = {
    */
   name?: string | undefined;
 };
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const DeploymentCreateMetricMessagesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type DeploymentCreateMetricMessagesRole = ClosedEnum<
+  typeof DeploymentCreateMetricMessagesRole
+>;
 
 export type DeploymentCreateMetricMessagesDeveloperMessage = {
   /**
@@ -1354,6 +487,21 @@ export type DeploymentCreateMetricMessages =
   | DeploymentCreateMetricMessagesAssistantMessage;
 
 /**
+ * The role of the messages author, in this case tool.
+ */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole =
+  {
+    Tool: "tool",
+  } as const;
+/**
+ * The role of the messages author, in this case tool.
+ */
+export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole =
+  ClosedEnum<
+    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
+  >;
+
+/**
  * The contents of the tool message.
  */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsContent =
@@ -1375,6 +523,21 @@ export type ChoicesToolMessage = {
   toolCallId: string;
 };
 
+/**
+ * The type of the content part.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
+  >;
+
 export type DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart = {
   /**
    * The type of the content part.
@@ -1386,6 +549,21 @@ export type DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart = {
    */
   refusal: string;
 };
+
+/**
+ * The type of the content part.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type =
+  {
+    Text: "text",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
+  >;
 
 export type DeploymentCreateMetric2DeploymentsMetricsTextContentPart = {
   /**
@@ -1413,6 +591,18 @@ export type DeploymentCreateMetricChoicesContent =
   >;
 
 /**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole =
+  ClosedEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole>;
+
+/**
  * Data about a previous audio response from the model.
  */
 export type ChoicesAudio = {
@@ -1421,6 +611,17 @@ export type ChoicesAudio = {
    */
   id: string;
 };
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const ChoicesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type ChoicesType = ClosedEnum<typeof ChoicesType>;
 
 export type ChoicesFunction = {
   /**
@@ -1491,6 +692,34 @@ export type ChoicesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type DeploymentCreateMetricChoicesDeploymentsMetricsRole = ClosedEnum<
+  typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type =
+  {
+    File: "file",
+  } as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
+  >;
+
 export type DeploymentCreateMetric2DeploymentsMetricsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -1511,6 +740,29 @@ export type DeploymentCreateMetric2DeploymentsMetrics4 = {
   file: DeploymentCreateMetric2DeploymentsMetricsFile;
 };
 
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType =
+  {
+    InputAudio: "input_audio",
+  } as const;
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType
+  >;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsFormat = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsFormat = ClosedEnum<
+  typeof DeploymentCreateMetric2DeploymentsMetricsFormat
+>;
+
 export type DeploymentCreateMetric2DeploymentsMetricsInputAudio = {
   /**
    * Base64 encoded audio data.
@@ -1528,6 +780,30 @@ export type DeploymentCreateMetric2DeploymentsMetrics3 = {
   inputAudio: DeploymentCreateMetric2DeploymentsMetricsInputAudio;
 };
 
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type =
+  {
+    ImageUrl: "image_url",
+  } as const;
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
+  >;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const DeploymentCreateMetric2DeploymentsMetricsDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type DeploymentCreateMetric2DeploymentsMetricsDetail = ClosedEnum<
+  typeof DeploymentCreateMetric2DeploymentsMetricsDetail
+>;
+
 export type DeploymentCreateMetric2DeploymentsMetricsImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -1543,6 +819,15 @@ export type DeploymentCreateMetric2DeploymentsMetrics2 = {
   type: DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type;
   imageUrl: DeploymentCreateMetric2DeploymentsMetricsImageUrl;
 };
+
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType =
+  {
+    Text: "text",
+  } as const;
+export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType =
+  ClosedEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
+  >;
 
 export type DeploymentCreateMetric2DeploymentsMetrics1 = {
   type: DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType;
@@ -1589,6 +874,19 @@ export type ChoicesUserMessage = {
     >;
 };
 
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const DeploymentCreateMetricChoicesRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type DeploymentCreateMetricChoicesRole = ClosedEnum<
+  typeof DeploymentCreateMetricChoicesRole
+>;
+
 export type ChoicesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -1603,6 +901,17 @@ export type ChoicesSystemMessage = {
    */
   name?: string | undefined;
 };
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const ChoicesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type ChoicesRole = ClosedEnum<typeof ChoicesRole>;
 
 export type ChoicesDeveloperMessage = {
   /**
@@ -1827,6 +1136,34 @@ export function performanceFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
+  > = z.nativeEnum(
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role,
+  );
+
+/** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role
+  > =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBody5Role$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent$inboundSchema:
   z.ZodType<
     DeploymentCreateMetricMessagesDeploymentsMetricsRequestContent,
@@ -1971,6 +1308,34 @@ export function deploymentCreateMetricMessagesToolMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessages4Type$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetric2RefusalContentPart$inboundSchema: z.ZodType<
   DeploymentCreateMetric2RefusalContentPart,
   z.ZodTypeDef,
@@ -2039,6 +1404,34 @@ export function deploymentCreateMetric2RefusalContentPartFromJSON(
       ),
     `Failed to parse 'DeploymentCreateMetric2RefusalContentPart' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -2254,6 +1647,34 @@ export function deploymentCreateMetricMessagesDeploymentsMetricsContentFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
+  > = z.nativeEnum(
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole,
+  );
+
+/** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole
+  > =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetricMessagesAudio$inboundSchema: z.ZodType<
   DeploymentCreateMetricMessagesAudio,
   z.ZodTypeDef,
@@ -2310,6 +1731,28 @@ export function deploymentCreateMetricMessagesAudioFromJSON(
       DeploymentCreateMetricMessagesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentCreateMetricMessagesAudio' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetricMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricMessagesType
+> = z.nativeEnum(DeploymentCreateMetricMessagesType);
+
+/** @internal */
+export const DeploymentCreateMetricMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricMessagesType
+> = DeploymentCreateMetricMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessagesType$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetricMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -2594,6 +2037,59 @@ export function deploymentCreateMetricMessagesAssistantMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
+  > = z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole);
+
+/** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole
+  > = DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRequestRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
   DeploymentCreateMetric2File,
   z.ZodTypeDef,
@@ -2717,6 +2213,50 @@ export function deploymentCreateMetric24FromJSON(
     (x) => DeploymentCreateMetric24$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentCreateMetric24' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsRequestType> =
+    z.nativeEnum(DeploymentCreateMetric2DeploymentsMetricsRequestType);
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsRequestType> =
+    DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetric2Format$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetric2Format
+> = z.nativeEnum(DeploymentCreateMetric2Format);
+
+/** @internal */
+export const DeploymentCreateMetric2Format$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetric2Format
+> = DeploymentCreateMetric2Format$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2Format$ {
+  /** @deprecated use `DeploymentCreateMetric2Format$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetric2Format$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2Format$outboundSchema` instead. */
+  export const outboundSchema = DeploymentCreateMetric2Format$outboundSchema;
 }
 
 /** @internal */
@@ -2845,6 +2385,50 @@ export function deploymentCreateMetric23FromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> = z
+    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsType);
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsType> =
+    DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetric2Detail$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetric2Detail
+> = z.nativeEnum(DeploymentCreateMetric2Detail);
+
+/** @internal */
+export const DeploymentCreateMetric2Detail$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetric2Detail
+> = DeploymentCreateMetric2Detail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2Detail$ {
+  /** @deprecated use `DeploymentCreateMetric2Detail$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetric2Detail$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2Detail$outboundSchema` instead. */
+  export const outboundSchema = DeploymentCreateMetric2Detail$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetric2ImageUrl$inboundSchema: z.ZodType<
   DeploymentCreateMetric2ImageUrl,
   z.ZodTypeDef,
@@ -2966,6 +2550,27 @@ export function deploymentCreateMetric22FromJSON(
     (x) => DeploymentCreateMetric22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentCreateMetric22' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2Type$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetric2Type
+> = z.nativeEnum(DeploymentCreateMetric2Type);
+
+/** @internal */
+export const DeploymentCreateMetric2Type$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetric2Type
+> = DeploymentCreateMetric2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2Type$ {
+  /** @deprecated use `DeploymentCreateMetric2Type$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetric2Type$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2Type$outboundSchema` instead. */
+  export const outboundSchema = DeploymentCreateMetric2Type$outboundSchema;
 }
 
 /** @internal */
@@ -3263,6 +2868,29 @@ export function deploymentCreateMetricMessagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole> =
+    z.nativeEnum(DeploymentCreateMetricMessagesDeploymentsMetricsRole);
+
+/** @internal */
+export const DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricMessagesDeploymentsMetricsRole> =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessagesDeploymentsMetricsRole$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesDeploymentsMetricsRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetricMessagesSystemMessage$inboundSchema:
   z.ZodType<
     DeploymentCreateMetricMessagesSystemMessage,
@@ -3333,6 +2961,28 @@ export function deploymentCreateMetricMessagesSystemMessageFromJSON(
       ),
     `Failed to parse 'DeploymentCreateMetricMessagesSystemMessage' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetricMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricMessagesRole
+> = z.nativeEnum(DeploymentCreateMetricMessagesRole);
+
+/** @internal */
+export const DeploymentCreateMetricMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricMessagesRole
+> = DeploymentCreateMetricMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricMessagesRole$ {
+  /** @deprecated use `DeploymentCreateMetricMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetricMessagesRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricMessagesRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricMessagesRole$outboundSchema;
 }
 
 /** @internal */
@@ -3477,6 +3127,34 @@ export function deploymentCreateMetricMessagesFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
+  > = z.nativeEnum(
+    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole,
+  );
+
+/** @internal */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole
+  > =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$ {
+  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRequestBodyRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsContent$inboundSchema:
   z.ZodType<
     DeploymentCreateMetricChoicesDeploymentsMetricsContent,
@@ -3610,6 +3288,34 @@ export function choicesToolMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4ContentType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart$inboundSchema:
   z.ZodType<
     DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart,
@@ -3679,6 +3385,34 @@ export function deploymentCreateMetric2DeploymentsMetricsRefusalContentPartFromJ
         .parse(JSON.parse(x)),
     `Failed to parse 'DeploymentCreateMetric2DeploymentsMetricsRefusalContentPart' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema;
 }
 
 /** @internal */
@@ -3910,6 +3644,31 @@ export function deploymentCreateMetricChoicesContentFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
+  > = z.nativeEnum(DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole);
+
+/** @internal */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
+  > = DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$ {
+  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole$outboundSchema;
+}
+
+/** @internal */
 export const ChoicesAudio$inboundSchema: z.ZodType<
   ChoicesAudio,
   z.ZodTypeDef,
@@ -3957,6 +3716,25 @@ export function choicesAudioFromJSON(
     (x) => ChoicesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ChoicesAudio' from JSON`,
   );
+}
+
+/** @internal */
+export const ChoicesType$inboundSchema: z.ZodNativeEnum<typeof ChoicesType> = z
+  .nativeEnum(ChoicesType);
+
+/** @internal */
+export const ChoicesType$outboundSchema: z.ZodNativeEnum<typeof ChoicesType> =
+  ChoicesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ChoicesType$ {
+  /** @deprecated use `ChoicesType$inboundSchema` instead. */
+  export const inboundSchema = ChoicesType$inboundSchema;
+  /** @deprecated use `ChoicesType$outboundSchema` instead. */
+  export const outboundSchema = ChoicesType$outboundSchema;
 }
 
 /** @internal */
@@ -4202,6 +3980,57 @@ export function choicesAssistantMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole> =
+    z.nativeEnum(DeploymentCreateMetricChoicesDeploymentsMetricsRole);
+
+/** @internal */
+export const DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRole> =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricChoicesDeploymentsMetricsRole$ {
+  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricChoicesDeploymentsMetricsRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
   z.ZodType<
     DeploymentCreateMetric2DeploymentsMetricsFile,
@@ -4350,6 +4179,57 @@ export function deploymentCreateMetric2DeploymentsMetrics4FromJSON(
       ),
     `Failed to parse 'DeploymentCreateMetric2DeploymentsMetrics4' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3ContentType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsFormat> = z
+    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsFormat);
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsFormat> =
+    DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsFormat$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsFormat$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsFormat$outboundSchema;
 }
 
 /** @internal */
@@ -4505,6 +4385,57 @@ export function deploymentCreateMetric2DeploymentsMetrics3FromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Type$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsDetail> = z
+    .nativeEnum(DeploymentCreateMetric2DeploymentsMetricsDetail);
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetric2DeploymentsMetricsDetail> =
+    DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsDetail$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsDetail$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsDetail$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsImageUrl$inboundSchema:
   z.ZodType<
     DeploymentCreateMetric2DeploymentsMetricsImageUrl,
@@ -4656,6 +4587,34 @@ export function deploymentCreateMetric2DeploymentsMetrics2FromJSON(
       ),
     `Failed to parse 'DeploymentCreateMetric2DeploymentsMetrics2' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
+  > = z.nativeEnum(
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType
+  > =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoicesType$outboundSchema;
 }
 
 /** @internal */
@@ -4954,6 +4913,28 @@ export function choicesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentCreateMetricChoicesRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricChoicesRole
+> = z.nativeEnum(DeploymentCreateMetricChoicesRole);
+
+/** @internal */
+export const DeploymentCreateMetricChoicesRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentCreateMetricChoicesRole
+> = DeploymentCreateMetricChoicesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricChoicesRole$ {
+  /** @deprecated use `DeploymentCreateMetricChoicesRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetricChoicesRole$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricChoicesRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricChoicesRole$outboundSchema;
+}
+
+/** @internal */
 export const ChoicesSystemMessage$inboundSchema: z.ZodType<
   ChoicesSystemMessage,
   z.ZodTypeDef,
@@ -5011,6 +4992,25 @@ export function choicesSystemMessageFromJSON(
     (x) => ChoicesSystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ChoicesSystemMessage' from JSON`,
   );
+}
+
+/** @internal */
+export const ChoicesRole$inboundSchema: z.ZodNativeEnum<typeof ChoicesRole> = z
+  .nativeEnum(ChoicesRole);
+
+/** @internal */
+export const ChoicesRole$outboundSchema: z.ZodNativeEnum<typeof ChoicesRole> =
+  ChoicesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ChoicesRole$ {
+  /** @deprecated use `ChoicesRole$inboundSchema` instead. */
+  export const inboundSchema = ChoicesRole$inboundSchema;
+  /** @deprecated use `ChoicesRole$outboundSchema` instead. */
+  export const outboundSchema = ChoicesRole$outboundSchema;
 }
 
 /** @internal */

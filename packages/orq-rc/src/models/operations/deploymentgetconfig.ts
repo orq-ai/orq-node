@@ -22,1416 +22,6 @@ export type DeploymentGetConfigPrefixMessagesDeploymentsRequestRole =
   ClosedEnum<typeof DeploymentGetConfigPrefixMessagesDeploymentsRequestRole>;
 
 /**
- * The type of the content part.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType = {
-  Refusal: "refusal",
-} as const;
-/**
- * The type of the content part.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyType = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
->;
-
-/**
- * The type of the content part.
- */
-export const DeploymentGetConfig2DeploymentsRequestType = {
-  Text: "text",
-} as const;
-/**
- * The type of the content part.
- */
-export type DeploymentGetConfig2DeploymentsRequestType = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsRequestType
->;
-
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export const DeploymentGetConfigPrefixMessagesDeploymentsRole = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type DeploymentGetConfigPrefixMessagesDeploymentsRole = ClosedEnum<
-  typeof DeploymentGetConfigPrefixMessagesDeploymentsRole
->;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const PrefixMessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type PrefixMessagesType = ClosedEnum<typeof PrefixMessagesType>;
-
-/**
- * The role of the messages author, in this case `user`.
- */
-export const DeploymentGetConfigPrefixMessagesRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type DeploymentGetConfigPrefixMessagesRole = ClosedEnum<
-  typeof DeploymentGetConfigPrefixMessagesRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentGetConfig2DeploymentsType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentGetConfig2DeploymentsType = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsType
->;
-
-export const DeploymentGetConfig2Type = {
-  InputAudio: "input_audio",
-} as const;
-export type DeploymentGetConfig2Type = ClosedEnum<
-  typeof DeploymentGetConfig2Type
->;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const Format = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type Format = ClosedEnum<typeof Format>;
-
-export const TwoType = {
-  ImageUrl: "image_url",
-} as const;
-export type TwoType = ClosedEnum<typeof TwoType>;
-
-/**
- * Specifies the detail level of the image.
- */
-export const Detail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type Detail = ClosedEnum<typeof Detail>;
-
-export const Type = {
-  Text: "text",
-} as const;
-export type Type = ClosedEnum<typeof Type>;
-
-/**
- * The role of the messages author, in this case `system`.
- */
-export const PrefixMessagesRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type PrefixMessagesRole = ClosedEnum<typeof PrefixMessagesRole>;
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const Role = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type Role = ClosedEnum<typeof Role>;
-
-/**
- * The role of the messages author, in this case tool.
- */
-export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole = {
-  Tool: "tool",
-} as const;
-/**
- * The role of the messages author, in this case tool.
- */
-export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole =
-  ClosedEnum<
-    typeof DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type = {
-  Text: "text",
-} as const;
-/**
- * The type of the content part.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
-  >;
-
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export const DeploymentGetConfigMessagesDeploymentsRequestRole = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type DeploymentGetConfigMessagesDeploymentsRequestRole = ClosedEnum<
-  typeof DeploymentGetConfigMessagesDeploymentsRequestRole
->;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const MessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type MessagesType = ClosedEnum<typeof MessagesType>;
-
-/**
- * The role of the messages author, in this case `user`.
- */
-export const DeploymentGetConfigMessagesDeploymentsRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type DeploymentGetConfigMessagesDeploymentsRole = ClosedEnum<
-  typeof DeploymentGetConfigMessagesDeploymentsRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type =
-  {
-    File: "file",
-  } as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
-  >;
-
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType =
-  {
-    InputAudio: "input_audio",
-  } as const;
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType
-  >;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const TwoFormat = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type TwoFormat = ClosedEnum<typeof TwoFormat>;
-
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type = {
-  ImageUrl: "image_url",
-} as const;
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
-  >;
-
-/**
- * Specifies the detail level of the image.
- */
-export const TwoDetail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type TwoDetail = ClosedEnum<typeof TwoDetail>;
-
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType = {
-  Text: "text",
-} as const;
-export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType
-  >;
-
-/**
- * The role of the messages author, in this case `system`.
- */
-export const DeploymentGetConfigMessagesRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type DeploymentGetConfigMessagesRole = ClosedEnum<
-  typeof DeploymentGetConfigMessagesRole
->;
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const MessagesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type MessagesRole = ClosedEnum<typeof MessagesRole>;
-
-/**
- * The type of the model. Current `chat`,`completion` and `image` are supported
- */
-export const DeploymentGetConfigType = {
-  Chat: "chat",
-  Completion: "completion",
-  Embedding: "embedding",
-  Vision: "vision",
-  Image: "image",
-  Tts: "tts",
-  Stt: "stt",
-  Rerank: "rerank",
-  Moderations: "moderations",
-} as const;
-/**
- * The type of the model. Current `chat`,`completion` and `image` are supported
- */
-export type DeploymentGetConfigType = ClosedEnum<
-  typeof DeploymentGetConfigType
->;
-
-/**
- * The role of the prompt message
- */
-export const DeploymentGetConfigRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type DeploymentGetConfigRole = ClosedEnum<
-  typeof DeploymentGetConfigRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType =
-  ClosedEnum<
-    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
-  >;
-
-export const DeploymentGetConfig2DeploymentsResponse200Type = {
-  ImageUrl: "image_url",
-} as const;
-export type DeploymentGetConfig2DeploymentsResponse200Type = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsResponse200Type
->;
-
-export const DeploymentGetConfig2DeploymentsResponseType = {
-  Text: "text",
-} as const;
-export type DeploymentGetConfig2DeploymentsResponseType = ClosedEnum<
-  typeof DeploymentGetConfig2DeploymentsResponseType
->;
-
-export const DeploymentGetConfigDeploymentsResponseType = {
-  Function: "function",
-} as const;
-export type DeploymentGetConfigDeploymentsResponseType = ClosedEnum<
-  typeof DeploymentGetConfigDeploymentsResponseType
->;
-
-/**
- * Only supported on `image` models.
- */
-export const DeploymentGetConfigFormat = {
-  Url: "url",
-  B64Json: "b64_json",
-  Text: "text",
-  JsonObject: "json_object",
-} as const;
-/**
- * Only supported on `image` models.
- */
-export type DeploymentGetConfigFormat = ClosedEnum<
-  typeof DeploymentGetConfigFormat
->;
-
-export const DeploymentGetConfigResponseFormatType = {
-  JsonObject: "json_object",
-} as const;
-export type DeploymentGetConfigResponseFormatType = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormatType
->;
-
-export const DeploymentGetConfigResponseFormatDeploymentsType = {
-  JsonSchema: "json_schema",
-} as const;
-export type DeploymentGetConfigResponseFormatDeploymentsType = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormatDeploymentsType
->;
-
-/**
- * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
- */
-export const DeploymentGetConfigPhotoRealVersion = {
-  V1: "v1",
-  V2: "v2",
-} as const;
-/**
- * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
- */
-export type DeploymentGetConfigPhotoRealVersion = ClosedEnum<
-  typeof DeploymentGetConfigPhotoRealVersion
->;
-
-/**
- * The format to return the embeddings
- */
-export const DeploymentGetConfigEncodingFormat = {
-  Float: "float",
-  Base64: "base64",
-} as const;
-/**
- * The format to return the embeddings
- */
-export type DeploymentGetConfigEncodingFormat = ClosedEnum<
-  typeof DeploymentGetConfigEncodingFormat
->;
-
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export const DeploymentGetConfigReasoningEffort = {
-  Disable: "disable",
-  Low: "low",
-  Medium: "medium",
-  High: "high",
-} as const;
-/**
- * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
- */
-export type DeploymentGetConfigReasoningEffort = ClosedEnum<
-  typeof DeploymentGetConfigReasoningEffort
->;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const DeploymentGetConfigDeploymentsType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type DeploymentGetConfigDeploymentsType = ClosedEnum<
-  typeof DeploymentGetConfigDeploymentsType
->;
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigPrefixMessagesDeploymentsRequestRole
-  > = z.nativeEnum(DeploymentGetConfigPrefixMessagesDeploymentsRequestRole);
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigPrefixMessagesDeploymentsRequestRole
-  > = DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$ {
-  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
-  > = z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyType);
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
-  > = DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestType> = z
-    .nativeEnum(DeploymentGetConfig2DeploymentsRequestType);
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestType> =
-    DeploymentGetConfig2DeploymentsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesDeploymentsRole> = z
-    .nativeEnum(DeploymentGetConfigPrefixMessagesDeploymentsRole);
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesDeploymentsRole> =
-    DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigPrefixMessagesDeploymentsRole$ {
-  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema;
-}
-
-/** @internal */
-export const PrefixMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesType
-> = z.nativeEnum(PrefixMessagesType);
-
-/** @internal */
-export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesType
-> = PrefixMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesType$ {
-  /** @deprecated use `PrefixMessagesType$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesType$inboundSchema;
-  /** @deprecated use `PrefixMessagesType$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesRole> = z.nativeEnum(
-    DeploymentGetConfigPrefixMessagesRole,
-  );
-
-/** @internal */
-export const DeploymentGetConfigPrefixMessagesRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesRole> =
-    DeploymentGetConfigPrefixMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigPrefixMessagesRole$ {
-  /** @deprecated use `DeploymentGetConfigPrefixMessagesRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigPrefixMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigPrefixMessagesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigPrefixMessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2DeploymentsType
-> = z.nativeEnum(DeploymentGetConfig2DeploymentsType);
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsType> =
-    DeploymentGetConfig2DeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2Type$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2Type
-> = z.nativeEnum(DeploymentGetConfig2Type);
-
-/** @internal */
-export const DeploymentGetConfig2Type$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfig2Type
-> = DeploymentGetConfig2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2Type$ {
-  /** @deprecated use `DeploymentGetConfig2Type$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfig2Type$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2Type$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfig2Type$outboundSchema;
-}
-
-/** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
-
-/** @internal */
-export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
-  Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Format$ {
-  /** @deprecated use `Format$inboundSchema` instead. */
-  export const inboundSchema = Format$inboundSchema;
-  /** @deprecated use `Format$outboundSchema` instead. */
-  export const outboundSchema = Format$outboundSchema;
-}
-
-/** @internal */
-export const TwoType$inboundSchema: z.ZodNativeEnum<typeof TwoType> = z
-  .nativeEnum(TwoType);
-
-/** @internal */
-export const TwoType$outboundSchema: z.ZodNativeEnum<typeof TwoType> =
-  TwoType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwoType$ {
-  /** @deprecated use `TwoType$inboundSchema` instead. */
-  export const inboundSchema = TwoType$inboundSchema;
-  /** @deprecated use `TwoType$outboundSchema` instead. */
-  export const outboundSchema = TwoType$outboundSchema;
-}
-
-/** @internal */
-export const Detail$inboundSchema: z.ZodNativeEnum<typeof Detail> = z
-  .nativeEnum(Detail);
-
-/** @internal */
-export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> =
-  Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Detail$ {
-  /** @deprecated use `Detail$inboundSchema` instead. */
-  export const inboundSchema = Detail$inboundSchema;
-  /** @deprecated use `Detail$outboundSchema` instead. */
-  export const outboundSchema = Detail$outboundSchema;
-}
-
-/** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Type$ {
-  /** @deprecated use `Type$inboundSchema` instead. */
-  export const inboundSchema = Type$inboundSchema;
-  /** @deprecated use `Type$outboundSchema` instead. */
-  export const outboundSchema = Type$outboundSchema;
-}
-
-/** @internal */
-export const PrefixMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesRole
-> = z.nativeEnum(PrefixMessagesRole);
-
-/** @internal */
-export const PrefixMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesRole
-> = PrefixMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PrefixMessagesRole$ {
-  /** @deprecated use `PrefixMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesRole$inboundSchema;
-  /** @deprecated use `PrefixMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
-
-/** @internal */
-export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
-  Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Role$ {
-  /** @deprecated use `Role$inboundSchema` instead. */
-  export const inboundSchema = Role$inboundSchema;
-  /** @deprecated use `Role$outboundSchema` instead. */
-  export const outboundSchema = Role$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole
-  > = z.nativeEnum(
-    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole,
-  );
-
-/** @internal */
-export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole
-  > =
-    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRequestRole> = z
-    .nativeEnum(DeploymentGetConfigMessagesDeploymentsRequestRole);
-
-/** @internal */
-export const DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRequestRole> =
-    DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigMessagesDeploymentsRequestRole$ {
-  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const MessagesType$inboundSchema: z.ZodNativeEnum<typeof MessagesType> =
-  z.nativeEnum(MessagesType);
-
-/** @internal */
-export const MessagesType$outboundSchema: z.ZodNativeEnum<typeof MessagesType> =
-  MessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MessagesType$ {
-  /** @deprecated use `MessagesType$inboundSchema` instead. */
-  export const inboundSchema = MessagesType$inboundSchema;
-  /** @deprecated use `MessagesType$outboundSchema` instead. */
-  export const outboundSchema = MessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigMessagesDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRole> = z
-    .nativeEnum(DeploymentGetConfigMessagesDeploymentsRole);
-
-/** @internal */
-export const DeploymentGetConfigMessagesDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRole> =
-    DeploymentGetConfigMessagesDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigMessagesDeploymentsRole$ {
-  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigMessagesDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigMessagesDeploymentsRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema;
-}
-
-/** @internal */
-export const TwoFormat$inboundSchema: z.ZodNativeEnum<typeof TwoFormat> = z
-  .nativeEnum(TwoFormat);
-
-/** @internal */
-export const TwoFormat$outboundSchema: z.ZodNativeEnum<typeof TwoFormat> =
-  TwoFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwoFormat$ {
-  /** @deprecated use `TwoFormat$inboundSchema` instead. */
-  export const inboundSchema = TwoFormat$inboundSchema;
-  /** @deprecated use `TwoFormat$outboundSchema` instead. */
-  export const outboundSchema = TwoFormat$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema;
-}
-
-/** @internal */
-export const TwoDetail$inboundSchema: z.ZodNativeEnum<typeof TwoDetail> = z
-  .nativeEnum(TwoDetail);
-
-/** @internal */
-export const TwoDetail$outboundSchema: z.ZodNativeEnum<typeof TwoDetail> =
-  TwoDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace TwoDetail$ {
-  /** @deprecated use `TwoDetail$inboundSchema` instead. */
-  export const inboundSchema = TwoDetail$inboundSchema;
-  /** @deprecated use `TwoDetail$outboundSchema` instead. */
-  export const outboundSchema = TwoDetail$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType
-  > =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigMessagesRole
-> = z.nativeEnum(DeploymentGetConfigMessagesRole);
-
-/** @internal */
-export const DeploymentGetConfigMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigMessagesRole
-> = DeploymentGetConfigMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigMessagesRole$ {
-  /** @deprecated use `DeploymentGetConfigMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfigMessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const MessagesRole$inboundSchema: z.ZodNativeEnum<typeof MessagesRole> =
-  z.nativeEnum(MessagesRole);
-
-/** @internal */
-export const MessagesRole$outboundSchema: z.ZodNativeEnum<typeof MessagesRole> =
-  MessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace MessagesRole$ {
-  /** @deprecated use `MessagesRole$inboundSchema` instead. */
-  export const inboundSchema = MessagesRole$inboundSchema;
-  /** @deprecated use `MessagesRole$outboundSchema` instead. */
-  export const outboundSchema = MessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigType
-> = z.nativeEnum(DeploymentGetConfigType);
-
-/** @internal */
-export const DeploymentGetConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigType
-> = DeploymentGetConfigType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigType$ {
-  /** @deprecated use `DeploymentGetConfigType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfigType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigRole
-> = z.nativeEnum(DeploymentGetConfigRole);
-
-/** @internal */
-export const DeploymentGetConfigRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigRole
-> = DeploymentGetConfigRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigRole$ {
-  /** @deprecated use `DeploymentGetConfigRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigRole$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfigRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType,
-  );
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
-  > =
-    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponse200Type> = z
-    .nativeEnum(DeploymentGetConfig2DeploymentsResponse200Type);
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponse200Type> =
-    DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsResponse200Type$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponseType> = z
-    .nativeEnum(DeploymentGetConfig2DeploymentsResponseType);
-
-/** @internal */
-export const DeploymentGetConfig2DeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponseType> =
-    DeploymentGetConfig2DeploymentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfig2DeploymentsResponseType$ {
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfig2DeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfig2DeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfig2DeploymentsResponseType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigDeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponseType> = z
-    .nativeEnum(DeploymentGetConfigDeploymentsResponseType);
-
-/** @internal */
-export const DeploymentGetConfigDeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponseType> =
-    DeploymentGetConfigDeploymentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigDeploymentsResponseType$ {
-  /** @deprecated use `DeploymentGetConfigDeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigDeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigDeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigDeploymentsResponseType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigFormat$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigFormat
-> = z.nativeEnum(DeploymentGetConfigFormat);
-
-/** @internal */
-export const DeploymentGetConfigFormat$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigFormat
-> = DeploymentGetConfigFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigFormat$ {
-  /** @deprecated use `DeploymentGetConfigFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigFormat$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigFormat$outboundSchema` instead. */
-  export const outboundSchema = DeploymentGetConfigFormat$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigResponseFormatType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatType> = z.nativeEnum(
-    DeploymentGetConfigResponseFormatType,
-  );
-
-/** @internal */
-export const DeploymentGetConfigResponseFormatType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatType> =
-    DeploymentGetConfigResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigResponseFormatType$ {
-  /** @deprecated use `DeploymentGetConfigResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigResponseFormatType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigResponseFormatType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatDeploymentsType> = z
-    .nativeEnum(DeploymentGetConfigResponseFormatDeploymentsType);
-
-/** @internal */
-export const DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatDeploymentsType> =
-    DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigResponseFormatDeploymentsType$ {
-  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigPhotoRealVersion
-> = z.nativeEnum(DeploymentGetConfigPhotoRealVersion);
-
-/** @internal */
-export const DeploymentGetConfigPhotoRealVersion$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigPhotoRealVersion> =
-    DeploymentGetConfigPhotoRealVersion$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigPhotoRealVersion$ {
-  /** @deprecated use `DeploymentGetConfigPhotoRealVersion$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigPhotoRealVersion$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigPhotoRealVersion$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigPhotoRealVersion$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigEncodingFormat$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigEncodingFormat
-> = z.nativeEnum(DeploymentGetConfigEncodingFormat);
-
-/** @internal */
-export const DeploymentGetConfigEncodingFormat$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigEncodingFormat
-> = DeploymentGetConfigEncodingFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigEncodingFormat$ {
-  /** @deprecated use `DeploymentGetConfigEncodingFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigEncodingFormat$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigEncodingFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigEncodingFormat$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigReasoningEffort$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigReasoningEffort
-> = z.nativeEnum(DeploymentGetConfigReasoningEffort);
-
-/** @internal */
-export const DeploymentGetConfigReasoningEffort$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigReasoningEffort
-> = DeploymentGetConfigReasoningEffort$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigReasoningEffort$ {
-  /** @deprecated use `DeploymentGetConfigReasoningEffort$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigReasoningEffort$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigReasoningEffort$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigReasoningEffort$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigDeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigDeploymentsType
-> = z.nativeEnum(DeploymentGetConfigDeploymentsType);
-
-/** @internal */
-export const DeploymentGetConfigDeploymentsType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentGetConfigDeploymentsType
-> = DeploymentGetConfigDeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigDeploymentsType$ {
-  /** @deprecated use `DeploymentGetConfigDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentGetConfigDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigDeploymentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigDeploymentsType$outboundSchema;
-}
-
-/**
  * The contents of the tool message.
  */
 export type DeploymentGetConfigPrefixMessagesContent = string | Array<string>;
@@ -1451,6 +41,19 @@ export type ToolMessage = {
   toolCallId: string;
 };
 
+/**
+ * The type of the content part.
+ */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType = {
+  Refusal: "refusal",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyType = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+>;
+
 export type RefusalContentPart = {
   /**
    * The type of the content part.
@@ -1461,6 +64,19 @@ export type RefusalContentPart = {
    */
   refusal: string;
 };
+
+/**
+ * The type of the content part.
+ */
+export const DeploymentGetConfig2DeploymentsRequestType = {
+  Text: "text",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentGetConfig2DeploymentsRequestType = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsRequestType
+>;
 
 export type TextContentPart = {
   /**
@@ -1483,6 +99,19 @@ export type PrefixMessagesContent =
   | Array<TextContentPart | RefusalContentPart>;
 
 /**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const DeploymentGetConfigPrefixMessagesDeploymentsRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type DeploymentGetConfigPrefixMessagesDeploymentsRole = ClosedEnum<
+  typeof DeploymentGetConfigPrefixMessagesDeploymentsRole
+>;
+
+/**
  * Data about a previous audio response from the model.
  */
 export type Audio = {
@@ -1491,6 +120,17 @@ export type Audio = {
    */
   id: string;
 };
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const PrefixMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type PrefixMessagesType = ClosedEnum<typeof PrefixMessagesType>;
 
 export type FunctionT = {
   /**
@@ -1558,6 +198,32 @@ export type AssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const DeploymentGetConfigPrefixMessagesRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type DeploymentGetConfigPrefixMessagesRole = ClosedEnum<
+  typeof DeploymentGetConfigPrefixMessagesRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentGetConfig2DeploymentsType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentGetConfig2DeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsType
+>;
+
 export type FileT = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -1577,6 +243,25 @@ export type Four = {
   file: FileT;
 };
 
+export const DeploymentGetConfig2Type = {
+  InputAudio: "input_audio",
+} as const;
+export type DeploymentGetConfig2Type = ClosedEnum<
+  typeof DeploymentGetConfig2Type
+>;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const Format = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type Format = ClosedEnum<typeof Format>;
+
 export type InputAudio = {
   /**
    * Base64 encoded audio data.
@@ -1593,6 +278,24 @@ export type Three = {
   inputAudio: InputAudio;
 };
 
+export const TwoType = {
+  ImageUrl: "image_url",
+} as const;
+export type TwoType = ClosedEnum<typeof TwoType>;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const Detail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type Detail = ClosedEnum<typeof Detail>;
+
 export type ImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -1608,6 +311,11 @@ export type Two2 = {
   type: TwoType;
   imageUrl: ImageUrl;
 };
+
+export const Type = {
+  Text: "text",
+} as const;
+export type Type = ClosedEnum<typeof Type>;
 
 export type One = {
   type: Type;
@@ -1636,6 +344,17 @@ export type UserMessage = {
   content: string | Array<One | Two2 | Three | Four>;
 };
 
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const PrefixMessagesRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type PrefixMessagesRole = ClosedEnum<typeof PrefixMessagesRole>;
+
 export type SystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -1650,6 +369,17 @@ export type SystemMessage = {
    */
   name?: string | undefined;
 };
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const Role = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type Role = ClosedEnum<typeof Role>;
 
 export type DeveloperMessage = {
   /**
@@ -1674,6 +404,20 @@ export type PrefixMessages =
   | AssistantMessage;
 
 /**
+ * The role of the messages author, in this case tool.
+ */
+export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole = {
+  Tool: "tool",
+} as const;
+/**
+ * The role of the messages author, in this case tool.
+ */
+export type DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole =
+  ClosedEnum<
+    typeof DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole
+  >;
+
+/**
  * The contents of the tool message.
  */
 export type DeploymentGetConfigMessagesDeploymentsContent =
@@ -1695,6 +439,21 @@ export type MessagesToolMessage = {
   toolCallId: string;
 };
 
+/**
+ * The type of the content part.
+ */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
+  >;
+
 export type TwoRefusalContentPart = {
   /**
    * The type of the content part.
@@ -1705,6 +464,20 @@ export type TwoRefusalContentPart = {
    */
   refusal: string;
 };
+
+/**
+ * The type of the content part.
+ */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type = {
+  Text: "text",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
+  >;
 
 export type TwoTextContentPart = {
   /**
@@ -1729,6 +502,19 @@ export type DeploymentGetConfigMessagesContent =
   | Array<TwoTextContentPart | TwoRefusalContentPart>;
 
 /**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const DeploymentGetConfigMessagesDeploymentsRequestRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type DeploymentGetConfigMessagesDeploymentsRequestRole = ClosedEnum<
+  typeof DeploymentGetConfigMessagesDeploymentsRequestRole
+>;
+
+/**
  * Data about a previous audio response from the model.
  */
 export type MessagesAudio = {
@@ -1737,6 +523,17 @@ export type MessagesAudio = {
    */
   id: string;
 };
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const MessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type MessagesType = ClosedEnum<typeof MessagesType>;
 
 export type MessagesFunction = {
   /**
@@ -1804,6 +601,34 @@ export type MessagesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const DeploymentGetConfigMessagesDeploymentsRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type DeploymentGetConfigMessagesDeploymentsRole = ClosedEnum<
+  typeof DeploymentGetConfigMessagesDeploymentsRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type =
+  {
+    File: "file",
+  } as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
+  >;
+
 export type TwoFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -1823,6 +648,27 @@ export type Two4 = {
   file: TwoFile;
 };
 
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType =
+  {
+    InputAudio: "input_audio",
+  } as const;
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType
+  >;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const TwoFormat = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type TwoFormat = ClosedEnum<typeof TwoFormat>;
+
 export type TwoInputAudio = {
   /**
    * Base64 encoded audio data.
@@ -1839,6 +685,27 @@ export type Two3 = {
   inputAudio: TwoInputAudio;
 };
 
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type = {
+  ImageUrl: "image_url",
+} as const;
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
+  >;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const TwoDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type TwoDetail = ClosedEnum<typeof TwoDetail>;
+
 export type TwoImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -1854,6 +721,14 @@ export type DeploymentGetConfig22 = {
   type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type;
   imageUrl: TwoImageUrl;
 };
+
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType = {
+  Text: "text",
+} as const;
+export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType
+  >;
 
 export type Two1 = {
   type: DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType;
@@ -1888,6 +763,19 @@ export type MessagesUserMessage = {
   content: string | Array<Two1 | DeploymentGetConfig22 | Two3 | Two4>;
 };
 
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const DeploymentGetConfigMessagesRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type DeploymentGetConfigMessagesRole = ClosedEnum<
+  typeof DeploymentGetConfigMessagesRole
+>;
+
 export type MessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -1902,6 +790,17 @@ export type MessagesSystemMessage = {
    */
   name?: string | undefined;
 };
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const MessagesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type MessagesRole = ClosedEnum<typeof MessagesRole>;
 
 export type MessagesDeveloperMessage = {
   /**
@@ -2323,6 +1222,61 @@ export type DeploymentGetConfigRequestBody = {
   } | undefined;
 };
 
+/**
+ * The type of the model. Current `chat`,`completion` and `image` are supported
+ */
+export const DeploymentGetConfigType = {
+  Chat: "chat",
+  Completion: "completion",
+  Embedding: "embedding",
+  Vision: "vision",
+  Image: "image",
+  Tts: "tts",
+  Stt: "stt",
+  Rerank: "rerank",
+  Moderations: "moderations",
+} as const;
+/**
+ * The type of the model. Current `chat`,`completion` and `image` are supported
+ */
+export type DeploymentGetConfigType = ClosedEnum<
+  typeof DeploymentGetConfigType
+>;
+
+/**
+ * The role of the prompt message
+ */
+export const DeploymentGetConfigRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentGetConfigRole = ClosedEnum<
+  typeof DeploymentGetConfigRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
+  >;
+
 export type DeploymentGetConfig2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -2341,6 +1295,13 @@ export type DeploymentGetConfig23 = {
   type: DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType;
   file: DeploymentGetConfig2File;
 };
+
+export const DeploymentGetConfig2DeploymentsResponse200Type = {
+  ImageUrl: "image_url",
+} as const;
+export type DeploymentGetConfig2DeploymentsResponse200Type = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsResponse200Type
+>;
 
 export type DeploymentGetConfig2ImageUrl = {
   /**
@@ -2365,6 +1326,13 @@ export type DeploymentGetConfig2Deployments2 = {
   imageUrl: DeploymentGetConfig2ImageUrl;
 };
 
+export const DeploymentGetConfig2DeploymentsResponseType = {
+  Text: "text",
+} as const;
+export type DeploymentGetConfig2DeploymentsResponseType = ClosedEnum<
+  typeof DeploymentGetConfig2DeploymentsResponseType
+>;
+
 /**
  * Text content part of a prompt message
  */
@@ -2388,6 +1356,13 @@ export type DeploymentGetConfigContent =
     | DeploymentGetConfig2Deployments2
     | DeploymentGetConfig23
   >;
+
+export const DeploymentGetConfigDeploymentsResponseType = {
+  Function: "function",
+} as const;
+export type DeploymentGetConfigDeploymentsResponseType = ClosedEnum<
+  typeof DeploymentGetConfigDeploymentsResponseType
+>;
 
 export type DeploymentGetConfigDeploymentsFunction = {
   name: string;
@@ -2423,9 +1398,39 @@ export type DeploymentGetConfigMessages = {
   toolCallId?: string | undefined;
 };
 
+/**
+ * Only supported on `image` models.
+ */
+export const DeploymentGetConfigFormat = {
+  Url: "url",
+  B64Json: "b64_json",
+  Text: "text",
+  JsonObject: "json_object",
+} as const;
+/**
+ * Only supported on `image` models.
+ */
+export type DeploymentGetConfigFormat = ClosedEnum<
+  typeof DeploymentGetConfigFormat
+>;
+
+export const DeploymentGetConfigResponseFormatType = {
+  JsonObject: "json_object",
+} as const;
+export type DeploymentGetConfigResponseFormatType = ClosedEnum<
+  typeof DeploymentGetConfigResponseFormatType
+>;
+
 export type DeploymentGetConfigResponseFormat2 = {
   type: DeploymentGetConfigResponseFormatType;
 };
+
+export const DeploymentGetConfigResponseFormatDeploymentsType = {
+  JsonSchema: "json_schema",
+} as const;
+export type DeploymentGetConfigResponseFormatDeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfigResponseFormatDeploymentsType
+>;
 
 export type DeploymentGetConfigResponseFormatJsonSchema = {
   name: string;
@@ -2452,6 +1457,50 @@ export type DeploymentGetConfigResponseFormat1 = {
 export type DeploymentGetConfigResponseFormat =
   | DeploymentGetConfigResponseFormat1
   | DeploymentGetConfigResponseFormat2;
+
+/**
+ * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
+ */
+export const DeploymentGetConfigPhotoRealVersion = {
+  V1: "v1",
+  V2: "v2",
+} as const;
+/**
+ * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
+ */
+export type DeploymentGetConfigPhotoRealVersion = ClosedEnum<
+  typeof DeploymentGetConfigPhotoRealVersion
+>;
+
+/**
+ * The format to return the embeddings
+ */
+export const DeploymentGetConfigEncodingFormat = {
+  Float: "float",
+  Base64: "base64",
+} as const;
+/**
+ * The format to return the embeddings
+ */
+export type DeploymentGetConfigEncodingFormat = ClosedEnum<
+  typeof DeploymentGetConfigEncodingFormat
+>;
+
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export const DeploymentGetConfigReasoningEffort = {
+  Disable: "disable",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ */
+export type DeploymentGetConfigReasoningEffort = ClosedEnum<
+  typeof DeploymentGetConfigReasoningEffort
+>;
 
 /**
  * Model Parameters: Not all parameters apply to every model
@@ -2539,6 +1588,19 @@ export type ParametersT = {
   budgetTokens?: number | undefined;
 };
 
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const DeploymentGetConfigDeploymentsType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type DeploymentGetConfigDeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfigDeploymentsType
+>;
+
 export type DeploymentGetConfigFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
@@ -2600,6 +1662,31 @@ export type DeploymentGetConfigResponseBody = {
    */
   tools?: Array<Tools> | undefined;
 };
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfigPrefixMessagesDeploymentsRequestRole
+  > = z.nativeEnum(DeploymentGetConfigPrefixMessagesDeploymentsRequestRole);
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfigPrefixMessagesDeploymentsRequestRole
+  > = DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$ {
+  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigPrefixMessagesDeploymentsRequestRole$outboundSchema;
+}
 
 /** @internal */
 export const DeploymentGetConfigPrefixMessagesContent$inboundSchema: z.ZodType<
@@ -2727,6 +1814,31 @@ export function toolMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+  > = z.nativeEnum(DeploymentGetConfig2DeploymentsRequestRequestBodyType);
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyType
+  > = DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
 export const RefusalContentPart$inboundSchema: z.ZodType<
   RefusalContentPart,
   z.ZodTypeDef,
@@ -2781,6 +1893,29 @@ export function refusalContentPartFromJSON(
     (x) => RefusalContentPart$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RefusalContentPart' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestType> = z
+    .nativeEnum(DeploymentGetConfig2DeploymentsRequestType);
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsRequestType> =
+    DeploymentGetConfig2DeploymentsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestType$outboundSchema;
 }
 
 /** @internal */
@@ -2953,6 +2088,29 @@ export function prefixMessagesContentFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesDeploymentsRole> = z
+    .nativeEnum(DeploymentGetConfigPrefixMessagesDeploymentsRole);
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesDeploymentsRole> =
+    DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigPrefixMessagesDeploymentsRole$ {
+  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigPrefixMessagesDeploymentsRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigPrefixMessagesDeploymentsRole$outboundSchema;
+}
+
+/** @internal */
 export const Audio$inboundSchema: z.ZodType<Audio, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
@@ -2997,6 +2155,27 @@ export function audioFromJSON(
     (x) => Audio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Audio' from JSON`,
   );
+}
+
+/** @internal */
+export const PrefixMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof PrefixMessagesType
+> = z.nativeEnum(PrefixMessagesType);
+
+/** @internal */
+export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof PrefixMessagesType
+> = PrefixMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PrefixMessagesType$ {
+  /** @deprecated use `PrefixMessagesType$inboundSchema` instead. */
+  export const inboundSchema = PrefixMessagesType$inboundSchema;
+  /** @deprecated use `PrefixMessagesType$outboundSchema` instead. */
+  export const outboundSchema = PrefixMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -3221,6 +2400,53 @@ export function assistantMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigPrefixMessagesRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesRole> = z.nativeEnum(
+    DeploymentGetConfigPrefixMessagesRole,
+  );
+
+/** @internal */
+export const DeploymentGetConfigPrefixMessagesRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPrefixMessagesRole> =
+    DeploymentGetConfigPrefixMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigPrefixMessagesRole$ {
+  /** @deprecated use `DeploymentGetConfigPrefixMessagesRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigPrefixMessagesRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigPrefixMessagesRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigPrefixMessagesRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig2DeploymentsType
+> = z.nativeEnum(DeploymentGetConfig2DeploymentsType);
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsType> =
+    DeploymentGetConfig2DeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsType$outboundSchema;
+}
+
+/** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
     file_data: z.string(),
@@ -3323,6 +2549,46 @@ export function fourFromJSON(
     (x) => Four$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Four' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2Type$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig2Type
+> = z.nativeEnum(DeploymentGetConfig2Type);
+
+/** @internal */
+export const DeploymentGetConfig2Type$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig2Type
+> = DeploymentGetConfig2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2Type$ {
+  /** @deprecated use `DeploymentGetConfig2Type$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig2Type$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2Type$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig2Type$outboundSchema;
+}
+
+/** @internal */
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
+  .nativeEnum(Format);
+
+/** @internal */
+export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
+  Format$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Format$ {
+  /** @deprecated use `Format$inboundSchema` instead. */
+  export const inboundSchema = Format$inboundSchema;
+  /** @deprecated use `Format$outboundSchema` instead. */
+  export const outboundSchema = Format$outboundSchema;
 }
 
 /** @internal */
@@ -3437,6 +2703,44 @@ export function threeFromJSON(
 }
 
 /** @internal */
+export const TwoType$inboundSchema: z.ZodNativeEnum<typeof TwoType> = z
+  .nativeEnum(TwoType);
+
+/** @internal */
+export const TwoType$outboundSchema: z.ZodNativeEnum<typeof TwoType> =
+  TwoType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwoType$ {
+  /** @deprecated use `TwoType$inboundSchema` instead. */
+  export const inboundSchema = TwoType$inboundSchema;
+  /** @deprecated use `TwoType$outboundSchema` instead. */
+  export const outboundSchema = TwoType$outboundSchema;
+}
+
+/** @internal */
+export const Detail$inboundSchema: z.ZodNativeEnum<typeof Detail> = z
+  .nativeEnum(Detail);
+
+/** @internal */
+export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> =
+  Detail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Detail$ {
+  /** @deprecated use `Detail$inboundSchema` instead. */
+  export const inboundSchema = Detail$inboundSchema;
+  /** @deprecated use `Detail$outboundSchema` instead. */
+  export const outboundSchema = Detail$outboundSchema;
+}
+
+/** @internal */
 export const ImageUrl$inboundSchema: z.ZodType<
   ImageUrl,
   z.ZodTypeDef,
@@ -3542,6 +2846,26 @@ export function two2FromJSON(
     (x) => Two2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Two2' from JSON`,
   );
+}
+
+/** @internal */
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
+
+/** @internal */
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
 }
 
 /** @internal */
@@ -3778,6 +3102,27 @@ export function userMessageFromJSON(
 }
 
 /** @internal */
+export const PrefixMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof PrefixMessagesRole
+> = z.nativeEnum(PrefixMessagesRole);
+
+/** @internal */
+export const PrefixMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof PrefixMessagesRole
+> = PrefixMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PrefixMessagesRole$ {
+  /** @deprecated use `PrefixMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = PrefixMessagesRole$inboundSchema;
+  /** @deprecated use `PrefixMessagesRole$outboundSchema` instead. */
+  export const outboundSchema = PrefixMessagesRole$outboundSchema;
+}
+
+/** @internal */
 export const SystemMessage$inboundSchema: z.ZodType<
   SystemMessage,
   z.ZodTypeDef,
@@ -3831,6 +3176,26 @@ export function systemMessageFromJSON(
     (x) => SystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SystemMessage' from JSON`,
   );
+}
+
+/** @internal */
+export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
+  Role,
+);
+
+/** @internal */
+export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
+  Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Role$ {
+  /** @deprecated use `Role$inboundSchema` instead. */
+  export const inboundSchema = Role$inboundSchema;
+  /** @deprecated use `Role$outboundSchema` instead. */
+  export const outboundSchema = Role$outboundSchema;
 }
 
 /** @internal */
@@ -3952,6 +3317,34 @@ export function prefixMessagesFromJSON(
     (x) => PrefixMessages$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PrefixMessages' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole
+  > = z.nativeEnum(
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole,
+  );
+
+/** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole
+  > =
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$ {
+  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
 }
 
 /** @internal */
@@ -4088,6 +3481,34 @@ export function messagesToolMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType
+  > =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema;
+}
+
+/** @internal */
 export const TwoRefusalContentPart$inboundSchema: z.ZodType<
   TwoRefusalContentPart,
   z.ZodTypeDef,
@@ -4144,6 +3565,34 @@ export function twoRefusalContentPartFromJSON(
     (x) => TwoRefusalContentPart$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'TwoRefusalContentPart' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
+  > =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema;
 }
 
 /** @internal */
@@ -4334,6 +3783,29 @@ export function deploymentGetConfigMessagesContentFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRequestRole> = z
+    .nativeEnum(DeploymentGetConfigMessagesDeploymentsRequestRole);
+
+/** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRequestRole> =
+    DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigMessagesDeploymentsRequestRole$ {
+  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigMessagesDeploymentsRequestRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigMessagesDeploymentsRequestRole$outboundSchema;
+}
+
+/** @internal */
 export const MessagesAudio$inboundSchema: z.ZodType<
   MessagesAudio,
   z.ZodTypeDef,
@@ -4381,6 +3853,25 @@ export function messagesAudioFromJSON(
     (x) => MessagesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'MessagesAudio' from JSON`,
   );
+}
+
+/** @internal */
+export const MessagesType$inboundSchema: z.ZodNativeEnum<typeof MessagesType> =
+  z.nativeEnum(MessagesType);
+
+/** @internal */
+export const MessagesType$outboundSchema: z.ZodNativeEnum<typeof MessagesType> =
+  MessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MessagesType$ {
+  /** @deprecated use `MessagesType$inboundSchema` instead. */
+  export const inboundSchema = MessagesType$inboundSchema;
+  /** @deprecated use `MessagesType$outboundSchema` instead. */
+  export const outboundSchema = MessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -4615,6 +4106,57 @@ export function messagesAssistantMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRole> = z
+    .nativeEnum(DeploymentGetConfigMessagesDeploymentsRole);
+
+/** @internal */
+export const DeploymentGetConfigMessagesDeploymentsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigMessagesDeploymentsRole> =
+    DeploymentGetConfigMessagesDeploymentsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigMessagesDeploymentsRole$ {
+  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigMessagesDeploymentsRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigMessagesDeploymentsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigMessagesDeploymentsRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type
+  > =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema;
+}
+
+/** @internal */
 export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
   z.object({
     file_data: z.string(),
@@ -4719,6 +4261,53 @@ export function two4FromJSON(
     (x) => Two4$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Two4' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType
+  > =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema;
+}
+
+/** @internal */
+export const TwoFormat$inboundSchema: z.ZodNativeEnum<typeof TwoFormat> = z
+  .nativeEnum(TwoFormat);
+
+/** @internal */
+export const TwoFormat$outboundSchema: z.ZodNativeEnum<typeof TwoFormat> =
+  TwoFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwoFormat$ {
+  /** @deprecated use `TwoFormat$inboundSchema` instead. */
+  export const inboundSchema = TwoFormat$inboundSchema;
+  /** @deprecated use `TwoFormat$outboundSchema` instead. */
+  export const outboundSchema = TwoFormat$outboundSchema;
 }
 
 /** @internal */
@@ -4829,6 +4418,53 @@ export function two3FromJSON(
     (x) => Two3$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'Two3' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type
+  > =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessages3Type$outboundSchema;
+}
+
+/** @internal */
+export const TwoDetail$inboundSchema: z.ZodNativeEnum<typeof TwoDetail> = z
+  .nativeEnum(TwoDetail);
+
+/** @internal */
+export const TwoDetail$outboundSchema: z.ZodNativeEnum<typeof TwoDetail> =
+  TwoDetail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwoDetail$ {
+  /** @deprecated use `TwoDetail$inboundSchema` instead. */
+  export const inboundSchema = TwoDetail$inboundSchema;
+  /** @deprecated use `TwoDetail$outboundSchema` instead. */
+  export const outboundSchema = TwoDetail$outboundSchema;
 }
 
 /** @internal */
@@ -4949,6 +4585,34 @@ export function deploymentGetConfig22FromJSON(
     (x) => DeploymentGetConfig22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentGetConfig22' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType
+  > =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsRequestRequestBodyMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -5217,6 +4881,27 @@ export function messagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigMessagesRole
+> = z.nativeEnum(DeploymentGetConfigMessagesRole);
+
+/** @internal */
+export const DeploymentGetConfigMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigMessagesRole
+> = DeploymentGetConfigMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigMessagesRole$ {
+  /** @deprecated use `DeploymentGetConfigMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigMessagesRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigMessagesRole$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigMessagesRole$outboundSchema;
+}
+
+/** @internal */
 export const MessagesSystemMessage$inboundSchema: z.ZodType<
   MessagesSystemMessage,
   z.ZodTypeDef,
@@ -5274,6 +4959,25 @@ export function messagesSystemMessageFromJSON(
     (x) => MessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'MessagesSystemMessage' from JSON`,
   );
+}
+
+/** @internal */
+export const MessagesRole$inboundSchema: z.ZodNativeEnum<typeof MessagesRole> =
+  z.nativeEnum(MessagesRole);
+
+/** @internal */
+export const MessagesRole$outboundSchema: z.ZodNativeEnum<typeof MessagesRole> =
+  MessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MessagesRole$ {
+  /** @deprecated use `MessagesRole$inboundSchema` instead. */
+  export const inboundSchema = MessagesRole$inboundSchema;
+  /** @deprecated use `MessagesRole$outboundSchema` instead. */
+  export const outboundSchema = MessagesRole$outboundSchema;
 }
 
 /** @internal */
@@ -8086,6 +7790,76 @@ export function deploymentGetConfigRequestBodyFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigType
+> = z.nativeEnum(DeploymentGetConfigType);
+
+/** @internal */
+export const DeploymentGetConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigType
+> = DeploymentGetConfigType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigType$ {
+  /** @deprecated use `DeploymentGetConfigType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigType$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfigRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigRole
+> = z.nativeEnum(DeploymentGetConfigRole);
+
+/** @internal */
+export const DeploymentGetConfigRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigRole
+> = DeploymentGetConfigRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigRole$ {
+  /** @deprecated use `DeploymentGetConfigRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigRole$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigRole$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType,
+  );
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType
+  > =
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentGetConfig2File$inboundSchema: z.ZodType<
   DeploymentGetConfig2File,
   z.ZodTypeDef,
@@ -8207,6 +7981,29 @@ export function deploymentGetConfig23FromJSON(
     (x) => DeploymentGetConfig23$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentGetConfig23' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponse200Type> = z
+    .nativeEnum(DeploymentGetConfig2DeploymentsResponse200Type);
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponse200Type> =
+    DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsResponse200Type$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsResponse200Type$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsResponse200Type$outboundSchema;
 }
 
 /** @internal */
@@ -8336,6 +8133,29 @@ export function deploymentGetConfig2Deployments2FromJSON(
     (x) => DeploymentGetConfig2Deployments2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentGetConfig2Deployments2' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponseType> = z
+    .nativeEnum(DeploymentGetConfig2DeploymentsResponseType);
+
+/** @internal */
+export const DeploymentGetConfig2DeploymentsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig2DeploymentsResponseType> =
+    DeploymentGetConfig2DeploymentsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig2DeploymentsResponseType$ {
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig2DeploymentsResponseType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig2DeploymentsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig2DeploymentsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -8534,6 +8354,29 @@ export function deploymentGetConfigContentFromJSON(
     (x) => DeploymentGetConfigContent$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentGetConfigContent' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfigDeploymentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponseType> = z
+    .nativeEnum(DeploymentGetConfigDeploymentsResponseType);
+
+/** @internal */
+export const DeploymentGetConfigDeploymentsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigDeploymentsResponseType> =
+    DeploymentGetConfigDeploymentsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigDeploymentsResponseType$ {
+  /** @deprecated use `DeploymentGetConfigDeploymentsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigDeploymentsResponseType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigDeploymentsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigDeploymentsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -8762,6 +8605,51 @@ export function deploymentGetConfigMessagesFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigFormat$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigFormat
+> = z.nativeEnum(DeploymentGetConfigFormat);
+
+/** @internal */
+export const DeploymentGetConfigFormat$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigFormat
+> = DeploymentGetConfigFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigFormat$ {
+  /** @deprecated use `DeploymentGetConfigFormat$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigFormat$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigFormat$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigFormat$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfigResponseFormatType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatType> = z.nativeEnum(
+    DeploymentGetConfigResponseFormatType,
+  );
+
+/** @internal */
+export const DeploymentGetConfigResponseFormatType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatType> =
+    DeploymentGetConfigResponseFormatType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigResponseFormatType$ {
+  /** @deprecated use `DeploymentGetConfigResponseFormatType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigResponseFormatType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigResponseFormatType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigResponseFormatType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentGetConfigResponseFormat2$inboundSchema: z.ZodType<
   DeploymentGetConfigResponseFormat2,
   z.ZodTypeDef,
@@ -8817,6 +8705,29 @@ export function deploymentGetConfigResponseFormat2FromJSON(
       DeploymentGetConfigResponseFormat2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentGetConfigResponseFormat2' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatDeploymentsType> = z
+    .nativeEnum(DeploymentGetConfigResponseFormatDeploymentsType);
+
+/** @internal */
+export const DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatDeploymentsType> =
+    DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigResponseFormatDeploymentsType$ {
+  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema;
 }
 
 /** @internal */
@@ -9025,6 +8936,73 @@ export function deploymentGetConfigResponseFormatFromJSON(
 }
 
 /** @internal */
+export const DeploymentGetConfigPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigPhotoRealVersion
+> = z.nativeEnum(DeploymentGetConfigPhotoRealVersion);
+
+/** @internal */
+export const DeploymentGetConfigPhotoRealVersion$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigPhotoRealVersion> =
+    DeploymentGetConfigPhotoRealVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigPhotoRealVersion$ {
+  /** @deprecated use `DeploymentGetConfigPhotoRealVersion$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigPhotoRealVersion$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigPhotoRealVersion$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigPhotoRealVersion$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfigEncodingFormat$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigEncodingFormat
+> = z.nativeEnum(DeploymentGetConfigEncodingFormat);
+
+/** @internal */
+export const DeploymentGetConfigEncodingFormat$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigEncodingFormat
+> = DeploymentGetConfigEncodingFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigEncodingFormat$ {
+  /** @deprecated use `DeploymentGetConfigEncodingFormat$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigEncodingFormat$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigEncodingFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigEncodingFormat$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfigReasoningEffort$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigReasoningEffort
+> = z.nativeEnum(DeploymentGetConfigReasoningEffort);
+
+/** @internal */
+export const DeploymentGetConfigReasoningEffort$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigReasoningEffort
+> = DeploymentGetConfigReasoningEffort$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigReasoningEffort$ {
+  /** @deprecated use `DeploymentGetConfigReasoningEffort$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigReasoningEffort$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigReasoningEffort$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigReasoningEffort$outboundSchema;
+}
+
+/** @internal */
 export const ParametersT$inboundSchema: z.ZodType<
   ParametersT,
   z.ZodTypeDef,
@@ -9144,6 +9122,28 @@ export function parametersFromJSON(
     (x) => ParametersT$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ParametersT' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentGetConfigDeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigDeploymentsType
+> = z.nativeEnum(DeploymentGetConfigDeploymentsType);
+
+/** @internal */
+export const DeploymentGetConfigDeploymentsType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigDeploymentsType
+> = DeploymentGetConfigDeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigDeploymentsType$ {
+  /** @deprecated use `DeploymentGetConfigDeploymentsType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigDeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigDeploymentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigDeploymentsType$outboundSchema;
 }
 
 /** @internal */

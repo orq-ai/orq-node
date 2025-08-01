@@ -9,42 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-/**
- * The status of the chunk
- */
-export const GetOneChunkStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type GetOneChunkStatus = ClosedEnum<typeof GetOneChunkStatus>;
-
-/** @internal */
-export const GetOneChunkStatus$inboundSchema: z.ZodNativeEnum<
-  typeof GetOneChunkStatus
-> = z.nativeEnum(GetOneChunkStatus);
-
-/** @internal */
-export const GetOneChunkStatus$outboundSchema: z.ZodNativeEnum<
-  typeof GetOneChunkStatus
-> = GetOneChunkStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOneChunkStatus$ {
-  /** @deprecated use `GetOneChunkStatus$inboundSchema` instead. */
-  export const inboundSchema = GetOneChunkStatus$inboundSchema;
-  /** @deprecated use `GetOneChunkStatus$outboundSchema` instead. */
-  export const outboundSchema = GetOneChunkStatus$outboundSchema;
-}
-
 export type GetOneChunkRequest = {
   /**
    * The unique identifier of the chunk
@@ -61,6 +25,21 @@ export type GetOneChunkRequest = {
 };
 
 export type GetOneChunkMetadata = string | number | boolean;
+
+/**
+ * The status of the chunk
+ */
+export const GetOneChunkStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * The status of the chunk
+ */
+export type GetOneChunkStatus = ClosedEnum<typeof GetOneChunkStatus>;
 
 /**
  * Chunk successfully retrieved
@@ -222,6 +201,27 @@ export function getOneChunkMetadataFromJSON(
     (x) => GetOneChunkMetadata$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetOneChunkMetadata' from JSON`,
   );
+}
+
+/** @internal */
+export const GetOneChunkStatus$inboundSchema: z.ZodNativeEnum<
+  typeof GetOneChunkStatus
+> = z.nativeEnum(GetOneChunkStatus);
+
+/** @internal */
+export const GetOneChunkStatus$outboundSchema: z.ZodNativeEnum<
+  typeof GetOneChunkStatus
+> = GetOneChunkStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneChunkStatus$ {
+  /** @deprecated use `GetOneChunkStatus$inboundSchema` instead. */
+  export const inboundSchema = GetOneChunkStatus$inboundSchema;
+  /** @deprecated use `GetOneChunkStatus$outboundSchema` instead. */
+  export const outboundSchema = GetOneChunkStatus$outboundSchema;
 }
 
 /** @internal */

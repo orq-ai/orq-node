@@ -9,68 +9,6 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const ListChunksObject = {
-  List: "list",
-} as const;
-export type ListChunksObject = ClosedEnum<typeof ListChunksObject>;
-
-/**
- * The status of the chunk
- */
-export const ListChunksStatus = {
-  Pending: "pending",
-  Processing: "processing",
-  Completed: "completed",
-  Failed: "failed",
-  Queued: "queued",
-} as const;
-/**
- * The status of the chunk
- */
-export type ListChunksStatus = ClosedEnum<typeof ListChunksStatus>;
-
-/** @internal */
-export const ListChunksObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListChunksObject
-> = z.nativeEnum(ListChunksObject);
-
-/** @internal */
-export const ListChunksObject$outboundSchema: z.ZodNativeEnum<
-  typeof ListChunksObject
-> = ListChunksObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksObject$ {
-  /** @deprecated use `ListChunksObject$inboundSchema` instead. */
-  export const inboundSchema = ListChunksObject$inboundSchema;
-  /** @deprecated use `ListChunksObject$outboundSchema` instead. */
-  export const outboundSchema = ListChunksObject$outboundSchema;
-}
-
-/** @internal */
-export const ListChunksStatus$inboundSchema: z.ZodNativeEnum<
-  typeof ListChunksStatus
-> = z.nativeEnum(ListChunksStatus);
-
-/** @internal */
-export const ListChunksStatus$outboundSchema: z.ZodNativeEnum<
-  typeof ListChunksStatus
-> = ListChunksStatus$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListChunksStatus$ {
-  /** @deprecated use `ListChunksStatus$inboundSchema` instead. */
-  export const inboundSchema = ListChunksStatus$inboundSchema;
-  /** @deprecated use `ListChunksStatus$outboundSchema` instead. */
-  export const outboundSchema = ListChunksStatus$outboundSchema;
-}
-
 /**
  * Filter datasources by status.
  */
@@ -107,7 +45,27 @@ export type ListChunksRequest = {
   status?: Array<string> | string | undefined;
 };
 
+export const ListChunksObject = {
+  List: "list",
+} as const;
+export type ListChunksObject = ClosedEnum<typeof ListChunksObject>;
+
 export type ListChunksMetadata = string | number | boolean;
+
+/**
+ * The status of the chunk
+ */
+export const ListChunksStatus = {
+  Pending: "pending",
+  Processing: "processing",
+  Completed: "completed",
+  Failed: "failed",
+  Queued: "queued",
+} as const;
+/**
+ * The status of the chunk
+ */
+export type ListChunksStatus = ClosedEnum<typeof ListChunksStatus>;
 
 export type ListChunksData = {
   /**
@@ -292,6 +250,27 @@ export function listChunksRequestFromJSON(
 }
 
 /** @internal */
+export const ListChunksObject$inboundSchema: z.ZodNativeEnum<
+  typeof ListChunksObject
+> = z.nativeEnum(ListChunksObject);
+
+/** @internal */
+export const ListChunksObject$outboundSchema: z.ZodNativeEnum<
+  typeof ListChunksObject
+> = ListChunksObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListChunksObject$ {
+  /** @deprecated use `ListChunksObject$inboundSchema` instead. */
+  export const inboundSchema = ListChunksObject$inboundSchema;
+  /** @deprecated use `ListChunksObject$outboundSchema` instead. */
+  export const outboundSchema = ListChunksObject$outboundSchema;
+}
+
+/** @internal */
 export const ListChunksMetadata$inboundSchema: z.ZodType<
   ListChunksMetadata,
   z.ZodTypeDef,
@@ -337,6 +316,27 @@ export function listChunksMetadataFromJSON(
     (x) => ListChunksMetadata$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListChunksMetadata' from JSON`,
   );
+}
+
+/** @internal */
+export const ListChunksStatus$inboundSchema: z.ZodNativeEnum<
+  typeof ListChunksStatus
+> = z.nativeEnum(ListChunksStatus);
+
+/** @internal */
+export const ListChunksStatus$outboundSchema: z.ZodNativeEnum<
+  typeof ListChunksStatus
+> = ListChunksStatus$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListChunksStatus$ {
+  /** @deprecated use `ListChunksStatus$inboundSchema` instead. */
+  export const inboundSchema = ListChunksStatus$inboundSchema;
+  /** @deprecated use `ListChunksStatus$outboundSchema` instead. */
+  export const outboundSchema = ListChunksStatus$outboundSchema;
 }
 
 /** @internal */

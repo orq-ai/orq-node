@@ -9,6 +9,11 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type DeploymentStreamGlobals = {
+  environment?: string | undefined;
+  contactId?: string | undefined;
+};
+
 /**
  * The role of the messages author, in this case tool.
  */
@@ -23,1255 +28,6 @@ export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role =
   ClosedEnum<
     typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role
   >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType =
-  {
-    Text: "text",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType
-  >;
-
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole =
-  ClosedEnum<
-    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
-  >;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const DeploymentStreamPrefixMessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type DeploymentStreamPrefixMessagesType = ClosedEnum<
-  typeof DeploymentStreamPrefixMessagesType
->;
-
-/**
- * The role of the messages author, in this case `user`.
- */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type DeploymentStreamPrefixMessagesDeploymentsRequestRole = ClosedEnum<
-  typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentStream2DeploymentsRequestRequestBodyType = {
-  File: "file",
-} as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
-  typeof DeploymentStream2DeploymentsRequestRequestBodyType
->;
-
-export const DeploymentStream2DeploymentsRequestType = {
-  InputAudio: "input_audio",
-} as const;
-export type DeploymentStream2DeploymentsRequestType = ClosedEnum<
-  typeof DeploymentStream2DeploymentsRequestType
->;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const DeploymentStream2Format = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type DeploymentStream2Format = ClosedEnum<
-  typeof DeploymentStream2Format
->;
-
-export const DeploymentStream2DeploymentsType = {
-  ImageUrl: "image_url",
-} as const;
-export type DeploymentStream2DeploymentsType = ClosedEnum<
-  typeof DeploymentStream2DeploymentsType
->;
-
-/**
- * Specifies the detail level of the image.
- */
-export const DeploymentStream2Detail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type DeploymentStream2Detail = ClosedEnum<
-  typeof DeploymentStream2Detail
->;
-
-export const DeploymentStream2Type = {
-  Text: "text",
-} as const;
-export type DeploymentStream2Type = ClosedEnum<typeof DeploymentStream2Type>;
-
-/**
- * The role of the messages author, in this case `system`.
- */
-export const DeploymentStreamPrefixMessagesDeploymentsRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type DeploymentStreamPrefixMessagesDeploymentsRole = ClosedEnum<
-  typeof DeploymentStreamPrefixMessagesDeploymentsRole
->;
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const DeploymentStreamPrefixMessagesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type DeploymentStreamPrefixMessagesRole = ClosedEnum<
-  typeof DeploymentStreamPrefixMessagesRole
->;
-
-/**
- * The role of the messages author, in this case tool.
- */
-export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role = {
-  Tool: "tool",
-} as const;
-/**
- * The role of the messages author, in this case tool.
- */
-export type DeploymentStreamMessagesDeploymentsRequestRequestBody5Role =
-  ClosedEnum<typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role>;
-
-/**
- * The type of the content part.
- */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
-  {
-    Refusal: "refusal",
-  } as const;
-/**
- * The type of the content part.
- */
-export type DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
-  >;
-
-/**
- * The type of the content part.
- */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type = {
-  Text: "text",
-} as const;
-/**
- * The type of the content part.
- */
-export type DeploymentStream2DeploymentsRequestRequestBodyMessages4Type =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
-  >;
-
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole = {
-  Assistant: "assistant",
-} as const;
-/**
- * The role of the messages author, in this case `assistant`.
- */
-export type DeploymentStreamMessagesDeploymentsRequestRequestBodyRole =
-  ClosedEnum<typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole>;
-
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export const DeploymentStreamMessagesType = {
-  Function: "function",
-} as const;
-/**
- * The type of the tool. Currently, only `function` is supported.
- */
-export type DeploymentStreamMessagesType = ClosedEnum<
-  typeof DeploymentStreamMessagesType
->;
-
-/**
- * The role of the messages author, in this case `user`.
- */
-export const DeploymentStreamMessagesDeploymentsRequestRole = {
-  User: "user",
-} as const;
-/**
- * The role of the messages author, in this case `user`.
- */
-export type DeploymentStreamMessagesDeploymentsRequestRole = ClosedEnum<
-  typeof DeploymentStreamMessagesDeploymentsRequestRole
->;
-
-/**
- * The type of the content part. Always `file`.
- */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type =
-  {
-    File: "file",
-  } as const;
-/**
- * The type of the content part. Always `file`.
- */
-export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
-  >;
-
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType =
-  {
-    InputAudio: "input_audio",
-  } as const;
-export type DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType
-  >;
-
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export const DeploymentStream2DeploymentsFormat = {
-  Mp3: "mp3",
-  Wav: "wav",
-} as const;
-/**
- * The format of the encoded audio data. Currently supports `wav` and `mp3`.
- */
-export type DeploymentStream2DeploymentsFormat = ClosedEnum<
-  typeof DeploymentStream2DeploymentsFormat
->;
-
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type = {
-  ImageUrl: "image_url",
-} as const;
-export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Type =
-  ClosedEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
-  >;
-
-/**
- * Specifies the detail level of the image.
- */
-export const DeploymentStream2DeploymentsDetail = {
-  Low: "low",
-  High: "high",
-  Auto: "auto",
-} as const;
-/**
- * Specifies the detail level of the image.
- */
-export type DeploymentStream2DeploymentsDetail = ClosedEnum<
-  typeof DeploymentStream2DeploymentsDetail
->;
-
-export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType = {
-  Text: "text",
-} as const;
-export type DeploymentStream2DeploymentsRequestRequestBodyMessagesType =
-  ClosedEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType>;
-
-/**
- * The role of the messages author, in this case `system`.
- */
-export const DeploymentStreamMessagesDeploymentsRole = {
-  System: "system",
-} as const;
-/**
- * The role of the messages author, in this case `system`.
- */
-export type DeploymentStreamMessagesDeploymentsRole = ClosedEnum<
-  typeof DeploymentStreamMessagesDeploymentsRole
->;
-
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export const DeploymentStreamMessagesRole = {
-  Developer: "developer",
-} as const;
-/**
- * The role of the messages author, in this case  `developer`.
- */
-export type DeploymentStreamMessagesRole = ClosedEnum<
-  typeof DeploymentStreamMessagesRole
->;
-
-/**
- * Indicates the type of model used to generate the response
- */
-export const DeploymentStreamObject = {
-  Chat: "chat",
-  Completion: "completion",
-  Image: "image",
-  Vision: "vision",
-} as const;
-/**
- * Indicates the type of model used to generate the response
- */
-export type DeploymentStreamObject = ClosedEnum<typeof DeploymentStreamObject>;
-
-/**
- * The provider used to generate the response
- */
-export const DeploymentStreamProvider = {
-  Cohere: "cohere",
-  Openai: "openai",
-  Anthropic: "anthropic",
-  Huggingface: "huggingface",
-  Replicate: "replicate",
-  Google: "google",
-  GoogleAi: "google-ai",
-  Azure: "azure",
-  Aws: "aws",
-  Anyscale: "anyscale",
-  Perplexity: "perplexity",
-  Groq: "groq",
-  Fal: "fal",
-  Leonardoai: "leonardoai",
-  Nvidia: "nvidia",
-  Jina: "jina",
-  Togetherai: "togetherai",
-  Elevenlabs: "elevenlabs",
-} as const;
-/**
- * The provider used to generate the response
- */
-export type DeploymentStreamProvider = ClosedEnum<
-  typeof DeploymentStreamProvider
->;
-
-/**
- * The role of the prompt message
- */
-export const DeploymentStreamMessageDeploymentsResponseRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type DeploymentStreamMessageDeploymentsResponseRole = ClosedEnum<
-  typeof DeploymentStreamMessageDeploymentsResponseRole
->;
-
-/**
- * The role of the prompt message
- */
-export const DeploymentStreamMessageDeploymentsRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type DeploymentStreamMessageDeploymentsRole = ClosedEnum<
-  typeof DeploymentStreamMessageDeploymentsRole
->;
-
-/**
- * The role of the prompt message
- */
-export const DeploymentStreamMessageRole = {
-  System: "system",
-  Assistant: "assistant",
-  User: "user",
-  Exception: "exception",
-  Tool: "tool",
-  Prompt: "prompt",
-  Correction: "correction",
-  ExpectedOutput: "expected_output",
-} as const;
-/**
- * The role of the prompt message
- */
-export type DeploymentStreamMessageRole = ClosedEnum<
-  typeof DeploymentStreamMessageRole
->;
-
-export const DeploymentStreamMessageType = {
-  Function: "function",
-} as const;
-export type DeploymentStreamMessageType = ClosedEnum<
-  typeof DeploymentStreamMessageType
->;
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role
-  > = z.nativeEnum(
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role,
-  );
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role
-  > =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
-  > = z.nativeEnum(
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type,
-  );
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
-  > =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType
-  > = z.nativeEnum(
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType,
-  );
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType
-  > =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
-  > = z.nativeEnum(
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole,
-  );
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
-  > =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamPrefixMessagesType
-> = z.nativeEnum(DeploymentStreamPrefixMessagesType);
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamPrefixMessagesType
-> = DeploymentStreamPrefixMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesType$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamPrefixMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole> =
-    z.nativeEnum(DeploymentStreamPrefixMessagesDeploymentsRequestRole);
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole> =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> = z
-    .nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyType);
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> =
-    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestType> = z
-    .nativeEnum(DeploymentStream2DeploymentsRequestType);
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestType> =
-    DeploymentStream2DeploymentsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2Format$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2Format
-> = z.nativeEnum(DeploymentStream2Format);
-
-/** @internal */
-export const DeploymentStream2Format$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2Format
-> = DeploymentStream2Format$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Format$ {
-  /** @deprecated use `DeploymentStream2Format$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Format$inboundSchema;
-  /** @deprecated use `DeploymentStream2Format$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Format$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsType
-> = z.nativeEnum(DeploymentStream2DeploymentsType);
-
-/** @internal */
-export const DeploymentStream2DeploymentsType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsType
-> = DeploymentStream2DeploymentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2DeploymentsType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2Detail$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2Detail
-> = z.nativeEnum(DeploymentStream2Detail);
-
-/** @internal */
-export const DeploymentStream2Detail$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2Detail
-> = DeploymentStream2Detail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Detail$ {
-  /** @deprecated use `DeploymentStream2Detail$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Detail$inboundSchema;
-  /** @deprecated use `DeploymentStream2Detail$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Detail$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2Type$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2Type
-> = z.nativeEnum(DeploymentStream2Type);
-
-/** @internal */
-export const DeploymentStream2Type$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2Type
-> = DeploymentStream2Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2Type$ {
-  /** @deprecated use `DeploymentStream2Type$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2Type$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStream2Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRole> = z
-    .nativeEnum(DeploymentStreamPrefixMessagesDeploymentsRole);
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRole> =
-    DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesDeploymentsRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamPrefixMessagesRole
-> = z.nativeEnum(DeploymentStreamPrefixMessagesRole);
-
-/** @internal */
-export const DeploymentStreamPrefixMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamPrefixMessagesRole
-> = DeploymentStreamPrefixMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamPrefixMessagesRole$ {
-  /** @deprecated use `DeploymentStreamPrefixMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamPrefixMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamPrefixMessagesRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamPrefixMessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role
-  > = z.nativeEnum(DeploymentStreamMessagesDeploymentsRequestRequestBody5Role);
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role
-  > = DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
-  > = z.nativeEnum(
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType,
-  );
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
-  > =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
-  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages4Type);
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
-  > = DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole
-  > = z.nativeEnum(DeploymentStreamMessagesDeploymentsRequestRequestBodyRole);
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole
-  > = DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessagesType
-> = z.nativeEnum(DeploymentStreamMessagesType);
-
-/** @internal */
-export const DeploymentStreamMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessagesType
-> = DeploymentStreamMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesType$ {
-  /** @deprecated use `DeploymentStreamMessagesType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRequestRole> = z
-    .nativeEnum(DeploymentStreamMessagesDeploymentsRequestRole);
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRequestRole> =
-    DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRequestRole$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
-  > = z.nativeEnum(
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type,
-  );
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
-  > =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType
-  > = z.nativeEnum(
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType,
-  );
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType
-  > =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsFormat$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsFormat
-> = z.nativeEnum(DeploymentStream2DeploymentsFormat);
-
-/** @internal */
-export const DeploymentStream2DeploymentsFormat$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsFormat
-> = DeploymentStream2DeploymentsFormat$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsFormat$ {
-  /** @deprecated use `DeploymentStream2DeploymentsFormat$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsFormat$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsFormat$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsFormat$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
-  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages3Type);
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
-  > = DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsDetail$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsDetail
-> = z.nativeEnum(DeploymentStream2DeploymentsDetail);
-
-/** @internal */
-export const DeploymentStream2DeploymentsDetail$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStream2DeploymentsDetail
-> = DeploymentStream2DeploymentsDetail$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsDetail$ {
-  /** @deprecated use `DeploymentStream2DeploymentsDetail$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStream2DeploymentsDetail$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsDetail$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsDetail$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType
-  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessagesType);
-
-/** @internal */
-export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType
-  > = DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStream2DeploymentsRequestRequestBodyMessagesType$ {
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
-  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRole> = z
-    .nativeEnum(DeploymentStreamMessagesDeploymentsRole);
-
-/** @internal */
-export const DeploymentStreamMessagesDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRole> =
-    DeploymentStreamMessagesDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesDeploymentsRole$ {
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessagesDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessagesDeploymentsRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessagesRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessagesRole
-> = z.nativeEnum(DeploymentStreamMessagesRole);
-
-/** @internal */
-export const DeploymentStreamMessagesRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessagesRole
-> = DeploymentStreamMessagesRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessagesRole$ {
-  /** @deprecated use `DeploymentStreamMessagesRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessagesRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessagesRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessagesRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamObject$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamObject
-> = z.nativeEnum(DeploymentStreamObject);
-
-/** @internal */
-export const DeploymentStreamObject$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamObject
-> = DeploymentStreamObject$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamObject$ {
-  /** @deprecated use `DeploymentStreamObject$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamObject$inboundSchema;
-  /** @deprecated use `DeploymentStreamObject$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamObject$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamProvider$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamProvider
-> = z.nativeEnum(DeploymentStreamProvider);
-
-/** @internal */
-export const DeploymentStreamProvider$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamProvider
-> = DeploymentStreamProvider$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamProvider$ {
-  /** @deprecated use `DeploymentStreamProvider$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamProvider$inboundSchema;
-  /** @deprecated use `DeploymentStreamProvider$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamProvider$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessageDeploymentsResponseRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseRole> = z
-    .nativeEnum(DeploymentStreamMessageDeploymentsResponseRole);
-
-/** @internal */
-export const DeploymentStreamMessageDeploymentsResponseRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseRole> =
-    DeploymentStreamMessageDeploymentsResponseRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsResponseRole$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsResponseRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsResponseRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessageDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsRole> = z.nativeEnum(
-    DeploymentStreamMessageDeploymentsRole,
-  );
-
-/** @internal */
-export const DeploymentStreamMessageDeploymentsRole$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsRole> =
-    DeploymentStreamMessageDeploymentsRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageDeploymentsRole$ {
-  /** @deprecated use `DeploymentStreamMessageDeploymentsRole$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentStreamMessageDeploymentsRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageDeploymentsRole$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentStreamMessageDeploymentsRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessageRole$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessageRole
-> = z.nativeEnum(DeploymentStreamMessageRole);
-
-/** @internal */
-export const DeploymentStreamMessageRole$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessageRole
-> = DeploymentStreamMessageRole$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageRole$ {
-  /** @deprecated use `DeploymentStreamMessageRole$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessageRole$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageRole$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessageRole$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentStreamMessageType$inboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessageType
-> = z.nativeEnum(DeploymentStreamMessageType);
-
-/** @internal */
-export const DeploymentStreamMessageType$outboundSchema: z.ZodNativeEnum<
-  typeof DeploymentStreamMessageType
-> = DeploymentStreamMessageType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentStreamMessageType$ {
-  /** @deprecated use `DeploymentStreamMessageType$inboundSchema` instead. */
-  export const inboundSchema = DeploymentStreamMessageType$inboundSchema;
-  /** @deprecated use `DeploymentStreamMessageType$outboundSchema` instead. */
-  export const outboundSchema = DeploymentStreamMessageType$outboundSchema;
-}
-
-export type DeploymentStreamGlobals = {
-  environment?: string | undefined;
-  contactId?: string | undefined;
-};
 
 /**
  * The contents of the tool message.
@@ -1295,6 +51,21 @@ export type PrefixMessagesToolMessage = {
   toolCallId: string;
 };
 
+/**
+ * The type of the content part.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
+  >;
+
 export type DeploymentStream2RefusalContentPart = {
   /**
    * The type of the content part.
@@ -1305,6 +76,21 @@ export type DeploymentStream2RefusalContentPart = {
    */
   refusal: string;
 };
+
+/**
+ * The type of the content part.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType =
+  {
+    Text: "text",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType
+  >;
 
 export type DeploymentStream2TextContentPart = {
   /**
@@ -1331,6 +117,20 @@ export type DeploymentStreamPrefixMessagesDeploymentsContent =
   >;
 
 /**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole =
+  ClosedEnum<
+    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
+  >;
+
+/**
  * Data about a previous audio response from the model.
  */
 export type PrefixMessagesAudio = {
@@ -1339,6 +139,19 @@ export type PrefixMessagesAudio = {
    */
   id: string;
 };
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const DeploymentStreamPrefixMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type DeploymentStreamPrefixMessagesType = ClosedEnum<
+  typeof DeploymentStreamPrefixMessagesType
+>;
 
 export type PrefixMessagesFunction = {
   /**
@@ -1408,6 +221,32 @@ export type PrefixMessagesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type DeploymentStreamPrefixMessagesDeploymentsRequestRole = ClosedEnum<
+  typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyType = {
+  File: "file",
+} as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
+  typeof DeploymentStream2DeploymentsRequestRequestBodyType
+>;
+
 export type DeploymentStream2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -1427,6 +266,27 @@ export type DeploymentStream24 = {
   file: DeploymentStream2File;
 };
 
+export const DeploymentStream2DeploymentsRequestType = {
+  InputAudio: "input_audio",
+} as const;
+export type DeploymentStream2DeploymentsRequestType = ClosedEnum<
+  typeof DeploymentStream2DeploymentsRequestType
+>;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const DeploymentStream2Format = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type DeploymentStream2Format = ClosedEnum<
+  typeof DeploymentStream2Format
+>;
+
 export type DeploymentStream2InputAudio = {
   /**
    * Base64 encoded audio data.
@@ -1443,6 +303,28 @@ export type DeploymentStream23 = {
   inputAudio: DeploymentStream2InputAudio;
 };
 
+export const DeploymentStream2DeploymentsType = {
+  ImageUrl: "image_url",
+} as const;
+export type DeploymentStream2DeploymentsType = ClosedEnum<
+  typeof DeploymentStream2DeploymentsType
+>;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const DeploymentStream2Detail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type DeploymentStream2Detail = ClosedEnum<
+  typeof DeploymentStream2Detail
+>;
+
 export type DeploymentStream2ImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -1458,6 +340,11 @@ export type DeploymentStream22 = {
   type: DeploymentStream2DeploymentsType;
   imageUrl: DeploymentStream2ImageUrl;
 };
+
+export const DeploymentStream2Type = {
+  Text: "text",
+} as const;
+export type DeploymentStream2Type = ClosedEnum<typeof DeploymentStream2Type>;
 
 export type DeploymentStream21 = {
   type: DeploymentStream2Type;
@@ -1504,6 +391,19 @@ export type PrefixMessagesUserMessage = {
     >;
 };
 
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const DeploymentStreamPrefixMessagesDeploymentsRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type DeploymentStreamPrefixMessagesDeploymentsRole = ClosedEnum<
+  typeof DeploymentStreamPrefixMessagesDeploymentsRole
+>;
+
 export type PrefixMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -1518,6 +418,19 @@ export type PrefixMessagesSystemMessage = {
    */
   name?: string | undefined;
 };
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const DeploymentStreamPrefixMessagesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type DeploymentStreamPrefixMessagesRole = ClosedEnum<
+  typeof DeploymentStreamPrefixMessagesRole
+>;
 
 export type PrefixMessagesDeveloperMessage = {
   /**
@@ -1542,6 +455,18 @@ export type DeploymentStreamPrefixMessages =
   | PrefixMessagesAssistantMessage;
 
 /**
+ * The role of the messages author, in this case tool.
+ */
+export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role = {
+  Tool: "tool",
+} as const;
+/**
+ * The role of the messages author, in this case tool.
+ */
+export type DeploymentStreamMessagesDeploymentsRequestRequestBody5Role =
+  ClosedEnum<typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role>;
+
+/**
  * The contents of the tool message.
  */
 export type DeploymentStreamMessagesDeploymentsRequestContent =
@@ -1563,6 +488,21 @@ export type DeploymentStreamMessagesToolMessage = {
   toolCallId: string;
 };
 
+/**
+ * The type of the content part.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
+  {
+    Refusal: "refusal",
+  } as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
+  >;
+
 export type DeploymentStream2DeploymentsRefusalContentPart = {
   /**
    * The type of the content part.
@@ -1573,6 +513,20 @@ export type DeploymentStream2DeploymentsRefusalContentPart = {
    */
   refusal: string;
 };
+
+/**
+ * The type of the content part.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type = {
+  Text: "text",
+} as const;
+/**
+ * The type of the content part.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages4Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
+  >;
 
 export type DeploymentStream2DeploymentsTextContentPart = {
   /**
@@ -1600,6 +554,18 @@ export type DeploymentStreamMessagesDeploymentsContent =
   >;
 
 /**
+ * The role of the messages author, in this case `assistant`.
+ */
+export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole = {
+  Assistant: "assistant",
+} as const;
+/**
+ * The role of the messages author, in this case `assistant`.
+ */
+export type DeploymentStreamMessagesDeploymentsRequestRequestBodyRole =
+  ClosedEnum<typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole>;
+
+/**
  * Data about a previous audio response from the model.
  */
 export type DeploymentStreamMessagesAudio = {
@@ -1608,6 +574,19 @@ export type DeploymentStreamMessagesAudio = {
    */
   id: string;
 };
+
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export const DeploymentStreamMessagesType = {
+  Function: "function",
+} as const;
+/**
+ * The type of the tool. Currently, only `function` is supported.
+ */
+export type DeploymentStreamMessagesType = ClosedEnum<
+  typeof DeploymentStreamMessagesType
+>;
 
 export type DeploymentStreamMessagesFunction = {
   /**
@@ -1678,6 +657,34 @@ export type DeploymentStreamMessagesAssistantMessage = {
   redactedReasoning?: string | undefined;
 };
 
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export const DeploymentStreamMessagesDeploymentsRequestRole = {
+  User: "user",
+} as const;
+/**
+ * The role of the messages author, in this case `user`.
+ */
+export type DeploymentStreamMessagesDeploymentsRequestRole = ClosedEnum<
+  typeof DeploymentStreamMessagesDeploymentsRequestRole
+>;
+
+/**
+ * The type of the content part. Always `file`.
+ */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type =
+  {
+    File: "file",
+  } as const;
+/**
+ * The type of the content part. Always `file`.
+ */
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
+  >;
+
 export type DeploymentStream2DeploymentsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -1697,6 +704,29 @@ export type DeploymentStream2Deployments4 = {
   file: DeploymentStream2DeploymentsFile;
 };
 
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType =
+  {
+    InputAudio: "input_audio",
+  } as const;
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType
+  >;
+
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export const DeploymentStream2DeploymentsFormat = {
+  Mp3: "mp3",
+  Wav: "wav",
+} as const;
+/**
+ * The format of the encoded audio data. Currently supports `wav` and `mp3`.
+ */
+export type DeploymentStream2DeploymentsFormat = ClosedEnum<
+  typeof DeploymentStream2DeploymentsFormat
+>;
+
 export type DeploymentStream2DeploymentsInputAudio = {
   /**
    * Base64 encoded audio data.
@@ -1713,6 +743,29 @@ export type DeploymentStream2Deployments3 = {
   inputAudio: DeploymentStream2DeploymentsInputAudio;
 };
 
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type = {
+  ImageUrl: "image_url",
+} as const;
+export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Type =
+  ClosedEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
+  >;
+
+/**
+ * Specifies the detail level of the image.
+ */
+export const DeploymentStream2DeploymentsDetail = {
+  Low: "low",
+  High: "high",
+  Auto: "auto",
+} as const;
+/**
+ * Specifies the detail level of the image.
+ */
+export type DeploymentStream2DeploymentsDetail = ClosedEnum<
+  typeof DeploymentStream2DeploymentsDetail
+>;
+
 export type DeploymentStream2DeploymentsImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded image data.
@@ -1728,6 +781,12 @@ export type DeploymentStream2Deployments2 = {
   type: DeploymentStream2DeploymentsRequestRequestBodyMessages3Type;
   imageUrl: DeploymentStream2DeploymentsImageUrl;
 };
+
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType = {
+  Text: "text",
+} as const;
+export type DeploymentStream2DeploymentsRequestRequestBodyMessagesType =
+  ClosedEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType>;
 
 export type DeploymentStream2Deployments1 = {
   type: DeploymentStream2DeploymentsRequestRequestBodyMessagesType;
@@ -1774,6 +833,19 @@ export type DeploymentStreamMessagesUserMessage = {
     >;
 };
 
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export const DeploymentStreamMessagesDeploymentsRole = {
+  System: "system",
+} as const;
+/**
+ * The role of the messages author, in this case `system`.
+ */
+export type DeploymentStreamMessagesDeploymentsRole = ClosedEnum<
+  typeof DeploymentStreamMessagesDeploymentsRole
+>;
+
 export type DeploymentStreamMessagesSystemMessage = {
   /**
    * The role of the messages author, in this case `system`.
@@ -1788,6 +860,19 @@ export type DeploymentStreamMessagesSystemMessage = {
    */
   name?: string | undefined;
 };
+
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export const DeploymentStreamMessagesRole = {
+  Developer: "developer",
+} as const;
+/**
+ * The role of the messages author, in this case  `developer`.
+ */
+export type DeploymentStreamMessagesRole = ClosedEnum<
+  typeof DeploymentStreamMessagesRole
+>;
 
 export type DeploymentStreamMessagesDeveloperMessage = {
   /**
@@ -2234,6 +1319,70 @@ export type DeploymentStreamRequestBody = {
     | undefined;
 };
 
+/**
+ * Indicates the type of model used to generate the response
+ */
+export const DeploymentStreamObject = {
+  Chat: "chat",
+  Completion: "completion",
+  Image: "image",
+  Vision: "vision",
+} as const;
+/**
+ * Indicates the type of model used to generate the response
+ */
+export type DeploymentStreamObject = ClosedEnum<typeof DeploymentStreamObject>;
+
+/**
+ * The provider used to generate the response
+ */
+export const DeploymentStreamProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+} as const;
+/**
+ * The provider used to generate the response
+ */
+export type DeploymentStreamProvider = ClosedEnum<
+  typeof DeploymentStreamProvider
+>;
+
+/**
+ * The role of the prompt message
+ */
+export const DeploymentStreamMessageDeploymentsResponseRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentStreamMessageDeploymentsResponseRole = ClosedEnum<
+  typeof DeploymentStreamMessageDeploymentsResponseRole
+>;
+
 export type DeploymentStreamMessage3 = {
   /**
    * The role of the prompt message
@@ -2242,6 +1391,26 @@ export type DeploymentStreamMessage3 = {
   url: string;
 };
 
+/**
+ * The role of the prompt message
+ */
+export const DeploymentStreamMessageDeploymentsRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentStreamMessageDeploymentsRole = ClosedEnum<
+  typeof DeploymentStreamMessageDeploymentsRole
+>;
+
 export type DeploymentStreamMessage2 = {
   /**
    * The role of the prompt message
@@ -2249,6 +1418,33 @@ export type DeploymentStreamMessage2 = {
   role: DeploymentStreamMessageDeploymentsRole;
   content: string | null;
 };
+
+/**
+ * The role of the prompt message
+ */
+export const DeploymentStreamMessageRole = {
+  System: "system",
+  Assistant: "assistant",
+  User: "user",
+  Exception: "exception",
+  Tool: "tool",
+  Prompt: "prompt",
+  Correction: "correction",
+  ExpectedOutput: "expected_output",
+} as const;
+/**
+ * The role of the prompt message
+ */
+export type DeploymentStreamMessageRole = ClosedEnum<
+  typeof DeploymentStreamMessageRole
+>;
+
+export const DeploymentStreamMessageType = {
+  Function: "function",
+} as const;
+export type DeploymentStreamMessageType = ClosedEnum<
+  typeof DeploymentStreamMessageType
+>;
 
 export type DeploymentStreamMessageFunction = {
   name: string;
@@ -2442,6 +1638,34 @@ export function deploymentStreamGlobalsFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role
+  > = z.nativeEnum(
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role,
+  );
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role
+  > =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$ {
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBody5Role$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestContent$inboundSchema:
   z.ZodType<
     DeploymentStreamPrefixMessagesDeploymentsRequestContent,
@@ -2574,6 +1798,34 @@ export function prefixMessagesToolMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type,
+  );
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessages4Type$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStream2RefusalContentPart$inboundSchema: z.ZodType<
   DeploymentStream2RefusalContentPart,
   z.ZodTypeDef,
@@ -2635,6 +1887,34 @@ export function deploymentStream2RefusalContentPartFromJSON(
       DeploymentStream2RefusalContentPart$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStream2RefusalContentPart' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType,
+  );
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyPrefixMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -2839,6 +2119,34 @@ export function deploymentStreamPrefixMessagesDeploymentsContentFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
+  > = z.nativeEnum(
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole,
+  );
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole
+  > =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$ {
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
+}
+
+/** @internal */
 export const PrefixMessagesAudio$inboundSchema: z.ZodType<
   PrefixMessagesAudio,
   z.ZodTypeDef,
@@ -2890,6 +2198,28 @@ export function prefixMessagesAudioFromJSON(
     (x) => PrefixMessagesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PrefixMessagesAudio' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamPrefixMessagesType
+> = z.nativeEnum(DeploymentStreamPrefixMessagesType);
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamPrefixMessagesType
+> = DeploymentStreamPrefixMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamPrefixMessagesType$ {
+  /** @deprecated use `DeploymentStreamPrefixMessagesType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamPrefixMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentStreamPrefixMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamPrefixMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -3134,6 +2464,52 @@ export function prefixMessagesAssistantMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole> =
+    z.nativeEnum(DeploymentStreamPrefixMessagesDeploymentsRequestRole);
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRequestRole> =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamPrefixMessagesDeploymentsRequestRole$ {
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRequestRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> = z
+    .nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyType);
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestRequestBodyType> =
+    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStream2File$inboundSchema: z.ZodType<
   DeploymentStream2File,
   z.ZodTypeDef,
@@ -3253,6 +2629,50 @@ export function deploymentStream24FromJSON(
     (x) => DeploymentStream24$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStream24' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestType> = z
+    .nativeEnum(DeploymentStream2DeploymentsRequestType);
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStream2DeploymentsRequestType> =
+    DeploymentStream2DeploymentsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStream2Format$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2Format
+> = z.nativeEnum(DeploymentStream2Format);
+
+/** @internal */
+export const DeploymentStream2Format$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2Format
+> = DeploymentStream2Format$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2Format$ {
+  /** @deprecated use `DeploymentStream2Format$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream2Format$inboundSchema;
+  /** @deprecated use `DeploymentStream2Format$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream2Format$outboundSchema;
 }
 
 /** @internal */
@@ -3380,6 +2800,48 @@ export function deploymentStream23FromJSON(
 }
 
 /** @internal */
+export const DeploymentStream2DeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsType
+> = z.nativeEnum(DeploymentStream2DeploymentsType);
+
+/** @internal */
+export const DeploymentStream2DeploymentsType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsType
+> = DeploymentStream2DeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream2DeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsType$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream2DeploymentsType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStream2Detail$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2Detail
+> = z.nativeEnum(DeploymentStream2Detail);
+
+/** @internal */
+export const DeploymentStream2Detail$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2Detail
+> = DeploymentStream2Detail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2Detail$ {
+  /** @deprecated use `DeploymentStream2Detail$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream2Detail$inboundSchema;
+  /** @deprecated use `DeploymentStream2Detail$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream2Detail$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStream2ImageUrl$inboundSchema: z.ZodType<
   DeploymentStream2ImageUrl,
   z.ZodTypeDef,
@@ -3499,6 +2961,27 @@ export function deploymentStream22FromJSON(
     (x) => DeploymentStream22$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStream22' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStream2Type$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2Type
+> = z.nativeEnum(DeploymentStream2Type);
+
+/** @internal */
+export const DeploymentStream2Type$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2Type
+> = DeploymentStream2Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2Type$ {
+  /** @deprecated use `DeploymentStream2Type$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream2Type$inboundSchema;
+  /** @deprecated use `DeploymentStream2Type$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStream2Type$outboundSchema;
 }
 
 /** @internal */
@@ -3780,6 +3263,29 @@ export function prefixMessagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRole> = z
+    .nativeEnum(DeploymentStreamPrefixMessagesDeploymentsRole);
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamPrefixMessagesDeploymentsRole> =
+    DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamPrefixMessagesDeploymentsRole$ {
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamPrefixMessagesDeploymentsRole$outboundSchema;
+}
+
+/** @internal */
 export const PrefixMessagesSystemMessage$inboundSchema: z.ZodType<
   PrefixMessagesSystemMessage,
   z.ZodTypeDef,
@@ -3839,6 +3345,28 @@ export function prefixMessagesSystemMessageFromJSON(
     (x) => PrefixMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'PrefixMessagesSystemMessage' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamPrefixMessagesRole
+> = z.nativeEnum(DeploymentStreamPrefixMessagesRole);
+
+/** @internal */
+export const DeploymentStreamPrefixMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamPrefixMessagesRole
+> = DeploymentStreamPrefixMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamPrefixMessagesRole$ {
+  /** @deprecated use `DeploymentStreamPrefixMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamPrefixMessagesRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamPrefixMessagesRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamPrefixMessagesRole$outboundSchema;
 }
 
 /** @internal */
@@ -3968,6 +3496,31 @@ export function deploymentStreamPrefixMessagesFromJSON(
     (x) => DeploymentStreamPrefixMessages$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStreamPrefixMessages' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role
+  > = z.nativeEnum(DeploymentStreamMessagesDeploymentsRequestRequestBody5Role);
+
+/** @internal */
+export const DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamMessagesDeploymentsRequestRequestBody5Role
+  > = DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$ {
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamMessagesDeploymentsRequestRequestBody5Role$outboundSchema;
 }
 
 /** @internal */
@@ -4110,6 +3663,34 @@ export function deploymentStreamMessagesToolMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType,
+  );
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4ContentType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStream2DeploymentsRefusalContentPart$inboundSchema:
   z.ZodType<
     DeploymentStream2DeploymentsRefusalContentPart,
@@ -4180,6 +3761,31 @@ export function deploymentStream2DeploymentsRefusalContentPartFromJSON(
       ),
     `Failed to parse 'DeploymentStream2DeploymentsRefusalContentPart' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages4Type);
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages4Type
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages4Type$outboundSchema;
 }
 
 /** @internal */
@@ -4404,6 +4010,31 @@ export function deploymentStreamMessagesDeploymentsContentFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole
+  > = z.nativeEnum(DeploymentStreamMessagesDeploymentsRequestRequestBodyRole);
+
+/** @internal */
+export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole
+  > = DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$ {
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamMessagesDeploymentsRequestRequestBodyRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStreamMessagesAudio$inboundSchema: z.ZodType<
   DeploymentStreamMessagesAudio,
   z.ZodTypeDef,
@@ -4457,6 +4088,27 @@ export function deploymentStreamMessagesAudioFromJSON(
     (x) => DeploymentStreamMessagesAudio$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStreamMessagesAudio' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStreamMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessagesType
+> = z.nativeEnum(DeploymentStreamMessagesType);
+
+/** @internal */
+export const DeploymentStreamMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessagesType
+> = DeploymentStreamMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessagesType$ {
+  /** @deprecated use `DeploymentStreamMessagesType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessagesType$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -4725,6 +4377,57 @@ export function deploymentStreamMessagesAssistantMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRequestRole> = z
+    .nativeEnum(DeploymentStreamMessagesDeploymentsRequestRole);
+
+/** @internal */
+export const DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRequestRole> =
+    DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessagesDeploymentsRequestRole$ {
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamMessagesDeploymentsRequestRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamMessagesDeploymentsRequestRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type,
+  );
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStream2DeploymentsFile$inboundSchema: z.ZodType<
   DeploymentStream2DeploymentsFile,
   z.ZodTypeDef,
@@ -4850,6 +4553,56 @@ export function deploymentStream2Deployments4FromJSON(
     (x) => DeploymentStream2Deployments4$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStream2Deployments4' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType
+  > = z.nativeEnum(
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType,
+  );
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType
+  > =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3ContentType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsFormat$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsFormat
+> = z.nativeEnum(DeploymentStream2DeploymentsFormat);
+
+/** @internal */
+export const DeploymentStream2DeploymentsFormat$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsFormat
+> = DeploymentStream2DeploymentsFormat$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsFormat$ {
+  /** @deprecated use `DeploymentStream2DeploymentsFormat$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream2DeploymentsFormat$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsFormat$outboundSchema;
 }
 
 /** @internal */
@@ -4989,6 +4742,53 @@ export function deploymentStream2Deployments3FromJSON(
 }
 
 /** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessages3Type);
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Type
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessages3Type$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsDetail$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsDetail
+> = z.nativeEnum(DeploymentStream2DeploymentsDetail);
+
+/** @internal */
+export const DeploymentStream2DeploymentsDetail$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStream2DeploymentsDetail
+> = DeploymentStream2DeploymentsDetail$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsDetail$ {
+  /** @deprecated use `DeploymentStream2DeploymentsDetail$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStream2DeploymentsDetail$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsDetail$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsDetail$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStream2DeploymentsImageUrl$inboundSchema: z.ZodType<
   DeploymentStream2DeploymentsImageUrl,
   z.ZodTypeDef,
@@ -5117,6 +4917,31 @@ export function deploymentStream2Deployments2FromJSON(
     (x) => DeploymentStream2Deployments2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStream2Deployments2' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType
+  > = z.nativeEnum(DeploymentStream2DeploymentsRequestRequestBodyMessagesType);
+
+/** @internal */
+export const DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentStream2DeploymentsRequestRequestBodyMessagesType
+  > = DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStream2DeploymentsRequestRequestBodyMessagesType$ {
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStream2DeploymentsRequestRequestBodyMessagesType$outboundSchema;
 }
 
 /** @internal */
@@ -5414,6 +5239,29 @@ export function deploymentStreamMessagesUserMessageFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamMessagesDeploymentsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRole> = z
+    .nativeEnum(DeploymentStreamMessagesDeploymentsRole);
+
+/** @internal */
+export const DeploymentStreamMessagesDeploymentsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessagesDeploymentsRole> =
+    DeploymentStreamMessagesDeploymentsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessagesDeploymentsRole$ {
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamMessagesDeploymentsRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessagesDeploymentsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamMessagesDeploymentsRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStreamMessagesSystemMessage$inboundSchema: z.ZodType<
   DeploymentStreamMessagesSystemMessage,
   z.ZodTypeDef,
@@ -5476,6 +5324,27 @@ export function deploymentStreamMessagesSystemMessageFromJSON(
       DeploymentStreamMessagesSystemMessage$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStreamMessagesSystemMessage' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStreamMessagesRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessagesRole
+> = z.nativeEnum(DeploymentStreamMessagesRole);
+
+/** @internal */
+export const DeploymentStreamMessagesRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessagesRole
+> = DeploymentStreamMessagesRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessagesRole$ {
+  /** @deprecated use `DeploymentStreamMessagesRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamMessagesRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessagesRole$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamMessagesRole$outboundSchema;
 }
 
 /** @internal */
@@ -8683,6 +8552,71 @@ export function deploymentStreamRequestBodyFromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamObject$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamObject
+> = z.nativeEnum(DeploymentStreamObject);
+
+/** @internal */
+export const DeploymentStreamObject$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamObject
+> = DeploymentStreamObject$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamObject$ {
+  /** @deprecated use `DeploymentStreamObject$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamObject$inboundSchema;
+  /** @deprecated use `DeploymentStreamObject$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamObject$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStreamProvider$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamProvider
+> = z.nativeEnum(DeploymentStreamProvider);
+
+/** @internal */
+export const DeploymentStreamProvider$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamProvider
+> = DeploymentStreamProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamProvider$ {
+  /** @deprecated use `DeploymentStreamProvider$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamProvider$inboundSchema;
+  /** @deprecated use `DeploymentStreamProvider$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamProvider$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStreamMessageDeploymentsResponseRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseRole> = z
+    .nativeEnum(DeploymentStreamMessageDeploymentsResponseRole);
+
+/** @internal */
+export const DeploymentStreamMessageDeploymentsResponseRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsResponseRole> =
+    DeploymentStreamMessageDeploymentsResponseRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessageDeploymentsResponseRole$ {
+  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamMessageDeploymentsResponseRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessageDeploymentsResponseRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamMessageDeploymentsResponseRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStreamMessage3$inboundSchema: z.ZodType<
   DeploymentStreamMessage3,
   z.ZodTypeDef,
@@ -8740,6 +8674,30 @@ export function deploymentStreamMessage3FromJSON(
 }
 
 /** @internal */
+export const DeploymentStreamMessageDeploymentsRole$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsRole> = z.nativeEnum(
+    DeploymentStreamMessageDeploymentsRole,
+  );
+
+/** @internal */
+export const DeploymentStreamMessageDeploymentsRole$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentStreamMessageDeploymentsRole> =
+    DeploymentStreamMessageDeploymentsRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessageDeploymentsRole$ {
+  /** @deprecated use `DeploymentStreamMessageDeploymentsRole$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentStreamMessageDeploymentsRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessageDeploymentsRole$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentStreamMessageDeploymentsRole$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentStreamMessage2$inboundSchema: z.ZodType<
   DeploymentStreamMessage2,
   z.ZodTypeDef,
@@ -8794,6 +8752,48 @@ export function deploymentStreamMessage2FromJSON(
     (x) => DeploymentStreamMessage2$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'DeploymentStreamMessage2' from JSON`,
   );
+}
+
+/** @internal */
+export const DeploymentStreamMessageRole$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessageRole
+> = z.nativeEnum(DeploymentStreamMessageRole);
+
+/** @internal */
+export const DeploymentStreamMessageRole$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessageRole
+> = DeploymentStreamMessageRole$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessageRole$ {
+  /** @deprecated use `DeploymentStreamMessageRole$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamMessageRole$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessageRole$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamMessageRole$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentStreamMessageType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessageType
+> = z.nativeEnum(DeploymentStreamMessageType);
+
+/** @internal */
+export const DeploymentStreamMessageType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentStreamMessageType
+> = DeploymentStreamMessageType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentStreamMessageType$ {
+  /** @deprecated use `DeploymentStreamMessageType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentStreamMessageType$inboundSchema;
+  /** @deprecated use `DeploymentStreamMessageType$outboundSchema` instead. */
+  export const outboundSchema = DeploymentStreamMessageType$outboundSchema;
 }
 
 /** @internal */
