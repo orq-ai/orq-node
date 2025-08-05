@@ -13,32 +13,37 @@ export class EventStream<T extends ServerEvent<unknown>>
   extends ReadableStream<T>
 {
   constructor(
-    stream: ReadableStream<Uint8Array>,
+    responseBody: ReadableStream<Uint8Array>,
     parse: (x: ServerEvent<string>) => IteratorResult<T, undefined>,
   ) {
-    const reader = stream.getReader();
+    const upstream = responseBody.getReader();
     let buffer: Uint8Array = new Uint8Array();
     super({
-      async pull(controller) {
+      async pull(downstream) {
         try {
-          const r = await reader.read();
-          if (r.done) return controller.close();
-          buffer = concatBuffer(buffer, r.value);
-          for (const { chunk, remainder } of chunks(buffer)) {
-            buffer = remainder;
-            const item = parseChunk(chunk, parse);
-            if (item?.value) controller.enqueue(item.value);
+          while (true) {
+            const match = findBoundary(buffer);
+            if (!match) {
+              const chunk = await upstream.read();
+              if (chunk.done) return downstream.close();
+              buffer = concatBuffer(buffer, chunk.value);
+              continue;
+            }
+            const message = buffer.slice(0, match.index);
+            buffer = buffer.slice(match.index + match.length);
+            const item = parseMessage(message, parse);
+            if (item?.value) return downstream.enqueue(item.value);
             if (item?.done) {
-              await reader.cancel("done");
-              return controller.close();
+              await upstream.cancel("done");
+              return downstream.close();
             }
           }
         } catch (e) {
-          await reader.cancel(e);
-          controller.error(e);
+          downstream.error(e);
+          await upstream.cancel(e);
         }
       },
-      cancel: reason => reader.cancel(reason),
+      cancel: reason => upstream.cancel(reason),
     });
   }
 
@@ -103,22 +108,7 @@ function findBoundary(
   return null;
 }
 
-function* chunks(
-  remainder: Uint8Array,
-): Generator<{ chunk: Uint8Array; remainder: Uint8Array }> {
-  while (true) {
-    const match = findBoundary(remainder);
-    if (!match) {
-      yield { chunk: new Uint8Array(), remainder };
-      return;
-    }
-    const chunk = remainder.slice(0, match.index);
-    remainder = remainder.slice(match.index + match.length);
-    yield { chunk, remainder };
-  }
-}
-
-function parseChunk<T extends ServerEvent<unknown>>(
+function parseMessage<T extends ServerEvent<unknown>>(
   chunk: Uint8Array,
   parse: (x: ServerEvent<string>) => IteratorResult<T, undefined>,
 ) {

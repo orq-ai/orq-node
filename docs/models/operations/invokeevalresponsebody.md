@@ -10,7 +10,6 @@ Returns the result of the evaluator run
 ```typescript
 const value: operations.String = {
   type: "string",
-  value: "<value>",
 };
 ```
 

@@ -13,6 +13,7 @@ Add metrics to a deployment
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeploymentCreateMetric" method="post" path="/v2/deployments/{id}/metrics" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

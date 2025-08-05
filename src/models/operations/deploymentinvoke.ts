@@ -52,6 +52,7 @@ export const DeploymentInvokeProvider = {
   Elevenlabs: "elevenlabs",
   Litellm: "litellm",
   Openailike: "openailike",
+  Cerebras: "cerebras",
 } as const;
 /**
  * The provider used to generate the response

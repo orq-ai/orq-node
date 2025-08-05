@@ -54,6 +54,7 @@ Get all Evaluators
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="GetEvals" method="get" path="/v2/evaluators" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -123,6 +124,7 @@ Create an Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="CreateEval" method="post" path="/v2/evaluators" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -222,6 +224,7 @@ Update an Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="UpdateEval" method="patch" path="/v2/evaluators/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -303,6 +306,7 @@ Delete an Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="DeleteEval" method="delete" path="/v2/evaluators/{id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -376,6 +380,7 @@ Run BertScore Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsBertScore" method="post" path="/v2/evaluators/bert_score" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -446,6 +451,7 @@ Run BLEU Score Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsBleuScore" method="post" path="/v2/evaluators/bleu_score" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -516,6 +522,7 @@ Run Contains All Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContainsAll" method="post" path="/v2/evaluators/contains_all" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -586,6 +593,7 @@ Run Contains Any Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContainsAny" method="post" path="/v2/evaluators/contains_any" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -656,6 +664,7 @@ Run Contains Email Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContainsEmail" method="post" path="/v2/evaluators/contains_email" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -726,6 +735,7 @@ Run Contains None Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContainsNone" method="post" path="/v2/evaluators/contains_none" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -796,6 +806,7 @@ Run Contains URL Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContainsUrl" method="post" path="/v2/evaluators/contains_url" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -866,6 +877,7 @@ Run Contains Valid Link Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContainsValidLink" method="post" path="/v2/evaluators/contains_valid_link" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -936,6 +948,7 @@ Run Contains Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsContains" method="post" path="/v2/evaluators/contains" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1006,6 +1019,7 @@ Run Ends With Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsEndsWith" method="post" path="/v2/evaluators/ends_with" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1076,6 +1090,7 @@ Run Exact Match Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsExactMatch" method="post" path="/v2/evaluators/exact_match" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1146,6 +1161,7 @@ Run Length Between Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsLengthBetween" method="post" path="/v2/evaluators/length_between" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1216,6 +1232,7 @@ Run Length Greater Than Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsLengthGreaterThan" method="post" path="/v2/evaluators/length_greater_than" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1286,6 +1303,7 @@ Run Length Less Than Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsLengthLessThan" method="post" path="/v2/evaluators/length_less_than" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1356,6 +1374,7 @@ Run JSON Validation Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsValidJson" method="post" path="/v2/evaluators/valid_json" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1426,6 +1445,7 @@ Run Age Appropriate Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsAgeAppropriate" method="post" path="/v2/evaluators/age_appropriate" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1496,6 +1516,7 @@ Run Bot Detection Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsBotDetection" method="post" path="/v2/evaluators/bot_detection" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1566,6 +1587,7 @@ Run Fact Checking Knowledge Base Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsFactCheckingKnowledgeBase" method="post" path="/v2/evaluators/fact_checking_knowledge_base" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1636,6 +1658,7 @@ Run Grammar Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsGrammar" method="post" path="/v2/evaluators/grammar" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1706,6 +1729,7 @@ Run Localization Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsLocalization" method="post" path="/v2/evaluators/localization" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1776,6 +1800,7 @@ Run PII Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsPii" method="post" path="/v2/evaluators/pii" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1846,6 +1871,7 @@ Run Sentiment Classification Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsSentimentClassification" method="post" path="/v2/evaluators/sentiment_classification" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1916,6 +1942,7 @@ Run Summarization Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsSummarization" method="post" path="/v2/evaluators/summarization" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -1986,6 +2013,7 @@ Run Tone of Voice Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsToneOfVoice" method="post" path="/v2/evaluators/tone_of_voice" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2056,6 +2084,7 @@ Run Translation Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsTranslation" method="post" path="/v2/evaluators/translation" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2126,6 +2155,7 @@ Run Coherence Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasCoherence" method="post" path="/v2/evaluators/ragas_coherence" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2196,6 +2226,7 @@ Run Conciseness Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasConciseness" method="post" path="/v2/evaluators/ragas_conciseness" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2266,6 +2297,7 @@ Run Context Precision Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasContextPrecision" method="post" path="/v2/evaluators/ragas_context_precision" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2336,6 +2368,7 @@ Run Context Recall Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasContextRecall" method="post" path="/v2/evaluators/ragas_context_recall" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2406,6 +2439,7 @@ Run Context Entities Recall Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasContextEntitiesRecall" method="post" path="/v2/evaluators/ragas_context_entities_recall" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2476,6 +2510,7 @@ Run Correctness Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasCorrectness" method="post" path="/v2/evaluators/ragas_correctness" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2546,6 +2581,7 @@ Run Faithfulness Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasFaithfulness" method="post" path="/v2/evaluators/ragas_faithfulness" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2616,6 +2652,7 @@ Run Harmfulness Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasHarmfulness" method="post" path="/v2/evaluators/ragas_harmfulness" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2686,6 +2723,7 @@ Run Maliciousness Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasMaliciousness" method="post" path="/v2/evaluators/ragas_maliciousness" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2756,6 +2794,7 @@ Run Noise Sensitivity Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasNoiseSensitivity" method="post" path="/v2/evaluators/ragas_noise_sensitivity" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2826,6 +2865,7 @@ Run Response Relevancy Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasResponseRelevancy" method="post" path="/v2/evaluators/ragas_response_relevancy" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2896,6 +2936,7 @@ Run Summarization Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="EvalsRagasSummarization" method="post" path="/v2/evaluators/ragas_summarization" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -2966,6 +3007,7 @@ Invoke a Custom Evaluator
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="InvokeEval" method="post" path="/v2/evaluators/{id}/invoke" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

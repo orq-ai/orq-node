@@ -13,6 +13,7 @@ Retrieve a remote config
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="RemoteConfigsGetConfig" method="post" path="/v2/remoteconfigs" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

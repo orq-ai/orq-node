@@ -16,6 +16,7 @@ Files are used to upload documents that can be used with features like [Deployme
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="FileUpload" method="post" path="/v2/files" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 import { openAsBlob } from "node:fs";
@@ -90,6 +91,7 @@ Returns a list of the files that your account has access to. orq.ai sorts and re
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="FileList" method="get" path="/v2/files" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -158,6 +160,7 @@ Retrieves the details of an existing file object. After you supply a unique file
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="FileGet" method="get" path="/v2/files/{file_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -230,6 +233,7 @@ Delete file
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="FileDelete" method="delete" path="/v2/files/{file_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
