@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "3.10.0-rc.47",
+  "version": "3.11.0-rc.0",
   "author": "Orq",
   "bin": {
     "mcp": "bin/mcp-server.js"
@@ -34,7 +34,7 @@
     "eslint": "^9.19.0",
     "express": "^4.21.2",
     "globals": "^15.14.0",
-    "typescript": "^5.4.5",
+    "typescript": "~5.8.3",
     "typescript-eslint": "^8.22.0"
   },
   "dependencies": {
