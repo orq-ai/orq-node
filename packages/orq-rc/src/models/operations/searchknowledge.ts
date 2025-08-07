@@ -5,8 +5,22 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ */
+export const SearchType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
+  HybridSearch: "hybrid_search",
+} as const;
+/**
+ * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ */
+export type SearchType = ClosedEnum<typeof SearchType>;
 
 /**
  * Exists
@@ -336,6 +350,10 @@ export type SearchKnowledgeRequestBody = {
    */
   threshold?: number | undefined;
   /**
+   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   */
+  searchType?: SearchType | undefined;
+  /**
    * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
    */
   filterBy?: FilterByAnd | FilterByOr | {
@@ -386,6 +404,25 @@ export type Matches = {
 export type SearchKnowledgeResponseBody = {
   matches: Array<Matches>;
 };
+
+/** @internal */
+export const SearchType$inboundSchema: z.ZodNativeEnum<typeof SearchType> = z
+  .nativeEnum(SearchType);
+
+/** @internal */
+export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> =
+  SearchType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchType$ {
+  /** @deprecated use `SearchType$inboundSchema` instead. */
+  export const inboundSchema = SearchType$inboundSchema;
+  /** @deprecated use `SearchType$outboundSchema` instead. */
+  export const outboundSchema = SearchType$outboundSchema;
+}
 
 /** @internal */
 export const SearchKnowledgeOrExists$inboundSchema: z.ZodType<
@@ -3014,6 +3051,7 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
   query: z.string(),
   top_k: z.number().int().optional(),
   threshold: z.number().optional(),
+  search_type: SearchType$inboundSchema.default("hybrid_search"),
   filter_by: z.union([
     z.lazy(() => FilterByAnd$inboundSchema),
     z.lazy(() => FilterByOr$inboundSchema),
@@ -3033,6 +3071,7 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "top_k": "topK",
+    "search_type": "searchType",
     "filter_by": "filterBy",
     "search_options": "searchOptions",
   });
@@ -3043,6 +3082,7 @@ export type SearchKnowledgeRequestBody$Outbound = {
   query: string;
   top_k?: number | undefined;
   threshold?: number | undefined;
+  search_type: string;
   filter_by?: FilterByAnd$Outbound | FilterByOr$Outbound | {
     [k: string]:
       | SearchKnowledge1Eq$Outbound
@@ -3067,6 +3107,7 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
   query: z.string(),
   topK: z.number().int().optional(),
   threshold: z.number().optional(),
+  searchType: SearchType$outboundSchema.default("hybrid_search"),
   filterBy: z.union([
     z.lazy(() => FilterByAnd$outboundSchema),
     z.lazy(() => FilterByOr$outboundSchema),
@@ -3086,6 +3127,7 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     topK: "top_k",
+    searchType: "search_type",
     filterBy: "filter_by",
     searchOptions: "search_options",
   });
