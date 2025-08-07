@@ -1503,6 +1503,21 @@ export type DeploymentGetConfigReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const DeploymentGetConfigVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type DeploymentGetConfigVerbosity = ClosedEnum<
+  typeof DeploymentGetConfigVerbosity
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type ParametersT = {
@@ -1586,6 +1601,10 @@ export type ParametersT = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: DeploymentGetConfigVerbosity | undefined;
 };
 
 /**
@@ -9003,6 +9022,27 @@ export namespace DeploymentGetConfigReasoningEffort$ {
 }
 
 /** @internal */
+export const DeploymentGetConfigVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigVerbosity
+> = z.nativeEnum(DeploymentGetConfigVerbosity);
+
+/** @internal */
+export const DeploymentGetConfigVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigVerbosity
+> = DeploymentGetConfigVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigVerbosity$ {
+  /** @deprecated use `DeploymentGetConfigVerbosity$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigVerbosity$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigVerbosity$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const ParametersT$inboundSchema: z.ZodType<
   ParametersT,
   z.ZodTypeDef,
@@ -9031,6 +9071,7 @@ export const ParametersT$inboundSchema: z.ZodType<
   encoding_format: DeploymentGetConfigEncodingFormat$inboundSchema.optional(),
   reasoningEffort: DeploymentGetConfigReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: DeploymentGetConfigVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -9060,6 +9101,7 @@ export type ParametersT$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -9091,6 +9133,7 @@ export const ParametersT$outboundSchema: z.ZodType<
   encodingFormat: DeploymentGetConfigEncodingFormat$outboundSchema.optional(),
   reasoningEffort: DeploymentGetConfigReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: DeploymentGetConfigVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

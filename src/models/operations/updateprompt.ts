@@ -112,6 +112,19 @@ export type UpdatePromptReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const UpdatePromptVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type UpdatePromptVerbosity = ClosedEnum<typeof UpdatePromptVerbosity>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type UpdatePromptModelParameters = {
@@ -195,6 +208,10 @@ export type UpdatePromptModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: UpdatePromptVerbosity | undefined;
 };
 
 export const UpdatePromptProvider = {
@@ -584,6 +601,21 @@ export type UpdatePromptPromptsReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const UpdatePromptPromptsVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type UpdatePromptPromptsVerbosity = ClosedEnum<
+  typeof UpdatePromptPromptsVerbosity
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type UpdatePromptPromptsModelParameters = {
@@ -667,6 +699,10 @@ export type UpdatePromptPromptsModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: UpdatePromptPromptsVerbosity | undefined;
 };
 
 export const UpdatePromptPromptsProvider = {
@@ -1325,6 +1361,27 @@ export namespace UpdatePromptReasoningEffort$ {
 }
 
 /** @internal */
+export const UpdatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptVerbosity
+> = z.nativeEnum(UpdatePromptVerbosity);
+
+/** @internal */
+export const UpdatePromptVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptVerbosity
+> = UpdatePromptVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePromptVerbosity$ {
+  /** @deprecated use `UpdatePromptVerbosity$inboundSchema` instead. */
+  export const inboundSchema = UpdatePromptVerbosity$inboundSchema;
+  /** @deprecated use `UpdatePromptVerbosity$outboundSchema` instead. */
+  export const outboundSchema = UpdatePromptVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   UpdatePromptModelParameters,
   z.ZodTypeDef,
@@ -1352,6 +1409,7 @@ export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   encoding_format: UpdatePromptEncodingFormat$inboundSchema.optional(),
   reasoningEffort: UpdatePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: UpdatePromptVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1381,6 +1439,7 @@ export type UpdatePromptModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -1411,6 +1470,7 @@ export const UpdatePromptModelParameters$outboundSchema: z.ZodType<
   encodingFormat: UpdatePromptEncodingFormat$outboundSchema.optional(),
   reasoningEffort: UpdatePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: UpdatePromptVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -2996,6 +3056,27 @@ export namespace UpdatePromptPromptsReasoningEffort$ {
 }
 
 /** @internal */
+export const UpdatePromptPromptsVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsVerbosity
+> = z.nativeEnum(UpdatePromptPromptsVerbosity);
+
+/** @internal */
+export const UpdatePromptPromptsVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof UpdatePromptPromptsVerbosity
+> = UpdatePromptPromptsVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdatePromptPromptsVerbosity$ {
+  /** @deprecated use `UpdatePromptPromptsVerbosity$inboundSchema` instead. */
+  export const inboundSchema = UpdatePromptPromptsVerbosity$inboundSchema;
+  /** @deprecated use `UpdatePromptPromptsVerbosity$outboundSchema` instead. */
+  export const outboundSchema = UpdatePromptPromptsVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   UpdatePromptPromptsModelParameters,
   z.ZodTypeDef,
@@ -3024,6 +3105,7 @@ export const UpdatePromptPromptsModelParameters$inboundSchema: z.ZodType<
   encoding_format: UpdatePromptPromptsEncodingFormat$inboundSchema.optional(),
   reasoningEffort: UpdatePromptPromptsReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: UpdatePromptPromptsVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -3053,6 +3135,7 @@ export type UpdatePromptPromptsModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -3084,6 +3167,7 @@ export const UpdatePromptPromptsModelParameters$outboundSchema: z.ZodType<
   encodingFormat: UpdatePromptPromptsEncodingFormat$outboundSchema.optional(),
   reasoningEffort: UpdatePromptPromptsReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: UpdatePromptPromptsVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

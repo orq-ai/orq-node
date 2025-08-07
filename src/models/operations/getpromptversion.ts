@@ -144,6 +144,21 @@ export type GetPromptVersionReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const GetPromptVersionVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type GetPromptVersionVerbosity = ClosedEnum<
+  typeof GetPromptVersionVerbosity
+>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type GetPromptVersionModelParameters = {
@@ -227,6 +242,10 @@ export type GetPromptVersionModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: GetPromptVersionVerbosity | undefined;
 };
 
 export const GetPromptVersionProvider = {
@@ -972,6 +991,27 @@ export namespace GetPromptVersionReasoningEffort$ {
 }
 
 /** @internal */
+export const GetPromptVersionVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionVerbosity
+> = z.nativeEnum(GetPromptVersionVerbosity);
+
+/** @internal */
+export const GetPromptVersionVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof GetPromptVersionVerbosity
+> = GetPromptVersionVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetPromptVersionVerbosity$ {
+  /** @deprecated use `GetPromptVersionVerbosity$inboundSchema` instead. */
+  export const inboundSchema = GetPromptVersionVerbosity$inboundSchema;
+  /** @deprecated use `GetPromptVersionVerbosity$outboundSchema` instead. */
+  export const outboundSchema = GetPromptVersionVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   GetPromptVersionModelParameters,
   z.ZodTypeDef,
@@ -999,6 +1039,7 @@ export const GetPromptVersionModelParameters$inboundSchema: z.ZodType<
   encoding_format: GetPromptVersionEncodingFormat$inboundSchema.optional(),
   reasoningEffort: GetPromptVersionReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: GetPromptVersionVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1028,6 +1069,7 @@ export type GetPromptVersionModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -1058,6 +1100,7 @@ export const GetPromptVersionModelParameters$outboundSchema: z.ZodType<
   encodingFormat: GetPromptVersionEncodingFormat$outboundSchema.optional(),
   reasoningEffort: GetPromptVersionReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: GetPromptVersionVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
