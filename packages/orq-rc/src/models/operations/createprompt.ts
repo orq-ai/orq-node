@@ -121,6 +121,19 @@ export const ReasoningEffort = {
 export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const Verbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type Verbosity = ClosedEnum<typeof Verbosity>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type ModelParameters = {
@@ -200,6 +213,10 @@ export type ModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: Verbosity | undefined;
 };
 
 export const Provider = {
@@ -583,6 +600,19 @@ export type CreatePromptReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const CreatePromptVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type CreatePromptVerbosity = ClosedEnum<typeof CreatePromptVerbosity>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type CreatePromptModelParameters = {
@@ -666,6 +696,10 @@ export type CreatePromptModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: CreatePromptVerbosity | undefined;
 };
 
 export const CreatePromptProvider = {
@@ -1318,6 +1352,25 @@ export namespace ReasoningEffort$ {
 }
 
 /** @internal */
+export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
+  .nativeEnum(Verbosity);
+
+/** @internal */
+export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> =
+  Verbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Verbosity$ {
+  /** @deprecated use `Verbosity$inboundSchema` instead. */
+  export const inboundSchema = Verbosity$inboundSchema;
+  /** @deprecated use `Verbosity$outboundSchema` instead. */
+  export const outboundSchema = Verbosity$outboundSchema;
+}
+
+/** @internal */
 export const ModelParameters$inboundSchema: z.ZodType<
   ModelParameters,
   z.ZodTypeDef,
@@ -1345,6 +1398,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
   encoding_format: EncodingFormat$inboundSchema.optional(),
   reasoningEffort: ReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: Verbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1374,6 +1428,7 @@ export type ModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -1404,6 +1459,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
   encodingFormat: EncodingFormat$outboundSchema.optional(),
   reasoningEffort: ReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: Verbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
@@ -2867,6 +2923,27 @@ export namespace CreatePromptReasoningEffort$ {
 }
 
 /** @internal */
+export const CreatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptVerbosity
+> = z.nativeEnum(CreatePromptVerbosity);
+
+/** @internal */
+export const CreatePromptVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptVerbosity
+> = CreatePromptVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptVerbosity$ {
+  /** @deprecated use `CreatePromptVerbosity$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptVerbosity$inboundSchema;
+  /** @deprecated use `CreatePromptVerbosity$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   CreatePromptModelParameters,
   z.ZodTypeDef,
@@ -2894,6 +2971,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
   encoding_format: CreatePromptEncodingFormat$inboundSchema.optional(),
   reasoningEffort: CreatePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: CreatePromptVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -2923,6 +3001,7 @@ export type CreatePromptModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -2953,6 +3032,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
   encodingFormat: CreatePromptEncodingFormat$outboundSchema.optional(),
   reasoningEffort: CreatePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: CreatePromptVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

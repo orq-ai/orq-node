@@ -212,6 +212,19 @@ export type DeploymentsReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const DeploymentsVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type DeploymentsVerbosity = ClosedEnum<typeof DeploymentsVerbosity>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type DeploymentsModelParameters = {
@@ -295,6 +308,10 @@ export type DeploymentsModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: DeploymentsVerbosity | undefined;
 };
 
 export const DeploymentsProvider = {
@@ -1221,6 +1238,27 @@ export namespace DeploymentsReasoningEffort$ {
 }
 
 /** @internal */
+export const DeploymentsVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsVerbosity
+> = z.nativeEnum(DeploymentsVerbosity);
+
+/** @internal */
+export const DeploymentsVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsVerbosity
+> = DeploymentsVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsVerbosity$ {
+  /** @deprecated use `DeploymentsVerbosity$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsVerbosity$inboundSchema;
+  /** @deprecated use `DeploymentsVerbosity$outboundSchema` instead. */
+  export const outboundSchema = DeploymentsVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   DeploymentsModelParameters,
   z.ZodTypeDef,
@@ -1248,6 +1286,7 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   encoding_format: DeploymentsEncodingFormat$inboundSchema.optional(),
   reasoningEffort: DeploymentsReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: DeploymentsVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1277,6 +1316,7 @@ export type DeploymentsModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -1307,6 +1347,7 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   encodingFormat: DeploymentsEncodingFormat$outboundSchema.optional(),
   reasoningEffort: DeploymentsReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: DeploymentsVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",

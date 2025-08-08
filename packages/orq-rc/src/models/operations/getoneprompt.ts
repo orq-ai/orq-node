@@ -143,6 +143,19 @@ export type GetOnePromptReasoningEffort = ClosedEnum<
 >;
 
 /**
+ * Controls the verbosity of the model output.
+ */
+export const GetOnePromptVerbosity = {
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+} as const;
+/**
+ * Controls the verbosity of the model output.
+ */
+export type GetOnePromptVerbosity = ClosedEnum<typeof GetOnePromptVerbosity>;
+
+/**
  * Model Parameters: Not all parameters apply to every model
  */
 export type GetOnePromptModelParameters = {
@@ -226,6 +239,10 @@ export type GetOnePromptModelParameters = {
    * Gives the model enhanced reasoning capabilities for complex tasks. A value of 0 disables thinking. The minimum budget tokens for thinking are 1024. The Budget Tokens should never exceed the Max Tokens parameter. Only supported by `Anthropic`
    */
   budgetTokens?: number | undefined;
+  /**
+   * Controls the verbosity of the model output.
+   */
+  verbosity?: GetOnePromptVerbosity | undefined;
 };
 
 export const GetOnePromptProvider = {
@@ -969,6 +986,27 @@ export namespace GetOnePromptReasoningEffort$ {
 }
 
 /** @internal */
+export const GetOnePromptVerbosity$inboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptVerbosity
+> = z.nativeEnum(GetOnePromptVerbosity);
+
+/** @internal */
+export const GetOnePromptVerbosity$outboundSchema: z.ZodNativeEnum<
+  typeof GetOnePromptVerbosity
+> = GetOnePromptVerbosity$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOnePromptVerbosity$ {
+  /** @deprecated use `GetOnePromptVerbosity$inboundSchema` instead. */
+  export const inboundSchema = GetOnePromptVerbosity$inboundSchema;
+  /** @deprecated use `GetOnePromptVerbosity$outboundSchema` instead. */
+  export const outboundSchema = GetOnePromptVerbosity$outboundSchema;
+}
+
+/** @internal */
 export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   GetOnePromptModelParameters,
   z.ZodTypeDef,
@@ -996,6 +1034,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   encoding_format: GetOnePromptEncodingFormat$inboundSchema.optional(),
   reasoningEffort: GetOnePromptReasoningEffort$inboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: GetOnePromptVerbosity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -1025,6 +1064,7 @@ export type GetOnePromptModelParameters$Outbound = {
   encoding_format?: string | undefined;
   reasoningEffort?: string | undefined;
   budgetTokens?: number | undefined;
+  verbosity?: string | undefined;
 };
 
 /** @internal */
@@ -1055,6 +1095,7 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
   encodingFormat: GetOnePromptEncodingFormat$outboundSchema.optional(),
   reasoningEffort: GetOnePromptReasoningEffort$outboundSchema.optional(),
   budgetTokens: z.number().optional(),
+  verbosity: GetOnePromptVerbosity$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
