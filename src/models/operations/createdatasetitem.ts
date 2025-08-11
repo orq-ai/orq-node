@@ -438,7 +438,7 @@ export type CreateDatasetItemMessages =
   | CreateDatasetItemMessagesUserMessage
   | CreateDatasetItemMessagesAssistantMessage;
 
-export type CreateDatasetItemRequestBody = {
+export type RequestBody = {
   /**
    * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported.
    */
@@ -460,7 +460,7 @@ export type CreateDatasetItemRequestBody = {
 
 export type CreateDatasetItemRequest = {
   datasetId: string;
-  requestBody?: CreateDatasetItemRequestBody | undefined;
+  requestBody?: Array<RequestBody> | undefined;
 };
 
 /**
@@ -914,10 +914,7 @@ export type CreateDatasetItemDatasetsMessages =
   | CreateDatasetItemMessagesDatasetsUserMessage
   | CreateDatasetItemMessagesDatasetsAssistantMessage;
 
-/**
- * Datapoint created successfully. Returns the newly created datapoint object.
- */
-export type CreateDatasetItemResponseBody = {
+export type ResponseBody = {
   /**
    * The unique identifier of the dataset item
    */
@@ -2849,8 +2846,8 @@ export function createDatasetItemMessagesFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemRequestBody$inboundSchema: z.ZodType<
-  CreateDatasetItemRequestBody,
+export const RequestBody$inboundSchema: z.ZodType<
+  RequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2872,7 +2869,7 @@ export const CreateDatasetItemRequestBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateDatasetItemRequestBody$Outbound = {
+export type RequestBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
@@ -2887,10 +2884,10 @@ export type CreateDatasetItemRequestBody$Outbound = {
 };
 
 /** @internal */
-export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
-  CreateDatasetItemRequestBody$Outbound,
+export const RequestBody$outboundSchema: z.ZodType<
+  RequestBody$Outbound,
   z.ZodTypeDef,
-  CreateDatasetItemRequestBody
+  RequestBody
 > = z.object({
   inputs: z.record(z.any()).optional(),
   messages: z.array(
@@ -2913,32 +2910,26 @@ export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateDatasetItemRequestBody$ {
-  /** @deprecated use `CreateDatasetItemRequestBody$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemRequestBody$inboundSchema;
-  /** @deprecated use `CreateDatasetItemRequestBody$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemRequestBody$outboundSchema;
-  /** @deprecated use `CreateDatasetItemRequestBody$Outbound` instead. */
-  export type Outbound = CreateDatasetItemRequestBody$Outbound;
+export namespace RequestBody$ {
+  /** @deprecated use `RequestBody$inboundSchema` instead. */
+  export const inboundSchema = RequestBody$inboundSchema;
+  /** @deprecated use `RequestBody$outboundSchema` instead. */
+  export const outboundSchema = RequestBody$outboundSchema;
+  /** @deprecated use `RequestBody$Outbound` instead. */
+  export type Outbound = RequestBody$Outbound;
 }
 
-export function createDatasetItemRequestBodyToJSON(
-  createDatasetItemRequestBody: CreateDatasetItemRequestBody,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemRequestBody$outboundSchema.parse(
-      createDatasetItemRequestBody,
-    ),
-  );
+export function requestBodyToJSON(requestBody: RequestBody): string {
+  return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
 }
 
-export function createDatasetItemRequestBodyFromJSON(
+export function requestBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateDatasetItemRequestBody, SDKValidationError> {
+): SafeParseResult<RequestBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateDatasetItemRequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemRequestBody' from JSON`,
+    (x) => RequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody' from JSON`,
   );
 }
 
@@ -2949,8 +2940,7 @@ export const CreateDatasetItemRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   dataset_id: z.string(),
-  RequestBody: z.lazy(() => CreateDatasetItemRequestBody$inboundSchema)
-    .optional(),
+  RequestBody: z.array(z.lazy(() => RequestBody$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "dataset_id": "datasetId",
@@ -2961,7 +2951,7 @@ export const CreateDatasetItemRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateDatasetItemRequest$Outbound = {
   dataset_id: string;
-  RequestBody?: CreateDatasetItemRequestBody$Outbound | undefined;
+  RequestBody?: Array<RequestBody$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2971,8 +2961,7 @@ export const CreateDatasetItemRequest$outboundSchema: z.ZodType<
   CreateDatasetItemRequest
 > = z.object({
   datasetId: z.string(),
-  requestBody: z.lazy(() => CreateDatasetItemRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     datasetId: "dataset_id",
@@ -5081,8 +5070,8 @@ export function createDatasetItemDatasetsMessagesFromJSON(
 }
 
 /** @internal */
-export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
-  CreateDatasetItemResponseBody,
+export const ResponseBody$inboundSchema: z.ZodType<
+  ResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5111,7 +5100,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-08-08T18:39:55.435Z",
+    "2025-08-11T08:05:49.158Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5125,7 +5114,7 @@ export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateDatasetItemResponseBody$Outbound = {
+export type ResponseBody$Outbound = {
   _id: string;
   workspace_id: string;
   inputs?: { [k: string]: any } | undefined;
@@ -5147,10 +5136,10 @@ export type CreateDatasetItemResponseBody$Outbound = {
 };
 
 /** @internal */
-export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
-  CreateDatasetItemResponseBody$Outbound,
+export const ResponseBody$outboundSchema: z.ZodType<
+  ResponseBody$Outbound,
   z.ZodTypeDef,
-  CreateDatasetItemResponseBody
+  ResponseBody
 > = z.object({
   id: z.string(),
   workspaceId: z.string(),
@@ -5175,7 +5164,7 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-08-08T18:39:55.435Z"))
+  updated: z.date().default(() => new Date("2025-08-11T08:05:49.158Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -5192,31 +5181,25 @@ export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateDatasetItemResponseBody$ {
-  /** @deprecated use `CreateDatasetItemResponseBody$inboundSchema` instead. */
-  export const inboundSchema = CreateDatasetItemResponseBody$inboundSchema;
-  /** @deprecated use `CreateDatasetItemResponseBody$outboundSchema` instead. */
-  export const outboundSchema = CreateDatasetItemResponseBody$outboundSchema;
-  /** @deprecated use `CreateDatasetItemResponseBody$Outbound` instead. */
-  export type Outbound = CreateDatasetItemResponseBody$Outbound;
+export namespace ResponseBody$ {
+  /** @deprecated use `ResponseBody$inboundSchema` instead. */
+  export const inboundSchema = ResponseBody$inboundSchema;
+  /** @deprecated use `ResponseBody$outboundSchema` instead. */
+  export const outboundSchema = ResponseBody$outboundSchema;
+  /** @deprecated use `ResponseBody$Outbound` instead. */
+  export type Outbound = ResponseBody$Outbound;
 }
 
-export function createDatasetItemResponseBodyToJSON(
-  createDatasetItemResponseBody: CreateDatasetItemResponseBody,
-): string {
-  return JSON.stringify(
-    CreateDatasetItemResponseBody$outboundSchema.parse(
-      createDatasetItemResponseBody,
-    ),
-  );
+export function responseBodyToJSON(responseBody: ResponseBody): string {
+  return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
 }
 
-export function createDatasetItemResponseBodyFromJSON(
+export function responseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<CreateDatasetItemResponseBody, SDKValidationError> {
+): SafeParseResult<ResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateDatasetItemResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateDatasetItemResponseBody' from JSON`,
+    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

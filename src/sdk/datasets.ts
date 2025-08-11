@@ -129,7 +129,7 @@ export class Datasets extends ClientSDK {
   async createDatapoint(
     request: operations.CreateDatasetItemRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateDatasetItemResponseBody> {
+  ): Promise<Array<operations.ResponseBody>> {
     return unwrapAsync(datasetsCreateDatapoint(
       this,
       request,

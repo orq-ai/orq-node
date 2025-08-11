@@ -526,7 +526,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateDatasetItemResponseBody](../../models/operations/createdatasetitemresponsebody.md)\>**
+**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
 
 ### Errors
 
