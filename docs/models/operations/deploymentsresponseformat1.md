@@ -6,17 +6,12 @@
 import { DeploymentsResponseFormat1 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentsResponseFormat1 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-    schema: {},
-  },
+  type: "text",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
-| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                     | [operations.DeploymentsResponseFormatDeploymentsType](../../models/operations/deploymentsresponseformatdeploymentstype.md) | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
-| `jsonSchema`                                                                                                               | [operations.DeploymentsResponseFormatJsonSchema](../../models/operations/deploymentsresponseformatjsonschema.md)           | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
+| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                     | [operations.DeploymentsResponseFormatDeploymentsResponseType](../../models/operations/deploymentsresponseformatdeploymentsresponsetype.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |

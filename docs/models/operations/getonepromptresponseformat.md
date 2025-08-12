@@ -15,11 +15,7 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ```typescript
 const value: operations.GetOnePromptResponseFormat1 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-    schema: {},
-  },
+  type: "text",
 };
 ```
 
@@ -27,6 +23,21 @@ const value: operations.GetOnePromptResponseFormat1 = {
 
 ```typescript
 const value: operations.GetOnePromptResponseFormat2 = {
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+    schema: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
+  },
+};
+```
+
+### `operations.GetOnePromptResponseFormat3`
+
+```typescript
+const value: operations.GetOnePromptResponseFormat3 = {
   type: "json_object",
 };
 ```

@@ -6,7 +6,11 @@
 import { GetAllPromptsResponseFormat2 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsResponseFormat2 = {
-  type: "json_object",
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+    schema: {},
+  },
 };
 ```
 
@@ -15,3 +19,4 @@ let value: GetAllPromptsResponseFormat2 = {
 | Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
 | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `type`                                                                                                                 | [operations.GetAllPromptsResponseFormatPromptsType](../../models/operations/getallpromptsresponseformatpromptstype.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `jsonSchema`                                                                                                           | [operations.GetAllPromptsResponseFormatJsonSchema](../../models/operations/getallpromptsresponseformatjsonschema.md)   | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |

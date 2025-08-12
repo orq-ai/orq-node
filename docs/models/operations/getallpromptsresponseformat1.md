@@ -6,19 +6,12 @@
 import { GetAllPromptsResponseFormat1 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsResponseFormat1 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-    schema: {
-      "key": "<value>",
-    },
-  },
+  type: "text",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                               | [operations.GetAllPromptsResponseFormatType](../../models/operations/getallpromptsresponseformattype.md)             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
-| `jsonSchema`                                                                                                         | [operations.GetAllPromptsResponseFormatJsonSchema](../../models/operations/getallpromptsresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                   | [operations.GetAllPromptsResponseFormatType](../../models/operations/getallpromptsresponseformattype.md) | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
