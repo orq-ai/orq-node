@@ -1289,14 +1289,6 @@ components:
                     "type":
                       type: "string"
                       enum:
-                        - "text"
-                  required:
-                    - "type"
-                - type: "object"
-                  properties:
-                    "type":
-                      type: "string"
-                      enum:
                         - "json_schema"
                     "json_schema":
                       type: "object"
@@ -1320,6 +1312,14 @@ components:
                       type: "string"
                       enum:
                         - "json_object"
+                  required:
+                    - "type"
+                - type: "object"
+                  properties:
+                    "type":
+                      type: "string"
+                      enum:
+                        - "text"
                   required:
                     - "type"
                 - type: "null"
@@ -3481,14 +3481,6 @@ components:
                             "type":
                               type: "string"
                               enum:
-                                - "text"
-                          required:
-                            - "type"
-                        - type: "object"
-                          properties:
-                            "type":
-                              type: "string"
-                              enum:
                                 - "json_schema"
                             "json_schema":
                               type: "object"
@@ -3512,6 +3504,14 @@ components:
                               type: "string"
                               enum:
                                 - "json_object"
+                          required:
+                            - "type"
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "text"
                           required:
                             - "type"
                         - type: "null"
@@ -4081,14 +4081,6 @@ components:
                                         "type":
                                           type: "string"
                                           enum:
-                                            - "text"
-                                      required:
-                                        - "type"
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
                                             - "json_schema"
                                         "json_schema":
                                           type: "object"
@@ -4112,6 +4104,14 @@ components:
                                           type: "string"
                                           enum:
                                             - "json_object"
+                                      required:
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
                                       required:
                                         - "type"
                                     - type: "null"
@@ -4365,14 +4365,6 @@ components:
                                         "type":
                                           type: "string"
                                           enum:
-                                            - "text"
-                                      required:
-                                        - "type"
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
                                             - "json_schema"
                                         "json_schema":
                                           type: "object"
@@ -4396,6 +4388,14 @@ components:
                                           type: "string"
                                           enum:
                                             - "json_object"
+                                      required:
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
                                       required:
                                         - "type"
                                     - type: "null"
@@ -4704,14 +4704,6 @@ components:
                                     "type":
                                       type: "string"
                                       enum:
-                                        - "text"
-                                  required:
-                                    - "type"
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
                                         - "json_schema"
                                     "json_schema":
                                       type: "object"
@@ -4735,6 +4727,14 @@ components:
                                       type: "string"
                                       enum:
                                         - "json_object"
+                                  required:
+                                    - "type"
+                                - type: "object"
+                                  properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "text"
                                   required:
                                     - "type"
                                 - type: "null"
@@ -4873,7 +4873,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-12T10:35:49.436Z"
+          default: "2025-08-12T12:58:20.938Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4936,7 +4936,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-08-12T10:35:49.436Z"
+            default: "2025-08-12T12:58:20.938Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -5016,7 +5016,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-12T10:35:49.436Z"
+          default: "2025-08-12T12:58:20.938Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5062,7 +5062,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-08-12T10:35:49.436Z"
+                default: "2025-08-12T12:58:20.938Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5105,7 +5105,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-12T10:35:49.436Z"
+          default: "2025-08-12T12:58:20.938Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5207,14 +5207,6 @@ components:
                         "type":
                           type: "string"
                           enum:
-                            - "text"
-                      required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
                             - "json_schema"
                         "json_schema":
                           type: "object"
@@ -5238,6 +5230,14 @@ components:
                           type: "string"
                           enum:
                             - "json_object"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "text"
                       required:
                         - "type"
                     - type: "null"
@@ -5674,14 +5674,6 @@ components:
                         "type":
                           type: "string"
                           enum:
-                            - "text"
-                      required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
                             - "json_schema"
                         "json_schema":
                           type: "object"
@@ -5705,6 +5697,14 @@ components:
                           type: "string"
                           enum:
                             - "json_object"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "text"
                       required:
                         - "type"
                     - type: "null"
@@ -6070,14 +6070,6 @@ components:
                         "type":
                           type: "string"
                           enum:
-                            - "text"
-                      required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
                             - "json_schema"
                         "json_schema":
                           type: "object"
@@ -6101,6 +6093,14 @@ components:
                           type: "string"
                           enum:
                             - "json_object"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "text"
                       required:
                         - "type"
                     - type: "null"
@@ -6461,14 +6461,6 @@ components:
                         "type":
                           type: "string"
                           enum:
-                            - "text"
-                      required:
-                        - "type"
-                    - type: "object"
-                      properties:
-                        "type":
-                          type: "string"
-                          enum:
                             - "json_schema"
                         "json_schema":
                           type: "object"
@@ -6492,6 +6484,14 @@ components:
                           type: "string"
                           enum:
                             - "json_object"
+                      required:
+                        - "type"
+                    - type: "object"
+                      properties:
+                        "type":
+                          type: "string"
+                          enum:
+                            - "text"
                       required:
                         - "type"
                     - type: "null"
@@ -6846,14 +6846,6 @@ components:
                                   "type":
                                     type: "string"
                                     enum:
-                                      - "text"
-                                required:
-                                  - "type"
-                              - type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
                                       - "json_schema"
                                   "json_schema":
                                     type: "object"
@@ -6877,6 +6869,14 @@ components:
                                     type: "string"
                                     enum:
                                       - "json_object"
+                                required:
+                                  - "type"
+                              - type: "object"
+                                properties:
+                                  "type":
+                                    type: "string"
+                                    enum:
+                                      - "text"
                                 required:
                                   - "type"
                               - type: "null"
@@ -7228,14 +7228,6 @@ components:
                             "type":
                               type: "string"
                               enum:
-                                - "text"
-                          required:
-                            - "type"
-                        - type: "object"
-                          properties:
-                            "type":
-                              type: "string"
-                              enum:
                                 - "json_schema"
                             "json_schema":
                               type: "object"
@@ -7259,6 +7251,14 @@ components:
                               type: "string"
                               enum:
                                 - "json_object"
+                          required:
+                            - "type"
+                        - type: "object"
+                          properties:
+                            "type":
+                              type: "string"
+                              enum:
+                                - "text"
                           required:
                             - "type"
                         - type: "null"
@@ -7708,7 +7708,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-12T10:35:45.801Z"
+          default: "2025-08-12T12:58:17.685Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7716,7 +7716,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-12T10:35:45.801Z"
+              default: "2025-08-12T12:58:17.685Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7826,7 +7826,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-08-12T10:35:45.801Z"
+                default: "2025-08-12T12:58:17.685Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7834,7 +7834,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7941,7 +7941,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-12T10:35:45.801Z"
+          default: "2025-08-12T12:58:17.685Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7949,7 +7949,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-12T10:35:45.801Z"
+              default: "2025-08-12T12:58:17.685Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8050,7 +8050,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-12T10:35:45.801Z"
+          default: "2025-08-12T12:58:17.685Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8058,7 +8058,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-12T10:35:45.801Z"
+              default: "2025-08-12T12:58:17.685Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9221,10 +9221,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9293,10 +9293,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9362,10 +9362,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9446,10 +9446,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9541,10 +9541,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9613,10 +9613,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9682,10 +9682,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9766,10 +9766,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-12T10:35:48.407Z"
+                    default: "2025-08-12T12:58:20.056Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -10133,10 +10133,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10205,10 +10205,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10274,10 +10274,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10358,10 +10358,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "updated":
               type: "string"
-              default: "2025-08-12T10:35:48.407Z"
+              default: "2025-08-12T12:58:20.056Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -14131,7 +14131,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14139,7 +14139,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14270,7 +14270,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-12T10:35:45.801Z"
+                          default: "2025-08-12T12:58:17.685Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14278,7 +14278,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-12T10:35:45.801Z"
+                              default: "2025-08-12T12:58:17.685Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -14578,14 +14578,6 @@ paths:
                                         "type":
                                           type: "string"
                                           enum:
-                                            - "text"
-                                      required:
-                                        - "type"
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
                                             - "json_schema"
                                         "json_schema":
                                           type: "object"
@@ -14609,6 +14601,14 @@ paths:
                                           type: "string"
                                           enum:
                                             - "json_object"
+                                      required:
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
                                       required:
                                         - "type"
                                     - type: "null"
@@ -16011,14 +16011,6 @@ paths:
                               "type":
                                 type: "string"
                                 enum:
-                                  - "text"
-                            required:
-                              - "type"
-                          - type: "object"
-                            properties:
-                              "type":
-                                type: "string"
-                                enum:
                                   - "json_schema"
                               "json_schema":
                                 type: "object"
@@ -16042,6 +16034,14 @@ paths:
                                 type: "string"
                                 enum:
                                   - "json_object"
+                            required:
+                              - "type"
+                          - type: "object"
+                            properties:
+                              "type":
+                                type: "string"
+                                enum:
+                                  - "text"
                             required:
                               - "type"
                           - type: "null"
@@ -18303,7 +18303,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-12T10:35:49.436Z"
+                    default: "2025-08-12T12:58:20.938Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18391,7 +18391,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-08-12T10:35:49.436Z"
+                          default: "2025-08-12T12:58:20.938Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18458,7 +18458,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-12T10:35:49.436Z"
+                    default: "2025-08-12T12:58:20.938Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18659,14 +18659,6 @@ paths:
                                         "type":
                                           type: "string"
                                           enum:
-                                            - "text"
-                                      required:
-                                        - "type"
-                                    - type: "object"
-                                      properties:
-                                        "type":
-                                          type: "string"
-                                          enum:
                                             - "json_schema"
                                         "json_schema":
                                           type: "object"
@@ -18690,6 +18682,14 @@ paths:
                                           type: "string"
                                           enum:
                                             - "json_object"
+                                      required:
+                                        - "type"
+                                    - type: "object"
+                                      properties:
+                                        "type":
+                                          type: "string"
+                                          enum:
+                                            - "text"
                                       required:
                                         - "type"
                                     - type: "null"
@@ -19044,14 +19044,6 @@ paths:
                                 "type":
                                   type: "string"
                                   enum:
-                                    - "text"
-                              required:
-                                - "type"
-                            - type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
                                     - "json_schema"
                                 "json_schema":
                                   type: "object"
@@ -19075,6 +19067,14 @@ paths:
                                   type: "string"
                                   enum:
                                     - "json_object"
+                              required:
+                                - "type"
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "text"
                               required:
                                 - "type"
                             - type: "null"
@@ -19440,14 +19440,6 @@ paths:
                                   "type":
                                     type: "string"
                                     enum:
-                                      - "text"
-                                required:
-                                  - "type"
-                              - type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
                                       - "json_schema"
                                   "json_schema":
                                     type: "object"
@@ -19471,6 +19463,14 @@ paths:
                                     type: "string"
                                     enum:
                                       - "json_object"
+                                required:
+                                  - "type"
+                              - type: "object"
+                                properties:
+                                  "type":
+                                    type: "string"
+                                    enum:
+                                      - "text"
                                 required:
                                   - "type"
                               - type: "null"
@@ -19856,14 +19856,6 @@ paths:
                                   "type":
                                     type: "string"
                                     enum:
-                                      - "text"
-                                required:
-                                  - "type"
-                              - type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
                                       - "json_schema"
                                   "json_schema":
                                     type: "object"
@@ -19887,6 +19879,14 @@ paths:
                                     type: "string"
                                     enum:
                                       - "json_object"
+                                required:
+                                  - "type"
+                              - type: "object"
+                                properties:
+                                  "type":
+                                    type: "string"
+                                    enum:
+                                      - "text"
                                 required:
                                   - "type"
                               - type: "null"
@@ -20240,14 +20240,6 @@ paths:
                                 "type":
                                   type: "string"
                                   enum:
-                                    - "text"
-                              required:
-                                - "type"
-                            - type: "object"
-                              properties:
-                                "type":
-                                  type: "string"
-                                  enum:
                                     - "json_schema"
                                 "json_schema":
                                   type: "object"
@@ -20271,6 +20263,14 @@ paths:
                                   type: "string"
                                   enum:
                                     - "json_object"
+                              required:
+                                - "type"
+                            - type: "object"
+                              properties:
+                                "type":
+                                  type: "string"
+                                  enum:
+                                    - "text"
                               required:
                                 - "type"
                             - type: "null"
@@ -20639,14 +20639,6 @@ paths:
                                   "type":
                                     type: "string"
                                     enum:
-                                      - "text"
-                                required:
-                                  - "type"
-                              - type: "object"
-                                properties:
-                                  "type":
-                                    type: "string"
-                                    enum:
                                       - "json_schema"
                                   "json_schema":
                                     type: "object"
@@ -20670,6 +20662,14 @@ paths:
                                     type: "string"
                                     enum:
                                       - "json_object"
+                                required:
+                                  - "type"
+                              - type: "object"
+                                properties:
+                                  "type":
+                                    type: "string"
+                                    enum:
+                                      - "text"
                                 required:
                                   - "type"
                               - type: "null"
@@ -21101,14 +21101,6 @@ paths:
                                             "type":
                                               type: "string"
                                               enum:
-                                                - "text"
-                                          required:
-                                            - "type"
-                                        - type: "object"
-                                          properties:
-                                            "type":
-                                              type: "string"
-                                              enum:
                                                 - "json_schema"
                                             "json_schema":
                                               type: "object"
@@ -21132,6 +21124,14 @@ paths:
                                               type: "string"
                                               enum:
                                                 - "json_object"
+                                          required:
+                                            - "type"
+                                        - type: "object"
+                                          properties:
+                                            "type":
+                                              type: "string"
+                                              enum:
+                                                - "text"
                                           required:
                                             - "type"
                                         - type: "null"
@@ -21514,14 +21514,6 @@ paths:
                                       "type":
                                         type: "string"
                                         enum:
-                                          - "text"
-                                    required:
-                                      - "type"
-                                  - type: "object"
-                                    properties:
-                                      "type":
-                                        type: "string"
-                                        enum:
                                           - "json_schema"
                                       "json_schema":
                                         type: "object"
@@ -21545,6 +21537,14 @@ paths:
                                         type: "string"
                                         enum:
                                           - "json_object"
+                                    required:
+                                      - "type"
+                                  - type: "object"
+                                    properties:
+                                      "type":
+                                        type: "string"
+                                        enum:
+                                          - "text"
                                     required:
                                       - "type"
                                   - type: "null"
@@ -22049,7 +22049,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-12T10:35:45.801Z"
+                          default: "2025-08-12T12:58:17.685Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22057,7 +22057,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-12T10:35:45.801Z"
+                              default: "2025-08-12T12:58:17.685Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -22181,7 +22181,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22189,7 +22189,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22299,7 +22299,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22307,7 +22307,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22459,7 +22459,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22467,7 +22467,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22858,7 +22858,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-12T10:35:45.801Z"
+                          default: "2025-08-12T12:58:17.685Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22866,7 +22866,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-12T10:35:45.801Z"
+                              default: "2025-08-12T12:58:17.685Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -23487,7 +23487,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-08-12T10:35:45.801Z"
+                      default: "2025-08-12T12:58:17.685Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -23495,7 +23495,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-08-12T10:35:45.801Z"
+                          default: "2025-08-12T12:58:17.685Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -23830,7 +23830,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23838,7 +23838,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -24456,7 +24456,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -24464,7 +24464,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -25741,7 +25741,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K2EXKNBAC6YFEQK3JBTVC98C"
+                          default: "01K2F5RKAMAN6BH9GXZ4VVFKSN"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -25904,7 +25904,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K2EXKNBCFXD50M72K38B23SQ"
+                    default: "01K2F5RKANEP40H8V3299209M3"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -25997,7 +25997,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K2EXKNBB488J57WPGH5TM8TA"
+                    default: "01K2F5RKAMN93PBR4DV2KP9SW8"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26126,7 +26126,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K2EXKNBDVHZTG3RRSVCKT3FC"
+                    default: "01K2F5RKB0CQD5SR6EWHJKSCNF"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -27079,10 +27079,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27151,10 +27151,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27220,10 +27220,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27304,10 +27304,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27373,10 +27373,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27769,10 +27769,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27854,10 +27854,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-12T10:35:48.407Z"
+                              default: "2025-08-12T12:58:20.056Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -28243,10 +28243,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28315,10 +28315,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28384,10 +28384,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28468,10 +28468,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28844,10 +28844,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28916,10 +28916,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28985,10 +28985,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -29069,10 +29069,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-12T10:35:48.407Z"
+                        default: "2025-08-12T12:58:20.056Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -32134,7 +32134,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -32142,7 +32142,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -32276,7 +32276,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-12T10:35:45.801Z"
+                    default: "2025-08-12T12:58:17.685Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -32284,7 +32284,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-12T10:35:45.801Z"
+                        default: "2025-08-12T12:58:17.685Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
