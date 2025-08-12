@@ -42,6 +42,17 @@ export const CreatePromptFormat = {
  */
 export type CreatePromptFormat = ClosedEnum<typeof CreatePromptFormat>;
 
+export const CreatePromptResponseFormatPromptsType = {
+  Text: "text",
+} as const;
+export type CreatePromptResponseFormatPromptsType = ClosedEnum<
+  typeof CreatePromptResponseFormatPromptsType
+>;
+
+export type ResponseFormat3 = {
+  type: CreatePromptResponseFormatPromptsType;
+};
+
 export const CreatePromptResponseFormatType = {
   JsonObject: "json_object",
 } as const;
@@ -80,7 +91,10 @@ export type ResponseFormat1 = {
  *
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
-export type ResponseFormat = ResponseFormat1 | ResponseFormat2;
+export type ResponseFormat =
+  | ResponseFormat1
+  | ResponseFormat2
+  | ResponseFormat3;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -196,7 +210,12 @@ export type ModelParameters = {
    *
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
-  responseFormat?: ResponseFormat1 | ResponseFormat2 | null | undefined;
+  responseFormat?:
+    | ResponseFormat1
+    | ResponseFormat2
+    | ResponseFormat3
+    | null
+    | undefined;
   /**
    * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
    */
@@ -511,22 +530,34 @@ export type CreatePromptPromptsFormat = ClosedEnum<
   typeof CreatePromptPromptsFormat
 >;
 
-export const CreatePromptResponseFormatPromptsResponseType = {
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType = {
+  Text: "text",
+} as const;
+export type CreatePromptResponseFormatPromptsResponse200ApplicationJSONType =
+  ClosedEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
+  >;
+
+export type CreatePromptResponseFormat3 = {
+  type: CreatePromptResponseFormatPromptsResponse200ApplicationJSONType;
+};
+
+export const CreatePromptResponseFormatPromptsResponse200Type = {
   JsonObject: "json_object",
 } as const;
-export type CreatePromptResponseFormatPromptsResponseType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsResponseType
+export type CreatePromptResponseFormatPromptsResponse200Type = ClosedEnum<
+  typeof CreatePromptResponseFormatPromptsResponse200Type
 >;
 
 export type CreatePromptResponseFormat2 = {
-  type: CreatePromptResponseFormatPromptsResponseType;
+  type: CreatePromptResponseFormatPromptsResponse200Type;
 };
 
-export const CreatePromptResponseFormatPromptsType = {
+export const CreatePromptResponseFormatPromptsResponseType = {
   JsonSchema: "json_schema",
 } as const;
-export type CreatePromptResponseFormatPromptsType = ClosedEnum<
-  typeof CreatePromptResponseFormatPromptsType
+export type CreatePromptResponseFormatPromptsResponseType = ClosedEnum<
+  typeof CreatePromptResponseFormatPromptsResponseType
 >;
 
 export type CreatePromptResponseFormatJsonSchema = {
@@ -536,7 +567,7 @@ export type CreatePromptResponseFormatJsonSchema = {
 };
 
 export type CreatePromptResponseFormat1 = {
-  type: CreatePromptResponseFormatPromptsType;
+  type: CreatePromptResponseFormatPromptsResponseType;
   jsonSchema: CreatePromptResponseFormatJsonSchema;
 };
 
@@ -553,7 +584,8 @@ export type CreatePromptResponseFormat1 = {
  */
 export type CreatePromptResponseFormat =
   | CreatePromptResponseFormat1
-  | CreatePromptResponseFormat2;
+  | CreatePromptResponseFormat2
+  | CreatePromptResponseFormat3;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -678,6 +710,7 @@ export type CreatePromptModelParameters = {
   responseFormat?:
     | CreatePromptResponseFormat1
     | CreatePromptResponseFormat2
+    | CreatePromptResponseFormat3
     | null
     | undefined;
   /**
@@ -1024,6 +1057,82 @@ export namespace CreatePromptFormat$ {
 }
 
 /** @internal */
+export const CreatePromptResponseFormatPromptsType$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> = z.nativeEnum(
+    CreatePromptResponseFormatPromptsType,
+  );
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> =
+    CreatePromptResponseFormatPromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptResponseFormatPromptsType$ {
+  /** @deprecated use `CreatePromptResponseFormatPromptsType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreatePromptResponseFormatPromptsType$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatPromptsType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreatePromptResponseFormatPromptsType$outboundSchema;
+}
+
+/** @internal */
+export const ResponseFormat3$inboundSchema: z.ZodType<
+  ResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreatePromptResponseFormatPromptsType$inboundSchema,
+});
+
+/** @internal */
+export type ResponseFormat3$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ResponseFormat3$outboundSchema: z.ZodType<
+  ResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  ResponseFormat3
+> = z.object({
+  type: CreatePromptResponseFormatPromptsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ResponseFormat3$ {
+  /** @deprecated use `ResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = ResponseFormat3$inboundSchema;
+  /** @deprecated use `ResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema = ResponseFormat3$outboundSchema;
+  /** @deprecated use `ResponseFormat3$Outbound` instead. */
+  export type Outbound = ResponseFormat3$Outbound;
+}
+
+export function responseFormat3ToJSON(
+  responseFormat3: ResponseFormat3,
+): string {
+  return JSON.stringify(ResponseFormat3$outboundSchema.parse(responseFormat3));
+}
+
+export function responseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreatePromptResponseFormatType$inboundSchema: z.ZodNativeEnum<
   typeof CreatePromptResponseFormatType
 > = z.nativeEnum(CreatePromptResponseFormatType);
@@ -1244,12 +1353,14 @@ export const ResponseFormat$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ResponseFormat1$inboundSchema),
   z.lazy(() => ResponseFormat2$inboundSchema),
+  z.lazy(() => ResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type ResponseFormat$Outbound =
   | ResponseFormat1$Outbound
-  | ResponseFormat2$Outbound;
+  | ResponseFormat2$Outbound
+  | ResponseFormat3$Outbound;
 
 /** @internal */
 export const ResponseFormat$outboundSchema: z.ZodType<
@@ -1259,6 +1370,7 @@ export const ResponseFormat$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ResponseFormat1$outboundSchema),
   z.lazy(() => ResponseFormat2$outboundSchema),
+  z.lazy(() => ResponseFormat3$outboundSchema),
 ]);
 
 /**
@@ -1392,6 +1504,7 @@ export const ModelParameters$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => ResponseFormat1$inboundSchema),
       z.lazy(() => ResponseFormat2$inboundSchema),
+      z.lazy(() => ResponseFormat3$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: PhotoRealVersion$inboundSchema.optional(),
@@ -1422,6 +1535,7 @@ export type ModelParameters$Outbound = {
   responseFormat?:
     | ResponseFormat1$Outbound
     | ResponseFormat2$Outbound
+    | ResponseFormat3$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1453,6 +1567,7 @@ export const ModelParameters$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => ResponseFormat1$outboundSchema),
       z.lazy(() => ResponseFormat2$outboundSchema),
+      z.lazy(() => ResponseFormat3$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: PhotoRealVersion$outboundSchema.optional(),
@@ -2569,26 +2684,112 @@ export namespace CreatePromptPromptsFormat$ {
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponseType> = z
-    .nativeEnum(CreatePromptResponseFormatPromptsResponseType);
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
+  > = z.nativeEnum(
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType,
+  );
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponseType> =
-    CreatePromptResponseFormatPromptsResponseType$inboundSchema;
+export const CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreatePromptResponseFormatPromptsResponse200ApplicationJSONType
+  > =
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormatPromptsResponseType$ {
-  /** @deprecated use `CreatePromptResponseFormatPromptsResponseType$inboundSchema` instead. */
+export namespace CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$ {
+  /** @deprecated use `CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema` instead. */
   export const inboundSchema =
-    CreatePromptResponseFormatPromptsResponseType$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPromptsResponseType$outboundSchema` instead. */
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema` instead. */
   export const outboundSchema =
-    CreatePromptResponseFormatPromptsResponseType$outboundSchema;
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema;
+}
+
+/** @internal */
+export const CreatePromptResponseFormat3$inboundSchema: z.ZodType<
+  CreatePromptResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
+});
+
+/** @internal */
+export type CreatePromptResponseFormat3$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const CreatePromptResponseFormat3$outboundSchema: z.ZodType<
+  CreatePromptResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  CreatePromptResponseFormat3
+> = z.object({
+  type:
+    CreatePromptResponseFormatPromptsResponse200ApplicationJSONType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptResponseFormat3$ {
+  /** @deprecated use `CreatePromptResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptResponseFormat3$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptResponseFormat3$outboundSchema;
+  /** @deprecated use `CreatePromptResponseFormat3$Outbound` instead. */
+  export type Outbound = CreatePromptResponseFormat3$Outbound;
+}
+
+export function createPromptResponseFormat3ToJSON(
+  createPromptResponseFormat3: CreatePromptResponseFormat3,
+): string {
+  return JSON.stringify(
+    CreatePromptResponseFormat3$outboundSchema.parse(
+      createPromptResponseFormat3,
+    ),
+  );
+}
+
+export function createPromptResponseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponse200Type> = z
+    .nativeEnum(CreatePromptResponseFormatPromptsResponse200Type);
+
+/** @internal */
+export const CreatePromptResponseFormatPromptsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponse200Type> =
+    CreatePromptResponseFormatPromptsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreatePromptResponseFormatPromptsResponse200Type$ {
+  /** @deprecated use `CreatePromptResponseFormatPromptsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreatePromptResponseFormatPromptsResponse200Type$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatPromptsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreatePromptResponseFormatPromptsResponse200Type$outboundSchema;
 }
 
 /** @internal */
@@ -2597,7 +2798,7 @@ export const CreatePromptResponseFormat2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
+  type: CreatePromptResponseFormatPromptsResponse200Type$inboundSchema,
 });
 
 /** @internal */
@@ -2611,7 +2812,7 @@ export const CreatePromptResponseFormat2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptResponseFormat2
 > = z.object({
-  type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
+  type: CreatePromptResponseFormatPromptsResponse200Type$outboundSchema,
 });
 
 /**
@@ -2648,27 +2849,26 @@ export function createPromptResponseFormat2FromJSON(
 }
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> = z.nativeEnum(
-    CreatePromptResponseFormatPromptsType,
-  );
+export const CreatePromptResponseFormatPromptsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponseType> = z
+    .nativeEnum(CreatePromptResponseFormatPromptsResponseType);
 
 /** @internal */
-export const CreatePromptResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsType> =
-    CreatePromptResponseFormatPromptsType$inboundSchema;
+export const CreatePromptResponseFormatPromptsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof CreatePromptResponseFormatPromptsResponseType> =
+    CreatePromptResponseFormatPromptsResponseType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptResponseFormatPromptsType$ {
-  /** @deprecated use `CreatePromptResponseFormatPromptsType$inboundSchema` instead. */
+export namespace CreatePromptResponseFormatPromptsResponseType$ {
+  /** @deprecated use `CreatePromptResponseFormatPromptsResponseType$inboundSchema` instead. */
   export const inboundSchema =
-    CreatePromptResponseFormatPromptsType$inboundSchema;
-  /** @deprecated use `CreatePromptResponseFormatPromptsType$outboundSchema` instead. */
+    CreatePromptResponseFormatPromptsResponseType$inboundSchema;
+  /** @deprecated use `CreatePromptResponseFormatPromptsResponseType$outboundSchema` instead. */
   export const outboundSchema =
-    CreatePromptResponseFormatPromptsType$outboundSchema;
+    CreatePromptResponseFormatPromptsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -2742,7 +2942,7 @@ export const CreatePromptResponseFormat1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreatePromptResponseFormatPromptsType$inboundSchema,
+  type: CreatePromptResponseFormatPromptsResponseType$inboundSchema,
   json_schema: z.lazy(() => CreatePromptResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2762,7 +2962,7 @@ export const CreatePromptResponseFormat1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptResponseFormat1
 > = z.object({
-  type: CreatePromptResponseFormatPromptsType$outboundSchema,
+  type: CreatePromptResponseFormatPromptsResponseType$outboundSchema,
   jsonSchema: z.lazy(() => CreatePromptResponseFormatJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -2811,12 +3011,14 @@ export const CreatePromptResponseFormat$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
   z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
+  z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type CreatePromptResponseFormat$Outbound =
   | CreatePromptResponseFormat1$Outbound
-  | CreatePromptResponseFormat2$Outbound;
+  | CreatePromptResponseFormat2$Outbound
+  | CreatePromptResponseFormat3$Outbound;
 
 /** @internal */
 export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
@@ -2826,6 +3028,7 @@ export const CreatePromptResponseFormat$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
   z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
+  z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
 ]);
 
 /**
@@ -2965,6 +3168,7 @@ export const CreatePromptModelParameters$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => CreatePromptResponseFormat1$inboundSchema),
       z.lazy(() => CreatePromptResponseFormat2$inboundSchema),
+      z.lazy(() => CreatePromptResponseFormat3$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$inboundSchema.optional(),
@@ -2995,6 +3199,7 @@ export type CreatePromptModelParameters$Outbound = {
   responseFormat?:
     | CreatePromptResponseFormat1$Outbound
     | CreatePromptResponseFormat2$Outbound
+    | CreatePromptResponseFormat3$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -3026,6 +3231,7 @@ export const CreatePromptModelParameters$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => CreatePromptResponseFormat1$outboundSchema),
       z.lazy(() => CreatePromptResponseFormat2$outboundSchema),
+      z.lazy(() => CreatePromptResponseFormat3$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: CreatePromptPhotoRealVersion$outboundSchema.optional(),

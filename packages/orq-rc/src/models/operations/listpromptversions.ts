@@ -69,6 +69,17 @@ export type ListPromptVersionsFormat = ClosedEnum<
   typeof ListPromptVersionsFormat
 >;
 
+export const ListPromptVersionsResponseFormatPromptsResponseType = {
+  Text: "text",
+} as const;
+export type ListPromptVersionsResponseFormatPromptsResponseType = ClosedEnum<
+  typeof ListPromptVersionsResponseFormatPromptsResponseType
+>;
+
+export type ListPromptVersionsResponseFormat3 = {
+  type: ListPromptVersionsResponseFormatPromptsResponseType;
+};
+
 export const ListPromptVersionsResponseFormatPromptsType = {
   JsonObject: "json_object",
 } as const;
@@ -111,7 +122,8 @@ export type ListPromptVersionsResponseFormat1 = {
  */
 export type ListPromptVersionsResponseFormat =
   | ListPromptVersionsResponseFormat1
-  | ListPromptVersionsResponseFormat2;
+  | ListPromptVersionsResponseFormat2
+  | ListPromptVersionsResponseFormat3;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -238,6 +250,7 @@ export type ListPromptVersionsModelParameters = {
   responseFormat?:
     | ListPromptVersionsResponseFormat1
     | ListPromptVersionsResponseFormat2
+    | ListPromptVersionsResponseFormat3
     | null
     | undefined;
   /**
@@ -678,6 +691,86 @@ export namespace ListPromptVersionsFormat$ {
 }
 
 /** @internal */
+export const ListPromptVersionsResponseFormatPromptsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof ListPromptVersionsResponseFormatPromptsResponseType> =
+    z.nativeEnum(ListPromptVersionsResponseFormatPromptsResponseType);
+
+/** @internal */
+export const ListPromptVersionsResponseFormatPromptsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof ListPromptVersionsResponseFormatPromptsResponseType> =
+    ListPromptVersionsResponseFormatPromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListPromptVersionsResponseFormatPromptsResponseType$ {
+  /** @deprecated use `ListPromptVersionsResponseFormatPromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListPromptVersionsResponseFormatPromptsResponseType$inboundSchema;
+  /** @deprecated use `ListPromptVersionsResponseFormatPromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListPromptVersionsResponseFormatPromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const ListPromptVersionsResponseFormat3$inboundSchema: z.ZodType<
+  ListPromptVersionsResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ListPromptVersionsResponseFormatPromptsResponseType$inboundSchema,
+});
+
+/** @internal */
+export type ListPromptVersionsResponseFormat3$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const ListPromptVersionsResponseFormat3$outboundSchema: z.ZodType<
+  ListPromptVersionsResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  ListPromptVersionsResponseFormat3
+> = z.object({
+  type: ListPromptVersionsResponseFormatPromptsResponseType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListPromptVersionsResponseFormat3$ {
+  /** @deprecated use `ListPromptVersionsResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = ListPromptVersionsResponseFormat3$inboundSchema;
+  /** @deprecated use `ListPromptVersionsResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema =
+    ListPromptVersionsResponseFormat3$outboundSchema;
+  /** @deprecated use `ListPromptVersionsResponseFormat3$Outbound` instead. */
+  export type Outbound = ListPromptVersionsResponseFormat3$Outbound;
+}
+
+export function listPromptVersionsResponseFormat3ToJSON(
+  listPromptVersionsResponseFormat3: ListPromptVersionsResponseFormat3,
+): string {
+  return JSON.stringify(
+    ListPromptVersionsResponseFormat3$outboundSchema.parse(
+      listPromptVersionsResponseFormat3,
+    ),
+  );
+}
+
+export function listPromptVersionsResponseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<ListPromptVersionsResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListPromptVersionsResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListPromptVersionsResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListPromptVersionsResponseFormatPromptsType$inboundSchema:
   z.ZodNativeEnum<typeof ListPromptVersionsResponseFormatPromptsType> = z
     .nativeEnum(ListPromptVersionsResponseFormatPromptsType);
@@ -931,12 +1024,14 @@ export const ListPromptVersionsResponseFormat$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ListPromptVersionsResponseFormat1$inboundSchema),
   z.lazy(() => ListPromptVersionsResponseFormat2$inboundSchema),
+  z.lazy(() => ListPromptVersionsResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type ListPromptVersionsResponseFormat$Outbound =
   | ListPromptVersionsResponseFormat1$Outbound
-  | ListPromptVersionsResponseFormat2$Outbound;
+  | ListPromptVersionsResponseFormat2$Outbound
+  | ListPromptVersionsResponseFormat3$Outbound;
 
 /** @internal */
 export const ListPromptVersionsResponseFormat$outboundSchema: z.ZodType<
@@ -946,6 +1041,7 @@ export const ListPromptVersionsResponseFormat$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => ListPromptVersionsResponseFormat1$outboundSchema),
   z.lazy(() => ListPromptVersionsResponseFormat2$outboundSchema),
+  z.lazy(() => ListPromptVersionsResponseFormat3$outboundSchema),
 ]);
 
 /**
@@ -1089,6 +1185,7 @@ export const ListPromptVersionsModelParameters$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => ListPromptVersionsResponseFormat1$inboundSchema),
       z.lazy(() => ListPromptVersionsResponseFormat2$inboundSchema),
+      z.lazy(() => ListPromptVersionsResponseFormat3$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: ListPromptVersionsPhotoRealVersion$inboundSchema.optional(),
@@ -1119,6 +1216,7 @@ export type ListPromptVersionsModelParameters$Outbound = {
   responseFormat?:
     | ListPromptVersionsResponseFormat1$Outbound
     | ListPromptVersionsResponseFormat2$Outbound
+    | ListPromptVersionsResponseFormat3$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1150,6 +1248,7 @@ export const ListPromptVersionsModelParameters$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => ListPromptVersionsResponseFormat1$outboundSchema),
       z.lazy(() => ListPromptVersionsResponseFormat2$outboundSchema),
+      z.lazy(() => ListPromptVersionsResponseFormat3$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: ListPromptVersionsPhotoRealVersion$outboundSchema

@@ -67,6 +67,17 @@ export const GetAllPromptsFormat = {
  */
 export type GetAllPromptsFormat = ClosedEnum<typeof GetAllPromptsFormat>;
 
+export const GetAllPromptsResponseFormatPromptsResponseType = {
+  Text: "text",
+} as const;
+export type GetAllPromptsResponseFormatPromptsResponseType = ClosedEnum<
+  typeof GetAllPromptsResponseFormatPromptsResponseType
+>;
+
+export type GetAllPromptsResponseFormat3 = {
+  type: GetAllPromptsResponseFormatPromptsResponseType;
+};
+
 export const GetAllPromptsResponseFormatPromptsType = {
   JsonObject: "json_object",
 } as const;
@@ -109,7 +120,8 @@ export type GetAllPromptsResponseFormat1 = {
  */
 export type GetAllPromptsResponseFormat =
   | GetAllPromptsResponseFormat1
-  | GetAllPromptsResponseFormat2;
+  | GetAllPromptsResponseFormat2
+  | GetAllPromptsResponseFormat3;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -234,6 +246,7 @@ export type GetAllPromptsModelParameters = {
   responseFormat?:
     | GetAllPromptsResponseFormat1
     | GetAllPromptsResponseFormat2
+    | GetAllPromptsResponseFormat3
     | null
     | undefined;
   /**
@@ -690,6 +703,85 @@ export namespace GetAllPromptsFormat$ {
 }
 
 /** @internal */
+export const GetAllPromptsResponseFormatPromptsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponseType> = z
+    .nativeEnum(GetAllPromptsResponseFormatPromptsResponseType);
+
+/** @internal */
+export const GetAllPromptsResponseFormatPromptsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponseType> =
+    GetAllPromptsResponseFormatPromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsResponseFormatPromptsResponseType$ {
+  /** @deprecated use `GetAllPromptsResponseFormatPromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetAllPromptsResponseFormatPromptsResponseType$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormatPromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPromptsResponseFormatPromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormat3$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptsResponseFormatPromptsResponseType$inboundSchema,
+});
+
+/** @internal */
+export type GetAllPromptsResponseFormat3$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const GetAllPromptsResponseFormat3$outboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsResponseFormat3
+> = z.object({
+  type: GetAllPromptsResponseFormatPromptsResponseType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsResponseFormat3$ {
+  /** @deprecated use `GetAllPromptsResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsResponseFormat3$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsResponseFormat3$outboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormat3$Outbound` instead. */
+  export type Outbound = GetAllPromptsResponseFormat3$Outbound;
+}
+
+export function getAllPromptsResponseFormat3ToJSON(
+  getAllPromptsResponseFormat3: GetAllPromptsResponseFormat3,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormat3$outboundSchema.parse(
+      getAllPromptsResponseFormat3,
+    ),
+  );
+}
+
+export function getAllPromptsResponseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsResponseFormatPromptsType$inboundSchema:
   z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> = z.nativeEnum(
     GetAllPromptsResponseFormatPromptsType,
@@ -934,12 +1026,14 @@ export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type GetAllPromptsResponseFormat$Outbound =
   | GetAllPromptsResponseFormat1$Outbound
-  | GetAllPromptsResponseFormat2$Outbound;
+  | GetAllPromptsResponseFormat2$Outbound
+  | GetAllPromptsResponseFormat3$Outbound;
 
 /** @internal */
 export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
@@ -949,6 +1043,7 @@ export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormat3$outboundSchema),
 ]);
 
 /**
@@ -1090,6 +1185,7 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
+      z.lazy(() => GetAllPromptsResponseFormat3$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$inboundSchema.optional(),
@@ -1120,6 +1216,7 @@ export type GetAllPromptsModelParameters$Outbound = {
   responseFormat?:
     | GetAllPromptsResponseFormat1$Outbound
     | GetAllPromptsResponseFormat2$Outbound
+    | GetAllPromptsResponseFormat3$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1151,6 +1248,7 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
+      z.lazy(() => GetAllPromptsResponseFormat3$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$outboundSchema.optional(),

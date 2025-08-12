@@ -8,7 +8,7 @@ dotenv.config();
  * Example usage of the @orq-ai/node SDK
  *
  * To run this example from the examples directory:
- * npm run build && npx tsx contactsCreate.ts
+ * npm run build && npx tsx contactsCreate.example.ts
  */
 
 import { Orq } from "@orq-ai/node";

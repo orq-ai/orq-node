@@ -35,3 +35,11 @@ const value: operations.UpdatePromptResponseFormatPrompts2 = {
 };
 ```
 
+### `operations.UpdatePromptResponseFormatPrompts3`
+
+```typescript
+const value: operations.UpdatePromptResponseFormatPrompts3 = {
+  type: "text",
+};
+```
+

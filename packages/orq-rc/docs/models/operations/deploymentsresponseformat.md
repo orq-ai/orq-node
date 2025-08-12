@@ -31,3 +31,11 @@ const value: operations.DeploymentsResponseFormat2 = {
 };
 ```
 
+### `operations.DeploymentsResponseFormat3`
+
+```typescript
+const value: operations.DeploymentsResponseFormat3 = {
+  type: "text",
+};
+```
+

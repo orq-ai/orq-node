@@ -34,3 +34,11 @@ const value: operations.ListPromptVersionsResponseFormat2 = {
 };
 ```
 
+### `operations.ListPromptVersionsResponseFormat3`
+
+```typescript
+const value: operations.ListPromptVersionsResponseFormat3 = {
+  type: "text",
+};
+```
+

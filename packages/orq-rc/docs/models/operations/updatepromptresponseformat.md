@@ -31,3 +31,11 @@ const value: operations.UpdatePromptResponseFormat2 = {
 };
 ```
 
+### `operations.UpdatePromptResponseFormat3`
+
+```typescript
+const value: operations.UpdatePromptResponseFormat3 = {
+  type: "text",
+};
+```
+

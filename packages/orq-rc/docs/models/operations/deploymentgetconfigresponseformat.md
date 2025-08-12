@@ -34,3 +34,11 @@ const value: operations.DeploymentGetConfigResponseFormat2 = {
 };
 ```
 
+### `operations.DeploymentGetConfigResponseFormat3`
+
+```typescript
+const value: operations.DeploymentGetConfigResponseFormat3 = {
+  type: "text",
+};
+```
+

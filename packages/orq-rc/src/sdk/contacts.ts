@@ -16,7 +16,7 @@ export class Contacts extends ClientSDK {
    * Create a contact
    *
    * @remarks
-   * Creates a new contact or updates an existing one based on external_id. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
+   * Creates a new contact with a unique external_id. If a contact with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
    */
   async create(
     request?: operations.CreateContactRequestBody | undefined,

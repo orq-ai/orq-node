@@ -34,3 +34,11 @@ const value: operations.ResponseFormat2 = {
 };
 ```
 
+### `operations.ResponseFormat3`
+
+```typescript
+const value: operations.ResponseFormat3 = {
+  type: "text",
+};
+```
+

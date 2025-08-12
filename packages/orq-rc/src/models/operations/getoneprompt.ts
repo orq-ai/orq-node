@@ -54,6 +54,17 @@ export const GetOnePromptFormat = {
  */
 export type GetOnePromptFormat = ClosedEnum<typeof GetOnePromptFormat>;
 
+export const GetOnePromptResponseFormatPromptsResponseType = {
+  Text: "text",
+} as const;
+export type GetOnePromptResponseFormatPromptsResponseType = ClosedEnum<
+  typeof GetOnePromptResponseFormatPromptsResponseType
+>;
+
+export type GetOnePromptResponseFormat3 = {
+  type: GetOnePromptResponseFormatPromptsResponseType;
+};
+
 export const GetOnePromptResponseFormatPromptsType = {
   JsonObject: "json_object",
 } as const;
@@ -96,7 +107,8 @@ export type GetOnePromptResponseFormat1 = {
  */
 export type GetOnePromptResponseFormat =
   | GetOnePromptResponseFormat1
-  | GetOnePromptResponseFormat2;
+  | GetOnePromptResponseFormat2
+  | GetOnePromptResponseFormat3;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -221,6 +233,7 @@ export type GetOnePromptModelParameters = {
   responseFormat?:
     | GetOnePromptResponseFormat1
     | GetOnePromptResponseFormat2
+    | GetOnePromptResponseFormat3
     | null
     | undefined;
   /**
@@ -634,6 +647,85 @@ export namespace GetOnePromptFormat$ {
 }
 
 /** @internal */
+export const GetOnePromptResponseFormatPromptsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponseType> = z
+    .nativeEnum(GetOnePromptResponseFormatPromptsResponseType);
+
+/** @internal */
+export const GetOnePromptResponseFormatPromptsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponseType> =
+    GetOnePromptResponseFormatPromptsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOnePromptResponseFormatPromptsResponseType$ {
+  /** @deprecated use `GetOnePromptResponseFormatPromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOnePromptResponseFormatPromptsResponseType$inboundSchema;
+  /** @deprecated use `GetOnePromptResponseFormatPromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOnePromptResponseFormatPromptsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const GetOnePromptResponseFormat3$inboundSchema: z.ZodType<
+  GetOnePromptResponseFormat3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetOnePromptResponseFormatPromptsResponseType$inboundSchema,
+});
+
+/** @internal */
+export type GetOnePromptResponseFormat3$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const GetOnePromptResponseFormat3$outboundSchema: z.ZodType<
+  GetOnePromptResponseFormat3$Outbound,
+  z.ZodTypeDef,
+  GetOnePromptResponseFormat3
+> = z.object({
+  type: GetOnePromptResponseFormatPromptsResponseType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOnePromptResponseFormat3$ {
+  /** @deprecated use `GetOnePromptResponseFormat3$inboundSchema` instead. */
+  export const inboundSchema = GetOnePromptResponseFormat3$inboundSchema;
+  /** @deprecated use `GetOnePromptResponseFormat3$outboundSchema` instead. */
+  export const outboundSchema = GetOnePromptResponseFormat3$outboundSchema;
+  /** @deprecated use `GetOnePromptResponseFormat3$Outbound` instead. */
+  export type Outbound = GetOnePromptResponseFormat3$Outbound;
+}
+
+export function getOnePromptResponseFormat3ToJSON(
+  getOnePromptResponseFormat3: GetOnePromptResponseFormat3,
+): string {
+  return JSON.stringify(
+    GetOnePromptResponseFormat3$outboundSchema.parse(
+      getOnePromptResponseFormat3,
+    ),
+  );
+}
+
+export function getOnePromptResponseFormat3FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOnePromptResponseFormat3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOnePromptResponseFormat3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptResponseFormat3' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetOnePromptResponseFormatPromptsType$inboundSchema:
   z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsType> = z.nativeEnum(
     GetOnePromptResponseFormatPromptsType,
@@ -874,12 +966,14 @@ export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
   z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
+  z.lazy(() => GetOnePromptResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type GetOnePromptResponseFormat$Outbound =
   | GetOnePromptResponseFormat1$Outbound
-  | GetOnePromptResponseFormat2$Outbound;
+  | GetOnePromptResponseFormat2$Outbound
+  | GetOnePromptResponseFormat3$Outbound;
 
 /** @internal */
 export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
@@ -889,6 +983,7 @@ export const GetOnePromptResponseFormat$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
   z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
+  z.lazy(() => GetOnePromptResponseFormat3$outboundSchema),
 ]);
 
 /**
@@ -1028,6 +1123,7 @@ export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
       z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
+      z.lazy(() => GetOnePromptResponseFormat3$inboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$inboundSchema.optional(),
@@ -1058,6 +1154,7 @@ export type GetOnePromptModelParameters$Outbound = {
   responseFormat?:
     | GetOnePromptResponseFormat1$Outbound
     | GetOnePromptResponseFormat2$Outbound
+    | GetOnePromptResponseFormat3$Outbound
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1089,6 +1186,7 @@ export const GetOnePromptModelParameters$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => GetOnePromptResponseFormat1$outboundSchema),
       z.lazy(() => GetOnePromptResponseFormat2$outboundSchema),
+      z.lazy(() => GetOnePromptResponseFormat3$outboundSchema),
     ]),
   ).optional(),
   photoRealVersion: GetOnePromptPhotoRealVersion$outboundSchema.optional(),
