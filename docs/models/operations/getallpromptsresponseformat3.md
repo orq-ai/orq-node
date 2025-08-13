@@ -6,7 +6,7 @@
 import { GetAllPromptsResponseFormat3 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsResponseFormat3 = {
-  type: "json_object",
+  type: "text",
 };
 ```
 

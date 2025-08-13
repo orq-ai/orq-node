@@ -6,7 +6,7 @@
 import { GetOnePromptResponseFormat3 } from "@orq-ai/node/models/operations";
 
 let value: GetOnePromptResponseFormat3 = {
-  type: "json_object",
+  type: "text",
 };
 ```
 

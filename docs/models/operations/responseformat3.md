@@ -6,7 +6,7 @@
 import { ResponseFormat3 } from "@orq-ai/node/models/operations";
 
 let value: ResponseFormat3 = {
-  type: "json_object",
+  type: "text",
 };
 ```
 

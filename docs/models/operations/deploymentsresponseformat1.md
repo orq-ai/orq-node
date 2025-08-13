@@ -6,7 +6,11 @@
 import { DeploymentsResponseFormat1 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentsResponseFormat1 = {
-  type: "text",
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+    schema: {},
+  },
 };
 ```
 
@@ -15,3 +19,4 @@ let value: DeploymentsResponseFormat1 = {
 | Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `type`                                                                                                                                     | [operations.DeploymentsResponseFormatDeploymentsResponseType](../../models/operations/deploymentsresponseformatdeploymentsresponsetype.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `jsonSchema`                                                                                                                               | [operations.DeploymentsResponseFormatJsonSchema](../../models/operations/deploymentsresponseformatjsonschema.md)                           | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |

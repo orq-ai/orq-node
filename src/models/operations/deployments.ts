@@ -124,7 +124,7 @@ export const DeploymentsFormat = {
 export type DeploymentsFormat = ClosedEnum<typeof DeploymentsFormat>;
 
 export const DeploymentsResponseFormatDeploymentsType = {
-  JsonObject: "json_object",
+  Text: "text",
 } as const;
 export type DeploymentsResponseFormatDeploymentsType = ClosedEnum<
   typeof DeploymentsResponseFormatDeploymentsType
@@ -135,10 +135,21 @@ export type DeploymentsResponseFormat3 = {
 };
 
 export const DeploymentsResponseFormatType = {
-  JsonSchema: "json_schema",
+  JsonObject: "json_object",
 } as const;
 export type DeploymentsResponseFormatType = ClosedEnum<
   typeof DeploymentsResponseFormatType
+>;
+
+export type DeploymentsResponseFormat2 = {
+  type: DeploymentsResponseFormatType;
+};
+
+export const DeploymentsResponseFormatDeploymentsResponseType = {
+  JsonSchema: "json_schema",
+} as const;
+export type DeploymentsResponseFormatDeploymentsResponseType = ClosedEnum<
+  typeof DeploymentsResponseFormatDeploymentsResponseType
 >;
 
 export type DeploymentsResponseFormatJsonSchema = {
@@ -147,20 +158,9 @@ export type DeploymentsResponseFormatJsonSchema = {
   schema: { [k: string]: any };
 };
 
-export type DeploymentsResponseFormat2 = {
-  type: DeploymentsResponseFormatType;
-  jsonSchema: DeploymentsResponseFormatJsonSchema;
-};
-
-export const DeploymentsResponseFormatDeploymentsResponseType = {
-  Text: "text",
-} as const;
-export type DeploymentsResponseFormatDeploymentsResponseType = ClosedEnum<
-  typeof DeploymentsResponseFormatDeploymentsResponseType
->;
-
 export type DeploymentsResponseFormat1 = {
   type: DeploymentsResponseFormatDeploymentsResponseType;
+  jsonSchema: DeploymentsResponseFormatJsonSchema;
 };
 
 /**
@@ -175,8 +175,8 @@ export type DeploymentsResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type DeploymentsResponseFormat =
-  | DeploymentsResponseFormat2
   | DeploymentsResponseFormat1
+  | DeploymentsResponseFormat2
   | DeploymentsResponseFormat3;
 
 /**
@@ -300,8 +300,8 @@ export type DeploymentsModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | DeploymentsResponseFormat2
     | DeploymentsResponseFormat1
+    | DeploymentsResponseFormat2
     | DeploymentsResponseFormat3
     | null
     | undefined;
@@ -1002,6 +1002,83 @@ export namespace DeploymentsResponseFormatType$ {
 }
 
 /** @internal */
+export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
+  DeploymentsResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentsResponseFormatType$inboundSchema,
+});
+
+/** @internal */
+export type DeploymentsResponseFormat2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const DeploymentsResponseFormat2$outboundSchema: z.ZodType<
+  DeploymentsResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  DeploymentsResponseFormat2
+> = z.object({
+  type: DeploymentsResponseFormatType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsResponseFormat2$ {
+  /** @deprecated use `DeploymentsResponseFormat2$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsResponseFormat2$inboundSchema;
+  /** @deprecated use `DeploymentsResponseFormat2$outboundSchema` instead. */
+  export const outboundSchema = DeploymentsResponseFormat2$outboundSchema;
+  /** @deprecated use `DeploymentsResponseFormat2$Outbound` instead. */
+  export type Outbound = DeploymentsResponseFormat2$Outbound;
+}
+
+export function deploymentsResponseFormat2ToJSON(
+  deploymentsResponseFormat2: DeploymentsResponseFormat2,
+): string {
+  return JSON.stringify(
+    DeploymentsResponseFormat2$outboundSchema.parse(deploymentsResponseFormat2),
+  );
+}
+
+export function deploymentsResponseFormat2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentsResponseFormat2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentsResponseFormat2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentsResponseFormatDeploymentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> = z
+    .nativeEnum(DeploymentsResponseFormatDeploymentsResponseType);
+
+/** @internal */
+export const DeploymentsResponseFormatDeploymentsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> =
+    DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsResponseFormatDeploymentsResponseType$ {
+  /** @deprecated use `DeploymentsResponseFormatDeploymentsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
+  /** @deprecated use `DeploymentsResponseFormatDeploymentsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentsResponseFormatDeploymentsResponseType$outboundSchema;
+}
+
+/** @internal */
 export const DeploymentsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   DeploymentsResponseFormatJsonSchema,
   z.ZodTypeDef,
@@ -1067,12 +1144,12 @@ export function deploymentsResponseFormatJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
-  DeploymentsResponseFormat2,
+export const DeploymentsResponseFormat1$inboundSchema: z.ZodType<
+  DeploymentsResponseFormat1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: DeploymentsResponseFormatType$inboundSchema,
+  type: DeploymentsResponseFormatDeploymentsResponseType$inboundSchema,
   json_schema: z.lazy(() => DeploymentsResponseFormatJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -1081,91 +1158,9 @@ export const DeploymentsResponseFormat2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type DeploymentsResponseFormat2$Outbound = {
-  type: string;
-  json_schema: DeploymentsResponseFormatJsonSchema$Outbound;
-};
-
-/** @internal */
-export const DeploymentsResponseFormat2$outboundSchema: z.ZodType<
-  DeploymentsResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  DeploymentsResponseFormat2
-> = z.object({
-  type: DeploymentsResponseFormatType$outboundSchema,
-  jsonSchema: z.lazy(() => DeploymentsResponseFormatJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormat2$ {
-  /** @deprecated use `DeploymentsResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = DeploymentsResponseFormat2$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = DeploymentsResponseFormat2$outboundSchema;
-  /** @deprecated use `DeploymentsResponseFormat2$Outbound` instead. */
-  export type Outbound = DeploymentsResponseFormat2$Outbound;
-}
-
-export function deploymentsResponseFormat2ToJSON(
-  deploymentsResponseFormat2: DeploymentsResponseFormat2,
-): string {
-  return JSON.stringify(
-    DeploymentsResponseFormat2$outboundSchema.parse(deploymentsResponseFormat2),
-  );
-}
-
-export function deploymentsResponseFormat2FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentsResponseFormat2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => DeploymentsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentsResponseFormat2' from JSON`,
-  );
-}
-
-/** @internal */
-export const DeploymentsResponseFormatDeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> = z
-    .nativeEnum(DeploymentsResponseFormatDeploymentsResponseType);
-
-/** @internal */
-export const DeploymentsResponseFormatDeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentsResponseFormatDeploymentsResponseType> =
-    DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentsResponseFormatDeploymentsResponseType$ {
-  /** @deprecated use `DeploymentsResponseFormatDeploymentsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentsResponseFormatDeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentsResponseFormatDeploymentsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentsResponseFormatDeploymentsResponseType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentsResponseFormat1$inboundSchema: z.ZodType<
-  DeploymentsResponseFormat1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentsResponseFormatDeploymentsResponseType$inboundSchema,
-});
-
-/** @internal */
 export type DeploymentsResponseFormat1$Outbound = {
   type: string;
+  json_schema: DeploymentsResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
@@ -1175,6 +1170,11 @@ export const DeploymentsResponseFormat1$outboundSchema: z.ZodType<
   DeploymentsResponseFormat1
 > = z.object({
   type: DeploymentsResponseFormatDeploymentsResponseType$outboundSchema,
+  jsonSchema: z.lazy(() => DeploymentsResponseFormatJsonSchema$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
 });
 
 /**
@@ -1214,15 +1214,15 @@ export const DeploymentsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
   z.lazy(() => DeploymentsResponseFormat1$inboundSchema),
+  z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
   z.lazy(() => DeploymentsResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type DeploymentsResponseFormat$Outbound =
-  | DeploymentsResponseFormat2$Outbound
   | DeploymentsResponseFormat1$Outbound
+  | DeploymentsResponseFormat2$Outbound
   | DeploymentsResponseFormat3$Outbound;
 
 /** @internal */
@@ -1231,8 +1231,8 @@ export const DeploymentsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentsResponseFormat
 > = z.union([
-  z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
   z.lazy(() => DeploymentsResponseFormat1$outboundSchema),
+  z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
   z.lazy(() => DeploymentsResponseFormat3$outboundSchema),
 ]);
 
@@ -1371,8 +1371,8 @@ export const DeploymentsModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
       z.lazy(() => DeploymentsResponseFormat1$inboundSchema),
+      z.lazy(() => DeploymentsResponseFormat2$inboundSchema),
       z.lazy(() => DeploymentsResponseFormat3$inboundSchema),
     ]),
   ).optional(),
@@ -1402,8 +1402,8 @@ export type DeploymentsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | DeploymentsResponseFormat2$Outbound
     | DeploymentsResponseFormat1$Outbound
+    | DeploymentsResponseFormat2$Outbound
     | DeploymentsResponseFormat3$Outbound
     | null
     | undefined;
@@ -1434,8 +1434,8 @@ export const DeploymentsModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
       z.lazy(() => DeploymentsResponseFormat1$outboundSchema),
+      z.lazy(() => DeploymentsResponseFormat2$outboundSchema),
       z.lazy(() => DeploymentsResponseFormat3$outboundSchema),
     ]),
   ).optional(),

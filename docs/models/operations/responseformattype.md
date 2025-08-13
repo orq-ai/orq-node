@@ -5,11 +5,11 @@
 ```typescript
 import { ResponseFormatType } from "@orq-ai/node/models/operations";
 
-let value: ResponseFormatType = "text";
+let value: ResponseFormatType = "json_schema";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"json_schema"
 ```

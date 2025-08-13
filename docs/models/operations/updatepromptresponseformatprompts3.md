@@ -6,7 +6,7 @@
 import { UpdatePromptResponseFormatPrompts3 } from "@orq-ai/node/models/operations";
 
 let value: UpdatePromptResponseFormatPrompts3 = {
-  type: "json_object",
+  type: "text",
 };
 ```
 

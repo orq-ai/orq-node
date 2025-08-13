@@ -68,7 +68,7 @@ export const GetAllPromptsFormat = {
 export type GetAllPromptsFormat = ClosedEnum<typeof GetAllPromptsFormat>;
 
 export const GetAllPromptsResponseFormatPromptsResponseType = {
-  JsonObject: "json_object",
+  Text: "text",
 } as const;
 export type GetAllPromptsResponseFormatPromptsResponseType = ClosedEnum<
   typeof GetAllPromptsResponseFormatPromptsResponseType
@@ -79,10 +79,21 @@ export type GetAllPromptsResponseFormat3 = {
 };
 
 export const GetAllPromptsResponseFormatPromptsType = {
-  JsonSchema: "json_schema",
+  JsonObject: "json_object",
 } as const;
 export type GetAllPromptsResponseFormatPromptsType = ClosedEnum<
   typeof GetAllPromptsResponseFormatPromptsType
+>;
+
+export type GetAllPromptsResponseFormat2 = {
+  type: GetAllPromptsResponseFormatPromptsType;
+};
+
+export const GetAllPromptsResponseFormatType = {
+  JsonSchema: "json_schema",
+} as const;
+export type GetAllPromptsResponseFormatType = ClosedEnum<
+  typeof GetAllPromptsResponseFormatType
 >;
 
 export type GetAllPromptsResponseFormatJsonSchema = {
@@ -91,20 +102,9 @@ export type GetAllPromptsResponseFormatJsonSchema = {
   schema: { [k: string]: any };
 };
 
-export type GetAllPromptsResponseFormat2 = {
-  type: GetAllPromptsResponseFormatPromptsType;
-  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
-};
-
-export const GetAllPromptsResponseFormatType = {
-  Text: "text",
-} as const;
-export type GetAllPromptsResponseFormatType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatType
->;
-
 export type GetAllPromptsResponseFormat1 = {
   type: GetAllPromptsResponseFormatType;
+  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
 };
 
 /**
@@ -119,8 +119,8 @@ export type GetAllPromptsResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type GetAllPromptsResponseFormat =
-  | GetAllPromptsResponseFormat2
   | GetAllPromptsResponseFormat1
+  | GetAllPromptsResponseFormat2
   | GetAllPromptsResponseFormat3;
 
 /**
@@ -244,8 +244,8 @@ export type GetAllPromptsModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | GetAllPromptsResponseFormat2
     | GetAllPromptsResponseFormat1
+    | GetAllPromptsResponseFormat2
     | GetAllPromptsResponseFormat3
     | null
     | undefined;
@@ -806,6 +806,83 @@ export namespace GetAllPromptsResponseFormatPromptsType$ {
 }
 
 /** @internal */
+export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPromptsResponseFormatPromptsType$inboundSchema,
+});
+
+/** @internal */
+export type GetAllPromptsResponseFormat2$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const GetAllPromptsResponseFormat2$outboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat2$Outbound,
+  z.ZodTypeDef,
+  GetAllPromptsResponseFormat2
+> = z.object({
+  type: GetAllPromptsResponseFormatPromptsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsResponseFormat2$ {
+  /** @deprecated use `GetAllPromptsResponseFormat2$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsResponseFormat2$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormat2$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsResponseFormat2$outboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormat2$Outbound` instead. */
+  export type Outbound = GetAllPromptsResponseFormat2$Outbound;
+}
+
+export function getAllPromptsResponseFormat2ToJSON(
+  getAllPromptsResponseFormat2: GetAllPromptsResponseFormat2,
+): string {
+  return JSON.stringify(
+    GetAllPromptsResponseFormat2$outboundSchema.parse(
+      getAllPromptsResponseFormat2,
+    ),
+  );
+}
+
+export function getAllPromptsResponseFormat2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsResponseFormat2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsResponseFormat2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsResponseFormatType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormatType
+> = z.nativeEnum(GetAllPromptsResponseFormatType);
+
+/** @internal */
+export const GetAllPromptsResponseFormatType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormatType
+> = GetAllPromptsResponseFormatType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPromptsResponseFormatType$ {
+  /** @deprecated use `GetAllPromptsResponseFormatType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsResponseFormatType$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormatType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsResponseFormatType$outboundSchema;
+}
+
+/** @internal */
 export const GetAllPromptsResponseFormatJsonSchema$inboundSchema: z.ZodType<
   GetAllPromptsResponseFormatJsonSchema,
   z.ZodTypeDef,
@@ -871,12 +948,12 @@ export function getAllPromptsResponseFormatJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat2,
+export const GetAllPromptsResponseFormat1$inboundSchema: z.ZodType<
+  GetAllPromptsResponseFormat1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: GetAllPromptsResponseFormatPromptsType$inboundSchema,
+  type: GetAllPromptsResponseFormatType$inboundSchema,
   json_schema: z.lazy(() =>
     GetAllPromptsResponseFormatJsonSchema$inboundSchema
   ),
@@ -887,93 +964,9 @@ export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetAllPromptsResponseFormat2$Outbound = {
-  type: string;
-  json_schema: GetAllPromptsResponseFormatJsonSchema$Outbound;
-};
-
-/** @internal */
-export const GetAllPromptsResponseFormat2$outboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  GetAllPromptsResponseFormat2
-> = z.object({
-  type: GetAllPromptsResponseFormatPromptsType$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    GetAllPromptsResponseFormatJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsResponseFormat2$ {
-  /** @deprecated use `GetAllPromptsResponseFormat2$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsResponseFormat2$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormat2$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsResponseFormat2$outboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormat2$Outbound` instead. */
-  export type Outbound = GetAllPromptsResponseFormat2$Outbound;
-}
-
-export function getAllPromptsResponseFormat2ToJSON(
-  getAllPromptsResponseFormat2: GetAllPromptsResponseFormat2,
-): string {
-  return JSON.stringify(
-    GetAllPromptsResponseFormat2$outboundSchema.parse(
-      getAllPromptsResponseFormat2,
-    ),
-  );
-}
-
-export function getAllPromptsResponseFormat2FromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllPromptsResponseFormat2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllPromptsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptsResponseFormat2' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAllPromptsResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = z.nativeEnum(GetAllPromptsResponseFormatType);
-
-/** @internal */
-export const GetAllPromptsResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = GetAllPromptsResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsResponseFormatType$ {
-  /** @deprecated use `GetAllPromptsResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsResponseFormatType$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsResponseFormatType$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsResponseFormat1$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetAllPromptsResponseFormatType$inboundSchema,
-});
-
-/** @internal */
 export type GetAllPromptsResponseFormat1$Outbound = {
   type: string;
+  json_schema: GetAllPromptsResponseFormatJsonSchema$Outbound;
 };
 
 /** @internal */
@@ -983,6 +976,13 @@ export const GetAllPromptsResponseFormat1$outboundSchema: z.ZodType<
   GetAllPromptsResponseFormat1
 > = z.object({
   type: GetAllPromptsResponseFormatType$outboundSchema,
+  jsonSchema: z.lazy(() =>
+    GetAllPromptsResponseFormatJsonSchema$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
 });
 
 /**
@@ -1024,15 +1024,15 @@ export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat3$inboundSchema),
 ]);
 
 /** @internal */
 export type GetAllPromptsResponseFormat$Outbound =
-  | GetAllPromptsResponseFormat2$Outbound
   | GetAllPromptsResponseFormat1$Outbound
+  | GetAllPromptsResponseFormat2$Outbound
   | GetAllPromptsResponseFormat3$Outbound;
 
 /** @internal */
@@ -1041,8 +1041,8 @@ export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsResponseFormat
 > = z.union([
-  z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
+  z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
   z.lazy(() => GetAllPromptsResponseFormat3$outboundSchema),
 ]);
 
@@ -1183,8 +1183,8 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
+      z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat3$inboundSchema),
     ]),
   ).optional(),
@@ -1214,8 +1214,8 @@ export type GetAllPromptsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | GetAllPromptsResponseFormat2$Outbound
     | GetAllPromptsResponseFormat1$Outbound
+    | GetAllPromptsResponseFormat2$Outbound
     | GetAllPromptsResponseFormat3$Outbound
     | null
     | undefined;
@@ -1246,8 +1246,8 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
+      z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
       z.lazy(() => GetAllPromptsResponseFormat3$outboundSchema),
     ]),
   ).optional(),

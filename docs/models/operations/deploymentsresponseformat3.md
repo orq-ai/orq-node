@@ -6,7 +6,7 @@
 import { DeploymentsResponseFormat3 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentsResponseFormat3 = {
-  type: "json_object",
+  type: "text",
 };
 ```
 

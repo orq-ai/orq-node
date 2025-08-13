@@ -6,11 +6,11 @@
 import { CreatePromptResponseFormatPromptsResponse200ApplicationJSONType } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptResponseFormatPromptsResponse200ApplicationJSONType =
-  "json_object";
+  "text";
 ```
 
 ## Values
 
 ```typescript
-"json_object"
+"text"
 ```

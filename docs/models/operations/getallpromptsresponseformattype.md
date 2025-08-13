@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllPromptsResponseFormatType } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsResponseFormatType = "text";
+let value: GetAllPromptsResponseFormatType = "json_schema";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"json_schema"
 ```

@@ -6,7 +6,7 @@
 import { GetPromptVersionResponseFormat3 } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersionResponseFormat3 = {
-  type: "json_object",
+  type: "text",
 };
 ```
 

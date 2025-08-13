@@ -5,11 +5,11 @@
 ```typescript
 import { DeploymentGetConfigResponseFormatType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigResponseFormatType = "json_schema";
+let value: DeploymentGetConfigResponseFormatType = "json_object";
 ```
 
 ## Values
 
 ```typescript
-"json_schema"
+"json_object"
 ```

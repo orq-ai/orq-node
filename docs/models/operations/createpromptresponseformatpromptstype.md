@@ -5,11 +5,11 @@
 ```typescript
 import { CreatePromptResponseFormatPromptsType } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormatPromptsType = "json_object";
+let value: CreatePromptResponseFormatPromptsType = "text";
 ```
 
 ## Values
 
 ```typescript
-"json_object"
+"text"
 ```
