@@ -333,6 +333,105 @@ export type SearchOptions = {
   includeScores?: boolean | undefined;
 };
 
+export const SearchKnowledgeProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
+  Openailike: "openailike",
+  Cerebras: "cerebras",
+} as const;
+export type SearchKnowledgeProvider = ClosedEnum<
+  typeof SearchKnowledgeProvider
+>;
+
+export const SearchKnowledgeModelType = {
+  Rerank: "rerank",
+} as const;
+export type SearchKnowledgeModelType = ClosedEnum<
+  typeof SearchKnowledgeModelType
+>;
+
+export type SearchKnowledgeModelParameters = {
+  /**
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+};
+
+/**
+ * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
+ */
+export type SearchKnowledgeRerankConfig = {
+  enabled?: boolean | undefined;
+  provider?: SearchKnowledgeProvider | undefined;
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
+   * The name of the model to use
+   */
+  model?: string | undefined;
+  /**
+   * The ID of the model in the database
+   */
+  modelDbId?: string | undefined;
+  modelType?: SearchKnowledgeModelType | undefined;
+  modelParameters?: SearchKnowledgeModelParameters | undefined;
+};
+
+export const SearchKnowledgeKnowledgeProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
+  Openailike: "openailike",
+  Cerebras: "cerebras",
+} as const;
+export type SearchKnowledgeKnowledgeProvider = ClosedEnum<
+  typeof SearchKnowledgeKnowledgeProvider
+>;
+
+/**
+ * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
+ */
+export type SearchKnowledgeAgenticRagConfig = {
+  modelDbId: string;
+  provider: SearchKnowledgeKnowledgeProvider;
+  integrationId?: string | null | undefined;
+};
+
 /**
  * A search request for chunks in a knowledge base
  */
@@ -342,7 +441,7 @@ export type SearchKnowledgeRequestBody = {
    */
   query: string;
   /**
-   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`
+   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
    */
   topK?: number | undefined;
   /**
@@ -372,6 +471,14 @@ export type SearchKnowledgeRequestBody = {
    * Additional search options
    */
   searchOptions?: SearchOptions | undefined;
+  /**
+   * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
+   */
+  rerankConfig?: SearchKnowledgeRerankConfig | null | undefined;
+  /**
+   * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
+   */
+  agenticRagConfig?: SearchKnowledgeAgenticRagConfig | undefined;
 };
 
 export type SearchKnowledgeRequest = {
@@ -3043,6 +3150,287 @@ export function searchOptionsFromJSON(
 }
 
 /** @internal */
+export const SearchKnowledgeProvider$inboundSchema: z.ZodNativeEnum<
+  typeof SearchKnowledgeProvider
+> = z.nativeEnum(SearchKnowledgeProvider);
+
+/** @internal */
+export const SearchKnowledgeProvider$outboundSchema: z.ZodNativeEnum<
+  typeof SearchKnowledgeProvider
+> = SearchKnowledgeProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeProvider$ {
+  /** @deprecated use `SearchKnowledgeProvider$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeProvider$inboundSchema;
+  /** @deprecated use `SearchKnowledgeProvider$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeProvider$outboundSchema;
+}
+
+/** @internal */
+export const SearchKnowledgeModelType$inboundSchema: z.ZodNativeEnum<
+  typeof SearchKnowledgeModelType
+> = z.nativeEnum(SearchKnowledgeModelType);
+
+/** @internal */
+export const SearchKnowledgeModelType$outboundSchema: z.ZodNativeEnum<
+  typeof SearchKnowledgeModelType
+> = SearchKnowledgeModelType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeModelType$ {
+  /** @deprecated use `SearchKnowledgeModelType$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeModelType$inboundSchema;
+  /** @deprecated use `SearchKnowledgeModelType$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeModelType$outboundSchema;
+}
+
+/** @internal */
+export const SearchKnowledgeModelParameters$inboundSchema: z.ZodType<
+  SearchKnowledgeModelParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  threshold: z.number().optional(),
+});
+
+/** @internal */
+export type SearchKnowledgeModelParameters$Outbound = {
+  threshold?: number | undefined;
+};
+
+/** @internal */
+export const SearchKnowledgeModelParameters$outboundSchema: z.ZodType<
+  SearchKnowledgeModelParameters$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeModelParameters
+> = z.object({
+  threshold: z.number().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeModelParameters$ {
+  /** @deprecated use `SearchKnowledgeModelParameters$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeModelParameters$inboundSchema;
+  /** @deprecated use `SearchKnowledgeModelParameters$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeModelParameters$outboundSchema;
+  /** @deprecated use `SearchKnowledgeModelParameters$Outbound` instead. */
+  export type Outbound = SearchKnowledgeModelParameters$Outbound;
+}
+
+export function searchKnowledgeModelParametersToJSON(
+  searchKnowledgeModelParameters: SearchKnowledgeModelParameters,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeModelParameters$outboundSchema.parse(
+      searchKnowledgeModelParameters,
+    ),
+  );
+}
+
+export function searchKnowledgeModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeModelParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeRerankConfig$inboundSchema: z.ZodType<
+  SearchKnowledgeRerankConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: z.boolean().optional(),
+  provider: SearchKnowledgeProvider$inboundSchema.optional(),
+  top_k: z.number().int().optional(),
+  model: z.string().optional(),
+  model_db_id: z.string().optional(),
+  model_type: SearchKnowledgeModelType$inboundSchema.optional(),
+  model_parameters: z.lazy(() => SearchKnowledgeModelParameters$inboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "top_k": "topK",
+    "model_db_id": "modelDbId",
+    "model_type": "modelType",
+    "model_parameters": "modelParameters",
+  });
+});
+
+/** @internal */
+export type SearchKnowledgeRerankConfig$Outbound = {
+  enabled?: boolean | undefined;
+  provider?: string | undefined;
+  top_k?: number | undefined;
+  model?: string | undefined;
+  model_db_id?: string | undefined;
+  model_type?: string | undefined;
+  model_parameters?: SearchKnowledgeModelParameters$Outbound | undefined;
+};
+
+/** @internal */
+export const SearchKnowledgeRerankConfig$outboundSchema: z.ZodType<
+  SearchKnowledgeRerankConfig$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeRerankConfig
+> = z.object({
+  enabled: z.boolean().optional(),
+  provider: SearchKnowledgeProvider$outboundSchema.optional(),
+  topK: z.number().int().optional(),
+  model: z.string().optional(),
+  modelDbId: z.string().optional(),
+  modelType: SearchKnowledgeModelType$outboundSchema.optional(),
+  modelParameters: z.lazy(() => SearchKnowledgeModelParameters$outboundSchema)
+    .optional(),
+}).transform((v) => {
+  return remap$(v, {
+    topK: "top_k",
+    modelDbId: "model_db_id",
+    modelType: "model_type",
+    modelParameters: "model_parameters",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeRerankConfig$ {
+  /** @deprecated use `SearchKnowledgeRerankConfig$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeRerankConfig$inboundSchema;
+  /** @deprecated use `SearchKnowledgeRerankConfig$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeRerankConfig$outboundSchema;
+  /** @deprecated use `SearchKnowledgeRerankConfig$Outbound` instead. */
+  export type Outbound = SearchKnowledgeRerankConfig$Outbound;
+}
+
+export function searchKnowledgeRerankConfigToJSON(
+  searchKnowledgeRerankConfig: SearchKnowledgeRerankConfig,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeRerankConfig$outboundSchema.parse(
+      searchKnowledgeRerankConfig,
+    ),
+  );
+}
+
+export function searchKnowledgeRerankConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeRerankConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeRerankConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchKnowledgeKnowledgeProvider$inboundSchema: z.ZodNativeEnum<
+  typeof SearchKnowledgeKnowledgeProvider
+> = z.nativeEnum(SearchKnowledgeKnowledgeProvider);
+
+/** @internal */
+export const SearchKnowledgeKnowledgeProvider$outboundSchema: z.ZodNativeEnum<
+  typeof SearchKnowledgeKnowledgeProvider
+> = SearchKnowledgeKnowledgeProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeKnowledgeProvider$ {
+  /** @deprecated use `SearchKnowledgeKnowledgeProvider$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeKnowledgeProvider$inboundSchema;
+  /** @deprecated use `SearchKnowledgeKnowledgeProvider$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeKnowledgeProvider$outboundSchema;
+}
+
+/** @internal */
+export const SearchKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
+  SearchKnowledgeAgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model_db_id: z.string(),
+  provider: SearchKnowledgeKnowledgeProvider$inboundSchema,
+  integration_id: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "model_db_id": "modelDbId",
+    "integration_id": "integrationId",
+  });
+});
+
+/** @internal */
+export type SearchKnowledgeAgenticRagConfig$Outbound = {
+  model_db_id: string;
+  provider: string;
+  integration_id?: string | null | undefined;
+};
+
+/** @internal */
+export const SearchKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
+  SearchKnowledgeAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  SearchKnowledgeAgenticRagConfig
+> = z.object({
+  modelDbId: z.string(),
+  provider: SearchKnowledgeKnowledgeProvider$outboundSchema,
+  integrationId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    modelDbId: "model_db_id",
+    integrationId: "integration_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchKnowledgeAgenticRagConfig$ {
+  /** @deprecated use `SearchKnowledgeAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = SearchKnowledgeAgenticRagConfig$inboundSchema;
+  /** @deprecated use `SearchKnowledgeAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema = SearchKnowledgeAgenticRagConfig$outboundSchema;
+  /** @deprecated use `SearchKnowledgeAgenticRagConfig$Outbound` instead. */
+  export type Outbound = SearchKnowledgeAgenticRagConfig$Outbound;
+}
+
+export function searchKnowledgeAgenticRagConfigToJSON(
+  searchKnowledgeAgenticRagConfig: SearchKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    SearchKnowledgeAgenticRagConfig$outboundSchema.parse(
+      searchKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+export function searchKnowledgeAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchKnowledgeAgenticRagConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchKnowledgeAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchKnowledgeAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
 export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
   SearchKnowledgeRequestBody,
   z.ZodTypeDef,
@@ -3068,12 +3456,20 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
     ])),
   ]).optional(),
   search_options: z.lazy(() => SearchOptions$inboundSchema).optional(),
+  rerank_config: z.nullable(
+    z.lazy(() => SearchKnowledgeRerankConfig$inboundSchema),
+  ).optional(),
+  agentic_rag_config: z.lazy(() =>
+    SearchKnowledgeAgenticRagConfig$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_k": "topK",
     "search_type": "searchType",
     "filter_by": "filterBy",
     "search_options": "searchOptions",
+    "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
   });
 });
 
@@ -3096,6 +3492,8 @@ export type SearchKnowledgeRequestBody$Outbound = {
       | SearchKnowledge1Exists$Outbound;
   } | undefined;
   search_options?: SearchOptions$Outbound | undefined;
+  rerank_config?: SearchKnowledgeRerankConfig$Outbound | null | undefined;
+  agentic_rag_config?: SearchKnowledgeAgenticRagConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -3124,12 +3522,19 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
     ])),
   ]).optional(),
   searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),
+  rerankConfig: z.nullable(
+    z.lazy(() => SearchKnowledgeRerankConfig$outboundSchema),
+  ).optional(),
+  agenticRagConfig: z.lazy(() => SearchKnowledgeAgenticRagConfig$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     topK: "top_k",
     searchType: "search_type",
     filterBy: "filter_by",
     searchOptions: "search_options",
+    rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
   });
 });
 
