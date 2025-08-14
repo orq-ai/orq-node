@@ -14,7 +14,7 @@ export const tool$contactsDelete: ToolDefinition<typeof args> = {
   name: "contacts-delete",
   description: `Delete a contact
 
-Permanently deletes a contact from your workspace. This action cannot be undone.`,
+Permanently deletes a contact from your workspace and cleans up associated budget configurations. This action cannot be undone.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await contactsDelete(
