@@ -13,7 +13,7 @@
 
 ## create
 
-Creates a new contact or updates an existing one based on external_id. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
+Creates a new contact with a unique external_id. If a contact with the same external_id already exists, the operation will fail. Use this endpoint to add users from your system to orq.ai for tracking their usage and engagement.
 
 ### Example Usage
 
@@ -377,7 +377,7 @@ run();
 
 ## delete
 
-Permanently deletes a contact from your workspace. This action cannot be undone.
+Permanently deletes a contact from your workspace and cleans up associated budget configurations. This action cannot be undone.
 
 ### Example Usage
 
