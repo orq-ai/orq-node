@@ -3,6 +3,7 @@
  */
 
 export * from "./cleardataset.js";
+export * from "./createbudget.js";
 export * from "./createchunk.js";
 export * from "./createcontact.js";
 export * from "./createdataset.js";
@@ -12,6 +13,7 @@ export * from "./createeval.js";
 export * from "./createfeedback.js";
 export * from "./createknowledge.js";
 export * from "./createprompt.js";
+export * from "./deletebudget.js";
 export * from "./deletechunk.js";
 export * from "./deletecontact.js";
 export * from "./deletedatapoint.js";
@@ -67,12 +69,14 @@ export * from "./fileget.js";
 export * from "./filelist.js";
 export * from "./fileupload.js";
 export * from "./getallprompts.js";
+export * from "./getbudget.js";
 export * from "./getevals.js";
 export * from "./getonechunk.js";
 export * from "./getoneknowledge.js";
 export * from "./getoneprompt.js";
 export * from "./getpromptversion.js";
 export * from "./invokeeval.js";
+export * from "./listbudgets.js";
 export * from "./listchunks.js";
 export * from "./listcontacts.js";
 export * from "./listdatasetdatapoints.js";
@@ -88,6 +92,7 @@ export * from "./retrievedatapoint.js";
 export * from "./retrievedataset.js";
 export * from "./retrievedatasource.js";
 export * from "./searchknowledge.js";
+export * from "./updatebudget.js";
 export * from "./updatechunk.js";
 export * from "./updatecontact.js";
 export * from "./updatedatapoint.js";

@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
 import { Datasets } from "./datasets.js";
@@ -69,5 +70,10 @@ export class Orq extends ClientSDK {
   private _evals?: Evals;
   get evals(): Evals {
     return (this._evals ??= new Evals(this._options));
+  }
+
+  private _budgets?: Budgets;
+  get budgets(): Budgets {
+    return (this._budgets ??= new Budgets(this._options));
   }
 }
