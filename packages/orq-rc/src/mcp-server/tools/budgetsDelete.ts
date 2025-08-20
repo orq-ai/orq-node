@@ -12,9 +12,9 @@ const args = {
 
 export const tool$budgetsDelete: ToolDefinition<typeof args> = {
   name: "budgets-delete",
-  description: `Delete contact budget configuration
+  description: `Delete budget configuration
 
-Delete contact budget configuration by ID`,
+Delete budget configuration by ID`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await budgetsDelete(

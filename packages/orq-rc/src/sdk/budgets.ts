@@ -30,10 +30,10 @@ export class Budgets extends ClientSDK {
   }
 
   /**
-   * Create contact budget configuration
+   * Create budget configuration
    *
    * @remarks
-   * Create a new budget configuration for a contact. API Key and Workspace budget creation will be available in future releases.
+   * Create a new budget configuration for a contact or workspace.
    */
   async create(
     request: operations.CreateBudgetRequestBody,
@@ -64,10 +64,10 @@ export class Budgets extends ClientSDK {
   }
 
   /**
-   * Update contact budget configuration
+   * Update budget configuration
    *
    * @remarks
-   * Update contact budget configuration by ID
+   * Update budget configuration by ID
    */
   async update(
     request: operations.UpdateBudgetRequest,
@@ -81,10 +81,10 @@ export class Budgets extends ClientSDK {
   }
 
   /**
-   * Delete contact budget configuration
+   * Delete budget configuration
    *
    * @remarks
-   * Delete contact budget configuration by ID
+   * Delete budget configuration by ID
    */
   async delete(
     request: operations.DeleteBudgetRequest,

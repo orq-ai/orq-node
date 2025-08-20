@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Budget period type
  */
-export const UpdateBudgetPeriod = {
+export const Period = {
   Daily: "daily",
   Weekly: "weekly",
   Monthly: "monthly",
@@ -21,7 +21,7 @@ export const UpdateBudgetPeriod = {
 /**
  * Budget period type
  */
-export type UpdateBudgetPeriod = ClosedEnum<typeof UpdateBudgetPeriod>;
+export type Period = ClosedEnum<typeof Period>;
 
 /**
  * Budget configuration to update
@@ -30,7 +30,7 @@ export type Budget = {
   /**
    * Budget period type
    */
-  period?: UpdateBudgetPeriod | undefined;
+  period?: Period | undefined;
   /**
    * Budget amount in USD for the specified period
    */
@@ -69,7 +69,7 @@ export type UpdateBudgetType = ClosedEnum<typeof UpdateBudgetType>;
 /**
  * Budget period type
  */
-export const UpdateBudgetBudgetsPeriod = {
+export const UpdateBudgetPeriod = {
   Daily: "daily",
   Weekly: "weekly",
   Monthly: "monthly",
@@ -78,9 +78,7 @@ export const UpdateBudgetBudgetsPeriod = {
 /**
  * Budget period type
  */
-export type UpdateBudgetBudgetsPeriod = ClosedEnum<
-  typeof UpdateBudgetBudgetsPeriod
->;
+export type UpdateBudgetPeriod = ClosedEnum<typeof UpdateBudgetPeriod>;
 
 /**
  * Budget configuration
@@ -89,7 +87,7 @@ export type UpdateBudgetBudget = {
   /**
    * Budget period type
    */
-  period: UpdateBudgetBudgetsPeriod;
+  period: UpdateBudgetPeriod;
   /**
    * Budget amount in USD for the specified period
    */
@@ -155,30 +153,28 @@ export type UpdateBudgetResponseBody = {
 };
 
 /** @internal */
-export const UpdateBudgetPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateBudgetPeriod
-> = z.nativeEnum(UpdateBudgetPeriod);
+export const Period$inboundSchema: z.ZodNativeEnum<typeof Period> = z
+  .nativeEnum(Period);
 
 /** @internal */
-export const UpdateBudgetPeriod$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateBudgetPeriod
-> = UpdateBudgetPeriod$inboundSchema;
+export const Period$outboundSchema: z.ZodNativeEnum<typeof Period> =
+  Period$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateBudgetPeriod$ {
-  /** @deprecated use `UpdateBudgetPeriod$inboundSchema` instead. */
-  export const inboundSchema = UpdateBudgetPeriod$inboundSchema;
-  /** @deprecated use `UpdateBudgetPeriod$outboundSchema` instead. */
-  export const outboundSchema = UpdateBudgetPeriod$outboundSchema;
+export namespace Period$ {
+  /** @deprecated use `Period$inboundSchema` instead. */
+  export const inboundSchema = Period$inboundSchema;
+  /** @deprecated use `Period$outboundSchema` instead. */
+  export const outboundSchema = Period$outboundSchema;
 }
 
 /** @internal */
 export const Budget$inboundSchema: z.ZodType<Budget, z.ZodTypeDef, unknown> = z
   .object({
-    period: UpdateBudgetPeriod$inboundSchema.optional(),
+    period: Period$inboundSchema.optional(),
     amount: z.number().optional(),
   });
 
@@ -194,7 +190,7 @@ export const Budget$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Budget
 > = z.object({
-  period: UpdateBudgetPeriod$outboundSchema.optional(),
+  period: Period$outboundSchema.optional(),
   amount: z.number().optional(),
 });
 
@@ -377,24 +373,24 @@ export namespace UpdateBudgetType$ {
 }
 
 /** @internal */
-export const UpdateBudgetBudgetsPeriod$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateBudgetBudgetsPeriod
-> = z.nativeEnum(UpdateBudgetBudgetsPeriod);
+export const UpdateBudgetPeriod$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateBudgetPeriod
+> = z.nativeEnum(UpdateBudgetPeriod);
 
 /** @internal */
-export const UpdateBudgetBudgetsPeriod$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateBudgetBudgetsPeriod
-> = UpdateBudgetBudgetsPeriod$inboundSchema;
+export const UpdateBudgetPeriod$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateBudgetPeriod
+> = UpdateBudgetPeriod$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateBudgetBudgetsPeriod$ {
-  /** @deprecated use `UpdateBudgetBudgetsPeriod$inboundSchema` instead. */
-  export const inboundSchema = UpdateBudgetBudgetsPeriod$inboundSchema;
-  /** @deprecated use `UpdateBudgetBudgetsPeriod$outboundSchema` instead. */
-  export const outboundSchema = UpdateBudgetBudgetsPeriod$outboundSchema;
+export namespace UpdateBudgetPeriod$ {
+  /** @deprecated use `UpdateBudgetPeriod$inboundSchema` instead. */
+  export const inboundSchema = UpdateBudgetPeriod$inboundSchema;
+  /** @deprecated use `UpdateBudgetPeriod$outboundSchema` instead. */
+  export const outboundSchema = UpdateBudgetPeriod$outboundSchema;
 }
 
 /** @internal */
@@ -403,7 +399,7 @@ export const UpdateBudgetBudget$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  period: UpdateBudgetBudgetsPeriod$inboundSchema,
+  period: UpdateBudgetPeriod$inboundSchema,
   amount: z.number(),
 });
 
@@ -419,7 +415,7 @@ export const UpdateBudgetBudget$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateBudgetBudget
 > = z.object({
-  period: UpdateBudgetBudgetsPeriod$outboundSchema,
+  period: UpdateBudgetPeriod$outboundSchema,
   amount: z.number(),
 });
 
@@ -547,7 +543,7 @@ export const UpdateBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-08-20T07:45:57.493Z",
+    "2025-08-20T11:38:10.692Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -585,7 +581,7 @@ export const UpdateBudgetResponseBody$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => UpdateBudgetConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-08-20T07:45:57.493Z"))
+  updated: z.date().default(() => new Date("2025-08-20T11:38:10.692Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

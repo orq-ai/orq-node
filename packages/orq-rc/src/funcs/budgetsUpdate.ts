@@ -25,10 +25,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update contact budget configuration
+ * Update budget configuration
  *
  * @remarks
- * Update contact budget configuration by ID
+ * Update budget configuration by ID
  */
 export function budgetsUpdate(
   client: OrqCore,

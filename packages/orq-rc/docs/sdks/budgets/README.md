@@ -6,10 +6,10 @@
 ### Available Operations
 
 * [list](#list) - List contact budget configurations
-* [create](#create) - Create contact budget configuration
+* [create](#create) - Create budget configuration
 * [get](#get) - Get contact budget configuration
-* [update](#update) - Update contact budget configuration
-* [delete](#delete) - Delete contact budget configuration
+* [update](#update) - Update budget configuration
+* [delete](#delete) - Delete budget configuration
 
 ## list
 
@@ -90,7 +90,7 @@ run();
 
 ## create
 
-Create a new budget configuration for a contact. API Key and Workspace budget creation will be available in future releases.
+Create a new budget configuration for a contact or workspace.
 
 ### Example Usage
 
@@ -242,7 +242,7 @@ run();
 
 ## update
 
-Update contact budget configuration by ID
+Update budget configuration by ID
 
 ### Example Usage
 
@@ -329,7 +329,7 @@ run();
 
 ## delete
 
-Delete contact budget configuration by ID
+Delete budget configuration by ID
 
 ### Example Usage
 

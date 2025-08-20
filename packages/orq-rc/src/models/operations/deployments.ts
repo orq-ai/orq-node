@@ -349,6 +349,7 @@ export const DeploymentsProvider = {
   Litellm: "litellm",
   Openailike: "openailike",
   Cerebras: "cerebras",
+  Bytedance: "bytedance",
 } as const;
 export type DeploymentsProvider = ClosedEnum<typeof DeploymentsProvider>;
 

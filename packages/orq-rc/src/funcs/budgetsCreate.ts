@@ -25,10 +25,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create contact budget configuration
+ * Create budget configuration
  *
  * @remarks
- * Create a new budget configuration for a contact. API Key and Workspace budget creation will be available in future releases.
+ * Create a new budget configuration for a contact or workspace.
  */
 export function budgetsCreate(
   client: OrqCore,

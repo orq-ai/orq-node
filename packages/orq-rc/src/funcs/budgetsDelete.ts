@@ -26,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Delete contact budget configuration
+ * Delete budget configuration
  *
  * @remarks
- * Delete contact budget configuration by ID
+ * Delete budget configuration by ID
  */
 export function budgetsDelete(
   client: OrqCore,

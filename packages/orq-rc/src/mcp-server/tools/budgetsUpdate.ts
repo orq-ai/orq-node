@@ -12,9 +12,9 @@ const args = {
 
 export const tool$budgetsUpdate: ToolDefinition<typeof args> = {
   name: "budgets-update",
-  description: `Update contact budget configuration
+  description: `Update budget configuration
 
-Update contact budget configuration by ID`,
+Update budget configuration by ID`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await budgetsUpdate(

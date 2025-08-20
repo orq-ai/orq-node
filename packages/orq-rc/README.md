@@ -262,10 +262,10 @@ run();
 ### [budgets](docs/sdks/budgets/README.md)
 
 * [list](docs/sdks/budgets/README.md#list) - List contact budget configurations
-* [create](docs/sdks/budgets/README.md#create) - Create contact budget configuration
+* [create](docs/sdks/budgets/README.md#create) - Create budget configuration
 * [get](docs/sdks/budgets/README.md#get) - Get contact budget configuration
-* [update](docs/sdks/budgets/README.md#update) - Update contact budget configuration
-* [delete](docs/sdks/budgets/README.md#delete) - Delete contact budget configuration
+* [update](docs/sdks/budgets/README.md#update) - Update budget configuration
+* [delete](docs/sdks/budgets/README.md#delete) - Delete budget configuration
 
 ### [chunking](docs/sdks/chunking/README.md)
 
@@ -416,11 +416,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`budgetsCreate`](docs/sdks/budgets/README.md#create) - Create contact budget configuration
-- [`budgetsDelete`](docs/sdks/budgets/README.md#delete) - Delete contact budget configuration
+- [`budgetsCreate`](docs/sdks/budgets/README.md#create) - Create budget configuration
+- [`budgetsDelete`](docs/sdks/budgets/README.md#delete) - Delete budget configuration
 - [`budgetsGet`](docs/sdks/budgets/README.md#get) - Get contact budget configuration
 - [`budgetsList`](docs/sdks/budgets/README.md#list) - List contact budget configurations
-- [`budgetsUpdate`](docs/sdks/budgets/README.md#update) - Update contact budget configuration
+- [`budgetsUpdate`](docs/sdks/budgets/README.md#update) - Update budget configuration
 - [`chunkingParse`](docs/sdks/chunking/README.md#parse) - Parse text
 - [`contactsCreate`](docs/sdks/contacts/README.md#create) - Create a contact
 - [`contactsDelete`](docs/sdks/contacts/README.md#delete) - Delete a contact

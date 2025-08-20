@@ -12,9 +12,9 @@ const args = {
 
 export const tool$budgetsCreate: ToolDefinition<typeof args> = {
   name: "budgets-create",
-  description: `Create contact budget configuration
+  description: `Create budget configuration
 
-Create a new budget configuration for a contact. API Key and Workspace budget creation will be available in future releases.`,
+Create a new budget configuration for a contact or workspace.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await budgetsCreate(

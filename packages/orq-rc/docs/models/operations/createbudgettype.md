@@ -1,6 +1,6 @@
 # CreateBudgetType
 
-Budget entity type - only contact budgets supported
+Budget entity type
 
 ## Example Usage
 
@@ -13,5 +13,5 @@ let value: CreateBudgetType = "contact";
 ## Values
 
 ```typescript
-"contact"
+"api_key" | "contact" | "workspace"
 ```

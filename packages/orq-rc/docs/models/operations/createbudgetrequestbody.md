@@ -1,11 +1,14 @@
 # CreateBudgetRequestBody
 
-## Example Usage
+Create budget configuration for contact or workspace
+
+
+## Supported Types
+
+### `operations.RequestBody1`
 
 ```typescript
-import { CreateBudgetRequestBody } from "@orq-ai/node/models/operations";
-
-let value: CreateBudgetRequestBody = {
+const value: operations.RequestBody1 = {
   type: "contact",
   entityId: "user_123",
   period: "monthly",
@@ -13,11 +16,13 @@ let value: CreateBudgetRequestBody = {
 };
 ```
 
-## Fields
+### `operations.RequestBody2`
 
-| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `type`                                                                     | [operations.CreateBudgetType](../../models/operations/createbudgettype.md) | :heavy_check_mark:                                                         | Budget entity type - only contact budgets supported                        | contact                                                                    |
-| `entityId`                                                                 | *string*                                                                   | :heavy_check_mark:                                                         | Contact external ID                                                        | user_123                                                                   |
-| `period`                                                                   | [operations.Period](../../models/operations/period.md)                     | :heavy_check_mark:                                                         | Budget period type                                                         | monthly                                                                    |
-| `amount`                                                                   | *number*                                                                   | :heavy_check_mark:                                                         | Budget amount in USD for the specified period                              | 250                                                                        |
+```typescript
+const value: operations.RequestBody2 = {
+  type: "workspace",
+  period: "monthly",
+  amount: 250,
+};
+```
+
