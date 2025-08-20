@@ -4873,7 +4873,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-20T08:54:58.988Z"
+          default: "2025-08-20T09:40:22.159Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -4936,7 +4936,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-08-20T08:54:58.988Z"
+            default: "2025-08-20T09:40:22.159Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -5016,7 +5016,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-20T08:54:58.988Z"
+          default: "2025-08-20T09:40:22.159Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5062,7 +5062,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-08-20T08:54:58.988Z"
+                default: "2025-08-20T09:40:22.159Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5105,7 +5105,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-20T08:54:58.988Z"
+          default: "2025-08-20T09:40:22.159Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -7708,7 +7708,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-20T08:54:55.786Z"
+          default: "2025-08-20T09:40:19.094Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7716,7 +7716,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-20T08:54:55.786Z"
+              default: "2025-08-20T09:40:19.095Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -7826,7 +7826,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-08-20T08:54:55.786Z"
+                default: "2025-08-20T09:40:19.094Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -7834,7 +7834,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.095Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -7941,7 +7941,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-20T08:54:55.786Z"
+          default: "2025-08-20T09:40:19.094Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -7949,7 +7949,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-20T08:54:55.786Z"
+              default: "2025-08-20T09:40:19.095Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8050,7 +8050,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-20T08:54:55.786Z"
+          default: "2025-08-20T09:40:19.094Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8058,7 +8058,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-20T08:54:55.786Z"
+              default: "2025-08-20T09:40:19.095Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9240,10 +9240,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9314,10 +9314,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9385,10 +9385,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9471,10 +9471,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -9568,10 +9568,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9642,10 +9642,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9713,10 +9713,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -9799,10 +9799,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-20T08:54:58.176Z"
+                    default: "2025-08-20T09:40:21.349Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -10172,10 +10172,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10246,10 +10246,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10317,10 +10317,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -10403,10 +10403,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "updated":
               type: "string"
-              default: "2025-08-20T08:54:58.176Z"
+              default: "2025-08-20T09:40:21.349Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -14178,7 +14178,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -14186,7 +14186,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -14317,7 +14317,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-20T08:54:55.786Z"
+                          default: "2025-08-20T09:40:19.094Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -14325,7 +14325,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-20T08:54:55.786Z"
+                              default: "2025-08-20T09:40:19.095Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -18350,7 +18350,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-20T08:54:58.988Z"
+                    default: "2025-08-20T09:40:22.159Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -18438,7 +18438,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-08-20T08:54:58.988Z"
+                          default: "2025-08-20T09:40:22.159Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -18505,7 +18505,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-20T08:54:58.988Z"
+                    default: "2025-08-20T09:40:22.159Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -22096,7 +22096,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-20T08:54:55.786Z"
+                          default: "2025-08-20T09:40:19.094Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22104,7 +22104,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-20T08:54:55.786Z"
+                              default: "2025-08-20T09:40:19.095Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -22228,7 +22228,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22236,7 +22236,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22346,7 +22346,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22354,7 +22354,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22506,7 +22506,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -22514,7 +22514,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -22905,7 +22905,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-20T08:54:55.786Z"
+                          default: "2025-08-20T09:40:19.094Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -22913,7 +22913,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-20T08:54:55.786Z"
+                              default: "2025-08-20T09:40:19.095Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -23534,7 +23534,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-08-20T08:54:55.786Z"
+                      default: "2025-08-20T09:40:19.094Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -23542,7 +23542,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-08-20T08:54:55.786Z"
+                          default: "2025-08-20T09:40:19.095Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -23877,7 +23877,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -23885,7 +23885,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -24503,7 +24503,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -24511,7 +24511,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -25885,7 +25885,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K33B0QXPFS8MG5RH4DPGPAQQ"
+                          default: "01K33DKTWETB3H3V7KTV5A0JWV"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -26048,7 +26048,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K33B0QXQEQQ4F3BR5C350DJ2"
+                    default: "01K33DKTWJEMVSDE0ZM4ETZC20"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26141,7 +26141,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K33B0QXPWWXVTN832A9S3VP8"
+                    default: "01K33DKTWF36XG6FBM1ZJJHATH"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -26270,7 +26270,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K33B0QXQM8S1NJXK436GD8QK"
+                    default: "01K33DKTWKXDH33QMKMW255FTR"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -27223,10 +27223,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27297,10 +27297,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27368,10 +27368,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27454,10 +27454,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27525,10 +27525,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -27923,10 +27923,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -28010,10 +28010,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-20T08:54:58.176Z"
+                              default: "2025-08-20T09:40:21.349Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -28405,10 +28405,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28479,10 +28479,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28550,10 +28550,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -28636,10 +28636,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -29018,10 +29018,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -29092,10 +29092,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -29163,10 +29163,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -29249,10 +29249,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-20T08:54:58.176Z"
+                        default: "2025-08-20T09:40:21.349Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -32316,7 +32316,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -32324,7 +32324,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -32458,7 +32458,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-20T08:54:55.786Z"
+                    default: "2025-08-20T09:40:19.094Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -32466,7 +32466,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-20T08:54:55.786Z"
+                        default: "2025-08-20T09:40:19.095Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -32522,5 +32522,695 @@ paths:
                 required:
                   - "error"
               example: {"error": "Contact not found"}
+      security:
+        - ApiKey: []
+  "/v2/budgets":
+    get:
+      tags:
+        - "Budgets"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "list"
+      x-code-samples: [{"lang": "typescript", "label": "Node.js", "source": "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\n// List contact budgets\nconst budgets = await orq.budgets.list({\n  type: \"contact\",\n  limit: 50,\n  startingAfter: \"budget_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n});\n\nconsole.log(budgets.data);\nconsole.log('Has more:', budgets.hasMore);"}, {"lang": "python", "label": "Python", "source": "from orq_ai_sdk import Orq\nimport os\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\n# List contact budgets\nbudgets = orq.budgets.list(\n    type=\"contact\",\n    limit=50,\n    starting_after=\"budget_01ARZ3NDEKTSV4RRFFQ69G5FAV\"\n)\n\nprint(budgets.data)\nprint(f\"Has more: {budgets.has_more}\")"}]
+      operationId: "ListBudgets"
+      summary: "List contact budget configurations"
+      description: "Retrieves a paginated list of budget configurations in your workspace. Use pagination parameters to navigate through large budget lists efficiently."
+      parameters:
+        - schema:
+            type: "number"
+            minimum: 1
+            maximum: 50
+            default: 10
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          required: false
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          name: "limit"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          required: false
+          description: "A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list."
+          name: "starting_after"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          required: false
+          description: "A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list."
+          name: "ending_before"
+          in: "query"
+        - schema:
+            type: "string"
+            enum:
+              - "api_key"
+              - "contact"
+              - "workspace"
+            description: "Filter by budget entity type"
+            example: "contact"
+          required: false
+          name: "type"
+          in: "query"
+        - schema:
+            type: "string"
+            description: "Filter by specific entity ID"
+            example: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+          required: false
+          name: "entity_id"
+          in: "query"
+        - schema:
+            type:
+              - "boolean"
+              - "null"
+            description: "Filter by active status"
+            example: true
+          required: false
+          name: "is_active"
+          in: "query"
+      responses:
+        "200":
+          description: "List of budget configurations"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "object":
+                    type: "string"
+                    enum:
+                      - "list"
+                  "data":
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        "_id":
+                          type: "string"
+                          format: "ulid"
+                          description: "Unique ULID for the budget configuration"
+                          example: "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                        "type":
+                          type: "string"
+                          enum:
+                            - "api_key"
+                            - "contact"
+                            - "workspace"
+                          description: "Budget entity type"
+                          example: "contact"
+                        "contact_id":
+                          type: "string"
+                          description: "Contact external identifier (present when type is \"contact\")"
+                          example: "user_123"
+                        "api_key_id":
+                          type: "string"
+                          format: "ulid"
+                          description: "API Key identifier (present when type is \"api_key\")"
+                          example: "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                        "budget":
+                          type: "object"
+                          properties:
+                            "period":
+                              type: "string"
+                              enum:
+                                - "daily"
+                                - "weekly"
+                                - "monthly"
+                                - "yearly"
+                              description: "Budget period type"
+                              example: "monthly"
+                            "amount":
+                              type: "number"
+                              minimum: 0
+                              description: "Budget amount in USD for the specified period"
+                              example: 250
+                          required:
+                            - "period"
+                            - "amount"
+                          description: "Budget configuration"
+                        "is_active":
+                          type: "boolean"
+                          description: "Whether this budget configuration is currently active"
+                          example: true
+                        "consumption":
+                          type: "object"
+                          properties:
+                            "current_amount":
+                              type: "number"
+                              minimum: 0
+                              description: "Current period consumption in USD"
+                              example: 125.5
+                            "remaining_amount":
+                              type: "number"
+                              description: "Remaining budget (amount - current_amount)"
+                              example: 124.5
+                            "period_start":
+                              type:
+                                - "string"
+                                - "null"
+                              description: "When the current period started"
+                              example: "2024-01-01T00:00:00Z"
+                            "period_end":
+                              type:
+                                - "string"
+                                - "null"
+                              description: "When the current period will reset"
+                              example: "2024-01-31T23:59:59Z"
+                          required:
+                            - "current_amount"
+                            - "remaining_amount"
+                            - "period_start"
+                            - "period_end"
+                        "created":
+                          anyOf:
+                            - type: "string"
+                              format: "date-time"
+                            - type: "string"
+                          default: "2025-08-20T09:40:19.094Z"
+                          description: "The date and time the resource was created"
+                          readOnly: true
+                          format: "date-time"
+                        "updated":
+                          anyOf:
+                            - type: "string"
+                              format: "date-time"
+                              default: "2025-08-20T09:40:19.095Z"
+                            - type: "string"
+                          description: "The date and time the resource was last updated"
+                          readOnly: true
+                          format: "date-time"
+                      required:
+                        - "_id"
+                        - "type"
+                        - "budget"
+                        - "is_active"
+                  "has_more":
+                    type: "boolean"
+                required:
+                  - "object"
+                  - "data"
+                  - "has_more"
+              example: {"data": [{"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "limit_amount": 1000, "period": "monthly", "is_active": true, "created": "2024-01-15T10:30:00Z", "updated": "2024-01-15T10:30:00Z"}], "has_more": false}
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Budgets"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "create"
+      x-code-samples: [{"lang": "typescript", "label": "Node.js", "source": "// Create contact budget\nawait orq.budgets.create({\n  type: \"contact\",\n  entity_id: \"contact_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  period: \"monthly\",\n  amount: 250.0\n});"}, {"lang": "python", "label": "Python", "source": "# Create contact budget\norq.budgets.create(\n    type=\"contact\",\n    entity_id=\"contact_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n    period=\"monthly\",\n    amount=250.0\n)"}]
+      operationId: "CreateBudget"
+      summary: "Create budget configuration"
+      description: "Create a new budget configuration for a contact or workspace."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              oneOf:
+                - type: "object"
+                  properties:
+                    "type":
+                      type: "string"
+                      enum:
+                        - "contact"
+                      description: "Contact budget type"
+                      example: "contact"
+                    "entity_id":
+                      type: "string"
+                      description: "Contact external ID"
+                      example: "user_123"
+                    "period":
+                      type: "string"
+                      enum:
+                        - "daily"
+                        - "weekly"
+                        - "monthly"
+                        - "yearly"
+                      description: "Budget period type"
+                      example: "monthly"
+                    "amount":
+                      type: "number"
+                      minimum: 0
+                      description: "Budget amount in USD for the specified period"
+                      example: 250
+                  required:
+                    - "type"
+                    - "entity_id"
+                    - "period"
+                    - "amount"
+                - type: "object"
+                  properties:
+                    "type":
+                      type: "string"
+                      enum:
+                        - "workspace"
+                      description: "Workspace budget type"
+                      example: "workspace"
+                    "period":
+                      type: "string"
+                      enum:
+                        - "daily"
+                        - "weekly"
+                        - "monthly"
+                        - "yearly"
+                      description: "Budget period type"
+                      example: "monthly"
+                    "amount":
+                      type: "number"
+                      minimum: 0
+                      description: "Budget amount in USD for the specified period"
+                      example: 250
+                  required:
+                    - "type"
+                    - "period"
+                    - "amount"
+              description: "Create budget configuration for contact or workspace"
+      responses:
+        "200":
+          description: "Budget configuration created successfully"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    format: "ulid"
+                    description: "Unique ULID for the budget configuration"
+                    example: "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                  "type":
+                    type: "string"
+                    enum:
+                      - "api_key"
+                      - "contact"
+                      - "workspace"
+                    description: "Budget entity type"
+                    example: "contact"
+                  "contact_id":
+                    type: "string"
+                    description: "Contact external identifier (present when type is \"contact\")"
+                    example: "user_123"
+                  "api_key_id":
+                    type: "string"
+                    format: "ulid"
+                    description: "API Key identifier (present when type is \"api_key\")"
+                    example: "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                  "budget":
+                    type: "object"
+                    properties:
+                      "period":
+                        type: "string"
+                        enum:
+                          - "daily"
+                          - "weekly"
+                          - "monthly"
+                          - "yearly"
+                        description: "Budget period type"
+                        example: "monthly"
+                      "amount":
+                        type: "number"
+                        minimum: 0
+                        description: "Budget amount in USD for the specified period"
+                        example: 250
+                    required:
+                      - "period"
+                      - "amount"
+                    description: "Budget configuration"
+                  "is_active":
+                    type: "boolean"
+                    description: "Whether this budget configuration is currently active"
+                    example: true
+                  "consumption":
+                    type: "object"
+                    properties:
+                      "current_amount":
+                        type: "number"
+                        minimum: 0
+                        description: "Current period consumption in USD"
+                        example: 125.5
+                      "remaining_amount":
+                        type: "number"
+                        description: "Remaining budget (amount - current_amount)"
+                        example: 124.5
+                      "period_start":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "When the current period started"
+                        example: "2024-01-01T00:00:00Z"
+                      "period_end":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "When the current period will reset"
+                        example: "2024-01-31T23:59:59Z"
+                    required:
+                      - "current_amount"
+                      - "remaining_amount"
+                      - "period_start"
+                      - "period_end"
+                  "created":
+                    anyOf:
+                      - type: "string"
+                        format: "date-time"
+                      - type: "string"
+                    default: "2025-08-20T09:40:19.094Z"
+                    description: "The date and time the resource was created"
+                    readOnly: true
+                    format: "date-time"
+                  "updated":
+                    anyOf:
+                      - type: "string"
+                        format: "date-time"
+                        default: "2025-08-20T09:40:19.095Z"
+                      - type: "string"
+                    description: "The date and time the resource was last updated"
+                    readOnly: true
+                    format: "date-time"
+                required:
+                  - "_id"
+                  - "type"
+                  - "budget"
+                  - "is_active"
+                description: "Budget configuration details"
+        "400":
+          description: "Invalid request parameters"
+        "409":
+          description: "Budget already exists for this entity"
+      security:
+        - ApiKey: []
+  "/v2/budgets/{id}":
+    get:
+      tags:
+        - "Budgets"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "get"
+      x-code-samples: [{"lang": "typescript", "label": "Node.js", "source": "// Get budget by ID\nconst budget = await orq.budgets.get(\"01K1J1AX8PGR63QRP7423NY008\");"}, {"lang": "python", "label": "Python", "source": "# Get budget by ID\nbudget = orq.budgets.get(\"01K1J1AX8PGR63QRP7423NY008\")"}]
+      operationId: "GetBudget"
+      summary: "Get contact budget configuration"
+      description: "Get contact budget configuration by ID"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Budget ID"
+            example: "01K1J1AX8PGR63QRP7423NY008"
+          required: true
+          name: "id"
+          in: "path"
+      responses:
+        "200":
+          description: "Budget configuration"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    format: "ulid"
+                    description: "Unique ULID for the budget configuration"
+                    example: "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                  "type":
+                    type: "string"
+                    enum:
+                      - "api_key"
+                      - "contact"
+                      - "workspace"
+                    description: "Budget entity type"
+                    example: "contact"
+                  "contact_id":
+                    type: "string"
+                    description: "Contact external identifier (present when type is \"contact\")"
+                    example: "user_123"
+                  "api_key_id":
+                    type: "string"
+                    format: "ulid"
+                    description: "API Key identifier (present when type is \"api_key\")"
+                    example: "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                  "budget":
+                    type: "object"
+                    properties:
+                      "period":
+                        type: "string"
+                        enum:
+                          - "daily"
+                          - "weekly"
+                          - "monthly"
+                          - "yearly"
+                        description: "Budget period type"
+                        example: "monthly"
+                      "amount":
+                        type: "number"
+                        minimum: 0
+                        description: "Budget amount in USD for the specified period"
+                        example: 250
+                    required:
+                      - "period"
+                      - "amount"
+                    description: "Budget configuration"
+                  "is_active":
+                    type: "boolean"
+                    description: "Whether this budget configuration is currently active"
+                    example: true
+                  "consumption":
+                    type: "object"
+                    properties:
+                      "current_amount":
+                        type: "number"
+                        minimum: 0
+                        description: "Current period consumption in USD"
+                        example: 125.5
+                      "remaining_amount":
+                        type: "number"
+                        description: "Remaining budget (amount - current_amount)"
+                        example: 124.5
+                      "period_start":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "When the current period started"
+                        example: "2024-01-01T00:00:00Z"
+                      "period_end":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "When the current period will reset"
+                        example: "2024-01-31T23:59:59Z"
+                    required:
+                      - "current_amount"
+                      - "remaining_amount"
+                      - "period_start"
+                      - "period_end"
+                  "created":
+                    anyOf:
+                      - type: "string"
+                        format: "date-time"
+                      - type: "string"
+                    default: "2025-08-20T09:40:19.094Z"
+                    description: "The date and time the resource was created"
+                    readOnly: true
+                    format: "date-time"
+                  "updated":
+                    anyOf:
+                      - type: "string"
+                        format: "date-time"
+                        default: "2025-08-20T09:40:19.095Z"
+                      - type: "string"
+                    description: "The date and time the resource was last updated"
+                    readOnly: true
+                    format: "date-time"
+                required:
+                  - "_id"
+                  - "type"
+                  - "budget"
+                  - "is_active"
+                description: "Budget configuration details"
+        "404":
+          description: "Budget not found"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Budgets"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "update"
+      x-code-samples: [{"lang": "typescript", "label": "Node.js", "source": "// Update budget by ID\nawait orq.budgets.update(\"01K1J1AX8PGR63QRP7423NY008\", {\n  amount: 300.0,\n  period: \"yearly\"\n});"}, {"lang": "python", "label": "Python", "source": "# Update budget by ID\norq.budgets.update(\n    \"01K1J1AX8PGR63QRP7423NY008\",\n    amount=300.0,\n    period=\"yearly\"\n)"}]
+      operationId: "UpdateBudget"
+      summary: "Update budget configuration"
+      description: "Update budget configuration by ID"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Budget ID"
+            example: "01K1J1AX8PGR63QRP7423NY008"
+          required: true
+          name: "id"
+          in: "path"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              type: "object"
+              properties:
+                "budget":
+                  type: "object"
+                  properties:
+                    "period":
+                      type: "string"
+                      enum:
+                        - "daily"
+                        - "weekly"
+                        - "monthly"
+                        - "yearly"
+                      description: "Budget period type"
+                      example: "monthly"
+                    "amount":
+                      type: "number"
+                      minimum: 0
+                      description: "Budget amount in USD for the specified period"
+                      example: 300
+                  description: "Budget configuration to update"
+                "is_active":
+                  type: "boolean"
+                  description: "Whether this budget configuration is currently active"
+                  example: true
+      responses:
+        "200":
+          description: "Budget configuration updated successfully"
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                properties:
+                  "_id":
+                    type: "string"
+                    format: "ulid"
+                    description: "Unique ULID for the budget configuration"
+                    example: "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                  "type":
+                    type: "string"
+                    enum:
+                      - "api_key"
+                      - "contact"
+                      - "workspace"
+                    description: "Budget entity type"
+                    example: "contact"
+                  "contact_id":
+                    type: "string"
+                    description: "Contact external identifier (present when type is \"contact\")"
+                    example: "user_123"
+                  "api_key_id":
+                    type: "string"
+                    format: "ulid"
+                    description: "API Key identifier (present when type is \"api_key\")"
+                    example: "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                  "budget":
+                    type: "object"
+                    properties:
+                      "period":
+                        type: "string"
+                        enum:
+                          - "daily"
+                          - "weekly"
+                          - "monthly"
+                          - "yearly"
+                        description: "Budget period type"
+                        example: "monthly"
+                      "amount":
+                        type: "number"
+                        minimum: 0
+                        description: "Budget amount in USD for the specified period"
+                        example: 250
+                    required:
+                      - "period"
+                      - "amount"
+                    description: "Budget configuration"
+                  "is_active":
+                    type: "boolean"
+                    description: "Whether this budget configuration is currently active"
+                    example: true
+                  "consumption":
+                    type: "object"
+                    properties:
+                      "current_amount":
+                        type: "number"
+                        minimum: 0
+                        description: "Current period consumption in USD"
+                        example: 125.5
+                      "remaining_amount":
+                        type: "number"
+                        description: "Remaining budget (amount - current_amount)"
+                        example: 124.5
+                      "period_start":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "When the current period started"
+                        example: "2024-01-01T00:00:00Z"
+                      "period_end":
+                        type:
+                          - "string"
+                          - "null"
+                        description: "When the current period will reset"
+                        example: "2024-01-31T23:59:59Z"
+                    required:
+                      - "current_amount"
+                      - "remaining_amount"
+                      - "period_start"
+                      - "period_end"
+                  "created":
+                    anyOf:
+                      - type: "string"
+                        format: "date-time"
+                      - type: "string"
+                    default: "2025-08-20T09:40:19.094Z"
+                    description: "The date and time the resource was created"
+                    readOnly: true
+                    format: "date-time"
+                  "updated":
+                    anyOf:
+                      - type: "string"
+                        format: "date-time"
+                        default: "2025-08-20T09:40:19.095Z"
+                      - type: "string"
+                    description: "The date and time the resource was last updated"
+                    readOnly: true
+                    format: "date-time"
+                required:
+                  - "_id"
+                  - "type"
+                  - "budget"
+                  - "is_active"
+                description: "Budget configuration details"
+        "400":
+          description: "Invalid request parameters"
+        "404":
+          description: "Budget not found"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Budgets"
+      x-speakeasy-group: "budgets"
+      x-speakeasy-name-override: "delete"
+      x-code-samples: [{"lang": "typescript", "label": "Node.js", "source": "// Delete budget by ID\nawait orq.budgets.delete(\"01K1J1AX8PGR63QRP7423NY008\");"}, {"lang": "python", "label": "Python", "source": "# Delete budget by ID\norq.budgets.delete(\"01K1J1AX8PGR63QRP7423NY008\")"}]
+      operationId: "DeleteBudget"
+      summary: "Delete budget configuration"
+      description: "Delete budget configuration by ID"
+      parameters:
+        - schema:
+            type: "string"
+            description: "Budget ID"
+            example: "01K1J1AX8PGR63QRP7423NY008"
+          required: true
+          name: "id"
+          in: "path"
+      responses:
+        "204":
+          description: "Budget configuration deleted successfully"
+        "400":
+          description: "Invalid request parameters"
+        "404":
+          description: "Budget not found"
       security:
         - ApiKey: []
