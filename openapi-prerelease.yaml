@@ -5220,7 +5220,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-25T08:28:51.223Z"
+          default: "2025-08-25T10:00:30.210Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5283,7 +5283,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-08-25T08:28:51.223Z"
+            default: "2025-08-25T10:00:30.210Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -5363,7 +5363,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-25T08:28:51.223Z"
+          default: "2025-08-25T10:00:30.210Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5409,7 +5409,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-08-25T08:28:51.223Z"
+                default: "2025-08-25T10:00:30.210Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5452,7 +5452,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-25T08:28:51.223Z"
+          default: "2025-08-25T10:00:30.210Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -8061,7 +8061,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-25T08:28:47.904Z"
+          default: "2025-08-25T10:00:27.051Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8069,7 +8069,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-25T08:28:47.905Z"
+              default: "2025-08-25T10:00:27.052Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8179,7 +8179,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-08-25T08:28:47.904Z"
+                default: "2025-08-25T10:00:27.051Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -8187,7 +8187,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-08-25T08:28:47.905Z"
+                    default: "2025-08-25T10:00:27.052Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -8294,7 +8294,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-25T08:28:47.904Z"
+          default: "2025-08-25T10:00:27.051Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8302,7 +8302,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-25T08:28:47.905Z"
+              default: "2025-08-25T10:00:27.052Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8403,7 +8403,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-25T08:28:47.904Z"
+          default: "2025-08-25T10:00:27.051Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8411,7 +8411,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-25T08:28:47.905Z"
+              default: "2025-08-25T10:00:27.052Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -12577,10 +12577,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12651,10 +12651,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12722,10 +12722,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12808,10 +12808,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12905,10 +12905,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12979,10 +12979,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13050,10 +13050,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13136,10 +13136,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-25T08:28:50.342Z"
+                    default: "2025-08-25T10:00:29.383Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13509,10 +13509,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13583,10 +13583,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13654,10 +13654,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13740,10 +13740,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "updated":
               type: "string"
-              default: "2025-08-25T08:28:50.342Z"
+              default: "2025-08-25T10:00:29.383Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -17629,7 +17629,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17637,7 +17637,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17768,7 +17768,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-25T08:28:47.904Z"
+                          default: "2025-08-25T10:00:27.051Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -17776,7 +17776,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-25T08:28:47.905Z"
+                              default: "2025-08-25T10:00:27.052Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -21903,6 +21903,10 @@ paths:
                           - "jina"
                           - "togetherai"
                           - "elevenlabs"
+                          - "litellm"
+                          - "openailike"
+                          - "cerebras"
+                          - "bytedance"
                         description: "The provider used to generate the response"
                       "is_final":
                         type: "boolean"
@@ -21919,6 +21923,46 @@ paths:
                           - "string"
                           - "null"
                         description: "Provider backed system fingerprint."
+                      "retrievals":
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            "document":
+                              type: "string"
+                              description: "Content of the retrieved chunk from the knowledge base"
+                            "metadata":
+                              type: "object"
+                              properties:
+                                "file_name":
+                                  type: "string"
+                                  description: "Name of the file"
+                                "page_number":
+                                  type:
+                                    - "number"
+                                    - "null"
+                                  description: "Page number of the chunk"
+                                "file_type":
+                                  type: "string"
+                                  description: "Type of the file"
+                                "rerank_score":
+                                  type: "number"
+                                  description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
+                                "search_score":
+                                  type: "number"
+                                  description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
+                              required:
+                                - "file_name"
+                                - "page_number"
+                                - "file_type"
+                                - "search_score"
+                              description: "Metadata of the retrieved chunk from the knowledge base"
+                          required:
+                            - "document"
+                            - "metadata"
+                        description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
+                      "provider_response":
+                        description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
                       "choices":
                         type: "array"
                         items:
@@ -21927,9 +21971,13 @@ paths:
                             "index":
                               type: "number"
                             "message":
-                              anyOf:
+                              oneOf:
                                 - type: "object"
                                   properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "tool_calls"
                                     "role":
                                       type: "string"
                                       enum:
@@ -21973,11 +22021,25 @@ paths:
                                         required:
                                           - "type"
                                           - "function"
+                                    "reasoning":
+                                      type: "string"
+                                      description: "Internal thought process of the model"
+                                    "reasoning_signature":
+                                      type: "string"
+                                      description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                                    "redacted_reasoning":
+                                      type: "string"
+                                      description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
                                   required:
+                                    - "type"
                                     - "role"
                                     - "tool_calls"
                                 - type: "object"
                                   properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "content"
                                     "role":
                                       type: "string"
                                       enum:
@@ -21994,11 +22056,25 @@ paths:
                                       type:
                                         - "string"
                                         - "null"
+                                    "reasoning":
+                                      type: "string"
+                                      description: "Internal thought process of the model"
+                                    "reasoning_signature":
+                                      type: "string"
+                                      description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                                    "redacted_reasoning":
+                                      type: "string"
+                                      description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
                                   required:
+                                    - "type"
                                     - "role"
                                     - "content"
                                 - type: "object"
                                   properties:
+                                    "type":
+                                      type: "string"
+                                      enum:
+                                        - "image"
                                     "role":
                                       type: "string"
                                       enum:
@@ -22014,6 +22090,7 @@ paths:
                                     "url":
                                       type: "string"
                                   required:
+                                    - "type"
                                     - "role"
                                     - "url"
                             "finish_reason":
@@ -22022,47 +22099,16 @@ paths:
                                 - "null"
                           required:
                             - "index"
+                            - "message"
                         description: "A list of choices generated by the model"
-                      "retrievals":
-                        type: "array"
-                        items:
-                          type: "object"
-                          properties:
-                            "document":
-                              type: "string"
-                              description: "Content of the retrieved chunk from the knowledge base"
-                            "metadata":
-                              type: "object"
-                              properties:
-                                "file_name":
-                                  type: "string"
-                                  description: "Name of the file"
-                                "page_number":
-                                  type:
-                                    - "number"
-                                    - "null"
-                                  description: "Page number of the chunk"
-                                "file_type":
-                                  type: "string"
-                                  description: "Type of the file"
-                                "rerank_score":
-                                  type: "number"
-                                  description: "Rerank scores are normalized to be in the range [0, 1]. Scores close to 1 indicate a high relevance to the query, and scores closer to 0 indicate low relevance. It is not accurate to assume a score of 0.9 means the document is 2x more relevant than a document with a score of 0.45"
-                                "search_score":
-                                  type: "number"
-                                  description: "Search scores are normalized to be in the range [0, 1]. Search score is calculated based on `[Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity)` algorithm. Scores close to 1 indicate the document is closer to the query, and scores closer to 0 indicate the document is farther from the query."
-                              required:
-                                - "file_name"
-                                - "page_number"
-                                - "file_type"
-                                - "search_score"
-                              description: "Metadata of the retrieved chunk from the knowledge base"
-                          required:
-                            - "document"
-                            - "metadata"
-                        description: "List of documents retrieved from the knowledge base. This property is only available when the `include_retrievals` flag is set to `true` in the invoke settings. When stream is set to true, the `retrievals` property will be returned in the last streamed chunk where the property `is_final` is set to `true`."
-                      "provider_response":
-                        description: "Response returned by the model provider. This functionality is only supported when streaming is not used. If streaming is used, the `provider_response` property will be set to `null`."
+                    required:
+                      - "id"
+                      - "created"
+                      - "object"
+                      - "model"
+                      - "provider"
+                      - "is_final"
+                      - "choices"
                 required:
                   - "id"
                   - "created"
@@ -22145,7 +22191,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-25T08:28:51.223Z"
+                    default: "2025-08-25T10:00:30.210Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -22233,7 +22279,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-08-25T08:28:51.223Z"
+                          default: "2025-08-25T10:00:30.210Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -22300,7 +22346,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-25T08:28:51.223Z"
+                    default: "2025-08-25T10:00:30.210Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -25899,7 +25945,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-25T08:28:47.904Z"
+                          default: "2025-08-25T10:00:27.051Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -25907,7 +25953,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-25T08:28:47.905Z"
+                              default: "2025-08-25T10:00:27.052Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -26031,7 +26077,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -26039,7 +26085,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -26149,7 +26195,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -26157,7 +26203,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -26309,7 +26355,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -26317,7 +26363,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -26765,7 +26811,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-25T08:28:47.904Z"
+                          default: "2025-08-25T10:00:27.051Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -26773,7 +26819,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-25T08:28:47.905Z"
+                              default: "2025-08-25T10:00:27.052Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -27508,7 +27554,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-08-25T08:28:47.904Z"
+                      default: "2025-08-25T10:00:27.051Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -27516,7 +27562,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-08-25T08:28:47.905Z"
+                          default: "2025-08-25T10:00:27.052Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -27908,7 +27954,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -27916,7 +27962,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -28648,7 +28694,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -28656,7 +28702,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -30032,7 +30078,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K3G5GFZTC76S2PFRYCX5TQD1"
+                          default: "01K3GAR9ZYFC0FNS8RDJ5H0DKD"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -30195,7 +30241,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K3G5GFZW3V7PWVMHJG7HPQZN"
+                    default: "01K3GARA00SJ3481QD9DCF5Q5Z"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -30288,7 +30334,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K3G5GFZVYZ8EN901R48F5A1C"
+                    default: "01K3GAR9ZZ0W5EAQA37BRWERRD"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -30417,7 +30463,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K3G5GFZXSSAARWGAE7RBFPGT"
+                    default: "01K3GARA01YD0Y9P5PPK8QWMRC"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -32809,265 +32855,272 @@ paths:
               schema:
                 type: "object"
                 properties:
-                  "id":
-                    type: "string"
-                    description: "A unique identifier for the chat completion."
-                  "choices":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "finish_reason":
-                          type:
-                            - "string"
-                            - "null"
-                          enum:
-                            - "stop"
-                            - "length"
-                            - "tool_calls"
-                            - "content_filter"
-                            - "function_call"
-                          description: "The reason the model stopped generating tokens."
-                        "index":
-                          type: "number"
-                          description: "The index of the choice in the list of choices."
-                        "logprobs":
-                          type:
-                            - "object"
-                            - "null"
-                          properties:
-                            "content":
-                              type:
-                                - "array"
-                                - "null"
-                              items:
-                                type: "object"
-                                properties:
-                                  "token":
-                                    type: "string"
-                                    description: "The token."
-                                  "logprob":
-                                    type: "number"
-                                    description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
-                                  "bytes":
-                                    type:
-                                      - "array"
-                                      - "null"
-                                    items:
-                                      type: "number"
-                                    description: "A list of integers representing the UTF-8 bytes representation of the token."
-                                  "top_logprobs":
-                                    type: "array"
-                                    items:
-                                      type: "object"
-                                      properties:
-                                        "token":
-                                          type: "string"
-                                          description: "The token."
-                                        "logprob":
-                                          type: "number"
-                                          description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
-                                        "bytes":
-                                          type:
-                                            - "array"
-                                            - "null"
-                                          items:
-                                            type: "number"
-                                          description: "A list of integers representing the UTF-8 bytes representation of the token."
-                                      required:
-                                        - "token"
-                                        - "logprob"
-                                        - "bytes"
-                                    description: "List of the most likely tokens and their log probability, at this token position."
-                                required:
-                                  - "token"
-                                  - "logprob"
-                                  - "bytes"
-                                  - "top_logprobs"
-                              description: "A list of message content tokens with log probability information."
-                            "refusal":
-                              type:
-                                - "array"
-                                - "null"
-                              items:
-                                type: "object"
-                                properties:
-                                  "token":
-                                    type: "string"
-                                    description: "The token."
-                                  "logprob":
-                                    type: "number"
-                                    description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
-                                  "bytes":
-                                    type:
-                                      - "array"
-                                      - "null"
-                                    items:
-                                      type: "number"
-                                    description: "A list of integers representing the UTF-8 bytes representation of the token."
-                                  "top_logprobs":
-                                    type: "array"
-                                    items:
-                                      type: "object"
-                                      properties:
-                                        "token":
-                                          type: "string"
-                                          description: "The token."
-                                        "logprob":
-                                          type: "number"
-                                          description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
-                                        "bytes":
-                                          type:
-                                            - "array"
-                                            - "null"
-                                          items:
-                                            type: "number"
-                                          description: "A list of integers representing the UTF-8 bytes representation of the token."
-                                      required:
-                                        - "token"
-                                        - "logprob"
-                                        - "bytes"
-                                    description: "List of the most likely tokens and their log probability, at this token position."
-                                required:
-                                  - "token"
-                                  - "logprob"
-                                  - "bytes"
-                                  - "top_logprobs"
-                              description: "A list of message refusal tokens with log probability information."
-                          required:
-                            - "content"
-                            - "refusal"
-                          description: "Log probability information for the choice."
-                        "delta":
+                  "data":
+                    type: "object"
+                    properties:
+                      "id":
+                        type: "string"
+                        description: "A unique identifier for the chat completion."
+                      "choices":
+                        type: "array"
+                        items:
                           type: "object"
                           properties:
-                            "content":
+                            "finish_reason":
                               type:
                                 - "string"
                                 - "null"
-                              description: "The contents of the chunk message."
-                            "refusal":
-                              type:
-                                - "string"
-                                - "null"
-                            "tool_calls":
-                              type: "array"
-                              items:
-                                type: "object"
-                                properties:
-                                  "id":
-                                    type: "string"
-                                    description: "The ID of the tool call."
-                                  "type":
-                                    type: "string"
-                                    enum:
-                                      - "function"
-                                    description: "The type of the tool. Currently, only `function` is supported."
-                                  "function":
-                                    type: "object"
-                                    properties:
-                                      "name":
-                                        type: "string"
-                                        description: "The name of the function."
-                                      "arguments":
-                                        type: "string"
-                                        description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
-                            "role":
-                              type: "string"
                               enum:
-                                - "assistant"
-                            "reasoning":
-                              type: "string"
-                              description: "Internal thought process of the model"
-                            "reasoning_signature":
-                              type: "string"
-                              description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
-                            "redacted_reasoning":
-                              type: "string"
-                              description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
-                            "audio":
+                                - "stop"
+                                - "length"
+                                - "tool_calls"
+                                - "content_filter"
+                                - "function_call"
+                              description: "The reason the model stopped generating tokens."
+                            "index":
+                              type: "number"
+                              description: "The index of the choice in the list of choices."
+                            "logprobs":
                               type:
                                 - "object"
                                 - "null"
                               properties:
-                                "id":
+                                "content":
+                                  type:
+                                    - "array"
+                                    - "null"
+                                  items:
+                                    type: "object"
+                                    properties:
+                                      "token":
+                                        type: "string"
+                                        description: "The token."
+                                      "logprob":
+                                        type: "number"
+                                        description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
+                                      "bytes":
+                                        type:
+                                          - "array"
+                                          - "null"
+                                        items:
+                                          type: "number"
+                                        description: "A list of integers representing the UTF-8 bytes representation of the token."
+                                      "top_logprobs":
+                                        type: "array"
+                                        items:
+                                          type: "object"
+                                          properties:
+                                            "token":
+                                              type: "string"
+                                              description: "The token."
+                                            "logprob":
+                                              type: "number"
+                                              description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
+                                            "bytes":
+                                              type:
+                                                - "array"
+                                                - "null"
+                                              items:
+                                                type: "number"
+                                              description: "A list of integers representing the UTF-8 bytes representation of the token."
+                                          required:
+                                            - "token"
+                                            - "logprob"
+                                            - "bytes"
+                                        description: "List of the most likely tokens and their log probability, at this token position."
+                                    required:
+                                      - "token"
+                                      - "logprob"
+                                      - "bytes"
+                                      - "top_logprobs"
+                                  description: "A list of message content tokens with log probability information."
+                                "refusal":
+                                  type:
+                                    - "array"
+                                    - "null"
+                                  items:
+                                    type: "object"
+                                    properties:
+                                      "token":
+                                        type: "string"
+                                        description: "The token."
+                                      "logprob":
+                                        type: "number"
+                                        description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
+                                      "bytes":
+                                        type:
+                                          - "array"
+                                          - "null"
+                                        items:
+                                          type: "number"
+                                        description: "A list of integers representing the UTF-8 bytes representation of the token."
+                                      "top_logprobs":
+                                        type: "array"
+                                        items:
+                                          type: "object"
+                                          properties:
+                                            "token":
+                                              type: "string"
+                                              description: "The token."
+                                            "logprob":
+                                              type: "number"
+                                              description: "The log probability of this token, if it is within the top 20 most likely tokens. Otherwise, the value -9999.0 is used to signify that the token is very unlikely."
+                                            "bytes":
+                                              type:
+                                                - "array"
+                                                - "null"
+                                              items:
+                                                type: "number"
+                                              description: "A list of integers representing the UTF-8 bytes representation of the token."
+                                          required:
+                                            - "token"
+                                            - "logprob"
+                                            - "bytes"
+                                        description: "List of the most likely tokens and their log probability, at this token position."
+                                    required:
+                                      - "token"
+                                      - "logprob"
+                                      - "bytes"
+                                      - "top_logprobs"
+                                  description: "A list of message refusal tokens with log probability information."
+                              required:
+                                - "content"
+                                - "refusal"
+                              description: "Log probability information for the choice."
+                            "delta":
+                              type: "object"
+                              properties:
+                                "content":
+                                  type:
+                                    - "string"
+                                    - "null"
+                                  description: "The contents of the chunk message."
+                                "refusal":
+                                  type:
+                                    - "string"
+                                    - "null"
+                                "tool_calls":
+                                  type: "array"
+                                  items:
+                                    type: "object"
+                                    properties:
+                                      "id":
+                                        type: "string"
+                                        description: "The ID of the tool call."
+                                      "type":
+                                        type: "string"
+                                        enum:
+                                          - "function"
+                                        description: "The type of the tool. Currently, only `function` is supported."
+                                      "function":
+                                        type: "object"
+                                        properties:
+                                          "name":
+                                            type: "string"
+                                            description: "The name of the function."
+                                          "arguments":
+                                            type: "string"
+                                            description: "The arguments to call the function with, as generated by the model in JSON format. Note that the model does not always generate valid JSON, and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function."
+                                "role":
                                   type: "string"
-                                "transcript":
+                                  enum:
+                                    - "assistant"
+                                "reasoning":
                                   type: "string"
-                                "data":
+                                  description: "Internal thought process of the model"
+                                "reasoning_signature":
                                   type: "string"
-                                "expires_at":
-                                  type: "integer"
-                              description: "Audio response data in streaming mode."
-                          description: "A chat completion delta generated by streamed model responses."
-                      required:
-                        - "finish_reason"
-                        - "delta"
-                    description: "A list of chat completion choices. Can contain more than one elements if n is greater than 1. Can also be empty for the last chunk if you set stream_options: {\"include_usage\": true}."
-                  "created":
-                    type: "number"
-                    description: "The Unix timestamp (in seconds) of when the chat completion was created."
-                  "model":
-                    type: "string"
-                    description: "The model used for the chat completion."
-                  "system_fingerprint":
-                    type:
-                      - "string"
-                      - "null"
-                    description: "This fingerprint represents the backend configuration that the model runs with."
-                  "usage":
-                    type: "object"
-                    properties:
-                      "completion_tokens":
+                                  description: "The signature holds a cryptographic token which verifies that the thinking block was generated by the model, and is verified when thinking is part of a multiturn conversation. This value should not be modified and should always be sent to the API when the reasoning is redacted. Currently only supported by `Anthropic`."
+                                "redacted_reasoning":
+                                  type: "string"
+                                  description: "Occasionally the model's internal reasoning will be flagged by the safety systems of the provider. When this occurs, the provider will encrypt the reasoning. These redacted reasoning is decrypted when passed back to the API, allowing the model to continue its response without losing context."
+                                "audio":
+                                  type:
+                                    - "object"
+                                    - "null"
+                                  properties:
+                                    "id":
+                                      type: "string"
+                                    "transcript":
+                                      type: "string"
+                                    "data":
+                                      type: "string"
+                                    "expires_at":
+                                      type: "integer"
+                                  description: "Audio response data in streaming mode."
+                              description: "A chat completion delta generated by streamed model responses."
+                          required:
+                            - "finish_reason"
+                            - "delta"
+                        description: "A list of chat completion choices. Can contain more than one elements if n is greater than 1. Can also be empty for the last chunk if you set stream_options: {\"include_usage\": true}."
+                      "created":
                         type: "number"
-                        description: "Number of tokens in the generated completion."
-                      "prompt_tokens":
-                        type: "number"
-                        description: "Number of tokens in the prompt."
-                      "total_tokens":
-                        type: "number"
-                        description: "Total number of tokens used in the request (prompt + completion)."
-                      "prompt_tokens_details":
+                        description: "The Unix timestamp (in seconds) of when the chat completion was created."
+                      "model":
+                        type: "string"
+                        description: "The model used for the chat completion."
+                      "system_fingerprint":
                         type:
-                          - "object"
+                          - "string"
                           - "null"
+                        description: "This fingerprint represents the backend configuration that the model runs with."
+                      "usage":
+                        type: "object"
                         properties:
-                          "cached_tokens":
+                          "completion_tokens":
+                            type: "number"
+                            description: "Number of tokens in the generated completion."
+                          "prompt_tokens":
+                            type: "number"
+                            description: "Number of tokens in the prompt."
+                          "total_tokens":
+                            type: "number"
+                            description: "Total number of tokens used in the request (prompt + completion)."
+                          "prompt_tokens_details":
                             type:
-                              - "integer"
+                              - "object"
                               - "null"
-                          "audio_tokens":
+                            properties:
+                              "cached_tokens":
+                                type:
+                                  - "integer"
+                                  - "null"
+                              "audio_tokens":
+                                type:
+                                  - "integer"
+                                  - "null"
+                                description: "The number of audio input tokens consumed by the request."
+                          "completion_tokens_details":
                             type:
-                              - "integer"
+                              - "object"
                               - "null"
-                            description: "The number of audio input tokens consumed by the request."
-                      "completion_tokens_details":
-                        type:
-                          - "object"
-                          - "null"
-                        properties:
-                          "reasoning_tokens":
-                            type:
-                              - "number"
-                              - "null"
-                          "accepted_prediction_tokens":
-                            type:
-                              - "number"
-                              - "null"
-                          "rejected_prediction_tokens":
-                            type:
-                              - "number"
-                              - "null"
-                          "audio_tokens":
-                            type:
-                              - "integer"
-                              - "null"
-                            description: "The number of audio output tokens produced by the response."
-                    description: "Usage statistics for the completion request."
-                  "object":
-                    type: "string"
-                    enum:
-                      - "chat.completion.chunk"
+                            properties:
+                              "reasoning_tokens":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "accepted_prediction_tokens":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "rejected_prediction_tokens":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "audio_tokens":
+                                type:
+                                  - "integer"
+                                  - "null"
+                                description: "The number of audio output tokens produced by the response."
+                        description: "Usage statistics for the completion request."
+                      "object":
+                        type: "string"
+                        enum:
+                          - "chat.completion.chunk"
+                    required:
+                      - "choices"
+                      - "object"
+                    description: "Represents a streamed chunk of a chat completion response returned by model, based on the provided input."
                 required:
                   - "choices"
                   - "object"
@@ -33810,95 +33863,103 @@ paths:
               schema:
                 type: "object"
                 properties:
-                  "id":
-                    type: "string"
-                    description: "A unique identifier for the completion."
-                  "choices":
-                    type: "array"
-                    items:
-                      type: "object"
-                      properties:
-                        "finish_reason":
-                          type: "string"
-                          enum:
-                            - "stop"
-                            - "length"
-                            - "content_filter"
-                            - "tool_calls"
-                          description: "The reason the model stopped generating tokens."
-                        "index":
-                          type: "number"
-                          description: "The index of the choice in the list of choices."
-                        "text":
-                          type: "string"
-                      required:
-                        - "finish_reason"
-                        - "index"
-                        - "text"
-                    description: "The list of completion choices the model generated for the input prompt."
-                  "created":
-                    anyOf:
-                      - type: "string"
-                      - type: "number"
-                    description: "The Unix timestamp (in seconds) of when the chat completion was created."
-                  "model":
-                    type: "string"
-                    description: "The model used for the chat completion."
-                  "system_fingerprint":
-                    type: "string"
-                    description: "This fingerprint represents the backend configuration that the model runs with."
-                  "object":
-                    type: "string"
-                    description: "The object type"
-                  "usage":
+                  "data":
                     type: "object"
                     properties:
-                      "completion_tokens":
-                        type: "number"
-                        description: "Number of tokens in the generated completion."
-                      "prompt_tokens":
-                        type: "number"
-                        description: "Number of tokens in the prompt."
-                      "total_tokens":
-                        type: "number"
-                        description: "Total number of tokens used in the request (prompt + completion)."
-                      "prompt_tokens_details":
-                        type:
-                          - "object"
-                          - "null"
+                      "id":
+                        type: "string"
+                        description: "A unique identifier for the completion."
+                      "choices":
+                        type: "array"
+                        items:
+                          type: "object"
+                          properties:
+                            "finish_reason":
+                              type: "string"
+                              enum:
+                                - "stop"
+                                - "length"
+                                - "content_filter"
+                                - "tool_calls"
+                              description: "The reason the model stopped generating tokens."
+                            "index":
+                              type: "number"
+                              description: "The index of the choice in the list of choices."
+                            "text":
+                              type: "string"
+                          required:
+                            - "finish_reason"
+                            - "index"
+                            - "text"
+                        description: "The list of completion choices the model generated for the input prompt."
+                      "created":
+                        anyOf:
+                          - type: "string"
+                          - type: "number"
+                        description: "The Unix timestamp (in seconds) of when the chat completion was created."
+                      "model":
+                        type: "string"
+                        description: "The model used for the chat completion."
+                      "system_fingerprint":
+                        type: "string"
+                        description: "This fingerprint represents the backend configuration that the model runs with."
+                      "object":
+                        type: "string"
+                        description: "The object type"
+                      "usage":
+                        type: "object"
                         properties:
-                          "cached_tokens":
+                          "completion_tokens":
+                            type: "number"
+                            description: "Number of tokens in the generated completion."
+                          "prompt_tokens":
+                            type: "number"
+                            description: "Number of tokens in the prompt."
+                          "total_tokens":
+                            type: "number"
+                            description: "Total number of tokens used in the request (prompt + completion)."
+                          "prompt_tokens_details":
                             type:
-                              - "integer"
+                              - "object"
                               - "null"
-                          "audio_tokens":
+                            properties:
+                              "cached_tokens":
+                                type:
+                                  - "integer"
+                                  - "null"
+                              "audio_tokens":
+                                type:
+                                  - "integer"
+                                  - "null"
+                                description: "The number of audio input tokens consumed by the request."
+                          "completion_tokens_details":
                             type:
-                              - "integer"
+                              - "object"
                               - "null"
-                            description: "The number of audio input tokens consumed by the request."
-                      "completion_tokens_details":
-                        type:
-                          - "object"
-                          - "null"
-                        properties:
-                          "reasoning_tokens":
-                            type:
-                              - "number"
-                              - "null"
-                          "accepted_prediction_tokens":
-                            type:
-                              - "number"
-                              - "null"
-                          "rejected_prediction_tokens":
-                            type:
-                              - "number"
-                              - "null"
-                          "audio_tokens":
-                            type:
-                              - "integer"
-                              - "null"
-                            description: "The number of audio output tokens produced by the response."
-                    description: "Usage statistics for the completion request."
+                            properties:
+                              "reasoning_tokens":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "accepted_prediction_tokens":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "rejected_prediction_tokens":
+                                type:
+                                  - "number"
+                                  - "null"
+                              "audio_tokens":
+                                type:
+                                  - "integer"
+                                  - "null"
+                                description: "The number of audio output tokens produced by the response."
+                        description: "Usage statistics for the completion request."
+                    required:
+                      - "id"
+                      - "choices"
+                      - "model"
+                      - "object"
                 required:
                   - "id"
                   - "choices"
@@ -35732,9 +35793,15 @@ paths:
               schema:
                 type: "object"
                 properties:
-                  "type":
-                    type: "string"
-                    description: "The type of streaming event"
+                  "data":
+                    type: "object"
+                    properties:
+                      "type":
+                        type: "string"
+                        description: "The type of streaming event"
+                    required:
+                      - "type"
+                    description: "One server-sent event emitted while the response streams"
                 required:
                   - "type"
                 description: "One server-sent event emitted while the response streams"
@@ -36409,10 +36476,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36483,10 +36550,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36554,10 +36621,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36640,10 +36707,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36711,10 +36778,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -37109,10 +37176,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -37196,10 +37263,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-25T08:28:50.342Z"
+                              default: "2025-08-25T10:00:29.383Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -37591,10 +37658,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -37665,10 +37732,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -37736,10 +37803,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -37822,10 +37889,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38204,10 +38271,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38278,10 +38345,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38349,10 +38416,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38435,10 +38502,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-25T08:28:50.342Z"
+                        default: "2025-08-25T10:00:29.383Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41502,7 +41569,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41510,7 +41577,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -41644,7 +41711,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41652,7 +41719,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -41870,7 +41937,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-25T08:28:47.904Z"
+                          default: "2025-08-25T10:00:27.051Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -41878,7 +41945,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-25T08:28:47.905Z"
+                              default: "2025-08-25T10:00:27.052Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -42059,7 +42126,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42067,7 +42134,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42191,7 +42258,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42199,7 +42266,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42349,7 +42416,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-25T08:28:47.904Z"
+                    default: "2025-08-25T10:00:27.051Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42357,7 +42424,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-25T08:28:47.905Z"
+                        default: "2025-08-25T10:00:27.052Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
