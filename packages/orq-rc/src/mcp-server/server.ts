@@ -141,7 +141,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "ix-sse-errors-for-speakeasy-compatibility",
+    version: "3.12.0-rc.11",
   });
 
   const client = new OrqCore({

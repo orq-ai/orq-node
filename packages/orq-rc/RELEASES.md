@@ -3169,3 +3169,13 @@ Based on:
 - [typescript vix-sse-errors-for-speakeasy-compatibility] packages/orq-rc
 ### Releases
 - [NPM vix-sse-errors-for-speakeasy-compatibility] https://www.npmjs.com/package/@orq-ai/node/v/ix-sse-errors-for-speakeasy-compatibility - packages/orq-rc
+
+## 2025-08-25 13:08:52
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.606.4 (2.687.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.12.0-rc.11] packages/orq-rc
+### Releases
+- [NPM v3.12.0-rc.11] https://www.npmjs.com/package/@orq-ai/node/v/3.12.0-rc.11 - packages/orq-rc

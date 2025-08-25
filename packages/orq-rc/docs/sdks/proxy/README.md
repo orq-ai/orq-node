@@ -591,6 +591,49 @@ async function run() {
   const result = await orq.proxy.imagesGenerate({
     prompt: "<value>",
     model: "F-150",
+    orq: {
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+          "priority-high",
+        ],
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+    },
   });
 
   console.log(result);
@@ -617,6 +660,49 @@ async function run() {
   const res = await proxyImagesGenerate(orq, {
     prompt: "<value>",
     model: "F-150",
+    orq: {
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+          "priority-high",
+        ],
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;

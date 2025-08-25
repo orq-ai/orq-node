@@ -10,6 +10,49 @@ import { PostV2ProxyImagesGenerationsRequestBody } from "@orq-ai/node/models/ope
 let value: PostV2ProxyImagesGenerationsRequestBody = {
   prompt: "<value>",
   model: "Impala",
+  orq: {
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    fallbacks: [
+      {
+        model: "openai/gpt-4o-mini",
+      },
+    ],
+    contact: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
+    thread: {
+      id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      tags: [
+        "customer-support",
+        "priority-high",
+      ],
+    },
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+  },
 };
 ```
 
@@ -28,3 +71,4 @@ let value: PostV2ProxyImagesGenerationsRequestBody = {
 | `responseFormat`                                                                                                                                                | [operations.PostV2ProxyImagesGenerationsResponseFormat](../../models/operations/postv2proxyimagesgenerationsresponseformat.md)                                  | :heavy_minus_sign:                                                                                                                                              | The format in which generated images with are returned. This parameter isn't supported for `openai/gpt-image-1` which will always return base64-encoded images. |
 | `size`                                                                                                                                                          | *string*                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                              | The size of the generated images. Must be one of the specified sizes for each model.                                                                            |
 | `style`                                                                                                                                                         | *string*                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                              | The style of the generated images. This parameter is only supported for dall-e-3.                                                                               |
+| `orq`                                                                                                                                                           | [operations.PostV2ProxyImagesGenerationsOrq](../../models/operations/postv2proxyimagesgenerationsorq.md)                                                        | :heavy_minus_sign:                                                                                                                                              | N/A                                                                                                                                                             |

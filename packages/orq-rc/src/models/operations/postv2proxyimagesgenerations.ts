@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -78,6 +79,86 @@ export type PostV2ProxyImagesGenerationsResponseFormat = ClosedEnum<
 >;
 
 /**
+ * Retry configuration for the request
+ */
+export type PostV2ProxyImagesGenerationsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type PostV2ProxyImagesGenerationsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Thread information to group related requests
+ */
+export type PostV2ProxyImagesGenerationsThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
+};
+
+export const PostV2ProxyImagesGenerationsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type PostV2ProxyImagesGenerationsType = ClosedEnum<
+  typeof PostV2ProxyImagesGenerationsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type PostV2ProxyImagesGenerationsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: PostV2ProxyImagesGenerationsType;
+};
+
+export type PostV2ProxyImagesGenerationsOrq = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: PostV2ProxyImagesGenerationsRetry | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<PostV2ProxyImagesGenerationsFallbacks> | undefined;
+  /**
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   */
+  contact?: components.PublicContact | undefined;
+  /**
+   * Thread information to group related requests
+   */
+  thread?: PostV2ProxyImagesGenerationsThread | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: PostV2ProxyImagesGenerationsCache | undefined;
+};
+
+/**
  * input
  */
 export type PostV2ProxyImagesGenerationsRequestBody = {
@@ -128,6 +209,7 @@ export type PostV2ProxyImagesGenerationsRequestBody = {
    * The style of the generated images. This parameter is only supported for dall-e-3.
    */
   style?: string | null | undefined;
+  orq?: PostV2ProxyImagesGenerationsOrq | undefined;
 };
 
 export type PostV2ProxyImagesGenerationsData = {
@@ -269,6 +351,356 @@ export namespace PostV2ProxyImagesGenerationsResponseFormat$ {
 }
 
 /** @internal */
+export const PostV2ProxyImagesGenerationsRetry$inboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyImagesGenerationsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsRetry$outboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsRetry$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyImagesGenerationsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyImagesGenerationsRetry$ {
+  /** @deprecated use `PostV2ProxyImagesGenerationsRetry$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyImagesGenerationsRetry$inboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsRetry$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyImagesGenerationsRetry$outboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsRetry$Outbound` instead. */
+  export type Outbound = PostV2ProxyImagesGenerationsRetry$Outbound;
+}
+
+export function postV2ProxyImagesGenerationsRetryToJSON(
+  postV2ProxyImagesGenerationsRetry: PostV2ProxyImagesGenerationsRetry,
+): string {
+  return JSON.stringify(
+    PostV2ProxyImagesGenerationsRetry$outboundSchema.parse(
+      postV2ProxyImagesGenerationsRetry,
+    ),
+  );
+}
+
+export function postV2ProxyImagesGenerationsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyImagesGenerationsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyImagesGenerationsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyImagesGenerationsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsFallbacks$inboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type PostV2ProxyImagesGenerationsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsFallbacks$outboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsFallbacks$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyImagesGenerationsFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyImagesGenerationsFallbacks$ {
+  /** @deprecated use `PostV2ProxyImagesGenerationsFallbacks$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyImagesGenerationsFallbacks$inboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsFallbacks$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyImagesGenerationsFallbacks$outboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsFallbacks$Outbound` instead. */
+  export type Outbound = PostV2ProxyImagesGenerationsFallbacks$Outbound;
+}
+
+export function postV2ProxyImagesGenerationsFallbacksToJSON(
+  postV2ProxyImagesGenerationsFallbacks: PostV2ProxyImagesGenerationsFallbacks,
+): string {
+  return JSON.stringify(
+    PostV2ProxyImagesGenerationsFallbacks$outboundSchema.parse(
+      postV2ProxyImagesGenerationsFallbacks,
+    ),
+  );
+}
+
+export function postV2ProxyImagesGenerationsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyImagesGenerationsFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyImagesGenerationsFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyImagesGenerationsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsThread$inboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsThread,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type PostV2ProxyImagesGenerationsThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsThread$outboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsThread$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyImagesGenerationsThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyImagesGenerationsThread$ {
+  /** @deprecated use `PostV2ProxyImagesGenerationsThread$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyImagesGenerationsThread$inboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsThread$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyImagesGenerationsThread$outboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsThread$Outbound` instead. */
+  export type Outbound = PostV2ProxyImagesGenerationsThread$Outbound;
+}
+
+export function postV2ProxyImagesGenerationsThreadToJSON(
+  postV2ProxyImagesGenerationsThread: PostV2ProxyImagesGenerationsThread,
+): string {
+  return JSON.stringify(
+    PostV2ProxyImagesGenerationsThread$outboundSchema.parse(
+      postV2ProxyImagesGenerationsThread,
+    ),
+  );
+}
+
+export function postV2ProxyImagesGenerationsThreadFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyImagesGenerationsThread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyImagesGenerationsThread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyImagesGenerationsThread' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsType$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyImagesGenerationsType
+> = z.nativeEnum(PostV2ProxyImagesGenerationsType);
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsType$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyImagesGenerationsType
+> = PostV2ProxyImagesGenerationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyImagesGenerationsType$ {
+  /** @deprecated use `PostV2ProxyImagesGenerationsType$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyImagesGenerationsType$inboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsType$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyImagesGenerationsType$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsCache$inboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyImagesGenerationsType$inboundSchema,
+});
+
+/** @internal */
+export type PostV2ProxyImagesGenerationsCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsCache$outboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsCache$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyImagesGenerationsCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyImagesGenerationsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyImagesGenerationsCache$ {
+  /** @deprecated use `PostV2ProxyImagesGenerationsCache$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyImagesGenerationsCache$inboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsCache$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyImagesGenerationsCache$outboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsCache$Outbound` instead. */
+  export type Outbound = PostV2ProxyImagesGenerationsCache$Outbound;
+}
+
+export function postV2ProxyImagesGenerationsCacheToJSON(
+  postV2ProxyImagesGenerationsCache: PostV2ProxyImagesGenerationsCache,
+): string {
+  return JSON.stringify(
+    PostV2ProxyImagesGenerationsCache$outboundSchema.parse(
+      postV2ProxyImagesGenerationsCache,
+    ),
+  );
+}
+
+export function postV2ProxyImagesGenerationsCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyImagesGenerationsCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyImagesGenerationsCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyImagesGenerationsCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsOrq$inboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsOrq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  retry: z.lazy(() => PostV2ProxyImagesGenerationsRetry$inboundSchema)
+    .optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyImagesGenerationsFallbacks$inboundSchema),
+  ).optional(),
+  contact: components.PublicContact$inboundSchema.optional(),
+  thread: z.lazy(() => PostV2ProxyImagesGenerationsThread$inboundSchema)
+    .optional(),
+  cache: z.lazy(() => PostV2ProxyImagesGenerationsCache$inboundSchema)
+    .optional(),
+});
+
+/** @internal */
+export type PostV2ProxyImagesGenerationsOrq$Outbound = {
+  name?: string | undefined;
+  retry?: PostV2ProxyImagesGenerationsRetry$Outbound | undefined;
+  fallbacks?: Array<PostV2ProxyImagesGenerationsFallbacks$Outbound> | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
+  thread?: PostV2ProxyImagesGenerationsThread$Outbound | undefined;
+  cache?: PostV2ProxyImagesGenerationsCache$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyImagesGenerationsOrq$outboundSchema: z.ZodType<
+  PostV2ProxyImagesGenerationsOrq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyImagesGenerationsOrq
+> = z.object({
+  name: z.string().optional(),
+  retry: z.lazy(() => PostV2ProxyImagesGenerationsRetry$outboundSchema)
+    .optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyImagesGenerationsFallbacks$outboundSchema),
+  ).optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
+  thread: z.lazy(() => PostV2ProxyImagesGenerationsThread$outboundSchema)
+    .optional(),
+  cache: z.lazy(() => PostV2ProxyImagesGenerationsCache$outboundSchema)
+    .optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyImagesGenerationsOrq$ {
+  /** @deprecated use `PostV2ProxyImagesGenerationsOrq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyImagesGenerationsOrq$inboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsOrq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyImagesGenerationsOrq$outboundSchema;
+  /** @deprecated use `PostV2ProxyImagesGenerationsOrq$Outbound` instead. */
+  export type Outbound = PostV2ProxyImagesGenerationsOrq$Outbound;
+}
+
+export function postV2ProxyImagesGenerationsOrqToJSON(
+  postV2ProxyImagesGenerationsOrq: PostV2ProxyImagesGenerationsOrq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyImagesGenerationsOrq$outboundSchema.parse(
+      postV2ProxyImagesGenerationsOrq,
+    ),
+  );
+}
+
+export function postV2ProxyImagesGenerationsOrqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyImagesGenerationsOrq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyImagesGenerationsOrq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyImagesGenerationsOrq' from JSON`,
+  );
+}
+
+/** @internal */
 export const PostV2ProxyImagesGenerationsRequestBody$inboundSchema: z.ZodType<
   PostV2ProxyImagesGenerationsRequestBody,
   z.ZodTypeDef,
@@ -287,6 +719,7 @@ export const PostV2ProxyImagesGenerationsRequestBody$inboundSchema: z.ZodType<
   ),
   size: z.nullable(z.string()).optional(),
   style: z.nullable(z.string()).optional(),
+  orq: z.lazy(() => PostV2ProxyImagesGenerationsOrq$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "output_compression": "outputCompression",
@@ -308,6 +741,7 @@ export type PostV2ProxyImagesGenerationsRequestBody$Outbound = {
   response_format: string | null;
   size?: string | null | undefined;
   style?: string | null | undefined;
+  orq?: PostV2ProxyImagesGenerationsOrq$Outbound | undefined;
 };
 
 /** @internal */
@@ -329,6 +763,7 @@ export const PostV2ProxyImagesGenerationsRequestBody$outboundSchema: z.ZodType<
   ),
   size: z.nullable(z.string()).optional(),
   style: z.nullable(z.string()).optional(),
+  orq: z.lazy(() => PostV2ProxyImagesGenerationsOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     outputCompression: "output_compression",
