@@ -3,4 +3,5 @@
  */
 
 export * from "./deployments.js";
+export * from "./publiccontact.js";
 export * from "./security.js";

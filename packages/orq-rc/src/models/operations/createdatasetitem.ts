@@ -78,6 +78,49 @@ export const CreateDatasetItem2DatasetsRequestRequestBodyMessagesType = {
 export type CreateDatasetItem2DatasetsRequestRequestBodyMessagesType =
   ClosedEnum<typeof CreateDatasetItem2DatasetsRequestRequestBodyMessagesType>;
 
+export const CreateDatasetItemAnnotationsDatasetsType = {
+  FilePath: "file_path",
+} as const;
+export type CreateDatasetItemAnnotationsDatasetsType = ClosedEnum<
+  typeof CreateDatasetItemAnnotationsDatasetsType
+>;
+
+export type CreateDatasetItemAnnotationsFilePath = {
+  fileId: string;
+};
+
+export type CreateDatasetItemAnnotations2 = {
+  type: CreateDatasetItemAnnotationsDatasetsType;
+  text: string;
+  filePath: CreateDatasetItemAnnotationsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const CreateDatasetItemAnnotationsType = {
+  FileCitation: "file_citation",
+} as const;
+export type CreateDatasetItemAnnotationsType = ClosedEnum<
+  typeof CreateDatasetItemAnnotationsType
+>;
+
+export type CreateDatasetItemAnnotationsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type CreateDatasetItemAnnotations1 = {
+  type: CreateDatasetItemAnnotationsType;
+  text: string;
+  fileCitation: CreateDatasetItemAnnotationsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type CreateDatasetItem2Annotations =
+  | CreateDatasetItemAnnotations1
+  | CreateDatasetItemAnnotations2;
+
 export type CreateDatasetItem2TextContentPart = {
   /**
    * The type of the content part.
@@ -87,6 +130,12 @@ export type CreateDatasetItem2TextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<CreateDatasetItemAnnotations1 | CreateDatasetItemAnnotations2>
+    | undefined;
 };
 
 export type CreateDatasetItemContentDatasets2 =
@@ -543,6 +592,49 @@ export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMess
     typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
   >;
 
+export const CreateDatasetItemAnnotationsDatasetsResponse200Type = {
+  FilePath: "file_path",
+} as const;
+export type CreateDatasetItemAnnotationsDatasetsResponse200Type = ClosedEnum<
+  typeof CreateDatasetItemAnnotationsDatasetsResponse200Type
+>;
+
+export type CreateDatasetItemAnnotationsDatasetsFilePath = {
+  fileId: string;
+};
+
+export type CreateDatasetItemAnnotationsDatasets2 = {
+  type: CreateDatasetItemAnnotationsDatasetsResponse200Type;
+  text: string;
+  filePath: CreateDatasetItemAnnotationsDatasetsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const CreateDatasetItemAnnotationsDatasetsResponseType = {
+  FileCitation: "file_citation",
+} as const;
+export type CreateDatasetItemAnnotationsDatasetsResponseType = ClosedEnum<
+  typeof CreateDatasetItemAnnotationsDatasetsResponseType
+>;
+
+export type CreateDatasetItemAnnotationsDatasetsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type CreateDatasetItemAnnotationsDatasets1 = {
+  type: CreateDatasetItemAnnotationsDatasetsResponseType;
+  text: string;
+  fileCitation: CreateDatasetItemAnnotationsDatasetsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type CreateDatasetItem2DatasetsAnnotations =
+  | CreateDatasetItemAnnotationsDatasets1
+  | CreateDatasetItemAnnotationsDatasets2;
+
 export type CreateDatasetItem2DatasetsTextContentPart = {
   /**
    * The type of the content part.
@@ -553,6 +645,15 @@ export type CreateDatasetItem2DatasetsTextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<
+      | CreateDatasetItemAnnotationsDatasets1
+      | CreateDatasetItemAnnotationsDatasets2
+    >
+    | undefined;
 };
 
 export type CreateDatasetItemContentDatasetsResponse2002 =
@@ -1238,6 +1339,415 @@ export namespace CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$ {
 }
 
 /** @internal */
+export const CreateDatasetItemAnnotationsDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsType> = z
+    .nativeEnum(CreateDatasetItemAnnotationsDatasetsType);
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsType> =
+    CreateDatasetItemAnnotationsDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasetsType$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasetsType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsFilePath$inboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsFilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItemAnnotationsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotationsFilePath$outboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsFilePath$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemAnnotationsFilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsFilePath$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsFilePath$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsFilePath$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsFilePath$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsFilePath$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotationsFilePath$Outbound;
+}
+
+export function createDatasetItemAnnotationsFilePathToJSON(
+  createDatasetItemAnnotationsFilePath: CreateDatasetItemAnnotationsFilePath,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotationsFilePath$outboundSchema.parse(
+      createDatasetItemAnnotationsFilePath,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotationsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItemAnnotationsFilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemAnnotationsFilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemAnnotationsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotations2$inboundSchema: z.ZodType<
+  CreateDatasetItemAnnotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateDatasetItemAnnotationsDatasetsType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => CreateDatasetItemAnnotationsFilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItemAnnotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: CreateDatasetItemAnnotationsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotations2$outboundSchema: z.ZodType<
+  CreateDatasetItemAnnotations2$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemAnnotations2
+> = z.object({
+  type: CreateDatasetItemAnnotationsDatasetsType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => CreateDatasetItemAnnotationsFilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotations2$ {
+  /** @deprecated use `CreateDatasetItemAnnotations2$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemAnnotations2$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotations2$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemAnnotations2$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotations2$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotations2$Outbound;
+}
+
+export function createDatasetItemAnnotations2ToJSON(
+  createDatasetItemAnnotations2: CreateDatasetItemAnnotations2,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotations2$outboundSchema.parse(
+      createDatasetItemAnnotations2,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItemAnnotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItemAnnotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemAnnotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemAnnotationsType
+> = z.nativeEnum(CreateDatasetItemAnnotationsType);
+
+/** @internal */
+export const CreateDatasetItemAnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemAnnotationsType
+> = CreateDatasetItemAnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsType$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemAnnotationsType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsType$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemAnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsFileCitation$inboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsFileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItemAnnotationsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotationsFileCitation$outboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsFileCitation$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemAnnotationsFileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsFileCitation$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsFileCitation$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsFileCitation$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsFileCitation$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotationsFileCitation$Outbound;
+}
+
+export function createDatasetItemAnnotationsFileCitationToJSON(
+  createDatasetItemAnnotationsFileCitation:
+    CreateDatasetItemAnnotationsFileCitation,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotationsFileCitation$outboundSchema.parse(
+      createDatasetItemAnnotationsFileCitation,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotationsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateDatasetItemAnnotationsFileCitation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemAnnotationsFileCitation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateDatasetItemAnnotationsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotations1$inboundSchema: z.ZodType<
+  CreateDatasetItemAnnotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateDatasetItemAnnotationsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() =>
+    CreateDatasetItemAnnotationsFileCitation$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItemAnnotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: CreateDatasetItemAnnotationsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotations1$outboundSchema: z.ZodType<
+  CreateDatasetItemAnnotations1$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemAnnotations1
+> = z.object({
+  type: CreateDatasetItemAnnotationsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() =>
+    CreateDatasetItemAnnotationsFileCitation$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotations1$ {
+  /** @deprecated use `CreateDatasetItemAnnotations1$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemAnnotations1$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotations1$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemAnnotations1$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotations1$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotations1$Outbound;
+}
+
+export function createDatasetItemAnnotations1ToJSON(
+  createDatasetItemAnnotations1: CreateDatasetItemAnnotations1,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotations1$outboundSchema.parse(
+      createDatasetItemAnnotations1,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItemAnnotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItemAnnotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemAnnotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItem2Annotations$inboundSchema: z.ZodType<
+  CreateDatasetItem2Annotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateDatasetItemAnnotations1$inboundSchema),
+  z.lazy(() => CreateDatasetItemAnnotations2$inboundSchema),
+]);
+
+/** @internal */
+export type CreateDatasetItem2Annotations$Outbound =
+  | CreateDatasetItemAnnotations1$Outbound
+  | CreateDatasetItemAnnotations2$Outbound;
+
+/** @internal */
+export const CreateDatasetItem2Annotations$outboundSchema: z.ZodType<
+  CreateDatasetItem2Annotations$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItem2Annotations
+> = z.union([
+  z.lazy(() => CreateDatasetItemAnnotations1$outboundSchema),
+  z.lazy(() => CreateDatasetItemAnnotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2Annotations$ {
+  /** @deprecated use `CreateDatasetItem2Annotations$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItem2Annotations$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2Annotations$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItem2Annotations$outboundSchema;
+  /** @deprecated use `CreateDatasetItem2Annotations$Outbound` instead. */
+  export type Outbound = CreateDatasetItem2Annotations$Outbound;
+}
+
+export function createDatasetItem2AnnotationsToJSON(
+  createDatasetItem2Annotations: CreateDatasetItem2Annotations,
+): string {
+  return JSON.stringify(
+    CreateDatasetItem2Annotations$outboundSchema.parse(
+      createDatasetItem2Annotations,
+    ),
+  );
+}
+
+export function createDatasetItem2AnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItem2Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateDatasetItem2Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItem2Annotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateDatasetItem2TextContentPart$inboundSchema: z.ZodType<
   CreateDatasetItem2TextContentPart,
   z.ZodTypeDef,
@@ -1245,12 +1755,24 @@ export const CreateDatasetItem2TextContentPart$inboundSchema: z.ZodType<
 > = z.object({
   type: CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => CreateDatasetItemAnnotations1$inboundSchema),
+      z.lazy(() => CreateDatasetItemAnnotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type CreateDatasetItem2TextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | CreateDatasetItemAnnotations1$Outbound
+      | CreateDatasetItemAnnotations2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -1261,6 +1783,12 @@ export const CreateDatasetItem2TextContentPart$outboundSchema: z.ZodType<
 > = z.object({
   type: CreateDatasetItem2DatasetsRequestRequestBodyMessagesType$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => CreateDatasetItemAnnotations1$outboundSchema),
+      z.lazy(() => CreateDatasetItemAnnotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -3304,6 +3832,441 @@ export namespace CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBod
 }
 
 /** @internal */
+export const CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponse200Type> =
+    z.nativeEnum(CreateDatasetItemAnnotationsDatasetsResponse200Type);
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponse200Type> =
+    CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasetsResponse200Type$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema:
+  z.ZodType<
+    CreateDatasetItemAnnotationsDatasetsFilePath,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    file_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  });
+
+/** @internal */
+export type CreateDatasetItemAnnotationsDatasetsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema:
+  z.ZodType<
+    CreateDatasetItemAnnotationsDatasetsFilePath$Outbound,
+    z.ZodTypeDef,
+    CreateDatasetItemAnnotationsDatasetsFilePath
+  > = z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasetsFilePath$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFilePath$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotationsDatasetsFilePath$Outbound;
+}
+
+export function createDatasetItemAnnotationsDatasetsFilePathToJSON(
+  createDatasetItemAnnotationsDatasetsFilePath:
+    CreateDatasetItemAnnotationsDatasetsFilePath,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema.parse(
+      createDatasetItemAnnotationsDatasetsFilePath,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotationsDatasetsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateDatasetItemAnnotationsDatasetsFilePath,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateDatasetItemAnnotationsDatasetsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasets2$inboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsDatasets2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateDatasetItemAnnotationsDatasetsResponse200Type$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() =>
+    CreateDatasetItemAnnotationsDatasetsFilePath$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItemAnnotationsDatasets2$Outbound = {
+  type: string;
+  text: string;
+  file_path: CreateDatasetItemAnnotationsDatasetsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasets2$outboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsDatasets2$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemAnnotationsDatasets2
+> = z.object({
+  type: CreateDatasetItemAnnotationsDatasetsResponse200Type$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() =>
+    CreateDatasetItemAnnotationsDatasetsFilePath$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasets2$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasets2$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasets2$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasets2$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasets2$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasets2$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotationsDatasets2$Outbound;
+}
+
+export function createDatasetItemAnnotationsDatasets2ToJSON(
+  createDatasetItemAnnotationsDatasets2: CreateDatasetItemAnnotationsDatasets2,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotationsDatasets2$outboundSchema.parse(
+      createDatasetItemAnnotationsDatasets2,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotationsDatasets2FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItemAnnotationsDatasets2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemAnnotationsDatasets2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemAnnotationsDatasets2' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponseType> = z
+    .nativeEnum(CreateDatasetItemAnnotationsDatasetsResponseType);
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemAnnotationsDatasetsResponseType> =
+    CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasetsResponseType$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema:
+  z.ZodType<
+    CreateDatasetItemAnnotationsDatasetsFileCitation,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    file_id: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  });
+
+/** @internal */
+export type CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema:
+  z.ZodType<
+    CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound,
+    z.ZodTypeDef,
+    CreateDatasetItemAnnotationsDatasetsFileCitation
+  > = z.object({
+    fileId: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasetsFileCitation$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound` instead. */
+  export type Outbound =
+    CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound;
+}
+
+export function createDatasetItemAnnotationsDatasetsFileCitationToJSON(
+  createDatasetItemAnnotationsDatasetsFileCitation:
+    CreateDatasetItemAnnotationsDatasetsFileCitation,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema.parse(
+      createDatasetItemAnnotationsDatasetsFileCitation,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotationsDatasetsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateDatasetItemAnnotationsDatasetsFileCitation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateDatasetItemAnnotationsDatasetsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasets1$inboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsDatasets1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateDatasetItemAnnotationsDatasetsResponseType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() =>
+    CreateDatasetItemAnnotationsDatasetsFileCitation$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type CreateDatasetItemAnnotationsDatasets1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: CreateDatasetItemAnnotationsDatasetsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const CreateDatasetItemAnnotationsDatasets1$outboundSchema: z.ZodType<
+  CreateDatasetItemAnnotationsDatasets1$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemAnnotationsDatasets1
+> = z.object({
+  type: CreateDatasetItemAnnotationsDatasetsResponseType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() =>
+    CreateDatasetItemAnnotationsDatasetsFileCitation$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemAnnotationsDatasets1$ {
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasets1$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemAnnotationsDatasets1$inboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasets1$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemAnnotationsDatasets1$outboundSchema;
+  /** @deprecated use `CreateDatasetItemAnnotationsDatasets1$Outbound` instead. */
+  export type Outbound = CreateDatasetItemAnnotationsDatasets1$Outbound;
+}
+
+export function createDatasetItemAnnotationsDatasets1ToJSON(
+  createDatasetItemAnnotationsDatasets1: CreateDatasetItemAnnotationsDatasets1,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemAnnotationsDatasets1$outboundSchema.parse(
+      createDatasetItemAnnotationsDatasets1,
+    ),
+  );
+}
+
+export function createDatasetItemAnnotationsDatasets1FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItemAnnotationsDatasets1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemAnnotationsDatasets1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemAnnotationsDatasets1' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItem2DatasetsAnnotations$inboundSchema: z.ZodType<
+  CreateDatasetItem2DatasetsAnnotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => CreateDatasetItemAnnotationsDatasets1$inboundSchema),
+  z.lazy(() => CreateDatasetItemAnnotationsDatasets2$inboundSchema),
+]);
+
+/** @internal */
+export type CreateDatasetItem2DatasetsAnnotations$Outbound =
+  | CreateDatasetItemAnnotationsDatasets1$Outbound
+  | CreateDatasetItemAnnotationsDatasets2$Outbound;
+
+/** @internal */
+export const CreateDatasetItem2DatasetsAnnotations$outboundSchema: z.ZodType<
+  CreateDatasetItem2DatasetsAnnotations$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItem2DatasetsAnnotations
+> = z.union([
+  z.lazy(() => CreateDatasetItemAnnotationsDatasets1$outboundSchema),
+  z.lazy(() => CreateDatasetItemAnnotationsDatasets2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItem2DatasetsAnnotations$ {
+  /** @deprecated use `CreateDatasetItem2DatasetsAnnotations$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItem2DatasetsAnnotations$inboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsAnnotations$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItem2DatasetsAnnotations$outboundSchema;
+  /** @deprecated use `CreateDatasetItem2DatasetsAnnotations$Outbound` instead. */
+  export type Outbound = CreateDatasetItem2DatasetsAnnotations$Outbound;
+}
+
+export function createDatasetItem2DatasetsAnnotationsToJSON(
+  createDatasetItem2DatasetsAnnotations: CreateDatasetItem2DatasetsAnnotations,
+): string {
+  return JSON.stringify(
+    CreateDatasetItem2DatasetsAnnotations$outboundSchema.parse(
+      createDatasetItem2DatasetsAnnotations,
+    ),
+  );
+}
+
+export function createDatasetItem2DatasetsAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateDatasetItem2DatasetsAnnotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItem2DatasetsAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItem2DatasetsAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateDatasetItem2DatasetsTextContentPart$inboundSchema: z.ZodType<
   CreateDatasetItem2DatasetsTextContentPart,
   z.ZodTypeDef,
@@ -3312,12 +4275,24 @@ export const CreateDatasetItem2DatasetsTextContentPart$inboundSchema: z.ZodType<
   type:
     CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => CreateDatasetItemAnnotationsDatasets1$inboundSchema),
+      z.lazy(() => CreateDatasetItemAnnotationsDatasets2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type CreateDatasetItem2DatasetsTextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | CreateDatasetItemAnnotationsDatasets1$Outbound
+      | CreateDatasetItemAnnotationsDatasets2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -3330,6 +4305,12 @@ export const CreateDatasetItem2DatasetsTextContentPart$outboundSchema:
     type:
       CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema,
     text: z.string(),
+    annotations: z.array(
+      z.union([
+        z.lazy(() => CreateDatasetItemAnnotationsDatasets1$outboundSchema),
+        z.lazy(() => CreateDatasetItemAnnotationsDatasets2$outboundSchema),
+      ]),
+    ).optional(),
   });
 
 /**
@@ -5100,7 +6081,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-08-20T11:38:10.692Z",
+    "2025-08-25T10:00:27.052Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5164,7 +6145,7 @@ export const ResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-08-20T11:38:10.692Z"))
+  updated: z.date().default(() => new Date("2025-08-25T10:00:27.052Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

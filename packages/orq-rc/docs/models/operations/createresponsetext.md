@@ -1,0 +1,19 @@
+# CreateResponseText
+
+## Example Usage
+
+```typescript
+import { CreateResponseText } from "@orq-ai/node/models/operations";
+
+let value: CreateResponseText = {
+  format: {
+    type: "text",
+  },
+};
+```
+
+## Fields
+
+| Field                                  | Type                                   | Required                               | Description                            |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `format`                               | *operations.CreateResponseProxyFormat* | :heavy_check_mark:                     | N/A                                    |

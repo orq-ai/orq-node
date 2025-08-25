@@ -79,6 +79,45 @@ export type Deployments2PrefixMessages4Type = ClosedEnum<
   typeof Deployments2PrefixMessages4Type
 >;
 
+export const DeploymentsAnnotationsType = {
+  FilePath: "file_path",
+} as const;
+export type DeploymentsAnnotationsType = ClosedEnum<
+  typeof DeploymentsAnnotationsType
+>;
+
+export type FilePath = {
+  fileId: string;
+};
+
+export type Annotations2 = {
+  type: DeploymentsAnnotationsType;
+  text: string;
+  filePath: FilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const AnnotationsType = {
+  FileCitation: "file_citation",
+} as const;
+export type AnnotationsType = ClosedEnum<typeof AnnotationsType>;
+
+export type FileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type Annotations1 = {
+  type: AnnotationsType;
+  text: string;
+  fileCitation: FileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type Annotations = Annotations1 | Annotations2;
+
 export type TextContentPart = {
   /**
    * The type of the content part.
@@ -88,6 +127,10 @@ export type TextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?: Array<Annotations1 | Annotations2> | undefined;
 };
 
 export type Content2 = TextContentPart | RefusalContentPart;
@@ -476,6 +519,47 @@ export type Deployments2Messages4Type = ClosedEnum<
   typeof Deployments2Messages4Type
 >;
 
+export const DeploymentsAnnotationsMessages4Type = {
+  FilePath: "file_path",
+} as const;
+export type DeploymentsAnnotationsMessages4Type = ClosedEnum<
+  typeof DeploymentsAnnotationsMessages4Type
+>;
+
+export type AnnotationsFilePath = {
+  fileId: string;
+};
+
+export type DeploymentsAnnotations2 = {
+  type: DeploymentsAnnotationsMessages4Type;
+  text: string;
+  filePath: AnnotationsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const DeploymentsAnnotationsMessagesType = {
+  FileCitation: "file_citation",
+} as const;
+export type DeploymentsAnnotationsMessagesType = ClosedEnum<
+  typeof DeploymentsAnnotationsMessagesType
+>;
+
+export type AnnotationsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type DeploymentsAnnotations1 = {
+  type: DeploymentsAnnotationsMessagesType;
+  text: string;
+  fileCitation: AnnotationsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type TwoAnnotations = DeploymentsAnnotations1 | DeploymentsAnnotations2;
+
 export type TwoTextContentPart = {
   /**
    * The type of the content part.
@@ -485,6 +569,12 @@ export type TwoTextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<DeploymentsAnnotations1 | DeploymentsAnnotations2>
+    | undefined;
 };
 
 export type DeploymentsContentMessages2 =
@@ -1459,6 +1549,367 @@ export namespace Deployments2PrefixMessages4Type$ {
 }
 
 /** @internal */
+export const DeploymentsAnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsAnnotationsType
+> = z.nativeEnum(DeploymentsAnnotationsType);
+
+/** @internal */
+export const DeploymentsAnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsAnnotationsType
+> = DeploymentsAnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsAnnotationsType$ {
+  /** @deprecated use `DeploymentsAnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsAnnotationsType$inboundSchema;
+  /** @deprecated use `DeploymentsAnnotationsType$outboundSchema` instead. */
+  export const outboundSchema = DeploymentsAnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const FilePath$inboundSchema: z.ZodType<
+  FilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type FilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const FilePath$outboundSchema: z.ZodType<
+  FilePath$Outbound,
+  z.ZodTypeDef,
+  FilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FilePath$ {
+  /** @deprecated use `FilePath$inboundSchema` instead. */
+  export const inboundSchema = FilePath$inboundSchema;
+  /** @deprecated use `FilePath$outboundSchema` instead. */
+  export const outboundSchema = FilePath$outboundSchema;
+  /** @deprecated use `FilePath$Outbound` instead. */
+  export type Outbound = FilePath$Outbound;
+}
+
+export function filePathToJSON(filePath: FilePath): string {
+  return JSON.stringify(FilePath$outboundSchema.parse(filePath));
+}
+
+export function filePathFromJSON(
+  jsonString: string,
+): SafeParseResult<FilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const Annotations2$inboundSchema: z.ZodType<
+  Annotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentsAnnotationsType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => FilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type Annotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: FilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const Annotations2$outboundSchema: z.ZodType<
+  Annotations2$Outbound,
+  z.ZodTypeDef,
+  Annotations2
+> = z.object({
+  type: DeploymentsAnnotationsType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => FilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Annotations2$ {
+  /** @deprecated use `Annotations2$inboundSchema` instead. */
+  export const inboundSchema = Annotations2$inboundSchema;
+  /** @deprecated use `Annotations2$outboundSchema` instead. */
+  export const outboundSchema = Annotations2$outboundSchema;
+  /** @deprecated use `Annotations2$Outbound` instead. */
+  export type Outbound = Annotations2$Outbound;
+}
+
+export function annotations2ToJSON(annotations2: Annotations2): string {
+  return JSON.stringify(Annotations2$outboundSchema.parse(annotations2));
+}
+
+export function annotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const AnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof AnnotationsType
+> = z.nativeEnum(AnnotationsType);
+
+/** @internal */
+export const AnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof AnnotationsType
+> = AnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AnnotationsType$ {
+  /** @deprecated use `AnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = AnnotationsType$inboundSchema;
+  /** @deprecated use `AnnotationsType$outboundSchema` instead. */
+  export const outboundSchema = AnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const FileCitation$inboundSchema: z.ZodType<
+  FileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type FileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const FileCitation$outboundSchema: z.ZodType<
+  FileCitation$Outbound,
+  z.ZodTypeDef,
+  FileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileCitation$ {
+  /** @deprecated use `FileCitation$inboundSchema` instead. */
+  export const inboundSchema = FileCitation$inboundSchema;
+  /** @deprecated use `FileCitation$outboundSchema` instead. */
+  export const outboundSchema = FileCitation$outboundSchema;
+  /** @deprecated use `FileCitation$Outbound` instead. */
+  export type Outbound = FileCitation$Outbound;
+}
+
+export function fileCitationToJSON(fileCitation: FileCitation): string {
+  return JSON.stringify(FileCitation$outboundSchema.parse(fileCitation));
+}
+
+export function fileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<FileCitation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileCitation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const Annotations1$inboundSchema: z.ZodType<
+  Annotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: AnnotationsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() => FileCitation$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type Annotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: FileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const Annotations1$outboundSchema: z.ZodType<
+  Annotations1$Outbound,
+  z.ZodTypeDef,
+  Annotations1
+> = z.object({
+  type: AnnotationsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() => FileCitation$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Annotations1$ {
+  /** @deprecated use `Annotations1$inboundSchema` instead. */
+  export const inboundSchema = Annotations1$inboundSchema;
+  /** @deprecated use `Annotations1$outboundSchema` instead. */
+  export const outboundSchema = Annotations1$outboundSchema;
+  /** @deprecated use `Annotations1$Outbound` instead. */
+  export type Outbound = Annotations1$Outbound;
+}
+
+export function annotations1ToJSON(annotations1: Annotations1): string {
+  return JSON.stringify(Annotations1$outboundSchema.parse(annotations1));
+}
+
+export function annotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const Annotations$inboundSchema: z.ZodType<
+  Annotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => Annotations1$inboundSchema),
+  z.lazy(() => Annotations2$inboundSchema),
+]);
+
+/** @internal */
+export type Annotations$Outbound =
+  | Annotations1$Outbound
+  | Annotations2$Outbound;
+
+/** @internal */
+export const Annotations$outboundSchema: z.ZodType<
+  Annotations$Outbound,
+  z.ZodTypeDef,
+  Annotations
+> = z.union([
+  z.lazy(() => Annotations1$outboundSchema),
+  z.lazy(() => Annotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Annotations$ {
+  /** @deprecated use `Annotations$inboundSchema` instead. */
+  export const inboundSchema = Annotations$inboundSchema;
+  /** @deprecated use `Annotations$outboundSchema` instead. */
+  export const outboundSchema = Annotations$outboundSchema;
+  /** @deprecated use `Annotations$Outbound` instead. */
+  export type Outbound = Annotations$Outbound;
+}
+
+export function annotationsToJSON(annotations: Annotations): string {
+  return JSON.stringify(Annotations$outboundSchema.parse(annotations));
+}
+
+export function annotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const TextContentPart$inboundSchema: z.ZodType<
   TextContentPart,
   z.ZodTypeDef,
@@ -1466,12 +1917,21 @@ export const TextContentPart$inboundSchema: z.ZodType<
 > = z.object({
   type: Deployments2PrefixMessages4Type$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => Annotations1$inboundSchema),
+      z.lazy(() => Annotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type TextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<Annotations1$Outbound | Annotations2$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -1482,6 +1942,12 @@ export const TextContentPart$outboundSchema: z.ZodType<
 > = z.object({
   type: Deployments2PrefixMessages4Type$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => Annotations1$outboundSchema),
+      z.lazy(() => Annotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -3110,6 +3576,386 @@ export namespace Deployments2Messages4Type$ {
 }
 
 /** @internal */
+export const DeploymentsAnnotationsMessages4Type$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsAnnotationsMessages4Type
+> = z.nativeEnum(DeploymentsAnnotationsMessages4Type);
+
+/** @internal */
+export const DeploymentsAnnotationsMessages4Type$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentsAnnotationsMessages4Type> =
+    DeploymentsAnnotationsMessages4Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsAnnotationsMessages4Type$ {
+  /** @deprecated use `DeploymentsAnnotationsMessages4Type$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentsAnnotationsMessages4Type$inboundSchema;
+  /** @deprecated use `DeploymentsAnnotationsMessages4Type$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentsAnnotationsMessages4Type$outboundSchema;
+}
+
+/** @internal */
+export const AnnotationsFilePath$inboundSchema: z.ZodType<
+  AnnotationsFilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type AnnotationsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const AnnotationsFilePath$outboundSchema: z.ZodType<
+  AnnotationsFilePath$Outbound,
+  z.ZodTypeDef,
+  AnnotationsFilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AnnotationsFilePath$ {
+  /** @deprecated use `AnnotationsFilePath$inboundSchema` instead. */
+  export const inboundSchema = AnnotationsFilePath$inboundSchema;
+  /** @deprecated use `AnnotationsFilePath$outboundSchema` instead. */
+  export const outboundSchema = AnnotationsFilePath$outboundSchema;
+  /** @deprecated use `AnnotationsFilePath$Outbound` instead. */
+  export type Outbound = AnnotationsFilePath$Outbound;
+}
+
+export function annotationsFilePathToJSON(
+  annotationsFilePath: AnnotationsFilePath,
+): string {
+  return JSON.stringify(
+    AnnotationsFilePath$outboundSchema.parse(annotationsFilePath),
+  );
+}
+
+export function annotationsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<AnnotationsFilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AnnotationsFilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AnnotationsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentsAnnotations2$inboundSchema: z.ZodType<
+  DeploymentsAnnotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentsAnnotationsMessages4Type$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => AnnotationsFilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type DeploymentsAnnotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: AnnotationsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentsAnnotations2$outboundSchema: z.ZodType<
+  DeploymentsAnnotations2$Outbound,
+  z.ZodTypeDef,
+  DeploymentsAnnotations2
+> = z.object({
+  type: DeploymentsAnnotationsMessages4Type$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => AnnotationsFilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsAnnotations2$ {
+  /** @deprecated use `DeploymentsAnnotations2$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsAnnotations2$inboundSchema;
+  /** @deprecated use `DeploymentsAnnotations2$outboundSchema` instead. */
+  export const outboundSchema = DeploymentsAnnotations2$outboundSchema;
+  /** @deprecated use `DeploymentsAnnotations2$Outbound` instead. */
+  export type Outbound = DeploymentsAnnotations2$Outbound;
+}
+
+export function deploymentsAnnotations2ToJSON(
+  deploymentsAnnotations2: DeploymentsAnnotations2,
+): string {
+  return JSON.stringify(
+    DeploymentsAnnotations2$outboundSchema.parse(deploymentsAnnotations2),
+  );
+}
+
+export function deploymentsAnnotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentsAnnotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentsAnnotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentsAnnotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentsAnnotationsMessagesType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsAnnotationsMessagesType
+> = z.nativeEnum(DeploymentsAnnotationsMessagesType);
+
+/** @internal */
+export const DeploymentsAnnotationsMessagesType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentsAnnotationsMessagesType
+> = DeploymentsAnnotationsMessagesType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsAnnotationsMessagesType$ {
+  /** @deprecated use `DeploymentsAnnotationsMessagesType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsAnnotationsMessagesType$inboundSchema;
+  /** @deprecated use `DeploymentsAnnotationsMessagesType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentsAnnotationsMessagesType$outboundSchema;
+}
+
+/** @internal */
+export const AnnotationsFileCitation$inboundSchema: z.ZodType<
+  AnnotationsFileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type AnnotationsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const AnnotationsFileCitation$outboundSchema: z.ZodType<
+  AnnotationsFileCitation$Outbound,
+  z.ZodTypeDef,
+  AnnotationsFileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AnnotationsFileCitation$ {
+  /** @deprecated use `AnnotationsFileCitation$inboundSchema` instead. */
+  export const inboundSchema = AnnotationsFileCitation$inboundSchema;
+  /** @deprecated use `AnnotationsFileCitation$outboundSchema` instead. */
+  export const outboundSchema = AnnotationsFileCitation$outboundSchema;
+  /** @deprecated use `AnnotationsFileCitation$Outbound` instead. */
+  export type Outbound = AnnotationsFileCitation$Outbound;
+}
+
+export function annotationsFileCitationToJSON(
+  annotationsFileCitation: AnnotationsFileCitation,
+): string {
+  return JSON.stringify(
+    AnnotationsFileCitation$outboundSchema.parse(annotationsFileCitation),
+  );
+}
+
+export function annotationsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<AnnotationsFileCitation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AnnotationsFileCitation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AnnotationsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentsAnnotations1$inboundSchema: z.ZodType<
+  DeploymentsAnnotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentsAnnotationsMessagesType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() => AnnotationsFileCitation$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type DeploymentsAnnotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: AnnotationsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentsAnnotations1$outboundSchema: z.ZodType<
+  DeploymentsAnnotations1$Outbound,
+  z.ZodTypeDef,
+  DeploymentsAnnotations1
+> = z.object({
+  type: DeploymentsAnnotationsMessagesType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() => AnnotationsFileCitation$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentsAnnotations1$ {
+  /** @deprecated use `DeploymentsAnnotations1$inboundSchema` instead. */
+  export const inboundSchema = DeploymentsAnnotations1$inboundSchema;
+  /** @deprecated use `DeploymentsAnnotations1$outboundSchema` instead. */
+  export const outboundSchema = DeploymentsAnnotations1$outboundSchema;
+  /** @deprecated use `DeploymentsAnnotations1$Outbound` instead. */
+  export type Outbound = DeploymentsAnnotations1$Outbound;
+}
+
+export function deploymentsAnnotations1ToJSON(
+  deploymentsAnnotations1: DeploymentsAnnotations1,
+): string {
+  return JSON.stringify(
+    DeploymentsAnnotations1$outboundSchema.parse(deploymentsAnnotations1),
+  );
+}
+
+export function deploymentsAnnotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentsAnnotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentsAnnotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentsAnnotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const TwoAnnotations$inboundSchema: z.ZodType<
+  TwoAnnotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentsAnnotations1$inboundSchema),
+  z.lazy(() => DeploymentsAnnotations2$inboundSchema),
+]);
+
+/** @internal */
+export type TwoAnnotations$Outbound =
+  | DeploymentsAnnotations1$Outbound
+  | DeploymentsAnnotations2$Outbound;
+
+/** @internal */
+export const TwoAnnotations$outboundSchema: z.ZodType<
+  TwoAnnotations$Outbound,
+  z.ZodTypeDef,
+  TwoAnnotations
+> = z.union([
+  z.lazy(() => DeploymentsAnnotations1$outboundSchema),
+  z.lazy(() => DeploymentsAnnotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwoAnnotations$ {
+  /** @deprecated use `TwoAnnotations$inboundSchema` instead. */
+  export const inboundSchema = TwoAnnotations$inboundSchema;
+  /** @deprecated use `TwoAnnotations$outboundSchema` instead. */
+  export const outboundSchema = TwoAnnotations$outboundSchema;
+  /** @deprecated use `TwoAnnotations$Outbound` instead. */
+  export type Outbound = TwoAnnotations$Outbound;
+}
+
+export function twoAnnotationsToJSON(twoAnnotations: TwoAnnotations): string {
+  return JSON.stringify(TwoAnnotations$outboundSchema.parse(twoAnnotations));
+}
+
+export function twoAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<TwoAnnotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TwoAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const TwoTextContentPart$inboundSchema: z.ZodType<
   TwoTextContentPart,
   z.ZodTypeDef,
@@ -3117,12 +3963,21 @@ export const TwoTextContentPart$inboundSchema: z.ZodType<
 > = z.object({
   type: Deployments2Messages4Type$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => DeploymentsAnnotations1$inboundSchema),
+      z.lazy(() => DeploymentsAnnotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type TwoTextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<DeploymentsAnnotations1$Outbound | DeploymentsAnnotations2$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -3133,6 +3988,12 @@ export const TwoTextContentPart$outboundSchema: z.ZodType<
 > = z.object({
   type: Deployments2Messages4Type$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => DeploymentsAnnotations1$outboundSchema),
+      z.lazy(() => DeploymentsAnnotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**

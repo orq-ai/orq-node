@@ -5,13 +5,11 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = {
-  type: "contains_url",
-};
+let value: Six = "elevenlabs/eleven_flash_v2";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                        | Type                                                                                                                                                         | Required                                                                                                                                                     | Description                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                       | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                           | N/A                                                                                                                                                          |
+```typescript
+"elevenlabs/eleven_flash_v2"
+```

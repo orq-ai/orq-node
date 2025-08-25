@@ -78,6 +78,45 @@ export type DeploymentGetConfig2DeploymentsRequestType = ClosedEnum<
   typeof DeploymentGetConfig2DeploymentsRequestType
 >;
 
+export const DeploymentGetConfigAnnotationsType = {
+  FilePath: "file_path",
+} as const;
+export type DeploymentGetConfigAnnotationsType = ClosedEnum<
+  typeof DeploymentGetConfigAnnotationsType
+>;
+
+export type FilePath = {
+  fileId: string;
+};
+
+export type Annotations2 = {
+  type: DeploymentGetConfigAnnotationsType;
+  text: string;
+  filePath: FilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const AnnotationsType = {
+  FileCitation: "file_citation",
+} as const;
+export type AnnotationsType = ClosedEnum<typeof AnnotationsType>;
+
+export type FileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type Annotations1 = {
+  type: AnnotationsType;
+  text: string;
+  fileCitation: FileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type Annotations = Annotations1 | Annotations2;
+
 export type TextContentPart = {
   /**
    * The type of the content part.
@@ -87,6 +126,10 @@ export type TextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?: Array<Annotations1 | Annotations2> | undefined;
 };
 
 export type Content2 = TextContentPart | RefusalContentPart;
@@ -479,6 +522,49 @@ export type DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type =
     typeof DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type
   >;
 
+export const DeploymentGetConfigAnnotationsDeploymentsRequestType = {
+  FilePath: "file_path",
+} as const;
+export type DeploymentGetConfigAnnotationsDeploymentsRequestType = ClosedEnum<
+  typeof DeploymentGetConfigAnnotationsDeploymentsRequestType
+>;
+
+export type AnnotationsFilePath = {
+  fileId: string;
+};
+
+export type DeploymentGetConfigAnnotations2 = {
+  type: DeploymentGetConfigAnnotationsDeploymentsRequestType;
+  text: string;
+  filePath: AnnotationsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const DeploymentGetConfigAnnotationsDeploymentsType = {
+  FileCitation: "file_citation",
+} as const;
+export type DeploymentGetConfigAnnotationsDeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfigAnnotationsDeploymentsType
+>;
+
+export type AnnotationsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type DeploymentGetConfigAnnotations1 = {
+  type: DeploymentGetConfigAnnotationsDeploymentsType;
+  text: string;
+  fileCitation: AnnotationsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type TwoAnnotations =
+  | DeploymentGetConfigAnnotations1
+  | DeploymentGetConfigAnnotations2;
+
 export type TwoTextContentPart = {
   /**
    * The type of the content part.
@@ -488,6 +574,12 @@ export type TwoTextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<DeploymentGetConfigAnnotations1 | DeploymentGetConfigAnnotations2>
+    | undefined;
 };
 
 export type DeploymentGetConfigContentDeployments2 =
@@ -1531,7 +1623,7 @@ export type DeploymentGetConfigVerbosity = ClosedEnum<
 /**
  * Model Parameters: Not all parameters apply to every model
  */
-export type ParametersT = {
+export type DeploymentGetConfigParameters = {
   /**
    * Only supported on `chat` and `completion` models.
    */
@@ -1651,7 +1743,7 @@ export type DeploymentGetConfigFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type Tools = {
+export type DeploymentGetConfigTools = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
@@ -1687,11 +1779,11 @@ export type DeploymentGetConfigResponseBody = {
   /**
    * Model Parameters: Not all parameters apply to every model
    */
-  parameters: ParametersT;
+  parameters: DeploymentGetConfigParameters;
   /**
    * A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.
    */
-  tools?: Array<Tools> | undefined;
+  tools?: Array<DeploymentGetConfigTools> | undefined;
 };
 
 /** @internal */
@@ -1950,6 +2042,368 @@ export namespace DeploymentGetConfig2DeploymentsRequestType$ {
 }
 
 /** @internal */
+export const DeploymentGetConfigAnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigAnnotationsType
+> = z.nativeEnum(DeploymentGetConfigAnnotationsType);
+
+/** @internal */
+export const DeploymentGetConfigAnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigAnnotationsType
+> = DeploymentGetConfigAnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigAnnotationsType$ {
+  /** @deprecated use `DeploymentGetConfigAnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigAnnotationsType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotationsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigAnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const FilePath$inboundSchema: z.ZodType<
+  FilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type FilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const FilePath$outboundSchema: z.ZodType<
+  FilePath$Outbound,
+  z.ZodTypeDef,
+  FilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FilePath$ {
+  /** @deprecated use `FilePath$inboundSchema` instead. */
+  export const inboundSchema = FilePath$inboundSchema;
+  /** @deprecated use `FilePath$outboundSchema` instead. */
+  export const outboundSchema = FilePath$outboundSchema;
+  /** @deprecated use `FilePath$Outbound` instead. */
+  export type Outbound = FilePath$Outbound;
+}
+
+export function filePathToJSON(filePath: FilePath): string {
+  return JSON.stringify(FilePath$outboundSchema.parse(filePath));
+}
+
+export function filePathFromJSON(
+  jsonString: string,
+): SafeParseResult<FilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const Annotations2$inboundSchema: z.ZodType<
+  Annotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfigAnnotationsType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => FilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type Annotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: FilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const Annotations2$outboundSchema: z.ZodType<
+  Annotations2$Outbound,
+  z.ZodTypeDef,
+  Annotations2
+> = z.object({
+  type: DeploymentGetConfigAnnotationsType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => FilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Annotations2$ {
+  /** @deprecated use `Annotations2$inboundSchema` instead. */
+  export const inboundSchema = Annotations2$inboundSchema;
+  /** @deprecated use `Annotations2$outboundSchema` instead. */
+  export const outboundSchema = Annotations2$outboundSchema;
+  /** @deprecated use `Annotations2$Outbound` instead. */
+  export type Outbound = Annotations2$Outbound;
+}
+
+export function annotations2ToJSON(annotations2: Annotations2): string {
+  return JSON.stringify(Annotations2$outboundSchema.parse(annotations2));
+}
+
+export function annotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const AnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof AnnotationsType
+> = z.nativeEnum(AnnotationsType);
+
+/** @internal */
+export const AnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof AnnotationsType
+> = AnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AnnotationsType$ {
+  /** @deprecated use `AnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = AnnotationsType$inboundSchema;
+  /** @deprecated use `AnnotationsType$outboundSchema` instead. */
+  export const outboundSchema = AnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const FileCitation$inboundSchema: z.ZodType<
+  FileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type FileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const FileCitation$outboundSchema: z.ZodType<
+  FileCitation$Outbound,
+  z.ZodTypeDef,
+  FileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileCitation$ {
+  /** @deprecated use `FileCitation$inboundSchema` instead. */
+  export const inboundSchema = FileCitation$inboundSchema;
+  /** @deprecated use `FileCitation$outboundSchema` instead. */
+  export const outboundSchema = FileCitation$outboundSchema;
+  /** @deprecated use `FileCitation$Outbound` instead. */
+  export type Outbound = FileCitation$Outbound;
+}
+
+export function fileCitationToJSON(fileCitation: FileCitation): string {
+  return JSON.stringify(FileCitation$outboundSchema.parse(fileCitation));
+}
+
+export function fileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<FileCitation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileCitation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const Annotations1$inboundSchema: z.ZodType<
+  Annotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: AnnotationsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() => FileCitation$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type Annotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: FileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const Annotations1$outboundSchema: z.ZodType<
+  Annotations1$Outbound,
+  z.ZodTypeDef,
+  Annotations1
+> = z.object({
+  type: AnnotationsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() => FileCitation$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Annotations1$ {
+  /** @deprecated use `Annotations1$inboundSchema` instead. */
+  export const inboundSchema = Annotations1$inboundSchema;
+  /** @deprecated use `Annotations1$outboundSchema` instead. */
+  export const outboundSchema = Annotations1$outboundSchema;
+  /** @deprecated use `Annotations1$Outbound` instead. */
+  export type Outbound = Annotations1$Outbound;
+}
+
+export function annotations1ToJSON(annotations1: Annotations1): string {
+  return JSON.stringify(Annotations1$outboundSchema.parse(annotations1));
+}
+
+export function annotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const Annotations$inboundSchema: z.ZodType<
+  Annotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => Annotations1$inboundSchema),
+  z.lazy(() => Annotations2$inboundSchema),
+]);
+
+/** @internal */
+export type Annotations$Outbound =
+  | Annotations1$Outbound
+  | Annotations2$Outbound;
+
+/** @internal */
+export const Annotations$outboundSchema: z.ZodType<
+  Annotations$Outbound,
+  z.ZodTypeDef,
+  Annotations
+> = z.union([
+  z.lazy(() => Annotations1$outboundSchema),
+  z.lazy(() => Annotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Annotations$ {
+  /** @deprecated use `Annotations$inboundSchema` instead. */
+  export const inboundSchema = Annotations$inboundSchema;
+  /** @deprecated use `Annotations$outboundSchema` instead. */
+  export const outboundSchema = Annotations$outboundSchema;
+  /** @deprecated use `Annotations$Outbound` instead. */
+  export type Outbound = Annotations$Outbound;
+}
+
+export function annotationsToJSON(annotations: Annotations): string {
+  return JSON.stringify(Annotations$outboundSchema.parse(annotations));
+}
+
+export function annotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const TextContentPart$inboundSchema: z.ZodType<
   TextContentPart,
   z.ZodTypeDef,
@@ -1957,12 +2411,21 @@ export const TextContentPart$inboundSchema: z.ZodType<
 > = z.object({
   type: DeploymentGetConfig2DeploymentsRequestType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => Annotations1$inboundSchema),
+      z.lazy(() => Annotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type TextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<Annotations1$Outbound | Annotations2$Outbound>
+    | undefined;
 };
 
 /** @internal */
@@ -1973,6 +2436,12 @@ export const TextContentPart$outboundSchema: z.ZodType<
 > = z.object({
   type: DeploymentGetConfig2DeploymentsRequestType$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => Annotations1$outboundSchema),
+      z.lazy(() => Annotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -3627,6 +4096,391 @@ export namespace DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$
 }
 
 /** @internal */
+export const DeploymentGetConfigAnnotationsDeploymentsRequestType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigAnnotationsDeploymentsRequestType> =
+    z.nativeEnum(DeploymentGetConfigAnnotationsDeploymentsRequestType);
+
+/** @internal */
+export const DeploymentGetConfigAnnotationsDeploymentsRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigAnnotationsDeploymentsRequestType> =
+    DeploymentGetConfigAnnotationsDeploymentsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigAnnotationsDeploymentsRequestType$ {
+  /** @deprecated use `DeploymentGetConfigAnnotationsDeploymentsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigAnnotationsDeploymentsRequestType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotationsDeploymentsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigAnnotationsDeploymentsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const AnnotationsFilePath$inboundSchema: z.ZodType<
+  AnnotationsFilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type AnnotationsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const AnnotationsFilePath$outboundSchema: z.ZodType<
+  AnnotationsFilePath$Outbound,
+  z.ZodTypeDef,
+  AnnotationsFilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AnnotationsFilePath$ {
+  /** @deprecated use `AnnotationsFilePath$inboundSchema` instead. */
+  export const inboundSchema = AnnotationsFilePath$inboundSchema;
+  /** @deprecated use `AnnotationsFilePath$outboundSchema` instead. */
+  export const outboundSchema = AnnotationsFilePath$outboundSchema;
+  /** @deprecated use `AnnotationsFilePath$Outbound` instead. */
+  export type Outbound = AnnotationsFilePath$Outbound;
+}
+
+export function annotationsFilePathToJSON(
+  annotationsFilePath: AnnotationsFilePath,
+): string {
+  return JSON.stringify(
+    AnnotationsFilePath$outboundSchema.parse(annotationsFilePath),
+  );
+}
+
+export function annotationsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<AnnotationsFilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AnnotationsFilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AnnotationsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfigAnnotations2$inboundSchema: z.ZodType<
+  DeploymentGetConfigAnnotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfigAnnotationsDeploymentsRequestType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => AnnotationsFilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type DeploymentGetConfigAnnotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: AnnotationsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentGetConfigAnnotations2$outboundSchema: z.ZodType<
+  DeploymentGetConfigAnnotations2$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigAnnotations2
+> = z.object({
+  type: DeploymentGetConfigAnnotationsDeploymentsRequestType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => AnnotationsFilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigAnnotations2$ {
+  /** @deprecated use `DeploymentGetConfigAnnotations2$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigAnnotations2$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotations2$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigAnnotations2$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotations2$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigAnnotations2$Outbound;
+}
+
+export function deploymentGetConfigAnnotations2ToJSON(
+  deploymentGetConfigAnnotations2: DeploymentGetConfigAnnotations2,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAnnotations2$outboundSchema.parse(
+      deploymentGetConfigAnnotations2,
+    ),
+  );
+}
+
+export function deploymentGetConfigAnnotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfigAnnotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfigAnnotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigAnnotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfigAnnotationsDeploymentsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigAnnotationsDeploymentsType> = z
+    .nativeEnum(DeploymentGetConfigAnnotationsDeploymentsType);
+
+/** @internal */
+export const DeploymentGetConfigAnnotationsDeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfigAnnotationsDeploymentsType> =
+    DeploymentGetConfigAnnotationsDeploymentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigAnnotationsDeploymentsType$ {
+  /** @deprecated use `DeploymentGetConfigAnnotationsDeploymentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfigAnnotationsDeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotationsDeploymentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfigAnnotationsDeploymentsType$outboundSchema;
+}
+
+/** @internal */
+export const AnnotationsFileCitation$inboundSchema: z.ZodType<
+  AnnotationsFileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type AnnotationsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const AnnotationsFileCitation$outboundSchema: z.ZodType<
+  AnnotationsFileCitation$Outbound,
+  z.ZodTypeDef,
+  AnnotationsFileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace AnnotationsFileCitation$ {
+  /** @deprecated use `AnnotationsFileCitation$inboundSchema` instead. */
+  export const inboundSchema = AnnotationsFileCitation$inboundSchema;
+  /** @deprecated use `AnnotationsFileCitation$outboundSchema` instead. */
+  export const outboundSchema = AnnotationsFileCitation$outboundSchema;
+  /** @deprecated use `AnnotationsFileCitation$Outbound` instead. */
+  export type Outbound = AnnotationsFileCitation$Outbound;
+}
+
+export function annotationsFileCitationToJSON(
+  annotationsFileCitation: AnnotationsFileCitation,
+): string {
+  return JSON.stringify(
+    AnnotationsFileCitation$outboundSchema.parse(annotationsFileCitation),
+  );
+}
+
+export function annotationsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<AnnotationsFileCitation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AnnotationsFileCitation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AnnotationsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfigAnnotations1$inboundSchema: z.ZodType<
+  DeploymentGetConfigAnnotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfigAnnotationsDeploymentsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() => AnnotationsFileCitation$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type DeploymentGetConfigAnnotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: AnnotationsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentGetConfigAnnotations1$outboundSchema: z.ZodType<
+  DeploymentGetConfigAnnotations1$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigAnnotations1
+> = z.object({
+  type: DeploymentGetConfigAnnotationsDeploymentsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() => AnnotationsFileCitation$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfigAnnotations1$ {
+  /** @deprecated use `DeploymentGetConfigAnnotations1$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigAnnotations1$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotations1$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigAnnotations1$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigAnnotations1$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigAnnotations1$Outbound;
+}
+
+export function deploymentGetConfigAnnotations1ToJSON(
+  deploymentGetConfigAnnotations1: DeploymentGetConfigAnnotations1,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigAnnotations1$outboundSchema.parse(
+      deploymentGetConfigAnnotations1,
+    ),
+  );
+}
+
+export function deploymentGetConfigAnnotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfigAnnotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfigAnnotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigAnnotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const TwoAnnotations$inboundSchema: z.ZodType<
+  TwoAnnotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentGetConfigAnnotations1$inboundSchema),
+  z.lazy(() => DeploymentGetConfigAnnotations2$inboundSchema),
+]);
+
+/** @internal */
+export type TwoAnnotations$Outbound =
+  | DeploymentGetConfigAnnotations1$Outbound
+  | DeploymentGetConfigAnnotations2$Outbound;
+
+/** @internal */
+export const TwoAnnotations$outboundSchema: z.ZodType<
+  TwoAnnotations$Outbound,
+  z.ZodTypeDef,
+  TwoAnnotations
+> = z.union([
+  z.lazy(() => DeploymentGetConfigAnnotations1$outboundSchema),
+  z.lazy(() => DeploymentGetConfigAnnotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwoAnnotations$ {
+  /** @deprecated use `TwoAnnotations$inboundSchema` instead. */
+  export const inboundSchema = TwoAnnotations$inboundSchema;
+  /** @deprecated use `TwoAnnotations$outboundSchema` instead. */
+  export const outboundSchema = TwoAnnotations$outboundSchema;
+  /** @deprecated use `TwoAnnotations$Outbound` instead. */
+  export type Outbound = TwoAnnotations$Outbound;
+}
+
+export function twoAnnotationsToJSON(twoAnnotations: TwoAnnotations): string {
+  return JSON.stringify(TwoAnnotations$outboundSchema.parse(twoAnnotations));
+}
+
+export function twoAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<TwoAnnotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TwoAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TwoAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const TwoTextContentPart$inboundSchema: z.ZodType<
   TwoTextContentPart,
   z.ZodTypeDef,
@@ -3635,12 +4489,24 @@ export const TwoTextContentPart$inboundSchema: z.ZodType<
   type:
     DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => DeploymentGetConfigAnnotations1$inboundSchema),
+      z.lazy(() => DeploymentGetConfigAnnotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type TwoTextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | DeploymentGetConfigAnnotations1$Outbound
+      | DeploymentGetConfigAnnotations2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -3652,6 +4518,12 @@ export const TwoTextContentPart$outboundSchema: z.ZodType<
   type:
     DeploymentGetConfig2DeploymentsRequestRequestBodyMessages4Type$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => DeploymentGetConfigAnnotations1$outboundSchema),
+      z.lazy(() => DeploymentGetConfigAnnotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -9141,8 +10013,8 @@ export namespace DeploymentGetConfigVerbosity$ {
 }
 
 /** @internal */
-export const ParametersT$inboundSchema: z.ZodType<
-  ParametersT,
+export const DeploymentGetConfigParameters$inboundSchema: z.ZodType<
+  DeploymentGetConfigParameters,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -9178,7 +10050,7 @@ export const ParametersT$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ParametersT$Outbound = {
+export type DeploymentGetConfigParameters$Outbound = {
   temperature?: number | undefined;
   maxTokens?: number | undefined;
   topK?: number | undefined;
@@ -9205,10 +10077,10 @@ export type ParametersT$Outbound = {
 };
 
 /** @internal */
-export const ParametersT$outboundSchema: z.ZodType<
-  ParametersT$Outbound,
+export const DeploymentGetConfigParameters$outboundSchema: z.ZodType<
+  DeploymentGetConfigParameters$Outbound,
   z.ZodTypeDef,
-  ParametersT
+  DeploymentGetConfigParameters
 > = z.object({
   temperature: z.number().optional(),
   maxTokens: z.number().optional(),
@@ -9245,26 +10117,32 @@ export const ParametersT$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ParametersT$ {
-  /** @deprecated use `ParametersT$inboundSchema` instead. */
-  export const inboundSchema = ParametersT$inboundSchema;
-  /** @deprecated use `ParametersT$outboundSchema` instead. */
-  export const outboundSchema = ParametersT$outboundSchema;
-  /** @deprecated use `ParametersT$Outbound` instead. */
-  export type Outbound = ParametersT$Outbound;
+export namespace DeploymentGetConfigParameters$ {
+  /** @deprecated use `DeploymentGetConfigParameters$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigParameters$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigParameters$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigParameters$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigParameters$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigParameters$Outbound;
 }
 
-export function parametersToJSON(parametersT: ParametersT): string {
-  return JSON.stringify(ParametersT$outboundSchema.parse(parametersT));
+export function deploymentGetConfigParametersToJSON(
+  deploymentGetConfigParameters: DeploymentGetConfigParameters,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigParameters$outboundSchema.parse(
+      deploymentGetConfigParameters,
+    ),
+  );
 }
 
-export function parametersFromJSON(
+export function deploymentGetConfigParametersFromJSON(
   jsonString: string,
-): SafeParseResult<ParametersT, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfigParameters, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ParametersT$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ParametersT' from JSON`,
+    (x) => DeploymentGetConfigParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigParameters' from JSON`,
   );
 }
 
@@ -9353,23 +10231,26 @@ export function deploymentGetConfigFunctionFromJSON(
 }
 
 /** @internal */
-export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
-  .object({
-    type: DeploymentGetConfigDeploymentsType$inboundSchema,
-    function: z.lazy(() => DeploymentGetConfigFunction$inboundSchema),
-  });
+export const DeploymentGetConfigTools$inboundSchema: z.ZodType<
+  DeploymentGetConfigTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfigDeploymentsType$inboundSchema,
+  function: z.lazy(() => DeploymentGetConfigFunction$inboundSchema),
+});
 
 /** @internal */
-export type Tools$Outbound = {
+export type DeploymentGetConfigTools$Outbound = {
   type: string;
   function: DeploymentGetConfigFunction$Outbound;
 };
 
 /** @internal */
-export const Tools$outboundSchema: z.ZodType<
-  Tools$Outbound,
+export const DeploymentGetConfigTools$outboundSchema: z.ZodType<
+  DeploymentGetConfigTools$Outbound,
   z.ZodTypeDef,
-  Tools
+  DeploymentGetConfigTools
 > = z.object({
   type: DeploymentGetConfigDeploymentsType$outboundSchema,
   function: z.lazy(() => DeploymentGetConfigFunction$outboundSchema),
@@ -9379,26 +10260,30 @@ export const Tools$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Tools$ {
-  /** @deprecated use `Tools$inboundSchema` instead. */
-  export const inboundSchema = Tools$inboundSchema;
-  /** @deprecated use `Tools$outboundSchema` instead. */
-  export const outboundSchema = Tools$outboundSchema;
-  /** @deprecated use `Tools$Outbound` instead. */
-  export type Outbound = Tools$Outbound;
+export namespace DeploymentGetConfigTools$ {
+  /** @deprecated use `DeploymentGetConfigTools$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigTools$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigTools$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfigTools$outboundSchema;
+  /** @deprecated use `DeploymentGetConfigTools$Outbound` instead. */
+  export type Outbound = DeploymentGetConfigTools$Outbound;
 }
 
-export function toolsToJSON(tools: Tools): string {
-  return JSON.stringify(Tools$outboundSchema.parse(tools));
+export function deploymentGetConfigToolsToJSON(
+  deploymentGetConfigTools: DeploymentGetConfigTools,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigTools$outboundSchema.parse(deploymentGetConfigTools),
+  );
 }
 
-export function toolsFromJSON(
+export function deploymentGetConfigToolsFromJSON(
   jsonString: string,
-): SafeParseResult<Tools, SDKValidationError> {
+): SafeParseResult<DeploymentGetConfigTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Tools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Tools' from JSON`,
+    (x) => DeploymentGetConfigTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfigTools' from JSON`,
   );
 }
 
@@ -9414,8 +10299,9 @@ export const DeploymentGetConfigResponseBody$inboundSchema: z.ZodType<
   type: DeploymentGetConfigType$inboundSchema.optional(),
   version: z.string(),
   messages: z.array(z.lazy(() => DeploymentGetConfigMessages$inboundSchema)),
-  parameters: z.lazy(() => ParametersT$inboundSchema),
-  tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
+  parameters: z.lazy(() => DeploymentGetConfigParameters$inboundSchema),
+  tools: z.array(z.lazy(() => DeploymentGetConfigTools$inboundSchema))
+    .optional(),
 });
 
 /** @internal */
@@ -9426,8 +10312,8 @@ export type DeploymentGetConfigResponseBody$Outbound = {
   type?: string | undefined;
   version: string;
   messages: Array<DeploymentGetConfigMessages$Outbound>;
-  parameters: ParametersT$Outbound;
-  tools?: Array<Tools$Outbound> | undefined;
+  parameters: DeploymentGetConfigParameters$Outbound;
+  tools?: Array<DeploymentGetConfigTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -9442,8 +10328,9 @@ export const DeploymentGetConfigResponseBody$outboundSchema: z.ZodType<
   type: DeploymentGetConfigType$outboundSchema.optional(),
   version: z.string(),
   messages: z.array(z.lazy(() => DeploymentGetConfigMessages$outboundSchema)),
-  parameters: z.lazy(() => ParametersT$outboundSchema),
-  tools: z.array(z.lazy(() => Tools$outboundSchema)).optional(),
+  parameters: z.lazy(() => DeploymentGetConfigParameters$outboundSchema),
+  tools: z.array(z.lazy(() => DeploymentGetConfigTools$outboundSchema))
+    .optional(),
 });
 
 /**

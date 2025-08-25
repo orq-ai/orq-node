@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "3.12.0-rc.4",
+  "version": "ix-sse-errors-for-speakeasy-compatibility",
   "author": "Orq",
   "bin": {
     "mcp": "bin/mcp-server.js"

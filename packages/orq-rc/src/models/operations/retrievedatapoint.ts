@@ -88,6 +88,49 @@ export const RetrieveDatapoint2DatasetsResponse200ApplicationJSONType = {
 export type RetrieveDatapoint2DatasetsResponse200ApplicationJSONType =
   ClosedEnum<typeof RetrieveDatapoint2DatasetsResponse200ApplicationJSONType>;
 
+export const RetrieveDatapointAnnotationsDatasetsType = {
+  FilePath: "file_path",
+} as const;
+export type RetrieveDatapointAnnotationsDatasetsType = ClosedEnum<
+  typeof RetrieveDatapointAnnotationsDatasetsType
+>;
+
+export type RetrieveDatapointAnnotationsFilePath = {
+  fileId: string;
+};
+
+export type RetrieveDatapointAnnotations2 = {
+  type: RetrieveDatapointAnnotationsDatasetsType;
+  text: string;
+  filePath: RetrieveDatapointAnnotationsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const RetrieveDatapointAnnotationsType = {
+  FileCitation: "file_citation",
+} as const;
+export type RetrieveDatapointAnnotationsType = ClosedEnum<
+  typeof RetrieveDatapointAnnotationsType
+>;
+
+export type RetrieveDatapointAnnotationsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type RetrieveDatapointAnnotations1 = {
+  type: RetrieveDatapointAnnotationsType;
+  text: string;
+  fileCitation: RetrieveDatapointAnnotationsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type RetrieveDatapoint2Annotations =
+  | RetrieveDatapointAnnotations1
+  | RetrieveDatapointAnnotations2;
+
 export type RetrieveDatapoint2TextContentPart = {
   /**
    * The type of the content part.
@@ -97,6 +140,12 @@ export type RetrieveDatapoint2TextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<RetrieveDatapointAnnotations1 | RetrieveDatapointAnnotations2>
+    | undefined;
 };
 
 export type RetrieveDatapointContentDatasets2 =
@@ -852,6 +901,415 @@ export namespace RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$ {
 }
 
 /** @internal */
+export const RetrieveDatapointAnnotationsDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointAnnotationsDatasetsType> = z
+    .nativeEnum(RetrieveDatapointAnnotationsDatasetsType);
+
+/** @internal */
+export const RetrieveDatapointAnnotationsDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof RetrieveDatapointAnnotationsDatasetsType> =
+    RetrieveDatapointAnnotationsDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointAnnotationsDatasetsType$ {
+  /** @deprecated use `RetrieveDatapointAnnotationsDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointAnnotationsDatasetsType$inboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotationsDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointAnnotationsDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointAnnotationsFilePath$inboundSchema: z.ZodType<
+  RetrieveDatapointAnnotationsFilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type RetrieveDatapointAnnotationsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const RetrieveDatapointAnnotationsFilePath$outboundSchema: z.ZodType<
+  RetrieveDatapointAnnotationsFilePath$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapointAnnotationsFilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointAnnotationsFilePath$ {
+  /** @deprecated use `RetrieveDatapointAnnotationsFilePath$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointAnnotationsFilePath$inboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotationsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointAnnotationsFilePath$outboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotationsFilePath$Outbound` instead. */
+  export type Outbound = RetrieveDatapointAnnotationsFilePath$Outbound;
+}
+
+export function retrieveDatapointAnnotationsFilePathToJSON(
+  retrieveDatapointAnnotationsFilePath: RetrieveDatapointAnnotationsFilePath,
+): string {
+  return JSON.stringify(
+    RetrieveDatapointAnnotationsFilePath$outboundSchema.parse(
+      retrieveDatapointAnnotationsFilePath,
+    ),
+  );
+}
+
+export function retrieveDatapointAnnotationsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapointAnnotationsFilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveDatapointAnnotationsFilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointAnnotationsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapointAnnotations2$inboundSchema: z.ZodType<
+  RetrieveDatapointAnnotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RetrieveDatapointAnnotationsDatasetsType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => RetrieveDatapointAnnotationsFilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type RetrieveDatapointAnnotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: RetrieveDatapointAnnotationsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const RetrieveDatapointAnnotations2$outboundSchema: z.ZodType<
+  RetrieveDatapointAnnotations2$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapointAnnotations2
+> = z.object({
+  type: RetrieveDatapointAnnotationsDatasetsType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => RetrieveDatapointAnnotationsFilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointAnnotations2$ {
+  /** @deprecated use `RetrieveDatapointAnnotations2$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapointAnnotations2$inboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotations2$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapointAnnotations2$outboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotations2$Outbound` instead. */
+  export type Outbound = RetrieveDatapointAnnotations2$Outbound;
+}
+
+export function retrieveDatapointAnnotations2ToJSON(
+  retrieveDatapointAnnotations2: RetrieveDatapointAnnotations2,
+): string {
+  return JSON.stringify(
+    RetrieveDatapointAnnotations2$outboundSchema.parse(
+      retrieveDatapointAnnotations2,
+    ),
+  );
+}
+
+export function retrieveDatapointAnnotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapointAnnotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapointAnnotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointAnnotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapointAnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapointAnnotationsType
+> = z.nativeEnum(RetrieveDatapointAnnotationsType);
+
+/** @internal */
+export const RetrieveDatapointAnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof RetrieveDatapointAnnotationsType
+> = RetrieveDatapointAnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointAnnotationsType$ {
+  /** @deprecated use `RetrieveDatapointAnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapointAnnotationsType$inboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotationsType$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapointAnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const RetrieveDatapointAnnotationsFileCitation$inboundSchema: z.ZodType<
+  RetrieveDatapointAnnotationsFileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type RetrieveDatapointAnnotationsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const RetrieveDatapointAnnotationsFileCitation$outboundSchema: z.ZodType<
+  RetrieveDatapointAnnotationsFileCitation$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapointAnnotationsFileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointAnnotationsFileCitation$ {
+  /** @deprecated use `RetrieveDatapointAnnotationsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    RetrieveDatapointAnnotationsFileCitation$inboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotationsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    RetrieveDatapointAnnotationsFileCitation$outboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotationsFileCitation$Outbound` instead. */
+  export type Outbound = RetrieveDatapointAnnotationsFileCitation$Outbound;
+}
+
+export function retrieveDatapointAnnotationsFileCitationToJSON(
+  retrieveDatapointAnnotationsFileCitation:
+    RetrieveDatapointAnnotationsFileCitation,
+): string {
+  return JSON.stringify(
+    RetrieveDatapointAnnotationsFileCitation$outboundSchema.parse(
+      retrieveDatapointAnnotationsFileCitation,
+    ),
+  );
+}
+
+export function retrieveDatapointAnnotationsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  RetrieveDatapointAnnotationsFileCitation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveDatapointAnnotationsFileCitation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'RetrieveDatapointAnnotationsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapointAnnotations1$inboundSchema: z.ZodType<
+  RetrieveDatapointAnnotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RetrieveDatapointAnnotationsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() =>
+    RetrieveDatapointAnnotationsFileCitation$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type RetrieveDatapointAnnotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: RetrieveDatapointAnnotationsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const RetrieveDatapointAnnotations1$outboundSchema: z.ZodType<
+  RetrieveDatapointAnnotations1$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapointAnnotations1
+> = z.object({
+  type: RetrieveDatapointAnnotationsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() =>
+    RetrieveDatapointAnnotationsFileCitation$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapointAnnotations1$ {
+  /** @deprecated use `RetrieveDatapointAnnotations1$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapointAnnotations1$inboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotations1$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapointAnnotations1$outboundSchema;
+  /** @deprecated use `RetrieveDatapointAnnotations1$Outbound` instead. */
+  export type Outbound = RetrieveDatapointAnnotations1$Outbound;
+}
+
+export function retrieveDatapointAnnotations1ToJSON(
+  retrieveDatapointAnnotations1: RetrieveDatapointAnnotations1,
+): string {
+  return JSON.stringify(
+    RetrieveDatapointAnnotations1$outboundSchema.parse(
+      retrieveDatapointAnnotations1,
+    ),
+  );
+}
+
+export function retrieveDatapointAnnotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapointAnnotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapointAnnotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointAnnotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapoint2Annotations$inboundSchema: z.ZodType<
+  RetrieveDatapoint2Annotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => RetrieveDatapointAnnotations1$inboundSchema),
+  z.lazy(() => RetrieveDatapointAnnotations2$inboundSchema),
+]);
+
+/** @internal */
+export type RetrieveDatapoint2Annotations$Outbound =
+  | RetrieveDatapointAnnotations1$Outbound
+  | RetrieveDatapointAnnotations2$Outbound;
+
+/** @internal */
+export const RetrieveDatapoint2Annotations$outboundSchema: z.ZodType<
+  RetrieveDatapoint2Annotations$Outbound,
+  z.ZodTypeDef,
+  RetrieveDatapoint2Annotations
+> = z.union([
+  z.lazy(() => RetrieveDatapointAnnotations1$outboundSchema),
+  z.lazy(() => RetrieveDatapointAnnotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RetrieveDatapoint2Annotations$ {
+  /** @deprecated use `RetrieveDatapoint2Annotations$inboundSchema` instead. */
+  export const inboundSchema = RetrieveDatapoint2Annotations$inboundSchema;
+  /** @deprecated use `RetrieveDatapoint2Annotations$outboundSchema` instead. */
+  export const outboundSchema = RetrieveDatapoint2Annotations$outboundSchema;
+  /** @deprecated use `RetrieveDatapoint2Annotations$Outbound` instead. */
+  export type Outbound = RetrieveDatapoint2Annotations$Outbound;
+}
+
+export function retrieveDatapoint2AnnotationsToJSON(
+  retrieveDatapoint2Annotations: RetrieveDatapoint2Annotations,
+): string {
+  return JSON.stringify(
+    RetrieveDatapoint2Annotations$outboundSchema.parse(
+      retrieveDatapoint2Annotations,
+    ),
+  );
+}
+
+export function retrieveDatapoint2AnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapoint2Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapoint2Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapoint2Annotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveDatapoint2TextContentPart$inboundSchema: z.ZodType<
   RetrieveDatapoint2TextContentPart,
   z.ZodTypeDef,
@@ -859,12 +1317,24 @@ export const RetrieveDatapoint2TextContentPart$inboundSchema: z.ZodType<
 > = z.object({
   type: RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => RetrieveDatapointAnnotations1$inboundSchema),
+      z.lazy(() => RetrieveDatapointAnnotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type RetrieveDatapoint2TextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | RetrieveDatapointAnnotations1$Outbound
+      | RetrieveDatapointAnnotations2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -875,6 +1345,12 @@ export const RetrieveDatapoint2TextContentPart$outboundSchema: z.ZodType<
 > = z.object({
   type: RetrieveDatapoint2DatasetsResponse200ApplicationJSONType$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => RetrieveDatapointAnnotations1$outboundSchema),
+      z.lazy(() => RetrieveDatapointAnnotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -2481,7 +2957,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-08-20T11:38:10.692Z",
+    "2025-08-25T10:00:27.052Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -2539,7 +3015,7 @@ export const RetrieveDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-08-20T11:38:10.692Z"))
+  updated: z.date().default(() => new Date("2025-08-25T10:00:27.052Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

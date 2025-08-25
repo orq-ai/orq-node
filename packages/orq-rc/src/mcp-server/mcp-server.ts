@@ -19,7 +19,7 @@ const routes = buildRouteMap({
 export const app = buildApplication(routes, {
   name: "mcp",
   versionInfo: {
-    currentVersion: "3.12.0-rc.4",
+    currentVersion: "ix-sse-errors-for-speakeasy-compatibility",
   },
 });
 

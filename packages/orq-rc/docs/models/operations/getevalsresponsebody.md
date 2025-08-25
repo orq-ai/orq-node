@@ -13,8 +13,8 @@ let value: GetEvalsResponseBody = {
     {
       id: "<id>",
       description: "ah boo tame ethyl without consequently",
-      created: "2025-08-20T11:38:13.202Z",
-      updated: "2025-08-20T11:38:13.202Z",
+      created: "2025-08-25T10:00:29.383Z",
+      updated: "2025-08-25T10:00:29.383Z",
       type: "function_eval",
       functionParams: {
         type: "levenshtein_distance",

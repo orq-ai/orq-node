@@ -13,6 +13,10 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$batchesCancel } from "./tools/batchesCancel.js";
+import { tool$batchesCreate } from "./tools/batchesCreate.js";
+import { tool$batchesList } from "./tools/batchesList.js";
+import { tool$batchesRetrieve } from "./tools/batchesRetrieve.js";
 import { tool$budgetsCreate } from "./tools/budgetsCreate.js";
 import { tool$budgetsDelete } from "./tools/budgetsDelete.js";
 import { tool$budgetsGet } from "./tools/budgetsGet.js";
@@ -111,6 +115,18 @@ import { tool$promptsList } from "./tools/promptsList.js";
 import { tool$promptsListVersions } from "./tools/promptsListVersions.js";
 import { tool$promptsRetrieve } from "./tools/promptsRetrieve.js";
 import { tool$promptsUpdate } from "./tools/promptsUpdate.js";
+import { tool$proxyAudioSpeech } from "./tools/proxyAudioSpeech.js";
+import { tool$proxyAudioTranscriptions } from "./tools/proxyAudioTranscriptions.js";
+import { tool$proxyAudioTranslations } from "./tools/proxyAudioTranslations.js";
+import { tool$proxyChatCompletions } from "./tools/proxyChatCompletions.js";
+import { tool$proxyCompletions } from "./tools/proxyCompletions.js";
+import { tool$proxyEmbeddings } from "./tools/proxyEmbeddings.js";
+import { tool$proxyImagesEdit } from "./tools/proxyImagesEdit.js";
+import { tool$proxyImagesGenerate } from "./tools/proxyImagesGenerate.js";
+import { tool$proxyImagesVariation } from "./tools/proxyImagesVariation.js";
+import { tool$proxyModerations } from "./tools/proxyModerations.js";
+import { tool$proxyRerank } from "./tools/proxyRerank.js";
+import { tool$proxyResponsesCreate } from "./tools/proxyResponsesCreate.js";
 import { tool$remoteconfigsRetrieve } from "./tools/remoteconfigsRetrieve.js";
 
 export function createMCPServer(deps: {
@@ -125,7 +141,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.12.0-rc.4",
+    version: "ix-sse-errors-for-speakeasy-compatibility",
   });
 
   const client = new OrqCore({
@@ -208,6 +224,22 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
   tool(tool$chunkingParse);
+  tool(tool$proxyChatCompletions);
+  tool(tool$proxyModerations);
+  tool(tool$proxyEmbeddings);
+  tool(tool$proxyRerank);
+  tool(tool$proxyAudioSpeech);
+  tool(tool$proxyCompletions);
+  tool(tool$proxyImagesGenerate);
+  tool(tool$proxyImagesEdit);
+  tool(tool$proxyImagesVariation);
+  tool(tool$proxyAudioTranscriptions);
+  tool(tool$proxyAudioTranslations);
+  tool(tool$proxyResponsesCreate);
+  tool(tool$batchesCreate);
+  tool(tool$batchesList);
+  tool(tool$batchesRetrieve);
+  tool(tool$batchesCancel);
   tool(tool$evalsAll);
   tool(tool$evalsCreate);
   tool(tool$evalsUpdate);

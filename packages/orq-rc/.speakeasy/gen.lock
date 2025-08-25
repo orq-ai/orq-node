@@ -1,18 +1,19 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 0910122947ad244f33047918a520a27b
+  docChecksum: 20ab7594c8230c68f22541400a92d8e2
   docVersion: "2.0"
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 3.12.0-rc.4
-  configChecksum: d92937aacde27c511ce2fb78ad0df4e3
+  speakeasyVersion: 1.606.3
+  generationVersion: 2.687.1
+  releaseVersion: ix-sse-errors-for-speakeasy-compatibility
+  configChecksum: cf756e86bbb436849aa65f072806a04c
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
   published: true
 features:
   typescript:
+    acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
     core: 3.21.20
@@ -57,6 +58,12 @@ generatedFiles:
   - docs/models/components/andlte.md
   - docs/models/components/andne.md
   - docs/models/components/andnin.md
+  - docs/models/components/annotations.md
+  - docs/models/components/annotations1.md
+  - docs/models/components/annotations2.md
+  - docs/models/components/annotationsfilecitation.md
+  - docs/models/components/annotationsfilepath.md
+  - docs/models/components/annotationstype.md
   - docs/models/components/assistantmessage.md
   - docs/models/components/audio.md
   - docs/models/components/content.md
@@ -80,6 +87,11 @@ generatedFiles:
   - docs/models/components/deploymentsandin.md
   - docs/models/components/deploymentsandne.md
   - docs/models/components/deploymentsandnin.md
+  - docs/models/components/deploymentsannotations1.md
+  - docs/models/components/deploymentsannotations2.md
+  - docs/models/components/deploymentsannotationsmessages4type.md
+  - docs/models/components/deploymentsannotationsmessagestype.md
+  - docs/models/components/deploymentsannotationstype.md
   - docs/models/components/deploymentscontent2.md
   - docs/models/components/deploymentscontentmessages2.md
   - docs/models/components/deploymentsmessages3role.md
@@ -101,6 +113,8 @@ generatedFiles:
   - docs/models/components/documents.md
   - docs/models/components/eq.md
   - docs/models/components/exists.md
+  - docs/models/components/filecitation.md
+  - docs/models/components/filepath.md
   - docs/models/components/filet.md
   - docs/models/components/format.md
   - docs/models/components/four.md
@@ -148,6 +162,7 @@ generatedFiles:
   - docs/models/components/prefixmessages.md
   - docs/models/components/prefixmessagescontent.md
   - docs/models/components/prefixmessagesrole.md
+  - docs/models/components/publiccontact.md
   - docs/models/components/refusalcontentpart.md
   - docs/models/components/role.md
   - docs/models/components/security.md
@@ -162,6 +177,7 @@ generatedFiles:
   - docs/models/components/two2.md
   - docs/models/components/two3.md
   - docs/models/components/two4.md
+  - docs/models/components/twoannotations.md
   - docs/models/components/twodetail.md
   - docs/models/components/twofile.md
   - docs/models/components/twoformat.md
@@ -175,6 +191,7 @@ generatedFiles:
   - docs/models/errors/createevalresponsebody.md
   - docs/models/errors/deletecontactresponsebody.md
   - docs/models/errors/deleteevalresponsebody.md
+  - docs/models/errors/errort.md
   - docs/models/errors/evalsageappropriateevalsresponsebody.md
   - docs/models/errors/evalsageappropriateresponsebody.md
   - docs/models/errors/evalsbertscoreevalsresponsebody.md
@@ -254,6 +271,11 @@ generatedFiles:
   - docs/models/errors/honoapierror.md
   - docs/models/errors/invokeevalevalsresponsebody.md
   - docs/models/errors/invokeevalresponsebody.md
+  - docs/models/errors/postv2proxyaudiotranscriptionserror.md
+  - docs/models/errors/postv2proxyaudiotranscriptionsresponsebody.md
+  - docs/models/errors/postv2proxyaudiotranslationserror.md
+  - docs/models/errors/postv2proxyaudiotranslationsresponsebody.md
+  - docs/models/errors/postv2proxymoderationsresponsebody.md
   - docs/models/errors/retrievecontactresponsebody.md
   - docs/models/errors/updatecontactresponsebody.md
   - docs/models/errors/updateevalresponsebody.md
@@ -271,11 +293,27 @@ generatedFiles:
   - docs/models/operations/andlte.md
   - docs/models/operations/andne.md
   - docs/models/operations/andnin.md
+  - docs/models/operations/annotations.md
+  - docs/models/operations/annotations1.md
+  - docs/models/operations/annotations2.md
+  - docs/models/operations/annotationsfilecitation.md
+  - docs/models/operations/annotationsfilepath.md
+  - docs/models/operations/annotationstype.md
   - docs/models/operations/assistantmessage.md
   - docs/models/operations/audio.md
+  - docs/models/operations/background.md
   - docs/models/operations/bertscore.md
   - docs/models/operations/boolean.md
   - docs/models/operations/budget.md
+  - docs/models/operations/cache.md
+  - docs/models/operations/cancelbatcherrors.md
+  - docs/models/operations/cancelbatchobject.md
+  - docs/models/operations/cancelbatchrequest.md
+  - docs/models/operations/cancelbatchrequestcounts.md
+  - docs/models/operations/cancelbatchresponsebody.md
+  - docs/models/operations/categories.md
+  - docs/models/operations/categoryappliedinputtypes.md
+  - docs/models/operations/categoryscores.md
   - docs/models/operations/choices.md
   - docs/models/operations/choicesassistantmessage.md
   - docs/models/operations/choicesaudio.md
@@ -299,9 +337,17 @@ generatedFiles:
   - docs/models/operations/chunkingrequestthreshold.md
   - docs/models/operations/chunks.md
   - docs/models/operations/cleardatasetrequest.md
+  - docs/models/operations/completiontokensdetails.md
+  - docs/models/operations/completionwindow.md
   - docs/models/operations/consumption.md
   - docs/models/operations/content.md
+  - docs/models/operations/content1.md
   - docs/models/operations/content2.md
+  - docs/models/operations/contentannotations.md
+  - docs/models/operations/contenttype.md
+  - docs/models/operations/createbatchobject.md
+  - docs/models/operations/createbatchrequestbody.md
+  - docs/models/operations/createbatchresponsebody.md
   - docs/models/operations/createbudgetbudget.md
   - docs/models/operations/createbudgetperiod.md
   - docs/models/operations/createbudgetrequestbody.md
@@ -310,6 +356,151 @@ generatedFiles:
   - docs/models/operations/createbudgetrequestbodytype.md
   - docs/models/operations/createbudgetresponsebody.md
   - docs/models/operations/createbudgettype.md
+  - docs/models/operations/createchatcompletion13.md
+  - docs/models/operations/createchatcompletion1eq.md
+  - docs/models/operations/createchatcompletion1exists.md
+  - docs/models/operations/createchatcompletion1gte.md
+  - docs/models/operations/createchatcompletion1in.md
+  - docs/models/operations/createchatcompletion1lt.md
+  - docs/models/operations/createchatcompletion1lte.md
+  - docs/models/operations/createchatcompletion1ne.md
+  - docs/models/operations/createchatcompletion1nin.md
+  - docs/models/operations/createchatcompletion1proxyeq.md
+  - docs/models/operations/createchatcompletion1proxyin.md
+  - docs/models/operations/createchatcompletion1proxyne.md
+  - docs/models/operations/createchatcompletion1proxynin.md
+  - docs/models/operations/createchatcompletion21.md
+  - docs/models/operations/createchatcompletion22.md
+  - docs/models/operations/createchatcompletion23.md
+  - docs/models/operations/createchatcompletion24.md
+  - docs/models/operations/createchatcompletion2annotations.md
+  - docs/models/operations/createchatcompletion2detail.md
+  - docs/models/operations/createchatcompletion2file.md
+  - docs/models/operations/createchatcompletion2format.md
+  - docs/models/operations/createchatcompletion2imageurl.md
+  - docs/models/operations/createchatcompletion2inputaudio.md
+  - docs/models/operations/createchatcompletion2proxyrequestrequestbodymessages4type.md
+  - docs/models/operations/createchatcompletion2proxyrequestrequestbodymessagestype.md
+  - docs/models/operations/createchatcompletion2proxyrequestrequestbodytype.md
+  - docs/models/operations/createchatcompletion2proxyrequesttype.md
+  - docs/models/operations/createchatcompletion2proxytype.md
+  - docs/models/operations/createchatcompletion2refusalcontentpart.md
+  - docs/models/operations/createchatcompletion2textcontentpart.md
+  - docs/models/operations/createchatcompletion2type.md
+  - docs/models/operations/createchatcompletionagenticragconfig.md
+  - docs/models/operations/createchatcompletionand3.md
+  - docs/models/operations/createchatcompletionandeq.md
+  - docs/models/operations/createchatcompletionandexists.md
+  - docs/models/operations/createchatcompletionandgte.md
+  - docs/models/operations/createchatcompletionandin.md
+  - docs/models/operations/createchatcompletionandlt.md
+  - docs/models/operations/createchatcompletionandlte.md
+  - docs/models/operations/createchatcompletionandne.md
+  - docs/models/operations/createchatcompletionandnin.md
+  - docs/models/operations/createchatcompletionandproxyeq.md
+  - docs/models/operations/createchatcompletionandproxyin.md
+  - docs/models/operations/createchatcompletionandproxyne.md
+  - docs/models/operations/createchatcompletionandproxynin.md
+  - docs/models/operations/createchatcompletionannotations1.md
+  - docs/models/operations/createchatcompletionannotations2.md
+  - docs/models/operations/createchatcompletionannotationsfilecitation.md
+  - docs/models/operations/createchatcompletionannotationsfilepath.md
+  - docs/models/operations/createchatcompletionannotationsproxytype.md
+  - docs/models/operations/createchatcompletionannotationstype.md
+  - docs/models/operations/createchatcompletionaudio.md
+  - docs/models/operations/createchatcompletionchoices.md
+  - docs/models/operations/createchatcompletioncompletiontokensdetails.md
+  - docs/models/operations/createchatcompletioncontent.md
+  - docs/models/operations/createchatcompletioncontent2.md
+  - docs/models/operations/createchatcompletioncontentproxy2.md
+  - docs/models/operations/createchatcompletiondata.md
+  - docs/models/operations/createchatcompletionfilterby.md
+  - docs/models/operations/createchatcompletionfilterby1.md
+  - docs/models/operations/createchatcompletionfilterbyand.md
+  - docs/models/operations/createchatcompletionfilterbyor.md
+  - docs/models/operations/createchatcompletionfilterbyproxyand.md
+  - docs/models/operations/createchatcompletionfilterbyproxyor.md
+  - docs/models/operations/createchatcompletionfinishreason.md
+  - docs/models/operations/createchatcompletionformat.md
+  - docs/models/operations/createchatcompletionfunction.md
+  - docs/models/operations/createchatcompletionlogprobs.md
+  - docs/models/operations/createchatcompletionmessage.md
+  - docs/models/operations/createchatcompletionmessages.md
+  - docs/models/operations/createchatcompletionmessagesassistantmessage.md
+  - docs/models/operations/createchatcompletionmessagesaudio.md
+  - docs/models/operations/createchatcompletionmessagescontent.md
+  - docs/models/operations/createchatcompletionmessagesdevelopermessage.md
+  - docs/models/operations/createchatcompletionmessagesfunction.md
+  - docs/models/operations/createchatcompletionmessagesproxycontent.md
+  - docs/models/operations/createchatcompletionmessagesproxyrequestcontent.md
+  - docs/models/operations/createchatcompletionmessagesproxyrequestrequestbody5role.md
+  - docs/models/operations/createchatcompletionmessagesproxyrequestrequestbodyrole.md
+  - docs/models/operations/createchatcompletionmessagesproxyrequestrole.md
+  - docs/models/operations/createchatcompletionmessagesproxyrole.md
+  - docs/models/operations/createchatcompletionmessagesrole.md
+  - docs/models/operations/createchatcompletionmessagessystemmessage.md
+  - docs/models/operations/createchatcompletionmessagestoolcalls.md
+  - docs/models/operations/createchatcompletionmessagestoolmessage.md
+  - docs/models/operations/createchatcompletionmessagestype.md
+  - docs/models/operations/createchatcompletionmessagesusermessage.md
+  - docs/models/operations/createchatcompletionmodelparameters.md
+  - docs/models/operations/createchatcompletionmodeltype.md
+  - docs/models/operations/createchatcompletionobject.md
+  - docs/models/operations/createchatcompletionor3.md
+  - docs/models/operations/createchatcompletionoreq.md
+  - docs/models/operations/createchatcompletionorexists.md
+  - docs/models/operations/createchatcompletionorgte.md
+  - docs/models/operations/createchatcompletionorin.md
+  - docs/models/operations/createchatcompletionorlt.md
+  - docs/models/operations/createchatcompletionorlte.md
+  - docs/models/operations/createchatcompletionorne.md
+  - docs/models/operations/createchatcompletionornin.md
+  - docs/models/operations/createchatcompletionorproxyeq.md
+  - docs/models/operations/createchatcompletionorproxyin.md
+  - docs/models/operations/createchatcompletionorproxyne.md
+  - docs/models/operations/createchatcompletionorproxynin.md
+  - docs/models/operations/createchatcompletionprompttokensdetails.md
+  - docs/models/operations/createchatcompletionprovider.md
+  - docs/models/operations/createchatcompletionproxyaudio.md
+  - docs/models/operations/createchatcompletionproxychoices.md
+  - docs/models/operations/createchatcompletionproxycontent.md
+  - docs/models/operations/createchatcompletionproxyfunction.md
+  - docs/models/operations/createchatcompletionproxyobject.md
+  - docs/models/operations/createchatcompletionproxyprovider.md
+  - docs/models/operations/createchatcompletionproxyrequestrequestbodytype.md
+  - docs/models/operations/createchatcompletionproxyrequesttype.md
+  - docs/models/operations/createchatcompletionproxyresponse200type.md
+  - docs/models/operations/createchatcompletionproxyresponseaudio.md
+  - docs/models/operations/createchatcompletionproxyresponsebody.md
+  - docs/models/operations/createchatcompletionproxyresponsefunction.md
+  - docs/models/operations/createchatcompletionproxyresponsetoplogprobs.md
+  - docs/models/operations/createchatcompletionproxyresponsetype.md
+  - docs/models/operations/createchatcompletionproxyrole.md
+  - docs/models/operations/createchatcompletionproxytoolcalls.md
+  - docs/models/operations/createchatcompletionproxytoplogprobs.md
+  - docs/models/operations/createchatcompletionproxytype.md
+  - docs/models/operations/createchatcompletionproxyusage.md
+  - docs/models/operations/createchatcompletionrefusal.md
+  - docs/models/operations/createchatcompletionrequestbody.md
+  - docs/models/operations/createchatcompletionrerankconfig.md
+  - docs/models/operations/createchatcompletionresponse.md
+  - docs/models/operations/createchatcompletionresponsebody.md
+  - docs/models/operations/createchatcompletionresponseformat.md
+  - docs/models/operations/createchatcompletionresponseformat1.md
+  - docs/models/operations/createchatcompletionresponseformat2.md
+  - docs/models/operations/createchatcompletionresponseformat3.md
+  - docs/models/operations/createchatcompletionresponseformatjsonschema.md
+  - docs/models/operations/createchatcompletionresponseformatproxyrequesttype.md
+  - docs/models/operations/createchatcompletionresponseformatproxytype.md
+  - docs/models/operations/createchatcompletionresponseformattype.md
+  - docs/models/operations/createchatcompletionrole.md
+  - docs/models/operations/createchatcompletionsearchoptions.md
+  - docs/models/operations/createchatcompletionsearchtype.md
+  - docs/models/operations/createchatcompletionthread.md
+  - docs/models/operations/createchatcompletiontoolcalls.md
+  - docs/models/operations/createchatcompletiontoplogprobs.md
+  - docs/models/operations/createchatcompletiontype.md
+  - docs/models/operations/createchatcompletionusage.md
   - docs/models/operations/createchunkknowledgemetadata.md
   - docs/models/operations/createchunkmetadata.md
   - docs/models/operations/createchunkrequest.md
@@ -318,14 +509,17 @@ generatedFiles:
   - docs/models/operations/createchunkstatus.md
   - docs/models/operations/createcontactrequestbody.md
   - docs/models/operations/createcontactresponsebody.md
+  - docs/models/operations/created.md
   - docs/models/operations/createdatasetitem21.md
   - docs/models/operations/createdatasetitem22.md
   - docs/models/operations/createdatasetitem23.md
   - docs/models/operations/createdatasetitem24.md
+  - docs/models/operations/createdatasetitem2annotations.md
   - docs/models/operations/createdatasetitem2datasets1.md
   - docs/models/operations/createdatasetitem2datasets2.md
   - docs/models/operations/createdatasetitem2datasets3.md
   - docs/models/operations/createdatasetitem2datasets4.md
+  - docs/models/operations/createdatasetitem2datasetsannotations.md
   - docs/models/operations/createdatasetitem2datasetsdetail.md
   - docs/models/operations/createdatasetitem2datasetsfile.md
   - docs/models/operations/createdatasetitem2datasetsformat.md
@@ -352,6 +546,18 @@ generatedFiles:
   - docs/models/operations/createdatasetitem2refusalcontentpart.md
   - docs/models/operations/createdatasetitem2textcontentpart.md
   - docs/models/operations/createdatasetitem2type.md
+  - docs/models/operations/createdatasetitemannotations1.md
+  - docs/models/operations/createdatasetitemannotations2.md
+  - docs/models/operations/createdatasetitemannotationsdatasets1.md
+  - docs/models/operations/createdatasetitemannotationsdatasets2.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsfilecitation.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsfilepath.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsresponse200type.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsresponsetype.md
+  - docs/models/operations/createdatasetitemannotationsdatasetstype.md
+  - docs/models/operations/createdatasetitemannotationsfilecitation.md
+  - docs/models/operations/createdatasetitemannotationsfilepath.md
+  - docs/models/operations/createdatasetitemannotationstype.md
   - docs/models/operations/createdatasetitemcontent2.md
   - docs/models/operations/createdatasetitemcontentdatasets2.md
   - docs/models/operations/createdatasetitemcontentdatasetsresponse2.md
@@ -513,6 +719,75 @@ generatedFiles:
   - docs/models/operations/createprompttype.md
   - docs/models/operations/createpromptusecases.md
   - docs/models/operations/createpromptverbosity.md
+  - docs/models/operations/createresponse21.md
+  - docs/models/operations/createresponse22.md
+  - docs/models/operations/createresponse23.md
+  - docs/models/operations/createresponse2detail.md
+  - docs/models/operations/createresponse2proxy1.md
+  - docs/models/operations/createresponse2proxy2.md
+  - docs/models/operations/createresponse2proxyrequestrequestbodytype.md
+  - docs/models/operations/createresponse2proxyrequesttype.md
+  - docs/models/operations/createresponse2proxytype.md
+  - docs/models/operations/createresponse2type.md
+  - docs/models/operations/createresponseannotations1.md
+  - docs/models/operations/createresponseannotations2.md
+  - docs/models/operations/createresponseannotationsproxytype.md
+  - docs/models/operations/createresponseannotationstype.md
+  - docs/models/operations/createresponsecontent2.md
+  - docs/models/operations/createresponsedata.md
+  - docs/models/operations/createresponseformat.md
+  - docs/models/operations/createresponseformat1.md
+  - docs/models/operations/createresponseformat2.md
+  - docs/models/operations/createresponseformat3.md
+  - docs/models/operations/createresponseformatproxyresponse200applicationjsontype.md
+  - docs/models/operations/createresponseformatproxyresponse200type.md
+  - docs/models/operations/createresponseformatproxyresponsetype.md
+  - docs/models/operations/createresponseformatproxytype.md
+  - docs/models/operations/createresponseformattype.md
+  - docs/models/operations/createresponseinput.md
+  - docs/models/operations/createresponseinputtokensdetails.md
+  - docs/models/operations/createresponseobject.md
+  - docs/models/operations/createresponseoutputproxyresponsestatus.md
+  - docs/models/operations/createresponseoutputproxyresponsetype.md
+  - docs/models/operations/createresponseoutputproxystatus.md
+  - docs/models/operations/createresponseoutputproxytype.md
+  - docs/models/operations/createresponseoutputstatus.md
+  - docs/models/operations/createresponseoutputtype.md
+  - docs/models/operations/createresponseproxyformat.md
+  - docs/models/operations/createresponseproxyresponsebody.md
+  - docs/models/operations/createresponseproxytoolchoice.md
+  - docs/models/operations/createresponseproxytools.md
+  - docs/models/operations/createresponsereasoning.md
+  - docs/models/operations/createresponserequestbody.md
+  - docs/models/operations/createresponseresponse.md
+  - docs/models/operations/createresponseresponsebody.md
+  - docs/models/operations/createresponsestatus.md
+  - docs/models/operations/createresponsetext.md
+  - docs/models/operations/createresponsetoolchoice.md
+  - docs/models/operations/createresponsetoolchoice1.md
+  - docs/models/operations/createresponsetoolchoice2.md
+  - docs/models/operations/createresponsetoolchoicefunction.md
+  - docs/models/operations/createresponsetoolchoiceproxy1.md
+  - docs/models/operations/createresponsetoolchoiceproxy2.md
+  - docs/models/operations/createresponsetoolchoiceproxyrequesttype.md
+  - docs/models/operations/createresponsetoolchoiceproxyresponsetype.md
+  - docs/models/operations/createresponsetoolchoiceproxytype.md
+  - docs/models/operations/createresponsetoolchoicetype.md
+  - docs/models/operations/createresponsetools.md
+  - docs/models/operations/createresponsetools1.md
+  - docs/models/operations/createresponsetools2.md
+  - docs/models/operations/createresponsetools3.md
+  - docs/models/operations/createresponsetoolsparameters.md
+  - docs/models/operations/createresponsetoolsproxyrequestrequestbodytype.md
+  - docs/models/operations/createresponsetoolsproxyrequesttype.md
+  - docs/models/operations/createresponsetoolsproxyresponse200applicationjsonresponsebody1type.md
+  - docs/models/operations/createresponsetoolsproxyresponse200applicationjsonresponsebodytype.md
+  - docs/models/operations/createresponsetoolsproxyresponse200applicationjsontype.md
+  - docs/models/operations/createresponsetoolsproxyresponse200type.md
+  - docs/models/operations/createresponsetoolsproxyresponsetype.md
+  - docs/models/operations/createresponsetoolsproxytype.md
+  - docs/models/operations/createresponsetoolstype.md
+  - docs/models/operations/createresponseusage.md
   - docs/models/operations/data.md
   - docs/models/operations/datafunction.md
   - docs/models/operations/datafunctionparams.md
@@ -532,14 +807,17 @@ generatedFiles:
   - docs/models/operations/deleteevalrequest.md
   - docs/models/operations/deleteknowledgerequest.md
   - docs/models/operations/deletepromptrequest.md
+  - docs/models/operations/delta.md
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
   - docs/models/operations/deploymentcreatemetric24.md
+  - docs/models/operations/deploymentcreatemetric2annotations.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics1.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics2.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics3.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics4.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsannotations.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsdetail.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsfile.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsformat.md
@@ -566,6 +844,18 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric2refusalcontentpart.md
   - docs/models/operations/deploymentcreatemetric2textcontentpart.md
   - docs/models/operations/deploymentcreatemetric2type.md
+  - docs/models/operations/deploymentcreatemetricannotations1.md
+  - docs/models/operations/deploymentcreatemetricannotations2.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetrics1.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetrics2.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsfilecitation.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsfilepath.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsrequestrequestbodytype.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsrequesttype.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricstype.md
+  - docs/models/operations/deploymentcreatemetricannotationsfilecitation.md
+  - docs/models/operations/deploymentcreatemetricannotationsfilepath.md
+  - docs/models/operations/deploymentcreatemetricannotationstype.md
   - docs/models/operations/deploymentcreatemetricchoicescontent.md
   - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricscontent.md
   - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrequestrequestbodyrole.md
@@ -620,6 +910,11 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigandin.md
   - docs/models/operations/deploymentgetconfigandne.md
   - docs/models/operations/deploymentgetconfigandnin.md
+  - docs/models/operations/deploymentgetconfigannotations1.md
+  - docs/models/operations/deploymentgetconfigannotations2.md
+  - docs/models/operations/deploymentgetconfigannotationsdeploymentsrequesttype.md
+  - docs/models/operations/deploymentgetconfigannotationsdeploymentstype.md
+  - docs/models/operations/deploymentgetconfigannotationstype.md
   - docs/models/operations/deploymentgetconfigcontent.md
   - docs/models/operations/deploymentgetconfigcontent2.md
   - docs/models/operations/deploymentgetconfigcontentdeployments2.md
@@ -641,6 +936,7 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigorin.md
   - docs/models/operations/deploymentgetconfigorne.md
   - docs/models/operations/deploymentgetconfigornin.md
+  - docs/models/operations/deploymentgetconfigparameters.md
   - docs/models/operations/deploymentgetconfigphotorealversion.md
   - docs/models/operations/deploymentgetconfigprefixmessagescontent.md
   - docs/models/operations/deploymentgetconfigprefixmessagesdeploymentsrequestrole.md
@@ -659,6 +955,7 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigresponseformattype.md
   - docs/models/operations/deploymentgetconfigrole.md
   - docs/models/operations/deploymentgetconfigtoolcalls.md
+  - docs/models/operations/deploymentgetconfigtools.md
   - docs/models/operations/deploymentgetconfigtype.md
   - docs/models/operations/deploymentgetconfigverbosity.md
   - docs/models/operations/deploymentinvokechoices.md
@@ -724,10 +1021,12 @@ generatedFiles:
   - docs/models/operations/deploymentstream22.md
   - docs/models/operations/deploymentstream23.md
   - docs/models/operations/deploymentstream24.md
+  - docs/models/operations/deploymentstream2annotations.md
   - docs/models/operations/deploymentstream2deployments1.md
   - docs/models/operations/deploymentstream2deployments2.md
   - docs/models/operations/deploymentstream2deployments3.md
   - docs/models/operations/deploymentstream2deployments4.md
+  - docs/models/operations/deploymentstream2deploymentsannotations.md
   - docs/models/operations/deploymentstream2deploymentsdetail.md
   - docs/models/operations/deploymentstream2deploymentsfile.md
   - docs/models/operations/deploymentstream2deploymentsformat.md
@@ -767,6 +1066,18 @@ generatedFiles:
   - docs/models/operations/deploymentstreamandlte.md
   - docs/models/operations/deploymentstreamandne.md
   - docs/models/operations/deploymentstreamandnin.md
+  - docs/models/operations/deploymentstreamannotations1.md
+  - docs/models/operations/deploymentstreamannotations2.md
+  - docs/models/operations/deploymentstreamannotationsdeployments1.md
+  - docs/models/operations/deploymentstreamannotationsdeployments2.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsfilecitation.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsfilepath.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsrequestrequestbodytype.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsrequesttype.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentstype.md
+  - docs/models/operations/deploymentstreamannotationsfilecitation.md
+  - docs/models/operations/deploymentstreamannotationsfilepath.md
+  - docs/models/operations/deploymentstreamannotationstype.md
   - docs/models/operations/deploymentstreamchoices.md
   - docs/models/operations/deploymentstreamcontent2.md
   - docs/models/operations/deploymentstreamcontentdeployments2.md
@@ -787,8 +1098,11 @@ generatedFiles:
   - docs/models/operations/deploymentstreammessage1.md
   - docs/models/operations/deploymentstreammessage2.md
   - docs/models/operations/deploymentstreammessage3.md
+  - docs/models/operations/deploymentstreammessagedeploymentsresponse200type.md
   - docs/models/operations/deploymentstreammessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentstreammessagedeploymentsresponsetype.md
   - docs/models/operations/deploymentstreammessagedeploymentsrole.md
+  - docs/models/operations/deploymentstreammessagedeploymentstype.md
   - docs/models/operations/deploymentstreammessagefunction.md
   - docs/models/operations/deploymentstreammessagerole.md
   - docs/models/operations/deploymentstreammessages.md
@@ -845,12 +1159,17 @@ generatedFiles:
   - docs/models/operations/deploymentsverbosity.md
   - docs/models/operations/detail.md
   - docs/models/operations/developermessage.md
+  - docs/models/operations/document.md
   - docs/models/operations/documents.md
+  - docs/models/operations/effort.md
   - docs/models/operations/eight.md
   - docs/models/operations/eighteen.md
   - docs/models/operations/eleven.md
+  - docs/models/operations/embedding.md
   - docs/models/operations/encodingformat.md
   - docs/models/operations/eq.md
+  - docs/models/operations/errors.md
+  - docs/models/operations/errort.md
   - docs/models/operations/evalsageappropriateevalsvalue.md
   - docs/models/operations/evalsageappropriaterequestbody.md
   - docs/models/operations/evalsageappropriateresponsebody.md
@@ -967,8 +1286,10 @@ generatedFiles:
   - docs/models/operations/evalsvalidjsonresponsebody.md
   - docs/models/operations/evalsvalidjsonvalue.md
   - docs/models/operations/exists.md
+  - docs/models/operations/fallbacks.md
   - docs/models/operations/feedback.md
   - docs/models/operations/fifteen.md
+  - docs/models/operations/filecitation.md
   - docs/models/operations/filedeleterequest.md
   - docs/models/operations/filegetpurpose.md
   - docs/models/operations/filegetrequest.md
@@ -978,6 +1299,7 @@ generatedFiles:
   - docs/models/operations/filelistpurpose.md
   - docs/models/operations/filelistrequest.md
   - docs/models/operations/filelistresponsebody.md
+  - docs/models/operations/filepath.md
   - docs/models/operations/filet.md
   - docs/models/operations/fileuploadfile.md
   - docs/models/operations/fileuploadpurpose.md
@@ -987,8 +1309,13 @@ generatedFiles:
   - docs/models/operations/filterby1.md
   - docs/models/operations/filterbyand.md
   - docs/models/operations/filterbyor.md
+  - docs/models/operations/finishreason.md
   - docs/models/operations/five.md
   - docs/models/operations/format.md
+  - docs/models/operations/format1.md
+  - docs/models/operations/format2.md
+  - docs/models/operations/format3.md
+  - docs/models/operations/formattype.md
   - docs/models/operations/four.md
   - docs/models/operations/fourteen.md
   - docs/models/operations/functionparams.md
@@ -996,6 +1323,8 @@ generatedFiles:
   - docs/models/operations/functionparams2.md
   - docs/models/operations/functionparams3.md
   - docs/models/operations/functionparams4.md
+  - docs/models/operations/functionparams5.md
+  - docs/models/operations/functionparams6.md
   - docs/models/operations/functionparamstype.md
   - docs/models/operations/functiont.md
   - docs/models/operations/getallprompts21.md
@@ -1221,9 +1550,15 @@ generatedFiles:
   - docs/models/operations/guardrailconfigoperator.md
   - docs/models/operations/guardrailconfigtype.md
   - docs/models/operations/http.md
+  - docs/models/operations/image.md
   - docs/models/operations/imageurl.md
   - docs/models/operations/in.md
+  - docs/models/operations/include.md
+  - docs/models/operations/incompletedetails.md
+  - docs/models/operations/input.md
+  - docs/models/operations/input2.md
   - docs/models/operations/inputaudio.md
+  - docs/models/operations/inputtokensdetails.md
   - docs/models/operations/invokeeval21.md
   - docs/models/operations/invokeeval22.md
   - docs/models/operations/invokeeval23.md
@@ -1261,11 +1596,19 @@ generatedFiles:
   - docs/models/operations/invokeoptions.md
   - docs/models/operations/json.md
   - docs/models/operations/jsonschema.md
+  - docs/models/operations/knowledgebases.md
   - docs/models/operations/knowledgefilter.md
   - docs/models/operations/knowledgefilter1.md
   - docs/models/operations/knowledgefilterand.md
   - docs/models/operations/knowledgefilteror.md
   - docs/models/operations/language.md
+  - docs/models/operations/listbatchesbatchesobject.md
+  - docs/models/operations/listbatchesdata.md
+  - docs/models/operations/listbatcheserrors.md
+  - docs/models/operations/listbatchesobject.md
+  - docs/models/operations/listbatchesrequest.md
+  - docs/models/operations/listbatchesrequestcounts.md
+  - docs/models/operations/listbatchesresponsebody.md
   - docs/models/operations/listbudgetsbudget.md
   - docs/models/operations/listbudgetsconsumption.md
   - docs/models/operations/listbudgetsdata.md
@@ -1286,6 +1629,7 @@ generatedFiles:
   - docs/models/operations/listdatasetdatapoints22.md
   - docs/models/operations/listdatasetdatapoints23.md
   - docs/models/operations/listdatasetdatapoints24.md
+  - docs/models/operations/listdatasetdatapoints2annotations.md
   - docs/models/operations/listdatasetdatapoints2datasetsresponse200applicationjsonresponsebodytype.md
   - docs/models/operations/listdatasetdatapoints2datasetsresponse200applicationjsontype.md
   - docs/models/operations/listdatasetdatapoints2datasetsresponse200type.md
@@ -1299,6 +1643,12 @@ generatedFiles:
   - docs/models/operations/listdatasetdatapoints2refusalcontentpart.md
   - docs/models/operations/listdatasetdatapoints2textcontentpart.md
   - docs/models/operations/listdatasetdatapoints2type.md
+  - docs/models/operations/listdatasetdatapointsannotations1.md
+  - docs/models/operations/listdatasetdatapointsannotations2.md
+  - docs/models/operations/listdatasetdatapointsannotationsdatasetstype.md
+  - docs/models/operations/listdatasetdatapointsannotationsfilecitation.md
+  - docs/models/operations/listdatasetdatapointsannotationsfilepath.md
+  - docs/models/operations/listdatasetdatapointsannotationstype.md
   - docs/models/operations/listdatasetdatapointscontent2.md
   - docs/models/operations/listdatasetdatapointscontentdatasets2.md
   - docs/models/operations/listdatasetdatapointsdata.md
@@ -1385,6 +1735,7 @@ generatedFiles:
   - docs/models/operations/listpromptversionsusecases.md
   - docs/models/operations/listpromptversionsverbosity.md
   - docs/models/operations/llm.md
+  - docs/models/operations/logprobs.md
   - docs/models/operations/lt.md
   - docs/models/operations/lte.md
   - docs/models/operations/matches.md
@@ -1411,9 +1762,16 @@ generatedFiles:
   - docs/models/operations/metadata.md
   - docs/models/operations/method.md
   - docs/models/operations/metrics.md
+  - docs/models/operations/modalities.md
   - docs/models/operations/mode.md
+  - docs/models/operations/model.md
+  - docs/models/operations/model1.md
+  - docs/models/operations/model2.md
+  - docs/models/operations/model3.md
+  - docs/models/operations/model4.md
   - docs/models/operations/modelparameters.md
   - docs/models/operations/modeltype.md
+  - docs/models/operations/moderation.md
   - docs/models/operations/ne.md
   - docs/models/operations/nin.md
   - docs/models/operations/nine.md
@@ -1441,6 +1799,18 @@ generatedFiles:
   - docs/models/operations/orlte.md
   - docs/models/operations/orne.md
   - docs/models/operations/ornin.md
+  - docs/models/operations/orq.md
+  - docs/models/operations/output.md
+  - docs/models/operations/output1.md
+  - docs/models/operations/output2.md
+  - docs/models/operations/output3.md
+  - docs/models/operations/output4.md
+  - docs/models/operations/outputcontent.md
+  - docs/models/operations/outputformat.md
+  - docs/models/operations/outputrole.md
+  - docs/models/operations/outputstatus.md
+  - docs/models/operations/outputtokensdetails.md
+  - docs/models/operations/outputtype.md
   - docs/models/operations/ownedby.md
   - docs/models/operations/parameterst.md
   - docs/models/operations/parsechunkingrequest.md
@@ -1454,6 +1824,70 @@ generatedFiles:
   - docs/models/operations/performance.md
   - docs/models/operations/period.md
   - docs/models/operations/photorealversion.md
+  - docs/models/operations/postv2proxyaudiospeechrequestbody.md
+  - docs/models/operations/postv2proxyaudiospeechresponseformat.md
+  - docs/models/operations/postv2proxyaudiotranscriptionsfile.md
+  - docs/models/operations/postv2proxyaudiotranscriptionsrequestbody.md
+  - docs/models/operations/postv2proxyaudiotranscriptionsresponsebody.md
+  - docs/models/operations/postv2proxyaudiotranscriptionsresponseformat.md
+  - docs/models/operations/postv2proxyaudiotranslationsfile.md
+  - docs/models/operations/postv2proxyaudiotranslationsrequestbody.md
+  - docs/models/operations/postv2proxyaudiotranslationsresponsebody.md
+  - docs/models/operations/postv2proxyaudiotranslationsresponsebody1.md
+  - docs/models/operations/postv2proxyaudiotranslationsresponsebody2.md
+  - docs/models/operations/postv2proxyaudiotranslationsresponseformat.md
+  - docs/models/operations/postv2proxyaudiotranslationstimestampsgranularity.md
+  - docs/models/operations/postv2proxycompletionschoices.md
+  - docs/models/operations/postv2proxycompletionscompletiontokensdetails.md
+  - docs/models/operations/postv2proxycompletionscreated.md
+  - docs/models/operations/postv2proxycompletionsdata.md
+  - docs/models/operations/postv2proxycompletionsfinishreason.md
+  - docs/models/operations/postv2proxycompletionsprompttokensdetails.md
+  - docs/models/operations/postv2proxycompletionsproxychoices.md
+  - docs/models/operations/postv2proxycompletionsproxycompletiontokensdetails.md
+  - docs/models/operations/postv2proxycompletionsproxyfinishreason.md
+  - docs/models/operations/postv2proxycompletionsproxyprompttokensdetails.md
+  - docs/models/operations/postv2proxycompletionsproxyresponsebody.md
+  - docs/models/operations/postv2proxycompletionsproxyusage.md
+  - docs/models/operations/postv2proxycompletionsrequestbody.md
+  - docs/models/operations/postv2proxycompletionsresponse.md
+  - docs/models/operations/postv2proxycompletionsresponsebody.md
+  - docs/models/operations/postv2proxycompletionsstop.md
+  - docs/models/operations/postv2proxycompletionsusage.md
+  - docs/models/operations/postv2proxyembeddingsdata.md
+  - docs/models/operations/postv2proxyembeddingsencodingformat.md
+  - docs/models/operations/postv2proxyembeddingsinput.md
+  - docs/models/operations/postv2proxyembeddingsobject.md
+  - docs/models/operations/postv2proxyembeddingsproxyobject.md
+  - docs/models/operations/postv2proxyembeddingsrequestbody.md
+  - docs/models/operations/postv2proxyembeddingsresponsebody.md
+  - docs/models/operations/postv2proxyembeddingsusage.md
+  - docs/models/operations/postv2proxyimageseditsdata.md
+  - docs/models/operations/postv2proxyimageseditsinputtokensdetails.md
+  - docs/models/operations/postv2proxyimageseditsrequestbody.md
+  - docs/models/operations/postv2proxyimageseditsresponsebody.md
+  - docs/models/operations/postv2proxyimageseditsresponseformat.md
+  - docs/models/operations/postv2proxyimageseditsusage.md
+  - docs/models/operations/postv2proxyimagesgenerationsdata.md
+  - docs/models/operations/postv2proxyimagesgenerationsrequestbody.md
+  - docs/models/operations/postv2proxyimagesgenerationsresponsebody.md
+  - docs/models/operations/postv2proxyimagesgenerationsresponseformat.md
+  - docs/models/operations/postv2proxyimagesgenerationsusage.md
+  - docs/models/operations/postv2proxyimagesvariationsdata.md
+  - docs/models/operations/postv2proxyimagesvariationsinputtokensdetails.md
+  - docs/models/operations/postv2proxyimagesvariationsrequestbody.md
+  - docs/models/operations/postv2proxyimagesvariationsresponsebody.md
+  - docs/models/operations/postv2proxyimagesvariationsresponseformat.md
+  - docs/models/operations/postv2proxyimagesvariationsusage.md
+  - docs/models/operations/postv2proxymoderationsrequestbody.md
+  - docs/models/operations/postv2proxymoderationsresponsebody.md
+  - docs/models/operations/postv2proxyrerankdocuments.md
+  - docs/models/operations/postv2proxyrerankobject.md
+  - docs/models/operations/postv2proxyrerankproxyobject.md
+  - docs/models/operations/postv2proxyrerankrequestbody.md
+  - docs/models/operations/postv2proxyrerankresponsebody.md
+  - docs/models/operations/postv2proxyrerankresults.md
+  - docs/models/operations/postv2proxyrerankusage.md
   - docs/models/operations/prefixmessages.md
   - docs/models/operations/prefixmessagesassistantmessage.md
   - docs/models/operations/prefixmessagesaudio.md
@@ -1466,18 +1900,27 @@ generatedFiles:
   - docs/models/operations/prefixmessagestoolmessage.md
   - docs/models/operations/prefixmessagestype.md
   - docs/models/operations/prefixmessagesusermessage.md
+  - docs/models/operations/prompt.md
   - docs/models/operations/promptconfig.md
+  - docs/models/operations/prompttokensdetails.md
+  - docs/models/operations/properties.md
   - docs/models/operations/provider.md
   - docs/models/operations/purpose.md
   - docs/models/operations/python.md
+  - docs/models/operations/quality.md
   - docs/models/operations/queryparamfilterby.md
   - docs/models/operations/queryparamstatus.md
   - docs/models/operations/queryparamtype.md
   - docs/models/operations/ragas.md
   - docs/models/operations/ragasmetric.md
+  - docs/models/operations/ranker.md
+  - docs/models/operations/rankingoptions.md
+  - docs/models/operations/reason.md
+  - docs/models/operations/reasoning.md
   - docs/models/operations/reasoningeffort.md
   - docs/models/operations/recursivechunker.md
   - docs/models/operations/recursivechunkerstrategy.md
+  - docs/models/operations/refusal.md
   - docs/models/operations/refusalcontentpart.md
   - docs/models/operations/remoteconfigsgetconfigrequestbody.md
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
@@ -1493,8 +1936,11 @@ generatedFiles:
   - docs/models/operations/requestbodyperiod.md
   - docs/models/operations/requestbodypython.md
   - docs/models/operations/requestbodytype.md
+  - docs/models/operations/requestcounts.md
   - docs/models/operations/rerankconfig.md
   - docs/models/operations/responsebody.md
+  - docs/models/operations/responsebody1.md
+  - docs/models/operations/responsebody2.md
   - docs/models/operations/responsebodyboolean.md
   - docs/models/operations/responsebodyguardrailconfig.md
   - docs/models/operations/responsebodyhttp.md
@@ -1503,23 +1949,32 @@ generatedFiles:
   - docs/models/operations/responsebodymethod.md
   - docs/models/operations/responsebodynumber.md
   - docs/models/operations/responsebodypython.md
+  - docs/models/operations/responsebodysegments.md
   - docs/models/operations/responsebodytype.md
   - docs/models/operations/responsebodyvalue.md
+  - docs/models/operations/responsebodywords.md
   - docs/models/operations/responseformat.md
   - docs/models/operations/responseformat1.md
   - docs/models/operations/responseformat2.md
   - docs/models/operations/responseformat3.md
   - docs/models/operations/responseformatjsonschema.md
   - docs/models/operations/responseformattype.md
+  - docs/models/operations/results.md
   - docs/models/operations/retrievals.md
   - docs/models/operations/retrievalsettings.md
   - docs/models/operations/retrievaltype.md
+  - docs/models/operations/retrievebatcherrors.md
+  - docs/models/operations/retrievebatchobject.md
+  - docs/models/operations/retrievebatchrequest.md
+  - docs/models/operations/retrievebatchrequestcounts.md
+  - docs/models/operations/retrievebatchresponsebody.md
   - docs/models/operations/retrievecontactrequest.md
   - docs/models/operations/retrievecontactresponsebody.md
   - docs/models/operations/retrievedatapoint21.md
   - docs/models/operations/retrievedatapoint22.md
   - docs/models/operations/retrievedatapoint23.md
   - docs/models/operations/retrievedatapoint24.md
+  - docs/models/operations/retrievedatapoint2annotations.md
   - docs/models/operations/retrievedatapoint2datasetsresponse200applicationjsonresponsebodytype.md
   - docs/models/operations/retrievedatapoint2datasetsresponse200applicationjsontype.md
   - docs/models/operations/retrievedatapoint2datasetsresponse200type.md
@@ -1533,6 +1988,12 @@ generatedFiles:
   - docs/models/operations/retrievedatapoint2refusalcontentpart.md
   - docs/models/operations/retrievedatapoint2textcontentpart.md
   - docs/models/operations/retrievedatapoint2type.md
+  - docs/models/operations/retrievedatapointannotations1.md
+  - docs/models/operations/retrievedatapointannotations2.md
+  - docs/models/operations/retrievedatapointannotationsdatasetstype.md
+  - docs/models/operations/retrievedatapointannotationsfilecitation.md
+  - docs/models/operations/retrievedatapointannotationsfilepath.md
+  - docs/models/operations/retrievedatapointannotationstype.md
   - docs/models/operations/retrievedatapointcontent2.md
   - docs/models/operations/retrievedatapointcontentdatasets2.md
   - docs/models/operations/retrievedatapointmessages.md
@@ -1561,6 +2022,7 @@ generatedFiles:
   - docs/models/operations/retrievedatasourcerequest.md
   - docs/models/operations/retrievedatasourceresponsebody.md
   - docs/models/operations/retrievedatasourcestatus.md
+  - docs/models/operations/retry.md
   - docs/models/operations/returntypet.md
   - docs/models/operations/role.md
   - docs/models/operations/rouge1.md
@@ -1570,6 +2032,7 @@ generatedFiles:
   - docs/models/operations/scores.md
   - docs/models/operations/sdpmchunker.md
   - docs/models/operations/sdpmchunkerstrategy.md
+  - docs/models/operations/searchcontextsize.md
   - docs/models/operations/searchknowledge13.md
   - docs/models/operations/searchknowledge1eq.md
   - docs/models/operations/searchknowledge1exists.md
@@ -1622,20 +2085,27 @@ generatedFiles:
   - docs/models/operations/searchknowledgeresponsebody.md
   - docs/models/operations/searchoptions.md
   - docs/models/operations/searchtype.md
+  - docs/models/operations/segments.md
   - docs/models/operations/semanticchunker.md
   - docs/models/operations/semanticchunkerstrategy.md
   - docs/models/operations/sentencechunker.md
   - docs/models/operations/sentencechunkerstrategy.md
+  - docs/models/operations/servicetier.md
   - docs/models/operations/seven.md
   - docs/models/operations/seventeen.md
   - docs/models/operations/six.md
   - docs/models/operations/sixteen.md
+  - docs/models/operations/size.md
   - docs/models/operations/status.md
+  - docs/models/operations/stop.md
+  - docs/models/operations/streamoptions.md
   - docs/models/operations/string.md
   - docs/models/operations/stringarray.md
   - docs/models/operations/systemmessage.md
   - docs/models/operations/ten.md
+  - docs/models/operations/text.md
   - docs/models/operations/textcontentpart.md
+  - docs/models/operations/thinking.md
   - docs/models/operations/thirteen.md
   - docs/models/operations/thirty.md
   - docs/models/operations/thirtyfive.md
@@ -1647,11 +2117,32 @@ generatedFiles:
   - docs/models/operations/three.md
   - docs/models/operations/threshold.md
   - docs/models/operations/threshold2.md
+  - docs/models/operations/timestampgranularities.md
+  - docs/models/operations/timestampsgranularity.md
   - docs/models/operations/tokenchunker.md
   - docs/models/operations/tokenchunkerstrategy.md
   - docs/models/operations/toolcalls.md
+  - docs/models/operations/toolchoice.md
+  - docs/models/operations/toolchoice1.md
+  - docs/models/operations/toolchoice2.md
+  - docs/models/operations/toolchoice3.md
+  - docs/models/operations/toolchoice4.md
+  - docs/models/operations/toolchoicefunction.md
+  - docs/models/operations/toolchoicetype.md
   - docs/models/operations/toolmessage.md
   - docs/models/operations/tools.md
+  - docs/models/operations/tools1.md
+  - docs/models/operations/tools2.md
+  - docs/models/operations/tools3.md
+  - docs/models/operations/toolsparameters.md
+  - docs/models/operations/toolsproperties.md
+  - docs/models/operations/toolsranker.md
+  - docs/models/operations/toolsrankingoptions.md
+  - docs/models/operations/toolssearchcontextsize.md
+  - docs/models/operations/toolstype.md
+  - docs/models/operations/toolsuserlocation.md
+  - docs/models/operations/toplogprobs.md
+  - docs/models/operations/truncation.md
   - docs/models/operations/twelve.md
   - docs/models/operations/twenty.md
   - docs/models/operations/twentyeight.md
@@ -1668,12 +2159,15 @@ generatedFiles:
   - docs/models/operations/two2.md
   - docs/models/operations/two3.md
   - docs/models/operations/two4.md
+  - docs/models/operations/twoannotations.md
+  - docs/models/operations/twocontent.md
   - docs/models/operations/twodetail.md
   - docs/models/operations/twofile.md
   - docs/models/operations/twoformat.md
   - docs/models/operations/twoimageurl.md
   - docs/models/operations/twoinputaudio.md
   - docs/models/operations/tworefusalcontentpart.md
+  - docs/models/operations/tworole.md
   - docs/models/operations/twotextcontentpart.md
   - docs/models/operations/twotype.md
   - docs/models/operations/type.md
@@ -1698,10 +2192,12 @@ generatedFiles:
   - docs/models/operations/updatedatapoint22.md
   - docs/models/operations/updatedatapoint23.md
   - docs/models/operations/updatedatapoint24.md
+  - docs/models/operations/updatedatapoint2annotations.md
   - docs/models/operations/updatedatapoint2datasets1.md
   - docs/models/operations/updatedatapoint2datasets2.md
   - docs/models/operations/updatedatapoint2datasets3.md
   - docs/models/operations/updatedatapoint2datasets4.md
+  - docs/models/operations/updatedatapoint2datasetsannotations.md
   - docs/models/operations/updatedatapoint2datasetsdetail.md
   - docs/models/operations/updatedatapoint2datasetsfile.md
   - docs/models/operations/updatedatapoint2datasetsformat.md
@@ -1728,6 +2224,18 @@ generatedFiles:
   - docs/models/operations/updatedatapoint2refusalcontentpart.md
   - docs/models/operations/updatedatapoint2textcontentpart.md
   - docs/models/operations/updatedatapoint2type.md
+  - docs/models/operations/updatedatapointannotations1.md
+  - docs/models/operations/updatedatapointannotations2.md
+  - docs/models/operations/updatedatapointannotationsdatasets1.md
+  - docs/models/operations/updatedatapointannotationsdatasets2.md
+  - docs/models/operations/updatedatapointannotationsdatasetsfilecitation.md
+  - docs/models/operations/updatedatapointannotationsdatasetsfilepath.md
+  - docs/models/operations/updatedatapointannotationsdatasetsresponse200type.md
+  - docs/models/operations/updatedatapointannotationsdatasetsresponsetype.md
+  - docs/models/operations/updatedatapointannotationsdatasetstype.md
+  - docs/models/operations/updatedatapointannotationsfilecitation.md
+  - docs/models/operations/updatedatapointannotationsfilepath.md
+  - docs/models/operations/updatedatapointannotationstype.md
   - docs/models/operations/updatedatapointcontent2.md
   - docs/models/operations/updatedatapointcontentdatasets2.md
   - docs/models/operations/updatedatapointcontentdatasetsresponse2.md
@@ -1928,9 +2436,15 @@ generatedFiles:
   - docs/models/operations/updatepromptverbosity.md
   - docs/models/operations/usage.md
   - docs/models/operations/usecases.md
+  - docs/models/operations/userlocation.md
   - docs/models/operations/usermessage.md
   - docs/models/operations/value.md
   - docs/models/operations/verbosity.md
+  - docs/models/operations/version.md
+  - docs/models/operations/voice.md
+  - docs/models/operations/websearchoptions.md
+  - docs/models/operations/words.md
+  - docs/sdks/batches/README.md
   - docs/sdks/budgets/README.md
   - docs/sdks/chunking/README.md
   - docs/sdks/contacts/README.md
@@ -1944,6 +2458,7 @@ generatedFiles:
   - docs/sdks/models/README.md
   - docs/sdks/orq/README.md
   - docs/sdks/prompts/README.md
+  - docs/sdks/proxy/README.md
   - docs/sdks/remoteconfigs/README.md
   - eslint.config.mjs
   - examples/.env.template
@@ -1953,6 +2468,10 @@ generatedFiles:
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/batchesCancel.ts
+  - src/funcs/batchesCreate.ts
+  - src/funcs/batchesList.ts
+  - src/funcs/batchesRetrieve.ts
   - src/funcs/budgetsCreate.ts
   - src/funcs/budgetsDelete.ts
   - src/funcs/budgetsGet.ts
@@ -2051,6 +2570,18 @@ generatedFiles:
   - src/funcs/promptsListVersions.ts
   - src/funcs/promptsRetrieve.ts
   - src/funcs/promptsUpdate.ts
+  - src/funcs/proxyAudioSpeech.ts
+  - src/funcs/proxyAudioTranscriptions.ts
+  - src/funcs/proxyAudioTranslations.ts
+  - src/funcs/proxyChatCompletions.ts
+  - src/funcs/proxyCompletions.ts
+  - src/funcs/proxyEmbeddings.ts
+  - src/funcs/proxyImagesEdit.ts
+  - src/funcs/proxyImagesGenerate.ts
+  - src/funcs/proxyImagesVariation.ts
+  - src/funcs/proxyModerations.ts
+  - src/funcs/proxyRerank.ts
+  - src/funcs/proxyResponsesCreate.ts
   - src/funcs/remoteconfigsRetrieve.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
@@ -2086,6 +2617,10 @@ generatedFiles:
   - src/mcp-server/server.ts
   - src/mcp-server/shared.ts
   - src/mcp-server/tools.ts
+  - src/mcp-server/tools/batchesCancel.ts
+  - src/mcp-server/tools/batchesCreate.ts
+  - src/mcp-server/tools/batchesList.ts
+  - src/mcp-server/tools/batchesRetrieve.ts
   - src/mcp-server/tools/budgetsCreate.ts
   - src/mcp-server/tools/budgetsDelete.ts
   - src/mcp-server/tools/budgetsGet.ts
@@ -2184,9 +2719,22 @@ generatedFiles:
   - src/mcp-server/tools/promptsListVersions.ts
   - src/mcp-server/tools/promptsRetrieve.ts
   - src/mcp-server/tools/promptsUpdate.ts
+  - src/mcp-server/tools/proxyAudioSpeech.ts
+  - src/mcp-server/tools/proxyAudioTranscriptions.ts
+  - src/mcp-server/tools/proxyAudioTranslations.ts
+  - src/mcp-server/tools/proxyChatCompletions.ts
+  - src/mcp-server/tools/proxyCompletions.ts
+  - src/mcp-server/tools/proxyEmbeddings.ts
+  - src/mcp-server/tools/proxyImagesEdit.ts
+  - src/mcp-server/tools/proxyImagesGenerate.ts
+  - src/mcp-server/tools/proxyImagesVariation.ts
+  - src/mcp-server/tools/proxyModerations.ts
+  - src/mcp-server/tools/proxyRerank.ts
+  - src/mcp-server/tools/proxyResponsesCreate.ts
   - src/mcp-server/tools/remoteconfigsRetrieve.ts
   - src/models/components/deployments.ts
   - src/models/components/index.ts
+  - src/models/components/publiccontact.ts
   - src/models/components/security.ts
   - src/models/errors/apierror.ts
   - src/models/errors/createeval.ts
@@ -2236,14 +2784,20 @@ generatedFiles:
   - src/models/errors/index.ts
   - src/models/errors/invokeeval.ts
   - src/models/errors/orqerror.ts
+  - src/models/errors/postv2proxyaudiotranscriptions.ts
+  - src/models/errors/postv2proxyaudiotranslations.ts
+  - src/models/errors/postv2proxymoderations.ts
   - src/models/errors/responsevalidationerror.ts
   - src/models/errors/retrievecontact.ts
   - src/models/errors/sdkvalidationerror.ts
   - src/models/errors/updatecontact.ts
   - src/models/errors/updateeval.ts
   - src/models/errors/updateprompt.ts
+  - src/models/operations/cancelbatch.ts
   - src/models/operations/cleardataset.ts
+  - src/models/operations/createbatch.ts
   - src/models/operations/createbudget.ts
+  - src/models/operations/createchatcompletion.ts
   - src/models/operations/createchunk.ts
   - src/models/operations/createcontact.ts
   - src/models/operations/createdataset.ts
@@ -2253,6 +2807,7 @@ generatedFiles:
   - src/models/operations/createfeedback.ts
   - src/models/operations/createknowledge.ts
   - src/models/operations/createprompt.ts
+  - src/models/operations/createresponse.ts
   - src/models/operations/deletebudget.ts
   - src/models/operations/deletechunk.ts
   - src/models/operations/deletecontact.ts
@@ -2317,6 +2872,7 @@ generatedFiles:
   - src/models/operations/getpromptversion.ts
   - src/models/operations/index.ts
   - src/models/operations/invokeeval.ts
+  - src/models/operations/listbatches.ts
   - src/models/operations/listbudgets.ts
   - src/models/operations/listchunks.ts
   - src/models/operations/listcontacts.ts
@@ -2327,7 +2883,18 @@ generatedFiles:
   - src/models/operations/listmodels.ts
   - src/models/operations/listpromptversions.ts
   - src/models/operations/parse.ts
+  - src/models/operations/postv2proxyaudiospeech.ts
+  - src/models/operations/postv2proxyaudiotranscriptions.ts
+  - src/models/operations/postv2proxyaudiotranslations.ts
+  - src/models/operations/postv2proxycompletions.ts
+  - src/models/operations/postv2proxyembeddings.ts
+  - src/models/operations/postv2proxyimagesedits.ts
+  - src/models/operations/postv2proxyimagesgenerations.ts
+  - src/models/operations/postv2proxyimagesvariations.ts
+  - src/models/operations/postv2proxymoderations.ts
+  - src/models/operations/postv2proxyrerank.ts
   - src/models/operations/remoteconfigsgetconfig.ts
+  - src/models/operations/retrievebatch.ts
   - src/models/operations/retrievecontact.ts
   - src/models/operations/retrievedatapoint.ts
   - src/models/operations/retrievedataset.ts
@@ -2342,6 +2909,7 @@ generatedFiles:
   - src/models/operations/updateeval.ts
   - src/models/operations/updateknowledge.ts
   - src/models/operations/updateprompt.ts
+  - src/sdk/batches.ts
   - src/sdk/budgets.ts
   - src/sdk/chunking.ts
   - src/sdk/contacts.ts
@@ -2355,6 +2923,7 @@ generatedFiles:
   - src/sdk/metrics.ts
   - src/sdk/models.ts
   - src/sdk/prompts.ts
+  - src/sdk/proxy.ts
   - src/sdk/remoteconfigs.ts
   - src/sdk/sdk.ts
   - src/types/async.ts
@@ -2366,6 +2935,7 @@ generatedFiles:
   - src/types/operations.ts
   - src/types/rfcdate.ts
   - src/types/streams.ts
+  - temp/example.ts
   - tsconfig.json
 examples:
   CreateContact:
@@ -2376,7 +2946,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-03T12:31:41.205Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-08-25T10:00:27.052Z"}
     "":
       requestBody:
         application/json: {"external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
@@ -2450,7 +3020,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-08-20T11:38:14.041Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-08-25T10:00:30.210Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -2466,7 +3036,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-08-20T11:38:14.041Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-08-25T10:00:30.210Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -2557,7 +3127,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-08-25T10:00:27.052Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -2565,7 +3135,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-08-25T10:00:27.052Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -2577,7 +3147,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-08-25T10:00:27.052Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -2621,7 +3191,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-08-25T10:00:27.052Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -2632,7 +3202,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-08-25T10:00:27.052Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -2715,7 +3285,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01K33MBNM5XXND6M7TFEGC96HR", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01K3GARA00SJ3481QD9DCF5Q5Z", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -2724,7 +3294,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01K33MBNM5F3Y37VJ9MXC7J1X0", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01K3GAR9ZZ0W5EAQA37BRWERRD", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -2741,7 +3311,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01K33MBNM75662H8XBDX7CGEJN", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01K3GARA01YD0Y9P5PPK8QWMRC", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -3148,7 +3718,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-08-25T10:00:27.052Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -3169,7 +3739,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-08-25T10:00:27.052Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
@@ -3306,7 +3876,7 @@ examples:
         application/json: {"type": "contact", "entity_id": "user_123", "period": "monthly", "amount": 250}
       responses:
         "200":
-          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-08-25T10:00:27.052Z"}
   GetBudget:
     speakeasy-default-get-budget:
       parameters:
@@ -3314,7 +3884,7 @@ examples:
           id: "01K1J1AX8PGR63QRP7423NY008"
       responses:
         "200":
-          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-08-25T10:00:27.052Z"}
   UpdateBudget:
     speakeasy-default-update-budget:
       parameters:
@@ -3324,11 +3894,130 @@ examples:
         application/json: {"budget": {"period": "monthly", "amount": 300}, "is_active": true}
       responses:
         "200":
-          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-08-20T11:38:10.692Z"}
+          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-08-25T10:00:27.052Z"}
   DeleteBudget:
     speakeasy-default-delete-budget:
       parameters:
         path:
           id: "01K1J1AX8PGR63QRP7423NY008"
+  CreateChatCompletion:
+    speakeasy-default-create-chat-completion:
+      requestBody:
+        application/json: {"messages": [{"role": "assistant"}], "model": "Camaro", "orq": {"retry": {"count": 3, "on_codes": [429, 500, 502]}, "fallbacks": [{"model": "openai/gpt-5"}, {"model": "anthropic/claude-4-opus"}], "contact": {"id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "display_name": "Jane Doe", "email": "jane.doe@example.com"}, "thread": {"id": "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV", "tags": ["customer-support"]}, "inputs": {"customer_name": "John Smith", "issue_type": "billing"}, "cache": {"ttl": 3600, "type": "exact_match"}, "knowledge_bases": [{"top_k": 5, "search_type": "hybrid_search", "knowledge_id": "knowledge_01ARZ3NDEKTSV4RRFFQ69G5FAV"}]}, "stream": false}
+      responses:
+        "200":
+          application/json: {"choices": [{"finish_reason": "content_filter", "message": {}}], "object": "chat.completion"}
+  post_/v2/proxy/moderations:
+    speakeasy-default-post-/v2-/proxy/moderations:
+      requestBody:
+        application/json: {"input": "<value>"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "model": "Escalade", "results": [{"flagged": false, "categories": {"hate": true, "hate/threatening": false, "harassment": false, "harassment/threatening": false, "illicit": false, "illicit/violent": false, "self-harm": false, "self-harm/intent": true, "self-harm/instructions": false, "sexual": true, "sexual/minors": true, "violence": true, "violence/graphic": true}, "category_scores": {"hate": 8174.54, "hate/threatening": 8869.49, "harassment": 2863.34, "harassment/threatening": 6575.8, "illicit": 670.13, "illicit/violent": 787.24, "self-harm": 7678.68, "self-harm/intent": 1240.98, "self-harm/instructions": 9300.76, "sexual": 1330.84, "sexual/minors": 4561.42, "violence": 9528.46, "violence/graphic": 1614.38}}]}
+        "422":
+          application/json: {"error": {"message": "<value>", "type": "<value>", "param": "<value>", "code": "<value>"}}
+  post_/v2/proxy/embeddings:
+    speakeasy-default-post-/v2-/proxy/embeddings:
+      requestBody:
+        application/json: {"input": "<value>", "model": "Golf", "encoding_format": "float"}
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [{"object": "embedding", "embedding": [1439.11, 5140.22], "index": 3965.97}], "model": "ATS"}
+  post_/v2/proxy/rerank:
+    speakeasy-default-post-/v2-/proxy/rerank:
+      requestBody:
+        application/json: {"query": "<value>", "documents": [], "model": "Prius"}
+      responses:
+        "200":
+          application/json: {"object": "list", "results": []}
+  post_/v2/proxy/audio/speech:
+    speakeasy-default-post-/v2-/proxy/audio/speech:
+      requestBody:
+        application/json: {"input": "<value>", "model": "openai/tts-1-hd", "voice": "<value>", "response_format": "mp3", "speed": 1}
+  post_/v2/proxy/completions:
+    speakeasy-default-post-/v2-/proxy/completions:
+      requestBody:
+        application/json: {"model": "XTS", "prompt": "<value>", "echo": false, "frequency_penalty": 0, "max_tokens": 16, "presence_penalty": 0, "temperature": 1, "top_p": 1, "stream": false}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "choices": [{"finish_reason": "content_filter", "index": 1733.03, "text": "<value>"}], "model": "CTS", "object": "<value>"}
+  post_/v2/proxy/images/generations:
+    speakeasy-default-post-/v2-/proxy/images/generations:
+      requestBody:
+        application/json: {"prompt": "<value>", "background": "auto", "model": "F-150", "moderation": "auto", "n": 1, "output_compression": 100, "output_format": "png", "quality": "auto", "response_format": "url"}
+      responses:
+        "200":
+          application/json: {"data": [{}]}
+  post_/v2/proxy/images/edits:
+    speakeasy-default-post-/v2-/proxy/images/edits:
+      requestBody:
+        multipart/form-data: {"model": "Grand Cherokee", "image": "https://picsum.photos/seed/4IopZRfO/3966/2653", "prompt": "<value>", "n": 1, "response_format": "url"}
+      responses:
+        "200":
+          application/json: {"created": 7877.73, "data": [{}]}
+  post_/v2/proxy/images/variations:
+    speakeasy-default-post-/v2-/proxy/images/variations:
+      requestBody:
+        multipart/form-data: {"image": "https://picsum.photos/seed/3tyQFc/1182/550", "model": "Cruze", "n": 1, "response_format": "url", "size": "1024x1024"}
+      responses:
+        "200":
+          application/json: {"created": 7820.06, "data": [{}]}
+  post_/v2/proxy/audio/transcriptions:
+    speakeasy-default-post-/v2-/proxy/audio/transcriptions:
+      requestBody:
+        multipart/form-data: {"model": "openai/whisper-1", "enable_logging": true, "diarize": false, "tag_audio_events": true, "timestamps_granularity": "word", "temperature": 0.5, "timestamp_granularities": ["word", "segment"], "file": "x-file: example.file"}
+      responses:
+        "200":
+          application/json: {"text": "<value>"}
+        "422":
+          application/json: {"error": {"message": "<value>", "type": "<value>", "param": "<value>", "code": "<value>"}}
+  post_/v2/proxy/audio/translations:
+    speakeasy-default-post-/v2-/proxy/audio/translations:
+      requestBody:
+        multipart/form-data: {"model": "openai/whisper-1", "enable_logging": true, "diarize": false, "tag_audio_events": true, "timestamps_granularity": "word", "temperature": 0.5, "file": "x-file: example.file"}
+      responses:
+        "200":
+          application/json: {"text": "<value>"}
+        "422":
+          application/json: {"error": {"message": "<value>", "type": "<value>", "param": "<value>", "code": "<value>"}}
+  CreateResponse:
+    speakeasy-default-create-response:
+      requestBody:
+        application/json: {"model": "Element", "input": "<value>", "store": true, "stream": false}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "response", "created_at": 241.46, "status": "in_progress", "error": {"code": "<value>", "message": "<value>"}, "incomplete_details": {"reason": "max_output_tokens"}, "model": "Alpine", "output": [], "parallel_tool_calls": true, "truncation": "disabled"}
+  CreateBatch:
+    speakeasy-default-create-batch:
+      requestBody:
+        application/json: {"input_file_id": "<id>", "endpoint": "<value>", "completion_window": "24h"}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "errors": {}, "input_file_id": "<id>", "completion_window": "<value>", "status": "<value>", "output_file_id": "<id>", "error_file_id": "<id>", "created_at": 864169, "in_progress_at": 379938, "expires_at": 653245, "finalizing_at": 2268, "completed_at": 22870, "failed_at": 169615, "expired_at": 272439, "cancelling_at": 370081, "cancelled_at": null, "request_counts": {"total": 306335, "completed": 568856, "failed": 883386}}
+  ListBatches:
+    speakeasy-default-list-batches:
+      parameters:
+        query:
+          after: "<value>"
+          limit: 10
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [], "has_more": true}
+  RetrieveBatch:
+    speakeasy-default-retrieve-batch:
+      parameters:
+        path:
+          batch_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "errors": {}, "input_file_id": "<id>", "completion_window": "<value>", "status": "<value>", "output_file_id": "<id>", "error_file_id": null, "created_at": 321690, "in_progress_at": 881262, "expires_at": null, "finalizing_at": 227184, "completed_at": 267261, "failed_at": 976951, "expired_at": 948729, "cancelling_at": 868152, "cancelled_at": 459722, "request_counts": {"total": 214318, "completed": 276274, "failed": 664405}}
+  CancelBatch:
+    speakeasy-default-cancel-batch:
+      parameters:
+        path:
+          batch_id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "<id>", "object": "batch", "endpoint": "<value>", "errors": {}, "input_file_id": "<id>", "completion_window": "<value>", "status": "<value>", "output_file_id": "<id>", "error_file_id": "<id>", "created_at": 83832, "in_progress_at": null, "expires_at": 692340, "finalizing_at": 580121, "completed_at": 48976, "failed_at": 717547, "expired_at": 670530, "cancelling_at": 722145, "cancelled_at": 669229, "request_counts": {"total": 188995, "completed": 654597, "failed": 434397}}
 examplesVersion: 1.0.2
 generatedTests: {}

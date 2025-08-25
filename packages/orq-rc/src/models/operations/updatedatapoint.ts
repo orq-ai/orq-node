@@ -80,6 +80,49 @@ export type UpdateDatapoint2DatasetsRequestRequestBodyMessagesType = ClosedEnum<
   typeof UpdateDatapoint2DatasetsRequestRequestBodyMessagesType
 >;
 
+export const UpdateDatapointAnnotationsDatasetsType = {
+  FilePath: "file_path",
+} as const;
+export type UpdateDatapointAnnotationsDatasetsType = ClosedEnum<
+  typeof UpdateDatapointAnnotationsDatasetsType
+>;
+
+export type UpdateDatapointAnnotationsFilePath = {
+  fileId: string;
+};
+
+export type UpdateDatapointAnnotations2 = {
+  type: UpdateDatapointAnnotationsDatasetsType;
+  text: string;
+  filePath: UpdateDatapointAnnotationsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const UpdateDatapointAnnotationsType = {
+  FileCitation: "file_citation",
+} as const;
+export type UpdateDatapointAnnotationsType = ClosedEnum<
+  typeof UpdateDatapointAnnotationsType
+>;
+
+export type UpdateDatapointAnnotationsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type UpdateDatapointAnnotations1 = {
+  type: UpdateDatapointAnnotationsType;
+  text: string;
+  fileCitation: UpdateDatapointAnnotationsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type UpdateDatapoint2Annotations =
+  | UpdateDatapointAnnotations1
+  | UpdateDatapointAnnotations2;
+
 export type UpdateDatapoint2TextContentPart = {
   /**
    * The type of the content part.
@@ -89,6 +132,12 @@ export type UpdateDatapoint2TextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<UpdateDatapointAnnotations1 | UpdateDatapointAnnotations2>
+    | undefined;
 };
 
 export type UpdateDatapointContentDatasets2 =
@@ -541,6 +590,49 @@ export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessag
     typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType
   >;
 
+export const UpdateDatapointAnnotationsDatasetsResponse200Type = {
+  FilePath: "file_path",
+} as const;
+export type UpdateDatapointAnnotationsDatasetsResponse200Type = ClosedEnum<
+  typeof UpdateDatapointAnnotationsDatasetsResponse200Type
+>;
+
+export type UpdateDatapointAnnotationsDatasetsFilePath = {
+  fileId: string;
+};
+
+export type UpdateDatapointAnnotationsDatasets2 = {
+  type: UpdateDatapointAnnotationsDatasetsResponse200Type;
+  text: string;
+  filePath: UpdateDatapointAnnotationsDatasetsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const UpdateDatapointAnnotationsDatasetsResponseType = {
+  FileCitation: "file_citation",
+} as const;
+export type UpdateDatapointAnnotationsDatasetsResponseType = ClosedEnum<
+  typeof UpdateDatapointAnnotationsDatasetsResponseType
+>;
+
+export type UpdateDatapointAnnotationsDatasetsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type UpdateDatapointAnnotationsDatasets1 = {
+  type: UpdateDatapointAnnotationsDatasetsResponseType;
+  text: string;
+  fileCitation: UpdateDatapointAnnotationsDatasetsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type UpdateDatapoint2DatasetsAnnotations =
+  | UpdateDatapointAnnotationsDatasets1
+  | UpdateDatapointAnnotationsDatasets2;
+
 export type UpdateDatapoint2DatasetsTextContentPart = {
   /**
    * The type of the content part.
@@ -551,6 +643,14 @@ export type UpdateDatapoint2DatasetsTextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<
+      UpdateDatapointAnnotationsDatasets1 | UpdateDatapointAnnotationsDatasets2
+    >
+    | undefined;
 };
 
 export type UpdateDatapointContentDatasetsResponse2002 =
@@ -1236,6 +1336,410 @@ export namespace UpdateDatapoint2DatasetsRequestRequestBodyMessagesType$ {
 }
 
 /** @internal */
+export const UpdateDatapointAnnotationsDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointAnnotationsDatasetsType> = z.nativeEnum(
+    UpdateDatapointAnnotationsDatasetsType,
+  );
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointAnnotationsDatasetsType> =
+    UpdateDatapointAnnotationsDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasetsType$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasetsType$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsFilePath$inboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsFilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointAnnotationsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotationsFilePath$outboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsFilePath$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointAnnotationsFilePath
+> = z.object({
+  fileId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsFilePath$ {
+  /** @deprecated use `UpdateDatapointAnnotationsFilePath$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointAnnotationsFilePath$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsFilePath$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsFilePath$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotationsFilePath$Outbound;
+}
+
+export function updateDatapointAnnotationsFilePathToJSON(
+  updateDatapointAnnotationsFilePath: UpdateDatapointAnnotationsFilePath,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotationsFilePath$outboundSchema.parse(
+      updateDatapointAnnotationsFilePath,
+    ),
+  );
+}
+
+export function updateDatapointAnnotationsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointAnnotationsFilePath, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointAnnotationsFilePath$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointAnnotationsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointAnnotations2$inboundSchema: z.ZodType<
+  UpdateDatapointAnnotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointAnnotationsDatasetsType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() => UpdateDatapointAnnotationsFilePath$inboundSchema),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointAnnotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: UpdateDatapointAnnotationsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotations2$outboundSchema: z.ZodType<
+  UpdateDatapointAnnotations2$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointAnnotations2
+> = z.object({
+  type: UpdateDatapointAnnotationsDatasetsType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() => UpdateDatapointAnnotationsFilePath$outboundSchema),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotations2$ {
+  /** @deprecated use `UpdateDatapointAnnotations2$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointAnnotations2$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotations2$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointAnnotations2$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotations2$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotations2$Outbound;
+}
+
+export function updateDatapointAnnotations2ToJSON(
+  updateDatapointAnnotations2: UpdateDatapointAnnotations2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotations2$outboundSchema.parse(
+      updateDatapointAnnotations2,
+    ),
+  );
+}
+
+export function updateDatapointAnnotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointAnnotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointAnnotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointAnnotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointAnnotationsType
+> = z.nativeEnum(UpdateDatapointAnnotationsType);
+
+/** @internal */
+export const UpdateDatapointAnnotationsType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointAnnotationsType
+> = UpdateDatapointAnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsType$ {
+  /** @deprecated use `UpdateDatapointAnnotationsType$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointAnnotationsType$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsType$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointAnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsFileCitation$inboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsFileCitation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointAnnotationsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotationsFileCitation$outboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsFileCitation$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointAnnotationsFileCitation
+> = z.object({
+  fileId: z.string(),
+  quote: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileId: "file_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsFileCitation$ {
+  /** @deprecated use `UpdateDatapointAnnotationsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsFileCitation$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsFileCitation$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsFileCitation$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotationsFileCitation$Outbound;
+}
+
+export function updateDatapointAnnotationsFileCitationToJSON(
+  updateDatapointAnnotationsFileCitation:
+    UpdateDatapointAnnotationsFileCitation,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotationsFileCitation$outboundSchema.parse(
+      updateDatapointAnnotationsFileCitation,
+    ),
+  );
+}
+
+export function updateDatapointAnnotationsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointAnnotationsFileCitation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointAnnotationsFileCitation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointAnnotationsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointAnnotations1$inboundSchema: z.ZodType<
+  UpdateDatapointAnnotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointAnnotationsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() =>
+    UpdateDatapointAnnotationsFileCitation$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointAnnotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: UpdateDatapointAnnotationsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotations1$outboundSchema: z.ZodType<
+  UpdateDatapointAnnotations1$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointAnnotations1
+> = z.object({
+  type: UpdateDatapointAnnotationsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() =>
+    UpdateDatapointAnnotationsFileCitation$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotations1$ {
+  /** @deprecated use `UpdateDatapointAnnotations1$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointAnnotations1$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotations1$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointAnnotations1$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotations1$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotations1$Outbound;
+}
+
+export function updateDatapointAnnotations1ToJSON(
+  updateDatapointAnnotations1: UpdateDatapointAnnotations1,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotations1$outboundSchema.parse(
+      updateDatapointAnnotations1,
+    ),
+  );
+}
+
+export function updateDatapointAnnotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointAnnotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointAnnotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointAnnotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2Annotations$inboundSchema: z.ZodType<
+  UpdateDatapoint2Annotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateDatapointAnnotations1$inboundSchema),
+  z.lazy(() => UpdateDatapointAnnotations2$inboundSchema),
+]);
+
+/** @internal */
+export type UpdateDatapoint2Annotations$Outbound =
+  | UpdateDatapointAnnotations1$Outbound
+  | UpdateDatapointAnnotations2$Outbound;
+
+/** @internal */
+export const UpdateDatapoint2Annotations$outboundSchema: z.ZodType<
+  UpdateDatapoint2Annotations$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2Annotations
+> = z.union([
+  z.lazy(() => UpdateDatapointAnnotations1$outboundSchema),
+  z.lazy(() => UpdateDatapointAnnotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2Annotations$ {
+  /** @deprecated use `UpdateDatapoint2Annotations$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapoint2Annotations$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2Annotations$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapoint2Annotations$outboundSchema;
+  /** @deprecated use `UpdateDatapoint2Annotations$Outbound` instead. */
+  export type Outbound = UpdateDatapoint2Annotations$Outbound;
+}
+
+export function updateDatapoint2AnnotationsToJSON(
+  updateDatapoint2Annotations: UpdateDatapoint2Annotations,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2Annotations$outboundSchema.parse(
+      updateDatapoint2Annotations,
+    ),
+  );
+}
+
+export function updateDatapoint2AnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapoint2Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2Annotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapoint2TextContentPart$inboundSchema: z.ZodType<
   UpdateDatapoint2TextContentPart,
   z.ZodTypeDef,
@@ -1243,12 +1747,24 @@ export const UpdateDatapoint2TextContentPart$inboundSchema: z.ZodType<
 > = z.object({
   type: UpdateDatapoint2DatasetsRequestRequestBodyMessagesType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => UpdateDatapointAnnotations1$inboundSchema),
+      z.lazy(() => UpdateDatapointAnnotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type UpdateDatapoint2TextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | UpdateDatapointAnnotations1$Outbound
+      | UpdateDatapointAnnotations2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -1259,6 +1775,12 @@ export const UpdateDatapoint2TextContentPart$outboundSchema: z.ZodType<
 > = z.object({
   type: UpdateDatapoint2DatasetsRequestRequestBodyMessagesType$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => UpdateDatapointAnnotations1$outboundSchema),
+      z.lazy(() => UpdateDatapointAnnotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -3285,6 +3807,438 @@ export namespace UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyM
 }
 
 /** @internal */
+export const UpdateDatapointAnnotationsDatasetsResponse200Type$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointAnnotationsDatasetsResponse200Type> = z
+    .nativeEnum(UpdateDatapointAnnotationsDatasetsResponse200Type);
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsResponse200Type$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointAnnotationsDatasetsResponse200Type> =
+    UpdateDatapointAnnotationsDatasetsResponse200Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasetsResponse200Type$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasetsResponse200Type$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasetsResponse200Type$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsFilePath$inboundSchema:
+  z.ZodType<UpdateDatapointAnnotationsDatasetsFilePath, z.ZodTypeDef, unknown> =
+    z.object({
+      file_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "file_id": "fileId",
+      });
+    });
+
+/** @internal */
+export type UpdateDatapointAnnotationsDatasetsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsFilePath$outboundSchema:
+  z.ZodType<
+    UpdateDatapointAnnotationsDatasetsFilePath$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointAnnotationsDatasetsFilePath
+  > = z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasetsFilePath$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsFilePath$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasetsFilePath$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasetsFilePath$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsFilePath$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotationsDatasetsFilePath$Outbound;
+}
+
+export function updateDatapointAnnotationsDatasetsFilePathToJSON(
+  updateDatapointAnnotationsDatasetsFilePath:
+    UpdateDatapointAnnotationsDatasetsFilePath,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotationsDatasetsFilePath$outboundSchema.parse(
+      updateDatapointAnnotationsDatasetsFilePath,
+    ),
+  );
+}
+
+export function updateDatapointAnnotationsDatasetsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointAnnotationsDatasetsFilePath,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointAnnotationsDatasetsFilePath$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointAnnotationsDatasetsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasets2$inboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsDatasets2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointAnnotationsDatasetsResponse200Type$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() =>
+    UpdateDatapointAnnotationsDatasetsFilePath$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointAnnotationsDatasets2$Outbound = {
+  type: string;
+  text: string;
+  file_path: UpdateDatapointAnnotationsDatasetsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasets2$outboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsDatasets2$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointAnnotationsDatasets2
+> = z.object({
+  type: UpdateDatapointAnnotationsDatasetsResponse200Type$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() =>
+    UpdateDatapointAnnotationsDatasetsFilePath$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasets2$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasets2$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasets2$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasets2$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasets2$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasets2$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotationsDatasets2$Outbound;
+}
+
+export function updateDatapointAnnotationsDatasets2ToJSON(
+  updateDatapointAnnotationsDatasets2: UpdateDatapointAnnotationsDatasets2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotationsDatasets2$outboundSchema.parse(
+      updateDatapointAnnotationsDatasets2,
+    ),
+  );
+}
+
+export function updateDatapointAnnotationsDatasets2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointAnnotationsDatasets2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointAnnotationsDatasets2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointAnnotationsDatasets2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointAnnotationsDatasetsResponseType> = z
+    .nativeEnum(UpdateDatapointAnnotationsDatasetsResponseType);
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointAnnotationsDatasetsResponseType> =
+    UpdateDatapointAnnotationsDatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasetsResponseType$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasetsResponseType$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsFileCitation$inboundSchema:
+  z.ZodType<
+    UpdateDatapointAnnotationsDatasetsFileCitation,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    file_id: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  });
+
+/** @internal */
+export type UpdateDatapointAnnotationsDatasetsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasetsFileCitation$outboundSchema:
+  z.ZodType<
+    UpdateDatapointAnnotationsDatasetsFileCitation$Outbound,
+    z.ZodTypeDef,
+    UpdateDatapointAnnotationsDatasetsFileCitation
+  > = z.object({
+    fileId: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasetsFileCitation$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasetsFileCitation$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasetsFileCitation$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasetsFileCitation$Outbound` instead. */
+  export type Outbound =
+    UpdateDatapointAnnotationsDatasetsFileCitation$Outbound;
+}
+
+export function updateDatapointAnnotationsDatasetsFileCitationToJSON(
+  updateDatapointAnnotationsDatasetsFileCitation:
+    UpdateDatapointAnnotationsDatasetsFileCitation,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotationsDatasetsFileCitation$outboundSchema.parse(
+      updateDatapointAnnotationsDatasetsFileCitation,
+    ),
+  );
+}
+
+export function updateDatapointAnnotationsDatasetsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointAnnotationsDatasetsFileCitation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointAnnotationsDatasetsFileCitation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointAnnotationsDatasetsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasets1$inboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsDatasets1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: UpdateDatapointAnnotationsDatasetsResponseType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() =>
+    UpdateDatapointAnnotationsDatasetsFileCitation$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointAnnotationsDatasets1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: UpdateDatapointAnnotationsDatasetsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const UpdateDatapointAnnotationsDatasets1$outboundSchema: z.ZodType<
+  UpdateDatapointAnnotationsDatasets1$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointAnnotationsDatasets1
+> = z.object({
+  type: UpdateDatapointAnnotationsDatasetsResponseType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() =>
+    UpdateDatapointAnnotationsDatasetsFileCitation$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointAnnotationsDatasets1$ {
+  /** @deprecated use `UpdateDatapointAnnotationsDatasets1$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointAnnotationsDatasets1$inboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasets1$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointAnnotationsDatasets1$outboundSchema;
+  /** @deprecated use `UpdateDatapointAnnotationsDatasets1$Outbound` instead. */
+  export type Outbound = UpdateDatapointAnnotationsDatasets1$Outbound;
+}
+
+export function updateDatapointAnnotationsDatasets1ToJSON(
+  updateDatapointAnnotationsDatasets1: UpdateDatapointAnnotationsDatasets1,
+): string {
+  return JSON.stringify(
+    UpdateDatapointAnnotationsDatasets1$outboundSchema.parse(
+      updateDatapointAnnotationsDatasets1,
+    ),
+  );
+}
+
+export function updateDatapointAnnotationsDatasets1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointAnnotationsDatasets1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointAnnotationsDatasets1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointAnnotationsDatasets1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapoint2DatasetsAnnotations$inboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsAnnotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateDatapointAnnotationsDatasets1$inboundSchema),
+  z.lazy(() => UpdateDatapointAnnotationsDatasets2$inboundSchema),
+]);
+
+/** @internal */
+export type UpdateDatapoint2DatasetsAnnotations$Outbound =
+  | UpdateDatapointAnnotationsDatasets1$Outbound
+  | UpdateDatapointAnnotationsDatasets2$Outbound;
+
+/** @internal */
+export const UpdateDatapoint2DatasetsAnnotations$outboundSchema: z.ZodType<
+  UpdateDatapoint2DatasetsAnnotations$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapoint2DatasetsAnnotations
+> = z.union([
+  z.lazy(() => UpdateDatapointAnnotationsDatasets1$outboundSchema),
+  z.lazy(() => UpdateDatapointAnnotationsDatasets2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapoint2DatasetsAnnotations$ {
+  /** @deprecated use `UpdateDatapoint2DatasetsAnnotations$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapoint2DatasetsAnnotations$inboundSchema;
+  /** @deprecated use `UpdateDatapoint2DatasetsAnnotations$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapoint2DatasetsAnnotations$outboundSchema;
+  /** @deprecated use `UpdateDatapoint2DatasetsAnnotations$Outbound` instead. */
+  export type Outbound = UpdateDatapoint2DatasetsAnnotations$Outbound;
+}
+
+export function updateDatapoint2DatasetsAnnotationsToJSON(
+  updateDatapoint2DatasetsAnnotations: UpdateDatapoint2DatasetsAnnotations,
+): string {
+  return JSON.stringify(
+    UpdateDatapoint2DatasetsAnnotations$outboundSchema.parse(
+      updateDatapoint2DatasetsAnnotations,
+    ),
+  );
+}
+
+export function updateDatapoint2DatasetsAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapoint2DatasetsAnnotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapoint2DatasetsAnnotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapoint2DatasetsAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapoint2DatasetsTextContentPart$inboundSchema: z.ZodType<
   UpdateDatapoint2DatasetsTextContentPart,
   z.ZodTypeDef,
@@ -3293,12 +4247,24 @@ export const UpdateDatapoint2DatasetsTextContentPart$inboundSchema: z.ZodType<
   type:
     UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => UpdateDatapointAnnotationsDatasets1$inboundSchema),
+      z.lazy(() => UpdateDatapointAnnotationsDatasets2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type UpdateDatapoint2DatasetsTextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | UpdateDatapointAnnotationsDatasets1$Outbound
+      | UpdateDatapointAnnotationsDatasets2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -3310,6 +4276,12 @@ export const UpdateDatapoint2DatasetsTextContentPart$outboundSchema: z.ZodType<
   type:
     UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyMessagesType$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => UpdateDatapointAnnotationsDatasets1$outboundSchema),
+      z.lazy(() => UpdateDatapointAnnotationsDatasets2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -5046,7 +6018,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-08-20T11:38:10.692Z",
+    "2025-08-25T10:00:27.052Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -5108,7 +6080,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-08-20T11:38:10.692Z"))
+  updated: z.date().default(() => new Date("2025-08-25T10:00:27.052Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
