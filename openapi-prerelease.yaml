@@ -5220,7 +5220,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-26T09:10:22.707Z"
+          default: "2025-08-26T12:57:20.948Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5283,7 +5283,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-08-26T09:10:22.707Z"
+            default: "2025-08-26T12:57:20.948Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -5363,7 +5363,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-26T09:10:22.707Z"
+          default: "2025-08-26T12:57:20.948Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -5409,7 +5409,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-08-26T09:10:22.707Z"
+                default: "2025-08-26T12:57:20.948Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -5452,7 +5452,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-08-26T09:10:22.707Z"
+          default: "2025-08-26T12:57:20.948Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -8061,7 +8061,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-26T09:10:19.431Z"
+          default: "2025-08-26T12:57:17.525Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8069,7 +8069,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-26T09:10:19.431Z"
+              default: "2025-08-26T12:57:17.526Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8179,7 +8179,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-08-26T09:10:19.431Z"
+                default: "2025-08-26T12:57:17.525Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -8187,7 +8187,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.526Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -8294,7 +8294,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-26T09:10:19.431Z"
+          default: "2025-08-26T12:57:17.525Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8302,7 +8302,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-26T09:10:19.431Z"
+              default: "2025-08-26T12:57:17.526Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -8403,7 +8403,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-08-26T09:10:19.431Z"
+          default: "2025-08-26T12:57:17.525Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -8411,7 +8411,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-08-26T09:10:19.431Z"
+              default: "2025-08-26T12:57:17.526Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -12577,10 +12577,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12651,10 +12651,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12722,10 +12722,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12808,10 +12808,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12905,10 +12905,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12979,10 +12979,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13050,10 +13050,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13136,10 +13136,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "updated":
                     type: "string"
-                    default: "2025-08-26T09:10:21.894Z"
+                    default: "2025-08-26T12:57:20.002Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13509,10 +13509,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13583,10 +13583,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13654,10 +13654,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13740,10 +13740,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "updated":
               type: "string"
-              default: "2025-08-26T09:10:21.894Z"
+              default: "2025-08-26T12:57:20.002Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -17629,7 +17629,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -17637,7 +17637,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -17768,7 +17768,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-26T09:10:19.431Z"
+                          default: "2025-08-26T12:57:17.525Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -17776,7 +17776,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-26T09:10:19.431Z"
+                              default: "2025-08-26T12:57:17.526Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -22191,7 +22191,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-26T09:10:22.707Z"
+                    default: "2025-08-26T12:57:20.948Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -22279,7 +22279,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-08-26T09:10:22.707Z"
+                          default: "2025-08-26T12:57:20.948Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -22346,7 +22346,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-08-26T09:10:22.707Z"
+                    default: "2025-08-26T12:57:20.948Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -25945,7 +25945,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-26T09:10:19.431Z"
+                          default: "2025-08-26T12:57:17.525Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -25953,7 +25953,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-26T09:10:19.431Z"
+                              default: "2025-08-26T12:57:17.526Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -26077,7 +26077,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -26085,7 +26085,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -26195,7 +26195,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -26203,7 +26203,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -26355,7 +26355,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -26363,7 +26363,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -26811,7 +26811,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-26T09:10:19.431Z"
+                          default: "2025-08-26T12:57:17.525Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -26819,7 +26819,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-26T09:10:19.431Z"
+                              default: "2025-08-26T12:57:17.526Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -27554,7 +27554,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-08-26T09:10:19.431Z"
+                      default: "2025-08-26T12:57:17.525Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -27562,7 +27562,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-08-26T09:10:19.431Z"
+                          default: "2025-08-26T12:57:17.526Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -27954,7 +27954,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -27962,7 +27962,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -28694,7 +28694,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -28702,7 +28702,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -30078,7 +30078,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K3JT97W6EZ21Y5VE1V3M9G61"
+                          default: "01K3K78VHPTDRFBVVJ6JHAR12S"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -30241,7 +30241,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K3JT97W7CMK73Z4CAY46H14A"
+                    default: "01K3K78VHRP17CQ529NQZTYQPW"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -30334,7 +30334,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K3JT97W7GM3DMX28SSDGY9FA"
+                    default: "01K3K78VHQ7FT61TQQ79K56MRR"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -30463,7 +30463,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K3JT97W9MRQB4VDAKBJRJP9Q"
+                    default: "01K3K78VHTE4YY2E2MD2H692TQ"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -33749,6 +33749,605 @@ paths:
                     "user":
                       type: "string"
                       description: "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse."
+                    "orq":
+                      type: "object"
+                      properties:
+                        "name":
+                          type: "string"
+                          description: "The name to display on the trace. If not specified, the default system name will be used."
+                        "retry":
+                          type: "object"
+                          properties:
+                            "count":
+                              type: "number"
+                              minimum: 1
+                              maximum: 5
+                              default: 3
+                              description: "Number of retry attempts (1-5)"
+                              example: 3
+                            "on_codes":
+                              type: "array"
+                              items:
+                                type: "number"
+                              default: [429]
+                              description: "HTTP status codes that trigger retry logic"
+                              example: [429, 500, 502, 503, 504]
+                          description: "Retry configuration for the request"
+                        "fallbacks":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "model":
+                                type: "string"
+                                description: "Fallback model identifier"
+                                example: "openai/gpt-4o-mini"
+                            required:
+                              - "model"
+                          description: "Array of fallback models to use if primary model fails"
+                        "prompt":
+                          type: "object"
+                          properties:
+                            "id":
+                              type: "string"
+                              description: "Unique identifier of the prompt to use"
+                              example: "prompt_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                            "version":
+                              type: "string"
+                              enum:
+                                - "latest"
+                              description: "Version of the prompt to use (currently only \"latest\" supported)"
+                              example: "latest"
+                          required:
+                            - "id"
+                            - "version"
+                          description: "Prompt configuration for the request"
+                        "contact": {"$ref": "#/components/schemas/PublicContact"}
+                        "thread":
+                          type: "object"
+                          properties:
+                            "id":
+                              type: "string"
+                              description: "Unique thread identifier to group related invocations."
+                              example: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                            "tags":
+                              type: "array"
+                              items:
+                                type: "string"
+                              description: "Optional tags to differentiate or categorize threads"
+                              example: ["customer-support", "priority-high"]
+                          required:
+                            - "id"
+                          description: "Thread information to group related requests"
+                        "inputs":
+                          type: "object"
+                          additionalProperties: {}
+                          description: "Values to replace in the prompt messages using {{variableName}} syntax"
+                          example: {"customer_name": "John Smith", "product_name": "Premium Plan", "issue_type": "billing"}
+                        "cache":
+                          type: "object"
+                          properties:
+                            "ttl":
+                              type: "number"
+                              minimum: 0
+                              maximum: 259200
+                              default: 1800
+                              description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
+                              example: 3600
+                            "type":
+                              type: "string"
+                              enum:
+                                - "exact_match"
+                          required:
+                            - "type"
+                          description: "Cache configuration for the request."
+                        "knowledge_bases":
+                          type: "array"
+                          items:
+                            type: "object"
+                            properties:
+                              "top_k":
+                                type: "integer"
+                                minimum: 1
+                                maximum: 100
+                                description: "The number of results to return. If not provided, will default to the knowledge base configured `top_k`."
+                              "threshold":
+                                type: "number"
+                                minimum: 0
+                                maximum: 1
+                                description: "The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`"
+                              "search_type":
+                                type: "string"
+                                enum:
+                                  - "vector_search"
+                                  - "keyword_search"
+                                  - "hybrid_search"
+                                default: "hybrid_search"
+                                description: "The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`"
+                              "filter_by":
+                                anyOf:
+                                  - type: "object"
+                                    additionalProperties:
+                                      anyOf:
+                                        - type: "object"
+                                          properties:
+                                            "eq":
+                                              anyOf:
+                                                - type: "string"
+                                                  description: "String"
+                                                  title: "string"
+                                                - type: "number"
+                                                  description: "Number"
+                                                  title: "number"
+                                                - type: "boolean"
+                                                  description: "Boolean"
+                                                  title: "boolean"
+                                          required:
+                                            - "eq"
+                                          description: "Equal to"
+                                          title: "eq"
+                                        - type: "object"
+                                          properties:
+                                            "ne":
+                                              anyOf:
+                                                - type: "string"
+                                                  description: "String"
+                                                  title: "string"
+                                                - type: "number"
+                                                  description: "Number"
+                                                  title: "number"
+                                                - type: "boolean"
+                                                  description: "Boolean"
+                                                  title: "boolean"
+                                          required:
+                                            - "ne"
+                                          description: "Not equal to"
+                                          title: "ne"
+                                        - type: "object"
+                                          properties:
+                                            "gt":
+                                              type: "number"
+                                          required:
+                                            - "gt"
+                                        - type: "object"
+                                          properties:
+                                            "gte":
+                                              type: "number"
+                                          required:
+                                            - "gte"
+                                          description: "Greater than or equal to"
+                                          title: "gte"
+                                        - type: "object"
+                                          properties:
+                                            "lt":
+                                              type: "number"
+                                          required:
+                                            - "lt"
+                                          description: "Less than"
+                                          title: "lt"
+                                        - type: "object"
+                                          properties:
+                                            "lte":
+                                              type: "number"
+                                          required:
+                                            - "lte"
+                                          description: "Less than or equal to"
+                                          title: "lte"
+                                        - type: "object"
+                                          properties:
+                                            "in":
+                                              type: "array"
+                                              items:
+                                                anyOf:
+                                                  - type: "string"
+                                                    description: "String"
+                                                    title: "string"
+                                                  - type: "number"
+                                                    description: "Number"
+                                                    title: "number"
+                                                  - type: "boolean"
+                                                    description: "Boolean"
+                                                    title: "boolean"
+                                          required:
+                                            - "in"
+                                          description: "In"
+                                          title: "in"
+                                        - type: "object"
+                                          properties:
+                                            "nin":
+                                              type: "array"
+                                              items:
+                                                anyOf:
+                                                  - type: "string"
+                                                    description: "String"
+                                                    title: "string"
+                                                  - type: "number"
+                                                    description: "Number"
+                                                    title: "number"
+                                                  - type: "boolean"
+                                                    description: "Boolean"
+                                                    title: "boolean"
+                                          required:
+                                            - "nin"
+                                          description: "Not in"
+                                          title: "nin"
+                                        - type: "object"
+                                          properties:
+                                            "exists":
+                                              type: "boolean"
+                                          required:
+                                            - "exists"
+                                          description: "Exists"
+                                          title: "exists"
+                                    title: "Search operator"
+                                  - type: "object"
+                                    properties:
+                                      "and":
+                                        type: "array"
+                                        items:
+                                          type: "object"
+                                          additionalProperties:
+                                            anyOf:
+                                              - type: "object"
+                                                properties:
+                                                  "eq":
+                                                    anyOf:
+                                                      - type: "string"
+                                                        description: "String"
+                                                        title: "string"
+                                                      - type: "number"
+                                                        description: "Number"
+                                                        title: "number"
+                                                      - type: "boolean"
+                                                        description: "Boolean"
+                                                        title: "boolean"
+                                                required:
+                                                  - "eq"
+                                                description: "Equal to"
+                                                title: "eq"
+                                              - type: "object"
+                                                properties:
+                                                  "ne":
+                                                    anyOf:
+                                                      - type: "string"
+                                                        description: "String"
+                                                        title: "string"
+                                                      - type: "number"
+                                                        description: "Number"
+                                                        title: "number"
+                                                      - type: "boolean"
+                                                        description: "Boolean"
+                                                        title: "boolean"
+                                                required:
+                                                  - "ne"
+                                                description: "Not equal to"
+                                                title: "ne"
+                                              - type: "object"
+                                                properties:
+                                                  "gt":
+                                                    type: "number"
+                                                required:
+                                                  - "gt"
+                                              - type: "object"
+                                                properties:
+                                                  "gte":
+                                                    type: "number"
+                                                required:
+                                                  - "gte"
+                                                description: "Greater than or equal to"
+                                                title: "gte"
+                                              - type: "object"
+                                                properties:
+                                                  "lt":
+                                                    type: "number"
+                                                required:
+                                                  - "lt"
+                                                description: "Less than"
+                                                title: "lt"
+                                              - type: "object"
+                                                properties:
+                                                  "lte":
+                                                    type: "number"
+                                                required:
+                                                  - "lte"
+                                                description: "Less than or equal to"
+                                                title: "lte"
+                                              - type: "object"
+                                                properties:
+                                                  "in":
+                                                    type: "array"
+                                                    items:
+                                                      anyOf:
+                                                        - type: "string"
+                                                          description: "String"
+                                                          title: "string"
+                                                        - type: "number"
+                                                          description: "Number"
+                                                          title: "number"
+                                                        - type: "boolean"
+                                                          description: "Boolean"
+                                                          title: "boolean"
+                                                required:
+                                                  - "in"
+                                                description: "In"
+                                                title: "in"
+                                              - type: "object"
+                                                properties:
+                                                  "nin":
+                                                    type: "array"
+                                                    items:
+                                                      anyOf:
+                                                        - type: "string"
+                                                          description: "String"
+                                                          title: "string"
+                                                        - type: "number"
+                                                          description: "Number"
+                                                          title: "number"
+                                                        - type: "boolean"
+                                                          description: "Boolean"
+                                                          title: "boolean"
+                                                required:
+                                                  - "nin"
+                                                description: "Not in"
+                                                title: "nin"
+                                              - type: "object"
+                                                properties:
+                                                  "exists":
+                                                    type: "boolean"
+                                                required:
+                                                  - "exists"
+                                                description: "Exists"
+                                                title: "exists"
+                                    required:
+                                      - "and"
+                                    description: "And"
+                                    title: "and"
+                                  - type: "object"
+                                    properties:
+                                      "or":
+                                        type: "array"
+                                        items:
+                                          type: "object"
+                                          additionalProperties:
+                                            anyOf:
+                                              - type: "object"
+                                                properties:
+                                                  "eq":
+                                                    anyOf:
+                                                      - type: "string"
+                                                        description: "String"
+                                                        title: "string"
+                                                      - type: "number"
+                                                        description: "Number"
+                                                        title: "number"
+                                                      - type: "boolean"
+                                                        description: "Boolean"
+                                                        title: "boolean"
+                                                required:
+                                                  - "eq"
+                                                description: "Equal to"
+                                                title: "eq"
+                                              - type: "object"
+                                                properties:
+                                                  "ne":
+                                                    anyOf:
+                                                      - type: "string"
+                                                        description: "String"
+                                                        title: "string"
+                                                      - type: "number"
+                                                        description: "Number"
+                                                        title: "number"
+                                                      - type: "boolean"
+                                                        description: "Boolean"
+                                                        title: "boolean"
+                                                required:
+                                                  - "ne"
+                                                description: "Not equal to"
+                                                title: "ne"
+                                              - type: "object"
+                                                properties:
+                                                  "gt":
+                                                    type: "number"
+                                                required:
+                                                  - "gt"
+                                              - type: "object"
+                                                properties:
+                                                  "gte":
+                                                    type: "number"
+                                                required:
+                                                  - "gte"
+                                                description: "Greater than or equal to"
+                                                title: "gte"
+                                              - type: "object"
+                                                properties:
+                                                  "lt":
+                                                    type: "number"
+                                                required:
+                                                  - "lt"
+                                                description: "Less than"
+                                                title: "lt"
+                                              - type: "object"
+                                                properties:
+                                                  "lte":
+                                                    type: "number"
+                                                required:
+                                                  - "lte"
+                                                description: "Less than or equal to"
+                                                title: "lte"
+                                              - type: "object"
+                                                properties:
+                                                  "in":
+                                                    type: "array"
+                                                    items:
+                                                      anyOf:
+                                                        - type: "string"
+                                                          description: "String"
+                                                          title: "string"
+                                                        - type: "number"
+                                                          description: "Number"
+                                                          title: "number"
+                                                        - type: "boolean"
+                                                          description: "Boolean"
+                                                          title: "boolean"
+                                                required:
+                                                  - "in"
+                                                description: "In"
+                                                title: "in"
+                                              - type: "object"
+                                                properties:
+                                                  "nin":
+                                                    type: "array"
+                                                    items:
+                                                      anyOf:
+                                                        - type: "string"
+                                                          description: "String"
+                                                          title: "string"
+                                                        - type: "number"
+                                                          description: "Number"
+                                                          title: "number"
+                                                        - type: "boolean"
+                                                          description: "Boolean"
+                                                          title: "boolean"
+                                                required:
+                                                  - "nin"
+                                                description: "Not in"
+                                                title: "nin"
+                                              - type: "object"
+                                                properties:
+                                                  "exists":
+                                                    type: "boolean"
+                                                required:
+                                                  - "exists"
+                                                description: "Exists"
+                                                title: "exists"
+                                    required:
+                                      - "or"
+                                    description: "Or"
+                                    title: "or"
+                                description: "The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information."
+                              "search_options":
+                                type: "object"
+                                properties:
+                                  "include_vectors":
+                                    type: "boolean"
+                                    description: "Whether to include the vector in the chunk"
+                                  "include_metadata":
+                                    type: "boolean"
+                                    description: "Whether to include the metadata in the chunk"
+                                  "include_scores":
+                                    type: "boolean"
+                                    description: "Whether to include the scores in the chunk"
+                                description: "Additional search options"
+                              "rerank_config":
+                                type:
+                                  - "object"
+                                  - "null"
+                                properties:
+                                  "enabled":
+                                    type: "boolean"
+                                  "provider":
+                                    type: "string"
+                                    enum:
+                                      - "cohere"
+                                      - "openai"
+                                      - "anthropic"
+                                      - "huggingface"
+                                      - "replicate"
+                                      - "google"
+                                      - "google-ai"
+                                      - "azure"
+                                      - "aws"
+                                      - "anyscale"
+                                      - "perplexity"
+                                      - "groq"
+                                      - "fal"
+                                      - "leonardoai"
+                                      - "nvidia"
+                                      - "jina"
+                                      - "togetherai"
+                                      - "elevenlabs"
+                                      - "litellm"
+                                      - "openailike"
+                                      - "cerebras"
+                                      - "bytedance"
+                                  "top_k":
+                                    type: "integer"
+                                    minimum: 1
+                                    maximum: 100
+                                    description: "The number of results to return by the reranking model"
+                                  "model":
+                                    type: "string"
+                                    description: "The name of the model to use"
+                                  "model_db_id":
+                                    type: "string"
+                                    description: "The ID of the model in the database"
+                                  "model_type":
+                                    type: "string"
+                                    enum:
+                                      - "rerank"
+                                  "model_parameters":
+                                    type: "object"
+                                    properties:
+                                      "threshold":
+                                        type: "number"
+                                        description: "The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned"
+                                  "integration_id":
+                                    type:
+                                      - "string"
+                                      - "null"
+                                    format: "uuid"
+                                    description: "The id of the resource"
+                                    readOnly: true
+                                description: "Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings."
+                              "agentic_rag_config":
+                                type: "object"
+                                properties:
+                                  "model_db_id":
+                                    type: "string"
+                                  "provider":
+                                    type: "string"
+                                    enum:
+                                      - "cohere"
+                                      - "openai"
+                                      - "anthropic"
+                                      - "huggingface"
+                                      - "replicate"
+                                      - "google"
+                                      - "google-ai"
+                                      - "azure"
+                                      - "aws"
+                                      - "anyscale"
+                                      - "perplexity"
+                                      - "groq"
+                                      - "fal"
+                                      - "leonardoai"
+                                      - "nvidia"
+                                      - "jina"
+                                      - "togetherai"
+                                      - "elevenlabs"
+                                      - "litellm"
+                                      - "openailike"
+                                      - "cerebras"
+                                      - "bytedance"
+                                  "integration_id":
+                                    type:
+                                      - "string"
+                                      - "null"
+                                required:
+                                  - "model_db_id"
+                                  - "provider"
+                                description: "Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings."
+                              "knowledge_id":
+                                type: "string"
+                                description: "Unique identifier of the knowledge base to search"
+                                example: "customer-knowledge-base"
+                              "query":
+                                type: "string"
+                                description: "The query to use to search the knowledge base. If not provided we will use the last user message from the messages of the requests"
+                            required:
+                              - "knowledge_id"
+                      description: "Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, contact-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution."
+                      example: {"retry": {"count": 3, "on_codes": [429, 500, 502]}, "fallbacks": [{"model": "openai/gpt-5"}, {"model": "anthropic/claude-4-opus"}], "contact": {"id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "display_name": "Jane Doe", "email": "jane.doe@example.com"}, "thread": {"id": "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV", "tags": ["customer-support"]}, "inputs": {"customer_name": "John Smith", "issue_type": "billing"}, "cache": {"ttl": 3600, "type": "exact_match"}, "knowledge_bases": [{"knowledge_id": "knowledge_01ARZ3NDEKTSV4RRFFQ69G5FAV", "top_k": 5}]}
                   required:
                     - "model"
                     - "prompt"
@@ -36546,10 +37145,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36620,10 +37219,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36691,10 +37290,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36777,10 +37376,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -36848,10 +37447,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -37246,10 +37845,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -37333,10 +37932,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "updated":
                               type: "string"
-                              default: "2025-08-26T09:10:21.894Z"
+                              default: "2025-08-26T12:57:20.002Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -37728,10 +38327,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -37802,10 +38401,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -37873,10 +38472,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -37959,10 +38558,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38341,10 +38940,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38415,10 +39014,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38486,10 +39085,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -38572,10 +39171,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "updated":
                         type: "string"
-                        default: "2025-08-26T09:10:21.894Z"
+                        default: "2025-08-26T12:57:20.002Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41639,7 +42238,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41647,7 +42246,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -41781,7 +42380,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -41789,7 +42388,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42007,7 +42606,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-08-26T09:10:19.431Z"
+                          default: "2025-08-26T12:57:17.525Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -42015,7 +42614,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-08-26T09:10:19.431Z"
+                              default: "2025-08-26T12:57:17.526Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -42196,7 +42795,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42204,7 +42803,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42328,7 +42927,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42336,7 +42935,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -42486,7 +43085,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-08-26T09:10:19.431Z"
+                    default: "2025-08-26T12:57:17.525Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -42494,7 +43093,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-08-26T09:10:19.431Z"
+                        default: "2025-08-26T12:57:17.526Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
