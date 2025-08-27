@@ -510,6 +510,48 @@ async function run() {
   const result = await orq.proxy.completions({
     model: "XTS",
     prompt: "<value>",
+    orq: {
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+        ],
+      },
+      fallbacks: [
+        {
+          model: "openai/gpt-5",
+        },
+        {
+          model: "anthropic/claude-4-opus",
+        },
+      ],
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+        ],
+      },
+      inputs: {
+        "customer_name": "John Smith",
+        "issue_type": "billing",
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      knowledgeBases: [
+        {
+          topK: 5,
+          knowledgeId: "knowledge_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        },
+      ],
+    },
   });
 
   for await (const event of result) {
@@ -539,6 +581,48 @@ async function run() {
   const res = await proxyCompletions(orq, {
     model: "XTS",
     prompt: "<value>",
+    orq: {
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+        ],
+      },
+      fallbacks: [
+        {
+          model: "openai/gpt-5",
+        },
+        {
+          model: "anthropic/claude-4-opus",
+        },
+      ],
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+        ],
+      },
+      inputs: {
+        "customer_name": "John Smith",
+        "issue_type": "billing",
+      },
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      knowledgeBases: [
+        {
+          topK: 5,
+          knowledgeId: "knowledge_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        },
+      ],
+    },
   });
   if (res.ok) {
     const { value: result } = res;

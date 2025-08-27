@@ -8,12 +8,616 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
  */
 export type PostV2ProxyCompletionsStop = string | Array<string>;
+
+/**
+ * Retry configuration for the request
+ */
+export type PostV2ProxyCompletionsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type PostV2ProxyCompletionsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Version of the prompt to use (currently only "latest" supported)
+ */
+export const PostV2ProxyCompletionsVersion = {
+  Latest: "latest",
+} as const;
+/**
+ * Version of the prompt to use (currently only "latest" supported)
+ */
+export type PostV2ProxyCompletionsVersion = ClosedEnum<
+  typeof PostV2ProxyCompletionsVersion
+>;
+
+/**
+ * Prompt configuration for the request
+ */
+export type PostV2ProxyCompletionsPrompt = {
+  /**
+   * Unique identifier of the prompt to use
+   */
+  id: string;
+  /**
+   * Version of the prompt to use (currently only "latest" supported)
+   */
+  version: PostV2ProxyCompletionsVersion;
+};
+
+/**
+ * Thread information to group related requests
+ */
+export type PostV2ProxyCompletionsThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
+};
+
+export const PostV2ProxyCompletionsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type PostV2ProxyCompletionsType = ClosedEnum<
+  typeof PostV2ProxyCompletionsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type PostV2ProxyCompletionsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: PostV2ProxyCompletionsType;
+};
+
+/**
+ * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ */
+export const PostV2ProxyCompletionsSearchType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
+  HybridSearch: "hybrid_search",
+} as const;
+/**
+ * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+ */
+export type PostV2ProxyCompletionsSearchType = ClosedEnum<
+  typeof PostV2ProxyCompletionsSearchType
+>;
+
+/**
+ * Exists
+ */
+export type PostV2ProxyCompletionsOrExists = {
+  exists: boolean;
+};
+
+export type PostV2ProxyCompletionsOrProxyNin = string | number | boolean;
+
+/**
+ * Not in
+ */
+export type PostV2ProxyCompletionsOrNin = {
+  nin: Array<string | number | boolean>;
+};
+
+export type PostV2ProxyCompletionsOrProxyIn = string | number | boolean;
+
+/**
+ * In
+ */
+export type PostV2ProxyCompletionsOrIn = {
+  in: Array<string | number | boolean>;
+};
+
+/**
+ * Less than or equal to
+ */
+export type PostV2ProxyCompletionsOrLte = {
+  lte: number;
+};
+
+/**
+ * Less than
+ */
+export type PostV2ProxyCompletionsOrLt = {
+  lt: number;
+};
+
+/**
+ * Greater than or equal to
+ */
+export type PostV2ProxyCompletionsOrGte = {
+  gte: number;
+};
+
+export type PostV2ProxyCompletionsOr3 = {
+  gt: number;
+};
+
+export type PostV2ProxyCompletionsOrProxyNe = string | number | boolean;
+
+/**
+ * Not equal to
+ */
+export type PostV2ProxyCompletionsOrNe = {
+  ne: string | number | boolean;
+};
+
+export type PostV2ProxyCompletionsOrProxyEq = string | number | boolean;
+
+/**
+ * Equal to
+ */
+export type PostV2ProxyCompletionsOrEq = {
+  eq: string | number | boolean;
+};
+
+export type PostV2ProxyCompletionsFilterByProxyOr =
+  | PostV2ProxyCompletionsOrEq
+  | PostV2ProxyCompletionsOrNe
+  | PostV2ProxyCompletionsOr3
+  | PostV2ProxyCompletionsOrGte
+  | PostV2ProxyCompletionsOrLt
+  | PostV2ProxyCompletionsOrLte
+  | PostV2ProxyCompletionsOrIn
+  | PostV2ProxyCompletionsOrNin
+  | PostV2ProxyCompletionsOrExists;
+
+/**
+ * Or
+ */
+export type PostV2ProxyCompletionsFilterByOr = {
+  or: Array<
+    {
+      [k: string]:
+        | PostV2ProxyCompletionsOrEq
+        | PostV2ProxyCompletionsOrNe
+        | PostV2ProxyCompletionsOr3
+        | PostV2ProxyCompletionsOrGte
+        | PostV2ProxyCompletionsOrLt
+        | PostV2ProxyCompletionsOrLte
+        | PostV2ProxyCompletionsOrIn
+        | PostV2ProxyCompletionsOrNin
+        | PostV2ProxyCompletionsOrExists;
+    }
+  >;
+};
+
+/**
+ * Exists
+ */
+export type PostV2ProxyCompletionsAndExists = {
+  exists: boolean;
+};
+
+export type PostV2ProxyCompletionsAndProxyNin = string | number | boolean;
+
+/**
+ * Not in
+ */
+export type PostV2ProxyCompletionsAndNin = {
+  nin: Array<string | number | boolean>;
+};
+
+export type PostV2ProxyCompletionsAndProxyIn = string | number | boolean;
+
+/**
+ * In
+ */
+export type PostV2ProxyCompletionsAndIn = {
+  in: Array<string | number | boolean>;
+};
+
+/**
+ * Less than or equal to
+ */
+export type PostV2ProxyCompletionsAndLte = {
+  lte: number;
+};
+
+/**
+ * Less than
+ */
+export type PostV2ProxyCompletionsAndLt = {
+  lt: number;
+};
+
+/**
+ * Greater than or equal to
+ */
+export type PostV2ProxyCompletionsAndGte = {
+  gte: number;
+};
+
+export type PostV2ProxyCompletionsAnd3 = {
+  gt: number;
+};
+
+export type PostV2ProxyCompletionsAndProxyNe = string | number | boolean;
+
+/**
+ * Not equal to
+ */
+export type PostV2ProxyCompletionsAndNe = {
+  ne: string | number | boolean;
+};
+
+export type PostV2ProxyCompletionsAndProxyEq = string | number | boolean;
+
+/**
+ * Equal to
+ */
+export type PostV2ProxyCompletionsAndEq = {
+  eq: string | number | boolean;
+};
+
+export type PostV2ProxyCompletionsFilterByProxyAnd =
+  | PostV2ProxyCompletionsAndEq
+  | PostV2ProxyCompletionsAndNe
+  | PostV2ProxyCompletionsAnd3
+  | PostV2ProxyCompletionsAndGte
+  | PostV2ProxyCompletionsAndLt
+  | PostV2ProxyCompletionsAndLte
+  | PostV2ProxyCompletionsAndIn
+  | PostV2ProxyCompletionsAndNin
+  | PostV2ProxyCompletionsAndExists;
+
+/**
+ * And
+ */
+export type PostV2ProxyCompletionsFilterByAnd = {
+  and: Array<
+    {
+      [k: string]:
+        | PostV2ProxyCompletionsAndEq
+        | PostV2ProxyCompletionsAndNe
+        | PostV2ProxyCompletionsAnd3
+        | PostV2ProxyCompletionsAndGte
+        | PostV2ProxyCompletionsAndLt
+        | PostV2ProxyCompletionsAndLte
+        | PostV2ProxyCompletionsAndIn
+        | PostV2ProxyCompletionsAndNin
+        | PostV2ProxyCompletionsAndExists;
+    }
+  >;
+};
+
+/**
+ * Exists
+ */
+export type PostV2ProxyCompletions1Exists = {
+  exists: boolean;
+};
+
+export type PostV2ProxyCompletions1ProxyNin = string | number | boolean;
+
+/**
+ * Not in
+ */
+export type PostV2ProxyCompletions1Nin = {
+  nin: Array<string | number | boolean>;
+};
+
+export type PostV2ProxyCompletions1ProxyIn = string | number | boolean;
+
+/**
+ * In
+ */
+export type PostV2ProxyCompletions1In = {
+  in: Array<string | number | boolean>;
+};
+
+/**
+ * Less than or equal to
+ */
+export type PostV2ProxyCompletions1Lte = {
+  lte: number;
+};
+
+/**
+ * Less than
+ */
+export type PostV2ProxyCompletions1Lt = {
+  lt: number;
+};
+
+/**
+ * Greater than or equal to
+ */
+export type PostV2ProxyCompletions1Gte = {
+  gte: number;
+};
+
+export type PostV2ProxyCompletions13 = {
+  gt: number;
+};
+
+export type PostV2ProxyCompletions1ProxyNe = string | number | boolean;
+
+/**
+ * Not equal to
+ */
+export type PostV2ProxyCompletions1Ne = {
+  ne: string | number | boolean;
+};
+
+export type PostV2ProxyCompletions1ProxyEq = string | number | boolean;
+
+/**
+ * Equal to
+ */
+export type PostV2ProxyCompletions1Eq = {
+  eq: string | number | boolean;
+};
+
+export type PostV2ProxyCompletionsFilterBy1 =
+  | PostV2ProxyCompletions1Eq
+  | PostV2ProxyCompletions1Ne
+  | PostV2ProxyCompletions13
+  | PostV2ProxyCompletions1Gte
+  | PostV2ProxyCompletions1Lt
+  | PostV2ProxyCompletions1Lte
+  | PostV2ProxyCompletions1In
+  | PostV2ProxyCompletions1Nin
+  | PostV2ProxyCompletions1Exists;
+
+/**
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
+ */
+export type PostV2ProxyCompletionsFilterBy =
+  | PostV2ProxyCompletionsFilterByAnd
+  | PostV2ProxyCompletionsFilterByOr
+  | {
+    [k: string]:
+      | PostV2ProxyCompletions1Eq
+      | PostV2ProxyCompletions1Ne
+      | PostV2ProxyCompletions13
+      | PostV2ProxyCompletions1Gte
+      | PostV2ProxyCompletions1Lt
+      | PostV2ProxyCompletions1Lte
+      | PostV2ProxyCompletions1In
+      | PostV2ProxyCompletions1Nin
+      | PostV2ProxyCompletions1Exists;
+  };
+
+/**
+ * Additional search options
+ */
+export type PostV2ProxyCompletionsSearchOptions = {
+  /**
+   * Whether to include the vector in the chunk
+   */
+  includeVectors?: boolean | undefined;
+  /**
+   * Whether to include the metadata in the chunk
+   */
+  includeMetadata?: boolean | undefined;
+  /**
+   * Whether to include the scores in the chunk
+   */
+  includeScores?: boolean | undefined;
+};
+
+export const PostV2ProxyCompletionsProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
+  Openailike: "openailike",
+  Cerebras: "cerebras",
+  Bytedance: "bytedance",
+} as const;
+export type PostV2ProxyCompletionsProvider = ClosedEnum<
+  typeof PostV2ProxyCompletionsProvider
+>;
+
+export const PostV2ProxyCompletionsModelType = {
+  Rerank: "rerank",
+} as const;
+export type PostV2ProxyCompletionsModelType = ClosedEnum<
+  typeof PostV2ProxyCompletionsModelType
+>;
+
+export type PostV2ProxyCompletionsModelParameters = {
+  /**
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+};
+
+/**
+ * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
+ */
+export type PostV2ProxyCompletionsRerankConfig = {
+  enabled?: boolean | undefined;
+  provider?: PostV2ProxyCompletionsProvider | undefined;
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
+   * The name of the model to use
+   */
+  model?: string | undefined;
+  /**
+   * The ID of the model in the database
+   */
+  modelDbId?: string | undefined;
+  modelType?: PostV2ProxyCompletionsModelType | undefined;
+  modelParameters?: PostV2ProxyCompletionsModelParameters | undefined;
+};
+
+export const PostV2ProxyCompletionsProxyProvider = {
+  Cohere: "cohere",
+  Openai: "openai",
+  Anthropic: "anthropic",
+  Huggingface: "huggingface",
+  Replicate: "replicate",
+  Google: "google",
+  GoogleAi: "google-ai",
+  Azure: "azure",
+  Aws: "aws",
+  Anyscale: "anyscale",
+  Perplexity: "perplexity",
+  Groq: "groq",
+  Fal: "fal",
+  Leonardoai: "leonardoai",
+  Nvidia: "nvidia",
+  Jina: "jina",
+  Togetherai: "togetherai",
+  Elevenlabs: "elevenlabs",
+  Litellm: "litellm",
+  Openailike: "openailike",
+  Cerebras: "cerebras",
+  Bytedance: "bytedance",
+} as const;
+export type PostV2ProxyCompletionsProxyProvider = ClosedEnum<
+  typeof PostV2ProxyCompletionsProxyProvider
+>;
+
+/**
+ * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
+ */
+export type PostV2ProxyCompletionsAgenticRagConfig = {
+  modelDbId: string;
+  provider: PostV2ProxyCompletionsProxyProvider;
+  integrationId?: string | null | undefined;
+};
+
+export type PostV2ProxyCompletionsKnowledgeBases = {
+  /**
+   * The number of results to return. If not provided, will default to the knowledge base configured `top_k`.
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold to apply to the search. If not provided, will default to the knowledge base configured `threshold`
+   */
+  threshold?: number | undefined;
+  /**
+   * The type of search to perform. If not provided, will default to the knowledge base configured `retrieval_type`
+   */
+  searchType?: PostV2ProxyCompletionsSearchType | undefined;
+  /**
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://dash.readme.com/project/orqai/v2.0/docs/searching-a-knowledge-base) for more information.
+   */
+  filterBy?:
+    | PostV2ProxyCompletionsFilterByAnd
+    | PostV2ProxyCompletionsFilterByOr
+    | {
+      [k: string]:
+        | PostV2ProxyCompletions1Eq
+        | PostV2ProxyCompletions1Ne
+        | PostV2ProxyCompletions13
+        | PostV2ProxyCompletions1Gte
+        | PostV2ProxyCompletions1Lt
+        | PostV2ProxyCompletions1Lte
+        | PostV2ProxyCompletions1In
+        | PostV2ProxyCompletions1Nin
+        | PostV2ProxyCompletions1Exists;
+    }
+    | undefined;
+  /**
+   * Additional search options
+   */
+  searchOptions?: PostV2ProxyCompletionsSearchOptions | undefined;
+  /**
+   * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
+   */
+  rerankConfig?: PostV2ProxyCompletionsRerankConfig | null | undefined;
+  /**
+   * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
+   */
+  agenticRagConfig?: PostV2ProxyCompletionsAgenticRagConfig | undefined;
+  /**
+   * Unique identifier of the knowledge base to search
+   */
+  knowledgeId: string;
+  /**
+   * The query to use to search the knowledge base. If not provided we will use the last user message from the messages of the requests
+   */
+  query?: string | undefined;
+};
+
+/**
+ * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, contact-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+ */
+export type PostV2ProxyCompletionsOrq = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: PostV2ProxyCompletionsRetry | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<PostV2ProxyCompletionsFallbacks> | undefined;
+  /**
+   * Prompt configuration for the request
+   */
+  prompt?: PostV2ProxyCompletionsPrompt | undefined;
+  /**
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   */
+  contact?: components.PublicContact | undefined;
+  /**
+   * Thread information to group related requests
+   */
+  thread?: PostV2ProxyCompletionsThread | undefined;
+  /**
+   * Values to replace in the prompt messages using {{"{{"}}variableName}} syntax
+   */
+  inputs?: { [k: string]: any } | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: PostV2ProxyCompletionsCache | undefined;
+  knowledgeBases?: Array<PostV2ProxyCompletionsKnowledgeBases> | undefined;
+};
 
 export type PostV2ProxyCompletionsRequestBody = {
   /**
@@ -60,6 +664,10 @@ export type PostV2ProxyCompletionsRequestBody = {
    * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
    */
   user?: string | undefined;
+  /**
+   * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, contact-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
+   */
+  orq?: PostV2ProxyCompletionsOrq | undefined;
   stream?: boolean | undefined;
 };
 
@@ -342,6 +950,3650 @@ export function postV2ProxyCompletionsStopFromJSON(
 }
 
 /** @internal */
+export const PostV2ProxyCompletionsRetry$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsRetry$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsRetry$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsRetry$ {
+  /** @deprecated use `PostV2ProxyCompletionsRetry$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsRetry$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsRetry$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsRetry$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsRetry$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsRetry$Outbound;
+}
+
+export function postV2ProxyCompletionsRetryToJSON(
+  postV2ProxyCompletionsRetry: PostV2ProxyCompletionsRetry,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsRetry$outboundSchema.parse(
+      postV2ProxyCompletionsRetry,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFallbacks$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsFallbacks$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFallbacks$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFallbacks$ {
+  /** @deprecated use `PostV2ProxyCompletionsFallbacks$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsFallbacks$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFallbacks$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsFallbacks$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFallbacks$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFallbacks$Outbound;
+}
+
+export function postV2ProxyCompletionsFallbacksToJSON(
+  postV2ProxyCompletionsFallbacks: PostV2ProxyCompletionsFallbacks,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFallbacks$outboundSchema.parse(
+      postV2ProxyCompletionsFallbacks,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsVersion$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsVersion
+> = z.nativeEnum(PostV2ProxyCompletionsVersion);
+
+/** @internal */
+export const PostV2ProxyCompletionsVersion$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsVersion
+> = PostV2ProxyCompletionsVersion$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsVersion$ {
+  /** @deprecated use `PostV2ProxyCompletionsVersion$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsVersion$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsVersion$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsVersion$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsPrompt$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsPrompt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: PostV2ProxyCompletionsVersion$inboundSchema,
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsPrompt$Outbound = {
+  id: string;
+  version: string;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsPrompt$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsPrompt$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsPrompt
+> = z.object({
+  id: z.string(),
+  version: PostV2ProxyCompletionsVersion$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsPrompt$ {
+  /** @deprecated use `PostV2ProxyCompletionsPrompt$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsPrompt$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsPrompt$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsPrompt$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsPrompt$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsPrompt$Outbound;
+}
+
+export function postV2ProxyCompletionsPromptToJSON(
+  postV2ProxyCompletionsPrompt: PostV2ProxyCompletionsPrompt,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsPrompt$outboundSchema.parse(
+      postV2ProxyCompletionsPrompt,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsPromptFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsPrompt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsPrompt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsPrompt' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsThread$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsThread,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsThread$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsThread$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsThread$ {
+  /** @deprecated use `PostV2ProxyCompletionsThread$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsThread$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsThread$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsThread$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsThread$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsThread$Outbound;
+}
+
+export function postV2ProxyCompletionsThreadToJSON(
+  postV2ProxyCompletionsThread: PostV2ProxyCompletionsThread,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsThread$outboundSchema.parse(
+      postV2ProxyCompletionsThread,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsThreadFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsThread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsThread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsThread' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsType$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsType
+> = z.nativeEnum(PostV2ProxyCompletionsType);
+
+/** @internal */
+export const PostV2ProxyCompletionsType$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsType
+> = PostV2ProxyCompletionsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsType$ {
+  /** @deprecated use `PostV2ProxyCompletionsType$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsType$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsType$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsType$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsCache$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyCompletionsType$inboundSchema,
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsCache$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsCache$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyCompletionsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsCache$ {
+  /** @deprecated use `PostV2ProxyCompletionsCache$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsCache$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsCache$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsCache$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsCache$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsCache$Outbound;
+}
+
+export function postV2ProxyCompletionsCacheToJSON(
+  postV2ProxyCompletionsCache: PostV2ProxyCompletionsCache,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsCache$outboundSchema.parse(
+      postV2ProxyCompletionsCache,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsSearchType$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsSearchType
+> = z.nativeEnum(PostV2ProxyCompletionsSearchType);
+
+/** @internal */
+export const PostV2ProxyCompletionsSearchType$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsSearchType
+> = PostV2ProxyCompletionsSearchType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsSearchType$ {
+  /** @deprecated use `PostV2ProxyCompletionsSearchType$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsSearchType$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsSearchType$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsSearchType$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrExists$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrExists,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  exists: z.boolean(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrExists$Outbound = {
+  exists: boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrExists$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrExists$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrExists
+> = z.object({
+  exists: z.boolean(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrExists$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrExists$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrExists$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrExists$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrExists$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrExists$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrExists$Outbound;
+}
+
+export function postV2ProxyCompletionsOrExistsToJSON(
+  postV2ProxyCompletionsOrExists: PostV2ProxyCompletionsOrExists,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrExists$outboundSchema.parse(
+      postV2ProxyCompletionsOrExists,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrExists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrExists' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyNin$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyNin,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsOrProxyNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyNin$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyNin$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrProxyNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrProxyNin$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyNin$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrProxyNin$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyNin$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrProxyNin$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyNin$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrProxyNin$Outbound;
+}
+
+export function postV2ProxyCompletionsOrProxyNinToJSON(
+  postV2ProxyCompletionsOrProxyNin: PostV2ProxyCompletionsOrProxyNin,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrProxyNin$outboundSchema.parse(
+      postV2ProxyCompletionsOrProxyNin,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrProxyNinFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrProxyNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrProxyNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrProxyNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrNin$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrNin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrNin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrNin$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrNin$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrNin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrNin$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrNin$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrNin$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrNin$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrNin$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrNin$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrNin$Outbound;
+}
+
+export function postV2ProxyCompletionsOrNinToJSON(
+  postV2ProxyCompletionsOrNin: PostV2ProxyCompletionsOrNin,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrNin$outboundSchema.parse(
+      postV2ProxyCompletionsOrNin,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrNinFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyIn$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyIn,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsOrProxyIn$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyIn$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyIn$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrProxyIn
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrProxyIn$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyIn$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrProxyIn$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyIn$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrProxyIn$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyIn$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrProxyIn$Outbound;
+}
+
+export function postV2ProxyCompletionsOrProxyInToJSON(
+  postV2ProxyCompletionsOrProxyIn: PostV2ProxyCompletionsOrProxyIn,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrProxyIn$outboundSchema.parse(
+      postV2ProxyCompletionsOrProxyIn,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrProxyInFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrProxyIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrProxyIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrProxyIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrIn$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrIn,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrIn$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrIn$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrIn$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrIn
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrIn$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrIn$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrIn$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrIn$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrIn$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrIn$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrIn$Outbound;
+}
+
+export function postV2ProxyCompletionsOrInToJSON(
+  postV2ProxyCompletionsOrIn: PostV2ProxyCompletionsOrIn,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrIn$outboundSchema.parse(postV2ProxyCompletionsOrIn),
+  );
+}
+
+export function postV2ProxyCompletionsOrInFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrLte$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lte: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrLte$Outbound = {
+  lte: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrLte$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrLte$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrLte
+> = z.object({
+  lte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrLte$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrLte$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrLte$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrLte$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrLte$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrLte$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrLte$Outbound;
+}
+
+export function postV2ProxyCompletionsOrLteToJSON(
+  postV2ProxyCompletionsOrLte: PostV2ProxyCompletionsOrLte,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrLte$outboundSchema.parse(
+      postV2ProxyCompletionsOrLte,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrLteFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrLt$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lt: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrLt$Outbound = {
+  lt: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrLt$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrLt$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrLt
+> = z.object({
+  lt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrLt$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrLt$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrLt$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrLt$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrLt$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrLt$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrLt$Outbound;
+}
+
+export function postV2ProxyCompletionsOrLtToJSON(
+  postV2ProxyCompletionsOrLt: PostV2ProxyCompletionsOrLt,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrLt$outboundSchema.parse(postV2ProxyCompletionsOrLt),
+  );
+}
+
+export function postV2ProxyCompletionsOrLtFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrGte$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gte: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrGte$Outbound = {
+  gte: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrGte$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrGte$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrGte
+> = z.object({
+  gte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrGte$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrGte$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrGte$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrGte$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrGte$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrGte$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrGte$Outbound;
+}
+
+export function postV2ProxyCompletionsOrGteToJSON(
+  postV2ProxyCompletionsOrGte: PostV2ProxyCompletionsOrGte,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrGte$outboundSchema.parse(
+      postV2ProxyCompletionsOrGte,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrGteFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOr3$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOr3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gt: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOr3$Outbound = {
+  gt: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOr3$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOr3$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOr3
+> = z.object({
+  gt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOr3$ {
+  /** @deprecated use `PostV2ProxyCompletionsOr3$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOr3$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOr3$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOr3$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOr3$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOr3$Outbound;
+}
+
+export function postV2ProxyCompletionsOr3ToJSON(
+  postV2ProxyCompletionsOr3: PostV2ProxyCompletionsOr3,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOr3$outboundSchema.parse(postV2ProxyCompletionsOr3),
+  );
+}
+
+export function postV2ProxyCompletionsOr3FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOr3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOr3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOr3' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyNe$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyNe,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsOrProxyNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyNe$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyNe$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrProxyNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrProxyNe$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyNe$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrProxyNe$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyNe$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrProxyNe$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyNe$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrProxyNe$Outbound;
+}
+
+export function postV2ProxyCompletionsOrProxyNeToJSON(
+  postV2ProxyCompletionsOrProxyNe: PostV2ProxyCompletionsOrProxyNe,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrProxyNe$outboundSchema.parse(
+      postV2ProxyCompletionsOrProxyNe,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrProxyNeFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrProxyNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrProxyNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrProxyNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrNe$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrNe,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrNe$Outbound = {
+  ne: string | number | boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrNe$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrNe$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrNe
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrNe$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrNe$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrNe$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrNe$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrNe$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrNe$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrNe$Outbound;
+}
+
+export function postV2ProxyCompletionsOrNeToJSON(
+  postV2ProxyCompletionsOrNe: PostV2ProxyCompletionsOrNe,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrNe$outboundSchema.parse(postV2ProxyCompletionsOrNe),
+  );
+}
+
+export function postV2ProxyCompletionsOrNeFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyEq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyEq,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsOrProxyEq$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsOrProxyEq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrProxyEq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrProxyEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrProxyEq$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyEq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrProxyEq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyEq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrProxyEq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrProxyEq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrProxyEq$Outbound;
+}
+
+export function postV2ProxyCompletionsOrProxyEqToJSON(
+  postV2ProxyCompletionsOrProxyEq: PostV2ProxyCompletionsOrProxyEq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrProxyEq$outboundSchema.parse(
+      postV2ProxyCompletionsOrProxyEq,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsOrProxyEqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrProxyEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrProxyEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrProxyEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrEq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrEq$Outbound = {
+  eq: string | number | boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrEq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrEq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrEq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrEq$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrEq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrEq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrEq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrEq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrEq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrEq$Outbound;
+}
+
+export function postV2ProxyCompletionsOrEqToJSON(
+  postV2ProxyCompletionsOrEq: PostV2ProxyCompletionsOrEq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrEq$outboundSchema.parse(postV2ProxyCompletionsOrEq),
+  );
+}
+
+export function postV2ProxyCompletionsOrEqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByProxyOr$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByProxyOr,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletionsOrEq$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrNe$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOr3$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrGte$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrLt$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrLte$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrIn$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrNin$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrExists$inboundSchema),
+]);
+
+/** @internal */
+export type PostV2ProxyCompletionsFilterByProxyOr$Outbound =
+  | PostV2ProxyCompletionsOrEq$Outbound
+  | PostV2ProxyCompletionsOrNe$Outbound
+  | PostV2ProxyCompletionsOr3$Outbound
+  | PostV2ProxyCompletionsOrGte$Outbound
+  | PostV2ProxyCompletionsOrLt$Outbound
+  | PostV2ProxyCompletionsOrLte$Outbound
+  | PostV2ProxyCompletionsOrIn$Outbound
+  | PostV2ProxyCompletionsOrNin$Outbound
+  | PostV2ProxyCompletionsOrExists$Outbound;
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByProxyOr$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByProxyOr$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFilterByProxyOr
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletionsOrEq$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrNe$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOr3$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrGte$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrLt$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrLte$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrIn$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrNin$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsOrExists$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFilterByProxyOr$ {
+  /** @deprecated use `PostV2ProxyCompletionsFilterByProxyOr$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsFilterByProxyOr$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByProxyOr$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsFilterByProxyOr$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByProxyOr$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFilterByProxyOr$Outbound;
+}
+
+export function postV2ProxyCompletionsFilterByProxyOrToJSON(
+  postV2ProxyCompletionsFilterByProxyOr: PostV2ProxyCompletionsFilterByProxyOr,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFilterByProxyOr$outboundSchema.parse(
+      postV2ProxyCompletionsFilterByProxyOr,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFilterByProxyOrFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFilterByProxyOr, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsFilterByProxyOr$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFilterByProxyOr' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByOr$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByOr,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  or: z.array(
+    z.record(z.union([
+      z.lazy(() => PostV2ProxyCompletionsOrEq$inboundSchema),
+      z.lazy(() =>
+        PostV2ProxyCompletionsOrNe$inboundSchema
+      ),
+      z.lazy(() => PostV2ProxyCompletionsOr3$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrGte$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrLt$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrLte$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrIn$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrNin$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrExists$inboundSchema),
+    ])),
+  ),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsFilterByOr$Outbound = {
+  or: Array<
+    {
+      [k: string]:
+        | PostV2ProxyCompletionsOrEq$Outbound
+        | PostV2ProxyCompletionsOrNe$Outbound
+        | PostV2ProxyCompletionsOr3$Outbound
+        | PostV2ProxyCompletionsOrGte$Outbound
+        | PostV2ProxyCompletionsOrLt$Outbound
+        | PostV2ProxyCompletionsOrLte$Outbound
+        | PostV2ProxyCompletionsOrIn$Outbound
+        | PostV2ProxyCompletionsOrNin$Outbound
+        | PostV2ProxyCompletionsOrExists$Outbound;
+    }
+  >;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByOr$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByOr$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFilterByOr
+> = z.object({
+  or: z.array(
+    z.record(z.union([
+      z.lazy(() => PostV2ProxyCompletionsOrEq$outboundSchema),
+      z.lazy(() =>
+        PostV2ProxyCompletionsOrNe$outboundSchema
+      ),
+      z.lazy(() => PostV2ProxyCompletionsOr3$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrGte$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrLt$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrLte$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrIn$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrNin$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsOrExists$outboundSchema),
+    ])),
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFilterByOr$ {
+  /** @deprecated use `PostV2ProxyCompletionsFilterByOr$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsFilterByOr$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByOr$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsFilterByOr$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByOr$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFilterByOr$Outbound;
+}
+
+export function postV2ProxyCompletionsFilterByOrToJSON(
+  postV2ProxyCompletionsFilterByOr: PostV2ProxyCompletionsFilterByOr,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFilterByOr$outboundSchema.parse(
+      postV2ProxyCompletionsFilterByOr,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFilterByOrFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFilterByOr, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsFilterByOr$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFilterByOr' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndExists$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndExists,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  exists: z.boolean(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndExists$Outbound = {
+  exists: boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndExists$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndExists$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndExists
+> = z.object({
+  exists: z.boolean(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndExists$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndExists$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndExists$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndExists$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndExists$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndExists$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndExists$Outbound;
+}
+
+export function postV2ProxyCompletionsAndExistsToJSON(
+  postV2ProxyCompletionsAndExists: PostV2ProxyCompletionsAndExists,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndExists$outboundSchema.parse(
+      postV2ProxyCompletionsAndExists,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndExists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndExists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndExists' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyNin$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyNin,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsAndProxyNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyNin$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyNin$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndProxyNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndProxyNin$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyNin$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndProxyNin$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyNin$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsAndProxyNin$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyNin$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndProxyNin$Outbound;
+}
+
+export function postV2ProxyCompletionsAndProxyNinToJSON(
+  postV2ProxyCompletionsAndProxyNin: PostV2ProxyCompletionsAndProxyNin,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndProxyNin$outboundSchema.parse(
+      postV2ProxyCompletionsAndProxyNin,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndProxyNinFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndProxyNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndProxyNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndProxyNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndNin$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndNin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndNin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndNin$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndNin$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndNin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndNin$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndNin$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndNin$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndNin$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndNin$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndNin$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndNin$Outbound;
+}
+
+export function postV2ProxyCompletionsAndNinToJSON(
+  postV2ProxyCompletionsAndNin: PostV2ProxyCompletionsAndNin,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndNin$outboundSchema.parse(
+      postV2ProxyCompletionsAndNin,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndNinFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyIn$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyIn,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsAndProxyIn$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyIn$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyIn$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndProxyIn
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndProxyIn$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyIn$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndProxyIn$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyIn$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndProxyIn$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyIn$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndProxyIn$Outbound;
+}
+
+export function postV2ProxyCompletionsAndProxyInToJSON(
+  postV2ProxyCompletionsAndProxyIn: PostV2ProxyCompletionsAndProxyIn,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndProxyIn$outboundSchema.parse(
+      postV2ProxyCompletionsAndProxyIn,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndProxyInFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndProxyIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndProxyIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndProxyIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndIn$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndIn,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndIn$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndIn$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndIn$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndIn
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndIn$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndIn$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndIn$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndIn$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndIn$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndIn$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndIn$Outbound;
+}
+
+export function postV2ProxyCompletionsAndInToJSON(
+  postV2ProxyCompletionsAndIn: PostV2ProxyCompletionsAndIn,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndIn$outboundSchema.parse(
+      postV2ProxyCompletionsAndIn,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndInFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndLte$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndLte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lte: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndLte$Outbound = {
+  lte: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndLte$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndLte$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndLte
+> = z.object({
+  lte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndLte$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndLte$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndLte$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndLte$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndLte$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndLte$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndLte$Outbound;
+}
+
+export function postV2ProxyCompletionsAndLteToJSON(
+  postV2ProxyCompletionsAndLte: PostV2ProxyCompletionsAndLte,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndLte$outboundSchema.parse(
+      postV2ProxyCompletionsAndLte,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndLteFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndLte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndLte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndLte' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndLt$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndLt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lt: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndLt$Outbound = {
+  lt: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndLt$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndLt$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndLt
+> = z.object({
+  lt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndLt$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndLt$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndLt$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndLt$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndLt$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndLt$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndLt$Outbound;
+}
+
+export function postV2ProxyCompletionsAndLtToJSON(
+  postV2ProxyCompletionsAndLt: PostV2ProxyCompletionsAndLt,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndLt$outboundSchema.parse(
+      postV2ProxyCompletionsAndLt,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndLtFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndLt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndLt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndLt' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndGte$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndGte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gte: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndGte$Outbound = {
+  gte: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndGte$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndGte$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndGte
+> = z.object({
+  gte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndGte$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndGte$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndGte$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndGte$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndGte$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndGte$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndGte$Outbound;
+}
+
+export function postV2ProxyCompletionsAndGteToJSON(
+  postV2ProxyCompletionsAndGte: PostV2ProxyCompletionsAndGte,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndGte$outboundSchema.parse(
+      postV2ProxyCompletionsAndGte,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndGteFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndGte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndGte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndGte' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAnd3$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAnd3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gt: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAnd3$Outbound = {
+  gt: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAnd3$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAnd3$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAnd3
+> = z.object({
+  gt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAnd3$ {
+  /** @deprecated use `PostV2ProxyCompletionsAnd3$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAnd3$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAnd3$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAnd3$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAnd3$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAnd3$Outbound;
+}
+
+export function postV2ProxyCompletionsAnd3ToJSON(
+  postV2ProxyCompletionsAnd3: PostV2ProxyCompletionsAnd3,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAnd3$outboundSchema.parse(postV2ProxyCompletionsAnd3),
+  );
+}
+
+export function postV2ProxyCompletionsAnd3FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAnd3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAnd3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAnd3' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyNe$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyNe,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsAndProxyNe$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyNe$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyNe$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndProxyNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndProxyNe$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyNe$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndProxyNe$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyNe$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndProxyNe$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyNe$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndProxyNe$Outbound;
+}
+
+export function postV2ProxyCompletionsAndProxyNeToJSON(
+  postV2ProxyCompletionsAndProxyNe: PostV2ProxyCompletionsAndProxyNe,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndProxyNe$outboundSchema.parse(
+      postV2ProxyCompletionsAndProxyNe,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndProxyNeFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndProxyNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndProxyNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndProxyNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndNe$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndNe,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndNe$Outbound = {
+  ne: string | number | boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndNe$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndNe$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndNe
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndNe$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndNe$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndNe$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndNe$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndNe$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndNe$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndNe$Outbound;
+}
+
+export function postV2ProxyCompletionsAndNeToJSON(
+  postV2ProxyCompletionsAndNe: PostV2ProxyCompletionsAndNe,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndNe$outboundSchema.parse(
+      postV2ProxyCompletionsAndNe,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndNeFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyEq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyEq,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletionsAndProxyEq$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletionsAndProxyEq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndProxyEq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndProxyEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndProxyEq$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyEq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndProxyEq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyEq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndProxyEq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndProxyEq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndProxyEq$Outbound;
+}
+
+export function postV2ProxyCompletionsAndProxyEqToJSON(
+  postV2ProxyCompletionsAndProxyEq: PostV2ProxyCompletionsAndProxyEq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndProxyEq$outboundSchema.parse(
+      postV2ProxyCompletionsAndProxyEq,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndProxyEqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndProxyEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndProxyEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndProxyEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAndEq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndEq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAndEq$Outbound = {
+  eq: string | number | boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAndEq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAndEq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAndEq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAndEq$ {
+  /** @deprecated use `PostV2ProxyCompletionsAndEq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsAndEq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndEq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsAndEq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAndEq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAndEq$Outbound;
+}
+
+export function postV2ProxyCompletionsAndEqToJSON(
+  postV2ProxyCompletionsAndEq: PostV2ProxyCompletionsAndEq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAndEq$outboundSchema.parse(
+      postV2ProxyCompletionsAndEq,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAndEqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAndEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsAndEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAndEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByProxyAnd$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByProxyAnd,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletionsAndEq$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndNe$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAnd3$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndGte$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndLt$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndLte$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndIn$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndNin$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndExists$inboundSchema),
+]);
+
+/** @internal */
+export type PostV2ProxyCompletionsFilterByProxyAnd$Outbound =
+  | PostV2ProxyCompletionsAndEq$Outbound
+  | PostV2ProxyCompletionsAndNe$Outbound
+  | PostV2ProxyCompletionsAnd3$Outbound
+  | PostV2ProxyCompletionsAndGte$Outbound
+  | PostV2ProxyCompletionsAndLt$Outbound
+  | PostV2ProxyCompletionsAndLte$Outbound
+  | PostV2ProxyCompletionsAndIn$Outbound
+  | PostV2ProxyCompletionsAndNin$Outbound
+  | PostV2ProxyCompletionsAndExists$Outbound;
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByProxyAnd$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByProxyAnd$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFilterByProxyAnd
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletionsAndEq$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndNe$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAnd3$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndGte$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndLt$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndLte$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndIn$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndNin$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsAndExists$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFilterByProxyAnd$ {
+  /** @deprecated use `PostV2ProxyCompletionsFilterByProxyAnd$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsFilterByProxyAnd$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByProxyAnd$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsFilterByProxyAnd$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByProxyAnd$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFilterByProxyAnd$Outbound;
+}
+
+export function postV2ProxyCompletionsFilterByProxyAndToJSON(
+  postV2ProxyCompletionsFilterByProxyAnd:
+    PostV2ProxyCompletionsFilterByProxyAnd,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFilterByProxyAnd$outboundSchema.parse(
+      postV2ProxyCompletionsFilterByProxyAnd,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFilterByProxyAndFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFilterByProxyAnd, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsFilterByProxyAnd$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFilterByProxyAnd' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByAnd$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByAnd,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  and: z.array(
+    z.record(z.union([
+      z.lazy(() => PostV2ProxyCompletionsAndEq$inboundSchema),
+      z.lazy(() =>
+        PostV2ProxyCompletionsAndNe$inboundSchema
+      ),
+      z.lazy(() => PostV2ProxyCompletionsAnd3$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndGte$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndLt$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndLte$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndIn$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndNin$inboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndExists$inboundSchema),
+    ])),
+  ),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsFilterByAnd$Outbound = {
+  and: Array<
+    {
+      [k: string]:
+        | PostV2ProxyCompletionsAndEq$Outbound
+        | PostV2ProxyCompletionsAndNe$Outbound
+        | PostV2ProxyCompletionsAnd3$Outbound
+        | PostV2ProxyCompletionsAndGte$Outbound
+        | PostV2ProxyCompletionsAndLt$Outbound
+        | PostV2ProxyCompletionsAndLte$Outbound
+        | PostV2ProxyCompletionsAndIn$Outbound
+        | PostV2ProxyCompletionsAndNin$Outbound
+        | PostV2ProxyCompletionsAndExists$Outbound;
+    }
+  >;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterByAnd$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterByAnd$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFilterByAnd
+> = z.object({
+  and: z.array(
+    z.record(z.union([
+      z.lazy(() => PostV2ProxyCompletionsAndEq$outboundSchema),
+      z.lazy(() =>
+        PostV2ProxyCompletionsAndNe$outboundSchema
+      ),
+      z.lazy(() => PostV2ProxyCompletionsAnd3$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndGte$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndLt$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndLte$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndIn$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndNin$outboundSchema),
+      z.lazy(() => PostV2ProxyCompletionsAndExists$outboundSchema),
+    ])),
+  ),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFilterByAnd$ {
+  /** @deprecated use `PostV2ProxyCompletionsFilterByAnd$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsFilterByAnd$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByAnd$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsFilterByAnd$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterByAnd$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFilterByAnd$Outbound;
+}
+
+export function postV2ProxyCompletionsFilterByAndToJSON(
+  postV2ProxyCompletionsFilterByAnd: PostV2ProxyCompletionsFilterByAnd,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFilterByAnd$outboundSchema.parse(
+      postV2ProxyCompletionsFilterByAnd,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFilterByAndFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFilterByAnd, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsFilterByAnd$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFilterByAnd' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Exists$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Exists,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  exists: z.boolean(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Exists$Outbound = {
+  exists: boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Exists$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Exists$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Exists
+> = z.object({
+  exists: z.boolean(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Exists$ {
+  /** @deprecated use `PostV2ProxyCompletions1Exists$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Exists$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Exists$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Exists$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Exists$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Exists$Outbound;
+}
+
+export function postV2ProxyCompletions1ExistsToJSON(
+  postV2ProxyCompletions1Exists: PostV2ProxyCompletions1Exists,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Exists$outboundSchema.parse(
+      postV2ProxyCompletions1Exists,
+    ),
+  );
+}
+
+export function postV2ProxyCompletions1ExistsFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Exists, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Exists$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Exists' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyNin$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyNin,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletions1ProxyNin$Outbound =
+  | string
+  | number
+  | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyNin$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyNin$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1ProxyNin
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1ProxyNin$ {
+  /** @deprecated use `PostV2ProxyCompletions1ProxyNin$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1ProxyNin$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyNin$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1ProxyNin$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyNin$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1ProxyNin$Outbound;
+}
+
+export function postV2ProxyCompletions1ProxyNinToJSON(
+  postV2ProxyCompletions1ProxyNin: PostV2ProxyCompletions1ProxyNin,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1ProxyNin$outboundSchema.parse(
+      postV2ProxyCompletions1ProxyNin,
+    ),
+  );
+}
+
+export function postV2ProxyCompletions1ProxyNinFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1ProxyNin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1ProxyNin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1ProxyNin' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Nin$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Nin,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Nin$Outbound = {
+  nin: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Nin$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Nin$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Nin
+> = z.object({
+  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Nin$ {
+  /** @deprecated use `PostV2ProxyCompletions1Nin$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Nin$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Nin$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Nin$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Nin$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Nin$Outbound;
+}
+
+export function postV2ProxyCompletions1NinToJSON(
+  postV2ProxyCompletions1Nin: PostV2ProxyCompletions1Nin,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Nin$outboundSchema.parse(postV2ProxyCompletions1Nin),
+  );
+}
+
+export function postV2ProxyCompletions1NinFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Nin, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Nin$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Nin' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyIn$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyIn,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletions1ProxyIn$Outbound = string | number | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyIn$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyIn$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1ProxyIn
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1ProxyIn$ {
+  /** @deprecated use `PostV2ProxyCompletions1ProxyIn$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1ProxyIn$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyIn$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1ProxyIn$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyIn$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1ProxyIn$Outbound;
+}
+
+export function postV2ProxyCompletions1ProxyInToJSON(
+  postV2ProxyCompletions1ProxyIn: PostV2ProxyCompletions1ProxyIn,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1ProxyIn$outboundSchema.parse(
+      postV2ProxyCompletions1ProxyIn,
+    ),
+  );
+}
+
+export function postV2ProxyCompletions1ProxyInFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1ProxyIn, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1ProxyIn$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1ProxyIn' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1In$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1In,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1In$Outbound = {
+  in: Array<string | number | boolean>;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1In$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1In$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1In
+> = z.object({
+  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1In$ {
+  /** @deprecated use `PostV2ProxyCompletions1In$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1In$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1In$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1In$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1In$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1In$Outbound;
+}
+
+export function postV2ProxyCompletions1InToJSON(
+  postV2ProxyCompletions1In: PostV2ProxyCompletions1In,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1In$outboundSchema.parse(postV2ProxyCompletions1In),
+  );
+}
+
+export function postV2ProxyCompletions1InFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1In, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1In$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1In' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Lte$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Lte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lte: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Lte$Outbound = {
+  lte: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Lte$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Lte$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Lte
+> = z.object({
+  lte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Lte$ {
+  /** @deprecated use `PostV2ProxyCompletions1Lte$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Lte$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Lte$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Lte$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Lte$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Lte$Outbound;
+}
+
+export function postV2ProxyCompletions1LteToJSON(
+  postV2ProxyCompletions1Lte: PostV2ProxyCompletions1Lte,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Lte$outboundSchema.parse(postV2ProxyCompletions1Lte),
+  );
+}
+
+export function postV2ProxyCompletions1LteFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Lte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Lte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Lte' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Lt$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Lt,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  lt: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Lt$Outbound = {
+  lt: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Lt$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Lt$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Lt
+> = z.object({
+  lt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Lt$ {
+  /** @deprecated use `PostV2ProxyCompletions1Lt$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Lt$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Lt$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Lt$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Lt$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Lt$Outbound;
+}
+
+export function postV2ProxyCompletions1LtToJSON(
+  postV2ProxyCompletions1Lt: PostV2ProxyCompletions1Lt,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Lt$outboundSchema.parse(postV2ProxyCompletions1Lt),
+  );
+}
+
+export function postV2ProxyCompletions1LtFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Lt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Lt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Lt' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Gte$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Gte,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gte: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Gte$Outbound = {
+  gte: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Gte$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Gte$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Gte
+> = z.object({
+  gte: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Gte$ {
+  /** @deprecated use `PostV2ProxyCompletions1Gte$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Gte$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Gte$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Gte$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Gte$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Gte$Outbound;
+}
+
+export function postV2ProxyCompletions1GteToJSON(
+  postV2ProxyCompletions1Gte: PostV2ProxyCompletions1Gte,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Gte$outboundSchema.parse(postV2ProxyCompletions1Gte),
+  );
+}
+
+export function postV2ProxyCompletions1GteFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Gte, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Gte$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Gte' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions13$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions13,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  gt: z.number(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions13$Outbound = {
+  gt: number;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions13$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions13$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions13
+> = z.object({
+  gt: z.number(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions13$ {
+  /** @deprecated use `PostV2ProxyCompletions13$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions13$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions13$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions13$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions13$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions13$Outbound;
+}
+
+export function postV2ProxyCompletions13ToJSON(
+  postV2ProxyCompletions13: PostV2ProxyCompletions13,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions13$outboundSchema.parse(postV2ProxyCompletions13),
+  );
+}
+
+export function postV2ProxyCompletions13FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions13, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions13' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyNe$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyNe,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletions1ProxyNe$Outbound = string | number | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyNe$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyNe$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1ProxyNe
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1ProxyNe$ {
+  /** @deprecated use `PostV2ProxyCompletions1ProxyNe$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1ProxyNe$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyNe$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1ProxyNe$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyNe$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1ProxyNe$Outbound;
+}
+
+export function postV2ProxyCompletions1ProxyNeToJSON(
+  postV2ProxyCompletions1ProxyNe: PostV2ProxyCompletions1ProxyNe,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1ProxyNe$outboundSchema.parse(
+      postV2ProxyCompletions1ProxyNe,
+    ),
+  );
+}
+
+export function postV2ProxyCompletions1ProxyNeFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1ProxyNe, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1ProxyNe$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1ProxyNe' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Ne$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Ne,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Ne$Outbound = {
+  ne: string | number | boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Ne$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Ne$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Ne
+> = z.object({
+  ne: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Ne$ {
+  /** @deprecated use `PostV2ProxyCompletions1Ne$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Ne$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Ne$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Ne$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Ne$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Ne$Outbound;
+}
+
+export function postV2ProxyCompletions1NeToJSON(
+  postV2ProxyCompletions1Ne: PostV2ProxyCompletions1Ne,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Ne$outboundSchema.parse(postV2ProxyCompletions1Ne),
+  );
+}
+
+export function postV2ProxyCompletions1NeFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Ne, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Ne$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Ne' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyEq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyEq,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/** @internal */
+export type PostV2ProxyCompletions1ProxyEq$Outbound = string | number | boolean;
+
+/** @internal */
+export const PostV2ProxyCompletions1ProxyEq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1ProxyEq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1ProxyEq
+> = z.union([z.string(), z.number(), z.boolean()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1ProxyEq$ {
+  /** @deprecated use `PostV2ProxyCompletions1ProxyEq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1ProxyEq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyEq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1ProxyEq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1ProxyEq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1ProxyEq$Outbound;
+}
+
+export function postV2ProxyCompletions1ProxyEqToJSON(
+  postV2ProxyCompletions1ProxyEq: PostV2ProxyCompletions1ProxyEq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1ProxyEq$outboundSchema.parse(
+      postV2ProxyCompletions1ProxyEq,
+    ),
+  );
+}
+
+export function postV2ProxyCompletions1ProxyEqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1ProxyEq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1ProxyEq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1ProxyEq' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletions1Eq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Eq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/** @internal */
+export type PostV2ProxyCompletions1Eq$Outbound = {
+  eq: string | number | boolean;
+};
+
+/** @internal */
+export const PostV2ProxyCompletions1Eq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletions1Eq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletions1Eq
+> = z.object({
+  eq: z.union([z.string(), z.number(), z.boolean()]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletions1Eq$ {
+  /** @deprecated use `PostV2ProxyCompletions1Eq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletions1Eq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Eq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletions1Eq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletions1Eq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletions1Eq$Outbound;
+}
+
+export function postV2ProxyCompletions1EqToJSON(
+  postV2ProxyCompletions1Eq: PostV2ProxyCompletions1Eq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletions1Eq$outboundSchema.parse(postV2ProxyCompletions1Eq),
+  );
+}
+
+export function postV2ProxyCompletions1EqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletions1Eq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletions1Eq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletions1Eq' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterBy1$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterBy1,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletions1Eq$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Ne$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions13$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Gte$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Lt$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Lte$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1In$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Nin$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Exists$inboundSchema),
+]);
+
+/** @internal */
+export type PostV2ProxyCompletionsFilterBy1$Outbound =
+  | PostV2ProxyCompletions1Eq$Outbound
+  | PostV2ProxyCompletions1Ne$Outbound
+  | PostV2ProxyCompletions13$Outbound
+  | PostV2ProxyCompletions1Gte$Outbound
+  | PostV2ProxyCompletions1Lt$Outbound
+  | PostV2ProxyCompletions1Lte$Outbound
+  | PostV2ProxyCompletions1In$Outbound
+  | PostV2ProxyCompletions1Nin$Outbound
+  | PostV2ProxyCompletions1Exists$Outbound;
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterBy1$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterBy1$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFilterBy1
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletions1Eq$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Ne$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions13$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Gte$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Lt$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Lte$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1In$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Nin$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletions1Exists$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFilterBy1$ {
+  /** @deprecated use `PostV2ProxyCompletionsFilterBy1$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsFilterBy1$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterBy1$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsFilterBy1$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterBy1$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFilterBy1$Outbound;
+}
+
+export function postV2ProxyCompletionsFilterBy1ToJSON(
+  postV2ProxyCompletionsFilterBy1: PostV2ProxyCompletionsFilterBy1,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFilterBy1$outboundSchema.parse(
+      postV2ProxyCompletionsFilterBy1,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFilterBy1FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFilterBy1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsFilterBy1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFilterBy1' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterBy$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterBy,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletionsFilterByAnd$inboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsFilterByOr$inboundSchema),
+  z.record(z.union([
+    z.lazy(() => PostV2ProxyCompletions1Eq$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Ne$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions13$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Gte$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Lt$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Lte$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1In$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Nin$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Exists$inboundSchema),
+  ])),
+]);
+
+/** @internal */
+export type PostV2ProxyCompletionsFilterBy$Outbound =
+  | PostV2ProxyCompletionsFilterByAnd$Outbound
+  | PostV2ProxyCompletionsFilterByOr$Outbound
+  | {
+    [k: string]:
+      | PostV2ProxyCompletions1Eq$Outbound
+      | PostV2ProxyCompletions1Ne$Outbound
+      | PostV2ProxyCompletions13$Outbound
+      | PostV2ProxyCompletions1Gte$Outbound
+      | PostV2ProxyCompletions1Lt$Outbound
+      | PostV2ProxyCompletions1Lte$Outbound
+      | PostV2ProxyCompletions1In$Outbound
+      | PostV2ProxyCompletions1Nin$Outbound
+      | PostV2ProxyCompletions1Exists$Outbound;
+  };
+
+/** @internal */
+export const PostV2ProxyCompletionsFilterBy$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsFilterBy$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsFilterBy
+> = z.union([
+  z.lazy(() => PostV2ProxyCompletionsFilterByAnd$outboundSchema),
+  z.lazy(() => PostV2ProxyCompletionsFilterByOr$outboundSchema),
+  z.record(z.union([
+    z.lazy(() => PostV2ProxyCompletions1Eq$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Ne$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions13$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Gte$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Lt$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Lte$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1In$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Nin$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletions1Exists$outboundSchema),
+  ])),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsFilterBy$ {
+  /** @deprecated use `PostV2ProxyCompletionsFilterBy$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsFilterBy$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterBy$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsFilterBy$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsFilterBy$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsFilterBy$Outbound;
+}
+
+export function postV2ProxyCompletionsFilterByToJSON(
+  postV2ProxyCompletionsFilterBy: PostV2ProxyCompletionsFilterBy,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsFilterBy$outboundSchema.parse(
+      postV2ProxyCompletionsFilterBy,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsFilterByFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsFilterBy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsFilterBy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsFilterBy' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsSearchOptions$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsSearchOptions,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  include_vectors: z.boolean().optional(),
+  include_metadata: z.boolean().optional(),
+  include_scores: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "include_vectors": "includeVectors",
+    "include_metadata": "includeMetadata",
+    "include_scores": "includeScores",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsSearchOptions$Outbound = {
+  include_vectors?: boolean | undefined;
+  include_metadata?: boolean | undefined;
+  include_scores?: boolean | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsSearchOptions$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsSearchOptions$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsSearchOptions
+> = z.object({
+  includeVectors: z.boolean().optional(),
+  includeMetadata: z.boolean().optional(),
+  includeScores: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    includeVectors: "include_vectors",
+    includeMetadata: "include_metadata",
+    includeScores: "include_scores",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsSearchOptions$ {
+  /** @deprecated use `PostV2ProxyCompletionsSearchOptions$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsSearchOptions$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsSearchOptions$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsSearchOptions$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsSearchOptions$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsSearchOptions$Outbound;
+}
+
+export function postV2ProxyCompletionsSearchOptionsToJSON(
+  postV2ProxyCompletionsSearchOptions: PostV2ProxyCompletionsSearchOptions,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsSearchOptions$outboundSchema.parse(
+      postV2ProxyCompletionsSearchOptions,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsSearchOptionsFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsSearchOptions, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsSearchOptions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsSearchOptions' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsProvider$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsProvider
+> = z.nativeEnum(PostV2ProxyCompletionsProvider);
+
+/** @internal */
+export const PostV2ProxyCompletionsProvider$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsProvider
+> = PostV2ProxyCompletionsProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsProvider$ {
+  /** @deprecated use `PostV2ProxyCompletionsProvider$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsProvider$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsProvider$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsProvider$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsModelType$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsModelType
+> = z.nativeEnum(PostV2ProxyCompletionsModelType);
+
+/** @internal */
+export const PostV2ProxyCompletionsModelType$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsModelType
+> = PostV2ProxyCompletionsModelType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsModelType$ {
+  /** @deprecated use `PostV2ProxyCompletionsModelType$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsModelType$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsModelType$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsModelType$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsModelParameters$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsModelParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  threshold: z.number().optional(),
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsModelParameters$Outbound = {
+  threshold?: number | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsModelParameters$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsModelParameters$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsModelParameters
+> = z.object({
+  threshold: z.number().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsModelParameters$ {
+  /** @deprecated use `PostV2ProxyCompletionsModelParameters$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsModelParameters$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsModelParameters$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsModelParameters$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsModelParameters$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsModelParameters$Outbound;
+}
+
+export function postV2ProxyCompletionsModelParametersToJSON(
+  postV2ProxyCompletionsModelParameters: PostV2ProxyCompletionsModelParameters,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsModelParameters$outboundSchema.parse(
+      postV2ProxyCompletionsModelParameters,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsModelParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsRerankConfig$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsRerankConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: z.boolean().optional(),
+  provider: PostV2ProxyCompletionsProvider$inboundSchema.optional(),
+  top_k: z.number().int().optional(),
+  model: z.string().optional(),
+  model_db_id: z.string().optional(),
+  model_type: PostV2ProxyCompletionsModelType$inboundSchema.optional(),
+  model_parameters: z.lazy(() =>
+    PostV2ProxyCompletionsModelParameters$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "top_k": "topK",
+    "model_db_id": "modelDbId",
+    "model_type": "modelType",
+    "model_parameters": "modelParameters",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsRerankConfig$Outbound = {
+  enabled?: boolean | undefined;
+  provider?: string | undefined;
+  top_k?: number | undefined;
+  model?: string | undefined;
+  model_db_id?: string | undefined;
+  model_type?: string | undefined;
+  model_parameters?: PostV2ProxyCompletionsModelParameters$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsRerankConfig$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsRerankConfig$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsRerankConfig
+> = z.object({
+  enabled: z.boolean().optional(),
+  provider: PostV2ProxyCompletionsProvider$outboundSchema.optional(),
+  topK: z.number().int().optional(),
+  model: z.string().optional(),
+  modelDbId: z.string().optional(),
+  modelType: PostV2ProxyCompletionsModelType$outboundSchema.optional(),
+  modelParameters: z.lazy(() =>
+    PostV2ProxyCompletionsModelParameters$outboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    topK: "top_k",
+    modelDbId: "model_db_id",
+    modelType: "model_type",
+    modelParameters: "model_parameters",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsRerankConfig$ {
+  /** @deprecated use `PostV2ProxyCompletionsRerankConfig$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsRerankConfig$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsRerankConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsRerankConfig$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsRerankConfig$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsRerankConfig$Outbound;
+}
+
+export function postV2ProxyCompletionsRerankConfigToJSON(
+  postV2ProxyCompletionsRerankConfig: PostV2ProxyCompletionsRerankConfig,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsRerankConfig$outboundSchema.parse(
+      postV2ProxyCompletionsRerankConfig,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsRerankConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsRerankConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsRerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsRerankConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsProxyProvider$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyCompletionsProxyProvider
+> = z.nativeEnum(PostV2ProxyCompletionsProxyProvider);
+
+/** @internal */
+export const PostV2ProxyCompletionsProxyProvider$outboundSchema:
+  z.ZodNativeEnum<typeof PostV2ProxyCompletionsProxyProvider> =
+    PostV2ProxyCompletionsProxyProvider$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsProxyProvider$ {
+  /** @deprecated use `PostV2ProxyCompletionsProxyProvider$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsProxyProvider$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsProxyProvider$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsProxyProvider$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsAgenticRagConfig$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAgenticRagConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model_db_id: z.string(),
+  provider: PostV2ProxyCompletionsProxyProvider$inboundSchema,
+  integration_id: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "model_db_id": "modelDbId",
+    "integration_id": "integrationId",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsAgenticRagConfig$Outbound = {
+  model_db_id: string;
+  provider: string;
+  integration_id?: string | null | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsAgenticRagConfig$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsAgenticRagConfig$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsAgenticRagConfig
+> = z.object({
+  modelDbId: z.string(),
+  provider: PostV2ProxyCompletionsProxyProvider$outboundSchema,
+  integrationId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    modelDbId: "model_db_id",
+    integrationId: "integration_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsAgenticRagConfig$ {
+  /** @deprecated use `PostV2ProxyCompletionsAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsAgenticRagConfig$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsAgenticRagConfig$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsAgenticRagConfig$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsAgenticRagConfig$Outbound;
+}
+
+export function postV2ProxyCompletionsAgenticRagConfigToJSON(
+  postV2ProxyCompletionsAgenticRagConfig:
+    PostV2ProxyCompletionsAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsAgenticRagConfig$outboundSchema.parse(
+      postV2ProxyCompletionsAgenticRagConfig,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsAgenticRagConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsKnowledgeBases$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  top_k: z.number().int().optional(),
+  threshold: z.number().optional(),
+  search_type: PostV2ProxyCompletionsSearchType$inboundSchema.default(
+    "hybrid_search",
+  ),
+  filter_by: z.union([
+    z.lazy(() => PostV2ProxyCompletionsFilterByAnd$inboundSchema),
+    z.lazy(() => PostV2ProxyCompletionsFilterByOr$inboundSchema),
+    z.record(
+      z.union([
+        z.lazy(() => PostV2ProxyCompletions1Eq$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Ne$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions13$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Gte$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Lt$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Lte$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1In$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Nin$inboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Exists$inboundSchema),
+      ]),
+    ),
+  ]).optional(),
+  search_options: z.lazy(() =>
+    PostV2ProxyCompletionsSearchOptions$inboundSchema
+  ).optional(),
+  rerank_config: z.nullable(
+    z.lazy(() => PostV2ProxyCompletionsRerankConfig$inboundSchema),
+  ).optional(),
+  agentic_rag_config: z.lazy(() =>
+    PostV2ProxyCompletionsAgenticRagConfig$inboundSchema
+  ).optional(),
+  knowledge_id: z.string(),
+  query: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "top_k": "topK",
+    "search_type": "searchType",
+    "filter_by": "filterBy",
+    "search_options": "searchOptions",
+    "rerank_config": "rerankConfig",
+    "agentic_rag_config": "agenticRagConfig",
+    "knowledge_id": "knowledgeId",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsKnowledgeBases$Outbound = {
+  top_k?: number | undefined;
+  threshold?: number | undefined;
+  search_type: string;
+  filter_by?:
+    | PostV2ProxyCompletionsFilterByAnd$Outbound
+    | PostV2ProxyCompletionsFilterByOr$Outbound
+    | {
+      [k: string]:
+        | PostV2ProxyCompletions1Eq$Outbound
+        | PostV2ProxyCompletions1Ne$Outbound
+        | PostV2ProxyCompletions13$Outbound
+        | PostV2ProxyCompletions1Gte$Outbound
+        | PostV2ProxyCompletions1Lt$Outbound
+        | PostV2ProxyCompletions1Lte$Outbound
+        | PostV2ProxyCompletions1In$Outbound
+        | PostV2ProxyCompletions1Nin$Outbound
+        | PostV2ProxyCompletions1Exists$Outbound;
+    }
+    | undefined;
+  search_options?: PostV2ProxyCompletionsSearchOptions$Outbound | undefined;
+  rerank_config?:
+    | PostV2ProxyCompletionsRerankConfig$Outbound
+    | null
+    | undefined;
+  agentic_rag_config?:
+    | PostV2ProxyCompletionsAgenticRagConfig$Outbound
+    | undefined;
+  knowledge_id: string;
+  query?: string | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsKnowledgeBases$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsKnowledgeBases$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsKnowledgeBases
+> = z.object({
+  topK: z.number().int().optional(),
+  threshold: z.number().optional(),
+  searchType: PostV2ProxyCompletionsSearchType$outboundSchema.default(
+    "hybrid_search",
+  ),
+  filterBy: z.union([
+    z.lazy(() => PostV2ProxyCompletionsFilterByAnd$outboundSchema),
+    z.lazy(() => PostV2ProxyCompletionsFilterByOr$outboundSchema),
+    z.record(
+      z.union([
+        z.lazy(() => PostV2ProxyCompletions1Eq$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Ne$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions13$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Gte$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Lt$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Lte$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1In$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Nin$outboundSchema),
+        z.lazy(() => PostV2ProxyCompletions1Exists$outboundSchema),
+      ]),
+    ),
+  ]).optional(),
+  searchOptions: z.lazy(() =>
+    PostV2ProxyCompletionsSearchOptions$outboundSchema
+  ).optional(),
+  rerankConfig: z.nullable(
+    z.lazy(() => PostV2ProxyCompletionsRerankConfig$outboundSchema),
+  ).optional(),
+  agenticRagConfig: z.lazy(() =>
+    PostV2ProxyCompletionsAgenticRagConfig$outboundSchema
+  ).optional(),
+  knowledgeId: z.string(),
+  query: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    topK: "top_k",
+    searchType: "search_type",
+    filterBy: "filter_by",
+    searchOptions: "search_options",
+    rerankConfig: "rerank_config",
+    agenticRagConfig: "agentic_rag_config",
+    knowledgeId: "knowledge_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsKnowledgeBases$ {
+  /** @deprecated use `PostV2ProxyCompletionsKnowledgeBases$inboundSchema` instead. */
+  export const inboundSchema =
+    PostV2ProxyCompletionsKnowledgeBases$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsKnowledgeBases$outboundSchema` instead. */
+  export const outboundSchema =
+    PostV2ProxyCompletionsKnowledgeBases$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsKnowledgeBases$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsKnowledgeBases$Outbound;
+}
+
+export function postV2ProxyCompletionsKnowledgeBasesToJSON(
+  postV2ProxyCompletionsKnowledgeBases: PostV2ProxyCompletionsKnowledgeBases,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsKnowledgeBases$outboundSchema.parse(
+      postV2ProxyCompletionsKnowledgeBases,
+    ),
+  );
+}
+
+export function postV2ProxyCompletionsKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV2ProxyCompletionsKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyCompletionsOrq$inboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  retry: z.lazy(() => PostV2ProxyCompletionsRetry$inboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyCompletionsFallbacks$inboundSchema),
+  ).optional(),
+  prompt: z.lazy(() => PostV2ProxyCompletionsPrompt$inboundSchema).optional(),
+  contact: components.PublicContact$inboundSchema.optional(),
+  thread: z.lazy(() => PostV2ProxyCompletionsThread$inboundSchema).optional(),
+  inputs: z.record(z.any()).optional(),
+  cache: z.lazy(() => PostV2ProxyCompletionsCache$inboundSchema).optional(),
+  knowledge_bases: z.array(
+    z.lazy(() => PostV2ProxyCompletionsKnowledgeBases$inboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "knowledge_bases": "knowledgeBases",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyCompletionsOrq$Outbound = {
+  name?: string | undefined;
+  retry?: PostV2ProxyCompletionsRetry$Outbound | undefined;
+  fallbacks?: Array<PostV2ProxyCompletionsFallbacks$Outbound> | undefined;
+  prompt?: PostV2ProxyCompletionsPrompt$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
+  thread?: PostV2ProxyCompletionsThread$Outbound | undefined;
+  inputs?: { [k: string]: any } | undefined;
+  cache?: PostV2ProxyCompletionsCache$Outbound | undefined;
+  knowledge_bases?:
+    | Array<PostV2ProxyCompletionsKnowledgeBases$Outbound>
+    | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyCompletionsOrq$outboundSchema: z.ZodType<
+  PostV2ProxyCompletionsOrq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyCompletionsOrq
+> = z.object({
+  name: z.string().optional(),
+  retry: z.lazy(() => PostV2ProxyCompletionsRetry$outboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyCompletionsFallbacks$outboundSchema),
+  ).optional(),
+  prompt: z.lazy(() => PostV2ProxyCompletionsPrompt$outboundSchema).optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
+  thread: z.lazy(() => PostV2ProxyCompletionsThread$outboundSchema).optional(),
+  inputs: z.record(z.any()).optional(),
+  cache: z.lazy(() => PostV2ProxyCompletionsCache$outboundSchema).optional(),
+  knowledgeBases: z.array(
+    z.lazy(() => PostV2ProxyCompletionsKnowledgeBases$outboundSchema),
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    knowledgeBases: "knowledge_bases",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyCompletionsOrq$ {
+  /** @deprecated use `PostV2ProxyCompletionsOrq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyCompletionsOrq$inboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyCompletionsOrq$outboundSchema;
+  /** @deprecated use `PostV2ProxyCompletionsOrq$Outbound` instead. */
+  export type Outbound = PostV2ProxyCompletionsOrq$Outbound;
+}
+
+export function postV2ProxyCompletionsOrqToJSON(
+  postV2ProxyCompletionsOrq: PostV2ProxyCompletionsOrq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyCompletionsOrq$outboundSchema.parse(postV2ProxyCompletionsOrq),
+  );
+}
+
+export function postV2ProxyCompletionsOrqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyCompletionsOrq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyCompletionsOrq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyCompletionsOrq' from JSON`,
+  );
+}
+
+/** @internal */
 export const PostV2ProxyCompletionsRequestBody$inboundSchema: z.ZodType<
   PostV2ProxyCompletionsRequestBody,
   z.ZodTypeDef,
@@ -358,6 +4610,7 @@ export const PostV2ProxyCompletionsRequestBody$inboundSchema: z.ZodType<
   temperature: z.nullable(z.number().default(1)),
   top_p: z.nullable(z.number().default(1)),
   user: z.string().optional(),
+  orq: z.lazy(() => PostV2ProxyCompletionsOrq$inboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
@@ -381,6 +4634,7 @@ export type PostV2ProxyCompletionsRequestBody$Outbound = {
   temperature: number | null;
   top_p: number | null;
   user?: string | undefined;
+  orq?: PostV2ProxyCompletionsOrq$Outbound | undefined;
   stream: boolean;
 };
 
@@ -401,6 +4655,7 @@ export const PostV2ProxyCompletionsRequestBody$outboundSchema: z.ZodType<
   temperature: z.nullable(z.number().default(1)),
   topP: z.nullable(z.number().default(1)),
   user: z.string().optional(),
+  orq: z.lazy(() => PostV2ProxyCompletionsOrq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {

@@ -1,0 +1,23 @@
+# PostV2ProxyCompletionsRerankConfig
+
+Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
+
+## Example Usage
+
+```typescript
+import { PostV2ProxyCompletionsRerankConfig } from "@orq-ai/node/models/operations";
+
+let value: PostV2ProxyCompletionsRerankConfig = {};
+```
+
+## Fields
+
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `enabled`                                                                                                            | *boolean*                                                                                                            | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
+| `provider`                                                                                                           | [operations.PostV2ProxyCompletionsProvider](../../models/operations/postv2proxycompletionsprovider.md)               | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
+| `topK`                                                                                                               | *number*                                                                                                             | :heavy_minus_sign:                                                                                                   | The number of results to return by the reranking model                                                               |
+| `model`                                                                                                              | *string*                                                                                                             | :heavy_minus_sign:                                                                                                   | The name of the model to use                                                                                         |
+| `modelDbId`                                                                                                          | *string*                                                                                                             | :heavy_minus_sign:                                                                                                   | The ID of the model in the database                                                                                  |
+| `modelType`                                                                                                          | [operations.PostV2ProxyCompletionsModelType](../../models/operations/postv2proxycompletionsmodeltype.md)             | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
+| `modelParameters`                                                                                                    | [operations.PostV2ProxyCompletionsModelParameters](../../models/operations/postv2proxycompletionsmodelparameters.md) | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
