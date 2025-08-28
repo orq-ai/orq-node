@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -27,6 +28,68 @@ export const PostV2ProxyEmbeddingsEncodingFormat = {
 export type PostV2ProxyEmbeddingsEncodingFormat = ClosedEnum<
   typeof PostV2ProxyEmbeddingsEncodingFormat
 >;
+
+export type PostV2ProxyEmbeddingsFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+export const PostV2ProxyEmbeddingsType = {
+  ExactMatch: "exact_match",
+} as const;
+export type PostV2ProxyEmbeddingsType = ClosedEnum<
+  typeof PostV2ProxyEmbeddingsType
+>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type PostV2ProxyEmbeddingsCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: PostV2ProxyEmbeddingsType;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type PostV2ProxyEmbeddingsRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type PostV2ProxyEmbeddingsOrq = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<PostV2ProxyEmbeddingsFallbacks> | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: PostV2ProxyEmbeddingsCache | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: PostV2ProxyEmbeddingsRetry | undefined;
+  /**
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   */
+  contact?: components.PublicContact | undefined;
+};
 
 /**
  * input
@@ -52,6 +115,7 @@ export type PostV2ProxyEmbeddingsRequestBody = {
    * A unique identifier representing your end-user
    */
   user?: string | undefined;
+  orq?: PostV2ProxyEmbeddingsOrq | undefined;
 };
 
 export const PostV2ProxyEmbeddingsObject = {
@@ -184,6 +248,274 @@ export namespace PostV2ProxyEmbeddingsEncodingFormat$ {
 }
 
 /** @internal */
+export const PostV2ProxyEmbeddingsFallbacks$inboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type PostV2ProxyEmbeddingsFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const PostV2ProxyEmbeddingsFallbacks$outboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsFallbacks$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyEmbeddingsFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyEmbeddingsFallbacks$ {
+  /** @deprecated use `PostV2ProxyEmbeddingsFallbacks$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyEmbeddingsFallbacks$inboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsFallbacks$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyEmbeddingsFallbacks$outboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsFallbacks$Outbound` instead. */
+  export type Outbound = PostV2ProxyEmbeddingsFallbacks$Outbound;
+}
+
+export function postV2ProxyEmbeddingsFallbacksToJSON(
+  postV2ProxyEmbeddingsFallbacks: PostV2ProxyEmbeddingsFallbacks,
+): string {
+  return JSON.stringify(
+    PostV2ProxyEmbeddingsFallbacks$outboundSchema.parse(
+      postV2ProxyEmbeddingsFallbacks,
+    ),
+  );
+}
+
+export function postV2ProxyEmbeddingsFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyEmbeddingsFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyEmbeddingsFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyEmbeddingsFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyEmbeddingsType$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyEmbeddingsType
+> = z.nativeEnum(PostV2ProxyEmbeddingsType);
+
+/** @internal */
+export const PostV2ProxyEmbeddingsType$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyEmbeddingsType
+> = PostV2ProxyEmbeddingsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyEmbeddingsType$ {
+  /** @deprecated use `PostV2ProxyEmbeddingsType$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyEmbeddingsType$inboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsType$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyEmbeddingsType$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyEmbeddingsCache$inboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyEmbeddingsType$inboundSchema,
+});
+
+/** @internal */
+export type PostV2ProxyEmbeddingsCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const PostV2ProxyEmbeddingsCache$outboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsCache$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyEmbeddingsCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyEmbeddingsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyEmbeddingsCache$ {
+  /** @deprecated use `PostV2ProxyEmbeddingsCache$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyEmbeddingsCache$inboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsCache$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyEmbeddingsCache$outboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsCache$Outbound` instead. */
+  export type Outbound = PostV2ProxyEmbeddingsCache$Outbound;
+}
+
+export function postV2ProxyEmbeddingsCacheToJSON(
+  postV2ProxyEmbeddingsCache: PostV2ProxyEmbeddingsCache,
+): string {
+  return JSON.stringify(
+    PostV2ProxyEmbeddingsCache$outboundSchema.parse(postV2ProxyEmbeddingsCache),
+  );
+}
+
+export function postV2ProxyEmbeddingsCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyEmbeddingsCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyEmbeddingsCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyEmbeddingsCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyEmbeddingsRetry$inboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyEmbeddingsRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyEmbeddingsRetry$outboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsRetry$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyEmbeddingsRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyEmbeddingsRetry$ {
+  /** @deprecated use `PostV2ProxyEmbeddingsRetry$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyEmbeddingsRetry$inboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsRetry$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyEmbeddingsRetry$outboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsRetry$Outbound` instead. */
+  export type Outbound = PostV2ProxyEmbeddingsRetry$Outbound;
+}
+
+export function postV2ProxyEmbeddingsRetryToJSON(
+  postV2ProxyEmbeddingsRetry: PostV2ProxyEmbeddingsRetry,
+): string {
+  return JSON.stringify(
+    PostV2ProxyEmbeddingsRetry$outboundSchema.parse(postV2ProxyEmbeddingsRetry),
+  );
+}
+
+export function postV2ProxyEmbeddingsRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyEmbeddingsRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyEmbeddingsRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyEmbeddingsRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyEmbeddingsOrq$inboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsOrq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => PostV2ProxyEmbeddingsFallbacks$inboundSchema))
+    .optional(),
+  cache: z.lazy(() => PostV2ProxyEmbeddingsCache$inboundSchema).optional(),
+  retry: z.lazy(() => PostV2ProxyEmbeddingsRetry$inboundSchema).optional(),
+  contact: components.PublicContact$inboundSchema.optional(),
+});
+
+/** @internal */
+export type PostV2ProxyEmbeddingsOrq$Outbound = {
+  name?: string | undefined;
+  fallbacks?: Array<PostV2ProxyEmbeddingsFallbacks$Outbound> | undefined;
+  cache?: PostV2ProxyEmbeddingsCache$Outbound | undefined;
+  retry?: PostV2ProxyEmbeddingsRetry$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyEmbeddingsOrq$outboundSchema: z.ZodType<
+  PostV2ProxyEmbeddingsOrq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyEmbeddingsOrq
+> = z.object({
+  name: z.string().optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyEmbeddingsFallbacks$outboundSchema),
+  ).optional(),
+  cache: z.lazy(() => PostV2ProxyEmbeddingsCache$outboundSchema).optional(),
+  retry: z.lazy(() => PostV2ProxyEmbeddingsRetry$outboundSchema).optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyEmbeddingsOrq$ {
+  /** @deprecated use `PostV2ProxyEmbeddingsOrq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyEmbeddingsOrq$inboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsOrq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyEmbeddingsOrq$outboundSchema;
+  /** @deprecated use `PostV2ProxyEmbeddingsOrq$Outbound` instead. */
+  export type Outbound = PostV2ProxyEmbeddingsOrq$Outbound;
+}
+
+export function postV2ProxyEmbeddingsOrqToJSON(
+  postV2ProxyEmbeddingsOrq: PostV2ProxyEmbeddingsOrq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyEmbeddingsOrq$outboundSchema.parse(postV2ProxyEmbeddingsOrq),
+  );
+}
+
+export function postV2ProxyEmbeddingsOrqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyEmbeddingsOrq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyEmbeddingsOrq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyEmbeddingsOrq' from JSON`,
+  );
+}
+
+/** @internal */
 export const PostV2ProxyEmbeddingsRequestBody$inboundSchema: z.ZodType<
   PostV2ProxyEmbeddingsRequestBody,
   z.ZodTypeDef,
@@ -196,6 +528,7 @@ export const PostV2ProxyEmbeddingsRequestBody$inboundSchema: z.ZodType<
   ),
   dimensions: z.number().optional(),
   user: z.string().optional(),
+  orq: z.lazy(() => PostV2ProxyEmbeddingsOrq$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "encoding_format": "encodingFormat",
@@ -209,6 +542,7 @@ export type PostV2ProxyEmbeddingsRequestBody$Outbound = {
   encoding_format: string;
   dimensions?: number | undefined;
   user?: string | undefined;
+  orq?: PostV2ProxyEmbeddingsOrq$Outbound | undefined;
 };
 
 /** @internal */
@@ -224,6 +558,7 @@ export const PostV2ProxyEmbeddingsRequestBody$outboundSchema: z.ZodType<
   ),
   dimensions: z.number().optional(),
   user: z.string().optional(),
+  orq: z.lazy(() => PostV2ProxyEmbeddingsOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
