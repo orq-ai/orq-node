@@ -106,7 +106,7 @@ export class Knowledge extends ClientSDK {
    * Search knowledge base
    *
    * @remarks
-   * Search a Knowledge Base and return the most similar chunks, along with their search and rerank scores.
+   * Search a Knowledge Base and return the most similar chunks, along with their search and rerank scores. Note that all configuration changes made in the API will override the settings in the UI.
    */
   async search(
     request: operations.SearchKnowledgeRequest,

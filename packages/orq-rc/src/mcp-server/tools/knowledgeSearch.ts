@@ -14,7 +14,7 @@ export const tool$knowledgeSearch: ToolDefinition<typeof args> = {
   name: "knowledge-search",
   description: `Search knowledge base
 
-Search a Knowledge Base and return the most similar chunks, along with their search and rerank scores.`,
+Search a Knowledge Base and return the most similar chunks, along with their search and rerank scores. Note that all configuration changes made in the API will override the settings in the UI.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await knowledgeSearch(
