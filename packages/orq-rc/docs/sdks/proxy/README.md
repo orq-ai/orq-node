@@ -429,6 +429,42 @@ async function run() {
     query: "<value>",
     documents: [],
     model: "Prius",
+    orq: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+    },
   });
 
   console.log(result);
@@ -456,6 +492,42 @@ async function run() {
     query: "<value>",
     documents: [],
     model: "Prius",
+    orq: {
+      fallbacks: [
+        {
+          model: "openai/gpt-4o-mini",
+        },
+      ],
+      cache: {
+        ttl: 3600,
+        type: "exact_match",
+      },
+      retry: {
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;

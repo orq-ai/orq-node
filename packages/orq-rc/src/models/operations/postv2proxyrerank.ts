@@ -7,9 +7,70 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PostV2ProxyRerankDocuments = string | { [k: string]: string };
+
+export type PostV2ProxyRerankFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+export const PostV2ProxyRerankType = {
+  ExactMatch: "exact_match",
+} as const;
+export type PostV2ProxyRerankType = ClosedEnum<typeof PostV2ProxyRerankType>;
+
+/**
+ * Cache configuration for the request.
+ */
+export type PostV2ProxyRerankCache = {
+  /**
+   * Time to live for cached responses in seconds. Maximum 259200 seconds (3 days).
+   */
+  ttl?: number | undefined;
+  type: PostV2ProxyRerankType;
+};
+
+/**
+ * Retry configuration for the request
+ */
+export type PostV2ProxyRerankRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type PostV2ProxyRerankOrq = {
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<PostV2ProxyRerankFallbacks> | undefined;
+  /**
+   * Cache configuration for the request.
+   */
+  cache?: PostV2ProxyRerankCache | undefined;
+  /**
+   * Retry configuration for the request
+   */
+  retry?: PostV2ProxyRerankRetry | undefined;
+  /**
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   */
+  contact?: components.PublicContact | undefined;
+};
 
 /**
  * input
@@ -35,6 +96,7 @@ export type PostV2ProxyRerankRequestBody = {
    * The filename of the document to rerank
    */
   filename?: string | null | undefined;
+  orq?: PostV2ProxyRerankOrq | undefined;
 };
 
 export const PostV2ProxyRerankObject = {
@@ -160,6 +222,271 @@ export function postV2ProxyRerankDocumentsFromJSON(
 }
 
 /** @internal */
+export const PostV2ProxyRerankFallbacks$inboundSchema: z.ZodType<
+  PostV2ProxyRerankFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type PostV2ProxyRerankFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const PostV2ProxyRerankFallbacks$outboundSchema: z.ZodType<
+  PostV2ProxyRerankFallbacks$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyRerankFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyRerankFallbacks$ {
+  /** @deprecated use `PostV2ProxyRerankFallbacks$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyRerankFallbacks$inboundSchema;
+  /** @deprecated use `PostV2ProxyRerankFallbacks$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyRerankFallbacks$outboundSchema;
+  /** @deprecated use `PostV2ProxyRerankFallbacks$Outbound` instead. */
+  export type Outbound = PostV2ProxyRerankFallbacks$Outbound;
+}
+
+export function postV2ProxyRerankFallbacksToJSON(
+  postV2ProxyRerankFallbacks: PostV2ProxyRerankFallbacks,
+): string {
+  return JSON.stringify(
+    PostV2ProxyRerankFallbacks$outboundSchema.parse(postV2ProxyRerankFallbacks),
+  );
+}
+
+export function postV2ProxyRerankFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyRerankFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyRerankFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyRerankFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyRerankType$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyRerankType
+> = z.nativeEnum(PostV2ProxyRerankType);
+
+/** @internal */
+export const PostV2ProxyRerankType$outboundSchema: z.ZodNativeEnum<
+  typeof PostV2ProxyRerankType
+> = PostV2ProxyRerankType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyRerankType$ {
+  /** @deprecated use `PostV2ProxyRerankType$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyRerankType$inboundSchema;
+  /** @deprecated use `PostV2ProxyRerankType$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyRerankType$outboundSchema;
+}
+
+/** @internal */
+export const PostV2ProxyRerankCache$inboundSchema: z.ZodType<
+  PostV2ProxyRerankCache,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyRerankType$inboundSchema,
+});
+
+/** @internal */
+export type PostV2ProxyRerankCache$Outbound = {
+  ttl: number;
+  type: string;
+};
+
+/** @internal */
+export const PostV2ProxyRerankCache$outboundSchema: z.ZodType<
+  PostV2ProxyRerankCache$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyRerankCache
+> = z.object({
+  ttl: z.number().default(1800),
+  type: PostV2ProxyRerankType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyRerankCache$ {
+  /** @deprecated use `PostV2ProxyRerankCache$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyRerankCache$inboundSchema;
+  /** @deprecated use `PostV2ProxyRerankCache$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyRerankCache$outboundSchema;
+  /** @deprecated use `PostV2ProxyRerankCache$Outbound` instead. */
+  export type Outbound = PostV2ProxyRerankCache$Outbound;
+}
+
+export function postV2ProxyRerankCacheToJSON(
+  postV2ProxyRerankCache: PostV2ProxyRerankCache,
+): string {
+  return JSON.stringify(
+    PostV2ProxyRerankCache$outboundSchema.parse(postV2ProxyRerankCache),
+  );
+}
+
+export function postV2ProxyRerankCacheFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyRerankCache, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyRerankCache$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyRerankCache' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyRerankRetry$inboundSchema: z.ZodType<
+  PostV2ProxyRerankRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyRerankRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyRerankRetry$outboundSchema: z.ZodType<
+  PostV2ProxyRerankRetry$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyRerankRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyRerankRetry$ {
+  /** @deprecated use `PostV2ProxyRerankRetry$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyRerankRetry$inboundSchema;
+  /** @deprecated use `PostV2ProxyRerankRetry$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyRerankRetry$outboundSchema;
+  /** @deprecated use `PostV2ProxyRerankRetry$Outbound` instead. */
+  export type Outbound = PostV2ProxyRerankRetry$Outbound;
+}
+
+export function postV2ProxyRerankRetryToJSON(
+  postV2ProxyRerankRetry: PostV2ProxyRerankRetry,
+): string {
+  return JSON.stringify(
+    PostV2ProxyRerankRetry$outboundSchema.parse(postV2ProxyRerankRetry),
+  );
+}
+
+export function postV2ProxyRerankRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyRerankRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyRerankRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyRerankRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyRerankOrq$inboundSchema: z.ZodType<
+  PostV2ProxyRerankOrq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => PostV2ProxyRerankFallbacks$inboundSchema))
+    .optional(),
+  cache: z.lazy(() => PostV2ProxyRerankCache$inboundSchema).optional(),
+  retry: z.lazy(() => PostV2ProxyRerankRetry$inboundSchema).optional(),
+  contact: components.PublicContact$inboundSchema.optional(),
+});
+
+/** @internal */
+export type PostV2ProxyRerankOrq$Outbound = {
+  name?: string | undefined;
+  fallbacks?: Array<PostV2ProxyRerankFallbacks$Outbound> | undefined;
+  cache?: PostV2ProxyRerankCache$Outbound | undefined;
+  retry?: PostV2ProxyRerankRetry$Outbound | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyRerankOrq$outboundSchema: z.ZodType<
+  PostV2ProxyRerankOrq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyRerankOrq
+> = z.object({
+  name: z.string().optional(),
+  fallbacks: z.array(z.lazy(() => PostV2ProxyRerankFallbacks$outboundSchema))
+    .optional(),
+  cache: z.lazy(() => PostV2ProxyRerankCache$outboundSchema).optional(),
+  retry: z.lazy(() => PostV2ProxyRerankRetry$outboundSchema).optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyRerankOrq$ {
+  /** @deprecated use `PostV2ProxyRerankOrq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyRerankOrq$inboundSchema;
+  /** @deprecated use `PostV2ProxyRerankOrq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyRerankOrq$outboundSchema;
+  /** @deprecated use `PostV2ProxyRerankOrq$Outbound` instead. */
+  export type Outbound = PostV2ProxyRerankOrq$Outbound;
+}
+
+export function postV2ProxyRerankOrqToJSON(
+  postV2ProxyRerankOrq: PostV2ProxyRerankOrq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyRerankOrq$outboundSchema.parse(postV2ProxyRerankOrq),
+  );
+}
+
+export function postV2ProxyRerankOrqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyRerankOrq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyRerankOrq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyRerankOrq' from JSON`,
+  );
+}
+
+/** @internal */
 export const PostV2ProxyRerankRequestBody$inboundSchema: z.ZodType<
   PostV2ProxyRerankRequestBody,
   z.ZodTypeDef,
@@ -170,6 +497,7 @@ export const PostV2ProxyRerankRequestBody$inboundSchema: z.ZodType<
   model: z.string(),
   top_n: z.number().optional(),
   filename: z.nullable(z.string()).optional(),
+  orq: z.lazy(() => PostV2ProxyRerankOrq$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_n": "topN",
@@ -183,6 +511,7 @@ export type PostV2ProxyRerankRequestBody$Outbound = {
   model: string;
   top_n?: number | undefined;
   filename?: string | null | undefined;
+  orq?: PostV2ProxyRerankOrq$Outbound | undefined;
 };
 
 /** @internal */
@@ -196,6 +525,7 @@ export const PostV2ProxyRerankRequestBody$outboundSchema: z.ZodType<
   model: z.string(),
   topN: z.number().optional(),
   filename: z.nullable(z.string()).optional(),
+  orq: z.lazy(() => PostV2ProxyRerankOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     topN: "top_n",

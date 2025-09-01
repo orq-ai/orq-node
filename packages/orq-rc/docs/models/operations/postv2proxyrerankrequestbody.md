@@ -11,6 +11,42 @@ let value: PostV2ProxyRerankRequestBody = {
   query: "<value>",
   documents: [],
   model: "Taurus",
+  orq: {
+    fallbacks: [
+      {
+        model: "openai/gpt-4o-mini",
+      },
+    ],
+    cache: {
+      ttl: 3600,
+      type: "exact_match",
+    },
+    retry: {
+      onCodes: [
+        429,
+        500,
+        502,
+        503,
+        504,
+      ],
+    },
+    contact: {
+      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      displayName: "Jane Doe",
+      email: "jane.doe@example.com",
+      metadata: [
+        {
+          "department": "Engineering",
+          "role": "Senior Developer",
+        },
+      ],
+      logoUrl: "https://example.com/avatars/jane-doe.jpg",
+      tags: [
+        "hr",
+        "engineering",
+      ],
+    },
+  },
 };
 ```
 
@@ -23,3 +59,4 @@ let value: PostV2ProxyRerankRequestBody = {
 | `model`                                                                                             | *string*                                                                                            | :heavy_check_mark:                                                                                  | The identifier of the model to use                                                                  |
 | `topN`                                                                                              | *number*                                                                                            | :heavy_minus_sign:                                                                                  | The number of most relevant documents or indices to return, defaults to the length of the documents |
 | `filename`                                                                                          | *string*                                                                                            | :heavy_minus_sign:                                                                                  | The filename of the document to rerank                                                              |
+| `orq`                                                                                               | [operations.PostV2ProxyRerankOrq](../../models/operations/postv2proxyrerankorq.md)                  | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
