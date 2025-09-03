@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const Six = {
@@ -63,6 +64,64 @@ export type PostV2ProxyAudioSpeechResponseFormat = ClosedEnum<
 >;
 
 /**
+ * Retry configuration for the request
+ */
+export type PostV2ProxyAudioSpeechRetry = {
+  /**
+   * Number of retry attempts (1-5)
+   */
+  count?: number | undefined;
+  /**
+   * HTTP status codes that trigger retry logic
+   */
+  onCodes?: Array<number> | undefined;
+};
+
+export type PostV2ProxyAudioSpeechFallbacks = {
+  /**
+   * Fallback model identifier
+   */
+  model: string;
+};
+
+/**
+ * Thread information to group related requests
+ */
+export type PostV2ProxyAudioSpeechThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
+};
+
+export type PostV2ProxyAudioSpeechOrq = {
+  /**
+   * Retry configuration for the request
+   */
+  retry?: PostV2ProxyAudioSpeechRetry | undefined;
+  /**
+   * Array of fallback models to use if primary model fails
+   */
+  fallbacks?: Array<PostV2ProxyAudioSpeechFallbacks> | undefined;
+  /**
+   * The name to display on the trace. If not specified, the default system name will be used.
+   */
+  name?: string | undefined;
+  /**
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+   */
+  contact?: components.PublicContact | undefined;
+  /**
+   * Thread information to group related requests
+   */
+  thread?: PostV2ProxyAudioSpeechThread | undefined;
+};
+
+/**
  * input
  */
 export type PostV2ProxyAudioSpeechRequestBody = {
@@ -96,6 +155,7 @@ export type PostV2ProxyAudioSpeechRequestBody = {
    * The speed of the generated audio.
    */
   speed?: number | undefined;
+  orq?: PostV2ProxyAudioSpeechOrq | undefined;
 };
 
 /** @internal */
@@ -298,6 +358,258 @@ export namespace PostV2ProxyAudioSpeechResponseFormat$ {
 }
 
 /** @internal */
+export const PostV2ProxyAudioSpeechRetry$inboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().default(3),
+  on_codes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+/** @internal */
+export type PostV2ProxyAudioSpeechRetry$Outbound = {
+  count: number;
+  on_codes?: Array<number> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyAudioSpeechRetry$outboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechRetry$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyAudioSpeechRetry
+> = z.object({
+  count: z.number().default(3),
+  onCodes: z.array(z.number()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    onCodes: "on_codes",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyAudioSpeechRetry$ {
+  /** @deprecated use `PostV2ProxyAudioSpeechRetry$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyAudioSpeechRetry$inboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechRetry$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyAudioSpeechRetry$outboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechRetry$Outbound` instead. */
+  export type Outbound = PostV2ProxyAudioSpeechRetry$Outbound;
+}
+
+export function postV2ProxyAudioSpeechRetryToJSON(
+  postV2ProxyAudioSpeechRetry: PostV2ProxyAudioSpeechRetry,
+): string {
+  return JSON.stringify(
+    PostV2ProxyAudioSpeechRetry$outboundSchema.parse(
+      postV2ProxyAudioSpeechRetry,
+    ),
+  );
+}
+
+export function postV2ProxyAudioSpeechRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyAudioSpeechRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyAudioSpeechRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyAudioSpeechRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyAudioSpeechFallbacks$inboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.string(),
+});
+
+/** @internal */
+export type PostV2ProxyAudioSpeechFallbacks$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const PostV2ProxyAudioSpeechFallbacks$outboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechFallbacks$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyAudioSpeechFallbacks
+> = z.object({
+  model: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyAudioSpeechFallbacks$ {
+  /** @deprecated use `PostV2ProxyAudioSpeechFallbacks$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyAudioSpeechFallbacks$inboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechFallbacks$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyAudioSpeechFallbacks$outboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechFallbacks$Outbound` instead. */
+  export type Outbound = PostV2ProxyAudioSpeechFallbacks$Outbound;
+}
+
+export function postV2ProxyAudioSpeechFallbacksToJSON(
+  postV2ProxyAudioSpeechFallbacks: PostV2ProxyAudioSpeechFallbacks,
+): string {
+  return JSON.stringify(
+    PostV2ProxyAudioSpeechFallbacks$outboundSchema.parse(
+      postV2ProxyAudioSpeechFallbacks,
+    ),
+  );
+}
+
+export function postV2ProxyAudioSpeechFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyAudioSpeechFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyAudioSpeechFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyAudioSpeechFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyAudioSpeechThread$inboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechThread,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type PostV2ProxyAudioSpeechThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyAudioSpeechThread$outboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechThread$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyAudioSpeechThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyAudioSpeechThread$ {
+  /** @deprecated use `PostV2ProxyAudioSpeechThread$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyAudioSpeechThread$inboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechThread$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyAudioSpeechThread$outboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechThread$Outbound` instead. */
+  export type Outbound = PostV2ProxyAudioSpeechThread$Outbound;
+}
+
+export function postV2ProxyAudioSpeechThreadToJSON(
+  postV2ProxyAudioSpeechThread: PostV2ProxyAudioSpeechThread,
+): string {
+  return JSON.stringify(
+    PostV2ProxyAudioSpeechThread$outboundSchema.parse(
+      postV2ProxyAudioSpeechThread,
+    ),
+  );
+}
+
+export function postV2ProxyAudioSpeechThreadFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyAudioSpeechThread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyAudioSpeechThread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyAudioSpeechThread' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV2ProxyAudioSpeechOrq$inboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechOrq,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  retry: z.lazy(() => PostV2ProxyAudioSpeechRetry$inboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyAudioSpeechFallbacks$inboundSchema),
+  ).optional(),
+  name: z.string().optional(),
+  contact: components.PublicContact$inboundSchema.optional(),
+  thread: z.lazy(() => PostV2ProxyAudioSpeechThread$inboundSchema).optional(),
+});
+
+/** @internal */
+export type PostV2ProxyAudioSpeechOrq$Outbound = {
+  retry?: PostV2ProxyAudioSpeechRetry$Outbound | undefined;
+  fallbacks?: Array<PostV2ProxyAudioSpeechFallbacks$Outbound> | undefined;
+  name?: string | undefined;
+  contact?: components.PublicContact$Outbound | undefined;
+  thread?: PostV2ProxyAudioSpeechThread$Outbound | undefined;
+};
+
+/** @internal */
+export const PostV2ProxyAudioSpeechOrq$outboundSchema: z.ZodType<
+  PostV2ProxyAudioSpeechOrq$Outbound,
+  z.ZodTypeDef,
+  PostV2ProxyAudioSpeechOrq
+> = z.object({
+  retry: z.lazy(() => PostV2ProxyAudioSpeechRetry$outboundSchema).optional(),
+  fallbacks: z.array(
+    z.lazy(() => PostV2ProxyAudioSpeechFallbacks$outboundSchema),
+  ).optional(),
+  name: z.string().optional(),
+  contact: components.PublicContact$outboundSchema.optional(),
+  thread: z.lazy(() => PostV2ProxyAudioSpeechThread$outboundSchema).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostV2ProxyAudioSpeechOrq$ {
+  /** @deprecated use `PostV2ProxyAudioSpeechOrq$inboundSchema` instead. */
+  export const inboundSchema = PostV2ProxyAudioSpeechOrq$inboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechOrq$outboundSchema` instead. */
+  export const outboundSchema = PostV2ProxyAudioSpeechOrq$outboundSchema;
+  /** @deprecated use `PostV2ProxyAudioSpeechOrq$Outbound` instead. */
+  export type Outbound = PostV2ProxyAudioSpeechOrq$Outbound;
+}
+
+export function postV2ProxyAudioSpeechOrqToJSON(
+  postV2ProxyAudioSpeechOrq: PostV2ProxyAudioSpeechOrq,
+): string {
+  return JSON.stringify(
+    PostV2ProxyAudioSpeechOrq$outboundSchema.parse(postV2ProxyAudioSpeechOrq),
+  );
+}
+
+export function postV2ProxyAudioSpeechOrqFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV2ProxyAudioSpeechOrq, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV2ProxyAudioSpeechOrq$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2ProxyAudioSpeechOrq' from JSON`,
+  );
+}
+
+/** @internal */
 export const PostV2ProxyAudioSpeechRequestBody$inboundSchema: z.ZodType<
   PostV2ProxyAudioSpeechRequestBody,
   z.ZodTypeDef,
@@ -317,6 +629,7 @@ export const PostV2ProxyAudioSpeechRequestBody$inboundSchema: z.ZodType<
     "mp3",
   ),
   speed: z.number().default(1),
+  orq: z.lazy(() => PostV2ProxyAudioSpeechOrq$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "response_format": "responseFormat",
@@ -330,6 +643,7 @@ export type PostV2ProxyAudioSpeechRequestBody$Outbound = {
   voice: string;
   response_format: string;
   speed: number;
+  orq?: PostV2ProxyAudioSpeechOrq$Outbound | undefined;
 };
 
 /** @internal */
@@ -352,6 +666,7 @@ export const PostV2ProxyAudioSpeechRequestBody$outboundSchema: z.ZodType<
     "mp3",
   ),
   speed: z.number().default(1),
+  orq: z.lazy(() => PostV2ProxyAudioSpeechOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
