@@ -9,8 +9,9 @@ let value: CreateResponseRequestBody = {
   model: "Beetle",
   input: [
     {
-      role: "developer",
-      content: [],
+      type: "function_call_output",
+      callId: "<id>",
+      output: "<value>",
     },
   ],
 };

@@ -22,3 +22,16 @@ const value: operations.CreateResponse2Proxy2 = {
 };
 ```
 
+### `operations.CreateResponse2Proxy3`
+
+```typescript
+const value: operations.CreateResponse2Proxy3 = {
+  type: "function_call",
+  callId: "<id>",
+  id: "<id>",
+  name: "<value>",
+  arguments: "<value>",
+  status: "<value>",
+};
+```
+

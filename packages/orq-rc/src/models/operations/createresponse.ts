@@ -116,6 +116,49 @@ export type Text = {
 /**
  * The type of input item
  */
+export const CreateResponse2ProxyRequestRequestBodyInputType = {
+  FunctionCall: "function_call",
+} as const;
+/**
+ * The type of input item
+ */
+export type CreateResponse2ProxyRequestRequestBodyInputType = ClosedEnum<
+  typeof CreateResponse2ProxyRequestRequestBodyInputType
+>;
+
+/**
+ * Represents a function tool call, provided as input to the model.
+ */
+export type CreateResponse2Proxy3 = {
+  /**
+   * The type of input item
+   */
+  type: CreateResponse2ProxyRequestRequestBodyInputType;
+  /**
+   * The ID of the function call
+   */
+  callId: string;
+  /**
+   * The unique identifier for this function call
+   */
+  id: string;
+  /**
+   * The name of the function being called
+   */
+  name: string;
+  /**
+   * The arguments to the function as a JSON string
+   */
+  arguments: string;
+  /**
+   * The status of the function call
+   */
+  status: string;
+};
+
+/**
+ * The type of input item
+ */
 export const CreateResponse2ProxyRequestRequestBodyType = {
   FunctionCallOutput: "function_call_output",
 } as const;
@@ -298,14 +341,17 @@ export type CreateResponse21 = {
     | Array<CreateResponse2Proxy1 | CreateResponse22 | CreateResponse23>;
 };
 
-export type Input2 = CreateResponse2Proxy2 | CreateResponse21;
+export type Input2 =
+  | CreateResponse2Proxy3
+  | CreateResponse2Proxy2
+  | CreateResponse21;
 
 /**
  * The actual user input(s) for the model. Can be a simple string, or an array of structured input items (messages, tool outputs) representing a conversation history or complex input.
  */
 export type CreateResponseInput =
   | string
-  | Array<CreateResponse2Proxy2 | CreateResponse21>;
+  | Array<CreateResponse2Proxy3 | CreateResponse2Proxy2 | CreateResponse21>;
 
 export const Include = {
   CodeInterpreterCallOutputs: "code_interpreter_call.outputs",
@@ -651,7 +697,9 @@ export type CreateResponseRequestBody = {
   /**
    * The actual user input(s) for the model. Can be a simple string, or an array of structured input items (messages, tool outputs) representing a conversation history or complex input.
    */
-  input: string | Array<CreateResponse2Proxy2 | CreateResponse21>;
+  input:
+    | string
+    | Array<CreateResponse2Proxy3 | CreateResponse2Proxy2 | CreateResponse21>;
   /**
    * Specifies which (potentially large) fields to include in the response. By default, the results of Code Interpreter and file searches are excluded. Available options:
    *
@@ -2029,6 +2077,106 @@ export function textFromJSON(
 }
 
 /** @internal */
+export const CreateResponse2ProxyRequestRequestBodyInputType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateResponse2ProxyRequestRequestBodyInputType> = z
+    .nativeEnum(CreateResponse2ProxyRequestRequestBodyInputType);
+
+/** @internal */
+export const CreateResponse2ProxyRequestRequestBodyInputType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateResponse2ProxyRequestRequestBodyInputType> =
+    CreateResponse2ProxyRequestRequestBodyInputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateResponse2ProxyRequestRequestBodyInputType$ {
+  /** @deprecated use `CreateResponse2ProxyRequestRequestBodyInputType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateResponse2ProxyRequestRequestBodyInputType$inboundSchema;
+  /** @deprecated use `CreateResponse2ProxyRequestRequestBodyInputType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateResponse2ProxyRequestRequestBodyInputType$outboundSchema;
+}
+
+/** @internal */
+export const CreateResponse2Proxy3$inboundSchema: z.ZodType<
+  CreateResponse2Proxy3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: CreateResponse2ProxyRequestRequestBodyInputType$inboundSchema,
+  call_id: z.string(),
+  id: z.string(),
+  name: z.string(),
+  arguments: z.string(),
+  status: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "call_id": "callId",
+  });
+});
+
+/** @internal */
+export type CreateResponse2Proxy3$Outbound = {
+  type: string;
+  call_id: string;
+  id: string;
+  name: string;
+  arguments: string;
+  status: string;
+};
+
+/** @internal */
+export const CreateResponse2Proxy3$outboundSchema: z.ZodType<
+  CreateResponse2Proxy3$Outbound,
+  z.ZodTypeDef,
+  CreateResponse2Proxy3
+> = z.object({
+  type: CreateResponse2ProxyRequestRequestBodyInputType$outboundSchema,
+  callId: z.string(),
+  id: z.string(),
+  name: z.string(),
+  arguments: z.string(),
+  status: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    callId: "call_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateResponse2Proxy3$ {
+  /** @deprecated use `CreateResponse2Proxy3$inboundSchema` instead. */
+  export const inboundSchema = CreateResponse2Proxy3$inboundSchema;
+  /** @deprecated use `CreateResponse2Proxy3$outboundSchema` instead. */
+  export const outboundSchema = CreateResponse2Proxy3$outboundSchema;
+  /** @deprecated use `CreateResponse2Proxy3$Outbound` instead. */
+  export type Outbound = CreateResponse2Proxy3$Outbound;
+}
+
+export function createResponse2Proxy3ToJSON(
+  createResponse2Proxy3: CreateResponse2Proxy3,
+): string {
+  return JSON.stringify(
+    CreateResponse2Proxy3$outboundSchema.parse(createResponse2Proxy3),
+  );
+}
+
+export function createResponse2Proxy3FromJSON(
+  jsonString: string,
+): SafeParseResult<CreateResponse2Proxy3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateResponse2Proxy3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateResponse2Proxy3' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateResponse2ProxyRequestRequestBodyType$inboundSchema:
   z.ZodNativeEnum<typeof CreateResponse2ProxyRequestRequestBodyType> = z
     .nativeEnum(CreateResponse2ProxyRequestRequestBodyType);
@@ -2633,12 +2781,14 @@ export function createResponse21FromJSON(
 /** @internal */
 export const Input2$inboundSchema: z.ZodType<Input2, z.ZodTypeDef, unknown> = z
   .union([
+    z.lazy(() => CreateResponse2Proxy3$inboundSchema),
     z.lazy(() => CreateResponse2Proxy2$inboundSchema),
     z.lazy(() => CreateResponse21$inboundSchema),
   ]);
 
 /** @internal */
 export type Input2$Outbound =
+  | CreateResponse2Proxy3$Outbound
   | CreateResponse2Proxy2$Outbound
   | CreateResponse21$Outbound;
 
@@ -2648,6 +2798,7 @@ export const Input2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Input2
 > = z.union([
+  z.lazy(() => CreateResponse2Proxy3$outboundSchema),
   z.lazy(() => CreateResponse2Proxy2$outboundSchema),
   z.lazy(() => CreateResponse21$outboundSchema),
 ]);
@@ -2687,6 +2838,7 @@ export const CreateResponseInput$inboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
+    z.lazy(() => CreateResponse2Proxy3$inboundSchema),
     z.lazy(() => CreateResponse2Proxy2$inboundSchema),
     z.lazy(() => CreateResponse21$inboundSchema),
   ])),
@@ -2695,7 +2847,11 @@ export const CreateResponseInput$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateResponseInput$Outbound =
   | string
-  | Array<CreateResponse2Proxy2$Outbound | CreateResponse21$Outbound>;
+  | Array<
+    | CreateResponse2Proxy3$Outbound
+    | CreateResponse2Proxy2$Outbound
+    | CreateResponse21$Outbound
+  >;
 
 /** @internal */
 export const CreateResponseInput$outboundSchema: z.ZodType<
@@ -2705,6 +2861,7 @@ export const CreateResponseInput$outboundSchema: z.ZodType<
 > = z.union([
   z.string(),
   z.array(z.union([
+    z.lazy(() => CreateResponse2Proxy3$outboundSchema),
     z.lazy(() => CreateResponse2Proxy2$outboundSchema),
     z.lazy(() => CreateResponse21$outboundSchema),
   ])),
@@ -3740,6 +3897,7 @@ export const CreateResponseRequestBody$inboundSchema: z.ZodType<
   input: z.union([
     z.string(),
     z.array(z.union([
+      z.lazy(() => CreateResponse2Proxy3$inboundSchema),
       z.lazy(() => CreateResponse2Proxy2$inboundSchema),
       z.lazy(() => CreateResponse21$inboundSchema),
     ])),
@@ -3784,7 +3942,11 @@ export type CreateResponseRequestBody$Outbound = {
   text?: Text$Outbound | null | undefined;
   input:
     | string
-    | Array<CreateResponse2Proxy2$Outbound | CreateResponse21$Outbound>;
+    | Array<
+      | CreateResponse2Proxy3$Outbound
+      | CreateResponse2Proxy2$Outbound
+      | CreateResponse21$Outbound
+    >;
   include?: Array<string> | null | undefined;
   parallel_tool_calls?: boolean | null | undefined;
   store: boolean | null;
@@ -3818,6 +3980,7 @@ export const CreateResponseRequestBody$outboundSchema: z.ZodType<
   input: z.union([
     z.string(),
     z.array(z.union([
+      z.lazy(() => CreateResponse2Proxy3$outboundSchema),
       z.lazy(() => CreateResponse2Proxy2$outboundSchema),
       z.lazy(() => CreateResponse21$outboundSchema),
     ])),
