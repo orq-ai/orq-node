@@ -5,11 +5,13 @@
 ```typescript
 import { Five } from "@orq-ai/node/models/operations";
 
-let value: Five = "elevenlabs/eleven_flash_v2_5";
+let value: Five = {
+  type: "contains_email",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"elevenlabs/eleven_flash_v2_5"
-```
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                         | [operations.GetEvalsFunctionParamsEvalsResponse200Type](../../models/operations/getevalsfunctionparamsevalsresponse200type.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |

@@ -5,11 +5,13 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = "elevenlabs/eleven_flash_v2";
+let value: Six = {
+  type: "contains_url",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"elevenlabs/eleven_flash_v2"
-```
+| Field                                                                                                                                                        | Type                                                                                                                                                         | Required                                                                                                                                                     | Description                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                       | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                           | N/A                                                                                                                                                          |

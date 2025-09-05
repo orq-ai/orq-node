@@ -3,7 +3,6 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { Batches } from "./batches.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
@@ -15,7 +14,6 @@ import { Files } from "./files.js";
 import { Knowledge } from "./knowledge.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
-import { Proxy } from "./proxy.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
 
 export class Orq extends ClientSDK {
@@ -67,16 +65,6 @@ export class Orq extends ClientSDK {
   private _chunking?: Chunking;
   get chunking(): Chunking {
     return (this._chunking ??= new Chunking(this._options));
-  }
-
-  private _proxy?: Proxy;
-  get proxy(): Proxy {
-    return (this._proxy ??= new Proxy(this._options));
-  }
-
-  private _batches?: Batches;
-  get batches(): Batches {
-    return (this._batches ??= new Batches(this._options));
   }
 
   private _evals?: Evals;
