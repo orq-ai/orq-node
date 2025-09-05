@@ -1,6 +1,6 @@
 {
   "name": "@orq-ai/node",
-  "version": "3.12.0-rc.43",
+  "version": "3.12.0-rc.45",
   "author": "Orq",
   "bin": {
     "mcp": "bin/mcp-server.js"
