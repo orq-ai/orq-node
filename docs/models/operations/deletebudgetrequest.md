@@ -1,0 +1,17 @@
+# DeleteBudgetRequest
+
+## Example Usage
+
+```typescript
+import { DeleteBudgetRequest } from "@orq-ai/node/models/operations";
+
+let value: DeleteBudgetRequest = {
+  id: "01K1J1AX8PGR63QRP7423NY008",
+};
+```
+
+## Fields
+
+| Field                      | Type                       | Required                   | Description                | Example                    |
+| -------------------------- | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
+| `id`                       | *string*                   | :heavy_check_mark:         | N/A                        | 01K1J1AX8PGR63QRP7423NY008 |

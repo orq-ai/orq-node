@@ -53,6 +53,7 @@ export const DeploymentInvokeProvider = {
   Litellm: "litellm",
   Openailike: "openailike",
   Cerebras: "cerebras",
+  Bytedance: "bytedance",
 } as const;
 /**
  * The provider used to generate the response

@@ -117,6 +117,48 @@ export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesT
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType
   >;
 
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsType = {
+  FilePath: "file_path",
+} as const;
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsType =
+  ClosedEnum<typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsType>;
+
+export type DeploymentCreateMetricAnnotationsFilePath = {
+  fileId: string;
+};
+
+export type DeploymentCreateMetricAnnotations2 = {
+  type: DeploymentCreateMetricAnnotationsDeploymentsMetricsType;
+  text: string;
+  filePath: DeploymentCreateMetricAnnotationsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const DeploymentCreateMetricAnnotationsType = {
+  FileCitation: "file_citation",
+} as const;
+export type DeploymentCreateMetricAnnotationsType = ClosedEnum<
+  typeof DeploymentCreateMetricAnnotationsType
+>;
+
+export type DeploymentCreateMetricAnnotationsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type DeploymentCreateMetricAnnotations1 = {
+  type: DeploymentCreateMetricAnnotationsType;
+  text: string;
+  fileCitation: DeploymentCreateMetricAnnotationsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type DeploymentCreateMetric2Annotations =
+  | DeploymentCreateMetricAnnotations1
+  | DeploymentCreateMetricAnnotations2;
+
 export type DeploymentCreateMetric2TextContentPart = {
   /**
    * The type of the content part.
@@ -126,6 +168,14 @@ export type DeploymentCreateMetric2TextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<
+      DeploymentCreateMetricAnnotations1 | DeploymentCreateMetricAnnotations2
+    >
+    | undefined;
 };
 
 export type DeploymentCreateMetricContentDeploymentsMetrics2 =
@@ -565,6 +615,53 @@ export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4T
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type
   >;
 
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType =
+  {
+    FilePath: "file_path",
+  } as const;
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType =
+  ClosedEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType
+  >;
+
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath = {
+  fileId: string;
+};
+
+export type DeploymentCreateMetricAnnotationsDeploymentsMetrics2 = {
+  type:
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType;
+  text: string;
+  filePath: DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath;
+  startIndex: number;
+  endIndex: number;
+};
+
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType = {
+  FileCitation: "file_citation",
+} as const;
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType =
+  ClosedEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType
+  >;
+
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation = {
+  fileId: string;
+  quote?: string | undefined;
+};
+
+export type DeploymentCreateMetricAnnotationsDeploymentsMetrics1 = {
+  type: DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType;
+  text: string;
+  fileCitation: DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation;
+  startIndex: number;
+  endIndex: number;
+};
+
+export type DeploymentCreateMetric2DeploymentsMetricsAnnotations =
+  | DeploymentCreateMetricAnnotationsDeploymentsMetrics1
+  | DeploymentCreateMetricAnnotationsDeploymentsMetrics2;
+
 export type DeploymentCreateMetric2DeploymentsMetricsTextContentPart = {
   /**
    * The type of the content part.
@@ -574,6 +671,15 @@ export type DeploymentCreateMetric2DeploymentsMetricsTextContentPart = {
    * The text content.
    */
   text: string;
+  /**
+   * Annotations for the text content.
+   */
+  annotations?:
+    | Array<
+      | DeploymentCreateMetricAnnotationsDeploymentsMetrics1
+      | DeploymentCreateMetricAnnotationsDeploymentsMetrics2
+    >
+    | undefined;
 };
 
 export type DeploymentCreateMetricContentDeploymentsMetricsRequestRequestBody2 =
@@ -1435,6 +1541,439 @@ export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMess
 }
 
 /** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsType
+  > = z.nativeEnum(DeploymentCreateMetricAnnotationsDeploymentsMetricsType);
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsType
+  > = DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsType$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsFilePath$inboundSchema: z.ZodType<
+  DeploymentCreateMetricAnnotationsFilePath,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  file_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_id": "fileId",
+  });
+});
+
+/** @internal */
+export type DeploymentCreateMetricAnnotationsFilePath$Outbound = {
+  file_id: string;
+};
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsFilePath$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsFilePath$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricAnnotationsFilePath
+  > = z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsFilePath$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsFilePath$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsFilePath$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsFilePath$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsFilePath$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricAnnotationsFilePath$Outbound;
+}
+
+export function deploymentCreateMetricAnnotationsFilePathToJSON(
+  deploymentCreateMetricAnnotationsFilePath:
+    DeploymentCreateMetricAnnotationsFilePath,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotationsFilePath$outboundSchema.parse(
+      deploymentCreateMetricAnnotationsFilePath,
+    ),
+  );
+}
+
+export function deploymentCreateMetricAnnotationsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetricAnnotationsFilePath,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotationsFilePath$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricAnnotationsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotations2$inboundSchema: z.ZodType<
+  DeploymentCreateMetricAnnotations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentCreateMetricAnnotationsDeploymentsMetricsType$inboundSchema,
+  text: z.string(),
+  file_path: z.lazy(() =>
+    DeploymentCreateMetricAnnotationsFilePath$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_path": "filePath",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type DeploymentCreateMetricAnnotations2$Outbound = {
+  type: string;
+  text: string;
+  file_path: DeploymentCreateMetricAnnotationsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentCreateMetricAnnotations2$outboundSchema: z.ZodType<
+  DeploymentCreateMetricAnnotations2$Outbound,
+  z.ZodTypeDef,
+  DeploymentCreateMetricAnnotations2
+> = z.object({
+  type: DeploymentCreateMetricAnnotationsDeploymentsMetricsType$outboundSchema,
+  text: z.string(),
+  filePath: z.lazy(() =>
+    DeploymentCreateMetricAnnotationsFilePath$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    filePath: "file_path",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotations2$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotations2$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetricAnnotations2$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotations2$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotations2$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotations2$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricAnnotations2$Outbound;
+}
+
+export function deploymentCreateMetricAnnotations2ToJSON(
+  deploymentCreateMetricAnnotations2: DeploymentCreateMetricAnnotations2,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotations2$outboundSchema.parse(
+      deploymentCreateMetricAnnotations2,
+    ),
+  );
+}
+
+export function deploymentCreateMetricAnnotations2FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentCreateMetricAnnotations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentCreateMetricAnnotations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricAnnotationsType> = z.nativeEnum(
+    DeploymentCreateMetricAnnotationsType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentCreateMetricAnnotationsType> =
+    DeploymentCreateMetricAnnotationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsType$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsFileCitation$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsFileCitation,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    file_id: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  });
+
+/** @internal */
+export type DeploymentCreateMetricAnnotationsFileCitation$Outbound = {
+  file_id: string;
+  quote?: string | undefined;
+};
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsFileCitation$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsFileCitation$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricAnnotationsFileCitation
+  > = z.object({
+    fileId: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsFileCitation$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsFileCitation$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsFileCitation$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsFileCitation$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricAnnotationsFileCitation$Outbound;
+}
+
+export function deploymentCreateMetricAnnotationsFileCitationToJSON(
+  deploymentCreateMetricAnnotationsFileCitation:
+    DeploymentCreateMetricAnnotationsFileCitation,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotationsFileCitation$outboundSchema.parse(
+      deploymentCreateMetricAnnotationsFileCitation,
+    ),
+  );
+}
+
+export function deploymentCreateMetricAnnotationsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetricAnnotationsFileCitation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotationsFileCitation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricAnnotationsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotations1$inboundSchema: z.ZodType<
+  DeploymentCreateMetricAnnotations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentCreateMetricAnnotationsType$inboundSchema,
+  text: z.string(),
+  file_citation: z.lazy(() =>
+    DeploymentCreateMetricAnnotationsFileCitation$inboundSchema
+  ),
+  start_index: z.number().int(),
+  end_index: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    "file_citation": "fileCitation",
+    "start_index": "startIndex",
+    "end_index": "endIndex",
+  });
+});
+
+/** @internal */
+export type DeploymentCreateMetricAnnotations1$Outbound = {
+  type: string;
+  text: string;
+  file_citation: DeploymentCreateMetricAnnotationsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentCreateMetricAnnotations1$outboundSchema: z.ZodType<
+  DeploymentCreateMetricAnnotations1$Outbound,
+  z.ZodTypeDef,
+  DeploymentCreateMetricAnnotations1
+> = z.object({
+  type: DeploymentCreateMetricAnnotationsType$outboundSchema,
+  text: z.string(),
+  fileCitation: z.lazy(() =>
+    DeploymentCreateMetricAnnotationsFileCitation$outboundSchema
+  ),
+  startIndex: z.number().int(),
+  endIndex: z.number().int(),
+}).transform((v) => {
+  return remap$(v, {
+    fileCitation: "file_citation",
+    startIndex: "start_index",
+    endIndex: "end_index",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotations1$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotations1$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetricAnnotations1$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotations1$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotations1$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotations1$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetricAnnotations1$Outbound;
+}
+
+export function deploymentCreateMetricAnnotations1ToJSON(
+  deploymentCreateMetricAnnotations1: DeploymentCreateMetricAnnotations1,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotations1$outboundSchema.parse(
+      deploymentCreateMetricAnnotations1,
+    ),
+  );
+}
+
+export function deploymentCreateMetricAnnotations1FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentCreateMetricAnnotations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentCreateMetricAnnotations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2Annotations$inboundSchema: z.ZodType<
+  DeploymentCreateMetric2Annotations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => DeploymentCreateMetricAnnotations1$inboundSchema),
+  z.lazy(() => DeploymentCreateMetricAnnotations2$inboundSchema),
+]);
+
+/** @internal */
+export type DeploymentCreateMetric2Annotations$Outbound =
+  | DeploymentCreateMetricAnnotations1$Outbound
+  | DeploymentCreateMetricAnnotations2$Outbound;
+
+/** @internal */
+export const DeploymentCreateMetric2Annotations$outboundSchema: z.ZodType<
+  DeploymentCreateMetric2Annotations$Outbound,
+  z.ZodTypeDef,
+  DeploymentCreateMetric2Annotations
+> = z.union([
+  z.lazy(() => DeploymentCreateMetricAnnotations1$outboundSchema),
+  z.lazy(() => DeploymentCreateMetricAnnotations2$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2Annotations$ {
+  /** @deprecated use `DeploymentCreateMetric2Annotations$inboundSchema` instead. */
+  export const inboundSchema = DeploymentCreateMetric2Annotations$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2Annotations$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2Annotations$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2Annotations$Outbound` instead. */
+  export type Outbound = DeploymentCreateMetric2Annotations$Outbound;
+}
+
+export function deploymentCreateMetric2AnnotationsToJSON(
+  deploymentCreateMetric2Annotations: DeploymentCreateMetric2Annotations,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetric2Annotations$outboundSchema.parse(
+      deploymentCreateMetric2Annotations,
+    ),
+  );
+}
+
+export function deploymentCreateMetric2AnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentCreateMetric2Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetric2Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentCreateMetric2Annotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentCreateMetric2TextContentPart$inboundSchema: z.ZodType<
   DeploymentCreateMetric2TextContentPart,
   z.ZodTypeDef,
@@ -1443,12 +1982,24 @@ export const DeploymentCreateMetric2TextContentPart$inboundSchema: z.ZodType<
   type:
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$inboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => DeploymentCreateMetricAnnotations1$inboundSchema),
+      z.lazy(() => DeploymentCreateMetricAnnotations2$inboundSchema),
+    ]),
+  ).optional(),
 });
 
 /** @internal */
 export type DeploymentCreateMetric2TextContentPart$Outbound = {
   type: string;
   text: string;
+  annotations?:
+    | Array<
+      | DeploymentCreateMetricAnnotations1$Outbound
+      | DeploymentCreateMetricAnnotations2$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -1460,6 +2011,12 @@ export const DeploymentCreateMetric2TextContentPart$outboundSchema: z.ZodType<
   type:
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyMessagesType$outboundSchema,
   text: z.string(),
+  annotations: z.array(
+    z.union([
+      z.lazy(() => DeploymentCreateMetricAnnotations1$outboundSchema),
+      z.lazy(() => DeploymentCreateMetricAnnotations2$outboundSchema),
+    ]),
+  ).optional(),
 });
 
 /**
@@ -3416,6 +3973,491 @@ export namespace DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoi
 }
 
 /** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType
+  > = z.nativeEnum(
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType
+  > =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    file_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  });
+
+/** @internal */
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound =
+  {
+    file_id: string;
+  };
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath
+  > = z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound;
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetricsFilePathToJSON(
+  deploymentCreateMetricAnnotationsDeploymentsMetricsFilePath:
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema
+      .parse(deploymentCreateMetricAnnotationsDeploymentsMetricsFilePath),
+  );
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetricsFilePathFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$inboundSchema,
+    text: z.string(),
+    file_path: z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$inboundSchema
+    ),
+    start_index: z.number().int(),
+    end_index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_path": "filePath",
+      "start_index": "startIndex",
+      "end_index": "endIndex",
+    });
+  });
+
+/** @internal */
+export type DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound = {
+  type: string;
+  text: string;
+  file_path:
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2
+  > = z.object({
+    type:
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestRequestBodyType$outboundSchema,
+    text: z.string(),
+    filePath: z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsFilePath$outboundSchema
+    ),
+    startIndex: z.number().int(),
+    endIndex: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      filePath: "file_path",
+      startIndex: "start_index",
+      endIndex: "end_index",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetrics2$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound;
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetrics2ToJSON(
+  deploymentCreateMetricAnnotationsDeploymentsMetrics2:
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema.parse(
+      deploymentCreateMetricAnnotationsDeploymentsMetrics2,
+    ),
+  );
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetrics2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetricAnnotationsDeploymentsMetrics2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricAnnotationsDeploymentsMetrics2' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType
+  > = z.nativeEnum(
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType,
+  );
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType
+  > =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    file_id: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  });
+
+/** @internal */
+export type DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound =
+  {
+    file_id: string;
+    quote?: string | undefined;
+  };
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation
+  > = z.object({
+    fileId: z.string(),
+    quote: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound;
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitationToJSON(
+  deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation:
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema
+      .parse(deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation),
+  );
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetricsFileCitationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    type:
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$inboundSchema,
+    text: z.string(),
+    file_citation: z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$inboundSchema
+    ),
+    start_index: z.number().int(),
+    end_index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_citation": "fileCitation",
+      "start_index": "startIndex",
+      "end_index": "endIndex",
+    });
+  });
+
+/** @internal */
+export type DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound = {
+  type: string;
+  text: string;
+  file_citation:
+    DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$Outbound;
+  start_index: number;
+  end_index: number;
+};
+
+/** @internal */
+export const DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1
+  > = z.object({
+    type:
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsRequestType$outboundSchema,
+    text: z.string(),
+    fileCitation: z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetricsFileCitation$outboundSchema
+    ),
+    startIndex: z.number().int(),
+    endIndex: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileCitation: "file_citation",
+      startIndex: "start_index",
+      endIndex: "end_index",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetricAnnotationsDeploymentsMetrics1$ {
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound;
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetrics1ToJSON(
+  deploymentCreateMetricAnnotationsDeploymentsMetrics1:
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema.parse(
+      deploymentCreateMetricAnnotationsDeploymentsMetrics1,
+    ),
+  );
+}
+
+export function deploymentCreateMetricAnnotationsDeploymentsMetrics1FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetricAnnotationsDeploymentsMetrics1,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetricAnnotationsDeploymentsMetrics1' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema:
+  z.ZodType<
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([
+    z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema
+    ),
+    z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema
+    ),
+  ]);
+
+/** @internal */
+export type DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound =
+  | DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound
+  | DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound;
+
+/** @internal */
+export const DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema:
+  z.ZodType<
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound,
+    z.ZodTypeDef,
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations
+  > = z.union([
+    z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema
+    ),
+    z.lazy(() =>
+      DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema
+    ),
+  ]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentCreateMetric2DeploymentsMetricsAnnotations$ {
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema;
+  /** @deprecated use `DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound` instead. */
+  export type Outbound =
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations$Outbound;
+}
+
+export function deploymentCreateMetric2DeploymentsMetricsAnnotationsToJSON(
+  deploymentCreateMetric2DeploymentsMetricsAnnotations:
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations,
+): string {
+  return JSON.stringify(
+    DeploymentCreateMetric2DeploymentsMetricsAnnotations$outboundSchema.parse(
+      deploymentCreateMetric2DeploymentsMetricsAnnotations,
+    ),
+  );
+}
+
+export function deploymentCreateMetric2DeploymentsMetricsAnnotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  DeploymentCreateMetric2DeploymentsMetricsAnnotations,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      DeploymentCreateMetric2DeploymentsMetricsAnnotations$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'DeploymentCreateMetric2DeploymentsMetricsAnnotations' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSchema:
   z.ZodType<
     DeploymentCreateMetric2DeploymentsMetricsTextContentPart,
@@ -3425,6 +4467,16 @@ export const DeploymentCreateMetric2DeploymentsMetricsTextContentPart$inboundSch
     type:
       DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$inboundSchema,
     text: z.string(),
+    annotations: z.array(
+      z.union([
+        z.lazy(() =>
+          DeploymentCreateMetricAnnotationsDeploymentsMetrics1$inboundSchema
+        ),
+        z.lazy(() =>
+          DeploymentCreateMetricAnnotationsDeploymentsMetrics2$inboundSchema
+        ),
+      ]),
+    ).optional(),
   });
 
 /** @internal */
@@ -3432,6 +4484,12 @@ export type DeploymentCreateMetric2DeploymentsMetricsTextContentPart$Outbound =
   {
     type: string;
     text: string;
+    annotations?:
+      | Array<
+        | DeploymentCreateMetricAnnotationsDeploymentsMetrics1$Outbound
+        | DeploymentCreateMetricAnnotationsDeploymentsMetrics2$Outbound
+      >
+      | undefined;
   };
 
 /** @internal */
@@ -3444,6 +4502,16 @@ export const DeploymentCreateMetric2DeploymentsMetricsTextContentPart$outboundSc
     type:
       DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices4Type$outboundSchema,
     text: z.string(),
+    annotations: z.array(
+      z.union([
+        z.lazy(() =>
+          DeploymentCreateMetricAnnotationsDeploymentsMetrics1$outboundSchema
+        ),
+        z.lazy(() =>
+          DeploymentCreateMetricAnnotationsDeploymentsMetrics2$outboundSchema
+        ),
+      ]),
+    ).optional(),
   });
 
 /**

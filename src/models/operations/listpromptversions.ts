@@ -297,6 +297,7 @@ export const ListPromptVersionsProvider = {
   Litellm: "litellm",
   Openailike: "openailike",
   Cerebras: "cerebras",
+  Bytedance: "bytedance",
 } as const;
 export type ListPromptVersionsProvider = ClosedEnum<
   typeof ListPromptVersionsProvider

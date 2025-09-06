@@ -5,11 +5,11 @@
 ```typescript
 import { DeploymentStreamMessageType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentStreamMessageType = "function";
+let value: DeploymentStreamMessageType = "tool_calls";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"tool_calls"
 ```

@@ -355,6 +355,7 @@ export const SearchKnowledgeProvider = {
   Litellm: "litellm",
   Openailike: "openailike",
   Cerebras: "cerebras",
+  Bytedance: "bytedance",
 } as const;
 export type SearchKnowledgeProvider = ClosedEnum<
   typeof SearchKnowledgeProvider
@@ -418,6 +419,7 @@ export const SearchKnowledgeKnowledgeProvider = {
   Litellm: "litellm",
   Openailike: "openailike",
   Cerebras: "cerebras",
+  Bytedance: "bytedance",
 } as const;
 export type SearchKnowledgeKnowledgeProvider = ClosedEnum<
   typeof SearchKnowledgeKnowledgeProvider

@@ -13,6 +13,11 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$budgetsCreate } from "./tools/budgetsCreate.js";
+import { tool$budgetsDelete } from "./tools/budgetsDelete.js";
+import { tool$budgetsGet } from "./tools/budgetsGet.js";
+import { tool$budgetsList } from "./tools/budgetsList.js";
+import { tool$budgetsUpdate } from "./tools/budgetsUpdate.js";
 import { tool$chunkingParse } from "./tools/chunkingParse.js";
 import { tool$contactsCreate } from "./tools/contactsCreate.js";
 import { tool$contactsDelete } from "./tools/contactsDelete.js";
@@ -120,7 +125,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.11.15",
+    version: "3.12.0",
   });
 
   const client = new OrqCore({
@@ -245,6 +250,11 @@ export function createMCPServer(deps: {
   tool(tool$evalsRagasResponseRelevancy);
   tool(tool$evalsRagasSummarization);
   tool(tool$evalsInvoke);
+  tool(tool$budgetsList);
+  tool(tool$budgetsCreate);
+  tool(tool$budgetsGet);
+  tool(tool$budgetsUpdate);
+  tool(tool$budgetsDelete);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

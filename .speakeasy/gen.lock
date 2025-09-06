@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: fc444c59d236d5f7ec94f7a6682fb1bc
+  docChecksum: 082503933be925ce9dc9c949466301c1
   docVersion: "2.0"
-  speakeasyVersion: 1.609.0
-  generationVersion: 2.692.0
-  releaseVersion: 3.11.15
-  configChecksum: 30d8b544b5b27b18aed34a5f598d47ea
+  speakeasyVersion: 1.611.0
+  generationVersion: 2.694.1
+  releaseVersion: 3.12.0
+  configChecksum: 5f9387a6fea41a7c82671b7dc5c1104a
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -56,6 +56,12 @@ generatedFiles:
   - docs/models/components/andlte.md
   - docs/models/components/andne.md
   - docs/models/components/andnin.md
+  - docs/models/components/annotations.md
+  - docs/models/components/annotations1.md
+  - docs/models/components/annotations2.md
+  - docs/models/components/annotationsfilecitation.md
+  - docs/models/components/annotationsfilepath.md
+  - docs/models/components/annotationstype.md
   - docs/models/components/assistantmessage.md
   - docs/models/components/audio.md
   - docs/models/components/content.md
@@ -79,6 +85,11 @@ generatedFiles:
   - docs/models/components/deploymentsandin.md
   - docs/models/components/deploymentsandne.md
   - docs/models/components/deploymentsandnin.md
+  - docs/models/components/deploymentsannotations1.md
+  - docs/models/components/deploymentsannotations2.md
+  - docs/models/components/deploymentsannotationsmessages4type.md
+  - docs/models/components/deploymentsannotationsmessagestype.md
+  - docs/models/components/deploymentsannotationstype.md
   - docs/models/components/deploymentscontent2.md
   - docs/models/components/deploymentscontentmessages2.md
   - docs/models/components/deploymentsmessages3role.md
@@ -100,6 +111,8 @@ generatedFiles:
   - docs/models/components/documents.md
   - docs/models/components/eq.md
   - docs/models/components/exists.md
+  - docs/models/components/filecitation.md
+  - docs/models/components/filepath.md
   - docs/models/components/filet.md
   - docs/models/components/format.md
   - docs/models/components/four.md
@@ -161,6 +174,7 @@ generatedFiles:
   - docs/models/components/two2.md
   - docs/models/components/two3.md
   - docs/models/components/two4.md
+  - docs/models/components/twoannotations.md
   - docs/models/components/twodetail.md
   - docs/models/components/twofile.md
   - docs/models/components/twoformat.md
@@ -270,10 +284,17 @@ generatedFiles:
   - docs/models/operations/andlte.md
   - docs/models/operations/andne.md
   - docs/models/operations/andnin.md
+  - docs/models/operations/annotations.md
+  - docs/models/operations/annotations1.md
+  - docs/models/operations/annotations2.md
+  - docs/models/operations/annotationsfilecitation.md
+  - docs/models/operations/annotationsfilepath.md
+  - docs/models/operations/annotationstype.md
   - docs/models/operations/assistantmessage.md
   - docs/models/operations/audio.md
   - docs/models/operations/bertscore.md
   - docs/models/operations/boolean.md
+  - docs/models/operations/budget.md
   - docs/models/operations/choices.md
   - docs/models/operations/choicesassistantmessage.md
   - docs/models/operations/choicesaudio.md
@@ -297,8 +318,17 @@ generatedFiles:
   - docs/models/operations/chunkingrequestthreshold.md
   - docs/models/operations/chunks.md
   - docs/models/operations/cleardatasetrequest.md
+  - docs/models/operations/consumption.md
   - docs/models/operations/content.md
   - docs/models/operations/content2.md
+  - docs/models/operations/createbudgetbudget.md
+  - docs/models/operations/createbudgetperiod.md
+  - docs/models/operations/createbudgetrequestbody.md
+  - docs/models/operations/createbudgetrequestbodybudgetstype.md
+  - docs/models/operations/createbudgetrequestbodyperiod.md
+  - docs/models/operations/createbudgetrequestbodytype.md
+  - docs/models/operations/createbudgetresponsebody.md
+  - docs/models/operations/createbudgettype.md
   - docs/models/operations/createchunkknowledgemetadata.md
   - docs/models/operations/createchunkmetadata.md
   - docs/models/operations/createchunkrequest.md
@@ -311,10 +341,12 @@ generatedFiles:
   - docs/models/operations/createdatasetitem22.md
   - docs/models/operations/createdatasetitem23.md
   - docs/models/operations/createdatasetitem24.md
+  - docs/models/operations/createdatasetitem2annotations.md
   - docs/models/operations/createdatasetitem2datasets1.md
   - docs/models/operations/createdatasetitem2datasets2.md
   - docs/models/operations/createdatasetitem2datasets3.md
   - docs/models/operations/createdatasetitem2datasets4.md
+  - docs/models/operations/createdatasetitem2datasetsannotations.md
   - docs/models/operations/createdatasetitem2datasetsdetail.md
   - docs/models/operations/createdatasetitem2datasetsfile.md
   - docs/models/operations/createdatasetitem2datasetsformat.md
@@ -341,6 +373,18 @@ generatedFiles:
   - docs/models/operations/createdatasetitem2refusalcontentpart.md
   - docs/models/operations/createdatasetitem2textcontentpart.md
   - docs/models/operations/createdatasetitem2type.md
+  - docs/models/operations/createdatasetitemannotations1.md
+  - docs/models/operations/createdatasetitemannotations2.md
+  - docs/models/operations/createdatasetitemannotationsdatasets1.md
+  - docs/models/operations/createdatasetitemannotationsdatasets2.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsfilecitation.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsfilepath.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsresponse200type.md
+  - docs/models/operations/createdatasetitemannotationsdatasetsresponsetype.md
+  - docs/models/operations/createdatasetitemannotationsdatasetstype.md
+  - docs/models/operations/createdatasetitemannotationsfilecitation.md
+  - docs/models/operations/createdatasetitemannotationsfilepath.md
+  - docs/models/operations/createdatasetitemannotationstype.md
   - docs/models/operations/createdatasetitemcontent2.md
   - docs/models/operations/createdatasetitemcontentdatasets2.md
   - docs/models/operations/createdatasetitemcontentdatasetsresponse2.md
@@ -512,6 +556,7 @@ generatedFiles:
   - docs/models/operations/datamethod.md
   - docs/models/operations/datapython.md
   - docs/models/operations/datatype.md
+  - docs/models/operations/deletebudgetrequest.md
   - docs/models/operations/deletechunkrequest.md
   - docs/models/operations/deletecontactrequest.md
   - docs/models/operations/deletedatapointrequest.md
@@ -524,10 +569,12 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
   - docs/models/operations/deploymentcreatemetric24.md
+  - docs/models/operations/deploymentcreatemetric2annotations.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics1.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics2.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics3.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetrics4.md
+  - docs/models/operations/deploymentcreatemetric2deploymentsmetricsannotations.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsdetail.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsfile.md
   - docs/models/operations/deploymentcreatemetric2deploymentsmetricsformat.md
@@ -554,6 +601,18 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetric2refusalcontentpart.md
   - docs/models/operations/deploymentcreatemetric2textcontentpart.md
   - docs/models/operations/deploymentcreatemetric2type.md
+  - docs/models/operations/deploymentcreatemetricannotations1.md
+  - docs/models/operations/deploymentcreatemetricannotations2.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetrics1.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetrics2.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsfilecitation.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsfilepath.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsrequestrequestbodytype.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricsrequesttype.md
+  - docs/models/operations/deploymentcreatemetricannotationsdeploymentsmetricstype.md
+  - docs/models/operations/deploymentcreatemetricannotationsfilecitation.md
+  - docs/models/operations/deploymentcreatemetricannotationsfilepath.md
+  - docs/models/operations/deploymentcreatemetricannotationstype.md
   - docs/models/operations/deploymentcreatemetricchoicescontent.md
   - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricscontent.md
   - docs/models/operations/deploymentcreatemetricchoicesdeploymentsmetricsrequestrequestbodyrole.md
@@ -608,6 +667,11 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigandin.md
   - docs/models/operations/deploymentgetconfigandne.md
   - docs/models/operations/deploymentgetconfigandnin.md
+  - docs/models/operations/deploymentgetconfigannotations1.md
+  - docs/models/operations/deploymentgetconfigannotations2.md
+  - docs/models/operations/deploymentgetconfigannotationsdeploymentsrequesttype.md
+  - docs/models/operations/deploymentgetconfigannotationsdeploymentstype.md
+  - docs/models/operations/deploymentgetconfigannotationstype.md
   - docs/models/operations/deploymentgetconfigcontent.md
   - docs/models/operations/deploymentgetconfigcontent2.md
   - docs/models/operations/deploymentgetconfigcontentdeployments2.md
@@ -712,10 +776,12 @@ generatedFiles:
   - docs/models/operations/deploymentstream22.md
   - docs/models/operations/deploymentstream23.md
   - docs/models/operations/deploymentstream24.md
+  - docs/models/operations/deploymentstream2annotations.md
   - docs/models/operations/deploymentstream2deployments1.md
   - docs/models/operations/deploymentstream2deployments2.md
   - docs/models/operations/deploymentstream2deployments3.md
   - docs/models/operations/deploymentstream2deployments4.md
+  - docs/models/operations/deploymentstream2deploymentsannotations.md
   - docs/models/operations/deploymentstream2deploymentsdetail.md
   - docs/models/operations/deploymentstream2deploymentsfile.md
   - docs/models/operations/deploymentstream2deploymentsformat.md
@@ -755,6 +821,18 @@ generatedFiles:
   - docs/models/operations/deploymentstreamandlte.md
   - docs/models/operations/deploymentstreamandne.md
   - docs/models/operations/deploymentstreamandnin.md
+  - docs/models/operations/deploymentstreamannotations1.md
+  - docs/models/operations/deploymentstreamannotations2.md
+  - docs/models/operations/deploymentstreamannotationsdeployments1.md
+  - docs/models/operations/deploymentstreamannotationsdeployments2.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsfilecitation.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsfilepath.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsrequestrequestbodytype.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentsrequesttype.md
+  - docs/models/operations/deploymentstreamannotationsdeploymentstype.md
+  - docs/models/operations/deploymentstreamannotationsfilecitation.md
+  - docs/models/operations/deploymentstreamannotationsfilepath.md
+  - docs/models/operations/deploymentstreamannotationstype.md
   - docs/models/operations/deploymentstreamchoices.md
   - docs/models/operations/deploymentstreamcontent2.md
   - docs/models/operations/deploymentstreamcontentdeployments2.md
@@ -775,8 +853,11 @@ generatedFiles:
   - docs/models/operations/deploymentstreammessage1.md
   - docs/models/operations/deploymentstreammessage2.md
   - docs/models/operations/deploymentstreammessage3.md
+  - docs/models/operations/deploymentstreammessagedeploymentsresponse200type.md
   - docs/models/operations/deploymentstreammessagedeploymentsresponserole.md
+  - docs/models/operations/deploymentstreammessagedeploymentsresponsetype.md
   - docs/models/operations/deploymentstreammessagedeploymentsrole.md
+  - docs/models/operations/deploymentstreammessagedeploymentstype.md
   - docs/models/operations/deploymentstreammessagefunction.md
   - docs/models/operations/deploymentstreammessagerole.md
   - docs/models/operations/deploymentstreammessages.md
@@ -957,6 +1038,7 @@ generatedFiles:
   - docs/models/operations/exists.md
   - docs/models/operations/feedback.md
   - docs/models/operations/fifteen.md
+  - docs/models/operations/filecitation.md
   - docs/models/operations/filedeleterequest.md
   - docs/models/operations/filegetpurpose.md
   - docs/models/operations/filegetrequest.md
@@ -966,6 +1048,7 @@ generatedFiles:
   - docs/models/operations/filelistpurpose.md
   - docs/models/operations/filelistrequest.md
   - docs/models/operations/filelistresponsebody.md
+  - docs/models/operations/filepath.md
   - docs/models/operations/filet.md
   - docs/models/operations/fileuploadfile.md
   - docs/models/operations/fileuploadpurpose.md
@@ -1026,6 +1109,12 @@ generatedFiles:
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
   - docs/models/operations/getallpromptsverbosity.md
+  - docs/models/operations/getbudgetbudget.md
+  - docs/models/operations/getbudgetconsumption.md
+  - docs/models/operations/getbudgetperiod.md
+  - docs/models/operations/getbudgetrequest.md
+  - docs/models/operations/getbudgetresponsebody.md
+  - docs/models/operations/getbudgettype.md
   - docs/models/operations/getevalsdata.md
   - docs/models/operations/getevalsdataevalsguardrailconfig.md
   - docs/models/operations/getevalsdataevalsresponse200applicationjsonguardrailconfig.md
@@ -1248,6 +1337,14 @@ generatedFiles:
   - docs/models/operations/knowledgefilterand.md
   - docs/models/operations/knowledgefilteror.md
   - docs/models/operations/language.md
+  - docs/models/operations/listbudgetsbudget.md
+  - docs/models/operations/listbudgetsconsumption.md
+  - docs/models/operations/listbudgetsdata.md
+  - docs/models/operations/listbudgetsobject.md
+  - docs/models/operations/listbudgetsperiod.md
+  - docs/models/operations/listbudgetsrequest.md
+  - docs/models/operations/listbudgetsresponsebody.md
+  - docs/models/operations/listbudgetstype.md
   - docs/models/operations/listchunksdata.md
   - docs/models/operations/listchunksmetadata.md
   - docs/models/operations/listchunksobject.md
@@ -1260,6 +1357,7 @@ generatedFiles:
   - docs/models/operations/listdatasetdatapoints22.md
   - docs/models/operations/listdatasetdatapoints23.md
   - docs/models/operations/listdatasetdatapoints24.md
+  - docs/models/operations/listdatasetdatapoints2annotations.md
   - docs/models/operations/listdatasetdatapoints2datasetsresponse200applicationjsonresponsebodytype.md
   - docs/models/operations/listdatasetdatapoints2datasetsresponse200applicationjsontype.md
   - docs/models/operations/listdatasetdatapoints2datasetsresponse200type.md
@@ -1273,6 +1371,12 @@ generatedFiles:
   - docs/models/operations/listdatasetdatapoints2refusalcontentpart.md
   - docs/models/operations/listdatasetdatapoints2textcontentpart.md
   - docs/models/operations/listdatasetdatapoints2type.md
+  - docs/models/operations/listdatasetdatapointsannotations1.md
+  - docs/models/operations/listdatasetdatapointsannotations2.md
+  - docs/models/operations/listdatasetdatapointsannotationsdatasetstype.md
+  - docs/models/operations/listdatasetdatapointsannotationsfilecitation.md
+  - docs/models/operations/listdatasetdatapointsannotationsfilepath.md
+  - docs/models/operations/listdatasetdatapointsannotationstype.md
   - docs/models/operations/listdatasetdatapointscontent2.md
   - docs/models/operations/listdatasetdatapointscontentdatasets2.md
   - docs/models/operations/listdatasetdatapointsdata.md
@@ -1426,6 +1530,7 @@ generatedFiles:
   - docs/models/operations/parseresponsebody.md
   - docs/models/operations/parsethreshold2.md
   - docs/models/operations/performance.md
+  - docs/models/operations/period.md
   - docs/models/operations/photorealversion.md
   - docs/models/operations/prefixmessages.md
   - docs/models/operations/prefixmessagesassistantmessage.md
@@ -1445,6 +1550,7 @@ generatedFiles:
   - docs/models/operations/python.md
   - docs/models/operations/queryparamfilterby.md
   - docs/models/operations/queryparamstatus.md
+  - docs/models/operations/queryparamtype.md
   - docs/models/operations/ragas.md
   - docs/models/operations/ragasmetric.md
   - docs/models/operations/reasoningeffort.md
@@ -1455,11 +1561,14 @@ generatedFiles:
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
   - docs/models/operations/requestbody.md
+  - docs/models/operations/requestbody1.md
+  - docs/models/operations/requestbody2.md
   - docs/models/operations/requestbodyguardrailconfig.md
   - docs/models/operations/requestbodyhttp.md
   - docs/models/operations/requestbodyjson.md
   - docs/models/operations/requestbodyllm.md
   - docs/models/operations/requestbodymethod.md
+  - docs/models/operations/requestbodyperiod.md
   - docs/models/operations/requestbodypython.md
   - docs/models/operations/requestbodytype.md
   - docs/models/operations/rerankconfig.md
@@ -1489,6 +1598,7 @@ generatedFiles:
   - docs/models/operations/retrievedatapoint22.md
   - docs/models/operations/retrievedatapoint23.md
   - docs/models/operations/retrievedatapoint24.md
+  - docs/models/operations/retrievedatapoint2annotations.md
   - docs/models/operations/retrievedatapoint2datasetsresponse200applicationjsonresponsebodytype.md
   - docs/models/operations/retrievedatapoint2datasetsresponse200applicationjsontype.md
   - docs/models/operations/retrievedatapoint2datasetsresponse200type.md
@@ -1502,6 +1612,12 @@ generatedFiles:
   - docs/models/operations/retrievedatapoint2refusalcontentpart.md
   - docs/models/operations/retrievedatapoint2textcontentpart.md
   - docs/models/operations/retrievedatapoint2type.md
+  - docs/models/operations/retrievedatapointannotations1.md
+  - docs/models/operations/retrievedatapointannotations2.md
+  - docs/models/operations/retrievedatapointannotationsdatasetstype.md
+  - docs/models/operations/retrievedatapointannotationsfilecitation.md
+  - docs/models/operations/retrievedatapointannotationsfilepath.md
+  - docs/models/operations/retrievedatapointannotationstype.md
   - docs/models/operations/retrievedatapointcontent2.md
   - docs/models/operations/retrievedatapointcontentdatasets2.md
   - docs/models/operations/retrievedatapointmessages.md
@@ -1637,6 +1753,7 @@ generatedFiles:
   - docs/models/operations/two2.md
   - docs/models/operations/two3.md
   - docs/models/operations/two4.md
+  - docs/models/operations/twoannotations.md
   - docs/models/operations/twodetail.md
   - docs/models/operations/twofile.md
   - docs/models/operations/twoformat.md
@@ -1647,6 +1764,13 @@ generatedFiles:
   - docs/models/operations/twotype.md
   - docs/models/operations/type.md
   - docs/models/operations/typescript.md
+  - docs/models/operations/updatebudgetbudget.md
+  - docs/models/operations/updatebudgetconsumption.md
+  - docs/models/operations/updatebudgetperiod.md
+  - docs/models/operations/updatebudgetrequest.md
+  - docs/models/operations/updatebudgetrequestbody.md
+  - docs/models/operations/updatebudgetresponsebody.md
+  - docs/models/operations/updatebudgettype.md
   - docs/models/operations/updatechunkknowledgemetadata.md
   - docs/models/operations/updatechunkmetadata.md
   - docs/models/operations/updatechunkrequest.md
@@ -1660,10 +1784,12 @@ generatedFiles:
   - docs/models/operations/updatedatapoint22.md
   - docs/models/operations/updatedatapoint23.md
   - docs/models/operations/updatedatapoint24.md
+  - docs/models/operations/updatedatapoint2annotations.md
   - docs/models/operations/updatedatapoint2datasets1.md
   - docs/models/operations/updatedatapoint2datasets2.md
   - docs/models/operations/updatedatapoint2datasets3.md
   - docs/models/operations/updatedatapoint2datasets4.md
+  - docs/models/operations/updatedatapoint2datasetsannotations.md
   - docs/models/operations/updatedatapoint2datasetsdetail.md
   - docs/models/operations/updatedatapoint2datasetsfile.md
   - docs/models/operations/updatedatapoint2datasetsformat.md
@@ -1690,6 +1816,18 @@ generatedFiles:
   - docs/models/operations/updatedatapoint2refusalcontentpart.md
   - docs/models/operations/updatedatapoint2textcontentpart.md
   - docs/models/operations/updatedatapoint2type.md
+  - docs/models/operations/updatedatapointannotations1.md
+  - docs/models/operations/updatedatapointannotations2.md
+  - docs/models/operations/updatedatapointannotationsdatasets1.md
+  - docs/models/operations/updatedatapointannotationsdatasets2.md
+  - docs/models/operations/updatedatapointannotationsdatasetsfilecitation.md
+  - docs/models/operations/updatedatapointannotationsdatasetsfilepath.md
+  - docs/models/operations/updatedatapointannotationsdatasetsresponse200type.md
+  - docs/models/operations/updatedatapointannotationsdatasetsresponsetype.md
+  - docs/models/operations/updatedatapointannotationsdatasetstype.md
+  - docs/models/operations/updatedatapointannotationsfilecitation.md
+  - docs/models/operations/updatedatapointannotationsfilepath.md
+  - docs/models/operations/updatedatapointannotationstype.md
   - docs/models/operations/updatedatapointcontent2.md
   - docs/models/operations/updatedatapointcontentdatasets2.md
   - docs/models/operations/updatedatapointcontentdatasetsresponse2.md
@@ -1893,6 +2031,7 @@ generatedFiles:
   - docs/models/operations/usermessage.md
   - docs/models/operations/value.md
   - docs/models/operations/verbosity.md
+  - docs/sdks/budgets/README.md
   - docs/sdks/chunking/README.md
   - docs/sdks/contacts/README.md
   - docs/sdks/datasets/README.md
@@ -1914,6 +2053,11 @@ generatedFiles:
   - jsr.json
   - package.json
   - src/core.ts
+  - src/funcs/budgetsCreate.ts
+  - src/funcs/budgetsDelete.ts
+  - src/funcs/budgetsGet.ts
+  - src/funcs/budgetsList.ts
+  - src/funcs/budgetsUpdate.ts
   - src/funcs/chunkingParse.ts
   - src/funcs/contactsCreate.ts
   - src/funcs/contactsDelete.ts
@@ -2042,6 +2186,11 @@ generatedFiles:
   - src/mcp-server/server.ts
   - src/mcp-server/shared.ts
   - src/mcp-server/tools.ts
+  - src/mcp-server/tools/budgetsCreate.ts
+  - src/mcp-server/tools/budgetsDelete.ts
+  - src/mcp-server/tools/budgetsGet.ts
+  - src/mcp-server/tools/budgetsList.ts
+  - src/mcp-server/tools/budgetsUpdate.ts
   - src/mcp-server/tools/chunkingParse.ts
   - src/mcp-server/tools/contactsCreate.ts
   - src/mcp-server/tools/contactsDelete.ts
@@ -2194,6 +2343,7 @@ generatedFiles:
   - src/models/errors/updateeval.ts
   - src/models/errors/updateprompt.ts
   - src/models/operations/cleardataset.ts
+  - src/models/operations/createbudget.ts
   - src/models/operations/createchunk.ts
   - src/models/operations/createcontact.ts
   - src/models/operations/createdataset.ts
@@ -2203,6 +2353,7 @@ generatedFiles:
   - src/models/operations/createfeedback.ts
   - src/models/operations/createknowledge.ts
   - src/models/operations/createprompt.ts
+  - src/models/operations/deletebudget.ts
   - src/models/operations/deletechunk.ts
   - src/models/operations/deletecontact.ts
   - src/models/operations/deletedatapoint.ts
@@ -2258,6 +2409,7 @@ generatedFiles:
   - src/models/operations/filelist.ts
   - src/models/operations/fileupload.ts
   - src/models/operations/getallprompts.ts
+  - src/models/operations/getbudget.ts
   - src/models/operations/getevals.ts
   - src/models/operations/getonechunk.ts
   - src/models/operations/getoneknowledge.ts
@@ -2265,6 +2417,7 @@ generatedFiles:
   - src/models/operations/getpromptversion.ts
   - src/models/operations/index.ts
   - src/models/operations/invokeeval.ts
+  - src/models/operations/listbudgets.ts
   - src/models/operations/listchunks.ts
   - src/models/operations/listcontacts.ts
   - src/models/operations/listdatasetdatapoints.ts
@@ -2280,6 +2433,7 @@ generatedFiles:
   - src/models/operations/retrievedataset.ts
   - src/models/operations/retrievedatasource.ts
   - src/models/operations/searchknowledge.ts
+  - src/models/operations/updatebudget.ts
   - src/models/operations/updatechunk.ts
   - src/models/operations/updatecontact.ts
   - src/models/operations/updatedatapoint.ts
@@ -2288,6 +2442,7 @@ generatedFiles:
   - src/models/operations/updateeval.ts
   - src/models/operations/updateknowledge.ts
   - src/models/operations/updateprompt.ts
+  - src/sdk/budgets.ts
   - src/sdk/chunking.ts
   - src/sdk/contacts.ts
   - src/sdk/datasets.ts
@@ -2321,7 +2476,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-17T14:04:15.852Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-06T09:10:41.187Z"}
   CreateFeedback:
     "":
       requestBody:
@@ -2379,7 +2534,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-09-04T12:16:48.985Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-09-06T09:10:44.532Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -2395,7 +2550,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-09-04T12:16:48.985Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-09-06T09:10:44.532Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -2486,7 +2641,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-09-06T09:10:41.187Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -2494,7 +2649,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-09-06T09:10:41.187Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -2506,7 +2661,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-09-06T09:10:41.187Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -2540,7 +2695,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-06T09:10:41.187Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -2551,7 +2706,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-06T09:10:41.187Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -2634,7 +2789,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01K4AAH2Y5Z3Y44RCCDBX6TAV3", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01K4F4NTCPGTP9EWCTJRKPKRH6", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -2643,7 +2798,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01K4AAH2Y51KRXFNKQEBZTVYM8", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01K4F4NTCN97W4JD14RXZ8YEQT", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -2660,7 +2815,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01K4AAH2Y6596A6CTKD9S08WQC", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01K4F4NTCQYBKN0HARWV41JDMP", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -2754,7 +2909,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-06T09:10:41.187Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -2766,7 +2921,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-04T12:16:45.621Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-06T09:10:41.187Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
@@ -3175,5 +3330,46 @@ examples:
       responses:
         "200":
           application/json: {"chunks": [{"text": "<value>", "index": 5956.23}]}
+  ListBudgets:
+    speakeasy-default-list-budgets:
+      parameters:
+        query:
+          limit: 10
+          type: "contact"
+          entity_id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV"
+          is_active: true
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [], "has_more": true}
+  CreateBudget:
+    speakeasy-default-create-budget:
+      requestBody:
+        application/json: {"type": "workspace", "period": "monthly", "amount": 250}
+      responses:
+        "200":
+          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-06T09:10:41.187Z"}
+  GetBudget:
+    speakeasy-default-get-budget:
+      parameters:
+        path:
+          id: "01K1J1AX8PGR63QRP7423NY008"
+      responses:
+        "200":
+          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-06T09:10:41.187Z"}
+  UpdateBudget:
+    speakeasy-default-update-budget:
+      parameters:
+        path:
+          id: "01K1J1AX8PGR63QRP7423NY008"
+      requestBody:
+        application/json: {"budget": {"period": "monthly", "amount": 300}, "is_active": true}
+      responses:
+        "200":
+          application/json: {"_id": "budget_01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "api_key_id": "apikey_01ARZ3NDEKTSV4RRFFQ69G5FAV", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-06T09:10:41.187Z"}
+  DeleteBudget:
+    speakeasy-default-delete-budget:
+      parameters:
+        path:
+          id: "01K1J1AX8PGR63QRP7423NY008"
 examplesVersion: 1.0.2
 generatedTests: {}
