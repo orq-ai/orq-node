@@ -18,7 +18,7 @@ const orq = new Orq({
 });
 
 async function main() {
-  const result = await orq.create({
+  const result = await orq.contacts.create({
     externalId: "user_12345",
     displayName: "Jane Smith",
     email: "jane.smith@example.com",
