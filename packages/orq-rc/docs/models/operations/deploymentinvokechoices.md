@@ -25,8 +25,8 @@ let value: DeploymentInvokeChoices = {
 
 ## Fields
 
-| Field                | Type                 | Required             | Description          |
-| -------------------- | -------------------- | -------------------- | -------------------- |
-| `index`              | *number*             | :heavy_check_mark:   | N/A                  |
-| `message`            | *operations.Message* | :heavy_check_mark:   | N/A                  |
-| `finishReason`       | *string*             | :heavy_minus_sign:   | N/A                  |
+| Field                                | Type                                 | Required                             | Description                          |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| `index`                              | *number*                             | :heavy_check_mark:                   | N/A                                  |
+| `message`                            | *operations.DeploymentInvokeMessage* | :heavy_check_mark:                   | N/A                                  |
+| `finishReason`                       | *string*                             | :heavy_minus_sign:                   | N/A                                  |

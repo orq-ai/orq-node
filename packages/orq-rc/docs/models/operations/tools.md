@@ -1,21 +1,115 @@
 # Tools
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Tools1`
 
 ```typescript
-import { Tools } from "@orq-ai/node/models/operations";
+const value: operations.Tools1 = {
+  type: "google_search",
+};
+```
 
-let value: Tools = {
+### `operations.Tools2`
+
+```typescript
+const value: operations.Tools2 = {
+  type: "web_scraper",
+};
+```
+
+### `operations.Tools3`
+
+```typescript
+const value: operations.Tools3 = {
+  type: "call_sub_agent",
+};
+```
+
+### `operations.Tools4`
+
+```typescript
+const value: operations.Tools4 = {
+  type: "retrieve_agents",
+};
+```
+
+### `operations.Tools5`
+
+```typescript
+const value: operations.Tools5 = {
+  type: "query_memory_store",
+};
+```
+
+### `operations.Six`
+
+```typescript
+const value: operations.Six = {
+  type: "write_memory_store",
+};
+```
+
+### `operations.Seven`
+
+```typescript
+const value: operations.Seven = {
+  type: "retrieve_memory_stores",
+};
+```
+
+### `operations.Eight`
+
+```typescript
+const value: operations.Eight = {
+  type: "retrieve_knowledge_bases",
+};
+```
+
+### `operations.Nine`
+
+```typescript
+const value: operations.Nine = {
+  type: "query_knowledge_base",
+};
+```
+
+### `operations.Ten`
+
+```typescript
+const value: operations.Ten = {
+  type: "current_date",
+};
+```
+
+### `operations.Eleven`
+
+```typescript
+const value: operations.Eleven = {
+  path: "Default",
+  key: "<key>",
+  displayName: "Callie.Block91",
+  description: "blah fine hmph anti",
+  type: "http",
+  http: {
+    blueprint: {
+      url: "https://weary-sprinkles.net",
+      method: "POST",
+    },
+  },
+};
+```
+
+### `operations.Twelve`
+
+```typescript
+const value: operations.Twelve = {
   type: "function",
+  key: "<key>",
   function: {
     name: "<value>",
   },
 };
 ```
 
-## Fields
-
-| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                         | [operations.DeploymentGetConfigDeploymentsType](../../models/operations/deploymentgetconfigdeploymentstype.md) | :heavy_check_mark:                                                                                             | The type of the tool. Currently, only `function` is supported.                                                 |
-| `function`                                                                                                     | [operations.DeploymentGetConfigFunction](../../models/operations/deploymentgetconfigfunction.md)               | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

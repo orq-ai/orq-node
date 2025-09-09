@@ -5,15 +5,15 @@
 
 ### Available Operations
 
-* [list](#list) - List contact budget configurations
+* [list](#list) - List budget configurations
 * [create](#create) - Create budget configuration
-* [get](#get) - Get contact budget configuration
+* [get](#get) - Get budget configuration
 * [update](#update) - Update budget configuration
 * [delete](#delete) - Delete budget configuration
 
 ## list
 
-Retrieves a paginated list of budget configurations in your workspace. Use pagination parameters to navigate through large budget lists efficiently.
+Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.
 
 ### Example Usage
 
@@ -90,7 +90,7 @@ run();
 
 ## create
 
-Create a new budget configuration for a contact or workspace.
+Create a new budget configuration for a contact or workspace. For contacts, provide the external ID in entity_id field. For workspaces, only the type field is required (entity_id is not needed). Only one budget can exist per workspace.
 
 ### Example Usage
 
@@ -169,7 +169,7 @@ run();
 
 ## get
 
-Get contact budget configuration by ID
+Get budget configuration by ID.
 
 ### Example Usage
 

@@ -5,15 +5,11 @@
 ```typescript
 import { Fifteen } from "@orq-ai/node/models/operations";
 
-let value: Fifteen = {
-  type: "regex",
-  pattern: "<value>",
-};
+let value: Fifteen = "jina/jina-clip-v1";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                             | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydata515type.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
-| `pattern`                                                                                                                                                                                          | *string*                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+```typescript
+"jina/jina-clip-v1"
+```

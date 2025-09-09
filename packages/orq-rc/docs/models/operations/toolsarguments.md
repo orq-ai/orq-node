@@ -1,0 +1,21 @@
+# ToolsArguments
+
+## Example Usage
+
+```typescript
+import { ToolsArguments } from "@orq-ai/node/models/operations";
+
+let value: ToolsArguments = {
+  type: "boolean",
+  description: "of bank yahoo out physically insignificant nor usefully ad",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                 | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                | [operations.StreamRunAgentToolsAgentsRequestRequestBodySettings11HttpType](../../models/operations/streamrunagenttoolsagentsrequestrequestbodysettings11httptype.md)  | :heavy_check_mark:                                                                                                                                                    | The type of the argument.                                                                                                                                             |
+| `description`                                                                                                                                                         | *string*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | A description of the argument.                                                                                                                                        |
+| `sendToModel`                                                                                                                                                         | *boolean*                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                    | Whether to send the argument to the model. If set to false, the argument will not be sent to the model and needs to be provided by the user or it will be left blank. |
+| `defaultValue`                                                                                                                                                        | *operations.ToolsDefaultValue*                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                    | The default value of the argument.                                                                                                                                    |

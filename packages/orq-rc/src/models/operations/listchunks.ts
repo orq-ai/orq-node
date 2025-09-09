@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter datasources by status.
  */
-export type QueryParamStatus = Array<string> | string;
+export type ListChunksQueryParamStatus = Array<string> | string;
 
 export type ListChunksRequest = {
   /**
@@ -116,50 +116,50 @@ export type ListChunksResponseBody = {
 };
 
 /** @internal */
-export const QueryParamStatus$inboundSchema: z.ZodType<
-  QueryParamStatus,
+export const ListChunksQueryParamStatus$inboundSchema: z.ZodType<
+  ListChunksQueryParamStatus,
   z.ZodTypeDef,
   unknown
 > = z.union([z.array(z.string()), z.string()]);
 
 /** @internal */
-export type QueryParamStatus$Outbound = Array<string> | string;
+export type ListChunksQueryParamStatus$Outbound = Array<string> | string;
 
 /** @internal */
-export const QueryParamStatus$outboundSchema: z.ZodType<
-  QueryParamStatus$Outbound,
+export const ListChunksQueryParamStatus$outboundSchema: z.ZodType<
+  ListChunksQueryParamStatus$Outbound,
   z.ZodTypeDef,
-  QueryParamStatus
+  ListChunksQueryParamStatus
 > = z.union([z.array(z.string()), z.string()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace QueryParamStatus$ {
-  /** @deprecated use `QueryParamStatus$inboundSchema` instead. */
-  export const inboundSchema = QueryParamStatus$inboundSchema;
-  /** @deprecated use `QueryParamStatus$outboundSchema` instead. */
-  export const outboundSchema = QueryParamStatus$outboundSchema;
-  /** @deprecated use `QueryParamStatus$Outbound` instead. */
-  export type Outbound = QueryParamStatus$Outbound;
+export namespace ListChunksQueryParamStatus$ {
+  /** @deprecated use `ListChunksQueryParamStatus$inboundSchema` instead. */
+  export const inboundSchema = ListChunksQueryParamStatus$inboundSchema;
+  /** @deprecated use `ListChunksQueryParamStatus$outboundSchema` instead. */
+  export const outboundSchema = ListChunksQueryParamStatus$outboundSchema;
+  /** @deprecated use `ListChunksQueryParamStatus$Outbound` instead. */
+  export type Outbound = ListChunksQueryParamStatus$Outbound;
 }
 
-export function queryParamStatusToJSON(
-  queryParamStatus: QueryParamStatus,
+export function listChunksQueryParamStatusToJSON(
+  listChunksQueryParamStatus: ListChunksQueryParamStatus,
 ): string {
   return JSON.stringify(
-    QueryParamStatus$outboundSchema.parse(queryParamStatus),
+    ListChunksQueryParamStatus$outboundSchema.parse(listChunksQueryParamStatus),
   );
 }
 
-export function queryParamStatusFromJSON(
+export function listChunksQueryParamStatusFromJSON(
   jsonString: string,
-): SafeParseResult<QueryParamStatus, SDKValidationError> {
+): SafeParseResult<ListChunksQueryParamStatus, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamStatus' from JSON`,
+    (x) => ListChunksQueryParamStatus$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListChunksQueryParamStatus' from JSON`,
   );
 }
 

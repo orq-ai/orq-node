@@ -13,6 +13,14 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$agentsList } from "./tools/agentsList.js";
+import { tool$agentsListActions } from "./tools/agentsListActions.js";
+import { tool$agentsRetrieve } from "./tools/agentsRetrieve.js";
+import { tool$agentsRetrieveAction } from "./tools/agentsRetrieveAction.js";
+import { tool$agentsRetrieveTask } from "./tools/agentsRetrieveTask.js";
+import { tool$agentsReviewAction } from "./tools/agentsReviewAction.js";
+import { tool$agentsRun } from "./tools/agentsRun.js";
+import { tool$agentsStreamRun } from "./tools/agentsStreamRun.js";
 import { tool$budgetsCreate } from "./tools/budgetsCreate.js";
 import { tool$budgetsDelete } from "./tools/budgetsDelete.js";
 import { tool$budgetsGet } from "./tools/budgetsGet.js";
@@ -103,7 +111,23 @@ import { tool$knowledgeSearch } from "./tools/knowledgeSearch.js";
 import { tool$knowledgeUpdate } from "./tools/knowledgeUpdate.js";
 import { tool$knowledgeUpdateChunk } from "./tools/knowledgeUpdateChunk.js";
 import { tool$knowledgeUpdateDatasource } from "./tools/knowledgeUpdateDatasource.js";
+import { tool$memoryStoresCreate } from "./tools/memoryStoresCreate.js";
+import { tool$memoryStoresCreateDocument } from "./tools/memoryStoresCreateDocument.js";
+import { tool$memoryStoresCreateMemory } from "./tools/memoryStoresCreateMemory.js";
+import { tool$memoryStoresDelete } from "./tools/memoryStoresDelete.js";
+import { tool$memoryStoresDeleteDocument } from "./tools/memoryStoresDeleteDocument.js";
+import { tool$memoryStoresDeleteMemory } from "./tools/memoryStoresDeleteMemory.js";
+import { tool$memoryStoresList } from "./tools/memoryStoresList.js";
+import { tool$memoryStoresListDocuments } from "./tools/memoryStoresListDocuments.js";
+import { tool$memoryStoresListMemories } from "./tools/memoryStoresListMemories.js";
+import { tool$memoryStoresRetrieve } from "./tools/memoryStoresRetrieve.js";
+import { tool$memoryStoresRetrieveDocument } from "./tools/memoryStoresRetrieveDocument.js";
+import { tool$memoryStoresRetrieveMemory } from "./tools/memoryStoresRetrieveMemory.js";
+import { tool$memoryStoresUpdate } from "./tools/memoryStoresUpdate.js";
+import { tool$memoryStoresUpdateDocument } from "./tools/memoryStoresUpdateDocument.js";
+import { tool$memoryStoresUpdateMemory } from "./tools/memoryStoresUpdateMemory.js";
 import { tool$modelsList } from "./tools/modelsList.js";
+import { tool$postV2AgentsInternal } from "./tools/postV2AgentsInternal.js";
 import { tool$promptsCreate } from "./tools/promptsCreate.js";
 import { tool$promptsDelete } from "./tools/promptsDelete.js";
 import { tool$promptsGetVersion } from "./tools/promptsGetVersion.js";
@@ -125,7 +149,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.13.0-rc.1",
+    version: "3.13.0-rc.2",
   });
 
   const client = new OrqCore({
@@ -157,6 +181,7 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$postV2AgentsInternal);
   tool(tool$contactsCreate);
   tool(tool$contactsList);
   tool(tool$contactsRetrieve);
@@ -167,6 +192,14 @@ export function createMCPServer(deps: {
   tool(tool$deploymentsGetConfig);
   tool(tool$deploymentsInvoke);
   tool(tool$deploymentsStream);
+  tool(tool$agentsList);
+  tool(tool$agentsRetrieve);
+  tool(tool$agentsRetrieveTask);
+  tool(tool$agentsRun);
+  tool(tool$agentsStreamRun);
+  tool(tool$agentsListActions);
+  tool(tool$agentsRetrieveAction);
+  tool(tool$agentsReviewAction);
   tool(tool$filesCreate);
   tool(tool$filesList);
   tool(tool$filesGet);
@@ -180,6 +213,21 @@ export function createMCPServer(deps: {
   tool(tool$promptsGetVersion);
   tool(tool$remoteconfigsRetrieve);
   tool(tool$modelsList);
+  tool(tool$memoryStoresList);
+  tool(tool$memoryStoresCreate);
+  tool(tool$memoryStoresRetrieve);
+  tool(tool$memoryStoresUpdate);
+  tool(tool$memoryStoresDelete);
+  tool(tool$memoryStoresListMemories);
+  tool(tool$memoryStoresCreateMemory);
+  tool(tool$memoryStoresRetrieveMemory);
+  tool(tool$memoryStoresUpdateMemory);
+  tool(tool$memoryStoresDeleteMemory);
+  tool(tool$memoryStoresListDocuments);
+  tool(tool$memoryStoresCreateDocument);
+  tool(tool$memoryStoresRetrieveDocument);
+  tool(tool$memoryStoresUpdateDocument);
+  tool(tool$memoryStoresDeleteDocument);
   tool(tool$datasetsList);
   tool(tool$datasetsCreate);
   tool(tool$datasetsRetrieve);

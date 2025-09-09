@@ -5,10 +5,10 @@ Create budget configuration for contact or workspace
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.ContactBudget`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.ContactBudget = {
   type: "contact",
   entityId: "user_123",
   period: "monthly",
@@ -16,10 +16,10 @@ const value: operations.RequestBody1 = {
 };
 ```
 
-### `operations.RequestBody2`
+### `operations.WorkspaceBudget`
 
 ```typescript
-const value: operations.RequestBody2 = {
+const value: operations.WorkspaceBudget = {
   type: "workspace",
   period: "monthly",
   amount: 250,

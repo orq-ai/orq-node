@@ -26,17 +26,14 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.Http`
+### `operations.RequestBodyHTTP`
 
 ```typescript
-const value: operations.Http = {
+const value: operations.RequestBodyHTTP = {
   type: "http_eval",
-  url: "https://weary-sprinkles.net",
-  method: "GET",
-  headers: {
-    "key": "<value>",
-    "key1": "<value>",
-  },
+  url: "https://marvelous-jump.name/",
+  method: "POST",
+  headers: {},
   payload: {},
   path: "Default",
   key: "<key>",

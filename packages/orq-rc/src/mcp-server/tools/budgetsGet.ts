@@ -12,9 +12,9 @@ const args = {
 
 export const tool$budgetsGet: ToolDefinition<typeof args> = {
   name: "budgets-get",
-  description: `Get contact budget configuration
+  description: `Get budget configuration
 
-Get contact budget configuration by ID`,
+Get budget configuration by ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await budgetsGet(

@@ -61,3 +61,45 @@ const value: operations.UpdateEvalResponseBodyPython = {
 };
 ```
 
+### `operations.UpdateEvalResponseBodyFunction`
+
+```typescript
+const value: operations.UpdateEvalResponseBodyFunction = {
+  id: "<id>",
+  description: "than tremendously always busily",
+  type: "function_eval",
+  functionParams: {
+    type: "keywords_match",
+    keywords: [
+      "<value 1>",
+    ],
+  },
+  key: "<key>",
+};
+```
+
+### `operations.ResponseBodyRagas`
+
+```typescript
+const value: operations.ResponseBodyRagas = {
+  id: "<id>",
+  description: "now pliers abandoned um",
+  type: "ragas",
+  ragasMetric: "context_precision",
+  key: "<key>",
+  model: "A8",
+};
+```
+
+### `operations.ResponseBodyTypescript`
+
+```typescript
+const value: operations.ResponseBodyTypescript = {
+  id: "<id>",
+  description: "of ick inasmuch whoa what meh funny failing",
+  code: "<value>",
+  type: "typescript_eval",
+  key: "<key>",
+};
+```
+

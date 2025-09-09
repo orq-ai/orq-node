@@ -77,25 +77,25 @@ const value: operations.DataFunction = {
 };
 ```
 
-### `operations.Ragas`
+### `operations.DataRagas`
 
 ```typescript
-const value: operations.Ragas = {
+const value: operations.DataRagas = {
   id: "<id>",
-  description: "truthfully deselect until",
+  description: "hurtful deny doodle for",
   type: "ragas",
   ragasMetric: "context_entities_recall",
   key: "<key>",
-  model: "Model S",
+  model: "El Camino",
 };
 ```
 
-### `operations.Typescript`
+### `operations.DataTypescript`
 
 ```typescript
-const value: operations.Typescript = {
+const value: operations.DataTypescript = {
   id: "<id>",
-  description: "recklessly bare behind ultimately athletic",
+  description: "psst trench forceful",
   code: "<value>",
   type: "typescript_eval",
   key: "<key>",

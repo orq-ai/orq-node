@@ -130,10 +130,6 @@ export type UpdateBudgetResponseBody = {
    */
   contactId?: string | undefined;
   /**
-   * API Key identifier (present when type is "api_key")
-   */
-  apiKeyId?: string | undefined;
-  /**
    * Budget configuration
    */
   budget: UpdateBudgetBudget;
@@ -536,20 +532,18 @@ export const UpdateBudgetResponseBody$inboundSchema: z.ZodType<
   _id: z.string(),
   type: UpdateBudgetType$inboundSchema,
   contact_id: z.string().optional(),
-  api_key_id: z.string().optional(),
   budget: z.lazy(() => UpdateBudgetBudget$inboundSchema),
   is_active: z.boolean(),
   consumption: z.lazy(() => UpdateBudgetConsumption$inboundSchema).optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-09-05T20:13:44.106Z",
+    "2025-09-09T09:35:11.330Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "contact_id": "contactId",
-    "api_key_id": "apiKeyId",
     "is_active": "isActive",
   });
 });
@@ -559,7 +553,6 @@ export type UpdateBudgetResponseBody$Outbound = {
   _id: string;
   type: string;
   contact_id?: string | undefined;
-  api_key_id?: string | undefined;
   budget: UpdateBudgetBudget$Outbound;
   is_active: boolean;
   consumption?: UpdateBudgetConsumption$Outbound | undefined;
@@ -576,18 +569,16 @@ export const UpdateBudgetResponseBody$outboundSchema: z.ZodType<
   id: z.string(),
   type: UpdateBudgetType$outboundSchema,
   contactId: z.string().optional(),
-  apiKeyId: z.string().optional(),
   budget: z.lazy(() => UpdateBudgetBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => UpdateBudgetConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-09-05T20:13:44.106Z"))
+  updated: z.date().default(() => new Date("2025-09-09T09:35:11.330Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     contactId: "contact_id",
-    apiKeyId: "api_key_id",
     isActive: "is_active",
   });
 });

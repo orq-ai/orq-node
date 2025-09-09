@@ -41,7 +41,7 @@ export const ObjectT = {
 } as const;
 export type ObjectT = ClosedEnum<typeof ObjectT>;
 
-export type Metrics = {
+export type ListContactsMetrics = {
   /**
    * Total cost in dollars of the last 30 days
    */
@@ -97,7 +97,7 @@ export type Data = {
    * The date and time the resource was last updated
    */
   updated?: Date | undefined;
-  metrics: Metrics;
+  metrics: ListContactsMetrics;
 };
 
 /**
@@ -263,23 +263,26 @@ export namespace ObjectT$ {
 }
 
 /** @internal */
-export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
-  z.object({
-    total_cost: z.number(),
-    total_tokens: z.number(),
-    total_requests: z.number(),
-    error_rate: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      "total_cost": "totalCost",
-      "total_tokens": "totalTokens",
-      "total_requests": "totalRequests",
-      "error_rate": "errorRate",
-    });
+export const ListContactsMetrics$inboundSchema: z.ZodType<
+  ListContactsMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number(),
+  total_tokens: z.number(),
+  total_requests: z.number(),
+  error_rate: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
+    "total_tokens": "totalTokens",
+    "total_requests": "totalRequests",
+    "error_rate": "errorRate",
   });
+});
 
 /** @internal */
-export type Metrics$Outbound = {
+export type ListContactsMetrics$Outbound = {
   total_cost: number;
   total_tokens: number;
   total_requests: number;
@@ -287,10 +290,10 @@ export type Metrics$Outbound = {
 };
 
 /** @internal */
-export const Metrics$outboundSchema: z.ZodType<
-  Metrics$Outbound,
+export const ListContactsMetrics$outboundSchema: z.ZodType<
+  ListContactsMetrics$Outbound,
   z.ZodTypeDef,
-  Metrics
+  ListContactsMetrics
 > = z.object({
   totalCost: z.number(),
   totalTokens: z.number(),
@@ -309,26 +312,30 @@ export const Metrics$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Metrics$ {
-  /** @deprecated use `Metrics$inboundSchema` instead. */
-  export const inboundSchema = Metrics$inboundSchema;
-  /** @deprecated use `Metrics$outboundSchema` instead. */
-  export const outboundSchema = Metrics$outboundSchema;
-  /** @deprecated use `Metrics$Outbound` instead. */
-  export type Outbound = Metrics$Outbound;
+export namespace ListContactsMetrics$ {
+  /** @deprecated use `ListContactsMetrics$inboundSchema` instead. */
+  export const inboundSchema = ListContactsMetrics$inboundSchema;
+  /** @deprecated use `ListContactsMetrics$outboundSchema` instead. */
+  export const outboundSchema = ListContactsMetrics$outboundSchema;
+  /** @deprecated use `ListContactsMetrics$Outbound` instead. */
+  export type Outbound = ListContactsMetrics$Outbound;
 }
 
-export function metricsToJSON(metrics: Metrics): string {
-  return JSON.stringify(Metrics$outboundSchema.parse(metrics));
+export function listContactsMetricsToJSON(
+  listContactsMetrics: ListContactsMetrics,
+): string {
+  return JSON.stringify(
+    ListContactsMetrics$outboundSchema.parse(listContactsMetrics),
+  );
 }
 
-export function metricsFromJSON(
+export function listContactsMetricsFromJSON(
   jsonString: string,
-): SafeParseResult<Metrics, SDKValidationError> {
+): SafeParseResult<ListContactsMetrics, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Metrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metrics' from JSON`,
+    (x) => ListContactsMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListContactsMetrics' from JSON`,
   );
 }
 
@@ -345,9 +352,9 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-09-05T20:13:44.106Z",
+      "2025-09-09T09:35:11.330Z",
     ).transform(v => new Date(v)),
-    metrics: z.lazy(() => Metrics$inboundSchema),
+    metrics: z.lazy(() => ListContactsMetrics$inboundSchema),
   }).transform((v) => {
     return remap$(v, {
       "_id": "id",
@@ -368,7 +375,7 @@ export type Data$Outbound = {
   metadata?: { [k: string]: any } | undefined;
   created?: string | undefined;
   updated: string;
-  metrics: Metrics$Outbound;
+  metrics: ListContactsMetrics$Outbound;
 };
 
 /** @internal */
@@ -382,9 +389,9 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2025-09-05T20:13:44.106Z"))
+    updated: z.date().default(() => new Date("2025-09-09T09:35:11.330Z"))
       .transform(v => v.toISOString()),
-    metrics: z.lazy(() => Metrics$outboundSchema),
+    metrics: z.lazy(() => ListContactsMetrics$outboundSchema),
   }).transform((v) => {
     return remap$(v, {
       id: "_id",

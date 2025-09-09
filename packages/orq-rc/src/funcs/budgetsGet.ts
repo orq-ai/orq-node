@@ -25,10 +25,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Get contact budget configuration
+ * Get budget configuration
  *
  * @remarks
- * Get contact budget configuration by ID
+ * Get budget configuration by ID.
  */
 export function budgetsGet(
   client: OrqCore,

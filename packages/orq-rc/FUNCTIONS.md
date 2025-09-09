@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { OrqCore } from "@orq-ai/node/core.js";
-import { contactsCreate } from "@orq-ai/node/funcs/contactsCreate.js";
+import { postV2AgentsInternal } from "@orq-ai/node/funcs/postV2AgentsInternal.js";
 
 // Use `OrqCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -29,28 +29,18 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await contactsCreate(orq, {
-    externalId: "user_12345",
-    displayName: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatarUrl: "https://example.com/avatars/jane-smith.jpg",
-    tags: [
-      "premium",
-      "beta-user",
-      "enterprise",
-    ],
-    metadata: {
-      "department": "Engineering",
-      "role": "Senior Developer",
-      "subscription_tier": "premium",
-      "last_login": "2024-01-15T10:30:00Z",
-    },
+  const res = await postV2AgentsInternal(orq, {
+    path: "Default",
+    key: "<key>",
+    description: "qua hm over irk",
+    instructions: "<value>",
+    model: "Model S",
   });
   if (res.ok) {
     const { value: result } = res;
-    console.log(result);
+    
   } else {
-    console.log("contactsCreate failed:", res.error);
+    console.log("postV2AgentsInternal failed:", res.error);
   }
 }
 

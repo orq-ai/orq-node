@@ -5,13 +5,11 @@
 ```typescript
 import { Nineteen } from "@orq-ai/node/models/operations";
 
-let value: Nineteen = {
-  type: "bert_score",
-};
+let value: Nineteen = "jina/jina-embeddings-v2-base-code";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                             | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydata519type.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+```typescript
+"jina/jina-embeddings-v2-base-code"
+```

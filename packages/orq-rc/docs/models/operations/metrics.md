@@ -5,19 +5,11 @@
 ```typescript
 import { Metrics } from "@orq-ai/node/models/operations";
 
-let value: Metrics = {
-  totalCost: 100,
-  totalTokens: 1000,
-  totalRequests: 1000,
-  errorRate: 22,
-};
+let value: Metrics = {};
 ```
 
 ## Fields
 
-| Field                                     | Type                                      | Required                                  | Description                               | Example                                   |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `totalCost`                               | *number*                                  | :heavy_check_mark:                        | Total cost in dollars of the last 30 days | 100                                       |
-| `totalTokens`                             | *number*                                  | :heavy_check_mark:                        | Total tokens of the last 30 days          | 1000                                      |
-| `totalRequests`                           | *number*                                  | :heavy_check_mark:                        | Total requests of the last 30 days        | 1000                                      |
-| `errorRate`                               | *number*                                  | :heavy_check_mark:                        | P50 error rate of the last 30 days        | 22                                        |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `totalCost`        | *number*           | :heavy_minus_sign: | N/A                |
