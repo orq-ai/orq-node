@@ -165,15 +165,17 @@ async function $do(
   >(
     M.sse(
       200,
-      z.instanceof(ReadableStream<Uint8Array>).transform(stream => {
-        return new EventStream(stream, rawEvent => {
-          return {
-            value: operations.StreamRunAgentResponseBody$inboundSchema.parse(
-              rawEvent,
-            ),
-          };
-        });
-      }),
+      z
+        .instanceof(ReadableStream<Uint8Array>)
+        .transform(stream => {
+          return new EventStream(stream, rawEvent => {
+            return {
+              value: operations.StreamRunAgentResponseBody$inboundSchema.parse(
+                rawEvent,
+              ),
+            };
+          });
+        }),
     ),
     M.jsonErr(404, errors.StreamRunAgentResponseBody$inboundSchema),
     M.fail("4XX"),
