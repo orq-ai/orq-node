@@ -2000,7 +2000,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools11$inboundSchema: z.ZodType<Tools11, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K4S6B50BM1M7PBQ06YKYFMZ7"),
+    _id: z.string().default("01K4SD7KRE02D7MQ5H4A38QB1N"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2040,7 +2040,7 @@ export const Tools11$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools11
 > = z.object({
-  id: z.string().default("01K4S6B50BM1M7PBQ06YKYFMZ7"),
+  id: z.string().default("01K4SD7KRE02D7MQ5H4A38QB1N"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
