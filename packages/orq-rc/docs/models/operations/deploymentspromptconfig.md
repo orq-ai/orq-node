@@ -8,7 +8,7 @@ import { DeploymentsPromptConfig } from "@orq-ai/node/models/operations";
 let value: DeploymentsPromptConfig = {
   tools: [],
   model: "Grand Caravan",
-  modelType: "vision",
+  modelType: "image",
   modelParameters: {},
   provider: "perplexity",
   messages: [

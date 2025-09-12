@@ -39,12 +39,12 @@ export const ListPromptVersionsModelType = {
   Chat: "chat",
   Completion: "completion",
   Embedding: "embedding",
-  Vision: "vision",
   Image: "image",
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
   Moderations: "moderations",
+  Vision: "vision",
 } as const;
 /**
  * The modality of the model

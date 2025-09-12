@@ -1321,12 +1321,12 @@ export const DeploymentGetConfigType = {
   Chat: "chat",
   Completion: "completion",
   Embedding: "embedding",
-  Vision: "vision",
   Image: "image",
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
   Moderations: "moderations",
+  Vision: "vision",
 } as const;
 /**
  * The type of the model. Current `chat`,`completion` and `image` are supported
