@@ -1949,7 +1949,7 @@ export function httpFromJSON(
 /** @internal */
 export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K561XEYG7QJBGMNE51VGJDW1"),
+    _id: z.string().default("01K5699S2HE6PXXYE5TNBX046X"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -1988,7 +1988,7 @@ export const Eleven$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Eleven
 > = z.object({
-  id: z.string().default("01K561XEYG7QJBGMNE51VGJDW1"),
+  id: z.string().default("01K5699S2HE6PXXYE5TNBX046X"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -2948,8 +2948,8 @@ export const Settings$inboundSchema: z.ZodType<
     ]),
   ),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default("none"),
-  max_iterations: z.number().default(15),
-  max_execution_time: z.number().default(120),
+  max_iterations: z.number().int().default(15),
+  max_execution_time: z.number().int().default(120),
 }).transform((v) => {
   return remap$(v, {
     "tool_approval_required": "toolApprovalRequired",
@@ -3002,8 +3002,8 @@ export const Settings$outboundSchema: z.ZodType<
     ]),
   ),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default("none"),
-  maxIterations: z.number().default(15),
-  maxExecutionTime: z.number().default(120),
+  maxIterations: z.number().int().default(15),
+  maxExecutionTime: z.number().int().default(120),
 }).transform((v) => {
   return remap$(v, {
     toolApprovalRequired: "tool_approval_required",

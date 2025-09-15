@@ -2000,7 +2000,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools11$inboundSchema: z.ZodType<Tools11, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K561XEYNW6XG8DDYGR2YHS0D"),
+    _id: z.string().default("01K5699S2Q4XJ1WRX4H36HP02A"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2040,7 +2040,7 @@ export const Tools11$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools11
 > = z.object({
-  id: z.string().default("01K561XEYNW6XG8DDYGR2YHS0D"),
+  id: z.string().default("01K5699S2Q4XJ1WRX4H36HP02A"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3079,8 +3079,8 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
   ),
   tool_approval_required: StreamRunAgentToolApprovalRequired$inboundSchema
     .default("none"),
-  max_iterations: z.number().default(15),
-  max_execution_time: z.number().default(120),
+  max_iterations: z.number().int().default(15),
+  max_execution_time: z.number().int().default(120),
 }).transform((v) => {
   return remap$(v, {
     "tool_approval_required": "toolApprovalRequired",
@@ -3134,8 +3134,8 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
   ),
   toolApprovalRequired: StreamRunAgentToolApprovalRequired$outboundSchema
     .default("none"),
-  maxIterations: z.number().default(15),
-  maxExecutionTime: z.number().default(120),
+  maxIterations: z.number().int().default(15),
+  maxExecutionTime: z.number().int().default(120),
 }).transform((v) => {
   return remap$(v, {
     toolApprovalRequired: "tool_approval_required",
