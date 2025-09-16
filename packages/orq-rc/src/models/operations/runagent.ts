@@ -1949,7 +1949,7 @@ export function httpFromJSON(
 /** @internal */
 export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K56KFQT4RGB1NYXYE095PZFW"),
+    _id: z.string().default("01K58D6N9AF5696QDGHGP1401W"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -1988,7 +1988,7 @@ export const Eleven$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Eleven
 > = z.object({
-  id: z.string().default("01K56KFQT4RGB1NYXYE095PZFW"),
+  id: z.string().default("01K58D6N9AF5696QDGHGP1401W"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
