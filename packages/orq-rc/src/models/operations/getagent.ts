@@ -934,7 +934,7 @@ export const KnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K58D6N8NVNCZED2Y4FVKGF4Z"),
+  id: z.string().default("01K58QGV66QCDZS36NAK74W7XX"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => Configuration2$inboundSchema),
@@ -959,7 +959,7 @@ export const KnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   KnowledgeBases
 > = z.object({
-  id: z.string().default("01K58D6N8NVNCZED2Y4FVKGF4Z"),
+  id: z.string().default("01K58QGV66QCDZS36NAK74W7XX"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => Configuration2$outboundSchema),
