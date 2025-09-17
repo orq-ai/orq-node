@@ -8,15 +8,12 @@ Override the agentic RAG configuration for this search. If not provided, will us
 import { SearchKnowledgeAgenticRagConfig } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledgeAgenticRagConfig = {
-  modelDbId: "<id>",
-  provider: "leonardoai",
+  model: "Land Cruiser",
 };
 ```
 
 ## Fields
 
-| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `modelDbId`                                                                                                | *string*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
-| `provider`                                                                                                 | [operations.SearchKnowledgeKnowledgeProvider](../../models/operations/searchknowledgeknowledgeprovider.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
-| `integrationId`                                                                                            | *string*                                                                                                   | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `model`                                                                               | *string*                                                                              | :heavy_check_mark:                                                                    | The name of the model for the Agent to use. This model must support function calling. |

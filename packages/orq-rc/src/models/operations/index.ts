@@ -99,7 +99,6 @@ export * from "./listknowledgebases.js";
 export * from "./listmodels.js";
 export * from "./listpromptversions.js";
 export * from "./parse.js";
-export * from "./postv2agentsinternal.js";
 export * from "./remoteconfigsgetconfig.js";
 export * from "./retrieveaction.js";
 export * from "./retrievecontact.js";

@@ -127,7 +127,6 @@ import { tool$memoryStoresUpdate } from "./tools/memoryStoresUpdate.js";
 import { tool$memoryStoresUpdateDocument } from "./tools/memoryStoresUpdateDocument.js";
 import { tool$memoryStoresUpdateMemory } from "./tools/memoryStoresUpdateMemory.js";
 import { tool$modelsList } from "./tools/modelsList.js";
-import { tool$postV2AgentsInternal } from "./tools/postV2AgentsInternal.js";
 import { tool$promptsCreate } from "./tools/promptsCreate.js";
 import { tool$promptsDelete } from "./tools/promptsDelete.js";
 import { tool$promptsGetVersion } from "./tools/promptsGetVersion.js";
@@ -149,7 +148,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.13.0-rc.13",
+    version: "3.13.0-rc.15",
   });
 
   const client = new OrqCore({
@@ -181,7 +180,6 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
-  tool(tool$postV2AgentsInternal);
   tool(tool$contactsCreate);
   tool(tool$contactsList);
   tool(tool$contactsRetrieve);

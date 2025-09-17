@@ -158,6 +158,43 @@ export type StreamRunAgentMessage = {
   metadata?: { [k: string]: any } | undefined;
 };
 
+export const StreamRunAgentConfigurationAgentsType = {
+  Query: "query",
+} as const;
+export type StreamRunAgentConfigurationAgentsType = ClosedEnum<
+  typeof StreamRunAgentConfigurationAgentsType
+>;
+
+export type StreamRunAgentConfiguration2 = {
+  type: StreamRunAgentConfigurationAgentsType;
+  query: string;
+};
+
+export const StreamRunAgentConfigurationType = {
+  LastUserMessage: "last_user_message",
+} as const;
+export type StreamRunAgentConfigurationType = ClosedEnum<
+  typeof StreamRunAgentConfigurationType
+>;
+
+export type StreamRunAgentConfiguration1 = {
+  type: StreamRunAgentConfigurationType;
+};
+
+/**
+ * Defines the configuration settings which can either be for a user message or a text entry.
+ */
+export type StreamRunAgentConfiguration =
+  | StreamRunAgentConfiguration2
+  | StreamRunAgentConfiguration1;
+
+export type StreamRunAgentKnowledgeBases = {
+  /**
+   * Defines the configuration settings which can either be for a user message or a text entry.
+   */
+  configuration: StreamRunAgentConfiguration2 | StreamRunAgentConfiguration1;
+};
+
 export type StreamRunAgentTeamOfAgents = {
   id: string;
   /**
@@ -498,7 +535,7 @@ export type StreamRunAgentSettings = {
 
 export type StreamRunAgentRequestBody = {
   /**
-   * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed. To prevent new version creation and update the latest version instead, use the `prevent_version_creation` parameter in the settings.
+   * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed.
    */
   key: string;
   /**
@@ -506,7 +543,7 @@ export type StreamRunAgentRequestBody = {
    */
   taskId?: string | undefined;
   /**
-   * The language model that powers the agent. Currently, private models are not supported.
+   * The language model that powers the agent. The model must support tool calling capabilities.
    */
   model: string;
   /**
@@ -554,7 +591,7 @@ export type StreamRunAgentRequestBody = {
    */
   systemPrompt?: string | undefined;
   memoryStores?: Array<string> | undefined;
-  knowledgeBases?: Array<string> | undefined;
+  knowledgeBases?: Array<StreamRunAgentKnowledgeBases> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
@@ -1442,6 +1479,288 @@ export function streamRunAgentMessageFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentConfigurationAgentsType$inboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentConfigurationAgentsType> = z.nativeEnum(
+    StreamRunAgentConfigurationAgentsType,
+  );
+
+/** @internal */
+export const StreamRunAgentConfigurationAgentsType$outboundSchema:
+  z.ZodNativeEnum<typeof StreamRunAgentConfigurationAgentsType> =
+    StreamRunAgentConfigurationAgentsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentConfigurationAgentsType$ {
+  /** @deprecated use `StreamRunAgentConfigurationAgentsType$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentConfigurationAgentsType$inboundSchema;
+  /** @deprecated use `StreamRunAgentConfigurationAgentsType$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentConfigurationAgentsType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentConfiguration2$inboundSchema: z.ZodType<
+  StreamRunAgentConfiguration2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentConfigurationAgentsType$inboundSchema,
+  query: z.string(),
+});
+
+/** @internal */
+export type StreamRunAgentConfiguration2$Outbound = {
+  type: string;
+  query: string;
+};
+
+/** @internal */
+export const StreamRunAgentConfiguration2$outboundSchema: z.ZodType<
+  StreamRunAgentConfiguration2$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentConfiguration2
+> = z.object({
+  type: StreamRunAgentConfigurationAgentsType$outboundSchema,
+  query: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentConfiguration2$ {
+  /** @deprecated use `StreamRunAgentConfiguration2$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentConfiguration2$inboundSchema;
+  /** @deprecated use `StreamRunAgentConfiguration2$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentConfiguration2$outboundSchema;
+  /** @deprecated use `StreamRunAgentConfiguration2$Outbound` instead. */
+  export type Outbound = StreamRunAgentConfiguration2$Outbound;
+}
+
+export function streamRunAgentConfiguration2ToJSON(
+  streamRunAgentConfiguration2: StreamRunAgentConfiguration2,
+): string {
+  return JSON.stringify(
+    StreamRunAgentConfiguration2$outboundSchema.parse(
+      streamRunAgentConfiguration2,
+    ),
+  );
+}
+
+export function streamRunAgentConfiguration2FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentConfiguration2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentConfiguration2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentConfiguration2' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentConfigurationType
+> = z.nativeEnum(StreamRunAgentConfigurationType);
+
+/** @internal */
+export const StreamRunAgentConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof StreamRunAgentConfigurationType
+> = StreamRunAgentConfigurationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentConfigurationType$ {
+  /** @deprecated use `StreamRunAgentConfigurationType$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentConfigurationType$inboundSchema;
+  /** @deprecated use `StreamRunAgentConfigurationType$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentConfigurationType$outboundSchema;
+}
+
+/** @internal */
+export const StreamRunAgentConfiguration1$inboundSchema: z.ZodType<
+  StreamRunAgentConfiguration1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: StreamRunAgentConfigurationType$inboundSchema,
+});
+
+/** @internal */
+export type StreamRunAgentConfiguration1$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const StreamRunAgentConfiguration1$outboundSchema: z.ZodType<
+  StreamRunAgentConfiguration1$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentConfiguration1
+> = z.object({
+  type: StreamRunAgentConfigurationType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentConfiguration1$ {
+  /** @deprecated use `StreamRunAgentConfiguration1$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentConfiguration1$inboundSchema;
+  /** @deprecated use `StreamRunAgentConfiguration1$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentConfiguration1$outboundSchema;
+  /** @deprecated use `StreamRunAgentConfiguration1$Outbound` instead. */
+  export type Outbound = StreamRunAgentConfiguration1$Outbound;
+}
+
+export function streamRunAgentConfiguration1ToJSON(
+  streamRunAgentConfiguration1: StreamRunAgentConfiguration1,
+): string {
+  return JSON.stringify(
+    StreamRunAgentConfiguration1$outboundSchema.parse(
+      streamRunAgentConfiguration1,
+    ),
+  );
+}
+
+export function streamRunAgentConfiguration1FromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentConfiguration1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentConfiguration1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentConfiguration1' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentConfiguration$inboundSchema: z.ZodType<
+  StreamRunAgentConfiguration,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => StreamRunAgentConfiguration2$inboundSchema),
+  z.lazy(() => StreamRunAgentConfiguration1$inboundSchema),
+]);
+
+/** @internal */
+export type StreamRunAgentConfiguration$Outbound =
+  | StreamRunAgentConfiguration2$Outbound
+  | StreamRunAgentConfiguration1$Outbound;
+
+/** @internal */
+export const StreamRunAgentConfiguration$outboundSchema: z.ZodType<
+  StreamRunAgentConfiguration$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentConfiguration
+> = z.union([
+  z.lazy(() => StreamRunAgentConfiguration2$outboundSchema),
+  z.lazy(() => StreamRunAgentConfiguration1$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentConfiguration$ {
+  /** @deprecated use `StreamRunAgentConfiguration$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentConfiguration$inboundSchema;
+  /** @deprecated use `StreamRunAgentConfiguration$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentConfiguration$outboundSchema;
+  /** @deprecated use `StreamRunAgentConfiguration$Outbound` instead. */
+  export type Outbound = StreamRunAgentConfiguration$Outbound;
+}
+
+export function streamRunAgentConfigurationToJSON(
+  streamRunAgentConfiguration: StreamRunAgentConfiguration,
+): string {
+  return JSON.stringify(
+    StreamRunAgentConfiguration$outboundSchema.parse(
+      streamRunAgentConfiguration,
+    ),
+  );
+}
+
+export function streamRunAgentConfigurationFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentConfiguration, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentConfiguration' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentKnowledgeBases$inboundSchema: z.ZodType<
+  StreamRunAgentKnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  configuration: z.union([
+    z.lazy(() => StreamRunAgentConfiguration2$inboundSchema),
+    z.lazy(() => StreamRunAgentConfiguration1$inboundSchema),
+  ]),
+});
+
+/** @internal */
+export type StreamRunAgentKnowledgeBases$Outbound = {
+  configuration:
+    | StreamRunAgentConfiguration2$Outbound
+    | StreamRunAgentConfiguration1$Outbound;
+};
+
+/** @internal */
+export const StreamRunAgentKnowledgeBases$outboundSchema: z.ZodType<
+  StreamRunAgentKnowledgeBases$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentKnowledgeBases
+> = z.object({
+  configuration: z.union([
+    z.lazy(() => StreamRunAgentConfiguration2$outboundSchema),
+    z.lazy(() => StreamRunAgentConfiguration1$outboundSchema),
+  ]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentKnowledgeBases$ {
+  /** @deprecated use `StreamRunAgentKnowledgeBases$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentKnowledgeBases$inboundSchema;
+  /** @deprecated use `StreamRunAgentKnowledgeBases$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentKnowledgeBases$outboundSchema;
+  /** @deprecated use `StreamRunAgentKnowledgeBases$Outbound` instead. */
+  export type Outbound = StreamRunAgentKnowledgeBases$Outbound;
+}
+
+export function streamRunAgentKnowledgeBasesToJSON(
+  streamRunAgentKnowledgeBases: StreamRunAgentKnowledgeBases,
+): string {
+  return JSON.stringify(
+    StreamRunAgentKnowledgeBases$outboundSchema.parse(
+      streamRunAgentKnowledgeBases,
+    ),
+  );
+}
+
+export function streamRunAgentKnowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentKnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentKnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentKnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentTeamOfAgents$inboundSchema: z.ZodType<
   StreamRunAgentTeamOfAgents,
   z.ZodTypeDef,
@@ -2000,7 +2319,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools11$inboundSchema: z.ZodType<Tools11, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K592EZAPKK76SKV9WV30Q8ZD"),
+    _id: z.string().default("01K5BAANZ841ZENVPCT1H3PJDK"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2040,7 +2359,7 @@ export const Tools11$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools11
 > = z.object({
-  id: z.string().default("01K592EZAPKK76SKV9WV30Q8ZD"),
+  id: z.string().default("01K5BAANZ841ZENVPCT1H3PJDK"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3196,7 +3515,9 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
   iconUrl: z.string().optional(),
   system_prompt: z.string().optional(),
   memory_stores: z.array(z.string()).optional(),
-  knowledge_bases: z.array(z.string()).optional(),
+  knowledge_bases: z.array(
+    z.lazy(() => StreamRunAgentKnowledgeBases$inboundSchema),
+  ).optional(),
   team_of_agents: z.array(
     z.lazy(() => StreamRunAgentTeamOfAgents$inboundSchema),
   ).optional(),
@@ -3231,7 +3552,7 @@ export type StreamRunAgentRequestBody$Outbound = {
   iconUrl?: string | undefined;
   system_prompt?: string | undefined;
   memory_stores?: Array<string> | undefined;
-  knowledge_bases?: Array<string> | undefined;
+  knowledge_bases?: Array<StreamRunAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<StreamRunAgentTeamOfAgents$Outbound> | undefined;
   settings: StreamRunAgentSettings$Outbound;
   stream_timeout_seconds?: number | undefined;
@@ -3258,7 +3579,9 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   iconUrl: z.string().optional(),
   systemPrompt: z.string().optional(),
   memoryStores: z.array(z.string()).optional(),
-  knowledgeBases: z.array(z.string()).optional(),
+  knowledgeBases: z.array(
+    z.lazy(() => StreamRunAgentKnowledgeBases$outboundSchema),
+  ).optional(),
   teamOfAgents: z.array(z.lazy(() => StreamRunAgentTeamOfAgents$outboundSchema))
     .optional(),
   settings: z.lazy(() => StreamRunAgentSettings$outboundSchema),

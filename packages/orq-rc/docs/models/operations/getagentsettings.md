@@ -11,7 +11,6 @@ let value: GetAgentSettings = {
     {
       id: "<id>",
       actionType: "<value>",
-      requiresApproval: true,
     },
   ],
 };

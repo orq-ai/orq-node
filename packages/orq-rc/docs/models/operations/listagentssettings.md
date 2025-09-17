@@ -11,7 +11,6 @@ let value: ListAgentsSettings = {
     {
       id: "<id>",
       actionType: "<value>",
-      requiresApproval: true,
     },
   ],
 };

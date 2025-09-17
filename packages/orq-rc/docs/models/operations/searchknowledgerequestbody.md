@@ -9,6 +9,9 @@ import { SearchKnowledgeRequestBody } from "@orq-ai/node/models/operations";
 
 let value: SearchKnowledgeRequestBody = {
   query: "<value>",
+  rerankConfig: {
+    model: "cohere/rerank-multilingual-v3.0",
+  },
 };
 ```
 

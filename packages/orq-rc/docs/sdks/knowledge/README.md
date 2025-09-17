@@ -410,6 +410,12 @@ const orq = new Orq({
 async function run() {
   const result = await orq.knowledge.search({
     knowledgeId: "<id>",
+    requestBody: {
+      query: "<value>",
+      rerankConfig: {
+        model: "cohere/rerank-multilingual-v3.0",
+      },
+    },
   });
 
   console.log(result);
@@ -435,6 +441,12 @@ const orq = new OrqCore({
 async function run() {
   const res = await knowledgeSearch(orq, {
     knowledgeId: "<id>",
+    requestBody: {
+      query: "<value>",
+      rerankConfig: {
+        model: "cohere/rerank-multilingual-v3.0",
+      },
+    },
   });
   if (res.ok) {
     const { value: result } = res;

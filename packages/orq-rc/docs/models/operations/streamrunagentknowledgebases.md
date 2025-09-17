@@ -1,11 +1,11 @@
-# KnowledgeBases
+# StreamRunAgentKnowledgeBases
 
 ## Example Usage
 
 ```typescript
-import { KnowledgeBases } from "@orq-ai/node/models/operations";
+import { StreamRunAgentKnowledgeBases } from "@orq-ai/node/models/operations";
 
-let value: KnowledgeBases = {
+let value: StreamRunAgentKnowledgeBases = {
   configuration: {
     type: "last_user_message",
   },
@@ -16,4 +16,4 @@ let value: KnowledgeBases = {
 
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `configuration`                                                                            | *operations.Configuration*                                                                 | :heavy_check_mark:                                                                         | Defines the configuration settings which can either be for a user message or a text entry. |
+| `configuration`                                                                            | *operations.StreamRunAgentConfiguration*                                                   | :heavy_check_mark:                                                                         | Defines the configuration settings which can either be for a user message or a text entry. |

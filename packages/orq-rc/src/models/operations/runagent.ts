@@ -141,6 +141,39 @@ export type Message = {
   metadata?: { [k: string]: any } | undefined;
 };
 
+export const RunAgentConfigurationType = {
+  Query: "query",
+} as const;
+export type RunAgentConfigurationType = ClosedEnum<
+  typeof RunAgentConfigurationType
+>;
+
+export type Configuration2 = {
+  type: RunAgentConfigurationType;
+  query: string;
+};
+
+export const ConfigurationType = {
+  LastUserMessage: "last_user_message",
+} as const;
+export type ConfigurationType = ClosedEnum<typeof ConfigurationType>;
+
+export type Configuration1 = {
+  type: ConfigurationType;
+};
+
+/**
+ * Defines the configuration settings which can either be for a user message or a text entry.
+ */
+export type Configuration = Configuration2 | Configuration1;
+
+export type KnowledgeBases = {
+  /**
+   * Defines the configuration settings which can either be for a user message or a text entry.
+   */
+  configuration: Configuration2 | Configuration1;
+};
+
 export type TeamOfAgents = {
   id: string;
   /**
@@ -481,7 +514,7 @@ export type Settings = {
 
 export type RunAgentRequestBody = {
   /**
-   * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed. To prevent new version creation and update the latest version instead, use the `prevent_version_creation` parameter in the settings.
+   * A unique identifier for the agent. This key must be unique within the same workspace and cannot be reused. When executing the agent, this key determines if the agent already exists. If the agent version differs, a new version is created at the end of the execution, except for the task. All agent parameters are evaluated to decide if a new version is needed.
    */
   key: string;
   /**
@@ -489,7 +522,7 @@ export type RunAgentRequestBody = {
    */
   taskId?: string | undefined;
   /**
-   * The language model that powers the agent. Currently, private models are not supported.
+   * The language model that powers the agent. The model must support tool calling capabilities.
    */
   model: string;
   /**
@@ -537,7 +570,7 @@ export type RunAgentRequestBody = {
    */
   systemPrompt?: string | undefined;
   memoryStores?: Array<string> | undefined;
-  knowledgeBases?: Array<string> | undefined;
+  knowledgeBases?: Array<KnowledgeBases> | undefined;
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
@@ -1422,6 +1455,259 @@ export function messageFromJSON(
 }
 
 /** @internal */
+export const RunAgentConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentConfigurationType
+> = z.nativeEnum(RunAgentConfigurationType);
+
+/** @internal */
+export const RunAgentConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentConfigurationType
+> = RunAgentConfigurationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RunAgentConfigurationType$ {
+  /** @deprecated use `RunAgentConfigurationType$inboundSchema` instead. */
+  export const inboundSchema = RunAgentConfigurationType$inboundSchema;
+  /** @deprecated use `RunAgentConfigurationType$outboundSchema` instead. */
+  export const outboundSchema = RunAgentConfigurationType$outboundSchema;
+}
+
+/** @internal */
+export const Configuration2$inboundSchema: z.ZodType<
+  Configuration2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RunAgentConfigurationType$inboundSchema,
+  query: z.string(),
+});
+
+/** @internal */
+export type Configuration2$Outbound = {
+  type: string;
+  query: string;
+};
+
+/** @internal */
+export const Configuration2$outboundSchema: z.ZodType<
+  Configuration2$Outbound,
+  z.ZodTypeDef,
+  Configuration2
+> = z.object({
+  type: RunAgentConfigurationType$outboundSchema,
+  query: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Configuration2$ {
+  /** @deprecated use `Configuration2$inboundSchema` instead. */
+  export const inboundSchema = Configuration2$inboundSchema;
+  /** @deprecated use `Configuration2$outboundSchema` instead. */
+  export const outboundSchema = Configuration2$outboundSchema;
+  /** @deprecated use `Configuration2$Outbound` instead. */
+  export type Outbound = Configuration2$Outbound;
+}
+
+export function configuration2ToJSON(configuration2: Configuration2): string {
+  return JSON.stringify(Configuration2$outboundSchema.parse(configuration2));
+}
+
+export function configuration2FromJSON(
+  jsonString: string,
+): SafeParseResult<Configuration2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Configuration2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Configuration2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof ConfigurationType
+> = z.nativeEnum(ConfigurationType);
+
+/** @internal */
+export const ConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof ConfigurationType
+> = ConfigurationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ConfigurationType$ {
+  /** @deprecated use `ConfigurationType$inboundSchema` instead. */
+  export const inboundSchema = ConfigurationType$inboundSchema;
+  /** @deprecated use `ConfigurationType$outboundSchema` instead. */
+  export const outboundSchema = ConfigurationType$outboundSchema;
+}
+
+/** @internal */
+export const Configuration1$inboundSchema: z.ZodType<
+  Configuration1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: ConfigurationType$inboundSchema,
+});
+
+/** @internal */
+export type Configuration1$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const Configuration1$outboundSchema: z.ZodType<
+  Configuration1$Outbound,
+  z.ZodTypeDef,
+  Configuration1
+> = z.object({
+  type: ConfigurationType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Configuration1$ {
+  /** @deprecated use `Configuration1$inboundSchema` instead. */
+  export const inboundSchema = Configuration1$inboundSchema;
+  /** @deprecated use `Configuration1$outboundSchema` instead. */
+  export const outboundSchema = Configuration1$outboundSchema;
+  /** @deprecated use `Configuration1$Outbound` instead. */
+  export type Outbound = Configuration1$Outbound;
+}
+
+export function configuration1ToJSON(configuration1: Configuration1): string {
+  return JSON.stringify(Configuration1$outboundSchema.parse(configuration1));
+}
+
+export function configuration1FromJSON(
+  jsonString: string,
+): SafeParseResult<Configuration1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Configuration1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Configuration1' from JSON`,
+  );
+}
+
+/** @internal */
+export const Configuration$inboundSchema: z.ZodType<
+  Configuration,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => Configuration2$inboundSchema),
+  z.lazy(() => Configuration1$inboundSchema),
+]);
+
+/** @internal */
+export type Configuration$Outbound =
+  | Configuration2$Outbound
+  | Configuration1$Outbound;
+
+/** @internal */
+export const Configuration$outboundSchema: z.ZodType<
+  Configuration$Outbound,
+  z.ZodTypeDef,
+  Configuration
+> = z.union([
+  z.lazy(() => Configuration2$outboundSchema),
+  z.lazy(() => Configuration1$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Configuration$ {
+  /** @deprecated use `Configuration$inboundSchema` instead. */
+  export const inboundSchema = Configuration$inboundSchema;
+  /** @deprecated use `Configuration$outboundSchema` instead. */
+  export const outboundSchema = Configuration$outboundSchema;
+  /** @deprecated use `Configuration$Outbound` instead. */
+  export type Outbound = Configuration$Outbound;
+}
+
+export function configurationToJSON(configuration: Configuration): string {
+  return JSON.stringify(Configuration$outboundSchema.parse(configuration));
+}
+
+export function configurationFromJSON(
+  jsonString: string,
+): SafeParseResult<Configuration, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Configuration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Configuration' from JSON`,
+  );
+}
+
+/** @internal */
+export const KnowledgeBases$inboundSchema: z.ZodType<
+  KnowledgeBases,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  configuration: z.union([
+    z.lazy(() => Configuration2$inboundSchema),
+    z.lazy(() => Configuration1$inboundSchema),
+  ]),
+});
+
+/** @internal */
+export type KnowledgeBases$Outbound = {
+  configuration: Configuration2$Outbound | Configuration1$Outbound;
+};
+
+/** @internal */
+export const KnowledgeBases$outboundSchema: z.ZodType<
+  KnowledgeBases$Outbound,
+  z.ZodTypeDef,
+  KnowledgeBases
+> = z.object({
+  configuration: z.union([
+    z.lazy(() => Configuration2$outboundSchema),
+    z.lazy(() => Configuration1$outboundSchema),
+  ]),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace KnowledgeBases$ {
+  /** @deprecated use `KnowledgeBases$inboundSchema` instead. */
+  export const inboundSchema = KnowledgeBases$inboundSchema;
+  /** @deprecated use `KnowledgeBases$outboundSchema` instead. */
+  export const outboundSchema = KnowledgeBases$outboundSchema;
+  /** @deprecated use `KnowledgeBases$Outbound` instead. */
+  export type Outbound = KnowledgeBases$Outbound;
+}
+
+export function knowledgeBasesToJSON(knowledgeBases: KnowledgeBases): string {
+  return JSON.stringify(KnowledgeBases$outboundSchema.parse(knowledgeBases));
+}
+
+export function knowledgeBasesFromJSON(
+  jsonString: string,
+): SafeParseResult<KnowledgeBases, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => KnowledgeBases$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KnowledgeBases' from JSON`,
+  );
+}
+
+/** @internal */
 export const TeamOfAgents$inboundSchema: z.ZodType<
   TeamOfAgents,
   z.ZodTypeDef,
@@ -1949,7 +2235,7 @@ export function httpFromJSON(
 /** @internal */
 export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K592EZADMJQP3DNFNP9GCMH8"),
+    _id: z.string().default("01K5BAANZ2VKY1KWPSHAPE9WV1"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -1988,7 +2274,7 @@ export const Eleven$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Eleven
 > = z.object({
-  id: z.string().default("01K592EZADMJQP3DNFNP9GCMH8"),
+  id: z.string().default("01K5BAANZ2VKY1KWPSHAPE9WV1"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3060,7 +3346,8 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   iconUrl: z.string().optional(),
   system_prompt: z.string().optional(),
   memory_stores: z.array(z.string()).optional(),
-  knowledge_bases: z.array(z.string()).optional(),
+  knowledge_bases: z.array(z.lazy(() => KnowledgeBases$inboundSchema))
+    .optional(),
   team_of_agents: z.array(z.lazy(() => TeamOfAgents$inboundSchema)).optional(),
   settings: z.lazy(() => Settings$inboundSchema),
 }).transform((v) => {
@@ -3091,7 +3378,7 @@ export type RunAgentRequestBody$Outbound = {
   iconUrl?: string | undefined;
   system_prompt?: string | undefined;
   memory_stores?: Array<string> | undefined;
-  knowledge_bases?: Array<string> | undefined;
+  knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
   settings: Settings$Outbound;
 };
@@ -3117,7 +3404,8 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   iconUrl: z.string().optional(),
   systemPrompt: z.string().optional(),
   memoryStores: z.array(z.string()).optional(),
-  knowledgeBases: z.array(z.string()).optional(),
+  knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
+    .optional(),
   teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
   settings: z.lazy(() => Settings$outboundSchema),
 }).transform((v) => {

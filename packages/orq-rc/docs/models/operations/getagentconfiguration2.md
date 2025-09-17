@@ -1,11 +1,11 @@
-# Configuration2
+# GetAgentConfiguration2
 
 ## Example Usage
 
 ```typescript
-import { Configuration2 } from "@orq-ai/node/models/operations";
+import { GetAgentConfiguration2 } from "@orq-ai/node/models/operations";
 
-let value: Configuration2 = {
+let value: GetAgentConfiguration2 = {
   type: "query",
   query: "<value>",
 };
@@ -15,5 +15,5 @@ let value: Configuration2 = {
 
 | Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `type`                                                                                       | [operations.RunAgentConfigurationType](../../models/operations/runagentconfigurationtype.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `type`                                                                                       | [operations.GetAgentConfigurationType](../../models/operations/getagentconfigurationtype.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
 | `query`                                                                                      | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |

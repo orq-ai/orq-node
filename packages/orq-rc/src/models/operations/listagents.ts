@@ -80,7 +80,7 @@ export type ListAgentsTools = {
   id: string;
   actionType: string;
   displayName?: string | undefined;
-  requiresApproval: boolean;
+  requiresApproval?: boolean | undefined;
   conditions?: Array<ListAgentsConditions> | undefined;
   /**
    * The id of the resource
@@ -453,7 +453,7 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   id: z.string(),
   action_type: z.string(),
   display_name: z.string().optional(),
-  requires_approval: z.boolean(),
+  requires_approval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => ListAgentsConditions$inboundSchema))
     .optional(),
   mcpServer: z.string().optional(),
@@ -486,7 +486,7 @@ export const ListAgentsTools$outboundSchema: z.ZodType<
   id: z.string(),
   actionType: z.string(),
   displayName: z.string().optional(),
-  requiresApproval: z.boolean(),
+  requiresApproval: z.boolean().default(false),
   conditions: z.array(z.lazy(() => ListAgentsConditions$outboundSchema))
     .optional(),
   mcpServer: z.string().optional(),
@@ -1026,7 +1026,7 @@ export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K592EZ9D4VJ91Z3NPRFVFCCV"),
+  id: z.string().default("01K5BAANYFVP5NHXS0SR12XB4K"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => ListAgentsConfiguration2$inboundSchema),
@@ -1053,7 +1053,7 @@ export const ListAgentsKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsKnowledgeBases
 > = z.object({
-  id: z.string().default("01K592EZ9D4VJ91Z3NPRFVFCCV"),
+  id: z.string().default("01K5BAANYFVP5NHXS0SR12XB4K"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => ListAgentsConfiguration2$outboundSchema),
