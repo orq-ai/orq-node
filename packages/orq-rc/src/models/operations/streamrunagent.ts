@@ -2319,7 +2319,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools11$inboundSchema: z.ZodType<Tools11, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K5BAANZ841ZENVPCT1H3PJDK"),
+    _id: z.string().default("01K5DS7B6171EJH0CX4QFMQMYX"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2359,7 +2359,7 @@ export const Tools11$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools11
 > = z.object({
-  id: z.string().default("01K5BAANZ841ZENVPCT1H3PJDK"),
+  id: z.string().default("01K5DS7B6171EJH0CX4QFMQMYX"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
