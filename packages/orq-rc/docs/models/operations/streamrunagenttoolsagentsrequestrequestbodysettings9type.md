@@ -6,11 +6,11 @@
 import { StreamRunAgentToolsAgentsRequestRequestBodySettings9Type } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentToolsAgentsRequestRequestBodySettings9Type =
-  "query_knowledge_base";
+  "retrieve_knowledge_bases";
 ```
 
 ## Values
 
 ```typescript
-"query_knowledge_base"
+"retrieve_knowledge_bases"
 ```

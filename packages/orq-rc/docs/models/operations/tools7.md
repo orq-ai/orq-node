@@ -6,7 +6,7 @@
 import { Tools7 } from "@orq-ai/node/models/operations";
 
 let value: Tools7 = {
-  type: "retrieve_memory_stores",
+  type: "delete_memory_document",
 };
 ```
 

@@ -30,7 +30,10 @@ export type RetrieveMemoryResponseBody = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   storeId: string;
-  tags: { [k: string]: string };
+  /**
+   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
+   */
+  metadata: { [k: string]: string };
   workspaceId: string;
 };
 
@@ -114,7 +117,7 @@ export const RetrieveMemoryResponseBody$inboundSchema: z.ZodType<
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   store_id: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
   workspace_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -136,7 +139,7 @@ export type RetrieveMemoryResponseBody$Outbound = {
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   store_id: string;
-  tags: { [k: string]: string };
+  metadata: { [k: string]: string };
   workspace_id: string;
 };
 
@@ -153,7 +156,7 @@ export const RetrieveMemoryResponseBody$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   storeId: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
   workspaceId: z.string(),
 }).transform((v) => {
   return remap$(v, {

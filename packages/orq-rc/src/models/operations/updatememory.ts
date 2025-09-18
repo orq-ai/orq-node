@@ -9,8 +9,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMemoryRequestBody = {
+  /**
+   * Unique identifier for the entity this memory is associated with (e.g., user ID, session ID, conversation ID)
+   */
   entityId: string;
-  tags: { [k: string]: string };
+  /**
+   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
+   */
+  metadata: { [k: string]: string };
 };
 
 export type UpdateMemoryRequest = {
@@ -36,7 +42,10 @@ export type UpdateMemoryResponseBody = {
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   storeId: string;
-  tags: { [k: string]: string };
+  /**
+   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory access based on their specific needs (e.g., user segments, topics, contexts, or any custom taxonomy).
+   */
+  metadata: { [k: string]: string };
   workspaceId: string;
 };
 
@@ -47,7 +56,7 @@ export const UpdateMemoryRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   entity_id: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
 }).transform((v) => {
   return remap$(v, {
     "entity_id": "entityId",
@@ -57,7 +66,7 @@ export const UpdateMemoryRequestBody$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateMemoryRequestBody$Outbound = {
   entity_id: string;
-  tags: { [k: string]: string };
+  metadata: { [k: string]: string };
 };
 
 /** @internal */
@@ -67,7 +76,7 @@ export const UpdateMemoryRequestBody$outboundSchema: z.ZodType<
   UpdateMemoryRequestBody
 > = z.object({
   entityId: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
 }).transform((v) => {
   return remap$(v, {
     entityId: "entity_id",
@@ -190,7 +199,7 @@ export const UpdateMemoryResponseBody$inboundSchema: z.ZodType<
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   store_id: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
   workspace_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -212,7 +221,7 @@ export type UpdateMemoryResponseBody$Outbound = {
   created_by_id?: string | null | undefined;
   updated_by_id?: string | null | undefined;
   store_id: string;
-  tags: { [k: string]: string };
+  metadata: { [k: string]: string };
   workspace_id: string;
 };
 
@@ -229,7 +238,7 @@ export const UpdateMemoryResponseBody$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   storeId: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
   workspaceId: z.string(),
 }).transform((v) => {
   return remap$(v, {

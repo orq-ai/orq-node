@@ -6,7 +6,7 @@
 import { Eight } from "@orq-ai/node/models/operations";
 
 let value: Eight = {
-  type: "retrieve_knowledge_bases",
+  type: "retrieve_memory_stores",
 };
 ```
 

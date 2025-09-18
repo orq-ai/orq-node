@@ -6,11 +6,11 @@
 import { RunAgentToolsAgentsRequestRequestBodySettings8Type } from "@orq-ai/node/models/operations";
 
 let value: RunAgentToolsAgentsRequestRequestBodySettings8Type =
-  "retrieve_knowledge_bases";
+  "retrieve_memory_stores";
 ```
 
 ## Values
 
 ```typescript
-"retrieve_knowledge_bases"
+"retrieve_memory_stores"
 ```

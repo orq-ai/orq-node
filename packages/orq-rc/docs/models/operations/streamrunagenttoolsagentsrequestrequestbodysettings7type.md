@@ -6,11 +6,11 @@
 import { StreamRunAgentToolsAgentsRequestRequestBodySettings7Type } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentToolsAgentsRequestRequestBodySettings7Type =
-  "retrieve_memory_stores";
+  "delete_memory_document";
 ```
 
 ## Values
 
 ```typescript
-"retrieve_memory_stores"
+"delete_memory_document"
 ```

@@ -5,11 +5,23 @@
 ```typescript
 import { Thirteen } from "@orq-ai/node/models/operations";
 
-let value: Thirteen = "google/multimodalembedding@001";
+let value: Thirteen = {
+  type: "function",
+  key: "<key>",
+  function: {
+    name: "<value>",
+  },
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"google/multimodalembedding@001"
-```
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                           | [operations.RunAgentToolsAgentsRequestRequestBodySettings13Type](../../models/operations/runagenttoolsagentsrequestrequestbodysettings13type.md) | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `id`                                                                                                                                             | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `key`                                                                                                                                            | *string*                                                                                                                                         | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `displayName`                                                                                                                                    | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `description`                                                                                                                                    | *string*                                                                                                                                         | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `requiresApproval`                                                                                                                               | *boolean*                                                                                                                                        | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+| `function`                                                                                                                                       | [operations.ToolsFunction](../../models/operations/toolsfunction.md)                                                                             | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |

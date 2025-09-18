@@ -5,12 +5,11 @@
 ```typescript
 import { StreamRunAgentToolsAgentsRequestRequestBodySettings12Type } from "@orq-ai/node/models/operations";
 
-let value: StreamRunAgentToolsAgentsRequestRequestBodySettings12Type =
-  "function";
+let value: StreamRunAgentToolsAgentsRequestRequestBodySettings12Type = "http";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"http"
 ```

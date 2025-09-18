@@ -85,10 +85,11 @@ const value: operations.UpdateMemoryStoreModel12 =
   "google/text-multilingual-embedding-002";
 ```
 
-### `operations.Model13`
+### `operations.UpdateMemoryStoreModel13`
 
 ```typescript
-const value: operations.Model13 = "google/multimodalembedding@001";
+const value: operations.UpdateMemoryStoreModel13 =
+  "google/multimodalembedding@001";
 ```
 
 ### `operations.Model14`

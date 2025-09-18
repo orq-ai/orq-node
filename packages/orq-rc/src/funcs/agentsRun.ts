@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * Run an agent
  *
  * @remarks
- * Executes an agent with the provided configuration using A2A message format. If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The fallback model is configured at the agent level and will be used automatically if the primary model fails during execution.
+ * Executes an agent with the provided configuration using A2A message format. If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The fallback model is configured at the agent level and will be used automatically if the primary model fails during execution. Memory stores can be associated with specific entities (users, sessions) using the memory.entity_id parameter.
  */
 export function agentsRun(
   client: OrqCore,

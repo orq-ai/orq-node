@@ -6,7 +6,7 @@
 import { Tools8 } from "@orq-ai/node/models/operations";
 
 let value: Tools8 = {
-  type: "retrieve_knowledge_bases",
+  type: "retrieve_memory_stores",
 };
 ```
 

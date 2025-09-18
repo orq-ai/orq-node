@@ -6,7 +6,7 @@
 import { Nine } from "@orq-ai/node/models/operations";
 
 let value: Nine = {
-  type: "query_knowledge_base",
+  type: "retrieve_knowledge_bases",
 };
 ```
 

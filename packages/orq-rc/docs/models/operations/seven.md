@@ -6,7 +6,7 @@
 import { Seven } from "@orq-ai/node/models/operations";
 
 let value: Seven = {
-  type: "retrieve_memory_stores",
+  type: "delete_memory_document",
 };
 ```
 

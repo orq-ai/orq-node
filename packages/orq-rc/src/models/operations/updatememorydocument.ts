@@ -10,13 +10,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UpdateMemoryDocumentRequestBody = {
   /**
-   * The content of the memory
+   * The content of the memory document
    */
   text: string;
   /**
-   * Use the tags to categorize documents within a memory collection
+   * Flexible key-value pairs for custom filtering and categorization of documents within a memory collection. Clients can add arbitrary string metadata to enable future filtering based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy). This enables powerful querying and retrieval strategies.
    */
-  tags: { [k: string]: string };
+  metadata: { [k: string]: string };
 };
 
 export type UpdateMemoryDocumentRequest = {
@@ -48,7 +48,10 @@ export type UpdateMemoryDocumentResponseBody = {
   createdById?: string | undefined;
   updatedById?: string | undefined;
   workspaceId: string;
-  tags?: { [k: string]: string } | undefined;
+  /**
+   * Flexible key-value pairs for custom filtering and categorization. Clients can add arbitrary string metadata to enable future filtering of memory documents based on their specific needs (e.g., document type, source, topic, relevance score, or any custom taxonomy).
+   */
+  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -58,13 +61,13 @@ export const UpdateMemoryDocumentRequestBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   text: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
 });
 
 /** @internal */
 export type UpdateMemoryDocumentRequestBody$Outbound = {
   text: string;
-  tags: { [k: string]: string };
+  metadata: { [k: string]: string };
 };
 
 /** @internal */
@@ -74,7 +77,7 @@ export const UpdateMemoryDocumentRequestBody$outboundSchema: z.ZodType<
   UpdateMemoryDocumentRequestBody
 > = z.object({
   text: z.string(),
-  tags: z.record(z.string()),
+  metadata: z.record(z.string()),
 });
 
 /**
@@ -206,7 +209,7 @@ export const UpdateMemoryDocumentResponseBody$inboundSchema: z.ZodType<
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
   workspace_id: z.string(),
-  tags: z.record(z.string()).optional(),
+  metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -229,7 +232,7 @@ export type UpdateMemoryDocumentResponseBody$Outbound = {
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
   workspace_id: string;
-  tags?: { [k: string]: string } | undefined;
+  metadata?: { [k: string]: string } | undefined;
 };
 
 /** @internal */
@@ -247,7 +250,7 @@ export const UpdateMemoryDocumentResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   workspaceId: z.string(),
-  tags: z.record(z.string()).optional(),
+  metadata: z.record(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

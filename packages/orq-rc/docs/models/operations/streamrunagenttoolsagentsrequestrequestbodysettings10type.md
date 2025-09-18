@@ -6,11 +6,11 @@
 import { StreamRunAgentToolsAgentsRequestRequestBodySettings10Type } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentToolsAgentsRequestRequestBodySettings10Type =
-  "current_date";
+  "query_knowledge_base";
 ```
 
 ## Values
 
 ```typescript
-"current_date"
+"query_knowledge_base"
 ```

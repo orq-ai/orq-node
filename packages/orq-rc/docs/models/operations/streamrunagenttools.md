@@ -55,7 +55,7 @@ const value: operations.Tools6 = {
 
 ```typescript
 const value: operations.Tools7 = {
-  type: "retrieve_memory_stores",
+  type: "delete_memory_document",
 };
 ```
 
@@ -63,7 +63,7 @@ const value: operations.Tools7 = {
 
 ```typescript
 const value: operations.Tools8 = {
-  type: "retrieve_knowledge_bases",
+  type: "retrieve_memory_stores",
 };
 ```
 
@@ -71,7 +71,7 @@ const value: operations.Tools8 = {
 
 ```typescript
 const value: operations.Tools9 = {
-  type: "query_knowledge_base",
+  type: "retrieve_knowledge_bases",
 };
 ```
 
@@ -79,7 +79,7 @@ const value: operations.Tools9 = {
 
 ```typescript
 const value: operations.Tools10 = {
-  type: "current_date",
+  type: "query_knowledge_base",
 };
 ```
 
@@ -87,10 +87,18 @@ const value: operations.Tools10 = {
 
 ```typescript
 const value: operations.Tools11 = {
+  type: "current_date",
+};
+```
+
+### `operations.Tools12`
+
+```typescript
+const value: operations.Tools12 = {
   path: "Default",
   key: "<key>",
-  displayName: "Demetrius.Treutel",
-  description: "minus whether even pleasant mmm daintily front even",
+  displayName: "Alexane8",
+  description: "coal ew whoa representation fooey irritably almighty",
   type: "http",
   http: {
     blueprint: {
@@ -101,10 +109,10 @@ const value: operations.Tools11 = {
 };
 ```
 
-### `operations.Tools12`
+### `operations.Tools13`
 
 ```typescript
-const value: operations.Tools12 = {
+const value: operations.Tools13 = {
   type: "function",
   key: "<key>",
   function: {

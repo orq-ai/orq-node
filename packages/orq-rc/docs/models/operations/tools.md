@@ -55,7 +55,7 @@ const value: operations.Six = {
 
 ```typescript
 const value: operations.Seven = {
-  type: "retrieve_memory_stores",
+  type: "delete_memory_document",
 };
 ```
 
@@ -63,7 +63,7 @@ const value: operations.Seven = {
 
 ```typescript
 const value: operations.Eight = {
-  type: "retrieve_knowledge_bases",
+  type: "retrieve_memory_stores",
 };
 ```
 
@@ -71,7 +71,7 @@ const value: operations.Eight = {
 
 ```typescript
 const value: operations.Nine = {
-  type: "query_knowledge_base",
+  type: "retrieve_knowledge_bases",
 };
 ```
 
@@ -79,7 +79,7 @@ const value: operations.Nine = {
 
 ```typescript
 const value: operations.Ten = {
-  type: "current_date",
+  type: "query_knowledge_base",
 };
 ```
 
@@ -87,10 +87,18 @@ const value: operations.Ten = {
 
 ```typescript
 const value: operations.Eleven = {
+  type: "current_date",
+};
+```
+
+### `operations.Twelve`
+
+```typescript
+const value: operations.Twelve = {
   path: "Default",
   key: "<key>",
-  displayName: "Callie.Block91",
-  description: "blah fine hmph anti",
+  displayName: "Jace.Cremin",
+  description: "glass recount publicity zowie aboard as",
   type: "http",
   http: {
     blueprint: {
@@ -101,10 +109,10 @@ const value: operations.Eleven = {
 };
 ```
 
-### `operations.Twelve`
+### `operations.Thirteen`
 
 ```typescript
-const value: operations.Twelve = {
+const value: operations.Thirteen = {
   type: "function",
   key: "<key>",
   function: {

@@ -75,10 +75,10 @@ const value: operations.Model11 = "google/text-embedding-005";
 const value: operations.Model12 = "google/text-multilingual-embedding-002";
 ```
 
-### `operations.Thirteen`
+### `operations.Model13`
 
 ```typescript
-const value: operations.Thirteen = "google/multimodalembedding@001";
+const value: operations.Model13 = "google/multimodalembedding@001";
 ```
 
 ### `operations.Fourteen`

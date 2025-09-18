@@ -6,7 +6,7 @@
 import { Tools9 } from "@orq-ai/node/models/operations";
 
 let value: Tools9 = {
-  type: "query_knowledge_base",
+  type: "retrieve_knowledge_bases",
 };
 ```
 

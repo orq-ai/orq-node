@@ -54,10 +54,12 @@ export const Model14 = {
 } as const;
 export type Model14 = ClosedEnum<typeof Model14>;
 
-export const Model13 = {
+export const UpdateMemoryStoreModel13 = {
   GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
 } as const;
-export type Model13 = ClosedEnum<typeof Model13>;
+export type UpdateMemoryStoreModel13 = ClosedEnum<
+  typeof UpdateMemoryStoreModel13
+>;
 
 export const UpdateMemoryStoreModel12 = {
   GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
@@ -156,7 +158,7 @@ export type UpdateMemoryStoreModel =
   | UpdateMemoryStoreModel10
   | UpdateMemoryStoreModel11
   | UpdateMemoryStoreModel12
-  | Model13
+  | UpdateMemoryStoreModel13
   | Model14
   | Model15
   | Model16
@@ -181,7 +183,7 @@ export type UpdateMemoryStoreEmbeddingConfig = {
     | UpdateMemoryStoreModel10
     | UpdateMemoryStoreModel11
     | UpdateMemoryStoreModel12
-    | Model13
+    | UpdateMemoryStoreModel13
     | Model14
     | Model15
     | Model16
@@ -479,22 +481,24 @@ export namespace Model14$ {
 }
 
 /** @internal */
-export const Model13$inboundSchema: z.ZodNativeEnum<typeof Model13> = z
-  .nativeEnum(Model13);
+export const UpdateMemoryStoreModel13$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateMemoryStoreModel13
+> = z.nativeEnum(UpdateMemoryStoreModel13);
 
 /** @internal */
-export const Model13$outboundSchema: z.ZodNativeEnum<typeof Model13> =
-  Model13$inboundSchema;
+export const UpdateMemoryStoreModel13$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateMemoryStoreModel13
+> = UpdateMemoryStoreModel13$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model13$ {
-  /** @deprecated use `Model13$inboundSchema` instead. */
-  export const inboundSchema = Model13$inboundSchema;
-  /** @deprecated use `Model13$outboundSchema` instead. */
-  export const outboundSchema = Model13$outboundSchema;
+export namespace UpdateMemoryStoreModel13$ {
+  /** @deprecated use `UpdateMemoryStoreModel13$inboundSchema` instead. */
+  export const inboundSchema = UpdateMemoryStoreModel13$inboundSchema;
+  /** @deprecated use `UpdateMemoryStoreModel13$outboundSchema` instead. */
+  export const outboundSchema = UpdateMemoryStoreModel13$outboundSchema;
 }
 
 /** @internal */
@@ -767,7 +771,7 @@ export const UpdateMemoryStoreModel$inboundSchema: z.ZodType<
   UpdateMemoryStoreModel10$inboundSchema,
   UpdateMemoryStoreModel11$inboundSchema,
   UpdateMemoryStoreModel12$inboundSchema,
-  Model13$inboundSchema,
+  UpdateMemoryStoreModel13$inboundSchema,
   Model14$inboundSchema,
   Model15$inboundSchema,
   Model16$inboundSchema,
@@ -822,7 +826,7 @@ export const UpdateMemoryStoreModel$outboundSchema: z.ZodType<
   UpdateMemoryStoreModel10$outboundSchema,
   UpdateMemoryStoreModel11$outboundSchema,
   UpdateMemoryStoreModel12$outboundSchema,
-  Model13$outboundSchema,
+  UpdateMemoryStoreModel13$outboundSchema,
   Model14$outboundSchema,
   Model15$outboundSchema,
   Model16$outboundSchema,
@@ -884,7 +888,7 @@ export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
     UpdateMemoryStoreModel10$inboundSchema,
     UpdateMemoryStoreModel11$inboundSchema,
     UpdateMemoryStoreModel12$inboundSchema,
-    Model13$inboundSchema,
+    UpdateMemoryStoreModel13$inboundSchema,
     Model14$inboundSchema,
     Model15$inboundSchema,
     Model16$inboundSchema,
@@ -943,7 +947,7 @@ export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
     UpdateMemoryStoreModel10$outboundSchema,
     UpdateMemoryStoreModel11$outboundSchema,
     UpdateMemoryStoreModel12$outboundSchema,
-    Model13$outboundSchema,
+    UpdateMemoryStoreModel13$outboundSchema,
     Model14$outboundSchema,
     Model15$outboundSchema,
     Model16$outboundSchema,

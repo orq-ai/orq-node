@@ -6,7 +6,7 @@
 import { Tools10 } from "@orq-ai/node/models/operations";
 
 let value: Tools10 = {
-  type: "current_date",
+  type: "query_knowledge_base",
 };
 ```
 

@@ -54,10 +54,10 @@ export const Fourteen = {
 } as const;
 export type Fourteen = ClosedEnum<typeof Fourteen>;
 
-export const Thirteen = {
+export const Model13 = {
   GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
 } as const;
-export type Thirteen = ClosedEnum<typeof Thirteen>;
+export type Model13 = ClosedEnum<typeof Model13>;
 
 export const Model12 = {
   GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
@@ -132,7 +132,7 @@ export type Model =
   | Model10
   | Model11
   | Model12
-  | Thirteen
+  | Model13
   | Fourteen
   | Fifteen
   | Sixteen
@@ -157,7 +157,7 @@ export type EmbeddingConfig = {
     | Model10
     | Model11
     | Model12
-    | Thirteen
+    | Model13
     | Fourteen
     | Fifteen
     | Sixteen
@@ -604,22 +604,22 @@ export namespace Fourteen$ {
 }
 
 /** @internal */
-export const Thirteen$inboundSchema: z.ZodNativeEnum<typeof Thirteen> = z
-  .nativeEnum(Thirteen);
+export const Model13$inboundSchema: z.ZodNativeEnum<typeof Model13> = z
+  .nativeEnum(Model13);
 
 /** @internal */
-export const Thirteen$outboundSchema: z.ZodNativeEnum<typeof Thirteen> =
-  Thirteen$inboundSchema;
+export const Model13$outboundSchema: z.ZodNativeEnum<typeof Model13> =
+  Model13$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Thirteen$ {
-  /** @deprecated use `Thirteen$inboundSchema` instead. */
-  export const inboundSchema = Thirteen$inboundSchema;
-  /** @deprecated use `Thirteen$outboundSchema` instead. */
-  export const outboundSchema = Thirteen$outboundSchema;
+export namespace Model13$ {
+  /** @deprecated use `Model13$inboundSchema` instead. */
+  export const inboundSchema = Model13$inboundSchema;
+  /** @deprecated use `Model13$outboundSchema` instead. */
+  export const outboundSchema = Model13$outboundSchema;
 }
 
 /** @internal */
@@ -865,7 +865,7 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     Model10$inboundSchema,
     Model11$inboundSchema,
     Model12$inboundSchema,
-    Thirteen$inboundSchema,
+    Model13$inboundSchema,
     Fourteen$inboundSchema,
     Fifteen$inboundSchema,
     Sixteen$inboundSchema,
@@ -920,7 +920,7 @@ export const Model$outboundSchema: z.ZodType<
   Model10$outboundSchema,
   Model11$outboundSchema,
   Model12$outboundSchema,
-  Thirteen$outboundSchema,
+  Model13$outboundSchema,
   Fourteen$outboundSchema,
   Fifteen$outboundSchema,
   Sixteen$outboundSchema,
@@ -978,7 +978,7 @@ export const EmbeddingConfig$inboundSchema: z.ZodType<
     Model10$inboundSchema,
     Model11$inboundSchema,
     Model12$inboundSchema,
-    Thirteen$inboundSchema,
+    Model13$inboundSchema,
     Fourteen$inboundSchema,
     Fifteen$inboundSchema,
     Sixteen$inboundSchema,
@@ -1037,7 +1037,7 @@ export const EmbeddingConfig$outboundSchema: z.ZodType<
     Model10$outboundSchema,
     Model11$outboundSchema,
     Model12$outboundSchema,
-    Thirteen$outboundSchema,
+    Model13$outboundSchema,
     Fourteen$outboundSchema,
     Fifteen$outboundSchema,
     Sixteen$outboundSchema,

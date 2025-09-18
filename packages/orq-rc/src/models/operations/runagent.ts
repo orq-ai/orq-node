@@ -141,6 +141,16 @@ export type Message = {
   metadata?: { [k: string]: any } | undefined;
 };
 
+/**
+ * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
+ */
+export type Memory = {
+  /**
+   * An entity ID used to link memory stores to a specific user, session, or conversation. This ID is used to isolate and retrieve memories specific to the entity across agent executions.
+   */
+  entityId: string;
+};
+
 export const RunAgentConfigurationType = {
   Query: "query",
 } as const;
@@ -182,11 +192,11 @@ export type TeamOfAgents = {
   role?: string | undefined;
 };
 
-export const RunAgentToolsAgentsRequestRequestBodySettings12Type = {
+export const RunAgentToolsAgentsRequestRequestBodySettings13Type = {
   Function: "function",
 } as const;
-export type RunAgentToolsAgentsRequestRequestBodySettings12Type = ClosedEnum<
-  typeof RunAgentToolsAgentsRequestRequestBodySettings12Type
+export type RunAgentToolsAgentsRequestRequestBodySettings13Type = ClosedEnum<
+  typeof RunAgentToolsAgentsRequestRequestBodySettings13Type
 >;
 
 export type ToolsFunction = {
@@ -196,8 +206,8 @@ export type ToolsFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type Twelve = {
-  type: RunAgentToolsAgentsRequestRequestBodySettings12Type;
+export type Thirteen = {
+  type: RunAgentToolsAgentsRequestRequestBodySettings13Type;
   id?: string | undefined;
   key: string;
   displayName?: string | undefined;
@@ -220,11 +230,11 @@ export const Status = {
  */
 export type Status = ClosedEnum<typeof Status>;
 
-export const RunAgentToolsAgentsRequestRequestBodySettings11Type = {
+export const RunAgentToolsAgentsRequestRequestBodySettings12Type = {
   Http: "http",
 } as const;
-export type RunAgentToolsAgentsRequestRequestBodySettings11Type = ClosedEnum<
-  typeof RunAgentToolsAgentsRequestRequestBodySettings11Type
+export type RunAgentToolsAgentsRequestRequestBodySettings12Type = ClosedEnum<
+  typeof RunAgentToolsAgentsRequestRequestBodySettings12Type
 >;
 
 /**
@@ -266,7 +276,7 @@ export type Blueprint = {
 /**
  * The type of the argument.
  */
-export const RunAgentToolsAgentsRequestRequestBodySettings11HttpType = {
+export const RunAgentToolsAgentsRequestRequestBodySettings12HttpType = {
   String: "string",
   Number: "number",
   Boolean: "boolean",
@@ -274,8 +284,8 @@ export const RunAgentToolsAgentsRequestRequestBodySettings11HttpType = {
 /**
  * The type of the argument.
  */
-export type RunAgentToolsAgentsRequestRequestBodySettings11HttpType =
-  ClosedEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings11HttpType>;
+export type RunAgentToolsAgentsRequestRequestBodySettings12HttpType =
+  ClosedEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings12HttpType>;
 
 /**
  * The default value of the argument.
@@ -286,7 +296,7 @@ export type Arguments = {
   /**
    * The type of the argument.
    */
-  type: RunAgentToolsAgentsRequestRequestBodySettings11HttpType;
+  type: RunAgentToolsAgentsRequestRequestBodySettings12HttpType;
   /**
    * A description of the argument.
    */
@@ -312,7 +322,7 @@ export type Http = {
   arguments?: { [k: string]: Arguments } | undefined;
 };
 
-export type Eleven = {
+export type Twelve = {
   id?: string | undefined;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
@@ -335,13 +345,25 @@ export type Eleven = {
    */
   status?: Status | undefined;
   versionHash?: string | undefined;
-  type: RunAgentToolsAgentsRequestRequestBodySettings11Type;
+  type: RunAgentToolsAgentsRequestRequestBodySettings12Type;
   http: Http;
   requiresApproval?: boolean | undefined;
 };
 
-export const RunAgentToolsAgentsRequestRequestBodySettings10Type = {
+export const RunAgentToolsAgentsRequestRequestBodySettings11Type = {
   CurrentDate: "current_date",
+} as const;
+export type RunAgentToolsAgentsRequestRequestBodySettings11Type = ClosedEnum<
+  typeof RunAgentToolsAgentsRequestRequestBodySettings11Type
+>;
+
+export type Eleven = {
+  type: RunAgentToolsAgentsRequestRequestBodySettings11Type;
+  requiresApproval?: boolean | undefined;
+};
+
+export const RunAgentToolsAgentsRequestRequestBodySettings10Type = {
+  QueryKnowledgeBase: "query_knowledge_base",
 } as const;
 export type RunAgentToolsAgentsRequestRequestBodySettings10Type = ClosedEnum<
   typeof RunAgentToolsAgentsRequestRequestBodySettings10Type
@@ -353,7 +375,7 @@ export type Ten = {
 };
 
 export const RunAgentToolsAgentsRequestRequestBodySettings9Type = {
-  QueryKnowledgeBase: "query_knowledge_base",
+  RetrieveKnowledgeBases: "retrieve_knowledge_bases",
 } as const;
 export type RunAgentToolsAgentsRequestRequestBodySettings9Type = ClosedEnum<
   typeof RunAgentToolsAgentsRequestRequestBodySettings9Type
@@ -365,7 +387,7 @@ export type Nine = {
 };
 
 export const RunAgentToolsAgentsRequestRequestBodySettings8Type = {
-  RetrieveKnowledgeBases: "retrieve_knowledge_bases",
+  RetrieveMemoryStores: "retrieve_memory_stores",
 } as const;
 export type RunAgentToolsAgentsRequestRequestBodySettings8Type = ClosedEnum<
   typeof RunAgentToolsAgentsRequestRequestBodySettings8Type
@@ -377,7 +399,7 @@ export type Eight = {
 };
 
 export const RunAgentToolsAgentsRequestRequestBodySettings7Type = {
-  RetrieveMemoryStores: "retrieve_memory_stores",
+  DeleteMemoryDocument: "delete_memory_document",
 } as const;
 export type RunAgentToolsAgentsRequestRequestBodySettings7Type = ClosedEnum<
   typeof RunAgentToolsAgentsRequestRequestBodySettings7Type
@@ -457,8 +479,8 @@ export type Tools1 = {
 };
 
 export type Tools =
-  | Eleven
   | Twelve
+  | Thirteen
   | Tools1
   | Tools2
   | Tools3
@@ -468,7 +490,8 @@ export type Tools =
   | Seven
   | Eight
   | Nine
-  | Ten;
+  | Ten
+  | Eleven;
 
 /**
  * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
@@ -485,8 +508,8 @@ export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
 export type Settings = {
   tools: Array<
-    | Eleven
     | Twelve
+    | Thirteen
     | Tools1
     | Tools2
     | Tools3
@@ -497,6 +520,7 @@ export type Settings = {
     | Eight
     | Nine
     | Ten
+    | Eleven
   >;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
@@ -550,9 +574,9 @@ export type RunAgentRequestBody = {
    */
   contextId?: string | undefined;
   /**
-   * An external id for the agent execution. This can be used to associate a specific user with the agent execution.
+   * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
-  externalId?: string | undefined;
+  memory?: Memory | undefined;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
@@ -1455,6 +1479,61 @@ export function messageFromJSON(
 }
 
 /** @internal */
+export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
+  .object({
+    entity_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entity_id": "entityId",
+    });
+  });
+
+/** @internal */
+export type Memory$Outbound = {
+  entity_id: string;
+};
+
+/** @internal */
+export const Memory$outboundSchema: z.ZodType<
+  Memory$Outbound,
+  z.ZodTypeDef,
+  Memory
+> = z.object({
+  entityId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    entityId: "entity_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Memory$ {
+  /** @deprecated use `Memory$inboundSchema` instead. */
+  export const inboundSchema = Memory$inboundSchema;
+  /** @deprecated use `Memory$outboundSchema` instead. */
+  export const outboundSchema = Memory$outboundSchema;
+  /** @deprecated use `Memory$Outbound` instead. */
+  export type Outbound = Memory$Outbound;
+}
+
+export function memoryToJSON(memory: Memory): string {
+  return JSON.stringify(Memory$outboundSchema.parse(memory));
+}
+
+export function memoryFromJSON(
+  jsonString: string,
+): SafeParseResult<Memory, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Memory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Memory' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentConfigurationType$inboundSchema: z.ZodNativeEnum<
   typeof RunAgentConfigurationType
 > = z.nativeEnum(RunAgentConfigurationType);
@@ -1769,26 +1848,26 @@ export function teamOfAgentsFromJSON(
 }
 
 /** @internal */
-export const RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings12Type> =
-    z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings12Type);
+export const RunAgentToolsAgentsRequestRequestBodySettings13Type$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings13Type> =
+    z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings13Type);
 
 /** @internal */
-export const RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings12Type> =
-    RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema;
+export const RunAgentToolsAgentsRequestRequestBodySettings13Type$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings13Type> =
+    RunAgentToolsAgentsRequestRequestBodySettings13Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RunAgentToolsAgentsRequestRequestBodySettings12Type$ {
-  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema` instead. */
+export namespace RunAgentToolsAgentsRequestRequestBodySettings13Type$ {
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings13Type$inboundSchema` instead. */
   export const inboundSchema =
-    RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema;
-  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema` instead. */
+    RunAgentToolsAgentsRequestRequestBodySettings13Type$inboundSchema;
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings13Type$outboundSchema` instead. */
   export const outboundSchema =
-    RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema;
+    RunAgentToolsAgentsRequestRequestBodySettings13Type$outboundSchema;
 }
 
 /** @internal */
@@ -1851,25 +1930,28 @@ export function toolsFunctionFromJSON(
 }
 
 /** @internal */
-export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
-  .object({
-    type: RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema,
-    _id: z.string().optional(),
-    key: z.string(),
-    display_name: z.string().optional(),
-    description: z.string().optional(),
-    requires_approval: z.boolean().default(false),
-    function: z.lazy(() => ToolsFunction$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "display_name": "displayName",
-      "requires_approval": "requiresApproval",
-    });
+export const Thirteen$inboundSchema: z.ZodType<
+  Thirteen,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: RunAgentToolsAgentsRequestRequestBodySettings13Type$inboundSchema,
+  _id: z.string().optional(),
+  key: z.string(),
+  display_name: z.string().optional(),
+  description: z.string().optional(),
+  requires_approval: z.boolean().default(false),
+  function: z.lazy(() => ToolsFunction$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "requires_approval": "requiresApproval",
   });
+});
 
 /** @internal */
-export type Twelve$Outbound = {
+export type Thirteen$Outbound = {
   type: string;
   _id?: string | undefined;
   key: string;
@@ -1880,12 +1962,12 @@ export type Twelve$Outbound = {
 };
 
 /** @internal */
-export const Twelve$outboundSchema: z.ZodType<
-  Twelve$Outbound,
+export const Thirteen$outboundSchema: z.ZodType<
+  Thirteen$Outbound,
   z.ZodTypeDef,
-  Twelve
+  Thirteen
 > = z.object({
-  type: RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema,
+  type: RunAgentToolsAgentsRequestRequestBodySettings13Type$outboundSchema,
   id: z.string().optional(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1904,26 +1986,26 @@ export const Twelve$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Twelve$ {
-  /** @deprecated use `Twelve$inboundSchema` instead. */
-  export const inboundSchema = Twelve$inboundSchema;
-  /** @deprecated use `Twelve$outboundSchema` instead. */
-  export const outboundSchema = Twelve$outboundSchema;
-  /** @deprecated use `Twelve$Outbound` instead. */
-  export type Outbound = Twelve$Outbound;
+export namespace Thirteen$ {
+  /** @deprecated use `Thirteen$inboundSchema` instead. */
+  export const inboundSchema = Thirteen$inboundSchema;
+  /** @deprecated use `Thirteen$outboundSchema` instead. */
+  export const outboundSchema = Thirteen$outboundSchema;
+  /** @deprecated use `Thirteen$Outbound` instead. */
+  export type Outbound = Thirteen$Outbound;
 }
 
-export function twelveToJSON(twelve: Twelve): string {
-  return JSON.stringify(Twelve$outboundSchema.parse(twelve));
+export function thirteenToJSON(thirteen: Thirteen): string {
+  return JSON.stringify(Thirteen$outboundSchema.parse(thirteen));
 }
 
-export function twelveFromJSON(
+export function thirteenFromJSON(
   jsonString: string,
-): SafeParseResult<Twelve, SDKValidationError> {
+): SafeParseResult<Thirteen, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Twelve$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Twelve' from JSON`,
+    (x) => Thirteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Thirteen' from JSON`,
   );
 }
 
@@ -1947,26 +2029,26 @@ export namespace Status$ {
 }
 
 /** @internal */
-export const RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema:
-  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings11Type> =
-    z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings11Type);
+export const RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings12Type> =
+    z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings12Type);
 
 /** @internal */
-export const RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema:
-  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings11Type> =
-    RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema;
+export const RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings12Type> =
+    RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RunAgentToolsAgentsRequestRequestBodySettings11Type$ {
-  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema` instead. */
+export namespace RunAgentToolsAgentsRequestRequestBodySettings12Type$ {
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema` instead. */
   export const inboundSchema =
-    RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema;
-  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema` instead. */
+    RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema;
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema` instead. */
   export const outboundSchema =
-    RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema;
+    RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema;
 }
 
 /** @internal */
@@ -2048,28 +2130,28 @@ export function blueprintFromJSON(
 }
 
 /** @internal */
-export const RunAgentToolsAgentsRequestRequestBodySettings11HttpType$inboundSchema:
+export const RunAgentToolsAgentsRequestRequestBodySettings12HttpType$inboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentToolsAgentsRequestRequestBodySettings11HttpType
-  > = z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings11HttpType);
+    typeof RunAgentToolsAgentsRequestRequestBodySettings12HttpType
+  > = z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings12HttpType);
 
 /** @internal */
-export const RunAgentToolsAgentsRequestRequestBodySettings11HttpType$outboundSchema:
+export const RunAgentToolsAgentsRequestRequestBodySettings12HttpType$outboundSchema:
   z.ZodNativeEnum<
-    typeof RunAgentToolsAgentsRequestRequestBodySettings11HttpType
-  > = RunAgentToolsAgentsRequestRequestBodySettings11HttpType$inboundSchema;
+    typeof RunAgentToolsAgentsRequestRequestBodySettings12HttpType
+  > = RunAgentToolsAgentsRequestRequestBodySettings12HttpType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RunAgentToolsAgentsRequestRequestBodySettings11HttpType$ {
-  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings11HttpType$inboundSchema` instead. */
+export namespace RunAgentToolsAgentsRequestRequestBodySettings12HttpType$ {
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings12HttpType$inboundSchema` instead. */
   export const inboundSchema =
-    RunAgentToolsAgentsRequestRequestBodySettings11HttpType$inboundSchema;
-  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings11HttpType$outboundSchema` instead. */
+    RunAgentToolsAgentsRequestRequestBodySettings12HttpType$inboundSchema;
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings12HttpType$outboundSchema` instead. */
   export const outboundSchema =
-    RunAgentToolsAgentsRequestRequestBodySettings11HttpType$outboundSchema;
+    RunAgentToolsAgentsRequestRequestBodySettings12HttpType$outboundSchema;
 }
 
 /** @internal */
@@ -2122,7 +2204,7 @@ export const Arguments$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentToolsAgentsRequestRequestBodySettings11HttpType$inboundSchema,
+  type: RunAgentToolsAgentsRequestRequestBodySettings12HttpType$inboundSchema,
   description: z.string(),
   send_to_model: z.boolean().default(true),
   default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -2147,7 +2229,7 @@ export const Arguments$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Arguments
 > = z.object({
-  type: RunAgentToolsAgentsRequestRequestBodySettings11HttpType$outboundSchema,
+  type: RunAgentToolsAgentsRequestRequestBodySettings12HttpType$outboundSchema,
   description: z.string(),
   sendToModel: z.boolean().default(true),
   defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -2233,16 +2315,16 @@ export function httpFromJSON(
 }
 
 /** @internal */
-export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K5E8A6SKDM6WDDRGVD1YNSN1"),
+    _id: z.string().default("01K5ENCKSWHJKG9277SMJ4E28Y"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
     description: z.string(),
     status: Status$inboundSchema.default("live"),
     version_hash: z.string().optional(),
-    type: RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema,
+    type: RunAgentToolsAgentsRequestRequestBodySettings12Type$inboundSchema,
     http: z.lazy(() => Http$inboundSchema),
     requires_approval: z.boolean().default(false),
   }).transform((v) => {
@@ -2255,7 +2337,7 @@ export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
   });
 
 /** @internal */
-export type Eleven$Outbound = {
+export type Twelve$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -2269,19 +2351,19 @@ export type Eleven$Outbound = {
 };
 
 /** @internal */
-export const Eleven$outboundSchema: z.ZodType<
-  Eleven$Outbound,
+export const Twelve$outboundSchema: z.ZodType<
+  Twelve$Outbound,
   z.ZodTypeDef,
-  Eleven
+  Twelve
 > = z.object({
-  id: z.string().default("01K5E8A6SKDM6WDDRGVD1YNSN1"),
+  id: z.string().default("01K5ENCKSWHJKG9277SMJ4E28Y"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),
   status: Status$outboundSchema.default("live"),
   versionHash: z.string().optional(),
-  type: RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema,
+  type: RunAgentToolsAgentsRequestRequestBodySettings12Type$outboundSchema,
   http: z.lazy(() => Http$outboundSchema),
   requiresApproval: z.boolean().default(false),
 }).transform((v) => {
@@ -2289,6 +2371,87 @@ export const Eleven$outboundSchema: z.ZodType<
     id: "_id",
     displayName: "display_name",
     versionHash: "version_hash",
+    requiresApproval: "requires_approval",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Twelve$ {
+  /** @deprecated use `Twelve$inboundSchema` instead. */
+  export const inboundSchema = Twelve$inboundSchema;
+  /** @deprecated use `Twelve$outboundSchema` instead. */
+  export const outboundSchema = Twelve$outboundSchema;
+  /** @deprecated use `Twelve$Outbound` instead. */
+  export type Outbound = Twelve$Outbound;
+}
+
+export function twelveToJSON(twelve: Twelve): string {
+  return JSON.stringify(Twelve$outboundSchema.parse(twelve));
+}
+
+export function twelveFromJSON(
+  jsonString: string,
+): SafeParseResult<Twelve, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Twelve$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Twelve' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings11Type> =
+    z.nativeEnum(RunAgentToolsAgentsRequestRequestBodySettings11Type);
+
+/** @internal */
+export const RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentToolsAgentsRequestRequestBodySettings11Type> =
+    RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RunAgentToolsAgentsRequestRequestBodySettings11Type$ {
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema` instead. */
+  export const inboundSchema =
+    RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema;
+  /** @deprecated use `RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema` instead. */
+  export const outboundSchema =
+    RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema;
+}
+
+/** @internal */
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
+  .object({
+    type: RunAgentToolsAgentsRequestRequestBodySettings11Type$inboundSchema,
+    requires_approval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "requires_approval": "requiresApproval",
+    });
+  });
+
+/** @internal */
+export type Eleven$Outbound = {
+  type: string;
+  requires_approval: boolean;
+};
+
+/** @internal */
+export const Eleven$outboundSchema: z.ZodType<
+  Eleven$Outbound,
+  z.ZodTypeDef,
+  Eleven
+> = z.object({
+  type: RunAgentToolsAgentsRequestRequestBodySettings11Type$outboundSchema,
+  requiresApproval: z.boolean().default(false),
+}).transform((v) => {
+  return remap$(v, {
     requiresApproval: "requires_approval",
   });
 });
@@ -3114,8 +3277,8 @@ export function tools1FromJSON(
 /** @internal */
 export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
   .union([
-    z.lazy(() => Eleven$inboundSchema),
     z.lazy(() => Twelve$inboundSchema),
+    z.lazy(() => Thirteen$inboundSchema),
     z.lazy(() => Tools1$inboundSchema),
     z.lazy(() => Tools2$inboundSchema),
     z.lazy(() => Tools3$inboundSchema),
@@ -3126,12 +3289,13 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
     z.lazy(() => Eight$inboundSchema),
     z.lazy(() => Nine$inboundSchema),
     z.lazy(() => Ten$inboundSchema),
+    z.lazy(() => Eleven$inboundSchema),
   ]);
 
 /** @internal */
 export type Tools$Outbound =
-  | Eleven$Outbound
   | Twelve$Outbound
+  | Thirteen$Outbound
   | Tools1$Outbound
   | Tools2$Outbound
   | Tools3$Outbound
@@ -3141,7 +3305,8 @@ export type Tools$Outbound =
   | Seven$Outbound
   | Eight$Outbound
   | Nine$Outbound
-  | Ten$Outbound;
+  | Ten$Outbound
+  | Eleven$Outbound;
 
 /** @internal */
 export const Tools$outboundSchema: z.ZodType<
@@ -3149,8 +3314,8 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.union([
-  z.lazy(() => Eleven$outboundSchema),
   z.lazy(() => Twelve$outboundSchema),
+  z.lazy(() => Thirteen$outboundSchema),
   z.lazy(() => Tools1$outboundSchema),
   z.lazy(() => Tools2$outboundSchema),
   z.lazy(() => Tools3$outboundSchema),
@@ -3161,6 +3326,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.lazy(() => Eight$outboundSchema),
   z.lazy(() => Nine$outboundSchema),
   z.lazy(() => Ten$outboundSchema),
+  z.lazy(() => Eleven$outboundSchema),
 ]);
 
 /**
@@ -3219,8 +3385,8 @@ export const Settings$inboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => Eleven$inboundSchema),
       z.lazy(() => Twelve$inboundSchema),
+      z.lazy(() => Thirteen$inboundSchema),
       z.lazy(() => Tools1$inboundSchema),
       z.lazy(() => Tools2$inboundSchema),
       z.lazy(() => Tools3$inboundSchema),
@@ -3231,6 +3397,7 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => Eight$inboundSchema),
       z.lazy(() => Nine$inboundSchema),
       z.lazy(() => Ten$inboundSchema),
+      z.lazy(() => Eleven$inboundSchema),
     ]),
   ),
   tool_approval_required: ToolApprovalRequired$inboundSchema.default("none"),
@@ -3247,8 +3414,8 @@ export const Settings$inboundSchema: z.ZodType<
 /** @internal */
 export type Settings$Outbound = {
   tools: Array<
-    | Eleven$Outbound
     | Twelve$Outbound
+    | Thirteen$Outbound
     | Tools1$Outbound
     | Tools2$Outbound
     | Tools3$Outbound
@@ -3259,6 +3426,7 @@ export type Settings$Outbound = {
     | Eight$Outbound
     | Nine$Outbound
     | Ten$Outbound
+    | Eleven$Outbound
   >;
   tool_approval_required: string;
   max_iterations: number;
@@ -3273,8 +3441,8 @@ export const Settings$outboundSchema: z.ZodType<
 > = z.object({
   tools: z.array(
     z.union([
-      z.lazy(() => Eleven$outboundSchema),
       z.lazy(() => Twelve$outboundSchema),
+      z.lazy(() => Thirteen$outboundSchema),
       z.lazy(() => Tools1$outboundSchema),
       z.lazy(() => Tools2$outboundSchema),
       z.lazy(() => Tools3$outboundSchema),
@@ -3285,6 +3453,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => Eight$outboundSchema),
       z.lazy(() => Nine$outboundSchema),
       z.lazy(() => Ten$outboundSchema),
+      z.lazy(() => Eleven$outboundSchema),
     ]),
   ),
   toolApprovalRequired: ToolApprovalRequired$outboundSchema.default("none"),
@@ -3340,7 +3509,7 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   message: z.lazy(() => Message$inboundSchema),
   variables: z.record(z.any()).optional(),
   contextId: z.string().optional(),
-  external_id: z.string().optional(),
+  memory: z.lazy(() => Memory$inboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
   iconUrl: z.string().optional(),
@@ -3353,7 +3522,6 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "fallback_models": "fallbackModels",
-    "external_id": "externalId",
     "system_prompt": "systemPrompt",
     "memory_stores": "memoryStores",
     "knowledge_bases": "knowledgeBases",
@@ -3372,7 +3540,7 @@ export type RunAgentRequestBody$Outbound = {
   message: Message$Outbound;
   variables?: { [k: string]: any } | undefined;
   contextId?: string | undefined;
-  external_id?: string | undefined;
+  memory?: Memory$Outbound | undefined;
   path: string;
   description?: string | undefined;
   iconUrl?: string | undefined;
@@ -3398,7 +3566,7 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   message: z.lazy(() => Message$outboundSchema),
   variables: z.record(z.any()).optional(),
   contextId: z.string().optional(),
-  externalId: z.string().optional(),
+  memory: z.lazy(() => Memory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
   iconUrl: z.string().optional(),
@@ -3411,7 +3579,6 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     fallbackModels: "fallback_models",
-    externalId: "external_id",
     systemPrompt: "system_prompt",
     memoryStores: "memory_stores",
     knowledgeBases: "knowledge_bases",
