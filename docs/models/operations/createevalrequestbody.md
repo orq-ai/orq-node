@@ -7,6 +7,7 @@
 
 ```typescript
 const value: operations.Llm = {
+  outputType: "string",
   type: "llm_eval",
   prompt: "<value>",
   path: "Default",
@@ -19,6 +20,7 @@ const value: operations.Llm = {
 
 ```typescript
 const value: operations.Json = {
+  outputType: "boolean",
   type: "json_schema",
   schema: "<value>",
   path: "Default",
@@ -30,14 +32,16 @@ const value: operations.Json = {
 
 ```typescript
 const value: operations.Http = {
+  outputType: "string",
   type: "http_eval",
-  url: "https://weary-sprinkles.net",
-  method: "GET",
-  headers: {
+  url: "https://tempting-quinoa.info",
+  method: "POST",
+  headers: {},
+  payload: {
     "key": "<value>",
     "key1": "<value>",
+    "key2": "<value>",
   },
-  payload: {},
   path: "Default",
   key: "<key>",
 };
@@ -47,6 +51,7 @@ const value: operations.Http = {
 
 ```typescript
 const value: operations.Python = {
+  outputType: "string",
   code: "<value>",
   type: "python_eval",
   path: "Default",

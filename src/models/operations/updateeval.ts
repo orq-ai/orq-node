@@ -51,6 +51,15 @@ export type UpdateEvalRequestBodyEvalsRequest4GuardrailConfig =
   | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber
   | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean;
 
+export const UpdateEvalRequestBodyEvalsRequest4OutputType = {
+  Boolean: "boolean",
+  Number: "number",
+  String: "string",
+} as const;
+export type UpdateEvalRequestBodyEvalsRequest4OutputType = ClosedEnum<
+  typeof UpdateEvalRequestBodyEvalsRequest4OutputType
+>;
+
 export const UpdateEvalRequestBodyEvalsRequest4Type = {
   PythonEval: "python_eval",
 } as const;
@@ -63,6 +72,7 @@ export type RequestBodyPython = {
     | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber
     | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean
     | undefined;
+  outputType?: UpdateEvalRequestBodyEvalsRequest4OutputType | undefined;
   code?: string | undefined;
   type: UpdateEvalRequestBodyEvalsRequest4Type;
   /**
@@ -116,6 +126,15 @@ export type UpdateEvalRequestBodyEvalsRequestGuardrailConfig =
   | UpdateEvalGuardrailConfigEvalsRequestNumber
   | UpdateEvalGuardrailConfigEvalsRequestBoolean;
 
+export const UpdateEvalRequestBodyEvalsRequestOutputType = {
+  Boolean: "boolean",
+  Number: "number",
+  String: "string",
+} as const;
+export type UpdateEvalRequestBodyEvalsRequestOutputType = ClosedEnum<
+  typeof UpdateEvalRequestBodyEvalsRequestOutputType
+>;
+
 export const UpdateEvalRequestBodyEvalsRequestType = {
   HttpEval: "http_eval",
 } as const;
@@ -134,6 +153,7 @@ export type RequestBodyHTTP = {
     | UpdateEvalGuardrailConfigEvalsRequestNumber
     | UpdateEvalGuardrailConfigEvalsRequestBoolean
     | undefined;
+  outputType?: UpdateEvalRequestBodyEvalsRequestOutputType | undefined;
   type: UpdateEvalRequestBodyEvalsRequestType;
   url?: string | undefined;
   method?: RequestBodyMethod | undefined;
@@ -190,6 +210,13 @@ export type UpdateEvalRequestBodyEvalsGuardrailConfig =
   | UpdateEvalGuardrailConfigEvalsNumber
   | UpdateEvalGuardrailConfigEvalsBoolean;
 
+export const UpdateEvalRequestBodyEvalsOutputType = {
+  Boolean: "boolean",
+} as const;
+export type UpdateEvalRequestBodyEvalsOutputType = ClosedEnum<
+  typeof UpdateEvalRequestBodyEvalsOutputType
+>;
+
 export const UpdateEvalRequestBodyEvalsType = {
   JsonSchema: "json_schema",
 } as const;
@@ -202,6 +229,7 @@ export type RequestBodyJSON = {
     | UpdateEvalGuardrailConfigEvalsNumber
     | UpdateEvalGuardrailConfigEvalsBoolean
     | undefined;
+  outputType?: UpdateEvalRequestBodyEvalsOutputType | undefined;
   type: UpdateEvalRequestBodyEvalsType;
   schema?: string | undefined;
   /**
@@ -255,6 +283,15 @@ export type UpdateEvalRequestBodyGuardrailConfig =
   | UpdateEvalGuardrailConfigNumber
   | UpdateEvalGuardrailConfigBoolean;
 
+export const UpdateEvalRequestBodyOutputType = {
+  Boolean: "boolean",
+  Number: "number",
+  String: "string",
+} as const;
+export type UpdateEvalRequestBodyOutputType = ClosedEnum<
+  typeof UpdateEvalRequestBodyOutputType
+>;
+
 export const UpdateEvalRequestBodyType = {
   LlmEval: "llm_eval",
 } as const;
@@ -267,6 +304,7 @@ export type RequestBodyLLM = {
     | UpdateEvalGuardrailConfigNumber
     | UpdateEvalGuardrailConfigBoolean
     | undefined;
+  outputType?: UpdateEvalRequestBodyOutputType | undefined;
   type: UpdateEvalRequestBodyType;
   prompt?: string | undefined;
   /**
@@ -898,6 +936,29 @@ export function updateEvalRequestBodyEvalsRequest4GuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const UpdateEvalRequestBodyEvalsRequest4OutputType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequest4OutputType> = z
+    .nativeEnum(UpdateEvalRequestBodyEvalsRequest4OutputType);
+
+/** @internal */
+export const UpdateEvalRequestBodyEvalsRequest4OutputType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequest4OutputType> =
+    UpdateEvalRequestBodyEvalsRequest4OutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateEvalRequestBodyEvalsRequest4OutputType$ {
+  /** @deprecated use `UpdateEvalRequestBodyEvalsRequest4OutputType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateEvalRequestBodyEvalsRequest4OutputType$inboundSchema;
+  /** @deprecated use `UpdateEvalRequestBodyEvalsRequest4OutputType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateEvalRequestBodyEvalsRequest4OutputType$outboundSchema;
+}
+
+/** @internal */
 export const UpdateEvalRequestBodyEvalsRequest4Type$inboundSchema:
   z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequest4Type> = z.nativeEnum(
     UpdateEvalRequestBodyEvalsRequest4Type,
@@ -935,6 +996,8 @@ export const RequestBodyPython$inboundSchema: z.ZodType<
       UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$inboundSchema
     ),
   ]).optional(),
+  output_type: UpdateEvalRequestBodyEvalsRequest4OutputType$inboundSchema
+    .optional(),
   code: z.string().optional(),
   type: UpdateEvalRequestBodyEvalsRequest4Type$inboundSchema,
   path: z.string(),
@@ -943,6 +1006,7 @@ export const RequestBodyPython$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 
@@ -952,6 +1016,7 @@ export type RequestBodyPython$Outbound = {
     | UpdateEvalGuardrailConfigEvalsRequestRequestBodyNumber$Outbound
     | UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$Outbound
     | undefined;
+  output_type?: string | undefined;
   code?: string | undefined;
   type: string;
   path: string;
@@ -973,6 +1038,8 @@ export const RequestBodyPython$outboundSchema: z.ZodType<
       UpdateEvalGuardrailConfigEvalsRequestRequestBodyBoolean$outboundSchema
     ),
   ]).optional(),
+  outputType: UpdateEvalRequestBodyEvalsRequest4OutputType$outboundSchema
+    .optional(),
   code: z.string().optional(),
   type: UpdateEvalRequestBodyEvalsRequest4Type$outboundSchema,
   path: z.string(),
@@ -981,6 +1048,7 @@ export const RequestBodyPython$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
 });
 
@@ -1308,6 +1376,29 @@ export function updateEvalRequestBodyEvalsRequestGuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const UpdateEvalRequestBodyEvalsRequestOutputType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequestOutputType> = z
+    .nativeEnum(UpdateEvalRequestBodyEvalsRequestOutputType);
+
+/** @internal */
+export const UpdateEvalRequestBodyEvalsRequestOutputType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequestOutputType> =
+    UpdateEvalRequestBodyEvalsRequestOutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateEvalRequestBodyEvalsRequestOutputType$ {
+  /** @deprecated use `UpdateEvalRequestBodyEvalsRequestOutputType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateEvalRequestBodyEvalsRequestOutputType$inboundSchema;
+  /** @deprecated use `UpdateEvalRequestBodyEvalsRequestOutputType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateEvalRequestBodyEvalsRequestOutputType$outboundSchema;
+}
+
+/** @internal */
 export const UpdateEvalRequestBodyEvalsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsRequestType> = z.nativeEnum(
     UpdateEvalRequestBodyEvalsRequestType,
@@ -1362,6 +1453,8 @@ export const RequestBodyHTTP$inboundSchema: z.ZodType<
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$inboundSchema),
   ]).optional(),
+  output_type: UpdateEvalRequestBodyEvalsRequestOutputType$inboundSchema
+    .optional(),
   type: UpdateEvalRequestBodyEvalsRequestType$inboundSchema,
   url: z.string().optional(),
   method: RequestBodyMethod$inboundSchema.optional(),
@@ -1373,6 +1466,7 @@ export const RequestBodyHTTP$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 
@@ -1382,6 +1476,7 @@ export type RequestBodyHTTP$Outbound = {
     | UpdateEvalGuardrailConfigEvalsRequestNumber$Outbound
     | UpdateEvalGuardrailConfigEvalsRequestBoolean$Outbound
     | undefined;
+  output_type?: string | undefined;
   type: string;
   url?: string | undefined;
   method?: string | undefined;
@@ -1402,6 +1497,8 @@ export const RequestBodyHTTP$outboundSchema: z.ZodType<
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestBoolean$outboundSchema),
   ]).optional(),
+  outputType: UpdateEvalRequestBodyEvalsRequestOutputType$outboundSchema
+    .optional(),
   type: UpdateEvalRequestBodyEvalsRequestType$outboundSchema,
   url: z.string().optional(),
   method: RequestBodyMethod$outboundSchema.optional(),
@@ -1413,6 +1510,7 @@ export const RequestBodyHTTP$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
 });
 
@@ -1717,6 +1815,30 @@ export function updateEvalRequestBodyEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const UpdateEvalRequestBodyEvalsOutputType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsOutputType> = z.nativeEnum(
+    UpdateEvalRequestBodyEvalsOutputType,
+  );
+
+/** @internal */
+export const UpdateEvalRequestBodyEvalsOutputType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateEvalRequestBodyEvalsOutputType> =
+    UpdateEvalRequestBodyEvalsOutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateEvalRequestBodyEvalsOutputType$ {
+  /** @deprecated use `UpdateEvalRequestBodyEvalsOutputType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateEvalRequestBodyEvalsOutputType$inboundSchema;
+  /** @deprecated use `UpdateEvalRequestBodyEvalsOutputType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateEvalRequestBodyEvalsOutputType$outboundSchema;
+}
+
+/** @internal */
 export const UpdateEvalRequestBodyEvalsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateEvalRequestBodyEvalsType
 > = z.nativeEnum(UpdateEvalRequestBodyEvalsType);
@@ -1747,6 +1869,7 @@ export const RequestBodyJSON$inboundSchema: z.ZodType<
     z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$inboundSchema),
   ]).optional(),
+  output_type: UpdateEvalRequestBodyEvalsOutputType$inboundSchema.optional(),
   type: UpdateEvalRequestBodyEvalsType$inboundSchema,
   schema: z.string().optional(),
   path: z.string(),
@@ -1755,6 +1878,7 @@ export const RequestBodyJSON$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 
@@ -1764,6 +1888,7 @@ export type RequestBodyJSON$Outbound = {
     | UpdateEvalGuardrailConfigEvalsNumber$Outbound
     | UpdateEvalGuardrailConfigEvalsBoolean$Outbound
     | undefined;
+  output_type?: string | undefined;
   type: string;
   schema?: string | undefined;
   path: string;
@@ -1781,6 +1906,7 @@ export const RequestBodyJSON$outboundSchema: z.ZodType<
     z.lazy(() => UpdateEvalGuardrailConfigEvalsNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsBoolean$outboundSchema),
   ]).optional(),
+  outputType: UpdateEvalRequestBodyEvalsOutputType$outboundSchema.optional(),
   type: UpdateEvalRequestBodyEvalsType$outboundSchema,
   schema: z.string().optional(),
   path: z.string(),
@@ -1789,6 +1915,7 @@ export const RequestBodyJSON$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
 });
 
@@ -2075,6 +2202,27 @@ export function updateEvalRequestBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const UpdateEvalRequestBodyOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateEvalRequestBodyOutputType
+> = z.nativeEnum(UpdateEvalRequestBodyOutputType);
+
+/** @internal */
+export const UpdateEvalRequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateEvalRequestBodyOutputType
+> = UpdateEvalRequestBodyOutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateEvalRequestBodyOutputType$ {
+  /** @deprecated use `UpdateEvalRequestBodyOutputType$inboundSchema` instead. */
+  export const inboundSchema = UpdateEvalRequestBodyOutputType$inboundSchema;
+  /** @deprecated use `UpdateEvalRequestBodyOutputType$outboundSchema` instead. */
+  export const outboundSchema = UpdateEvalRequestBodyOutputType$outboundSchema;
+}
+
+/** @internal */
 export const UpdateEvalRequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateEvalRequestBodyType
 > = z.nativeEnum(UpdateEvalRequestBodyType);
@@ -2105,6 +2253,7 @@ export const RequestBodyLLM$inboundSchema: z.ZodType<
     z.lazy(() => UpdateEvalGuardrailConfigNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigBoolean$inboundSchema),
   ]).optional(),
+  output_type: UpdateEvalRequestBodyOutputType$inboundSchema.optional(),
   type: UpdateEvalRequestBodyType$inboundSchema,
   prompt: z.string().optional(),
   path: z.string(),
@@ -2114,6 +2263,7 @@ export const RequestBodyLLM$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 
@@ -2123,6 +2273,7 @@ export type RequestBodyLLM$Outbound = {
     | UpdateEvalGuardrailConfigNumber$Outbound
     | UpdateEvalGuardrailConfigBoolean$Outbound
     | undefined;
+  output_type?: string | undefined;
   type: string;
   prompt?: string | undefined;
   path: string;
@@ -2141,6 +2292,7 @@ export const RequestBodyLLM$outboundSchema: z.ZodType<
     z.lazy(() => UpdateEvalGuardrailConfigNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigBoolean$outboundSchema),
   ]).optional(),
+  outputType: UpdateEvalRequestBodyOutputType$outboundSchema.optional(),
   type: UpdateEvalRequestBodyType$outboundSchema,
   prompt: z.string().optional(),
   path: z.string(),
@@ -2150,6 +2302,7 @@ export const RequestBodyLLM$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
 });
 
@@ -2674,8 +2827,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -2717,8 +2870,8 @@ export const UpdateEvalResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -3139,8 +3292,8 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -3188,8 +3341,8 @@ export const UpdateEvalResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -3579,8 +3732,8 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -3620,8 +3773,8 @@ export const UpdateEvalResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -3979,8 +4132,8 @@ export const UpdateEvalResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -4020,8 +4173,8 @@ export const UpdateEvalResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-18T16:20:51.118Z"),
-  updated: z.string().default("2025-09-18T16:20:51.118Z"),
+  created: z.string().default("2025-09-18T20:52:06.286Z"),
+  updated: z.string().default("2025-09-18T20:52:06.286Z"),
   guardrailConfig: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
