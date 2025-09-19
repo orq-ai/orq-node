@@ -1026,7 +1026,7 @@ export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K5ENCKRKHT796JCBNMRC3S1A"),
+  id: z.string().default("01K5G8MPFSMRQRQJDBQYD5QEBZ"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => ListAgentsConfiguration2$inboundSchema),
@@ -1053,7 +1053,7 @@ export const ListAgentsKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsKnowledgeBases
 > = z.object({
-  id: z.string().default("01K5ENCKRKHT796JCBNMRC3S1A"),
+  id: z.string().default("01K5G8MPFSMRQRQJDBQYD5QEBZ"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => ListAgentsConfiguration2$outboundSchema),

@@ -2317,7 +2317,7 @@ export function httpFromJSON(
 /** @internal */
 export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K5ENCKSWHJKG9277SMJ4E28Y"),
+    _id: z.string().default("01K5G8MPGEKZAMVJHD82V68CG2"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2356,7 +2356,7 @@ export const Twelve$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Twelve
 > = z.object({
-  id: z.string().default("01K5ENCKSWHJKG9277SMJ4E28Y"),
+  id: z.string().default("01K5G8MPGEKZAMVJHD82V68CG2"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
