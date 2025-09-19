@@ -142,6 +142,50 @@ export type Message = {
 };
 
 /**
+ * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+ */
+export type Contact = {
+  /**
+   * Unique identifier for the contact
+   */
+  id: string;
+  /**
+   * Display name of the contact
+   */
+  displayName?: string | undefined;
+  /**
+   * Email address of the contact
+   */
+  email?: string | undefined;
+  /**
+   * A hash of key/value pairs containing any other data about the contact
+   */
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * URL to the contact's avatar or logo
+   */
+  logoUrl?: string | undefined;
+  /**
+   * A list of tags associated with the contact
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
+ * Thread information to group related requests
+ */
+export type RunAgentThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
  * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
  */
 export type Memory = {
@@ -570,9 +614,13 @@ export type RunAgentRequestBody = {
    */
   variables?: { [k: string]: any } | undefined;
   /**
-   * Optional context ID that maps to thread_id
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
    */
-  contextId?: string | undefined;
+  contact?: Contact | undefined;
+  /**
+   * Thread information to group related requests
+   */
+  thread?: RunAgentThread | undefined;
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
@@ -1479,6 +1527,131 @@ export function messageFromJSON(
 }
 
 /** @internal */
+export const Contact$inboundSchema: z.ZodType<Contact, z.ZodTypeDef, unknown> =
+  z.object({
+    id: z.string(),
+    display_name: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logo_url: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "logo_url": "logoUrl",
+    });
+  });
+
+/** @internal */
+export type Contact$Outbound = {
+  id: string;
+  display_name?: string | undefined;
+  email?: string | undefined;
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  logo_url?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const Contact$outboundSchema: z.ZodType<
+  Contact$Outbound,
+  z.ZodTypeDef,
+  Contact
+> = z.object({
+  id: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logoUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    logoUrl: "logo_url",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Contact$ {
+  /** @deprecated use `Contact$inboundSchema` instead. */
+  export const inboundSchema = Contact$inboundSchema;
+  /** @deprecated use `Contact$outboundSchema` instead. */
+  export const outboundSchema = Contact$outboundSchema;
+  /** @deprecated use `Contact$Outbound` instead. */
+  export type Outbound = Contact$Outbound;
+}
+
+export function contactToJSON(contact: Contact): string {
+  return JSON.stringify(Contact$outboundSchema.parse(contact));
+}
+
+export function contactFromJSON(
+  jsonString: string,
+): SafeParseResult<Contact, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Contact$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Contact' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentThread$inboundSchema: z.ZodType<
+  RunAgentThread,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type RunAgentThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const RunAgentThread$outboundSchema: z.ZodType<
+  RunAgentThread$Outbound,
+  z.ZodTypeDef,
+  RunAgentThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RunAgentThread$ {
+  /** @deprecated use `RunAgentThread$inboundSchema` instead. */
+  export const inboundSchema = RunAgentThread$inboundSchema;
+  /** @deprecated use `RunAgentThread$outboundSchema` instead. */
+  export const outboundSchema = RunAgentThread$outboundSchema;
+  /** @deprecated use `RunAgentThread$Outbound` instead. */
+  export type Outbound = RunAgentThread$Outbound;
+}
+
+export function runAgentThreadToJSON(runAgentThread: RunAgentThread): string {
+  return JSON.stringify(RunAgentThread$outboundSchema.parse(runAgentThread));
+}
+
+export function runAgentThreadFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentThread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentThread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentThread' from JSON`,
+  );
+}
+
+/** @internal */
 export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
   .object({
     entity_id: z.string(),
@@ -2317,7 +2490,7 @@ export function httpFromJSON(
 /** @internal */
 export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K5G8MPGEKZAMVJHD82V68CG2"),
+    _id: z.string().default("01K5GVCVAT62Q2KSZCYQ4ZMK81"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2356,7 +2529,7 @@ export const Twelve$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Twelve
 > = z.object({
-  id: z.string().default("01K5G8MPGEKZAMVJHD82V68CG2"),
+  id: z.string().default("01K5GVCVAT62Q2KSZCYQ4ZMK81"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3508,7 +3681,8 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => Message$inboundSchema),
   variables: z.record(z.any()).optional(),
-  contextId: z.string().optional(),
+  contact: z.lazy(() => Contact$inboundSchema).optional(),
+  thread: z.lazy(() => RunAgentThread$inboundSchema).optional(),
   memory: z.lazy(() => Memory$inboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
@@ -3539,7 +3713,8 @@ export type RunAgentRequestBody$Outbound = {
   instructions: string;
   message: Message$Outbound;
   variables?: { [k: string]: any } | undefined;
-  contextId?: string | undefined;
+  contact?: Contact$Outbound | undefined;
+  thread?: RunAgentThread$Outbound | undefined;
   memory?: Memory$Outbound | undefined;
   path: string;
   description?: string | undefined;
@@ -3565,7 +3740,8 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => Message$outboundSchema),
   variables: z.record(z.any()).optional(),
-  contextId: z.string().optional(),
+  contact: z.lazy(() => Contact$outboundSchema).optional(),
+  thread: z.lazy(() => RunAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),

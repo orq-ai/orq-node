@@ -159,6 +159,50 @@ export type StreamRunAgentMessage = {
 };
 
 /**
+ * Information about the contact making the request. If the contact does not exist, it will be created automatically.
+ */
+export type StreamRunAgentContact = {
+  /**
+   * Unique identifier for the contact
+   */
+  id: string;
+  /**
+   * Display name of the contact
+   */
+  displayName?: string | undefined;
+  /**
+   * Email address of the contact
+   */
+  email?: string | undefined;
+  /**
+   * A hash of key/value pairs containing any other data about the contact
+   */
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * URL to the contact's avatar or logo
+   */
+  logoUrl?: string | undefined;
+  /**
+   * A list of tags associated with the contact
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
+ * Thread information to group related requests
+ */
+export type StreamRunAgentThread = {
+  /**
+   * Unique thread identifier to group related invocations.
+   */
+  id: string;
+  /**
+   * Optional tags to differentiate or categorize threads
+   */
+  tags?: Array<string> | undefined;
+};
+
+/**
  * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
  */
 export type StreamRunAgentMemory = {
@@ -590,9 +634,13 @@ export type StreamRunAgentRequestBody = {
    */
   variables?: { [k: string]: any } | undefined;
   /**
-   * Optional context ID that maps to thread_id
+   * Information about the contact making the request. If the contact does not exist, it will be created automatically.
    */
-  contextId?: string | undefined;
+  contact?: StreamRunAgentContact | undefined;
+  /**
+   * Thread information to group related requests
+   */
+  thread?: StreamRunAgentThread | undefined;
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
@@ -1502,6 +1550,142 @@ export function streamRunAgentMessageFromJSON(
 }
 
 /** @internal */
+export const StreamRunAgentContact$inboundSchema: z.ZodType<
+  StreamRunAgentContact,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
+  });
+});
+
+/** @internal */
+export type StreamRunAgentContact$Outbound = {
+  id: string;
+  display_name?: string | undefined;
+  email?: string | undefined;
+  metadata?: Array<{ [k: string]: any }> | undefined;
+  logo_url?: string | undefined;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentContact$outboundSchema: z.ZodType<
+  StreamRunAgentContact$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentContact
+> = z.object({
+  id: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logoUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    logoUrl: "logo_url",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentContact$ {
+  /** @deprecated use `StreamRunAgentContact$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentContact$inboundSchema;
+  /** @deprecated use `StreamRunAgentContact$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentContact$outboundSchema;
+  /** @deprecated use `StreamRunAgentContact$Outbound` instead. */
+  export type Outbound = StreamRunAgentContact$Outbound;
+}
+
+export function streamRunAgentContactToJSON(
+  streamRunAgentContact: StreamRunAgentContact,
+): string {
+  return JSON.stringify(
+    StreamRunAgentContact$outboundSchema.parse(streamRunAgentContact),
+  );
+}
+
+export function streamRunAgentContactFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentContact, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentContact$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentContact' from JSON`,
+  );
+}
+
+/** @internal */
+export const StreamRunAgentThread$inboundSchema: z.ZodType<
+  StreamRunAgentThread,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/** @internal */
+export type StreamRunAgentThread$Outbound = {
+  id: string;
+  tags?: Array<string> | undefined;
+};
+
+/** @internal */
+export const StreamRunAgentThread$outboundSchema: z.ZodType<
+  StreamRunAgentThread$Outbound,
+  z.ZodTypeDef,
+  StreamRunAgentThread
+> = z.object({
+  id: z.string(),
+  tags: z.array(z.string()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace StreamRunAgentThread$ {
+  /** @deprecated use `StreamRunAgentThread$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentThread$inboundSchema;
+  /** @deprecated use `StreamRunAgentThread$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentThread$outboundSchema;
+  /** @deprecated use `StreamRunAgentThread$Outbound` instead. */
+  export type Outbound = StreamRunAgentThread$Outbound;
+}
+
+export function streamRunAgentThreadToJSON(
+  streamRunAgentThread: StreamRunAgentThread,
+): string {
+  return JSON.stringify(
+    StreamRunAgentThread$outboundSchema.parse(streamRunAgentThread),
+  );
+}
+
+export function streamRunAgentThreadFromJSON(
+  jsonString: string,
+): SafeParseResult<StreamRunAgentThread, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => StreamRunAgentThread$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentThread' from JSON`,
+  );
+}
+
+/** @internal */
 export const StreamRunAgentMemory$inboundSchema: z.ZodType<
   StreamRunAgentMemory,
   z.ZodTypeDef,
@@ -2404,7 +2588,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools12$inboundSchema: z.ZodType<Tools12, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K5G8MPGKX9VB3AKS4PE7S6NV"),
+    _id: z.string().default("01K5GVCVB3Q3RWWJZHD1JBQVWJ"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2444,7 +2628,7 @@ export const Tools12$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools12
 > = z.object({
-  id: z.string().default("01K5G8MPGKX9VB3AKS4PE7S6NV"),
+  id: z.string().default("01K5GVCVB3Q3RWWJZHD1JBQVWJ"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3684,7 +3868,8 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => StreamRunAgentMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
-  contextId: z.string().optional(),
+  contact: z.lazy(() => StreamRunAgentContact$inboundSchema).optional(),
+  thread: z.lazy(() => StreamRunAgentThread$inboundSchema).optional(),
   memory: z.lazy(() => StreamRunAgentMemory$inboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
@@ -3720,7 +3905,8 @@ export type StreamRunAgentRequestBody$Outbound = {
   instructions: string;
   message: StreamRunAgentMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
-  contextId?: string | undefined;
+  contact?: StreamRunAgentContact$Outbound | undefined;
+  thread?: StreamRunAgentThread$Outbound | undefined;
   memory?: StreamRunAgentMemory$Outbound | undefined;
   path: string;
   description?: string | undefined;
@@ -3747,7 +3933,8 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   instructions: z.string(),
   message: z.lazy(() => StreamRunAgentMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
-  contextId: z.string().optional(),
+  contact: z.lazy(() => StreamRunAgentContact$outboundSchema).optional(),
+  thread: z.lazy(() => StreamRunAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => StreamRunAgentMemory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),

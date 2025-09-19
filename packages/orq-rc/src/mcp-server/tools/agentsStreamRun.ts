@@ -14,7 +14,7 @@ export const tool$agentsStreamRun: ToolDefinition<typeof args> = {
   name: "agents-stream-run",
   description: `Run and stream agent execution
 
-Creates or updates an agent with the provided configuration, then streams execution events via Server-Sent Events (SSE). If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The stream will continue until the agent completes, errors, or reaches the configured timeout. Memory stores can be associated with specific entities (users, sessions) using the memory.entity_id parameter.`,
+Creates or updates an agent with the provided configuration, then streams execution events via Server-Sent Events (SSE). If the agent already exists with the same configuration, it will be reused. If the configuration differs, a new version is created. The stream will continue until the agent completes, errors, or reaches the configured timeout.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsStreamRun(
