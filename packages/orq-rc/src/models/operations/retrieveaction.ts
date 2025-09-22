@@ -33,17 +33,17 @@ export type Tool = {
   requiresApproval?: boolean | undefined;
 };
 
-export const RetrieveActionReview = {
+export const Review = {
   Approved: "approved",
   Rejected: "rejected",
 } as const;
-export type RetrieveActionReview = ClosedEnum<typeof RetrieveActionReview>;
+export type Review = ClosedEnum<typeof Review>;
 
 /**
  * An action is a tool that an agent chooses to use. If executed is false, together with the output being there, it can indicate that a tool was mocked
  */
 export type State = {
-  review?: RetrieveActionReview | null | undefined;
+  review?: Review | null | undefined;
   /**
    * The source of the review, where it was approved or rejected
    */
@@ -218,30 +218,28 @@ export function toolFromJSON(
 }
 
 /** @internal */
-export const RetrieveActionReview$inboundSchema: z.ZodNativeEnum<
-  typeof RetrieveActionReview
-> = z.nativeEnum(RetrieveActionReview);
+export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> = z
+  .nativeEnum(Review);
 
 /** @internal */
-export const RetrieveActionReview$outboundSchema: z.ZodNativeEnum<
-  typeof RetrieveActionReview
-> = RetrieveActionReview$inboundSchema;
+export const Review$outboundSchema: z.ZodNativeEnum<typeof Review> =
+  Review$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RetrieveActionReview$ {
-  /** @deprecated use `RetrieveActionReview$inboundSchema` instead. */
-  export const inboundSchema = RetrieveActionReview$inboundSchema;
-  /** @deprecated use `RetrieveActionReview$outboundSchema` instead. */
-  export const outboundSchema = RetrieveActionReview$outboundSchema;
+export namespace Review$ {
+  /** @deprecated use `Review$inboundSchema` instead. */
+  export const inboundSchema = Review$inboundSchema;
+  /** @deprecated use `Review$outboundSchema` instead. */
+  export const outboundSchema = Review$outboundSchema;
 }
 
 /** @internal */
 export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> = z
   .object({
-    review: z.nullable(RetrieveActionReview$inboundSchema).optional(),
+    review: z.nullable(Review$inboundSchema).optional(),
     review_source: z.string().optional(),
     reviewed_by_id: z.string().optional(),
     executed: z.boolean().default(false),
@@ -272,7 +270,7 @@ export const State$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   State
 > = z.object({
-  review: z.nullable(RetrieveActionReview$outboundSchema).optional(),
+  review: z.nullable(Review$outboundSchema).optional(),
   reviewSource: z.string().optional(),
   reviewedById: z.string().optional(),
   executed: z.boolean().default(false),

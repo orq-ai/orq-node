@@ -7,7 +7,6 @@ import { agentsListActions } from "../funcs/agentsListActions.js";
 import { agentsRetrieve } from "../funcs/agentsRetrieve.js";
 import { agentsRetrieveAction } from "../funcs/agentsRetrieveAction.js";
 import { agentsRetrieveTask } from "../funcs/agentsRetrieveTask.js";
-import { agentsReviewAction } from "../funcs/agentsReviewAction.js";
 import { agentsRun } from "../funcs/agentsRun.js";
 import { agentsStreamRun } from "../funcs/agentsStreamRun.js";
 import { EventStream } from "../lib/event-streams.js";
@@ -123,23 +122,6 @@ export class Agents extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RetrieveActionResponseBody> {
     return unwrapAsync(agentsRetrieveAction(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Review a tool execution
-   *
-   * @remarks
-   * Review a tool execution and approve, reject or mock it. This will trigger the next step in the agent execution.
-   */
-  async reviewAction(
-    request: operations.ReviewActionRequest,
-    options?: RequestOptions,
-  ): Promise<operations.ReviewActionResponseBody> {
-    return unwrapAsync(agentsReviewAction(
       this,
       request,
       options,

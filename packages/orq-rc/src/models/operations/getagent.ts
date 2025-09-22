@@ -198,10 +198,6 @@ export type GetAgentResponseBody = {
   systemPrompt?: string | undefined;
   instructions: string;
   /**
-   * Optional URL to an icon for the agent
-   */
-  iconUrl?: string | undefined;
-  /**
    * The status of the agent. `Live` is the latest version of the agent. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status: GetAgentStatus;
@@ -950,7 +946,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K5P8H85R69VC35GMP021YCW9"),
+  id: z.string().default("01K5QVJ9EJ7XANYHFG6QW4P43G"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => GetAgentConfiguration2$inboundSchema),
@@ -977,7 +973,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K5P8H85R69VC35GMP021YCW9"),
+  id: z.string().default("01K5QVJ9EJ7XANYHFG6QW4P43G"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => GetAgentConfiguration2$outboundSchema),
@@ -1057,7 +1053,6 @@ export const GetAgentResponseBody$inboundSchema: z.ZodType<
   description: z.string(),
   system_prompt: z.string().optional(),
   instructions: z.string(),
-  iconUrl: z.string().optional(),
   status: GetAgentStatus$inboundSchema,
   settings: z.lazy(() => GetAgentSettings$inboundSchema).optional(),
   model: z.lazy(() => GetAgentModel$inboundSchema),
@@ -1100,7 +1095,6 @@ export type GetAgentResponseBody$Outbound = {
   description: string;
   system_prompt?: string | undefined;
   instructions: string;
-  iconUrl?: string | undefined;
   status: string;
   settings?: GetAgentSettings$Outbound | undefined;
   model: GetAgentModel$Outbound;
@@ -1132,7 +1126,6 @@ export const GetAgentResponseBody$outboundSchema: z.ZodType<
   description: z.string(),
   systemPrompt: z.string().optional(),
   instructions: z.string(),
-  iconUrl: z.string().optional(),
   status: GetAgentStatus$outboundSchema,
   settings: z.lazy(() => GetAgentSettings$outboundSchema).optional(),
   model: z.lazy(() => GetAgentModel$outboundSchema),

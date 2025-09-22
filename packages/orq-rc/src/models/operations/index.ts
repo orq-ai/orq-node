@@ -108,7 +108,6 @@ export * from "./retrievedatasource.js";
 export * from "./retrievememory.js";
 export * from "./retrievememorydocument.js";
 export * from "./retrievememorystore.js";
-export * from "./reviewaction.js";
 export * from "./runagent.js";
 export * from "./searchknowledge.js";
 export * from "./streamrunagent.js";

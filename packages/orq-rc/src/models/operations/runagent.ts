@@ -634,10 +634,6 @@ export type RunAgentRequestBody = {
    */
   description?: string | undefined;
   /**
-   * Optional URL to an icon for the agent
-   */
-  iconUrl?: string | undefined;
-  /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
   systemPrompt?: string | undefined;
@@ -2490,7 +2486,7 @@ export function httpFromJSON(
 /** @internal */
 export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K5P8H86HXDY2EG6M545NB9XM"),
+    _id: z.string().default("01K5QVJ9FF25BZPCTY7C9D1N2E"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2529,7 +2525,7 @@ export const Twelve$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Twelve
 > = z.object({
-  id: z.string().default("01K5P8H86HXDY2EG6M545NB9XM"),
+  id: z.string().default("01K5QVJ9FF25BZPCTY7C9D1N2E"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3686,7 +3682,6 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   memory: z.lazy(() => Memory$inboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
-  iconUrl: z.string().optional(),
   system_prompt: z.string().optional(),
   memory_stores: z.array(z.string()).optional(),
   knowledge_bases: z.array(z.lazy(() => KnowledgeBases$inboundSchema))
@@ -3718,7 +3713,6 @@ export type RunAgentRequestBody$Outbound = {
   memory?: Memory$Outbound | undefined;
   path: string;
   description?: string | undefined;
-  iconUrl?: string | undefined;
   system_prompt?: string | undefined;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
@@ -3745,7 +3739,6 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
-  iconUrl: z.string().optional(),
   systemPrompt: z.string().optional(),
   memoryStores: z.array(z.string()).optional(),
   knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))

@@ -654,10 +654,6 @@ export type StreamRunAgentRequestBody = {
    */
   description?: string | undefined;
   /**
-   * Optional URL to an icon for the agent
-   */
-  iconUrl?: string | undefined;
-  /**
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
   systemPrompt?: string | undefined;
@@ -2588,7 +2584,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools12$inboundSchema: z.ZodType<Tools12, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K5P8H86NVTZS0CZ8QE478AE4"),
+    _id: z.string().default("01K5QVJ9FJ8T39EZR9MRSV8G09"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -2628,7 +2624,7 @@ export const Tools12$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools12
 > = z.object({
-  id: z.string().default("01K5P8H86NVTZS0CZ8QE478AE4"),
+  id: z.string().default("01K5QVJ9FJ8T39EZR9MRSV8G09"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3873,7 +3869,6 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
   memory: z.lazy(() => StreamRunAgentMemory$inboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
-  iconUrl: z.string().optional(),
   system_prompt: z.string().optional(),
   memory_stores: z.array(z.string()).optional(),
   knowledge_bases: z.array(
@@ -3910,7 +3905,6 @@ export type StreamRunAgentRequestBody$Outbound = {
   memory?: StreamRunAgentMemory$Outbound | undefined;
   path: string;
   description?: string | undefined;
-  iconUrl?: string | undefined;
   system_prompt?: string | undefined;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<StreamRunAgentKnowledgeBases$Outbound> | undefined;
@@ -3938,7 +3932,6 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   memory: z.lazy(() => StreamRunAgentMemory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
-  iconUrl: z.string().optional(),
   systemPrompt: z.string().optional(),
   memoryStores: z.array(z.string()).optional(),
   knowledgeBases: z.array(
