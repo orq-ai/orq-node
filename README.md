@@ -931,7 +931,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Orq({ httpClient });
+const sdk = new Orq({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

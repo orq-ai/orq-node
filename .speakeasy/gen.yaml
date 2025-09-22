@@ -54,6 +54,7 @@ typescript:
   jsonpath: legacy
   maxMethodParams: 0
   methodArguments: infer-optional-args
+  modelPropertyCasing: camel
   moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@orq-ai/node'
