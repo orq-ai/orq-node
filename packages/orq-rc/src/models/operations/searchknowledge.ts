@@ -338,7 +338,7 @@ export type SearchOptions = {
  */
 export type SearchKnowledgeRerankConfig = {
   /**
-   * The name of the rerank model to use
+   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/rerank-models).
    */
   model: string;
   /**
@@ -356,7 +356,7 @@ export type SearchKnowledgeRerankConfig = {
  */
 export type SearchKnowledgeAgenticRagConfig = {
   /**
-   * The name of the model for the Agent to use. This model must support function calling.
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
    */
   model: string;
 };

@@ -52,6 +52,15 @@ export type CreateEvalRequestBodyEvalsGuardrailConfig =
   | CreateEvalGuardrailConfigEvalsNumber
   | CreateEvalGuardrailConfigEvalsBoolean;
 
+export const CreateEvalRequestBodyEvalsOutputType = {
+  Boolean: "boolean",
+  Number: "number",
+  String: "string",
+} as const;
+export type CreateEvalRequestBodyEvalsOutputType = ClosedEnum<
+  typeof CreateEvalRequestBodyEvalsOutputType
+>;
+
 export const CreateEvalRequestBodyEvalsRequestType = {
   PythonEval: "python_eval",
 } as const;
@@ -64,6 +73,7 @@ export type Python = {
     | CreateEvalGuardrailConfigEvalsNumber
     | CreateEvalGuardrailConfigEvalsBoolean
     | undefined;
+  outputType: CreateEvalRequestBodyEvalsOutputType;
   code: string;
   type: CreateEvalRequestBodyEvalsRequestType;
   /**
@@ -117,6 +127,15 @@ export type CreateEvalRequestBodyGuardrailConfig =
   | CreateEvalGuardrailConfigNumber
   | CreateEvalGuardrailConfigBoolean;
 
+export const CreateEvalRequestBodyOutputType = {
+  Boolean: "boolean",
+  Number: "number",
+  String: "string",
+} as const;
+export type CreateEvalRequestBodyOutputType = ClosedEnum<
+  typeof CreateEvalRequestBodyOutputType
+>;
+
 export const CreateEvalRequestBodyEvalsType = {
   HttpEval: "http_eval",
 } as const;
@@ -135,6 +154,7 @@ export type RequestBodyHTTP = {
     | CreateEvalGuardrailConfigNumber
     | CreateEvalGuardrailConfigBoolean
     | undefined;
+  outputType: CreateEvalRequestBodyOutputType;
   type: CreateEvalRequestBodyEvalsType;
   url: string;
   method: RequestBodyMethod;
@@ -191,6 +211,11 @@ export type RequestBodyGuardrailConfig =
   | GuardrailConfigNumber
   | GuardrailConfigBoolean;
 
+export const RequestBodyOutputType = {
+  Boolean: "boolean",
+} as const;
+export type RequestBodyOutputType = ClosedEnum<typeof RequestBodyOutputType>;
+
 export const CreateEvalRequestBodyType = {
   JsonSchema: "json_schema",
 } as const;
@@ -200,6 +225,7 @@ export type CreateEvalRequestBodyType = ClosedEnum<
 
 export type Json = {
   guardrailConfig?: GuardrailConfigNumber | GuardrailConfigBoolean | undefined;
+  outputType: RequestBodyOutputType;
   type: CreateEvalRequestBodyType;
   schema: string;
   /**
@@ -247,6 +273,13 @@ export type Boolean = {
 
 export type GuardrailConfig = NumberT | Boolean;
 
+export const OutputType = {
+  Boolean: "boolean",
+  Number: "number",
+  String: "string",
+} as const;
+export type OutputType = ClosedEnum<typeof OutputType>;
+
 export const RequestBodyType = {
   LlmEval: "llm_eval",
 } as const;
@@ -254,6 +287,7 @@ export type RequestBodyType = ClosedEnum<typeof RequestBodyType>;
 
 export type Llm = {
   guardrailConfig?: NumberT | Boolean | undefined;
+  outputType: OutputType;
   type: RequestBodyType;
   prompt: string;
   /**
@@ -1637,6 +1671,30 @@ export function createEvalRequestBodyEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const CreateEvalRequestBodyEvalsOutputType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsOutputType> = z.nativeEnum(
+    CreateEvalRequestBodyEvalsOutputType,
+  );
+
+/** @internal */
+export const CreateEvalRequestBodyEvalsOutputType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsOutputType> =
+    CreateEvalRequestBodyEvalsOutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalRequestBodyEvalsOutputType$ {
+  /** @deprecated use `CreateEvalRequestBodyEvalsOutputType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateEvalRequestBodyEvalsOutputType$inboundSchema;
+  /** @deprecated use `CreateEvalRequestBodyEvalsOutputType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateEvalRequestBodyEvalsOutputType$outboundSchema;
+}
+
+/** @internal */
 export const CreateEvalRequestBodyEvalsRequestType$inboundSchema:
   z.ZodNativeEnum<typeof CreateEvalRequestBodyEvalsRequestType> = z.nativeEnum(
     CreateEvalRequestBodyEvalsRequestType,
@@ -1667,6 +1725,7 @@ export const Python$inboundSchema: z.ZodType<Python, z.ZodTypeDef, unknown> = z
       z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$inboundSchema),
       z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$inboundSchema),
     ]).optional(),
+    output_type: CreateEvalRequestBodyEvalsOutputType$inboundSchema,
     code: z.string(),
     type: CreateEvalRequestBodyEvalsRequestType$inboundSchema,
     path: z.string(),
@@ -1675,6 +1734,7 @@ export const Python$inboundSchema: z.ZodType<Python, z.ZodTypeDef, unknown> = z
   }).transform((v) => {
     return remap$(v, {
       "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
     });
   });
 
@@ -1684,6 +1744,7 @@ export type Python$Outbound = {
     | CreateEvalGuardrailConfigEvalsNumber$Outbound
     | CreateEvalGuardrailConfigEvalsBoolean$Outbound
     | undefined;
+  output_type: string;
   code: string;
   type: string;
   path: string;
@@ -1701,6 +1762,7 @@ export const Python$outboundSchema: z.ZodType<
     z.lazy(() => CreateEvalGuardrailConfigEvalsNumber$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsBoolean$outboundSchema),
   ]).optional(),
+  outputType: CreateEvalRequestBodyEvalsOutputType$outboundSchema,
   code: z.string(),
   type: CreateEvalRequestBodyEvalsRequestType$outboundSchema,
   path: z.string(),
@@ -1709,6 +1771,7 @@ export const Python$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
 });
 
@@ -1998,6 +2061,27 @@ export function createEvalRequestBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const CreateEvalRequestBodyOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyOutputType
+> = z.nativeEnum(CreateEvalRequestBodyOutputType);
+
+/** @internal */
+export const CreateEvalRequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateEvalRequestBodyOutputType
+> = CreateEvalRequestBodyOutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateEvalRequestBodyOutputType$ {
+  /** @deprecated use `CreateEvalRequestBodyOutputType$inboundSchema` instead. */
+  export const inboundSchema = CreateEvalRequestBodyOutputType$inboundSchema;
+  /** @deprecated use `CreateEvalRequestBodyOutputType$outboundSchema` instead. */
+  export const outboundSchema = CreateEvalRequestBodyOutputType$outboundSchema;
+}
+
+/** @internal */
 export const CreateEvalRequestBodyEvalsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyEvalsType
 > = z.nativeEnum(CreateEvalRequestBodyEvalsType);
@@ -2049,6 +2133,7 @@ export const RequestBodyHTTP$inboundSchema: z.ZodType<
     z.lazy(() => CreateEvalGuardrailConfigNumber$inboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigBoolean$inboundSchema),
   ]).optional(),
+  output_type: CreateEvalRequestBodyOutputType$inboundSchema,
   type: CreateEvalRequestBodyEvalsType$inboundSchema,
   url: z.string(),
   method: RequestBodyMethod$inboundSchema,
@@ -2060,6 +2145,7 @@ export const RequestBodyHTTP$inboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 
@@ -2069,6 +2155,7 @@ export type RequestBodyHTTP$Outbound = {
     | CreateEvalGuardrailConfigNumber$Outbound
     | CreateEvalGuardrailConfigBoolean$Outbound
     | undefined;
+  output_type: string;
   type: string;
   url: string;
   method: string;
@@ -2089,6 +2176,7 @@ export const RequestBodyHTTP$outboundSchema: z.ZodType<
     z.lazy(() => CreateEvalGuardrailConfigNumber$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigBoolean$outboundSchema),
   ]).optional(),
+  outputType: CreateEvalRequestBodyOutputType$outboundSchema,
   type: CreateEvalRequestBodyEvalsType$outboundSchema,
   url: z.string(),
   method: RequestBodyMethod$outboundSchema,
@@ -2100,6 +2188,7 @@ export const RequestBodyHTTP$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     guardrailConfig: "guardrail_config",
+    outputType: "output_type",
   });
 });
 
@@ -2378,6 +2467,27 @@ export function requestBodyGuardrailConfigFromJSON(
 }
 
 /** @internal */
+export const RequestBodyOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyOutputType
+> = z.nativeEnum(RequestBodyOutputType);
+
+/** @internal */
+export const RequestBodyOutputType$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyOutputType
+> = RequestBodyOutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RequestBodyOutputType$ {
+  /** @deprecated use `RequestBodyOutputType$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyOutputType$inboundSchema;
+  /** @deprecated use `RequestBodyOutputType$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyOutputType$outboundSchema;
+}
+
+/** @internal */
 export const CreateEvalRequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof CreateEvalRequestBodyType
 > = z.nativeEnum(CreateEvalRequestBodyType);
@@ -2405,6 +2515,7 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
       z.lazy(() => GuardrailConfigNumber$inboundSchema),
       z.lazy(() => GuardrailConfigBoolean$inboundSchema),
     ]).optional(),
+    output_type: RequestBodyOutputType$inboundSchema,
     type: CreateEvalRequestBodyType$inboundSchema,
     schema: z.string(),
     path: z.string(),
@@ -2413,6 +2524,7 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   }).transform((v) => {
     return remap$(v, {
       "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
     });
   });
 
@@ -2422,6 +2534,7 @@ export type Json$Outbound = {
     | GuardrailConfigNumber$Outbound
     | GuardrailConfigBoolean$Outbound
     | undefined;
+  output_type: string;
   type: string;
   schema: string;
   path: string;
@@ -2436,6 +2549,7 @@ export const Json$outboundSchema: z.ZodType<Json$Outbound, z.ZodTypeDef, Json> =
       z.lazy(() => GuardrailConfigNumber$outboundSchema),
       z.lazy(() => GuardrailConfigBoolean$outboundSchema),
     ]).optional(),
+    outputType: RequestBodyOutputType$outboundSchema,
     type: CreateEvalRequestBodyType$outboundSchema,
     schema: z.string(),
     path: z.string(),
@@ -2444,6 +2558,7 @@ export const Json$outboundSchema: z.ZodType<Json$Outbound, z.ZodTypeDef, Json> =
   }).transform((v) => {
     return remap$(v, {
       guardrailConfig: "guardrail_config",
+      outputType: "output_type",
     });
   });
 
@@ -2697,6 +2812,25 @@ export function guardrailConfigFromJSON(
 }
 
 /** @internal */
+export const OutputType$inboundSchema: z.ZodNativeEnum<typeof OutputType> = z
+  .nativeEnum(OutputType);
+
+/** @internal */
+export const OutputType$outboundSchema: z.ZodNativeEnum<typeof OutputType> =
+  OutputType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OutputType$ {
+  /** @deprecated use `OutputType$inboundSchema` instead. */
+  export const inboundSchema = OutputType$inboundSchema;
+  /** @deprecated use `OutputType$outboundSchema` instead. */
+  export const outboundSchema = OutputType$outboundSchema;
+}
+
+/** @internal */
 export const RequestBodyType$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyType
 > = z.nativeEnum(RequestBodyType);
@@ -2724,6 +2858,7 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
       z.lazy(() => NumberT$inboundSchema),
       z.lazy(() => Boolean$inboundSchema),
     ]).optional(),
+    output_type: OutputType$inboundSchema,
     type: RequestBodyType$inboundSchema,
     prompt: z.string(),
     path: z.string(),
@@ -2733,12 +2868,14 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
   }).transform((v) => {
     return remap$(v, {
       "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
     });
   });
 
 /** @internal */
 export type Llm$Outbound = {
   guardrail_config?: NumberT$Outbound | Boolean$Outbound | undefined;
+  output_type: string;
   type: string;
   prompt: string;
   path: string;
@@ -2754,6 +2891,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
       z.lazy(() => NumberT$outboundSchema),
       z.lazy(() => Boolean$outboundSchema),
     ]).optional(),
+    outputType: OutputType$outboundSchema,
     type: RequestBodyType$outboundSchema,
     prompt: z.string(),
     path: z.string(),
@@ -2763,6 +2901,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
   }).transform((v) => {
     return remap$(v, {
       guardrailConfig: "guardrail_config",
+      outputType: "output_type",
     });
   });
 
@@ -3209,8 +3348,8 @@ export const Typescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema
@@ -3253,8 +3392,8 @@ export const Typescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema
@@ -3671,8 +3810,8 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
   .object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-09-23T05:14:14.676Z"),
-    updated: z.string().default("2025-09-23T05:14:14.676Z"),
+    created: z.string().default("2025-09-23T09:23:25.719Z"),
+    updated: z.string().default("2025-09-23T09:23:25.719Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
@@ -3718,8 +3857,8 @@ export const Ragas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema
@@ -7143,8 +7282,8 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
@@ -7258,8 +7397,8 @@ export const ResponseBodyFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema
@@ -7698,8 +7837,8 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -7741,8 +7880,8 @@ export const ResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -8155,8 +8294,8 @@ export const ResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -8204,8 +8343,8 @@ export const ResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -8582,8 +8721,8 @@ export const ResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -8623,8 +8762,8 @@ export const ResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       CreateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -8979,8 +9118,8 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrail_config: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -9020,8 +9159,8 @@ export const ResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-23T05:14:14.676Z"),
-  updated: z.string().default("2025-09-23T05:14:14.676Z"),
+  created: z.string().default("2025-09-23T09:23:25.719Z"),
+  updated: z.string().default("2025-09-23T09:23:25.719Z"),
   guardrailConfig: z.union([
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => CreateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),

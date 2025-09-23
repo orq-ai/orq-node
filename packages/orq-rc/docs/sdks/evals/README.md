@@ -134,6 +134,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.evals.create({
+    outputType: "string",
     type: "http_eval",
     url: "https://total-unit.name",
     method: "GET",
@@ -172,6 +173,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await evalsCreate(orq, {
+    outputType: "string",
     type: "http_eval",
     url: "https://total-unit.name",
     method: "GET",

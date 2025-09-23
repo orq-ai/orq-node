@@ -392,7 +392,7 @@ export type Tools12 = {
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
-  path: string;
+  path?: string | undefined;
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -2584,8 +2584,8 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools12$inboundSchema: z.ZodType<Tools12, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K5TFX13PK8PJ90FG71KH7FXP"),
-    path: z.string(),
+    _id: z.string().default("01K5TY59DTYFN2T8AVPJS0D2GW"),
+    path: z.string().optional(),
     key: z.string(),
     display_name: z.string(),
     description: z.string(),
@@ -2607,7 +2607,7 @@ export const Tools12$inboundSchema: z.ZodType<Tools12, z.ZodTypeDef, unknown> =
 /** @internal */
 export type Tools12$Outbound = {
   _id: string;
-  path: string;
+  path?: string | undefined;
   key: string;
   display_name: string;
   description: string;
@@ -2624,8 +2624,8 @@ export const Tools12$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools12
 > = z.object({
-  id: z.string().default("01K5TFX13PK8PJ90FG71KH7FXP"),
-  path: z.string(),
+  id: z.string().default("01K5TY59DTYFN2T8AVPJS0D2GW"),
+  path: z.string().optional(),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),
