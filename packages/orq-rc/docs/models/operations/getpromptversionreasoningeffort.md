@@ -7,11 +7,11 @@ Constrains effort on reasoning for reasoning models. Reducing reasoning effort c
 ```typescript
 import { GetPromptVersionReasoningEffort } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionReasoningEffort = "medium";
+let value: GetPromptVersionReasoningEffort = "low";
 ```
 
 ## Values
 
 ```typescript
-"disable" | "low" | "medium" | "high"
+"disable" | "minimal" | "low" | "medium" | "high"
 ```

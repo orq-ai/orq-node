@@ -156,6 +156,7 @@ export type GetAllPromptsEncodingFormat = ClosedEnum<
  */
 export const GetAllPromptsReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

@@ -143,6 +143,7 @@ export type GetOnePromptEncodingFormat = ClosedEnum<
  */
 export const GetOnePromptReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

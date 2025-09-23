@@ -144,6 +144,7 @@ export type GetPromptVersionEncodingFormat = ClosedEnum<
  */
 export const GetPromptVersionReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

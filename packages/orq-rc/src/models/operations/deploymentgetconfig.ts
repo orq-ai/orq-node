@@ -1594,6 +1594,7 @@ export type DeploymentGetConfigEncodingFormat = ClosedEnum<
  */
 export const DeploymentGetConfigReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

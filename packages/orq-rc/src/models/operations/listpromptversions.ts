@@ -158,6 +158,7 @@ export type ListPromptVersionsEncodingFormat = ClosedEnum<
  */
 export const ListPromptVersionsReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

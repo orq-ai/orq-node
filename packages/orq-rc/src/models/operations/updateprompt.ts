@@ -112,6 +112,7 @@ export type UpdatePromptEncodingFormat = ClosedEnum<
  */
 export const UpdatePromptReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -640,6 +641,7 @@ export type UpdatePromptPromptsEncodingFormat = ClosedEnum<
  */
 export const UpdatePromptPromptsReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",

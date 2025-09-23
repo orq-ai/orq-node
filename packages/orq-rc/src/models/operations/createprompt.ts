@@ -125,6 +125,7 @@ export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
  */
 export const ReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -621,6 +622,7 @@ export type CreatePromptEncodingFormat = ClosedEnum<
  */
 export const CreatePromptReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
