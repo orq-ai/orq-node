@@ -665,6 +665,10 @@ export type StreamRunAgentRequestBody = {
   teamOfAgents?: Array<StreamRunAgentTeamOfAgents> | undefined;
   settings: StreamRunAgentSettings;
   /**
+   * Optional metadata for the agent run as key-value pairs that will be included in traces
+   */
+  metadata?: { [k: string]: any } | undefined;
+  /**
    * Stream timeout in seconds (1-3600). Default: 1800 (30 minutes)
    */
   streamTimeoutSeconds?: number | undefined;
@@ -2584,7 +2588,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools12$inboundSchema: z.ZodType<Tools12, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K5TY59DTYFN2T8AVPJS0D2GW"),
+    _id: z.string().default("01K5V5RXVF0TRJZTADJBGYJ90Y"),
     path: z.string().optional(),
     key: z.string(),
     display_name: z.string(),
@@ -2624,7 +2628,7 @@ export const Tools12$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools12
 > = z.object({
-  id: z.string().default("01K5TY59DTYFN2T8AVPJS0D2GW"),
+  id: z.string().default("01K5V5RXVF0TRJZTADJBGYJ90Y"),
   path: z.string().optional(),
   key: z.string(),
   displayName: z.string(),
@@ -3878,6 +3882,7 @@ export const StreamRunAgentRequestBody$inboundSchema: z.ZodType<
     z.lazy(() => StreamRunAgentTeamOfAgents$inboundSchema),
   ).optional(),
   settings: z.lazy(() => StreamRunAgentSettings$inboundSchema),
+  metadata: z.record(z.any()).optional(),
   stream_timeout_seconds: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -3910,6 +3915,7 @@ export type StreamRunAgentRequestBody$Outbound = {
   knowledge_bases?: Array<StreamRunAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<StreamRunAgentTeamOfAgents$Outbound> | undefined;
   settings: StreamRunAgentSettings$Outbound;
+  metadata?: { [k: string]: any } | undefined;
   stream_timeout_seconds?: number | undefined;
 };
 
@@ -3940,6 +3946,7 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   teamOfAgents: z.array(z.lazy(() => StreamRunAgentTeamOfAgents$outboundSchema))
     .optional(),
   settings: z.lazy(() => StreamRunAgentSettings$outboundSchema),
+  metadata: z.record(z.any()).optional(),
   streamTimeoutSeconds: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {

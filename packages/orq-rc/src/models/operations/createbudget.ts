@@ -658,7 +658,7 @@ export const CreateBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-09-23T09:23:23.462Z",
+    "2025-09-23T11:36:26.030Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -693,7 +693,7 @@ export const CreateBudgetResponseBody$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => Consumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-09-23T09:23:23.462Z"))
+  updated: z.date().default(() => new Date("2025-09-23T11:36:26.030Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

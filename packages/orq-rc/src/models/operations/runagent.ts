@@ -644,6 +644,10 @@ export type RunAgentRequestBody = {
    */
   teamOfAgents?: Array<TeamOfAgents> | undefined;
   settings: Settings;
+  /**
+   * Optional metadata for the agent run as key-value pairs that will be included in traces
+   */
+  metadata?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -2486,7 +2490,7 @@ export function httpFromJSON(
 /** @internal */
 export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K5TY59DP2QRHN3270F65EA3Z"),
+    _id: z.string().default("01K5V5RXVBC21XVWTSE2DZC9ZH"),
     path: z.string().optional(),
     key: z.string(),
     display_name: z.string(),
@@ -2525,7 +2529,7 @@ export const Twelve$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Twelve
 > = z.object({
-  id: z.string().default("01K5TY59DP2QRHN3270F65EA3Z"),
+  id: z.string().default("01K5V5RXVBC21XVWTSE2DZC9ZH"),
   path: z.string().optional(),
   key: z.string(),
   displayName: z.string(),
@@ -3688,6 +3692,7 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
     .optional(),
   team_of_agents: z.array(z.lazy(() => TeamOfAgents$inboundSchema)).optional(),
   settings: z.lazy(() => Settings$inboundSchema),
+  metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "fallback_models": "fallbackModels",
@@ -3718,6 +3723,7 @@ export type RunAgentRequestBody$Outbound = {
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
   settings: Settings$Outbound;
+  metadata?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -3745,6 +3751,7 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
     .optional(),
   teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
   settings: z.lazy(() => Settings$outboundSchema),
+  metadata: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     fallbackModels: "fallback_models",
