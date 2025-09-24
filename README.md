@@ -66,10 +66,7 @@ bun add @orq-ai/node
 ### Yarn
 
 ```bash
-yarn add @orq-ai/node zod
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
+yarn add @orq-ai/node
 ```
 
 
