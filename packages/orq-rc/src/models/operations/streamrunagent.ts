@@ -107,7 +107,7 @@ export type StreamRunAgentPartsAgentsKind = ClosedEnum<
 
 export type StreamRunAgentParts2 = {
   kind: StreamRunAgentPartsAgentsKind;
-  data?: any | undefined;
+  data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -126,9 +126,9 @@ export type StreamRunAgentParts1 = {
 export type StreamRunAgentParts =
   | StreamRunAgentParts4
   | StreamRunAgentParts1
+  | StreamRunAgentParts2
   | StreamRunAgentParts3
-  | Parts5
-  | StreamRunAgentParts2;
+  | Parts5;
 
 /**
  * The A2A format message containing the task for the agent to perform.
@@ -148,9 +148,9 @@ export type StreamRunAgentMessage = {
   parts: Array<
     | StreamRunAgentParts4
     | StreamRunAgentParts1
+    | StreamRunAgentParts2
     | StreamRunAgentParts3
     | Parts5
-    | StreamRunAgentParts2
   >;
   /**
    * Optional message metadata
@@ -1262,14 +1262,14 @@ export const StreamRunAgentParts2$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   kind: StreamRunAgentPartsAgentsKind$inboundSchema,
-  data: z.any().optional(),
+  data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });
 
 /** @internal */
 export type StreamRunAgentParts2$Outbound = {
   kind: string;
-  data?: any | undefined;
+  data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -1280,7 +1280,7 @@ export const StreamRunAgentParts2$outboundSchema: z.ZodType<
   StreamRunAgentParts2
 > = z.object({
   kind: StreamRunAgentPartsAgentsKind$outboundSchema,
-  data: z.any().optional(),
+  data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });
 
@@ -1401,18 +1401,18 @@ export const StreamRunAgentParts$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => StreamRunAgentParts4$inboundSchema),
   z.lazy(() => StreamRunAgentParts1$inboundSchema),
+  z.lazy(() => StreamRunAgentParts2$inboundSchema),
   z.lazy(() => StreamRunAgentParts3$inboundSchema),
   z.lazy(() => Parts5$inboundSchema),
-  z.lazy(() => StreamRunAgentParts2$inboundSchema),
 ]);
 
 /** @internal */
 export type StreamRunAgentParts$Outbound =
   | StreamRunAgentParts4$Outbound
   | StreamRunAgentParts1$Outbound
+  | StreamRunAgentParts2$Outbound
   | StreamRunAgentParts3$Outbound
-  | Parts5$Outbound
-  | StreamRunAgentParts2$Outbound;
+  | Parts5$Outbound;
 
 /** @internal */
 export const StreamRunAgentParts$outboundSchema: z.ZodType<
@@ -1422,9 +1422,9 @@ export const StreamRunAgentParts$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => StreamRunAgentParts4$outboundSchema),
   z.lazy(() => StreamRunAgentParts1$outboundSchema),
+  z.lazy(() => StreamRunAgentParts2$outboundSchema),
   z.lazy(() => StreamRunAgentParts3$outboundSchema),
   z.lazy(() => Parts5$outboundSchema),
-  z.lazy(() => StreamRunAgentParts2$outboundSchema),
 ]);
 
 /**
@@ -1473,9 +1473,9 @@ export const StreamRunAgentMessage$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => StreamRunAgentParts4$inboundSchema),
       z.lazy(() => StreamRunAgentParts1$inboundSchema),
+      z.lazy(() => StreamRunAgentParts2$inboundSchema),
       z.lazy(() => StreamRunAgentParts3$inboundSchema),
       z.lazy(() => Parts5$inboundSchema),
-      z.lazy(() => StreamRunAgentParts2$inboundSchema),
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -1488,9 +1488,9 @@ export type StreamRunAgentMessage$Outbound = {
   parts: Array<
     | StreamRunAgentParts4$Outbound
     | StreamRunAgentParts1$Outbound
+    | StreamRunAgentParts2$Outbound
     | StreamRunAgentParts3$Outbound
     | Parts5$Outbound
-    | StreamRunAgentParts2$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -1510,9 +1510,9 @@ export const StreamRunAgentMessage$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => StreamRunAgentParts4$outboundSchema),
       z.lazy(() => StreamRunAgentParts1$outboundSchema),
+      z.lazy(() => StreamRunAgentParts2$outboundSchema),
       z.lazy(() => StreamRunAgentParts3$outboundSchema),
       z.lazy(() => Parts5$outboundSchema),
-      z.lazy(() => StreamRunAgentParts2$outboundSchema),
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -2588,7 +2588,7 @@ export function toolsHttpFromJSON(
 /** @internal */
 export const Tools12$inboundSchema: z.ZodType<Tools12, z.ZodTypeDef, unknown> =
   z.object({
-    _id: z.string().default("01K5V5RXVF0TRJZTADJBGYJ90Y"),
+    _id: z.string().default("01K5X16BV6H39EVD4E4K07VQ12"),
     path: z.string().optional(),
     key: z.string(),
     display_name: z.string(),
@@ -2628,7 +2628,7 @@ export const Tools12$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools12
 > = z.object({
-  id: z.string().default("01K5V5RXVF0TRJZTADJBGYJ90Y"),
+  id: z.string().default("01K5X16BV6H39EVD4E4K07VQ12"),
   path: z.string().optional(),
   key: z.string(),
   displayName: z.string(),

@@ -17,6 +17,10 @@ const value: operations.Parts1 = {
 ```typescript
 const value: operations.Parts2 = {
   kind: "data",
+  data: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
 };
 ```
 

@@ -15,6 +15,9 @@ let value: RunAgentRequestBody = {
     parts: [
       {
         kind: "data",
+        data: {
+          "key": "<value>",
+        },
       },
     ],
   },
@@ -43,7 +46,12 @@ let value: RunAgentRequestBody = {
   },
   path: "Default",
   settings: {
-    tools: [],
+    tools: [
+      {
+        type: "query_knowledge_base",
+        requiresApproval: false,
+      },
+    ],
   },
 };
 ```

@@ -17,6 +17,10 @@ const value: operations.StreamRunAgentParts1 = {
 ```typescript
 const value: operations.StreamRunAgentParts2 = {
   kind: "data",
+  data: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
 };
 ```
 

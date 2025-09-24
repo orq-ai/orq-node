@@ -103,7 +103,7 @@ export type PartsKind = ClosedEnum<typeof PartsKind>;
 
 export type Parts2 = {
   kind: PartsKind;
-  data?: any | undefined;
+  data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -117,7 +117,7 @@ export type Parts1 = {
   text: string;
 };
 
-export type Parts = Parts4 | Parts1 | Parts3 | Five | Parts2;
+export type Parts = Parts4 | Parts1 | Parts2 | Parts3 | Five;
 
 /**
  * The A2A format message containing the task for the agent to perform.
@@ -134,7 +134,7 @@ export type Message = {
   /**
    * A2A message parts
    */
-  parts: Array<Parts4 | Parts1 | Parts3 | Five | Parts2>;
+  parts: Array<Parts4 | Parts1 | Parts2 | Parts3 | Five>;
   /**
    * Optional message metadata
    */
@@ -1271,14 +1271,14 @@ export namespace PartsKind$ {
 export const Parts2$inboundSchema: z.ZodType<Parts2, z.ZodTypeDef, unknown> = z
   .object({
     kind: PartsKind$inboundSchema,
-    data: z.any().optional(),
+    data: z.record(z.any()),
     metadata: z.record(z.any()).optional(),
   });
 
 /** @internal */
 export type Parts2$Outbound = {
   kind: string;
-  data?: any | undefined;
+  data: { [k: string]: any };
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -1289,7 +1289,7 @@ export const Parts2$outboundSchema: z.ZodType<
   Parts2
 > = z.object({
   kind: PartsKind$outboundSchema,
-  data: z.any().optional(),
+  data: z.record(z.any()),
   metadata: z.record(z.any()).optional(),
 });
 
@@ -1395,18 +1395,18 @@ export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
   .union([
     z.lazy(() => Parts4$inboundSchema),
     z.lazy(() => Parts1$inboundSchema),
+    z.lazy(() => Parts2$inboundSchema),
     z.lazy(() => Parts3$inboundSchema),
     z.lazy(() => Five$inboundSchema),
-    z.lazy(() => Parts2$inboundSchema),
   ]);
 
 /** @internal */
 export type Parts$Outbound =
   | Parts4$Outbound
   | Parts1$Outbound
+  | Parts2$Outbound
   | Parts3$Outbound
-  | Five$Outbound
-  | Parts2$Outbound;
+  | Five$Outbound;
 
 /** @internal */
 export const Parts$outboundSchema: z.ZodType<
@@ -1416,9 +1416,9 @@ export const Parts$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => Parts4$outboundSchema),
   z.lazy(() => Parts1$outboundSchema),
+  z.lazy(() => Parts2$outboundSchema),
   z.lazy(() => Parts3$outboundSchema),
   z.lazy(() => Five$outboundSchema),
-  z.lazy(() => Parts2$outboundSchema),
 ]);
 
 /**
@@ -1457,9 +1457,9 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
       z.union([
         z.lazy(() => Parts4$inboundSchema),
         z.lazy(() => Parts1$inboundSchema),
+        z.lazy(() => Parts2$inboundSchema),
         z.lazy(() => Parts3$inboundSchema),
         z.lazy(() => Five$inboundSchema),
-        z.lazy(() => Parts2$inboundSchema),
       ]),
     ),
     metadata: z.record(z.any()).optional(),
@@ -1472,9 +1472,9 @@ export type Message$Outbound = {
   parts: Array<
     | Parts4$Outbound
     | Parts1$Outbound
+    | Parts2$Outbound
     | Parts3$Outbound
     | Five$Outbound
-    | Parts2$Outbound
   >;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -1491,9 +1491,9 @@ export const Message$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => Parts4$outboundSchema),
       z.lazy(() => Parts1$outboundSchema),
+      z.lazy(() => Parts2$outboundSchema),
       z.lazy(() => Parts3$outboundSchema),
       z.lazy(() => Five$outboundSchema),
-      z.lazy(() => Parts2$outboundSchema),
     ]),
   ),
   metadata: z.record(z.any()).optional(),
@@ -2490,7 +2490,7 @@ export function httpFromJSON(
 /** @internal */
 export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K5V5RXVBC21XVWTSE2DZC9ZH"),
+    _id: z.string().default("01K5X16BV17ZPH27JT1JZGNS5R"),
     path: z.string().optional(),
     key: z.string(),
     display_name: z.string(),
@@ -2529,7 +2529,7 @@ export const Twelve$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Twelve
 > = z.object({
-  id: z.string().default("01K5V5RXVBC21XVWTSE2DZC9ZH"),
+  id: z.string().default("01K5X16BV17ZPH27JT1JZGNS5R"),
   path: z.string().optional(),
   key: z.string(),
   displayName: z.string(),
