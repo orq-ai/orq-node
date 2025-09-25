@@ -54,61 +54,45 @@ export const Model14 = {
 } as const;
 export type Model14 = ClosedEnum<typeof Model14>;
 
-export const UpdateMemoryStoreModel13 = {
+export const Model13 = {
   GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
 } as const;
-export type UpdateMemoryStoreModel13 = ClosedEnum<
-  typeof UpdateMemoryStoreModel13
->;
+export type Model13 = ClosedEnum<typeof Model13>;
 
-export const UpdateMemoryStoreModel12 = {
+export const Model12 = {
   GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
 } as const;
-export type UpdateMemoryStoreModel12 = ClosedEnum<
-  typeof UpdateMemoryStoreModel12
->;
+export type Model12 = ClosedEnum<typeof Model12>;
 
-export const UpdateMemoryStoreModel11 = {
+export const Model11 = {
   GoogleTextEmbedding005: "google/text-embedding-005",
 } as const;
-export type UpdateMemoryStoreModel11 = ClosedEnum<
-  typeof UpdateMemoryStoreModel11
->;
+export type Model11 = ClosedEnum<typeof Model11>;
 
-export const UpdateMemoryStoreModel10 = {
+export const Model10 = {
   GoogleGeminiEmbedding001: "google/gemini-embedding-001",
 } as const;
-export type UpdateMemoryStoreModel10 = ClosedEnum<
-  typeof UpdateMemoryStoreModel10
->;
+export type Model10 = ClosedEnum<typeof Model10>;
 
-export const UpdateMemoryStoreModel9 = {
+export const Model9 = {
   OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
 } as const;
-export type UpdateMemoryStoreModel9 = ClosedEnum<
-  typeof UpdateMemoryStoreModel9
->;
+export type Model9 = ClosedEnum<typeof Model9>;
 
-export const UpdateMemoryStoreModel8 = {
+export const Model8 = {
   OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
 } as const;
-export type UpdateMemoryStoreModel8 = ClosedEnum<
-  typeof UpdateMemoryStoreModel8
->;
+export type Model8 = ClosedEnum<typeof Model8>;
 
-export const UpdateMemoryStoreModel7 = {
+export const Model7 = {
   OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
 } as const;
-export type UpdateMemoryStoreModel7 = ClosedEnum<
-  typeof UpdateMemoryStoreModel7
->;
+export type Model7 = ClosedEnum<typeof Model7>;
 
-export const UpdateMemoryStoreModel6 = {
+export const Model6 = {
   AzureTextEmbedding3Small: "azure/text-embedding-3-small",
 } as const;
-export type UpdateMemoryStoreModel6 = ClosedEnum<
-  typeof UpdateMemoryStoreModel6
->;
+export type Model6 = ClosedEnum<typeof Model6>;
 
 export const UpdateMemoryStoreModel5 = {
   AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
@@ -151,14 +135,14 @@ export type UpdateMemoryStoreModel =
   | UpdateMemoryStoreModel3
   | UpdateMemoryStoreModel4
   | UpdateMemoryStoreModel5
-  | UpdateMemoryStoreModel6
-  | UpdateMemoryStoreModel7
-  | UpdateMemoryStoreModel8
-  | UpdateMemoryStoreModel9
-  | UpdateMemoryStoreModel10
-  | UpdateMemoryStoreModel11
-  | UpdateMemoryStoreModel12
-  | UpdateMemoryStoreModel13
+  | Model6
+  | Model7
+  | Model8
+  | Model9
+  | Model10
+  | Model11
+  | Model12
+  | Model13
   | Model14
   | Model15
   | Model16
@@ -176,14 +160,14 @@ export type UpdateMemoryStoreEmbeddingConfig = {
     | UpdateMemoryStoreModel3
     | UpdateMemoryStoreModel4
     | UpdateMemoryStoreModel5
-    | UpdateMemoryStoreModel6
-    | UpdateMemoryStoreModel7
-    | UpdateMemoryStoreModel8
-    | UpdateMemoryStoreModel9
-    | UpdateMemoryStoreModel10
-    | UpdateMemoryStoreModel11
-    | UpdateMemoryStoreModel12
-    | UpdateMemoryStoreModel13
+    | Model6
+    | Model7
+    | Model8
+    | Model9
+    | Model10
+    | Model11
+    | Model12
+    | Model13
     | Model14
     | Model15
     | Model16
@@ -481,171 +465,155 @@ export namespace Model14$ {
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel13$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel13
-> = z.nativeEnum(UpdateMemoryStoreModel13);
+export const Model13$inboundSchema: z.ZodNativeEnum<typeof Model13> = z
+  .nativeEnum(Model13);
 
 /** @internal */
-export const UpdateMemoryStoreModel13$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel13
-> = UpdateMemoryStoreModel13$inboundSchema;
+export const Model13$outboundSchema: z.ZodNativeEnum<typeof Model13> =
+  Model13$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel13$ {
-  /** @deprecated use `UpdateMemoryStoreModel13$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel13$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel13$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel13$outboundSchema;
+export namespace Model13$ {
+  /** @deprecated use `Model13$inboundSchema` instead. */
+  export const inboundSchema = Model13$inboundSchema;
+  /** @deprecated use `Model13$outboundSchema` instead. */
+  export const outboundSchema = Model13$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel12$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel12
-> = z.nativeEnum(UpdateMemoryStoreModel12);
+export const Model12$inboundSchema: z.ZodNativeEnum<typeof Model12> = z
+  .nativeEnum(Model12);
 
 /** @internal */
-export const UpdateMemoryStoreModel12$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel12
-> = UpdateMemoryStoreModel12$inboundSchema;
+export const Model12$outboundSchema: z.ZodNativeEnum<typeof Model12> =
+  Model12$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel12$ {
-  /** @deprecated use `UpdateMemoryStoreModel12$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel12$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel12$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel12$outboundSchema;
+export namespace Model12$ {
+  /** @deprecated use `Model12$inboundSchema` instead. */
+  export const inboundSchema = Model12$inboundSchema;
+  /** @deprecated use `Model12$outboundSchema` instead. */
+  export const outboundSchema = Model12$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel11$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel11
-> = z.nativeEnum(UpdateMemoryStoreModel11);
+export const Model11$inboundSchema: z.ZodNativeEnum<typeof Model11> = z
+  .nativeEnum(Model11);
 
 /** @internal */
-export const UpdateMemoryStoreModel11$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel11
-> = UpdateMemoryStoreModel11$inboundSchema;
+export const Model11$outboundSchema: z.ZodNativeEnum<typeof Model11> =
+  Model11$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel11$ {
-  /** @deprecated use `UpdateMemoryStoreModel11$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel11$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel11$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel11$outboundSchema;
+export namespace Model11$ {
+  /** @deprecated use `Model11$inboundSchema` instead. */
+  export const inboundSchema = Model11$inboundSchema;
+  /** @deprecated use `Model11$outboundSchema` instead. */
+  export const outboundSchema = Model11$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel10$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel10
-> = z.nativeEnum(UpdateMemoryStoreModel10);
+export const Model10$inboundSchema: z.ZodNativeEnum<typeof Model10> = z
+  .nativeEnum(Model10);
 
 /** @internal */
-export const UpdateMemoryStoreModel10$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel10
-> = UpdateMemoryStoreModel10$inboundSchema;
+export const Model10$outboundSchema: z.ZodNativeEnum<typeof Model10> =
+  Model10$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel10$ {
-  /** @deprecated use `UpdateMemoryStoreModel10$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel10$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel10$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel10$outboundSchema;
+export namespace Model10$ {
+  /** @deprecated use `Model10$inboundSchema` instead. */
+  export const inboundSchema = Model10$inboundSchema;
+  /** @deprecated use `Model10$outboundSchema` instead. */
+  export const outboundSchema = Model10$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel9$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel9
-> = z.nativeEnum(UpdateMemoryStoreModel9);
+export const Model9$inboundSchema: z.ZodNativeEnum<typeof Model9> = z
+  .nativeEnum(Model9);
 
 /** @internal */
-export const UpdateMemoryStoreModel9$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel9
-> = UpdateMemoryStoreModel9$inboundSchema;
+export const Model9$outboundSchema: z.ZodNativeEnum<typeof Model9> =
+  Model9$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel9$ {
-  /** @deprecated use `UpdateMemoryStoreModel9$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel9$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel9$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel9$outboundSchema;
+export namespace Model9$ {
+  /** @deprecated use `Model9$inboundSchema` instead. */
+  export const inboundSchema = Model9$inboundSchema;
+  /** @deprecated use `Model9$outboundSchema` instead. */
+  export const outboundSchema = Model9$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel8$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel8
-> = z.nativeEnum(UpdateMemoryStoreModel8);
+export const Model8$inboundSchema: z.ZodNativeEnum<typeof Model8> = z
+  .nativeEnum(Model8);
 
 /** @internal */
-export const UpdateMemoryStoreModel8$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel8
-> = UpdateMemoryStoreModel8$inboundSchema;
+export const Model8$outboundSchema: z.ZodNativeEnum<typeof Model8> =
+  Model8$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel8$ {
-  /** @deprecated use `UpdateMemoryStoreModel8$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel8$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel8$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel8$outboundSchema;
+export namespace Model8$ {
+  /** @deprecated use `Model8$inboundSchema` instead. */
+  export const inboundSchema = Model8$inboundSchema;
+  /** @deprecated use `Model8$outboundSchema` instead. */
+  export const outboundSchema = Model8$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel7$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel7
-> = z.nativeEnum(UpdateMemoryStoreModel7);
+export const Model7$inboundSchema: z.ZodNativeEnum<typeof Model7> = z
+  .nativeEnum(Model7);
 
 /** @internal */
-export const UpdateMemoryStoreModel7$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel7
-> = UpdateMemoryStoreModel7$inboundSchema;
+export const Model7$outboundSchema: z.ZodNativeEnum<typeof Model7> =
+  Model7$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel7$ {
-  /** @deprecated use `UpdateMemoryStoreModel7$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel7$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel7$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel7$outboundSchema;
+export namespace Model7$ {
+  /** @deprecated use `Model7$inboundSchema` instead. */
+  export const inboundSchema = Model7$inboundSchema;
+  /** @deprecated use `Model7$outboundSchema` instead. */
+  export const outboundSchema = Model7$outboundSchema;
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel6$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel6
-> = z.nativeEnum(UpdateMemoryStoreModel6);
+export const Model6$inboundSchema: z.ZodNativeEnum<typeof Model6> = z
+  .nativeEnum(Model6);
 
 /** @internal */
-export const UpdateMemoryStoreModel6$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel6
-> = UpdateMemoryStoreModel6$inboundSchema;
+export const Model6$outboundSchema: z.ZodNativeEnum<typeof Model6> =
+  Model6$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel6$ {
-  /** @deprecated use `UpdateMemoryStoreModel6$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel6$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel6$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel6$outboundSchema;
+export namespace Model6$ {
+  /** @deprecated use `Model6$inboundSchema` instead. */
+  export const inboundSchema = Model6$inboundSchema;
+  /** @deprecated use `Model6$outboundSchema` instead. */
+  export const outboundSchema = Model6$outboundSchema;
 }
 
 /** @internal */
@@ -764,14 +732,14 @@ export const UpdateMemoryStoreModel$inboundSchema: z.ZodType<
   UpdateMemoryStoreModel3$inboundSchema,
   UpdateMemoryStoreModel4$inboundSchema,
   UpdateMemoryStoreModel5$inboundSchema,
-  UpdateMemoryStoreModel6$inboundSchema,
-  UpdateMemoryStoreModel7$inboundSchema,
-  UpdateMemoryStoreModel8$inboundSchema,
-  UpdateMemoryStoreModel9$inboundSchema,
-  UpdateMemoryStoreModel10$inboundSchema,
-  UpdateMemoryStoreModel11$inboundSchema,
-  UpdateMemoryStoreModel12$inboundSchema,
-  UpdateMemoryStoreModel13$inboundSchema,
+  Model6$inboundSchema,
+  Model7$inboundSchema,
+  Model8$inboundSchema,
+  Model9$inboundSchema,
+  Model10$inboundSchema,
+  Model11$inboundSchema,
+  Model12$inboundSchema,
+  Model13$inboundSchema,
   Model14$inboundSchema,
   Model15$inboundSchema,
   Model16$inboundSchema,
@@ -819,14 +787,14 @@ export const UpdateMemoryStoreModel$outboundSchema: z.ZodType<
   UpdateMemoryStoreModel3$outboundSchema,
   UpdateMemoryStoreModel4$outboundSchema,
   UpdateMemoryStoreModel5$outboundSchema,
-  UpdateMemoryStoreModel6$outboundSchema,
-  UpdateMemoryStoreModel7$outboundSchema,
-  UpdateMemoryStoreModel8$outboundSchema,
-  UpdateMemoryStoreModel9$outboundSchema,
-  UpdateMemoryStoreModel10$outboundSchema,
-  UpdateMemoryStoreModel11$outboundSchema,
-  UpdateMemoryStoreModel12$outboundSchema,
-  UpdateMemoryStoreModel13$outboundSchema,
+  Model6$outboundSchema,
+  Model7$outboundSchema,
+  Model8$outboundSchema,
+  Model9$outboundSchema,
+  Model10$outboundSchema,
+  Model11$outboundSchema,
+  Model12$outboundSchema,
+  Model13$outboundSchema,
   Model14$outboundSchema,
   Model15$outboundSchema,
   Model16$outboundSchema,
@@ -881,14 +849,14 @@ export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
     UpdateMemoryStoreModel3$inboundSchema,
     UpdateMemoryStoreModel4$inboundSchema,
     UpdateMemoryStoreModel5$inboundSchema,
-    UpdateMemoryStoreModel6$inboundSchema,
-    UpdateMemoryStoreModel7$inboundSchema,
-    UpdateMemoryStoreModel8$inboundSchema,
-    UpdateMemoryStoreModel9$inboundSchema,
-    UpdateMemoryStoreModel10$inboundSchema,
-    UpdateMemoryStoreModel11$inboundSchema,
-    UpdateMemoryStoreModel12$inboundSchema,
-    UpdateMemoryStoreModel13$inboundSchema,
+    Model6$inboundSchema,
+    Model7$inboundSchema,
+    Model8$inboundSchema,
+    Model9$inboundSchema,
+    Model10$inboundSchema,
+    Model11$inboundSchema,
+    Model12$inboundSchema,
+    Model13$inboundSchema,
     Model14$inboundSchema,
     Model15$inboundSchema,
     Model16$inboundSchema,
@@ -940,14 +908,14 @@ export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
     UpdateMemoryStoreModel3$outboundSchema,
     UpdateMemoryStoreModel4$outboundSchema,
     UpdateMemoryStoreModel5$outboundSchema,
-    UpdateMemoryStoreModel6$outboundSchema,
-    UpdateMemoryStoreModel7$outboundSchema,
-    UpdateMemoryStoreModel8$outboundSchema,
-    UpdateMemoryStoreModel9$outboundSchema,
-    UpdateMemoryStoreModel10$outboundSchema,
-    UpdateMemoryStoreModel11$outboundSchema,
-    UpdateMemoryStoreModel12$outboundSchema,
-    UpdateMemoryStoreModel13$outboundSchema,
+    Model6$outboundSchema,
+    Model7$outboundSchema,
+    Model8$outboundSchema,
+    Model9$outboundSchema,
+    Model10$outboundSchema,
+    Model11$outboundSchema,
+    Model12$outboundSchema,
+    Model13$outboundSchema,
     Model14$outboundSchema,
     Model15$outboundSchema,
     Model16$outboundSchema,

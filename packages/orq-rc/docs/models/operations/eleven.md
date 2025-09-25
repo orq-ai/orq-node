@@ -5,14 +5,11 @@
 ```typescript
 import { Eleven } from "@orq-ai/node/models/operations";
 
-let value: Eleven = {
-  type: "current_date",
-};
+let value: Eleven = "google/text-embedding-005";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                           | [operations.RunAgentToolsAgentsRequestRequestBodySettings11Type](../../models/operations/runagenttoolsagentsrequestrequestbodysettings11type.md) | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
-| `requiresApproval`                                                                                                                               | *boolean*                                                                                                                                        | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+```typescript
+"google/text-embedding-005"
+```

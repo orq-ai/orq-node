@@ -5,14 +5,11 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = {
-  type: "write_memory_store",
-};
+let value: Six = "azure/text-embedding-3-small";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                        | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                       | [operations.RunAgentToolsAgentsRequestRequestBodySettingsType](../../models/operations/runagenttoolsagentsrequestrequestbodysettingstype.md) | :heavy_check_mark:                                                                                                                           | N/A                                                                                                                                          |
-| `requiresApproval`                                                                                                                           | *boolean*                                                                                                                                    | :heavy_minus_sign:                                                                                                                           | N/A                                                                                                                                          |
+```typescript
+"azure/text-embedding-3-small"
+```

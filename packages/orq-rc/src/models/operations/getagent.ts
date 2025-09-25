@@ -189,8 +189,8 @@ export type GetAgentResponseBody = {
   key: string;
   workspaceId: string;
   projectId: string;
-  createdById?: string | undefined;
-  updatedById?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
   role: string;
@@ -946,7 +946,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K5X16BTDKGNSSN59NJGVDAY6"),
+  id: z.string().default("01K5ZT3CQCJNRJAK5JM21YBYM3"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => GetAgentConfiguration2$inboundSchema),
@@ -973,7 +973,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K5X16BTDKGNSSN59NJGVDAY6"),
+  id: z.string().default("01K5ZT3CQCJNRJAK5JM21YBYM3"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => GetAgentConfiguration2$outboundSchema),
@@ -1045,8 +1045,8 @@ export const GetAgentResponseBody$inboundSchema: z.ZodType<
   key: z.string(),
   workspace_id: z.string(),
   project_id: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
   role: z.string(),
@@ -1087,8 +1087,8 @@ export type GetAgentResponseBody$Outbound = {
   key: string;
   workspace_id: string;
   project_id: string;
-  created_by_id?: string | undefined;
-  updated_by_id?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
   created?: string | undefined;
   updated?: string | undefined;
   role: string;
@@ -1118,8 +1118,8 @@ export const GetAgentResponseBody$outboundSchema: z.ZodType<
   key: z.string(),
   workspaceId: z.string(),
   projectId: z.string(),
-  createdById: z.string().optional(),
-  updatedById: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
   role: z.string(),

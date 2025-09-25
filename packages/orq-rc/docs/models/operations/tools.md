@@ -1,123 +1,133 @@
 # Tools
 
+Available tools for agent execution. Each tool provides specific capabilities to interact with external systems, retrieve information, or perform specialized tasks.
+
 
 ## Supported Types
 
-### `operations.Tools1`
+### `components.HttpTool`
 
 ```typescript
-const value: operations.Tools1 = {
-  type: "google_search",
-};
-```
-
-### `operations.Tools2`
-
-```typescript
-const value: operations.Tools2 = {
-  type: "web_scraper",
-};
-```
-
-### `operations.Tools3`
-
-```typescript
-const value: operations.Tools3 = {
-  type: "call_sub_agent",
-};
-```
-
-### `operations.Tools4`
-
-```typescript
-const value: operations.Tools4 = {
-  type: "retrieve_agents",
-};
-```
-
-### `operations.Tools5`
-
-```typescript
-const value: operations.Tools5 = {
-  type: "query_memory_store",
-};
-```
-
-### `operations.Six`
-
-```typescript
-const value: operations.Six = {
-  type: "write_memory_store",
-};
-```
-
-### `operations.Seven`
-
-```typescript
-const value: operations.Seven = {
-  type: "delete_memory_document",
-};
-```
-
-### `operations.Eight`
-
-```typescript
-const value: operations.Eight = {
-  type: "retrieve_memory_stores",
-};
-```
-
-### `operations.Nine`
-
-```typescript
-const value: operations.Nine = {
-  type: "retrieve_knowledge_bases",
-};
-```
-
-### `operations.Ten`
-
-```typescript
-const value: operations.Ten = {
-  type: "query_knowledge_base",
-};
-```
-
-### `operations.Eleven`
-
-```typescript
-const value: operations.Eleven = {
-  type: "current_date",
-};
-```
-
-### `operations.Twelve`
-
-```typescript
-const value: operations.Twelve = {
+const value: components.HttpTool = {
   path: "Default",
   key: "<key>",
-  displayName: "Jace.Cremin",
-  description: "glass recount publicity zowie aboard as",
+  displayName: "Johnnie_Rutherford26",
+  description: "mmm however since frank conservative know",
   type: "http",
   http: {
     blueprint: {
-      url: "https://weary-sprinkles.net",
-      method: "POST",
+      url: "https://bad-fisherman.com/",
+      method: "GET",
     },
   },
 };
 ```
 
-### `operations.Thirteen`
+### `components.CodeExecutionTool`
 
 ```typescript
-const value: operations.Thirteen = {
+const value: components.CodeExecutionTool = {
+  path: "Default",
+  key: "<key>",
+  displayName: "Marcelino84",
+  description: "futon consequently lest tuba",
+  type: "code",
+  codeTool: {
+    language: "python",
+    code: "<value>",
+  },
+};
+```
+
+### `components.FunctionTool`
+
+```typescript
+const value: components.FunctionTool = {
   type: "function",
   key: "<key>",
   function: {
     name: "<value>",
   },
+};
+```
+
+### `components.GoogleSearchTool`
+
+```typescript
+const value: components.GoogleSearchTool = {
+  type: "google_search",
+};
+```
+
+### `components.WebScraperTool`
+
+```typescript
+const value: components.WebScraperTool = {
+  type: "web_scraper",
+};
+```
+
+### `components.CallSubAgentTool`
+
+```typescript
+const value: components.CallSubAgentTool = {
+  type: "call_sub_agent",
+};
+```
+
+### `components.RetrieveAgentsTool`
+
+```typescript
+const value: components.RetrieveAgentsTool = {
+  type: "retrieve_agents",
+};
+```
+
+### `components.QueryMemoryStoreTool`
+
+```typescript
+const value: components.QueryMemoryStoreTool = {
+  type: "query_memory_store",
+};
+```
+
+### `components.WriteMemoryStoreTool`
+
+```typescript
+const value: components.WriteMemoryStoreTool = {
+  type: "write_memory_store",
+};
+```
+
+### `components.RetrieveMemoryStoresTool`
+
+```typescript
+const value: components.RetrieveMemoryStoresTool = {
+  type: "retrieve_memory_stores",
+};
+```
+
+### `components.RetrieveKnowledgeBasesTool`
+
+```typescript
+const value: components.RetrieveKnowledgeBasesTool = {
+  type: "retrieve_knowledge_bases",
+};
+```
+
+### `components.QueryKnowledgeBaseTool`
+
+```typescript
+const value: components.QueryKnowledgeBaseTool = {
+  type: "query_knowledge_base",
+};
+```
+
+### `components.CurrentDateTool`
+
+```typescript
+const value: components.CurrentDateTool = {
+  type: "current_date",
 };
 ```
 

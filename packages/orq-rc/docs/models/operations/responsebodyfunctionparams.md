@@ -209,10 +209,10 @@ const value: operations.FunctionParams23 = {
 };
 ```
 
-### `operations.FunctionParams24`
+### `operations.UpdateEvalFunctionParams24`
 
 ```typescript
-const value: operations.FunctionParams24 = {
+const value: operations.UpdateEvalFunctionParams24 = {
   type: "levenshtein_distance",
 };
 ```

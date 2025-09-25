@@ -1,22 +1,35 @@
 # UpdatePromptResponseFormat1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.UpdatePrompt11`
 
 ```typescript
-import { UpdatePromptResponseFormat1 } from "@orq-ai/node/models/operations";
-
-let value: UpdatePromptResponseFormat1 = {
+const value: operations.UpdatePrompt11 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    schema: {
+      "key": "<value>",
+    },
   },
 };
 ```
 
-## Fields
+### `operations.UpdatePrompt12`
 
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | [operations.UpdatePromptResponseFormatType](../../models/operations/updatepromptresponseformattype.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `jsonSchema`                                                                                           | [operations.ResponseFormatJsonSchema](../../models/operations/responseformatjsonschema.md)             | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+```typescript
+const value: operations.UpdatePrompt12 = {
+  type: "json_object",
+};
+```
+
+### `operations.UpdatePrompt13`
+
+```typescript
+const value: operations.UpdatePrompt13 = {
+  type: "text",
+};
+```
+

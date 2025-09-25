@@ -1,6 +1,6 @@
 # UpdateDatapointMessagesDatasetsRequestRequestBodyRole
 
-The role of the messages author, in this case `assistant`.
+The role of the messages author, in this case `assistant` or `exception`.
 
 ## Example Usage
 
@@ -13,5 +13,5 @@ let value: UpdateDatapointMessagesDatasetsRequestRequestBodyRole = "assistant";
 ## Values
 
 ```typescript
-"assistant"
+"assistant" | "exception"
 ```

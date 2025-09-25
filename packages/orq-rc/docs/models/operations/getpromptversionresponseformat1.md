@@ -1,24 +1,33 @@
 # GetPromptVersionResponseFormat1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.GetPromptVersion11`
 
 ```typescript
-import { GetPromptVersionResponseFormat1 } from "@orq-ai/node/models/operations";
-
-let value: GetPromptVersionResponseFormat1 = {
+const value: operations.GetPromptVersion11 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {
-      "key": "<value>",
-    },
+    schema: {},
   },
 };
 ```
 
-## Fields
+### `operations.GetPromptVersion12`
 
-| Field                                                                                                                      | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
-| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                     | [operations.GetPromptVersionResponseFormatType](../../models/operations/getpromptversionresponseformattype.md)             | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
-| `jsonSchema`                                                                                                               | [operations.GetPromptVersionResponseFormatJsonSchema](../../models/operations/getpromptversionresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |
+```typescript
+const value: operations.GetPromptVersion12 = {
+  type: "json_object",
+};
+```
+
+### `operations.GetPromptVersion13`
+
+```typescript
+const value: operations.GetPromptVersion13 = {
+  type: "text",
+};
+```
+

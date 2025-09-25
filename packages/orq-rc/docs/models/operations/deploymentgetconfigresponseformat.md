@@ -15,30 +15,25 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ```typescript
 const value: operations.DeploymentGetConfigResponseFormat1 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-    schema: {
-      "key": "<value>",
-      "key1": "<value>",
-    },
-  },
+  type: "text",
 };
 ```
 
 ### `operations.DeploymentGetConfigResponseFormat2`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat2 = {
-  type: "json_object",
-};
+const value: operations.DeploymentGetConfigResponseFormat2 = "mp3";
 ```
 
 ### `operations.DeploymentGetConfigResponseFormat3`
 
 ```typescript
-const value: operations.DeploymentGetConfigResponseFormat3 = {
-  type: "text",
-};
+const value: operations.DeploymentGetConfigResponseFormat3 = "url";
+```
+
+### `operations.DeploymentGetConfigResponseFormat4`
+
+```typescript
+const value: operations.DeploymentGetConfigResponseFormat4 = "vtt";
 ```
 

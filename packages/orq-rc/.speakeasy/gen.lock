@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: 6587fb8856cd78fdabccf4c6edad4ad0
+  docChecksum: 3f1e40f398d00bff381d2930ebcfc690
   docVersion: "2.0"
-  speakeasyVersion: 1.624.0
-  generationVersion: 2.714.0
-  releaseVersion: 3.13.0-rc.30
-  configChecksum: 1969bc12c376c42f405b99825b6ca6e8
+  speakeasyVersion: 1.628.1
+  generationVersion: 2.716.1
+  releaseVersion: 3.13.0-rc.36
+  configChecksum: 2c3ca0ed859a5bc31f83f00fd96afdd0
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -63,10 +63,21 @@ generatedFiles:
   - docs/models/components/annotationsfilecitation.md
   - docs/models/components/annotationsfilepath.md
   - docs/models/components/annotationstype.md
+  - docs/models/components/arguments.md
   - docs/models/components/assistantmessage.md
   - docs/models/components/audio.md
+  - docs/models/components/blueprint.md
+  - docs/models/components/callsubagenttool.md
+  - docs/models/components/callsubagenttooltype.md
+  - docs/models/components/codeexecutiontool.md
+  - docs/models/components/codeexecutiontoolstatus.md
+  - docs/models/components/codeexecutiontooltype.md
+  - docs/models/components/codetool.md
   - docs/models/components/content.md
   - docs/models/components/content2.md
+  - docs/models/components/currentdatetool.md
+  - docs/models/components/currentdatetooltype.md
+  - docs/models/components/defaultvalue.md
   - docs/models/components/deployments.md
   - docs/models/components/deployments21.md
   - docs/models/components/deployments22.md
@@ -118,7 +129,14 @@ generatedFiles:
   - docs/models/components/format.md
   - docs/models/components/four.md
   - docs/models/components/functiont.md
+  - docs/models/components/functiontool.md
+  - docs/models/components/functiontooltype.md
+  - docs/models/components/googlesearchtool.md
   - docs/models/components/gte.md
+  - docs/models/components/http.md
+  - docs/models/components/httptool.md
+  - docs/models/components/httptoolhttptype.md
+  - docs/models/components/httptooltype.md
   - docs/models/components/imageurl.md
   - docs/models/components/in.md
   - docs/models/components/inputaudio.md
@@ -126,6 +144,7 @@ generatedFiles:
   - docs/models/components/knowledgefilter.md
   - docs/models/components/knowledgefilterand.md
   - docs/models/components/knowledgefilteror.md
+  - docs/models/components/language.md
   - docs/models/components/lt.md
   - docs/models/components/lte.md
   - docs/models/components/messages.md
@@ -141,6 +160,7 @@ generatedFiles:
   - docs/models/components/messagestype.md
   - docs/models/components/messagesusermessage.md
   - docs/models/components/metadata.md
+  - docs/models/components/method.md
   - docs/models/components/ne.md
   - docs/models/components/nin.md
   - docs/models/components/one.md
@@ -160,10 +180,23 @@ generatedFiles:
   - docs/models/components/ornin.md
   - docs/models/components/prefixmessages.md
   - docs/models/components/prefixmessagescontent.md
+  - docs/models/components/prefixmessagesfunction.md
   - docs/models/components/prefixmessagesrole.md
+  - docs/models/components/prefixmessagestype.md
+  - docs/models/components/queryknowledgebasetool.md
+  - docs/models/components/queryknowledgebasetooltype.md
+  - docs/models/components/querymemorystoretool.md
+  - docs/models/components/querymemorystoretooltype.md
   - docs/models/components/refusalcontentpart.md
+  - docs/models/components/retrieveagentstool.md
+  - docs/models/components/retrieveagentstooltype.md
+  - docs/models/components/retrieveknowledgebasestool.md
+  - docs/models/components/retrieveknowledgebasestooltype.md
+  - docs/models/components/retrievememorystorestool.md
+  - docs/models/components/retrievememorystorestooltype.md
   - docs/models/components/role.md
   - docs/models/components/security.md
+  - docs/models/components/status.md
   - docs/models/components/systemmessage.md
   - docs/models/components/textcontentpart.md
   - docs/models/components/thread.md
@@ -186,9 +219,14 @@ generatedFiles:
   - docs/models/components/twotype.md
   - docs/models/components/type.md
   - docs/models/components/usermessage.md
+  - docs/models/components/webscrapertool.md
+  - docs/models/components/webscrapertooltype.md
+  - docs/models/components/writememorystoretool.md
+  - docs/models/components/writememorystoretooltype.md
   - docs/models/errors/createevalresponsebody.md
   - docs/models/errors/deletecontactresponsebody.md
   - docs/models/errors/deleteevalresponsebody.md
+  - docs/models/errors/duplicatetoolresponsebody.md
   - docs/models/errors/evalsageappropriateevalsresponsebody.md
   - docs/models/errors/evalsageappropriateresponsebody.md
   - docs/models/errors/evalsbertscoreevalsresponsebody.md
@@ -275,6 +313,7 @@ generatedFiles:
   - docs/models/errors/updatecontactresponsebody.md
   - docs/models/errors/updateevalresponsebody.md
   - docs/models/errors/updatepromptresponsebody.md
+  - docs/models/errors/updatetoolresponsebody.md
   - docs/models/operations/agenticchunker.md
   - docs/models/operations/agenticchunkerstrategy.md
   - docs/models/operations/agenticragconfig.md
@@ -319,16 +358,16 @@ generatedFiles:
   - docs/models/operations/chunkingconfiguration2.md
   - docs/models/operations/chunkingconfigurationtype.md
   - docs/models/operations/chunkingoptions.md
-  - docs/models/operations/chunkingrequestmode.md
   - docs/models/operations/chunkingrequestreturntype.md
-  - docs/models/operations/chunkingrequestthreshold.md
   - docs/models/operations/chunks.md
   - docs/models/operations/cleardatasetrequest.md
+  - docs/models/operations/codetool.md
   - docs/models/operations/conditions.md
   - docs/models/operations/configuration.md
   - docs/models/operations/configuration1.md
   - docs/models/operations/configuration2.md
   - docs/models/operations/configurationtype.md
+  - docs/models/operations/connectiontype.md
   - docs/models/operations/consumption.md
   - docs/models/operations/contact.md
   - docs/models/operations/contactbudget.md
@@ -592,6 +631,16 @@ generatedFiles:
   - docs/models/operations/creatememorystoremodel9.md
   - docs/models/operations/creatememorystorerequestbody.md
   - docs/models/operations/creatememorystoreresponsebody.md
+  - docs/models/operations/createprompt11.md
+  - docs/models/operations/createprompt12.md
+  - docs/models/operations/createprompt13.md
+  - docs/models/operations/createprompt1jsonschema.md
+  - docs/models/operations/createprompt1prompts3.md
+  - docs/models/operations/createprompt1promptsresponse200applicationjsontype.md
+  - docs/models/operations/createprompt1promptsresponse200type.md
+  - docs/models/operations/createprompt1promptsresponsetype.md
+  - docs/models/operations/createprompt1promptstype.md
+  - docs/models/operations/createprompt1type.md
   - docs/models/operations/createprompt21.md
   - docs/models/operations/createprompt22.md
   - docs/models/operations/createprompt23.md
@@ -638,28 +687,68 @@ generatedFiles:
   - docs/models/operations/createpromptresponseformat1.md
   - docs/models/operations/createpromptresponseformat2.md
   - docs/models/operations/createpromptresponseformat3.md
-  - docs/models/operations/createpromptresponseformatjsonschema.md
-  - docs/models/operations/createpromptresponseformatpromptsresponse200applicationjsontype.md
-  - docs/models/operations/createpromptresponseformatpromptsresponse200type.md
-  - docs/models/operations/createpromptresponseformatpromptsresponsetype.md
-  - docs/models/operations/createpromptresponseformatpromptstype.md
-  - docs/models/operations/createpromptresponseformattype.md
+  - docs/models/operations/createpromptresponseformat4.md
   - docs/models/operations/createpromptrole.md
   - docs/models/operations/createprompttoolcalls.md
   - docs/models/operations/createprompttype.md
   - docs/models/operations/createpromptusecases.md
   - docs/models/operations/createpromptverbosity.md
+  - docs/models/operations/createtoolrequestbody.md
+  - docs/models/operations/createtoolrequestbodyhttp.md
+  - docs/models/operations/createtoolrequestbodymethod.md
+  - docs/models/operations/createtoolrequestbodystatus.md
+  - docs/models/operations/createtoolrequestbodytoolsrequest3type.md
+  - docs/models/operations/createtoolrequestbodytoolsrequest4mcptype.md
+  - docs/models/operations/createtoolrequestbodytoolsrequest4type.md
+  - docs/models/operations/createtoolrequestbodytoolsrequest5status.md
+  - docs/models/operations/createtoolrequestbodytoolsrequest5type.md
+  - docs/models/operations/createtoolrequestbodytoolsrequeststatus.md
+  - docs/models/operations/createtoolrequestbodytoolsrequesttype.md
+  - docs/models/operations/createtoolrequestbodytoolsstatus.md
+  - docs/models/operations/createtoolrequestbodytoolstype.md
+  - docs/models/operations/createtoolrequestbodytype.md
+  - docs/models/operations/createtoolresponsebody.md
+  - docs/models/operations/createtoolresponsebodyfunction.md
+  - docs/models/operations/createtoolresponsebodyhttp.md
+  - docs/models/operations/createtoolresponsebodymethod.md
+  - docs/models/operations/createtoolresponsebodystatus.md
+  - docs/models/operations/createtoolresponsebodytoolsresponse200applicationjson3type.md
+  - docs/models/operations/createtoolresponsebodytoolsresponse200applicationjson4type.md
+  - docs/models/operations/createtoolresponsebodytoolsresponse200applicationjsontype.md
+  - docs/models/operations/createtoolresponsebodytoolsresponse200status.md
+  - docs/models/operations/createtoolresponsebodytoolsresponse200type.md
+  - docs/models/operations/createtoolresponsebodytoolsresponsestatus.md
+  - docs/models/operations/createtoolresponsebodytoolsresponsetype.md
+  - docs/models/operations/createtoolresponsebodytoolsstatus.md
+  - docs/models/operations/createtoolresponsebodytoolstype.md
+  - docs/models/operations/createtoolresponsebodytype.md
   - docs/models/operations/data.md
+  - docs/models/operations/data1.md
+  - docs/models/operations/data2.md
+  - docs/models/operations/data3.md
+  - docs/models/operations/data4.md
+  - docs/models/operations/data5.md
+  - docs/models/operations/dataarguments.md
+  - docs/models/operations/datablueprint.md
+  - docs/models/operations/datacodetool.md
+  - docs/models/operations/dataconnectiontype.md
+  - docs/models/operations/datadefaultvalue.md
   - docs/models/operations/datafunction.md
   - docs/models/operations/datafunctionparams.md
   - docs/models/operations/dataguardrailconfig.md
+  - docs/models/operations/dataheaders.md
   - docs/models/operations/datahttp.md
+  - docs/models/operations/datainputschema.md
   - docs/models/operations/datajson.md
+  - docs/models/operations/datajsonschema.md
+  - docs/models/operations/datalanguage.md
   - docs/models/operations/datallm.md
+  - docs/models/operations/datamcp.md
   - docs/models/operations/datamethod.md
   - docs/models/operations/datapython.md
   - docs/models/operations/dataragas.md
   - docs/models/operations/dataragasmetric.md
+  - docs/models/operations/datastatus.md
   - docs/models/operations/datatype.md
   - docs/models/operations/datatypescript.md
   - docs/models/operations/defaultvalue.md
@@ -675,6 +764,7 @@ generatedFiles:
   - docs/models/operations/deletememoryrequest.md
   - docs/models/operations/deletememorystorerequest.md
   - docs/models/operations/deletepromptrequest.md
+  - docs/models/operations/deletetoolrequest.md
   - docs/models/operations/deploymentcreatemetric21.md
   - docs/models/operations/deploymentcreatemetric22.md
   - docs/models/operations/deploymentcreatemetric23.md
@@ -754,6 +844,13 @@ generatedFiles:
   - docs/models/operations/deploymentcreatemetricrequest.md
   - docs/models/operations/deploymentcreatemetricrequestbody.md
   - docs/models/operations/deploymentcreatemetricresponsebody.md
+  - docs/models/operations/deploymentgetconfig11.md
+  - docs/models/operations/deploymentgetconfig12.md
+  - docs/models/operations/deploymentgetconfig13.md
+  - docs/models/operations/deploymentgetconfig1deploymentsresponsetype.md
+  - docs/models/operations/deploymentgetconfig1deploymentstype.md
+  - docs/models/operations/deploymentgetconfig1jsonschema.md
+  - docs/models/operations/deploymentgetconfig1type.md
   - docs/models/operations/deploymentgetconfig21.md
   - docs/models/operations/deploymentgetconfig22.md
   - docs/models/operations/deploymentgetconfig23.md
@@ -815,10 +912,7 @@ generatedFiles:
   - docs/models/operations/deploymentgetconfigresponseformat1.md
   - docs/models/operations/deploymentgetconfigresponseformat2.md
   - docs/models/operations/deploymentgetconfigresponseformat3.md
-  - docs/models/operations/deploymentgetconfigresponseformatdeploymentsresponsetype.md
-  - docs/models/operations/deploymentgetconfigresponseformatdeploymentstype.md
-  - docs/models/operations/deploymentgetconfigresponseformatjsonschema.md
-  - docs/models/operations/deploymentgetconfigresponseformattype.md
+  - docs/models/operations/deploymentgetconfigresponseformat4.md
   - docs/models/operations/deploymentgetconfigrole.md
   - docs/models/operations/deploymentgetconfigtoolcalls.md
   - docs/models/operations/deploymentgetconfigtools.md
@@ -836,6 +930,13 @@ generatedFiles:
   - docs/models/operations/deploymentinvokeobject.md
   - docs/models/operations/deploymentinvokeprovider.md
   - docs/models/operations/deploymentinvokeresponsebody.md
+  - docs/models/operations/deployments11.md
+  - docs/models/operations/deployments12.md
+  - docs/models/operations/deployments13.md
+  - docs/models/operations/deployments1deploymentsresponsetype.md
+  - docs/models/operations/deployments1deploymentstype.md
+  - docs/models/operations/deployments1jsonschema.md
+  - docs/models/operations/deployments1type.md
   - docs/models/operations/deployments21.md
   - docs/models/operations/deployments22.md
   - docs/models/operations/deployments23.md
@@ -868,10 +969,7 @@ generatedFiles:
   - docs/models/operations/deploymentsresponseformat1.md
   - docs/models/operations/deploymentsresponseformat2.md
   - docs/models/operations/deploymentsresponseformat3.md
-  - docs/models/operations/deploymentsresponseformatdeploymentsresponsetype.md
-  - docs/models/operations/deploymentsresponseformatdeploymentstype.md
-  - docs/models/operations/deploymentsresponseformatjsonschema.md
-  - docs/models/operations/deploymentsresponseformattype.md
+  - docs/models/operations/deploymentsresponseformat4.md
   - docs/models/operations/deploymentsrole.md
   - docs/models/operations/deploymentstoolcalls.md
   - docs/models/operations/deploymentstools.md
@@ -1027,6 +1125,38 @@ generatedFiles:
   - docs/models/operations/detail.md
   - docs/models/operations/developermessage.md
   - docs/models/operations/documents.md
+  - docs/models/operations/duplicatetoolrequest.md
+  - docs/models/operations/duplicatetoolresponsebody.md
+  - docs/models/operations/duplicatetoolresponsebody1.md
+  - docs/models/operations/duplicatetoolresponsebody2.md
+  - docs/models/operations/duplicatetoolresponsebody3.md
+  - docs/models/operations/duplicatetoolresponsebody4.md
+  - docs/models/operations/duplicatetoolresponsebody5.md
+  - docs/models/operations/duplicatetoolresponsebodyarguments.md
+  - docs/models/operations/duplicatetoolresponsebodyblueprint.md
+  - docs/models/operations/duplicatetoolresponsebodycodetool.md
+  - docs/models/operations/duplicatetoolresponsebodyconnectiontype.md
+  - docs/models/operations/duplicatetoolresponsebodydefaultvalue.md
+  - docs/models/operations/duplicatetoolresponsebodyfunction.md
+  - docs/models/operations/duplicatetoolresponsebodyheaders.md
+  - docs/models/operations/duplicatetoolresponsebodyhttp.md
+  - docs/models/operations/duplicatetoolresponsebodyinputschema.md
+  - docs/models/operations/duplicatetoolresponsebodyjsonschema.md
+  - docs/models/operations/duplicatetoolresponsebodylanguage.md
+  - docs/models/operations/duplicatetoolresponsebodymcp.md
+  - docs/models/operations/duplicatetoolresponsebodymethod.md
+  - docs/models/operations/duplicatetoolresponsebodystatus.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponse200applicationjson3type.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponse200applicationjson4type.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponse200applicationjsonstatus.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponse200applicationjsontype.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponse200status.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponse200type.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponsestatus.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsresponsetype.md
+  - docs/models/operations/duplicatetoolresponsebodytoolsstatus.md
+  - docs/models/operations/duplicatetoolresponsebodytoolstype.md
+  - docs/models/operations/duplicatetoolresponsebodytype.md
   - docs/models/operations/eight.md
   - docs/models/operations/eighteen.md
   - docs/models/operations/eleven.md
@@ -1269,6 +1399,13 @@ generatedFiles:
   - docs/models/operations/getallmemorystoresobject.md
   - docs/models/operations/getallmemorystoresrequest.md
   - docs/models/operations/getallmemorystoresresponsebody.md
+  - docs/models/operations/getallprompts11.md
+  - docs/models/operations/getallprompts12.md
+  - docs/models/operations/getallprompts13.md
+  - docs/models/operations/getallprompts1jsonschema.md
+  - docs/models/operations/getallprompts1promptsresponsetype.md
+  - docs/models/operations/getallprompts1promptstype.md
+  - docs/models/operations/getallprompts1type.md
   - docs/models/operations/getallprompts21.md
   - docs/models/operations/getallprompts22.md
   - docs/models/operations/getallprompts23.md
@@ -1300,15 +1437,30 @@ generatedFiles:
   - docs/models/operations/getallpromptsresponseformat1.md
   - docs/models/operations/getallpromptsresponseformat2.md
   - docs/models/operations/getallpromptsresponseformat3.md
-  - docs/models/operations/getallpromptsresponseformatjsonschema.md
-  - docs/models/operations/getallpromptsresponseformatpromptsresponsetype.md
-  - docs/models/operations/getallpromptsresponseformatpromptstype.md
-  - docs/models/operations/getallpromptsresponseformattype.md
+  - docs/models/operations/getallpromptsresponseformat4.md
   - docs/models/operations/getallpromptsrole.md
   - docs/models/operations/getallpromptstoolcalls.md
   - docs/models/operations/getallpromptstype.md
   - docs/models/operations/getallpromptsusecases.md
   - docs/models/operations/getallpromptsverbosity.md
+  - docs/models/operations/getalltoolsdata.md
+  - docs/models/operations/getalltoolsdatafunction.md
+  - docs/models/operations/getalltoolsdatahttp.md
+  - docs/models/operations/getalltoolsdatamethod.md
+  - docs/models/operations/getalltoolsdatastatus.md
+  - docs/models/operations/getalltoolsdatatoolsresponse200applicationjsonresponsebody3type.md
+  - docs/models/operations/getalltoolsdatatoolsresponse200applicationjsonresponsebodytype.md
+  - docs/models/operations/getalltoolsdatatoolsresponse200applicationjsontype.md
+  - docs/models/operations/getalltoolsdatatoolsresponse200status.md
+  - docs/models/operations/getalltoolsdatatoolsresponse200type.md
+  - docs/models/operations/getalltoolsdatatoolsresponsestatus.md
+  - docs/models/operations/getalltoolsdatatoolsresponsetype.md
+  - docs/models/operations/getalltoolsdatatoolsstatus.md
+  - docs/models/operations/getalltoolsdatatoolstype.md
+  - docs/models/operations/getalltoolsdatatype.md
+  - docs/models/operations/getalltoolsobject.md
+  - docs/models/operations/getalltoolsrequest.md
+  - docs/models/operations/getalltoolsresponsebody.md
   - docs/models/operations/getbudgetbudget.md
   - docs/models/operations/getbudgetconsumption.md
   - docs/models/operations/getbudgetperiod.md
@@ -1446,6 +1598,13 @@ generatedFiles:
   - docs/models/operations/getoneknowledgeresponsebody.md
   - docs/models/operations/getoneknowledgeretrievalsettings.md
   - docs/models/operations/getoneknowledgeretrievaltype.md
+  - docs/models/operations/getoneprompt11.md
+  - docs/models/operations/getoneprompt12.md
+  - docs/models/operations/getoneprompt13.md
+  - docs/models/operations/getoneprompt1jsonschema.md
+  - docs/models/operations/getoneprompt1promptsresponsetype.md
+  - docs/models/operations/getoneprompt1promptstype.md
+  - docs/models/operations/getoneprompt1type.md
   - docs/models/operations/getoneprompt21.md
   - docs/models/operations/getoneprompt22.md
   - docs/models/operations/getoneprompt23.md
@@ -1475,15 +1634,19 @@ generatedFiles:
   - docs/models/operations/getonepromptresponseformat1.md
   - docs/models/operations/getonepromptresponseformat2.md
   - docs/models/operations/getonepromptresponseformat3.md
-  - docs/models/operations/getonepromptresponseformatjsonschema.md
-  - docs/models/operations/getonepromptresponseformatpromptsresponsetype.md
-  - docs/models/operations/getonepromptresponseformatpromptstype.md
-  - docs/models/operations/getonepromptresponseformattype.md
+  - docs/models/operations/getonepromptresponseformat4.md
   - docs/models/operations/getonepromptrole.md
   - docs/models/operations/getoneprompttoolcalls.md
   - docs/models/operations/getoneprompttype.md
   - docs/models/operations/getonepromptusecases.md
   - docs/models/operations/getonepromptverbosity.md
+  - docs/models/operations/getpromptversion11.md
+  - docs/models/operations/getpromptversion12.md
+  - docs/models/operations/getpromptversion13.md
+  - docs/models/operations/getpromptversion1jsonschema.md
+  - docs/models/operations/getpromptversion1promptsresponsetype.md
+  - docs/models/operations/getpromptversion1promptstype.md
+  - docs/models/operations/getpromptversion1type.md
   - docs/models/operations/getpromptversion21.md
   - docs/models/operations/getpromptversion22.md
   - docs/models/operations/getpromptversion23.md
@@ -1512,10 +1675,7 @@ generatedFiles:
   - docs/models/operations/getpromptversionresponseformat1.md
   - docs/models/operations/getpromptversionresponseformat2.md
   - docs/models/operations/getpromptversionresponseformat3.md
-  - docs/models/operations/getpromptversionresponseformatjsonschema.md
-  - docs/models/operations/getpromptversionresponseformatpromptsresponsetype.md
-  - docs/models/operations/getpromptversionresponseformatpromptstype.md
-  - docs/models/operations/getpromptversionresponseformattype.md
+  - docs/models/operations/getpromptversionresponseformat4.md
   - docs/models/operations/getpromptversionrole.md
   - docs/models/operations/getpromptversiontoolcalls.md
   - docs/models/operations/getpromptversiontype.md
@@ -1527,11 +1687,13 @@ generatedFiles:
   - docs/models/operations/guardrailconfignumber.md
   - docs/models/operations/guardrailconfigoperator.md
   - docs/models/operations/guardrailconfigtype.md
+  - docs/models/operations/headers.md
   - docs/models/operations/hiddenpanels.md
   - docs/models/operations/http.md
   - docs/models/operations/imageurl.md
   - docs/models/operations/in.md
   - docs/models/operations/inputaudio.md
+  - docs/models/operations/inputschema.md
   - docs/models/operations/invokeeval21.md
   - docs/models/operations/invokeeval22.md
   - docs/models/operations/invokeeval23.md
@@ -1690,6 +1852,13 @@ generatedFiles:
   - docs/models/operations/listmodelsobject.md
   - docs/models/operations/listmodelsresponsebody.md
   - docs/models/operations/listmodelstype.md
+  - docs/models/operations/listpromptversions11.md
+  - docs/models/operations/listpromptversions12.md
+  - docs/models/operations/listpromptversions13.md
+  - docs/models/operations/listpromptversions1jsonschema.md
+  - docs/models/operations/listpromptversions1promptsresponsetype.md
+  - docs/models/operations/listpromptversions1promptstype.md
+  - docs/models/operations/listpromptversions1type.md
   - docs/models/operations/listpromptversions21.md
   - docs/models/operations/listpromptversions22.md
   - docs/models/operations/listpromptversions23.md
@@ -1720,10 +1889,7 @@ generatedFiles:
   - docs/models/operations/listpromptversionsresponseformat1.md
   - docs/models/operations/listpromptversionsresponseformat2.md
   - docs/models/operations/listpromptversionsresponseformat3.md
-  - docs/models/operations/listpromptversionsresponseformatjsonschema.md
-  - docs/models/operations/listpromptversionsresponseformatpromptsresponsetype.md
-  - docs/models/operations/listpromptversionsresponseformatpromptstype.md
-  - docs/models/operations/listpromptversionsresponseformattype.md
+  - docs/models/operations/listpromptversionsresponseformat4.md
   - docs/models/operations/listpromptversionsrole.md
   - docs/models/operations/listpromptversionstoolcalls.md
   - docs/models/operations/listpromptversionstype.md
@@ -1733,6 +1899,7 @@ generatedFiles:
   - docs/models/operations/lt.md
   - docs/models/operations/lte.md
   - docs/models/operations/matches.md
+  - docs/models/operations/mcp.md
   - docs/models/operations/memory.md
   - docs/models/operations/message.md
   - docs/models/operations/message1.md
@@ -1790,15 +1957,19 @@ generatedFiles:
   - docs/models/operations/numbert.md
   - docs/models/operations/objectt.md
   - docs/models/operations/one.md
+  - docs/models/operations/one1.md
+  - docs/models/operations/one2.md
   - docs/models/operations/one3.md
   - docs/models/operations/oneeq.md
   - docs/models/operations/oneexists.md
   - docs/models/operations/onegte.md
   - docs/models/operations/onein.md
+  - docs/models/operations/onejsonschema.md
   - docs/models/operations/onelt.md
   - docs/models/operations/onelte.md
   - docs/models/operations/onene.md
   - docs/models/operations/onenin.md
+  - docs/models/operations/onetype.md
   - docs/models/operations/operator.md
   - docs/models/operations/or.md
   - docs/models/operations/or3.md
@@ -1814,13 +1985,11 @@ generatedFiles:
   - docs/models/operations/ownedby.md
   - docs/models/operations/parameterst.md
   - docs/models/operations/parsechunkingrequest.md
-  - docs/models/operations/parsechunkingrequestchunkingrequestrequestbodyreturntype.md
   - docs/models/operations/parsechunkingrequestchunkingrequestreturntype.md
   - docs/models/operations/parsechunkingrequestchunkingreturntype.md
   - docs/models/operations/parsechunkingrequestreturntype.md
   - docs/models/operations/parsemetadata.md
   - docs/models/operations/parseresponsebody.md
-  - docs/models/operations/parsethreshold2.md
   - docs/models/operations/parts.md
   - docs/models/operations/parts1.md
   - docs/models/operations/parts2.md
@@ -1861,29 +2030,62 @@ generatedFiles:
   - docs/models/operations/remoteconfigsgetconfigresponsebody.md
   - docs/models/operations/remoteconfigsgetconfigtype.md
   - docs/models/operations/requestbody.md
+  - docs/models/operations/requestbody1.md
+  - docs/models/operations/requestbody2.md
+  - docs/models/operations/requestbody3.md
+  - docs/models/operations/requestbody4.md
+  - docs/models/operations/requestbody5.md
+  - docs/models/operations/requestbodyarguments.md
+  - docs/models/operations/requestbodyblueprint.md
+  - docs/models/operations/requestbodycodetool.md
+  - docs/models/operations/requestbodyconnectiontype.md
+  - docs/models/operations/requestbodydefaultvalue.md
+  - docs/models/operations/requestbodyfunction.md
   - docs/models/operations/requestbodyguardrailconfig.md
+  - docs/models/operations/requestbodyheaders.md
   - docs/models/operations/requestbodyhttp.md
+  - docs/models/operations/requestbodyinputschema.md
   - docs/models/operations/requestbodyjson.md
+  - docs/models/operations/requestbodyjsonschema.md
+  - docs/models/operations/requestbodylanguage.md
   - docs/models/operations/requestbodyllm.md
+  - docs/models/operations/requestbodymcp.md
   - docs/models/operations/requestbodymethod.md
   - docs/models/operations/requestbodyoutputtype.md
   - docs/models/operations/requestbodyperiod.md
   - docs/models/operations/requestbodypython.md
+  - docs/models/operations/requestbodystatus.md
   - docs/models/operations/requestbodytype.md
   - docs/models/operations/rerankconfig.md
   - docs/models/operations/responsebody.md
+  - docs/models/operations/responsebody1.md
+  - docs/models/operations/responsebody2.md
+  - docs/models/operations/responsebody3.md
+  - docs/models/operations/responsebody4.md
+  - docs/models/operations/responsebody5.md
+  - docs/models/operations/responsebodyarguments.md
+  - docs/models/operations/responsebodyblueprint.md
   - docs/models/operations/responsebodyboolean.md
+  - docs/models/operations/responsebodycodetool.md
+  - docs/models/operations/responsebodyconnectiontype.md
+  - docs/models/operations/responsebodydefaultvalue.md
   - docs/models/operations/responsebodyfunction.md
   - docs/models/operations/responsebodyfunctionparams.md
   - docs/models/operations/responsebodyguardrailconfig.md
+  - docs/models/operations/responsebodyheaders.md
   - docs/models/operations/responsebodyhttp.md
+  - docs/models/operations/responsebodyinputschema.md
   - docs/models/operations/responsebodyjson.md
+  - docs/models/operations/responsebodyjsonschema.md
+  - docs/models/operations/responsebodylanguage.md
   - docs/models/operations/responsebodyllm.md
+  - docs/models/operations/responsebodymcp.md
   - docs/models/operations/responsebodymethod.md
   - docs/models/operations/responsebodynumber.md
   - docs/models/operations/responsebodypython.md
   - docs/models/operations/responsebodyragas.md
   - docs/models/operations/responsebodyragasmetric.md
+  - docs/models/operations/responsebodystatus.md
   - docs/models/operations/responsebodytype.md
   - docs/models/operations/responsebodytypescript.md
   - docs/models/operations/responsebodyvalue.md
@@ -1891,8 +2093,7 @@ generatedFiles:
   - docs/models/operations/responseformat1.md
   - docs/models/operations/responseformat2.md
   - docs/models/operations/responseformat3.md
-  - docs/models/operations/responseformatjsonschema.md
-  - docs/models/operations/responseformattype.md
+  - docs/models/operations/responseformat4.md
   - docs/models/operations/retrievals.md
   - docs/models/operations/retrievalsettings.md
   - docs/models/operations/retrievaltype.md
@@ -1982,6 +2183,38 @@ generatedFiles:
   - docs/models/operations/retrievememorystoremodel9.md
   - docs/models/operations/retrievememorystorerequest.md
   - docs/models/operations/retrievememorystoreresponsebody.md
+  - docs/models/operations/retrievetoolrequest.md
+  - docs/models/operations/retrievetoolresponsebody.md
+  - docs/models/operations/retrievetoolresponsebody1.md
+  - docs/models/operations/retrievetoolresponsebody2.md
+  - docs/models/operations/retrievetoolresponsebody3.md
+  - docs/models/operations/retrievetoolresponsebody4.md
+  - docs/models/operations/retrievetoolresponsebody5.md
+  - docs/models/operations/retrievetoolresponsebodyarguments.md
+  - docs/models/operations/retrievetoolresponsebodyblueprint.md
+  - docs/models/operations/retrievetoolresponsebodycodetool.md
+  - docs/models/operations/retrievetoolresponsebodyconnectiontype.md
+  - docs/models/operations/retrievetoolresponsebodydefaultvalue.md
+  - docs/models/operations/retrievetoolresponsebodyfunction.md
+  - docs/models/operations/retrievetoolresponsebodyheaders.md
+  - docs/models/operations/retrievetoolresponsebodyhttp.md
+  - docs/models/operations/retrievetoolresponsebodyinputschema.md
+  - docs/models/operations/retrievetoolresponsebodyjsonschema.md
+  - docs/models/operations/retrievetoolresponsebodylanguage.md
+  - docs/models/operations/retrievetoolresponsebodymcp.md
+  - docs/models/operations/retrievetoolresponsebodymethod.md
+  - docs/models/operations/retrievetoolresponsebodystatus.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponse200applicationjson3type.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponse200applicationjson4type.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponse200applicationjsonstatus.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponse200applicationjsontype.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponse200status.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponse200type.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponsestatus.md
+  - docs/models/operations/retrievetoolresponsebodytoolsresponsetype.md
+  - docs/models/operations/retrievetoolresponsebodytoolsstatus.md
+  - docs/models/operations/retrievetoolresponsebodytoolstype.md
+  - docs/models/operations/retrievetoolresponsebodytype.md
   - docs/models/operations/returntypet.md
   - docs/models/operations/review.md
   - docs/models/operations/role.md
@@ -2005,22 +2238,8 @@ generatedFiles:
   - docs/models/operations/runagentstate.md
   - docs/models/operations/runagentstatus.md
   - docs/models/operations/runagentthread.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings10type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings11type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings12httptype.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings12type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings13type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings7type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings8type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettings9type.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodysettingstype.md
-  - docs/models/operations/runagenttoolsagentsrequestrequestbodytype.md
-  - docs/models/operations/runagenttoolsagentsrequesttype.md
-  - docs/models/operations/runagenttoolsagentstype.md
   - docs/models/operations/runagenttoolstype.md
   - docs/models/operations/scores.md
-  - docs/models/operations/sdpmchunker.md
-  - docs/models/operations/sdpmchunkerstrategy.md
   - docs/models/operations/searchknowledge13.md
   - docs/models/operations/searchknowledge1eq.md
   - docs/models/operations/searchknowledge1exists.md
@@ -2112,25 +2331,7 @@ generatedFiles:
   - docs/models/operations/streamrunagentthread.md
   - docs/models/operations/streamrunagenttoolapprovalrequired.md
   - docs/models/operations/streamrunagenttools.md
-  - docs/models/operations/streamrunagenttools1.md
-  - docs/models/operations/streamrunagenttools2.md
-  - docs/models/operations/streamrunagenttools3.md
-  - docs/models/operations/streamrunagenttools4.md
-  - docs/models/operations/streamrunagenttools5.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings10type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings11type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings12httptype.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings12type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings13type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings6type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings7type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings8type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettings9type.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodysettingstype.md
-  - docs/models/operations/streamrunagenttoolsagentsrequestrequestbodytype.md
-  - docs/models/operations/streamrunagenttoolsagentsrequesttype.md
   - docs/models/operations/streamrunagenttoolsagentstype.md
-  - docs/models/operations/streamrunagenttoolsfunction.md
   - docs/models/operations/streamrunagenttoolstype.md
   - docs/models/operations/string.md
   - docs/models/operations/stringarray.md
@@ -2156,23 +2357,10 @@ generatedFiles:
   - docs/models/operations/toolcalls.md
   - docs/models/operations/toolmessage.md
   - docs/models/operations/tools.md
-  - docs/models/operations/tools1.md
-  - docs/models/operations/tools10.md
-  - docs/models/operations/tools11.md
-  - docs/models/operations/tools12.md
-  - docs/models/operations/tools13.md
-  - docs/models/operations/tools2.md
-  - docs/models/operations/tools3.md
-  - docs/models/operations/tools4.md
-  - docs/models/operations/tools5.md
-  - docs/models/operations/tools6.md
-  - docs/models/operations/tools7.md
-  - docs/models/operations/tools8.md
-  - docs/models/operations/tools9.md
+  - docs/models/operations/tools24.md
   - docs/models/operations/toolsarguments.md
   - docs/models/operations/toolsblueprint.md
   - docs/models/operations/toolsdefaultvalue.md
-  - docs/models/operations/toolsfunction.md
   - docs/models/operations/toolshttp.md
   - docs/models/operations/toolsmethod.md
   - docs/models/operations/toolsstatus.md
@@ -2334,6 +2522,7 @@ generatedFiles:
   - docs/models/operations/updateevalfunctionparams20.md
   - docs/models/operations/updateevalfunctionparams21.md
   - docs/models/operations/updateevalfunctionparams22.md
+  - docs/models/operations/updateevalfunctionparams24.md
   - docs/models/operations/updateevalfunctionparams3.md
   - docs/models/operations/updateevalfunctionparams4.md
   - docs/models/operations/updateevalfunctionparams5.md
@@ -2489,22 +2678,27 @@ generatedFiles:
   - docs/models/operations/updatememorystorememorystoresembeddingconfig.md
   - docs/models/operations/updatememorystoremodel.md
   - docs/models/operations/updatememorystoremodel1.md
-  - docs/models/operations/updatememorystoremodel10.md
-  - docs/models/operations/updatememorystoremodel11.md
-  - docs/models/operations/updatememorystoremodel12.md
-  - docs/models/operations/updatememorystoremodel13.md
   - docs/models/operations/updatememorystoremodel2.md
   - docs/models/operations/updatememorystoremodel3.md
   - docs/models/operations/updatememorystoremodel4.md
   - docs/models/operations/updatememorystoremodel5.md
-  - docs/models/operations/updatememorystoremodel6.md
-  - docs/models/operations/updatememorystoremodel7.md
-  - docs/models/operations/updatememorystoremodel8.md
-  - docs/models/operations/updatememorystoremodel9.md
   - docs/models/operations/updatememorystoreprovider.md
   - docs/models/operations/updatememorystorerequest.md
   - docs/models/operations/updatememorystorerequestbody.md
   - docs/models/operations/updatememorystoreresponsebody.md
+  - docs/models/operations/updateprompt11.md
+  - docs/models/operations/updateprompt12.md
+  - docs/models/operations/updateprompt13.md
+  - docs/models/operations/updateprompt1jsonschema.md
+  - docs/models/operations/updateprompt1prompts1.md
+  - docs/models/operations/updateprompt1prompts2.md
+  - docs/models/operations/updateprompt1prompts3.md
+  - docs/models/operations/updateprompt1promptsrequesttype.md
+  - docs/models/operations/updateprompt1promptsresponse200applicationjsontype.md
+  - docs/models/operations/updateprompt1promptsresponse200type.md
+  - docs/models/operations/updateprompt1promptsresponsetype.md
+  - docs/models/operations/updateprompt1promptstype.md
+  - docs/models/operations/updateprompt1type.md
   - docs/models/operations/updateprompt21.md
   - docs/models/operations/updateprompt22.md
   - docs/models/operations/updateprompt23.md
@@ -2563,21 +2757,74 @@ generatedFiles:
   - docs/models/operations/updatepromptresponseformat1.md
   - docs/models/operations/updatepromptresponseformat2.md
   - docs/models/operations/updatepromptresponseformat3.md
-  - docs/models/operations/updatepromptresponseformatjsonschema.md
+  - docs/models/operations/updatepromptresponseformat4.md
   - docs/models/operations/updatepromptresponseformatprompts1.md
   - docs/models/operations/updatepromptresponseformatprompts2.md
   - docs/models/operations/updatepromptresponseformatprompts3.md
-  - docs/models/operations/updatepromptresponseformatpromptsrequesttype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200applicationjsontype.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponse200type.md
-  - docs/models/operations/updatepromptresponseformatpromptsresponsetype.md
-  - docs/models/operations/updatepromptresponseformatpromptstype.md
-  - docs/models/operations/updatepromptresponseformattype.md
+  - docs/models/operations/updatepromptresponseformatprompts4.md
   - docs/models/operations/updatepromptrole.md
   - docs/models/operations/updateprompttoolcalls.md
   - docs/models/operations/updateprompttype.md
   - docs/models/operations/updatepromptusecases.md
   - docs/models/operations/updatepromptverbosity.md
+  - docs/models/operations/updatetoolrequest.md
+  - docs/models/operations/updatetoolrequestbody.md
+  - docs/models/operations/updatetoolrequestbody1.md
+  - docs/models/operations/updatetoolrequestbody2.md
+  - docs/models/operations/updatetoolrequestbody3.md
+  - docs/models/operations/updatetoolrequestbody4.md
+  - docs/models/operations/updatetoolrequestbody5.md
+  - docs/models/operations/updatetoolrequestbodyarguments.md
+  - docs/models/operations/updatetoolrequestbodyblueprint.md
+  - docs/models/operations/updatetoolrequestbodydefaultvalue.md
+  - docs/models/operations/updatetoolrequestbodyfunction.md
+  - docs/models/operations/updatetoolrequestbodyhttp.md
+  - docs/models/operations/updatetoolrequestbodyjsonschema.md
+  - docs/models/operations/updatetoolrequestbodylanguage.md
+  - docs/models/operations/updatetoolrequestbodymethod.md
+  - docs/models/operations/updatetoolrequestbodystatus.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequest3type.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequest4mcptype.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequest4status.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequest4type.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequest5status.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequest5type.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequeststatus.md
+  - docs/models/operations/updatetoolrequestbodytoolsrequesttype.md
+  - docs/models/operations/updatetoolrequestbodytoolsstatus.md
+  - docs/models/operations/updatetoolrequestbodytoolstype.md
+  - docs/models/operations/updatetoolrequestbodytype.md
+  - docs/models/operations/updatetoolresponsebody.md
+  - docs/models/operations/updatetoolresponsebody1.md
+  - docs/models/operations/updatetoolresponsebody2.md
+  - docs/models/operations/updatetoolresponsebody3.md
+  - docs/models/operations/updatetoolresponsebody4.md
+  - docs/models/operations/updatetoolresponsebody5.md
+  - docs/models/operations/updatetoolresponsebodyarguments.md
+  - docs/models/operations/updatetoolresponsebodyblueprint.md
+  - docs/models/operations/updatetoolresponsebodycodetool.md
+  - docs/models/operations/updatetoolresponsebodyconnectiontype.md
+  - docs/models/operations/updatetoolresponsebodydefaultvalue.md
+  - docs/models/operations/updatetoolresponsebodyfunction.md
+  - docs/models/operations/updatetoolresponsebodyheaders.md
+  - docs/models/operations/updatetoolresponsebodyhttp.md
+  - docs/models/operations/updatetoolresponsebodyinputschema.md
+  - docs/models/operations/updatetoolresponsebodyjsonschema.md
+  - docs/models/operations/updatetoolresponsebodylanguage.md
+  - docs/models/operations/updatetoolresponsebodymcp.md
+  - docs/models/operations/updatetoolresponsebodymethod.md
+  - docs/models/operations/updatetoolresponsebodystatus.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponse200applicationjson3type.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponse200applicationjson4type.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponse200applicationjsonstatus.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponse200applicationjsontype.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponse200status.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponse200type.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponsestatus.md
+  - docs/models/operations/updatetoolresponsebodytoolsresponsetype.md
+  - docs/models/operations/updatetoolresponsebodytoolsstatus.md
+  - docs/models/operations/updatetoolresponsebodytoolstype.md
+  - docs/models/operations/updatetoolresponsebodytype.md
   - docs/models/operations/usage.md
   - docs/models/operations/usecases.md
   - docs/models/operations/usermessage.md
@@ -2600,6 +2847,7 @@ generatedFiles:
   - docs/sdks/orq/README.md
   - docs/sdks/prompts/README.md
   - docs/sdks/remoteconfigs/README.md
+  - docs/sdks/tools/README.md
   - eslint.config.mjs
   - examples/.env.template
   - examples/README.md
@@ -2729,6 +2977,12 @@ generatedFiles:
   - src/funcs/promptsRetrieve.ts
   - src/funcs/promptsUpdate.ts
   - src/funcs/remoteconfigsRetrieve.ts
+  - src/funcs/toolsCreate.ts
+  - src/funcs/toolsDelete.ts
+  - src/funcs/toolsDuplicate.ts
+  - src/funcs/toolsList.ts
+  - src/funcs/toolsRetrieve.ts
+  - src/funcs/toolsUpdate.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -2884,13 +3138,33 @@ generatedFiles:
   - src/mcp-server/tools/promptsRetrieve.ts
   - src/mcp-server/tools/promptsUpdate.ts
   - src/mcp-server/tools/remoteconfigsRetrieve.ts
+  - src/mcp-server/tools/toolsCreate.ts
+  - src/mcp-server/tools/toolsDelete.ts
+  - src/mcp-server/tools/toolsDuplicate.ts
+  - src/mcp-server/tools/toolsList.ts
+  - src/mcp-server/tools/toolsRetrieve.ts
+  - src/mcp-server/tools/toolsUpdate.ts
+  - src/models/components/callsubagenttool.ts
+  - src/models/components/codeexecutiontool.ts
+  - src/models/components/currentdatetool.ts
   - src/models/components/deployments.ts
+  - src/models/components/functiontool.ts
+  - src/models/components/googlesearchtool.ts
+  - src/models/components/httptool.ts
   - src/models/components/index.ts
+  - src/models/components/queryknowledgebasetool.ts
+  - src/models/components/querymemorystoretool.ts
+  - src/models/components/retrieveagentstool.ts
+  - src/models/components/retrieveknowledgebasestool.ts
+  - src/models/components/retrievememorystorestool.ts
   - src/models/components/security.ts
+  - src/models/components/webscrapertool.ts
+  - src/models/components/writememorystoretool.ts
   - src/models/errors/apierror.ts
   - src/models/errors/createeval.ts
   - src/models/errors/deletecontact.ts
   - src/models/errors/deleteeval.ts
+  - src/models/errors/duplicatetool.ts
   - src/models/errors/evalsageappropriate.ts
   - src/models/errors/evalsbertscore.ts
   - src/models/errors/evalsbleuscore.ts
@@ -2944,6 +3218,7 @@ generatedFiles:
   - src/models/errors/updatecontact.ts
   - src/models/errors/updateeval.ts
   - src/models/errors/updateprompt.ts
+  - src/models/errors/updatetool.ts
   - src/models/operations/cleardataset.ts
   - src/models/operations/createbudget.ts
   - src/models/operations/createchunk.ts
@@ -2958,6 +3233,7 @@ generatedFiles:
   - src/models/operations/creatememorydocument.ts
   - src/models/operations/creatememorystore.ts
   - src/models/operations/createprompt.ts
+  - src/models/operations/createtool.ts
   - src/models/operations/deletebudget.ts
   - src/models/operations/deletechunk.ts
   - src/models/operations/deletecontact.ts
@@ -2970,11 +3246,13 @@ generatedFiles:
   - src/models/operations/deletememorydocument.ts
   - src/models/operations/deletememorystore.ts
   - src/models/operations/deleteprompt.ts
+  - src/models/operations/deletetool.ts
   - src/models/operations/deploymentcreatemetric.ts
   - src/models/operations/deploymentgetconfig.ts
   - src/models/operations/deploymentinvoke.ts
   - src/models/operations/deployments.ts
   - src/models/operations/deploymentstream.ts
+  - src/models/operations/duplicatetool.ts
   - src/models/operations/evalsageappropriate.ts
   - src/models/operations/evalsbertscore.ts
   - src/models/operations/evalsbleuscore.ts
@@ -3022,6 +3300,7 @@ generatedFiles:
   - src/models/operations/getallmemorydocuments.ts
   - src/models/operations/getallmemorystores.ts
   - src/models/operations/getallprompts.ts
+  - src/models/operations/getalltools.ts
   - src/models/operations/getbudget.ts
   - src/models/operations/getevals.ts
   - src/models/operations/getonechunk.ts
@@ -3051,6 +3330,7 @@ generatedFiles:
   - src/models/operations/retrievememory.ts
   - src/models/operations/retrievememorydocument.ts
   - src/models/operations/retrievememorystore.ts
+  - src/models/operations/retrievetool.ts
   - src/models/operations/runagent.ts
   - src/models/operations/searchknowledge.ts
   - src/models/operations/streamrunagent.ts
@@ -3066,6 +3346,7 @@ generatedFiles:
   - src/models/operations/updatememorydocument.ts
   - src/models/operations/updatememorystore.ts
   - src/models/operations/updateprompt.ts
+  - src/models/operations/updatetool.ts
   - src/sdk/agents.ts
   - src/sdk/budgets.ts
   - src/sdk/chunking.ts
@@ -3083,6 +3364,7 @@ generatedFiles:
   - src/sdk/prompts.ts
   - src/sdk/remoteconfigs.ts
   - src/sdk/sdk.ts
+  - src/sdk/tools.ts
   - src/types/async.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
@@ -3102,7 +3384,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-03T12:31:41.205Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-25T06:48:39.657Z"}
     "":
       requestBody:
         application/json: {"external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
@@ -3176,7 +3458,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-09-24T04:54:55.616Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-09-25T06:48:42.376Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -3192,7 +3474,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-09-24T04:54:55.616Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-09-25T06:48:42.376Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -3283,7 +3565,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-09-25T06:48:39.657Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -3291,7 +3573,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-09-25T06:48:39.657Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -3303,7 +3585,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-09-25T06:48:39.657Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -3347,7 +3629,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-25T06:48:39.657Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -3358,7 +3640,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-09-25T06:48:39.657Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -3441,7 +3723,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01K5X16BZMYXH42ZZACKKE4YPB", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01K5ZT3CV9BJA1682124W3S9A4", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -3450,7 +3732,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01K5X16BZM187B5KQFADQ4TDC0", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01K5ZT3CV8RH1NSQQXZXZ9KF45", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -3467,7 +3749,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01K5X16BZQNBG0DWTHWFFH63AW", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01K5ZT3CVAEWED4S8XD0FV8DQW", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -3876,7 +4158,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-25T06:48:39.657Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -3897,7 +4179,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-09-25T06:48:39.657Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
@@ -4034,7 +4316,7 @@ examples:
         application/json: {"type": "contact", "entity_id": "user_123", "period": "monthly", "amount": 250}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-25T06:48:39.657Z"}
   GetBudget:
     speakeasy-default-get-budget:
       parameters:
@@ -4042,7 +4324,7 @@ examples:
           id: "01K1J1AX8PGR63QRP7423NY008"
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-25T06:48:39.657Z"}
   UpdateBudget:
     speakeasy-default-update-budget:
       parameters:
@@ -4052,7 +4334,7 @@ examples:
         application/json: {"budget": {"period": "monthly", "amount": 300}, "is_active": true}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-24T04:54:52.401Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-09-25T06:48:39.657Z"}
   DeleteBudget:
     speakeasy-default-delete-budget:
       parameters:
@@ -4386,5 +4668,57 @@ examples:
           memory_store_key: "<value>"
           memory_id: "<id>"
           document_id: "<id>"
+  GetAllTools:
+    speakeasy-default-get-all-tools:
+      parameters:
+        query:
+          limit: 300
+      responses:
+        "200":
+          application/json: {"object": "list", "data": [], "has_more": true}
+        "401":
+          application/json: {"message": "<value>"}
+  CreateTool:
+    speakeasy-default-create-tool:
+      requestBody:
+        application/json: {"_id": "01K5ZT3CYBDREF06WS7W7BX3Y2", "path": "Default", "key": "<key>", "display_name": "Ellie78", "description": "runway border pro mortally recount accredit promptly", "status": "live", "type": "json_schema", "json_schema": {"name": "<value>", "schema": {"key": "<value>", "key1": "<value>"}, "strict": false}}
+      responses:
+        "200":
+          application/json: {"_id": "01K5ZT3CY918P3S9AAW781FHVZ", "path": "Default", "key": "<key>", "display_name": "Jeanette55", "description": "but rough promptly twin triumphantly for chops acquire", "project_id": "<id>", "workspace_id": "<id>", "created": "<value>", "updated": "<value>", "status": "live", "type": "http", "http": {"blueprint": {"url": "https://firm-numeric.com/", "method": "POST"}}}
+  UpdateTool:
+    speakeasy-default-update-tool:
+      parameters:
+        path:
+          tool_key: "<value>"
+      requestBody:
+        application/json: {"path": "Default", "status": "live", "type": "function"}
+      responses:
+        "200":
+          application/json: {"_id": "01K5ZT3CYD4ETM76S49R63RMZ2", "path": "Default", "key": "<key>", "display_name": "Jordan.Runolfsdottir42", "description": "meanwhile charming per ick yogurt owlishly with wire er hm", "project_id": "<id>", "workspace_id": "<id>", "created": "<value>", "updated": "<value>", "status": "live", "type": "function", "function": {"name": "<value>"}}
+        "404":
+          application/json: {"error": "<value>"}
+  DeleteTool:
+    speakeasy-default-delete-tool:
+      parameters:
+        path:
+          tool_key: "<value>"
+  RetrieveTool:
+    speakeasy-default-retrieve-tool:
+      parameters:
+        path:
+          tool_key: "<value>"
+      responses:
+        "200":
+          application/json: {"_id": "01K5ZT3CYJRRYP8YYE165HXC5W", "path": "Default", "key": "<key>", "display_name": "Josephine_Braun", "description": "soupy bus uncommon unto wetly sniveling majestic", "project_id": "<id>", "workspace_id": "<id>", "created": "<value>", "updated": "<value>", "status": "live", "type": "http", "http": {"blueprint": {"url": "https://advanced-sprinkles.net/", "method": "PUT"}}}
+  DuplicateTool:
+    speakeasy-default-duplicate-tool:
+      parameters:
+        path:
+          key: "<key>"
+      responses:
+        "200":
+          application/json: {"_id": "01K5ZT3CYGGD0B34YMS9MRYCSD", "path": "Default", "key": "<key>", "display_name": "Tina5", "description": "quaver zany not pfft loudly soap hovel since", "project_id": "<id>", "workspace_id": "<id>", "created": "<value>", "updated": "<value>", "status": "live", "type": "function", "function": {"name": "<value>"}}
+        "404":
+          application/json: {"error": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}

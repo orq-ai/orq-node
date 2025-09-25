@@ -28,16 +28,18 @@ const value: operations.CreatePromptResponseFormat1 = {
 ### `operations.CreatePromptResponseFormat2`
 
 ```typescript
-const value: operations.CreatePromptResponseFormat2 = {
-  type: "json_object",
-};
+const value: operations.CreatePromptResponseFormat2 = "aac";
 ```
 
 ### `operations.CreatePromptResponseFormat3`
 
 ```typescript
-const value: operations.CreatePromptResponseFormat3 = {
-  type: "text",
-};
+const value: operations.CreatePromptResponseFormat3 = "url";
+```
+
+### `operations.CreatePromptResponseFormat4`
+
+```typescript
+const value: operations.CreatePromptResponseFormat4 = "srt";
 ```
 

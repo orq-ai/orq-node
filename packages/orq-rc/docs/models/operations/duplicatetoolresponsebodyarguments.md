@@ -1,0 +1,21 @@
+# DuplicateToolResponseBodyArguments
+
+## Example Usage
+
+```typescript
+import { DuplicateToolResponseBodyArguments } from "@orq-ai/node/models/operations";
+
+let value: DuplicateToolResponseBodyArguments = {
+  type: "boolean",
+  description: "juvenile to plus brightly yahoo aha onto",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                 | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                | [operations.DuplicateToolResponseBodyToolsResponse200ApplicationJson3Type](../../models/operations/duplicatetoolresponsebodytoolsresponse200applicationjson3type.md)  | :heavy_check_mark:                                                                                                                                                    | The type of the argument.                                                                                                                                             |
+| `description`                                                                                                                                                         | *string*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | A description of the argument.                                                                                                                                        |
+| `sendToModel`                                                                                                                                                         | *boolean*                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                    | Whether to send the argument to the model. If set to false, the argument will not be sent to the model and needs to be provided by the user or it will be left blank. |
+| `defaultValue`                                                                                                                                                        | *operations.DuplicateToolResponseBodyDefaultValue*                                                                                                                    | :heavy_minus_sign:                                                                                                                                                    | The default value of the argument.                                                                                                                                    |

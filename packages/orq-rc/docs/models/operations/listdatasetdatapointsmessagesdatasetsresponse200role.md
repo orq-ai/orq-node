@@ -1,6 +1,6 @@
 # ListDatasetDatapointsMessagesDatasetsResponse200Role
 
-The role of the messages author, in this case `assistant`.
+The role of the messages author, in this case `assistant` or `exception`.
 
 ## Example Usage
 
@@ -13,5 +13,5 @@ let value: ListDatasetDatapointsMessagesDatasetsResponse200Role = "assistant";
 ## Values
 
 ```typescript
-"assistant"
+"assistant" | "exception"
 ```

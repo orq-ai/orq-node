@@ -5,11 +5,11 @@
 ```typescript
 import { ToolsType } from "@orq-ai/node/models/operations";
 
-let value: ToolsType = "google_search";
+let value: ToolsType = "http";
 ```
 
 ## Values
 
 ```typescript
-"google_search"
+"http"
 ```

@@ -48,7 +48,7 @@ let value: RunAgentRequestBody = {
   settings: {
     tools: [
       {
-        type: "query_knowledge_base",
+        type: "retrieve_memory_stores",
         requiresApproval: false,
       },
     ],

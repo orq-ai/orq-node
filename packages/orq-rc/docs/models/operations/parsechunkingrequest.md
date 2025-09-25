@@ -42,16 +42,6 @@ const value: operations.SemanticChunkerStrategy = {
 };
 ```
 
-### `operations.SDPMChunkerStrategy`
-
-```typescript
-const value: operations.SDPMChunkerStrategy = {
-  text: "<value>",
-  strategy: "sdpm",
-  embeddingModel: "<value>",
-};
-```
-
 ### `operations.AgenticChunkerStrategy`
 
 ```typescript

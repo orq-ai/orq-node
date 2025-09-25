@@ -26,16 +26,18 @@ const value: operations.GetOnePromptResponseFormat1 = {
 ### `operations.GetOnePromptResponseFormat2`
 
 ```typescript
-const value: operations.GetOnePromptResponseFormat2 = {
-  type: "json_object",
-};
+const value: operations.GetOnePromptResponseFormat2 = "mp3";
 ```
 
 ### `operations.GetOnePromptResponseFormat3`
 
 ```typescript
-const value: operations.GetOnePromptResponseFormat3 = {
-  type: "text",
-};
+const value: operations.GetOnePromptResponseFormat3 = "base64_json";
+```
+
+### `operations.GetOnePromptResponseFormat4`
+
+```typescript
+const value: operations.GetOnePromptResponseFormat4 = "json";
 ```
 

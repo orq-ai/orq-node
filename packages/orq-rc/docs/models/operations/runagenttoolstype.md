@@ -1,15 +1,17 @@
 # RunAgentToolsType
 
+The type of the argument.
+
 ## Example Usage
 
 ```typescript
 import { RunAgentToolsType } from "@orq-ai/node/models/operations";
 
-let value: RunAgentToolsType = "web_scraper";
+let value: RunAgentToolsType = "number";
 ```
 
 ## Values
 
 ```typescript
-"web_scraper"
+"string" | "number" | "boolean"
 ```

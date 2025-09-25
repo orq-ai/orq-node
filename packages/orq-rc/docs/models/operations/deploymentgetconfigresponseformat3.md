@@ -5,13 +5,11 @@
 ```typescript
 import { DeploymentGetConfigResponseFormat3 } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigResponseFormat3 = {
-  type: "text",
-};
+let value: DeploymentGetConfigResponseFormat3 = "url";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                     | [operations.DeploymentGetConfigResponseFormatDeploymentsType](../../models/operations/deploymentgetconfigresponseformatdeploymentstype.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+```typescript
+"url" | "base64_json"
+```

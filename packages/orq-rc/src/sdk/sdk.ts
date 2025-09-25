@@ -17,6 +17,7 @@ import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
+import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
   private _contacts?: Contacts;
@@ -87,5 +88,10 @@ export class Orq extends ClientSDK {
   private _budgets?: Budgets;
   get budgets(): Budgets {
     return (this._budgets ??= new Budgets(this._options));
+  }
+
+  private _tools?: Tools;
+  get tools(): Tools {
+    return (this._tools ??= new Tools(this._options));
   }
 }

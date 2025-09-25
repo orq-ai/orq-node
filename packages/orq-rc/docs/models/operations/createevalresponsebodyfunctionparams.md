@@ -205,10 +205,10 @@ const value: operations.TwentyThree = {
 };
 ```
 
-### `operations.TwentyFour`
+### `operations.FunctionParams24`
 
 ```typescript
-const value: operations.TwentyFour = {
+const value: operations.FunctionParams24 = {
   type: "levenshtein_distance",
 };
 ```

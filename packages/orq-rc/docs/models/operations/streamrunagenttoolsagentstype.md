@@ -1,15 +1,17 @@
 # StreamRunAgentToolsAgentsType
 
+The type of the argument.
+
 ## Example Usage
 
 ```typescript
 import { StreamRunAgentToolsAgentsType } from "@orq-ai/node/models/operations";
 
-let value: StreamRunAgentToolsAgentsType = "web_scraper";
+let value: StreamRunAgentToolsAgentsType = "number";
 ```
 
 ## Values
 
 ```typescript
-"web_scraper"
+"string" | "number" | "boolean"
 ```

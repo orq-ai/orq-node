@@ -34,7 +34,7 @@ const value: operations.UpdateDatapointMessagesUserMessage = {
 
 ```typescript
 const value: operations.UpdateDatapointMessagesAssistantMessage = {
-  role: "assistant",
+  role: "exception",
 };
 ```
 

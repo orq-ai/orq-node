@@ -152,13 +152,14 @@ export type CreateDatasetItemMessagesDatasetsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type CreateDatasetItemMessagesDatasetsRequestRequestBodyRole =
   ClosedEnum<typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole>;
@@ -225,7 +226,7 @@ export type CreateDatasetItemMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: CreateDatasetItemMessagesDatasetsRequestRequestBodyRole;
   /**
@@ -671,14 +672,15 @@ export type CreateDatasetItemMessagesDatasetsResponse200Content =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   {
     Assistant: "assistant",
+    Exception: "exception",
   } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   ClosedEnum<
@@ -748,7 +750,7 @@ export type CreateDatasetItemMessagesDatasetsAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role:
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole;
@@ -6081,7 +6083,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-09-24T04:54:52.401Z",
+    "2025-09-25T06:48:39.657Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6145,7 +6147,7 @@ export const ResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-09-24T04:54:52.401Z"))
+  updated: z.date().default(() => new Date("2025-09-25T06:48:39.657Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

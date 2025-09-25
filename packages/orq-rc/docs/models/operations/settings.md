@@ -8,7 +8,7 @@ import { Settings } from "@orq-ai/node/models/operations";
 let value: Settings = {
   tools: [
     {
-      type: "current_date",
+      type: "retrieve_knowledge_bases",
       requiresApproval: false,
     },
   ],

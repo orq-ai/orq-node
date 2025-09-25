@@ -54,45 +54,45 @@ export const Fourteen = {
 } as const;
 export type Fourteen = ClosedEnum<typeof Fourteen>;
 
-export const Model13 = {
+export const Thirteen = {
   GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
 } as const;
-export type Model13 = ClosedEnum<typeof Model13>;
+export type Thirteen = ClosedEnum<typeof Thirteen>;
 
-export const Model12 = {
+export const Twelve = {
   GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
 } as const;
-export type Model12 = ClosedEnum<typeof Model12>;
+export type Twelve = ClosedEnum<typeof Twelve>;
 
-export const Model11 = {
+export const Eleven = {
   GoogleTextEmbedding005: "google/text-embedding-005",
 } as const;
-export type Model11 = ClosedEnum<typeof Model11>;
+export type Eleven = ClosedEnum<typeof Eleven>;
 
-export const Model10 = {
+export const Ten = {
   GoogleGeminiEmbedding001: "google/gemini-embedding-001",
 } as const;
-export type Model10 = ClosedEnum<typeof Model10>;
+export type Ten = ClosedEnum<typeof Ten>;
 
-export const Model9 = {
+export const Nine = {
   OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
 } as const;
-export type Model9 = ClosedEnum<typeof Model9>;
+export type Nine = ClosedEnum<typeof Nine>;
 
-export const Model8 = {
+export const Eight = {
   OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
 } as const;
-export type Model8 = ClosedEnum<typeof Model8>;
+export type Eight = ClosedEnum<typeof Eight>;
 
-export const Model7 = {
+export const Seven = {
   OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
 } as const;
-export type Model7 = ClosedEnum<typeof Model7>;
+export type Seven = ClosedEnum<typeof Seven>;
 
-export const Model6 = {
+export const Six = {
   AzureTextEmbedding3Small: "azure/text-embedding-3-small",
 } as const;
-export type Model6 = ClosedEnum<typeof Model6>;
+export type Six = ClosedEnum<typeof Six>;
 
 export const Model5 = {
   AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
@@ -125,14 +125,14 @@ export type Model =
   | Model3
   | Model4
   | Model5
-  | Model6
-  | Model7
-  | Model8
-  | Model9
-  | Model10
-  | Model11
-  | Model12
-  | Model13
+  | Six
+  | Seven
+  | Eight
+  | Nine
+  | Ten
+  | Eleven
+  | Twelve
+  | Thirteen
   | Fourteen
   | Fifteen
   | Sixteen
@@ -150,14 +150,14 @@ export type EmbeddingConfig = {
     | Model3
     | Model4
     | Model5
-    | Model6
-    | Model7
-    | Model8
-    | Model9
-    | Model10
-    | Model11
-    | Model12
-    | Model13
+    | Six
+    | Seven
+    | Eight
+    | Nine
+    | Ten
+    | Eleven
+    | Twelve
+    | Thirteen
     | Fourteen
     | Fifteen
     | Sixteen
@@ -604,155 +604,156 @@ export namespace Fourteen$ {
 }
 
 /** @internal */
-export const Model13$inboundSchema: z.ZodNativeEnum<typeof Model13> = z
-  .nativeEnum(Model13);
+export const Thirteen$inboundSchema: z.ZodNativeEnum<typeof Thirteen> = z
+  .nativeEnum(Thirteen);
 
 /** @internal */
-export const Model13$outboundSchema: z.ZodNativeEnum<typeof Model13> =
-  Model13$inboundSchema;
+export const Thirteen$outboundSchema: z.ZodNativeEnum<typeof Thirteen> =
+  Thirteen$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model13$ {
-  /** @deprecated use `Model13$inboundSchema` instead. */
-  export const inboundSchema = Model13$inboundSchema;
-  /** @deprecated use `Model13$outboundSchema` instead. */
-  export const outboundSchema = Model13$outboundSchema;
+export namespace Thirteen$ {
+  /** @deprecated use `Thirteen$inboundSchema` instead. */
+  export const inboundSchema = Thirteen$inboundSchema;
+  /** @deprecated use `Thirteen$outboundSchema` instead. */
+  export const outboundSchema = Thirteen$outboundSchema;
 }
 
 /** @internal */
-export const Model12$inboundSchema: z.ZodNativeEnum<typeof Model12> = z
-  .nativeEnum(Model12);
+export const Twelve$inboundSchema: z.ZodNativeEnum<typeof Twelve> = z
+  .nativeEnum(Twelve);
 
 /** @internal */
-export const Model12$outboundSchema: z.ZodNativeEnum<typeof Model12> =
-  Model12$inboundSchema;
+export const Twelve$outboundSchema: z.ZodNativeEnum<typeof Twelve> =
+  Twelve$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model12$ {
-  /** @deprecated use `Model12$inboundSchema` instead. */
-  export const inboundSchema = Model12$inboundSchema;
-  /** @deprecated use `Model12$outboundSchema` instead. */
-  export const outboundSchema = Model12$outboundSchema;
+export namespace Twelve$ {
+  /** @deprecated use `Twelve$inboundSchema` instead. */
+  export const inboundSchema = Twelve$inboundSchema;
+  /** @deprecated use `Twelve$outboundSchema` instead. */
+  export const outboundSchema = Twelve$outboundSchema;
 }
 
 /** @internal */
-export const Model11$inboundSchema: z.ZodNativeEnum<typeof Model11> = z
-  .nativeEnum(Model11);
+export const Eleven$inboundSchema: z.ZodNativeEnum<typeof Eleven> = z
+  .nativeEnum(Eleven);
 
 /** @internal */
-export const Model11$outboundSchema: z.ZodNativeEnum<typeof Model11> =
-  Model11$inboundSchema;
+export const Eleven$outboundSchema: z.ZodNativeEnum<typeof Eleven> =
+  Eleven$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model11$ {
-  /** @deprecated use `Model11$inboundSchema` instead. */
-  export const inboundSchema = Model11$inboundSchema;
-  /** @deprecated use `Model11$outboundSchema` instead. */
-  export const outboundSchema = Model11$outboundSchema;
+export namespace Eleven$ {
+  /** @deprecated use `Eleven$inboundSchema` instead. */
+  export const inboundSchema = Eleven$inboundSchema;
+  /** @deprecated use `Eleven$outboundSchema` instead. */
+  export const outboundSchema = Eleven$outboundSchema;
 }
 
 /** @internal */
-export const Model10$inboundSchema: z.ZodNativeEnum<typeof Model10> = z
-  .nativeEnum(Model10);
+export const Ten$inboundSchema: z.ZodNativeEnum<typeof Ten> = z.nativeEnum(Ten);
 
 /** @internal */
-export const Model10$outboundSchema: z.ZodNativeEnum<typeof Model10> =
-  Model10$inboundSchema;
+export const Ten$outboundSchema: z.ZodNativeEnum<typeof Ten> =
+  Ten$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model10$ {
-  /** @deprecated use `Model10$inboundSchema` instead. */
-  export const inboundSchema = Model10$inboundSchema;
-  /** @deprecated use `Model10$outboundSchema` instead. */
-  export const outboundSchema = Model10$outboundSchema;
+export namespace Ten$ {
+  /** @deprecated use `Ten$inboundSchema` instead. */
+  export const inboundSchema = Ten$inboundSchema;
+  /** @deprecated use `Ten$outboundSchema` instead. */
+  export const outboundSchema = Ten$outboundSchema;
 }
 
 /** @internal */
-export const Model9$inboundSchema: z.ZodNativeEnum<typeof Model9> = z
-  .nativeEnum(Model9);
+export const Nine$inboundSchema: z.ZodNativeEnum<typeof Nine> = z.nativeEnum(
+  Nine,
+);
 
 /** @internal */
-export const Model9$outboundSchema: z.ZodNativeEnum<typeof Model9> =
-  Model9$inboundSchema;
+export const Nine$outboundSchema: z.ZodNativeEnum<typeof Nine> =
+  Nine$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model9$ {
-  /** @deprecated use `Model9$inboundSchema` instead. */
-  export const inboundSchema = Model9$inboundSchema;
-  /** @deprecated use `Model9$outboundSchema` instead. */
-  export const outboundSchema = Model9$outboundSchema;
+export namespace Nine$ {
+  /** @deprecated use `Nine$inboundSchema` instead. */
+  export const inboundSchema = Nine$inboundSchema;
+  /** @deprecated use `Nine$outboundSchema` instead. */
+  export const outboundSchema = Nine$outboundSchema;
 }
 
 /** @internal */
-export const Model8$inboundSchema: z.ZodNativeEnum<typeof Model8> = z
-  .nativeEnum(Model8);
+export const Eight$inboundSchema: z.ZodNativeEnum<typeof Eight> = z.nativeEnum(
+  Eight,
+);
 
 /** @internal */
-export const Model8$outboundSchema: z.ZodNativeEnum<typeof Model8> =
-  Model8$inboundSchema;
+export const Eight$outboundSchema: z.ZodNativeEnum<typeof Eight> =
+  Eight$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model8$ {
-  /** @deprecated use `Model8$inboundSchema` instead. */
-  export const inboundSchema = Model8$inboundSchema;
-  /** @deprecated use `Model8$outboundSchema` instead. */
-  export const outboundSchema = Model8$outboundSchema;
+export namespace Eight$ {
+  /** @deprecated use `Eight$inboundSchema` instead. */
+  export const inboundSchema = Eight$inboundSchema;
+  /** @deprecated use `Eight$outboundSchema` instead. */
+  export const outboundSchema = Eight$outboundSchema;
 }
 
 /** @internal */
-export const Model7$inboundSchema: z.ZodNativeEnum<typeof Model7> = z
-  .nativeEnum(Model7);
+export const Seven$inboundSchema: z.ZodNativeEnum<typeof Seven> = z.nativeEnum(
+  Seven,
+);
 
 /** @internal */
-export const Model7$outboundSchema: z.ZodNativeEnum<typeof Model7> =
-  Model7$inboundSchema;
+export const Seven$outboundSchema: z.ZodNativeEnum<typeof Seven> =
+  Seven$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model7$ {
-  /** @deprecated use `Model7$inboundSchema` instead. */
-  export const inboundSchema = Model7$inboundSchema;
-  /** @deprecated use `Model7$outboundSchema` instead. */
-  export const outboundSchema = Model7$outboundSchema;
+export namespace Seven$ {
+  /** @deprecated use `Seven$inboundSchema` instead. */
+  export const inboundSchema = Seven$inboundSchema;
+  /** @deprecated use `Seven$outboundSchema` instead. */
+  export const outboundSchema = Seven$outboundSchema;
 }
 
 /** @internal */
-export const Model6$inboundSchema: z.ZodNativeEnum<typeof Model6> = z
-  .nativeEnum(Model6);
+export const Six$inboundSchema: z.ZodNativeEnum<typeof Six> = z.nativeEnum(Six);
 
 /** @internal */
-export const Model6$outboundSchema: z.ZodNativeEnum<typeof Model6> =
-  Model6$inboundSchema;
+export const Six$outboundSchema: z.ZodNativeEnum<typeof Six> =
+  Six$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model6$ {
-  /** @deprecated use `Model6$inboundSchema` instead. */
-  export const inboundSchema = Model6$inboundSchema;
-  /** @deprecated use `Model6$outboundSchema` instead. */
-  export const outboundSchema = Model6$outboundSchema;
+export namespace Six$ {
+  /** @deprecated use `Six$inboundSchema` instead. */
+  export const inboundSchema = Six$inboundSchema;
+  /** @deprecated use `Six$outboundSchema` instead. */
+  export const outboundSchema = Six$outboundSchema;
 }
 
 /** @internal */
@@ -858,14 +859,14 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     Model3$inboundSchema,
     Model4$inboundSchema,
     Model5$inboundSchema,
-    Model6$inboundSchema,
-    Model7$inboundSchema,
-    Model8$inboundSchema,
-    Model9$inboundSchema,
-    Model10$inboundSchema,
-    Model11$inboundSchema,
-    Model12$inboundSchema,
-    Model13$inboundSchema,
+    Six$inboundSchema,
+    Seven$inboundSchema,
+    Eight$inboundSchema,
+    Nine$inboundSchema,
+    Ten$inboundSchema,
+    Eleven$inboundSchema,
+    Twelve$inboundSchema,
+    Thirteen$inboundSchema,
     Fourteen$inboundSchema,
     Fifteen$inboundSchema,
     Sixteen$inboundSchema,
@@ -913,14 +914,14 @@ export const Model$outboundSchema: z.ZodType<
   Model3$outboundSchema,
   Model4$outboundSchema,
   Model5$outboundSchema,
-  Model6$outboundSchema,
-  Model7$outboundSchema,
-  Model8$outboundSchema,
-  Model9$outboundSchema,
-  Model10$outboundSchema,
-  Model11$outboundSchema,
-  Model12$outboundSchema,
-  Model13$outboundSchema,
+  Six$outboundSchema,
+  Seven$outboundSchema,
+  Eight$outboundSchema,
+  Nine$outboundSchema,
+  Ten$outboundSchema,
+  Eleven$outboundSchema,
+  Twelve$outboundSchema,
+  Thirteen$outboundSchema,
   Fourteen$outboundSchema,
   Fifteen$outboundSchema,
   Sixteen$outboundSchema,
@@ -971,14 +972,14 @@ export const EmbeddingConfig$inboundSchema: z.ZodType<
     Model3$inboundSchema,
     Model4$inboundSchema,
     Model5$inboundSchema,
-    Model6$inboundSchema,
-    Model7$inboundSchema,
-    Model8$inboundSchema,
-    Model9$inboundSchema,
-    Model10$inboundSchema,
-    Model11$inboundSchema,
-    Model12$inboundSchema,
-    Model13$inboundSchema,
+    Six$inboundSchema,
+    Seven$inboundSchema,
+    Eight$inboundSchema,
+    Nine$inboundSchema,
+    Ten$inboundSchema,
+    Eleven$inboundSchema,
+    Twelve$inboundSchema,
+    Thirteen$inboundSchema,
     Fourteen$inboundSchema,
     Fifteen$inboundSchema,
     Sixteen$inboundSchema,
@@ -1030,14 +1031,14 @@ export const EmbeddingConfig$outboundSchema: z.ZodType<
     Model3$outboundSchema,
     Model4$outboundSchema,
     Model5$outboundSchema,
-    Model6$outboundSchema,
-    Model7$outboundSchema,
-    Model8$outboundSchema,
-    Model9$outboundSchema,
-    Model10$outboundSchema,
-    Model11$outboundSchema,
-    Model12$outboundSchema,
-    Model13$outboundSchema,
+    Six$outboundSchema,
+    Seven$outboundSchema,
+    Eight$outboundSchema,
+    Nine$outboundSchema,
+    Ten$outboundSchema,
+    Eleven$outboundSchema,
+    Twelve$outboundSchema,
+    Thirteen$outboundSchema,
     Fourteen$outboundSchema,
     Fifteen$outboundSchema,
     Sixteen$outboundSchema,

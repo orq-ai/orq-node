@@ -33,52 +33,52 @@ const value: operations.Model4 = "cohere/embed-english-v3.0";
 const value: operations.Model5 = "azure/text-embedding-ada-002";
 ```
 
-### `operations.Model6`
+### `operations.Six`
 
 ```typescript
-const value: operations.Model6 = "azure/text-embedding-3-small";
+const value: operations.Six = "azure/text-embedding-3-small";
 ```
 
-### `operations.Model7`
+### `operations.Seven`
 
 ```typescript
-const value: operations.Model7 = "openai/text-embedding-3-large";
+const value: operations.Seven = "openai/text-embedding-3-large";
 ```
 
-### `operations.Model8`
+### `operations.Eight`
 
 ```typescript
-const value: operations.Model8 = "openai/text-embedding-3-small";
+const value: operations.Eight = "openai/text-embedding-3-small";
 ```
 
-### `operations.Model9`
+### `operations.Nine`
 
 ```typescript
-const value: operations.Model9 = "openai/text-embedding-ada-002";
+const value: operations.Nine = "openai/text-embedding-ada-002";
 ```
 
-### `operations.Model10`
+### `operations.Ten`
 
 ```typescript
-const value: operations.Model10 = "google/gemini-embedding-001";
+const value: operations.Ten = "google/gemini-embedding-001";
 ```
 
-### `operations.Model11`
+### `operations.Eleven`
 
 ```typescript
-const value: operations.Model11 = "google/text-embedding-005";
+const value: operations.Eleven = "google/text-embedding-005";
 ```
 
-### `operations.Model12`
+### `operations.Twelve`
 
 ```typescript
-const value: operations.Model12 = "google/text-multilingual-embedding-002";
+const value: operations.Twelve = "google/text-multilingual-embedding-002";
 ```
 
-### `operations.Model13`
+### `operations.Thirteen`
 
 ```typescript
-const value: operations.Model13 = "google/multimodalembedding@001";
+const value: operations.Thirteen = "google/multimodalembedding@001";
 ```
 
 ### `operations.Fourteen`

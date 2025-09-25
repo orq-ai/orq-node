@@ -37,59 +37,52 @@ const value: operations.UpdateMemoryStoreModel5 =
   "azure/text-embedding-ada-002";
 ```
 
-### `operations.UpdateMemoryStoreModel6`
+### `operations.Model6`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel6 =
-  "azure/text-embedding-3-small";
+const value: operations.Model6 = "azure/text-embedding-3-small";
 ```
 
-### `operations.UpdateMemoryStoreModel7`
+### `operations.Model7`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel7 =
-  "openai/text-embedding-3-large";
+const value: operations.Model7 = "openai/text-embedding-3-large";
 ```
 
-### `operations.UpdateMemoryStoreModel8`
+### `operations.Model8`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel8 =
-  "openai/text-embedding-3-small";
+const value: operations.Model8 = "openai/text-embedding-3-small";
 ```
 
-### `operations.UpdateMemoryStoreModel9`
+### `operations.Model9`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel9 =
-  "openai/text-embedding-ada-002";
+const value: operations.Model9 = "openai/text-embedding-ada-002";
 ```
 
-### `operations.UpdateMemoryStoreModel10`
+### `operations.Model10`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel10 =
-  "google/gemini-embedding-001";
+const value: operations.Model10 = "google/gemini-embedding-001";
 ```
 
-### `operations.UpdateMemoryStoreModel11`
+### `operations.Model11`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel11 = "google/text-embedding-005";
+const value: operations.Model11 = "google/text-embedding-005";
 ```
 
-### `operations.UpdateMemoryStoreModel12`
+### `operations.Model12`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel12 =
-  "google/text-multilingual-embedding-002";
+const value: operations.Model12 = "google/text-multilingual-embedding-002";
 ```
 
-### `operations.UpdateMemoryStoreModel13`
+### `operations.Model13`
 
 ```typescript
-const value: operations.UpdateMemoryStoreModel13 =
-  "google/multimodalembedding@001";
+const value: operations.Model13 = "google/multimodalembedding@001";
 ```
 
 ### `operations.Model14`

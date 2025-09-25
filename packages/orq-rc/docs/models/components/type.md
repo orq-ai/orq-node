@@ -1,17 +1,15 @@
 # Type
 
-The type of the tool. Currently, only `function` is supported.
-
 ## Example Usage
 
 ```typescript
 import { Type } from "@orq-ai/node/models/components";
 
-let value: Type = "function";
+let value: Type = "google_search";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"google_search"
 ```

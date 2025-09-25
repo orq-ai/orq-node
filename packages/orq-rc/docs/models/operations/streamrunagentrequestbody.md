@@ -41,7 +41,7 @@ let value: StreamRunAgentRequestBody = {
   settings: {
     tools: [
       {
-        type: "retrieve_agents",
+        type: "google_search",
         requiresApproval: false,
       },
     ],

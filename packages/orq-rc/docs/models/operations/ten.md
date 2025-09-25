@@ -5,14 +5,11 @@
 ```typescript
 import { Ten } from "@orq-ai/node/models/operations";
 
-let value: Ten = {
-  type: "query_knowledge_base",
-};
+let value: Ten = "google/gemini-embedding-001";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                           | [operations.RunAgentToolsAgentsRequestRequestBodySettings10Type](../../models/operations/runagenttoolsagentsrequestrequestbodysettings10type.md) | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
-| `requiresApproval`                                                                                                                               | *boolean*                                                                                                                                        | :heavy_minus_sign:                                                                                                                               | N/A                                                                                                                                              |
+```typescript
+"google/gemini-embedding-001"
+```

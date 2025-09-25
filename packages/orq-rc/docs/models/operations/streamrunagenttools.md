@@ -1,123 +1,133 @@
 # StreamRunAgentTools
 
+Available tools for agent execution. Each tool provides specific capabilities to interact with external systems, retrieve information, or perform specialized tasks.
+
 
 ## Supported Types
 
-### `operations.StreamRunAgentTools1`
+### `components.HttpTool`
 
 ```typescript
-const value: operations.StreamRunAgentTools1 = {
-  type: "google_search",
-};
-```
-
-### `operations.StreamRunAgentTools2`
-
-```typescript
-const value: operations.StreamRunAgentTools2 = {
-  type: "web_scraper",
-};
-```
-
-### `operations.StreamRunAgentTools3`
-
-```typescript
-const value: operations.StreamRunAgentTools3 = {
-  type: "call_sub_agent",
-};
-```
-
-### `operations.StreamRunAgentTools4`
-
-```typescript
-const value: operations.StreamRunAgentTools4 = {
-  type: "retrieve_agents",
-};
-```
-
-### `operations.StreamRunAgentTools5`
-
-```typescript
-const value: operations.StreamRunAgentTools5 = {
-  type: "query_memory_store",
-};
-```
-
-### `operations.Tools6`
-
-```typescript
-const value: operations.Tools6 = {
-  type: "write_memory_store",
-};
-```
-
-### `operations.Tools7`
-
-```typescript
-const value: operations.Tools7 = {
-  type: "delete_memory_document",
-};
-```
-
-### `operations.Tools8`
-
-```typescript
-const value: operations.Tools8 = {
-  type: "retrieve_memory_stores",
-};
-```
-
-### `operations.Tools9`
-
-```typescript
-const value: operations.Tools9 = {
-  type: "retrieve_knowledge_bases",
-};
-```
-
-### `operations.Tools10`
-
-```typescript
-const value: operations.Tools10 = {
-  type: "query_knowledge_base",
-};
-```
-
-### `operations.Tools11`
-
-```typescript
-const value: operations.Tools11 = {
-  type: "current_date",
-};
-```
-
-### `operations.Tools12`
-
-```typescript
-const value: operations.Tools12 = {
+const value: components.HttpTool = {
   path: "Default",
   key: "<key>",
-  displayName: "Alexane8",
-  description: "coal ew whoa representation fooey irritably almighty",
+  displayName: "Johnnie_Rutherford26",
+  description: "mmm however since frank conservative know",
   type: "http",
   http: {
     blueprint: {
-      url: "https://outlying-depot.biz/",
+      url: "https://bad-fisherman.com/",
       method: "GET",
     },
   },
 };
 ```
 
-### `operations.Tools13`
+### `components.CodeExecutionTool`
 
 ```typescript
-const value: operations.Tools13 = {
+const value: components.CodeExecutionTool = {
+  path: "Default",
+  key: "<key>",
+  displayName: "Marcelino84",
+  description: "futon consequently lest tuba",
+  type: "code",
+  codeTool: {
+    language: "python",
+    code: "<value>",
+  },
+};
+```
+
+### `components.FunctionTool`
+
+```typescript
+const value: components.FunctionTool = {
   type: "function",
   key: "<key>",
   function: {
     name: "<value>",
   },
+};
+```
+
+### `components.GoogleSearchTool`
+
+```typescript
+const value: components.GoogleSearchTool = {
+  type: "google_search",
+};
+```
+
+### `components.WebScraperTool`
+
+```typescript
+const value: components.WebScraperTool = {
+  type: "web_scraper",
+};
+```
+
+### `components.CallSubAgentTool`
+
+```typescript
+const value: components.CallSubAgentTool = {
+  type: "call_sub_agent",
+};
+```
+
+### `components.RetrieveAgentsTool`
+
+```typescript
+const value: components.RetrieveAgentsTool = {
+  type: "retrieve_agents",
+};
+```
+
+### `components.QueryMemoryStoreTool`
+
+```typescript
+const value: components.QueryMemoryStoreTool = {
+  type: "query_memory_store",
+};
+```
+
+### `components.WriteMemoryStoreTool`
+
+```typescript
+const value: components.WriteMemoryStoreTool = {
+  type: "write_memory_store",
+};
+```
+
+### `components.RetrieveMemoryStoresTool`
+
+```typescript
+const value: components.RetrieveMemoryStoresTool = {
+  type: "retrieve_memory_stores",
+};
+```
+
+### `components.RetrieveKnowledgeBasesTool`
+
+```typescript
+const value: components.RetrieveKnowledgeBasesTool = {
+  type: "retrieve_knowledge_bases",
+};
+```
+
+### `components.QueryKnowledgeBaseTool`
+
+```typescript
+const value: components.QueryKnowledgeBaseTool = {
+  type: "query_knowledge_base",
+};
+```
+
+### `components.CurrentDateTool`
+
+```typescript
+const value: components.CurrentDateTool = {
+  type: "current_date",
 };
 ```
 

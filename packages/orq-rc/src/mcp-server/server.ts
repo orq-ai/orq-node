@@ -134,6 +134,12 @@ import { tool$promptsListVersions } from "./tools/promptsListVersions.js";
 import { tool$promptsRetrieve } from "./tools/promptsRetrieve.js";
 import { tool$promptsUpdate } from "./tools/promptsUpdate.js";
 import { tool$remoteconfigsRetrieve } from "./tools/remoteconfigsRetrieve.js";
+import { tool$toolsCreate } from "./tools/toolsCreate.js";
+import { tool$toolsDelete } from "./tools/toolsDelete.js";
+import { tool$toolsDuplicate } from "./tools/toolsDuplicate.js";
+import { tool$toolsList } from "./tools/toolsList.js";
+import { tool$toolsRetrieve } from "./tools/toolsRetrieve.js";
+import { tool$toolsUpdate } from "./tools/toolsUpdate.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -147,7 +153,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.13.0-rc.30",
+    version: "3.13.0-rc.36",
   });
 
   const client = new OrqCore({
@@ -299,6 +305,12 @@ export function createMCPServer(deps: {
   tool(tool$budgetsGet);
   tool(tool$budgetsUpdate);
   tool(tool$budgetsDelete);
+  tool(tool$toolsList);
+  tool(tool$toolsCreate);
+  tool(tool$toolsUpdate);
+  tool(tool$toolsDelete);
+  tool(tool$toolsRetrieve);
+  tool(tool$toolsDuplicate);
   tool(tool$deploymentsMetricsCreate);
 
   return server;

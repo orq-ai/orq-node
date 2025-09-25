@@ -5,11 +5,11 @@
 ```typescript
 import { StreamRunAgentToolsType } from "@orq-ai/node/models/operations";
 
-let value: StreamRunAgentToolsType = "google_search";
+let value: StreamRunAgentToolsType = "http";
 ```
 
 ## Values
 
 ```typescript
-"google_search"
+"http"
 ```

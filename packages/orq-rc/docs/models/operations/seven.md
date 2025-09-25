@@ -5,14 +5,11 @@
 ```typescript
 import { Seven } from "@orq-ai/node/models/operations";
 
-let value: Seven = {
-  type: "delete_memory_document",
-};
+let value: Seven = "openai/text-embedding-3-large";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                         | [operations.RunAgentToolsAgentsRequestRequestBodySettings7Type](../../models/operations/runagenttoolsagentsrequestrequestbodysettings7type.md) | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
-| `requiresApproval`                                                                                                                             | *boolean*                                                                                                                                      | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
+```typescript
+"openai/text-embedding-3-large"
+```
