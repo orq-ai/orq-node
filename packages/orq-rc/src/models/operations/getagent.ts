@@ -80,11 +80,14 @@ export type GetAgentTools = {
 };
 
 export type GetAgentSettings = {
+  /**
+   * Maximum iterations(llm calls) before the agent will stop executing.
+   */
   maxIterations?: number | undefined;
   /**
-   * Max execution time in seconds
+   * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
-  maxExecutionTime: number;
+  maxExecutionTime?: number | undefined;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -464,8 +467,8 @@ export const GetAgentSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(10),
-  max_execution_time: z.number().int(),
+  max_iterations: z.number().int().default(15),
+  max_execution_time: z.number().int().default(300),
   tool_approval_required: GetAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -492,8 +495,8 @@ export const GetAgentSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentSettings
 > = z.object({
-  maxIterations: z.number().int().default(10),
-  maxExecutionTime: z.number().int(),
+  maxIterations: z.number().int().default(15),
+  maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: GetAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -946,7 +949,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K60CGQ2DXANBB2SN1A3NQ2CT"),
+  id: z.string().default("01K60ZS4N17YWPMAPEA8B02SZD"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => GetAgentConfiguration2$inboundSchema),
@@ -973,7 +976,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K60CGQ2DXANBB2SN1A3NQ2CT"),
+  id: z.string().default("01K60ZS4N17YWPMAPEA8B02SZD"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => GetAgentConfiguration2$outboundSchema),

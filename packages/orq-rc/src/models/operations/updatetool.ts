@@ -39,7 +39,7 @@ export type UpdateToolRequestBodyLanguage = ClosedEnum<
   typeof UpdateToolRequestBodyLanguage
 >;
 
-export type RequestBodyCodeTool = {
+export type UpdateToolRequestBodyCodeTool = {
   /**
    * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
    */
@@ -68,9 +68,8 @@ export type UpdateToolRequestBody5 = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: UpdateToolRequestBodyToolsRequest5Status | undefined;
-  versionHash?: string | undefined;
   type: UpdateToolRequestBodyToolsRequest5Type;
-  codeTool?: RequestBodyCodeTool | undefined;
+  codeTool?: UpdateToolRequestBodyCodeTool | undefined;
 };
 
 /**
@@ -175,7 +174,6 @@ export type UpdateToolRequestBody4 = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: UpdateToolRequestBodyToolsRequest4Status | undefined;
-  versionHash?: string | undefined;
   type: UpdateToolRequestBodyToolsRequest4Type;
   mcp?: RequestBodyMcp | undefined;
 };
@@ -309,7 +307,6 @@ export type UpdateToolRequestBody3 = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: UpdateToolRequestBodyToolsRequestStatus | undefined;
-  versionHash?: string | undefined;
   type: UpdateToolRequestBodyToolsRequestType;
   http?: UpdateToolRequestBodyHttp | undefined;
 };
@@ -374,7 +371,6 @@ export type UpdateToolRequestBody2 = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: UpdateToolRequestBodyToolsStatus | undefined;
-  versionHash?: string | undefined;
   type: UpdateToolRequestBodyToolsType;
   jsonSchema?: UpdateToolRequestBodyJsonSchema | undefined;
 };
@@ -438,7 +434,6 @@ export type UpdateToolRequestBody1 = {
    * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
    */
   status?: UpdateToolRequestBodyStatus | undefined;
-  versionHash?: string | undefined;
   type: UpdateToolRequestBodyType;
   function?: UpdateToolRequestBodyFunction | undefined;
 };
@@ -1063,8 +1058,8 @@ export namespace UpdateToolRequestBodyLanguage$ {
 }
 
 /** @internal */
-export const RequestBodyCodeTool$inboundSchema: z.ZodType<
-  RequestBodyCodeTool,
+export const UpdateToolRequestBodyCodeTool$inboundSchema: z.ZodType<
+  UpdateToolRequestBodyCodeTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1074,17 +1069,17 @@ export const RequestBodyCodeTool$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type RequestBodyCodeTool$Outbound = {
+export type UpdateToolRequestBodyCodeTool$Outbound = {
   parameters?: { [k: string]: any } | undefined;
   language: string;
   code: string;
 };
 
 /** @internal */
-export const RequestBodyCodeTool$outboundSchema: z.ZodType<
-  RequestBodyCodeTool$Outbound,
+export const UpdateToolRequestBodyCodeTool$outboundSchema: z.ZodType<
+  UpdateToolRequestBodyCodeTool$Outbound,
   z.ZodTypeDef,
-  RequestBodyCodeTool
+  UpdateToolRequestBodyCodeTool
 > = z.object({
   parameters: z.record(z.any()).optional(),
   language: UpdateToolRequestBodyLanguage$outboundSchema,
@@ -1095,30 +1090,32 @@ export const RequestBodyCodeTool$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBodyCodeTool$ {
-  /** @deprecated use `RequestBodyCodeTool$inboundSchema` instead. */
-  export const inboundSchema = RequestBodyCodeTool$inboundSchema;
-  /** @deprecated use `RequestBodyCodeTool$outboundSchema` instead. */
-  export const outboundSchema = RequestBodyCodeTool$outboundSchema;
-  /** @deprecated use `RequestBodyCodeTool$Outbound` instead. */
-  export type Outbound = RequestBodyCodeTool$Outbound;
+export namespace UpdateToolRequestBodyCodeTool$ {
+  /** @deprecated use `UpdateToolRequestBodyCodeTool$inboundSchema` instead. */
+  export const inboundSchema = UpdateToolRequestBodyCodeTool$inboundSchema;
+  /** @deprecated use `UpdateToolRequestBodyCodeTool$outboundSchema` instead. */
+  export const outboundSchema = UpdateToolRequestBodyCodeTool$outboundSchema;
+  /** @deprecated use `UpdateToolRequestBodyCodeTool$Outbound` instead. */
+  export type Outbound = UpdateToolRequestBodyCodeTool$Outbound;
 }
 
-export function requestBodyCodeToolToJSON(
-  requestBodyCodeTool: RequestBodyCodeTool,
+export function updateToolRequestBodyCodeToolToJSON(
+  updateToolRequestBodyCodeTool: UpdateToolRequestBodyCodeTool,
 ): string {
   return JSON.stringify(
-    RequestBodyCodeTool$outboundSchema.parse(requestBodyCodeTool),
+    UpdateToolRequestBodyCodeTool$outboundSchema.parse(
+      updateToolRequestBodyCodeTool,
+    ),
   );
 }
 
-export function requestBodyCodeToolFromJSON(
+export function updateToolRequestBodyCodeToolFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBodyCodeTool, SDKValidationError> {
+): SafeParseResult<UpdateToolRequestBodyCodeTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBodyCodeTool$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBodyCodeTool' from JSON`,
+    (x) => UpdateToolRequestBodyCodeTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateToolRequestBodyCodeTool' from JSON`,
   );
 }
 
@@ -1134,13 +1131,12 @@ export const UpdateToolRequestBody5$inboundSchema: z.ZodType<
   status: UpdateToolRequestBodyToolsRequest5Status$inboundSchema.default(
     "live",
   ),
-  version_hash: z.string().optional(),
   type: UpdateToolRequestBodyToolsRequest5Type$inboundSchema,
-  code_tool: z.lazy(() => RequestBodyCodeTool$inboundSchema).optional(),
+  code_tool: z.lazy(() => UpdateToolRequestBodyCodeTool$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
-    "version_hash": "versionHash",
     "code_tool": "codeTool",
   });
 });
@@ -1151,9 +1147,8 @@ export type UpdateToolRequestBody5$Outbound = {
   display_name: string;
   description?: string | undefined;
   status: string;
-  version_hash?: string | undefined;
   type: string;
-  code_tool?: RequestBodyCodeTool$Outbound | undefined;
+  code_tool?: UpdateToolRequestBodyCodeTool$Outbound | undefined;
 };
 
 /** @internal */
@@ -1168,13 +1163,12 @@ export const UpdateToolRequestBody5$outboundSchema: z.ZodType<
   status: UpdateToolRequestBodyToolsRequest5Status$outboundSchema.default(
     "live",
   ),
-  versionHash: z.string().optional(),
   type: UpdateToolRequestBodyToolsRequest5Type$outboundSchema,
-  codeTool: z.lazy(() => RequestBodyCodeTool$outboundSchema).optional(),
+  codeTool: z.lazy(() => UpdateToolRequestBodyCodeTool$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
-    versionHash: "version_hash",
     codeTool: "code_tool",
   });
 });
@@ -1511,13 +1505,11 @@ export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
   status: UpdateToolRequestBodyToolsRequest4Status$inboundSchema.default(
     "live",
   ),
-  version_hash: z.string().optional(),
   type: UpdateToolRequestBodyToolsRequest4Type$inboundSchema,
   mcp: z.lazy(() => RequestBodyMcp$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
-    "version_hash": "versionHash",
   });
 });
 
@@ -1527,7 +1519,6 @@ export type UpdateToolRequestBody4$Outbound = {
   display_name: string;
   description?: string | undefined;
   status: string;
-  version_hash?: string | undefined;
   type: string;
   mcp?: RequestBodyMcp$Outbound | undefined;
 };
@@ -1544,13 +1535,11 @@ export const UpdateToolRequestBody4$outboundSchema: z.ZodType<
   status: UpdateToolRequestBodyToolsRequest4Status$outboundSchema.default(
     "live",
   ),
-  versionHash: z.string().optional(),
   type: UpdateToolRequestBodyToolsRequest4Type$outboundSchema,
   mcp: z.lazy(() => RequestBodyMcp$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
-    versionHash: "version_hash",
   });
 });
 
@@ -1940,19 +1929,17 @@ export const UpdateToolRequestBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9T6Z9V3EAXFMJ0FRAY"),
+  _id: z.string().default("01K60ZS4WS9P8H6BANTJPSPQ11"),
   path: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequestStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: UpdateToolRequestBodyToolsRequestType$inboundSchema,
   http: z.lazy(() => UpdateToolRequestBodyHttp$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
-    "version_hash": "versionHash",
   });
 });
 
@@ -1963,7 +1950,6 @@ export type UpdateToolRequestBody3$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
-  version_hash?: string | undefined;
   type: string;
   http?: UpdateToolRequestBodyHttp$Outbound | undefined;
 };
@@ -1974,21 +1960,19 @@ export const UpdateToolRequestBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequestBody3
 > = z.object({
-  id: z.string().default("01K60CGQ9T6Z9V3EAXFMJ0FRAY"),
+  id: z.string().default("01K60ZS4WS9P8H6BANTJPSPQ11"),
   path: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequestStatus$outboundSchema.default(
     "live",
   ),
-  versionHash: z.string().optional(),
   type: UpdateToolRequestBodyToolsRequestType$outboundSchema,
   http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     displayName: "display_name",
-    versionHash: "version_hash",
   });
 });
 
@@ -2136,12 +2120,11 @@ export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9TV0MT91FZ2G0GP2KM"),
+  _id: z.string().default("01K60ZS4WS6R1A509SSN8HKVH3"),
   path: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: UpdateToolRequestBodyToolsType$inboundSchema,
   json_schema: z.lazy(() => UpdateToolRequestBodyJsonSchema$inboundSchema)
     .optional(),
@@ -2149,7 +2132,6 @@ export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
   return remap$(v, {
     "_id": "id",
     "display_name": "displayName",
-    "version_hash": "versionHash",
     "json_schema": "jsonSchema",
   });
 });
@@ -2161,7 +2143,6 @@ export type UpdateToolRequestBody2$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
-  version_hash?: string | undefined;
   type: string;
   json_schema?: UpdateToolRequestBodyJsonSchema$Outbound | undefined;
 };
@@ -2172,12 +2153,11 @@ export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequestBody2
 > = z.object({
-  id: z.string().default("01K60CGQ9TV0MT91FZ2G0GP2KM"),
+  id: z.string().default("01K60ZS4WS6R1A509SSN8HKVH3"),
   path: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
   type: UpdateToolRequestBodyToolsType$outboundSchema,
   jsonSchema: z.lazy(() => UpdateToolRequestBodyJsonSchema$outboundSchema)
     .optional(),
@@ -2185,7 +2165,6 @@ export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
   return remap$(v, {
     id: "_id",
     displayName: "display_name",
-    versionHash: "version_hash",
     jsonSchema: "json_schema",
   });
 });
@@ -2338,14 +2317,12 @@ export const UpdateToolRequestBody1$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
   type: UpdateToolRequestBodyType$inboundSchema,
   function: z.lazy(() => UpdateToolRequestBodyFunction$inboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
-    "version_hash": "versionHash",
   });
 });
 
@@ -2355,7 +2332,6 @@ export type UpdateToolRequestBody1$Outbound = {
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
-  version_hash?: string | undefined;
   type: string;
   function?: UpdateToolRequestBodyFunction$Outbound | undefined;
 };
@@ -2370,14 +2346,12 @@ export const UpdateToolRequestBody1$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyStatus$outboundSchema.default("live"),
-  versionHash: z.string().optional(),
   type: UpdateToolRequestBodyType$outboundSchema,
   function: z.lazy(() => UpdateToolRequestBodyFunction$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
-    versionHash: "version_hash",
   });
 });
 
@@ -2701,7 +2675,7 @@ export const UpdateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9SHDJ6VPDR1WQ92ZH1"),
+  _id: z.string().default("01K60ZS4WRKB3Q10HPAJR728F9"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2756,7 +2730,7 @@ export const UpdateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K60CGQ9SHDJ6VPDR1WQ92ZH1"),
+  id: z.string().default("01K60ZS4WRKB3Q10HPAJR728F9"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3130,7 +3104,7 @@ export const UpdateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9S7PNZWTWQ8RTH6VM4"),
+  _id: z.string().default("01K60ZS4WRWE96WS65G285EWW2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3184,7 +3158,7 @@ export const UpdateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K60CGQ9S7PNZWTWQ8RTH6VM4"),
+  id: z.string().default("01K60ZS4WRWE96WS65G285EWW2"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3602,7 +3576,7 @@ export const UpdateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9R0MA44KG89EKX7HJ1"),
+  _id: z.string().default("01K60ZS4WQ39A9F60507P28AXK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3656,7 +3630,7 @@ export const UpdateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K60CGQ9R0MA44KG89EKX7HJ1"),
+  id: z.string().default("01K60ZS4WQ39A9F60507P28AXK"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3830,7 +3804,7 @@ export const UpdateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9RVCZSB3YGPA7FW8KB"),
+  _id: z.string().default("01K60ZS4WQ6025CYDZ9ACR9R8N"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3883,7 +3857,7 @@ export const UpdateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K60CGQ9RVCZSB3YGPA7FW8KB"),
+  id: z.string().default("01K60ZS4WQ6025CYDZ9ACR9R8N"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -4055,7 +4029,7 @@ export const UpdateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ9QRS30JRTGYREZGV6F"),
+  _id: z.string().default("01K60ZS4WPB24AAFPTFM3K4AKH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -4107,7 +4081,7 @@ export const UpdateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K60CGQ9QRS30JRTGYREZGV6F"),
+  id: z.string().default("01K60ZS4WPB24AAFPTFM3K4AKH"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

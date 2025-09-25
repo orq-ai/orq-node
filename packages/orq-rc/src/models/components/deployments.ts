@@ -169,15 +169,15 @@ export type Audio = {
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export const PrefixMessagesType = {
+export const Type = {
   Function: "function",
 } as const;
 /**
  * The type of the tool. Currently, only `function` is supported.
  */
-export type PrefixMessagesType = ClosedEnum<typeof PrefixMessagesType>;
+export type Type = ClosedEnum<typeof Type>;
 
-export type PrefixMessagesFunction = {
+export type FunctionT = {
   /**
    * The name of the function to call.
    */
@@ -196,8 +196,8 @@ export type ToolCalls = {
   /**
    * The type of the tool. Currently, only `function` is supported.
    */
-  type: PrefixMessagesType;
-  function: PrefixMessagesFunction;
+  type: Type;
+  function: FunctionT;
 };
 
 export type AssistantMessage = {
@@ -2164,29 +2164,28 @@ export function audioFromJSON(
 }
 
 /** @internal */
-export const PrefixMessagesType$inboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesType
-> = z.nativeEnum(PrefixMessagesType);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
 
 /** @internal */
-export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
-  typeof PrefixMessagesType
-> = PrefixMessagesType$inboundSchema;
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PrefixMessagesType$ {
-  /** @deprecated use `PrefixMessagesType$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesType$inboundSchema;
-  /** @deprecated use `PrefixMessagesType$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesType$outboundSchema;
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
 }
 
 /** @internal */
-export const PrefixMessagesFunction$inboundSchema: z.ZodType<
-  PrefixMessagesFunction,
+export const FunctionT$inboundSchema: z.ZodType<
+  FunctionT,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2195,16 +2194,16 @@ export const PrefixMessagesFunction$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type PrefixMessagesFunction$Outbound = {
+export type FunctionT$Outbound = {
   name?: string | undefined;
   arguments?: string | undefined;
 };
 
 /** @internal */
-export const PrefixMessagesFunction$outboundSchema: z.ZodType<
-  PrefixMessagesFunction$Outbound,
+export const FunctionT$outboundSchema: z.ZodType<
+  FunctionT$Outbound,
   z.ZodTypeDef,
-  PrefixMessagesFunction
+  FunctionT
 > = z.object({
   name: z.string().optional(),
   arguments: z.string().optional(),
@@ -2214,30 +2213,26 @@ export const PrefixMessagesFunction$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PrefixMessagesFunction$ {
-  /** @deprecated use `PrefixMessagesFunction$inboundSchema` instead. */
-  export const inboundSchema = PrefixMessagesFunction$inboundSchema;
-  /** @deprecated use `PrefixMessagesFunction$outboundSchema` instead. */
-  export const outboundSchema = PrefixMessagesFunction$outboundSchema;
-  /** @deprecated use `PrefixMessagesFunction$Outbound` instead. */
-  export type Outbound = PrefixMessagesFunction$Outbound;
+export namespace FunctionT$ {
+  /** @deprecated use `FunctionT$inboundSchema` instead. */
+  export const inboundSchema = FunctionT$inboundSchema;
+  /** @deprecated use `FunctionT$outboundSchema` instead. */
+  export const outboundSchema = FunctionT$outboundSchema;
+  /** @deprecated use `FunctionT$Outbound` instead. */
+  export type Outbound = FunctionT$Outbound;
 }
 
-export function prefixMessagesFunctionToJSON(
-  prefixMessagesFunction: PrefixMessagesFunction,
-): string {
-  return JSON.stringify(
-    PrefixMessagesFunction$outboundSchema.parse(prefixMessagesFunction),
-  );
+export function functionToJSON(functionT: FunctionT): string {
+  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
 }
 
-export function prefixMessagesFunctionFromJSON(
+export function functionFromJSON(
   jsonString: string,
-): SafeParseResult<PrefixMessagesFunction, SDKValidationError> {
+): SafeParseResult<FunctionT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PrefixMessagesFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PrefixMessagesFunction' from JSON`,
+    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionT' from JSON`,
   );
 }
 
@@ -2248,15 +2243,15 @@ export const ToolCalls$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  type: PrefixMessagesType$inboundSchema,
-  function: z.lazy(() => PrefixMessagesFunction$inboundSchema),
+  type: Type$inboundSchema,
+  function: z.lazy(() => FunctionT$inboundSchema),
 });
 
 /** @internal */
 export type ToolCalls$Outbound = {
   id: string;
   type: string;
-  function: PrefixMessagesFunction$Outbound;
+  function: FunctionT$Outbound;
 };
 
 /** @internal */
@@ -2266,8 +2261,8 @@ export const ToolCalls$outboundSchema: z.ZodType<
   ToolCalls
 > = z.object({
   id: z.string(),
-  type: PrefixMessagesType$outboundSchema,
-  function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
+  type: Type$outboundSchema,
+  function: z.lazy(() => FunctionT$outboundSchema),
 });
 
 /**

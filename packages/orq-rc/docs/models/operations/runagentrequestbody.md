@@ -14,9 +14,9 @@ let value: RunAgentRequestBody = {
     role: "user",
     parts: [
       {
-        kind: "data",
-        data: {
-          "key": "<value>",
+        kind: "file",
+        file: {
+          bytes: "<value>",
         },
       },
     ],

@@ -94,12 +94,10 @@ export const Model6 = {
 } as const;
 export type Model6 = ClosedEnum<typeof Model6>;
 
-export const UpdateMemoryStoreModel5 = {
+export const Model5 = {
   AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
 } as const;
-export type UpdateMemoryStoreModel5 = ClosedEnum<
-  typeof UpdateMemoryStoreModel5
->;
+export type Model5 = ClosedEnum<typeof Model5>;
 
 export const UpdateMemoryStoreModel4 = {
   CohereEmbedEnglishV30: "cohere/embed-english-v3.0",
@@ -134,7 +132,7 @@ export type UpdateMemoryStoreModel =
   | UpdateMemoryStoreModel2
   | UpdateMemoryStoreModel3
   | UpdateMemoryStoreModel4
-  | UpdateMemoryStoreModel5
+  | Model5
   | Model6
   | Model7
   | Model8
@@ -159,7 +157,7 @@ export type UpdateMemoryStoreEmbeddingConfig = {
     | UpdateMemoryStoreModel2
     | UpdateMemoryStoreModel3
     | UpdateMemoryStoreModel4
-    | UpdateMemoryStoreModel5
+    | Model5
     | Model6
     | Model7
     | Model8
@@ -617,24 +615,22 @@ export namespace Model6$ {
 }
 
 /** @internal */
-export const UpdateMemoryStoreModel5$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel5
-> = z.nativeEnum(UpdateMemoryStoreModel5);
+export const Model5$inboundSchema: z.ZodNativeEnum<typeof Model5> = z
+  .nativeEnum(Model5);
 
 /** @internal */
-export const UpdateMemoryStoreModel5$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateMemoryStoreModel5
-> = UpdateMemoryStoreModel5$inboundSchema;
+export const Model5$outboundSchema: z.ZodNativeEnum<typeof Model5> =
+  Model5$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateMemoryStoreModel5$ {
-  /** @deprecated use `UpdateMemoryStoreModel5$inboundSchema` instead. */
-  export const inboundSchema = UpdateMemoryStoreModel5$inboundSchema;
-  /** @deprecated use `UpdateMemoryStoreModel5$outboundSchema` instead. */
-  export const outboundSchema = UpdateMemoryStoreModel5$outboundSchema;
+export namespace Model5$ {
+  /** @deprecated use `Model5$inboundSchema` instead. */
+  export const inboundSchema = Model5$inboundSchema;
+  /** @deprecated use `Model5$outboundSchema` instead. */
+  export const outboundSchema = Model5$outboundSchema;
 }
 
 /** @internal */
@@ -731,7 +727,7 @@ export const UpdateMemoryStoreModel$inboundSchema: z.ZodType<
   UpdateMemoryStoreModel2$inboundSchema,
   UpdateMemoryStoreModel3$inboundSchema,
   UpdateMemoryStoreModel4$inboundSchema,
-  UpdateMemoryStoreModel5$inboundSchema,
+  Model5$inboundSchema,
   Model6$inboundSchema,
   Model7$inboundSchema,
   Model8$inboundSchema,
@@ -786,7 +782,7 @@ export const UpdateMemoryStoreModel$outboundSchema: z.ZodType<
   UpdateMemoryStoreModel2$outboundSchema,
   UpdateMemoryStoreModel3$outboundSchema,
   UpdateMemoryStoreModel4$outboundSchema,
-  UpdateMemoryStoreModel5$outboundSchema,
+  Model5$outboundSchema,
   Model6$outboundSchema,
   Model7$outboundSchema,
   Model8$outboundSchema,
@@ -848,7 +844,7 @@ export const UpdateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
     UpdateMemoryStoreModel2$inboundSchema,
     UpdateMemoryStoreModel3$inboundSchema,
     UpdateMemoryStoreModel4$inboundSchema,
-    UpdateMemoryStoreModel5$inboundSchema,
+    Model5$inboundSchema,
     Model6$inboundSchema,
     Model7$inboundSchema,
     Model8$inboundSchema,
@@ -907,7 +903,7 @@ export const UpdateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
     UpdateMemoryStoreModel2$outboundSchema,
     UpdateMemoryStoreModel3$outboundSchema,
     UpdateMemoryStoreModel4$outboundSchema,
-    UpdateMemoryStoreModel5$outboundSchema,
+    Model5$outboundSchema,
     Model6$outboundSchema,
     Model7$outboundSchema,
     Model8$outboundSchema,

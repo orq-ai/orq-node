@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Filter datasources by status.
  */
-export type QueryParamStatus = Array<string> | string;
+export type Status = Array<string> | string;
 
 export type ListDatasourcesRequest = {
   /**
@@ -109,50 +109,43 @@ export type ListDatasourcesResponseBody = {
 };
 
 /** @internal */
-export const QueryParamStatus$inboundSchema: z.ZodType<
-  QueryParamStatus,
-  z.ZodTypeDef,
-  unknown
-> = z.union([z.array(z.string()), z.string()]);
+export const Status$inboundSchema: z.ZodType<Status, z.ZodTypeDef, unknown> = z
+  .union([z.array(z.string()), z.string()]);
 
 /** @internal */
-export type QueryParamStatus$Outbound = Array<string> | string;
+export type Status$Outbound = Array<string> | string;
 
 /** @internal */
-export const QueryParamStatus$outboundSchema: z.ZodType<
-  QueryParamStatus$Outbound,
+export const Status$outboundSchema: z.ZodType<
+  Status$Outbound,
   z.ZodTypeDef,
-  QueryParamStatus
+  Status
 > = z.union([z.array(z.string()), z.string()]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace QueryParamStatus$ {
-  /** @deprecated use `QueryParamStatus$inboundSchema` instead. */
-  export const inboundSchema = QueryParamStatus$inboundSchema;
-  /** @deprecated use `QueryParamStatus$outboundSchema` instead. */
-  export const outboundSchema = QueryParamStatus$outboundSchema;
-  /** @deprecated use `QueryParamStatus$Outbound` instead. */
-  export type Outbound = QueryParamStatus$Outbound;
+export namespace Status$ {
+  /** @deprecated use `Status$inboundSchema` instead. */
+  export const inboundSchema = Status$inboundSchema;
+  /** @deprecated use `Status$outboundSchema` instead. */
+  export const outboundSchema = Status$outboundSchema;
+  /** @deprecated use `Status$Outbound` instead. */
+  export type Outbound = Status$Outbound;
 }
 
-export function queryParamStatusToJSON(
-  queryParamStatus: QueryParamStatus,
-): string {
-  return JSON.stringify(
-    QueryParamStatus$outboundSchema.parse(queryParamStatus),
-  );
+export function statusToJSON(status: Status): string {
+  return JSON.stringify(Status$outboundSchema.parse(status));
 }
 
-export function queryParamStatusFromJSON(
+export function statusFromJSON(
   jsonString: string,
-): SafeParseResult<QueryParamStatus, SDKValidationError> {
+): SafeParseResult<Status, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => QueryParamStatus$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'QueryParamStatus' from JSON`,
+    (x) => Status$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Status' from JSON`,
   );
 }
 
@@ -285,7 +278,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K60CGQ6KMNCZ11M6ZTSX707R"),
+  _id: z.string().default("01K60ZS4S46HFDSXZK2JFH7EX7"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -329,7 +322,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01K60CGQ6KMNCZ11M6ZTSX707R"),
+  id: z.string().default("01K60ZS4S46HFDSXZK2JFH7EX7"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

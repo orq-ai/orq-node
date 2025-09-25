@@ -93,11 +93,14 @@ export type ListAgentsTools = {
 };
 
 export type ListAgentsSettings = {
+  /**
+   * Maximum iterations(llm calls) before the agent will stop executing.
+   */
   maxIterations?: number | undefined;
   /**
-   * Max execution time in seconds
+   * Maximum time (in seconds) for the agent thinking process. This does not include the time for tool calls and sub agent calls. It will be loosely enforced, the in progress LLM calls will not be terminated and the last assistant message will be returned.
    */
-  maxExecutionTime: number;
+  maxExecutionTime?: number | undefined;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -530,8 +533,8 @@ export const ListAgentsSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  max_iterations: z.number().int().default(10),
-  max_execution_time: z.number().int(),
+  max_iterations: z.number().int().default(15),
+  max_execution_time: z.number().int().default(300),
   tool_approval_required: ListAgentsToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
@@ -558,8 +561,8 @@ export const ListAgentsSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsSettings
 > = z.object({
-  maxIterations: z.number().int().default(10),
-  maxExecutionTime: z.number().int(),
+  maxIterations: z.number().int().default(15),
+  maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ListAgentsToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
@@ -1022,7 +1025,7 @@ export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K60CGQ250M2GXK4GC08ZSGV1"),
+  id: z.string().default("01K60ZS4MZY99WNA5C8F32W61C"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => ListAgentsConfiguration2$inboundSchema),
@@ -1049,7 +1052,7 @@ export const ListAgentsKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsKnowledgeBases
 > = z.object({
-  id: z.string().default("01K60CGQ250M2GXK4GC08ZSGV1"),
+  id: z.string().default("01K60ZS4MZY99WNA5C8F32W61C"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() => ListAgentsConfiguration2$outboundSchema),

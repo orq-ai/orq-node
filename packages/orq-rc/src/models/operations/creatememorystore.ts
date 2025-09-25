@@ -94,10 +94,10 @@ export const Six = {
 } as const;
 export type Six = ClosedEnum<typeof Six>;
 
-export const Model5 = {
+export const Five = {
   AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
 } as const;
-export type Model5 = ClosedEnum<typeof Model5>;
+export type Five = ClosedEnum<typeof Five>;
 
 export const Model4 = {
   CohereEmbedEnglishV30: "cohere/embed-english-v3.0",
@@ -124,7 +124,7 @@ export type Model =
   | Model2
   | Model3
   | Model4
-  | Model5
+  | Five
   | Six
   | Seven
   | Eight
@@ -149,7 +149,7 @@ export type EmbeddingConfig = {
     | Model2
     | Model3
     | Model4
-    | Model5
+    | Five
     | Six
     | Seven
     | Eight
@@ -757,22 +757,23 @@ export namespace Six$ {
 }
 
 /** @internal */
-export const Model5$inboundSchema: z.ZodNativeEnum<typeof Model5> = z
-  .nativeEnum(Model5);
+export const Five$inboundSchema: z.ZodNativeEnum<typeof Five> = z.nativeEnum(
+  Five,
+);
 
 /** @internal */
-export const Model5$outboundSchema: z.ZodNativeEnum<typeof Model5> =
-  Model5$inboundSchema;
+export const Five$outboundSchema: z.ZodNativeEnum<typeof Five> =
+  Five$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Model5$ {
-  /** @deprecated use `Model5$inboundSchema` instead. */
-  export const inboundSchema = Model5$inboundSchema;
-  /** @deprecated use `Model5$outboundSchema` instead. */
-  export const outboundSchema = Model5$outboundSchema;
+export namespace Five$ {
+  /** @deprecated use `Five$inboundSchema` instead. */
+  export const inboundSchema = Five$inboundSchema;
+  /** @deprecated use `Five$outboundSchema` instead. */
+  export const outboundSchema = Five$outboundSchema;
 }
 
 /** @internal */
@@ -858,7 +859,7 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     Model2$inboundSchema,
     Model3$inboundSchema,
     Model4$inboundSchema,
-    Model5$inboundSchema,
+    Five$inboundSchema,
     Six$inboundSchema,
     Seven$inboundSchema,
     Eight$inboundSchema,
@@ -913,7 +914,7 @@ export const Model$outboundSchema: z.ZodType<
   Model2$outboundSchema,
   Model3$outboundSchema,
   Model4$outboundSchema,
-  Model5$outboundSchema,
+  Five$outboundSchema,
   Six$outboundSchema,
   Seven$outboundSchema,
   Eight$outboundSchema,
@@ -971,7 +972,7 @@ export const EmbeddingConfig$inboundSchema: z.ZodType<
     Model2$inboundSchema,
     Model3$inboundSchema,
     Model4$inboundSchema,
-    Model5$inboundSchema,
+    Five$inboundSchema,
     Six$inboundSchema,
     Seven$inboundSchema,
     Eight$inboundSchema,
@@ -1030,7 +1031,7 @@ export const EmbeddingConfig$outboundSchema: z.ZodType<
     Model2$outboundSchema,
     Model3$outboundSchema,
     Model4$outboundSchema,
-    Model5$outboundSchema,
+    Five$outboundSchema,
     Six$outboundSchema,
     Seven$outboundSchema,
     Eight$outboundSchema,

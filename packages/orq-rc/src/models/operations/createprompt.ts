@@ -476,7 +476,7 @@ export type UseCases = ClosedEnum<typeof UseCases>;
 /**
  * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
  */
-export const Language = {
+export const CreatePromptLanguage = {
   Chinese: "Chinese",
   Dutch: "Dutch",
   English: "English",
@@ -488,7 +488,7 @@ export const Language = {
 /**
  * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
  */
-export type Language = ClosedEnum<typeof Language>;
+export type CreatePromptLanguage = ClosedEnum<typeof CreatePromptLanguage>;
 
 export type CreatePromptMetadata = {
   /**
@@ -498,7 +498,7 @@ export type CreatePromptMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: Language | null | undefined;
+  language?: CreatePromptLanguage | null | undefined;
 };
 
 export type CreatePromptRequestBody = {
@@ -1040,7 +1040,7 @@ export type CreatePromptUseCases = ClosedEnum<typeof CreatePromptUseCases>;
 /**
  * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
  */
-export const CreatePromptLanguage = {
+export const CreatePromptPromptsLanguage = {
   Chinese: "Chinese",
   Dutch: "Dutch",
   English: "English",
@@ -1052,7 +1052,9 @@ export const CreatePromptLanguage = {
 /**
  * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
  */
-export type CreatePromptLanguage = ClosedEnum<typeof CreatePromptLanguage>;
+export type CreatePromptPromptsLanguage = ClosedEnum<
+  typeof CreatePromptPromptsLanguage
+>;
 
 export type CreatePromptPromptsMetadata = {
   /**
@@ -1062,7 +1064,7 @@ export type CreatePromptPromptsMetadata = {
   /**
    * The language that the prompt is written in. Use this field to categorize the prompt for your own purpose
    */
-  language?: CreatePromptLanguage | null | undefined;
+  language?: CreatePromptPromptsLanguage | null | undefined;
 };
 
 /**
@@ -2660,22 +2662,24 @@ export namespace UseCases$ {
 }
 
 /** @internal */
-export const Language$inboundSchema: z.ZodNativeEnum<typeof Language> = z
-  .nativeEnum(Language);
+export const CreatePromptLanguage$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptLanguage
+> = z.nativeEnum(CreatePromptLanguage);
 
 /** @internal */
-export const Language$outboundSchema: z.ZodNativeEnum<typeof Language> =
-  Language$inboundSchema;
+export const CreatePromptLanguage$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptLanguage
+> = CreatePromptLanguage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Language$ {
-  /** @deprecated use `Language$inboundSchema` instead. */
-  export const inboundSchema = Language$inboundSchema;
-  /** @deprecated use `Language$outboundSchema` instead. */
-  export const outboundSchema = Language$outboundSchema;
+export namespace CreatePromptLanguage$ {
+  /** @deprecated use `CreatePromptLanguage$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptLanguage$inboundSchema;
+  /** @deprecated use `CreatePromptLanguage$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptLanguage$outboundSchema;
 }
 
 /** @internal */
@@ -2685,7 +2689,7 @@ export const CreatePromptMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(UseCases$inboundSchema).optional(),
-  language: z.nullable(Language$inboundSchema).optional(),
+  language: z.nullable(CreatePromptLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -2705,7 +2709,7 @@ export const CreatePromptMetadata$outboundSchema: z.ZodType<
   CreatePromptMetadata
 > = z.object({
   useCases: z.array(UseCases$outboundSchema).optional(),
-  language: z.nullable(Language$outboundSchema).optional(),
+  language: z.nullable(CreatePromptLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
@@ -4501,24 +4505,24 @@ export namespace CreatePromptUseCases$ {
 }
 
 /** @internal */
-export const CreatePromptLanguage$inboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptLanguage
-> = z.nativeEnum(CreatePromptLanguage);
+export const CreatePromptPromptsLanguage$inboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsLanguage
+> = z.nativeEnum(CreatePromptPromptsLanguage);
 
 /** @internal */
-export const CreatePromptLanguage$outboundSchema: z.ZodNativeEnum<
-  typeof CreatePromptLanguage
-> = CreatePromptLanguage$inboundSchema;
+export const CreatePromptPromptsLanguage$outboundSchema: z.ZodNativeEnum<
+  typeof CreatePromptPromptsLanguage
+> = CreatePromptPromptsLanguage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreatePromptLanguage$ {
-  /** @deprecated use `CreatePromptLanguage$inboundSchema` instead. */
-  export const inboundSchema = CreatePromptLanguage$inboundSchema;
-  /** @deprecated use `CreatePromptLanguage$outboundSchema` instead. */
-  export const outboundSchema = CreatePromptLanguage$outboundSchema;
+export namespace CreatePromptPromptsLanguage$ {
+  /** @deprecated use `CreatePromptPromptsLanguage$inboundSchema` instead. */
+  export const inboundSchema = CreatePromptPromptsLanguage$inboundSchema;
+  /** @deprecated use `CreatePromptPromptsLanguage$outboundSchema` instead. */
+  export const outboundSchema = CreatePromptPromptsLanguage$outboundSchema;
 }
 
 /** @internal */
@@ -4528,7 +4532,7 @@ export const CreatePromptPromptsMetadata$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   use_cases: z.array(CreatePromptUseCases$inboundSchema).optional(),
-  language: z.nullable(CreatePromptLanguage$inboundSchema).optional(),
+  language: z.nullable(CreatePromptPromptsLanguage$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "use_cases": "useCases",
@@ -4548,7 +4552,7 @@ export const CreatePromptPromptsMetadata$outboundSchema: z.ZodType<
   CreatePromptPromptsMetadata
 > = z.object({
   useCases: z.array(CreatePromptUseCases$outboundSchema).optional(),
-  language: z.nullable(CreatePromptLanguage$outboundSchema).optional(),
+  language: z.nullable(CreatePromptPromptsLanguage$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     useCases: "use_cases",
