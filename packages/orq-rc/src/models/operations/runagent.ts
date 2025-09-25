@@ -2179,7 +2179,7 @@ export const TwentyFour$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K5ZT3CQZFBXVN2YQ8CKRJ1MW"),
+  _id: z.string().default("01K60CGQ35YREFRTW8EPP79TWP"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2218,7 +2218,7 @@ export const TwentyFour$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TwentyFour
 > = z.object({
-  id: z.string().default("01K5ZT3CQZFBXVN2YQ8CKRJ1MW"),
+  id: z.string().default("01K60CGQ35YREFRTW8EPP79TWP"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

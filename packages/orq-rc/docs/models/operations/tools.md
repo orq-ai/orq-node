@@ -5,52 +5,6 @@ Available tools for agent execution. Each tool provides specific capabilities to
 
 ## Supported Types
 
-### `components.HttpTool`
-
-```typescript
-const value: components.HttpTool = {
-  path: "Default",
-  key: "<key>",
-  displayName: "Johnnie_Rutherford26",
-  description: "mmm however since frank conservative know",
-  type: "http",
-  http: {
-    blueprint: {
-      url: "https://bad-fisherman.com/",
-      method: "GET",
-    },
-  },
-};
-```
-
-### `components.CodeExecutionTool`
-
-```typescript
-const value: components.CodeExecutionTool = {
-  path: "Default",
-  key: "<key>",
-  displayName: "Marcelino84",
-  description: "futon consequently lest tuba",
-  type: "code",
-  codeTool: {
-    language: "python",
-    code: "<value>",
-  },
-};
-```
-
-### `components.FunctionTool`
-
-```typescript
-const value: components.FunctionTool = {
-  type: "function",
-  key: "<key>",
-  function: {
-    name: "<value>",
-  },
-};
-```
-
 ### `components.GoogleSearchTool`
 
 ```typescript
@@ -128,6 +82,52 @@ const value: components.QueryKnowledgeBaseTool = {
 ```typescript
 const value: components.CurrentDateTool = {
   type: "current_date",
+};
+```
+
+### `components.HttpTool`
+
+```typescript
+const value: components.HttpTool = {
+  path: "Default",
+  key: "<key>",
+  displayName: "Johnnie_Rutherford26",
+  description: "mmm however since frank conservative know",
+  type: "http",
+  http: {
+    blueprint: {
+      url: "https://bad-fisherman.com/",
+      method: "GET",
+    },
+  },
+};
+```
+
+### `components.CodeExecutionTool`
+
+```typescript
+const value: components.CodeExecutionTool = {
+  path: "Default",
+  key: "<key>",
+  displayName: "Marcelino84",
+  description: "futon consequently lest tuba",
+  type: "code",
+  codeTool: {
+    language: "python",
+    code: "<value>",
+  },
+};
+```
+
+### `components.FunctionTool`
+
+```typescript
+const value: components.FunctionTool = {
+  type: "function",
+  key: "<key>",
+  function: {
+    name: "<value>",
+  },
 };
 ```
 

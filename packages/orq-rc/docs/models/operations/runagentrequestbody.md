@@ -48,7 +48,7 @@ let value: RunAgentRequestBody = {
   settings: {
     tools: [
       {
-        type: "retrieve_memory_stores",
+        type: "current_date",
         requiresApproval: false,
       },
     ],

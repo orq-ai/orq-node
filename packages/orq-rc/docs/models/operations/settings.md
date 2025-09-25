@@ -8,7 +8,19 @@ import { Settings } from "@orq-ai/node/models/operations";
 let value: Settings = {
   tools: [
     {
-      type: "retrieve_knowledge_bases",
+      id: "01K60CGPWFAB7ZDDQT1K4MRS6G",
+      path: "Default",
+      key: "<key>",
+      displayName: "Julio_Ondricka",
+      description: "svelte asset convalesce impolite",
+      status: "live",
+      type: "http",
+      http: {
+        blueprint: {
+          url: "https://bad-fisherman.com/",
+          method: "GET",
+        },
+      },
       requiresApproval: false,
     },
   ],
