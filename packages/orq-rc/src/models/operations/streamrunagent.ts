@@ -2725,7 +2725,7 @@ export const RunAgentRequestToolHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K62KZ68TAT5EHKJKEJ1QWV1V"),
+  _id: z.string().default("01K62YGY99XT5HTD1YVGV5G48D"),
   key: z.string(),
   display_name: z.string(),
   description: z.string(),
@@ -2758,7 +2758,7 @@ export const RunAgentRequestToolHTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentRequestToolHTTPTool
 > = z.object({
-  id: z.string().default("01K62KZ68TAT5EHKJKEJ1QWV1V"),
+  id: z.string().default("01K62YGY99XT5HTD1YVGV5G48D"),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),

@@ -11,7 +11,7 @@ let value: GetAllToolsResponseBody = {
   object: "list",
   data: [
     {
-      id: "01K62KZ6FPNY19C7S67BG3GQ5A",
+      id: "01K62YGYFRX97QRB1WB7XPP9CG",
       path: "Default",
       key: "<key>",
       displayName: "Luella_Marks78",
