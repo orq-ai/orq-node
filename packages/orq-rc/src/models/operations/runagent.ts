@@ -2655,7 +2655,7 @@ export const HTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K69SP31Y2P12G2N1XPSQ8JJ7"),
+  _id: z.string().default("01K6A6CKCVAAMX0ZZDQH3NN3NK"),
   key: z.string(),
   display_name: z.string(),
   description: z.string(),
@@ -2688,7 +2688,7 @@ export const HTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HTTPTool
 > = z.object({
-  id: z.string().default("01K69SP31Y2P12G2N1XPSQ8JJ7"),
+  id: z.string().default("01K6A6CKCVAAMX0ZZDQH3NN3NK"),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),
