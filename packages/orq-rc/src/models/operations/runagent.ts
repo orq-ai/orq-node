@@ -9,20 +9,32 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const Role2 = {
+/**
+ * Tool message
+ */
+export const RoleToolMessage = {
   Tool: "tool",
 } as const;
-export type Role2 = ClosedEnum<typeof Role2>;
+/**
+ * Tool message
+ */
+export type RoleToolMessage = ClosedEnum<typeof RoleToolMessage>;
 
-export const Role1 = {
+/**
+ * User message
+ */
+export const RoleUserMessage = {
   User: "user",
 } as const;
-export type Role1 = ClosedEnum<typeof Role1>;
+/**
+ * User message
+ */
+export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
 
 /**
  * Message role (user or tool for continuing executions)
  */
-export type RunAgentRole = Role1 | Role2;
+export type RunAgentRole = RoleUserMessage | RoleToolMessage;
 
 export const RunAgentPublicMessagePartKind = {
   ToolResult: "tool_result",
@@ -46,7 +58,10 @@ export const PublicMessagePartKind = {
 } as const;
 export type PublicMessagePartKind = ClosedEnum<typeof PublicMessagePartKind>;
 
-export type File2 = {
+/**
+ * File in URI format. Check in the model's documentation for the supported mime types for the URI format
+ */
+export type FileInURIFormat = {
   /**
    * URL for the File content
    */
@@ -61,7 +76,10 @@ export type File2 = {
   name?: string | undefined;
 };
 
-export type File1 = {
+/**
+ * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
+ */
+export type BinaryFormat = {
   /**
    * base64 encoded content of the file
    */
@@ -76,14 +94,14 @@ export type File1 = {
   name?: string | undefined;
 };
 
-export type PublicMessagePartFile = File1 | File2;
+export type PublicMessagePartFile = BinaryFormat | FileInURIFormat;
 
 /**
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
  */
 export type FilePart = {
   kind: PublicMessagePartKind;
-  file: File1 | File2;
+  file: BinaryFormat | FileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -116,7 +134,7 @@ export type Message = {
   /**
    * Message role (user or tool for continuing executions)
    */
-  role: Role1 | Role2;
+  role: RoleUserMessage | RoleToolMessage;
   /**
    * A2A message parts (text, file, or tool_result only)
    */
@@ -177,37 +195,47 @@ export type Memory = {
   entityId: string;
 };
 
-export const RunAgentConfigurationType = {
+export const RunAgentKnowledgeBaseConfigurationType = {
   Query: "query",
 } as const;
-export type RunAgentConfigurationType = ClosedEnum<
-  typeof RunAgentConfigurationType
+export type RunAgentKnowledgeBaseConfigurationType = ClosedEnum<
+  typeof RunAgentKnowledgeBaseConfigurationType
 >;
 
-export type Configuration2 = {
-  type: RunAgentConfigurationType;
+/**
+ * Defines the configuration settings for a static query.
+ */
+export type KnowledgeBaseStaticQuery = {
+  type: RunAgentKnowledgeBaseConfigurationType;
   query: string;
 };
 
-export const ConfigurationType = {
+export const KnowledgeBaseConfigurationType = {
   LastUserMessage: "last_user_message",
 } as const;
-export type ConfigurationType = ClosedEnum<typeof ConfigurationType>;
+export type KnowledgeBaseConfigurationType = ClosedEnum<
+  typeof KnowledgeBaseConfigurationType
+>;
 
-export type Configuration1 = {
-  type: ConfigurationType;
+/**
+ * Defines the configuration settings for a last user message type retrieval.
+ */
+export type KnowledgeBaseLastUserMessage = {
+  type: KnowledgeBaseConfigurationType;
 };
 
 /**
  * Defines the configuration settings which can either be for a user message or a text entry.
  */
-export type Configuration = Configuration2 | Configuration1;
+export type KnowledgeBaseConfiguration =
+  | KnowledgeBaseStaticQuery
+  | KnowledgeBaseLastUserMessage;
 
 export type KnowledgeBases = {
   /**
    * Defines the configuration settings which can either be for a user message or a text entry.
    */
-  configuration: Configuration2 | Configuration1;
+  configuration: KnowledgeBaseStaticQuery | KnowledgeBaseLastUserMessage;
 };
 
 export type TeamOfAgents = {
@@ -694,6 +722,9 @@ export type RunAgentRequestBody = {
    * A custom system prompt template for the agent. If omitted, the default template is used.
    */
   systemPrompt?: string | undefined;
+  /**
+   * The list of keys of the memory stores that are accessible to the agent.
+   */
   memoryStores?: Array<string> | undefined;
   knowledgeBases?: Array<KnowledgeBases> | undefined;
   /**
@@ -814,43 +845,45 @@ export type RunAgentResponseBody = {
 };
 
 /** @internal */
-export const Role2$inboundSchema: z.ZodNativeEnum<typeof Role2> = z.nativeEnum(
-  Role2,
-);
+export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
+  typeof RoleToolMessage
+> = z.nativeEnum(RoleToolMessage);
 
 /** @internal */
-export const Role2$outboundSchema: z.ZodNativeEnum<typeof Role2> =
-  Role2$inboundSchema;
+export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RoleToolMessage
+> = RoleToolMessage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Role2$ {
-  /** @deprecated use `Role2$inboundSchema` instead. */
-  export const inboundSchema = Role2$inboundSchema;
-  /** @deprecated use `Role2$outboundSchema` instead. */
-  export const outboundSchema = Role2$outboundSchema;
+export namespace RoleToolMessage$ {
+  /** @deprecated use `RoleToolMessage$inboundSchema` instead. */
+  export const inboundSchema = RoleToolMessage$inboundSchema;
+  /** @deprecated use `RoleToolMessage$outboundSchema` instead. */
+  export const outboundSchema = RoleToolMessage$outboundSchema;
 }
 
 /** @internal */
-export const Role1$inboundSchema: z.ZodNativeEnum<typeof Role1> = z.nativeEnum(
-  Role1,
-);
+export const RoleUserMessage$inboundSchema: z.ZodNativeEnum<
+  typeof RoleUserMessage
+> = z.nativeEnum(RoleUserMessage);
 
 /** @internal */
-export const Role1$outboundSchema: z.ZodNativeEnum<typeof Role1> =
-  Role1$inboundSchema;
+export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RoleUserMessage
+> = RoleUserMessage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Role1$ {
-  /** @deprecated use `Role1$inboundSchema` instead. */
-  export const inboundSchema = Role1$inboundSchema;
-  /** @deprecated use `Role1$outboundSchema` instead. */
-  export const outboundSchema = Role1$outboundSchema;
+export namespace RoleUserMessage$ {
+  /** @deprecated use `RoleUserMessage$inboundSchema` instead. */
+  export const inboundSchema = RoleUserMessage$inboundSchema;
+  /** @deprecated use `RoleUserMessage$outboundSchema` instead. */
+  export const outboundSchema = RoleUserMessage$outboundSchema;
 }
 
 /** @internal */
@@ -858,7 +891,7 @@ export const RunAgentRole$inboundSchema: z.ZodType<
   RunAgentRole,
   z.ZodTypeDef,
   unknown
-> = z.union([Role1$inboundSchema, Role2$inboundSchema]);
+> = z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]);
 
 /** @internal */
 export type RunAgentRole$Outbound = string | string;
@@ -868,7 +901,7 @@ export const RunAgentRole$outboundSchema: z.ZodType<
   RunAgentRole$Outbound,
   z.ZodTypeDef,
   RunAgentRole
-> = z.union([Role1$outboundSchema, Role2$outboundSchema]);
+> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
 
 /**
  * @internal
@@ -1007,25 +1040,28 @@ export namespace PublicMessagePartKind$ {
 }
 
 /** @internal */
-export const File2$inboundSchema: z.ZodType<File2, z.ZodTypeDef, unknown> = z
-  .object({
-    uri: z.string(),
-    mimeType: z.string().optional(),
-    name: z.string().optional(),
-  });
+export const FileInURIFormat$inboundSchema: z.ZodType<
+  FileInURIFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  uri: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
 
 /** @internal */
-export type File2$Outbound = {
+export type FileInURIFormat$Outbound = {
   uri: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const File2$outboundSchema: z.ZodType<
-  File2$Outbound,
+export const FileInURIFormat$outboundSchema: z.ZodType<
+  FileInURIFormat$Outbound,
   z.ZodTypeDef,
-  File2
+  FileInURIFormat
 > = z.object({
   uri: z.string(),
   mimeType: z.string().optional(),
@@ -1036,49 +1072,54 @@ export const File2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace File2$ {
-  /** @deprecated use `File2$inboundSchema` instead. */
-  export const inboundSchema = File2$inboundSchema;
-  /** @deprecated use `File2$outboundSchema` instead. */
-  export const outboundSchema = File2$outboundSchema;
-  /** @deprecated use `File2$Outbound` instead. */
-  export type Outbound = File2$Outbound;
+export namespace FileInURIFormat$ {
+  /** @deprecated use `FileInURIFormat$inboundSchema` instead. */
+  export const inboundSchema = FileInURIFormat$inboundSchema;
+  /** @deprecated use `FileInURIFormat$outboundSchema` instead. */
+  export const outboundSchema = FileInURIFormat$outboundSchema;
+  /** @deprecated use `FileInURIFormat$Outbound` instead. */
+  export type Outbound = FileInURIFormat$Outbound;
 }
 
-export function file2ToJSON(file2: File2): string {
-  return JSON.stringify(File2$outboundSchema.parse(file2));
+export function fileInURIFormatToJSON(
+  fileInURIFormat: FileInURIFormat,
+): string {
+  return JSON.stringify(FileInURIFormat$outboundSchema.parse(fileInURIFormat));
 }
 
-export function file2FromJSON(
+export function fileInURIFormatFromJSON(
   jsonString: string,
-): SafeParseResult<File2, SDKValidationError> {
+): SafeParseResult<FileInURIFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => File2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'File2' from JSON`,
+    (x) => FileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileInURIFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const File1$inboundSchema: z.ZodType<File1, z.ZodTypeDef, unknown> = z
-  .object({
-    bytes: z.string(),
-    mimeType: z.string().optional(),
-    name: z.string().optional(),
-  });
+export const BinaryFormat$inboundSchema: z.ZodType<
+  BinaryFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bytes: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
 
 /** @internal */
-export type File1$Outbound = {
+export type BinaryFormat$Outbound = {
   bytes: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const File1$outboundSchema: z.ZodType<
-  File1$Outbound,
+export const BinaryFormat$outboundSchema: z.ZodType<
+  BinaryFormat$Outbound,
   z.ZodTypeDef,
-  File1
+  BinaryFormat
 > = z.object({
   bytes: z.string(),
   mimeType: z.string().optional(),
@@ -1089,26 +1130,26 @@ export const File1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace File1$ {
-  /** @deprecated use `File1$inboundSchema` instead. */
-  export const inboundSchema = File1$inboundSchema;
-  /** @deprecated use `File1$outboundSchema` instead. */
-  export const outboundSchema = File1$outboundSchema;
-  /** @deprecated use `File1$Outbound` instead. */
-  export type Outbound = File1$Outbound;
+export namespace BinaryFormat$ {
+  /** @deprecated use `BinaryFormat$inboundSchema` instead. */
+  export const inboundSchema = BinaryFormat$inboundSchema;
+  /** @deprecated use `BinaryFormat$outboundSchema` instead. */
+  export const outboundSchema = BinaryFormat$outboundSchema;
+  /** @deprecated use `BinaryFormat$Outbound` instead. */
+  export type Outbound = BinaryFormat$Outbound;
 }
 
-export function file1ToJSON(file1: File1): string {
-  return JSON.stringify(File1$outboundSchema.parse(file1));
+export function binaryFormatToJSON(binaryFormat: BinaryFormat): string {
+  return JSON.stringify(BinaryFormat$outboundSchema.parse(binaryFormat));
 }
 
-export function file1FromJSON(
+export function binaryFormatFromJSON(
   jsonString: string,
-): SafeParseResult<File1, SDKValidationError> {
+): SafeParseResult<BinaryFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => File1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'File1' from JSON`,
+    (x) => BinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BinaryFormat' from JSON`,
   );
 }
 
@@ -1118,12 +1159,14 @@ export const PublicMessagePartFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => File1$inboundSchema),
-  z.lazy(() => File2$inboundSchema),
+  z.lazy(() => BinaryFormat$inboundSchema),
+  z.lazy(() => FileInURIFormat$inboundSchema),
 ]);
 
 /** @internal */
-export type PublicMessagePartFile$Outbound = File1$Outbound | File2$Outbound;
+export type PublicMessagePartFile$Outbound =
+  | BinaryFormat$Outbound
+  | FileInURIFormat$Outbound;
 
 /** @internal */
 export const PublicMessagePartFile$outboundSchema: z.ZodType<
@@ -1131,8 +1174,8 @@ export const PublicMessagePartFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PublicMessagePartFile
 > = z.union([
-  z.lazy(() => File1$outboundSchema),
-  z.lazy(() => File2$outboundSchema),
+  z.lazy(() => BinaryFormat$outboundSchema),
+  z.lazy(() => FileInURIFormat$outboundSchema),
 ]);
 
 /**
@@ -1174,8 +1217,8 @@ export const FilePart$inboundSchema: z.ZodType<
 > = z.object({
   kind: PublicMessagePartKind$inboundSchema,
   file: z.union([
-    z.lazy(() => File1$inboundSchema),
-    z.lazy(() => File2$inboundSchema),
+    z.lazy(() => BinaryFormat$inboundSchema),
+    z.lazy(() => FileInURIFormat$inboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
@@ -1183,7 +1226,7 @@ export const FilePart$inboundSchema: z.ZodType<
 /** @internal */
 export type FilePart$Outbound = {
   kind: string;
-  file: File1$Outbound | File2$Outbound;
+  file: BinaryFormat$Outbound | FileInURIFormat$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -1195,8 +1238,8 @@ export const FilePart$outboundSchema: z.ZodType<
 > = z.object({
   kind: PublicMessagePartKind$outboundSchema,
   file: z.union([
-    z.lazy(() => File1$outboundSchema),
-    z.lazy(() => File2$outboundSchema),
+    z.lazy(() => BinaryFormat$outboundSchema),
+    z.lazy(() => FileInURIFormat$outboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
@@ -1364,7 +1407,10 @@ export function publicMessagePartFromJSON(
 export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
   z.object({
     messageId: z.string().optional(),
-    role: z.union([Role1$inboundSchema, Role2$inboundSchema]),
+    role: z.union([
+      RoleUserMessage$inboundSchema,
+      RoleToolMessage$inboundSchema,
+    ]),
     parts: z.array(
       z.union([
         z.lazy(() => TextPart$inboundSchema),
@@ -1388,7 +1434,10 @@ export const Message$outboundSchema: z.ZodType<
   Message
 > = z.object({
   messageId: z.string().optional(),
-  role: z.union([Role1$outboundSchema, Role2$outboundSchema]),
+  role: z.union([
+    RoleUserMessage$outboundSchema,
+    RoleToolMessage$outboundSchema,
+  ]),
   parts: z.array(
     z.union([
       z.lazy(() => TextPart$outboundSchema),
@@ -1606,49 +1655,52 @@ export function memoryFromJSON(
 }
 
 /** @internal */
-export const RunAgentConfigurationType$inboundSchema: z.ZodNativeEnum<
-  typeof RunAgentConfigurationType
-> = z.nativeEnum(RunAgentConfigurationType);
+export const RunAgentKnowledgeBaseConfigurationType$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentKnowledgeBaseConfigurationType> = z.nativeEnum(
+    RunAgentKnowledgeBaseConfigurationType,
+  );
 
 /** @internal */
-export const RunAgentConfigurationType$outboundSchema: z.ZodNativeEnum<
-  typeof RunAgentConfigurationType
-> = RunAgentConfigurationType$inboundSchema;
+export const RunAgentKnowledgeBaseConfigurationType$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentKnowledgeBaseConfigurationType> =
+    RunAgentKnowledgeBaseConfigurationType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RunAgentConfigurationType$ {
-  /** @deprecated use `RunAgentConfigurationType$inboundSchema` instead. */
-  export const inboundSchema = RunAgentConfigurationType$inboundSchema;
-  /** @deprecated use `RunAgentConfigurationType$outboundSchema` instead. */
-  export const outboundSchema = RunAgentConfigurationType$outboundSchema;
+export namespace RunAgentKnowledgeBaseConfigurationType$ {
+  /** @deprecated use `RunAgentKnowledgeBaseConfigurationType$inboundSchema` instead. */
+  export const inboundSchema =
+    RunAgentKnowledgeBaseConfigurationType$inboundSchema;
+  /** @deprecated use `RunAgentKnowledgeBaseConfigurationType$outboundSchema` instead. */
+  export const outboundSchema =
+    RunAgentKnowledgeBaseConfigurationType$outboundSchema;
 }
 
 /** @internal */
-export const Configuration2$inboundSchema: z.ZodType<
-  Configuration2,
+export const KnowledgeBaseStaticQuery$inboundSchema: z.ZodType<
+  KnowledgeBaseStaticQuery,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: RunAgentConfigurationType$inboundSchema,
+  type: RunAgentKnowledgeBaseConfigurationType$inboundSchema,
   query: z.string(),
 });
 
 /** @internal */
-export type Configuration2$Outbound = {
+export type KnowledgeBaseStaticQuery$Outbound = {
   type: string;
   query: string;
 };
 
 /** @internal */
-export const Configuration2$outboundSchema: z.ZodType<
-  Configuration2$Outbound,
+export const KnowledgeBaseStaticQuery$outboundSchema: z.ZodType<
+  KnowledgeBaseStaticQuery$Outbound,
   z.ZodTypeDef,
-  Configuration2
+  KnowledgeBaseStaticQuery
 > = z.object({
-  type: RunAgentConfigurationType$outboundSchema,
+  type: RunAgentKnowledgeBaseConfigurationType$outboundSchema,
   query: z.string(),
 });
 
@@ -1656,149 +1708,163 @@ export const Configuration2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Configuration2$ {
-  /** @deprecated use `Configuration2$inboundSchema` instead. */
-  export const inboundSchema = Configuration2$inboundSchema;
-  /** @deprecated use `Configuration2$outboundSchema` instead. */
-  export const outboundSchema = Configuration2$outboundSchema;
-  /** @deprecated use `Configuration2$Outbound` instead. */
-  export type Outbound = Configuration2$Outbound;
+export namespace KnowledgeBaseStaticQuery$ {
+  /** @deprecated use `KnowledgeBaseStaticQuery$inboundSchema` instead. */
+  export const inboundSchema = KnowledgeBaseStaticQuery$inboundSchema;
+  /** @deprecated use `KnowledgeBaseStaticQuery$outboundSchema` instead. */
+  export const outboundSchema = KnowledgeBaseStaticQuery$outboundSchema;
+  /** @deprecated use `KnowledgeBaseStaticQuery$Outbound` instead. */
+  export type Outbound = KnowledgeBaseStaticQuery$Outbound;
 }
 
-export function configuration2ToJSON(configuration2: Configuration2): string {
-  return JSON.stringify(Configuration2$outboundSchema.parse(configuration2));
+export function knowledgeBaseStaticQueryToJSON(
+  knowledgeBaseStaticQuery: KnowledgeBaseStaticQuery,
+): string {
+  return JSON.stringify(
+    KnowledgeBaseStaticQuery$outboundSchema.parse(knowledgeBaseStaticQuery),
+  );
 }
 
-export function configuration2FromJSON(
+export function knowledgeBaseStaticQueryFromJSON(
   jsonString: string,
-): SafeParseResult<Configuration2, SDKValidationError> {
+): SafeParseResult<KnowledgeBaseStaticQuery, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Configuration2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Configuration2' from JSON`,
+    (x) => KnowledgeBaseStaticQuery$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KnowledgeBaseStaticQuery' from JSON`,
   );
 }
 
 /** @internal */
-export const ConfigurationType$inboundSchema: z.ZodNativeEnum<
-  typeof ConfigurationType
-> = z.nativeEnum(ConfigurationType);
+export const KnowledgeBaseConfigurationType$inboundSchema: z.ZodNativeEnum<
+  typeof KnowledgeBaseConfigurationType
+> = z.nativeEnum(KnowledgeBaseConfigurationType);
 
 /** @internal */
-export const ConfigurationType$outboundSchema: z.ZodNativeEnum<
-  typeof ConfigurationType
-> = ConfigurationType$inboundSchema;
+export const KnowledgeBaseConfigurationType$outboundSchema: z.ZodNativeEnum<
+  typeof KnowledgeBaseConfigurationType
+> = KnowledgeBaseConfigurationType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ConfigurationType$ {
-  /** @deprecated use `ConfigurationType$inboundSchema` instead. */
-  export const inboundSchema = ConfigurationType$inboundSchema;
-  /** @deprecated use `ConfigurationType$outboundSchema` instead. */
-  export const outboundSchema = ConfigurationType$outboundSchema;
+export namespace KnowledgeBaseConfigurationType$ {
+  /** @deprecated use `KnowledgeBaseConfigurationType$inboundSchema` instead. */
+  export const inboundSchema = KnowledgeBaseConfigurationType$inboundSchema;
+  /** @deprecated use `KnowledgeBaseConfigurationType$outboundSchema` instead. */
+  export const outboundSchema = KnowledgeBaseConfigurationType$outboundSchema;
 }
 
 /** @internal */
-export const Configuration1$inboundSchema: z.ZodType<
-  Configuration1,
+export const KnowledgeBaseLastUserMessage$inboundSchema: z.ZodType<
+  KnowledgeBaseLastUserMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: ConfigurationType$inboundSchema,
+  type: KnowledgeBaseConfigurationType$inboundSchema,
 });
 
 /** @internal */
-export type Configuration1$Outbound = {
+export type KnowledgeBaseLastUserMessage$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Configuration1$outboundSchema: z.ZodType<
-  Configuration1$Outbound,
+export const KnowledgeBaseLastUserMessage$outboundSchema: z.ZodType<
+  KnowledgeBaseLastUserMessage$Outbound,
   z.ZodTypeDef,
-  Configuration1
+  KnowledgeBaseLastUserMessage
 > = z.object({
-  type: ConfigurationType$outboundSchema,
+  type: KnowledgeBaseConfigurationType$outboundSchema,
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Configuration1$ {
-  /** @deprecated use `Configuration1$inboundSchema` instead. */
-  export const inboundSchema = Configuration1$inboundSchema;
-  /** @deprecated use `Configuration1$outboundSchema` instead. */
-  export const outboundSchema = Configuration1$outboundSchema;
-  /** @deprecated use `Configuration1$Outbound` instead. */
-  export type Outbound = Configuration1$Outbound;
+export namespace KnowledgeBaseLastUserMessage$ {
+  /** @deprecated use `KnowledgeBaseLastUserMessage$inboundSchema` instead. */
+  export const inboundSchema = KnowledgeBaseLastUserMessage$inboundSchema;
+  /** @deprecated use `KnowledgeBaseLastUserMessage$outboundSchema` instead. */
+  export const outboundSchema = KnowledgeBaseLastUserMessage$outboundSchema;
+  /** @deprecated use `KnowledgeBaseLastUserMessage$Outbound` instead. */
+  export type Outbound = KnowledgeBaseLastUserMessage$Outbound;
 }
 
-export function configuration1ToJSON(configuration1: Configuration1): string {
-  return JSON.stringify(Configuration1$outboundSchema.parse(configuration1));
+export function knowledgeBaseLastUserMessageToJSON(
+  knowledgeBaseLastUserMessage: KnowledgeBaseLastUserMessage,
+): string {
+  return JSON.stringify(
+    KnowledgeBaseLastUserMessage$outboundSchema.parse(
+      knowledgeBaseLastUserMessage,
+    ),
+  );
 }
 
-export function configuration1FromJSON(
+export function knowledgeBaseLastUserMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Configuration1, SDKValidationError> {
+): SafeParseResult<KnowledgeBaseLastUserMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Configuration1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Configuration1' from JSON`,
+    (x) => KnowledgeBaseLastUserMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KnowledgeBaseLastUserMessage' from JSON`,
   );
 }
 
 /** @internal */
-export const Configuration$inboundSchema: z.ZodType<
-  Configuration,
+export const KnowledgeBaseConfiguration$inboundSchema: z.ZodType<
+  KnowledgeBaseConfiguration,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => Configuration2$inboundSchema),
-  z.lazy(() => Configuration1$inboundSchema),
+  z.lazy(() => KnowledgeBaseStaticQuery$inboundSchema),
+  z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
 ]);
 
 /** @internal */
-export type Configuration$Outbound =
-  | Configuration2$Outbound
-  | Configuration1$Outbound;
+export type KnowledgeBaseConfiguration$Outbound =
+  | KnowledgeBaseStaticQuery$Outbound
+  | KnowledgeBaseLastUserMessage$Outbound;
 
 /** @internal */
-export const Configuration$outboundSchema: z.ZodType<
-  Configuration$Outbound,
+export const KnowledgeBaseConfiguration$outboundSchema: z.ZodType<
+  KnowledgeBaseConfiguration$Outbound,
   z.ZodTypeDef,
-  Configuration
+  KnowledgeBaseConfiguration
 > = z.union([
-  z.lazy(() => Configuration2$outboundSchema),
-  z.lazy(() => Configuration1$outboundSchema),
+  z.lazy(() => KnowledgeBaseStaticQuery$outboundSchema),
+  z.lazy(() => KnowledgeBaseLastUserMessage$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Configuration$ {
-  /** @deprecated use `Configuration$inboundSchema` instead. */
-  export const inboundSchema = Configuration$inboundSchema;
-  /** @deprecated use `Configuration$outboundSchema` instead. */
-  export const outboundSchema = Configuration$outboundSchema;
-  /** @deprecated use `Configuration$Outbound` instead. */
-  export type Outbound = Configuration$Outbound;
+export namespace KnowledgeBaseConfiguration$ {
+  /** @deprecated use `KnowledgeBaseConfiguration$inboundSchema` instead. */
+  export const inboundSchema = KnowledgeBaseConfiguration$inboundSchema;
+  /** @deprecated use `KnowledgeBaseConfiguration$outboundSchema` instead. */
+  export const outboundSchema = KnowledgeBaseConfiguration$outboundSchema;
+  /** @deprecated use `KnowledgeBaseConfiguration$Outbound` instead. */
+  export type Outbound = KnowledgeBaseConfiguration$Outbound;
 }
 
-export function configurationToJSON(configuration: Configuration): string {
-  return JSON.stringify(Configuration$outboundSchema.parse(configuration));
+export function knowledgeBaseConfigurationToJSON(
+  knowledgeBaseConfiguration: KnowledgeBaseConfiguration,
+): string {
+  return JSON.stringify(
+    KnowledgeBaseConfiguration$outboundSchema.parse(knowledgeBaseConfiguration),
+  );
 }
 
-export function configurationFromJSON(
+export function knowledgeBaseConfigurationFromJSON(
   jsonString: string,
-): SafeParseResult<Configuration, SDKValidationError> {
+): SafeParseResult<KnowledgeBaseConfiguration, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Configuration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Configuration' from JSON`,
+    (x) => KnowledgeBaseConfiguration$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'KnowledgeBaseConfiguration' from JSON`,
   );
 }
 
@@ -1809,14 +1875,16 @@ export const KnowledgeBases$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   configuration: z.union([
-    z.lazy(() => Configuration2$inboundSchema),
-    z.lazy(() => Configuration1$inboundSchema),
+    z.lazy(() => KnowledgeBaseStaticQuery$inboundSchema),
+    z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
   ]),
 });
 
 /** @internal */
 export type KnowledgeBases$Outbound = {
-  configuration: Configuration2$Outbound | Configuration1$Outbound;
+  configuration:
+    | KnowledgeBaseStaticQuery$Outbound
+    | KnowledgeBaseLastUserMessage$Outbound;
 };
 
 /** @internal */
@@ -1826,8 +1894,8 @@ export const KnowledgeBases$outboundSchema: z.ZodType<
   KnowledgeBases
 > = z.object({
   configuration: z.union([
-    z.lazy(() => Configuration2$outboundSchema),
-    z.lazy(() => Configuration1$outboundSchema),
+    z.lazy(() => KnowledgeBaseStaticQuery$outboundSchema),
+    z.lazy(() => KnowledgeBaseLastUserMessage$outboundSchema),
   ]),
 });
 
@@ -2587,7 +2655,7 @@ export const HTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K62YGY95K5520CTFX05QZG7G"),
+  _id: z.string().default("01K69SP31Y2P12G2N1XPSQ8JJ7"),
   key: z.string(),
   display_name: z.string(),
   description: z.string(),
@@ -2620,7 +2688,7 @@ export const HTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HTTPTool
 > = z.object({
-  id: z.string().default("01K62YGY95K5520CTFX05QZG7G"),
+  id: z.string().default("01K69SP31Y2P12G2N1XPSQ8JJ7"),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),

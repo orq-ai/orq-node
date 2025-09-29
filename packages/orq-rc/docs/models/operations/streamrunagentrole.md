@@ -5,15 +5,15 @@ Message role (user or tool for continuing executions)
 
 ## Supported Types
 
-### `operations.StreamRunAgentRole1`
+### `operations.StreamRunAgentRoleUserMessage`
 
 ```typescript
-const value: operations.StreamRunAgentRole1 = "user";
+const value: operations.StreamRunAgentRoleUserMessage = "user";
 ```
 
-### `operations.StreamRunAgentRole2`
+### `operations.StreamRunAgentRoleToolMessage`
 
 ```typescript
-const value: operations.StreamRunAgentRole2 = "tool";
+const value: operations.StreamRunAgentRoleToolMessage = "tool";
 ```
 

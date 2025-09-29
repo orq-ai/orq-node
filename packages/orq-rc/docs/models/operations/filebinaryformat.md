@@ -1,11 +1,13 @@
-# StreamRunAgentFile1
+# FileBinaryFormat
+
+Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
 
 ## Example Usage
 
 ```typescript
-import { StreamRunAgentFile1 } from "@orq-ai/node/models/operations";
+import { FileBinaryFormat } from "@orq-ai/node/models/operations";
 
-let value: StreamRunAgentFile1 = {
+let value: FileBinaryFormat = {
   bytes: "<value>",
 };
 ```

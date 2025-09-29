@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.File1`
+### `operations.BinaryFormat`
 
 ```typescript
-const value: operations.File1 = {
+const value: operations.BinaryFormat = {
   bytes: "<value>",
 };
 ```
 
-### `operations.File2`
+### `operations.FileInURIFormat`
 
 ```typescript
-const value: operations.File2 = {
-  uri: "https://soulful-cod.biz",
+const value: operations.FileInURIFormat = {
+  uri: "https://experienced-pupil.org",
 };
 ```
 

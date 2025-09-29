@@ -1,12 +1,14 @@
-# StreamRunAgentFile2
+# FileFileInURIFormat
+
+File in URI format. Check in the model's documentation for the supported mime types for the URI format
 
 ## Example Usage
 
 ```typescript
-import { StreamRunAgentFile2 } from "@orq-ai/node/models/operations";
+import { FileFileInURIFormat } from "@orq-ai/node/models/operations";
 
-let value: StreamRunAgentFile2 = {
-  uri: "https://windy-programme.com",
+let value: FileFileInURIFormat = {
+  uri: "https://rapid-sushi.info/",
 };
 ```
 

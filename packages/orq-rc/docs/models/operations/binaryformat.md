@@ -1,11 +1,13 @@
-# File1
+# BinaryFormat
+
+Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
 
 ## Example Usage
 
 ```typescript
-import { File1 } from "@orq-ai/node/models/operations";
+import { BinaryFormat } from "@orq-ai/node/models/operations";
 
-let value: File1 = {
+let value: BinaryFormat = {
   bytes: "<value>",
 };
 ```
