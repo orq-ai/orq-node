@@ -1000,7 +1000,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K6AKQCPA4DC0AVJ13YN3QVZA"),
+  id: z.string().default("01K6ASAWJGFW1MVNKVKJP37T9D"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() =>
@@ -1031,7 +1031,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K6AKQCPA4DC0AVJ13YN3QVZA"),
+  id: z.string().default("01K6ASAWJGFW1MVNKVKJP37T9D"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() =>
