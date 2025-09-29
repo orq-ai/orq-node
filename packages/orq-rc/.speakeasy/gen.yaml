@@ -22,7 +22,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 3.13.0-rc.43
+  version: 3.13.0-rc.44
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
