@@ -61,6 +61,14 @@ const value: operations.RetrieveMemoryStoresTool = {
 };
 ```
 
+### `operations.DeleteMemoryStoreTool`
+
+```typescript
+const value: operations.DeleteMemoryStoreTool = {
+  type: "delete_memory_document",
+};
+```
+
 ### `operations.RetrieveKnowledgeBasesTool`
 
 ```typescript

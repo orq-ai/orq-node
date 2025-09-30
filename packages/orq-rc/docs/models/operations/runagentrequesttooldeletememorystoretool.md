@@ -1,14 +1,14 @@
-# RunAgentRequestToolRetrieveKnowledgeBasesTool
+# RunAgentRequestToolDeleteMemoryStoreTool
 
-Lists available knowledge bases
+Deletes a memory store
 
 ## Example Usage
 
 ```typescript
-import { RunAgentRequestToolRetrieveKnowledgeBasesTool } from "@orq-ai/node/models/operations";
+import { RunAgentRequestToolDeleteMemoryStoreTool } from "@orq-ai/node/models/operations";
 
-let value: RunAgentRequestToolRetrieveKnowledgeBasesTool = {
-  type: "retrieve_knowledge_bases",
+let value: RunAgentRequestToolDeleteMemoryStoreTool = {
+  type: "delete_memory_document",
 };
 ```
 
@@ -16,5 +16,5 @@ let value: RunAgentRequestToolRetrieveKnowledgeBasesTool = {
 
 | Field                                                                                                                                                                                            | Type                                                                                                                                                                                             | Required                                                                                                                                                                                         | Description                                                                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                                                           | [operations.StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools9Type](../../models/operations/streamrunagentrunagentrequesttoolagentsrequestrequestbodysettingstools9type.md) | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |
+| `type`                                                                                                                                                                                           | [operations.StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools8Type](../../models/operations/streamrunagentrunagentrequesttoolagentsrequestrequestbodysettingstools8type.md) | :heavy_check_mark:                                                                                                                                                                               | N/A                                                                                                                                                                                              |
 | `requiresApproval`                                                                                                                                                                               | *boolean*                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                               | N/A                                                                                                                                                                                              |

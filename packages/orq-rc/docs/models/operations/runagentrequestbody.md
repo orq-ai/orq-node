@@ -48,7 +48,7 @@ let value: RunAgentRequestBody = {
   settings: {
     tools: [
       {
-        type: "current_date",
+        type: "query_knowledge_base",
         requiresApproval: false,
       },
     ],

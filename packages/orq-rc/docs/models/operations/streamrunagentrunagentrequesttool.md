@@ -61,6 +61,14 @@ const value: operations.RunAgentRequestToolRetrieveMemoryStoresTool = {
 };
 ```
 
+### `operations.RunAgentRequestToolDeleteMemoryStoreTool`
+
+```typescript
+const value: operations.RunAgentRequestToolDeleteMemoryStoreTool = {
+  type: "delete_memory_document",
+};
+```
+
 ### `operations.RunAgentRequestToolRetrieveKnowledgeBasesTool`
 
 ```typescript

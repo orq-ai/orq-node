@@ -8,7 +8,7 @@ import { Settings } from "@orq-ai/node/models/operations";
 let value: Settings = {
   tools: [
     {
-      id: "01K6D0K7K6QGCVT3Y0000VEPWE",
+      id: "01K6D83JNJWC7MMM2HDS4PNB5M",
       key: "<key>",
       displayName: "Julio_Ondricka",
       description: "svelte asset convalesce impolite",

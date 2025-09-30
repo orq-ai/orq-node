@@ -7,11 +7,11 @@ import { StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools9
 
 let value:
   StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools9Type =
-    "query_knowledge_base";
+    "retrieve_knowledge_bases";
 ```
 
 ## Values
 
 ```typescript
-"query_knowledge_base"
+"retrieve_knowledge_bases"
 ```

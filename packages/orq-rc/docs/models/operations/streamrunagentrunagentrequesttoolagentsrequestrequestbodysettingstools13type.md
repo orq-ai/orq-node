@@ -7,11 +7,11 @@ import { StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools1
 
 let value:
   StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools13Type =
-    "function";
+    "code";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"code"
 ```

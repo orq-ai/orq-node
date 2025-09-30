@@ -7,11 +7,11 @@ import { RunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools8Type }
 
 let value:
   RunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools8Type =
-    "retrieve_knowledge_bases";
+    "delete_memory_document";
 ```
 
 ## Values
 
 ```typescript
-"retrieve_knowledge_bases"
+"delete_memory_document"
 ```

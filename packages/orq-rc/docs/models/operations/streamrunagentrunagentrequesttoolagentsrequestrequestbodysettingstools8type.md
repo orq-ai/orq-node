@@ -7,11 +7,11 @@ import { StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools8
 
 let value:
   StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools8Type =
-    "retrieve_knowledge_bases";
+    "delete_memory_document";
 ```
 
 ## Values
 
 ```typescript
-"retrieve_knowledge_bases"
+"delete_memory_document"
 ```

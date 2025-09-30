@@ -7,11 +7,11 @@ import { StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools1
 
 let value:
   StreamRunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools11Type =
-    "http";
+    "current_date";
 ```
 
 ## Values
 
 ```typescript
-"http"
+"current_date"
 ```

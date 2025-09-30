@@ -7,11 +7,11 @@ import { RunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools13Type 
 
 let value:
   RunAgentRunAgentRequestToolAgentsRequestRequestBodySettingsTools13Type =
-    "function";
+    "code";
 ```
 
 ## Values
 
 ```typescript
-"function"
+"code"
 ```
