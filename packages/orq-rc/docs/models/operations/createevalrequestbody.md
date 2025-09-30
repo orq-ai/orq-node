@@ -51,7 +51,7 @@ const value: operations.RequestBodyHTTP = {
 
 ```typescript
 const value: operations.Python = {
-  outputType: "string",
+  outputType: "number",
   code: "<value>",
   type: "python_eval",
   path: "Default",
