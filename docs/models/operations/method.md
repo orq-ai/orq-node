@@ -1,15 +1,17 @@
 # Method
 
+The HTTP method to use.
+
 ## Example Usage
 
 ```typescript
 import { Method } from "@orq-ai/node/models/operations";
 
-let value: Method = "GET";
+let value: Method = "POST";
 ```
 
 ## Values
 
 ```typescript
-"GET" | "POST"
+"GET" | "POST" | "PUT" | "DELETE"
 ```

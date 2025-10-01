@@ -25,7 +25,7 @@ let value: DeploymentsData = {
       },
     ],
     model: "LeBaron",
-    modelType: "stt",
+    modelType: "rerank",
     modelParameters: {},
     provider: "huggingface",
     messages: [],

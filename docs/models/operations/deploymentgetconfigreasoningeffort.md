@@ -13,5 +13,5 @@ let value: DeploymentGetConfigReasoningEffort = "disable";
 ## Values
 
 ```typescript
-"disable" | "low" | "medium" | "high"
+"disable" | "minimal" | "low" | "medium" | "high"
 ```

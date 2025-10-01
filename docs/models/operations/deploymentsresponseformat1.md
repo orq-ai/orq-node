@@ -1,11 +1,12 @@
 # DeploymentsResponseFormat1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Deployments11`
 
 ```typescript
-import { DeploymentsResponseFormat1 } from "@orq-ai/node/models/operations";
-
-let value: DeploymentsResponseFormat1 = {
+const value: operations.Deployments11 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -14,9 +15,19 @@ let value: DeploymentsResponseFormat1 = {
 };
 ```
 
-## Fields
+### `operations.Deployments12`
 
-| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                     | [operations.DeploymentsResponseFormatDeploymentsResponseType](../../models/operations/deploymentsresponseformatdeploymentsresponsetype.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
-| `jsonSchema`                                                                                                                               | [operations.DeploymentsResponseFormatJsonSchema](../../models/operations/deploymentsresponseformatjsonschema.md)                           | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+```typescript
+const value: operations.Deployments12 = {
+  type: "json_object",
+};
+```
+
+### `operations.Deployments13`
+
+```typescript
+const value: operations.Deployments13 = {
+  type: "text",
+};
+```
+

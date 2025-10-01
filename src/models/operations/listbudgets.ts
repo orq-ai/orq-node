@@ -10,15 +10,14 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Filter by budget entity type
+ * Filter by budget entity type (contact or workspace)
  */
 export const QueryParamType = {
-  ApiKey: "api_key",
   Contact: "contact",
   Workspace: "workspace",
 } as const;
 /**
- * Filter by budget entity type
+ * Filter by budget entity type (contact or workspace)
  */
 export type QueryParamType = ClosedEnum<typeof QueryParamType>;
 
@@ -36,7 +35,7 @@ export type ListBudgetsRequest = {
    */
   endingBefore?: string | undefined;
   /**
-   * Filter by budget entity type
+   * Filter by budget entity type (contact or workspace)
    */
   type?: QueryParamType | undefined;
   entityId?: string | undefined;
@@ -121,10 +120,6 @@ export type ListBudgetsData = {
    * Contact external identifier (present when type is "contact")
    */
   contactId?: string | undefined;
-  /**
-   * API Key identifier (present when type is "api_key")
-   */
-  apiKeyId?: string | undefined;
   /**
    * Budget configuration
    */
@@ -463,20 +458,18 @@ export const ListBudgetsData$inboundSchema: z.ZodType<
   _id: z.string(),
   type: ListBudgetsType$inboundSchema,
   contact_id: z.string().optional(),
-  api_key_id: z.string().optional(),
   budget: z.lazy(() => ListBudgetsBudget$inboundSchema),
   is_active: z.boolean(),
   consumption: z.lazy(() => ListBudgetsConsumption$inboundSchema).optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-09-30T08:46:37.543Z",
+    "2025-10-01T15:27:37.468Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "contact_id": "contactId",
-    "api_key_id": "apiKeyId",
     "is_active": "isActive",
   });
 });
@@ -486,7 +479,6 @@ export type ListBudgetsData$Outbound = {
   _id: string;
   type: string;
   contact_id?: string | undefined;
-  api_key_id?: string | undefined;
   budget: ListBudgetsBudget$Outbound;
   is_active: boolean;
   consumption?: ListBudgetsConsumption$Outbound | undefined;
@@ -503,18 +495,16 @@ export const ListBudgetsData$outboundSchema: z.ZodType<
   id: z.string(),
   type: ListBudgetsType$outboundSchema,
   contactId: z.string().optional(),
-  apiKeyId: z.string().optional(),
   budget: z.lazy(() => ListBudgetsBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => ListBudgetsConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-09-30T08:46:37.543Z"))
+  updated: z.date().default(() => new Date("2025-10-01T15:27:37.468Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     contactId: "contact_id",
-    apiKeyId: "api_key_id",
     isActive: "is_active",
   });
 });

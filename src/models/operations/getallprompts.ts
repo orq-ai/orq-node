@@ -41,12 +41,12 @@ export const GetAllPromptsModelType = {
   Chat: "chat",
   Completion: "completion",
   Embedding: "embedding",
-  Vision: "vision",
   Image: "image",
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
   Moderations: "moderations",
+  Vision: "vision",
 } as const;
 /**
  * The modality of the model
@@ -67,45 +67,79 @@ export const GetAllPromptsFormat = {
  */
 export type GetAllPromptsFormat = ClosedEnum<typeof GetAllPromptsFormat>;
 
-export const GetAllPromptsResponseFormatPromptsResponseType = {
+export const GetAllPromptsResponseFormat4 = {
+  Json: "json",
+  Text: "text",
+  Srt: "srt",
+  VerboseJson: "verbose_json",
+  Vtt: "vtt",
+} as const;
+export type GetAllPromptsResponseFormat4 = ClosedEnum<
+  typeof GetAllPromptsResponseFormat4
+>;
+
+export const GetAllPromptsResponseFormat3 = {
+  Url: "url",
+  Base64Json: "base64_json",
+} as const;
+export type GetAllPromptsResponseFormat3 = ClosedEnum<
+  typeof GetAllPromptsResponseFormat3
+>;
+
+export const GetAllPromptsResponseFormat2 = {
+  Mp3: "mp3",
+  Opus: "opus",
+  Aac: "aac",
+  Flac: "flac",
+  Wav: "wav",
+  Pcm: "pcm",
+} as const;
+export type GetAllPromptsResponseFormat2 = ClosedEnum<
+  typeof GetAllPromptsResponseFormat2
+>;
+
+export const GetAllPrompts1PromptsResponseType = {
   Text: "text",
 } as const;
-export type GetAllPromptsResponseFormatPromptsResponseType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatPromptsResponseType
+export type GetAllPrompts1PromptsResponseType = ClosedEnum<
+  typeof GetAllPrompts1PromptsResponseType
 >;
 
-export type GetAllPromptsResponseFormat3 = {
-  type: GetAllPromptsResponseFormatPromptsResponseType;
+export type GetAllPrompts13 = {
+  type: GetAllPrompts1PromptsResponseType;
 };
 
-export const GetAllPromptsResponseFormatPromptsType = {
+export const GetAllPrompts1PromptsType = {
   JsonObject: "json_object",
 } as const;
-export type GetAllPromptsResponseFormatPromptsType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatPromptsType
+export type GetAllPrompts1PromptsType = ClosedEnum<
+  typeof GetAllPrompts1PromptsType
 >;
 
-export type GetAllPromptsResponseFormat2 = {
-  type: GetAllPromptsResponseFormatPromptsType;
+export type GetAllPrompts12 = {
+  type: GetAllPrompts1PromptsType;
 };
 
-export const GetAllPromptsResponseFormatType = {
+export const GetAllPrompts1Type = {
   JsonSchema: "json_schema",
 } as const;
-export type GetAllPromptsResponseFormatType = ClosedEnum<
-  typeof GetAllPromptsResponseFormatType
->;
+export type GetAllPrompts1Type = ClosedEnum<typeof GetAllPrompts1Type>;
 
-export type GetAllPromptsResponseFormatJsonSchema = {
+export type GetAllPrompts1JsonSchema = {
   name: string;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
-export type GetAllPromptsResponseFormat1 = {
-  type: GetAllPromptsResponseFormatType;
-  jsonSchema: GetAllPromptsResponseFormatJsonSchema;
+export type GetAllPrompts11 = {
+  type: GetAllPrompts1Type;
+  jsonSchema: GetAllPrompts1JsonSchema;
 };
+
+export type GetAllPromptsResponseFormat1 =
+  | GetAllPrompts11
+  | GetAllPrompts12
+  | GetAllPrompts13;
 
 /**
  * An object specifying the format that the model must output.
@@ -119,9 +153,12 @@ export type GetAllPromptsResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type GetAllPromptsResponseFormat =
-  | GetAllPromptsResponseFormat1
+  | GetAllPrompts11
+  | GetAllPrompts12
+  | GetAllPrompts13
   | GetAllPromptsResponseFormat2
-  | GetAllPromptsResponseFormat3;
+  | GetAllPromptsResponseFormat3
+  | GetAllPromptsResponseFormat4;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -156,6 +193,7 @@ export type GetAllPromptsEncodingFormat = ClosedEnum<
  */
 export const GetAllPromptsReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -244,9 +282,12 @@ export type GetAllPromptsModelParameters = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | GetAllPromptsResponseFormat1
+    | GetAllPrompts11
+    | GetAllPrompts12
+    | GetAllPrompts13
     | GetAllPromptsResponseFormat2
     | GetAllPromptsResponseFormat3
+    | GetAllPromptsResponseFormat4
     | null
     | undefined;
   /**
@@ -704,50 +745,35 @@ export namespace GetAllPromptsFormat$ {
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponseType> = z
-    .nativeEnum(GetAllPromptsResponseFormatPromptsResponseType);
+export const GetAllPromptsResponseFormat4$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormat4
+> = z.nativeEnum(GetAllPromptsResponseFormat4);
 
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsResponseType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsResponseType> =
-    GetAllPromptsResponseFormatPromptsResponseType$inboundSchema;
+export const GetAllPromptsResponseFormat4$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormat4
+> = GetAllPromptsResponseFormat4$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetAllPromptsResponseFormatPromptsResponseType$ {
-  /** @deprecated use `GetAllPromptsResponseFormatPromptsResponseType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllPromptsResponseFormatPromptsResponseType$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatPromptsResponseType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllPromptsResponseFormatPromptsResponseType$outboundSchema;
+export namespace GetAllPromptsResponseFormat4$ {
+  /** @deprecated use `GetAllPromptsResponseFormat4$inboundSchema` instead. */
+  export const inboundSchema = GetAllPromptsResponseFormat4$inboundSchema;
+  /** @deprecated use `GetAllPromptsResponseFormat4$outboundSchema` instead. */
+  export const outboundSchema = GetAllPromptsResponseFormat4$outboundSchema;
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormat3$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetAllPromptsResponseFormatPromptsResponseType$inboundSchema,
-});
+export const GetAllPromptsResponseFormat3$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormat3
+> = z.nativeEnum(GetAllPromptsResponseFormat3);
 
 /** @internal */
-export type GetAllPromptsResponseFormat3$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetAllPromptsResponseFormat3$outboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  GetAllPromptsResponseFormat3
-> = z.object({
-  type: GetAllPromptsResponseFormatPromptsResponseType$outboundSchema,
-});
+export const GetAllPromptsResponseFormat3$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormat3
+> = GetAllPromptsResponseFormat3$inboundSchema;
 
 /**
  * @internal
@@ -758,76 +784,17 @@ export namespace GetAllPromptsResponseFormat3$ {
   export const inboundSchema = GetAllPromptsResponseFormat3$inboundSchema;
   /** @deprecated use `GetAllPromptsResponseFormat3$outboundSchema` instead. */
   export const outboundSchema = GetAllPromptsResponseFormat3$outboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormat3$Outbound` instead. */
-  export type Outbound = GetAllPromptsResponseFormat3$Outbound;
-}
-
-export function getAllPromptsResponseFormat3ToJSON(
-  getAllPromptsResponseFormat3: GetAllPromptsResponseFormat3,
-): string {
-  return JSON.stringify(
-    GetAllPromptsResponseFormat3$outboundSchema.parse(
-      getAllPromptsResponseFormat3,
-    ),
-  );
-}
-
-export function getAllPromptsResponseFormat3FromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllPromptsResponseFormat3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllPromptsResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptsResponseFormat3' from JSON`,
-  );
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> = z.nativeEnum(
-    GetAllPromptsResponseFormatPromptsType,
-  );
+export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormat2
+> = z.nativeEnum(GetAllPromptsResponseFormat2);
 
 /** @internal */
-export const GetAllPromptsResponseFormatPromptsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAllPromptsResponseFormatPromptsType> =
-    GetAllPromptsResponseFormatPromptsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAllPromptsResponseFormatPromptsType$ {
-  /** @deprecated use `GetAllPromptsResponseFormatPromptsType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllPromptsResponseFormatPromptsType$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatPromptsType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllPromptsResponseFormatPromptsType$outboundSchema;
-}
-
-/** @internal */
-export const GetAllPromptsResponseFormat2$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: GetAllPromptsResponseFormatPromptsType$inboundSchema,
-});
-
-/** @internal */
-export type GetAllPromptsResponseFormat2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const GetAllPromptsResponseFormat2$outboundSchema: z.ZodType<
-  GetAllPromptsResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  GetAllPromptsResponseFormat2
-> = z.object({
-  type: GetAllPromptsResponseFormatPromptsType$outboundSchema,
-});
+export const GetAllPromptsResponseFormat2$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPromptsResponseFormat2
+> = GetAllPromptsResponseFormat2$inboundSchema;
 
 /**
  * @internal
@@ -838,54 +805,179 @@ export namespace GetAllPromptsResponseFormat2$ {
   export const inboundSchema = GetAllPromptsResponseFormat2$inboundSchema;
   /** @deprecated use `GetAllPromptsResponseFormat2$outboundSchema` instead. */
   export const outboundSchema = GetAllPromptsResponseFormat2$outboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormat2$Outbound` instead. */
-  export type Outbound = GetAllPromptsResponseFormat2$Outbound;
-}
-
-export function getAllPromptsResponseFormat2ToJSON(
-  getAllPromptsResponseFormat2: GetAllPromptsResponseFormat2,
-): string {
-  return JSON.stringify(
-    GetAllPromptsResponseFormat2$outboundSchema.parse(
-      getAllPromptsResponseFormat2,
-    ),
-  );
-}
-
-export function getAllPromptsResponseFormat2FromJSON(
-  jsonString: string,
-): SafeParseResult<GetAllPromptsResponseFormat2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAllPromptsResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptsResponseFormat2' from JSON`,
-  );
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormatType$inboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = z.nativeEnum(GetAllPromptsResponseFormatType);
+export const GetAllPrompts1PromptsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts1PromptsResponseType
+> = z.nativeEnum(GetAllPrompts1PromptsResponseType);
 
 /** @internal */
-export const GetAllPromptsResponseFormatType$outboundSchema: z.ZodNativeEnum<
-  typeof GetAllPromptsResponseFormatType
-> = GetAllPromptsResponseFormatType$inboundSchema;
+export const GetAllPrompts1PromptsResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts1PromptsResponseType
+> = GetAllPrompts1PromptsResponseType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetAllPromptsResponseFormatType$ {
-  /** @deprecated use `GetAllPromptsResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema = GetAllPromptsResponseFormatType$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema = GetAllPromptsResponseFormatType$outboundSchema;
+export namespace GetAllPrompts1PromptsResponseType$ {
+  /** @deprecated use `GetAllPrompts1PromptsResponseType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts1PromptsResponseType$inboundSchema;
+  /** @deprecated use `GetAllPrompts1PromptsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetAllPrompts1PromptsResponseType$outboundSchema;
 }
 
 /** @internal */
-export const GetAllPromptsResponseFormatJsonSchema$inboundSchema: z.ZodType<
-  GetAllPromptsResponseFormatJsonSchema,
+export const GetAllPrompts13$inboundSchema: z.ZodType<
+  GetAllPrompts13,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPrompts1PromptsResponseType$inboundSchema,
+});
+
+/** @internal */
+export type GetAllPrompts13$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const GetAllPrompts13$outboundSchema: z.ZodType<
+  GetAllPrompts13$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts13
+> = z.object({
+  type: GetAllPrompts1PromptsResponseType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts13$ {
+  /** @deprecated use `GetAllPrompts13$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts13$inboundSchema;
+  /** @deprecated use `GetAllPrompts13$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts13$outboundSchema;
+  /** @deprecated use `GetAllPrompts13$Outbound` instead. */
+  export type Outbound = GetAllPrompts13$Outbound;
+}
+
+export function getAllPrompts13ToJSON(
+  getAllPrompts13: GetAllPrompts13,
+): string {
+  return JSON.stringify(GetAllPrompts13$outboundSchema.parse(getAllPrompts13));
+}
+
+export function getAllPrompts13FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts13, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts13' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPrompts1PromptsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts1PromptsType
+> = z.nativeEnum(GetAllPrompts1PromptsType);
+
+/** @internal */
+export const GetAllPrompts1PromptsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts1PromptsType
+> = GetAllPrompts1PromptsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts1PromptsType$ {
+  /** @deprecated use `GetAllPrompts1PromptsType$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts1PromptsType$inboundSchema;
+  /** @deprecated use `GetAllPrompts1PromptsType$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts1PromptsType$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPrompts12$inboundSchema: z.ZodType<
+  GetAllPrompts12,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPrompts1PromptsType$inboundSchema,
+});
+
+/** @internal */
+export type GetAllPrompts12$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const GetAllPrompts12$outboundSchema: z.ZodType<
+  GetAllPrompts12$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts12
+> = z.object({
+  type: GetAllPrompts1PromptsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts12$ {
+  /** @deprecated use `GetAllPrompts12$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts12$inboundSchema;
+  /** @deprecated use `GetAllPrompts12$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts12$outboundSchema;
+  /** @deprecated use `GetAllPrompts12$Outbound` instead. */
+  export type Outbound = GetAllPrompts12$Outbound;
+}
+
+export function getAllPrompts12ToJSON(
+  getAllPrompts12: GetAllPrompts12,
+): string {
+  return JSON.stringify(GetAllPrompts12$outboundSchema.parse(getAllPrompts12));
+}
+
+export function getAllPrompts12FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts12, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts12$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts12' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPrompts1Type$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts1Type
+> = z.nativeEnum(GetAllPrompts1Type);
+
+/** @internal */
+export const GetAllPrompts1Type$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllPrompts1Type
+> = GetAllPrompts1Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts1Type$ {
+  /** @deprecated use `GetAllPrompts1Type$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts1Type$inboundSchema;
+  /** @deprecated use `GetAllPrompts1Type$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts1Type$outboundSchema;
+}
+
+/** @internal */
+export const GetAllPrompts1JsonSchema$inboundSchema: z.ZodType<
+  GetAllPrompts1JsonSchema,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -895,17 +987,17 @@ export const GetAllPromptsResponseFormatJsonSchema$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetAllPromptsResponseFormatJsonSchema$Outbound = {
+export type GetAllPrompts1JsonSchema$Outbound = {
   name: string;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
 /** @internal */
-export const GetAllPromptsResponseFormatJsonSchema$outboundSchema: z.ZodType<
-  GetAllPromptsResponseFormatJsonSchema$Outbound,
+export const GetAllPrompts1JsonSchema$outboundSchema: z.ZodType<
+  GetAllPrompts1JsonSchema$Outbound,
   z.ZodTypeDef,
-  GetAllPromptsResponseFormatJsonSchema
+  GetAllPrompts1JsonSchema
 > = z.object({
   name: z.string(),
   strict: z.boolean().optional(),
@@ -916,35 +1008,93 @@ export const GetAllPromptsResponseFormatJsonSchema$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetAllPromptsResponseFormatJsonSchema$ {
-  /** @deprecated use `GetAllPromptsResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAllPromptsResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAllPromptsResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `GetAllPromptsResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = GetAllPromptsResponseFormatJsonSchema$Outbound;
+export namespace GetAllPrompts1JsonSchema$ {
+  /** @deprecated use `GetAllPrompts1JsonSchema$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts1JsonSchema$inboundSchema;
+  /** @deprecated use `GetAllPrompts1JsonSchema$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts1JsonSchema$outboundSchema;
+  /** @deprecated use `GetAllPrompts1JsonSchema$Outbound` instead. */
+  export type Outbound = GetAllPrompts1JsonSchema$Outbound;
 }
 
-export function getAllPromptsResponseFormatJsonSchemaToJSON(
-  getAllPromptsResponseFormatJsonSchema: GetAllPromptsResponseFormatJsonSchema,
+export function getAllPrompts1JsonSchemaToJSON(
+  getAllPrompts1JsonSchema: GetAllPrompts1JsonSchema,
 ): string {
   return JSON.stringify(
-    GetAllPromptsResponseFormatJsonSchema$outboundSchema.parse(
-      getAllPromptsResponseFormatJsonSchema,
-    ),
+    GetAllPrompts1JsonSchema$outboundSchema.parse(getAllPrompts1JsonSchema),
   );
 }
 
-export function getAllPromptsResponseFormatJsonSchemaFromJSON(
+export function getAllPrompts1JsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<GetAllPromptsResponseFormatJsonSchema, SDKValidationError> {
+): SafeParseResult<GetAllPrompts1JsonSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      GetAllPromptsResponseFormatJsonSchema$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllPromptsResponseFormatJsonSchema' from JSON`,
+    (x) => GetAllPrompts1JsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts1JsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPrompts11$inboundSchema: z.ZodType<
+  GetAllPrompts11,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetAllPrompts1Type$inboundSchema,
+  json_schema: z.lazy(() => GetAllPrompts1JsonSchema$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
+});
+
+/** @internal */
+export type GetAllPrompts11$Outbound = {
+  type: string;
+  json_schema: GetAllPrompts1JsonSchema$Outbound;
+};
+
+/** @internal */
+export const GetAllPrompts11$outboundSchema: z.ZodType<
+  GetAllPrompts11$Outbound,
+  z.ZodTypeDef,
+  GetAllPrompts11
+> = z.object({
+  type: GetAllPrompts1Type$outboundSchema,
+  jsonSchema: z.lazy(() => GetAllPrompts1JsonSchema$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllPrompts11$ {
+  /** @deprecated use `GetAllPrompts11$inboundSchema` instead. */
+  export const inboundSchema = GetAllPrompts11$inboundSchema;
+  /** @deprecated use `GetAllPrompts11$outboundSchema` instead. */
+  export const outboundSchema = GetAllPrompts11$outboundSchema;
+  /** @deprecated use `GetAllPrompts11$Outbound` instead. */
+  export type Outbound = GetAllPrompts11$Outbound;
+}
+
+export function getAllPrompts11ToJSON(
+  getAllPrompts11: GetAllPrompts11,
+): string {
+  return JSON.stringify(GetAllPrompts11$outboundSchema.parse(getAllPrompts11));
+}
+
+export function getAllPrompts11FromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPrompts11, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPrompts11$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPrompts11' from JSON`,
   );
 }
 
@@ -953,38 +1103,28 @@ export const GetAllPromptsResponseFormat1$inboundSchema: z.ZodType<
   GetAllPromptsResponseFormat1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetAllPromptsResponseFormatType$inboundSchema,
-  json_schema: z.lazy(() =>
-    GetAllPromptsResponseFormatJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
-  });
-});
+> = z.union([
+  z.lazy(() => GetAllPrompts11$inboundSchema),
+  z.lazy(() => GetAllPrompts12$inboundSchema),
+  z.lazy(() => GetAllPrompts13$inboundSchema),
+]);
 
 /** @internal */
-export type GetAllPromptsResponseFormat1$Outbound = {
-  type: string;
-  json_schema: GetAllPromptsResponseFormatJsonSchema$Outbound;
-};
+export type GetAllPromptsResponseFormat1$Outbound =
+  | GetAllPrompts11$Outbound
+  | GetAllPrompts12$Outbound
+  | GetAllPrompts13$Outbound;
 
 /** @internal */
 export const GetAllPromptsResponseFormat1$outboundSchema: z.ZodType<
   GetAllPromptsResponseFormat1$Outbound,
   z.ZodTypeDef,
   GetAllPromptsResponseFormat1
-> = z.object({
-  type: GetAllPromptsResponseFormatType$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    GetAllPromptsResponseFormatJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
+> = z.union([
+  z.lazy(() => GetAllPrompts11$outboundSchema),
+  z.lazy(() => GetAllPrompts12$outboundSchema),
+  z.lazy(() => GetAllPrompts13$outboundSchema),
+]);
 
 /**
  * @internal
@@ -1025,16 +1165,24 @@ export const GetAllPromptsResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
-  z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
-  z.lazy(() => GetAllPromptsResponseFormat3$inboundSchema),
+  z.union([
+    z.lazy(() => GetAllPrompts11$inboundSchema),
+    z.lazy(() => GetAllPrompts12$inboundSchema),
+    z.lazy(() => GetAllPrompts13$inboundSchema),
+  ]),
+  GetAllPromptsResponseFormat2$inboundSchema,
+  GetAllPromptsResponseFormat3$inboundSchema,
+  GetAllPromptsResponseFormat4$inboundSchema,
 ]);
 
 /** @internal */
 export type GetAllPromptsResponseFormat$Outbound =
-  | GetAllPromptsResponseFormat1$Outbound
-  | GetAllPromptsResponseFormat2$Outbound
-  | GetAllPromptsResponseFormat3$Outbound;
+  | GetAllPrompts11$Outbound
+  | GetAllPrompts12$Outbound
+  | GetAllPrompts13$Outbound
+  | string
+  | string
+  | string;
 
 /** @internal */
 export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
@@ -1042,9 +1190,14 @@ export const GetAllPromptsResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllPromptsResponseFormat
 > = z.union([
-  z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
-  z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
-  z.lazy(() => GetAllPromptsResponseFormat3$outboundSchema),
+  z.union([
+    z.lazy(() => GetAllPrompts11$outboundSchema),
+    z.lazy(() => GetAllPrompts12$outboundSchema),
+    z.lazy(() => GetAllPrompts13$outboundSchema),
+  ]),
+  GetAllPromptsResponseFormat2$outboundSchema,
+  GetAllPromptsResponseFormat3$outboundSchema,
+  GetAllPromptsResponseFormat4$outboundSchema,
 ]);
 
 /**
@@ -1184,9 +1337,14 @@ export const GetAllPromptsModelParameters$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetAllPromptsResponseFormat1$inboundSchema),
-      z.lazy(() => GetAllPromptsResponseFormat2$inboundSchema),
-      z.lazy(() => GetAllPromptsResponseFormat3$inboundSchema),
+      z.union([
+        z.lazy(() => GetAllPrompts11$inboundSchema),
+        z.lazy(() => GetAllPrompts12$inboundSchema),
+        z.lazy(() => GetAllPrompts13$inboundSchema),
+      ]),
+      GetAllPromptsResponseFormat2$inboundSchema,
+      GetAllPromptsResponseFormat3$inboundSchema,
+      GetAllPromptsResponseFormat4$inboundSchema,
     ]),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$inboundSchema.optional(),
@@ -1215,9 +1373,12 @@ export type GetAllPromptsModelParameters$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | GetAllPromptsResponseFormat1$Outbound
-    | GetAllPromptsResponseFormat2$Outbound
-    | GetAllPromptsResponseFormat3$Outbound
+    | GetAllPrompts11$Outbound
+    | GetAllPrompts12$Outbound
+    | GetAllPrompts13$Outbound
+    | string
+    | string
+    | string
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -1247,9 +1408,14 @@ export const GetAllPromptsModelParameters$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => GetAllPromptsResponseFormat1$outboundSchema),
-      z.lazy(() => GetAllPromptsResponseFormat2$outboundSchema),
-      z.lazy(() => GetAllPromptsResponseFormat3$outboundSchema),
+      z.union([
+        z.lazy(() => GetAllPrompts11$outboundSchema),
+        z.lazy(() => GetAllPrompts12$outboundSchema),
+        z.lazy(() => GetAllPrompts13$outboundSchema),
+      ]),
+      GetAllPromptsResponseFormat2$outboundSchema,
+      GetAllPromptsResponseFormat3$outboundSchema,
+      GetAllPromptsResponseFormat4$outboundSchema,
     ]),
   ).optional(),
   photoRealVersion: GetAllPromptsPhotoRealVersion$outboundSchema.optional(),

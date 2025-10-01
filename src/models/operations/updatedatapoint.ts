@@ -152,13 +152,14 @@ export type UpdateDatapointMessagesDatasetsContent =
   | Array<UpdateDatapoint2TextContentPart | UpdateDatapoint2RefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const UpdateDatapointMessagesDatasetsRequestRequestBodyRole = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type UpdateDatapointMessagesDatasetsRequestRequestBodyRole = ClosedEnum<
   typeof UpdateDatapointMessagesDatasetsRequestRequestBodyRole
@@ -226,7 +227,7 @@ export type UpdateDatapointMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: UpdateDatapointMessagesDatasetsRequestRequestBodyRole;
   /**
@@ -668,14 +669,15 @@ export type UpdateDatapointMessagesDatasetsResponse200Content =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   {
     Assistant: "assistant",
+    Exception: "exception",
   } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   ClosedEnum<
@@ -745,7 +747,7 @@ export type UpdateDatapointMessagesDatasetsAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role:
     UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole;
@@ -6018,7 +6020,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-09-30T08:46:37.543Z",
+    "2025-10-01T15:27:37.468Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6080,7 +6082,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-09-30T08:46:37.543Z"))
+  updated: z.date().default(() => new Date("2025-10-01T15:27:37.468Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

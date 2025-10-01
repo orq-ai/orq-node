@@ -13,5 +13,5 @@ let value: CreatePromptReasoningEffort = "low";
 ## Values
 
 ```typescript
-"disable" | "low" | "medium" | "high"
+"disable" | "minimal" | "low" | "medium" | "high"
 ```

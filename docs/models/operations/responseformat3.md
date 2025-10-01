@@ -5,13 +5,11 @@
 ```typescript
 import { ResponseFormat3 } from "@orq-ai/node/models/operations";
 
-let value: ResponseFormat3 = {
-  type: "text",
-};
+let value: ResponseFormat3 = "url";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                               | [operations.CreatePromptResponseFormatPromptsType](../../models/operations/createpromptresponseformatpromptstype.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+```typescript
+"url" | "base64_json"
+```

@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { Agents } from "./agents.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Contacts } from "./contacts.js";
@@ -12,9 +13,11 @@ import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { Knowledge } from "./knowledge.js";
+import { MemoryStores } from "./memorystores.js";
 import { Models } from "./models.js";
 import { Prompts } from "./prompts.js";
 import { Remoteconfigs } from "./remoteconfigs.js";
+import { Tools } from "./tools.js";
 
 export class Orq extends ClientSDK {
   private _contacts?: Contacts;
@@ -30,6 +33,11 @@ export class Orq extends ClientSDK {
   private _deployments?: Deployments;
   get deployments(): Deployments {
     return (this._deployments ??= new Deployments(this._options));
+  }
+
+  private _agents?: Agents;
+  get agents(): Agents {
+    return (this._agents ??= new Agents(this._options));
   }
 
   private _files?: Files;
@@ -50,6 +58,11 @@ export class Orq extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
+  }
+
+  private _memoryStores?: MemoryStores;
+  get memoryStores(): MemoryStores {
+    return (this._memoryStores ??= new MemoryStores(this._options));
   }
 
   private _datasets?: Datasets;
@@ -75,5 +88,10 @@ export class Orq extends ClientSDK {
   private _budgets?: Budgets;
   get budgets(): Budgets {
     return (this._budgets ??= new Budgets(this._options));
+  }
+
+  private _tools?: Tools;
+  get tools(): Tools {
+    return (this._tools ??= new Tools(this._options));
   }
 }

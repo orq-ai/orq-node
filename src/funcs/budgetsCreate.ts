@@ -28,7 +28,7 @@ import { Result } from "../types/fp.js";
  * Create budget configuration
  *
  * @remarks
- * Create a new budget configuration for a contact or workspace.
+ * Create a new budget configuration for a contact or workspace. For contacts, provide the external ID in entity_id field. For workspaces, only the type field is required (entity_id is not needed). Only one budget can exist per workspace.
  */
 export function budgetsCreate(
   client: OrqCore,

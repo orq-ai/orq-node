@@ -1,25 +1,37 @@
 # ListPromptVersionsResponseFormat1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.ListPromptVersions11`
 
 ```typescript
-import { ListPromptVersionsResponseFormat1 } from "@orq-ai/node/models/operations";
-
-let value: ListPromptVersionsResponseFormat1 = {
+const value: operations.ListPromptVersions11 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
     schema: {
       "key": "<value>",
       "key1": "<value>",
+      "key2": "<value>",
     },
   },
 };
 ```
 
-## Fields
+### `operations.ListPromptVersions12`
 
-| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                         | [operations.ListPromptVersionsResponseFormatType](../../models/operations/listpromptversionsresponseformattype.md)             | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
-| `jsonSchema`                                                                                                                   | [operations.ListPromptVersionsResponseFormatJsonSchema](../../models/operations/listpromptversionsresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+```typescript
+const value: operations.ListPromptVersions12 = {
+  type: "json_object",
+};
+```
+
+### `operations.ListPromptVersions13`
+
+```typescript
+const value: operations.ListPromptVersions13 = {
+  type: "text",
+};
+```
+

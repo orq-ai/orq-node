@@ -5,13 +5,11 @@
 ```typescript
 import { CreatePromptResponseFormat3 } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormat3 = {
-  type: "text",
-};
+let value: CreatePromptResponseFormat3 = "url";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                    | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                                   | [operations.CreatePromptResponseFormatPromptsResponse200ApplicationJSONType](../../models/operations/createpromptresponseformatpromptsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |
+```typescript
+"url" | "base64_json"
+```

@@ -5,15 +5,11 @@
 ```typescript
 import { Eight } from "@orq-ai/node/models/operations";
 
-let value: Eight = {
-  type: "start_with",
-  value: "<value>",
-};
+let value: Eight = "openai/text-embedding-3-small";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                        | Type                                                                                                                                                                                         | Required                                                                                                                                                                                     | Description                                                                                                                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                       | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydatatype.md) | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |
-| `value`                                                                                                                                                                                      | *string*                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                           | N/A                                                                                                                                                                                          |
+```typescript
+"openai/text-embedding-3-small"
+```

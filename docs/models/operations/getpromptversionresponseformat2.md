@@ -5,13 +5,11 @@
 ```typescript
 import { GetPromptVersionResponseFormat2 } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionResponseFormat2 = {
-  type: "json_object",
-};
+let value: GetPromptVersionResponseFormat2 = "wav";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                        | Type                                                                                                                         | Required                                                                                                                     | Description                                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                       | [operations.GetPromptVersionResponseFormatPromptsType](../../models/operations/getpromptversionresponseformatpromptstype.md) | :heavy_check_mark:                                                                                                           | N/A                                                                                                                          |
+```typescript
+"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
+```

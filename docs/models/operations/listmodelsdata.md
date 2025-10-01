@@ -10,7 +10,7 @@ import { ListModelsData } from "@orq-ai/node/models/operations";
 let value: ListModelsData = {
   id: "<id>",
   created: 6758.51,
-  type: "vision",
+  type: "image",
   ownedBy: "vendor",
 };
 ```

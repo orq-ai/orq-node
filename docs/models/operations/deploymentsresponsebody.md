@@ -30,7 +30,7 @@ let value: DeploymentsResponseBody = {
           },
         ],
         model: "LeBaron",
-        modelType: "stt",
+        modelType: "rerank",
         modelParameters: {},
         provider: "huggingface",
         messages: [],

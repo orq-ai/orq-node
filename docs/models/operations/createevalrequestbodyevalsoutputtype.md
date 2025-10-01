@@ -11,5 +11,5 @@ let value: CreateEvalRequestBodyEvalsOutputType = "boolean";
 ## Values
 
 ```typescript
-"boolean" | "number" | "string"
+"boolean" | "number"
 ```

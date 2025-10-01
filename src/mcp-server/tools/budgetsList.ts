@@ -12,9 +12,9 @@ const args = {
 
 export const tool$budgetsList: ToolDefinition<typeof args> = {
   name: "budgets-list",
-  description: `List contact budget configurations
+  description: `List budget configurations
 
-Retrieves a paginated list of budget configurations in your workspace. Use pagination parameters to navigate through large budget lists efficiently.`,
+Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await budgetsList(

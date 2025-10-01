@@ -10,7 +10,7 @@ import { DeploymentInvokeResponseBody } from "@orq-ai/node/models/operations";
 let value: DeploymentInvokeResponseBody = {
   id: "<id>",
   created: new Date("2025-06-29T20:07:01.844Z"),
-  object: "completion",
+  object: "chat",
   model: "Model Y",
   provider: "cerebras",
   isFinal: false,

@@ -13,10 +13,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Budgets extends ClientSDK {
   /**
-   * List contact budget configurations
+   * List budget configurations
    *
    * @remarks
-   * Retrieves a paginated list of budget configurations in your workspace. Use pagination parameters to navigate through large budget lists efficiently.
+   * Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.
    */
   async list(
     request?: operations.ListBudgetsRequest | undefined,
@@ -33,7 +33,7 @@ export class Budgets extends ClientSDK {
    * Create budget configuration
    *
    * @remarks
-   * Create a new budget configuration for a contact or workspace.
+   * Create a new budget configuration for a contact or workspace. For contacts, provide the external ID in entity_id field. For workspaces, only the type field is required (entity_id is not needed). Only one budget can exist per workspace.
    */
   async create(
     request: operations.CreateBudgetRequestBody,
@@ -47,10 +47,10 @@ export class Budgets extends ClientSDK {
   }
 
   /**
-   * Get contact budget configuration
+   * Get budget configuration
    *
    * @remarks
-   * Get contact budget configuration by ID
+   * Get budget configuration by ID.
    */
   async get(
     request: operations.GetBudgetRequest,

@@ -25,10 +25,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List contact budget configurations
+ * List budget configurations
  *
  * @remarks
- * Retrieves a paginated list of budget configurations in your workspace. Use pagination parameters to navigate through large budget lists efficiently.
+ * Retrieves a paginated list of budget configurations in your workspace. Supports filtering by type (contact or workspace). For workspace budgets, only one budget can exist per workspace.
  */
 export function budgetsList(
   client: OrqCore,

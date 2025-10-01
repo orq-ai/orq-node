@@ -5,13 +5,11 @@
 ```typescript
 import { UpdatePromptResponseFormat3 } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseFormat3 = {
-  type: "text",
-};
+let value: UpdatePromptResponseFormat3 = "url";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                             | [operations.UpdatePromptResponseFormatPromptsRequestType](../../models/operations/updatepromptresponseformatpromptsrequesttype.md) | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |
+```typescript
+"url" | "base64_json"
+```

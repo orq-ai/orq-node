@@ -193,14 +193,15 @@ export type DeploymentCreateMetricMessagesDeploymentsMetricsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
   {
     Assistant: "assistant",
+    Exception: "exception",
   } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
   ClosedEnum<
@@ -270,7 +271,7 @@ export type DeploymentCreateMetricMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole;
   /**
@@ -697,13 +698,14 @@ export type DeploymentCreateMetricChoicesContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole =
   ClosedEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole>;
@@ -769,7 +771,7 @@ export type ChoicesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole;
   /**

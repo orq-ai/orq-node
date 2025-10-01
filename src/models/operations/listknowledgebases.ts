@@ -51,6 +51,10 @@ export type ListKnowledgeBasesRetrievalType = ClosedEnum<
  */
 export type ListKnowledgeBasesRerankConfig = {
   /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
   rerankThreshold?: number | undefined;
@@ -267,10 +271,12 @@ export const ListKnowledgeBasesRerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  top_k: z.number().int().default(5),
   rerank_threshold: z.number().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "top_k": "topK",
     "rerank_threshold": "rerankThreshold",
     "rerank_model": "rerankModel",
   });
@@ -278,6 +284,7 @@ export const ListKnowledgeBasesRerankConfig$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ListKnowledgeBasesRerankConfig$Outbound = {
+  top_k: number;
   rerank_threshold: number;
   rerank_model: string;
 };
@@ -288,10 +295,12 @@ export const ListKnowledgeBasesRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListKnowledgeBasesRerankConfig
 > = z.object({
+  topK: z.number().int().default(5),
   rerankThreshold: z.number().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    topK: "top_k",
     rerankThreshold: "rerank_threshold",
     rerankModel: "rerank_model",
   });

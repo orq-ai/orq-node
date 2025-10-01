@@ -5,13 +5,11 @@
 ```typescript
 import { Seven } from "@orq-ai/node/models/operations";
 
-let value: Seven = {
-  type: "contains_valid_link",
-};
+let value: Seven = "openai/text-embedding-3-large";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                | Type                                                                                                                                                                                 | Required                                                                                                                                                                             | Description                                                                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                                               | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodytype.md) | :heavy_check_mark:                                                                                                                                                                   | N/A                                                                                                                                                                                  |
+```typescript
+"openai/text-embedding-3-large"
+```

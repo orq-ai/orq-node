@@ -142,13 +142,14 @@ export type PrefixMessagesContent =
   | Array<TextContentPart | RefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const DeploymentGetConfigPrefixMessagesDeploymentsRole = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type DeploymentGetConfigPrefixMessagesDeploymentsRole = ClosedEnum<
   typeof DeploymentGetConfigPrefixMessagesDeploymentsRole
@@ -212,7 +213,7 @@ export type AssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: DeploymentGetConfigPrefixMessagesDeploymentsRole;
   /**
@@ -594,13 +595,14 @@ export type DeploymentGetConfigMessagesContent =
   | Array<TwoTextContentPart | TwoRefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const DeploymentGetConfigMessagesDeploymentsRequestRole = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type DeploymentGetConfigMessagesDeploymentsRequestRole = ClosedEnum<
   typeof DeploymentGetConfigMessagesDeploymentsRequestRole
@@ -664,7 +666,7 @@ export type MessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: DeploymentGetConfigMessagesDeploymentsRequestRole;
   /**
@@ -1321,12 +1323,12 @@ export const DeploymentGetConfigType = {
   Chat: "chat",
   Completion: "completion",
   Embedding: "embedding",
-  Vision: "vision",
   Image: "image",
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
   Moderations: "moderations",
+  Vision: "vision",
 } as const;
 /**
  * The type of the model. Current `chat`,`completion` and `image` are supported
@@ -1506,44 +1508,81 @@ export type DeploymentGetConfigFormat = ClosedEnum<
   typeof DeploymentGetConfigFormat
 >;
 
-export const DeploymentGetConfigResponseFormatDeploymentsType = {
+export const DeploymentGetConfigResponseFormat4 = {
+  Json: "json",
+  Text: "text",
+  Srt: "srt",
+  VerboseJson: "verbose_json",
+  Vtt: "vtt",
+} as const;
+export type DeploymentGetConfigResponseFormat4 = ClosedEnum<
+  typeof DeploymentGetConfigResponseFormat4
+>;
+
+export const DeploymentGetConfigResponseFormat3 = {
+  Url: "url",
+  Base64Json: "base64_json",
+} as const;
+export type DeploymentGetConfigResponseFormat3 = ClosedEnum<
+  typeof DeploymentGetConfigResponseFormat3
+>;
+
+export const DeploymentGetConfigResponseFormat2 = {
+  Mp3: "mp3",
+  Opus: "opus",
+  Aac: "aac",
+  Flac: "flac",
+  Wav: "wav",
+  Pcm: "pcm",
+} as const;
+export type DeploymentGetConfigResponseFormat2 = ClosedEnum<
+  typeof DeploymentGetConfigResponseFormat2
+>;
+
+export const DeploymentGetConfig1DeploymentsType = {
   Text: "text",
 } as const;
-export type DeploymentGetConfigResponseFormatDeploymentsType = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormatDeploymentsType
+export type DeploymentGetConfig1DeploymentsType = ClosedEnum<
+  typeof DeploymentGetConfig1DeploymentsType
 >;
 
-export type DeploymentGetConfigResponseFormat3 = {
-  type: DeploymentGetConfigResponseFormatDeploymentsType;
+export type DeploymentGetConfig13 = {
+  type: DeploymentGetConfig1DeploymentsType;
 };
 
-export const DeploymentGetConfigResponseFormatType = {
+export const DeploymentGetConfig1Type = {
   JsonObject: "json_object",
 } as const;
-export type DeploymentGetConfigResponseFormatType = ClosedEnum<
-  typeof DeploymentGetConfigResponseFormatType
+export type DeploymentGetConfig1Type = ClosedEnum<
+  typeof DeploymentGetConfig1Type
 >;
 
-export type DeploymentGetConfigResponseFormat2 = {
-  type: DeploymentGetConfigResponseFormatType;
+export type DeploymentGetConfig12 = {
+  type: DeploymentGetConfig1Type;
 };
 
-export const DeploymentGetConfigResponseFormatDeploymentsResponseType = {
+export const DeploymentGetConfig1DeploymentsResponseType = {
   JsonSchema: "json_schema",
 } as const;
-export type DeploymentGetConfigResponseFormatDeploymentsResponseType =
-  ClosedEnum<typeof DeploymentGetConfigResponseFormatDeploymentsResponseType>;
+export type DeploymentGetConfig1DeploymentsResponseType = ClosedEnum<
+  typeof DeploymentGetConfig1DeploymentsResponseType
+>;
 
-export type DeploymentGetConfigResponseFormatJsonSchema = {
+export type DeploymentGetConfig1JsonSchema = {
   name: string;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
-export type DeploymentGetConfigResponseFormat1 = {
-  type: DeploymentGetConfigResponseFormatDeploymentsResponseType;
-  jsonSchema: DeploymentGetConfigResponseFormatJsonSchema;
+export type DeploymentGetConfig11 = {
+  type: DeploymentGetConfig1DeploymentsResponseType;
+  jsonSchema: DeploymentGetConfig1JsonSchema;
 };
+
+export type DeploymentGetConfigResponseFormat1 =
+  | DeploymentGetConfig11
+  | DeploymentGetConfig12
+  | DeploymentGetConfig13;
 
 /**
  * An object specifying the format that the model must output.
@@ -1557,9 +1596,12 @@ export type DeploymentGetConfigResponseFormat1 = {
  * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
  */
 export type DeploymentGetConfigResponseFormat =
-  | DeploymentGetConfigResponseFormat1
+  | DeploymentGetConfig11
+  | DeploymentGetConfig12
+  | DeploymentGetConfig13
   | DeploymentGetConfigResponseFormat2
-  | DeploymentGetConfigResponseFormat3;
+  | DeploymentGetConfigResponseFormat3
+  | DeploymentGetConfigResponseFormat4;
 
 /**
  * The version of photoReal to use. Must be v1 or v2. Only available for `leonardoai` provider
@@ -1594,6 +1636,7 @@ export type DeploymentGetConfigEncodingFormat = ClosedEnum<
  */
 export const DeploymentGetConfigReasoningEffort = {
   Disable: "disable",
+  Minimal: "minimal",
   Low: "low",
   Medium: "medium",
   High: "high",
@@ -1684,9 +1727,12 @@ export type ParametersT = {
    * Important: when using JSON mode, you must also instruct the model to produce JSON yourself via a system or user message. Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit, resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off if finish_reason="length", which indicates the generation exceeded max_tokens or the conversation exceeded the max context length.
    */
   responseFormat?:
-    | DeploymentGetConfigResponseFormat1
+    | DeploymentGetConfig11
+    | DeploymentGetConfig12
+    | DeploymentGetConfig13
     | DeploymentGetConfigResponseFormat2
     | DeploymentGetConfigResponseFormat3
+    | DeploymentGetConfigResponseFormat4
     | null
     | undefined;
   /**
@@ -9529,50 +9575,36 @@ export namespace DeploymentGetConfigFormat$ {
 }
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatDeploymentsType> = z
-    .nativeEnum(DeploymentGetConfigResponseFormatDeploymentsType);
+export const DeploymentGetConfigResponseFormat4$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigResponseFormat4
+> = z.nativeEnum(DeploymentGetConfigResponseFormat4);
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatDeploymentsType> =
-    DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
+export const DeploymentGetConfigResponseFormat4$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigResponseFormat4
+> = DeploymentGetConfigResponseFormat4$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfigResponseFormatDeploymentsType$ {
-  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema` instead. */
+export namespace DeploymentGetConfigResponseFormat4$ {
+  /** @deprecated use `DeploymentGetConfigResponseFormat4$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfigResponseFormat4$inboundSchema;
+  /** @deprecated use `DeploymentGetConfigResponseFormat4$outboundSchema` instead. */
   export const outboundSchema =
-    DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema;
+    DeploymentGetConfigResponseFormat4$outboundSchema;
 }
 
 /** @internal */
-export const DeploymentGetConfigResponseFormat3$inboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfigResponseFormatDeploymentsType$inboundSchema,
-});
+export const DeploymentGetConfigResponseFormat3$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigResponseFormat3
+> = z.nativeEnum(DeploymentGetConfigResponseFormat3);
 
 /** @internal */
-export type DeploymentGetConfigResponseFormat3$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const DeploymentGetConfigResponseFormat3$outboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat3$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfigResponseFormat3
-> = z.object({
-  type: DeploymentGetConfigResponseFormatDeploymentsType$outboundSchema,
-});
+export const DeploymentGetConfigResponseFormat3$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigResponseFormat3
+> = DeploymentGetConfigResponseFormat3$inboundSchema;
 
 /**
  * @internal
@@ -9584,77 +9616,17 @@ export namespace DeploymentGetConfigResponseFormat3$ {
   /** @deprecated use `DeploymentGetConfigResponseFormat3$outboundSchema` instead. */
   export const outboundSchema =
     DeploymentGetConfigResponseFormat3$outboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormat3$Outbound` instead. */
-  export type Outbound = DeploymentGetConfigResponseFormat3$Outbound;
-}
-
-export function deploymentGetConfigResponseFormat3ToJSON(
-  deploymentGetConfigResponseFormat3: DeploymentGetConfigResponseFormat3,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigResponseFormat3$outboundSchema.parse(
-      deploymentGetConfigResponseFormat3,
-    ),
-  );
-}
-
-export function deploymentGetConfigResponseFormat3FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentGetConfigResponseFormat3, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigResponseFormat3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigResponseFormat3' from JSON`,
-  );
 }
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatType> = z.nativeEnum(
-    DeploymentGetConfigResponseFormatType,
-  );
+export const DeploymentGetConfigResponseFormat2$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigResponseFormat2
+> = z.nativeEnum(DeploymentGetConfigResponseFormat2);
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatType$outboundSchema:
-  z.ZodNativeEnum<typeof DeploymentGetConfigResponseFormatType> =
-    DeploymentGetConfigResponseFormatType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace DeploymentGetConfigResponseFormatType$ {
-  /** @deprecated use `DeploymentGetConfigResponseFormatType$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigResponseFormatType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatType$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigResponseFormatType$outboundSchema;
-}
-
-/** @internal */
-export const DeploymentGetConfigResponseFormat2$inboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: DeploymentGetConfigResponseFormatType$inboundSchema,
-});
-
-/** @internal */
-export type DeploymentGetConfigResponseFormat2$Outbound = {
-  type: string;
-};
-
-/** @internal */
-export const DeploymentGetConfigResponseFormat2$outboundSchema: z.ZodType<
-  DeploymentGetConfigResponseFormat2$Outbound,
-  z.ZodTypeDef,
-  DeploymentGetConfigResponseFormat2
-> = z.object({
-  type: DeploymentGetConfigResponseFormatType$outboundSchema,
-});
+export const DeploymentGetConfigResponseFormat2$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfigResponseFormat2
+> = DeploymentGetConfigResponseFormat2$inboundSchema;
 
 /**
  * @internal
@@ -9666,126 +9638,307 @@ export namespace DeploymentGetConfigResponseFormat2$ {
   /** @deprecated use `DeploymentGetConfigResponseFormat2$outboundSchema` instead. */
   export const outboundSchema =
     DeploymentGetConfigResponseFormat2$outboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormat2$Outbound` instead. */
-  export type Outbound = DeploymentGetConfigResponseFormat2$Outbound;
-}
-
-export function deploymentGetConfigResponseFormat2ToJSON(
-  deploymentGetConfigResponseFormat2: DeploymentGetConfigResponseFormat2,
-): string {
-  return JSON.stringify(
-    DeploymentGetConfigResponseFormat2$outboundSchema.parse(
-      deploymentGetConfigResponseFormat2,
-    ),
-  );
-}
-
-export function deploymentGetConfigResponseFormat2FromJSON(
-  jsonString: string,
-): SafeParseResult<DeploymentGetConfigResponseFormat2, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      DeploymentGetConfigResponseFormat2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'DeploymentGetConfigResponseFormat2' from JSON`,
-  );
 }
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatDeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigResponseFormatDeploymentsResponseType
-  > = z.nativeEnum(DeploymentGetConfigResponseFormatDeploymentsResponseType);
+export const DeploymentGetConfig1DeploymentsType$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig1DeploymentsType
+> = z.nativeEnum(DeploymentGetConfig1DeploymentsType);
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatDeploymentsResponseType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof DeploymentGetConfigResponseFormatDeploymentsResponseType
-  > = DeploymentGetConfigResponseFormatDeploymentsResponseType$inboundSchema;
+export const DeploymentGetConfig1DeploymentsType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig1DeploymentsType> =
+    DeploymentGetConfig1DeploymentsType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfigResponseFormatDeploymentsResponseType$ {
-  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsResponseType$inboundSchema` instead. */
+export namespace DeploymentGetConfig1DeploymentsType$ {
+  /** @deprecated use `DeploymentGetConfig1DeploymentsType$inboundSchema` instead. */
   export const inboundSchema =
-    DeploymentGetConfigResponseFormatDeploymentsResponseType$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatDeploymentsResponseType$outboundSchema` instead. */
+    DeploymentGetConfig1DeploymentsType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig1DeploymentsType$outboundSchema` instead. */
   export const outboundSchema =
-    DeploymentGetConfigResponseFormatDeploymentsResponseType$outboundSchema;
+    DeploymentGetConfig1DeploymentsType$outboundSchema;
 }
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatJsonSchema$inboundSchema:
-  z.ZodType<
-    DeploymentGetConfigResponseFormatJsonSchema,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    name: z.string(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
+export const DeploymentGetConfig13$inboundSchema: z.ZodType<
+  DeploymentGetConfig13,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfig1DeploymentsType$inboundSchema,
+});
 
 /** @internal */
-export type DeploymentGetConfigResponseFormatJsonSchema$Outbound = {
+export type DeploymentGetConfig13$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const DeploymentGetConfig13$outboundSchema: z.ZodType<
+  DeploymentGetConfig13$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig13
+> = z.object({
+  type: DeploymentGetConfig1DeploymentsType$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig13$ {
+  /** @deprecated use `DeploymentGetConfig13$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig13$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig13$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig13$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig13$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig13$Outbound;
+}
+
+export function deploymentGetConfig13ToJSON(
+  deploymentGetConfig13: DeploymentGetConfig13,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig13$outboundSchema.parse(deploymentGetConfig13),
+  );
+}
+
+export function deploymentGetConfig13FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfig13, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfig13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig13' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfig1Type$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig1Type
+> = z.nativeEnum(DeploymentGetConfig1Type);
+
+/** @internal */
+export const DeploymentGetConfig1Type$outboundSchema: z.ZodNativeEnum<
+  typeof DeploymentGetConfig1Type
+> = DeploymentGetConfig1Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig1Type$ {
+  /** @deprecated use `DeploymentGetConfig1Type$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig1Type$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig1Type$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig1Type$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfig12$inboundSchema: z.ZodType<
+  DeploymentGetConfig12,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfig1Type$inboundSchema,
+});
+
+/** @internal */
+export type DeploymentGetConfig12$Outbound = {
+  type: string;
+};
+
+/** @internal */
+export const DeploymentGetConfig12$outboundSchema: z.ZodType<
+  DeploymentGetConfig12$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig12
+> = z.object({
+  type: DeploymentGetConfig1Type$outboundSchema,
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig12$ {
+  /** @deprecated use `DeploymentGetConfig12$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig12$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig12$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig12$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig12$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig12$Outbound;
+}
+
+export function deploymentGetConfig12ToJSON(
+  deploymentGetConfig12: DeploymentGetConfig12,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig12$outboundSchema.parse(deploymentGetConfig12),
+  );
+}
+
+export function deploymentGetConfig12FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfig12, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfig12$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig12' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfig1DeploymentsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig1DeploymentsResponseType> = z
+    .nativeEnum(DeploymentGetConfig1DeploymentsResponseType);
+
+/** @internal */
+export const DeploymentGetConfig1DeploymentsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof DeploymentGetConfig1DeploymentsResponseType> =
+    DeploymentGetConfig1DeploymentsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig1DeploymentsResponseType$ {
+  /** @deprecated use `DeploymentGetConfig1DeploymentsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    DeploymentGetConfig1DeploymentsResponseType$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig1DeploymentsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    DeploymentGetConfig1DeploymentsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const DeploymentGetConfig1JsonSchema$inboundSchema: z.ZodType<
+  DeploymentGetConfig1JsonSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  strict: z.boolean().optional(),
+  schema: z.record(z.any()),
+});
+
+/** @internal */
+export type DeploymentGetConfig1JsonSchema$Outbound = {
   name: string;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
 
 /** @internal */
-export const DeploymentGetConfigResponseFormatJsonSchema$outboundSchema:
-  z.ZodType<
-    DeploymentGetConfigResponseFormatJsonSchema$Outbound,
-    z.ZodTypeDef,
-    DeploymentGetConfigResponseFormatJsonSchema
-  > = z.object({
-    name: z.string(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
+export const DeploymentGetConfig1JsonSchema$outboundSchema: z.ZodType<
+  DeploymentGetConfig1JsonSchema$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig1JsonSchema
+> = z.object({
+  name: z.string(),
+  strict: z.boolean().optional(),
+  schema: z.record(z.any()),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DeploymentGetConfigResponseFormatJsonSchema$ {
-  /** @deprecated use `DeploymentGetConfigResponseFormatJsonSchema$inboundSchema` instead. */
-  export const inboundSchema =
-    DeploymentGetConfigResponseFormatJsonSchema$inboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatJsonSchema$outboundSchema` instead. */
-  export const outboundSchema =
-    DeploymentGetConfigResponseFormatJsonSchema$outboundSchema;
-  /** @deprecated use `DeploymentGetConfigResponseFormatJsonSchema$Outbound` instead. */
-  export type Outbound = DeploymentGetConfigResponseFormatJsonSchema$Outbound;
+export namespace DeploymentGetConfig1JsonSchema$ {
+  /** @deprecated use `DeploymentGetConfig1JsonSchema$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig1JsonSchema$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig1JsonSchema$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig1JsonSchema$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig1JsonSchema$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig1JsonSchema$Outbound;
 }
 
-export function deploymentGetConfigResponseFormatJsonSchemaToJSON(
-  deploymentGetConfigResponseFormatJsonSchema:
-    DeploymentGetConfigResponseFormatJsonSchema,
+export function deploymentGetConfig1JsonSchemaToJSON(
+  deploymentGetConfig1JsonSchema: DeploymentGetConfig1JsonSchema,
 ): string {
   return JSON.stringify(
-    DeploymentGetConfigResponseFormatJsonSchema$outboundSchema.parse(
-      deploymentGetConfigResponseFormatJsonSchema,
+    DeploymentGetConfig1JsonSchema$outboundSchema.parse(
+      deploymentGetConfig1JsonSchema,
     ),
   );
 }
 
-export function deploymentGetConfigResponseFormatJsonSchemaFromJSON(
+export function deploymentGetConfig1JsonSchemaFromJSON(
   jsonString: string,
-): SafeParseResult<
-  DeploymentGetConfigResponseFormatJsonSchema,
-  SDKValidationError
-> {
+): SafeParseResult<DeploymentGetConfig1JsonSchema, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      DeploymentGetConfigResponseFormatJsonSchema$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'DeploymentGetConfigResponseFormatJsonSchema' from JSON`,
+    (x) => DeploymentGetConfig1JsonSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig1JsonSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeploymentGetConfig11$inboundSchema: z.ZodType<
+  DeploymentGetConfig11,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: DeploymentGetConfig1DeploymentsResponseType$inboundSchema,
+  json_schema: z.lazy(() => DeploymentGetConfig1JsonSchema$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "json_schema": "jsonSchema",
+  });
+});
+
+/** @internal */
+export type DeploymentGetConfig11$Outbound = {
+  type: string;
+  json_schema: DeploymentGetConfig1JsonSchema$Outbound;
+};
+
+/** @internal */
+export const DeploymentGetConfig11$outboundSchema: z.ZodType<
+  DeploymentGetConfig11$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfig11
+> = z.object({
+  type: DeploymentGetConfig1DeploymentsResponseType$outboundSchema,
+  jsonSchema: z.lazy(() => DeploymentGetConfig1JsonSchema$outboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    jsonSchema: "json_schema",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeploymentGetConfig11$ {
+  /** @deprecated use `DeploymentGetConfig11$inboundSchema` instead. */
+  export const inboundSchema = DeploymentGetConfig11$inboundSchema;
+  /** @deprecated use `DeploymentGetConfig11$outboundSchema` instead. */
+  export const outboundSchema = DeploymentGetConfig11$outboundSchema;
+  /** @deprecated use `DeploymentGetConfig11$Outbound` instead. */
+  export type Outbound = DeploymentGetConfig11$Outbound;
+}
+
+export function deploymentGetConfig11ToJSON(
+  deploymentGetConfig11: DeploymentGetConfig11,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfig11$outboundSchema.parse(deploymentGetConfig11),
+  );
+}
+
+export function deploymentGetConfig11FromJSON(
+  jsonString: string,
+): SafeParseResult<DeploymentGetConfig11, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeploymentGetConfig11$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentGetConfig11' from JSON`,
   );
 }
 
@@ -9794,38 +9947,28 @@ export const DeploymentGetConfigResponseFormat1$inboundSchema: z.ZodType<
   DeploymentGetConfigResponseFormat1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: DeploymentGetConfigResponseFormatDeploymentsResponseType$inboundSchema,
-  json_schema: z.lazy(() =>
-    DeploymentGetConfigResponseFormatJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "json_schema": "jsonSchema",
-  });
-});
+> = z.union([
+  z.lazy(() => DeploymentGetConfig11$inboundSchema),
+  z.lazy(() => DeploymentGetConfig12$inboundSchema),
+  z.lazy(() => DeploymentGetConfig13$inboundSchema),
+]);
 
 /** @internal */
-export type DeploymentGetConfigResponseFormat1$Outbound = {
-  type: string;
-  json_schema: DeploymentGetConfigResponseFormatJsonSchema$Outbound;
-};
+export type DeploymentGetConfigResponseFormat1$Outbound =
+  | DeploymentGetConfig11$Outbound
+  | DeploymentGetConfig12$Outbound
+  | DeploymentGetConfig13$Outbound;
 
 /** @internal */
 export const DeploymentGetConfigResponseFormat1$outboundSchema: z.ZodType<
   DeploymentGetConfigResponseFormat1$Outbound,
   z.ZodTypeDef,
   DeploymentGetConfigResponseFormat1
-> = z.object({
-  type: DeploymentGetConfigResponseFormatDeploymentsResponseType$outboundSchema,
-  jsonSchema: z.lazy(() =>
-    DeploymentGetConfigResponseFormatJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
+> = z.union([
+  z.lazy(() => DeploymentGetConfig11$outboundSchema),
+  z.lazy(() => DeploymentGetConfig12$outboundSchema),
+  z.lazy(() => DeploymentGetConfig13$outboundSchema),
+]);
 
 /**
  * @internal
@@ -9868,16 +10011,24 @@ export const DeploymentGetConfigResponseFormat$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => DeploymentGetConfigResponseFormat1$inboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat3$inboundSchema),
+  z.union([
+    z.lazy(() => DeploymentGetConfig11$inboundSchema),
+    z.lazy(() => DeploymentGetConfig12$inboundSchema),
+    z.lazy(() => DeploymentGetConfig13$inboundSchema),
+  ]),
+  DeploymentGetConfigResponseFormat2$inboundSchema,
+  DeploymentGetConfigResponseFormat3$inboundSchema,
+  DeploymentGetConfigResponseFormat4$inboundSchema,
 ]);
 
 /** @internal */
 export type DeploymentGetConfigResponseFormat$Outbound =
-  | DeploymentGetConfigResponseFormat1$Outbound
-  | DeploymentGetConfigResponseFormat2$Outbound
-  | DeploymentGetConfigResponseFormat3$Outbound;
+  | DeploymentGetConfig11$Outbound
+  | DeploymentGetConfig12$Outbound
+  | DeploymentGetConfig13$Outbound
+  | string
+  | string
+  | string;
 
 /** @internal */
 export const DeploymentGetConfigResponseFormat$outboundSchema: z.ZodType<
@@ -9885,9 +10036,14 @@ export const DeploymentGetConfigResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentGetConfigResponseFormat
 > = z.union([
-  z.lazy(() => DeploymentGetConfigResponseFormat1$outboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
-  z.lazy(() => DeploymentGetConfigResponseFormat3$outboundSchema),
+  z.union([
+    z.lazy(() => DeploymentGetConfig11$outboundSchema),
+    z.lazy(() => DeploymentGetConfig12$outboundSchema),
+    z.lazy(() => DeploymentGetConfig13$outboundSchema),
+  ]),
+  DeploymentGetConfigResponseFormat2$outboundSchema,
+  DeploymentGetConfigResponseFormat3$outboundSchema,
+  DeploymentGetConfigResponseFormat4$outboundSchema,
 ]);
 
 /**
@@ -10032,9 +10188,14 @@ export const ParametersT$inboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentGetConfigResponseFormat1$inboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat2$inboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat3$inboundSchema),
+      z.union([
+        z.lazy(() => DeploymentGetConfig11$inboundSchema),
+        z.lazy(() => DeploymentGetConfig12$inboundSchema),
+        z.lazy(() => DeploymentGetConfig13$inboundSchema),
+      ]),
+      DeploymentGetConfigResponseFormat2$inboundSchema,
+      DeploymentGetConfigResponseFormat3$inboundSchema,
+      DeploymentGetConfigResponseFormat4$inboundSchema,
     ]),
   ).optional(),
   photoRealVersion: DeploymentGetConfigPhotoRealVersion$inboundSchema
@@ -10064,9 +10225,12 @@ export type ParametersT$Outbound = {
   quality?: string | undefined;
   style?: string | undefined;
   responseFormat?:
-    | DeploymentGetConfigResponseFormat1$Outbound
-    | DeploymentGetConfigResponseFormat2$Outbound
-    | DeploymentGetConfigResponseFormat3$Outbound
+    | DeploymentGetConfig11$Outbound
+    | DeploymentGetConfig12$Outbound
+    | DeploymentGetConfig13$Outbound
+    | string
+    | string
+    | string
     | null
     | undefined;
   photoRealVersion?: string | undefined;
@@ -10096,9 +10260,14 @@ export const ParametersT$outboundSchema: z.ZodType<
   style: z.string().optional(),
   responseFormat: z.nullable(
     z.union([
-      z.lazy(() => DeploymentGetConfigResponseFormat1$outboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat2$outboundSchema),
-      z.lazy(() => DeploymentGetConfigResponseFormat3$outboundSchema),
+      z.union([
+        z.lazy(() => DeploymentGetConfig11$outboundSchema),
+        z.lazy(() => DeploymentGetConfig12$outboundSchema),
+        z.lazy(() => DeploymentGetConfig13$outboundSchema),
+      ]),
+      DeploymentGetConfigResponseFormat2$outboundSchema,
+      DeploymentGetConfigResponseFormat3$outboundSchema,
+      DeploymentGetConfigResponseFormat4$outboundSchema,
     ]),
   ).optional(),
   photoRealVersion: DeploymentGetConfigPhotoRealVersion$outboundSchema

@@ -60,3 +60,42 @@ const value: operations.ResponseBodyPython = {
 };
 ```
 
+### `operations.ResponseBodyFunction`
+
+```typescript
+const value: operations.ResponseBodyFunction = {
+  id: "<id>",
+  description: "pish mortally likely legitimize awareness easily zowie",
+  type: "function_eval",
+  functionParams: {
+    type: "cosine_similarity",
+  },
+  key: "<key>",
+};
+```
+
+### `operations.Ragas`
+
+```typescript
+const value: operations.Ragas = {
+  id: "<id>",
+  description: "truthfully deselect until",
+  type: "ragas",
+  ragasMetric: "context_entities_recall",
+  key: "<key>",
+  model: "Model S",
+};
+```
+
+### `operations.Typescript`
+
+```typescript
+const value: operations.Typescript = {
+  id: "<id>",
+  description: "recklessly bare behind ultimately athletic",
+  code: "<value>",
+  type: "typescript_eval",
+  key: "<key>",
+};
+```
+

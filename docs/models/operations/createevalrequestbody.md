@@ -28,14 +28,14 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.Http`
+### `operations.RequestBodyHTTP`
 
 ```typescript
-const value: operations.Http = {
-  outputType: "string",
+const value: operations.RequestBodyHTTP = {
+  outputType: "boolean",
   type: "http_eval",
-  url: "https://tempting-quinoa.info",
-  method: "POST",
+  url: "https://lumpy-petal.name/",
+  method: "GET",
   headers: {},
   payload: {
     "key": "<value>",
@@ -51,7 +51,7 @@ const value: operations.Http = {
 
 ```typescript
 const value: operations.Python = {
-  outputType: "string",
+  outputType: "number",
   code: "<value>",
   type: "python_eval",
   path: "Default",

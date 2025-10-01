@@ -1,0 +1,21 @@
+# UpdateToolRequestBodyArguments
+
+## Example Usage
+
+```typescript
+import { UpdateToolRequestBodyArguments } from "@orq-ai/node/models/operations";
+
+let value: UpdateToolRequestBodyArguments = {
+  type: "number",
+  description: "whoa incidentally impolite spew victoriously ripe geez boohoo",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                 | Type                                                                                                                                                                  | Required                                                                                                                                                              | Description                                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                | [operations.UpdateToolRequestBodyToolsRequest3Type](../../models/operations/updatetoolrequestbodytoolsrequest3type.md)                                                | :heavy_check_mark:                                                                                                                                                    | The type of the argument.                                                                                                                                             |
+| `description`                                                                                                                                                         | *string*                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                    | A description of the argument.                                                                                                                                        |
+| `sendToModel`                                                                                                                                                         | *boolean*                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                    | Whether to send the argument to the model. If set to false, the argument will not be sent to the model and needs to be provided by the user or it will be left blank. |
+| `defaultValue`                                                                                                                                                        | *operations.UpdateToolRequestBodyDefaultValue*                                                                                                                        | :heavy_minus_sign:                                                                                                                                                    | The default value of the argument.                                                                                                                                    |

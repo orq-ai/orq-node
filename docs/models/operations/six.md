@@ -5,13 +5,11 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = {
-  type: "contains_url",
-};
+let value: Six = "azure/text-embedding-3-small";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                        | Type                                                                                                                                                         | Required                                                                                                                                                     | Description                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                                                       | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                           | N/A                                                                                                                                                          |
+```typescript
+"azure/text-embedding-3-small"
+```

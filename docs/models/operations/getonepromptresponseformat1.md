@@ -1,11 +1,12 @@
 # GetOnePromptResponseFormat1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.GetOnePrompt11`
 
 ```typescript
-import { GetOnePromptResponseFormat1 } from "@orq-ai/node/models/operations";
-
-let value: GetOnePromptResponseFormat1 = {
+const value: operations.GetOnePrompt11 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -14,9 +15,19 @@ let value: GetOnePromptResponseFormat1 = {
 };
 ```
 
-## Fields
+### `operations.GetOnePrompt12`
 
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                             | [operations.GetOnePromptResponseFormatType](../../models/operations/getonepromptresponseformattype.md)             | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
-| `jsonSchema`                                                                                                       | [operations.GetOnePromptResponseFormatJsonSchema](../../models/operations/getonepromptresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+```typescript
+const value: operations.GetOnePrompt12 = {
+  type: "json_object",
+};
+```
+
+### `operations.GetOnePrompt13`
+
+```typescript
+const value: operations.GetOnePrompt13 = {
+  type: "text",
+};
+```
+

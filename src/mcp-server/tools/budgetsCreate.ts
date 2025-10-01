@@ -14,7 +14,7 @@ export const tool$budgetsCreate: ToolDefinition<typeof args> = {
   name: "budgets-create",
   description: `Create budget configuration
 
-Create a new budget configuration for a contact or workspace.`,
+Create a new budget configuration for a contact or workspace. For contacts, provide the external ID in entity_id field. For workspaces, only the type field is required (entity_id is not needed). Only one budget can exist per workspace.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await budgetsCreate(

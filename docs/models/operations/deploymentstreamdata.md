@@ -8,7 +8,7 @@ import { DeploymentStreamData } from "@orq-ai/node/models/operations";
 let value: DeploymentStreamData = {
   id: "<id>",
   created: new Date("2025-05-08T16:39:48.977Z"),
-  object: "image",
+  object: "completion",
   model: "ATS",
   provider: "litellm",
   isFinal: false,

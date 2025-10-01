@@ -20,6 +20,7 @@ const value: operations.GetAllPromptsResponseFormat1 = {
     name: "<value>",
     schema: {
       "key": "<value>",
+      "key1": "<value>",
     },
   },
 };
@@ -28,16 +29,18 @@ const value: operations.GetAllPromptsResponseFormat1 = {
 ### `operations.GetAllPromptsResponseFormat2`
 
 ```typescript
-const value: operations.GetAllPromptsResponseFormat2 = {
-  type: "json_object",
-};
+const value: operations.GetAllPromptsResponseFormat2 = "opus";
 ```
 
 ### `operations.GetAllPromptsResponseFormat3`
 
 ```typescript
-const value: operations.GetAllPromptsResponseFormat3 = {
-  type: "text",
-};
+const value: operations.GetAllPromptsResponseFormat3 = "base64_json";
+```
+
+### `operations.GetAllPromptsResponseFormat4`
+
+```typescript
+const value: operations.GetAllPromptsResponseFormat4 = "json";
 ```
 

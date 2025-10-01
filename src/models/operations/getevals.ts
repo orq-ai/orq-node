@@ -87,7 +87,7 @@ export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType =
     typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
   >;
 
-export type Typescript = {
+export type DataTypescript = {
   id: string;
   description: string;
   created?: string | undefined;
@@ -157,7 +157,7 @@ export type GetEvalsDataEvalsResponse200ApplicationJSONType = ClosedEnum<
   typeof GetEvalsDataEvalsResponse200ApplicationJSONType
 >;
 
-export const RagasMetric = {
+export const DataRagasMetric = {
   ContextPrecision: "context_precision",
   ContextRecall: "context_recall",
   ContextEntitiesRecall: "context_entities_recall",
@@ -171,9 +171,9 @@ export const RagasMetric = {
   Summarization: "summarization",
   NoiseSensitivity: "noise_sensitivity",
 } as const;
-export type RagasMetric = ClosedEnum<typeof RagasMetric>;
+export type DataRagasMetric = ClosedEnum<typeof DataRagasMetric>;
 
-export type Ragas = {
+export type DataRagas = {
   id: string;
   description: string;
   created?: string | undefined;
@@ -183,7 +183,7 @@ export type Ragas = {
     | GetEvalsGuardrailConfigEvalsResponse200Boolean
     | undefined;
   type: GetEvalsDataEvalsResponse200ApplicationJSONType;
-  ragasMetric: RagasMetric;
+  ragasMetric: DataRagasMetric;
   key: string;
   model: string;
 };
@@ -253,7 +253,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type
   >;
 
-export type ThirtyFive = {
+export type GetEvalsFunctionParams35 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type;
 };
@@ -267,7 +267,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type
   >;
 
-export type ThirtyFour = {
+export type GetEvalsFunctionParams34 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type;
 };
@@ -281,7 +281,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type
   >;
 
-export type ThirtyThree = {
+export type GetEvalsFunctionParams33 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type;
 };
@@ -295,7 +295,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type
   >;
 
-export type ThirtyTwo = {
+export type GetEvalsFunctionParams32 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type;
 };
@@ -309,7 +309,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type
   >;
 
-export type ThirtyOne = {
+export type GetEvalsFunctionParams31 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type;
 };
@@ -323,7 +323,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type
   >;
 
-export type Thirty = {
+export type GetEvalsFunctionParams30 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type;
 };
@@ -337,7 +337,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type
   >;
 
-export type TwentyNine = {
+export type GetEvalsFunctionParams29 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type;
 };
@@ -351,7 +351,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type
   >;
 
-export type TwentyEight = {
+export type GetEvalsFunctionParams28 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type;
 };
@@ -365,7 +365,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type
   >;
 
-export type TwentySeven = {
+export type GetEvalsFunctionParams27 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type;
 };
@@ -379,7 +379,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type
   >;
 
-export type TwentySix = {
+export type GetEvalsFunctionParams26 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type;
   keywords: Array<string>;
@@ -394,7 +394,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type
   >;
 
-export type TwentyFive = {
+export type GetEvalsFunctionParams25 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type;
   topic: string;
@@ -409,7 +409,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type
   >;
 
-export type TwentyFour = {
+export type GetEvalsFunctionParams24 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type;
 };
@@ -423,7 +423,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type
   >;
 
-export type TwentyThree = {
+export type GetEvalsFunctionParams23 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type;
 };
@@ -437,7 +437,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type
   >;
 
-export type TwentyTwo = {
+export type GetEvalsFunctionParams22 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type;
 };
@@ -451,7 +451,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type
   >;
 
-export type TwentyOne = {
+export type GetEvalsFunctionParams21 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type;
 };
@@ -465,7 +465,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type
   >;
 
-export type Twenty = {
+export type GetEvalsFunctionParams20 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type;
 };
@@ -479,7 +479,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type
   >;
 
-export type Nineteen = {
+export type GetEvalsFunctionParams19 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type;
 };
@@ -493,7 +493,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type
   >;
 
-export type Eighteen = {
+export type GetEvalsFunctionParams18 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type;
 };
@@ -507,7 +507,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type
   >;
 
-export type Seventeen = {
+export type GetEvalsFunctionParams17 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type;
 };
@@ -521,7 +521,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type
   >;
 
-export type Sixteen = {
+export type GetEvalsFunctionParams16 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type;
 };
@@ -535,7 +535,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type
   >;
 
-export type Fifteen = {
+export type GetEvalsFunctionParams15 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type;
   pattern: string;
@@ -550,7 +550,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type
   >;
 
-export type Fourteen = {
+export type GetEvalsFunctionParams14 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type;
 };
@@ -564,7 +564,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type
   >;
 
-export type Thirteen = {
+export type GetEvalsFunctionParams13 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type;
   value: number;
@@ -579,7 +579,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type
   >;
 
-export type Twelve = {
+export type GetEvalsFunctionParams12 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type;
   min: number;
@@ -595,7 +595,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type
   >;
 
-export type Eleven = {
+export type GetEvalsFunctionParams11 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type;
   value: number;
@@ -610,7 +610,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type
   >;
 
-export type Ten = {
+export type GetEvalsFunctionParams10 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type;
 };
@@ -624,7 +624,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type
   >;
 
-export type Nine = {
+export type GetEvalsFunctionParams9 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type;
   value: string;
@@ -639,7 +639,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDat
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType
   >;
 
-export type Eight = {
+export type GetEvalsFunctionParams8 = {
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType;
   value: string;
@@ -654,7 +654,7 @@ export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyTyp
     typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
   >;
 
-export type Seven = {
+export type GetEvalsFunctionParams7 = {
   type: GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType;
 };
 
@@ -664,7 +664,7 @@ export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType = {
 export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType =
   ClosedEnum<typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType>;
 
-export type Six = {
+export type GetEvalsFunctionParams6 = {
   type: GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType;
 };
 
@@ -675,7 +675,7 @@ export type GetEvalsFunctionParamsEvalsResponse200Type = ClosedEnum<
   typeof GetEvalsFunctionParamsEvalsResponse200Type
 >;
 
-export type Five = {
+export type GetEvalsFunctionParams5 = {
   type: GetEvalsFunctionParamsEvalsResponse200Type;
 };
 
@@ -686,7 +686,7 @@ export type GetEvalsFunctionParamsEvalsResponseType = ClosedEnum<
   typeof GetEvalsFunctionParamsEvalsResponseType
 >;
 
-export type FunctionParams4 = {
+export type GetEvalsFunctionParams4 = {
   type: GetEvalsFunctionParamsEvalsResponseType;
   keywords: Array<string>;
 };
@@ -698,7 +698,7 @@ export type GetEvalsFunctionParamsEvalsType = ClosedEnum<
   typeof GetEvalsFunctionParamsEvalsType
 >;
 
-export type FunctionParams3 = {
+export type GetEvalsFunctionParams3 = {
   type: GetEvalsFunctionParamsEvalsType;
   keywords: Array<string>;
 };
@@ -710,57 +710,62 @@ export type GetEvalsFunctionParamsType = ClosedEnum<
   typeof GetEvalsFunctionParamsType
 >;
 
-export type FunctionParams2 = {
+export type GetEvalsFunctionParams2 = {
   type: GetEvalsFunctionParamsType;
   keywords: Array<string>;
 };
 
-export const FunctionParamsType = {
-  Contains: "contains",
-} as const;
-export type FunctionParamsType = ClosedEnum<typeof FunctionParamsType>;
+export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type =
+  {
+    Contains: "contains",
+  } as const;
+export type GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type =
+  ClosedEnum<
+    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type
+  >;
 
-export type FunctionParams1 = {
-  type: FunctionParamsType;
+export type GetEvalsFunctionParams1 = {
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type;
   value: string;
 };
 
 export type DataFunctionParams =
-  | Twelve
-  | FunctionParams1
-  | FunctionParams2
-  | FunctionParams3
-  | FunctionParams4
-  | Eight
-  | Nine
-  | Eleven
-  | Thirteen
-  | Fifteen
-  | TwentyFive
-  | TwentySix
-  | Five
-  | Six
-  | Seven
-  | Ten
-  | Fourteen
-  | Sixteen
-  | Seventeen
-  | Eighteen
-  | Nineteen
-  | Twenty
-  | TwentyOne
-  | TwentyTwo
-  | TwentyThree
-  | TwentyFour
-  | TwentySeven
-  | TwentyEight
-  | TwentyNine
-  | Thirty
-  | ThirtyOne
-  | ThirtyTwo
-  | ThirtyThree
-  | ThirtyFour
-  | ThirtyFive;
+  | GetEvalsFunctionParams12
+  | GetEvalsFunctionParams1
+  | GetEvalsFunctionParams2
+  | GetEvalsFunctionParams3
+  | GetEvalsFunctionParams4
+  | GetEvalsFunctionParams8
+  | GetEvalsFunctionParams9
+  | GetEvalsFunctionParams11
+  | GetEvalsFunctionParams13
+  | GetEvalsFunctionParams15
+  | GetEvalsFunctionParams25
+  | GetEvalsFunctionParams26
+  | GetEvalsFunctionParams5
+  | GetEvalsFunctionParams6
+  | GetEvalsFunctionParams7
+  | GetEvalsFunctionParams10
+  | GetEvalsFunctionParams14
+  | GetEvalsFunctionParams16
+  | GetEvalsFunctionParams17
+  | GetEvalsFunctionParams18
+  | GetEvalsFunctionParams19
+  | GetEvalsFunctionParams20
+  | GetEvalsFunctionParams21
+  | GetEvalsFunctionParams22
+  | GetEvalsFunctionParams23
+  | GetEvalsFunctionParams24
+  | GetEvalsFunctionParams27
+  | GetEvalsFunctionParams28
+  | GetEvalsFunctionParams29
+  | GetEvalsFunctionParams30
+  | GetEvalsFunctionParams31
+  | GetEvalsFunctionParams32
+  | GetEvalsFunctionParams33
+  | GetEvalsFunctionParams34
+  | GetEvalsFunctionParams35;
 
 export type DataFunction = {
   id: string;
@@ -773,41 +778,41 @@ export type DataFunction = {
     | undefined;
   type: GetEvalsDataEvalsResponse200Type;
   functionParams:
-    | Twelve
-    | FunctionParams1
-    | FunctionParams2
-    | FunctionParams3
-    | FunctionParams4
-    | Eight
-    | Nine
-    | Eleven
-    | Thirteen
-    | Fifteen
-    | TwentyFive
-    | TwentySix
-    | Five
-    | Six
-    | Seven
-    | Ten
-    | Fourteen
-    | Sixteen
-    | Seventeen
-    | Eighteen
-    | Nineteen
-    | Twenty
-    | TwentyOne
-    | TwentyTwo
-    | TwentyThree
-    | TwentyFour
-    | TwentySeven
-    | TwentyEight
-    | TwentyNine
-    | Thirty
-    | ThirtyOne
-    | ThirtyTwo
-    | ThirtyThree
-    | ThirtyFour
-    | ThirtyFive;
+    | GetEvalsFunctionParams12
+    | GetEvalsFunctionParams1
+    | GetEvalsFunctionParams2
+    | GetEvalsFunctionParams3
+    | GetEvalsFunctionParams4
+    | GetEvalsFunctionParams8
+    | GetEvalsFunctionParams9
+    | GetEvalsFunctionParams11
+    | GetEvalsFunctionParams13
+    | GetEvalsFunctionParams15
+    | GetEvalsFunctionParams25
+    | GetEvalsFunctionParams26
+    | GetEvalsFunctionParams5
+    | GetEvalsFunctionParams6
+    | GetEvalsFunctionParams7
+    | GetEvalsFunctionParams10
+    | GetEvalsFunctionParams14
+    | GetEvalsFunctionParams16
+    | GetEvalsFunctionParams17
+    | GetEvalsFunctionParams18
+    | GetEvalsFunctionParams19
+    | GetEvalsFunctionParams20
+    | GetEvalsFunctionParams21
+    | GetEvalsFunctionParams22
+    | GetEvalsFunctionParams23
+    | GetEvalsFunctionParams24
+    | GetEvalsFunctionParams27
+    | GetEvalsFunctionParams28
+    | GetEvalsFunctionParams29
+    | GetEvalsFunctionParams30
+    | GetEvalsFunctionParams31
+    | GetEvalsFunctionParams32
+    | GetEvalsFunctionParams33
+    | GetEvalsFunctionParams34
+    | GetEvalsFunctionParams35;
   key: string;
 };
 
@@ -1091,11 +1096,11 @@ export type DataLLM = {
 export type GetEvalsData =
   | DataHTTP
   | DataLLM
-  | Ragas
+  | DataRagas
   | DataJSON
   | DataPython
   | DataFunction
-  | Typescript;
+  | DataTypescript;
 
 /**
  * Returns a list of evals
@@ -1105,11 +1110,11 @@ export type GetEvalsResponseBody = {
   data: Array<
     | DataHTTP
     | DataLLM
-    | Ragas
+    | DataRagas
     | DataJSON
     | DataPython
     | DataFunction
-    | Typescript
+    | DataTypescript
   >;
   hasMore: boolean;
 };
@@ -1544,15 +1549,15 @@ export namespace GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$ {
 }
 
 /** @internal */
-export const Typescript$inboundSchema: z.ZodType<
-  Typescript,
+export const DataTypescript$inboundSchema: z.ZodType<
+  DataTypescript,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -1573,7 +1578,7 @@ export const Typescript$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Typescript$Outbound = {
+export type DataTypescript$Outbound = {
   _id: string;
   description: string;
   created: string;
@@ -1588,15 +1593,15 @@ export type Typescript$Outbound = {
 };
 
 /** @internal */
-export const Typescript$outboundSchema: z.ZodType<
-  Typescript$Outbound,
+export const DataTypescript$outboundSchema: z.ZodType<
+  DataTypescript$Outbound,
   z.ZodTypeDef,
-  Typescript
+  DataTypescript
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -1620,26 +1625,26 @@ export const Typescript$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Typescript$ {
-  /** @deprecated use `Typescript$inboundSchema` instead. */
-  export const inboundSchema = Typescript$inboundSchema;
-  /** @deprecated use `Typescript$outboundSchema` instead. */
-  export const outboundSchema = Typescript$outboundSchema;
-  /** @deprecated use `Typescript$Outbound` instead. */
-  export type Outbound = Typescript$Outbound;
+export namespace DataTypescript$ {
+  /** @deprecated use `DataTypescript$inboundSchema` instead. */
+  export const inboundSchema = DataTypescript$inboundSchema;
+  /** @deprecated use `DataTypescript$outboundSchema` instead. */
+  export const outboundSchema = DataTypescript$outboundSchema;
+  /** @deprecated use `DataTypescript$Outbound` instead. */
+  export type Outbound = DataTypescript$Outbound;
 }
 
-export function typescriptToJSON(typescript: Typescript): string {
-  return JSON.stringify(Typescript$outboundSchema.parse(typescript));
+export function dataTypescriptToJSON(dataTypescript: DataTypescript): string {
+  return JSON.stringify(DataTypescript$outboundSchema.parse(dataTypescript));
 }
 
-export function typescriptFromJSON(
+export function dataTypescriptFromJSON(
   jsonString: string,
-): SafeParseResult<Typescript, SDKValidationError> {
+): SafeParseResult<DataTypescript, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Typescript$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Typescript' from JSON`,
+    (x) => DataTypescript$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataTypescript' from JSON`,
   );
 }
 
@@ -1969,51 +1974,54 @@ export namespace GetEvalsDataEvalsResponse200ApplicationJSONType$ {
 }
 
 /** @internal */
-export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
-  .nativeEnum(RagasMetric);
+export const DataRagasMetric$inboundSchema: z.ZodNativeEnum<
+  typeof DataRagasMetric
+> = z.nativeEnum(DataRagasMetric);
 
 /** @internal */
-export const RagasMetric$outboundSchema: z.ZodNativeEnum<typeof RagasMetric> =
-  RagasMetric$inboundSchema;
+export const DataRagasMetric$outboundSchema: z.ZodNativeEnum<
+  typeof DataRagasMetric
+> = DataRagasMetric$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RagasMetric$ {
-  /** @deprecated use `RagasMetric$inboundSchema` instead. */
-  export const inboundSchema = RagasMetric$inboundSchema;
-  /** @deprecated use `RagasMetric$outboundSchema` instead. */
-  export const outboundSchema = RagasMetric$outboundSchema;
+export namespace DataRagasMetric$ {
+  /** @deprecated use `DataRagasMetric$inboundSchema` instead. */
+  export const inboundSchema = DataRagasMetric$inboundSchema;
+  /** @deprecated use `DataRagasMetric$outboundSchema` instead. */
+  export const outboundSchema = DataRagasMetric$outboundSchema;
 }
 
 /** @internal */
-export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    description: z.string(),
-    created: z.string().default("2025-09-30T08:46:39.987Z"),
-    updated: z.string().default("2025-09-30T08:46:39.987Z"),
-    guardrail_config: z.union([
-      z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
-      z.lazy(() =>
-        GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema
-      ),
-    ]).optional(),
-    type: GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema,
-    ragas_metric: RagasMetric$inboundSchema,
-    key: z.string(),
-    model: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "guardrail_config": "guardrailConfig",
-      "ragas_metric": "ragasMetric",
-    });
+export const DataRagas$inboundSchema: z.ZodType<
+  DataRagas,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  description: z.string(),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
+  guardrail_config: z.union([
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
+    z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema),
+  ]).optional(),
+  type: GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema,
+  ragas_metric: DataRagasMetric$inboundSchema,
+  key: z.string(),
+  model: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "guardrail_config": "guardrailConfig",
+    "ragas_metric": "ragasMetric",
   });
+});
 
 /** @internal */
-export type Ragas$Outbound = {
+export type DataRagas$Outbound = {
   _id: string;
   description: string;
   created: string;
@@ -2029,21 +2037,21 @@ export type Ragas$Outbound = {
 };
 
 /** @internal */
-export const Ragas$outboundSchema: z.ZodType<
-  Ragas$Outbound,
+export const DataRagas$outboundSchema: z.ZodType<
+  DataRagas$Outbound,
   z.ZodTypeDef,
-  Ragas
+  DataRagas
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema),
   ]).optional(),
   type: GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema,
-  ragasMetric: RagasMetric$outboundSchema,
+  ragasMetric: DataRagasMetric$outboundSchema,
   key: z.string(),
   model: z.string(),
 }).transform((v) => {
@@ -2058,26 +2066,26 @@ export const Ragas$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Ragas$ {
-  /** @deprecated use `Ragas$inboundSchema` instead. */
-  export const inboundSchema = Ragas$inboundSchema;
-  /** @deprecated use `Ragas$outboundSchema` instead. */
-  export const outboundSchema = Ragas$outboundSchema;
-  /** @deprecated use `Ragas$Outbound` instead. */
-  export type Outbound = Ragas$Outbound;
+export namespace DataRagas$ {
+  /** @deprecated use `DataRagas$inboundSchema` instead. */
+  export const inboundSchema = DataRagas$inboundSchema;
+  /** @deprecated use `DataRagas$outboundSchema` instead. */
+  export const outboundSchema = DataRagas$outboundSchema;
+  /** @deprecated use `DataRagas$Outbound` instead. */
+  export type Outbound = DataRagas$Outbound;
 }
 
-export function ragasToJSON(ragas: Ragas): string {
-  return JSON.stringify(Ragas$outboundSchema.parse(ragas));
+export function dataRagasToJSON(dataRagas: DataRagas): string {
+  return JSON.stringify(DataRagas$outboundSchema.parse(dataRagas));
 }
 
-export function ragasFromJSON(
+export function dataRagasFromJSON(
   jsonString: string,
-): SafeParseResult<Ragas, SDKValidationError> {
+): SafeParseResult<DataRagas, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Ragas$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Ragas' from JSON`,
+    (x) => DataRagas$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DataRagas' from JSON`,
   );
 }
 
@@ -2427,8 +2435,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const ThirtyFive$inboundSchema: z.ZodType<
-  ThirtyFive,
+export const GetEvalsFunctionParams35$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams35,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2437,15 +2445,15 @@ export const ThirtyFive$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ThirtyFive$Outbound = {
+export type GetEvalsFunctionParams35$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ThirtyFive$outboundSchema: z.ZodType<
-  ThirtyFive$Outbound,
+export const GetEvalsFunctionParams35$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams35$Outbound,
   z.ZodTypeDef,
-  ThirtyFive
+  GetEvalsFunctionParams35
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type$outboundSchema,
@@ -2455,26 +2463,30 @@ export const ThirtyFive$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ThirtyFive$ {
-  /** @deprecated use `ThirtyFive$inboundSchema` instead. */
-  export const inboundSchema = ThirtyFive$inboundSchema;
-  /** @deprecated use `ThirtyFive$outboundSchema` instead. */
-  export const outboundSchema = ThirtyFive$outboundSchema;
-  /** @deprecated use `ThirtyFive$Outbound` instead. */
-  export type Outbound = ThirtyFive$Outbound;
+export namespace GetEvalsFunctionParams35$ {
+  /** @deprecated use `GetEvalsFunctionParams35$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams35$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams35$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams35$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams35$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams35$Outbound;
 }
 
-export function thirtyFiveToJSON(thirtyFive: ThirtyFive): string {
-  return JSON.stringify(ThirtyFive$outboundSchema.parse(thirtyFive));
+export function getEvalsFunctionParams35ToJSON(
+  getEvalsFunctionParams35: GetEvalsFunctionParams35,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams35$outboundSchema.parse(getEvalsFunctionParams35),
+  );
 }
 
-export function thirtyFiveFromJSON(
+export function getEvalsFunctionParams35FromJSON(
   jsonString: string,
-): SafeParseResult<ThirtyFive, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams35, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThirtyFive$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThirtyFive' from JSON`,
+    (x) => GetEvalsFunctionParams35$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams35' from JSON`,
   );
 }
 
@@ -2507,8 +2519,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const ThirtyFour$inboundSchema: z.ZodType<
-  ThirtyFour,
+export const GetEvalsFunctionParams34$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams34,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2517,15 +2529,15 @@ export const ThirtyFour$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ThirtyFour$Outbound = {
+export type GetEvalsFunctionParams34$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ThirtyFour$outboundSchema: z.ZodType<
-  ThirtyFour$Outbound,
+export const GetEvalsFunctionParams34$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams34$Outbound,
   z.ZodTypeDef,
-  ThirtyFour
+  GetEvalsFunctionParams34
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData534Type$outboundSchema,
@@ -2535,26 +2547,30 @@ export const ThirtyFour$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ThirtyFour$ {
-  /** @deprecated use `ThirtyFour$inboundSchema` instead. */
-  export const inboundSchema = ThirtyFour$inboundSchema;
-  /** @deprecated use `ThirtyFour$outboundSchema` instead. */
-  export const outboundSchema = ThirtyFour$outboundSchema;
-  /** @deprecated use `ThirtyFour$Outbound` instead. */
-  export type Outbound = ThirtyFour$Outbound;
+export namespace GetEvalsFunctionParams34$ {
+  /** @deprecated use `GetEvalsFunctionParams34$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams34$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams34$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams34$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams34$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams34$Outbound;
 }
 
-export function thirtyFourToJSON(thirtyFour: ThirtyFour): string {
-  return JSON.stringify(ThirtyFour$outboundSchema.parse(thirtyFour));
+export function getEvalsFunctionParams34ToJSON(
+  getEvalsFunctionParams34: GetEvalsFunctionParams34,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams34$outboundSchema.parse(getEvalsFunctionParams34),
+  );
 }
 
-export function thirtyFourFromJSON(
+export function getEvalsFunctionParams34FromJSON(
   jsonString: string,
-): SafeParseResult<ThirtyFour, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams34, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThirtyFour$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThirtyFour' from JSON`,
+    (x) => GetEvalsFunctionParams34$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams34' from JSON`,
   );
 }
 
@@ -2587,8 +2603,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const ThirtyThree$inboundSchema: z.ZodType<
-  ThirtyThree,
+export const GetEvalsFunctionParams33$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams33,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2597,15 +2613,15 @@ export const ThirtyThree$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ThirtyThree$Outbound = {
+export type GetEvalsFunctionParams33$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ThirtyThree$outboundSchema: z.ZodType<
-  ThirtyThree$Outbound,
+export const GetEvalsFunctionParams33$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams33$Outbound,
   z.ZodTypeDef,
-  ThirtyThree
+  GetEvalsFunctionParams33
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData533Type$outboundSchema,
@@ -2615,26 +2631,30 @@ export const ThirtyThree$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ThirtyThree$ {
-  /** @deprecated use `ThirtyThree$inboundSchema` instead. */
-  export const inboundSchema = ThirtyThree$inboundSchema;
-  /** @deprecated use `ThirtyThree$outboundSchema` instead. */
-  export const outboundSchema = ThirtyThree$outboundSchema;
-  /** @deprecated use `ThirtyThree$Outbound` instead. */
-  export type Outbound = ThirtyThree$Outbound;
+export namespace GetEvalsFunctionParams33$ {
+  /** @deprecated use `GetEvalsFunctionParams33$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams33$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams33$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams33$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams33$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams33$Outbound;
 }
 
-export function thirtyThreeToJSON(thirtyThree: ThirtyThree): string {
-  return JSON.stringify(ThirtyThree$outboundSchema.parse(thirtyThree));
+export function getEvalsFunctionParams33ToJSON(
+  getEvalsFunctionParams33: GetEvalsFunctionParams33,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams33$outboundSchema.parse(getEvalsFunctionParams33),
+  );
 }
 
-export function thirtyThreeFromJSON(
+export function getEvalsFunctionParams33FromJSON(
   jsonString: string,
-): SafeParseResult<ThirtyThree, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams33, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThirtyThree$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThirtyThree' from JSON`,
+    (x) => GetEvalsFunctionParams33$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams33' from JSON`,
   );
 }
 
@@ -2667,8 +2687,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const ThirtyTwo$inboundSchema: z.ZodType<
-  ThirtyTwo,
+export const GetEvalsFunctionParams32$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams32,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2677,15 +2697,15 @@ export const ThirtyTwo$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ThirtyTwo$Outbound = {
+export type GetEvalsFunctionParams32$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ThirtyTwo$outboundSchema: z.ZodType<
-  ThirtyTwo$Outbound,
+export const GetEvalsFunctionParams32$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams32$Outbound,
   z.ZodTypeDef,
-  ThirtyTwo
+  GetEvalsFunctionParams32
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData532Type$outboundSchema,
@@ -2695,26 +2715,30 @@ export const ThirtyTwo$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ThirtyTwo$ {
-  /** @deprecated use `ThirtyTwo$inboundSchema` instead. */
-  export const inboundSchema = ThirtyTwo$inboundSchema;
-  /** @deprecated use `ThirtyTwo$outboundSchema` instead. */
-  export const outboundSchema = ThirtyTwo$outboundSchema;
-  /** @deprecated use `ThirtyTwo$Outbound` instead. */
-  export type Outbound = ThirtyTwo$Outbound;
+export namespace GetEvalsFunctionParams32$ {
+  /** @deprecated use `GetEvalsFunctionParams32$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams32$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams32$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams32$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams32$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams32$Outbound;
 }
 
-export function thirtyTwoToJSON(thirtyTwo: ThirtyTwo): string {
-  return JSON.stringify(ThirtyTwo$outboundSchema.parse(thirtyTwo));
+export function getEvalsFunctionParams32ToJSON(
+  getEvalsFunctionParams32: GetEvalsFunctionParams32,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams32$outboundSchema.parse(getEvalsFunctionParams32),
+  );
 }
 
-export function thirtyTwoFromJSON(
+export function getEvalsFunctionParams32FromJSON(
   jsonString: string,
-): SafeParseResult<ThirtyTwo, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams32, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThirtyTwo$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThirtyTwo' from JSON`,
+    (x) => GetEvalsFunctionParams32$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams32' from JSON`,
   );
 }
 
@@ -2747,8 +2771,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const ThirtyOne$inboundSchema: z.ZodType<
-  ThirtyOne,
+export const GetEvalsFunctionParams31$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams31,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2757,15 +2781,15 @@ export const ThirtyOne$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type ThirtyOne$Outbound = {
+export type GetEvalsFunctionParams31$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const ThirtyOne$outboundSchema: z.ZodType<
-  ThirtyOne$Outbound,
+export const GetEvalsFunctionParams31$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams31$Outbound,
   z.ZodTypeDef,
-  ThirtyOne
+  GetEvalsFunctionParams31
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData531Type$outboundSchema,
@@ -2775,26 +2799,30 @@ export const ThirtyOne$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ThirtyOne$ {
-  /** @deprecated use `ThirtyOne$inboundSchema` instead. */
-  export const inboundSchema = ThirtyOne$inboundSchema;
-  /** @deprecated use `ThirtyOne$outboundSchema` instead. */
-  export const outboundSchema = ThirtyOne$outboundSchema;
-  /** @deprecated use `ThirtyOne$Outbound` instead. */
-  export type Outbound = ThirtyOne$Outbound;
+export namespace GetEvalsFunctionParams31$ {
+  /** @deprecated use `GetEvalsFunctionParams31$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams31$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams31$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams31$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams31$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams31$Outbound;
 }
 
-export function thirtyOneToJSON(thirtyOne: ThirtyOne): string {
-  return JSON.stringify(ThirtyOne$outboundSchema.parse(thirtyOne));
+export function getEvalsFunctionParams31ToJSON(
+  getEvalsFunctionParams31: GetEvalsFunctionParams31,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams31$outboundSchema.parse(getEvalsFunctionParams31),
+  );
 }
 
-export function thirtyOneFromJSON(
+export function getEvalsFunctionParams31FromJSON(
   jsonString: string,
-): SafeParseResult<ThirtyOne, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams31, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ThirtyOne$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ThirtyOne' from JSON`,
+    (x) => GetEvalsFunctionParams31$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams31' from JSON`,
   );
 }
 
@@ -2827,22 +2855,25 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$inboundSchema,
-  });
+export const GetEvalsFunctionParams30$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams30,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$inboundSchema,
+});
 
 /** @internal */
-export type Thirty$Outbound = {
+export type GetEvalsFunctionParams30$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Thirty$outboundSchema: z.ZodType<
-  Thirty$Outbound,
+export const GetEvalsFunctionParams30$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams30$Outbound,
   z.ZodTypeDef,
-  Thirty
+  GetEvalsFunctionParams30
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData530Type$outboundSchema,
@@ -2852,26 +2883,30 @@ export const Thirty$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Thirty$ {
-  /** @deprecated use `Thirty$inboundSchema` instead. */
-  export const inboundSchema = Thirty$inboundSchema;
-  /** @deprecated use `Thirty$outboundSchema` instead. */
-  export const outboundSchema = Thirty$outboundSchema;
-  /** @deprecated use `Thirty$Outbound` instead. */
-  export type Outbound = Thirty$Outbound;
+export namespace GetEvalsFunctionParams30$ {
+  /** @deprecated use `GetEvalsFunctionParams30$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams30$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams30$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams30$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams30$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams30$Outbound;
 }
 
-export function thirtyToJSON(thirty: Thirty): string {
-  return JSON.stringify(Thirty$outboundSchema.parse(thirty));
+export function getEvalsFunctionParams30ToJSON(
+  getEvalsFunctionParams30: GetEvalsFunctionParams30,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams30$outboundSchema.parse(getEvalsFunctionParams30),
+  );
 }
 
-export function thirtyFromJSON(
+export function getEvalsFunctionParams30FromJSON(
   jsonString: string,
-): SafeParseResult<Thirty, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams30, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Thirty$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Thirty' from JSON`,
+    (x) => GetEvalsFunctionParams30$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams30' from JSON`,
   );
 }
 
@@ -2904,8 +2939,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyNine$inboundSchema: z.ZodType<
-  TwentyNine,
+export const GetEvalsFunctionParams29$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams29,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2914,15 +2949,15 @@ export const TwentyNine$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyNine$Outbound = {
+export type GetEvalsFunctionParams29$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentyNine$outboundSchema: z.ZodType<
-  TwentyNine$Outbound,
+export const GetEvalsFunctionParams29$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams29$Outbound,
   z.ZodTypeDef,
-  TwentyNine
+  GetEvalsFunctionParams29
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData529Type$outboundSchema,
@@ -2932,26 +2967,30 @@ export const TwentyNine$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyNine$ {
-  /** @deprecated use `TwentyNine$inboundSchema` instead. */
-  export const inboundSchema = TwentyNine$inboundSchema;
-  /** @deprecated use `TwentyNine$outboundSchema` instead. */
-  export const outboundSchema = TwentyNine$outboundSchema;
-  /** @deprecated use `TwentyNine$Outbound` instead. */
-  export type Outbound = TwentyNine$Outbound;
+export namespace GetEvalsFunctionParams29$ {
+  /** @deprecated use `GetEvalsFunctionParams29$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams29$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams29$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams29$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams29$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams29$Outbound;
 }
 
-export function twentyNineToJSON(twentyNine: TwentyNine): string {
-  return JSON.stringify(TwentyNine$outboundSchema.parse(twentyNine));
+export function getEvalsFunctionParams29ToJSON(
+  getEvalsFunctionParams29: GetEvalsFunctionParams29,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams29$outboundSchema.parse(getEvalsFunctionParams29),
+  );
 }
 
-export function twentyNineFromJSON(
+export function getEvalsFunctionParams29FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyNine, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams29, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyNine$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyNine' from JSON`,
+    (x) => GetEvalsFunctionParams29$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams29' from JSON`,
   );
 }
 
@@ -2984,8 +3023,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyEight$inboundSchema: z.ZodType<
-  TwentyEight,
+export const GetEvalsFunctionParams28$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams28,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2994,15 +3033,15 @@ export const TwentyEight$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyEight$Outbound = {
+export type GetEvalsFunctionParams28$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentyEight$outboundSchema: z.ZodType<
-  TwentyEight$Outbound,
+export const GetEvalsFunctionParams28$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams28$Outbound,
   z.ZodTypeDef,
-  TwentyEight
+  GetEvalsFunctionParams28
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData528Type$outboundSchema,
@@ -3012,26 +3051,30 @@ export const TwentyEight$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyEight$ {
-  /** @deprecated use `TwentyEight$inboundSchema` instead. */
-  export const inboundSchema = TwentyEight$inboundSchema;
-  /** @deprecated use `TwentyEight$outboundSchema` instead. */
-  export const outboundSchema = TwentyEight$outboundSchema;
-  /** @deprecated use `TwentyEight$Outbound` instead. */
-  export type Outbound = TwentyEight$Outbound;
+export namespace GetEvalsFunctionParams28$ {
+  /** @deprecated use `GetEvalsFunctionParams28$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams28$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams28$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams28$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams28$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams28$Outbound;
 }
 
-export function twentyEightToJSON(twentyEight: TwentyEight): string {
-  return JSON.stringify(TwentyEight$outboundSchema.parse(twentyEight));
+export function getEvalsFunctionParams28ToJSON(
+  getEvalsFunctionParams28: GetEvalsFunctionParams28,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams28$outboundSchema.parse(getEvalsFunctionParams28),
+  );
 }
 
-export function twentyEightFromJSON(
+export function getEvalsFunctionParams28FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyEight, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams28, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyEight$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyEight' from JSON`,
+    (x) => GetEvalsFunctionParams28$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams28' from JSON`,
   );
 }
 
@@ -3064,8 +3107,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentySeven$inboundSchema: z.ZodType<
-  TwentySeven,
+export const GetEvalsFunctionParams27$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams27,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3074,15 +3117,15 @@ export const TwentySeven$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentySeven$Outbound = {
+export type GetEvalsFunctionParams27$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentySeven$outboundSchema: z.ZodType<
-  TwentySeven$Outbound,
+export const GetEvalsFunctionParams27$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams27$Outbound,
   z.ZodTypeDef,
-  TwentySeven
+  GetEvalsFunctionParams27
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData527Type$outboundSchema,
@@ -3092,26 +3135,30 @@ export const TwentySeven$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentySeven$ {
-  /** @deprecated use `TwentySeven$inboundSchema` instead. */
-  export const inboundSchema = TwentySeven$inboundSchema;
-  /** @deprecated use `TwentySeven$outboundSchema` instead. */
-  export const outboundSchema = TwentySeven$outboundSchema;
-  /** @deprecated use `TwentySeven$Outbound` instead. */
-  export type Outbound = TwentySeven$Outbound;
+export namespace GetEvalsFunctionParams27$ {
+  /** @deprecated use `GetEvalsFunctionParams27$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams27$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams27$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams27$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams27$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams27$Outbound;
 }
 
-export function twentySevenToJSON(twentySeven: TwentySeven): string {
-  return JSON.stringify(TwentySeven$outboundSchema.parse(twentySeven));
+export function getEvalsFunctionParams27ToJSON(
+  getEvalsFunctionParams27: GetEvalsFunctionParams27,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams27$outboundSchema.parse(getEvalsFunctionParams27),
+  );
 }
 
-export function twentySevenFromJSON(
+export function getEvalsFunctionParams27FromJSON(
   jsonString: string,
-): SafeParseResult<TwentySeven, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams27, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentySeven$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentySeven' from JSON`,
+    (x) => GetEvalsFunctionParams27$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams27' from JSON`,
   );
 }
 
@@ -3144,8 +3191,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentySix$inboundSchema: z.ZodType<
-  TwentySix,
+export const GetEvalsFunctionParams26$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams26,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3155,16 +3202,16 @@ export const TwentySix$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentySix$Outbound = {
+export type GetEvalsFunctionParams26$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const TwentySix$outboundSchema: z.ZodType<
-  TwentySix$Outbound,
+export const GetEvalsFunctionParams26$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams26$Outbound,
   z.ZodTypeDef,
-  TwentySix
+  GetEvalsFunctionParams26
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData526Type$outboundSchema,
@@ -3175,26 +3222,30 @@ export const TwentySix$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentySix$ {
-  /** @deprecated use `TwentySix$inboundSchema` instead. */
-  export const inboundSchema = TwentySix$inboundSchema;
-  /** @deprecated use `TwentySix$outboundSchema` instead. */
-  export const outboundSchema = TwentySix$outboundSchema;
-  /** @deprecated use `TwentySix$Outbound` instead. */
-  export type Outbound = TwentySix$Outbound;
+export namespace GetEvalsFunctionParams26$ {
+  /** @deprecated use `GetEvalsFunctionParams26$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams26$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams26$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams26$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams26$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams26$Outbound;
 }
 
-export function twentySixToJSON(twentySix: TwentySix): string {
-  return JSON.stringify(TwentySix$outboundSchema.parse(twentySix));
+export function getEvalsFunctionParams26ToJSON(
+  getEvalsFunctionParams26: GetEvalsFunctionParams26,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams26$outboundSchema.parse(getEvalsFunctionParams26),
+  );
 }
 
-export function twentySixFromJSON(
+export function getEvalsFunctionParams26FromJSON(
   jsonString: string,
-): SafeParseResult<TwentySix, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams26, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentySix$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentySix' from JSON`,
+    (x) => GetEvalsFunctionParams26$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams26' from JSON`,
   );
 }
 
@@ -3227,8 +3278,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyFive$inboundSchema: z.ZodType<
-  TwentyFive,
+export const GetEvalsFunctionParams25$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams25,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3238,16 +3289,16 @@ export const TwentyFive$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyFive$Outbound = {
+export type GetEvalsFunctionParams25$Outbound = {
   type: string;
   topic: string;
 };
 
 /** @internal */
-export const TwentyFive$outboundSchema: z.ZodType<
-  TwentyFive$Outbound,
+export const GetEvalsFunctionParams25$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams25$Outbound,
   z.ZodTypeDef,
-  TwentyFive
+  GetEvalsFunctionParams25
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData525Type$outboundSchema,
@@ -3258,26 +3309,30 @@ export const TwentyFive$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyFive$ {
-  /** @deprecated use `TwentyFive$inboundSchema` instead. */
-  export const inboundSchema = TwentyFive$inboundSchema;
-  /** @deprecated use `TwentyFive$outboundSchema` instead. */
-  export const outboundSchema = TwentyFive$outboundSchema;
-  /** @deprecated use `TwentyFive$Outbound` instead. */
-  export type Outbound = TwentyFive$Outbound;
+export namespace GetEvalsFunctionParams25$ {
+  /** @deprecated use `GetEvalsFunctionParams25$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams25$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams25$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams25$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams25$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams25$Outbound;
 }
 
-export function twentyFiveToJSON(twentyFive: TwentyFive): string {
-  return JSON.stringify(TwentyFive$outboundSchema.parse(twentyFive));
+export function getEvalsFunctionParams25ToJSON(
+  getEvalsFunctionParams25: GetEvalsFunctionParams25,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams25$outboundSchema.parse(getEvalsFunctionParams25),
+  );
 }
 
-export function twentyFiveFromJSON(
+export function getEvalsFunctionParams25FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyFive, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams25, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyFive$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyFive' from JSON`,
+    (x) => GetEvalsFunctionParams25$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams25' from JSON`,
   );
 }
 
@@ -3310,8 +3365,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyFour$inboundSchema: z.ZodType<
-  TwentyFour,
+export const GetEvalsFunctionParams24$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams24,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3320,15 +3375,15 @@ export const TwentyFour$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyFour$Outbound = {
+export type GetEvalsFunctionParams24$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentyFour$outboundSchema: z.ZodType<
-  TwentyFour$Outbound,
+export const GetEvalsFunctionParams24$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams24$Outbound,
   z.ZodTypeDef,
-  TwentyFour
+  GetEvalsFunctionParams24
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData524Type$outboundSchema,
@@ -3338,26 +3393,30 @@ export const TwentyFour$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyFour$ {
-  /** @deprecated use `TwentyFour$inboundSchema` instead. */
-  export const inboundSchema = TwentyFour$inboundSchema;
-  /** @deprecated use `TwentyFour$outboundSchema` instead. */
-  export const outboundSchema = TwentyFour$outboundSchema;
-  /** @deprecated use `TwentyFour$Outbound` instead. */
-  export type Outbound = TwentyFour$Outbound;
+export namespace GetEvalsFunctionParams24$ {
+  /** @deprecated use `GetEvalsFunctionParams24$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams24$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams24$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams24$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams24$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams24$Outbound;
 }
 
-export function twentyFourToJSON(twentyFour: TwentyFour): string {
-  return JSON.stringify(TwentyFour$outboundSchema.parse(twentyFour));
+export function getEvalsFunctionParams24ToJSON(
+  getEvalsFunctionParams24: GetEvalsFunctionParams24,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams24$outboundSchema.parse(getEvalsFunctionParams24),
+  );
 }
 
-export function twentyFourFromJSON(
+export function getEvalsFunctionParams24FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyFour, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams24, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyFour$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyFour' from JSON`,
+    (x) => GetEvalsFunctionParams24$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams24' from JSON`,
   );
 }
 
@@ -3390,8 +3449,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyThree$inboundSchema: z.ZodType<
-  TwentyThree,
+export const GetEvalsFunctionParams23$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams23,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3400,15 +3459,15 @@ export const TwentyThree$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyThree$Outbound = {
+export type GetEvalsFunctionParams23$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentyThree$outboundSchema: z.ZodType<
-  TwentyThree$Outbound,
+export const GetEvalsFunctionParams23$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams23$Outbound,
   z.ZodTypeDef,
-  TwentyThree
+  GetEvalsFunctionParams23
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData523Type$outboundSchema,
@@ -3418,26 +3477,30 @@ export const TwentyThree$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyThree$ {
-  /** @deprecated use `TwentyThree$inboundSchema` instead. */
-  export const inboundSchema = TwentyThree$inboundSchema;
-  /** @deprecated use `TwentyThree$outboundSchema` instead. */
-  export const outboundSchema = TwentyThree$outboundSchema;
-  /** @deprecated use `TwentyThree$Outbound` instead. */
-  export type Outbound = TwentyThree$Outbound;
+export namespace GetEvalsFunctionParams23$ {
+  /** @deprecated use `GetEvalsFunctionParams23$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams23$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams23$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams23$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams23$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams23$Outbound;
 }
 
-export function twentyThreeToJSON(twentyThree: TwentyThree): string {
-  return JSON.stringify(TwentyThree$outboundSchema.parse(twentyThree));
+export function getEvalsFunctionParams23ToJSON(
+  getEvalsFunctionParams23: GetEvalsFunctionParams23,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams23$outboundSchema.parse(getEvalsFunctionParams23),
+  );
 }
 
-export function twentyThreeFromJSON(
+export function getEvalsFunctionParams23FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyThree, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams23, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyThree$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyThree' from JSON`,
+    (x) => GetEvalsFunctionParams23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams23' from JSON`,
   );
 }
 
@@ -3470,8 +3533,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyTwo$inboundSchema: z.ZodType<
-  TwentyTwo,
+export const GetEvalsFunctionParams22$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams22,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3480,15 +3543,15 @@ export const TwentyTwo$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyTwo$Outbound = {
+export type GetEvalsFunctionParams22$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentyTwo$outboundSchema: z.ZodType<
-  TwentyTwo$Outbound,
+export const GetEvalsFunctionParams22$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams22$Outbound,
   z.ZodTypeDef,
-  TwentyTwo
+  GetEvalsFunctionParams22
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData522Type$outboundSchema,
@@ -3498,26 +3561,30 @@ export const TwentyTwo$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyTwo$ {
-  /** @deprecated use `TwentyTwo$inboundSchema` instead. */
-  export const inboundSchema = TwentyTwo$inboundSchema;
-  /** @deprecated use `TwentyTwo$outboundSchema` instead. */
-  export const outboundSchema = TwentyTwo$outboundSchema;
-  /** @deprecated use `TwentyTwo$Outbound` instead. */
-  export type Outbound = TwentyTwo$Outbound;
+export namespace GetEvalsFunctionParams22$ {
+  /** @deprecated use `GetEvalsFunctionParams22$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams22$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams22$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams22$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams22$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams22$Outbound;
 }
 
-export function twentyTwoToJSON(twentyTwo: TwentyTwo): string {
-  return JSON.stringify(TwentyTwo$outboundSchema.parse(twentyTwo));
+export function getEvalsFunctionParams22ToJSON(
+  getEvalsFunctionParams22: GetEvalsFunctionParams22,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams22$outboundSchema.parse(getEvalsFunctionParams22),
+  );
 }
 
-export function twentyTwoFromJSON(
+export function getEvalsFunctionParams22FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyTwo, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams22, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyTwo$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyTwo' from JSON`,
+    (x) => GetEvalsFunctionParams22$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams22' from JSON`,
   );
 }
 
@@ -3550,8 +3617,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const TwentyOne$inboundSchema: z.ZodType<
-  TwentyOne,
+export const GetEvalsFunctionParams21$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams21,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3560,15 +3627,15 @@ export const TwentyOne$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TwentyOne$Outbound = {
+export type GetEvalsFunctionParams21$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const TwentyOne$outboundSchema: z.ZodType<
-  TwentyOne$Outbound,
+export const GetEvalsFunctionParams21$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams21$Outbound,
   z.ZodTypeDef,
-  TwentyOne
+  GetEvalsFunctionParams21
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData521Type$outboundSchema,
@@ -3578,26 +3645,30 @@ export const TwentyOne$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TwentyOne$ {
-  /** @deprecated use `TwentyOne$inboundSchema` instead. */
-  export const inboundSchema = TwentyOne$inboundSchema;
-  /** @deprecated use `TwentyOne$outboundSchema` instead. */
-  export const outboundSchema = TwentyOne$outboundSchema;
-  /** @deprecated use `TwentyOne$Outbound` instead. */
-  export type Outbound = TwentyOne$Outbound;
+export namespace GetEvalsFunctionParams21$ {
+  /** @deprecated use `GetEvalsFunctionParams21$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams21$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams21$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams21$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams21$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams21$Outbound;
 }
 
-export function twentyOneToJSON(twentyOne: TwentyOne): string {
-  return JSON.stringify(TwentyOne$outboundSchema.parse(twentyOne));
+export function getEvalsFunctionParams21ToJSON(
+  getEvalsFunctionParams21: GetEvalsFunctionParams21,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams21$outboundSchema.parse(getEvalsFunctionParams21),
+  );
 }
 
-export function twentyOneFromJSON(
+export function getEvalsFunctionParams21FromJSON(
   jsonString: string,
-): SafeParseResult<TwentyOne, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams21, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TwentyOne$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TwentyOne' from JSON`,
+    (x) => GetEvalsFunctionParams21$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams21' from JSON`,
   );
 }
 
@@ -3630,22 +3701,25 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Twenty$inboundSchema: z.ZodType<Twenty, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$inboundSchema,
-  });
+export const GetEvalsFunctionParams20$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams20,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$inboundSchema,
+});
 
 /** @internal */
-export type Twenty$Outbound = {
+export type GetEvalsFunctionParams20$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Twenty$outboundSchema: z.ZodType<
-  Twenty$Outbound,
+export const GetEvalsFunctionParams20$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams20$Outbound,
   z.ZodTypeDef,
-  Twenty
+  GetEvalsFunctionParams20
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData520Type$outboundSchema,
@@ -3655,26 +3729,30 @@ export const Twenty$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Twenty$ {
-  /** @deprecated use `Twenty$inboundSchema` instead. */
-  export const inboundSchema = Twenty$inboundSchema;
-  /** @deprecated use `Twenty$outboundSchema` instead. */
-  export const outboundSchema = Twenty$outboundSchema;
-  /** @deprecated use `Twenty$Outbound` instead. */
-  export type Outbound = Twenty$Outbound;
+export namespace GetEvalsFunctionParams20$ {
+  /** @deprecated use `GetEvalsFunctionParams20$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams20$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams20$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams20$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams20$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams20$Outbound;
 }
 
-export function twentyToJSON(twenty: Twenty): string {
-  return JSON.stringify(Twenty$outboundSchema.parse(twenty));
+export function getEvalsFunctionParams20ToJSON(
+  getEvalsFunctionParams20: GetEvalsFunctionParams20,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams20$outboundSchema.parse(getEvalsFunctionParams20),
+  );
 }
 
-export function twentyFromJSON(
+export function getEvalsFunctionParams20FromJSON(
   jsonString: string,
-): SafeParseResult<Twenty, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams20, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Twenty$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Twenty' from JSON`,
+    (x) => GetEvalsFunctionParams20$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams20' from JSON`,
   );
 }
 
@@ -3707,8 +3785,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Nineteen$inboundSchema: z.ZodType<
-  Nineteen,
+export const GetEvalsFunctionParams19$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams19,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3717,15 +3795,15 @@ export const Nineteen$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Nineteen$Outbound = {
+export type GetEvalsFunctionParams19$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Nineteen$outboundSchema: z.ZodType<
-  Nineteen$Outbound,
+export const GetEvalsFunctionParams19$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams19$Outbound,
   z.ZodTypeDef,
-  Nineteen
+  GetEvalsFunctionParams19
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData519Type$outboundSchema,
@@ -3735,26 +3813,30 @@ export const Nineteen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Nineteen$ {
-  /** @deprecated use `Nineteen$inboundSchema` instead. */
-  export const inboundSchema = Nineteen$inboundSchema;
-  /** @deprecated use `Nineteen$outboundSchema` instead. */
-  export const outboundSchema = Nineteen$outboundSchema;
-  /** @deprecated use `Nineteen$Outbound` instead. */
-  export type Outbound = Nineteen$Outbound;
+export namespace GetEvalsFunctionParams19$ {
+  /** @deprecated use `GetEvalsFunctionParams19$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams19$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams19$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams19$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams19$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams19$Outbound;
 }
 
-export function nineteenToJSON(nineteen: Nineteen): string {
-  return JSON.stringify(Nineteen$outboundSchema.parse(nineteen));
+export function getEvalsFunctionParams19ToJSON(
+  getEvalsFunctionParams19: GetEvalsFunctionParams19,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams19$outboundSchema.parse(getEvalsFunctionParams19),
+  );
 }
 
-export function nineteenFromJSON(
+export function getEvalsFunctionParams19FromJSON(
   jsonString: string,
-): SafeParseResult<Nineteen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams19, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Nineteen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Nineteen' from JSON`,
+    (x) => GetEvalsFunctionParams19$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams19' from JSON`,
   );
 }
 
@@ -3787,8 +3869,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Eighteen$inboundSchema: z.ZodType<
-  Eighteen,
+export const GetEvalsFunctionParams18$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams18,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3797,15 +3879,15 @@ export const Eighteen$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Eighteen$Outbound = {
+export type GetEvalsFunctionParams18$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Eighteen$outboundSchema: z.ZodType<
-  Eighteen$Outbound,
+export const GetEvalsFunctionParams18$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams18$Outbound,
   z.ZodTypeDef,
-  Eighteen
+  GetEvalsFunctionParams18
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type$outboundSchema,
@@ -3815,26 +3897,30 @@ export const Eighteen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Eighteen$ {
-  /** @deprecated use `Eighteen$inboundSchema` instead. */
-  export const inboundSchema = Eighteen$inboundSchema;
-  /** @deprecated use `Eighteen$outboundSchema` instead. */
-  export const outboundSchema = Eighteen$outboundSchema;
-  /** @deprecated use `Eighteen$Outbound` instead. */
-  export type Outbound = Eighteen$Outbound;
+export namespace GetEvalsFunctionParams18$ {
+  /** @deprecated use `GetEvalsFunctionParams18$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams18$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams18$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams18$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams18$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams18$Outbound;
 }
 
-export function eighteenToJSON(eighteen: Eighteen): string {
-  return JSON.stringify(Eighteen$outboundSchema.parse(eighteen));
+export function getEvalsFunctionParams18ToJSON(
+  getEvalsFunctionParams18: GetEvalsFunctionParams18,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams18$outboundSchema.parse(getEvalsFunctionParams18),
+  );
 }
 
-export function eighteenFromJSON(
+export function getEvalsFunctionParams18FromJSON(
   jsonString: string,
-): SafeParseResult<Eighteen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams18, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Eighteen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Eighteen' from JSON`,
+    (x) => GetEvalsFunctionParams18$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams18' from JSON`,
   );
 }
 
@@ -3867,8 +3953,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Seventeen$inboundSchema: z.ZodType<
-  Seventeen,
+export const GetEvalsFunctionParams17$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams17,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3877,15 +3963,15 @@ export const Seventeen$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Seventeen$Outbound = {
+export type GetEvalsFunctionParams17$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Seventeen$outboundSchema: z.ZodType<
-  Seventeen$Outbound,
+export const GetEvalsFunctionParams17$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams17$Outbound,
   z.ZodTypeDef,
-  Seventeen
+  GetEvalsFunctionParams17
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData517Type$outboundSchema,
@@ -3895,26 +3981,30 @@ export const Seventeen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Seventeen$ {
-  /** @deprecated use `Seventeen$inboundSchema` instead. */
-  export const inboundSchema = Seventeen$inboundSchema;
-  /** @deprecated use `Seventeen$outboundSchema` instead. */
-  export const outboundSchema = Seventeen$outboundSchema;
-  /** @deprecated use `Seventeen$Outbound` instead. */
-  export type Outbound = Seventeen$Outbound;
+export namespace GetEvalsFunctionParams17$ {
+  /** @deprecated use `GetEvalsFunctionParams17$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams17$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams17$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams17$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams17$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams17$Outbound;
 }
 
-export function seventeenToJSON(seventeen: Seventeen): string {
-  return JSON.stringify(Seventeen$outboundSchema.parse(seventeen));
+export function getEvalsFunctionParams17ToJSON(
+  getEvalsFunctionParams17: GetEvalsFunctionParams17,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams17$outboundSchema.parse(getEvalsFunctionParams17),
+  );
 }
 
-export function seventeenFromJSON(
+export function getEvalsFunctionParams17FromJSON(
   jsonString: string,
-): SafeParseResult<Seventeen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams17, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Seventeen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Seventeen' from JSON`,
+    (x) => GetEvalsFunctionParams17$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams17' from JSON`,
   );
 }
 
@@ -3947,22 +4037,25 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Sixteen$inboundSchema: z.ZodType<Sixteen, z.ZodTypeDef, unknown> =
-  z.object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$inboundSchema,
-  });
+export const GetEvalsFunctionParams16$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams16,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$inboundSchema,
+});
 
 /** @internal */
-export type Sixteen$Outbound = {
+export type GetEvalsFunctionParams16$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Sixteen$outboundSchema: z.ZodType<
-  Sixteen$Outbound,
+export const GetEvalsFunctionParams16$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams16$Outbound,
   z.ZodTypeDef,
-  Sixteen
+  GetEvalsFunctionParams16
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData516Type$outboundSchema,
@@ -3972,26 +4065,30 @@ export const Sixteen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Sixteen$ {
-  /** @deprecated use `Sixteen$inboundSchema` instead. */
-  export const inboundSchema = Sixteen$inboundSchema;
-  /** @deprecated use `Sixteen$outboundSchema` instead. */
-  export const outboundSchema = Sixteen$outboundSchema;
-  /** @deprecated use `Sixteen$Outbound` instead. */
-  export type Outbound = Sixteen$Outbound;
+export namespace GetEvalsFunctionParams16$ {
+  /** @deprecated use `GetEvalsFunctionParams16$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams16$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams16$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams16$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams16$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams16$Outbound;
 }
 
-export function sixteenToJSON(sixteen: Sixteen): string {
-  return JSON.stringify(Sixteen$outboundSchema.parse(sixteen));
+export function getEvalsFunctionParams16ToJSON(
+  getEvalsFunctionParams16: GetEvalsFunctionParams16,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams16$outboundSchema.parse(getEvalsFunctionParams16),
+  );
 }
 
-export function sixteenFromJSON(
+export function getEvalsFunctionParams16FromJSON(
   jsonString: string,
-): SafeParseResult<Sixteen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams16, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Sixteen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Sixteen' from JSON`,
+    (x) => GetEvalsFunctionParams16$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams16' from JSON`,
   );
 }
 
@@ -4024,24 +4121,27 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Fifteen$inboundSchema: z.ZodType<Fifteen, z.ZodTypeDef, unknown> =
-  z.object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$inboundSchema,
-    pattern: z.string(),
-  });
+export const GetEvalsFunctionParams15$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams15,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$inboundSchema,
+  pattern: z.string(),
+});
 
 /** @internal */
-export type Fifteen$Outbound = {
+export type GetEvalsFunctionParams15$Outbound = {
   type: string;
   pattern: string;
 };
 
 /** @internal */
-export const Fifteen$outboundSchema: z.ZodType<
-  Fifteen$Outbound,
+export const GetEvalsFunctionParams15$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams15$Outbound,
   z.ZodTypeDef,
-  Fifteen
+  GetEvalsFunctionParams15
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData515Type$outboundSchema,
@@ -4052,26 +4152,30 @@ export const Fifteen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Fifteen$ {
-  /** @deprecated use `Fifteen$inboundSchema` instead. */
-  export const inboundSchema = Fifteen$inboundSchema;
-  /** @deprecated use `Fifteen$outboundSchema` instead. */
-  export const outboundSchema = Fifteen$outboundSchema;
-  /** @deprecated use `Fifteen$Outbound` instead. */
-  export type Outbound = Fifteen$Outbound;
+export namespace GetEvalsFunctionParams15$ {
+  /** @deprecated use `GetEvalsFunctionParams15$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams15$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams15$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams15$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams15$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams15$Outbound;
 }
 
-export function fifteenToJSON(fifteen: Fifteen): string {
-  return JSON.stringify(Fifteen$outboundSchema.parse(fifteen));
+export function getEvalsFunctionParams15ToJSON(
+  getEvalsFunctionParams15: GetEvalsFunctionParams15,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams15$outboundSchema.parse(getEvalsFunctionParams15),
+  );
 }
 
-export function fifteenFromJSON(
+export function getEvalsFunctionParams15FromJSON(
   jsonString: string,
-): SafeParseResult<Fifteen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams15, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Fifteen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Fifteen' from JSON`,
+    (x) => GetEvalsFunctionParams15$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams15' from JSON`,
   );
 }
 
@@ -4104,8 +4208,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Fourteen$inboundSchema: z.ZodType<
-  Fourteen,
+export const GetEvalsFunctionParams14$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams14,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4114,15 +4218,15 @@ export const Fourteen$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Fourteen$Outbound = {
+export type GetEvalsFunctionParams14$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Fourteen$outboundSchema: z.ZodType<
-  Fourteen$Outbound,
+export const GetEvalsFunctionParams14$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams14$Outbound,
   z.ZodTypeDef,
-  Fourteen
+  GetEvalsFunctionParams14
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData514Type$outboundSchema,
@@ -4132,26 +4236,30 @@ export const Fourteen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Fourteen$ {
-  /** @deprecated use `Fourteen$inboundSchema` instead. */
-  export const inboundSchema = Fourteen$inboundSchema;
-  /** @deprecated use `Fourteen$outboundSchema` instead. */
-  export const outboundSchema = Fourteen$outboundSchema;
-  /** @deprecated use `Fourteen$Outbound` instead. */
-  export type Outbound = Fourteen$Outbound;
+export namespace GetEvalsFunctionParams14$ {
+  /** @deprecated use `GetEvalsFunctionParams14$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams14$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams14$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams14$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams14$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams14$Outbound;
 }
 
-export function fourteenToJSON(fourteen: Fourteen): string {
-  return JSON.stringify(Fourteen$outboundSchema.parse(fourteen));
+export function getEvalsFunctionParams14ToJSON(
+  getEvalsFunctionParams14: GetEvalsFunctionParams14,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams14$outboundSchema.parse(getEvalsFunctionParams14),
+  );
 }
 
-export function fourteenFromJSON(
+export function getEvalsFunctionParams14FromJSON(
   jsonString: string,
-): SafeParseResult<Fourteen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams14, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Fourteen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Fourteen' from JSON`,
+    (x) => GetEvalsFunctionParams14$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams14' from JSON`,
   );
 }
 
@@ -4184,8 +4292,8 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Thirteen$inboundSchema: z.ZodType<
-  Thirteen,
+export const GetEvalsFunctionParams13$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams13,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4195,16 +4303,16 @@ export const Thirteen$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Thirteen$Outbound = {
+export type GetEvalsFunctionParams13$Outbound = {
   type: string;
   value: number;
 };
 
 /** @internal */
-export const Thirteen$outboundSchema: z.ZodType<
-  Thirteen$Outbound,
+export const GetEvalsFunctionParams13$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams13$Outbound,
   z.ZodTypeDef,
-  Thirteen
+  GetEvalsFunctionParams13
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type$outboundSchema,
@@ -4215,26 +4323,30 @@ export const Thirteen$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Thirteen$ {
-  /** @deprecated use `Thirteen$inboundSchema` instead. */
-  export const inboundSchema = Thirteen$inboundSchema;
-  /** @deprecated use `Thirteen$outboundSchema` instead. */
-  export const outboundSchema = Thirteen$outboundSchema;
-  /** @deprecated use `Thirteen$Outbound` instead. */
-  export type Outbound = Thirteen$Outbound;
+export namespace GetEvalsFunctionParams13$ {
+  /** @deprecated use `GetEvalsFunctionParams13$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams13$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams13$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams13$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams13$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams13$Outbound;
 }
 
-export function thirteenToJSON(thirteen: Thirteen): string {
-  return JSON.stringify(Thirteen$outboundSchema.parse(thirteen));
+export function getEvalsFunctionParams13ToJSON(
+  getEvalsFunctionParams13: GetEvalsFunctionParams13,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams13$outboundSchema.parse(getEvalsFunctionParams13),
+  );
 }
 
-export function thirteenFromJSON(
+export function getEvalsFunctionParams13FromJSON(
   jsonString: string,
-): SafeParseResult<Thirteen, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams13, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Thirteen$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Thirteen' from JSON`,
+    (x) => GetEvalsFunctionParams13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams13' from JSON`,
   );
 }
 
@@ -4267,26 +4379,29 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$inboundSchema,
-    min: z.number(),
-    max: z.number(),
-  });
+export const GetEvalsFunctionParams12$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams12,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$inboundSchema,
+  min: z.number(),
+  max: z.number(),
+});
 
 /** @internal */
-export type Twelve$Outbound = {
+export type GetEvalsFunctionParams12$Outbound = {
   type: string;
   min: number;
   max: number;
 };
 
 /** @internal */
-export const Twelve$outboundSchema: z.ZodType<
-  Twelve$Outbound,
+export const GetEvalsFunctionParams12$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams12$Outbound,
   z.ZodTypeDef,
-  Twelve
+  GetEvalsFunctionParams12
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData512Type$outboundSchema,
@@ -4298,26 +4413,30 @@ export const Twelve$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Twelve$ {
-  /** @deprecated use `Twelve$inboundSchema` instead. */
-  export const inboundSchema = Twelve$inboundSchema;
-  /** @deprecated use `Twelve$outboundSchema` instead. */
-  export const outboundSchema = Twelve$outboundSchema;
-  /** @deprecated use `Twelve$Outbound` instead. */
-  export type Outbound = Twelve$Outbound;
+export namespace GetEvalsFunctionParams12$ {
+  /** @deprecated use `GetEvalsFunctionParams12$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams12$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams12$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams12$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams12$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams12$Outbound;
 }
 
-export function twelveToJSON(twelve: Twelve): string {
-  return JSON.stringify(Twelve$outboundSchema.parse(twelve));
+export function getEvalsFunctionParams12ToJSON(
+  getEvalsFunctionParams12: GetEvalsFunctionParams12,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams12$outboundSchema.parse(getEvalsFunctionParams12),
+  );
 }
 
-export function twelveFromJSON(
+export function getEvalsFunctionParams12FromJSON(
   jsonString: string,
-): SafeParseResult<Twelve, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams12, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Twelve$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Twelve' from JSON`,
+    (x) => GetEvalsFunctionParams12$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams12' from JSON`,
   );
 }
 
@@ -4350,24 +4469,27 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$inboundSchema,
-    value: z.number(),
-  });
+export const GetEvalsFunctionParams11$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams11,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$inboundSchema,
+  value: z.number(),
+});
 
 /** @internal */
-export type Eleven$Outbound = {
+export type GetEvalsFunctionParams11$Outbound = {
   type: string;
   value: number;
 };
 
 /** @internal */
-export const Eleven$outboundSchema: z.ZodType<
-  Eleven$Outbound,
+export const GetEvalsFunctionParams11$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams11$Outbound,
   z.ZodTypeDef,
-  Eleven
+  GetEvalsFunctionParams11
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type$outboundSchema,
@@ -4378,26 +4500,30 @@ export const Eleven$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Eleven$ {
-  /** @deprecated use `Eleven$inboundSchema` instead. */
-  export const inboundSchema = Eleven$inboundSchema;
-  /** @deprecated use `Eleven$outboundSchema` instead. */
-  export const outboundSchema = Eleven$outboundSchema;
-  /** @deprecated use `Eleven$Outbound` instead. */
-  export type Outbound = Eleven$Outbound;
+export namespace GetEvalsFunctionParams11$ {
+  /** @deprecated use `GetEvalsFunctionParams11$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams11$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams11$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams11$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams11$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams11$Outbound;
 }
 
-export function elevenToJSON(eleven: Eleven): string {
-  return JSON.stringify(Eleven$outboundSchema.parse(eleven));
+export function getEvalsFunctionParams11ToJSON(
+  getEvalsFunctionParams11: GetEvalsFunctionParams11,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams11$outboundSchema.parse(getEvalsFunctionParams11),
+  );
 }
 
-export function elevenFromJSON(
+export function getEvalsFunctionParams11FromJSON(
   jsonString: string,
-): SafeParseResult<Eleven, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams11, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Eleven$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Eleven' from JSON`,
+    (x) => GetEvalsFunctionParams11$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams11' from JSON`,
   );
 }
 
@@ -4430,48 +4556,58 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$inboundSchema,
-  });
+export const GetEvalsFunctionParams10$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams10,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$inboundSchema,
+});
 
 /** @internal */
-export type Ten$Outbound = {
+export type GetEvalsFunctionParams10$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Ten$outboundSchema: z.ZodType<Ten$Outbound, z.ZodTypeDef, Ten> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$outboundSchema,
-  });
+export const GetEvalsFunctionParams10$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams10$Outbound,
+  z.ZodTypeDef,
+  GetEvalsFunctionParams10
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData510Type$outboundSchema,
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Ten$ {
-  /** @deprecated use `Ten$inboundSchema` instead. */
-  export const inboundSchema = Ten$inboundSchema;
-  /** @deprecated use `Ten$outboundSchema` instead. */
-  export const outboundSchema = Ten$outboundSchema;
-  /** @deprecated use `Ten$Outbound` instead. */
-  export type Outbound = Ten$Outbound;
+export namespace GetEvalsFunctionParams10$ {
+  /** @deprecated use `GetEvalsFunctionParams10$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams10$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams10$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams10$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams10$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams10$Outbound;
 }
 
-export function tenToJSON(ten: Ten): string {
-  return JSON.stringify(Ten$outboundSchema.parse(ten));
+export function getEvalsFunctionParams10ToJSON(
+  getEvalsFunctionParams10: GetEvalsFunctionParams10,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams10$outboundSchema.parse(getEvalsFunctionParams10),
+  );
 }
 
-export function tenFromJSON(
+export function getEvalsFunctionParams10FromJSON(
   jsonString: string,
-): SafeParseResult<Ten, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams10, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Ten$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Ten' from JSON`,
+    (x) => GetEvalsFunctionParams10$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams10' from JSON`,
   );
 }
 
@@ -4504,51 +4640,61 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema,
-    value: z.string(),
-  });
+export const GetEvalsFunctionParams9$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams9,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$inboundSchema,
+  value: z.string(),
+});
 
 /** @internal */
-export type Nine$Outbound = {
+export type GetEvalsFunctionParams9$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const Nine$outboundSchema: z.ZodType<Nine$Outbound, z.ZodTypeDef, Nine> =
-  z.object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$outboundSchema,
-    value: z.string(),
-  });
+export const GetEvalsFunctionParams9$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams9$Outbound,
+  z.ZodTypeDef,
+  GetEvalsFunctionParams9
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type$outboundSchema,
+  value: z.string(),
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Nine$ {
-  /** @deprecated use `Nine$inboundSchema` instead. */
-  export const inboundSchema = Nine$inboundSchema;
-  /** @deprecated use `Nine$outboundSchema` instead. */
-  export const outboundSchema = Nine$outboundSchema;
-  /** @deprecated use `Nine$Outbound` instead. */
-  export type Outbound = Nine$Outbound;
+export namespace GetEvalsFunctionParams9$ {
+  /** @deprecated use `GetEvalsFunctionParams9$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams9$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams9$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams9$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams9$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams9$Outbound;
 }
 
-export function nineToJSON(nine: Nine): string {
-  return JSON.stringify(Nine$outboundSchema.parse(nine));
+export function getEvalsFunctionParams9ToJSON(
+  getEvalsFunctionParams9: GetEvalsFunctionParams9,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams9$outboundSchema.parse(getEvalsFunctionParams9),
+  );
 }
 
-export function nineFromJSON(
+export function getEvalsFunctionParams9FromJSON(
   jsonString: string,
-): SafeParseResult<Nine, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams9, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Nine$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Nine' from JSON`,
+    (x) => GetEvalsFunctionParams9$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams9' from JSON`,
   );
 }
 
@@ -4581,24 +4727,27 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema,
-    value: z.string(),
-  });
+export const GetEvalsFunctionParams8$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams8,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$inboundSchema,
+  value: z.string(),
+});
 
 /** @internal */
-export type Eight$Outbound = {
+export type GetEvalsFunctionParams8$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const Eight$outboundSchema: z.ZodType<
-  Eight$Outbound,
+export const GetEvalsFunctionParams8$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams8$Outbound,
   z.ZodTypeDef,
-  Eight
+  GetEvalsFunctionParams8
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyDataType$outboundSchema,
@@ -4609,26 +4758,30 @@ export const Eight$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Eight$ {
-  /** @deprecated use `Eight$inboundSchema` instead. */
-  export const inboundSchema = Eight$inboundSchema;
-  /** @deprecated use `Eight$outboundSchema` instead. */
-  export const outboundSchema = Eight$outboundSchema;
-  /** @deprecated use `Eight$Outbound` instead. */
-  export type Outbound = Eight$Outbound;
+export namespace GetEvalsFunctionParams8$ {
+  /** @deprecated use `GetEvalsFunctionParams8$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams8$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams8$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams8$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams8$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams8$Outbound;
 }
 
-export function eightToJSON(eight: Eight): string {
-  return JSON.stringify(Eight$outboundSchema.parse(eight));
+export function getEvalsFunctionParams8ToJSON(
+  getEvalsFunctionParams8: GetEvalsFunctionParams8,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams8$outboundSchema.parse(getEvalsFunctionParams8),
+  );
 }
 
-export function eightFromJSON(
+export function getEvalsFunctionParams8FromJSON(
   jsonString: string,
-): SafeParseResult<Eight, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams8, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Eight$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Eight' from JSON`,
+    (x) => GetEvalsFunctionParams8$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams8' from JSON`,
   );
 }
 
@@ -4661,22 +4814,25 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-  });
+export const GetEvalsFunctionParams7$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams7,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+});
 
 /** @internal */
-export type Seven$Outbound = {
+export type GetEvalsFunctionParams7$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Seven$outboundSchema: z.ZodType<
-  Seven$Outbound,
+export const GetEvalsFunctionParams7$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams7$Outbound,
   z.ZodTypeDef,
-  Seven
+  GetEvalsFunctionParams7
 > = z.object({
   type:
     GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
@@ -4686,26 +4842,30 @@ export const Seven$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Seven$ {
-  /** @deprecated use `Seven$inboundSchema` instead. */
-  export const inboundSchema = Seven$inboundSchema;
-  /** @deprecated use `Seven$outboundSchema` instead. */
-  export const outboundSchema = Seven$outboundSchema;
-  /** @deprecated use `Seven$Outbound` instead. */
-  export type Outbound = Seven$Outbound;
+export namespace GetEvalsFunctionParams7$ {
+  /** @deprecated use `GetEvalsFunctionParams7$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams7$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams7$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams7$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams7$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams7$Outbound;
 }
 
-export function sevenToJSON(seven: Seven): string {
-  return JSON.stringify(Seven$outboundSchema.parse(seven));
+export function getEvalsFunctionParams7ToJSON(
+  getEvalsFunctionParams7: GetEvalsFunctionParams7,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams7$outboundSchema.parse(getEvalsFunctionParams7),
+  );
 }
 
-export function sevenFromJSON(
+export function getEvalsFunctionParams7FromJSON(
   jsonString: string,
-): SafeParseResult<Seven, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams7, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Seven$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Seven' from JSON`,
+    (x) => GetEvalsFunctionParams7$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams7' from JSON`,
   );
 }
 
@@ -4735,48 +4895,57 @@ export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$ {
 }
 
 /** @internal */
-export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema,
-  });
+export const GetEvalsFunctionParams6$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams6,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$inboundSchema,
+});
 
 /** @internal */
-export type Six$Outbound = {
+export type GetEvalsFunctionParams6$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Six$outboundSchema: z.ZodType<Six$Outbound, z.ZodTypeDef, Six> = z
-  .object({
-    type:
-      GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema,
-  });
+export const GetEvalsFunctionParams6$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams6$Outbound,
+  z.ZodTypeDef,
+  GetEvalsFunctionParams6
+> = z.object({
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema,
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Six$ {
-  /** @deprecated use `Six$inboundSchema` instead. */
-  export const inboundSchema = Six$inboundSchema;
-  /** @deprecated use `Six$outboundSchema` instead. */
-  export const outboundSchema = Six$outboundSchema;
-  /** @deprecated use `Six$Outbound` instead. */
-  export type Outbound = Six$Outbound;
+export namespace GetEvalsFunctionParams6$ {
+  /** @deprecated use `GetEvalsFunctionParams6$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams6$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams6$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams6$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams6$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams6$Outbound;
 }
 
-export function sixToJSON(six: Six): string {
-  return JSON.stringify(Six$outboundSchema.parse(six));
+export function getEvalsFunctionParams6ToJSON(
+  getEvalsFunctionParams6: GetEvalsFunctionParams6,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams6$outboundSchema.parse(getEvalsFunctionParams6),
+  );
 }
 
-export function sixFromJSON(
+export function getEvalsFunctionParams6FromJSON(
   jsonString: string,
-): SafeParseResult<Six, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams6, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Six$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Six' from JSON`,
+    (x) => GetEvalsFunctionParams6$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams6' from JSON`,
   );
 }
 
@@ -4804,46 +4973,56 @@ export namespace GetEvalsFunctionParamsEvalsResponse200Type$ {
 }
 
 /** @internal */
-export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
-  .object({
-    type: GetEvalsFunctionParamsEvalsResponse200Type$inboundSchema,
-  });
+export const GetEvalsFunctionParams5$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams5,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  type: GetEvalsFunctionParamsEvalsResponse200Type$inboundSchema,
+});
 
 /** @internal */
-export type Five$Outbound = {
+export type GetEvalsFunctionParams5$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Five$outboundSchema: z.ZodType<Five$Outbound, z.ZodTypeDef, Five> =
-  z.object({
-    type: GetEvalsFunctionParamsEvalsResponse200Type$outboundSchema,
-  });
+export const GetEvalsFunctionParams5$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams5$Outbound,
+  z.ZodTypeDef,
+  GetEvalsFunctionParams5
+> = z.object({
+  type: GetEvalsFunctionParamsEvalsResponse200Type$outboundSchema,
+});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Five$ {
-  /** @deprecated use `Five$inboundSchema` instead. */
-  export const inboundSchema = Five$inboundSchema;
-  /** @deprecated use `Five$outboundSchema` instead. */
-  export const outboundSchema = Five$outboundSchema;
-  /** @deprecated use `Five$Outbound` instead. */
-  export type Outbound = Five$Outbound;
+export namespace GetEvalsFunctionParams5$ {
+  /** @deprecated use `GetEvalsFunctionParams5$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams5$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams5$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams5$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams5$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams5$Outbound;
 }
 
-export function fiveToJSON(five: Five): string {
-  return JSON.stringify(Five$outboundSchema.parse(five));
+export function getEvalsFunctionParams5ToJSON(
+  getEvalsFunctionParams5: GetEvalsFunctionParams5,
+): string {
+  return JSON.stringify(
+    GetEvalsFunctionParams5$outboundSchema.parse(getEvalsFunctionParams5),
+  );
 }
 
-export function fiveFromJSON(
+export function getEvalsFunctionParams5FromJSON(
   jsonString: string,
-): SafeParseResult<Five, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams5, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Five$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Five' from JSON`,
+    (x) => GetEvalsFunctionParams5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams5' from JSON`,
   );
 }
 
@@ -4871,8 +5050,8 @@ export namespace GetEvalsFunctionParamsEvalsResponseType$ {
 }
 
 /** @internal */
-export const FunctionParams4$inboundSchema: z.ZodType<
-  FunctionParams4,
+export const GetEvalsFunctionParams4$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams4,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4881,16 +5060,16 @@ export const FunctionParams4$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type FunctionParams4$Outbound = {
+export type GetEvalsFunctionParams4$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const FunctionParams4$outboundSchema: z.ZodType<
-  FunctionParams4$Outbound,
+export const GetEvalsFunctionParams4$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams4$Outbound,
   z.ZodTypeDef,
-  FunctionParams4
+  GetEvalsFunctionParams4
 > = z.object({
   type: GetEvalsFunctionParamsEvalsResponseType$outboundSchema,
   keywords: z.array(z.string()),
@@ -4900,28 +5079,30 @@ export const FunctionParams4$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FunctionParams4$ {
-  /** @deprecated use `FunctionParams4$inboundSchema` instead. */
-  export const inboundSchema = FunctionParams4$inboundSchema;
-  /** @deprecated use `FunctionParams4$outboundSchema` instead. */
-  export const outboundSchema = FunctionParams4$outboundSchema;
-  /** @deprecated use `FunctionParams4$Outbound` instead. */
-  export type Outbound = FunctionParams4$Outbound;
+export namespace GetEvalsFunctionParams4$ {
+  /** @deprecated use `GetEvalsFunctionParams4$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams4$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams4$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams4$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams4$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams4$Outbound;
 }
 
-export function functionParams4ToJSON(
-  functionParams4: FunctionParams4,
+export function getEvalsFunctionParams4ToJSON(
+  getEvalsFunctionParams4: GetEvalsFunctionParams4,
 ): string {
-  return JSON.stringify(FunctionParams4$outboundSchema.parse(functionParams4));
+  return JSON.stringify(
+    GetEvalsFunctionParams4$outboundSchema.parse(getEvalsFunctionParams4),
+  );
 }
 
-export function functionParams4FromJSON(
+export function getEvalsFunctionParams4FromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams4, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams4, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams4' from JSON`,
+    (x) => GetEvalsFunctionParams4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams4' from JSON`,
   );
 }
 
@@ -4947,8 +5128,8 @@ export namespace GetEvalsFunctionParamsEvalsType$ {
 }
 
 /** @internal */
-export const FunctionParams3$inboundSchema: z.ZodType<
-  FunctionParams3,
+export const GetEvalsFunctionParams3$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams3,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4957,16 +5138,16 @@ export const FunctionParams3$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type FunctionParams3$Outbound = {
+export type GetEvalsFunctionParams3$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const FunctionParams3$outboundSchema: z.ZodType<
-  FunctionParams3$Outbound,
+export const GetEvalsFunctionParams3$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams3$Outbound,
   z.ZodTypeDef,
-  FunctionParams3
+  GetEvalsFunctionParams3
 > = z.object({
   type: GetEvalsFunctionParamsEvalsType$outboundSchema,
   keywords: z.array(z.string()),
@@ -4976,28 +5157,30 @@ export const FunctionParams3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FunctionParams3$ {
-  /** @deprecated use `FunctionParams3$inboundSchema` instead. */
-  export const inboundSchema = FunctionParams3$inboundSchema;
-  /** @deprecated use `FunctionParams3$outboundSchema` instead. */
-  export const outboundSchema = FunctionParams3$outboundSchema;
-  /** @deprecated use `FunctionParams3$Outbound` instead. */
-  export type Outbound = FunctionParams3$Outbound;
+export namespace GetEvalsFunctionParams3$ {
+  /** @deprecated use `GetEvalsFunctionParams3$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams3$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams3$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams3$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams3$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams3$Outbound;
 }
 
-export function functionParams3ToJSON(
-  functionParams3: FunctionParams3,
+export function getEvalsFunctionParams3ToJSON(
+  getEvalsFunctionParams3: GetEvalsFunctionParams3,
 ): string {
-  return JSON.stringify(FunctionParams3$outboundSchema.parse(functionParams3));
+  return JSON.stringify(
+    GetEvalsFunctionParams3$outboundSchema.parse(getEvalsFunctionParams3),
+  );
 }
 
-export function functionParams3FromJSON(
+export function getEvalsFunctionParams3FromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams3, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams3' from JSON`,
+    (x) => GetEvalsFunctionParams3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams3' from JSON`,
   );
 }
 
@@ -5023,8 +5206,8 @@ export namespace GetEvalsFunctionParamsType$ {
 }
 
 /** @internal */
-export const FunctionParams2$inboundSchema: z.ZodType<
-  FunctionParams2,
+export const GetEvalsFunctionParams2$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5033,16 +5216,16 @@ export const FunctionParams2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type FunctionParams2$Outbound = {
+export type GetEvalsFunctionParams2$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const FunctionParams2$outboundSchema: z.ZodType<
-  FunctionParams2$Outbound,
+export const GetEvalsFunctionParams2$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams2$Outbound,
   z.ZodTypeDef,
-  FunctionParams2
+  GetEvalsFunctionParams2
 > = z.object({
   type: GetEvalsFunctionParamsType$outboundSchema,
   keywords: z.array(z.string()),
@@ -5052,75 +5235,86 @@ export const FunctionParams2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FunctionParams2$ {
-  /** @deprecated use `FunctionParams2$inboundSchema` instead. */
-  export const inboundSchema = FunctionParams2$inboundSchema;
-  /** @deprecated use `FunctionParams2$outboundSchema` instead. */
-  export const outboundSchema = FunctionParams2$outboundSchema;
-  /** @deprecated use `FunctionParams2$Outbound` instead. */
-  export type Outbound = FunctionParams2$Outbound;
+export namespace GetEvalsFunctionParams2$ {
+  /** @deprecated use `GetEvalsFunctionParams2$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams2$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams2$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams2$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams2$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams2$Outbound;
 }
 
-export function functionParams2ToJSON(
-  functionParams2: FunctionParams2,
+export function getEvalsFunctionParams2ToJSON(
+  getEvalsFunctionParams2: GetEvalsFunctionParams2,
 ): string {
-  return JSON.stringify(FunctionParams2$outboundSchema.parse(functionParams2));
+  return JSON.stringify(
+    GetEvalsFunctionParams2$outboundSchema.parse(getEvalsFunctionParams2),
+  );
 }
 
-export function functionParams2FromJSON(
+export function getEvalsFunctionParams2FromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams2, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams2' from JSON`,
+    (x) => GetEvalsFunctionParams2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams2' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParamsType$inboundSchema: z.ZodNativeEnum<
-  typeof FunctionParamsType
-> = z.nativeEnum(FunctionParamsType);
+export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type
+  > = z.nativeEnum(
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type,
+  );
 
 /** @internal */
-export const FunctionParamsType$outboundSchema: z.ZodNativeEnum<
-  typeof FunctionParamsType
-> = FunctionParamsType$inboundSchema;
+export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type
+  > =
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FunctionParamsType$ {
-  /** @deprecated use `FunctionParamsType$inboundSchema` instead. */
-  export const inboundSchema = FunctionParamsType$inboundSchema;
-  /** @deprecated use `FunctionParamsType$outboundSchema` instead. */
-  export const outboundSchema = FunctionParamsType$outboundSchema;
+export namespace GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$ {
+  /** @deprecated use `GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema` instead. */
+  export const inboundSchema =
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$outboundSchema` instead. */
+  export const outboundSchema =
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$outboundSchema;
 }
 
 /** @internal */
-export const FunctionParams1$inboundSchema: z.ZodType<
-  FunctionParams1,
+export const GetEvalsFunctionParams1$inboundSchema: z.ZodType<
+  GetEvalsFunctionParams1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: FunctionParamsType$inboundSchema,
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$inboundSchema,
   value: z.string(),
 });
 
 /** @internal */
-export type FunctionParams1$Outbound = {
+export type GetEvalsFunctionParams1$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const FunctionParams1$outboundSchema: z.ZodType<
-  FunctionParams1$Outbound,
+export const GetEvalsFunctionParams1$outboundSchema: z.ZodType<
+  GetEvalsFunctionParams1$Outbound,
   z.ZodTypeDef,
-  FunctionParams1
+  GetEvalsFunctionParams1
 > = z.object({
-  type: FunctionParamsType$outboundSchema,
+  type:
+    GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData51Type$outboundSchema,
   value: z.string(),
 });
 
@@ -5128,28 +5322,30 @@ export const FunctionParams1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FunctionParams1$ {
-  /** @deprecated use `FunctionParams1$inboundSchema` instead. */
-  export const inboundSchema = FunctionParams1$inboundSchema;
-  /** @deprecated use `FunctionParams1$outboundSchema` instead. */
-  export const outboundSchema = FunctionParams1$outboundSchema;
-  /** @deprecated use `FunctionParams1$Outbound` instead. */
-  export type Outbound = FunctionParams1$Outbound;
+export namespace GetEvalsFunctionParams1$ {
+  /** @deprecated use `GetEvalsFunctionParams1$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsFunctionParams1$inboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams1$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsFunctionParams1$outboundSchema;
+  /** @deprecated use `GetEvalsFunctionParams1$Outbound` instead. */
+  export type Outbound = GetEvalsFunctionParams1$Outbound;
 }
 
-export function functionParams1ToJSON(
-  functionParams1: FunctionParams1,
+export function getEvalsFunctionParams1ToJSON(
+  getEvalsFunctionParams1: GetEvalsFunctionParams1,
 ): string {
-  return JSON.stringify(FunctionParams1$outboundSchema.parse(functionParams1));
+  return JSON.stringify(
+    GetEvalsFunctionParams1$outboundSchema.parse(getEvalsFunctionParams1),
+  );
 }
 
-export function functionParams1FromJSON(
+export function getEvalsFunctionParams1FromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams1, SDKValidationError> {
+): SafeParseResult<GetEvalsFunctionParams1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams1' from JSON`,
+    (x) => GetEvalsFunctionParams1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalsFunctionParams1' from JSON`,
   );
 }
 
@@ -5159,80 +5355,80 @@ export const DataFunctionParams$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => Twelve$inboundSchema),
-  z.lazy(() => FunctionParams1$inboundSchema),
-  z.lazy(() => FunctionParams2$inboundSchema),
-  z.lazy(() => FunctionParams3$inboundSchema),
-  z.lazy(() => FunctionParams4$inboundSchema),
-  z.lazy(() => Eight$inboundSchema),
-  z.lazy(() => Nine$inboundSchema),
-  z.lazy(() => Eleven$inboundSchema),
-  z.lazy(() => Thirteen$inboundSchema),
-  z.lazy(() => Fifteen$inboundSchema),
-  z.lazy(() => TwentyFive$inboundSchema),
-  z.lazy(() => TwentySix$inboundSchema),
-  z.lazy(() => Five$inboundSchema),
-  z.lazy(() => Six$inboundSchema),
-  z.lazy(() => Seven$inboundSchema),
-  z.lazy(() => Ten$inboundSchema),
-  z.lazy(() => Fourteen$inboundSchema),
-  z.lazy(() => Sixteen$inboundSchema),
-  z.lazy(() => Seventeen$inboundSchema),
-  z.lazy(() => Eighteen$inboundSchema),
-  z.lazy(() => Nineteen$inboundSchema),
-  z.lazy(() => Twenty$inboundSchema),
-  z.lazy(() => TwentyOne$inboundSchema),
-  z.lazy(() => TwentyTwo$inboundSchema),
-  z.lazy(() => TwentyThree$inboundSchema),
-  z.lazy(() => TwentyFour$inboundSchema),
-  z.lazy(() => TwentySeven$inboundSchema),
-  z.lazy(() => TwentyEight$inboundSchema),
-  z.lazy(() => TwentyNine$inboundSchema),
-  z.lazy(() => Thirty$inboundSchema),
-  z.lazy(() => ThirtyOne$inboundSchema),
-  z.lazy(() => ThirtyTwo$inboundSchema),
-  z.lazy(() => ThirtyThree$inboundSchema),
-  z.lazy(() => ThirtyFour$inboundSchema),
-  z.lazy(() => ThirtyFive$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams1$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams2$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams3$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams4$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams8$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams9$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams11$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams13$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams15$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams25$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams26$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams5$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams6$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams7$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams10$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams14$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams16$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams17$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams18$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams19$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams20$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams21$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams22$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams23$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams24$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams27$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams28$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams29$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams30$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams31$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams32$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams33$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams34$inboundSchema),
+  z.lazy(() => GetEvalsFunctionParams35$inboundSchema),
 ]);
 
 /** @internal */
 export type DataFunctionParams$Outbound =
-  | Twelve$Outbound
-  | FunctionParams1$Outbound
-  | FunctionParams2$Outbound
-  | FunctionParams3$Outbound
-  | FunctionParams4$Outbound
-  | Eight$Outbound
-  | Nine$Outbound
-  | Eleven$Outbound
-  | Thirteen$Outbound
-  | Fifteen$Outbound
-  | TwentyFive$Outbound
-  | TwentySix$Outbound
-  | Five$Outbound
-  | Six$Outbound
-  | Seven$Outbound
-  | Ten$Outbound
-  | Fourteen$Outbound
-  | Sixteen$Outbound
-  | Seventeen$Outbound
-  | Eighteen$Outbound
-  | Nineteen$Outbound
-  | Twenty$Outbound
-  | TwentyOne$Outbound
-  | TwentyTwo$Outbound
-  | TwentyThree$Outbound
-  | TwentyFour$Outbound
-  | TwentySeven$Outbound
-  | TwentyEight$Outbound
-  | TwentyNine$Outbound
-  | Thirty$Outbound
-  | ThirtyOne$Outbound
-  | ThirtyTwo$Outbound
-  | ThirtyThree$Outbound
-  | ThirtyFour$Outbound
-  | ThirtyFive$Outbound;
+  | GetEvalsFunctionParams12$Outbound
+  | GetEvalsFunctionParams1$Outbound
+  | GetEvalsFunctionParams2$Outbound
+  | GetEvalsFunctionParams3$Outbound
+  | GetEvalsFunctionParams4$Outbound
+  | GetEvalsFunctionParams8$Outbound
+  | GetEvalsFunctionParams9$Outbound
+  | GetEvalsFunctionParams11$Outbound
+  | GetEvalsFunctionParams13$Outbound
+  | GetEvalsFunctionParams15$Outbound
+  | GetEvalsFunctionParams25$Outbound
+  | GetEvalsFunctionParams26$Outbound
+  | GetEvalsFunctionParams5$Outbound
+  | GetEvalsFunctionParams6$Outbound
+  | GetEvalsFunctionParams7$Outbound
+  | GetEvalsFunctionParams10$Outbound
+  | GetEvalsFunctionParams14$Outbound
+  | GetEvalsFunctionParams16$Outbound
+  | GetEvalsFunctionParams17$Outbound
+  | GetEvalsFunctionParams18$Outbound
+  | GetEvalsFunctionParams19$Outbound
+  | GetEvalsFunctionParams20$Outbound
+  | GetEvalsFunctionParams21$Outbound
+  | GetEvalsFunctionParams22$Outbound
+  | GetEvalsFunctionParams23$Outbound
+  | GetEvalsFunctionParams24$Outbound
+  | GetEvalsFunctionParams27$Outbound
+  | GetEvalsFunctionParams28$Outbound
+  | GetEvalsFunctionParams29$Outbound
+  | GetEvalsFunctionParams30$Outbound
+  | GetEvalsFunctionParams31$Outbound
+  | GetEvalsFunctionParams32$Outbound
+  | GetEvalsFunctionParams33$Outbound
+  | GetEvalsFunctionParams34$Outbound
+  | GetEvalsFunctionParams35$Outbound;
 
 /** @internal */
 export const DataFunctionParams$outboundSchema: z.ZodType<
@@ -5240,41 +5436,41 @@ export const DataFunctionParams$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DataFunctionParams
 > = z.union([
-  z.lazy(() => Twelve$outboundSchema),
-  z.lazy(() => FunctionParams1$outboundSchema),
-  z.lazy(() => FunctionParams2$outboundSchema),
-  z.lazy(() => FunctionParams3$outboundSchema),
-  z.lazy(() => FunctionParams4$outboundSchema),
-  z.lazy(() => Eight$outboundSchema),
-  z.lazy(() => Nine$outboundSchema),
-  z.lazy(() => Eleven$outboundSchema),
-  z.lazy(() => Thirteen$outboundSchema),
-  z.lazy(() => Fifteen$outboundSchema),
-  z.lazy(() => TwentyFive$outboundSchema),
-  z.lazy(() => TwentySix$outboundSchema),
-  z.lazy(() => Five$outboundSchema),
-  z.lazy(() => Six$outboundSchema),
-  z.lazy(() => Seven$outboundSchema),
-  z.lazy(() => Ten$outboundSchema),
-  z.lazy(() => Fourteen$outboundSchema),
-  z.lazy(() => Sixteen$outboundSchema),
-  z.lazy(() => Seventeen$outboundSchema),
-  z.lazy(() => Eighteen$outboundSchema),
-  z.lazy(() => Nineteen$outboundSchema),
-  z.lazy(() => Twenty$outboundSchema),
-  z.lazy(() => TwentyOne$outboundSchema),
-  z.lazy(() => TwentyTwo$outboundSchema),
-  z.lazy(() => TwentyThree$outboundSchema),
-  z.lazy(() => TwentyFour$outboundSchema),
-  z.lazy(() => TwentySeven$outboundSchema),
-  z.lazy(() => TwentyEight$outboundSchema),
-  z.lazy(() => TwentyNine$outboundSchema),
-  z.lazy(() => Thirty$outboundSchema),
-  z.lazy(() => ThirtyOne$outboundSchema),
-  z.lazy(() => ThirtyTwo$outboundSchema),
-  z.lazy(() => ThirtyThree$outboundSchema),
-  z.lazy(() => ThirtyFour$outboundSchema),
-  z.lazy(() => ThirtyFive$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams1$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams2$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams3$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams4$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams8$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams9$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams11$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams13$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams15$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams25$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams26$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams5$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams6$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams7$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams10$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams14$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams16$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams17$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams18$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams19$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams20$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams21$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams22$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams23$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams24$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams27$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams28$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams29$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams30$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams31$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams32$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams33$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams34$outboundSchema),
+  z.lazy(() => GetEvalsFunctionParams35$outboundSchema),
 ]);
 
 /**
@@ -5316,49 +5512,49 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
   ]).optional(),
   type: GetEvalsDataEvalsResponse200Type$inboundSchema,
   function_params: z.union([
-    z.lazy(() => Twelve$inboundSchema),
-    z.lazy(() => FunctionParams1$inboundSchema),
-    z.lazy(() => FunctionParams2$inboundSchema),
-    z.lazy(() => FunctionParams3$inboundSchema),
-    z.lazy(() => FunctionParams4$inboundSchema),
-    z.lazy(() => Eight$inboundSchema),
-    z.lazy(() => Nine$inboundSchema),
-    z.lazy(() => Eleven$inboundSchema),
-    z.lazy(() => Thirteen$inboundSchema),
-    z.lazy(() => Fifteen$inboundSchema),
-    z.lazy(() => TwentyFive$inboundSchema),
-    z.lazy(() => TwentySix$inboundSchema),
-    z.lazy(() => Five$inboundSchema),
-    z.lazy(() => Six$inboundSchema),
-    z.lazy(() => Seven$inboundSchema),
-    z.lazy(() => Ten$inboundSchema),
-    z.lazy(() => Fourteen$inboundSchema),
-    z.lazy(() => Sixteen$inboundSchema),
-    z.lazy(() => Seventeen$inboundSchema),
-    z.lazy(() => Eighteen$inboundSchema),
-    z.lazy(() => Nineteen$inboundSchema),
-    z.lazy(() => Twenty$inboundSchema),
-    z.lazy(() => TwentyOne$inboundSchema),
-    z.lazy(() => TwentyTwo$inboundSchema),
-    z.lazy(() => TwentyThree$inboundSchema),
-    z.lazy(() => TwentyFour$inboundSchema),
-    z.lazy(() => TwentySeven$inboundSchema),
-    z.lazy(() => TwentyEight$inboundSchema),
-    z.lazy(() => TwentyNine$inboundSchema),
-    z.lazy(() => Thirty$inboundSchema),
-    z.lazy(() => ThirtyOne$inboundSchema),
-    z.lazy(() => ThirtyTwo$inboundSchema),
-    z.lazy(() => ThirtyThree$inboundSchema),
-    z.lazy(() => ThirtyFour$inboundSchema),
-    z.lazy(() => ThirtyFive$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams1$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams2$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams3$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams4$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams8$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams9$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams11$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams13$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams15$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams25$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams26$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams5$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams6$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams7$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams10$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams14$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams16$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams17$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams18$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams19$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams20$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams21$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams22$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams23$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams24$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams27$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams28$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams29$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams30$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams31$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams32$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams33$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams34$inboundSchema),
+    z.lazy(() => GetEvalsFunctionParams35$inboundSchema),
   ]),
   key: z.string(),
 }).transform((v) => {
@@ -5381,41 +5577,41 @@ export type DataFunction$Outbound = {
     | undefined;
   type: string;
   function_params:
-    | Twelve$Outbound
-    | FunctionParams1$Outbound
-    | FunctionParams2$Outbound
-    | FunctionParams3$Outbound
-    | FunctionParams4$Outbound
-    | Eight$Outbound
-    | Nine$Outbound
-    | Eleven$Outbound
-    | Thirteen$Outbound
-    | Fifteen$Outbound
-    | TwentyFive$Outbound
-    | TwentySix$Outbound
-    | Five$Outbound
-    | Six$Outbound
-    | Seven$Outbound
-    | Ten$Outbound
-    | Fourteen$Outbound
-    | Sixteen$Outbound
-    | Seventeen$Outbound
-    | Eighteen$Outbound
-    | Nineteen$Outbound
-    | Twenty$Outbound
-    | TwentyOne$Outbound
-    | TwentyTwo$Outbound
-    | TwentyThree$Outbound
-    | TwentyFour$Outbound
-    | TwentySeven$Outbound
-    | TwentyEight$Outbound
-    | TwentyNine$Outbound
-    | Thirty$Outbound
-    | ThirtyOne$Outbound
-    | ThirtyTwo$Outbound
-    | ThirtyThree$Outbound
-    | ThirtyFour$Outbound
-    | ThirtyFive$Outbound;
+    | GetEvalsFunctionParams12$Outbound
+    | GetEvalsFunctionParams1$Outbound
+    | GetEvalsFunctionParams2$Outbound
+    | GetEvalsFunctionParams3$Outbound
+    | GetEvalsFunctionParams4$Outbound
+    | GetEvalsFunctionParams8$Outbound
+    | GetEvalsFunctionParams9$Outbound
+    | GetEvalsFunctionParams11$Outbound
+    | GetEvalsFunctionParams13$Outbound
+    | GetEvalsFunctionParams15$Outbound
+    | GetEvalsFunctionParams25$Outbound
+    | GetEvalsFunctionParams26$Outbound
+    | GetEvalsFunctionParams5$Outbound
+    | GetEvalsFunctionParams6$Outbound
+    | GetEvalsFunctionParams7$Outbound
+    | GetEvalsFunctionParams10$Outbound
+    | GetEvalsFunctionParams14$Outbound
+    | GetEvalsFunctionParams16$Outbound
+    | GetEvalsFunctionParams17$Outbound
+    | GetEvalsFunctionParams18$Outbound
+    | GetEvalsFunctionParams19$Outbound
+    | GetEvalsFunctionParams20$Outbound
+    | GetEvalsFunctionParams21$Outbound
+    | GetEvalsFunctionParams22$Outbound
+    | GetEvalsFunctionParams23$Outbound
+    | GetEvalsFunctionParams24$Outbound
+    | GetEvalsFunctionParams27$Outbound
+    | GetEvalsFunctionParams28$Outbound
+    | GetEvalsFunctionParams29$Outbound
+    | GetEvalsFunctionParams30$Outbound
+    | GetEvalsFunctionParams31$Outbound
+    | GetEvalsFunctionParams32$Outbound
+    | GetEvalsFunctionParams33$Outbound
+    | GetEvalsFunctionParams34$Outbound
+    | GetEvalsFunctionParams35$Outbound;
   key: string;
 };
 
@@ -5427,49 +5623,49 @@ export const DataFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema),
   ]).optional(),
   type: GetEvalsDataEvalsResponse200Type$outboundSchema,
   functionParams: z.union([
-    z.lazy(() => Twelve$outboundSchema),
-    z.lazy(() => FunctionParams1$outboundSchema),
-    z.lazy(() => FunctionParams2$outboundSchema),
-    z.lazy(() => FunctionParams3$outboundSchema),
-    z.lazy(() => FunctionParams4$outboundSchema),
-    z.lazy(() => Eight$outboundSchema),
-    z.lazy(() => Nine$outboundSchema),
-    z.lazy(() => Eleven$outboundSchema),
-    z.lazy(() => Thirteen$outboundSchema),
-    z.lazy(() => Fifteen$outboundSchema),
-    z.lazy(() => TwentyFive$outboundSchema),
-    z.lazy(() => TwentySix$outboundSchema),
-    z.lazy(() => Five$outboundSchema),
-    z.lazy(() => Six$outboundSchema),
-    z.lazy(() => Seven$outboundSchema),
-    z.lazy(() => Ten$outboundSchema),
-    z.lazy(() => Fourteen$outboundSchema),
-    z.lazy(() => Sixteen$outboundSchema),
-    z.lazy(() => Seventeen$outboundSchema),
-    z.lazy(() => Eighteen$outboundSchema),
-    z.lazy(() => Nineteen$outboundSchema),
-    z.lazy(() => Twenty$outboundSchema),
-    z.lazy(() => TwentyOne$outboundSchema),
-    z.lazy(() => TwentyTwo$outboundSchema),
-    z.lazy(() => TwentyThree$outboundSchema),
-    z.lazy(() => TwentyFour$outboundSchema),
-    z.lazy(() => TwentySeven$outboundSchema),
-    z.lazy(() => TwentyEight$outboundSchema),
-    z.lazy(() => TwentyNine$outboundSchema),
-    z.lazy(() => Thirty$outboundSchema),
-    z.lazy(() => ThirtyOne$outboundSchema),
-    z.lazy(() => ThirtyTwo$outboundSchema),
-    z.lazy(() => ThirtyThree$outboundSchema),
-    z.lazy(() => ThirtyFour$outboundSchema),
-    z.lazy(() => ThirtyFive$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams1$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams2$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams3$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams4$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams8$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams9$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams11$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams13$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams15$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams25$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams26$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams5$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams6$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams7$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams10$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams14$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams16$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams17$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams18$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams19$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams20$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams21$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams22$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams23$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams24$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams27$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams28$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams29$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams30$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams31$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams32$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams33$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams34$outboundSchema),
+    z.lazy(() => GetEvalsFunctionParams35$outboundSchema),
   ]),
   key: z.string(),
 }).transform((v) => {
@@ -5810,8 +6006,8 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
@@ -5849,8 +6045,8 @@ export const DataPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$outboundSchema),
@@ -6196,8 +6392,8 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
@@ -6241,8 +6437,8 @@ export const DataHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigBoolean$outboundSchema),
@@ -6607,8 +6803,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$inboundSchema
@@ -6650,8 +6846,8 @@ export const DataJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$outboundSchema
@@ -7033,8 +7229,8 @@ export const DataLLM$inboundSchema: z.ZodType<DataLLM, z.ZodTypeDef, unknown> =
   z.object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-09-30T08:46:39.987Z"),
-    updated: z.string().default("2025-09-30T08:46:39.987Z"),
+    created: z.string().default("2025-10-01T15:27:39.780Z"),
+    updated: z.string().default("2025-10-01T15:27:39.780Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -7078,8 +7274,8 @@ export const DataLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-09-30T08:46:39.987Z"),
-  updated: z.string().default("2025-09-30T08:46:39.987Z"),
+  created: z.string().default("2025-10-01T15:27:39.780Z"),
+  updated: z.string().default("2025-10-01T15:27:39.780Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -7134,22 +7330,22 @@ export const GetEvalsData$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => DataHTTP$inboundSchema),
   z.lazy(() => DataLLM$inboundSchema),
-  z.lazy(() => Ragas$inboundSchema),
+  z.lazy(() => DataRagas$inboundSchema),
   z.lazy(() => DataJSON$inboundSchema),
   z.lazy(() => DataPython$inboundSchema),
   z.lazy(() => DataFunction$inboundSchema),
-  z.lazy(() => Typescript$inboundSchema),
+  z.lazy(() => DataTypescript$inboundSchema),
 ]);
 
 /** @internal */
 export type GetEvalsData$Outbound =
   | DataHTTP$Outbound
   | DataLLM$Outbound
-  | Ragas$Outbound
+  | DataRagas$Outbound
   | DataJSON$Outbound
   | DataPython$Outbound
   | DataFunction$Outbound
-  | Typescript$Outbound;
+  | DataTypescript$Outbound;
 
 /** @internal */
 export const GetEvalsData$outboundSchema: z.ZodType<
@@ -7159,11 +7355,11 @@ export const GetEvalsData$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => DataHTTP$outboundSchema),
   z.lazy(() => DataLLM$outboundSchema),
-  z.lazy(() => Ragas$outboundSchema),
+  z.lazy(() => DataRagas$outboundSchema),
   z.lazy(() => DataJSON$outboundSchema),
   z.lazy(() => DataPython$outboundSchema),
   z.lazy(() => DataFunction$outboundSchema),
-  z.lazy(() => Typescript$outboundSchema),
+  z.lazy(() => DataTypescript$outboundSchema),
 ]);
 
 /**
@@ -7204,11 +7400,11 @@ export const GetEvalsResponseBody$inboundSchema: z.ZodType<
     z.union([
       z.lazy(() => DataHTTP$inboundSchema),
       z.lazy(() => DataLLM$inboundSchema),
-      z.lazy(() => Ragas$inboundSchema),
+      z.lazy(() => DataRagas$inboundSchema),
       z.lazy(() => DataJSON$inboundSchema),
       z.lazy(() => DataPython$inboundSchema),
       z.lazy(() => DataFunction$inboundSchema),
-      z.lazy(() => Typescript$inboundSchema),
+      z.lazy(() => DataTypescript$inboundSchema),
     ]),
   ),
   has_more: z.boolean(),
@@ -7224,11 +7420,11 @@ export type GetEvalsResponseBody$Outbound = {
   data: Array<
     | DataHTTP$Outbound
     | DataLLM$Outbound
-    | Ragas$Outbound
+    | DataRagas$Outbound
     | DataJSON$Outbound
     | DataPython$Outbound
     | DataFunction$Outbound
-    | Typescript$Outbound
+    | DataTypescript$Outbound
   >;
   has_more: boolean;
 };
@@ -7244,11 +7440,11 @@ export const GetEvalsResponseBody$outboundSchema: z.ZodType<
     z.union([
       z.lazy(() => DataHTTP$outboundSchema),
       z.lazy(() => DataLLM$outboundSchema),
-      z.lazy(() => Ragas$outboundSchema),
+      z.lazy(() => DataRagas$outboundSchema),
       z.lazy(() => DataJSON$outboundSchema),
       z.lazy(() => DataPython$outboundSchema),
       z.lazy(() => DataFunction$outboundSchema),
-      z.lazy(() => Typescript$outboundSchema),
+      z.lazy(() => DataTypescript$outboundSchema),
     ]),
   ),
   hasMore: z.boolean(),

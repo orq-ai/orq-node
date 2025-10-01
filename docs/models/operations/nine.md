@@ -5,15 +5,11 @@
 ```typescript
 import { Nine } from "@orq-ai/node/models/operations";
 
-let value: Nine = {
-  type: "ends_with",
-  value: "<value>",
-};
+let value: Nine = "openai/text-embedding-ada-002";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                         | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData5Type](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydata5type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
-| `value`                                                                                                                                                                                        | *string*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
+```typescript
+"openai/text-embedding-ada-002"
+```

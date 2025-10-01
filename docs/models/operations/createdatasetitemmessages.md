@@ -41,7 +41,7 @@ const value: operations.CreateDatasetItemMessagesUserMessage = {
 
 ```typescript
 const value: operations.CreateDatasetItemMessagesAssistantMessage = {
-  role: "assistant",
+  role: "exception",
 };
 ```
 

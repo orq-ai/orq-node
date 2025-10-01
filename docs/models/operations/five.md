@@ -5,13 +5,11 @@
 ```typescript
 import { Five } from "@orq-ai/node/models/operations";
 
-let value: Five = {
-  type: "contains_email",
-};
+let value: Five = "azure/text-embedding-ada-002";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                         | [operations.GetEvalsFunctionParamsEvalsResponse200Type](../../models/operations/getevalsfunctionparamsevalsresponse200type.md) | :heavy_check_mark:                                                                                                             | N/A                                                                                                                            |
+```typescript
+"azure/text-embedding-ada-002"
+```

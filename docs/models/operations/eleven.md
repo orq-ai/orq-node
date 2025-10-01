@@ -5,15 +5,11 @@
 ```typescript
 import { Eleven } from "@orq-ai/node/models/operations";
 
-let value: Eleven = {
-  type: "length_less_than",
-  value: 1493.93,
-};
+let value: Eleven = "google/text-embedding-005";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                             | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData511Type](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydata511type.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
-| `value`                                                                                                                                                                                            | *number*                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+```typescript
+"google/text-embedding-005"
+```

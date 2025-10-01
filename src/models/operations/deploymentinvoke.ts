@@ -21,7 +21,6 @@ export const DeploymentInvokeObject = {
   Chat: "chat",
   Completion: "completion",
   Image: "image",
-  Vision: "vision",
 } as const;
 /**
  * Indicates the type of model used to generate the response
@@ -250,7 +249,7 @@ export type Message1 = {
   redactedReasoning?: string | undefined;
 };
 
-export type Message = Message1 | Message2 | Message3;
+export type DeploymentInvokeMessage = Message1 | Message2 | Message3;
 
 export type DeploymentInvokeChoices = {
   index: number;
@@ -1027,24 +1026,27 @@ export function message1FromJSON(
 }
 
 /** @internal */
-export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => Message1$inboundSchema),
-    z.lazy(() => Message2$inboundSchema),
-    z.lazy(() => Message3$inboundSchema),
-  ]);
+export const DeploymentInvokeMessage$inboundSchema: z.ZodType<
+  DeploymentInvokeMessage,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => Message1$inboundSchema),
+  z.lazy(() => Message2$inboundSchema),
+  z.lazy(() => Message3$inboundSchema),
+]);
 
 /** @internal */
-export type Message$Outbound =
+export type DeploymentInvokeMessage$Outbound =
   | Message1$Outbound
   | Message2$Outbound
   | Message3$Outbound;
 
 /** @internal */
-export const Message$outboundSchema: z.ZodType<
-  Message$Outbound,
+export const DeploymentInvokeMessage$outboundSchema: z.ZodType<
+  DeploymentInvokeMessage$Outbound,
   z.ZodTypeDef,
-  Message
+  DeploymentInvokeMessage
 > = z.union([
   z.lazy(() => Message1$outboundSchema),
   z.lazy(() => Message2$outboundSchema),
@@ -1055,26 +1057,30 @@ export const Message$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Message$ {
-  /** @deprecated use `Message$inboundSchema` instead. */
-  export const inboundSchema = Message$inboundSchema;
-  /** @deprecated use `Message$outboundSchema` instead. */
-  export const outboundSchema = Message$outboundSchema;
-  /** @deprecated use `Message$Outbound` instead. */
-  export type Outbound = Message$Outbound;
+export namespace DeploymentInvokeMessage$ {
+  /** @deprecated use `DeploymentInvokeMessage$inboundSchema` instead. */
+  export const inboundSchema = DeploymentInvokeMessage$inboundSchema;
+  /** @deprecated use `DeploymentInvokeMessage$outboundSchema` instead. */
+  export const outboundSchema = DeploymentInvokeMessage$outboundSchema;
+  /** @deprecated use `DeploymentInvokeMessage$Outbound` instead. */
+  export type Outbound = DeploymentInvokeMessage$Outbound;
 }
 
-export function messageToJSON(message: Message): string {
-  return JSON.stringify(Message$outboundSchema.parse(message));
+export function deploymentInvokeMessageToJSON(
+  deploymentInvokeMessage: DeploymentInvokeMessage,
+): string {
+  return JSON.stringify(
+    DeploymentInvokeMessage$outboundSchema.parse(deploymentInvokeMessage),
+  );
 }
 
-export function messageFromJSON(
+export function deploymentInvokeMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Message, SDKValidationError> {
+): SafeParseResult<DeploymentInvokeMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Message$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Message' from JSON`,
+    (x) => DeploymentInvokeMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentInvokeMessage' from JSON`,
   );
 }
 

@@ -5,15 +5,11 @@
 ```typescript
 import { Thirteen } from "@orq-ai/node/models/operations";
 
-let value: Thirteen = {
-  type: "length_greater_than",
-  value: 1177.11,
-};
+let value: Thirteen = "google/multimodalembedding@001";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                             | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData513Type](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydata513type.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
-| `value`                                                                                                                                                                                            | *number*                                                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+```typescript
+"google/multimodalembedding@001"
+```

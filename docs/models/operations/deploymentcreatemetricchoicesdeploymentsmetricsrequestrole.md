@@ -1,6 +1,6 @@
 # DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole
 
-The role of the messages author, in this case `assistant`.
+The role of the messages author, in this case `assistant` or `exception`.
 
 ## Example Usage
 
@@ -14,5 +14,5 @@ let value: DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole =
 ## Values
 
 ```typescript
-"assistant"
+"assistant" | "exception"
 ```

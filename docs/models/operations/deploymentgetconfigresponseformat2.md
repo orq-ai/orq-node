@@ -5,13 +5,11 @@
 ```typescript
 import { DeploymentGetConfigResponseFormat2 } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigResponseFormat2 = {
-  type: "json_object",
-};
+let value: DeploymentGetConfigResponseFormat2 = "flac";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                               | [operations.DeploymentGetConfigResponseFormatType](../../models/operations/deploymentgetconfigresponseformattype.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+```typescript
+"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
+```

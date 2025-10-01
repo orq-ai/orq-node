@@ -27,6 +27,10 @@ export type RetrievalType = ClosedEnum<typeof RetrievalType>;
  */
 export type RerankConfig = {
   /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
   rerankThreshold?: number | undefined;
@@ -108,6 +112,10 @@ export type CreateKnowledgeRetrievalType = ClosedEnum<
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
  */
 export type CreateKnowledgeRerankConfig = {
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
   /**
    * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
    */
@@ -225,10 +233,12 @@ export const RerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  top_k: z.number().int().default(5),
   rerank_threshold: z.number().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "top_k": "topK",
     "rerank_threshold": "rerankThreshold",
     "rerank_model": "rerankModel",
   });
@@ -236,6 +246,7 @@ export const RerankConfig$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RerankConfig$Outbound = {
+  top_k: number;
   rerank_threshold: number;
   rerank_model: string;
 };
@@ -246,10 +257,12 @@ export const RerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RerankConfig
 > = z.object({
+  topK: z.number().int().default(5),
   rerankThreshold: z.number().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    topK: "top_k",
     rerankThreshold: "rerank_threshold",
     rerankModel: "rerank_model",
   });
@@ -523,10 +536,12 @@ export const CreateKnowledgeRerankConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  top_k: z.number().int().default(5),
   rerank_threshold: z.number().default(0.5),
   rerank_model: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "top_k": "topK",
     "rerank_threshold": "rerankThreshold",
     "rerank_model": "rerankModel",
   });
@@ -534,6 +549,7 @@ export const CreateKnowledgeRerankConfig$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateKnowledgeRerankConfig$Outbound = {
+  top_k: number;
   rerank_threshold: number;
   rerank_model: string;
 };
@@ -544,10 +560,12 @@ export const CreateKnowledgeRerankConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateKnowledgeRerankConfig
 > = z.object({
+  topK: z.number().int().default(5),
   rerankThreshold: z.number().default(0.5),
   rerankModel: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    topK: "top_k",
     rerankThreshold: "rerank_threshold",
     rerankModel: "rerank_model",
   });

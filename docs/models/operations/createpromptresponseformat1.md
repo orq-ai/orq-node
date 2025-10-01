@@ -1,11 +1,12 @@
 # CreatePromptResponseFormat1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.CreatePrompt11`
 
 ```typescript
-import { CreatePromptResponseFormat1 } from "@orq-ai/node/models/operations";
-
-let value: CreatePromptResponseFormat1 = {
+const value: operations.CreatePrompt11 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -16,9 +17,19 @@ let value: CreatePromptResponseFormat1 = {
 };
 ```
 
-## Fields
+### `operations.CreatePrompt12`
 
-| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                                               | [operations.CreatePromptResponseFormatPromptsResponseType](../../models/operations/createpromptresponseformatpromptsresponsetype.md) | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
-| `jsonSchema`                                                                                                                         | [operations.CreatePromptResponseFormatJsonSchema](../../models/operations/createpromptresponseformatjsonschema.md)                   | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
+```typescript
+const value: operations.CreatePrompt12 = {
+  type: "json_object",
+};
+```
+
+### `operations.CreatePrompt1Prompts3`
+
+```typescript
+const value: operations.CreatePrompt1Prompts3 = {
+  type: "text",
+};
+```
+

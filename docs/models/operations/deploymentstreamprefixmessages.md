@@ -34,7 +34,7 @@ const value: operations.PrefixMessagesUserMessage = {
 
 ```typescript
 const value: operations.PrefixMessagesAssistantMessage = {
-  role: "assistant",
+  role: "exception",
 };
 ```
 

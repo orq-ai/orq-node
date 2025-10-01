@@ -3,41 +3,39 @@
 
 ## Supported Types
 
-### `operations.FunctionParams1`
+### `operations.GetEvalsFunctionParams1`
 
 ```typescript
-const value: operations.FunctionParams1 = {
+const value: operations.GetEvalsFunctionParams1 = {
   type: "contains",
   value: "<value>",
 };
 ```
 
-### `operations.FunctionParams2`
+### `operations.GetEvalsFunctionParams2`
 
 ```typescript
-const value: operations.FunctionParams2 = {
+const value: operations.GetEvalsFunctionParams2 = {
   type: "contains_none",
-  keywords: [],
-};
-```
-
-### `operations.FunctionParams3`
-
-```typescript
-const value: operations.FunctionParams3 = {
-  type: "contains_all",
   keywords: [
     "<value 1>",
-    "<value 2>",
-    "<value 3>",
   ],
 };
 ```
 
-### `operations.FunctionParams4`
+### `operations.GetEvalsFunctionParams3`
 
 ```typescript
-const value: operations.FunctionParams4 = {
+const value: operations.GetEvalsFunctionParams3 = {
+  type: "contains_all",
+  keywords: [],
+};
+```
+
+### `operations.GetEvalsFunctionParams4`
+
+```typescript
+const value: operations.GetEvalsFunctionParams4 = {
   type: "contains_any",
   keywords: [
     "<value 1>",
@@ -46,259 +44,261 @@ const value: operations.FunctionParams4 = {
 };
 ```
 
-### `operations.Five`
+### `operations.GetEvalsFunctionParams5`
 
 ```typescript
-const value: operations.Five = {
+const value: operations.GetEvalsFunctionParams5 = {
   type: "contains_email",
 };
 ```
 
-### `operations.Six`
+### `operations.GetEvalsFunctionParams6`
 
 ```typescript
-const value: operations.Six = {
+const value: operations.GetEvalsFunctionParams6 = {
   type: "contains_url",
 };
 ```
 
-### `operations.Seven`
+### `operations.GetEvalsFunctionParams7`
 
 ```typescript
-const value: operations.Seven = {
+const value: operations.GetEvalsFunctionParams7 = {
   type: "contains_valid_link",
 };
 ```
 
-### `operations.Eight`
+### `operations.GetEvalsFunctionParams8`
 
 ```typescript
-const value: operations.Eight = {
+const value: operations.GetEvalsFunctionParams8 = {
   type: "start_with",
   value: "<value>",
 };
 ```
 
-### `operations.Nine`
+### `operations.GetEvalsFunctionParams9`
 
 ```typescript
-const value: operations.Nine = {
+const value: operations.GetEvalsFunctionParams9 = {
   type: "ends_with",
   value: "<value>",
 };
 ```
 
-### `operations.Ten`
+### `operations.GetEvalsFunctionParams10`
 
 ```typescript
-const value: operations.Ten = {
+const value: operations.GetEvalsFunctionParams10 = {
   type: "exact_match",
 };
 ```
 
-### `operations.Eleven`
+### `operations.GetEvalsFunctionParams11`
 
 ```typescript
-const value: operations.Eleven = {
+const value: operations.GetEvalsFunctionParams11 = {
   type: "length_less_than",
-  value: 1493.93,
+  value: 2823.87,
 };
 ```
 
-### `operations.Twelve`
+### `operations.GetEvalsFunctionParams12`
 
 ```typescript
-const value: operations.Twelve = {
+const value: operations.GetEvalsFunctionParams12 = {
   type: "length_between",
-  min: 4530.84,
-  max: 1705.51,
+  min: 4915.71,
+  max: 109.41,
 };
 ```
 
-### `operations.Thirteen`
+### `operations.GetEvalsFunctionParams13`
 
 ```typescript
-const value: operations.Thirteen = {
+const value: operations.GetEvalsFunctionParams13 = {
   type: "length_greater_than",
-  value: 1177.11,
+  value: 2690.38,
 };
 ```
 
-### `operations.Fourteen`
+### `operations.GetEvalsFunctionParams14`
 
 ```typescript
-const value: operations.Fourteen = {
+const value: operations.GetEvalsFunctionParams14 = {
   type: "one_line",
 };
 ```
 
-### `operations.Fifteen`
+### `operations.GetEvalsFunctionParams15`
 
 ```typescript
-const value: operations.Fifteen = {
+const value: operations.GetEvalsFunctionParams15 = {
   type: "regex",
   pattern: "<value>",
 };
 ```
 
-### `operations.Sixteen`
+### `operations.GetEvalsFunctionParams16`
 
 ```typescript
-const value: operations.Sixteen = {
+const value: operations.GetEvalsFunctionParams16 = {
   type: "is_valid_json",
 };
 ```
 
-### `operations.Seventeen`
+### `operations.GetEvalsFunctionParams17`
 
 ```typescript
-const value: operations.Seventeen = {
+const value: operations.GetEvalsFunctionParams17 = {
   type: "moderations_openai",
 };
 ```
 
-### `operations.Eighteen`
+### `operations.GetEvalsFunctionParams18`
 
 ```typescript
-const value: operations.Eighteen = {
+const value: operations.GetEvalsFunctionParams18 = {
   type: "moderations_google",
 };
 ```
 
-### `operations.Nineteen`
+### `operations.GetEvalsFunctionParams19`
 
 ```typescript
-const value: operations.Nineteen = {
+const value: operations.GetEvalsFunctionParams19 = {
   type: "bert_score",
 };
 ```
 
-### `operations.Twenty`
+### `operations.GetEvalsFunctionParams20`
 
 ```typescript
-const value: operations.Twenty = {
+const value: operations.GetEvalsFunctionParams20 = {
   type: "bleu_score",
 };
 ```
 
-### `operations.TwentyOne`
+### `operations.GetEvalsFunctionParams21`
 
 ```typescript
-const value: operations.TwentyOne = {
+const value: operations.GetEvalsFunctionParams21 = {
   type: "rouge_n",
 };
 ```
 
-### `operations.TwentyTwo`
+### `operations.GetEvalsFunctionParams22`
 
 ```typescript
-const value: operations.TwentyTwo = {
+const value: operations.GetEvalsFunctionParams22 = {
   type: "meteor_score",
 };
 ```
 
-### `operations.TwentyThree`
+### `operations.GetEvalsFunctionParams23`
 
 ```typescript
-const value: operations.TwentyThree = {
+const value: operations.GetEvalsFunctionParams23 = {
   type: "cosine_similarity",
 };
 ```
 
-### `operations.TwentyFour`
+### `operations.GetEvalsFunctionParams24`
 
 ```typescript
-const value: operations.TwentyFour = {
+const value: operations.GetEvalsFunctionParams24 = {
   type: "levenshtein_distance",
 };
 ```
 
-### `operations.TwentyFive`
+### `operations.GetEvalsFunctionParams25`
 
 ```typescript
-const value: operations.TwentyFive = {
+const value: operations.GetEvalsFunctionParams25 = {
   type: "topic_match",
   topic: "<value>",
 };
 ```
 
-### `operations.TwentySix`
+### `operations.GetEvalsFunctionParams26`
 
 ```typescript
-const value: operations.TwentySix = {
+const value: operations.GetEvalsFunctionParams26 = {
   type: "keywords_match",
-  keywords: [],
+  keywords: [
+    "<value 1>",
+  ],
 };
 ```
 
-### `operations.TwentySeven`
+### `operations.GetEvalsFunctionParams27`
 
 ```typescript
-const value: operations.TwentySeven = {
+const value: operations.GetEvalsFunctionParams27 = {
   type: "most_repeated_words",
 };
 ```
 
-### `operations.TwentyEight`
+### `operations.GetEvalsFunctionParams28`
 
 ```typescript
-const value: operations.TwentyEight = {
+const value: operations.GetEvalsFunctionParams28 = {
   type: "flesch_reading_ease",
 };
 ```
 
-### `operations.TwentyNine`
+### `operations.GetEvalsFunctionParams29`
 
 ```typescript
-const value: operations.TwentyNine = {
+const value: operations.GetEvalsFunctionParams29 = {
   type: "gse_english_level",
 };
 ```
 
-### `operations.Thirty`
+### `operations.GetEvalsFunctionParams30`
 
 ```typescript
-const value: operations.Thirty = {
+const value: operations.GetEvalsFunctionParams30 = {
   type: "words_count",
 };
 ```
 
-### `operations.ThirtyOne`
+### `operations.GetEvalsFunctionParams31`
 
 ```typescript
-const value: operations.ThirtyOne = {
+const value: operations.GetEvalsFunctionParams31 = {
   type: "sentences_count",
 };
 ```
 
-### `operations.ThirtyTwo`
+### `operations.GetEvalsFunctionParams32`
 
 ```typescript
-const value: operations.ThirtyTwo = {
+const value: operations.GetEvalsFunctionParams32 = {
   type: "lexical_repetition",
 };
 ```
 
-### `operations.ThirtyThree`
+### `operations.GetEvalsFunctionParams33`
 
 ```typescript
-const value: operations.ThirtyThree = {
+const value: operations.GetEvalsFunctionParams33 = {
   type: "semantic_repetition",
 };
 ```
 
-### `operations.ThirtyFour`
+### `operations.GetEvalsFunctionParams34`
 
 ```typescript
-const value: operations.ThirtyFour = {
+const value: operations.GetEvalsFunctionParams34 = {
   type: "grammar_diversity",
 };
 ```
 
-### `operations.ThirtyFive`
+### `operations.GetEvalsFunctionParams35`
 
 ```typescript
-const value: operations.ThirtyFive = {
+const value: operations.GetEvalsFunctionParams35 = {
   type: "bert_coherence",
 };
 ```

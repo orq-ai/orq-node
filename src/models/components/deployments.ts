@@ -143,13 +143,14 @@ export type PrefixMessagesContent =
   | Array<TextContentPart | RefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const DeploymentsPrefixMessages4Role = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type DeploymentsPrefixMessages4Role = ClosedEnum<
   typeof DeploymentsPrefixMessages4Role
@@ -213,7 +214,7 @@ export type AssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: DeploymentsPrefixMessages4Role;
   /**
@@ -589,13 +590,14 @@ export type DeploymentsMessagesContent =
   | Array<TwoTextContentPart | TwoRefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export const DeploymentsMessages4Role = {
   Assistant: "assistant",
+  Exception: "exception",
 } as const;
 /**
- * The role of the messages author, in this case `assistant`.
+ * The role of the messages author, in this case `assistant` or `exception`.
  */
 export type DeploymentsMessages4Role = ClosedEnum<
   typeof DeploymentsMessages4Role
@@ -659,7 +661,7 @@ export type MessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant`.
+   * The role of the messages author, in this case `assistant` or `exception`.
    */
   role: DeploymentsMessages4Role;
   /**

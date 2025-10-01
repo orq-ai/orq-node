@@ -13,5 +13,5 @@ let value: GetPromptVersionModelType = "completion";
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "vision" | "image" | "tts" | "stt" | "rerank" | "moderations"
+"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "moderations" | "vision"
 ```

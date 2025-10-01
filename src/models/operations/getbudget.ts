@@ -90,10 +90,6 @@ export type GetBudgetResponseBody = {
    */
   contactId?: string | undefined;
   /**
-   * API Key identifier (present when type is "api_key")
-   */
-  apiKeyId?: string | undefined;
-  /**
    * Budget configuration
    */
   budget: GetBudgetBudget;
@@ -349,20 +345,18 @@ export const GetBudgetResponseBody$inboundSchema: z.ZodType<
   _id: z.string(),
   type: GetBudgetType$inboundSchema,
   contact_id: z.string().optional(),
-  api_key_id: z.string().optional(),
   budget: z.lazy(() => GetBudgetBudget$inboundSchema),
   is_active: z.boolean(),
   consumption: z.lazy(() => GetBudgetConsumption$inboundSchema).optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-09-30T08:46:37.543Z",
+    "2025-10-01T15:27:37.468Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
     "contact_id": "contactId",
-    "api_key_id": "apiKeyId",
     "is_active": "isActive",
   });
 });
@@ -372,7 +366,6 @@ export type GetBudgetResponseBody$Outbound = {
   _id: string;
   type: string;
   contact_id?: string | undefined;
-  api_key_id?: string | undefined;
   budget: GetBudgetBudget$Outbound;
   is_active: boolean;
   consumption?: GetBudgetConsumption$Outbound | undefined;
@@ -389,18 +382,16 @@ export const GetBudgetResponseBody$outboundSchema: z.ZodType<
   id: z.string(),
   type: GetBudgetType$outboundSchema,
   contactId: z.string().optional(),
-  apiKeyId: z.string().optional(),
   budget: z.lazy(() => GetBudgetBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => GetBudgetConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-09-30T08:46:37.543Z"))
+  updated: z.date().default(() => new Date("2025-10-01T15:27:37.468Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
     contactId: "contact_id",
-    apiKeyId: "api_key_id",
     isActive: "is_active",
   });
 });

@@ -5,13 +5,11 @@
 ```typescript
 import { Eighteen } from "@orq-ai/node/models/operations";
 
-let value: Eighteen = {
-  type: "moderations_google",
-};
+let value: Eighteen = "jina/jina-embeddings-v2-base-zh";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                              | Type                                                                                                                                                                                               | Required                                                                                                                                                                                           | Description                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                             | [operations.GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData518Type](../../models/operations/getevalsfunctionparamsevalsresponse200applicationjsonresponsebodydata518type.md) | :heavy_check_mark:                                                                                                                                                                                 | N/A                                                                                                                                                                                                |
+```typescript
+"jina/jina-embeddings-v2-base-zh"
+```

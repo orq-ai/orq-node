@@ -26,16 +26,18 @@ const value: operations.DeploymentsResponseFormat1 = {
 ### `operations.DeploymentsResponseFormat2`
 
 ```typescript
-const value: operations.DeploymentsResponseFormat2 = {
-  type: "json_object",
-};
+const value: operations.DeploymentsResponseFormat2 = "wav";
 ```
 
 ### `operations.DeploymentsResponseFormat3`
 
 ```typescript
-const value: operations.DeploymentsResponseFormat3 = {
-  type: "text",
-};
+const value: operations.DeploymentsResponseFormat3 = "base64_json";
+```
+
+### `operations.DeploymentsResponseFormat4`
+
+```typescript
+const value: operations.DeploymentsResponseFormat4 = "verbose_json";
 ```
 
