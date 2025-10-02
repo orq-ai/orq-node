@@ -200,10 +200,14 @@ export type InvokeEvalResponseBodyEvalsResponse200ApplicationJson7Value =
   | boolean
   | string;
 
+export type ResponseBodyOriginalValue = number | boolean | string;
+
 export type InvokeEvalResponseBodyEvalsResponseValue = {
   workflowRunId: string;
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 export type InvokeEvalResponseBodyLLM = {
@@ -298,6 +302,7 @@ export type InvokeEvalResponseBodyEvalsType = ClosedEnum<
 
 export type ResponseBodyNumber = {
   type: InvokeEvalResponseBodyEvalsType;
+  originalValue?: number | null | undefined;
   value: number | null;
 };
 
@@ -310,6 +315,7 @@ export type InvokeEvalResponseBodyType = ClosedEnum<
 
 export type String = {
   type: InvokeEvalResponseBodyType;
+  originalValue?: string | null | undefined;
   value?: string | null | undefined;
 };
 
@@ -1499,6 +1505,54 @@ export function invokeEvalResponseBodyEvalsResponse200ApplicationJSON7ValueFromJ
 }
 
 /** @internal */
+export const ResponseBodyOriginalValue$inboundSchema: z.ZodType<
+  ResponseBodyOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type ResponseBodyOriginalValue$Outbound = number | boolean | string;
+
+/** @internal */
+export const ResponseBodyOriginalValue$outboundSchema: z.ZodType<
+  ResponseBodyOriginalValue$Outbound,
+  z.ZodTypeDef,
+  ResponseBodyOriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ResponseBodyOriginalValue$ {
+  /** @deprecated use `ResponseBodyOriginalValue$inboundSchema` instead. */
+  export const inboundSchema = ResponseBodyOriginalValue$inboundSchema;
+  /** @deprecated use `ResponseBodyOriginalValue$outboundSchema` instead. */
+  export const outboundSchema = ResponseBodyOriginalValue$outboundSchema;
+  /** @deprecated use `ResponseBodyOriginalValue$Outbound` instead. */
+  export type Outbound = ResponseBodyOriginalValue$Outbound;
+}
+
+export function responseBodyOriginalValueToJSON(
+  responseBodyOriginalValue: ResponseBodyOriginalValue,
+): string {
+  return JSON.stringify(
+    ResponseBodyOriginalValue$outboundSchema.parse(responseBodyOriginalValue),
+  );
+}
+
+export function responseBodyOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyOriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyOriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
   InvokeEvalResponseBodyEvalsResponseValue,
   z.ZodTypeDef,
@@ -1507,9 +1561,14 @@ export const InvokeEvalResponseBodyEvalsResponseValue$inboundSchema: z.ZodType<
   workflow_run_id: z.string(),
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "workflow_run_id": "workflowRunId",
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
   });
 });
 
@@ -1518,6 +1577,8 @@ export type InvokeEvalResponseBodyEvalsResponseValue$Outbound = {
   workflow_run_id: string;
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -1529,9 +1590,14 @@ export const InvokeEvalResponseBodyEvalsResponseValue$outboundSchema: z.ZodType<
   workflowRunId: z.string(),
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     workflowRunId: "workflow_run_id",
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
   });
 });
 
@@ -2324,12 +2390,18 @@ export const ResponseBodyNumber$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: InvokeEvalResponseBodyEvalsType$inboundSchema,
+  original_value: z.nullable(z.number()).optional(),
   value: z.nullable(z.number()),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+  });
 });
 
 /** @internal */
 export type ResponseBodyNumber$Outbound = {
   type: string;
+  original_value?: number | null | undefined;
   value: number | null;
 };
 
@@ -2340,7 +2412,12 @@ export const ResponseBodyNumber$outboundSchema: z.ZodType<
   ResponseBodyNumber
 > = z.object({
   type: InvokeEvalResponseBodyEvalsType$outboundSchema,
+  originalValue: z.nullable(z.number()).optional(),
   value: z.nullable(z.number()),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+  });
 });
 
 /**
@@ -2399,12 +2476,18 @@ export namespace InvokeEvalResponseBodyType$ {
 export const String$inboundSchema: z.ZodType<String, z.ZodTypeDef, unknown> = z
   .object({
     type: InvokeEvalResponseBodyType$inboundSchema,
+    original_value: z.nullable(z.string()).optional(),
     value: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "original_value": "originalValue",
+    });
   });
 
 /** @internal */
 export type String$Outbound = {
   type: string;
+  original_value?: string | null | undefined;
   value?: string | null | undefined;
 };
 
@@ -2415,7 +2498,12 @@ export const String$outboundSchema: z.ZodType<
   String
 > = z.object({
   type: InvokeEvalResponseBodyType$outboundSchema,
+  originalValue: z.nullable(z.string()).optional(),
   value: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+  });
 });
 
 /**

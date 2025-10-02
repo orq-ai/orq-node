@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,9 +16,13 @@ export type EvalsSummarizationRequestBody = {
 
 export type EvalsSummarizationEvalsValue = number | boolean | string;
 
+export type EvalsSummarizationOriginalValue = number | boolean | string;
+
 export type EvalsSummarizationValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -140,6 +145,59 @@ export function evalsSummarizationEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsSummarizationOriginalValue$inboundSchema: z.ZodType<
+  EvalsSummarizationOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsSummarizationOriginalValue$Outbound =
+  | number
+  | boolean
+  | string;
+
+/** @internal */
+export const EvalsSummarizationOriginalValue$outboundSchema: z.ZodType<
+  EvalsSummarizationOriginalValue$Outbound,
+  z.ZodTypeDef,
+  EvalsSummarizationOriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsSummarizationOriginalValue$ {
+  /** @deprecated use `EvalsSummarizationOriginalValue$inboundSchema` instead. */
+  export const inboundSchema = EvalsSummarizationOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsSummarizationOriginalValue$outboundSchema` instead. */
+  export const outboundSchema = EvalsSummarizationOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsSummarizationOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsSummarizationOriginalValue$Outbound;
+}
+
+export function evalsSummarizationOriginalValueToJSON(
+  evalsSummarizationOriginalValue: EvalsSummarizationOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsSummarizationOriginalValue$outboundSchema.parse(
+      evalsSummarizationOriginalValue,
+    ),
+  );
+}
+
+export function evalsSummarizationOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<EvalsSummarizationOriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EvalsSummarizationOriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EvalsSummarizationOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsSummarizationValue$inboundSchema: z.ZodType<
   EvalsSummarizationValue,
   z.ZodTypeDef,
@@ -147,12 +205,22 @@ export const EvalsSummarizationValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsSummarizationValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -163,6 +231,14 @@ export const EvalsSummarizationValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

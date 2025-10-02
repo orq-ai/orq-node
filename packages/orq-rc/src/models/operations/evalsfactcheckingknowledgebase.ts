@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,9 +20,16 @@ export type EvalsFactCheckingKnowledgeBaseEvalsValue =
   | boolean
   | string;
 
+export type EvalsFactCheckingKnowledgeBaseOriginalValue =
+  | number
+  | boolean
+  | string;
+
 export type EvalsFactCheckingKnowledgeBaseValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -169,6 +177,70 @@ export function evalsFactCheckingKnowledgeBaseEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsFactCheckingKnowledgeBaseOriginalValue$inboundSchema:
+  z.ZodType<
+    EvalsFactCheckingKnowledgeBaseOriginalValue,
+    z.ZodTypeDef,
+    unknown
+  > = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsFactCheckingKnowledgeBaseOriginalValue$Outbound =
+  | number
+  | boolean
+  | string;
+
+/** @internal */
+export const EvalsFactCheckingKnowledgeBaseOriginalValue$outboundSchema:
+  z.ZodType<
+    EvalsFactCheckingKnowledgeBaseOriginalValue$Outbound,
+    z.ZodTypeDef,
+    EvalsFactCheckingKnowledgeBaseOriginalValue
+  > = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsFactCheckingKnowledgeBaseOriginalValue$ {
+  /** @deprecated use `EvalsFactCheckingKnowledgeBaseOriginalValue$inboundSchema` instead. */
+  export const inboundSchema =
+    EvalsFactCheckingKnowledgeBaseOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsFactCheckingKnowledgeBaseOriginalValue$outboundSchema` instead. */
+  export const outboundSchema =
+    EvalsFactCheckingKnowledgeBaseOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsFactCheckingKnowledgeBaseOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsFactCheckingKnowledgeBaseOriginalValue$Outbound;
+}
+
+export function evalsFactCheckingKnowledgeBaseOriginalValueToJSON(
+  evalsFactCheckingKnowledgeBaseOriginalValue:
+    EvalsFactCheckingKnowledgeBaseOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsFactCheckingKnowledgeBaseOriginalValue$outboundSchema.parse(
+      evalsFactCheckingKnowledgeBaseOriginalValue,
+    ),
+  );
+}
+
+export function evalsFactCheckingKnowledgeBaseOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  EvalsFactCheckingKnowledgeBaseOriginalValue,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      EvalsFactCheckingKnowledgeBaseOriginalValue$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'EvalsFactCheckingKnowledgeBaseOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsFactCheckingKnowledgeBaseValue$inboundSchema: z.ZodType<
   EvalsFactCheckingKnowledgeBaseValue,
   z.ZodTypeDef,
@@ -176,12 +248,22 @@ export const EvalsFactCheckingKnowledgeBaseValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsFactCheckingKnowledgeBaseValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -192,6 +274,14 @@ export const EvalsFactCheckingKnowledgeBaseValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,9 +15,13 @@ export type EvalsGrammarRequestBody = {
 
 export type EvalsGrammarEvalsValue = number | boolean | string;
 
+export type EvalsGrammarOriginalValue = number | boolean | string;
+
 export type EvalsGrammarValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -132,6 +137,54 @@ export function evalsGrammarEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsGrammarOriginalValue$inboundSchema: z.ZodType<
+  EvalsGrammarOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsGrammarOriginalValue$Outbound = number | boolean | string;
+
+/** @internal */
+export const EvalsGrammarOriginalValue$outboundSchema: z.ZodType<
+  EvalsGrammarOriginalValue$Outbound,
+  z.ZodTypeDef,
+  EvalsGrammarOriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsGrammarOriginalValue$ {
+  /** @deprecated use `EvalsGrammarOriginalValue$inboundSchema` instead. */
+  export const inboundSchema = EvalsGrammarOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsGrammarOriginalValue$outboundSchema` instead. */
+  export const outboundSchema = EvalsGrammarOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsGrammarOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsGrammarOriginalValue$Outbound;
+}
+
+export function evalsGrammarOriginalValueToJSON(
+  evalsGrammarOriginalValue: EvalsGrammarOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsGrammarOriginalValue$outboundSchema.parse(evalsGrammarOriginalValue),
+  );
+}
+
+export function evalsGrammarOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<EvalsGrammarOriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EvalsGrammarOriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EvalsGrammarOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsGrammarValue$inboundSchema: z.ZodType<
   EvalsGrammarValue,
   z.ZodTypeDef,
@@ -139,12 +192,22 @@ export const EvalsGrammarValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsGrammarValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -155,6 +218,14 @@ export const EvalsGrammarValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

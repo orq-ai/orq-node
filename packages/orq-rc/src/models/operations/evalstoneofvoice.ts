@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,9 +16,13 @@ export type EvalsToneOfVoiceRequestBody = {
 
 export type EvalsToneOfVoiceEvalsValue = number | boolean | string;
 
+export type EvalsToneOfVoiceOriginalValue = number | boolean | string;
+
 export type EvalsToneOfVoiceValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -138,6 +143,56 @@ export function evalsToneOfVoiceEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsToneOfVoiceOriginalValue$inboundSchema: z.ZodType<
+  EvalsToneOfVoiceOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsToneOfVoiceOriginalValue$Outbound = number | boolean | string;
+
+/** @internal */
+export const EvalsToneOfVoiceOriginalValue$outboundSchema: z.ZodType<
+  EvalsToneOfVoiceOriginalValue$Outbound,
+  z.ZodTypeDef,
+  EvalsToneOfVoiceOriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsToneOfVoiceOriginalValue$ {
+  /** @deprecated use `EvalsToneOfVoiceOriginalValue$inboundSchema` instead. */
+  export const inboundSchema = EvalsToneOfVoiceOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsToneOfVoiceOriginalValue$outboundSchema` instead. */
+  export const outboundSchema = EvalsToneOfVoiceOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsToneOfVoiceOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsToneOfVoiceOriginalValue$Outbound;
+}
+
+export function evalsToneOfVoiceOriginalValueToJSON(
+  evalsToneOfVoiceOriginalValue: EvalsToneOfVoiceOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsToneOfVoiceOriginalValue$outboundSchema.parse(
+      evalsToneOfVoiceOriginalValue,
+    ),
+  );
+}
+
+export function evalsToneOfVoiceOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<EvalsToneOfVoiceOriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EvalsToneOfVoiceOriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EvalsToneOfVoiceOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsToneOfVoiceValue$inboundSchema: z.ZodType<
   EvalsToneOfVoiceValue,
   z.ZodTypeDef,
@@ -145,12 +200,22 @@ export const EvalsToneOfVoiceValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsToneOfVoiceValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -161,6 +226,14 @@ export const EvalsToneOfVoiceValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

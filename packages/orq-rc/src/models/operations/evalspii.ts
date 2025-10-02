@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,9 +16,13 @@ export type EvalsPiiRequestBody = {
 
 export type EvalsPiiEvalsValue = number | boolean | string;
 
+export type EvalsPiiOriginalValue = number | boolean | string;
+
 export type EvalsPiiValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -136,6 +141,54 @@ export function evalsPiiEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsPiiOriginalValue$inboundSchema: z.ZodType<
+  EvalsPiiOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsPiiOriginalValue$Outbound = number | boolean | string;
+
+/** @internal */
+export const EvalsPiiOriginalValue$outboundSchema: z.ZodType<
+  EvalsPiiOriginalValue$Outbound,
+  z.ZodTypeDef,
+  EvalsPiiOriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsPiiOriginalValue$ {
+  /** @deprecated use `EvalsPiiOriginalValue$inboundSchema` instead. */
+  export const inboundSchema = EvalsPiiOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsPiiOriginalValue$outboundSchema` instead. */
+  export const outboundSchema = EvalsPiiOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsPiiOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsPiiOriginalValue$Outbound;
+}
+
+export function evalsPiiOriginalValueToJSON(
+  evalsPiiOriginalValue: EvalsPiiOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsPiiOriginalValue$outboundSchema.parse(evalsPiiOriginalValue),
+  );
+}
+
+export function evalsPiiOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<EvalsPiiOriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EvalsPiiOriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EvalsPiiOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsPiiValue$inboundSchema: z.ZodType<
   EvalsPiiValue,
   z.ZodTypeDef,
@@ -143,12 +196,22 @@ export const EvalsPiiValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsPiiValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -159,6 +222,14 @@ export const EvalsPiiValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

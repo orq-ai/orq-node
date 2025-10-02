@@ -23,6 +23,7 @@ generation:
     skipResponseBodyAssertions: false
 typescript:
   version: 3.14.0-rc.1
+  acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
     devDependencies: {}

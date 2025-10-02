@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -14,9 +15,13 @@ export type EvalsBotDetectionRequestBody = {
 
 export type EvalsBotDetectionEvalsValue = number | boolean | string;
 
+export type EvalsBotDetectionOriginalValue = number | boolean | string;
+
 export type EvalsBotDetectionValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -136,6 +141,56 @@ export function evalsBotDetectionEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsBotDetectionOriginalValue$inboundSchema: z.ZodType<
+  EvalsBotDetectionOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsBotDetectionOriginalValue$Outbound = number | boolean | string;
+
+/** @internal */
+export const EvalsBotDetectionOriginalValue$outboundSchema: z.ZodType<
+  EvalsBotDetectionOriginalValue$Outbound,
+  z.ZodTypeDef,
+  EvalsBotDetectionOriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsBotDetectionOriginalValue$ {
+  /** @deprecated use `EvalsBotDetectionOriginalValue$inboundSchema` instead. */
+  export const inboundSchema = EvalsBotDetectionOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsBotDetectionOriginalValue$outboundSchema` instead. */
+  export const outboundSchema = EvalsBotDetectionOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsBotDetectionOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsBotDetectionOriginalValue$Outbound;
+}
+
+export function evalsBotDetectionOriginalValueToJSON(
+  evalsBotDetectionOriginalValue: EvalsBotDetectionOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsBotDetectionOriginalValue$outboundSchema.parse(
+      evalsBotDetectionOriginalValue,
+    ),
+  );
+}
+
+export function evalsBotDetectionOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<EvalsBotDetectionOriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EvalsBotDetectionOriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EvalsBotDetectionOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsBotDetectionValue$inboundSchema: z.ZodType<
   EvalsBotDetectionValue,
   z.ZodTypeDef,
@@ -143,12 +198,22 @@ export const EvalsBotDetectionValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsBotDetectionValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -159,6 +224,14 @@ export const EvalsBotDetectionValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

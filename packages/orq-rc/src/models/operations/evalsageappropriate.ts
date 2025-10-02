@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,9 +16,13 @@ export type EvalsAgeAppropriateRequestBody = {
 
 export type EvalsAgeAppropriateEvalsValue = number | boolean | string;
 
+export type OriginalValue = number | boolean | string;
+
 export type EvalsAgeAppropriateValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -140,6 +145,50 @@ export function evalsAgeAppropriateEvalsValueFromJSON(
 }
 
 /** @internal */
+export const OriginalValue$inboundSchema: z.ZodType<
+  OriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type OriginalValue$Outbound = number | boolean | string;
+
+/** @internal */
+export const OriginalValue$outboundSchema: z.ZodType<
+  OriginalValue$Outbound,
+  z.ZodTypeDef,
+  OriginalValue
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace OriginalValue$ {
+  /** @deprecated use `OriginalValue$inboundSchema` instead. */
+  export const inboundSchema = OriginalValue$inboundSchema;
+  /** @deprecated use `OriginalValue$outboundSchema` instead. */
+  export const outboundSchema = OriginalValue$outboundSchema;
+  /** @deprecated use `OriginalValue$Outbound` instead. */
+  export type Outbound = OriginalValue$Outbound;
+}
+
+export function originalValueToJSON(originalValue: OriginalValue): string {
+  return JSON.stringify(OriginalValue$outboundSchema.parse(originalValue));
+}
+
+export function originalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<OriginalValue, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OriginalValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsAgeAppropriateValue$inboundSchema: z.ZodType<
   EvalsAgeAppropriateValue,
   z.ZodTypeDef,
@@ -147,12 +196,22 @@ export const EvalsAgeAppropriateValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsAgeAppropriateValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -163,6 +222,14 @@ export const EvalsAgeAppropriateValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

@@ -12,7 +12,9 @@ let value: EvalsPiiValue = {
 
 ## Fields
 
-| Field                           | Type                            | Required                        | Description                     |
-| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `value`                         | *operations.EvalsPiiEvalsValue* | :heavy_check_mark:              | N/A                             |
-| `explanation`                   | *string*                        | :heavy_minus_sign:              | N/A                             |
+| Field                              | Type                               | Required                           | Description                        |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| `value`                            | *operations.EvalsPiiEvalsValue*    | :heavy_check_mark:                 | N/A                                |
+| `explanation`                      | *string*                           | :heavy_minus_sign:                 | N/A                                |
+| `originalValue`                    | *operations.EvalsPiiOriginalValue* | :heavy_minus_sign:                 | N/A                                |
+| `originalExplanation`              | *string*                           | :heavy_minus_sign:                 | N/A                                |

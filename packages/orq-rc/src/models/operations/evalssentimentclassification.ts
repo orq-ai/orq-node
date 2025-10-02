@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -15,9 +16,16 @@ export type EvalsSentimentClassificationRequestBody = {
 
 export type EvalsSentimentClassificationEvalsValue = number | boolean | string;
 
+export type EvalsSentimentClassificationOriginalValue =
+  | number
+  | boolean
+  | string;
+
 export type EvalsSentimentClassificationValue = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  originalValue?: number | boolean | string | null | undefined;
+  originalExplanation?: string | null | undefined;
 };
 
 /**
@@ -156,6 +164,69 @@ export function evalsSentimentClassificationEvalsValueFromJSON(
 }
 
 /** @internal */
+export const EvalsSentimentClassificationOriginalValue$inboundSchema: z.ZodType<
+  EvalsSentimentClassificationOriginalValue,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.number(), z.boolean(), z.string()]);
+
+/** @internal */
+export type EvalsSentimentClassificationOriginalValue$Outbound =
+  | number
+  | boolean
+  | string;
+
+/** @internal */
+export const EvalsSentimentClassificationOriginalValue$outboundSchema:
+  z.ZodType<
+    EvalsSentimentClassificationOriginalValue$Outbound,
+    z.ZodTypeDef,
+    EvalsSentimentClassificationOriginalValue
+  > = z.union([z.number(), z.boolean(), z.string()]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvalsSentimentClassificationOriginalValue$ {
+  /** @deprecated use `EvalsSentimentClassificationOriginalValue$inboundSchema` instead. */
+  export const inboundSchema =
+    EvalsSentimentClassificationOriginalValue$inboundSchema;
+  /** @deprecated use `EvalsSentimentClassificationOriginalValue$outboundSchema` instead. */
+  export const outboundSchema =
+    EvalsSentimentClassificationOriginalValue$outboundSchema;
+  /** @deprecated use `EvalsSentimentClassificationOriginalValue$Outbound` instead. */
+  export type Outbound = EvalsSentimentClassificationOriginalValue$Outbound;
+}
+
+export function evalsSentimentClassificationOriginalValueToJSON(
+  evalsSentimentClassificationOriginalValue:
+    EvalsSentimentClassificationOriginalValue,
+): string {
+  return JSON.stringify(
+    EvalsSentimentClassificationOriginalValue$outboundSchema.parse(
+      evalsSentimentClassificationOriginalValue,
+    ),
+  );
+}
+
+export function evalsSentimentClassificationOriginalValueFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  EvalsSentimentClassificationOriginalValue,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      EvalsSentimentClassificationOriginalValue$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'EvalsSentimentClassificationOriginalValue' from JSON`,
+  );
+}
+
+/** @internal */
 export const EvalsSentimentClassificationValue$inboundSchema: z.ZodType<
   EvalsSentimentClassificationValue,
   z.ZodTypeDef,
@@ -163,12 +234,22 @@ export const EvalsSentimentClassificationValue$inboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  original_value: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  original_explanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "original_value": "originalValue",
+    "original_explanation": "originalExplanation",
+  });
 });
 
 /** @internal */
 export type EvalsSentimentClassificationValue$Outbound = {
   value: number | boolean | string;
   explanation?: string | null | undefined;
+  original_value?: number | boolean | string | null | undefined;
+  original_explanation?: string | null | undefined;
 };
 
 /** @internal */
@@ -179,6 +260,14 @@ export const EvalsSentimentClassificationValue$outboundSchema: z.ZodType<
 > = z.object({
   value: z.union([z.number(), z.boolean(), z.string()]),
   explanation: z.nullable(z.string()).optional(),
+  originalValue: z.nullable(z.union([z.number(), z.boolean(), z.string()]))
+    .optional(),
+  originalExplanation: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    originalValue: "original_value",
+    originalExplanation: "original_explanation",
+  });
 });
 
 /**

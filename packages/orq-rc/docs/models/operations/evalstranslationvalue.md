@@ -12,7 +12,9 @@ let value: EvalsTranslationValue = {
 
 ## Fields
 
-| Field                                   | Type                                    | Required                                | Description                             |
-| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| `value`                                 | *operations.EvalsTranslationEvalsValue* | :heavy_check_mark:                      | N/A                                     |
-| `explanation`                           | *string*                                | :heavy_minus_sign:                      | N/A                                     |
+| Field                                      | Type                                       | Required                                   | Description                                |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| `value`                                    | *operations.EvalsTranslationEvalsValue*    | :heavy_check_mark:                         | N/A                                        |
+| `explanation`                              | *string*                                   | :heavy_minus_sign:                         | N/A                                        |
+| `originalValue`                            | *operations.EvalsTranslationOriginalValue* | :heavy_minus_sign:                         | N/A                                        |
+| `originalExplanation`                      | *string*                                   | :heavy_minus_sign:                         | N/A                                        |

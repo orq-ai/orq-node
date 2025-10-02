@@ -12,7 +12,9 @@ let value: EvalsSentimentClassificationValue = {
 
 ## Fields
 
-| Field                                               | Type                                                | Required                                            | Description                                         |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `value`                                             | *operations.EvalsSentimentClassificationEvalsValue* | :heavy_check_mark:                                  | N/A                                                 |
-| `explanation`                                       | *string*                                            | :heavy_minus_sign:                                  | N/A                                                 |
+| Field                                                  | Type                                                   | Required                                               | Description                                            |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| `value`                                                | *operations.EvalsSentimentClassificationEvalsValue*    | :heavy_check_mark:                                     | N/A                                                    |
+| `explanation`                                          | *string*                                               | :heavy_minus_sign:                                     | N/A                                                    |
+| `originalValue`                                        | *operations.EvalsSentimentClassificationOriginalValue* | :heavy_minus_sign:                                     | N/A                                                    |
+| `originalExplanation`                                  | *string*                                               | :heavy_minus_sign:                                     | N/A                                                    |
