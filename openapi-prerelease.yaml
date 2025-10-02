@@ -5511,7 +5511,7 @@ components:
               "id":
                 type: "string"
                 format: "ulid"
-                default: "01K6J0GBPEP2W7QXCQMYH5CSTN"
+                default: "01K6J16C1E20ZK9CPTSMSNK2S5"
                 description: "The id of the resource"
                 readOnly: true
               "knowledge_id":
@@ -5799,7 +5799,7 @@ components:
               "id":
                 type: "string"
                 format: "ulid"
-                default: "01K6J0GBPHRZWJBF2JM3PH7RX5"
+                default: "01K6J16C1G6YCP07MYF3N3W29T"
                 description: "The id of the resource"
                 readOnly: true
               "knowledge_id":
@@ -6007,7 +6007,7 @@ components:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GBPN39A2MJ843RAF882M"
+                        default: "01K6J16C1J95BTZMGM2GG9AC0Y"
                       "key":
                         type: "string"
                         minLength: 1
@@ -6339,7 +6339,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-10-02T08:26:57.551Z"
+          default: "2025-10-02T08:38:58.887Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6402,7 +6402,7 @@ components:
           "created":
             type: "string"
             format: "date-time"
-            default: "2025-10-02T08:26:57.551Z"
+            default: "2025-10-02T08:38:58.887Z"
             description: "The date and time the resource was created"
             readOnly: true
         required:
@@ -6482,7 +6482,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-10-02T08:26:57.551Z"
+          default: "2025-10-02T08:38:58.887Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -6528,7 +6528,7 @@ components:
               "created":
                 type: "string"
                 format: "date-time"
-                default: "2025-10-02T08:26:57.551Z"
+                default: "2025-10-02T08:38:58.887Z"
                 description: "The date and time the resource was created"
                 readOnly: true
             required:
@@ -6571,7 +6571,7 @@ components:
         "created":
           type: "string"
           format: "date-time"
-          default: "2025-10-02T08:26:57.551Z"
+          default: "2025-10-02T08:38:58.887Z"
           description: "The date and time the resource was created"
           readOnly: true
       required:
@@ -9667,7 +9667,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-10-02T08:26:54.291Z"
+          default: "2025-10-02T08:38:55.770Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -9675,7 +9675,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-10-02T08:26:54.292Z"
+              default: "2025-10-02T08:38:55.770Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -9785,7 +9785,7 @@ components:
                   - type: "string"
                     format: "date-time"
                   - type: "string"
-                default: "2025-10-02T08:26:54.291Z"
+                default: "2025-10-02T08:38:55.770Z"
                 description: "The date and time the resource was created"
                 readOnly: true
                 format: "date-time"
@@ -9793,7 +9793,7 @@ components:
                 anyOf:
                   - type: "string"
                     format: "date-time"
-                    default: "2025-10-02T08:26:54.292Z"
+                    default: "2025-10-02T08:38:55.770Z"
                   - type: "string"
                 description: "The date and time the resource was last updated"
                 readOnly: true
@@ -9900,7 +9900,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-10-02T08:26:54.291Z"
+          default: "2025-10-02T08:38:55.770Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -9908,7 +9908,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-10-02T08:26:54.292Z"
+              default: "2025-10-02T08:38:55.770Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -10009,7 +10009,7 @@ components:
             - type: "string"
               format: "date-time"
             - type: "string"
-          default: "2025-10-02T08:26:54.291Z"
+          default: "2025-10-02T08:38:55.770Z"
           description: "The date and time the resource was created"
           readOnly: true
           format: "date-time"
@@ -10017,7 +10017,7 @@ components:
           anyOf:
             - type: "string"
               format: "date-time"
-              default: "2025-10-02T08:26:54.292Z"
+              default: "2025-10-02T08:38:55.770Z"
             - type: "string"
           description: "The date and time the resource was last updated"
           readOnly: true
@@ -11263,10 +11263,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11337,10 +11337,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11408,10 +11408,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11494,10 +11494,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11565,10 +11565,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -11963,10 +11963,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12050,10 +12050,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -12147,10 +12147,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12221,10 +12221,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12292,10 +12292,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12378,10 +12378,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12449,10 +12449,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12847,10 +12847,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -12934,10 +12934,10 @@ components:
                     type: "string"
                   "created":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "updated":
                     type: "string"
-                    default: "2025-10-02T08:26:56.871Z"
+                    default: "2025-10-02T08:38:58.234Z"
                   "guardrail_config":
                     oneOf:
                       - type: "object"
@@ -13328,10 +13328,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13402,10 +13402,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13473,10 +13473,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13559,10 +13559,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -13630,10 +13630,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -14028,10 +14028,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -14115,10 +14115,10 @@ components:
               type: "string"
             "created":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "updated":
               type: "string"
-              default: "2025-10-02T08:26:56.871Z"
+              default: "2025-10-02T08:38:58.234Z"
             "guardrail_config":
               oneOf:
                 - type: "object"
@@ -14565,16 +14565,6 @@ components:
               type:
                 - "string"
                 - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
-              type:
-                - "string"
-                - "null"
           required:
             - "value"
       required:
@@ -14603,16 +14593,6 @@ components:
                 - type: "boolean"
                 - type: "string"
             "explanation":
-              type:
-                - "string"
-                - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
               type:
                 - "string"
                 - "null"
@@ -14653,16 +14633,6 @@ components:
               type:
                 - "string"
                 - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
-              type:
-                - "string"
-                - "null"
           required:
             - "value"
       required:
@@ -14691,16 +14661,6 @@ components:
                 - type: "boolean"
                 - type: "string"
             "explanation":
-              type:
-                - "string"
-                - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
               type:
                 - "string"
                 - "null"
@@ -14738,16 +14698,6 @@ components:
               type:
                 - "string"
                 - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
-              type:
-                - "string"
-                - "null"
           required:
             - "value"
       required:
@@ -14779,16 +14729,6 @@ components:
                 - type: "boolean"
                 - type: "string"
             "explanation":
-              type:
-                - "string"
-                - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
               type:
                 - "string"
                 - "null"
@@ -14826,16 +14766,6 @@ components:
               type:
                 - "string"
                 - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
-              type:
-                - "string"
-                - "null"
           required:
             - "value"
       required:
@@ -14867,16 +14797,6 @@ components:
                 - type: "boolean"
                 - type: "string"
             "explanation":
-              type:
-                - "string"
-                - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
               type:
                 - "string"
                 - "null"
@@ -14914,16 +14834,6 @@ components:
               type:
                 - "string"
                 - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
-              type:
-                - "string"
-                - "null"
           required:
             - "value"
       required:
@@ -14955,16 +14865,6 @@ components:
                 - type: "boolean"
                 - type: "string"
             "explanation":
-              type:
-                - "string"
-                - "null"
-            "original_value":
-              anyOf:
-                - type: "number"
-                - type: "boolean"
-                - type: "string"
-                - type: "null"
-            "original_explanation":
               type:
                 - "string"
                 - "null"
@@ -15399,10 +15299,6 @@ components:
               type: "string"
               enum:
                 - "string"
-            "original_value":
-              type:
-                - "string"
-                - "null"
             "value":
               type:
                 - "string"
@@ -15416,10 +15312,6 @@ components:
               type: "string"
               enum:
                 - "number"
-            "original_value":
-              type:
-                - "number"
-                - "null"
             "value":
               type:
                 - "number"
@@ -15558,16 +15450,6 @@ components:
                     - type: "boolean"
                     - type: "string"
                 "explanation":
-                  type:
-                    - "string"
-                    - "null"
-                "original_value":
-                  anyOf:
-                    - type: "number"
-                    - type: "boolean"
-                    - type: "string"
-                    - type: "null"
-                "original_explanation":
                   type:
                     - "string"
                     - "null"
@@ -16711,10 +16593,6 @@ components:
               type: "string"
               enum:
                 - "string"
-            "original_value":
-              type:
-                - "string"
-                - "null"
             "value":
               type:
                 - "string"
@@ -16728,10 +16606,6 @@ components:
               type: "string"
               enum:
                 - "number"
-            "original_value":
-              type:
-                - "number"
-                - "null"
             "value":
               type:
                 - "number"
@@ -16873,16 +16747,6 @@ components:
                   type:
                     - "string"
                     - "null"
-                "original_value":
-                  anyOf:
-                    - type: "number"
-                    - type: "boolean"
-                    - type: "string"
-                    - type: "null"
-                "original_explanation":
-                  type:
-                    - "string"
-                    - "null"
               required:
                 - "workflow_run_id"
                 - "value"
@@ -16990,7 +16854,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTCJBZJJTQ3RKP8BATY"
+              default: "01K6J16C4A422DGFX47RXMRWBC"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17054,7 +16918,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTD95WX0NRVBDE5GM28"
+              default: "01K6J16C4B3BMF1HM5RX4V3SNR"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17361,7 +17225,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTFJR9A9R8J6AAXZX2W"
+              default: "01K6J16C4E1838HNNT9PQWGKPF"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17414,7 +17278,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTFSJQ2ATDP2BH1X7Y0"
+              default: "01K6J16C4F9TD2TEYRS7MSYP01"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17661,7 +17525,7 @@ components:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GBTHW86HPD0DG118HR1A"
+                    default: "01K6J16C4H5Y00V50VZMEF3VX9"
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17741,7 +17605,7 @@ components:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GBTJ5Y51C9Q0AAVPS0J7"
+                    default: "01K6J16C4JK2KASEN7HYGY86WM"
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17825,7 +17689,7 @@ components:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GBTKPJ1CKG74R7CY5WXG"
+                    default: "01K6J16C4JXYG4SDV5MP6S408W"
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -17949,7 +17813,7 @@ components:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GBTMEDH7GQSJ5FAW45CS"
+                    default: "01K6J16C4K78BKFFZGGWCAA2NW"
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18067,7 +17931,7 @@ components:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GBTN6XYQ19MHNV872WAW"
+                    default: "01K6J16C4M3YNC0TP5AMCXGAF3"
                   "path":
                     type: "string"
                     description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18154,7 +18018,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTNRFAAZ8YKS54WXTKX"
+              default: "01K6J16C4N9YKZ3KPG8JDWC42R"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18234,7 +18098,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTPXY20JF03PWEKW94E"
+              default: "01K6J16C4N19YRQPDC5A3K3H2R"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18318,7 +18182,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTQS65WM59PG8BRBCZE"
+              default: "01K6J16C4PWEAFY98QDT20EWGF"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18442,7 +18306,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTQ0FEYBWCJ1PHS8YRB"
+              default: "01K6J16C4QKYC3MTDV0YEY1ETP"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18560,7 +18424,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTSXRV6J0NMH6GZ15SA"
+              default: "01K6J16C4RG7JJTZ2E75A2VVJ7"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18641,7 +18505,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTSN1ACNPJX6VV74SYB"
+              default: "01K6J16C4S1TZAN6JMZ8XAKK10"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18721,7 +18585,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTT57PDF4NN0ZQQPP3J"
+              default: "01K6J16C4ZME2G1WZ1D42ARRC6"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18805,7 +18669,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTVYC2N7RKCFT4FVH5B"
+              default: "01K6J16C50WJ6YPTXWXHPH8CC5"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -18929,7 +18793,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTW56DW37CNN6Z1X03C"
+              default: "01K6J16C50NW3MH2D2JG7ZF2E8"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19047,7 +18911,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTXJYZ3CX9E052PHAG3"
+              default: "01K6J16C5149YRQSKDMJF96VV4"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19128,7 +18992,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTY06HPA16SEW7V9A6Y"
+              default: "01K6J16C52RETDZSZM9PYPHJFP"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19208,7 +19072,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTYZCM108S26QRTHS89"
+              default: "01K6J16C5202RQ6VPQ4TC9W04D"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19292,7 +19156,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBTZFNH82B11Y39GT8R7"
+              default: "01K6J16C5329RFWQ47J48QBCHG"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19416,7 +19280,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV05HGK6C605DB09BVX"
+              default: "01K6J16C5475G5C9DFN4B1YFAK"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19534,7 +19398,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV1P0PJ17YR41C6SVKX"
+              default: "01K6J16C5587MX5E1043C8BWS3"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19615,7 +19479,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV1Z9Y5R2H488594NQ5"
+              default: "01K6J16C56W1ATN6S0GVVQNMKQ"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19695,7 +19559,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV2M1KF42B833P6ZZ1J"
+              default: "01K6J16C574R76KPKGZQ5KT3XB"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19779,7 +19643,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV2JH4SM964T51F7G2Z"
+              default: "01K6J16C571T6SGB1A66MHBTVM"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -19903,7 +19767,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV3K1G4YHKG11G5N7XF"
+              default: "01K6J16C586CQT5765DGY59CF8"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -20021,7 +19885,7 @@ components:
             "_id":
               type: "string"
               format: "ulid"
-              default: "01K6J0GBV4975MCR7GCNQY30WK"
+              default: "01K6J16C59HW87BNJX08CDHVMR"
             "path":
               type: "string"
               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -21318,7 +21182,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -21326,7 +21190,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -21457,7 +21321,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-10-02T08:26:54.291Z"
+                          default: "2025-10-02T08:38:55.770Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -21465,7 +21329,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-02T08:26:54.292Z"
+                              default: "2025-10-02T08:38:55.770Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -26097,7 +25961,7 @@ paths:
                               "id":
                                 type: "string"
                                 format: "ulid"
-                                default: "01K6J0GBXAB1S65S1A2Z5J4DAS"
+                                default: "01K6J16C6NVFS00VW70Z8NPXXS"
                                 description: "The id of the resource"
                                 readOnly: true
                               "knowledge_id":
@@ -26376,7 +26240,7 @@ paths:
                         "id":
                           type: "string"
                           format: "ulid"
-                          default: "01K6J0GBXEMG101BSXAW9PTQ9J"
+                          default: "01K6J16C6SW4959F9C644R4T51"
                           description: "The id of the resource"
                           readOnly: true
                         "knowledge_id":
@@ -27060,7 +26924,7 @@ paths:
                       "id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GBXYA8RJ29Q256PMTE4K"
+                        default: "01K6J16C7GF8PWY6P8PR8EBXQ8"
                         description: "The id of the resource"
                         readOnly: true
                       "knowledge_id":
@@ -27268,7 +27132,7 @@ paths:
                               "_id":
                                 type: "string"
                                 format: "ulid"
-                                default: "01K6J0GBY0P5PGP2YCZTH8RYA3"
+                                default: "01K6J16C7HTNXVCX7S5WZ60QGP"
                               "key":
                                 type: "string"
                                 minLength: 1
@@ -27796,7 +27660,7 @@ paths:
                       "id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GBY5H4RT4XR9XVFD7E17"
+                        default: "01K6J16C7RK6D6MA6NY0K1SXS0"
                         description: "The id of the resource"
                         readOnly: true
                       "knowledge_id":
@@ -28004,7 +27868,7 @@ paths:
                               "_id":
                                 type: "string"
                                 format: "ulid"
-                                default: "01K6J0GBY6KWDFE5DH8SJT0HNV"
+                                default: "01K6J16C7SBNS9JBYSE48A73HW"
                               "key":
                                 type: "string"
                                 minLength: 1
@@ -28549,7 +28413,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-10-02T08:26:57.551Z"
+                    default: "2025-10-02T08:38:58.887Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -28637,7 +28501,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-10-02T08:26:57.551Z"
+                          default: "2025-10-02T08:38:58.887Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                       required:
@@ -28704,7 +28568,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-10-02T08:26:57.551Z"
+                    default: "2025-10-02T08:38:58.887Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                 required:
@@ -34049,7 +33913,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-10-02T08:26:54.291Z"
+                          default: "2025-10-02T08:38:55.770Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -34057,7 +33921,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-02T08:26:54.292Z"
+                              default: "2025-10-02T08:38:55.770Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -34181,7 +34045,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -34189,7 +34053,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -34299,7 +34163,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -34307,7 +34171,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -34459,7 +34323,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -34467,7 +34331,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -34916,7 +34780,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-10-02T08:26:54.291Z"
+                          default: "2025-10-02T08:38:55.770Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -34924,7 +34788,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-02T08:26:54.292Z"
+                              default: "2025-10-02T08:38:55.770Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -35661,7 +35525,7 @@ paths:
                         - type: "string"
                           format: "date-time"
                         - type: "string"
-                      default: "2025-10-02T08:26:54.291Z"
+                      default: "2025-10-02T08:38:55.770Z"
                       description: "The date and time the resource was created"
                       readOnly: true
                       format: "date-time"
@@ -35669,7 +35533,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-10-02T08:26:54.292Z"
+                          default: "2025-10-02T08:38:55.770Z"
                         - type: "string"
                       description: "The date and time the resource was last updated"
                       readOnly: true
@@ -36062,7 +35926,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -36070,7 +35934,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -36804,7 +36668,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -36812,7 +36676,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -38156,7 +38020,7 @@ paths:
                         "_id":
                           type: "string"
                           format: "ulid"
-                          default: "01K6J0GC1C7PFPJZ88ZY8B0W98"
+                          default: "01K6J16CB5DEGYY7BAH1FGAYB5"
                           description: "The id of the resource"
                           readOnly: true
                         "display_name":
@@ -38319,7 +38183,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GC1EKES4GAEX8WM7PZ46"
+                    default: "01K6J16CB6WSXRWFG68WFJ032J"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -38412,7 +38276,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GC1D0AJ5SZJNRZ4RAXZ4"
+                    default: "01K6J16CB60K474QVR482PC1XT"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -38541,7 +38405,7 @@ paths:
                   "_id":
                     type: "string"
                     format: "ulid"
-                    default: "01K6J0GC1F9BM8GB8R4WZFNGWY"
+                    default: "01K6J16CB7VSQFFEH9FZNV9Q1V"
                     description: "The id of the resource"
                     readOnly: true
                   "display_name":
@@ -39437,10 +39301,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -39511,10 +39375,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -39582,10 +39446,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -39668,10 +39532,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -39739,10 +39603,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -40137,10 +40001,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -40224,10 +40088,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-02T08:26:56.871Z"
+                              default: "2025-10-02T08:38:58.234Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -40644,10 +40508,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -40718,10 +40582,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -40789,10 +40653,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -40875,10 +40739,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -40946,10 +40810,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41344,10 +41208,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41431,10 +41295,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41834,10 +41698,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41908,10 +41772,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -41979,10 +41843,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -42065,10 +41929,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -42136,10 +42000,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -42534,10 +42398,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -42621,10 +42485,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-02T08:26:56.871Z"
+                        default: "2025-10-02T08:38:58.234Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -43729,16 +43593,6 @@ paths:
                         type:
                           - "string"
                           - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
                     required:
                       - "value"
                 required:
@@ -43807,16 +43661,6 @@ paths:
                           - type: "boolean"
                           - type: "string"
                       "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
                         type:
                           - "string"
                           - "null"
@@ -43897,16 +43741,6 @@ paths:
                         type:
                           - "string"
                           - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
                     required:
                       - "value"
                 required:
@@ -43975,16 +43809,6 @@ paths:
                           - type: "boolean"
                           - type: "string"
                       "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
                         type:
                           - "string"
                           - "null"
@@ -44062,16 +43886,6 @@ paths:
                         type:
                           - "string"
                           - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
                     required:
                       - "value"
                 required:
@@ -44143,16 +43957,6 @@ paths:
                           - type: "boolean"
                           - type: "string"
                       "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
                         type:
                           - "string"
                           - "null"
@@ -44230,16 +44034,6 @@ paths:
                         type:
                           - "string"
                           - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
                     required:
                       - "value"
                 required:
@@ -44311,16 +44105,6 @@ paths:
                           - type: "boolean"
                           - type: "string"
                       "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
                         type:
                           - "string"
                           - "null"
@@ -44398,16 +44182,6 @@ paths:
                         type:
                           - "string"
                           - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
                     required:
                       - "value"
                 required:
@@ -44479,16 +44253,6 @@ paths:
                           - type: "boolean"
                           - type: "string"
                       "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
                         type:
                           - "string"
                           - "null"
@@ -45507,10 +45271,6 @@ paths:
                         type: "string"
                         enum:
                           - "string"
-                      "original_value":
-                        type:
-                          - "string"
-                          - "null"
                       "value":
                         type:
                           - "string"
@@ -45524,10 +45284,6 @@ paths:
                         type: "string"
                         enum:
                           - "number"
-                      "original_value":
-                        type:
-                          - "number"
-                          - "null"
                       "value":
                         type:
                           - "number"
@@ -45669,16 +45425,6 @@ paths:
                             type:
                               - "string"
                               - "null"
-                          "original_value":
-                            anyOf:
-                              - type: "number"
-                              - type: "boolean"
-                              - type: "string"
-                              - type: "null"
-                          "original_explanation":
-                            type:
-                              - "string"
-                              - "null"
                         required:
                           - "workflow_run_id"
                           - "value"
@@ -45806,7 +45552,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -45814,7 +45560,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -45948,7 +45694,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -45956,7 +45702,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -46168,7 +45914,7 @@ paths:
                             - type: "string"
                               format: "date-time"
                             - type: "string"
-                          default: "2025-10-02T08:26:54.291Z"
+                          default: "2025-10-02T08:38:55.770Z"
                           description: "The date and time the resource was created"
                           readOnly: true
                           format: "date-time"
@@ -46176,7 +45922,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-02T08:26:54.292Z"
+                              default: "2025-10-02T08:38:55.770Z"
                             - type: "string"
                           description: "The date and time the resource was last updated"
                           readOnly: true
@@ -46356,7 +46102,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -46364,7 +46110,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -46483,7 +46229,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -46491,7 +46237,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -46636,7 +46382,7 @@ paths:
                       - type: "string"
                         format: "date-time"
                       - type: "string"
-                    default: "2025-10-02T08:26:54.291Z"
+                    default: "2025-10-02T08:38:55.770Z"
                     description: "The date and time the resource was created"
                     readOnly: true
                     format: "date-time"
@@ -46644,7 +46390,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-02T08:26:54.292Z"
+                        default: "2025-10-02T08:38:55.770Z"
                       - type: "string"
                     description: "The date and time the resource was last updated"
                     readOnly: true
@@ -46742,7 +46488,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K6J0GC4XYNW9PF5J8293BJA7"
+                              default: "01K6J16CE9ZAHJ4AY310FG2WHT"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -46822,7 +46568,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K6J0GC4XD0Q2DKBS0EBK5ZPR"
+                              default: "01K6J16CE9NA78BJJ7KVHGWN1P"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -46906,7 +46652,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K6J0GC4Y3ZAENAX0BK43J4PB"
+                              default: "01K6J16CEATT7VKKTEQYFWRZHP"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47030,7 +46776,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K6J0GC4Y9DR1SCZB84KXF8HX"
+                              default: "01K6J16CEBMSFFEBY1GQ56XSCS"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47148,7 +46894,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K6J0GC4ZVWC22AVH1ZB91HGW"
+                              default: "01K6J16CECEJB5CSVSX73YF574"
                             "path":
                               type: "string"
                               description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47310,7 +47056,7 @@ paths:
                     "_id":
                       type: "string"
                       format: "ulid"
-                      default: "01K6J0GC55975667ZMWAG37NKA"
+                      default: "01K6J16CEJQAR9FYRYVJDF71T8"
                     "path":
                       type: "string"
                       description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47374,7 +47120,7 @@ paths:
                     "_id":
                       type: "string"
                       format: "ulid"
-                      default: "01K6J0GC55FW65DMHZY310JS69"
+                      default: "01K6J16CEJRNB06Q2Q716DK0HT"
                     "path":
                       type: "string"
                       description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47634,7 +47380,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC521MXMAZ6G6M2ZXYFC"
+                        default: "01K6J16CEF57BGFEEJFBVCZZHA"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47714,7 +47460,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC53HH95K29QVT2WKXWQ"
+                        default: "01K6J16CEFD6HGKMYFJFF56AJ6"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47798,7 +47544,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5398RT6SDXNN0Y4FM2"
+                        default: "01K6J16CEF09JCRPXAGMA0Y7EW"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -47922,7 +47668,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5433NW33JV33JTCQ6H"
+                        default: "01K6J16CEGDWGNGEPK1H6FJBA4"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48040,7 +47786,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC54AX3M4R7PYRA4FEFP"
+                        default: "01K6J16CEHDCXXAKD5DWSDJS8T"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48187,7 +47933,7 @@ paths:
                     "_id":
                       type: "string"
                       format: "ulid"
-                      default: "01K6J0GC59R6X261KSFE5AB71N"
+                      default: "01K6J16CENPZ0V1XPYC1DCCY6Z"
                     "path":
                       type: "string"
                       description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48240,7 +47986,7 @@ paths:
                     "_id":
                       type: "string"
                       format: "ulid"
-                      default: "01K6J0GC59QVAMCZZ2MBHY7CYJ"
+                      default: "01K6J16CEN9XHEKYTETXDFA0TS"
                     "path":
                       type: "string"
                       description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48469,7 +48215,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC56G7RQEXJRHWP1HX3N"
+                        default: "01K6J16CEKBSFNKEZ5DD6K2VJ4"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48549,7 +48295,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC57SHHBNHHZ0092N969"
+                        default: "01K6J16CEKN7YA5SYVNNC9DKNB"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48633,7 +48379,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC578EFQ51ER8AMD587D"
+                        default: "01K6J16CEKA3DES7Y4TNQBFTEZ"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48757,7 +48503,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC58GF0K8VK9A6G1WEEN"
+                        default: "01K6J16CEMM6QPV4XA97MRADYF"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -48875,7 +48621,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC58P386EETHEFBH5JNG"
+                        default: "01K6J16CEN3N768A2M14J42GA0"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49009,7 +48755,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5CXNJDJCY07Y1X0HWG"
+                        default: "01K6J16CER48DZ5NSVWPWH76BP"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49089,7 +48835,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5C55J5VFJ9W69TD74Q"
+                        default: "01K6J16CERSY4BM104H17JW94M"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49173,7 +48919,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5C02QX54YF53RBY8TN"
+                        default: "01K6J16CESRDWJW0691JVH8XW0"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49297,7 +49043,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5D63FJWZBH828XZHS5"
+                        default: "01K6J16CESPE33GYBGYYDYT0PH"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49415,7 +49161,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5DQ562F8X6WCDY90S1"
+                        default: "01K6J16CESRNN2RK6Y1WDR6CAT"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49520,7 +49266,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5A7BZ7TVEYSW8RNKNP"
+                        default: "01K6J16CEPKQCZJP36QMDZ6GT9"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49600,7 +49346,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5A0WMAB16DTM77KFBK"
+                        default: "01K6J16CEPW95N5FNG28GW6X5Z"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49684,7 +49430,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5ABCS9T6VX9ZJW5QDR"
+                        default: "01K6J16CEQAB8PKEZ5GYB7D594"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49808,7 +49554,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5BTR9X3V7H0CD7YFTG"
+                        default: "01K6J16CEQ0BFK9M7AX3TSZVZ9"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
@@ -49926,7 +49672,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K6J0GC5B60EYNT0XCH0TDJ1A"
+                        default: "01K6J16CERN2G9G1Z5G574X855"
                       "path":
                         type: "string"
                         description: "The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists."
