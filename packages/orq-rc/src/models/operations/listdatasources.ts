@@ -278,7 +278,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6JFC6RXNE0A4RZ318HJ4GTR"),
+  _id: z.string().default("01K6JK9V6FZCQG8KPK9HVRXVFA"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -322,7 +322,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01K6JFC6RXNE0A4RZ318HJ4GTR"),
+  id: z.string().default("01K6JK9V6FZCQG8KPK9HVRXVFA"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,
