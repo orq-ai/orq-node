@@ -425,7 +425,6 @@ export type Http = {
  * Makes HTTP requests to external APIs
  */
 export type HTTPTool = {
-  id?: string | undefined;
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -2674,7 +2673,6 @@ export const HTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GBY0P5PGP2YCZTH8RYA3"),
   key: z.string(),
   display_name: z.string(),
   description: z.string(),
@@ -2684,7 +2682,6 @@ export const HTTPTool$inboundSchema: z.ZodType<
   requires_approval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
   });
@@ -2692,7 +2689,6 @@ export const HTTPTool$inboundSchema: z.ZodType<
 
 /** @internal */
 export type HTTPTool$Outbound = {
-  _id: string;
   key: string;
   display_name: string;
   description: string;
@@ -2707,7 +2703,6 @@ export const HTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   HTTPTool
 > = z.object({
-  id: z.string().default("01K6J0GBY0P5PGP2YCZTH8RYA3"),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),
@@ -2717,7 +2712,6 @@ export const HTTPTool$outboundSchema: z.ZodType<
   requiresApproval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
     requiresApproval: "requires_approval",
   });

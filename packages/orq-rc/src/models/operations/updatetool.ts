@@ -163,6 +163,10 @@ export type UpdateToolRequestBody4 = {
    */
   path?: string | undefined;
   /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
+  /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
   displayName: string;
@@ -290,11 +294,14 @@ export type UpdateToolRequestBodyHttp = {
 };
 
 export type UpdateToolRequestBody3 = {
-  id?: string | undefined;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
   path?: string | undefined;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
@@ -354,11 +361,14 @@ export type UpdateToolRequestBodyJsonSchema = {
 };
 
 export type UpdateToolRequestBody2 = {
-  id?: string | undefined;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
   path?: string | undefined;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
@@ -423,6 +433,10 @@ export type UpdateToolRequestBody1 = {
    */
   path?: string | undefined;
   /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
+  /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
   displayName?: string | undefined;
@@ -449,7 +463,7 @@ export type UpdateToolRequestBody =
   | UpdateToolRequestBody3;
 
 export type UpdateToolRequest = {
-  toolKey: string;
+  toolId: string;
   /**
    * The tool to update
    */
@@ -1500,6 +1514,7 @@ export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest4Status$inboundSchema.default(
@@ -1516,6 +1531,7 @@ export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateToolRequestBody4$Outbound = {
   path?: string | undefined;
+  key?: string | undefined;
   display_name: string;
   description?: string | undefined;
   status: string;
@@ -1530,6 +1546,7 @@ export const UpdateToolRequestBody4$outboundSchema: z.ZodType<
   UpdateToolRequestBody4
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest4Status$outboundSchema.default(
@@ -1929,8 +1946,8 @@ export const UpdateToolRequestBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC59QVAMCZZ2MBHY7CYJ"),
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequestStatus$inboundSchema.default("live"),
@@ -1938,15 +1955,14 @@ export const UpdateToolRequestBody3$inboundSchema: z.ZodType<
   http: z.lazy(() => UpdateToolRequestBodyHttp$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
   });
 });
 
 /** @internal */
 export type UpdateToolRequestBody3$Outbound = {
-  _id: string;
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -1960,8 +1976,8 @@ export const UpdateToolRequestBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequestBody3
 > = z.object({
-  id: z.string().default("01K6J0GC59QVAMCZZ2MBHY7CYJ"),
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequestStatus$outboundSchema.default(
@@ -1971,7 +1987,6 @@ export const UpdateToolRequestBody3$outboundSchema: z.ZodType<
   http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
   });
 });
@@ -2120,8 +2135,8 @@ export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC59R6X261KSFE5AB71N"),
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsStatus$inboundSchema.default("live"),
@@ -2130,7 +2145,6 @@ export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
@@ -2138,8 +2152,8 @@ export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateToolRequestBody2$Outbound = {
-  _id: string;
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -2153,8 +2167,8 @@ export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequestBody2
 > = z.object({
-  id: z.string().default("01K6J0GC59R6X261KSFE5AB71N"),
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsStatus$outboundSchema.default("live"),
@@ -2163,7 +2177,6 @@ export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
     jsonSchema: "json_schema",
   });
@@ -2314,6 +2327,7 @@ export const UpdateToolRequestBody1$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyStatus$inboundSchema.default("live"),
@@ -2329,6 +2343,7 @@ export const UpdateToolRequestBody1$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateToolRequestBody1$Outbound = {
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -2343,6 +2358,7 @@ export const UpdateToolRequestBody1$outboundSchema: z.ZodType<
   UpdateToolRequestBody1
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyStatus$outboundSchema.default("live"),
@@ -2457,7 +2473,7 @@ export const UpdateToolRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tool_key: z.string(),
+  tool_id: z.string(),
   RequestBody: z.union([
     z.lazy(() => UpdateToolRequestBody4$inboundSchema),
     z.lazy(() => UpdateToolRequestBody5$inboundSchema),
@@ -2467,14 +2483,14 @@ export const UpdateToolRequest$inboundSchema: z.ZodType<
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "tool_key": "toolKey",
+    "tool_id": "toolId",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type UpdateToolRequest$Outbound = {
-  tool_key: string;
+  tool_id: string;
   RequestBody?:
     | UpdateToolRequestBody4$Outbound
     | UpdateToolRequestBody5$Outbound
@@ -2490,7 +2506,7 @@ export const UpdateToolRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequest
 > = z.object({
-  toolKey: z.string(),
+  toolId: z.string(),
   requestBody: z.union([
     z.lazy(() => UpdateToolRequestBody4$outboundSchema),
     z.lazy(() => UpdateToolRequestBody5$outboundSchema),
@@ -2500,7 +2516,7 @@ export const UpdateToolRequest$outboundSchema: z.ZodType<
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
-    toolKey: "tool_key",
+    toolId: "tool_id",
     requestBody: "RequestBody",
   });
 });
@@ -2675,7 +2691,7 @@ export const UpdateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC58P386EETHEFBH5JNG"),
+  _id: z.string().default("01K6JFC6WD8KEBA4NR3E791VZS"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2730,7 +2746,7 @@ export const UpdateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K6J0GC58P386EETHEFBH5JNG"),
+  id: z.string().default("01K6JFC6WD8KEBA4NR3E791VZS"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3104,7 +3120,7 @@ export const UpdateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC58GF0K8VK9A6G1WEEN"),
+  _id: z.string().default("01K6JFC6WCCVXMESDXXKT1ZXPG"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3158,7 +3174,7 @@ export const UpdateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K6J0GC58GF0K8VK9A6G1WEEN"),
+  id: z.string().default("01K6JFC6WCCVXMESDXXKT1ZXPG"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3576,7 +3592,7 @@ export const UpdateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC578EFQ51ER8AMD587D"),
+  _id: z.string().default("01K6JFC6WCDC89YAP1FVGZHQ8A"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3630,7 +3646,7 @@ export const UpdateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K6J0GC578EFQ51ER8AMD587D"),
+  id: z.string().default("01K6JFC6WCDC89YAP1FVGZHQ8A"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3804,7 +3820,7 @@ export const UpdateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC57SHHBNHHZ0092N969"),
+  _id: z.string().default("01K6JFC6WCD3MKPCYG8E1TQRM4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3857,7 +3873,7 @@ export const UpdateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K6J0GC57SHHBNHHZ0092N969"),
+  id: z.string().default("01K6JFC6WCD3MKPCYG8E1TQRM4"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -4029,7 +4045,7 @@ export const UpdateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC56G7RQEXJRHWP1HX3N"),
+  _id: z.string().default("01K6JFC6WB51D6B5Q27472G904"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -4081,7 +4097,7 @@ export const UpdateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K6J0GC56G7RQEXJRHWP1HX3N"),
+  id: z.string().default("01K6JFC6WB51D6B5Q27472G904"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

@@ -452,7 +452,6 @@ export type RunAgentRequestToolHttp = {
  * Makes HTTP requests to external APIs
  */
 export type RunAgentRequestToolHTTPTool = {
-  id?: string | undefined;
   /**
    * Unique key of the tool as it will be displayed in the UI
    */
@@ -2829,7 +2828,6 @@ export const RunAgentRequestToolHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GBY6KWDFE5DH8SJT0HNV"),
   key: z.string(),
   display_name: z.string(),
   description: z.string(),
@@ -2839,7 +2837,6 @@ export const RunAgentRequestToolHTTPTool$inboundSchema: z.ZodType<
   requires_approval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
   });
@@ -2847,7 +2844,6 @@ export const RunAgentRequestToolHTTPTool$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RunAgentRequestToolHTTPTool$Outbound = {
-  _id: string;
   key: string;
   display_name: string;
   description: string;
@@ -2862,7 +2858,6 @@ export const RunAgentRequestToolHTTPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentRequestToolHTTPTool
 > = z.object({
-  id: z.string().default("01K6J0GBY6KWDFE5DH8SJT0HNV"),
   key: z.string(),
   displayName: z.string(),
   description: z.string(),
@@ -2872,7 +2867,6 @@ export const RunAgentRequestToolHTTPTool$outboundSchema: z.ZodType<
   requiresApproval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
     requiresApproval: "requires_approval",
   });

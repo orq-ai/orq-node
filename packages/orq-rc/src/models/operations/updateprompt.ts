@@ -83,6 +83,7 @@ export type UpdatePrompt1Type = ClosedEnum<typeof UpdatePrompt1Type>;
 
 export type OneJsonSchema = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -653,6 +654,7 @@ export type UpdatePrompt1PromptsResponseType = ClosedEnum<
 
 export type UpdatePrompt1JsonSchema = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -1382,6 +1384,7 @@ export const OneJsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
@@ -1389,6 +1392,7 @@ export const OneJsonSchema$inboundSchema: z.ZodType<
 /** @internal */
 export type OneJsonSchema$Outbound = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -1400,6 +1404,7 @@ export const OneJsonSchema$outboundSchema: z.ZodType<
   OneJsonSchema
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
@@ -3304,6 +3309,7 @@ export const UpdatePrompt1JsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
@@ -3311,6 +3317,7 @@ export const UpdatePrompt1JsonSchema$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdatePrompt1JsonSchema$Outbound = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -3322,6 +3329,7 @@ export const UpdatePrompt1JsonSchema$outboundSchema: z.ZodType<
   UpdatePrompt1JsonSchema
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });

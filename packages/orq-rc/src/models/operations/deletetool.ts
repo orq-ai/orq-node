@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteToolRequest = {
-  toolKey: string;
+  toolId: string;
 };
 
 /** @internal */
@@ -18,16 +18,16 @@ export const DeleteToolRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tool_key: z.string(),
+  tool_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    "tool_key": "toolKey",
+    "tool_id": "toolId",
   });
 });
 
 /** @internal */
 export type DeleteToolRequest$Outbound = {
-  tool_key: string;
+  tool_id: string;
 };
 
 /** @internal */
@@ -36,10 +36,10 @@ export const DeleteToolRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteToolRequest
 > = z.object({
-  toolKey: z.string(),
+  toolId: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    toolKey: "tool_key",
+    toolId: "tool_id",
   });
 });
 

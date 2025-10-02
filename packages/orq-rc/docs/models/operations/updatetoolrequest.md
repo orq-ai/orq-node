@@ -6,7 +6,7 @@
 import { UpdateToolRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdateToolRequest = {
-  toolKey: "<value>",
+  toolId: "<id>",
 };
 ```
 
@@ -14,5 +14,5 @@ let value: UpdateToolRequest = {
 
 | Field                              | Type                               | Required                           | Description                        |
 | ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `toolKey`                          | *string*                           | :heavy_check_mark:                 | N/A                                |
+| `toolId`                           | *string*                           | :heavy_check_mark:                 | N/A                                |
 | `requestBody`                      | *operations.UpdateToolRequestBody* | :heavy_minus_sign:                 | The tool to update                 |

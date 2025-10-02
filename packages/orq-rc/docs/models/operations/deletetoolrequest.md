@@ -6,7 +6,7 @@
 import { DeleteToolRequest } from "@orq-ai/node/models/operations";
 
 let value: DeleteToolRequest = {
-  toolKey: "<value>",
+  toolId: "<id>",
 };
 ```
 
@@ -14,4 +14,4 @@ let value: DeleteToolRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `toolKey`          | *string*           | :heavy_check_mark: | N/A                |
+| `toolId`           | *string*           | :heavy_check_mark: | N/A                |

@@ -98,7 +98,6 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.tools.create({
-    id: "01K5ZT3CYBDREF06WS7W7BX3Y2",
     path: "Default",
     key: "<key>",
     displayName: "Ellie78",
@@ -137,7 +136,6 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await toolsCreate(orq, {
-    id: "01K5ZT3CYBDREF06WS7W7BX3Y2",
     path: "Default",
     key: "<key>",
     displayName: "Ellie78",
@@ -189,7 +187,7 @@ Updates a tool in the workspace.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="UpdateTool" method="patch" path="/v2/tools/{tool_key}" -->
+<!-- UsageSnippet language="typescript" operationID="UpdateTool" method="patch" path="/v2/tools/{tool_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -199,7 +197,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.tools.update({
-    toolKey: "<value>",
+    toolId: "<id>",
     requestBody: {
       path: "Default",
       status: "live",
@@ -229,7 +227,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await toolsUpdate(orq, {
-    toolKey: "<value>",
+    toolId: "<id>",
     requestBody: {
       path: "Default",
       status: "live",
@@ -273,7 +271,7 @@ Deletes a tool by key.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="DeleteTool" method="delete" path="/v2/tools/{tool_key}" -->
+<!-- UsageSnippet language="typescript" operationID="DeleteTool" method="delete" path="/v2/tools/{tool_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -283,7 +281,7 @@ const orq = new Orq({
 
 async function run() {
   await orq.tools.delete({
-    toolKey: "<value>",
+    toolId: "<id>",
   });
 
 
@@ -308,7 +306,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await toolsDelete(orq, {
-    toolKey: "<value>",
+    toolId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -342,11 +340,11 @@ run();
 
 ## retrieve
 
-Retrieves a tool by key.
+Retrieves a tool by id.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="RetrieveTool" method="get" path="/v2/tools/{tool_key}" -->
+<!-- UsageSnippet language="typescript" operationID="RetrieveTool" method="get" path="/v2/tools/{tool_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -356,7 +354,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.tools.retrieve({
-    toolKey: "<value>",
+    toolId: "<id>",
   });
 
   console.log(result);
@@ -381,7 +379,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await toolsRetrieve(orq, {
-    toolKey: "<value>",
+    toolId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -415,11 +413,11 @@ run();
 
 ## duplicate
 
-Creates a copy of an existing tool with a new key and ID.
+Creates a copy of an existing tool with a new id and ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="DuplicateTool" method="post" path="/v2/tools/{key}/duplicate" -->
+<!-- UsageSnippet language="typescript" operationID="DuplicateTool" method="post" path="/v2/tools/{tool_id}/duplicate" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -429,7 +427,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.tools.duplicate({
-    key: "<key>",
+    toolId: "<id>",
   });
 
   console.log(result);
@@ -454,7 +452,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await toolsDuplicate(orq, {
-    key: "<key>",
+    toolId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

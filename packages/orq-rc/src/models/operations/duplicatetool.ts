@@ -11,9 +11,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DuplicateToolRequest = {
   /**
-   * The key of the tool to duplicate
+   * The id of the tool to duplicate
    */
-  key: string;
+  toolId: string;
 };
 
 /**
@@ -555,12 +555,16 @@ export const DuplicateToolRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  key: z.string(),
+  tool_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_id": "toolId",
+  });
 });
 
 /** @internal */
 export type DuplicateToolRequest$Outbound = {
-  key: string;
+  tool_id: string;
 };
 
 /** @internal */
@@ -569,7 +573,11 @@ export const DuplicateToolRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolRequest
 > = z.object({
-  key: z.string(),
+  toolId: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    toolId: "tool_id",
+  });
 });
 
 /**
@@ -750,7 +758,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC5B60EYNT0XCH0TDJ1A"),
+  _id: z.string().default("01K6JFC6WFT9DV8E52T2TY2VKE"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -806,7 +814,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K6J0GC5B60EYNT0XCH0TDJ1A"),
+  id: z.string().default("01K6JFC6WFT9DV8E52T2TY2VKE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1194,7 +1202,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC5BTR9X3V7H0CD7YFTG"),
+  _id: z.string().default("01K6JFC6WF7EEK66DVKBF1SX45"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1248,7 +1256,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K6J0GC5BTR9X3V7H0CD7YFTG"),
+  id: z.string().default("01K6JFC6WF7EEK66DVKBF1SX45"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1675,7 +1683,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC5ABCS9T6VX9ZJW5QDR"),
+  _id: z.string().default("01K6JFC6WFMT0HTTP4QKDG5486"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1729,7 +1737,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K6J0GC5ABCS9T6VX9ZJW5QDR"),
+  id: z.string().default("01K6JFC6WFMT0HTTP4QKDG5486"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1909,7 +1917,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC5A0WMAB16DTM77KFBK"),
+  _id: z.string().default("01K6JFC6WEFAPV3M4TBW5P49EW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1962,7 +1970,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K6J0GC5A0WMAB16DTM77KFBK"),
+  id: z.string().default("01K6JFC6WEFAPV3M4TBW5P49EW"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -2135,7 +2143,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K6J0GC5A7BZ7TVEYSW8RNKNP"),
+  _id: z.string().default("01K6JFC6WE7G9520Q9HRB1H4MW"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2187,7 +2195,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K6J0GC5A7BZ7TVEYSW8RNKNP"),
+  id: z.string().default("01K6JFC6WE7G9520Q9HRB1H4MW"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

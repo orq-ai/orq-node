@@ -85,7 +85,7 @@ export class Tools extends ClientSDK {
    * Retrieve tool
    *
    * @remarks
-   * Retrieves a tool by key.
+   * Retrieves a tool by id.
    */
   async retrieve(
     request: operations.RetrieveToolRequest,
@@ -102,7 +102,7 @@ export class Tools extends ClientSDK {
    * Duplicate tool
    *
    * @remarks
-   * Creates a copy of an existing tool with a new key and ID.
+   * Creates a copy of an existing tool with a new id and ID.
    */
   async duplicate(
     request: operations.DuplicateToolRequest,

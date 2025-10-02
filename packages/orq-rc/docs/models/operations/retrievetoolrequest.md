@@ -6,7 +6,7 @@
 import { RetrieveToolRequest } from "@orq-ai/node/models/operations";
 
 let value: RetrieveToolRequest = {
-  toolKey: "<value>",
+  toolId: "<id>",
 };
 ```
 
@@ -14,4 +14,4 @@ let value: RetrieveToolRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `toolKey`          | *string*           | :heavy_check_mark: | N/A                |
+| `toolId`           | *string*           | :heavy_check_mark: | N/A                |

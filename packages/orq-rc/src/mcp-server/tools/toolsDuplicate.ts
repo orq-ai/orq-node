@@ -14,7 +14,7 @@ export const tool$toolsDuplicate: ToolDefinition<typeof args> = {
   name: "tools-duplicate",
   description: `Duplicate tool
 
-Creates a copy of an existing tool with a new key and ID.`,
+Creates a copy of an existing tool with a new id and ID.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await toolsDuplicate(

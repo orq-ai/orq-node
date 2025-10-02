@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Duplicate tool
  *
  * @remarks
- * Creates a copy of an existing tool with a new key and ID.
+ * Creates a copy of an existing tool with a new id and ID.
  */
 export function toolsDuplicate(
   client: OrqCore,
@@ -89,13 +89,13 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    key: encodeSimple("key", payload.key, {
+    tool_id: encodeSimple("tool_id", payload.tool_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v2/tools/{key}/duplicate")(pathParams);
+  const path = pathToFunc("/v2/tools/{tool_id}/duplicate")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

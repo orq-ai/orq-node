@@ -115,6 +115,7 @@ export type GetPromptVersion1Type = ClosedEnum<typeof GetPromptVersion1Type>;
 
 export type GetPromptVersion1JsonSchema = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -925,6 +926,7 @@ export const GetPromptVersion1JsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
@@ -932,6 +934,7 @@ export const GetPromptVersion1JsonSchema$inboundSchema: z.ZodType<
 /** @internal */
 export type GetPromptVersion1JsonSchema$Outbound = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -943,6 +946,7 @@ export const GetPromptVersion1JsonSchema$outboundSchema: z.ZodType<
   GetPromptVersion1JsonSchema
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });

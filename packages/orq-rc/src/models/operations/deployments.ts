@@ -183,6 +183,7 @@ export type Deployments1DeploymentsResponseType = ClosedEnum<
 
 export type Deployments1JsonSchema = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -1180,6 +1181,7 @@ export const Deployments1JsonSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
@@ -1187,6 +1189,7 @@ export const Deployments1JsonSchema$inboundSchema: z.ZodType<
 /** @internal */
 export type Deployments1JsonSchema$Outbound = {
   name: string;
+  description?: string | undefined;
   strict?: boolean | undefined;
   schema: { [k: string]: any };
 };
@@ -1198,6 +1201,7 @@ export const Deployments1JsonSchema$outboundSchema: z.ZodType<
   Deployments1JsonSchema
 > = z.object({
   name: z.string(),
+  description: z.string().optional(),
   strict: z.boolean().optional(),
   schema: z.record(z.any()),
 });
