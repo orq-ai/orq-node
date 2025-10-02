@@ -89,7 +89,7 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    agent_key: encodeSimple("agent_key", payload.agent_key, {
       explode: false,
       charEncoding: "percent",
     }),
@@ -99,7 +99,7 @@ async function $do(
     }),
   };
 
-  const path = pathToFunc("/v2/agents/{id}/tasks/{task_id}")(pathParams);
+  const path = pathToFunc("/v2/agents/{agent_key}/tasks/{task_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

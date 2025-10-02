@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAgentTaskRequest = {
-  id: string;
+  agentKey: string;
   taskId: string;
 };
 
@@ -44,17 +44,18 @@ export const GetAgentTaskRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string(),
+  agent_key: z.string(),
   task_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "agent_key": "agentKey",
     "task_id": "taskId",
   });
 });
 
 /** @internal */
 export type GetAgentTaskRequest$Outbound = {
-  id: string;
+  agent_key: string;
   task_id: string;
 };
 
@@ -64,10 +65,11 @@ export const GetAgentTaskRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentTaskRequest
 > = z.object({
-  id: z.string(),
+  agentKey: z.string(),
   taskId: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    agentKey: "agent_key",
     taskId: "task_id",
   });
 });
