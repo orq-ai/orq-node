@@ -119,7 +119,10 @@ export type GetAgentModel = {
 };
 
 export type GetAgentTeamOfAgents = {
-  id: string;
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
   /**
    * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
    */
@@ -628,17 +631,13 @@ export const GetAgentTeamOfAgents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string(),
+  key: z.string(),
   role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-  });
 });
 
 /** @internal */
 export type GetAgentTeamOfAgents$Outbound = {
-  _id: string;
+  key: string;
   role?: string | undefined;
 };
 
@@ -648,12 +647,8 @@ export const GetAgentTeamOfAgents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentTeamOfAgents
 > = z.object({
-  id: z.string(),
+  key: z.string(),
   role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
 });
 
 /**
@@ -1000,7 +995,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K6JQQHWM0Q3GJRDMMRCBEPH5"),
+  id: z.string().default("01K6MDVPK6S8M080731CHZ5BEW"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() =>
@@ -1031,7 +1026,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K6JQQHWM0Q3GJRDMMRCBEPH5"),
+  id: z.string().default("01K6MDVPK6S8M080731CHZ5BEW"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() =>

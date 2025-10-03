@@ -239,7 +239,10 @@ export type KnowledgeBases = {
 };
 
 export type TeamOfAgents = {
-  id: string;
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
   /**
    * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
    */
@@ -1950,17 +1953,13 @@ export const TeamOfAgents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string(),
+  key: z.string(),
   role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-  });
 });
 
 /** @internal */
 export type TeamOfAgents$Outbound = {
-  _id: string;
+  key: string;
   role?: string | undefined;
 };
 
@@ -1970,12 +1969,8 @@ export const TeamOfAgents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TeamOfAgents
 > = z.object({
-  id: z.string(),
+  key: z.string(),
   role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
 });
 
 /**

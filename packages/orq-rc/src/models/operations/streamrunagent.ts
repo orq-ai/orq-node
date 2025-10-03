@@ -260,7 +260,10 @@ export type StreamRunAgentKnowledgeBases = {
 };
 
 export type StreamRunAgentTeamOfAgents = {
-  id: string;
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
   /**
    * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
    */
@@ -2031,17 +2034,13 @@ export const StreamRunAgentTeamOfAgents$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string(),
+  key: z.string(),
   role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-  });
 });
 
 /** @internal */
 export type StreamRunAgentTeamOfAgents$Outbound = {
-  _id: string;
+  key: string;
   role?: string | undefined;
 };
 
@@ -2051,12 +2050,8 @@ export const StreamRunAgentTeamOfAgents$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamRunAgentTeamOfAgents
 > = z.object({
-  id: z.string(),
+  key: z.string(),
   role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
 });
 
 /**

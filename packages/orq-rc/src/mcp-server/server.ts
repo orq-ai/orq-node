@@ -99,9 +99,12 @@ import { tool$knowledgeCreateChunks } from "./tools/knowledgeCreateChunks.js";
 import { tool$knowledgeCreateDatasource } from "./tools/knowledgeCreateDatasource.js";
 import { tool$knowledgeDelete } from "./tools/knowledgeDelete.js";
 import { tool$knowledgeDeleteChunk } from "./tools/knowledgeDeleteChunk.js";
+import { tool$knowledgeDeleteChunks } from "./tools/knowledgeDeleteChunks.js";
 import { tool$knowledgeDeleteDatasource } from "./tools/knowledgeDeleteDatasource.js";
+import { tool$knowledgeGetChunksCount } from "./tools/knowledgeGetChunksCount.js";
 import { tool$knowledgeList } from "./tools/knowledgeList.js";
 import { tool$knowledgeListChunks } from "./tools/knowledgeListChunks.js";
+import { tool$knowledgeListChunksPaginated } from "./tools/knowledgeListChunksPaginated.js";
 import { tool$knowledgeListDatasources } from "./tools/knowledgeListDatasources.js";
 import { tool$knowledgeRetrieve } from "./tools/knowledgeRetrieve.js";
 import { tool$knowledgeRetrieveChunk } from "./tools/knowledgeRetrieveChunk.js";
@@ -153,7 +156,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.14.0-rc.5",
+    version: "3.14.0-rc.6",
   });
 
   const client = new OrqCore({
@@ -254,6 +257,9 @@ export function createMCPServer(deps: {
   tool(tool$knowledgeUpdateDatasource);
   tool(tool$knowledgeCreateChunks);
   tool(tool$knowledgeListChunks);
+  tool(tool$knowledgeDeleteChunks);
+  tool(tool$knowledgeListChunksPaginated);
+  tool(tool$knowledgeGetChunksCount);
   tool(tool$knowledgeUpdateChunk);
   tool(tool$knowledgeDeleteChunk);
   tool(tool$knowledgeRetrieveChunk);
