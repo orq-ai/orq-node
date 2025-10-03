@@ -6,7 +6,7 @@
 import { GetAgentTaskRequest } from "@orq-ai/node/models/operations";
 
 let value: GetAgentTaskRequest = {
-  id: "<id>",
+  agentKey: "<value>",
   taskId: "<id>",
 };
 ```
@@ -15,5 +15,5 @@ let value: GetAgentTaskRequest = {
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
+| `agentKey`         | *string*           | :heavy_check_mark: | N/A                |
 | `taskId`           | *string*           | :heavy_check_mark: | N/A                |

@@ -162,7 +162,7 @@ Retrieves detailed information about a specific task for a given agent, includin
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="GetAgentTask" method="get" path="/v2/agents/{id}/tasks/{task_id}" -->
+<!-- UsageSnippet language="typescript" operationID="GetAgentTask" method="get" path="/v2/agents/{agent_key}/tasks/{task_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -172,7 +172,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.agents.retrieveTask({
-    id: "<id>",
+    agentKey: "<value>",
     taskId: "<id>",
   });
 
@@ -198,7 +198,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await agentsRetrieveTask(orq, {
-    id: "<id>",
+    agentKey: "<value>",
     taskId: "<id>",
   });
   if (res.ok) {
