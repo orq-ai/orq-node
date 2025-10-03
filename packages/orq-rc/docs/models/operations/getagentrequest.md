@@ -6,12 +6,12 @@
 import { GetAgentRequest } from "@orq-ai/node/models/operations";
 
 let value: GetAgentRequest = {
-  id: "<id>",
+  agentKey: "<value>",
 };
 ```
 
 ## Fields
 
-| Field                           | Type                            | Required                        | Description                     |
-| ------------------------------- | ------------------------------- | ------------------------------- | ------------------------------- |
-| `id`                            | *string*                        | :heavy_check_mark:              | The ID of the agent to retrieve |
+| Field                                   | Type                                    | Required                                | Description                             |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| `agentKey`                              | *string*                                | :heavy_check_mark:                      | The unique key of the agent to retrieve |

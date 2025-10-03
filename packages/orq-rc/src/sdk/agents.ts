@@ -4,6 +4,7 @@
 
 import { agentsList } from "../funcs/agentsList.js";
 import { agentsListActions } from "../funcs/agentsListActions.js";
+import { agentsListTasks } from "../funcs/agentsListTasks.js";
 import { agentsRetrieve } from "../funcs/agentsRetrieve.js";
 import { agentsRetrieveAction } from "../funcs/agentsRetrieveAction.js";
 import { agentsRetrieveTask } from "../funcs/agentsRetrieveTask.js";
@@ -15,6 +16,23 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Agents extends ClientSDK {
+  /**
+   * Retrieve a specific agent task
+   *
+   * @remarks
+   * Retrieves detailed information about a specific task for a given agent, including execution status and results.
+   */
+  async retrieveTask(
+    request: operations.GetAgentTaskRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetAgentTaskResponseBody> {
+    return unwrapAsync(agentsRetrieveTask(
+      this,
+      request,
+      options,
+    ));
+  }
+
   /**
    * List all agents
    *
@@ -36,7 +54,7 @@ export class Agents extends ClientSDK {
    * Get an agent
    *
    * @remarks
-   * Retrieves a single agent by ID, including its full configuration with primary and fallback model settings.
+   * Retrieves a single agent by its unique key, including its full configuration with primary and fallback model settings.
    */
   async retrieve(
     request: operations.GetAgentRequest,
@@ -50,16 +68,16 @@ export class Agents extends ClientSDK {
   }
 
   /**
-   * Retrieve a specific agent task
+   * List all tasks for an agent
    *
    * @remarks
-   * Retrieves detailed information about a specific task for a given agent, including execution status and results.
+   * Retrieves a paginated list of all tasks associated with a specific agent, optionally filtered by status.
    */
-  async retrieveTask(
-    request: operations.GetAgentTaskRequest,
+  async listTasks(
+    request: operations.ListAgentTasksRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAgentTaskResponseBody> {
-    return unwrapAsync(agentsRetrieveTask(
+  ): Promise<operations.ListAgentTasksResponseBody> {
+    return unwrapAsync(agentsListTasks(
       this,
       request,
       options,

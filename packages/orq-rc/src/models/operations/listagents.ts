@@ -116,11 +116,11 @@ export type ListAgentsModel = {
   /**
    * Optional integration ID for custom model configurations
    */
-  integrationId?: string | undefined;
+  integrationId?: string | null | undefined;
   /**
    * Optional array of fallback model IDs that will be used automatically in order if the primary model fails
    */
-  fallbackModels?: Array<string> | undefined;
+  fallbackModels?: Array<string> | null | undefined;
   /**
    * Maximum number of tokens for model responses
    */
@@ -624,8 +624,8 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  integration_id: z.string().optional(),
-  fallback_models: z.array(z.string()).optional(),
+  integration_id: z.nullable(z.string()).optional(),
+  fallback_models: z.nullable(z.array(z.string())).optional(),
   max_tokens: z.number().int().optional(),
   temperature: z.number().optional(),
 }).transform((v) => {
@@ -639,8 +639,8 @@ export const ListAgentsModel$inboundSchema: z.ZodType<
 /** @internal */
 export type ListAgentsModel$Outbound = {
   id: string;
-  integration_id?: string | undefined;
-  fallback_models?: Array<string> | undefined;
+  integration_id?: string | null | undefined;
+  fallback_models?: Array<string> | null | undefined;
   max_tokens?: number | undefined;
   temperature?: number | undefined;
 };
@@ -652,8 +652,8 @@ export const ListAgentsModel$outboundSchema: z.ZodType<
   ListAgentsModel
 > = z.object({
   id: z.string(),
-  integrationId: z.string().optional(),
-  fallbackModels: z.array(z.string()).optional(),
+  integrationId: z.nullable(z.string()).optional(),
+  fallbackModels: z.nullable(z.array(z.string())).optional(),
   maxTokens: z.number().int().optional(),
   temperature: z.number().optional(),
 }).transform((v) => {
@@ -1070,7 +1070,7 @@ export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K6MDVPK2362GQEATB1Z015K9"),
+  id: z.string().default("01K6N5KXWT4X129WMQN5TVGWC9"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() =>
@@ -1101,7 +1101,7 @@ export const ListAgentsKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsKnowledgeBases
 > = z.object({
-  id: z.string().default("01K6MDVPK2362GQEATB1Z015K9"),
+  id: z.string().default("01K6N5KXWT4X129WMQN5TVGWC9"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() =>

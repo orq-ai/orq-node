@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Get an agent
  *
  * @remarks
- * Retrieves a single agent by ID, including its full configuration with primary and fallback model settings.
+ * Retrieves a single agent by its unique key, including its full configuration with primary and fallback model settings.
  */
 export function agentsRetrieve(
   client: OrqCore,
@@ -89,13 +89,13 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    agent_key: encodeSimple("agent_key", payload.agent_key, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v2/agents/{id}")(pathParams);
+  const path = pathToFunc("/v2/agents/{agent_key}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
