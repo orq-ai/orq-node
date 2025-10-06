@@ -527,6 +527,175 @@ export type ListDatasetDatapointsMessages =
   | ListDatasetDatapointsMessagesUserMessage
   | ListDatasetDatapointsMessagesAssistantMessage;
 
+/**
+ * The type of evaluation
+ */
+export const ListDatasetDatapointsEvaluationsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type ListDatasetDatapointsEvaluationsEvaluationType = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsEvaluationType
+>;
+
+export const ListDatasetDatapointsEvaluationsSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type ListDatasetDatapointsEvaluationsSource = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsSource
+>;
+
+export const ListDatasetDatapointsEvaluationsDatasetsType = {
+  StringArray: "string_array",
+} as const;
+export type ListDatasetDatapointsEvaluationsDatasetsType = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsDatasetsType
+>;
+
+export type ListDatasetDatapointsEvaluations3 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: ListDatasetDatapointsEvaluationsEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: ListDatasetDatapointsEvaluationsSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: ListDatasetDatapointsEvaluationsDatasetsType;
+  values: Array<string>;
+};
+
+/**
+ * The type of evaluation
+ */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType =
+  ClosedEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType
+  >;
+
+export const ListDatasetDatapointsEvaluationsDatasetsResponseSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type ListDatasetDatapointsEvaluationsDatasetsResponseSource = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsDatasetsResponseSource
+>;
+
+export const ListDatasetDatapointsEvaluationsType = {
+  Number: "number",
+} as const;
+export type ListDatasetDatapointsEvaluationsType = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsType
+>;
+
+export type ListDatasetDatapointsEvaluations2 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType:
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: ListDatasetDatapointsEvaluationsDatasetsResponseSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: ListDatasetDatapointsEvaluationsType;
+  value: number;
+};
+
+/**
+ * The type of evaluation
+ */
+export const ListDatasetDatapointsEvaluationsDatasetsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type ListDatasetDatapointsEvaluationsDatasetsEvaluationType = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsDatasetsEvaluationType
+>;
+
+export const ListDatasetDatapointsEvaluationsDatasetsSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type ListDatasetDatapointsEvaluationsDatasetsSource = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsDatasetsSource
+>;
+
+export const ListDatasetDatapointsEvaluationsDatasetsResponseType = {
+  String: "string",
+} as const;
+export type ListDatasetDatapointsEvaluationsDatasetsResponseType = ClosedEnum<
+  typeof ListDatasetDatapointsEvaluationsDatasetsResponseType
+>;
+
+export type ListDatasetDatapointsEvaluations1 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: ListDatasetDatapointsEvaluationsDatasetsEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: ListDatasetDatapointsEvaluationsDatasetsSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: ListDatasetDatapointsEvaluationsDatasetsResponseType;
+  value: string;
+};
+
+export type ListDatasetDatapointsEvaluations =
+  | ListDatasetDatapointsEvaluations1
+  | ListDatasetDatapointsEvaluations2
+  | ListDatasetDatapointsEvaluations3;
+
 export type ListDatasetDatapointsData = {
   /**
    * The unique identifier of the dataset item
@@ -554,9 +723,23 @@ export type ListDatasetDatapointsData = {
     | undefined;
   expectedOutput?: string | undefined;
   /**
+   * Evaluations associated with the datapoint
+   */
+  evaluations?:
+    | Array<
+      | ListDatasetDatapointsEvaluations1
+      | ListDatasetDatapointsEvaluations2
+      | ListDatasetDatapointsEvaluations3
+    >
+    | undefined;
+  /**
    * The unique identifier of the dataset
    */
   datasetId: string;
+  /**
+   * The version of the dataset snapshot
+   */
+  snapshotVersion?: string | undefined;
   /**
    * The unique identifier of the user who created the dataset
    */
@@ -3075,6 +3258,580 @@ export function listDatasetDatapointsMessagesFromJSON(
 }
 
 /** @internal */
+export const ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsEvaluationType> = z
+    .nativeEnum(ListDatasetDatapointsEvaluationsEvaluationType);
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsEvaluationType> =
+    ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsEvaluationType$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsSource$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsSource> = z.nativeEnum(
+    ListDatasetDatapointsEvaluationsSource,
+  );
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsSource$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsSource> =
+    ListDatasetDatapointsEvaluationsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsSource$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsSource$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsSource$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsSource$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsType> = z
+    .nativeEnum(ListDatasetDatapointsEvaluationsDatasetsType);
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsType> =
+    ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsDatasetsType$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type: ListDatasetDatapointsEvaluationsEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: ListDatasetDatapointsEvaluationsSource$inboundSchema.default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-06T13:58:43.148Z",
+  ).transform(v => new Date(v)),
+  type: ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema,
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type ListDatasetDatapointsEvaluations3$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  values: Array<string>;
+};
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations3$outboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations3$Outbound,
+  z.ZodTypeDef,
+  ListDatasetDatapointsEvaluations3
+> = z.object({
+  id: z.string(),
+  evaluationType: ListDatasetDatapointsEvaluationsEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: ListDatasetDatapointsEvaluationsSource$outboundSchema.default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-06T13:58:43.148Z"))
+    .transform(v => v.toISOString()),
+  type: ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema,
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluations3$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluations3$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetDatapointsEvaluations3$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations3$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluations3$outboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations3$Outbound` instead. */
+  export type Outbound = ListDatasetDatapointsEvaluations3$Outbound;
+}
+
+export function listDatasetDatapointsEvaluations3ToJSON(
+  listDatasetDatapointsEvaluations3: ListDatasetDatapointsEvaluations3,
+): string {
+  return JSON.stringify(
+    ListDatasetDatapointsEvaluations3$outboundSchema.parse(
+      listDatasetDatapointsEvaluations3,
+    ),
+  );
+}
+
+export function listDatasetDatapointsEvaluations3FromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapointsEvaluations3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasetDatapointsEvaluations3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapointsEvaluations3' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType
+  > = z.nativeEnum(
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType,
+  );
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType
+  > =
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsResponseSource
+  > = z.nativeEnum(ListDatasetDatapointsEvaluationsDatasetsResponseSource);
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsResponseSource
+  > = ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsDatasetsResponseSource$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsType$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsType> = z.nativeEnum(
+    ListDatasetDatapointsEvaluationsType,
+  );
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsType$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsType> =
+    ListDatasetDatapointsEvaluationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsType$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type:
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: ListDatasetDatapointsEvaluationsDatasetsResponseSource$inboundSchema
+    .default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-06T13:58:43.147Z",
+  ).transform(v => new Date(v)),
+  type: ListDatasetDatapointsEvaluationsType$inboundSchema,
+  value: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type ListDatasetDatapointsEvaluations2$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  value: number;
+};
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations2$outboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations2$Outbound,
+  z.ZodTypeDef,
+  ListDatasetDatapointsEvaluations2
+> = z.object({
+  id: z.string(),
+  evaluationType:
+    ListDatasetDatapointsEvaluationsDatasetsResponseEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema
+    .default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-06T13:58:43.147Z"))
+    .transform(v => v.toISOString()),
+  type: ListDatasetDatapointsEvaluationsType$outboundSchema,
+  value: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluations2$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluations2$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetDatapointsEvaluations2$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations2$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluations2$outboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations2$Outbound` instead. */
+  export type Outbound = ListDatasetDatapointsEvaluations2$Outbound;
+}
+
+export function listDatasetDatapointsEvaluations2ToJSON(
+  listDatasetDatapointsEvaluations2: ListDatasetDatapointsEvaluations2,
+): string {
+  return JSON.stringify(
+    ListDatasetDatapointsEvaluations2$outboundSchema.parse(
+      listDatasetDatapointsEvaluations2,
+    ),
+  );
+}
+
+export function listDatasetDatapointsEvaluations2FromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapointsEvaluations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasetDatapointsEvaluations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapointsEvaluations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsEvaluationType
+  > = z.nativeEnum(ListDatasetDatapointsEvaluationsDatasetsEvaluationType);
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof ListDatasetDatapointsEvaluationsDatasetsEvaluationType
+  > = ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsDatasetsEvaluationType$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsSource> = z
+    .nativeEnum(ListDatasetDatapointsEvaluationsDatasetsSource);
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsSource> =
+    ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsDatasetsSource$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsResponseType> =
+    z.nativeEnum(ListDatasetDatapointsEvaluationsDatasetsResponseType);
+
+/** @internal */
+export const ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof ListDatasetDatapointsEvaluationsDatasetsResponseType> =
+    ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluationsDatasetsResponseType$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type:
+    ListDatasetDatapointsEvaluationsDatasetsEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: ListDatasetDatapointsEvaluationsDatasetsSource$inboundSchema.default(
+    "orq",
+  ),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-06T13:58:43.147Z",
+  ).transform(v => new Date(v)),
+  type: ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema,
+  value: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type ListDatasetDatapointsEvaluations1$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  value: string;
+};
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations1$outboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations1$Outbound,
+  z.ZodTypeDef,
+  ListDatasetDatapointsEvaluations1
+> = z.object({
+  id: z.string(),
+  evaluationType:
+    ListDatasetDatapointsEvaluationsDatasetsEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: ListDatasetDatapointsEvaluationsDatasetsSource$outboundSchema.default(
+    "orq",
+  ),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-06T13:58:43.147Z"))
+    .transform(v => v.toISOString()),
+  type: ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema,
+  value: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluations1$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluations1$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetDatapointsEvaluations1$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations1$outboundSchema` instead. */
+  export const outboundSchema =
+    ListDatasetDatapointsEvaluations1$outboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations1$Outbound` instead. */
+  export type Outbound = ListDatasetDatapointsEvaluations1$Outbound;
+}
+
+export function listDatasetDatapointsEvaluations1ToJSON(
+  listDatasetDatapointsEvaluations1: ListDatasetDatapointsEvaluations1,
+): string {
+  return JSON.stringify(
+    ListDatasetDatapointsEvaluations1$outboundSchema.parse(
+      listDatasetDatapointsEvaluations1,
+    ),
+  );
+}
+
+export function listDatasetDatapointsEvaluations1FromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapointsEvaluations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasetDatapointsEvaluations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapointsEvaluations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations$inboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => ListDatasetDatapointsEvaluations1$inboundSchema),
+  z.lazy(() => ListDatasetDatapointsEvaluations2$inboundSchema),
+  z.lazy(() => ListDatasetDatapointsEvaluations3$inboundSchema),
+]);
+
+/** @internal */
+export type ListDatasetDatapointsEvaluations$Outbound =
+  | ListDatasetDatapointsEvaluations1$Outbound
+  | ListDatasetDatapointsEvaluations2$Outbound
+  | ListDatasetDatapointsEvaluations3$Outbound;
+
+/** @internal */
+export const ListDatasetDatapointsEvaluations$outboundSchema: z.ZodType<
+  ListDatasetDatapointsEvaluations$Outbound,
+  z.ZodTypeDef,
+  ListDatasetDatapointsEvaluations
+> = z.union([
+  z.lazy(() => ListDatasetDatapointsEvaluations1$outboundSchema),
+  z.lazy(() => ListDatasetDatapointsEvaluations2$outboundSchema),
+  z.lazy(() => ListDatasetDatapointsEvaluations3$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ListDatasetDatapointsEvaluations$ {
+  /** @deprecated use `ListDatasetDatapointsEvaluations$inboundSchema` instead. */
+  export const inboundSchema = ListDatasetDatapointsEvaluations$inboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations$outboundSchema` instead. */
+  export const outboundSchema = ListDatasetDatapointsEvaluations$outboundSchema;
+  /** @deprecated use `ListDatasetDatapointsEvaluations$Outbound` instead. */
+  export type Outbound = ListDatasetDatapointsEvaluations$Outbound;
+}
+
+export function listDatasetDatapointsEvaluationsToJSON(
+  listDatasetDatapointsEvaluations: ListDatasetDatapointsEvaluations,
+): string {
+  return JSON.stringify(
+    ListDatasetDatapointsEvaluations$outboundSchema.parse(
+      listDatasetDatapointsEvaluations,
+    ),
+  );
+}
+
+export function listDatasetDatapointsEvaluationsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapointsEvaluations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListDatasetDatapointsEvaluations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapointsEvaluations' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   ListDatasetDatapointsData,
   z.ZodTypeDef,
@@ -3095,13 +3852,21 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   expected_output: z.string().optional(),
+  evaluations: z.array(
+    z.union([
+      z.lazy(() => ListDatasetDatapointsEvaluations1$inboundSchema),
+      z.lazy(() => ListDatasetDatapointsEvaluations2$inboundSchema),
+      z.lazy(() => ListDatasetDatapointsEvaluations3$inboundSchema),
+    ]),
+  ).optional(),
   dataset_id: z.string(),
+  snapshot_version: z.string().optional(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-06T11:41:10.403Z",
+    "2025-10-06T13:58:33.810Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -3109,6 +3874,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
     "expected_output": "expectedOutput",
     "dataset_id": "datasetId",
+    "snapshot_version": "snapshotVersion",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
   });
@@ -3129,7 +3895,15 @@ export type ListDatasetDatapointsData$Outbound = {
     >
     | undefined;
   expected_output?: string | undefined;
+  evaluations?:
+    | Array<
+      | ListDatasetDatapointsEvaluations1$Outbound
+      | ListDatasetDatapointsEvaluations2$Outbound
+      | ListDatasetDatapointsEvaluations3$Outbound
+    >
+    | undefined;
   dataset_id: string;
+  snapshot_version?: string | undefined;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
   created?: string | undefined;
@@ -3161,11 +3935,19 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
     ]),
   ).optional(),
   expectedOutput: z.string().optional(),
+  evaluations: z.array(
+    z.union([
+      z.lazy(() => ListDatasetDatapointsEvaluations1$outboundSchema),
+      z.lazy(() => ListDatasetDatapointsEvaluations2$outboundSchema),
+      z.lazy(() => ListDatasetDatapointsEvaluations3$outboundSchema),
+    ]),
+  ).optional(),
   datasetId: z.string(),
+  snapshotVersion: z.string().optional(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-06T11:41:10.403Z"))
+  updated: z.date().default(() => new Date("2025-10-06T13:58:33.810Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -3173,6 +3955,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
     workspaceId: "workspace_id",
     expectedOutput: "expected_output",
     datasetId: "dataset_id",
+    snapshotVersion: "snapshot_version",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
   });
