@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: c41407815b8785f03f9c23ffcdbc1707
+  docChecksum: 0c6636acf3fab6ecfb51bb23906dbed8
   docVersion: "2.0"
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 3.13.5
-  configChecksum: 863e920dbbdd719ed07e2a9bc68a07c3
+  speakeasyVersion: 1.635.0
+  generationVersion: 2.722.2
+  releaseVersion: 3.13.6
+  configChecksum: 6bd62866a6396a813e0609aa15c4a83b
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
@@ -270,6 +270,7 @@ generatedFiles:
   - docs/models/errors/honoapierror.md
   - docs/models/errors/invokeevalevalsresponsebody.md
   - docs/models/errors/invokeevalresponsebody.md
+  - docs/models/errors/listagenttasksresponsebody.md
   - docs/models/errors/retrievecontactresponsebody.md
   - docs/models/errors/streamrunagentresponsebody.md
   - docs/models/errors/updatecontactresponsebody.md
@@ -279,6 +280,7 @@ generatedFiles:
   - docs/models/operations/agenticchunker.md
   - docs/models/operations/agenticchunkerstrategy.md
   - docs/models/operations/agenticragconfig.md
+  - docs/models/operations/agentmanifestsnapshot.md
   - docs/models/operations/and.md
   - docs/models/operations/and3.md
   - docs/models/operations/andeq.md
@@ -1738,6 +1740,16 @@ generatedFiles:
   - docs/models/operations/listagentsteamofagents.md
   - docs/models/operations/listagentstoolapprovalrequired.md
   - docs/models/operations/listagentstools.md
+  - docs/models/operations/listagenttasksconditions.md
+  - docs/models/operations/listagenttasksmemory.md
+  - docs/models/operations/listagenttasksmetrics.md
+  - docs/models/operations/listagenttasksmodel.md
+  - docs/models/operations/listagenttasksrequest.md
+  - docs/models/operations/listagenttasksresponsebody.md
+  - docs/models/operations/listagenttaskssettings.md
+  - docs/models/operations/listagenttasksstate.md
+  - docs/models/operations/listagenttaskstoolapprovalrequired.md
+  - docs/models/operations/listagenttaskstools.md
   - docs/models/operations/listbudgetsbudget.md
   - docs/models/operations/listbudgetsconsumption.md
   - docs/models/operations/listbudgetsdata.md
@@ -1749,6 +1761,7 @@ generatedFiles:
   - docs/models/operations/listchunksdata.md
   - docs/models/operations/listchunksmetadata.md
   - docs/models/operations/listchunksobject.md
+  - docs/models/operations/listchunksqueryparamstatus.md
   - docs/models/operations/listchunksrequest.md
   - docs/models/operations/listchunksresponsebody.md
   - docs/models/operations/listchunksstatus.md
@@ -2351,6 +2364,7 @@ generatedFiles:
   - docs/models/operations/string.md
   - docs/models/operations/stringarray.md
   - docs/models/operations/systemmessage.md
+  - docs/models/operations/tasks.md
   - docs/models/operations/teamofagents.md
   - docs/models/operations/ten.md
   - docs/models/operations/textcontentpart.md
@@ -2868,6 +2882,7 @@ generatedFiles:
   - src/core.ts
   - src/funcs/agentsList.ts
   - src/funcs/agentsListActions.ts
+  - src/funcs/agentsListTasks.ts
   - src/funcs/agentsRetrieve.ts
   - src/funcs/agentsRetrieveAction.ts
   - src/funcs/agentsRetrieveTask.ts
@@ -3029,6 +3044,7 @@ generatedFiles:
   - src/mcp-server/tools.ts
   - src/mcp-server/tools/agentsList.ts
   - src/mcp-server/tools/agentsListActions.ts
+  - src/mcp-server/tools/agentsListTasks.ts
   - src/mcp-server/tools/agentsRetrieve.ts
   - src/mcp-server/tools/agentsRetrieveAction.ts
   - src/mcp-server/tools/agentsRetrieveTask.ts
@@ -3207,6 +3223,7 @@ generatedFiles:
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
   - src/models/errors/invokeeval.ts
+  - src/models/errors/listagenttasks.ts
   - src/models/errors/orqerror.ts
   - src/models/errors/responsevalidationerror.ts
   - src/models/errors/retrievecontact.ts
@@ -3308,6 +3325,7 @@ generatedFiles:
   - src/models/operations/invokeeval.ts
   - src/models/operations/listactions.ts
   - src/models/operations/listagents.ts
+  - src/models/operations/listagenttasks.ts
   - src/models/operations/listbudgets.ts
   - src/models/operations/listchunks.ts
   - src/models/operations/listcontacts.ts
@@ -3381,7 +3399,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-17T14:04:15.852Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-06T18:03:02.644Z"}
   CreateFeedback:
     "":
       requestBody:
@@ -3439,7 +3457,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-10-05T17:14:27.807Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-10-06T18:03:05.762Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -3455,7 +3473,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-10-05T17:14:27.807Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-10-06T18:03:05.762Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -3546,7 +3564,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-10-06T18:03:02.644Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -3554,7 +3572,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-10-06T18:03:02.644Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -3566,7 +3584,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-10-06T18:03:02.644Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -3600,7 +3618,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-06T18:03:02.644Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -3611,7 +3629,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-06T18:03:02.644Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -3694,7 +3712,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01K6TNWDA6ARQJKCC4EQ521FCM", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01K6XB25THBM5DG3Y0S8M10TH0", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -3703,7 +3721,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01K6TNWDA5TBHM59A41KET7AY4", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01K6XB25THSB2SA80DBG41HW40", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -3720,7 +3738,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01K6TNWDA7VREJ4MZ2VCHQANWE", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01K6XB25TJ18G5QG8DXSJQ1JFW", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -3816,7 +3834,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-06T18:03:02.644Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -3828,7 +3846,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-06T18:03:02.644Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
@@ -4254,7 +4272,7 @@ examples:
         application/json: {"type": "workspace", "period": "monthly", "amount": 250}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-06T18:03:02.644Z"}
   GetBudget:
     speakeasy-default-get-budget:
       parameters:
@@ -4262,7 +4280,7 @@ examples:
           id: "01K1J1AX8PGR63QRP7423NY008"
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-06T18:03:02.644Z"}
   UpdateBudget:
     speakeasy-default-update-budget:
       parameters:
@@ -4272,7 +4290,7 @@ examples:
         application/json: {"budget": {"period": "monthly", "amount": 300}, "is_active": true}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-05T17:14:24.663Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-06T18:03:02.644Z"}
   DeleteBudget:
     speakeasy-default-delete-budget:
       parameters:
@@ -4291,6 +4309,7 @@ examples:
       parameters:
         path:
           id: "<id>"
+          agent_key: "<value>"
       responses:
         "200":
           application/json: {"_id": "<id>", "key": "<key>", "workspace_id": "<id>", "project_id": "<id>", "role": "<value>", "description": "underneath beneath briskly provided knotty yippee", "instructions": "<value>", "status": "published", "model": {"id": "<id>"}, "path": "Default", "memory_stores": ["<value 1>", "<value 2>", "<value 3>"], "team_of_agents": []}
@@ -4526,5 +4545,17 @@ examples:
           application/json: {"_id": "01K6G660771HCEBTQ2CJE8NYGZ", "path": "Default", "key": "<key>", "display_name": "Tina5", "description": "quaver zany not pfft loudly soap hovel since", "project_id": "<id>", "workspace_id": "<id>", "created": "<value>", "updated": "<value>", "status": "live", "type": "function", "function": {"name": "<value>"}}
         "404":
           application/json: {"error": "<value>"}
+  ListAgentTasks:
+    speakeasy-default-list-agent-tasks:
+      parameters:
+        path:
+          agent_key: "<value>"
+        query:
+          limit: 10
+      responses:
+        "200":
+          application/json: {"tasks": [], "overall_total": 3263.5}
+        "404":
+          application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}

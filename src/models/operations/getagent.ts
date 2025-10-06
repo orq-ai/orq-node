@@ -11,9 +11,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAgentRequest = {
   /**
-   * The ID of the agent to retrieve
+   * The unique key of the agent to retrieve
    */
-  id: string;
+  agentKey: string;
 };
 
 /**
@@ -103,11 +103,11 @@ export type GetAgentModel = {
   /**
    * Optional integration ID for custom model configurations
    */
-  integrationId?: string | undefined;
+  integrationId?: string | null | undefined;
   /**
    * Optional array of fallback model IDs that will be used automatically in order if the primary model fails
    */
-  fallbackModels?: Array<string> | undefined;
+  fallbackModels?: Array<string> | null | undefined;
   /**
    * Maximum number of tokens for model responses
    */
@@ -248,12 +248,16 @@ export const GetAgentRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string(),
+  agent_key: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "agent_key": "agentKey",
+  });
 });
 
 /** @internal */
 export type GetAgentRequest$Outbound = {
-  id: string;
+  agent_key: string;
 };
 
 /** @internal */
@@ -262,7 +266,11 @@ export const GetAgentRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentRequest
 > = z.object({
-  id: z.string(),
+  agentKey: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    agentKey: "agent_key",
+  });
 });
 
 /**
@@ -558,8 +566,8 @@ export const GetAgentModel$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
-  integration_id: z.string().optional(),
-  fallback_models: z.array(z.string()).optional(),
+  integration_id: z.nullable(z.string()).optional(),
+  fallback_models: z.nullable(z.array(z.string())).optional(),
   max_tokens: z.number().int().optional(),
   temperature: z.number().optional(),
 }).transform((v) => {
@@ -573,8 +581,8 @@ export const GetAgentModel$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAgentModel$Outbound = {
   id: string;
-  integration_id?: string | undefined;
-  fallback_models?: Array<string> | undefined;
+  integration_id?: string | null | undefined;
+  fallback_models?: Array<string> | null | undefined;
   max_tokens?: number | undefined;
   temperature?: number | undefined;
 };
@@ -586,8 +594,8 @@ export const GetAgentModel$outboundSchema: z.ZodType<
   GetAgentModel
 > = z.object({
   id: z.string(),
-  integrationId: z.string().optional(),
-  fallbackModels: z.array(z.string()).optional(),
+  integrationId: z.nullable(z.string()).optional(),
+  fallbackModels: z.nullable(z.array(z.string())).optional(),
   maxTokens: z.number().int().optional(),
   temperature: z.number().optional(),
 }).transform((v) => {
@@ -995,7 +1003,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K6TNWD5S23PHE3CQEZDQ2ACE"),
+  id: z.string().default("01K6XB25PEBNJCJE8PKJ4Y6S2M"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() =>
@@ -1026,7 +1034,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K6TNWD5S23PHE3CQEZDQ2ACE"),
+  id: z.string().default("01K6XB25PEBNJCJE8PKJ4Y6S2M"),
   knowledgeId: z.string(),
   configuration: z.union([
     z.lazy(() =>

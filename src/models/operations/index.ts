@@ -93,6 +93,7 @@ export * from "./getpromptversion.js";
 export * from "./invokeeval.js";
 export * from "./listactions.js";
 export * from "./listagents.js";
+export * from "./listagenttasks.js";
 export * from "./listbudgets.js";
 export * from "./listchunks.js";
 export * from "./listcontacts.js";

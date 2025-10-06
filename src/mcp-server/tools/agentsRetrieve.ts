@@ -14,7 +14,7 @@ export const tool$agentsRetrieve: ToolDefinition<typeof args> = {
   name: "agents-retrieve",
   description: `Get an agent
 
-Retrieves a single agent by ID, including its full configuration with primary and fallback model settings.`,
+Retrieves a single agent by its unique key, including its full configuration with primary and fallback model settings.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await agentsRetrieve(
