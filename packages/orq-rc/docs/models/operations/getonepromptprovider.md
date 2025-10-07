@@ -5,11 +5,11 @@
 ```typescript
 import { GetOnePromptProvider } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptProvider = "groq";
+let value: GetOnePromptProvider = "fal";
 ```
 
 ## Values
 
 ```typescript
-"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm" | "openailike" | "cerebras" | "bytedance"
+"cohere" | "openai" | "anthropic" | "huggingface" | "replicate" | "google" | "google-ai" | "azure" | "aws" | "anyscale" | "perplexity" | "groq" | "fal" | "leonardoai" | "nvidia" | "jina" | "togetherai" | "elevenlabs" | "litellm" | "openailike" | "cerebras" | "bytedance" | "mistral"
 ```

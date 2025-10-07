@@ -1462,6 +1462,7 @@ export const DeploymentStreamProvider = {
   Openailike: "openailike",
   Cerebras: "cerebras",
   Bytedance: "bytedance",
+  Mistral: "mistral",
 } as const;
 /**
  * The provider used to generate the response

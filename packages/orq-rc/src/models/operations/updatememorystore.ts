@@ -227,6 +227,7 @@ export const UpdateMemoryStoreProvider = {
   Openailike: "openailike",
   Cerebras: "cerebras",
   Bytedance: "bytedance",
+  Mistral: "mistral",
 } as const;
 /**
  * The provider of the AI service

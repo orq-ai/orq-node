@@ -292,6 +292,7 @@ export const UpdatePromptProvider = {
   Openailike: "openailike",
   Cerebras: "cerebras",
   Bytedance: "bytedance",
+  Mistral: "mistral",
 } as const;
 export type UpdatePromptProvider = ClosedEnum<typeof UpdatePromptProvider>;
 
@@ -865,6 +866,7 @@ export const UpdatePromptPromptsProvider = {
   Openailike: "openailike",
   Cerebras: "cerebras",
   Bytedance: "bytedance",
+  Mistral: "mistral",
 } as const;
 export type UpdatePromptPromptsProvider = ClosedEnum<
   typeof UpdatePromptPromptsProvider
