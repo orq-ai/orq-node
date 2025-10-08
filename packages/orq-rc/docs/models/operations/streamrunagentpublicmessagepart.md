@@ -5,30 +5,30 @@ Message part that can be provided by users. Use "text" for regular messages, "fi
 
 ## Supported Types
 
-### `operations.PublicMessagePartTextPart`
+### `operations.StreamRunAgentPublicMessagePartTextPart`
 
 ```typescript
-const value: operations.PublicMessagePartTextPart = {
+const value: operations.StreamRunAgentPublicMessagePartTextPart = {
   kind: "text",
   text: "<value>",
 };
 ```
 
-### `operations.PublicMessagePartFilePart`
+### `operations.StreamRunAgentPublicMessagePartFilePart`
 
 ```typescript
-const value: operations.PublicMessagePartFilePart = {
+const value: operations.StreamRunAgentPublicMessagePartFilePart = {
   kind: "file",
   file: {
-    bytes: "<value>",
+    uri: "https://calculating-offset.net",
   },
 };
 ```
 
-### `operations.PublicMessagePartToolResultPart`
+### `operations.StreamRunAgentPublicMessagePartToolResultPart`
 
 ```typescript
-const value: operations.PublicMessagePartToolResultPart = {
+const value: operations.StreamRunAgentPublicMessagePartToolResultPart = {
   kind: "tool_result",
   toolCallId: "<id>",
 };

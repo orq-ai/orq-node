@@ -12,56 +12,62 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Tool message
  */
-export const RoleToolMessage = {
+export const RunAgentRoleToolMessage = {
   Tool: "tool",
 } as const;
 /**
  * Tool message
  */
-export type RoleToolMessage = ClosedEnum<typeof RoleToolMessage>;
+export type RunAgentRoleToolMessage = ClosedEnum<
+  typeof RunAgentRoleToolMessage
+>;
 
 /**
  * User message
  */
-export const RoleUserMessage = {
+export const RunAgentRoleUserMessage = {
   User: "user",
 } as const;
 /**
  * User message
  */
-export type RoleUserMessage = ClosedEnum<typeof RoleUserMessage>;
+export type RunAgentRoleUserMessage = ClosedEnum<
+  typeof RunAgentRoleUserMessage
+>;
 
 /**
  * Message role (user or tool for continuing executions)
  */
-export type RunAgentRole = RoleUserMessage | RoleToolMessage;
+export type RunAgentRole = RunAgentRoleUserMessage | RunAgentRoleToolMessage;
 
-export const RunAgentPublicMessagePartKind = {
+export const RunAgentPublicMessagePartAgentsRequestKind = {
   ToolResult: "tool_result",
 } as const;
-export type RunAgentPublicMessagePartKind = ClosedEnum<
-  typeof RunAgentPublicMessagePartKind
+export type RunAgentPublicMessagePartAgentsRequestKind = ClosedEnum<
+  typeof RunAgentPublicMessagePartAgentsRequestKind
 >;
 
 /**
  * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
  */
-export type ToolResultPart = {
-  kind: RunAgentPublicMessagePartKind;
+export type PublicMessagePartToolResultPart = {
+  kind: RunAgentPublicMessagePartAgentsRequestKind;
   toolCallId: string;
   result?: any | undefined;
   metadata?: { [k: string]: any } | undefined;
 };
 
-export const PublicMessagePartKind = {
+export const RunAgentPublicMessagePartAgentsKind = {
   File: "file",
 } as const;
-export type PublicMessagePartKind = ClosedEnum<typeof PublicMessagePartKind>;
+export type RunAgentPublicMessagePartAgentsKind = ClosedEnum<
+  typeof RunAgentPublicMessagePartAgentsKind
+>;
 
 /**
  * File in URI format. Check in the model's documentation for the supported mime types for the URI format
  */
-export type FileInURIFormat = {
+export type FileFileInURIFormat = {
   /**
    * URL for the File content
    */
@@ -79,7 +85,7 @@ export type FileInURIFormat = {
 /**
  * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
  */
-export type BinaryFormat = {
+export type FileBinaryFormat = {
   /**
    * base64 encoded content of the file
    */
@@ -94,39 +100,46 @@ export type BinaryFormat = {
   name?: string | undefined;
 };
 
-export type PublicMessagePartFile = BinaryFormat | FileInURIFormat;
+export type RunAgentPublicMessagePartFile =
+  | FileBinaryFormat
+  | FileFileInURIFormat;
 
 /**
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
  */
-export type FilePart = {
-  kind: PublicMessagePartKind;
-  file: BinaryFormat | FileInURIFormat;
+export type PublicMessagePartFilePart = {
+  kind: RunAgentPublicMessagePartAgentsKind;
+  file: FileBinaryFormat | FileFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
 
-export const Kind = {
+export const RunAgentPublicMessagePartKind = {
   Text: "text",
 } as const;
-export type Kind = ClosedEnum<typeof Kind>;
+export type RunAgentPublicMessagePartKind = ClosedEnum<
+  typeof RunAgentPublicMessagePartKind
+>;
 
 /**
  * Text content part. Use this to send text messages to the agent.
  */
-export type TextPart = {
-  kind: Kind;
+export type PublicMessagePartTextPart = {
+  kind: RunAgentPublicMessagePartKind;
   text: string;
 };
 
 /**
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
-export type PublicMessagePart = TextPart | FilePart | ToolResultPart;
+export type RunAgentPublicMessagePart =
+  | PublicMessagePartTextPart
+  | PublicMessagePartFilePart
+  | PublicMessagePartToolResultPart;
 
 /**
  * The A2A format message containing the task for the agent to perform.
  */
-export type Message = {
+export type RunAgentMessage = {
   /**
    * Optional A2A message ID in ULID format
    */
@@ -134,17 +147,21 @@ export type Message = {
   /**
    * Message role (user or tool for continuing executions)
    */
-  role: RoleUserMessage | RoleToolMessage;
+  role: RunAgentRoleUserMessage | RunAgentRoleToolMessage;
   /**
    * A2A message parts (text, file, or tool_result only)
    */
-  parts: Array<TextPart | FilePart | ToolResultPart>;
+  parts: Array<
+    | PublicMessagePartTextPart
+    | PublicMessagePartFilePart
+    | PublicMessagePartToolResultPart
+  >;
 };
 
 /**
  * Information about the contact making the request. If the contact does not exist, it will be created automatically.
  */
-export type Contact = {
+export type RunAgentContact = {
   /**
    * Unique identifier for the contact
    */
@@ -188,7 +205,7 @@ export type RunAgentThread = {
 /**
  * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
  */
-export type Memory = {
+export type RunAgentMemory = {
   /**
    * An entity ID used to link memory stores to a specific user, session, or conversation. This ID is used to isolate and retrieve memories specific to the entity across agent executions.
    */
@@ -714,7 +731,7 @@ export type RunAgentRequestBody = {
   /**
    * The A2A format message containing the task for the agent to perform.
    */
-  message: Message;
+  message: RunAgentMessage;
   /**
    * Optional variables for template replacement in system prompt, instructions, and messages
    */
@@ -722,7 +739,7 @@ export type RunAgentRequestBody = {
   /**
    * Information about the contact making the request. If the contact does not exist, it will be created automatically.
    */
-  contact?: Contact | undefined;
+  contact?: RunAgentContact | undefined;
   /**
    * Thread information to group related requests
    */
@@ -730,7 +747,7 @@ export type RunAgentRequestBody = {
   /**
    * Memory configuration for the agent execution. Used to associate memory stores with specific entities like users or sessions.
    */
-  memory?: Memory | undefined;
+  memory?: RunAgentMemory | undefined;
   /**
    * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
    */
@@ -811,7 +828,7 @@ export type RunAgentAgentsRole = ClosedEnum<typeof RunAgentAgentsRole>;
 /**
  * Optional status message
  */
-export type RunAgentMessage = {
+export type RunAgentAgentsMessage = {
   kind: RunAgentAgentsKind;
   messageId: string;
   /**
@@ -836,7 +853,7 @@ export type RunAgentStatus = {
   /**
    * Optional status message
    */
-  message?: RunAgentMessage | undefined;
+  message?: RunAgentAgentsMessage | undefined;
 };
 
 /**
@@ -866,45 +883,45 @@ export type RunAgentResponseBody = {
 };
 
 /** @internal */
-export const RoleToolMessage$inboundSchema: z.ZodNativeEnum<
-  typeof RoleToolMessage
-> = z.nativeEnum(RoleToolMessage);
+export const RunAgentRoleToolMessage$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentRoleToolMessage
+> = z.nativeEnum(RunAgentRoleToolMessage);
 
 /** @internal */
-export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
-  typeof RoleToolMessage
-> = RoleToolMessage$inboundSchema;
+export const RunAgentRoleToolMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentRoleToolMessage
+> = RunAgentRoleToolMessage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RoleToolMessage$ {
-  /** @deprecated use `RoleToolMessage$inboundSchema` instead. */
-  export const inboundSchema = RoleToolMessage$inboundSchema;
-  /** @deprecated use `RoleToolMessage$outboundSchema` instead. */
-  export const outboundSchema = RoleToolMessage$outboundSchema;
+export namespace RunAgentRoleToolMessage$ {
+  /** @deprecated use `RunAgentRoleToolMessage$inboundSchema` instead. */
+  export const inboundSchema = RunAgentRoleToolMessage$inboundSchema;
+  /** @deprecated use `RunAgentRoleToolMessage$outboundSchema` instead. */
+  export const outboundSchema = RunAgentRoleToolMessage$outboundSchema;
 }
 
 /** @internal */
-export const RoleUserMessage$inboundSchema: z.ZodNativeEnum<
-  typeof RoleUserMessage
-> = z.nativeEnum(RoleUserMessage);
+export const RunAgentRoleUserMessage$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentRoleUserMessage
+> = z.nativeEnum(RunAgentRoleUserMessage);
 
 /** @internal */
-export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
-  typeof RoleUserMessage
-> = RoleUserMessage$inboundSchema;
+export const RunAgentRoleUserMessage$outboundSchema: z.ZodNativeEnum<
+  typeof RunAgentRoleUserMessage
+> = RunAgentRoleUserMessage$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RoleUserMessage$ {
-  /** @deprecated use `RoleUserMessage$inboundSchema` instead. */
-  export const inboundSchema = RoleUserMessage$inboundSchema;
-  /** @deprecated use `RoleUserMessage$outboundSchema` instead. */
-  export const outboundSchema = RoleUserMessage$outboundSchema;
+export namespace RunAgentRoleUserMessage$ {
+  /** @deprecated use `RunAgentRoleUserMessage$inboundSchema` instead. */
+  export const inboundSchema = RunAgentRoleUserMessage$inboundSchema;
+  /** @deprecated use `RunAgentRoleUserMessage$outboundSchema` instead. */
+  export const outboundSchema = RunAgentRoleUserMessage$outboundSchema;
 }
 
 /** @internal */
@@ -912,7 +929,10 @@ export const RunAgentRole$inboundSchema: z.ZodType<
   RunAgentRole,
   z.ZodTypeDef,
   unknown
-> = z.union([RoleUserMessage$inboundSchema, RoleToolMessage$inboundSchema]);
+> = z.union([
+  RunAgentRoleUserMessage$inboundSchema,
+  RunAgentRoleToolMessage$inboundSchema,
+]);
 
 /** @internal */
 export type RunAgentRole$Outbound = string | string;
@@ -922,7 +942,10 @@ export const RunAgentRole$outboundSchema: z.ZodType<
   RunAgentRole$Outbound,
   z.ZodTypeDef,
   RunAgentRole
-> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
+> = z.union([
+  RunAgentRoleUserMessage$outboundSchema,
+  RunAgentRoleToolMessage$outboundSchema,
+]);
 
 /**
  * @internal
@@ -952,6 +975,369 @@ export function runAgentRoleFromJSON(
 }
 
 /** @internal */
+export const RunAgentPublicMessagePartAgentsRequestKind$inboundSchema:
+  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsRequestKind> = z
+    .nativeEnum(RunAgentPublicMessagePartAgentsRequestKind);
+
+/** @internal */
+export const RunAgentPublicMessagePartAgentsRequestKind$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsRequestKind> =
+    RunAgentPublicMessagePartAgentsRequestKind$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RunAgentPublicMessagePartAgentsRequestKind$ {
+  /** @deprecated use `RunAgentPublicMessagePartAgentsRequestKind$inboundSchema` instead. */
+  export const inboundSchema =
+    RunAgentPublicMessagePartAgentsRequestKind$inboundSchema;
+  /** @deprecated use `RunAgentPublicMessagePartAgentsRequestKind$outboundSchema` instead. */
+  export const outboundSchema =
+    RunAgentPublicMessagePartAgentsRequestKind$outboundSchema;
+}
+
+/** @internal */
+export const PublicMessagePartToolResultPart$inboundSchema: z.ZodType<
+  PublicMessagePartToolResultPart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: RunAgentPublicMessagePartAgentsRequestKind$inboundSchema,
+  tool_call_id: z.string(),
+  result: z.any().optional(),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "tool_call_id": "toolCallId",
+  });
+});
+
+/** @internal */
+export type PublicMessagePartToolResultPart$Outbound = {
+  kind: string;
+  tool_call_id: string;
+  result?: any | undefined;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const PublicMessagePartToolResultPart$outboundSchema: z.ZodType<
+  PublicMessagePartToolResultPart$Outbound,
+  z.ZodTypeDef,
+  PublicMessagePartToolResultPart
+> = z.object({
+  kind: RunAgentPublicMessagePartAgentsRequestKind$outboundSchema,
+  toolCallId: z.string(),
+  result: z.any().optional(),
+  metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    toolCallId: "tool_call_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PublicMessagePartToolResultPart$ {
+  /** @deprecated use `PublicMessagePartToolResultPart$inboundSchema` instead. */
+  export const inboundSchema = PublicMessagePartToolResultPart$inboundSchema;
+  /** @deprecated use `PublicMessagePartToolResultPart$outboundSchema` instead. */
+  export const outboundSchema = PublicMessagePartToolResultPart$outboundSchema;
+  /** @deprecated use `PublicMessagePartToolResultPart$Outbound` instead. */
+  export type Outbound = PublicMessagePartToolResultPart$Outbound;
+}
+
+export function publicMessagePartToolResultPartToJSON(
+  publicMessagePartToolResultPart: PublicMessagePartToolResultPart,
+): string {
+  return JSON.stringify(
+    PublicMessagePartToolResultPart$outboundSchema.parse(
+      publicMessagePartToolResultPart,
+    ),
+  );
+}
+
+export function publicMessagePartToolResultPartFromJSON(
+  jsonString: string,
+): SafeParseResult<PublicMessagePartToolResultPart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PublicMessagePartToolResultPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicMessagePartToolResultPart' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentPublicMessagePartAgentsKind$inboundSchema: z.ZodNativeEnum<
+  typeof RunAgentPublicMessagePartAgentsKind
+> = z.nativeEnum(RunAgentPublicMessagePartAgentsKind);
+
+/** @internal */
+export const RunAgentPublicMessagePartAgentsKind$outboundSchema:
+  z.ZodNativeEnum<typeof RunAgentPublicMessagePartAgentsKind> =
+    RunAgentPublicMessagePartAgentsKind$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RunAgentPublicMessagePartAgentsKind$ {
+  /** @deprecated use `RunAgentPublicMessagePartAgentsKind$inboundSchema` instead. */
+  export const inboundSchema =
+    RunAgentPublicMessagePartAgentsKind$inboundSchema;
+  /** @deprecated use `RunAgentPublicMessagePartAgentsKind$outboundSchema` instead. */
+  export const outboundSchema =
+    RunAgentPublicMessagePartAgentsKind$outboundSchema;
+}
+
+/** @internal */
+export const FileFileInURIFormat$inboundSchema: z.ZodType<
+  FileFileInURIFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  uri: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+
+/** @internal */
+export type FileFileInURIFormat$Outbound = {
+  uri: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const FileFileInURIFormat$outboundSchema: z.ZodType<
+  FileFileInURIFormat$Outbound,
+  z.ZodTypeDef,
+  FileFileInURIFormat
+> = z.object({
+  uri: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileFileInURIFormat$ {
+  /** @deprecated use `FileFileInURIFormat$inboundSchema` instead. */
+  export const inboundSchema = FileFileInURIFormat$inboundSchema;
+  /** @deprecated use `FileFileInURIFormat$outboundSchema` instead. */
+  export const outboundSchema = FileFileInURIFormat$outboundSchema;
+  /** @deprecated use `FileFileInURIFormat$Outbound` instead. */
+  export type Outbound = FileFileInURIFormat$Outbound;
+}
+
+export function fileFileInURIFormatToJSON(
+  fileFileInURIFormat: FileFileInURIFormat,
+): string {
+  return JSON.stringify(
+    FileFileInURIFormat$outboundSchema.parse(fileFileInURIFormat),
+  );
+}
+
+export function fileFileInURIFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<FileFileInURIFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileFileInURIFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const FileBinaryFormat$inboundSchema: z.ZodType<
+  FileBinaryFormat,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  bytes: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+
+/** @internal */
+export type FileBinaryFormat$Outbound = {
+  bytes: string;
+  mimeType?: string | undefined;
+  name?: string | undefined;
+};
+
+/** @internal */
+export const FileBinaryFormat$outboundSchema: z.ZodType<
+  FileBinaryFormat$Outbound,
+  z.ZodTypeDef,
+  FileBinaryFormat
+> = z.object({
+  bytes: z.string(),
+  mimeType: z.string().optional(),
+  name: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileBinaryFormat$ {
+  /** @deprecated use `FileBinaryFormat$inboundSchema` instead. */
+  export const inboundSchema = FileBinaryFormat$inboundSchema;
+  /** @deprecated use `FileBinaryFormat$outboundSchema` instead. */
+  export const outboundSchema = FileBinaryFormat$outboundSchema;
+  /** @deprecated use `FileBinaryFormat$Outbound` instead. */
+  export type Outbound = FileBinaryFormat$Outbound;
+}
+
+export function fileBinaryFormatToJSON(
+  fileBinaryFormat: FileBinaryFormat,
+): string {
+  return JSON.stringify(
+    FileBinaryFormat$outboundSchema.parse(fileBinaryFormat),
+  );
+}
+
+export function fileBinaryFormatFromJSON(
+  jsonString: string,
+): SafeParseResult<FileBinaryFormat, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileBinaryFormat' from JSON`,
+  );
+}
+
+/** @internal */
+export const RunAgentPublicMessagePartFile$inboundSchema: z.ZodType<
+  RunAgentPublicMessagePartFile,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => FileBinaryFormat$inboundSchema),
+  z.lazy(() => FileFileInURIFormat$inboundSchema),
+]);
+
+/** @internal */
+export type RunAgentPublicMessagePartFile$Outbound =
+  | FileBinaryFormat$Outbound
+  | FileFileInURIFormat$Outbound;
+
+/** @internal */
+export const RunAgentPublicMessagePartFile$outboundSchema: z.ZodType<
+  RunAgentPublicMessagePartFile$Outbound,
+  z.ZodTypeDef,
+  RunAgentPublicMessagePartFile
+> = z.union([
+  z.lazy(() => FileBinaryFormat$outboundSchema),
+  z.lazy(() => FileFileInURIFormat$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RunAgentPublicMessagePartFile$ {
+  /** @deprecated use `RunAgentPublicMessagePartFile$inboundSchema` instead. */
+  export const inboundSchema = RunAgentPublicMessagePartFile$inboundSchema;
+  /** @deprecated use `RunAgentPublicMessagePartFile$outboundSchema` instead. */
+  export const outboundSchema = RunAgentPublicMessagePartFile$outboundSchema;
+  /** @deprecated use `RunAgentPublicMessagePartFile$Outbound` instead. */
+  export type Outbound = RunAgentPublicMessagePartFile$Outbound;
+}
+
+export function runAgentPublicMessagePartFileToJSON(
+  runAgentPublicMessagePartFile: RunAgentPublicMessagePartFile,
+): string {
+  return JSON.stringify(
+    RunAgentPublicMessagePartFile$outboundSchema.parse(
+      runAgentPublicMessagePartFile,
+    ),
+  );
+}
+
+export function runAgentPublicMessagePartFileFromJSON(
+  jsonString: string,
+): SafeParseResult<RunAgentPublicMessagePartFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RunAgentPublicMessagePartFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPublicMessagePartFile' from JSON`,
+  );
+}
+
+/** @internal */
+export const PublicMessagePartFilePart$inboundSchema: z.ZodType<
+  PublicMessagePartFilePart,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  kind: RunAgentPublicMessagePartAgentsKind$inboundSchema,
+  file: z.union([
+    z.lazy(() => FileBinaryFormat$inboundSchema),
+    z.lazy(() => FileFileInURIFormat$inboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+
+/** @internal */
+export type PublicMessagePartFilePart$Outbound = {
+  kind: string;
+  file: FileBinaryFormat$Outbound | FileFileInURIFormat$Outbound;
+  metadata?: { [k: string]: any } | undefined;
+};
+
+/** @internal */
+export const PublicMessagePartFilePart$outboundSchema: z.ZodType<
+  PublicMessagePartFilePart$Outbound,
+  z.ZodTypeDef,
+  PublicMessagePartFilePart
+> = z.object({
+  kind: RunAgentPublicMessagePartAgentsKind$outboundSchema,
+  file: z.union([
+    z.lazy(() => FileBinaryFormat$outboundSchema),
+    z.lazy(() => FileFileInURIFormat$outboundSchema),
+  ]),
+  metadata: z.record(z.any()).optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PublicMessagePartFilePart$ {
+  /** @deprecated use `PublicMessagePartFilePart$inboundSchema` instead. */
+  export const inboundSchema = PublicMessagePartFilePart$inboundSchema;
+  /** @deprecated use `PublicMessagePartFilePart$outboundSchema` instead. */
+  export const outboundSchema = PublicMessagePartFilePart$outboundSchema;
+  /** @deprecated use `PublicMessagePartFilePart$Outbound` instead. */
+  export type Outbound = PublicMessagePartFilePart$Outbound;
+}
+
+export function publicMessagePartFilePartToJSON(
+  publicMessagePartFilePart: PublicMessagePartFilePart,
+): string {
+  return JSON.stringify(
+    PublicMessagePartFilePart$outboundSchema.parse(publicMessagePartFilePart),
+  );
+}
+
+export function publicMessagePartFilePartFromJSON(
+  jsonString: string,
+): SafeParseResult<PublicMessagePartFilePart, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PublicMessagePartFilePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicMessagePartFilePart' from JSON`,
+  );
+}
+
+/** @internal */
 export const RunAgentPublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
   typeof RunAgentPublicMessagePartKind
 > = z.nativeEnum(RunAgentPublicMessagePartKind);
@@ -973,368 +1359,28 @@ export namespace RunAgentPublicMessagePartKind$ {
 }
 
 /** @internal */
-export const ToolResultPart$inboundSchema: z.ZodType<
-  ToolResultPart,
+export const PublicMessagePartTextPart$inboundSchema: z.ZodType<
+  PublicMessagePartTextPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
   kind: RunAgentPublicMessagePartKind$inboundSchema,
-  tool_call_id: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-  });
-});
-
-/** @internal */
-export type ToolResultPart$Outbound = {
-  kind: string;
-  tool_call_id: string;
-  result?: any | undefined;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const ToolResultPart$outboundSchema: z.ZodType<
-  ToolResultPart$Outbound,
-  z.ZodTypeDef,
-  ToolResultPart
-> = z.object({
-  kind: RunAgentPublicMessagePartKind$outboundSchema,
-  toolCallId: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ToolResultPart$ {
-  /** @deprecated use `ToolResultPart$inboundSchema` instead. */
-  export const inboundSchema = ToolResultPart$inboundSchema;
-  /** @deprecated use `ToolResultPart$outboundSchema` instead. */
-  export const outboundSchema = ToolResultPart$outboundSchema;
-  /** @deprecated use `ToolResultPart$Outbound` instead. */
-  export type Outbound = ToolResultPart$Outbound;
-}
-
-export function toolResultPartToJSON(toolResultPart: ToolResultPart): string {
-  return JSON.stringify(ToolResultPart$outboundSchema.parse(toolResultPart));
-}
-
-export function toolResultPartFromJSON(
-  jsonString: string,
-): SafeParseResult<ToolResultPart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ToolResultPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ToolResultPart' from JSON`,
-  );
-}
-
-/** @internal */
-export const PublicMessagePartKind$inboundSchema: z.ZodNativeEnum<
-  typeof PublicMessagePartKind
-> = z.nativeEnum(PublicMessagePartKind);
-
-/** @internal */
-export const PublicMessagePartKind$outboundSchema: z.ZodNativeEnum<
-  typeof PublicMessagePartKind
-> = PublicMessagePartKind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PublicMessagePartKind$ {
-  /** @deprecated use `PublicMessagePartKind$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartKind$inboundSchema;
-  /** @deprecated use `PublicMessagePartKind$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartKind$outboundSchema;
-}
-
-/** @internal */
-export const FileInURIFormat$inboundSchema: z.ZodType<
-  FileInURIFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-/** @internal */
-export type FileInURIFormat$Outbound = {
-  uri: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const FileInURIFormat$outboundSchema: z.ZodType<
-  FileInURIFormat$Outbound,
-  z.ZodTypeDef,
-  FileInURIFormat
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FileInURIFormat$ {
-  /** @deprecated use `FileInURIFormat$inboundSchema` instead. */
-  export const inboundSchema = FileInURIFormat$inboundSchema;
-  /** @deprecated use `FileInURIFormat$outboundSchema` instead. */
-  export const outboundSchema = FileInURIFormat$outboundSchema;
-  /** @deprecated use `FileInURIFormat$Outbound` instead. */
-  export type Outbound = FileInURIFormat$Outbound;
-}
-
-export function fileInURIFormatToJSON(
-  fileInURIFormat: FileInURIFormat,
-): string {
-  return JSON.stringify(FileInURIFormat$outboundSchema.parse(fileInURIFormat));
-}
-
-export function fileInURIFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<FileInURIFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileInURIFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const BinaryFormat$inboundSchema: z.ZodType<
-  BinaryFormat,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-/** @internal */
-export type BinaryFormat$Outbound = {
-  bytes: string;
-  mimeType?: string | undefined;
-  name?: string | undefined;
-};
-
-/** @internal */
-export const BinaryFormat$outboundSchema: z.ZodType<
-  BinaryFormat$Outbound,
-  z.ZodTypeDef,
-  BinaryFormat
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace BinaryFormat$ {
-  /** @deprecated use `BinaryFormat$inboundSchema` instead. */
-  export const inboundSchema = BinaryFormat$inboundSchema;
-  /** @deprecated use `BinaryFormat$outboundSchema` instead. */
-  export const outboundSchema = BinaryFormat$outboundSchema;
-  /** @deprecated use `BinaryFormat$Outbound` instead. */
-  export type Outbound = BinaryFormat$Outbound;
-}
-
-export function binaryFormatToJSON(binaryFormat: BinaryFormat): string {
-  return JSON.stringify(BinaryFormat$outboundSchema.parse(binaryFormat));
-}
-
-export function binaryFormatFromJSON(
-  jsonString: string,
-): SafeParseResult<BinaryFormat, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => BinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'BinaryFormat' from JSON`,
-  );
-}
-
-/** @internal */
-export const PublicMessagePartFile$inboundSchema: z.ZodType<
-  PublicMessagePartFile,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => BinaryFormat$inboundSchema),
-  z.lazy(() => FileInURIFormat$inboundSchema),
-]);
-
-/** @internal */
-export type PublicMessagePartFile$Outbound =
-  | BinaryFormat$Outbound
-  | FileInURIFormat$Outbound;
-
-/** @internal */
-export const PublicMessagePartFile$outboundSchema: z.ZodType<
-  PublicMessagePartFile$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePartFile
-> = z.union([
-  z.lazy(() => BinaryFormat$outboundSchema),
-  z.lazy(() => FileInURIFormat$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace PublicMessagePartFile$ {
-  /** @deprecated use `PublicMessagePartFile$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartFile$inboundSchema;
-  /** @deprecated use `PublicMessagePartFile$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartFile$outboundSchema;
-  /** @deprecated use `PublicMessagePartFile$Outbound` instead. */
-  export type Outbound = PublicMessagePartFile$Outbound;
-}
-
-export function publicMessagePartFileToJSON(
-  publicMessagePartFile: PublicMessagePartFile,
-): string {
-  return JSON.stringify(
-    PublicMessagePartFile$outboundSchema.parse(publicMessagePartFile),
-  );
-}
-
-export function publicMessagePartFileFromJSON(
-  jsonString: string,
-): SafeParseResult<PublicMessagePartFile, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PublicMessagePartFile$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartFile' from JSON`,
-  );
-}
-
-/** @internal */
-export const FilePart$inboundSchema: z.ZodType<
-  FilePart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: PublicMessagePartKind$inboundSchema,
-  file: z.union([
-    z.lazy(() => BinaryFormat$inboundSchema),
-    z.lazy(() => FileInURIFormat$inboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-
-/** @internal */
-export type FilePart$Outbound = {
-  kind: string;
-  file: BinaryFormat$Outbound | FileInURIFormat$Outbound;
-  metadata?: { [k: string]: any } | undefined;
-};
-
-/** @internal */
-export const FilePart$outboundSchema: z.ZodType<
-  FilePart$Outbound,
-  z.ZodTypeDef,
-  FilePart
-> = z.object({
-  kind: PublicMessagePartKind$outboundSchema,
-  file: z.union([
-    z.lazy(() => BinaryFormat$outboundSchema),
-    z.lazy(() => FileInURIFormat$outboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace FilePart$ {
-  /** @deprecated use `FilePart$inboundSchema` instead. */
-  export const inboundSchema = FilePart$inboundSchema;
-  /** @deprecated use `FilePart$outboundSchema` instead. */
-  export const outboundSchema = FilePart$outboundSchema;
-  /** @deprecated use `FilePart$Outbound` instead. */
-  export type Outbound = FilePart$Outbound;
-}
-
-export function filePartToJSON(filePart: FilePart): string {
-  return JSON.stringify(FilePart$outboundSchema.parse(filePart));
-}
-
-export function filePartFromJSON(
-  jsonString: string,
-): SafeParseResult<FilePart, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FilePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FilePart' from JSON`,
-  );
-}
-
-/** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
-
-/** @internal */
-export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
-  Kind$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace Kind$ {
-  /** @deprecated use `Kind$inboundSchema` instead. */
-  export const inboundSchema = Kind$inboundSchema;
-  /** @deprecated use `Kind$outboundSchema` instead. */
-  export const outboundSchema = Kind$outboundSchema;
-}
-
-/** @internal */
-export const TextPart$inboundSchema: z.ZodType<
-  TextPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: Kind$inboundSchema,
   text: z.string(),
 });
 
 /** @internal */
-export type TextPart$Outbound = {
+export type PublicMessagePartTextPart$Outbound = {
   kind: string;
   text: string;
 };
 
 /** @internal */
-export const TextPart$outboundSchema: z.ZodType<
-  TextPart$Outbound,
+export const PublicMessagePartTextPart$outboundSchema: z.ZodType<
+  PublicMessagePartTextPart$Outbound,
   z.ZodTypeDef,
-  TextPart
+  PublicMessagePartTextPart
 > = z.object({
-  kind: Kind$outboundSchema,
+  kind: RunAgentPublicMessagePartKind$outboundSchema,
   text: z.string(),
 });
 
@@ -1342,128 +1388,139 @@ export const TextPart$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TextPart$ {
-  /** @deprecated use `TextPart$inboundSchema` instead. */
-  export const inboundSchema = TextPart$inboundSchema;
-  /** @deprecated use `TextPart$outboundSchema` instead. */
-  export const outboundSchema = TextPart$outboundSchema;
-  /** @deprecated use `TextPart$Outbound` instead. */
-  export type Outbound = TextPart$Outbound;
+export namespace PublicMessagePartTextPart$ {
+  /** @deprecated use `PublicMessagePartTextPart$inboundSchema` instead. */
+  export const inboundSchema = PublicMessagePartTextPart$inboundSchema;
+  /** @deprecated use `PublicMessagePartTextPart$outboundSchema` instead. */
+  export const outboundSchema = PublicMessagePartTextPart$outboundSchema;
+  /** @deprecated use `PublicMessagePartTextPart$Outbound` instead. */
+  export type Outbound = PublicMessagePartTextPart$Outbound;
 }
 
-export function textPartToJSON(textPart: TextPart): string {
-  return JSON.stringify(TextPart$outboundSchema.parse(textPart));
+export function publicMessagePartTextPartToJSON(
+  publicMessagePartTextPart: PublicMessagePartTextPart,
+): string {
+  return JSON.stringify(
+    PublicMessagePartTextPart$outboundSchema.parse(publicMessagePartTextPart),
+  );
 }
 
-export function textPartFromJSON(
+export function publicMessagePartTextPartFromJSON(
   jsonString: string,
-): SafeParseResult<TextPart, SDKValidationError> {
+): SafeParseResult<PublicMessagePartTextPart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TextPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TextPart' from JSON`,
+    (x) => PublicMessagePartTextPart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PublicMessagePartTextPart' from JSON`,
   );
 }
 
 /** @internal */
-export const PublicMessagePart$inboundSchema: z.ZodType<
-  PublicMessagePart,
+export const RunAgentPublicMessagePart$inboundSchema: z.ZodType<
+  RunAgentPublicMessagePart,
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => TextPart$inboundSchema),
-  z.lazy(() => FilePart$inboundSchema),
-  z.lazy(() => ToolResultPart$inboundSchema),
+  z.lazy(() => PublicMessagePartTextPart$inboundSchema),
+  z.lazy(() => PublicMessagePartFilePart$inboundSchema),
+  z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
 ]);
 
 /** @internal */
-export type PublicMessagePart$Outbound =
-  | TextPart$Outbound
-  | FilePart$Outbound
-  | ToolResultPart$Outbound;
+export type RunAgentPublicMessagePart$Outbound =
+  | PublicMessagePartTextPart$Outbound
+  | PublicMessagePartFilePart$Outbound
+  | PublicMessagePartToolResultPart$Outbound;
 
 /** @internal */
-export const PublicMessagePart$outboundSchema: z.ZodType<
-  PublicMessagePart$Outbound,
+export const RunAgentPublicMessagePart$outboundSchema: z.ZodType<
+  RunAgentPublicMessagePart$Outbound,
   z.ZodTypeDef,
-  PublicMessagePart
+  RunAgentPublicMessagePart
 > = z.union([
-  z.lazy(() => TextPart$outboundSchema),
-  z.lazy(() => FilePart$outboundSchema),
-  z.lazy(() => ToolResultPart$outboundSchema),
+  z.lazy(() => PublicMessagePartTextPart$outboundSchema),
+  z.lazy(() => PublicMessagePartFilePart$outboundSchema),
+  z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
 ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PublicMessagePart$ {
-  /** @deprecated use `PublicMessagePart$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePart$inboundSchema;
-  /** @deprecated use `PublicMessagePart$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePart$outboundSchema;
-  /** @deprecated use `PublicMessagePart$Outbound` instead. */
-  export type Outbound = PublicMessagePart$Outbound;
+export namespace RunAgentPublicMessagePart$ {
+  /** @deprecated use `RunAgentPublicMessagePart$inboundSchema` instead. */
+  export const inboundSchema = RunAgentPublicMessagePart$inboundSchema;
+  /** @deprecated use `RunAgentPublicMessagePart$outboundSchema` instead. */
+  export const outboundSchema = RunAgentPublicMessagePart$outboundSchema;
+  /** @deprecated use `RunAgentPublicMessagePart$Outbound` instead. */
+  export type Outbound = RunAgentPublicMessagePart$Outbound;
 }
 
-export function publicMessagePartToJSON(
-  publicMessagePart: PublicMessagePart,
+export function runAgentPublicMessagePartToJSON(
+  runAgentPublicMessagePart: RunAgentPublicMessagePart,
 ): string {
   return JSON.stringify(
-    PublicMessagePart$outboundSchema.parse(publicMessagePart),
+    RunAgentPublicMessagePart$outboundSchema.parse(runAgentPublicMessagePart),
   );
 }
 
-export function publicMessagePartFromJSON(
+export function runAgentPublicMessagePartFromJSON(
   jsonString: string,
-): SafeParseResult<PublicMessagePart, SDKValidationError> {
+): SafeParseResult<RunAgentPublicMessagePart, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PublicMessagePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePart' from JSON`,
+    (x) => RunAgentPublicMessagePart$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentPublicMessagePart' from JSON`,
   );
 }
 
 /** @internal */
-export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
-  z.object({
-    messageId: z.string().optional(),
-    role: z.union([
-      RoleUserMessage$inboundSchema,
-      RoleToolMessage$inboundSchema,
-    ]),
-    parts: z.array(
-      z.union([
-        z.lazy(() => TextPart$inboundSchema),
-        z.lazy(() => FilePart$inboundSchema),
-        z.lazy(() => ToolResultPart$inboundSchema),
-      ]),
-    ),
-  });
-
-/** @internal */
-export type Message$Outbound = {
-  messageId?: string | undefined;
-  role: string | string;
-  parts: Array<TextPart$Outbound | FilePart$Outbound | ToolResultPart$Outbound>;
-};
-
-/** @internal */
-export const Message$outboundSchema: z.ZodType<
-  Message$Outbound,
+export const RunAgentMessage$inboundSchema: z.ZodType<
+  RunAgentMessage,
   z.ZodTypeDef,
-  Message
+  unknown
 > = z.object({
   messageId: z.string().optional(),
   role: z.union([
-    RoleUserMessage$outboundSchema,
-    RoleToolMessage$outboundSchema,
+    RunAgentRoleUserMessage$inboundSchema,
+    RunAgentRoleToolMessage$inboundSchema,
   ]),
   parts: z.array(
     z.union([
-      z.lazy(() => TextPart$outboundSchema),
-      z.lazy(() => FilePart$outboundSchema),
-      z.lazy(() => ToolResultPart$outboundSchema),
+      z.lazy(() => PublicMessagePartTextPart$inboundSchema),
+      z.lazy(() => PublicMessagePartFilePart$inboundSchema),
+      z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+    ]),
+  ),
+});
+
+/** @internal */
+export type RunAgentMessage$Outbound = {
+  messageId?: string | undefined;
+  role: string | string;
+  parts: Array<
+    | PublicMessagePartTextPart$Outbound
+    | PublicMessagePartFilePart$Outbound
+    | PublicMessagePartToolResultPart$Outbound
+  >;
+};
+
+/** @internal */
+export const RunAgentMessage$outboundSchema: z.ZodType<
+  RunAgentMessage$Outbound,
+  z.ZodTypeDef,
+  RunAgentMessage
+> = z.object({
+  messageId: z.string().optional(),
+  role: z.union([
+    RunAgentRoleUserMessage$outboundSchema,
+    RunAgentRoleToolMessage$outboundSchema,
+  ]),
+  parts: z.array(
+    z.union([
+      z.lazy(() => PublicMessagePartTextPart$outboundSchema),
+      z.lazy(() => PublicMessagePartFilePart$outboundSchema),
+      z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
     ]),
   ),
 });
@@ -1472,47 +1529,52 @@ export const Message$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Message$ {
-  /** @deprecated use `Message$inboundSchema` instead. */
-  export const inboundSchema = Message$inboundSchema;
-  /** @deprecated use `Message$outboundSchema` instead. */
-  export const outboundSchema = Message$outboundSchema;
-  /** @deprecated use `Message$Outbound` instead. */
-  export type Outbound = Message$Outbound;
+export namespace RunAgentMessage$ {
+  /** @deprecated use `RunAgentMessage$inboundSchema` instead. */
+  export const inboundSchema = RunAgentMessage$inboundSchema;
+  /** @deprecated use `RunAgentMessage$outboundSchema` instead. */
+  export const outboundSchema = RunAgentMessage$outboundSchema;
+  /** @deprecated use `RunAgentMessage$Outbound` instead. */
+  export type Outbound = RunAgentMessage$Outbound;
 }
 
-export function messageToJSON(message: Message): string {
-  return JSON.stringify(Message$outboundSchema.parse(message));
+export function runAgentMessageToJSON(
+  runAgentMessage: RunAgentMessage,
+): string {
+  return JSON.stringify(RunAgentMessage$outboundSchema.parse(runAgentMessage));
 }
 
-export function messageFromJSON(
+export function runAgentMessageFromJSON(
   jsonString: string,
-): SafeParseResult<Message, SDKValidationError> {
+): SafeParseResult<RunAgentMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Message$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Message' from JSON`,
+    (x) => RunAgentMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentMessage' from JSON`,
   );
 }
 
 /** @internal */
-export const Contact$inboundSchema: z.ZodType<Contact, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    display_name: z.string().optional(),
-    email: z.string().optional(),
-    metadata: z.array(z.record(z.any())).optional(),
-    logo_url: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "display_name": "displayName",
-      "logo_url": "logoUrl",
-    });
+export const RunAgentContact$inboundSchema: z.ZodType<
+  RunAgentContact,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  display_name: z.string().optional(),
+  email: z.string().optional(),
+  metadata: z.array(z.record(z.any())).optional(),
+  logo_url: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "display_name": "displayName",
+    "logo_url": "logoUrl",
   });
+});
 
 /** @internal */
-export type Contact$Outbound = {
+export type RunAgentContact$Outbound = {
   id: string;
   display_name?: string | undefined;
   email?: string | undefined;
@@ -1522,10 +1584,10 @@ export type Contact$Outbound = {
 };
 
 /** @internal */
-export const Contact$outboundSchema: z.ZodType<
-  Contact$Outbound,
+export const RunAgentContact$outboundSchema: z.ZodType<
+  RunAgentContact$Outbound,
   z.ZodTypeDef,
-  Contact
+  RunAgentContact
 > = z.object({
   id: z.string(),
   displayName: z.string().optional(),
@@ -1544,26 +1606,28 @@ export const Contact$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Contact$ {
-  /** @deprecated use `Contact$inboundSchema` instead. */
-  export const inboundSchema = Contact$inboundSchema;
-  /** @deprecated use `Contact$outboundSchema` instead. */
-  export const outboundSchema = Contact$outboundSchema;
-  /** @deprecated use `Contact$Outbound` instead. */
-  export type Outbound = Contact$Outbound;
+export namespace RunAgentContact$ {
+  /** @deprecated use `RunAgentContact$inboundSchema` instead. */
+  export const inboundSchema = RunAgentContact$inboundSchema;
+  /** @deprecated use `RunAgentContact$outboundSchema` instead. */
+  export const outboundSchema = RunAgentContact$outboundSchema;
+  /** @deprecated use `RunAgentContact$Outbound` instead. */
+  export type Outbound = RunAgentContact$Outbound;
 }
 
-export function contactToJSON(contact: Contact): string {
-  return JSON.stringify(Contact$outboundSchema.parse(contact));
+export function runAgentContactToJSON(
+  runAgentContact: RunAgentContact,
+): string {
+  return JSON.stringify(RunAgentContact$outboundSchema.parse(runAgentContact));
 }
 
-export function contactFromJSON(
+export function runAgentContactFromJSON(
   jsonString: string,
-): SafeParseResult<Contact, SDKValidationError> {
+): SafeParseResult<RunAgentContact, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Contact$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Contact' from JSON`,
+    (x) => RunAgentContact$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentContact' from JSON`,
   );
 }
 
@@ -1621,25 +1685,28 @@ export function runAgentThreadFromJSON(
 }
 
 /** @internal */
-export const Memory$inboundSchema: z.ZodType<Memory, z.ZodTypeDef, unknown> = z
-  .object({
-    entity_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "entity_id": "entityId",
-    });
+export const RunAgentMemory$inboundSchema: z.ZodType<
+  RunAgentMemory,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  entity_id: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "entity_id": "entityId",
   });
+});
 
 /** @internal */
-export type Memory$Outbound = {
+export type RunAgentMemory$Outbound = {
   entity_id: string;
 };
 
 /** @internal */
-export const Memory$outboundSchema: z.ZodType<
-  Memory$Outbound,
+export const RunAgentMemory$outboundSchema: z.ZodType<
+  RunAgentMemory$Outbound,
   z.ZodTypeDef,
-  Memory
+  RunAgentMemory
 > = z.object({
   entityId: z.string(),
 }).transform((v) => {
@@ -1652,26 +1719,26 @@ export const Memory$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Memory$ {
-  /** @deprecated use `Memory$inboundSchema` instead. */
-  export const inboundSchema = Memory$inboundSchema;
-  /** @deprecated use `Memory$outboundSchema` instead. */
-  export const outboundSchema = Memory$outboundSchema;
-  /** @deprecated use `Memory$Outbound` instead. */
-  export type Outbound = Memory$Outbound;
+export namespace RunAgentMemory$ {
+  /** @deprecated use `RunAgentMemory$inboundSchema` instead. */
+  export const inboundSchema = RunAgentMemory$inboundSchema;
+  /** @deprecated use `RunAgentMemory$outboundSchema` instead. */
+  export const outboundSchema = RunAgentMemory$outboundSchema;
+  /** @deprecated use `RunAgentMemory$Outbound` instead. */
+  export type Outbound = RunAgentMemory$Outbound;
 }
 
-export function memoryToJSON(memory: Memory): string {
-  return JSON.stringify(Memory$outboundSchema.parse(memory));
+export function runAgentMemoryToJSON(runAgentMemory: RunAgentMemory): string {
+  return JSON.stringify(RunAgentMemory$outboundSchema.parse(runAgentMemory));
 }
 
-export function memoryFromJSON(
+export function runAgentMemoryFromJSON(
   jsonString: string,
-): SafeParseResult<Memory, SDKValidationError> {
+): SafeParseResult<RunAgentMemory, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Memory$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Memory' from JSON`,
+    (x) => RunAgentMemory$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentMemory' from JSON`,
   );
 }
 
@@ -3987,11 +4054,11 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   fallback_models: z.array(z.string()).optional(),
   role: z.string(),
   instructions: z.string(),
-  message: z.lazy(() => Message$inboundSchema),
+  message: z.lazy(() => RunAgentMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
-  contact: z.lazy(() => Contact$inboundSchema).optional(),
+  contact: z.lazy(() => RunAgentContact$inboundSchema).optional(),
   thread: z.lazy(() => RunAgentThread$inboundSchema).optional(),
-  memory: z.lazy(() => Memory$inboundSchema).optional(),
+  memory: z.lazy(() => RunAgentMemory$inboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
   system_prompt: z.string().optional(),
@@ -4019,11 +4086,11 @@ export type RunAgentRequestBody$Outbound = {
   fallback_models?: Array<string> | undefined;
   role: string;
   instructions: string;
-  message: Message$Outbound;
+  message: RunAgentMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
-  contact?: Contact$Outbound | undefined;
+  contact?: RunAgentContact$Outbound | undefined;
   thread?: RunAgentThread$Outbound | undefined;
-  memory?: Memory$Outbound | undefined;
+  memory?: RunAgentMemory$Outbound | undefined;
   path: string;
   description?: string | undefined;
   system_prompt?: string | undefined;
@@ -4046,11 +4113,11 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   fallbackModels: z.array(z.string()).optional(),
   role: z.string(),
   instructions: z.string(),
-  message: z.lazy(() => Message$outboundSchema),
+  message: z.lazy(() => RunAgentMessage$outboundSchema),
   variables: z.record(z.any()).optional(),
-  contact: z.lazy(() => Contact$outboundSchema).optional(),
+  contact: z.lazy(() => RunAgentContact$outboundSchema).optional(),
   thread: z.lazy(() => RunAgentThread$outboundSchema).optional(),
-  memory: z.lazy(() => Memory$outboundSchema).optional(),
+  memory: z.lazy(() => RunAgentMemory$outboundSchema).optional(),
   path: z.string(),
   description: z.string().optional(),
   systemPrompt: z.string().optional(),
@@ -4184,8 +4251,8 @@ export namespace RunAgentAgentsRole$ {
 }
 
 /** @internal */
-export const RunAgentMessage$inboundSchema: z.ZodType<
-  RunAgentMessage,
+export const RunAgentAgentsMessage$inboundSchema: z.ZodType<
+  RunAgentAgentsMessage,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -4196,7 +4263,7 @@ export const RunAgentMessage$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type RunAgentMessage$Outbound = {
+export type RunAgentAgentsMessage$Outbound = {
   kind: string;
   messageId: string;
   role: string;
@@ -4204,10 +4271,10 @@ export type RunAgentMessage$Outbound = {
 };
 
 /** @internal */
-export const RunAgentMessage$outboundSchema: z.ZodType<
-  RunAgentMessage$Outbound,
+export const RunAgentAgentsMessage$outboundSchema: z.ZodType<
+  RunAgentAgentsMessage$Outbound,
   z.ZodTypeDef,
-  RunAgentMessage
+  RunAgentAgentsMessage
 > = z.object({
   kind: RunAgentAgentsKind$outboundSchema,
   messageId: z.string(),
@@ -4219,28 +4286,30 @@ export const RunAgentMessage$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RunAgentMessage$ {
-  /** @deprecated use `RunAgentMessage$inboundSchema` instead. */
-  export const inboundSchema = RunAgentMessage$inboundSchema;
-  /** @deprecated use `RunAgentMessage$outboundSchema` instead. */
-  export const outboundSchema = RunAgentMessage$outboundSchema;
-  /** @deprecated use `RunAgentMessage$Outbound` instead. */
-  export type Outbound = RunAgentMessage$Outbound;
+export namespace RunAgentAgentsMessage$ {
+  /** @deprecated use `RunAgentAgentsMessage$inboundSchema` instead. */
+  export const inboundSchema = RunAgentAgentsMessage$inboundSchema;
+  /** @deprecated use `RunAgentAgentsMessage$outboundSchema` instead. */
+  export const outboundSchema = RunAgentAgentsMessage$outboundSchema;
+  /** @deprecated use `RunAgentAgentsMessage$Outbound` instead. */
+  export type Outbound = RunAgentAgentsMessage$Outbound;
 }
 
-export function runAgentMessageToJSON(
-  runAgentMessage: RunAgentMessage,
+export function runAgentAgentsMessageToJSON(
+  runAgentAgentsMessage: RunAgentAgentsMessage,
 ): string {
-  return JSON.stringify(RunAgentMessage$outboundSchema.parse(runAgentMessage));
+  return JSON.stringify(
+    RunAgentAgentsMessage$outboundSchema.parse(runAgentAgentsMessage),
+  );
 }
 
-export function runAgentMessageFromJSON(
+export function runAgentAgentsMessageFromJSON(
   jsonString: string,
-): SafeParseResult<RunAgentMessage, SDKValidationError> {
+): SafeParseResult<RunAgentAgentsMessage, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RunAgentMessage$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RunAgentMessage' from JSON`,
+    (x) => RunAgentAgentsMessage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentAgentsMessage' from JSON`,
   );
 }
 
@@ -4252,14 +4321,14 @@ export const RunAgentStatus$inboundSchema: z.ZodType<
 > = z.object({
   state: RunAgentState$inboundSchema,
   timestamp: z.string().optional(),
-  message: z.lazy(() => RunAgentMessage$inboundSchema).optional(),
+  message: z.lazy(() => RunAgentAgentsMessage$inboundSchema).optional(),
 });
 
 /** @internal */
 export type RunAgentStatus$Outbound = {
   state: string;
   timestamp?: string | undefined;
-  message?: RunAgentMessage$Outbound | undefined;
+  message?: RunAgentAgentsMessage$Outbound | undefined;
 };
 
 /** @internal */
@@ -4270,7 +4339,7 @@ export const RunAgentStatus$outboundSchema: z.ZodType<
 > = z.object({
   state: RunAgentState$outboundSchema,
   timestamp: z.string().optional(),
-  message: z.lazy(() => RunAgentMessage$outboundSchema).optional(),
+  message: z.lazy(() => RunAgentAgentsMessage$outboundSchema).optional(),
 });
 
 /**

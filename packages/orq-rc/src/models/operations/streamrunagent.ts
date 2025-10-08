@@ -52,7 +52,7 @@ export type StreamRunAgentPublicMessagePartAgentsRequestKind = ClosedEnum<
 /**
  * Tool execution result part. Use this ONLY when providing results for a pending tool call from the agent. The tool_call_id must match the ID from the agent's tool call request.
  */
-export type PublicMessagePartToolResultPart = {
+export type StreamRunAgentPublicMessagePartToolResultPart = {
   kind: StreamRunAgentPublicMessagePartAgentsRequestKind;
   toolCallId: string;
   result?: any | undefined;
@@ -69,7 +69,7 @@ export type StreamRunAgentPublicMessagePartAgentsKind = ClosedEnum<
 /**
  * File in URI format. Check in the model's documentation for the supported mime types for the URI format
  */
-export type FileFileInURIFormat = {
+export type StreamRunAgentFileFileInURIFormat = {
   /**
    * URL for the File content
    */
@@ -87,7 +87,7 @@ export type FileFileInURIFormat = {
 /**
  * Binary in base64 format. Check in the model's documentation for the supported mime types for the binary format.
  */
-export type FileBinaryFormat = {
+export type StreamRunAgentFileBinaryFormat = {
   /**
    * base64 encoded content of the file
    */
@@ -103,15 +103,15 @@ export type FileBinaryFormat = {
 };
 
 export type StreamRunAgentPublicMessagePartFile =
-  | FileBinaryFormat
-  | FileFileInURIFormat;
+  | StreamRunAgentFileBinaryFormat
+  | StreamRunAgentFileFileInURIFormat;
 
 /**
  * File attachment part. Use this to send files (images, documents, etc.) to the agent for processing.
  */
-export type PublicMessagePartFilePart = {
+export type StreamRunAgentPublicMessagePartFilePart = {
   kind: StreamRunAgentPublicMessagePartAgentsKind;
-  file: FileBinaryFormat | FileFileInURIFormat;
+  file: StreamRunAgentFileBinaryFormat | StreamRunAgentFileFileInURIFormat;
   metadata?: { [k: string]: any } | undefined;
 };
 
@@ -125,7 +125,7 @@ export type StreamRunAgentPublicMessagePartKind = ClosedEnum<
 /**
  * Text content part. Use this to send text messages to the agent.
  */
-export type PublicMessagePartTextPart = {
+export type StreamRunAgentPublicMessagePartTextPart = {
   kind: StreamRunAgentPublicMessagePartKind;
   text: string;
 };
@@ -134,9 +134,9 @@ export type PublicMessagePartTextPart = {
  * Message part that can be provided by users. Use "text" for regular messages, "file" for attachments, or "tool_result" when responding to tool call requests.
  */
 export type StreamRunAgentPublicMessagePart =
-  | PublicMessagePartTextPart
-  | PublicMessagePartFilePart
-  | PublicMessagePartToolResultPart;
+  | StreamRunAgentPublicMessagePartTextPart
+  | StreamRunAgentPublicMessagePartFilePart
+  | StreamRunAgentPublicMessagePartToolResultPart;
 
 /**
  * The A2A format message containing the task for the agent to perform.
@@ -154,9 +154,9 @@ export type StreamRunAgentMessage = {
    * A2A message parts (text, file, or tool_result only)
    */
   parts: Array<
-    | PublicMessagePartTextPart
-    | PublicMessagePartFilePart
-    | PublicMessagePartToolResultPart
+    | StreamRunAgentPublicMessagePartTextPart
+    | StreamRunAgentPublicMessagePartFilePart
+    | StreamRunAgentPublicMessagePartToolResultPart
   >;
 };
 
@@ -934,23 +934,24 @@ export namespace StreamRunAgentPublicMessagePartAgentsRequestKind$ {
 }
 
 /** @internal */
-export const PublicMessagePartToolResultPart$inboundSchema: z.ZodType<
-  PublicMessagePartToolResultPart,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  kind: StreamRunAgentPublicMessagePartAgentsRequestKind$inboundSchema,
-  tool_call_id: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
+export const StreamRunAgentPublicMessagePartToolResultPart$inboundSchema:
+  z.ZodType<
+    StreamRunAgentPublicMessagePartToolResultPart,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    kind: StreamRunAgentPublicMessagePartAgentsRequestKind$inboundSchema,
+    tool_call_id: z.string(),
+    result: z.any().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_call_id": "toolCallId",
+    });
   });
-});
 
 /** @internal */
-export type PublicMessagePartToolResultPart$Outbound = {
+export type StreamRunAgentPublicMessagePartToolResultPart$Outbound = {
   kind: string;
   tool_call_id: string;
   result?: any | undefined;
@@ -958,51 +959,61 @@ export type PublicMessagePartToolResultPart$Outbound = {
 };
 
 /** @internal */
-export const PublicMessagePartToolResultPart$outboundSchema: z.ZodType<
-  PublicMessagePartToolResultPart$Outbound,
-  z.ZodTypeDef,
-  PublicMessagePartToolResultPart
-> = z.object({
-  kind: StreamRunAgentPublicMessagePartAgentsRequestKind$outboundSchema,
-  toolCallId: z.string(),
-  result: z.any().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
+export const StreamRunAgentPublicMessagePartToolResultPart$outboundSchema:
+  z.ZodType<
+    StreamRunAgentPublicMessagePartToolResultPart$Outbound,
+    z.ZodTypeDef,
+    StreamRunAgentPublicMessagePartToolResultPart
+  > = z.object({
+    kind: StreamRunAgentPublicMessagePartAgentsRequestKind$outboundSchema,
+    toolCallId: z.string(),
+    result: z.any().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+    });
   });
-});
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PublicMessagePartToolResultPart$ {
-  /** @deprecated use `PublicMessagePartToolResultPart$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartToolResultPart$inboundSchema;
-  /** @deprecated use `PublicMessagePartToolResultPart$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartToolResultPart$outboundSchema;
-  /** @deprecated use `PublicMessagePartToolResultPart$Outbound` instead. */
-  export type Outbound = PublicMessagePartToolResultPart$Outbound;
+export namespace StreamRunAgentPublicMessagePartToolResultPart$ {
+  /** @deprecated use `StreamRunAgentPublicMessagePartToolResultPart$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentPublicMessagePartToolResultPart$inboundSchema;
+  /** @deprecated use `StreamRunAgentPublicMessagePartToolResultPart$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentPublicMessagePartToolResultPart$outboundSchema;
+  /** @deprecated use `StreamRunAgentPublicMessagePartToolResultPart$Outbound` instead. */
+  export type Outbound = StreamRunAgentPublicMessagePartToolResultPart$Outbound;
 }
 
-export function publicMessagePartToolResultPartToJSON(
-  publicMessagePartToolResultPart: PublicMessagePartToolResultPart,
+export function streamRunAgentPublicMessagePartToolResultPartToJSON(
+  streamRunAgentPublicMessagePartToolResultPart:
+    StreamRunAgentPublicMessagePartToolResultPart,
 ): string {
   return JSON.stringify(
-    PublicMessagePartToolResultPart$outboundSchema.parse(
-      publicMessagePartToolResultPart,
+    StreamRunAgentPublicMessagePartToolResultPart$outboundSchema.parse(
+      streamRunAgentPublicMessagePartToolResultPart,
     ),
   );
 }
 
-export function publicMessagePartToolResultPartFromJSON(
+export function streamRunAgentPublicMessagePartToolResultPartFromJSON(
   jsonString: string,
-): SafeParseResult<PublicMessagePartToolResultPart, SDKValidationError> {
+): SafeParseResult<
+  StreamRunAgentPublicMessagePartToolResultPart,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => PublicMessagePartToolResultPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartToolResultPart' from JSON`,
+    (x) =>
+      StreamRunAgentPublicMessagePartToolResultPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentPublicMessagePartToolResultPart' from JSON`,
   );
 }
 
@@ -1030,8 +1041,8 @@ export namespace StreamRunAgentPublicMessagePartAgentsKind$ {
 }
 
 /** @internal */
-export const FileFileInURIFormat$inboundSchema: z.ZodType<
-  FileFileInURIFormat,
+export const StreamRunAgentFileFileInURIFormat$inboundSchema: z.ZodType<
+  StreamRunAgentFileFileInURIFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1041,17 +1052,17 @@ export const FileFileInURIFormat$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type FileFileInURIFormat$Outbound = {
+export type StreamRunAgentFileFileInURIFormat$Outbound = {
   uri: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const FileFileInURIFormat$outboundSchema: z.ZodType<
-  FileFileInURIFormat$Outbound,
+export const StreamRunAgentFileFileInURIFormat$outboundSchema: z.ZodType<
+  StreamRunAgentFileFileInURIFormat$Outbound,
   z.ZodTypeDef,
-  FileFileInURIFormat
+  StreamRunAgentFileFileInURIFormat
 > = z.object({
   uri: z.string(),
   mimeType: z.string().optional(),
@@ -1062,36 +1073,39 @@ export const FileFileInURIFormat$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FileFileInURIFormat$ {
-  /** @deprecated use `FileFileInURIFormat$inboundSchema` instead. */
-  export const inboundSchema = FileFileInURIFormat$inboundSchema;
-  /** @deprecated use `FileFileInURIFormat$outboundSchema` instead. */
-  export const outboundSchema = FileFileInURIFormat$outboundSchema;
-  /** @deprecated use `FileFileInURIFormat$Outbound` instead. */
-  export type Outbound = FileFileInURIFormat$Outbound;
+export namespace StreamRunAgentFileFileInURIFormat$ {
+  /** @deprecated use `StreamRunAgentFileFileInURIFormat$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFileFileInURIFormat$inboundSchema;
+  /** @deprecated use `StreamRunAgentFileFileInURIFormat$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentFileFileInURIFormat$outboundSchema;
+  /** @deprecated use `StreamRunAgentFileFileInURIFormat$Outbound` instead. */
+  export type Outbound = StreamRunAgentFileFileInURIFormat$Outbound;
 }
 
-export function fileFileInURIFormatToJSON(
-  fileFileInURIFormat: FileFileInURIFormat,
+export function streamRunAgentFileFileInURIFormatToJSON(
+  streamRunAgentFileFileInURIFormat: StreamRunAgentFileFileInURIFormat,
 ): string {
   return JSON.stringify(
-    FileFileInURIFormat$outboundSchema.parse(fileFileInURIFormat),
+    StreamRunAgentFileFileInURIFormat$outboundSchema.parse(
+      streamRunAgentFileFileInURIFormat,
+    ),
   );
 }
 
-export function fileFileInURIFormatFromJSON(
+export function streamRunAgentFileFileInURIFormatFromJSON(
   jsonString: string,
-): SafeParseResult<FileFileInURIFormat, SDKValidationError> {
+): SafeParseResult<StreamRunAgentFileFileInURIFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileFileInURIFormat' from JSON`,
+    (x) => StreamRunAgentFileFileInURIFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFileFileInURIFormat' from JSON`,
   );
 }
 
 /** @internal */
-export const FileBinaryFormat$inboundSchema: z.ZodType<
-  FileBinaryFormat,
+export const StreamRunAgentFileBinaryFormat$inboundSchema: z.ZodType<
+  StreamRunAgentFileBinaryFormat,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1101,17 +1115,17 @@ export const FileBinaryFormat$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type FileBinaryFormat$Outbound = {
+export type StreamRunAgentFileBinaryFormat$Outbound = {
   bytes: string;
   mimeType?: string | undefined;
   name?: string | undefined;
 };
 
 /** @internal */
-export const FileBinaryFormat$outboundSchema: z.ZodType<
-  FileBinaryFormat$Outbound,
+export const StreamRunAgentFileBinaryFormat$outboundSchema: z.ZodType<
+  StreamRunAgentFileBinaryFormat$Outbound,
   z.ZodTypeDef,
-  FileBinaryFormat
+  StreamRunAgentFileBinaryFormat
 > = z.object({
   bytes: z.string(),
   mimeType: z.string().optional(),
@@ -1122,30 +1136,32 @@ export const FileBinaryFormat$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace FileBinaryFormat$ {
-  /** @deprecated use `FileBinaryFormat$inboundSchema` instead. */
-  export const inboundSchema = FileBinaryFormat$inboundSchema;
-  /** @deprecated use `FileBinaryFormat$outboundSchema` instead. */
-  export const outboundSchema = FileBinaryFormat$outboundSchema;
-  /** @deprecated use `FileBinaryFormat$Outbound` instead. */
-  export type Outbound = FileBinaryFormat$Outbound;
+export namespace StreamRunAgentFileBinaryFormat$ {
+  /** @deprecated use `StreamRunAgentFileBinaryFormat$inboundSchema` instead. */
+  export const inboundSchema = StreamRunAgentFileBinaryFormat$inboundSchema;
+  /** @deprecated use `StreamRunAgentFileBinaryFormat$outboundSchema` instead. */
+  export const outboundSchema = StreamRunAgentFileBinaryFormat$outboundSchema;
+  /** @deprecated use `StreamRunAgentFileBinaryFormat$Outbound` instead. */
+  export type Outbound = StreamRunAgentFileBinaryFormat$Outbound;
 }
 
-export function fileBinaryFormatToJSON(
-  fileBinaryFormat: FileBinaryFormat,
+export function streamRunAgentFileBinaryFormatToJSON(
+  streamRunAgentFileBinaryFormat: StreamRunAgentFileBinaryFormat,
 ): string {
   return JSON.stringify(
-    FileBinaryFormat$outboundSchema.parse(fileBinaryFormat),
+    StreamRunAgentFileBinaryFormat$outboundSchema.parse(
+      streamRunAgentFileBinaryFormat,
+    ),
   );
 }
 
-export function fileBinaryFormatFromJSON(
+export function streamRunAgentFileBinaryFormatFromJSON(
   jsonString: string,
-): SafeParseResult<FileBinaryFormat, SDKValidationError> {
+): SafeParseResult<StreamRunAgentFileBinaryFormat, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileBinaryFormat' from JSON`,
+    (x) => StreamRunAgentFileBinaryFormat$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'StreamRunAgentFileBinaryFormat' from JSON`,
   );
 }
 
@@ -1155,14 +1171,14 @@ export const StreamRunAgentPublicMessagePartFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => FileBinaryFormat$inboundSchema),
-  z.lazy(() => FileFileInURIFormat$inboundSchema),
+  z.lazy(() => StreamRunAgentFileBinaryFormat$inboundSchema),
+  z.lazy(() => StreamRunAgentFileFileInURIFormat$inboundSchema),
 ]);
 
 /** @internal */
 export type StreamRunAgentPublicMessagePartFile$Outbound =
-  | FileBinaryFormat$Outbound
-  | FileFileInURIFormat$Outbound;
+  | StreamRunAgentFileBinaryFormat$Outbound
+  | StreamRunAgentFileFileInURIFormat$Outbound;
 
 /** @internal */
 export const StreamRunAgentPublicMessagePartFile$outboundSchema: z.ZodType<
@@ -1170,8 +1186,8 @@ export const StreamRunAgentPublicMessagePartFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamRunAgentPublicMessagePartFile
 > = z.union([
-  z.lazy(() => FileBinaryFormat$outboundSchema),
-  z.lazy(() => FileFileInURIFormat$outboundSchema),
+  z.lazy(() => StreamRunAgentFileBinaryFormat$outboundSchema),
+  z.lazy(() => StreamRunAgentFileFileInURIFormat$outboundSchema),
 ]);
 
 /**
@@ -1211,36 +1227,38 @@ export function streamRunAgentPublicMessagePartFileFromJSON(
 }
 
 /** @internal */
-export const PublicMessagePartFilePart$inboundSchema: z.ZodType<
-  PublicMessagePartFilePart,
+export const StreamRunAgentPublicMessagePartFilePart$inboundSchema: z.ZodType<
+  StreamRunAgentPublicMessagePartFilePart,
   z.ZodTypeDef,
   unknown
 > = z.object({
   kind: StreamRunAgentPublicMessagePartAgentsKind$inboundSchema,
   file: z.union([
-    z.lazy(() => FileBinaryFormat$inboundSchema),
-    z.lazy(() => FileFileInURIFormat$inboundSchema),
+    z.lazy(() => StreamRunAgentFileBinaryFormat$inboundSchema),
+    z.lazy(() => StreamRunAgentFileFileInURIFormat$inboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
 
 /** @internal */
-export type PublicMessagePartFilePart$Outbound = {
+export type StreamRunAgentPublicMessagePartFilePart$Outbound = {
   kind: string;
-  file: FileBinaryFormat$Outbound | FileFileInURIFormat$Outbound;
+  file:
+    | StreamRunAgentFileBinaryFormat$Outbound
+    | StreamRunAgentFileFileInURIFormat$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const PublicMessagePartFilePart$outboundSchema: z.ZodType<
-  PublicMessagePartFilePart$Outbound,
+export const StreamRunAgentPublicMessagePartFilePart$outboundSchema: z.ZodType<
+  StreamRunAgentPublicMessagePartFilePart$Outbound,
   z.ZodTypeDef,
-  PublicMessagePartFilePart
+  StreamRunAgentPublicMessagePartFilePart
 > = z.object({
   kind: StreamRunAgentPublicMessagePartAgentsKind$outboundSchema,
   file: z.union([
-    z.lazy(() => FileBinaryFormat$outboundSchema),
-    z.lazy(() => FileFileInURIFormat$outboundSchema),
+    z.lazy(() => StreamRunAgentFileBinaryFormat$outboundSchema),
+    z.lazy(() => StreamRunAgentFileFileInURIFormat$outboundSchema),
   ]),
   metadata: z.record(z.any()).optional(),
 });
@@ -1249,30 +1267,41 @@ export const PublicMessagePartFilePart$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PublicMessagePartFilePart$ {
-  /** @deprecated use `PublicMessagePartFilePart$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartFilePart$inboundSchema;
-  /** @deprecated use `PublicMessagePartFilePart$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartFilePart$outboundSchema;
-  /** @deprecated use `PublicMessagePartFilePart$Outbound` instead. */
-  export type Outbound = PublicMessagePartFilePart$Outbound;
+export namespace StreamRunAgentPublicMessagePartFilePart$ {
+  /** @deprecated use `StreamRunAgentPublicMessagePartFilePart$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentPublicMessagePartFilePart$inboundSchema;
+  /** @deprecated use `StreamRunAgentPublicMessagePartFilePart$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentPublicMessagePartFilePart$outboundSchema;
+  /** @deprecated use `StreamRunAgentPublicMessagePartFilePart$Outbound` instead. */
+  export type Outbound = StreamRunAgentPublicMessagePartFilePart$Outbound;
 }
 
-export function publicMessagePartFilePartToJSON(
-  publicMessagePartFilePart: PublicMessagePartFilePart,
+export function streamRunAgentPublicMessagePartFilePartToJSON(
+  streamRunAgentPublicMessagePartFilePart:
+    StreamRunAgentPublicMessagePartFilePart,
 ): string {
   return JSON.stringify(
-    PublicMessagePartFilePart$outboundSchema.parse(publicMessagePartFilePart),
+    StreamRunAgentPublicMessagePartFilePart$outboundSchema.parse(
+      streamRunAgentPublicMessagePartFilePart,
+    ),
   );
 }
 
-export function publicMessagePartFilePartFromJSON(
+export function streamRunAgentPublicMessagePartFilePartFromJSON(
   jsonString: string,
-): SafeParseResult<PublicMessagePartFilePart, SDKValidationError> {
+): SafeParseResult<
+  StreamRunAgentPublicMessagePartFilePart,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => PublicMessagePartFilePart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartFilePart' from JSON`,
+    (x) =>
+      StreamRunAgentPublicMessagePartFilePart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentPublicMessagePartFilePart' from JSON`,
   );
 }
 
@@ -1300,8 +1329,8 @@ export namespace StreamRunAgentPublicMessagePartKind$ {
 }
 
 /** @internal */
-export const PublicMessagePartTextPart$inboundSchema: z.ZodType<
-  PublicMessagePartTextPart,
+export const StreamRunAgentPublicMessagePartTextPart$inboundSchema: z.ZodType<
+  StreamRunAgentPublicMessagePartTextPart,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1310,16 +1339,16 @@ export const PublicMessagePartTextPart$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type PublicMessagePartTextPart$Outbound = {
+export type StreamRunAgentPublicMessagePartTextPart$Outbound = {
   kind: string;
   text: string;
 };
 
 /** @internal */
-export const PublicMessagePartTextPart$outboundSchema: z.ZodType<
-  PublicMessagePartTextPart$Outbound,
+export const StreamRunAgentPublicMessagePartTextPart$outboundSchema: z.ZodType<
+  StreamRunAgentPublicMessagePartTextPart$Outbound,
   z.ZodTypeDef,
-  PublicMessagePartTextPart
+  StreamRunAgentPublicMessagePartTextPart
 > = z.object({
   kind: StreamRunAgentPublicMessagePartKind$outboundSchema,
   text: z.string(),
@@ -1329,30 +1358,41 @@ export const PublicMessagePartTextPart$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace PublicMessagePartTextPart$ {
-  /** @deprecated use `PublicMessagePartTextPart$inboundSchema` instead. */
-  export const inboundSchema = PublicMessagePartTextPart$inboundSchema;
-  /** @deprecated use `PublicMessagePartTextPart$outboundSchema` instead. */
-  export const outboundSchema = PublicMessagePartTextPart$outboundSchema;
-  /** @deprecated use `PublicMessagePartTextPart$Outbound` instead. */
-  export type Outbound = PublicMessagePartTextPart$Outbound;
+export namespace StreamRunAgentPublicMessagePartTextPart$ {
+  /** @deprecated use `StreamRunAgentPublicMessagePartTextPart$inboundSchema` instead. */
+  export const inboundSchema =
+    StreamRunAgentPublicMessagePartTextPart$inboundSchema;
+  /** @deprecated use `StreamRunAgentPublicMessagePartTextPart$outboundSchema` instead. */
+  export const outboundSchema =
+    StreamRunAgentPublicMessagePartTextPart$outboundSchema;
+  /** @deprecated use `StreamRunAgentPublicMessagePartTextPart$Outbound` instead. */
+  export type Outbound = StreamRunAgentPublicMessagePartTextPart$Outbound;
 }
 
-export function publicMessagePartTextPartToJSON(
-  publicMessagePartTextPart: PublicMessagePartTextPart,
+export function streamRunAgentPublicMessagePartTextPartToJSON(
+  streamRunAgentPublicMessagePartTextPart:
+    StreamRunAgentPublicMessagePartTextPart,
 ): string {
   return JSON.stringify(
-    PublicMessagePartTextPart$outboundSchema.parse(publicMessagePartTextPart),
+    StreamRunAgentPublicMessagePartTextPart$outboundSchema.parse(
+      streamRunAgentPublicMessagePartTextPart,
+    ),
   );
 }
 
-export function publicMessagePartTextPartFromJSON(
+export function streamRunAgentPublicMessagePartTextPartFromJSON(
   jsonString: string,
-): SafeParseResult<PublicMessagePartTextPart, SDKValidationError> {
+): SafeParseResult<
+  StreamRunAgentPublicMessagePartTextPart,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => PublicMessagePartTextPart$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PublicMessagePartTextPart' from JSON`,
+    (x) =>
+      StreamRunAgentPublicMessagePartTextPart$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'StreamRunAgentPublicMessagePartTextPart' from JSON`,
   );
 }
 
@@ -1362,16 +1402,16 @@ export const StreamRunAgentPublicMessagePart$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => PublicMessagePartTextPart$inboundSchema),
-  z.lazy(() => PublicMessagePartFilePart$inboundSchema),
-  z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+  z.lazy(() => StreamRunAgentPublicMessagePartTextPart$inboundSchema),
+  z.lazy(() => StreamRunAgentPublicMessagePartFilePart$inboundSchema),
+  z.lazy(() => StreamRunAgentPublicMessagePartToolResultPart$inboundSchema),
 ]);
 
 /** @internal */
 export type StreamRunAgentPublicMessagePart$Outbound =
-  | PublicMessagePartTextPart$Outbound
-  | PublicMessagePartFilePart$Outbound
-  | PublicMessagePartToolResultPart$Outbound;
+  | StreamRunAgentPublicMessagePartTextPart$Outbound
+  | StreamRunAgentPublicMessagePartFilePart$Outbound
+  | StreamRunAgentPublicMessagePartToolResultPart$Outbound;
 
 /** @internal */
 export const StreamRunAgentPublicMessagePart$outboundSchema: z.ZodType<
@@ -1379,9 +1419,9 @@ export const StreamRunAgentPublicMessagePart$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamRunAgentPublicMessagePart
 > = z.union([
-  z.lazy(() => PublicMessagePartTextPart$outboundSchema),
-  z.lazy(() => PublicMessagePartFilePart$outboundSchema),
-  z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
+  z.lazy(() => StreamRunAgentPublicMessagePartTextPart$outboundSchema),
+  z.lazy(() => StreamRunAgentPublicMessagePartFilePart$outboundSchema),
+  z.lazy(() => StreamRunAgentPublicMessagePartToolResultPart$outboundSchema),
 ]);
 
 /**
@@ -1430,9 +1470,9 @@ export const StreamRunAgentMessage$inboundSchema: z.ZodType<
   ]),
   parts: z.array(
     z.union([
-      z.lazy(() => PublicMessagePartTextPart$inboundSchema),
-      z.lazy(() => PublicMessagePartFilePart$inboundSchema),
-      z.lazy(() => PublicMessagePartToolResultPart$inboundSchema),
+      z.lazy(() => StreamRunAgentPublicMessagePartTextPart$inboundSchema),
+      z.lazy(() => StreamRunAgentPublicMessagePartFilePart$inboundSchema),
+      z.lazy(() => StreamRunAgentPublicMessagePartToolResultPart$inboundSchema),
     ]),
   ),
 });
@@ -1442,9 +1482,9 @@ export type StreamRunAgentMessage$Outbound = {
   messageId?: string | undefined;
   role: string | string;
   parts: Array<
-    | PublicMessagePartTextPart$Outbound
-    | PublicMessagePartFilePart$Outbound
-    | PublicMessagePartToolResultPart$Outbound
+    | StreamRunAgentPublicMessagePartTextPart$Outbound
+    | StreamRunAgentPublicMessagePartFilePart$Outbound
+    | StreamRunAgentPublicMessagePartToolResultPart$Outbound
   >;
 };
 
@@ -1461,9 +1501,11 @@ export const StreamRunAgentMessage$outboundSchema: z.ZodType<
   ]),
   parts: z.array(
     z.union([
-      z.lazy(() => PublicMessagePartTextPart$outboundSchema),
-      z.lazy(() => PublicMessagePartFilePart$outboundSchema),
-      z.lazy(() => PublicMessagePartToolResultPart$outboundSchema),
+      z.lazy(() => StreamRunAgentPublicMessagePartTextPart$outboundSchema),
+      z.lazy(() => StreamRunAgentPublicMessagePartFilePart$outboundSchema),
+      z.lazy(() =>
+        StreamRunAgentPublicMessagePartToolResultPart$outboundSchema
+      ),
     ]),
   ),
 });

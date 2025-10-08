@@ -13,7 +13,7 @@ let value: StreamRunAgentMessage = {
     {
       kind: "file",
       file: {
-        uri: "https://failing-merit.net",
+        uri: "https://calculating-offset.net",
       },
     },
   ],

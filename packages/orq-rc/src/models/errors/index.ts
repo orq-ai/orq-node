@@ -56,6 +56,7 @@ export * from "./orqerror.js";
 export * from "./responsevalidationerror.js";
 export * from "./retrievecontact.js";
 export * from "./sdkvalidationerror.js";
+export * from "./streamagent.js";
 export * from "./streamrunagent.js";
 export * from "./updatecontact.js";
 export * from "./updateeval.js";

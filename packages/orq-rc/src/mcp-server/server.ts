@@ -13,6 +13,7 @@ import {
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
+import { tool$agentsInvoke } from "./tools/agentsInvoke.js";
 import { tool$agentsList } from "./tools/agentsList.js";
 import { tool$agentsListActions } from "./tools/agentsListActions.js";
 import { tool$agentsListTasks } from "./tools/agentsListTasks.js";
@@ -20,6 +21,7 @@ import { tool$agentsRetrieve } from "./tools/agentsRetrieve.js";
 import { tool$agentsRetrieveAction } from "./tools/agentsRetrieveAction.js";
 import { tool$agentsRetrieveTask } from "./tools/agentsRetrieveTask.js";
 import { tool$agentsRun } from "./tools/agentsRun.js";
+import { tool$agentsStream } from "./tools/agentsStream.js";
 import { tool$agentsStreamRun } from "./tools/agentsStreamRun.js";
 import { tool$budgetsCreate } from "./tools/budgetsCreate.js";
 import { tool$budgetsDelete } from "./tools/budgetsDelete.js";
@@ -157,7 +159,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Orq",
-    version: "3.14.0-rc.17",
+    version: "3.14.0-rc.18",
   });
 
   const client = new OrqCore({
@@ -202,9 +204,11 @@ export function createMCPServer(deps: {
   tool(tool$agentsRetrieveTask);
   tool(tool$agentsList);
   tool(tool$agentsRetrieve);
+  tool(tool$agentsInvoke);
   tool(tool$agentsListTasks);
   tool(tool$agentsRun);
   tool(tool$agentsStreamRun);
+  tool(tool$agentsStream);
   tool(tool$agentsListActions);
   tool(tool$agentsRetrieveAction);
   tool(tool$filesCreate);

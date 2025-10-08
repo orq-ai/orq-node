@@ -1,6 +1,6 @@
 # RunAgentMessage
 
-Optional status message
+The A2A format message containing the task for the agent to perform.
 
 ## Example Usage
 
@@ -8,22 +8,20 @@ Optional status message
 import { RunAgentMessage } from "@orq-ai/node/models/operations";
 
 let value: RunAgentMessage = {
-  kind: "message",
-  messageId: "<id>",
-  role: "agent",
+  role: "user",
   parts: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
+    {
+      kind: "text",
+      text: "<value>",
+    },
   ],
 };
 ```
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `kind`                                                                         | [operations.RunAgentAgentsKind](../../models/operations/runagentagentskind.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `messageId`                                                                    | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
-| `role`                                                                         | [operations.RunAgentAgentsRole](../../models/operations/runagentagentsrole.md) | :heavy_check_mark:                                                             | Extended A2A message role                                                      |
-| `parts`                                                                        | *any*[]                                                                        | :heavy_check_mark:                                                             | N/A                                                                            |
+| Field                                                 | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `messageId`                                           | *string*                                              | :heavy_minus_sign:                                    | Optional A2A message ID in ULID format                |
+| `role`                                                | *operations.RunAgentRole*                             | :heavy_check_mark:                                    | Message role (user or tool for continuing executions) |
+| `parts`                                               | *operations.RunAgentPublicMessagePart*[]              | :heavy_check_mark:                                    | A2A message parts (text, file, or tool_result only)   |

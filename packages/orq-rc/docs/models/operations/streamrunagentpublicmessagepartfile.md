@@ -3,19 +3,19 @@
 
 ## Supported Types
 
-### `operations.FileBinaryFormat`
+### `operations.StreamRunAgentFileBinaryFormat`
 
 ```typescript
-const value: operations.FileBinaryFormat = {
+const value: operations.StreamRunAgentFileBinaryFormat = {
   bytes: "<value>",
 };
 ```
 
-### `operations.FileFileInURIFormat`
+### `operations.StreamRunAgentFileFileInURIFormat`
 
 ```typescript
-const value: operations.FileFileInURIFormat = {
-  uri: "https://rapid-sushi.info/",
+const value: operations.StreamRunAgentFileFileInURIFormat = {
+  uri: "https://round-pension.name/",
 };
 ```
 
