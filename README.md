@@ -409,7 +409,6 @@ run();
 
 * [list](docs/sdks/models/README.md#list) - List models
 
-
 ### [prompts](docs/sdks/prompts/README.md)
 
 * [list](docs/sdks/prompts/README.md#list) - List all prompts
