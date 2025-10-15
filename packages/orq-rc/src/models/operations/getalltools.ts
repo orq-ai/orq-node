@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAllToolsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 300
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
    */
   limit?: number | undefined;
   /**
@@ -588,7 +588,7 @@ export const GetAllToolsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  limit: z.number().default(300),
+  limit: z.number().default(10),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
 }).transform((v) => {
@@ -611,7 +611,7 @@ export const GetAllToolsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsRequest
 > = z.object({
-  limit: z.number().default(300),
+  limit: z.number().default(10),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -798,7 +798,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7KP695BEW2T07P9GACG6KHD"),
+    _id: z.string().default("01K7KZ4X0JGTHW3N6RGCRJW960"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -851,7 +851,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K7KP695BEW2T07P9GACG6KHD"),
+  id: z.string().default("01K7KZ4X0JGTHW3N6RGCRJW960"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1194,7 +1194,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7KP695AHK2T8GCM73BT48ST"),
+    _id: z.string().default("01K7KZ4X0JHB2K9STK311YB4EX"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -1246,7 +1246,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K7KP695AHK2T8GCM73BT48ST"),
+  id: z.string().default("01K7KZ4X0JHB2K9STK311YB4EX"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1629,7 +1629,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7KP695AZ7NN32EF78QJ6NTW"),
+    _id: z.string().default("01K7KZ4X0HRYTHX0BK790KJ010"),
     path: z.string(),
     key: z.string(),
     display_name: z.string(),
@@ -1681,7 +1681,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K7KP695AZ7NN32EF78QJ6NTW"),
+  id: z.string().default("01K7KZ4X0HRYTHX0BK790KJ010"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1842,7 +1842,7 @@ export const GetAllToolsData2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7KP69592Q93RE0P6XSJ54YD"),
+  _id: z.string().default("01K7KZ4X0HEVBHZ7HKFCNSRY7C"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1895,7 +1895,7 @@ export const GetAllToolsData2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData2
 > = z.object({
-  id: z.string().default("01K7KP69592Q93RE0P6XSJ54YD"),
+  id: z.string().default("01K7KZ4X0HEVBHZ7HKFCNSRY7C"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -2063,7 +2063,7 @@ export const GetAllToolsData1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7KP6959SWK33M95JXSH1W8B"),
+  _id: z.string().default("01K7KZ4X0H2ZMJANR3VK47F2JF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2115,7 +2115,7 @@ export const GetAllToolsData1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData1
 > = z.object({
-  id: z.string().default("01K7KP6959SWK33M95JXSH1W8B"),
+  id: z.string().default("01K7KZ4X0H2ZMJANR3VK47F2JF"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
