@@ -8,11 +8,11 @@ The role of the messages author, in this case `assistant` or `exception`.
 import { DeploymentStreamMessagesDeploymentsRequestRequestBodyRole } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStreamMessagesDeploymentsRequestRequestBodyRole =
-  "exception";
+  "assistant";
 ```
 
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

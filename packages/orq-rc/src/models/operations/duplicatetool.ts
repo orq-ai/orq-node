@@ -63,7 +63,13 @@ export type DuplicateToolResponseBodyCodeTool = {
 export type DuplicateToolResponseBody5 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -190,7 +196,13 @@ export type DuplicateToolResponseBodyMcp = {
 export type DuplicateToolResponseBody4 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -341,7 +353,13 @@ export type DuplicateToolResponseBodyHttp = {
 export type DuplicateToolResponseBody3 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -422,7 +440,13 @@ export type DuplicateToolResponseBodyJsonSchema = {
 export type DuplicateToolResponseBody2 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -503,7 +527,13 @@ export type DuplicateToolResponseBodyFunction = {
 export type DuplicateToolResponseBody1 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -758,7 +788,7 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC383NRA4ZZ3SE5Q362"),
+  _id: z.string().default("01K7K4ZPHVTSZ5QXN94GAXFB1J"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -814,7 +844,7 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K7HH3FC383NRA4ZZ3SE5Q362"),
+  id: z.string().default("01K7K4ZPHVTSZ5QXN94GAXFB1J"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1202,7 +1232,7 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC2NXS84JH68AJ28EEH"),
+  _id: z.string().default("01K7K4ZPHSPEC8FTA07QHNNPSK"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1256,7 +1286,7 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K7HH3FC2NXS84JH68AJ28EEH"),
+  id: z.string().default("01K7K4ZPHSPEC8FTA07QHNNPSK"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1683,7 +1713,7 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC1A4WCK7FJMPJVNME4"),
+  _id: z.string().default("01K7K4ZPHRYT3R5JHDECWMNH8S"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1737,7 +1767,7 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K7HH3FC1A4WCK7FJMPJVNME4"),
+  id: z.string().default("01K7K4ZPHRYT3R5JHDECWMNH8S"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1917,7 +1947,7 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC1RYWSQF5SV3ANHN3Q"),
+  _id: z.string().default("01K7K4ZPHR462KP2C4VGPDVMXV"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1970,7 +2000,7 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K7HH3FC1RYWSQF5SV3ANHN3Q"),
+  id: z.string().default("01K7K4ZPHR462KP2C4VGPDVMXV"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -2143,7 +2173,7 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC03BABX4BH5247YDPZ"),
+  _id: z.string().default("01K7K4ZPHQHF6QAWS9PECQXF85"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2195,7 +2225,7 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K7HH3FC03BABX4BH5247YDPZ"),
+  id: z.string().default("01K7K4ZPHQHF6QAWS9PECQXF85"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

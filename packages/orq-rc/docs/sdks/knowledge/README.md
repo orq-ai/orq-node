@@ -110,8 +110,10 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.knowledge.create({
+    type: "internal",
     key: "<key>",
     embeddingModel: "<value>",
+    isPrivateModel: false,
     path: "Default",
   });
 
@@ -137,8 +139,10 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await knowledgeCreate(orq, {
+    type: "internal",
     key: "<key>",
     embeddingModel: "<value>",
+    isPrivateModel: false,
     path: "Default",
   });
   if (res.ok) {
@@ -263,6 +267,7 @@ async function run() {
     knowledgeId: "<id>",
     requestBody: {
       path: "Default",
+      type: "external",
     },
   });
 
@@ -291,6 +296,7 @@ async function run() {
     knowledgeId: "<id>",
     requestBody: {
       path: "Default",
+      type: "external",
     },
   });
   if (res.ok) {

@@ -6,7 +6,7 @@
 import { PrefixMessagesAssistantMessage } from "@orq-ai/node/models/operations";
 
 let value: PrefixMessagesAssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

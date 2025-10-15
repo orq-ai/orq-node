@@ -6,7 +6,7 @@
 import { RetrieveDatapointMessagesAssistantMessage } from "@orq-ai/node/models/operations";
 
 let value: RetrieveDatapointMessagesAssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

@@ -9,11 +9,11 @@ import { DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole 
 
 let value:
   DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
-    "exception";
+    "assistant";
 ```
 
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

@@ -53,7 +53,13 @@ export type UpdateToolRequestBodyCodeTool = {
 
 export type UpdateToolRequestBody5 = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
@@ -159,7 +165,13 @@ export type RequestBodyMcp = {
 
 export type UpdateToolRequestBody4 = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
@@ -295,7 +307,13 @@ export type UpdateToolRequestBodyHttp = {
 
 export type UpdateToolRequestBody3 = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
@@ -362,7 +380,13 @@ export type UpdateToolRequestBodyJsonSchema = {
 
 export type UpdateToolRequestBody2 = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
@@ -429,7 +453,13 @@ export type UpdateToolRequestBodyFunction = {
 
 export type UpdateToolRequestBody1 = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
@@ -521,7 +551,13 @@ export type UpdateToolResponseBodyCodeTool = {
 export type UpdateToolResponseBody5 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -646,7 +682,13 @@ export type UpdateToolResponseBodyMcp = {
 export type UpdateToolResponseBody4 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -795,7 +837,13 @@ export type UpdateToolResponseBodyHttp = {
 export type UpdateToolResponseBody3 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -876,7 +924,13 @@ export type UpdateToolResponseBodyJsonSchema = {
 export type UpdateToolResponseBody2 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -957,7 +1011,13 @@ export type UpdateToolResponseBodyFunction = {
 export type UpdateToolResponseBody1 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -2691,7 +2751,7 @@ export const UpdateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FBYAV2Y100BE695Z1S2"),
+  _id: z.string().default("01K7K4ZPHND97KSSZ4DPJWT4AS"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2746,7 +2806,7 @@ export const UpdateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K7HH3FBYAV2Y100BE695Z1S2"),
+  id: z.string().default("01K7K4ZPHND97KSSZ4DPJWT4AS"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3120,7 +3180,7 @@ export const UpdateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FBXTFVPWEAZB3GD8SAN"),
+  _id: z.string().default("01K7K4ZPHNS1TWS2Q9K6A9285J"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3174,7 +3234,7 @@ export const UpdateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K7HH3FBXTFVPWEAZB3GD8SAN"),
+  id: z.string().default("01K7K4ZPHNS1TWS2Q9K6A9285J"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3592,7 +3652,7 @@ export const UpdateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FBW3AFPJ6KJWP6MPVE3"),
+  _id: z.string().default("01K7K4ZPHM3VMNE8QCY7XNVHRF"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3646,7 +3706,7 @@ export const UpdateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K7HH3FBW3AFPJ6KJWP6MPVE3"),
+  id: z.string().default("01K7K4ZPHM3VMNE8QCY7XNVHRF"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -3820,7 +3880,7 @@ export const UpdateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FBWMACRCVPR21BVKW3V"),
+  _id: z.string().default("01K7K4ZPHMMRXQGQBSPTT99NXC"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -3873,7 +3933,7 @@ export const UpdateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K7HH3FBWMACRCVPR21BVKW3V"),
+  id: z.string().default("01K7K4ZPHMMRXQGQBSPTT99NXC"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -4045,7 +4105,7 @@ export const UpdateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FBVVQE2A093A59Z8FSZ"),
+  _id: z.string().default("01K7K4ZPHK95ZQRH14JCYKJAZ6"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -4097,7 +4157,7 @@ export const UpdateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K7HH3FBVVQE2A093A59Z8FSZ"),
+  id: z.string().default("01K7K4ZPHK95ZQRH14JCYKJAZ6"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

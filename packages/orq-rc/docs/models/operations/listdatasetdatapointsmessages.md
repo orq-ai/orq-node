@@ -42,7 +42,7 @@ const value: operations.ListDatasetDatapointsMessagesUserMessage = {
 
 ```typescript
 const value: operations.ListDatasetDatapointsMessagesAssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

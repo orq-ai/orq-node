@@ -5,11 +5,11 @@
 ```typescript
 import { DataType } from "@orq-ai/node/models/operations";
 
-let value: DataType = "llm_eval";
+let value: DataType = "internal";
 ```
 
 ## Values
 
 ```typescript
-"llm_eval"
+"internal"
 ```

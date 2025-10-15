@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: da954a88f8999aac70bcdcdc1f340940
+  docChecksum: f22fc96388dd720d513281676c8b4d5b
   docVersion: "2.0"
   speakeasyVersion: 1.636.3
   generationVersion: 2.723.11
-  releaseVersion: 3.14.0-rc.25
-  configChecksum: 4f66d3c7391fa3c173ebc8de4ea3b2d6
+  releaseVersion: 3.14.0-rc.26
+  configChecksum: 522bcdf9c4e6a0ae5cecd6de71a65b7b
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://gitpkg.now.sh/orq-ai/orq-node/packages/orq-rc
@@ -540,6 +540,7 @@ generatedFiles:
   - docs/models/operations/createevalrequestbody.md
   - docs/models/operations/createevalrequestbodyevalsguardrailconfig.md
   - docs/models/operations/createevalrequestbodyevalsoutputtype.md
+  - docs/models/operations/createevalrequestbodyevalsrequest4type.md
   - docs/models/operations/createevalrequestbodyevalsrequesttype.md
   - docs/models/operations/createevalrequestbodyevalstype.md
   - docs/models/operations/createevalrequestbodyguardrailconfig.md
@@ -547,6 +548,7 @@ generatedFiles:
   - docs/models/operations/createevalrequestbodytype.md
   - docs/models/operations/createevalresponsebody.md
   - docs/models/operations/createevalresponsebodyevalsguardrailconfig.md
+  - docs/models/operations/createevalresponsebodyevalsresponse200applicationjson6type.md
   - docs/models/operations/createevalresponsebodyevalsresponse200applicationjson7guardrailconfig.md
   - docs/models/operations/createevalresponsebodyevalsresponse200applicationjson7type.md
   - docs/models/operations/createevalresponsebodyevalsresponse200applicationjsonguardrailconfig.md
@@ -562,12 +564,15 @@ generatedFiles:
   - docs/models/operations/createfeedbackrequestbody.md
   - docs/models/operations/createfeedbackresponsebody.md
   - docs/models/operations/createfeedbackvalue.md
-  - docs/models/operations/createknowledgeagenticragconfig.md
   - docs/models/operations/createknowledgerequestbody.md
-  - docs/models/operations/createknowledgererankconfig.md
+  - docs/models/operations/createknowledgerequestbodyagenticragconfig.md
+  - docs/models/operations/createknowledgerequestbodyrerankconfig.md
+  - docs/models/operations/createknowledgerequestbodytype.md
   - docs/models/operations/createknowledgeresponsebody.md
-  - docs/models/operations/createknowledgeretrievalsettings.md
-  - docs/models/operations/createknowledgeretrievaltype.md
+  - docs/models/operations/createknowledgeresponsebodyagenticragconfig.md
+  - docs/models/operations/createknowledgeresponsebodyrerankconfig.md
+  - docs/models/operations/createknowledgeresponsebodyretrievalsettings.md
+  - docs/models/operations/createknowledgeresponsebodytype.md
   - docs/models/operations/creatememorydocumentrequest.md
   - docs/models/operations/creatememorydocumentrequestbody.md
   - docs/models/operations/creatememorydocumentresponsebody.md
@@ -664,6 +669,8 @@ generatedFiles:
   - docs/models/operations/createpromptusecases.md
   - docs/models/operations/createpromptverbosity.md
   - docs/models/operations/createtoolrequestbody.md
+  - docs/models/operations/createtoolrequestbody1.md
+  - docs/models/operations/createtoolrequestbody2.md
   - docs/models/operations/createtoolrequestbodyhttp.md
   - docs/models/operations/createtoolrequestbodymethod.md
   - docs/models/operations/createtoolrequestbodystatus.md
@@ -678,6 +685,8 @@ generatedFiles:
   - docs/models/operations/createtoolrequestbodytoolstype.md
   - docs/models/operations/createtoolrequestbodytype.md
   - docs/models/operations/createtoolresponsebody.md
+  - docs/models/operations/createtoolresponsebody1.md
+  - docs/models/operations/createtoolresponsebody2.md
   - docs/models/operations/createtoolresponsebodyfunction.md
   - docs/models/operations/createtoolresponsebodyhttp.md
   - docs/models/operations/createtoolresponsebodymethod.md
@@ -699,11 +708,13 @@ generatedFiles:
   - docs/models/operations/data3.md
   - docs/models/operations/data4.md
   - docs/models/operations/data5.md
+  - docs/models/operations/dataagenticragconfig.md
   - docs/models/operations/dataarguments.md
   - docs/models/operations/datablueprint.md
   - docs/models/operations/datacodetool.md
   - docs/models/operations/dataconnectiontype.md
   - docs/models/operations/datadefaultvalue.md
+  - docs/models/operations/dataexternalconfig.md
   - docs/models/operations/datafunction.md
   - docs/models/operations/datafunctionparams.md
   - docs/models/operations/dataguardrailconfig.md
@@ -719,6 +730,9 @@ generatedFiles:
   - docs/models/operations/datapython.md
   - docs/models/operations/dataragas.md
   - docs/models/operations/dataragasmetric.md
+  - docs/models/operations/datarerankconfig.md
+  - docs/models/operations/dataretrievalsettings.md
+  - docs/models/operations/dataretrievaltype.md
   - docs/models/operations/datastatus.md
   - docs/models/operations/datatype.md
   - docs/models/operations/datatypescript.md
@@ -1270,6 +1284,7 @@ generatedFiles:
   - docs/models/operations/evaluationstype.md
   - docs/models/operations/evaluationtype.md
   - docs/models/operations/exists.md
+  - docs/models/operations/externalconfig.md
   - docs/models/operations/feedback.md
   - docs/models/operations/fifteen.md
   - docs/models/operations/filebinaryformat.md
@@ -1438,6 +1453,8 @@ generatedFiles:
   - docs/models/operations/getallpromptsusecases.md
   - docs/models/operations/getallpromptsverbosity.md
   - docs/models/operations/getalltoolsdata.md
+  - docs/models/operations/getalltoolsdata1.md
+  - docs/models/operations/getalltoolsdata2.md
   - docs/models/operations/getalltoolsdatafunction.md
   - docs/models/operations/getalltoolsdatahttp.md
   - docs/models/operations/getalltoolsdatamethod.md
@@ -1467,6 +1484,7 @@ generatedFiles:
   - docs/models/operations/getevalsdata.md
   - docs/models/operations/getevalsdataevalsguardrailconfig.md
   - docs/models/operations/getevalsdataevalsresponse200applicationjsonguardrailconfig.md
+  - docs/models/operations/getevalsdataevalsresponse200applicationjsonresponsebody7type.md
   - docs/models/operations/getevalsdataevalsresponse200applicationjsonresponsebodyguardrailconfig.md
   - docs/models/operations/getevalsdataevalsresponse200applicationjsonresponsebodytype.md
   - docs/models/operations/getevalsdataevalsresponse200applicationjsontype.md
@@ -1589,12 +1607,20 @@ generatedFiles:
   - docs/models/operations/getonechunkrequest.md
   - docs/models/operations/getonechunkresponsebody.md
   - docs/models/operations/getonechunkstatus.md
-  - docs/models/operations/getoneknowledgeagenticragconfig.md
   - docs/models/operations/getoneknowledgerequest.md
-  - docs/models/operations/getoneknowledgererankconfig.md
   - docs/models/operations/getoneknowledgeresponsebody.md
-  - docs/models/operations/getoneknowledgeretrievalsettings.md
-  - docs/models/operations/getoneknowledgeretrievaltype.md
+  - docs/models/operations/getoneknowledgeresponsebody1.md
+  - docs/models/operations/getoneknowledgeresponsebody2.md
+  - docs/models/operations/getoneknowledgeresponsebodyagenticragconfig.md
+  - docs/models/operations/getoneknowledgeresponsebodyexternalconfig.md
+  - docs/models/operations/getoneknowledgeresponsebodyknowledgeagenticragconfig.md
+  - docs/models/operations/getoneknowledgeresponsebodyknowledgererankconfig.md
+  - docs/models/operations/getoneknowledgeresponsebodyknowledgeretrievalsettings.md
+  - docs/models/operations/getoneknowledgeresponsebodyknowledgetype.md
+  - docs/models/operations/getoneknowledgeresponsebodyrerankconfig.md
+  - docs/models/operations/getoneknowledgeresponsebodyretrievalsettings.md
+  - docs/models/operations/getoneknowledgeresponsebodyretrievaltype.md
+  - docs/models/operations/getoneknowledgeresponsebodytype.md
   - docs/models/operations/getoneprompt11.md
   - docs/models/operations/getoneprompt12.md
   - docs/models/operations/getoneprompt13.md
@@ -1887,14 +1913,14 @@ generatedFiles:
   - docs/models/operations/listdatasourcesrequest.md
   - docs/models/operations/listdatasourcesresponsebody.md
   - docs/models/operations/listdatasourcesstatus.md
-  - docs/models/operations/listknowledgebasesagenticragconfig.md
   - docs/models/operations/listknowledgebasesdata.md
+  - docs/models/operations/listknowledgebasesdataagenticragconfig.md
+  - docs/models/operations/listknowledgebasesdatarerankconfig.md
+  - docs/models/operations/listknowledgebasesdataretrievalsettings.md
+  - docs/models/operations/listknowledgebasesdatatype.md
   - docs/models/operations/listknowledgebasesobject.md
   - docs/models/operations/listknowledgebasesrequest.md
-  - docs/models/operations/listknowledgebasesrerankconfig.md
   - docs/models/operations/listknowledgebasesresponsebody.md
-  - docs/models/operations/listknowledgebasesretrievalsettings.md
-  - docs/models/operations/listknowledgebasesretrievaltype.md
   - docs/models/operations/listmodelsdata.md
   - docs/models/operations/listmodelsobject.md
   - docs/models/operations/listmodelsresponsebody.md
@@ -2083,11 +2109,13 @@ generatedFiles:
   - docs/models/operations/requestbody3.md
   - docs/models/operations/requestbody4.md
   - docs/models/operations/requestbody5.md
+  - docs/models/operations/requestbodyagenticragconfig.md
   - docs/models/operations/requestbodyarguments.md
   - docs/models/operations/requestbodyblueprint.md
   - docs/models/operations/requestbodycodetool.md
   - docs/models/operations/requestbodyconnectiontype.md
   - docs/models/operations/requestbodydefaultvalue.md
+  - docs/models/operations/requestbodyexternalconfig.md
   - docs/models/operations/requestbodyfunction.md
   - docs/models/operations/requestbodyguardrailconfig.md
   - docs/models/operations/requestbodyheaders.md
@@ -2102,6 +2130,9 @@ generatedFiles:
   - docs/models/operations/requestbodyoutputtype.md
   - docs/models/operations/requestbodyperiod.md
   - docs/models/operations/requestbodypython.md
+  - docs/models/operations/requestbodyrerankconfig.md
+  - docs/models/operations/requestbodyretrievalsettings.md
+  - docs/models/operations/requestbodyretrievaltype.md
   - docs/models/operations/requestbodystatus.md
   - docs/models/operations/requestbodytype.md
   - docs/models/operations/rerankconfig.md
@@ -2111,12 +2142,14 @@ generatedFiles:
   - docs/models/operations/responsebody3.md
   - docs/models/operations/responsebody4.md
   - docs/models/operations/responsebody5.md
+  - docs/models/operations/responsebodyagenticragconfig.md
   - docs/models/operations/responsebodyarguments.md
   - docs/models/operations/responsebodyblueprint.md
   - docs/models/operations/responsebodyboolean.md
   - docs/models/operations/responsebodycodetool.md
   - docs/models/operations/responsebodyconnectiontype.md
   - docs/models/operations/responsebodydefaultvalue.md
+  - docs/models/operations/responsebodyexternalconfig.md
   - docs/models/operations/responsebodyfunction.md
   - docs/models/operations/responsebodyfunctionparams.md
   - docs/models/operations/responsebodyguardrailconfig.md
@@ -2134,6 +2167,9 @@ generatedFiles:
   - docs/models/operations/responsebodypython.md
   - docs/models/operations/responsebodyragas.md
   - docs/models/operations/responsebodyragasmetric.md
+  - docs/models/operations/responsebodyrerankconfig.md
+  - docs/models/operations/responsebodyretrievalsettings.md
+  - docs/models/operations/responsebodyretrievaltype.md
   - docs/models/operations/responsebodystatus.md
   - docs/models/operations/responsebodytype.md
   - docs/models/operations/responsebodytypescript.md
@@ -2362,7 +2398,6 @@ generatedFiles:
   - docs/models/operations/searchknowledge1lte.md
   - docs/models/operations/searchknowledge1ne.md
   - docs/models/operations/searchknowledge1nin.md
-  - docs/models/operations/searchknowledgeagenticragconfig.md
   - docs/models/operations/searchknowledgeand3.md
   - docs/models/operations/searchknowledgeandeq.md
   - docs/models/operations/searchknowledgeandexists.md
@@ -2393,7 +2428,6 @@ generatedFiles:
   - docs/models/operations/searchknowledgeornin.md
   - docs/models/operations/searchknowledgerequest.md
   - docs/models/operations/searchknowledgerequestbody.md
-  - docs/models/operations/searchknowledgererankconfig.md
   - docs/models/operations/searchknowledgeresponsebody.md
   - docs/models/operations/searchoptions.md
   - docs/models/operations/searchtype.md
@@ -2803,17 +2837,28 @@ generatedFiles:
   - docs/models/operations/updateevalresponsebodymethod.md
   - docs/models/operations/updateevalresponsebodypython.md
   - docs/models/operations/updateevalresponsebodytype.md
-  - docs/models/operations/updateknowledgeagenticragconfig.md
-  - docs/models/operations/updateknowledgeknowledgeagenticragconfig.md
-  - docs/models/operations/updateknowledgeknowledgererankconfig.md
-  - docs/models/operations/updateknowledgeknowledgeretrievalsettings.md
-  - docs/models/operations/updateknowledgeknowledgeretrievaltype.md
   - docs/models/operations/updateknowledgerequest.md
   - docs/models/operations/updateknowledgerequestbody.md
-  - docs/models/operations/updateknowledgererankconfig.md
+  - docs/models/operations/updateknowledgerequestbody1.md
+  - docs/models/operations/updateknowledgerequestbody2.md
+  - docs/models/operations/updateknowledgerequestbodyagenticragconfig.md
+  - docs/models/operations/updateknowledgerequestbodyknowledgetype.md
+  - docs/models/operations/updateknowledgerequestbodyrerankconfig.md
+  - docs/models/operations/updateknowledgerequestbodyretrievalsettings.md
+  - docs/models/operations/updateknowledgerequestbodytype.md
   - docs/models/operations/updateknowledgeresponsebody.md
-  - docs/models/operations/updateknowledgeretrievalsettings.md
-  - docs/models/operations/updateknowledgeretrievaltype.md
+  - docs/models/operations/updateknowledgeresponsebody1.md
+  - docs/models/operations/updateknowledgeresponsebody2.md
+  - docs/models/operations/updateknowledgeresponsebodyagenticragconfig.md
+  - docs/models/operations/updateknowledgeresponsebodyexternalconfig.md
+  - docs/models/operations/updateknowledgeresponsebodyknowledgeagenticragconfig.md
+  - docs/models/operations/updateknowledgeresponsebodyknowledgererankconfig.md
+  - docs/models/operations/updateknowledgeresponsebodyknowledgeretrievalsettings.md
+  - docs/models/operations/updateknowledgeresponsebodyknowledgetype.md
+  - docs/models/operations/updateknowledgeresponsebodyrerankconfig.md
+  - docs/models/operations/updateknowledgeresponsebodyretrievalsettings.md
+  - docs/models/operations/updateknowledgeresponsebodyretrievaltype.md
+  - docs/models/operations/updateknowledgeresponsebodytype.md
   - docs/models/operations/updatememorydocumentrequest.md
   - docs/models/operations/updatememorydocumentrequestbody.md
   - docs/models/operations/updatememorydocumentresponsebody.md
@@ -3538,7 +3583,7 @@ examples:
         "200":
           application/json: {"id": "<id>", "external_id": "<id>", "updated": "2025-06-03T12:31:41.205Z"}
         "201":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "workspace_id": "550e8400-e29b-41d4-a716-446655440000", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-15T05:20:08.470Z"}
     "":
       requestBody:
         application/json: {"external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
@@ -3612,7 +3657,7 @@ examples:
         multipart/form-data: {"file": "x-file: example.file", "purpose": "retrieval"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-10-14T14:13:28.247Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 3962.98, "file_name": "example.file", "workspace_id": "245aa340-3b5b-47ec-b7a6-1860ea087aa9", "created": "2025-10-15T05:20:11.223Z"}
   FileList:
     speakeasy-default-file-list:
       parameters:
@@ -3628,7 +3673,7 @@ examples:
           file_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-10-14T14:13:28.247Z"}
+          application/json: {"_id": "<id>", "object_name": "<value>", "purpose": "retrieval", "bytes": 9071.22, "file_name": "example.file", "workspace_id": "9562b954-6ece-4d52-9ebe-4d5b5601dd94", "created": "2025-10-15T05:20:11.223Z"}
   FileDelete:
     speakeasy-default-file-delete:
       parameters:
@@ -3719,7 +3764,7 @@ examples:
         application/json: {"display_name": "Neva.Raynor10", "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "859fdd9d-80f9-4a8f-aec3-fdb35ab72f74", "display_name": "Barrett.Cruickshank94", "project_id": "9e0264eb-a840-4be9-a52b-7f0680f07fb2", "workspace_id": "25fc3844-7978-451d-b8bb-5e18641f495a", "metadata": {"total_versions": 5603.5, "datapoints_count": 4196.21}, "updated": "2025-10-15T05:20:08.470Z"}
   RetrieveDataset:
     speakeasy-default-retrieve-dataset:
       parameters:
@@ -3727,7 +3772,7 @@ examples:
           dataset_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "cec751ff-edcf-48f5-919c-5f9600880799", "display_name": "Rex_Howell20", "project_id": "6e6fed2e-625a-4a65-8b6b-b17c351fe8d6", "workspace_id": "d3c5813a-7915-46a4-bc9b-9737e47047ec", "metadata": {"total_versions": 9356, "datapoints_count": 7039.39}, "updated": "2025-10-15T05:20:08.470Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDataset:
@@ -3739,7 +3784,7 @@ examples:
         application/json: {"path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "b3d673bc-7e1b-4211-aac1-f385b70b6202", "display_name": "Noble_Hilll12", "project_id": "2a621dee-4b22-4755-aabd-0ca81c578515", "workspace_id": "eab8ac16-dbd6-4fa5-853d-4dd5b0c3a595", "metadata": {"total_versions": 2611.42, "datapoints_count": 7855.37}, "updated": "2025-10-15T05:20:08.470Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDataset:
@@ -3783,7 +3828,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-15T05:20:08.470Z"}
         "404":
           application/json: {"message": "<value>"}
   UpdateDatapoint:
@@ -3794,7 +3839,7 @@ examples:
           datapoint_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "<id>", "workspace_id": "<id>", "dataset_id": "<id>", "updated": "2025-10-15T05:20:08.470Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteDatapoint:
@@ -3826,14 +3871,14 @@ examples:
           limit: 10
       responses:
         "200":
-          application/json: {"object": "list", "data": [{"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Challenger", "domain_id": "<id>", "path": "Default", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Challenger", "domain_id": "<id>", "path": "Default", "updated": "<value>"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Challenger", "domain_id": "<id>", "path": "Default", "updated": "<value>"}], "has_more": false}
+          application/json: {"object": "list", "data": [{"_id": "<id>", "created": "<value>", "key": "<key>", "domain_id": "<id>", "path": "Default", "updated": "<value>", "type": "internal", "model": "Challenger"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "domain_id": "<id>", "path": "Default", "updated": "<value>", "type": "internal", "model": "Challenger"}, {"_id": "<id>", "created": "<value>", "key": "<key>", "domain_id": "<id>", "path": "Default", "updated": "<value>", "type": "internal", "model": "Challenger"}], "has_more": false}
   CreateKnowledge:
     speakeasy-default-create-knowledge:
       requestBody:
-        application/json: {"key": "<key>", "embedding_model": "<value>", "path": "Default"}
+        application/json: {"type": "internal", "key": "<key>", "embedding_model": "<value>", "is_private_model": false, "path": "Default"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Charger", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "domain_id": "<id>", "path": "Default", "updated": "<value>", "type": "internal", "model": "Charger"}
   GetOneKnowledge:
     speakeasy-default-get-one-knowledge:
       parameters:
@@ -3841,17 +3886,17 @@ examples:
           knowledge_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model X", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "domain_id": "<id>", "path": "Default", "updated": "<value>", "type": "internal", "model": "Model X"}
   UpdateKnowledge:
     speakeasy-default-update-knowledge:
       parameters:
         path:
           knowledge_id: "<id>"
       requestBody:
-        application/json: {"path": "Default"}
+        application/json: {"path": "Default", "type": "external"}
       responses:
         "200":
-          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "model": "Model 3", "domain_id": "<id>", "path": "Default", "updated": "<value>"}
+          application/json: {"_id": "<id>", "created": "<value>", "key": "<key>", "domain_id": "<id>", "path": "Default", "updated": "<value>", "type": "internal", "model": "Model 3"}
   DeleteKnowledge:
     speakeasy-default-delete-knowledge:
       parameters:
@@ -3877,7 +3922,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_id": "01K7HH3F8PKDRFZ0H0P3GVR7TY", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
+          application/json: {"_id": "01K7K4ZPE552FR0C66SWCCRKQN", "display_name": "Savannah.Bode69", "status": "processing", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 5147.76}
   RetrieveDatasource:
     speakeasy-default-retrieve-datasource:
       parameters:
@@ -3886,7 +3931,7 @@ examples:
           datasource_id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "01K7HH3F8NEYW4NZCRGR3VSE5R", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
+          application/json: {"_id": "01K7K4ZPE5JNJZMFMPNWMTDG5G", "display_name": "Rudolph23", "status": "queued", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 8222.73}
   DeleteDatasource:
     speakeasy-default-delete-datasource:
       parameters:
@@ -3903,7 +3948,7 @@ examples:
         application/json: {"display_name": "Tony_Roberts"}
       responses:
         "200":
-          application/json: {"_id": "01K7HH3F8Q95PCFR9CPNEFX6BF", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
+          application/json: {"_id": "01K7K4ZPE6F04SHEXTTM57RGYD", "display_name": "Mathias_Pagac", "status": "completed", "created": "<value>", "updated": "<value>", "knowledge_id": "<id>", "chunks_count": 3625.25}
   CreateChunk:
     speakeasy-default-create-chunk:
       parameters:
@@ -4312,7 +4357,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-15T05:20:08.470Z"}
         "404":
           application/json: {"error": "<value>"}
   UpdateContact:
@@ -4333,7 +4378,7 @@ examples:
         application/json: {"display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}}
       responses:
         "200":
-          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV", "external_id": "user_12345", "display_name": "Jane Smith", "email": "jane.smith@example.com", "avatar_url": "https://example.com/avatars/jane-smith.jpg", "tags": ["premium", "beta-user", "enterprise"], "metadata": {"department": "Engineering", "role": "Senior Developer", "subscription_tier": "premium", "last_login": "2024-01-15T10:30:00Z"}, "updated": "2025-10-15T05:20:08.470Z"}
         "404":
           application/json: {"message": "<value>"}
   DeleteContact:
@@ -4470,7 +4515,7 @@ examples:
         application/json: {"type": "contact", "entity_id": "user_123", "period": "monthly", "amount": 250}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-15T05:20:08.470Z"}
   GetBudget:
     speakeasy-default-get-budget:
       parameters:
@@ -4478,7 +4523,7 @@ examples:
           id: "01K1J1AX8PGR63QRP7423NY008"
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-15T05:20:08.470Z"}
   UpdateBudget:
     speakeasy-default-update-budget:
       parameters:
@@ -4488,7 +4533,7 @@ examples:
         application/json: {"budget": {"period": "monthly", "amount": 300}, "is_active": true}
       responses:
         "200":
-          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-14T14:13:25.174Z"}
+          application/json: {"_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV", "type": "contact", "contact_id": "user_123", "budget": {"period": "monthly", "amount": 250}, "is_active": true, "consumption": {"current_amount": 125.5, "remaining_amount": 124.5, "period_start": "2024-01-01T00:00:00Z", "period_end": "2024-01-31T23:59:59Z"}, "updated": "2025-10-15T05:20:08.470Z"}
   DeleteBudget:
     speakeasy-default-delete-budget:
       parameters:

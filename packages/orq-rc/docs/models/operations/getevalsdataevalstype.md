@@ -5,11 +5,11 @@
 ```typescript
 import { GetEvalsDataEvalsType } from "@orq-ai/node/models/operations";
 
-let value: GetEvalsDataEvalsType = "http_eval";
+let value: GetEvalsDataEvalsType = "json_schema";
 ```
 
 ## Values
 
 ```typescript
-"http_eval"
+"json_schema"
 ```

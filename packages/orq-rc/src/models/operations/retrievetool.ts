@@ -60,7 +60,13 @@ export type RetrieveToolResponseBodyCodeTool = {
 export type RetrieveToolResponseBody5 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -187,7 +193,13 @@ export type RetrieveToolResponseBodyMcp = {
 export type RetrieveToolResponseBody4 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -338,7 +350,13 @@ export type RetrieveToolResponseBodyHttp = {
 export type RetrieveToolResponseBody3 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -419,7 +437,13 @@ export type RetrieveToolResponseBodyJsonSchema = {
 export type RetrieveToolResponseBody2 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -500,7 +524,13 @@ export type RetrieveToolResponseBodyFunction = {
 export type RetrieveToolResponseBody1 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -750,7 +780,7 @@ export const RetrieveToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC6BN5HK8R8EXYAVDQV"),
+  _id: z.string().default("01K7K4ZPHXHCY7JX9XKKTNVAF4"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -806,7 +836,7 @@ export const RetrieveToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody5
 > = z.object({
-  id: z.string().default("01K7HH3FC6BN5HK8R8EXYAVDQV"),
+  id: z.string().default("01K7K4ZPHXHCY7JX9XKKTNVAF4"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1190,7 +1220,7 @@ export const RetrieveToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC5YY3NDYXC8JKT7X1P"),
+  _id: z.string().default("01K7K4ZPHWS3V806WXEYWKDM4P"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1244,7 +1274,7 @@ export const RetrieveToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody4
 > = z.object({
-  id: z.string().default("01K7HH3FC5YY3NDYXC8JKT7X1P"),
+  id: z.string().default("01K7K4ZPHWS3V806WXEYWKDM4P"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1670,7 +1700,7 @@ export const RetrieveToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC4PE1G3V66HM0R8W72"),
+  _id: z.string().default("01K7K4ZPHW9KDGVAX7AFQNJ709"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1724,7 +1754,7 @@ export const RetrieveToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody3
 > = z.object({
-  id: z.string().default("01K7HH3FC4PE1G3V66HM0R8W72"),
+  id: z.string().default("01K7K4ZPHW9KDGVAX7AFQNJ709"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -1902,7 +1932,7 @@ export const RetrieveToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC4ZE2SK1A9E8RM8G1N"),
+  _id: z.string().default("01K7K4ZPHWGPTAXBJSXQZTV8P1"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -1955,7 +1985,7 @@ export const RetrieveToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody2
 > = z.object({
-  id: z.string().default("01K7HH3FC4ZE2SK1A9E8RM8G1N"),
+  id: z.string().default("01K7K4ZPHWGPTAXBJSXQZTV8P1"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),
@@ -2127,7 +2157,7 @@ export const RetrieveToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7HH3FC3K312CXX7V98Y2ZFH"),
+  _id: z.string().default("01K7K4ZPHVH0RMT4CA7ZFREGA2"),
   path: z.string(),
   key: z.string(),
   display_name: z.string(),
@@ -2179,7 +2209,7 @@ export const RetrieveToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody1
 > = z.object({
-  id: z.string().default("01K7HH3FC3K312CXX7V98Y2ZFH"),
+  id: z.string().default("01K7K4ZPHVH0RMT4CA7ZFREGA2"),
   path: z.string(),
   key: z.string(),
   displayName: z.string(),

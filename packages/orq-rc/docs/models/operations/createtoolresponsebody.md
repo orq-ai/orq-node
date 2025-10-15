@@ -5,14 +5,14 @@ Successfully created the tool.
 
 ## Supported Types
 
-### `operations.ResponseBody1`
+### `operations.CreateToolResponseBody1`
 
 ```typescript
-const value: operations.ResponseBody1 = {
+const value: operations.CreateToolResponseBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Calista_Haag77",
-  description: "usually in-joke apparatus well hence without",
+  displayName: "Cade96",
+  description: "eek shrilly valiantly vague harp browse home adolescent",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -24,15 +24,14 @@ const value: operations.ResponseBody1 = {
 };
 ```
 
-### `operations.ResponseBody2`
+### `operations.CreateToolResponseBody2`
 
 ```typescript
-const value: operations.ResponseBody2 = {
+const value: operations.CreateToolResponseBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Javonte_Haley",
-  description:
-    "conceal lift interior gadzooks eek greedily cardboard catalyze huzzah",
+  displayName: "Alessandro.Homenick",
+  description: "for minty bathhouse boohoo when on",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -40,7 +39,11 @@ const value: operations.ResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    schema: {
+      "key": "<value>",
+      "key1": "<value>",
+      "key2": "<value>",
+    },
   },
 };
 ```

@@ -14,5 +14,5 @@ let value: DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole =
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

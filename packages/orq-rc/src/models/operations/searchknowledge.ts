@@ -336,7 +336,7 @@ export type SearchOptions = {
 /**
  * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
  */
-export type SearchKnowledgeRerankConfig = {
+export type RerankConfig = {
   /**
    * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/rerank-models).
    */
@@ -354,7 +354,7 @@ export type SearchKnowledgeRerankConfig = {
 /**
  * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
  */
-export type SearchKnowledgeAgenticRagConfig = {
+export type AgenticRagConfig = {
   /**
    * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
    */
@@ -403,11 +403,11 @@ export type SearchKnowledgeRequestBody = {
   /**
    * Override the rerank configuration for this search. If not provided, will use the knowledge base configured rerank settings.
    */
-  rerankConfig?: SearchKnowledgeRerankConfig | undefined;
+  rerankConfig?: RerankConfig | undefined;
   /**
    * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
    */
-  agenticRagConfig?: SearchKnowledgeAgenticRagConfig | undefined;
+  agenticRagConfig?: AgenticRagConfig | undefined;
 };
 
 export type SearchKnowledgeRequest = {
@@ -3079,8 +3079,8 @@ export function searchOptionsFromJSON(
 }
 
 /** @internal */
-export const SearchKnowledgeRerankConfig$inboundSchema: z.ZodType<
-  SearchKnowledgeRerankConfig,
+export const RerankConfig$inboundSchema: z.ZodType<
+  RerankConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3094,17 +3094,17 @@ export const SearchKnowledgeRerankConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type SearchKnowledgeRerankConfig$Outbound = {
+export type RerankConfig$Outbound = {
   model: string;
   threshold: number;
   top_k: number;
 };
 
 /** @internal */
-export const SearchKnowledgeRerankConfig$outboundSchema: z.ZodType<
-  SearchKnowledgeRerankConfig$Outbound,
+export const RerankConfig$outboundSchema: z.ZodType<
+  RerankConfig$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeRerankConfig
+  RerankConfig
 > = z.object({
   model: z.string(),
   threshold: z.number().default(0),
@@ -3119,38 +3119,32 @@ export const SearchKnowledgeRerankConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeRerankConfig$ {
-  /** @deprecated use `SearchKnowledgeRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `SearchKnowledgeRerankConfig$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `SearchKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound = SearchKnowledgeRerankConfig$Outbound;
+export namespace RerankConfig$ {
+  /** @deprecated use `RerankConfig$inboundSchema` instead. */
+  export const inboundSchema = RerankConfig$inboundSchema;
+  /** @deprecated use `RerankConfig$outboundSchema` instead. */
+  export const outboundSchema = RerankConfig$outboundSchema;
+  /** @deprecated use `RerankConfig$Outbound` instead. */
+  export type Outbound = RerankConfig$Outbound;
 }
 
-export function searchKnowledgeRerankConfigToJSON(
-  searchKnowledgeRerankConfig: SearchKnowledgeRerankConfig,
-): string {
-  return JSON.stringify(
-    SearchKnowledgeRerankConfig$outboundSchema.parse(
-      searchKnowledgeRerankConfig,
-    ),
-  );
+export function rerankConfigToJSON(rerankConfig: RerankConfig): string {
+  return JSON.stringify(RerankConfig$outboundSchema.parse(rerankConfig));
 }
 
-export function searchKnowledgeRerankConfigFromJSON(
+export function rerankConfigFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeRerankConfig, SDKValidationError> {
+): SafeParseResult<RerankConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeRerankConfig' from JSON`,
+    (x) => RerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RerankConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const SearchKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
-  SearchKnowledgeAgenticRagConfig,
+export const AgenticRagConfig$inboundSchema: z.ZodType<
+  AgenticRagConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3158,15 +3152,15 @@ export const SearchKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type SearchKnowledgeAgenticRagConfig$Outbound = {
+export type AgenticRagConfig$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const SearchKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
-  SearchKnowledgeAgenticRagConfig$Outbound,
+export const AgenticRagConfig$outboundSchema: z.ZodType<
+  AgenticRagConfig$Outbound,
   z.ZodTypeDef,
-  SearchKnowledgeAgenticRagConfig
+  AgenticRagConfig
 > = z.object({
   model: z.string(),
 });
@@ -3175,32 +3169,30 @@ export const SearchKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace SearchKnowledgeAgenticRagConfig$ {
-  /** @deprecated use `SearchKnowledgeAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema = SearchKnowledgeAgenticRagConfig$inboundSchema;
-  /** @deprecated use `SearchKnowledgeAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema = SearchKnowledgeAgenticRagConfig$outboundSchema;
-  /** @deprecated use `SearchKnowledgeAgenticRagConfig$Outbound` instead. */
-  export type Outbound = SearchKnowledgeAgenticRagConfig$Outbound;
+export namespace AgenticRagConfig$ {
+  /** @deprecated use `AgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = AgenticRagConfig$inboundSchema;
+  /** @deprecated use `AgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema = AgenticRagConfig$outboundSchema;
+  /** @deprecated use `AgenticRagConfig$Outbound` instead. */
+  export type Outbound = AgenticRagConfig$Outbound;
 }
 
-export function searchKnowledgeAgenticRagConfigToJSON(
-  searchKnowledgeAgenticRagConfig: SearchKnowledgeAgenticRagConfig,
+export function agenticRagConfigToJSON(
+  agenticRagConfig: AgenticRagConfig,
 ): string {
   return JSON.stringify(
-    SearchKnowledgeAgenticRagConfig$outboundSchema.parse(
-      searchKnowledgeAgenticRagConfig,
-    ),
+    AgenticRagConfig$outboundSchema.parse(agenticRagConfig),
   );
 }
 
-export function searchKnowledgeAgenticRagConfigFromJSON(
+export function agenticRagConfigFromJSON(
   jsonString: string,
-): SafeParseResult<SearchKnowledgeAgenticRagConfig, SDKValidationError> {
+): SafeParseResult<AgenticRagConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SearchKnowledgeAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchKnowledgeAgenticRagConfig' from JSON`,
+    (x) => AgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgenticRagConfig' from JSON`,
   );
 }
 
@@ -3230,11 +3222,8 @@ export const SearchKnowledgeRequestBody$inboundSchema: z.ZodType<
     ])),
   ]).optional(),
   search_options: z.lazy(() => SearchOptions$inboundSchema).optional(),
-  rerank_config: z.lazy(() => SearchKnowledgeRerankConfig$inboundSchema)
-    .optional(),
-  agentic_rag_config: z.lazy(() =>
-    SearchKnowledgeAgenticRagConfig$inboundSchema
-  ).optional(),
+  rerank_config: z.lazy(() => RerankConfig$inboundSchema).optional(),
+  agentic_rag_config: z.lazy(() => AgenticRagConfig$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "top_k": "topK",
@@ -3265,8 +3254,8 @@ export type SearchKnowledgeRequestBody$Outbound = {
       | SearchKnowledge1Exists$Outbound;
   } | undefined;
   search_options?: SearchOptions$Outbound | undefined;
-  rerank_config?: SearchKnowledgeRerankConfig$Outbound | undefined;
-  agentic_rag_config?: SearchKnowledgeAgenticRagConfig$Outbound | undefined;
+  rerank_config?: RerankConfig$Outbound | undefined;
+  agentic_rag_config?: AgenticRagConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -3295,10 +3284,8 @@ export const SearchKnowledgeRequestBody$outboundSchema: z.ZodType<
     ])),
   ]).optional(),
   searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),
-  rerankConfig: z.lazy(() => SearchKnowledgeRerankConfig$outboundSchema)
-    .optional(),
-  agenticRagConfig: z.lazy(() => SearchKnowledgeAgenticRagConfig$outboundSchema)
-    .optional(),
+  rerankConfig: z.lazy(() => RerankConfig$outboundSchema).optional(),
+  agenticRagConfig: z.lazy(() => AgenticRagConfig$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     topK: "top_k",

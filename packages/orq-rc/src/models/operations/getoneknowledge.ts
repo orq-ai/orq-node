@@ -16,25 +16,17 @@ export type GetOneKnowledgeRequest = {
   knowledgeId: string;
 };
 
-/**
- * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
- */
-export const GetOneKnowledgeRetrievalType = {
-  VectorSearch: "vector_search",
-  KeywordSearch: "keyword_search",
-  HybridSearch: "hybrid_search",
+export const GetOneKnowledgeResponseBodyKnowledgeType = {
+  External: "external",
 } as const;
-/**
- * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
- */
-export type GetOneKnowledgeRetrievalType = ClosedEnum<
-  typeof GetOneKnowledgeRetrievalType
+export type GetOneKnowledgeResponseBodyKnowledgeType = ClosedEnum<
+  typeof GetOneKnowledgeResponseBodyKnowledgeType
 >;
 
 /**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
  */
-export type GetOneKnowledgeRerankConfig = {
+export type GetOneKnowledgeResponseBodyKnowledgeRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
@@ -52,7 +44,7 @@ export type GetOneKnowledgeRerankConfig = {
 /**
  * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
  */
-export type GetOneKnowledgeAgenticRagConfig = {
+export type GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig = {
   /**
    * The model to use for the Agentic RAG
    */
@@ -60,13 +52,9 @@ export type GetOneKnowledgeAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base.
  */
-export type GetOneKnowledgeRetrievalSettings = {
-  /**
-   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
-   */
-  retrievalType?: GetOneKnowledgeRetrievalType | undefined;
+export type GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings = {
   /**
    * The number of results to return from the search.
    */
@@ -78,17 +66,31 @@ export type GetOneKnowledgeRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: GetOneKnowledgeRerankConfig | null | undefined;
+  rerankConfig?:
+    | GetOneKnowledgeResponseBodyKnowledgeRerankConfig
+    | null
+    | undefined;
   /**
    * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
    */
-  agenticRagConfig?: GetOneKnowledgeAgenticRagConfig | null | undefined;
+  agenticRagConfig?:
+    | GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig
+    | null
+    | undefined;
 };
 
-/**
- * Knowledge Base object
- */
-export type GetOneKnowledgeResponseBody = {
+export type GetOneKnowledgeResponseBodyExternalConfig = {
+  /**
+   * The name of the external knowledge base.
+   */
+  name: string;
+  /**
+   * The API URL of the external knowledge base.
+   */
+  apiUrl: string;
+};
+
+export type GetOneKnowledgeResponseBody2 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -106,28 +108,168 @@ export type GetOneKnowledgeResponseBody = {
    */
   key: string;
   /**
-   * The embeddings model used for the knowledge base.
-   */
-  model: string;
-  /**
    * The project/domain ID of the knowledge base.
    */
   domainId: string;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
-  /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
-   */
-  retrievalSettings?: GetOneKnowledgeRetrievalSettings | undefined;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   /**
    * The last update date of the knowledge base.
    */
   updated: string;
+  type?: GetOneKnowledgeResponseBodyKnowledgeType | undefined;
+  /**
+   * The retrieval settings for the knowledge base.
+   */
+  retrievalSettings?:
+    | GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings
+    | undefined;
+  externalConfig: GetOneKnowledgeResponseBodyExternalConfig;
 };
+
+export const GetOneKnowledgeResponseBodyType = {
+  Internal: "internal",
+} as const;
+export type GetOneKnowledgeResponseBodyType = ClosedEnum<
+  typeof GetOneKnowledgeResponseBodyType
+>;
+
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export const GetOneKnowledgeResponseBodyRetrievalType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
+  HybridSearch: "hybrid_search",
+} as const;
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export type GetOneKnowledgeResponseBodyRetrievalType = ClosedEnum<
+  typeof GetOneKnowledgeResponseBodyRetrievalType
+>;
+
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
+export type GetOneKnowledgeResponseBodyRerankConfig = {
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
+   */
+  rerankThreshold?: number | undefined;
+  /**
+   * The rerank model to use for the knowledge base.
+   */
+  rerankModel: string;
+};
+
+/**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type GetOneKnowledgeResponseBodyAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
+ * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ */
+export type GetOneKnowledgeResponseBodyRetrievalSettings = {
+  /**
+   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalType?: GetOneKnowledgeResponseBodyRetrievalType | undefined;
+  /**
+   * The number of results to return from the search.
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?: GetOneKnowledgeResponseBodyRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?:
+    | GetOneKnowledgeResponseBodyAgenticRagConfig
+    | null
+    | undefined;
+};
+
+export type GetOneKnowledgeResponseBody1 = {
+  /**
+   * The unique identifier of the knowledge base.
+   */
+  id: string;
+  /**
+   * The creation date of the knowledge base.
+   */
+  created: string;
+  /**
+   * The description of the knowledge base.
+   */
+  description?: string | undefined;
+  /**
+   * The unique key of the knowledge base.
+   */
+  key: string;
+  /**
+   * The project/domain ID of the knowledge base.
+   */
+  domainId: string;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
+  /**
+   * The last update date of the knowledge base.
+   */
+  updated: string;
+  type?: GetOneKnowledgeResponseBodyType | undefined;
+  /**
+   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalSettings?: GetOneKnowledgeResponseBodyRetrievalSettings | undefined;
+  /**
+   * The embeddings model used for the knowledge base.
+   */
+  model: string;
+};
+
+/**
+ * Knowledge base retrieved
+ */
+export type GetOneKnowledgeResponseBody =
+  | GetOneKnowledgeResponseBody1
+  | GetOneKnowledgeResponseBody2;
 
 /** @internal */
 export const GetOneKnowledgeRequest$inboundSchema: z.ZodType<
@@ -192,29 +334,538 @@ export function getOneKnowledgeRequestFromJSON(
 }
 
 /** @internal */
-export const GetOneKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
-  typeof GetOneKnowledgeRetrievalType
-> = z.nativeEnum(GetOneKnowledgeRetrievalType);
+export const GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema:
+  z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyKnowledgeType> = z
+    .nativeEnum(GetOneKnowledgeResponseBodyKnowledgeType);
 
 /** @internal */
-export const GetOneKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
-  typeof GetOneKnowledgeRetrievalType
-> = GetOneKnowledgeRetrievalType$inboundSchema;
+export const GetOneKnowledgeResponseBodyKnowledgeType$outboundSchema:
+  z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyKnowledgeType> =
+    GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetOneKnowledgeRetrievalType$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRetrievalType$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = GetOneKnowledgeRetrievalType$outboundSchema;
+export namespace GetOneKnowledgeResponseBodyKnowledgeType$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeType$outboundSchema;
 }
 
 /** @internal */
-export const GetOneKnowledgeRerankConfig$inboundSchema: z.ZodType<
-  GetOneKnowledgeRerankConfig,
+export const GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    top_k: z.number().int().default(5),
+    rerank_threshold: z.number().default(0.5),
+    rerank_model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_threshold": "rerankThreshold",
+      "rerank_model": "rerankModel",
+    });
+  });
+
+/** @internal */
+export type GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound = {
+  top_k: number;
+  rerank_threshold: number;
+  rerank_model: string;
+};
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound,
+    z.ZodTypeDef,
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig
+  > = z.object({
+    topK: z.number().int().default(5),
+    rerankThreshold: z.number().default(0.5),
+    rerankModel: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      rerankThreshold: "rerank_threshold",
+      rerankModel: "rerank_model",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyKnowledgeRerankConfig$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound` instead. */
+  export type Outbound =
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound;
+}
+
+export function getOneKnowledgeResponseBodyKnowledgeRerankConfigToJSON(
+  getOneKnowledgeResponseBodyKnowledgeRerankConfig:
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig,
+): string {
+  return JSON.stringify(
+    GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema.parse(
+      getOneKnowledgeResponseBodyKnowledgeRerankConfig,
+    ),
+  );
+}
+
+export function getOneKnowledgeResponseBodyKnowledgeRerankConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyKnowledgeRerankConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyKnowledgeRerankConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    model: z.string(),
+  });
+
+/** @internal */
+export type GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound,
+    z.ZodTypeDef,
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig
+  > = z.object({
+    model: z.string(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound` instead. */
+  export type Outbound =
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound;
+}
+
+export function getOneKnowledgeResponseBodyKnowledgeAgenticRagConfigToJSON(
+  getOneKnowledgeResponseBodyKnowledgeAgenticRagConfig:
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema.parse(
+      getOneKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+export function getOneKnowledgeResponseBodyKnowledgeAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(
+      z.lazy(() =>
+        GetOneKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema
+      ),
+    ).optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() =>
+        GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  });
+
+/** @internal */
+export type GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound = {
+  top_k: number;
+  threshold: number;
+  rerank_config?:
+    | GetOneKnowledgeResponseBodyKnowledgeRerankConfig$Outbound
+    | null
+    | undefined;
+  agentic_rag_config?:
+    | GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound
+    | null
+    | undefined;
+};
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound,
+    z.ZodTypeDef,
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings
+  > = z.object({
+    topK: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerankConfig: z.nullable(
+      z.lazy(() =>
+        GetOneKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema
+      ),
+    ).optional(),
+    agenticRagConfig: z.nullable(
+      z.lazy(() =>
+        GetOneKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound` instead. */
+  export type Outbound =
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound;
+}
+
+export function getOneKnowledgeResponseBodyKnowledgeRetrievalSettingsToJSON(
+  getOneKnowledgeResponseBodyKnowledgeRetrievalSettings:
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings,
+): string {
+  return JSON.stringify(
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema.parse(
+      getOneKnowledgeResponseBodyKnowledgeRetrievalSettings,
+    ),
+  );
+}
+
+export function getOneKnowledgeResponseBodyKnowledgeRetrievalSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyExternalConfig$inboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBodyExternalConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  api_url: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "api_url": "apiUrl",
+  });
+});
+
+/** @internal */
+export type GetOneKnowledgeResponseBodyExternalConfig$Outbound = {
+  name: string;
+  api_url: string;
+};
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyExternalConfig$outboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyExternalConfig$Outbound,
+    z.ZodTypeDef,
+    GetOneKnowledgeResponseBodyExternalConfig
+  > = z.object({
+    name: z.string(),
+    apiUrl: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiUrl: "api_url",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyExternalConfig$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyExternalConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyExternalConfig$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyExternalConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyExternalConfig$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyExternalConfig$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeResponseBodyExternalConfig$Outbound;
+}
+
+export function getOneKnowledgeResponseBodyExternalConfigToJSON(
+  getOneKnowledgeResponseBodyExternalConfig:
+    GetOneKnowledgeResponseBodyExternalConfig,
+): string {
+  return JSON.stringify(
+    GetOneKnowledgeResponseBodyExternalConfig$outboundSchema.parse(
+      getOneKnowledgeResponseBodyExternalConfig,
+    ),
+  );
+}
+
+export function getOneKnowledgeResponseBodyExternalConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyExternalConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOneKnowledgeResponseBodyExternalConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyExternalConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBody2$inboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domain_id: z.string(),
+  path: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: GetOneKnowledgeResponseBodyKnowledgeType$inboundSchema.default(
+    "external",
+  ),
+  retrieval_settings: z.lazy(() =>
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema
+  ).optional(),
+  external_config: z.lazy(() =>
+    GetOneKnowledgeResponseBodyExternalConfig$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "retrieval_settings": "retrievalSettings",
+    "external_config": "externalConfig",
+  });
+});
+
+/** @internal */
+export type GetOneKnowledgeResponseBody2$Outbound = {
+  _id: string;
+  created: string;
+  description?: string | undefined;
+  key: string;
+  domain_id: string;
+  path?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
+  updated: string;
+  type: string;
+  retrieval_settings?:
+    | GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound
+    | undefined;
+  external_config: GetOneKnowledgeResponseBodyExternalConfig$Outbound;
+};
+
+/** @internal */
+export const GetOneKnowledgeResponseBody2$outboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBody2$Outbound,
+  z.ZodTypeDef,
+  GetOneKnowledgeResponseBody2
+> = z.object({
+  id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domainId: z.string(),
+  path: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: GetOneKnowledgeResponseBodyKnowledgeType$outboundSchema.default(
+    "external",
+  ),
+  retrievalSettings: z.lazy(() =>
+    GetOneKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema
+  ).optional(),
+  externalConfig: z.lazy(() =>
+    GetOneKnowledgeResponseBodyExternalConfig$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    domainId: "domain_id",
+    createdById: "created_by_id",
+    updatedById: "updated_by_id",
+    retrievalSettings: "retrieval_settings",
+    externalConfig: "external_config",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBody2$ {
+  /** @deprecated use `GetOneKnowledgeResponseBody2$inboundSchema` instead. */
+  export const inboundSchema = GetOneKnowledgeResponseBody2$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBody2$outboundSchema` instead. */
+  export const outboundSchema = GetOneKnowledgeResponseBody2$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBody2$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeResponseBody2$Outbound;
+}
+
+export function getOneKnowledgeResponseBody2ToJSON(
+  getOneKnowledgeResponseBody2: GetOneKnowledgeResponseBody2,
+): string {
+  return JSON.stringify(
+    GetOneKnowledgeResponseBody2$outboundSchema.parse(
+      getOneKnowledgeResponseBody2,
+    ),
+  );
+}
+
+export function getOneKnowledgeResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<GetOneKnowledgeResponseBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOneKnowledgeResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOneKnowledgeResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof GetOneKnowledgeResponseBodyType
+> = z.nativeEnum(GetOneKnowledgeResponseBodyType);
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof GetOneKnowledgeResponseBodyType
+> = GetOneKnowledgeResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyType$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema = GetOneKnowledgeResponseBodyType$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema = GetOneKnowledgeResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyRetrievalType$inboundSchema:
+  z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyRetrievalType> = z
+    .nativeEnum(GetOneKnowledgeResponseBodyRetrievalType);
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyRetrievalType$outboundSchema:
+  z.ZodNativeEnum<typeof GetOneKnowledgeResponseBodyRetrievalType> =
+    GetOneKnowledgeResponseBodyRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyRetrievalType$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyRetrievalType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyRetrievalType$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyRetrievalType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyRetrievalType$outboundSchema;
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBodyRerankConfig$inboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBodyRerankConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -230,17 +881,17 @@ export const GetOneKnowledgeRerankConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetOneKnowledgeRerankConfig$Outbound = {
+export type GetOneKnowledgeResponseBodyRerankConfig$Outbound = {
   top_k: number;
   rerank_threshold: number;
   rerank_model: string;
 };
 
 /** @internal */
-export const GetOneKnowledgeRerankConfig$outboundSchema: z.ZodType<
-  GetOneKnowledgeRerankConfig$Outbound,
+export const GetOneKnowledgeResponseBodyRerankConfig$outboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBodyRerankConfig$Outbound,
   z.ZodTypeDef,
-  GetOneKnowledgeRerankConfig
+  GetOneKnowledgeResponseBodyRerankConfig
 > = z.object({
   topK: z.number().int().default(5),
   rerankThreshold: z.number().default(0.5),
@@ -257,152 +908,295 @@ export const GetOneKnowledgeRerankConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetOneKnowledgeRerankConfig$ {
-  /** @deprecated use `GetOneKnowledgeRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRerankConfig$outboundSchema` instead. */
-  export const outboundSchema = GetOneKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeRerankConfig$Outbound;
+export namespace GetOneKnowledgeResponseBodyRerankConfig$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyRerankConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyRerankConfig$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyRerankConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyRerankConfig$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyRerankConfig$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeResponseBodyRerankConfig$Outbound;
 }
 
-export function getOneKnowledgeRerankConfigToJSON(
-  getOneKnowledgeRerankConfig: GetOneKnowledgeRerankConfig,
+export function getOneKnowledgeResponseBodyRerankConfigToJSON(
+  getOneKnowledgeResponseBodyRerankConfig:
+    GetOneKnowledgeResponseBodyRerankConfig,
 ): string {
   return JSON.stringify(
-    GetOneKnowledgeRerankConfig$outboundSchema.parse(
-      getOneKnowledgeRerankConfig,
+    GetOneKnowledgeResponseBodyRerankConfig$outboundSchema.parse(
+      getOneKnowledgeResponseBodyRerankConfig,
     ),
   );
 }
 
-export function getOneKnowledgeRerankConfigFromJSON(
+export function getOneKnowledgeResponseBodyRerankConfigFromJSON(
   jsonString: string,
-): SafeParseResult<GetOneKnowledgeRerankConfig, SDKValidationError> {
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyRerankConfig,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => GetOneKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRerankConfig' from JSON`,
+    (x) =>
+      GetOneKnowledgeResponseBodyRerankConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyRerankConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const GetOneKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
-  GetOneKnowledgeAgenticRagConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
+export const GetOneKnowledgeResponseBodyAgenticRagConfig$inboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyAgenticRagConfig,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    model: z.string(),
+  });
 
 /** @internal */
-export type GetOneKnowledgeAgenticRagConfig$Outbound = {
+export type GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const GetOneKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
-  GetOneKnowledgeAgenticRagConfig$Outbound,
-  z.ZodTypeDef,
-  GetOneKnowledgeAgenticRagConfig
-> = z.object({
-  model: z.string(),
-});
+export const GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound,
+    z.ZodTypeDef,
+    GetOneKnowledgeResponseBodyAgenticRagConfig
+  > = z.object({
+    model: z.string(),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetOneKnowledgeAgenticRagConfig$ {
-  /** @deprecated use `GetOneKnowledgeAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeAgenticRagConfig$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema = GetOneKnowledgeAgenticRagConfig$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeAgenticRagConfig$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeAgenticRagConfig$Outbound;
+export namespace GetOneKnowledgeResponseBodyAgenticRagConfig$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyAgenticRagConfig$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound;
 }
 
-export function getOneKnowledgeAgenticRagConfigToJSON(
-  getOneKnowledgeAgenticRagConfig: GetOneKnowledgeAgenticRagConfig,
+export function getOneKnowledgeResponseBodyAgenticRagConfigToJSON(
+  getOneKnowledgeResponseBodyAgenticRagConfig:
+    GetOneKnowledgeResponseBodyAgenticRagConfig,
 ): string {
   return JSON.stringify(
-    GetOneKnowledgeAgenticRagConfig$outboundSchema.parse(
-      getOneKnowledgeAgenticRagConfig,
+    GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema.parse(
+      getOneKnowledgeResponseBodyAgenticRagConfig,
     ),
   );
 }
 
-export function getOneKnowledgeAgenticRagConfigFromJSON(
+export function getOneKnowledgeResponseBodyAgenticRagConfigFromJSON(
   jsonString: string,
-): SafeParseResult<GetOneKnowledgeAgenticRagConfig, SDKValidationError> {
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyAgenticRagConfig,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => GetOneKnowledgeAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeAgenticRagConfig' from JSON`,
+    (x) =>
+      GetOneKnowledgeResponseBodyAgenticRagConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyAgenticRagConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const GetOneKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  retrieval_type: GetOneKnowledgeRetrievalType$inboundSchema.default(
-    "hybrid_search",
-  ),
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() => GetOneKnowledgeRerankConfig$inboundSchema),
-  ).optional(),
-  agentic_rag_config: z.nullable(
-    z.lazy(() => GetOneKnowledgeAgenticRagConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "retrieval_type": "retrievalType",
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-    "agentic_rag_config": "agenticRagConfig",
+export const GetOneKnowledgeResponseBodyRetrievalSettings$inboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyRetrievalSettings,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    retrieval_type: GetOneKnowledgeResponseBodyRetrievalType$inboundSchema
+      .default("hybrid_search"),
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(
+      z.lazy(() => GetOneKnowledgeResponseBodyRerankConfig$inboundSchema),
+    ).optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() => GetOneKnowledgeResponseBodyAgenticRagConfig$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "retrieval_type": "retrievalType",
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
   });
-});
 
 /** @internal */
-export type GetOneKnowledgeRetrievalSettings$Outbound = {
+export type GetOneKnowledgeResponseBodyRetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
-  rerank_config?: GetOneKnowledgeRerankConfig$Outbound | null | undefined;
+  rerank_config?:
+    | GetOneKnowledgeResponseBodyRerankConfig$Outbound
+    | null
+    | undefined;
   agentic_rag_config?:
-    | GetOneKnowledgeAgenticRagConfig$Outbound
+    | GetOneKnowledgeResponseBodyAgenticRagConfig$Outbound
     | null
     | undefined;
 };
 
 /** @internal */
-export const GetOneKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
-  GetOneKnowledgeRetrievalSettings$Outbound,
+export const GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema:
+  z.ZodType<
+    GetOneKnowledgeResponseBodyRetrievalSettings$Outbound,
+    z.ZodTypeDef,
+    GetOneKnowledgeResponseBodyRetrievalSettings
+  > = z.object({
+    retrievalType: GetOneKnowledgeResponseBodyRetrievalType$outboundSchema
+      .default("hybrid_search"),
+    topK: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerankConfig: z.nullable(
+      z.lazy(() => GetOneKnowledgeResponseBodyRerankConfig$outboundSchema),
+    ).optional(),
+    agenticRagConfig: z.nullable(
+      z.lazy(() => GetOneKnowledgeResponseBodyAgenticRagConfig$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      retrievalType: "retrieval_type",
+      topK: "top_k",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetOneKnowledgeResponseBodyRetrievalSettings$ {
+  /** @deprecated use `GetOneKnowledgeResponseBodyRetrievalSettings$inboundSchema` instead. */
+  export const inboundSchema =
+    GetOneKnowledgeResponseBodyRetrievalSettings$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema` instead. */
+  export const outboundSchema =
+    GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBodyRetrievalSettings$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeResponseBodyRetrievalSettings$Outbound;
+}
+
+export function getOneKnowledgeResponseBodyRetrievalSettingsToJSON(
+  getOneKnowledgeResponseBodyRetrievalSettings:
+    GetOneKnowledgeResponseBodyRetrievalSettings,
+): string {
+  return JSON.stringify(
+    GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema.parse(
+      getOneKnowledgeResponseBodyRetrievalSettings,
+    ),
+  );
+}
+
+export function getOneKnowledgeResponseBodyRetrievalSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetOneKnowledgeResponseBodyRetrievalSettings,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetOneKnowledgeResponseBodyRetrievalSettings$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetOneKnowledgeResponseBodyRetrievalSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetOneKnowledgeResponseBody1$inboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBody1,
   z.ZodTypeDef,
-  GetOneKnowledgeRetrievalSettings
+  unknown
 > = z.object({
-  retrievalType: GetOneKnowledgeRetrievalType$outboundSchema.default(
-    "hybrid_search",
-  ),
-  topK: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() => GetOneKnowledgeRerankConfig$outboundSchema),
+  _id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domain_id: z.string(),
+  path: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: GetOneKnowledgeResponseBodyType$inboundSchema.default("internal"),
+  retrieval_settings: z.lazy(() =>
+    GetOneKnowledgeResponseBodyRetrievalSettings$inboundSchema
   ).optional(),
-  agenticRagConfig: z.nullable(
-    z.lazy(() => GetOneKnowledgeAgenticRagConfig$outboundSchema),
-  ).optional(),
+  model: z.string(),
 }).transform((v) => {
   return remap$(v, {
-    retrievalType: "retrieval_type",
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-    agenticRagConfig: "agentic_rag_config",
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "retrieval_settings": "retrievalSettings",
+  });
+});
+
+/** @internal */
+export type GetOneKnowledgeResponseBody1$Outbound = {
+  _id: string;
+  created: string;
+  description?: string | undefined;
+  key: string;
+  domain_id: string;
+  path?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
+  updated: string;
+  type: string;
+  retrieval_settings?:
+    | GetOneKnowledgeResponseBodyRetrievalSettings$Outbound
+    | undefined;
+  model: string;
+};
+
+/** @internal */
+export const GetOneKnowledgeResponseBody1$outboundSchema: z.ZodType<
+  GetOneKnowledgeResponseBody1$Outbound,
+  z.ZodTypeDef,
+  GetOneKnowledgeResponseBody1
+> = z.object({
+  id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domainId: z.string(),
+  path: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: GetOneKnowledgeResponseBodyType$outboundSchema.default("internal"),
+  retrievalSettings: z.lazy(() =>
+    GetOneKnowledgeResponseBodyRetrievalSettings$outboundSchema
+  ).optional(),
+  model: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    domainId: "domain_id",
+    createdById: "created_by_id",
+    updatedById: "updated_by_id",
+    retrievalSettings: "retrieval_settings",
   });
 });
 
@@ -410,32 +1204,32 @@ export const GetOneKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetOneKnowledgeRetrievalSettings$ {
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema = GetOneKnowledgeRetrievalSettings$inboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema = GetOneKnowledgeRetrievalSettings$outboundSchema;
-  /** @deprecated use `GetOneKnowledgeRetrievalSettings$Outbound` instead. */
-  export type Outbound = GetOneKnowledgeRetrievalSettings$Outbound;
+export namespace GetOneKnowledgeResponseBody1$ {
+  /** @deprecated use `GetOneKnowledgeResponseBody1$inboundSchema` instead. */
+  export const inboundSchema = GetOneKnowledgeResponseBody1$inboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBody1$outboundSchema` instead. */
+  export const outboundSchema = GetOneKnowledgeResponseBody1$outboundSchema;
+  /** @deprecated use `GetOneKnowledgeResponseBody1$Outbound` instead. */
+  export type Outbound = GetOneKnowledgeResponseBody1$Outbound;
 }
 
-export function getOneKnowledgeRetrievalSettingsToJSON(
-  getOneKnowledgeRetrievalSettings: GetOneKnowledgeRetrievalSettings,
+export function getOneKnowledgeResponseBody1ToJSON(
+  getOneKnowledgeResponseBody1: GetOneKnowledgeResponseBody1,
 ): string {
   return JSON.stringify(
-    GetOneKnowledgeRetrievalSettings$outboundSchema.parse(
-      getOneKnowledgeRetrievalSettings,
+    GetOneKnowledgeResponseBody1$outboundSchema.parse(
+      getOneKnowledgeResponseBody1,
     ),
   );
 }
 
-export function getOneKnowledgeRetrievalSettingsFromJSON(
+export function getOneKnowledgeResponseBody1FromJSON(
   jsonString: string,
-): SafeParseResult<GetOneKnowledgeRetrievalSettings, SDKValidationError> {
+): SafeParseResult<GetOneKnowledgeResponseBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetOneKnowledgeRetrievalSettings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOneKnowledgeRetrievalSettings' from JSON`,
+    (x) => GetOneKnowledgeResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOneKnowledgeResponseBody1' from JSON`,
   );
 }
 
@@ -444,73 +1238,25 @@ export const GetOneKnowledgeResponseBody$inboundSchema: z.ZodType<
   GetOneKnowledgeResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  model: z.string(),
-  domain_id: z.string(),
-  path: z.string().optional(),
-  retrieval_settings: z.lazy(() =>
-    GetOneKnowledgeRetrievalSettings$inboundSchema
-  ).optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "retrieval_settings": "retrievalSettings",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
+> = z.union([
+  z.lazy(() => GetOneKnowledgeResponseBody1$inboundSchema),
+  z.lazy(() => GetOneKnowledgeResponseBody2$inboundSchema),
+]);
 
 /** @internal */
-export type GetOneKnowledgeResponseBody$Outbound = {
-  _id: string;
-  created: string;
-  description?: string | undefined;
-  key: string;
-  model: string;
-  domain_id: string;
-  path?: string | undefined;
-  retrieval_settings?: GetOneKnowledgeRetrievalSettings$Outbound | undefined;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  updated: string;
-};
+export type GetOneKnowledgeResponseBody$Outbound =
+  | GetOneKnowledgeResponseBody1$Outbound
+  | GetOneKnowledgeResponseBody2$Outbound;
 
 /** @internal */
 export const GetOneKnowledgeResponseBody$outboundSchema: z.ZodType<
   GetOneKnowledgeResponseBody$Outbound,
   z.ZodTypeDef,
   GetOneKnowledgeResponseBody
-> = z.object({
-  id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  model: z.string(),
-  domainId: z.string(),
-  path: z.string().optional(),
-  retrievalSettings: z.lazy(() =>
-    GetOneKnowledgeRetrievalSettings$outboundSchema
-  ).optional(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    retrievalSettings: "retrieval_settings",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
+> = z.union([
+  z.lazy(() => GetOneKnowledgeResponseBody1$outboundSchema),
+  z.lazy(() => GetOneKnowledgeResponseBody2$outboundSchema),
+]);
 
 /**
  * @internal

@@ -13,5 +13,5 @@ let value: ListDatasetDatapointsMessagesDatasetsResponse200Role = "assistant";
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

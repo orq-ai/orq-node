@@ -9,11 +9,11 @@ import { UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRo
 
 let value:
   UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
-    "exception";
+    "assistant";
 ```
 
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

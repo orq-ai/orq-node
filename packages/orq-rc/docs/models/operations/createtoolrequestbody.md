@@ -5,14 +5,14 @@ The tool to create
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.CreateToolRequestBody1`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.CreateToolRequestBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Abagail.Frami",
-  description: "solution which prohibition finally carelessly",
+  displayName: "Faye91",
+  description: "lest inasmuch inasmuch concrete meanwhile generally brr",
   type: "function",
   function: {
     name: "<value>",
@@ -20,21 +20,18 @@ const value: operations.RequestBody1 = {
 };
 ```
 
-### `operations.RequestBody2`
+### `operations.CreateToolRequestBody2`
 
 ```typescript
-const value: operations.RequestBody2 = {
+const value: operations.CreateToolRequestBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Ambrose98",
-  description:
-    "unnaturally t-shirt keenly surge selfishly often merrily who of",
+  displayName: "Mark39",
+  description: "annex redound rust graceful er whether boo er not up",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {
-      "key": "<value>",
-    },
+    schema: {},
   },
 };
 ```

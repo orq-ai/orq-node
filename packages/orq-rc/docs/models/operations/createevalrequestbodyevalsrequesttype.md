@@ -5,11 +5,11 @@
 ```typescript
 import { CreateEvalRequestBodyEvalsRequestType } from "@orq-ai/node/models/operations";
 
-let value: CreateEvalRequestBodyEvalsRequestType = "python_eval";
+let value: CreateEvalRequestBodyEvalsRequestType = "http_eval";
 ```
 
 ## Values
 
 ```typescript
-"python_eval"
+"http_eval"
 ```

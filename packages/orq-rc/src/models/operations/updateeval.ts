@@ -75,7 +75,13 @@ export type RequestBodyPython = {
   code?: string | undefined;
   type: UpdateEvalRequestBodyEvalsRequest4Type;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   description?: string | undefined;
@@ -161,7 +167,13 @@ export type UpdateEvalRequestBodyHTTP = {
   headers?: { [k: string]: string } | undefined;
   payload?: { [k: string]: any } | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   description?: string | undefined;
@@ -234,7 +246,13 @@ export type RequestBodyJSON = {
   type: UpdateEvalRequestBodyEvalsType;
   schema?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   description?: string | undefined;
@@ -309,7 +327,13 @@ export type RequestBodyLLM = {
   type: UpdateEvalRequestBodyType;
   prompt?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   description?: string | undefined;
@@ -3636,8 +3660,8 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema
@@ -3680,8 +3704,8 @@ export const ResponseBodyTypescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema
@@ -4107,8 +4131,8 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
@@ -4154,8 +4178,8 @@ export const ResponseBodyRagas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema
@@ -7662,8 +7686,8 @@ export const UpdateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
@@ -7777,8 +7801,8 @@ export const UpdateEvalResponseBodyFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema
@@ -8220,8 +8244,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -8263,8 +8287,8 @@ export const UpdateEvalResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -8685,8 +8709,8 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -8734,8 +8758,8 @@ export const UpdateEvalResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -9125,8 +9149,8 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -9166,8 +9190,8 @@ export const UpdateEvalResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -9525,8 +9549,8 @@ export const UpdateEvalResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -9566,8 +9590,8 @@ export const UpdateEvalResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-14T14:13:27.558Z"),
-  updated: z.string().default("2025-10-14T14:13:27.558Z"),
+  created: z.string().default("2025-10-15T05:20:10.646Z"),
+  updated: z.string().default("2025-10-15T05:20:10.646Z"),
   guardrailConfig: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
