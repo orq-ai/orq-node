@@ -34,7 +34,7 @@ const value: operations.UserMessage = {
 
 ```typescript
 const value: operations.AssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

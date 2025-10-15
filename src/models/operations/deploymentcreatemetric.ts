@@ -198,7 +198,6 @@ export type DeploymentCreateMetricMessagesDeploymentsMetricsContent =
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
   {
     Assistant: "assistant",
-    Exception: "exception",
   } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.
@@ -702,7 +701,6 @@ export type DeploymentCreateMetricChoicesContent =
  */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole = {
   Assistant: "assistant",
-  Exception: "exception",
 } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.

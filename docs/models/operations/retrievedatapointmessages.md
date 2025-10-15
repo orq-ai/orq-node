@@ -34,7 +34,7 @@ const value: operations.RetrieveDatapointMessagesUserMessage = {
 
 ```typescript
 const value: operations.RetrieveDatapointMessagesAssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

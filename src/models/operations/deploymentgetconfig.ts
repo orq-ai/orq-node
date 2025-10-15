@@ -146,7 +146,6 @@ export type PrefixMessagesContent =
  */
 export const DeploymentGetConfigPrefixMessagesDeploymentsRole = {
   Assistant: "assistant",
-  Exception: "exception",
 } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.
@@ -599,7 +598,6 @@ export type DeploymentGetConfigMessagesContent =
  */
 export const DeploymentGetConfigMessagesDeploymentsRequestRole = {
   Assistant: "assistant",
-  Exception: "exception",
 } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.

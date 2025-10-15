@@ -13,5 +13,5 @@ let value: DeploymentGetConfigMessagesDeploymentsRequestRole = "assistant";
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

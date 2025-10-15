@@ -7,11 +7,11 @@ The role of the messages author, in this case `assistant` or `exception`.
 ```typescript
 import { DeploymentsPrefixMessages4Role } from "@orq-ai/node/models/components";
 
-let value: DeploymentsPrefixMessages4Role = "exception";
+let value: DeploymentsPrefixMessages4Role = "assistant";
 ```
 
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

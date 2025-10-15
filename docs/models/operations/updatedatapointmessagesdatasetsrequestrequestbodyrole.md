@@ -13,5 +13,5 @@ let value: UpdateDatapointMessagesDatasetsRequestRequestBodyRole = "assistant";
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

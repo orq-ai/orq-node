@@ -6,7 +6,7 @@
 import { UpdateDatapointMessagesAssistantMessage } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapointMessagesAssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

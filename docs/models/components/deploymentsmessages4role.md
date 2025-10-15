@@ -13,5 +13,5 @@ let value: DeploymentsMessages4Role = "assistant";
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

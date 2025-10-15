@@ -6,7 +6,7 @@
 import { AssistantMessage } from "@orq-ai/node/models/operations";
 
 let value: AssistantMessage = {
-  role: "exception",
+  role: "assistant",
 };
 ```
 

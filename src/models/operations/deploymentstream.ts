@@ -170,7 +170,6 @@ export type DeploymentStreamPrefixMessagesDeploymentsContent =
  */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole = {
   Assistant: "assistant",
-  Exception: "exception",
 } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.
@@ -661,7 +660,6 @@ export type DeploymentStreamMessagesDeploymentsContent =
  */
 export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole = {
   Assistant: "assistant",
-  Exception: "exception",
 } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.

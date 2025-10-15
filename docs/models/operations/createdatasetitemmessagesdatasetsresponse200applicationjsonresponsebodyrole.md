@@ -15,5 +15,5 @@ let value:
 ## Values
 
 ```typescript
-"assistant" | "exception"
+"assistant"
 ```

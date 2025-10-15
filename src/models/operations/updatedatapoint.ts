@@ -156,7 +156,6 @@ export type UpdateDatapointMessagesDatasetsContent =
  */
 export const UpdateDatapointMessagesDatasetsRequestRequestBodyRole = {
   Assistant: "assistant",
-  Exception: "exception",
 } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.
@@ -674,7 +673,6 @@ export type UpdateDatapointMessagesDatasetsResponse200Content =
 export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   {
     Assistant: "assistant",
-    Exception: "exception",
   } as const;
 /**
  * The role of the messages author, in this case `assistant` or `exception`.
@@ -6020,7 +6018,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-14T11:40:48.565Z",
+    "2025-10-15T07:53:42.182Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6082,7 +6080,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-14T11:40:48.565Z"))
+  updated: z.date().default(() => new Date("2025-10-15T07:53:42.182Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
