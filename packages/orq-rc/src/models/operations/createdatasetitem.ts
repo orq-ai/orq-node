@@ -152,13 +152,13 @@ export type CreateDatasetItemMessagesDatasetsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type CreateDatasetItemMessagesDatasetsRequestRequestBodyRole =
   ClosedEnum<typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole>;
@@ -225,7 +225,7 @@ export type CreateDatasetItemMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: CreateDatasetItemMessagesDatasetsRequestRequestBodyRole;
   /**
@@ -671,14 +671,14 @@ export type CreateDatasetItemMessagesDatasetsResponse200Content =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   {
     Assistant: "assistant",
   } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   ClosedEnum<
@@ -748,7 +748,7 @@ export type CreateDatasetItemMessagesDatasetsAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role:
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole;
@@ -6294,7 +6294,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-16T10:40:29.529Z",
+    "2025-10-16T14:53:50.198Z",
   ).transform(v => new Date(v)),
   type: CreateDatasetItemEvaluationsDatasetsType$inboundSchema,
   values: z.array(z.string()),
@@ -6330,7 +6330,7 @@ export const Evaluations3$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: CreateDatasetItemEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-16T10:40:29.529Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-16T14:53:50.198Z"))
     .transform(v => v.toISOString()),
   type: CreateDatasetItemEvaluationsDatasetsType$outboundSchema,
   values: z.array(z.string()),
@@ -6445,7 +6445,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   source: EvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-16T10:40:29.529Z",
+    "2025-10-16T14:53:50.198Z",
   ).transform(v => new Date(v)),
   type: CreateDatasetItemEvaluationsType$inboundSchema,
   value: z.number(),
@@ -6481,7 +6481,7 @@ export const Evaluations2$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: EvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-16T10:40:29.529Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-16T14:53:50.198Z"))
     .transform(v => v.toISOString()),
   type: CreateDatasetItemEvaluationsType$outboundSchema,
   value: z.number(),
@@ -6594,7 +6594,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   source: Source$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-16T10:40:29.529Z",
+    "2025-10-16T14:53:50.198Z",
   ).transform(v => new Date(v)),
   type: EvaluationsType$inboundSchema,
   value: z.string(),
@@ -6630,7 +6630,7 @@ export const Evaluations1$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: Source$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-16T10:40:29.529Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-16T14:53:50.198Z"))
     .transform(v => v.toISOString()),
   type: EvaluationsType$outboundSchema,
   value: z.string(),
@@ -6764,7 +6764,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-16T10:40:20.235Z",
+    "2025-10-16T14:53:40.726Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6843,7 +6843,7 @@ export const ResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-16T10:40:20.235Z"))
+  updated: z.date().default(() => new Date("2025-10-16T14:53:40.726Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

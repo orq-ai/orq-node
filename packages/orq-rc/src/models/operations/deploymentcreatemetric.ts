@@ -193,14 +193,14 @@ export type DeploymentCreateMetricMessagesDeploymentsMetricsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
   {
     Assistant: "assistant",
   } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole =
   ClosedEnum<
@@ -270,7 +270,7 @@ export type DeploymentCreateMetricMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentCreateMetricMessagesDeploymentsMetricsRequestRequestBodyRole;
   /**
@@ -697,13 +697,13 @@ export type DeploymentCreateMetricChoicesContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole =
   ClosedEnum<typeof DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole>;
@@ -769,7 +769,7 @@ export type ChoicesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentCreateMetricChoicesDeploymentsMetricsRequestRole;
   /**

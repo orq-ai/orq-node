@@ -166,13 +166,13 @@ export type DeploymentStreamPrefixMessagesDeploymentsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole =
   ClosedEnum<
@@ -241,7 +241,7 @@ export type PrefixMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole;
   /**
@@ -656,13 +656,13 @@ export type DeploymentStreamMessagesDeploymentsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentStreamMessagesDeploymentsRequestRequestBodyRole =
   ClosedEnum<typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole>;
@@ -730,7 +730,7 @@ export type DeploymentStreamMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentStreamMessagesDeploymentsRequestRequestBodyRole;
   /**
