@@ -88,7 +88,7 @@ export type Data5 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -217,7 +217,7 @@ export type Data4 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -372,7 +372,7 @@ export type Data3 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -457,7 +457,7 @@ export type GetAllToolsData2 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -540,7 +540,7 @@ export type GetAllToolsData1 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -798,10 +798,10 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7NW4EQC7W1KRDKZQZT64WP1"),
+    _id: z.string().default("01K7NYJMFA2FJFWFHRXE0NC1Q2"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -831,7 +831,7 @@ export type Data5$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -851,10 +851,10 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K7NW4EQC7W1KRDKZQZT64WP1"),
+  id: z.string().default("01K7NYJMFA2FJFWFHRXE0NC1Q2"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1194,10 +1194,10 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7NW4EQBF4BEMB47T6Y53ZYT"),
+    _id: z.string().default("01K7NYJMF9PYZ0NE2D8A34973B"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -1226,7 +1226,7 @@ export type Data4$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1246,10 +1246,10 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K7NW4EQBF4BEMB47T6Y53ZYT"),
+  id: z.string().default("01K7NYJMF9PYZ0NE2D8A34973B"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1629,10 +1629,10 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7NW4EQ8CJEARYKNKY23WA6X"),
+    _id: z.string().default("01K7NYJMF8GQM6PX96182B38T9"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -1661,7 +1661,7 @@ export type Data3$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1681,10 +1681,10 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K7NW4EQ8CJEARYKNKY23WA6X"),
+  id: z.string().default("01K7NYJMF8GQM6PX96182B38T9"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1842,10 +1842,10 @@ export const GetAllToolsData2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4EQ8FKTP78PZD8C1EA3J"),
+  _id: z.string().default("01K7NYJMF88VMR0WM24HJNNSWP"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1875,7 +1875,7 @@ export type GetAllToolsData2$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1895,10 +1895,10 @@ export const GetAllToolsData2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData2
 > = z.object({
-  id: z.string().default("01K7NW4EQ8FKTP78PZD8C1EA3J"),
+  id: z.string().default("01K7NYJMF88VMR0WM24HJNNSWP"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -2063,10 +2063,10 @@ export const GetAllToolsData1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4EQ7FCVFJNPS07HXTBXE"),
+  _id: z.string().default("01K7NYJMF7JRCN9CE66D3C3DZH"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -2095,7 +2095,7 @@ export type GetAllToolsData1$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -2115,10 +2115,10 @@ export const GetAllToolsData1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData1
 > = z.object({
-  id: z.string().default("01K7NW4EQ7FCVFJNPS07HXTBXE"),
+  id: z.string().default("01K7NYJMF7JRCN9CE66D3C3DZH"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),

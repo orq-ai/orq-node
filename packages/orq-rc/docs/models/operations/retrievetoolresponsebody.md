@@ -11,8 +11,8 @@ Successfully retrieved the tool.
 const value: operations.RetrieveToolResponseBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Xavier_Steuber-Dibbert77",
-  description: "accountability blindly under platter ew bandwidth",
+  description:
+    "limply accountability blindly under platter ew bandwidth presume wherever boohoo",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -30,9 +30,7 @@ const value: operations.RetrieveToolResponseBody1 = {
 const value: operations.RetrieveToolResponseBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Karli16",
-  description:
-    "fatally phew certainly gah as besides sleepy synthesise cooperative blah",
+  description: "phooey far mythology voluntarily quizzically likely or",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -42,7 +40,6 @@ const value: operations.RetrieveToolResponseBody2 = {
     name: "<value>",
     schema: {
       "key": "<value>",
-      "key1": "<value>",
     },
   },
 };
@@ -54,8 +51,7 @@ const value: operations.RetrieveToolResponseBody2 = {
 const value: operations.RetrieveToolResponseBody3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Arianna_Ziemann",
-  description: "gee cinch barring",
+  description: "likewise practical before",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -76,8 +72,7 @@ const value: operations.RetrieveToolResponseBody3 = {
 const value: operations.RetrieveToolResponseBody4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Dawson_Von",
-  description: "anenst tray alongside mid",
+  description: "psst railway above airmail",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -86,11 +81,11 @@ const value: operations.RetrieveToolResponseBody4 = {
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://practical-term.name",
+    serverUrl: "https://voluminous-stool.com/",
     inputSchema: {
       type: "object",
     },
-    connectionType: "http",
+    connectionType: "sse",
   },
 };
 ```
@@ -101,9 +96,7 @@ const value: operations.RetrieveToolResponseBody4 = {
 const value: operations.RetrieveToolResponseBody5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Jarvis93",
-  description:
-    "babushka interestingly with fixed utilization airmail vaguely maroon",
+  description: "ironclad crossly rapidly meh well provided",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

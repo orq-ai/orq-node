@@ -11,8 +11,7 @@ The tool to create
 const value: operations.CreateToolRequestBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Faye91",
-  description: "lest inasmuch inasmuch concrete meanwhile generally brr",
+  description: "eggplant until so yippee up",
   type: "function",
   function: {
     name: "<value>",
@@ -26,12 +25,16 @@ const value: operations.CreateToolRequestBody1 = {
 const value: operations.CreateToolRequestBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Mark39",
-  description: "annex redound rust graceful er whether boo er not up",
+  description:
+    "sonnet kindheartedly mmm laughter scrabble aftermath uh-huh oof",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    schema: {
+      "key": "<value>",
+      "key1": "<value>",
+      "key2": "<value>",
+    },
   },
 };
 ```
@@ -42,8 +45,7 @@ const value: operations.CreateToolRequestBody2 = {
 const value: operations.RequestBody3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Lorna6",
-  description: "optimistically quinoa psst",
+  description: "lively whose atop breastplate when excluding but slime",
   type: "http",
   http: {
     blueprint: {
@@ -60,14 +62,12 @@ const value: operations.RequestBody3 = {
 const value: operations.RequestBody4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Kole_Ebert32",
-  description:
-    "hovercraft dramatic clearly oof reluctantly out requirement sharply impolite sleepily",
+  description: "instead righteously drat switch help observe whose",
   type: "mcp",
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://male-switchboard.org/",
+    serverUrl: "https://scornful-fog.net",
     inputSchema: {
       type: "object",
     },
@@ -82,8 +82,8 @@ const value: operations.RequestBody4 = {
 const value: operations.RequestBody5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Makenna.Maggio",
-  description: "phew before excluding before story stiffen westernize",
+  description:
+    "shady vague hungrily beyond fiercely furthermore hypothesize psst",
   type: "code",
   codeTool: {
     language: "python",

@@ -25,6 +25,11 @@ let value: ListAgentsResponseBody = {
       path: "Default",
       memoryStores: [],
       teamOfAgents: [],
+      knowledgeBases: [
+        {
+          knowledgeId: "customer-knowledge-base",
+        },
+      ],
     },
   ],
   hasMore: true,

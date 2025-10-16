@@ -3,6 +3,7 @@
  */
 
 export * from "./cleardataset.js";
+export * from "./createagent.js";
 export * from "./createbudget.js";
 export * from "./createchunk.js";
 export * from "./createcontact.js";
@@ -17,6 +18,7 @@ export * from "./creatememorydocument.js";
 export * from "./creatememorystore.js";
 export * from "./createprompt.js";
 export * from "./createtool.js";
+export * from "./deleteagent.js";
 export * from "./deletebudget.js";
 export * from "./deletechunk.js";
 export * from "./deletechunks.js";
@@ -122,6 +124,7 @@ export * from "./runagent.js";
 export * from "./searchknowledge.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
+export * from "./updateagent.js";
 export * from "./updatebudget.js";
 export * from "./updatechunk.js";
 export * from "./updatecontact.js";

@@ -79,7 +79,7 @@ export type DuplicateToolResponseBody5 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -212,7 +212,7 @@ export type DuplicateToolResponseBody4 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -369,7 +369,7 @@ export type DuplicateToolResponseBody3 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -456,7 +456,7 @@ export type DuplicateToolResponseBody2 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -543,7 +543,7 @@ export type DuplicateToolResponseBody1 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -788,10 +788,10 @@ export const DuplicateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ERBM7G0TCY95HM1C8N7"),
+  _id: z.string().default("01K7NYJMFV3XNM5AGDPZ4EJZ0G"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -824,7 +824,7 @@ export type DuplicateToolResponseBody5$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -844,10 +844,10 @@ export const DuplicateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K7NW4ERBM7G0TCY95HM1C8N7"),
+  id: z.string().default("01K7NYJMFV3XNM5AGDPZ4EJZ0G"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1232,10 +1232,10 @@ export const DuplicateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ERBQKTVXX3CB70ZE93J"),
+  _id: z.string().default("01K7NYJMFV4RXBW12TJ9TS2NBJ"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1266,7 +1266,7 @@ export type DuplicateToolResponseBody4$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1286,10 +1286,10 @@ export const DuplicateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K7NW4ERBQKTVXX3CB70ZE93J"),
+  id: z.string().default("01K7NYJMFV4RXBW12TJ9TS2NBJ"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1713,10 +1713,10 @@ export const DuplicateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ERAC6CGG8NNZY0Y7PDC"),
+  _id: z.string().default("01K7NYJMFTQG8VZ8VSNAR1G8H2"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1747,7 +1747,7 @@ export type DuplicateToolResponseBody3$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1767,10 +1767,10 @@ export const DuplicateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K7NW4ERAC6CGG8NNZY0Y7PDC"),
+  id: z.string().default("01K7NYJMFTQG8VZ8VSNAR1G8H2"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1947,10 +1947,10 @@ export const DuplicateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ERAP1C89WFAYZ4J9Y93"),
+  _id: z.string().default("01K7NYJMFS7M5YXNKA1VNKE9AF"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1980,7 +1980,7 @@ export type DuplicateToolResponseBody2$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -2000,10 +2000,10 @@ export const DuplicateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K7NW4ERAP1C89WFAYZ4J9Y93"),
+  id: z.string().default("01K7NYJMFS7M5YXNKA1VNKE9AF"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -2173,10 +2173,10 @@ export const DuplicateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ER93JRZD11ABEB3GPMC"),
+  _id: z.string().default("01K7NYJMFSY32FN3D8WB7QTFGC"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -2205,7 +2205,7 @@ export type DuplicateToolResponseBody1$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -2225,10 +2225,10 @@ export const DuplicateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DuplicateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K7NW4ER93JRZD11ABEB3GPMC"),
+  id: z.string().default("01K7NYJMFSY32FN3D8WB7QTFGC"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),

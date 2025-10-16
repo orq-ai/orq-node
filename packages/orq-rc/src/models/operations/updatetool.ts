@@ -65,7 +65,7 @@ export type UpdateToolRequestBody5 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -181,7 +181,7 @@ export type UpdateToolRequestBody4 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -486,11 +486,11 @@ export type UpdateToolRequestBody1 = {
  * The tool to update
  */
 export type UpdateToolRequestBody =
-  | UpdateToolRequestBody4
-  | UpdateToolRequestBody5
   | UpdateToolRequestBody1
   | UpdateToolRequestBody2
-  | UpdateToolRequestBody3;
+  | UpdateToolRequestBody3
+  | UpdateToolRequestBody4
+  | UpdateToolRequestBody5;
 
 export type UpdateToolRequest = {
   toolId: string;
@@ -498,11 +498,11 @@ export type UpdateToolRequest = {
    * The tool to update
    */
   requestBody?:
-    | UpdateToolRequestBody4
-    | UpdateToolRequestBody5
     | UpdateToolRequestBody1
     | UpdateToolRequestBody2
     | UpdateToolRequestBody3
+    | UpdateToolRequestBody4
+    | UpdateToolRequestBody5
     | undefined;
 };
 
@@ -567,7 +567,7 @@ export type UpdateToolResponseBody5 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -698,7 +698,7 @@ export type UpdateToolResponseBody4 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -853,7 +853,7 @@ export type UpdateToolResponseBody3 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -940,7 +940,7 @@ export type UpdateToolResponseBody2 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -1027,7 +1027,7 @@ export type UpdateToolResponseBody1 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -1200,7 +1200,7 @@ export const UpdateToolRequestBody5$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   path: z.string().optional(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest5Status$inboundSchema.default(
     "live",
@@ -1218,7 +1218,7 @@ export const UpdateToolRequestBody5$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateToolRequestBody5$Outbound = {
   path?: string | undefined;
-  display_name: string;
+  display_name?: string | undefined;
   description?: string | undefined;
   status: string;
   type: string;
@@ -1232,7 +1232,7 @@ export const UpdateToolRequestBody5$outboundSchema: z.ZodType<
   UpdateToolRequestBody5
 > = z.object({
   path: z.string().optional(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest5Status$outboundSchema.default(
     "live",
@@ -1575,7 +1575,7 @@ export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
 > = z.object({
   path: z.string().optional(),
   key: z.string().optional(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest4Status$inboundSchema.default(
     "live",
@@ -1592,7 +1592,7 @@ export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
 export type UpdateToolRequestBody4$Outbound = {
   path?: string | undefined;
   key?: string | undefined;
-  display_name: string;
+  display_name?: string | undefined;
   description?: string | undefined;
   status: string;
   type: string;
@@ -1607,7 +1607,7 @@ export const UpdateToolRequestBody4$outboundSchema: z.ZodType<
 > = z.object({
   path: z.string().optional(),
   key: z.string().optional(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest4Status$outboundSchema.default(
     "live",
@@ -2468,20 +2468,20 @@ export const UpdateToolRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdateToolRequestBody4$inboundSchema),
-  z.lazy(() => UpdateToolRequestBody5$inboundSchema),
   z.lazy(() => UpdateToolRequestBody1$inboundSchema),
   z.lazy(() => UpdateToolRequestBody2$inboundSchema),
   z.lazy(() => UpdateToolRequestBody3$inboundSchema),
+  z.lazy(() => UpdateToolRequestBody4$inboundSchema),
+  z.lazy(() => UpdateToolRequestBody5$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateToolRequestBody$Outbound =
-  | UpdateToolRequestBody4$Outbound
-  | UpdateToolRequestBody5$Outbound
   | UpdateToolRequestBody1$Outbound
   | UpdateToolRequestBody2$Outbound
-  | UpdateToolRequestBody3$Outbound;
+  | UpdateToolRequestBody3$Outbound
+  | UpdateToolRequestBody4$Outbound
+  | UpdateToolRequestBody5$Outbound;
 
 /** @internal */
 export const UpdateToolRequestBody$outboundSchema: z.ZodType<
@@ -2489,11 +2489,11 @@ export const UpdateToolRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequestBody
 > = z.union([
-  z.lazy(() => UpdateToolRequestBody4$outboundSchema),
-  z.lazy(() => UpdateToolRequestBody5$outboundSchema),
   z.lazy(() => UpdateToolRequestBody1$outboundSchema),
   z.lazy(() => UpdateToolRequestBody2$outboundSchema),
   z.lazy(() => UpdateToolRequestBody3$outboundSchema),
+  z.lazy(() => UpdateToolRequestBody4$outboundSchema),
+  z.lazy(() => UpdateToolRequestBody5$outboundSchema),
 ]);
 
 /**
@@ -2535,11 +2535,11 @@ export const UpdateToolRequest$inboundSchema: z.ZodType<
 > = z.object({
   tool_id: z.string(),
   RequestBody: z.union([
-    z.lazy(() => UpdateToolRequestBody4$inboundSchema),
-    z.lazy(() => UpdateToolRequestBody5$inboundSchema),
     z.lazy(() => UpdateToolRequestBody1$inboundSchema),
     z.lazy(() => UpdateToolRequestBody2$inboundSchema),
     z.lazy(() => UpdateToolRequestBody3$inboundSchema),
+    z.lazy(() => UpdateToolRequestBody4$inboundSchema),
+    z.lazy(() => UpdateToolRequestBody5$inboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2552,11 +2552,11 @@ export const UpdateToolRequest$inboundSchema: z.ZodType<
 export type UpdateToolRequest$Outbound = {
   tool_id: string;
   RequestBody?:
-    | UpdateToolRequestBody4$Outbound
-    | UpdateToolRequestBody5$Outbound
     | UpdateToolRequestBody1$Outbound
     | UpdateToolRequestBody2$Outbound
     | UpdateToolRequestBody3$Outbound
+    | UpdateToolRequestBody4$Outbound
+    | UpdateToolRequestBody5$Outbound
     | undefined;
 };
 
@@ -2568,11 +2568,11 @@ export const UpdateToolRequest$outboundSchema: z.ZodType<
 > = z.object({
   toolId: z.string(),
   requestBody: z.union([
-    z.lazy(() => UpdateToolRequestBody4$outboundSchema),
-    z.lazy(() => UpdateToolRequestBody5$outboundSchema),
     z.lazy(() => UpdateToolRequestBody1$outboundSchema),
     z.lazy(() => UpdateToolRequestBody2$outboundSchema),
     z.lazy(() => UpdateToolRequestBody3$outboundSchema),
+    z.lazy(() => UpdateToolRequestBody4$outboundSchema),
+    z.lazy(() => UpdateToolRequestBody5$outboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2751,10 +2751,10 @@ export const UpdateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ER7A11KHWADV7KEGNH7"),
+  _id: z.string().default("01K7NYJMFPBJRHX99X20FN0WY6"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -2786,7 +2786,7 @@ export type UpdateToolResponseBody5$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -2806,10 +2806,10 @@ export const UpdateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K7NW4ER7A11KHWADV7KEGNH7"),
+  id: z.string().default("01K7NYJMFPBJRHX99X20FN0WY6"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -3180,10 +3180,10 @@ export const UpdateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ER6EDF7S7E2MVDFYDMB"),
+  _id: z.string().default("01K7NYJMFN33MNW6CMD0M36Z2E"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -3214,7 +3214,7 @@ export type UpdateToolResponseBody4$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -3234,10 +3234,10 @@ export const UpdateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K7NW4ER6EDF7S7E2MVDFYDMB"),
+  id: z.string().default("01K7NYJMFN33MNW6CMD0M36Z2E"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -3652,10 +3652,10 @@ export const UpdateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ER5W5PW1AQT6E49FY4Q"),
+  _id: z.string().default("01K7NYJMFNNCAPT3BT2CVDAFSA"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -3686,7 +3686,7 @@ export type UpdateToolResponseBody3$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -3706,10 +3706,10 @@ export const UpdateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K7NW4ER5W5PW1AQT6E49FY4Q"),
+  id: z.string().default("01K7NYJMFNNCAPT3BT2CVDAFSA"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -3880,10 +3880,10 @@ export const UpdateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ER59FH9M0KP1FP0DW7M"),
+  _id: z.string().default("01K7NYJMFM3A2CNNMYME5166BF"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -3913,7 +3913,7 @@ export type UpdateToolResponseBody2$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -3933,10 +3933,10 @@ export const UpdateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K7NW4ER59FH9M0KP1FP0DW7M"),
+  id: z.string().default("01K7NYJMFM3A2CNNMYME5166BF"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -4105,10 +4105,10 @@ export const UpdateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7NW4ER4548GMM6Q22GEPPCP"),
+  _id: z.string().default("01K7NYJMFKEZ03PWYMGZMWRGX3"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -4137,7 +4137,7 @@ export type UpdateToolResponseBody1$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -4157,10 +4157,10 @@ export const UpdateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K7NW4ER4548GMM6Q22GEPPCP"),
+  id: z.string().default("01K7NYJMFKEZ03PWYMGZMWRGX3"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),

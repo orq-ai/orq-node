@@ -11,11 +11,10 @@ let value: GetAllToolsResponseBody = {
   object: "list",
   data: [
     {
-      id: "01K7NW4EQC7W1KRDKZQZT64WP1",
+      id: "01K7NYJMFA2FJFWFHRXE0NC1Q2",
       path: "Default",
       key: "<key>",
-      displayName: "Luella_Marks78",
-      description: "see extremely pearl sentimental",
+      description: "fast as violently next bouncy smoothly oof silent",
       projectId: "<id>",
       workspaceId: "<id>",
       created: "<value>",

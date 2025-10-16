@@ -6,14 +6,12 @@
 import { StreamRunAgentKnowledgeBases } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentKnowledgeBases = {
-  configuration: {
-    type: "last_user_message",
-  },
+  knowledgeId: "customer-knowledge-base",
 };
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `configuration`                                                                            | *operations.StreamRunAgentKnowledgeBaseConfiguration*                                      | :heavy_check_mark:                                                                         | Defines the configuration settings which can either be for a user message or a text entry. |
+| Field                                             | Type                                              | Required                                          | Description                                       | Example                                           |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `knowledgeId`                                     | *string*                                          | :heavy_check_mark:                                | Unique identifier of the knowledge base to search | customer-knowledge-base                           |

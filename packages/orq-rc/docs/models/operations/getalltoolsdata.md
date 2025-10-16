@@ -9,8 +9,7 @@
 const value: operations.GetAllToolsData1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Lindsey.Morissette34",
-  description: "when uh-huh so option for",
+  description: "amid eek winged blah rural softly hold",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -28,8 +27,7 @@ const value: operations.GetAllToolsData1 = {
 const value: operations.GetAllToolsData2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Alexander.Stracke",
-  description: "unlawful including apud behind gah surprisingly after so kit",
+  description: "uh-huh reckless for",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -39,8 +37,6 @@ const value: operations.GetAllToolsData2 = {
     name: "<value>",
     schema: {
       "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
     },
   },
 };
@@ -52,9 +48,7 @@ const value: operations.GetAllToolsData2 = {
 const value: operations.Data3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Eldora_Mosciski",
-  description:
-    "cannon husk terraform emulsify dress cheerfully compromise opera",
+  description: "noteworthy limply whoa proper delightfully",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -75,8 +69,7 @@ const value: operations.Data3 = {
 const value: operations.Data4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Francisco.Morar20",
-  description: "pick procrastinate structure oh gosh slight ethyl zowie",
+  description: "why meanwhile but important exactly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -85,11 +78,11 @@ const value: operations.Data4 = {
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://witty-integer.org/",
+    serverUrl: "https://lawful-disclosure.com",
     inputSchema: {
       type: "object",
     },
-    connectionType: "sse",
+    connectionType: "http",
   },
 };
 ```
@@ -100,8 +93,7 @@ const value: operations.Data4 = {
 const value: operations.Data5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Jaime.Greenholt6",
-  description: "indeed breed packaging partially misread oh faithfully",
+  description: "and furthermore bravely midst finally enhance",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

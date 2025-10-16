@@ -37,7 +37,6 @@ const value: operations.UpdateToolRequestBody3 = {
 ```typescript
 const value: operations.UpdateToolRequestBody4 = {
   path: "Default",
-  displayName: "Alan_Christiansen7",
   type: "mcp",
 };
 ```
@@ -47,7 +46,6 @@ const value: operations.UpdateToolRequestBody4 = {
 ```typescript
 const value: operations.UpdateToolRequestBody5 = {
   path: "Default",
-  displayName: "Elta.Friesen",
   type: "code",
 };
 ```

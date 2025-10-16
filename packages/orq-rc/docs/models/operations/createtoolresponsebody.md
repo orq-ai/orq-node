@@ -11,8 +11,7 @@ Successfully created the tool.
 const value: operations.CreateToolResponseBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Cade96",
-  description: "eek shrilly valiantly vague harp browse home adolescent",
+  description: "agile although twist or",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -30,8 +29,7 @@ const value: operations.CreateToolResponseBody1 = {
 const value: operations.CreateToolResponseBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Alessandro.Homenick",
-  description: "for minty bathhouse boohoo when on",
+  description: "midst righteously needy",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -41,8 +39,6 @@ const value: operations.CreateToolResponseBody2 = {
     name: "<value>",
     schema: {
       "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
     },
   },
 };
@@ -54,8 +50,7 @@ const value: operations.CreateToolResponseBody2 = {
 const value: operations.ResponseBody3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Rocio_Smitham",
-  description: "tromp ah merit juvenile amid",
+  description: "refute the besides before brr oof ah ew afore",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -76,8 +71,7 @@ const value: operations.ResponseBody3 = {
 const value: operations.ResponseBody4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Christop.Von",
-  description: "greedily lest mild obesity wealthy harp unto usefully",
+  description: "husky too furiously shameless",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -86,11 +80,11 @@ const value: operations.ResponseBody4 = {
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://brilliant-tooth.info",
+    serverUrl: "https://noteworthy-devastation.com/",
     inputSchema: {
       type: "object",
     },
-    connectionType: "http",
+    connectionType: "sse",
   },
 };
 ```
@@ -101,9 +95,7 @@ const value: operations.ResponseBody4 = {
 const value: operations.ResponseBody5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Cortez_Cremin51",
-  description:
-    "complication assist concerning grubby claw impact divine second norm",
+  description: "edge tank brightly hm",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

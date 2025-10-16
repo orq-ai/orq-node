@@ -78,6 +78,10 @@ export type ListAgentsTools = {
    * The id of the resource
    */
   id: string;
+  /**
+   * Optional tool key for custom tools
+   */
+  key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
   requiresApproval?: boolean | undefined;
@@ -146,57 +150,11 @@ export type ListAgentsMetrics = {
   totalCost?: number | undefined;
 };
 
-export const ListAgentsKnowledgeBaseConfigurationType = {
-  Query: "query",
-} as const;
-export type ListAgentsKnowledgeBaseConfigurationType = ClosedEnum<
-  typeof ListAgentsKnowledgeBaseConfigurationType
->;
-
-/**
- * Defines the configuration settings for a static query.
- */
-export type ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery = {
-  type: ListAgentsKnowledgeBaseConfigurationType;
-  query: string;
-};
-
-export const ListAgentsKnowledgeBaseConfigurationAgentsType = {
-  LastUserMessage: "last_user_message",
-} as const;
-export type ListAgentsKnowledgeBaseConfigurationAgentsType = ClosedEnum<
-  typeof ListAgentsKnowledgeBaseConfigurationAgentsType
->;
-
-/**
- * Defines the configuration settings for a last user message type retrieval.
- */
-export type ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage = {
-  type: ListAgentsKnowledgeBaseConfigurationAgentsType;
-};
-
-/**
- * Defines the configuration settings which can either be for a user message or a text entry.
- */
-export type ListAgentsKnowledgeBaseConfiguration =
-  | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery
-  | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage;
-
 export type ListAgentsKnowledgeBases = {
   /**
-   * The id of the resource
-   */
-  id?: string | undefined;
-  /**
-   * The id of the resource
+   * Unique identifier of the knowledge base to search
    */
   knowledgeId: string;
-  /**
-   * Defines the configuration settings which can either be for a user message or a text entry.
-   */
-  configuration:
-    | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery
-    | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage;
 };
 
 export const ListAgentsHiddenPanels = {
@@ -467,6 +425,7 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -485,6 +444,7 @@ export const ListAgentsTools$inboundSchema: z.ZodType<
 /** @internal */
 export type ListAgentsTools$Outbound = {
   id: string;
+  key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
   requires_approval: boolean;
@@ -500,6 +460,7 @@ export const ListAgentsTools$outboundSchema: z.ZodType<
   ListAgentsTools
 > = z.object({
   id: z.string(),
+  key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
   requiresApproval: z.boolean().default(false),
@@ -819,273 +780,12 @@ export function listAgentsMetricsFromJSON(
 }
 
 /** @internal */
-export const ListAgentsKnowledgeBaseConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsKnowledgeBaseConfigurationType> = z
-    .nativeEnum(ListAgentsKnowledgeBaseConfigurationType);
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsKnowledgeBaseConfigurationType> =
-    ListAgentsKnowledgeBaseConfigurationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsKnowledgeBaseConfigurationType$ {
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsKnowledgeBaseConfigurationType$inboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsKnowledgeBaseConfigurationType$outboundSchema;
-}
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema:
-  z.ZodType<
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: ListAgentsKnowledgeBaseConfigurationType$inboundSchema,
-    query: z.string(),
-  });
-
-/** @internal */
-export type ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound =
-  {
-    type: string;
-    query: string;
-  };
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema:
-  z.ZodType<
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound,
-    z.ZodTypeDef,
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery
-  > = z.object({
-    type: ListAgentsKnowledgeBaseConfigurationType$outboundSchema,
-    query: z.string(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$ {
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound` instead. */
-  export type Outbound =
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound;
-}
-
-export function listAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQueryToJSON(
-  listAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery:
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery,
-): string {
-  return JSON.stringify(
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema
-      .parse(listAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery),
-  );
-}
-
-export function listAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQueryFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsKnowledgeBaseConfigurationAgentsType> = z
-    .nativeEnum(ListAgentsKnowledgeBaseConfigurationAgentsType);
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof ListAgentsKnowledgeBaseConfigurationAgentsType> =
-    ListAgentsKnowledgeBaseConfigurationAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsKnowledgeBaseConfigurationAgentsType$ {
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsKnowledgeBaseConfigurationAgentsType$inboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsKnowledgeBaseConfigurationAgentsType$outboundSchema;
-}
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema:
-  z.ZodType<
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: ListAgentsKnowledgeBaseConfigurationAgentsType$inboundSchema,
-  });
-
-/** @internal */
-export type ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound =
-  {
-    type: string;
-  };
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema:
-  z.ZodType<
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound,
-    z.ZodTypeDef,
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage
-  > = z.object({
-    type: ListAgentsKnowledgeBaseConfigurationAgentsType$outboundSchema,
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$ {
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound` instead. */
-  export type Outbound =
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound;
-}
-
-export function listAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessageToJSON(
-  listAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage:
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage,
-): string {
-  return JSON.stringify(
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema
-      .parse(listAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage),
-  );
-}
-
-export function listAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfiguration$inboundSchema: z.ZodType<
-  ListAgentsKnowledgeBaseConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() =>
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema
-  ),
-  z.lazy(() =>
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema
-  ),
-]);
-
-/** @internal */
-export type ListAgentsKnowledgeBaseConfiguration$Outbound =
-  | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound
-  | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound;
-
-/** @internal */
-export const ListAgentsKnowledgeBaseConfiguration$outboundSchema: z.ZodType<
-  ListAgentsKnowledgeBaseConfiguration$Outbound,
-  z.ZodTypeDef,
-  ListAgentsKnowledgeBaseConfiguration
-> = z.union([
-  z.lazy(() =>
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema
-  ),
-  z.lazy(() =>
-    ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema
-  ),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace ListAgentsKnowledgeBaseConfiguration$ {
-  /** @deprecated use `ListAgentsKnowledgeBaseConfiguration$inboundSchema` instead. */
-  export const inboundSchema =
-    ListAgentsKnowledgeBaseConfiguration$inboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfiguration$outboundSchema` instead. */
-  export const outboundSchema =
-    ListAgentsKnowledgeBaseConfiguration$outboundSchema;
-  /** @deprecated use `ListAgentsKnowledgeBaseConfiguration$Outbound` instead. */
-  export type Outbound = ListAgentsKnowledgeBaseConfiguration$Outbound;
-}
-
-export function listAgentsKnowledgeBaseConfigurationToJSON(
-  listAgentsKnowledgeBaseConfiguration: ListAgentsKnowledgeBaseConfiguration,
-): string {
-  return JSON.stringify(
-    ListAgentsKnowledgeBaseConfiguration$outboundSchema.parse(
-      listAgentsKnowledgeBaseConfiguration,
-    ),
-  );
-}
-
-export function listAgentsKnowledgeBaseConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<ListAgentsKnowledgeBaseConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListAgentsKnowledgeBaseConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListAgentsKnowledgeBaseConfiguration' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
   ListAgentsKnowledgeBases,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K7NW4EGAA8AASGR0T9B8CTND"),
   knowledge_id: z.string(),
-  configuration: z.union([
-    z.lazy(() =>
-      ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema
-    ),
-    z.lazy(() =>
-      ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema
-    ),
-  ]),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -1094,11 +794,7 @@ export const ListAgentsKnowledgeBases$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ListAgentsKnowledgeBases$Outbound = {
-  id: string;
   knowledge_id: string;
-  configuration:
-    | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound
-    | ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound;
 };
 
 /** @internal */
@@ -1107,16 +803,7 @@ export const ListAgentsKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListAgentsKnowledgeBases
 > = z.object({
-  id: z.string().default("01K7NW4EGAA8AASGR0T9B8CTND"),
   knowledgeId: z.string(),
-  configuration: z.union([
-    z.lazy(() =>
-      ListAgentsKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema
-    ),
-    z.lazy(() =>
-      ListAgentsKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema
-    ),
-  ]),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",

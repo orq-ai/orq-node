@@ -1168,7 +1168,7 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  taskId: z.string().optional(),
+  task_id: z.string().optional(),
   message: z.lazy(() => StreamAgentMessage$inboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => StreamAgentContact$inboundSchema).optional(),
@@ -1178,13 +1178,14 @@ export const StreamAgentRequestBody$inboundSchema: z.ZodType<
   stream_timeout_seconds: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "task_id": "taskId",
     "stream_timeout_seconds": "streamTimeoutSeconds",
   });
 });
 
 /** @internal */
 export type StreamAgentRequestBody$Outbound = {
-  taskId?: string | undefined;
+  task_id?: string | undefined;
   message: StreamAgentMessage$Outbound;
   variables?: { [k: string]: any } | undefined;
   contact?: StreamAgentContact$Outbound | undefined;
@@ -1210,6 +1211,7 @@ export const StreamAgentRequestBody$outboundSchema: z.ZodType<
   streamTimeoutSeconds: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
+    taskId: "task_id",
     streamTimeoutSeconds: "stream_timeout_seconds",
   });
 });

@@ -11,8 +11,7 @@ Successfully duplicated the tool.
 const value: operations.DuplicateToolResponseBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Minnie.Kuphal22",
-  description: "fussy boo vice conservative bemuse spark quietly behind once",
+  description: "forenenst dial drat because fashion excepting drat that",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -30,8 +29,7 @@ const value: operations.DuplicateToolResponseBody1 = {
 const value: operations.DuplicateToolResponseBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Alene.Homenick66",
-  description: "onto into repeat rubric coagulate amid upon",
+  description: "buck while volunteer",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -39,11 +37,7 @@ const value: operations.DuplicateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {
-      "key": "<value>",
-      "key1": "<value>",
-      "key2": "<value>",
-    },
+    schema: {},
   },
 };
 ```
@@ -54,8 +48,7 @@ const value: operations.DuplicateToolResponseBody2 = {
 const value: operations.DuplicateToolResponseBody3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Hank36",
-  description: "birdcage over decode as",
+  description: "ditch patiently than blissfully overcharge grouchy",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -76,8 +69,7 @@ const value: operations.DuplicateToolResponseBody3 = {
 const value: operations.DuplicateToolResponseBody4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Belle.McGlynn94",
-  description: "which longingly blushing intently prance unlike poorly mmm",
+  description: "than hm helplessly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -86,7 +78,7 @@ const value: operations.DuplicateToolResponseBody4 = {
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://minty-topsail.org",
+    serverUrl: "https://dutiful-ethyl.net",
     inputSchema: {
       type: "object",
     },
@@ -101,8 +93,7 @@ const value: operations.DuplicateToolResponseBody4 = {
 const value: operations.DuplicateToolResponseBody5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Ed.Dibbert",
-  description: "micromanage gosh yearningly officially snoopy",
+  description: "provision similar utilization though lest",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

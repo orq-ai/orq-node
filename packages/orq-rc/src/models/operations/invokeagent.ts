@@ -317,7 +317,7 @@ export type InvokeAgentResponseBody = {
    */
   id: string;
   /**
-   * The context ID (workspace ID)
+   * The correlation ID for this execution
    */
   contextId: string;
   /**
@@ -329,7 +329,7 @@ export type InvokeAgentResponseBody = {
    */
   status: InvokeAgentStatus;
   /**
-   * Task metadata
+   * Task metadata containing workspace_id and trace_id for feedback
    */
   metadata?: { [k: string]: any } | undefined;
 };
@@ -1156,18 +1156,22 @@ export const InvokeAgentRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  taskId: z.string().optional(),
+  task_id: z.string().optional(),
   message: z.lazy(() => Message$inboundSchema),
   variables: z.record(z.any()).optional(),
   contact: z.lazy(() => Contact$inboundSchema).optional(),
   thread: z.lazy(() => InvokeAgentThread$inboundSchema).optional(),
   memory: z.lazy(() => Memory$inboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "task_id": "taskId",
+  });
 });
 
 /** @internal */
 export type InvokeAgentRequestBody$Outbound = {
-  taskId?: string | undefined;
+  task_id?: string | undefined;
   message: Message$Outbound;
   variables?: { [k: string]: any } | undefined;
   contact?: Contact$Outbound | undefined;
@@ -1189,6 +1193,10 @@ export const InvokeAgentRequestBody$outboundSchema: z.ZodType<
   thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
   memory: z.lazy(() => Memory$outboundSchema).optional(),
   metadata: z.record(z.any()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    taskId: "task_id",
+  });
 });
 
 /**
