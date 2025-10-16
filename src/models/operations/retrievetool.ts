@@ -70,7 +70,7 @@ export type RetrieveToolResponseBody5 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -197,7 +197,7 @@ export type RetrieveToolResponseBody4 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -348,7 +348,7 @@ export type RetrieveToolResponseBody3 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -429,7 +429,7 @@ export type RetrieveToolResponseBody2 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -510,7 +510,7 @@ export type RetrieveToolResponseBody1 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -750,10 +750,10 @@ export const RetrieveToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7MSPE988FB9BDWS0SJHQ4JV"),
+  _id: z.string().default("01K7NZKQ75ZMW80GZ5T5JD31BK"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -786,7 +786,7 @@ export type RetrieveToolResponseBody5$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -806,10 +806,10 @@ export const RetrieveToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody5
 > = z.object({
-  id: z.string().default("01K7MSPE988FB9BDWS0SJHQ4JV"),
+  id: z.string().default("01K7NZKQ75ZMW80GZ5T5JD31BK"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1190,10 +1190,10 @@ export const RetrieveToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7MSPE971FZMN125BD4KWD8S"),
+  _id: z.string().default("01K7NZKQ74AHSMYMYG08S7T2P9"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1224,7 +1224,7 @@ export type RetrieveToolResponseBody4$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1244,10 +1244,10 @@ export const RetrieveToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody4
 > = z.object({
-  id: z.string().default("01K7MSPE971FZMN125BD4KWD8S"),
+  id: z.string().default("01K7NZKQ74AHSMYMYG08S7T2P9"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1670,10 +1670,10 @@ export const RetrieveToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7MSPE977XR9H2FTHY4M6H6H"),
+  _id: z.string().default("01K7NZKQ74FWRN7867F9J8Y4YE"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1704,7 +1704,7 @@ export type RetrieveToolResponseBody3$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1724,10 +1724,10 @@ export const RetrieveToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody3
 > = z.object({
-  id: z.string().default("01K7MSPE977XR9H2FTHY4M6H6H"),
+  id: z.string().default("01K7NZKQ74FWRN7867F9J8Y4YE"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1902,10 +1902,10 @@ export const RetrieveToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7MSPE97RYN65ZEWRMPMQ8KS"),
+  _id: z.string().default("01K7NZKQ749FSMYR04Q9WDFEXB"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -1935,7 +1935,7 @@ export type RetrieveToolResponseBody2$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1955,10 +1955,10 @@ export const RetrieveToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody2
 > = z.object({
-  id: z.string().default("01K7MSPE97RYN65ZEWRMPMQ8KS"),
+  id: z.string().default("01K7NZKQ749FSMYR04Q9WDFEXB"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -2127,10 +2127,10 @@ export const RetrieveToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K7MSPE96NNKCTYDQ72EBA585"),
+  _id: z.string().default("01K7NZKQ6W7SPE4FA99BYS1Q54"),
   path: z.string(),
   key: z.string(),
-  display_name: z.string(),
+  display_name: z.string().optional(),
   description: z.string(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
@@ -2159,7 +2159,7 @@ export type RetrieveToolResponseBody1$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -2179,10 +2179,10 @@ export const RetrieveToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RetrieveToolResponseBody1
 > = z.object({
-  id: z.string().default("01K7MSPE96NNKCTYDQ72EBA585"),
+  id: z.string().default("01K7NZKQ6W7SPE4FA99BYS1Q54"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),

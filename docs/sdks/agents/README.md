@@ -6,11 +6,16 @@
 ### Available Operations
 
 * [retrieveTask](#retrievetask) - Retrieve a specific agent task
+* [create](#create) - Create a new agent
 * [list](#list) - List all agents
+* [delete](#delete) - Delete an agent
 * [retrieve](#retrieve) - Get an agent
+* [update](#update) - Update an agent
+* [invoke](#invoke) - Invoke an agent
 * [listTasks](#listtasks) - List all tasks for an agent
 * [run](#run) - Run an agent
 * [streamRun](#streamrun) - Run and stream agent execution
+* [stream](#stream) - Stream agent execution events
 * [listActions](#listactions) - List all actions
 * [retrieveAction](#retrieveaction) - Retrieve an action executed by an agent task.
 
@@ -90,6 +95,116 @@ run();
 | errors.GetAgentTaskResponseBody | 404                             | application/json                |
 | errors.APIError                 | 4XX, 5XX                        | \*/\*                           |
 
+## create
+
+Creates a new AI agent with specified configuration. Agents can be configured with a primary model and an optional fallback model that will be used automatically if the primary model fails.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="CreateAgent" method="post" path="/v2/agents/" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.agents.create({
+    path: "Default",
+    key: "<key>",
+    role: "<value>",
+    description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
+    instructions: "<value>",
+    model: "Camaro",
+    settings: {
+      tools: [
+        {
+          type: "http",
+          requiresApproval: false,
+        },
+      ],
+    },
+    knowledgeBases: [
+      {
+        knowledgeId: "customer-knowledge-base",
+      },
+    ],
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsCreate } from "@orq-ai/node/funcs/agentsCreate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsCreate(orq, {
+    path: "Default",
+    key: "<key>",
+    role: "<value>",
+    description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
+    instructions: "<value>",
+    model: "Camaro",
+    settings: {
+      tools: [
+        {
+          type: "http",
+          requiresApproval: false,
+        },
+      ],
+    },
+    knowledgeBases: [
+      {
+        knowledgeId: "customer-knowledge-base",
+      },
+    ],
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsCreate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.CreateAgentRequestBody](../../models/operations/createagentrequestbody.md)                                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.CreateAgentResponseBody](../../models/operations/createagentresponsebody.md)\>**
+
+### Errors
+
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.CreateAgentResponseBody | 409                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
+
 ## list
 
 Retrieves a paginated list of all agents in your workspace. Each agent includes its configuration, primary model, and optional fallback model settings.
@@ -158,6 +273,80 @@ run();
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## delete
+
+Permanently deletes an agent and all its configuration, including primary and fallback model settings.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="DeleteAgent" method="delete" path="/v2/agents/{agent_key}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  await orq.agents.delete({
+    agentKey: "<value>",
+  });
+
+
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsDelete } from "@orq-ai/node/funcs/agentsDelete.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsDelete(orq, {
+    agentKey: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("agentsDelete failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteAgentRequest](../../models/operations/deleteagentrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<void\>**
+
+### Errors
+
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.DeleteAgentResponseBody | 404                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
 ## retrieve
 
@@ -232,6 +421,227 @@ run();
 | --------------------------- | --------------------------- | --------------------------- |
 | errors.GetAgentResponseBody | 404                         | application/json            |
 | errors.APIError             | 4XX, 5XX                    | \*/\*                       |
+
+## update
+
+Updates an existing agent's configuration. You can update various fields including the model configuration and fallback model settings.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpdateAgent" method="patch" path="/v2/agents/{agent_key}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.agents.update({
+    agentKey: "<value>",
+    requestBody: {
+      path: "Default",
+      knowledgeBases: [
+        {
+          knowledgeId: "customer-knowledge-base",
+        },
+      ],
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsUpdate } from "@orq-ai/node/funcs/agentsUpdate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsUpdate(orq, {
+    agentKey: "<value>",
+    requestBody: {
+      path: "Default",
+      knowledgeBases: [
+        {
+          knowledgeId: "customer-knowledge-base",
+        },
+      ],
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateAgentRequest](../../models/operations/updateagentrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UpdateAgentResponseBody](../../models/operations/updateagentresponsebody.md)\>**
+
+### Errors
+
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.UpdateAgentResponseBody | 404                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
+
+## invoke
+
+Executes an existing agent with the provided input. The agent uses its pre-configured primary model and will automatically fall back to its configured fallback model if the primary model fails. Fallback models are configured at the agent level, not during execution.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="InvokeAgent" method="post" path="/v2/agents/{key}/task" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.agents.invoke({
+    key: "<key>",
+    requestBody: {
+      message: {
+        role: "user",
+        parts: [],
+      },
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+          "priority-high",
+        ],
+      },
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsInvoke } from "@orq-ai/node/funcs/agentsInvoke.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsInvoke(orq, {
+    key: "<key>",
+    requestBody: {
+      message: {
+        role: "user",
+        parts: [],
+      },
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+          "priority-high",
+        ],
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("agentsInvoke failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.InvokeAgentRequest](../../models/operations/invokeagentrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.InvokeAgentResponseBody](../../models/operations/invokeagentresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## listTasks
 
@@ -360,6 +770,11 @@ async function run() {
       ],
     },
     path: "Default",
+    knowledgeBases: [
+      {
+        knowledgeId: "customer-knowledge-base",
+      },
+    ],
     settings: {
       tools: [
         {
@@ -429,6 +844,11 @@ async function run() {
       ],
     },
     path: "Default",
+    knowledgeBases: [
+      {
+        knowledgeId: "customer-knowledge-base",
+      },
+    ],
     settings: {
       tools: [
         {
@@ -523,6 +943,11 @@ async function run() {
       ],
     },
     path: "Default",
+    knowledgeBases: [
+      {
+        knowledgeId: "customer-knowledge-base",
+      },
+    ],
     settings: {
       tools: [
         {
@@ -596,6 +1021,11 @@ async function run() {
       ],
     },
     path: "Default",
+    knowledgeBases: [
+      {
+        knowledgeId: "customer-knowledge-base",
+      },
+    ],
     settings: {
       tools: [
         {
@@ -637,6 +1067,142 @@ run();
 | --------------------------------- | --------------------------------- | --------------------------------- |
 | errors.StreamRunAgentResponseBody | 404                               | application/json                  |
 | errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
+
+## stream
+
+Executes an agent and streams events via Server-Sent Events (SSE). The stream will continue until the agent completes, errors, or reaches the configured timeout.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="StreamAgent" method="post" path="/v2/agents/{key}/stream-task" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.agents.stream({
+    key: "<key>",
+    requestBody: {
+      message: {
+        role: "user",
+        parts: [],
+      },
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+          "priority-high",
+        ],
+      },
+    },
+  });
+
+  for await (const event of result) {
+    console.log(event);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { agentsStream } from "@orq-ai/node/funcs/agentsStream.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await agentsStream(orq, {
+    key: "<key>",
+    requestBody: {
+      message: {
+        role: "user",
+        parts: [],
+      },
+      contact: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      thread: {
+        id: "thread_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        tags: [
+          "customer-support",
+          "priority-high",
+        ],
+      },
+    },
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const event of result) {
+    console.log(event);
+  }
+  } else {
+    console.log("agentsStream failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.StreamAgentRequest](../../models/operations/streamagentrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[EventStream<operations.StreamAgentResponseBody>](../../models/.md)\>**
+
+### Errors
+
+| Error Type                     | Status Code                    | Content Type                   |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+| errors.StreamAgentResponseBody | 404                            | application/json               |
+| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
 
 ## listActions
 

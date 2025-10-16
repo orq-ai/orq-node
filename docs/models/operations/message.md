@@ -1,7 +1,5 @@
 # Message
 
-The A2A format message containing the task for the agent to perform.
-
 ## Example Usage
 
 ```typescript
@@ -18,5 +16,5 @@ let value: Message = {
 | Field                                                 | Type                                                  | Required                                              | Description                                           |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | `messageId`                                           | *string*                                              | :heavy_minus_sign:                                    | Optional A2A message ID in ULID format                |
-| `role`                                                | *operations.RunAgentRole*                             | :heavy_check_mark:                                    | Message role (user or tool for continuing executions) |
+| `role`                                                | *operations.InvokeAgentRole*                          | :heavy_check_mark:                                    | Message role (user or tool for continuing executions) |
 | `parts`                                               | *operations.PublicMessagePart*[]                      | :heavy_check_mark:                                    | A2A message parts (text, file, or tool_result only)   |

@@ -45,7 +45,7 @@ export type GetAgentToolApprovalRequired = ClosedEnum<
   typeof GetAgentToolApprovalRequired
 >;
 
-export type Conditions = {
+export type GetAgentConditions = {
   /**
    * The argument of the tool call to evaluate
    */
@@ -65,10 +65,14 @@ export type GetAgentTools = {
    * The id of the resource
    */
   id: string;
+  /**
+   * Optional tool key for custom tools
+   */
+  key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
   requiresApproval?: boolean | undefined;
-  conditions?: Array<Conditions> | undefined;
+  conditions?: Array<GetAgentConditions> | undefined;
   /**
    * The id of the resource
    */
@@ -129,71 +133,25 @@ export type GetAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
-export type Metrics = {
+export type GetAgentMetrics = {
   totalCost?: number | undefined;
 };
 
-export const GetAgentKnowledgeBaseConfigurationType = {
-  Query: "query",
-} as const;
-export type GetAgentKnowledgeBaseConfigurationType = ClosedEnum<
-  typeof GetAgentKnowledgeBaseConfigurationType
->;
-
-/**
- * Defines the configuration settings for a static query.
- */
-export type GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery = {
-  type: GetAgentKnowledgeBaseConfigurationType;
-  query: string;
-};
-
-export const GetAgentKnowledgeBaseConfigurationAgentsType = {
-  LastUserMessage: "last_user_message",
-} as const;
-export type GetAgentKnowledgeBaseConfigurationAgentsType = ClosedEnum<
-  typeof GetAgentKnowledgeBaseConfigurationAgentsType
->;
-
-/**
- * Defines the configuration settings for a last user message type retrieval.
- */
-export type GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage = {
-  type: GetAgentKnowledgeBaseConfigurationAgentsType;
-};
-
-/**
- * Defines the configuration settings which can either be for a user message or a text entry.
- */
-export type GetAgentKnowledgeBaseConfiguration =
-  | GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery
-  | GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage;
-
 export type GetAgentKnowledgeBases = {
   /**
-   * The id of the resource
-   */
-  id?: string | undefined;
-  /**
-   * The id of the resource
+   * Unique identifier of the knowledge base to search
    */
   knowledgeId: string;
-  /**
-   * Defines the configuration settings which can either be for a user message or a text entry.
-   */
-  configuration:
-    | GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery
-    | GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage;
 };
 
-export const HiddenPanels = {
+export const GetAgentHiddenPanels = {
   Model: "model",
   Tools: "tools",
   KnowledgeBases: "knowledge_bases",
   Variables: "variables",
   RuntimeConstraints: "runtime_constraints",
 } as const;
-export type HiddenPanels = ClosedEnum<typeof HiddenPanels>;
+export type GetAgentHiddenPanels = ClosedEnum<typeof GetAgentHiddenPanels>;
 
 /**
  * Agent retrieved successfully
@@ -227,7 +185,7 @@ export type GetAgentResponseBody = {
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
   teamOfAgents: Array<GetAgentTeamOfAgents>;
-  metrics?: Metrics | undefined;
+  metrics?: GetAgentMetrics | undefined;
   /**
    * Extracted variables from agent instructions
    */
@@ -239,7 +197,7 @@ export type GetAgentResponseBody = {
   /**
    * List of hidden collapsed panels in configuration. Duplicates are not allowed.
    */
-  hiddenPanels?: Array<HiddenPanels> | undefined;
+  hiddenPanels?: Array<GetAgentHiddenPanels> | undefined;
 };
 
 /** @internal */
@@ -345,8 +303,8 @@ export namespace GetAgentToolApprovalRequired$ {
 }
 
 /** @internal */
-export const Conditions$inboundSchema: z.ZodType<
-  Conditions,
+export const GetAgentConditions$inboundSchema: z.ZodType<
+  GetAgentConditions,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -356,17 +314,17 @@ export const Conditions$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type Conditions$Outbound = {
+export type GetAgentConditions$Outbound = {
   condition: string;
   operator: string;
   value: string;
 };
 
 /** @internal */
-export const Conditions$outboundSchema: z.ZodType<
-  Conditions$Outbound,
+export const GetAgentConditions$outboundSchema: z.ZodType<
+  GetAgentConditions$Outbound,
   z.ZodTypeDef,
-  Conditions
+  GetAgentConditions
 > = z.object({
   condition: z.string(),
   operator: z.string(),
@@ -377,26 +335,30 @@ export const Conditions$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Conditions$ {
-  /** @deprecated use `Conditions$inboundSchema` instead. */
-  export const inboundSchema = Conditions$inboundSchema;
-  /** @deprecated use `Conditions$outboundSchema` instead. */
-  export const outboundSchema = Conditions$outboundSchema;
-  /** @deprecated use `Conditions$Outbound` instead. */
-  export type Outbound = Conditions$Outbound;
+export namespace GetAgentConditions$ {
+  /** @deprecated use `GetAgentConditions$inboundSchema` instead. */
+  export const inboundSchema = GetAgentConditions$inboundSchema;
+  /** @deprecated use `GetAgentConditions$outboundSchema` instead. */
+  export const outboundSchema = GetAgentConditions$outboundSchema;
+  /** @deprecated use `GetAgentConditions$Outbound` instead. */
+  export type Outbound = GetAgentConditions$Outbound;
 }
 
-export function conditionsToJSON(conditions: Conditions): string {
-  return JSON.stringify(Conditions$outboundSchema.parse(conditions));
+export function getAgentConditionsToJSON(
+  getAgentConditions: GetAgentConditions,
+): string {
+  return JSON.stringify(
+    GetAgentConditions$outboundSchema.parse(getAgentConditions),
+  );
 }
 
-export function conditionsFromJSON(
+export function getAgentConditionsFromJSON(
   jsonString: string,
-): SafeParseResult<Conditions, SDKValidationError> {
+): SafeParseResult<GetAgentConditions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Conditions$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Conditions' from JSON`,
+    (x) => GetAgentConditions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentConditions' from JSON`,
   );
 }
 
@@ -407,10 +369,12 @@ export const GetAgentTools$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
   requires_approval: z.boolean().default(false),
-  conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
+  conditions: z.array(z.lazy(() => GetAgentConditions$inboundSchema))
+    .optional(),
   mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
@@ -424,10 +388,11 @@ export const GetAgentTools$inboundSchema: z.ZodType<
 /** @internal */
 export type GetAgentTools$Outbound = {
   id: string;
+  key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
   requires_approval: boolean;
-  conditions?: Array<Conditions$Outbound> | undefined;
+  conditions?: Array<GetAgentConditions$Outbound> | undefined;
   mcpServer?: string | undefined;
   timeout: number;
 };
@@ -439,10 +404,12 @@ export const GetAgentTools$outboundSchema: z.ZodType<
   GetAgentTools
 > = z.object({
   id: z.string(),
+  key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
   requiresApproval: z.boolean().default(false),
-  conditions: z.array(z.lazy(() => Conditions$outboundSchema)).optional(),
+  conditions: z.array(z.lazy(() => GetAgentConditions$outboundSchema))
+    .optional(),
   mcpServer: z.string().optional(),
   timeout: z.number().default(120),
 }).transform((v) => {
@@ -691,25 +658,28 @@ export function getAgentTeamOfAgentsFromJSON(
 }
 
 /** @internal */
-export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
-  z.object({
-    total_cost: z.number().default(0),
-  }).transform((v) => {
-    return remap$(v, {
-      "total_cost": "totalCost",
-    });
+export const GetAgentMetrics$inboundSchema: z.ZodType<
+  GetAgentMetrics,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  total_cost: z.number().default(0),
+}).transform((v) => {
+  return remap$(v, {
+    "total_cost": "totalCost",
   });
+});
 
 /** @internal */
-export type Metrics$Outbound = {
+export type GetAgentMetrics$Outbound = {
   total_cost: number;
 };
 
 /** @internal */
-export const Metrics$outboundSchema: z.ZodType<
-  Metrics$Outbound,
+export const GetAgentMetrics$outboundSchema: z.ZodType<
+  GetAgentMetrics$Outbound,
   z.ZodTypeDef,
-  Metrics
+  GetAgentMetrics
 > = z.object({
   totalCost: z.number().default(0),
 }).transform((v) => {
@@ -722,278 +692,28 @@ export const Metrics$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Metrics$ {
-  /** @deprecated use `Metrics$inboundSchema` instead. */
-  export const inboundSchema = Metrics$inboundSchema;
-  /** @deprecated use `Metrics$outboundSchema` instead. */
-  export const outboundSchema = Metrics$outboundSchema;
-  /** @deprecated use `Metrics$Outbound` instead. */
-  export type Outbound = Metrics$Outbound;
+export namespace GetAgentMetrics$ {
+  /** @deprecated use `GetAgentMetrics$inboundSchema` instead. */
+  export const inboundSchema = GetAgentMetrics$inboundSchema;
+  /** @deprecated use `GetAgentMetrics$outboundSchema` instead. */
+  export const outboundSchema = GetAgentMetrics$outboundSchema;
+  /** @deprecated use `GetAgentMetrics$Outbound` instead. */
+  export type Outbound = GetAgentMetrics$Outbound;
 }
 
-export function metricsToJSON(metrics: Metrics): string {
-  return JSON.stringify(Metrics$outboundSchema.parse(metrics));
-}
-
-export function metricsFromJSON(
-  jsonString: string,
-): SafeParseResult<Metrics, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Metrics$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Metrics' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAgentKnowledgeBaseConfigurationType> = z.nativeEnum(
-    GetAgentKnowledgeBaseConfigurationType,
-  );
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAgentKnowledgeBaseConfigurationType> =
-    GetAgentKnowledgeBaseConfigurationType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentKnowledgeBaseConfigurationType$ {
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAgentKnowledgeBaseConfigurationType$inboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAgentKnowledgeBaseConfigurationType$outboundSchema;
-}
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema:
-  z.ZodType<
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: GetAgentKnowledgeBaseConfigurationType$inboundSchema,
-    query: z.string(),
-  });
-
-/** @internal */
-export type GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound =
-  {
-    type: string;
-    query: string;
-  };
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema:
-  z.ZodType<
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound,
-    z.ZodTypeDef,
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery
-  > = z.object({
-    type: GetAgentKnowledgeBaseConfigurationType$outboundSchema,
-    query: z.string(),
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$ {
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound` instead. */
-  export type Outbound =
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound;
-}
-
-export function getAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQueryToJSON(
-  getAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery:
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery,
+export function getAgentMetricsToJSON(
+  getAgentMetrics: GetAgentMetrics,
 ): string {
-  return JSON.stringify(
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema
-      .parse(getAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery),
-  );
+  return JSON.stringify(GetAgentMetrics$outboundSchema.parse(getAgentMetrics));
 }
 
-export function getAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQueryFromJSON(
+export function getAgentMetricsFromJSON(
   jsonString: string,
-): SafeParseResult<
-  GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery,
-  SDKValidationError
-> {
+): SafeParseResult<GetAgentMetrics, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) =>
-      GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAgentKnowledgeBaseConfigurationAgentsType> = z
-    .nativeEnum(GetAgentKnowledgeBaseConfigurationAgentsType);
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof GetAgentKnowledgeBaseConfigurationAgentsType> =
-    GetAgentKnowledgeBaseConfigurationAgentsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentKnowledgeBaseConfigurationAgentsType$ {
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationAgentsType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAgentKnowledgeBaseConfigurationAgentsType$inboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationAgentsType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAgentKnowledgeBaseConfigurationAgentsType$outboundSchema;
-}
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema:
-  z.ZodType<
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    type: GetAgentKnowledgeBaseConfigurationAgentsType$inboundSchema,
-  });
-
-/** @internal */
-export type GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound =
-  {
-    type: string;
-  };
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema:
-  z.ZodType<
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound,
-    z.ZodTypeDef,
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage
-  > = z.object({
-    type: GetAgentKnowledgeBaseConfigurationAgentsType$outboundSchema,
-  });
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$ {
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema` instead. */
-  export const inboundSchema =
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound` instead. */
-  export type Outbound =
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound;
-}
-
-export function getAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessageToJSON(
-  getAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage:
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage,
-): string {
-  return JSON.stringify(
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema
-      .parse(getAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage),
-  );
-}
-
-export function getAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessageFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfiguration$inboundSchema: z.ZodType<
-  GetAgentKnowledgeBaseConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() =>
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema
-  ),
-  z.lazy(() =>
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema
-  ),
-]);
-
-/** @internal */
-export type GetAgentKnowledgeBaseConfiguration$Outbound =
-  | GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound
-  | GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound;
-
-/** @internal */
-export const GetAgentKnowledgeBaseConfiguration$outboundSchema: z.ZodType<
-  GetAgentKnowledgeBaseConfiguration$Outbound,
-  z.ZodTypeDef,
-  GetAgentKnowledgeBaseConfiguration
-> = z.union([
-  z.lazy(() =>
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema
-  ),
-  z.lazy(() =>
-    GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema
-  ),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAgentKnowledgeBaseConfiguration$ {
-  /** @deprecated use `GetAgentKnowledgeBaseConfiguration$inboundSchema` instead. */
-  export const inboundSchema = GetAgentKnowledgeBaseConfiguration$inboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfiguration$outboundSchema` instead. */
-  export const outboundSchema =
-    GetAgentKnowledgeBaseConfiguration$outboundSchema;
-  /** @deprecated use `GetAgentKnowledgeBaseConfiguration$Outbound` instead. */
-  export type Outbound = GetAgentKnowledgeBaseConfiguration$Outbound;
-}
-
-export function getAgentKnowledgeBaseConfigurationToJSON(
-  getAgentKnowledgeBaseConfiguration: GetAgentKnowledgeBaseConfiguration,
-): string {
-  return JSON.stringify(
-    GetAgentKnowledgeBaseConfiguration$outboundSchema.parse(
-      getAgentKnowledgeBaseConfiguration,
-    ),
-  );
-}
-
-export function getAgentKnowledgeBaseConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAgentKnowledgeBaseConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetAgentKnowledgeBaseConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAgentKnowledgeBaseConfiguration' from JSON`,
+    (x) => GetAgentMetrics$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAgentMetrics' from JSON`,
   );
 }
 
@@ -1003,16 +723,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01K7MSPE0GRB41E6GMS2TX8NDZ"),
   knowledge_id: z.string(),
-  configuration: z.union([
-    z.lazy(() =>
-      GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$inboundSchema
-    ),
-    z.lazy(() =>
-      GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$inboundSchema
-    ),
-  ]),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -1021,11 +732,7 @@ export const GetAgentKnowledgeBases$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetAgentKnowledgeBases$Outbound = {
-  id: string;
   knowledge_id: string;
-  configuration:
-    | GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$Outbound
-    | GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$Outbound;
 };
 
 /** @internal */
@@ -1034,16 +741,7 @@ export const GetAgentKnowledgeBases$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAgentKnowledgeBases
 > = z.object({
-  id: z.string().default("01K7MSPE0GRB41E6GMS2TX8NDZ"),
   knowledgeId: z.string(),
-  configuration: z.union([
-    z.lazy(() =>
-      GetAgentKnowledgeBaseConfigurationKnowledgeBaseStaticQuery$outboundSchema
-    ),
-    z.lazy(() =>
-      GetAgentKnowledgeBaseConfigurationKnowledgeBaseLastUserMessage$outboundSchema
-    ),
-  ]),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -1082,22 +780,24 @@ export function getAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const HiddenPanels$inboundSchema: z.ZodNativeEnum<typeof HiddenPanels> =
-  z.nativeEnum(HiddenPanels);
+export const GetAgentHiddenPanels$inboundSchema: z.ZodNativeEnum<
+  typeof GetAgentHiddenPanels
+> = z.nativeEnum(GetAgentHiddenPanels);
 
 /** @internal */
-export const HiddenPanels$outboundSchema: z.ZodNativeEnum<typeof HiddenPanels> =
-  HiddenPanels$inboundSchema;
+export const GetAgentHiddenPanels$outboundSchema: z.ZodNativeEnum<
+  typeof GetAgentHiddenPanels
+> = GetAgentHiddenPanels$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace HiddenPanels$ {
-  /** @deprecated use `HiddenPanels$inboundSchema` instead. */
-  export const inboundSchema = HiddenPanels$inboundSchema;
-  /** @deprecated use `HiddenPanels$outboundSchema` instead. */
-  export const outboundSchema = HiddenPanels$outboundSchema;
+export namespace GetAgentHiddenPanels$ {
+  /** @deprecated use `GetAgentHiddenPanels$inboundSchema` instead. */
+  export const inboundSchema = GetAgentHiddenPanels$inboundSchema;
+  /** @deprecated use `GetAgentHiddenPanels$outboundSchema` instead. */
+  export const outboundSchema = GetAgentHiddenPanels$outboundSchema;
 }
 
 /** @internal */
@@ -1125,11 +825,11 @@ export const GetAgentResponseBody$inboundSchema: z.ZodType<
   path: z.string(),
   memory_stores: z.array(z.string()),
   team_of_agents: z.array(z.lazy(() => GetAgentTeamOfAgents$inboundSchema)),
-  metrics: z.lazy(() => Metrics$inboundSchema).optional(),
+  metrics: z.lazy(() => GetAgentMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => GetAgentKnowledgeBases$inboundSchema))
     .optional(),
-  hidden_panels: z.array(HiddenPanels$inboundSchema).optional(),
+  hidden_panels: z.array(GetAgentHiddenPanels$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -1167,7 +867,7 @@ export type GetAgentResponseBody$Outbound = {
   path: string;
   memory_stores: Array<string>;
   team_of_agents: Array<GetAgentTeamOfAgents$Outbound>;
-  metrics?: Metrics$Outbound | undefined;
+  metrics?: GetAgentMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<GetAgentKnowledgeBases$Outbound> | undefined;
   hidden_panels?: Array<string> | undefined;
@@ -1198,11 +898,11 @@ export const GetAgentResponseBody$outboundSchema: z.ZodType<
   path: z.string(),
   memoryStores: z.array(z.string()),
   teamOfAgents: z.array(z.lazy(() => GetAgentTeamOfAgents$outboundSchema)),
-  metrics: z.lazy(() => Metrics$outboundSchema).optional(),
+  metrics: z.lazy(() => GetAgentMetrics$outboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(z.lazy(() => GetAgentKnowledgeBases$outboundSchema))
     .optional(),
-  hiddenPanels: z.array(HiddenPanels$outboundSchema).optional(),
+  hiddenPanels: z.array(GetAgentHiddenPanels$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",

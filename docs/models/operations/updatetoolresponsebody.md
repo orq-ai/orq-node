@@ -11,8 +11,7 @@ Successfully updated the tool.
 const value: operations.UpdateToolResponseBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Meagan.Rohan3",
-  description: "indeed numeric boyfriend oily rebuff",
+  description: "past mathematics throughout versus monstrous geez gee very",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -30,8 +29,7 @@ const value: operations.UpdateToolResponseBody1 = {
 const value: operations.UpdateToolResponseBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Junius.Monahan-Prosacco83",
-  description: "agile joyful beneath",
+  description: "almost agile joyful beneath after down priesthood",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -39,9 +37,7 @@ const value: operations.UpdateToolResponseBody2 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {
-      "key": "<value>",
-    },
+    schema: {},
   },
 };
 ```
@@ -52,8 +48,7 @@ const value: operations.UpdateToolResponseBody2 = {
 const value: operations.UpdateToolResponseBody3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Gus_Lesch",
-  description: "aw upward out ack overreact whether after viability",
+  description: "essential SUV consequently incidentally kit through",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -74,8 +69,7 @@ const value: operations.UpdateToolResponseBody3 = {
 const value: operations.UpdateToolResponseBody4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Jessie16",
-  description: "fuzzy rudely modulo train train draw",
+  description: "lively beneath whoever pulp incidentally despite",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -84,7 +78,7 @@ const value: operations.UpdateToolResponseBody4 = {
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://new-gastropod.biz/",
+    serverUrl: "https://incomplete-crest.name/",
     inputSchema: {
       type: "object",
     },
@@ -99,9 +93,7 @@ const value: operations.UpdateToolResponseBody4 = {
 const value: operations.UpdateToolResponseBody5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Florida.Bode67",
-  description:
-    "since jam-packed meanwhile diligent drat how collaboration lest familiar although",
+  description: "bah trench cleaner vibration interestingly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

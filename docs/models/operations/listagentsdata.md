@@ -20,6 +20,11 @@ let value: ListAgentsData = {
   path: "Default",
   memoryStores: [],
   teamOfAgents: [],
+  knowledgeBases: [
+    {
+      knowledgeId: "customer-knowledge-base",
+    },
+  ],
 };
 ```
 

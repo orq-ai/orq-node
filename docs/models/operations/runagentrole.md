@@ -5,15 +5,15 @@ Message role (user or tool for continuing executions)
 
 ## Supported Types
 
-### `operations.RoleUserMessage`
+### `operations.RunAgentRoleUserMessage`
 
 ```typescript
-const value: operations.RoleUserMessage = "user";
+const value: operations.RunAgentRoleUserMessage = "user";
 ```
 
-### `operations.RoleToolMessage`
+### `operations.RunAgentRoleToolMessage`
 
 ```typescript
-const value: operations.RoleToolMessage = "tool";
+const value: operations.RunAgentRoleToolMessage = "tool";
 ```
 

@@ -104,6 +104,10 @@ export type ListAgentTasksTools = {
    * The id of the resource
    */
   id: string;
+  /**
+   * Optional tool key for custom tools
+   */
+  key?: string | undefined;
   actionType: string;
   displayName?: string | undefined;
   requiresApproval?: boolean | undefined;
@@ -466,6 +470,7 @@ export const ListAgentTasksTools$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   id: z.string(),
+  key: z.string().optional(),
   action_type: z.string(),
   display_name: z.string().optional(),
   requires_approval: z.boolean().default(false),
@@ -484,6 +489,7 @@ export const ListAgentTasksTools$inboundSchema: z.ZodType<
 /** @internal */
 export type ListAgentTasksTools$Outbound = {
   id: string;
+  key?: string | undefined;
   action_type: string;
   display_name?: string | undefined;
   requires_approval: boolean;
@@ -499,6 +505,7 @@ export const ListAgentTasksTools$outboundSchema: z.ZodType<
   ListAgentTasksTools
 > = z.object({
   id: z.string(),
+  key: z.string().optional(),
   actionType: z.string(),
   displayName: z.string().optional(),
   requiresApproval: z.boolean().default(false),

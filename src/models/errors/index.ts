@@ -3,7 +3,9 @@
  */
 
 export * from "./apierror.js";
+export * from "./createagent.js";
 export * from "./createeval.js";
+export * from "./deleteagent.js";
 export * from "./deletecontact.js";
 export * from "./deleteeval.js";
 export * from "./duplicatetool.js";
@@ -56,7 +58,9 @@ export * from "./orqerror.js";
 export * from "./responsevalidationerror.js";
 export * from "./retrievecontact.js";
 export * from "./sdkvalidationerror.js";
+export * from "./streamagent.js";
 export * from "./streamrunagent.js";
+export * from "./updateagent.js";
 export * from "./updatecontact.js";
 export * from "./updateeval.js";
 export * from "./updateprompt.js";

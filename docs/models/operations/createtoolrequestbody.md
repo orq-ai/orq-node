@@ -11,8 +11,7 @@ The tool to create
 const value: operations.RequestBody1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Abagail.Frami",
-  description: "solution which prohibition finally carelessly",
+  description: "scuttle unlike ouch",
   type: "function",
   function: {
     name: "<value>",
@@ -26,14 +25,14 @@ const value: operations.RequestBody1 = {
 const value: operations.RequestBody2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Ambrose98",
-  description:
-    "unnaturally t-shirt keenly surge selfishly often merrily who of",
+  description: "tedious embossing ugly",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
     schema: {
       "key": "<value>",
+      "key1": "<value>",
+      "key2": "<value>",
     },
   },
 };
@@ -45,8 +44,7 @@ const value: operations.RequestBody2 = {
 const value: operations.RequestBody3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Lorna6",
-  description: "optimistically quinoa psst",
+  description: "lively whose atop breastplate when excluding but slime",
   type: "http",
   http: {
     blueprint: {
@@ -63,14 +61,12 @@ const value: operations.RequestBody3 = {
 const value: operations.RequestBody4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Kole_Ebert32",
-  description:
-    "hovercraft dramatic clearly oof reluctantly out requirement sharply impolite sleepily",
+  description: "instead righteously drat switch help observe whose",
   type: "mcp",
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://male-switchboard.org/",
+    serverUrl: "https://scornful-fog.net",
     inputSchema: {
       type: "object",
     },
@@ -85,8 +81,8 @@ const value: operations.RequestBody4 = {
 const value: operations.RequestBody5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Makenna.Maggio",
-  description: "phew before excluding before story stiffen westernize",
+  description:
+    "shady vague hungrily beyond fiercely furthermore hypothesize psst",
   type: "code",
   codeTool: {
     language: "python",

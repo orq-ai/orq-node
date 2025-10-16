@@ -82,7 +82,7 @@ export type Data5 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -205,7 +205,7 @@ export type Data4 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -354,7 +354,7 @@ export type Data3 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -433,7 +433,7 @@ export type Data2 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -510,7 +510,7 @@ export type Data1 = {
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
-  displayName: string;
+  displayName?: string | undefined;
   /**
    * A description of the tool, used by the model to choose when and how to call the tool. We do recommend using the `description` field as accurate as possible to give enough context to the model to make the right decision.
    */
@@ -763,10 +763,10 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7MSPE88J72X5HA14HZPRNXB"),
+    _id: z.string().default("01K7NZKQ5SKSGG0B5Y6FCXJ8W6"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -796,7 +796,7 @@ export type Data5$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -816,10 +816,10 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K7MSPE88J72X5HA14HZPRNXB"),
+  id: z.string().default("01K7NZKQ5SKSGG0B5Y6FCXJ8W6"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1159,10 +1159,10 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7MSPE87H7N8ACH2Z3B4ZB50"),
+    _id: z.string().default("01K7NZKQ5MVR5Q2634V37V2AJ5"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -1191,7 +1191,7 @@ export type Data4$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1211,10 +1211,10 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K7MSPE87H7N8ACH2Z3B4ZB50"),
+  id: z.string().default("01K7NZKQ5MVR5Q2634V37V2AJ5"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1594,10 +1594,10 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7MSPE861KQ0W1MT39M6VBA6"),
+    _id: z.string().default("01K7NZKQ5K9H5WH3EZ63R07AMR"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -1626,7 +1626,7 @@ export type Data3$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1646,10 +1646,10 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K7MSPE861KQ0W1MT39M6VBA6"),
+  id: z.string().default("01K7NZKQ5K9H5WH3EZ63R07AMR"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -1804,10 +1804,10 @@ export function dataJsonSchemaFromJSON(
 /** @internal */
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7MSPE847KY90QAX59600S54"),
+    _id: z.string().default("01K7NZKQ5KHQZ1WVCRAR1F6270"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -1837,7 +1837,7 @@ export type Data2$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -1857,10 +1857,10 @@ export const Data2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data2
 > = z.object({
-  id: z.string().default("01K7MSPE847KY90QAX59600S54"),
+  id: z.string().default("01K7NZKQ5KHQZ1WVCRAR1F6270"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
@@ -2018,10 +2018,10 @@ export function getAllToolsDataFunctionFromJSON(
 /** @internal */
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K7MSPE83Q120HH4NHZ7PYB55"),
+    _id: z.string().default("01K7NZKQ5J073QWKD7Z7GT950A"),
     path: z.string(),
     key: z.string(),
-    display_name: z.string(),
+    display_name: z.string().optional(),
     description: z.string(),
     created_by_id: z.string().optional(),
     updated_by_id: z.string().optional(),
@@ -2050,7 +2050,7 @@ export type Data1$Outbound = {
   _id: string;
   path: string;
   key: string;
-  display_name: string;
+  display_name?: string | undefined;
   description: string;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
@@ -2070,10 +2070,10 @@ export const Data1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data1
 > = z.object({
-  id: z.string().default("01K7MSPE83Q120HH4NHZ7PYB55"),
+  id: z.string().default("01K7NZKQ5J073QWKD7Z7GT950A"),
   path: z.string(),
   key: z.string(),
-  displayName: z.string(),
+  displayName: z.string().optional(),
   description: z.string(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),

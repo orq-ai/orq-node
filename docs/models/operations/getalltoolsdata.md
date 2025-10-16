@@ -9,8 +9,8 @@
 const value: operations.Data1 = {
   path: "Default",
   key: "<key>",
-  displayName: "Susie91",
-  description: "lively venture steep below",
+  description:
+    "mispronounce sedately twin hospitable jovially now council yogurt yuck worth",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -28,8 +28,7 @@ const value: operations.Data1 = {
 const value: operations.Data2 = {
   path: "Default",
   key: "<key>",
-  displayName: "Claudine_Lowe10",
-  description: "why doorpost revitalise equate capitalize likewise",
+  description: "not circulate now drab",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -39,6 +38,7 @@ const value: operations.Data2 = {
     name: "<value>",
     schema: {
       "key": "<value>",
+      "key1": "<value>",
     },
   },
 };
@@ -50,9 +50,7 @@ const value: operations.Data2 = {
 const value: operations.Data3 = {
   path: "Default",
   key: "<key>",
-  displayName: "Eldora_Mosciski",
-  description:
-    "cannon husk terraform emulsify dress cheerfully compromise opera",
+  description: "noteworthy limply whoa proper delightfully",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -73,8 +71,7 @@ const value: operations.Data3 = {
 const value: operations.Data4 = {
   path: "Default",
   key: "<key>",
-  displayName: "Francisco.Morar20",
-  description: "pick procrastinate structure oh gosh slight ethyl zowie",
+  description: "why meanwhile but important exactly",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -83,11 +80,11 @@ const value: operations.Data4 = {
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://witty-integer.org/",
+    serverUrl: "https://lawful-disclosure.com",
     inputSchema: {
       type: "object",
     },
-    connectionType: "sse",
+    connectionType: "http",
   },
 };
 ```
@@ -98,8 +95,7 @@ const value: operations.Data4 = {
 const value: operations.Data5 = {
   path: "Default",
   key: "<key>",
-  displayName: "Jaime.Greenholt6",
-  description: "indeed breed packaging partially misread oh faithfully",
+  description: "and furthermore bravely midst finally enhance",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
