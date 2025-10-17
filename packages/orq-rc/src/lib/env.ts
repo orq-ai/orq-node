@@ -32,6 +32,18 @@ export const envSchema: z.ZodType<Env, z.ZodTypeDef, unknown> = z.object({
   ORQ_DEBUG: z.coerce.boolean().optional(),
 });
 
+/**
+ * Checks for the existence of the Deno global object to determine the environment.
+ * @returns {boolean} True if the runtime is Deno, false otherwise.
+ */
+function isDeno() {
+  if ("Deno" in globalThis) {
+    return true;
+  }
+
+  return false;
+}
+
 let envMemo: Env | undefined = undefined;
 /**
  * Reads and validates environment variables.
@@ -41,9 +53,14 @@ export function env(): Env {
     return envMemo;
   }
 
-  envMemo = envSchema.parse(
-    dlv(globalThis, "process.env") ?? dlv(globalThis, "Deno.env") ?? {},
-  );
+  let envObject: Record<string, unknown> = {};
+  if (isDeno()) {
+    envObject = (globalThis as any).Deno?.env?.toObject?.() ?? {};
+  } else {
+    envObject = dlv(globalThis, "process.env") ?? {};
+  }
+
+  envMemo = envSchema.parse(envObject);
   return envMemo;
 }
 
