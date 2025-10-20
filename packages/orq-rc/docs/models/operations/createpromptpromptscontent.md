@@ -11,9 +11,16 @@ The contents of the user message. Either the text content of the message or an a
 const value: string = "<value>";
 ```
 
-### `operations.CreatePromptContentPrompts2[]`
+### `operations.CreatePromptContentPromptsResponse2[]`
 
 ```typescript
-const value: operations.CreatePromptContentPrompts2[] = [];
+const value: operations.CreatePromptContentPromptsResponse2[] = [
+  {
+    type: "image_url",
+    imageUrl: {
+      url: "https://minor-saloon.net",
+    },
+  },
+];
 ```
 

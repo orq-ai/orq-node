@@ -1,25 +1,32 @@
-# GetOnePromptResponseBody
+# CreatePromptPrompt
 
-Prompt retrieved.
+A prompt entity with configuration, metadata, and versioning.
 
 ## Example Usage
 
 ```typescript
-import { GetOnePromptResponseBody } from "@orq-ai/node/models/operations";
+import { CreatePromptPrompt } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptResponseBody = {
+let value: CreatePromptPrompt = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "84a74d1d-9b26-4cc6-a761-97e9391a181c",
+  domainId: "2c164c57-e5c0-4364-b206-2ba565fd3465",
   created: "<value>",
   updated: "<value>",
-  displayName: "Carissa90",
+  displayName: "Pauline_Dach",
   promptConfig: {
     messages: [
       {
-        role: "system",
-        content: "<value>",
+        role: "user",
+        content: [
+          {
+            type: "image_url",
+            imageUrl: {
+              url: "https://minor-saloon.net",
+            },
+          },
+        ],
       },
     ],
   },
@@ -31,7 +38,7 @@ let value: GetOnePromptResponseBody = {
 | Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                                                                       | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
-| `type`                                                                                                                                                     | [operations.GetOnePromptType](../../models/operations/getoneprompttype.md)                                                                                 | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `type`                                                                                                                                                     | [operations.CreatePromptPromptsType](../../models/operations/createpromptpromptstype.md)                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `owner`                                                                                                                                                    | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `domainId`                                                                                                                                                 | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `created`                                                                                                                                                  | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
@@ -40,5 +47,5 @@ let value: GetOnePromptResponseBody = {
 | `updatedById`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
 | `displayName`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | The prompt’s name, meant to be displayable in the UI.                                                                                                      |
 | `description`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
-| `promptConfig`                                                                                                                                             | [operations.GetOnePromptPromptConfig](../../models/operations/getonepromptpromptconfig.md)                                                                 | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
-| `metadata`                                                                                                                                                 | [operations.GetOnePromptMetadata](../../models/operations/getonepromptmetadata.md)                                                                         | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
+| `promptConfig`                                                                                                                                             | [operations.CreatePromptPromptConfig](../../models/operations/createpromptpromptconfig.md)                                                                 | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
+| `metadata`                                                                                                                                                 | [operations.CreatePromptPromptsMetadata](../../models/operations/createpromptpromptsmetadata.md)                                                           | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |

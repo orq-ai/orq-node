@@ -33,123 +33,129 @@ const value: operations.RetrieveMemoryStoreModel4 = "cohere/embed-english-v3.0";
 ### `operations.RetrieveMemoryStoreModel5`
 
 ```typescript
-const value: operations.RetrieveMemoryStoreModel5 =
-  "azure/text-embedding-ada-002";
+const value: operations.RetrieveMemoryStoreModel5 = "cohere/embed-v4.0";
 ```
 
 ### `operations.RetrieveMemoryStoreModel6`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel6 =
-  "azure/text-embedding-3-small";
+  "azure/text-embedding-ada-002";
 ```
 
 ### `operations.RetrieveMemoryStoreModel7`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel7 =
-  "openai/text-embedding-3-large";
+  "azure/text-embedding-3-small";
 ```
 
 ### `operations.RetrieveMemoryStoreModel8`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel8 =
-  "openai/text-embedding-3-small";
+  "openai/text-embedding-3-large";
 ```
 
 ### `operations.RetrieveMemoryStoreModel9`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel9 =
-  "openai/text-embedding-ada-002";
+  "openai/text-embedding-3-small";
 ```
 
 ### `operations.RetrieveMemoryStoreModel10`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel10 =
-  "google/gemini-embedding-001";
+  "openai/text-embedding-ada-002";
 ```
 
 ### `operations.RetrieveMemoryStoreModel11`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel11 =
-  "google/text-embedding-005";
+  "google/gemini-embedding-001";
 ```
 
 ### `operations.RetrieveMemoryStoreModel12`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel12 =
-  "google/text-multilingual-embedding-002";
+  "google/text-embedding-005";
 ```
 
 ### `operations.RetrieveMemoryStoreModel13`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel13 =
-  "google/multimodalembedding@001";
+  "google/text-multilingual-embedding-002";
 ```
 
 ### `operations.RetrieveMemoryStoreModel14`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel14 =
-  "google-ai/text-embedding-004";
+  "google/multimodalembedding@001";
 ```
 
 ### `operations.RetrieveMemoryStoreModel15`
 
 ```typescript
-const value: operations.RetrieveMemoryStoreModel15 = "jina/jina-clip-v1";
+const value: operations.RetrieveMemoryStoreModel15 =
+  "google-ai/text-embedding-004";
 ```
 
 ### `operations.RetrieveMemoryStoreModel16`
 
 ```typescript
-const value: operations.RetrieveMemoryStoreModel16 =
-  "jina/jina-embeddings-v2-base-es";
+const value: operations.RetrieveMemoryStoreModel16 = "jina/jina-clip-v1";
 ```
 
 ### `operations.RetrieveMemoryStoreModel17`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel17 =
-  "jina/jina-embeddings-v2-base-en";
+  "jina/jina-embeddings-v2-base-es";
 ```
 
 ### `operations.RetrieveMemoryStoreModel18`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel18 =
-  "jina/jina-embeddings-v2-base-zh";
+  "jina/jina-embeddings-v2-base-en";
 ```
 
 ### `operations.RetrieveMemoryStoreModel19`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel19 =
-  "jina/jina-embeddings-v2-base-code";
+  "jina/jina-embeddings-v2-base-zh";
 ```
 
 ### `operations.RetrieveMemoryStoreModel20`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel20 =
-  "jina/jina-embeddings-v2-base-de";
+  "jina/jina-embeddings-v2-base-code";
 ```
 
 ### `operations.RetrieveMemoryStoreModel21`
 
 ```typescript
-const value: operations.RetrieveMemoryStoreModel21 = "jina/jina-clip-v2";
+const value: operations.RetrieveMemoryStoreModel21 =
+  "jina/jina-embeddings-v2-base-de";
 ```
 
 ### `operations.RetrieveMemoryStoreModel22`
 
 ```typescript
-const value: operations.RetrieveMemoryStoreModel22 = "jina/jina-embeddings-v3";
+const value: operations.RetrieveMemoryStoreModel22 = "jina/jina-clip-v2";
+```
+
+### `operations.RetrieveMemoryStoreModel23`
+
+```typescript
+const value: operations.RetrieveMemoryStoreModel23 = "jina/jina-embeddings-v3";
 ```
 

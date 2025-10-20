@@ -1,21 +1,52 @@
 # CreatePromptPromptsMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.CreatePromptMessagesSystemMessage`
 
 ```typescript
-import { CreatePromptPromptsMessages } from "@orq-ai/node/models/operations";
-
-let value: CreatePromptPromptsMessages = {
-  role: "prompt",
+const value: operations.CreatePromptMessagesSystemMessage = {
+  role: "system",
   content: "<value>",
 };
 ```
 
-## Fields
+### `operations.CreatePromptMessagesUserMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.CreatePromptPromptsRole](../../models/operations/createpromptpromptsrole.md)                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.CreatePromptPromptsContent*                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.CreatePromptPromptsToolCalls](../../models/operations/createpromptpromptstoolcalls.md)[]                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
-| `toolCallId`                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.CreatePromptMessagesUserMessage = {
+  role: "user",
+  content: [
+    {
+      type: "file",
+      file: {
+        fileData: "<value>",
+        filename: "example.file",
+      },
+    },
+  ],
+};
+```
+
+### `operations.CreatePromptMessagesAssistantMessage`
+
+```typescript
+const value: operations.CreatePromptMessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.CreatePromptMessagesToolMessage`
+
+```typescript
+const value: operations.CreatePromptMessagesToolMessage = {
+  role: "tool",
+  content: [
+    "<value 1>",
+    "<value 2>",
+  ],
+  toolCallId: "<id>",
+};
+```
+

@@ -197,10 +197,10 @@ const value: operations.FunctionParams22 = {
 };
 ```
 
-### `operations.TwentyThree`
+### `operations.FunctionParams23`
 
 ```typescript
-const value: operations.TwentyThree = {
+const value: operations.FunctionParams23 = {
   type: "cosine_similarity",
 };
 ```

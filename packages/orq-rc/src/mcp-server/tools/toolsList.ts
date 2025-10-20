@@ -14,7 +14,7 @@ export const tool$toolsList: ToolDefinition<typeof args> = {
   name: "tools-list",
   description: `List tools
 
-Retrieves a paginated list of tools in the workspace. Use cursor-based pagination parameters to navigate through the results.`,
+Lists all workspace tools. By default, returns all tools in a single response. Set \`limit\` to enable cursor-based pagination with \`starting_after\` and \`ending_before\`.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await toolsList(

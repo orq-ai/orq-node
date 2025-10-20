@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllMemoryStoresModel19 } from "@orq-ai/node/models/operations";
 
-let value: GetAllMemoryStoresModel19 = "jina/jina-embeddings-v2-base-code";
+let value: GetAllMemoryStoresModel19 = "jina/jina-embeddings-v2-base-zh";
 ```
 
 ## Values
 
 ```typescript
-"jina/jina-embeddings-v2-base-code"
+"jina/jina-embeddings-v2-base-zh"
 ```

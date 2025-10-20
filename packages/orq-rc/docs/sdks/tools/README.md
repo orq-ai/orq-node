@@ -14,7 +14,7 @@
 
 ## list
 
-Retrieves a paginated list of tools in the workspace. Use cursor-based pagination parameters to navigate through the results.
+Lists all workspace tools. By default, returns all tools in a single response. Set `limit` to enable cursor-based pagination with `starting_after` and `ending_before`.
 
 ### Example Usage
 
@@ -27,7 +27,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.tools.list({});
+  const result = await orq.tools.list({
+    limit: 10,
+  });
 
   console.log(result);
 }
@@ -50,7 +52,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await toolsList(orq, {});
+  const res = await toolsList(orq, {
+    limit: 10,
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);

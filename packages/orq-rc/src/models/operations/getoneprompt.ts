@@ -547,9 +547,9 @@ export type GetOnePromptMetadata = {
 };
 
 /**
- * Prompt retrieved.
+ * A prompt entity with configuration, metadata, and versioning.
  */
-export type GetOnePromptResponseBody = {
+export type GetOnePromptPrompt = {
   id: string;
   type: GetOnePromptType;
   owner: string;
@@ -2362,8 +2362,8 @@ export function getOnePromptMetadataFromJSON(
 }
 
 /** @internal */
-export const GetOnePromptResponseBody$inboundSchema: z.ZodType<
-  GetOnePromptResponseBody,
+export const GetOnePromptPrompt$inboundSchema: z.ZodType<
+  GetOnePromptPrompt,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2391,7 +2391,7 @@ export const GetOnePromptResponseBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type GetOnePromptResponseBody$Outbound = {
+export type GetOnePromptPrompt$Outbound = {
   _id: string;
   type: string;
   owner: string;
@@ -2407,10 +2407,10 @@ export type GetOnePromptResponseBody$Outbound = {
 };
 
 /** @internal */
-export const GetOnePromptResponseBody$outboundSchema: z.ZodType<
-  GetOnePromptResponseBody$Outbound,
+export const GetOnePromptPrompt$outboundSchema: z.ZodType<
+  GetOnePromptPrompt$Outbound,
   z.ZodTypeDef,
-  GetOnePromptResponseBody
+  GetOnePromptPrompt
 > = z.object({
   id: z.string(),
   type: GetOnePromptType$outboundSchema,
@@ -2439,29 +2439,29 @@ export const GetOnePromptResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetOnePromptResponseBody$ {
-  /** @deprecated use `GetOnePromptResponseBody$inboundSchema` instead. */
-  export const inboundSchema = GetOnePromptResponseBody$inboundSchema;
-  /** @deprecated use `GetOnePromptResponseBody$outboundSchema` instead. */
-  export const outboundSchema = GetOnePromptResponseBody$outboundSchema;
-  /** @deprecated use `GetOnePromptResponseBody$Outbound` instead. */
-  export type Outbound = GetOnePromptResponseBody$Outbound;
+export namespace GetOnePromptPrompt$ {
+  /** @deprecated use `GetOnePromptPrompt$inboundSchema` instead. */
+  export const inboundSchema = GetOnePromptPrompt$inboundSchema;
+  /** @deprecated use `GetOnePromptPrompt$outboundSchema` instead. */
+  export const outboundSchema = GetOnePromptPrompt$outboundSchema;
+  /** @deprecated use `GetOnePromptPrompt$Outbound` instead. */
+  export type Outbound = GetOnePromptPrompt$Outbound;
 }
 
-export function getOnePromptResponseBodyToJSON(
-  getOnePromptResponseBody: GetOnePromptResponseBody,
+export function getOnePromptPromptToJSON(
+  getOnePromptPrompt: GetOnePromptPrompt,
 ): string {
   return JSON.stringify(
-    GetOnePromptResponseBody$outboundSchema.parse(getOnePromptResponseBody),
+    GetOnePromptPrompt$outboundSchema.parse(getOnePromptPrompt),
   );
 }
 
-export function getOnePromptResponseBodyFromJSON(
+export function getOnePromptPromptFromJSON(
   jsonString: string,
-): SafeParseResult<GetOnePromptResponseBody, SDKValidationError> {
+): SafeParseResult<GetOnePromptPrompt, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetOnePromptResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOnePromptResponseBody' from JSON`,
+    (x) => GetOnePromptPrompt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOnePromptPrompt' from JSON`,
   );
 }

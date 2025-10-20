@@ -1,20 +1,32 @@
-# GetAllPromptsData
+# UpdatePromptPrompt
+
+A prompt entity with configuration, metadata, and versioning.
 
 ## Example Usage
 
 ```typescript
-import { GetAllPromptsData } from "@orq-ai/node/models/operations";
+import { UpdatePromptPrompt } from "@orq-ai/node/models/operations";
 
-let value: GetAllPromptsData = {
+let value: UpdatePromptPrompt = {
   id: "<id>",
   type: "prompt",
   owner: "<value>",
-  domainId: "f3c4fb34-357e-4e4f-8360-cf9632368531",
+  domainId: "22defb91-f127-414c-a5e4-45efc6f745cd",
   created: "<value>",
   updated: "<value>",
-  displayName: "Itzel7",
+  displayName: "Valentina_Bogan19",
   promptConfig: {
-    messages: [],
+    messages: [
+      {
+        role: "system",
+        content: [
+          {
+            type: "text",
+            text: "<value>",
+          },
+        ],
+      },
+    ],
   },
 };
 ```
@@ -24,7 +36,7 @@ let value: GetAllPromptsData = {
 | Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                                                                                                                                                       | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
-| `type`                                                                                                                                                     | [operations.GetAllPromptsType](../../models/operations/getallpromptstype.md)                                                                               | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `type`                                                                                                                                                     | [operations.UpdatePromptPromptsType](../../models/operations/updatepromptpromptstype.md)                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `owner`                                                                                                                                                    | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `domainId`                                                                                                                                                 | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
 | `created`                                                                                                                                                  | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
@@ -33,5 +45,5 @@ let value: GetAllPromptsData = {
 | `updatedById`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
 | `displayName`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_check_mark:                                                                                                                                         | The prompt’s name, meant to be displayable in the UI.                                                                                                      |
 | `description`                                                                                                                                              | *string*                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                         | The prompt’s description, meant to be displayable in the UI. Use this field to optionally store a long form explanation of the prompt for your own purpose |
-| `promptConfig`                                                                                                                                             | [operations.GetAllPromptsPromptConfig](../../models/operations/getallpromptspromptconfig.md)                                                               | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
-| `metadata`                                                                                                                                                 | [operations.GetAllPromptsMetadata](../../models/operations/getallpromptsmetadata.md)                                                                       | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |
+| `promptConfig`                                                                                                                                             | [operations.UpdatePromptPromptConfig](../../models/operations/updatepromptpromptconfig.md)                                                                 | :heavy_check_mark:                                                                                                                                         | A list of messages compatible with the openAI schema                                                                                                       |
+| `metadata`                                                                                                                                                 | [operations.UpdatePromptPromptsMetadata](../../models/operations/updatepromptpromptsmetadata.md)                                                           | :heavy_minus_sign:                                                                                                                                         | N/A                                                                                                                                                        |

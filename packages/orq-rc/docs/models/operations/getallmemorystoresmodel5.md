@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllMemoryStoresModel5 } from "@orq-ai/node/models/operations";
 
-let value: GetAllMemoryStoresModel5 = "azure/text-embedding-ada-002";
+let value: GetAllMemoryStoresModel5 = "cohere/embed-v4.0";
 ```
 
 ## Values
 
 ```typescript
-"azure/text-embedding-ada-002"
+"cohere/embed-v4.0"
 ```

@@ -201,10 +201,10 @@ const value: operations.UpdateEvalFunctionParams22 = {
 };
 ```
 
-### `operations.FunctionParams23`
+### `operations.UpdateEvalFunctionParams23`
 
 ```typescript
-const value: operations.FunctionParams23 = {
+const value: operations.UpdateEvalFunctionParams23 = {
   type: "cosine_similarity",
 };
 ```

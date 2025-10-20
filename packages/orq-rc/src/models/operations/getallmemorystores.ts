@@ -31,127 +31,134 @@ export type GetAllMemoryStoresObject = ClosedEnum<
   typeof GetAllMemoryStoresObject
 >;
 
-export const GetAllMemoryStoresModel22 = {
+export const GetAllMemoryStoresModel23 = {
   JinaJinaEmbeddingsV3: "jina/jina-embeddings-v3",
+} as const;
+export type GetAllMemoryStoresModel23 = ClosedEnum<
+  typeof GetAllMemoryStoresModel23
+>;
+
+export const GetAllMemoryStoresModel22 = {
+  JinaJinaClipV2: "jina/jina-clip-v2",
 } as const;
 export type GetAllMemoryStoresModel22 = ClosedEnum<
   typeof GetAllMemoryStoresModel22
 >;
 
 export const GetAllMemoryStoresModel21 = {
-  JinaJinaClipV2: "jina/jina-clip-v2",
+  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
 } as const;
 export type GetAllMemoryStoresModel21 = ClosedEnum<
   typeof GetAllMemoryStoresModel21
 >;
 
 export const GetAllMemoryStoresModel20 = {
-  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
+  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
 } as const;
 export type GetAllMemoryStoresModel20 = ClosedEnum<
   typeof GetAllMemoryStoresModel20
 >;
 
 export const GetAllMemoryStoresModel19 = {
-  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
+  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
 } as const;
 export type GetAllMemoryStoresModel19 = ClosedEnum<
   typeof GetAllMemoryStoresModel19
 >;
 
 export const GetAllMemoryStoresModel18 = {
-  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
+  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
 } as const;
 export type GetAllMemoryStoresModel18 = ClosedEnum<
   typeof GetAllMemoryStoresModel18
 >;
 
 export const GetAllMemoryStoresModel17 = {
-  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
+  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
 } as const;
 export type GetAllMemoryStoresModel17 = ClosedEnum<
   typeof GetAllMemoryStoresModel17
 >;
 
 export const GetAllMemoryStoresModel16 = {
-  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
+  JinaJinaClipV1: "jina/jina-clip-v1",
 } as const;
 export type GetAllMemoryStoresModel16 = ClosedEnum<
   typeof GetAllMemoryStoresModel16
 >;
 
 export const GetAllMemoryStoresModel15 = {
-  JinaJinaClipV1: "jina/jina-clip-v1",
+  GoogleAiTextEmbedding004: "google-ai/text-embedding-004",
 } as const;
 export type GetAllMemoryStoresModel15 = ClosedEnum<
   typeof GetAllMemoryStoresModel15
 >;
 
 export const GetAllMemoryStoresModel14 = {
-  GoogleAiTextEmbedding004: "google-ai/text-embedding-004",
+  GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
 } as const;
 export type GetAllMemoryStoresModel14 = ClosedEnum<
   typeof GetAllMemoryStoresModel14
 >;
 
 export const GetAllMemoryStoresModel13 = {
-  GoogleMultimodalembeddingAt001: "google/multimodalembedding@001",
+  GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
 } as const;
 export type GetAllMemoryStoresModel13 = ClosedEnum<
   typeof GetAllMemoryStoresModel13
 >;
 
 export const GetAllMemoryStoresModel12 = {
-  GoogleTextMultilingualEmbedding002: "google/text-multilingual-embedding-002",
+  GoogleTextEmbedding005: "google/text-embedding-005",
 } as const;
 export type GetAllMemoryStoresModel12 = ClosedEnum<
   typeof GetAllMemoryStoresModel12
 >;
 
 export const GetAllMemoryStoresModel11 = {
-  GoogleTextEmbedding005: "google/text-embedding-005",
+  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
 } as const;
 export type GetAllMemoryStoresModel11 = ClosedEnum<
   typeof GetAllMemoryStoresModel11
 >;
 
 export const GetAllMemoryStoresModel10 = {
-  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
+  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
 } as const;
 export type GetAllMemoryStoresModel10 = ClosedEnum<
   typeof GetAllMemoryStoresModel10
 >;
 
 export const GetAllMemoryStoresModel9 = {
-  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
+  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
 } as const;
 export type GetAllMemoryStoresModel9 = ClosedEnum<
   typeof GetAllMemoryStoresModel9
 >;
 
 export const GetAllMemoryStoresModel8 = {
-  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
+  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
 } as const;
 export type GetAllMemoryStoresModel8 = ClosedEnum<
   typeof GetAllMemoryStoresModel8
 >;
 
 export const GetAllMemoryStoresModel7 = {
-  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
+  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
 } as const;
 export type GetAllMemoryStoresModel7 = ClosedEnum<
   typeof GetAllMemoryStoresModel7
 >;
 
 export const GetAllMemoryStoresModel6 = {
-  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
+  AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
 } as const;
 export type GetAllMemoryStoresModel6 = ClosedEnum<
   typeof GetAllMemoryStoresModel6
 >;
 
 export const GetAllMemoryStoresModel5 = {
-  AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
+  CohereEmbedV40: "cohere/embed-v4.0",
 } as const;
 export type GetAllMemoryStoresModel5 = ClosedEnum<
   typeof GetAllMemoryStoresModel5
@@ -207,7 +214,8 @@ export type GetAllMemoryStoresModel =
   | GetAllMemoryStoresModel19
   | GetAllMemoryStoresModel20
   | GetAllMemoryStoresModel21
-  | GetAllMemoryStoresModel22;
+  | GetAllMemoryStoresModel22
+  | GetAllMemoryStoresModel23;
 
 export type GetAllMemoryStoresEmbeddingConfig = {
   model:
@@ -232,7 +240,8 @@ export type GetAllMemoryStoresEmbeddingConfig = {
     | GetAllMemoryStoresModel19
     | GetAllMemoryStoresModel20
     | GetAllMemoryStoresModel21
-    | GetAllMemoryStoresModel22;
+    | GetAllMemoryStoresModel22
+    | GetAllMemoryStoresModel23;
 };
 
 export type GetAllMemoryStoresData = {
@@ -369,6 +378,27 @@ export namespace GetAllMemoryStoresObject$ {
   export const inboundSchema = GetAllMemoryStoresObject$inboundSchema;
   /** @deprecated use `GetAllMemoryStoresObject$outboundSchema` instead. */
   export const outboundSchema = GetAllMemoryStoresObject$outboundSchema;
+}
+
+/** @internal */
+export const GetAllMemoryStoresModel23$inboundSchema: z.ZodNativeEnum<
+  typeof GetAllMemoryStoresModel23
+> = z.nativeEnum(GetAllMemoryStoresModel23);
+
+/** @internal */
+export const GetAllMemoryStoresModel23$outboundSchema: z.ZodNativeEnum<
+  typeof GetAllMemoryStoresModel23
+> = GetAllMemoryStoresModel23$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetAllMemoryStoresModel23$ {
+  /** @deprecated use `GetAllMemoryStoresModel23$inboundSchema` instead. */
+  export const inboundSchema = GetAllMemoryStoresModel23$inboundSchema;
+  /** @deprecated use `GetAllMemoryStoresModel23$outboundSchema` instead. */
+  export const outboundSchema = GetAllMemoryStoresModel23$outboundSchema;
 }
 
 /** @internal */
@@ -861,10 +891,12 @@ export const GetAllMemoryStoresModel$inboundSchema: z.ZodType<
   GetAllMemoryStoresModel20$inboundSchema,
   GetAllMemoryStoresModel21$inboundSchema,
   GetAllMemoryStoresModel22$inboundSchema,
+  GetAllMemoryStoresModel23$inboundSchema,
 ]);
 
 /** @internal */
 export type GetAllMemoryStoresModel$Outbound =
+  | string
   | string
   | string
   | string
@@ -916,6 +948,7 @@ export const GetAllMemoryStoresModel$outboundSchema: z.ZodType<
   GetAllMemoryStoresModel20$outboundSchema,
   GetAllMemoryStoresModel21$outboundSchema,
   GetAllMemoryStoresModel22$outboundSchema,
+  GetAllMemoryStoresModel23$outboundSchema,
 ]);
 
 /**
@@ -978,12 +1011,14 @@ export const GetAllMemoryStoresEmbeddingConfig$inboundSchema: z.ZodType<
     GetAllMemoryStoresModel20$inboundSchema,
     GetAllMemoryStoresModel21$inboundSchema,
     GetAllMemoryStoresModel22$inboundSchema,
+    GetAllMemoryStoresModel23$inboundSchema,
   ]),
 });
 
 /** @internal */
 export type GetAllMemoryStoresEmbeddingConfig$Outbound = {
   model:
+    | string
     | string
     | string
     | string
@@ -1037,6 +1072,7 @@ export const GetAllMemoryStoresEmbeddingConfig$outboundSchema: z.ZodType<
     GetAllMemoryStoresModel20$outboundSchema,
     GetAllMemoryStoresModel21$outboundSchema,
     GetAllMemoryStoresModel22$outboundSchema,
+    GetAllMemoryStoresModel23$outboundSchema,
   ]),
 });
 

@@ -5,11 +5,11 @@
 ```typescript
 import { CreateMemoryStoreModel11 } from "@orq-ai/node/models/operations";
 
-let value: CreateMemoryStoreModel11 = "google/text-embedding-005";
+let value: CreateMemoryStoreModel11 = "google/gemini-embedding-001";
 ```
 
 ## Values
 
 ```typescript
-"google/text-embedding-005"
+"google/gemini-embedding-001"
 ```

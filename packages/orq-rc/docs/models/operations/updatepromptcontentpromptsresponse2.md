@@ -1,0 +1,36 @@
+# UpdatePromptContentPromptsResponse2
+
+
+## Supported Types
+
+### `operations.UpdatePrompt2PromptsResponse1`
+
+```typescript
+const value: operations.UpdatePrompt2PromptsResponse1 = {
+  type: "text",
+  text: "<value>",
+};
+```
+
+### `operations.UpdatePrompt2PromptsResponse2`
+
+```typescript
+const value: operations.UpdatePrompt2PromptsResponse2 = {
+  type: "image_url",
+  imageUrl: {
+    url: "https://lustrous-ceramics.biz/",
+  },
+};
+```
+
+### `operations.UpdatePrompt2PromptsResponse3`
+
+```typescript
+const value: operations.UpdatePrompt2PromptsResponse3 = {
+  type: "file",
+  file: {
+    fileData: "<value>",
+  },
+};
+```
+

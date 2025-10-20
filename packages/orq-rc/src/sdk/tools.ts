@@ -17,7 +17,7 @@ export class Tools extends ClientSDK {
    * List tools
    *
    * @remarks
-   * Retrieves a paginated list of tools in the workspace. Use cursor-based pagination parameters to navigate through the results.
+   * Lists all workspace tools. By default, returns all tools in a single response. Set `limit` to enable cursor-based pagination with `starting_after` and `ending_before`.
    */
   async list(
     request?: operations.GetAllToolsRequest | undefined,

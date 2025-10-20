@@ -14,7 +14,7 @@ let value: CreateMemoryStoreResponseBody = {
   created: "<value>",
   updated: "<value>",
   embeddingConfig: {
-    model: "openai/text-embedding-3-large",
+    model: "azure/text-embedding-3-small",
   },
 };
 ```

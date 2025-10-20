@@ -33,7 +33,7 @@ export function promptsCreate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreatePromptResponseBody,
+    operations.CreatePromptPrompt,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -58,7 +58,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.CreatePromptResponseBody,
+      operations.CreatePromptPrompt,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -138,7 +138,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreatePromptResponseBody,
+    operations.CreatePromptPrompt,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -148,7 +148,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreatePromptResponseBody$inboundSchema),
+    M.json(200, operations.CreatePromptPrompt$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

@@ -37,7 +37,7 @@ export class Prompts extends ClientSDK {
   async create(
     request?: operations.CreatePromptRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.CreatePromptResponseBody> {
+  ): Promise<operations.CreatePromptPrompt> {
     return unwrapAsync(promptsCreate(
       this,
       request,
@@ -54,7 +54,7 @@ export class Prompts extends ClientSDK {
   async retrieve(
     request: operations.GetOnePromptRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetOnePromptResponseBody> {
+  ): Promise<operations.GetOnePromptPrompt> {
     return unwrapAsync(promptsRetrieve(
       this,
       request,
@@ -68,7 +68,7 @@ export class Prompts extends ClientSDK {
   async update(
     request: operations.UpdatePromptRequest,
     options?: RequestOptions,
-  ): Promise<operations.UpdatePromptResponseBody> {
+  ): Promise<operations.UpdatePromptPrompt> {
     return unwrapAsync(promptsUpdate(
       this,
       request,
