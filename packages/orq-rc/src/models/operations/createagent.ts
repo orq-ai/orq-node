@@ -408,6 +408,17 @@ export type KnowledgeBases = {
   knowledgeId: string;
 };
 
+export type TeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
 export type CreateAgentRequestBody = {
   /**
    * The path where the agent will be stored in the project structure
@@ -453,6 +464,10 @@ export type CreateAgentRequestBody = {
    * Optional array of knowledge base configurations for the agent to access
    */
   knowledgeBases?: Array<KnowledgeBases> | undefined;
+  /**
+   * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
+   */
+  teamOfAgents?: Array<TeamOfAgents> | undefined;
 };
 
 /**
@@ -2240,6 +2255,59 @@ export function knowledgeBasesFromJSON(
 }
 
 /** @internal */
+export const TeamOfAgents$inboundSchema: z.ZodType<
+  TeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+/** @internal */
+export type TeamOfAgents$Outbound = {
+  key: string;
+  role?: string | undefined;
+};
+
+/** @internal */
+export const TeamOfAgents$outboundSchema: z.ZodType<
+  TeamOfAgents$Outbound,
+  z.ZodTypeDef,
+  TeamOfAgents
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TeamOfAgents$ {
+  /** @deprecated use `TeamOfAgents$inboundSchema` instead. */
+  export const inboundSchema = TeamOfAgents$inboundSchema;
+  /** @deprecated use `TeamOfAgents$outboundSchema` instead. */
+  export const outboundSchema = TeamOfAgents$outboundSchema;
+  /** @deprecated use `TeamOfAgents$Outbound` instead. */
+  export type Outbound = TeamOfAgents$Outbound;
+}
+
+export function teamOfAgentsToJSON(teamOfAgents: TeamOfAgents): string {
+  return JSON.stringify(TeamOfAgents$outboundSchema.parse(teamOfAgents));
+}
+
+export function teamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<TeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   CreateAgentRequestBody,
   z.ZodTypeDef,
@@ -2257,12 +2325,14 @@ export const CreateAgentRequestBody$inboundSchema: z.ZodType<
   memory_stores: z.array(z.string()).optional(),
   knowledge_bases: z.array(z.lazy(() => KnowledgeBases$inboundSchema))
     .optional(),
+  team_of_agents: z.array(z.lazy(() => TeamOfAgents$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "system_prompt": "systemPrompt",
     "fallback_models": "fallbackModels",
     "memory_stores": "memoryStores",
     "knowledge_bases": "knowledgeBases",
+    "team_of_agents": "teamOfAgents",
   });
 });
 
@@ -2279,6 +2349,7 @@ export type CreateAgentRequestBody$Outbound = {
   settings: Settings$Outbound;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
+  team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2299,12 +2370,14 @@ export const CreateAgentRequestBody$outboundSchema: z.ZodType<
   memoryStores: z.array(z.string()).optional(),
   knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
     .optional(),
+  teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     systemPrompt: "system_prompt",
     fallbackModels: "fallback_models",
     memoryStores: "memory_stores",
     knowledgeBases: "knowledge_bases",
+    teamOfAgents: "team_of_agents",
   });
 });
 

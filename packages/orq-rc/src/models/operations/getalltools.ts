@@ -798,7 +798,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K83DE3CN1Z0NXEG7W542E105"),
+    _id: z.string().default("01K83MSAXMF8FWW395H84A1RAE"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -851,7 +851,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K83DE3CN1Z0NXEG7W542E105"),
+  id: z.string().default("01K83MSAXMF8FWW395H84A1RAE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1194,7 +1194,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K83DE3CNH2ER2KHJK4EBRG7C"),
+    _id: z.string().default("01K83MSAXMNG6Q4QY23S3T6EHJ"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1246,7 +1246,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K83DE3CNH2ER2KHJK4EBRG7C"),
+  id: z.string().default("01K83MSAXMNG6Q4QY23S3T6EHJ"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1629,7 +1629,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K83DE3CM03G3MMMQ4NX7A9FQ"),
+    _id: z.string().default("01K83MSAXK497GE95ACHS4J32X"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1681,7 +1681,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K83DE3CM03G3MMMQ4NX7A9FQ"),
+  id: z.string().default("01K83MSAXK497GE95ACHS4J32X"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1842,7 +1842,7 @@ export const GetAllToolsData2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K83DE3CMY3GG6C04E2SBYH7T"),
+  _id: z.string().default("01K83MSAXK7XA69Q1AFBP7MYB7"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1895,7 +1895,7 @@ export const GetAllToolsData2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData2
 > = z.object({
-  id: z.string().default("01K83DE3CMY3GG6C04E2SBYH7T"),
+  id: z.string().default("01K83MSAXK7XA69Q1AFBP7MYB7"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2063,7 +2063,7 @@ export const GetAllToolsData1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K83DE3CM8TZ5H5A3MFNMN3P6"),
+  _id: z.string().default("01K83MSAXK74MPH6P8937D25WA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2115,7 +2115,7 @@ export const GetAllToolsData1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData1
 > = z.object({
-  id: z.string().default("01K83DE3CM8TZ5H5A3MFNMN3P6"),
+  id: z.string().default("01K83MSAXK74MPH6P8937D25WA"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
