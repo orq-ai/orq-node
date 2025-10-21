@@ -413,9 +413,17 @@ export type UpdateAgentKnowledgeBases = {
   knowledgeId: string;
 };
 
-/**
- * Request body for updating an existing agent via the API. Uses simplified tool input format.
- */
+export type UpdateAgentTeamOfAgents = {
+  /**
+   * The unique key of the agent within the workspace
+   */
+  key: string;
+  /**
+   * The role of the agent in this context. This is used to give extra information to the leader to help it decide which agent to hand off to.
+   */
+  role?: string | undefined;
+};
+
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
   projectId?: string | undefined;
@@ -441,6 +449,10 @@ export type UpdateAgentRequestBody = {
   path?: string | undefined;
   memoryStores?: Array<string> | undefined;
   knowledgeBases?: Array<UpdateAgentKnowledgeBases> | undefined;
+  /**
+   * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
+   */
+  teamOfAgents?: Array<UpdateAgentTeamOfAgents> | undefined;
 };
 
 export type UpdateAgentRequest = {
@@ -557,7 +569,7 @@ export type UpdateAgentModel = {
   temperature?: number | undefined;
 };
 
-export type UpdateAgentTeamOfAgents = {
+export type UpdateAgentAgentsTeamOfAgents = {
   /**
    * The unique key of the agent within the workspace
    */
@@ -621,7 +633,7 @@ export type UpdateAgentResponseBody = {
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents: Array<UpdateAgentTeamOfAgents>;
+  teamOfAgents: Array<UpdateAgentAgentsTeamOfAgents>;
   metrics?: UpdateAgentMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -2348,6 +2360,63 @@ export function updateAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
+export const UpdateAgentTeamOfAgents$inboundSchema: z.ZodType<
+  UpdateAgentTeamOfAgents,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+/** @internal */
+export type UpdateAgentTeamOfAgents$Outbound = {
+  key: string;
+  role?: string | undefined;
+};
+
+/** @internal */
+export const UpdateAgentTeamOfAgents$outboundSchema: z.ZodType<
+  UpdateAgentTeamOfAgents$Outbound,
+  z.ZodTypeDef,
+  UpdateAgentTeamOfAgents
+> = z.object({
+  key: z.string(),
+  role: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateAgentTeamOfAgents$ {
+  /** @deprecated use `UpdateAgentTeamOfAgents$inboundSchema` instead. */
+  export const inboundSchema = UpdateAgentTeamOfAgents$inboundSchema;
+  /** @deprecated use `UpdateAgentTeamOfAgents$outboundSchema` instead. */
+  export const outboundSchema = UpdateAgentTeamOfAgents$outboundSchema;
+  /** @deprecated use `UpdateAgentTeamOfAgents$Outbound` instead. */
+  export type Outbound = UpdateAgentTeamOfAgents$Outbound;
+}
+
+export function updateAgentTeamOfAgentsToJSON(
+  updateAgentTeamOfAgents: UpdateAgentTeamOfAgents,
+): string {
+  return JSON.stringify(
+    UpdateAgentTeamOfAgents$outboundSchema.parse(updateAgentTeamOfAgents),
+  );
+}
+
+export function updateAgentTeamOfAgentsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentTeamOfAgents, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   UpdateAgentRequestBody,
   z.ZodTypeDef,
@@ -2367,6 +2436,8 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
   knowledge_bases: z.array(
     z.lazy(() => UpdateAgentKnowledgeBases$inboundSchema),
   ).optional(),
+  team_of_agents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "project_id": "projectId",
@@ -2374,6 +2445,7 @@ export const UpdateAgentRequestBody$inboundSchema: z.ZodType<
     "fallback_models": "fallbackModels",
     "memory_stores": "memoryStores",
     "knowledge_bases": "knowledgeBases",
+    "team_of_agents": "teamOfAgents",
   });
 });
 
@@ -2391,6 +2463,7 @@ export type UpdateAgentRequestBody$Outbound = {
   path?: string | undefined;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
+  team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2413,6 +2486,8 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   knowledgeBases: z.array(
     z.lazy(() => UpdateAgentKnowledgeBases$outboundSchema),
   ).optional(),
+  teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",
@@ -2420,6 +2495,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
     fallbackModels: "fallback_models",
     memoryStores: "memory_stores",
     knowledgeBases: "knowledge_bases",
+    teamOfAgents: "team_of_agents",
   });
 });
 
@@ -2871,8 +2947,8 @@ export function updateAgentModelFromJSON(
 }
 
 /** @internal */
-export const UpdateAgentTeamOfAgents$inboundSchema: z.ZodType<
-  UpdateAgentTeamOfAgents,
+export const UpdateAgentAgentsTeamOfAgents$inboundSchema: z.ZodType<
+  UpdateAgentAgentsTeamOfAgents,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2881,16 +2957,16 @@ export const UpdateAgentTeamOfAgents$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateAgentTeamOfAgents$Outbound = {
+export type UpdateAgentAgentsTeamOfAgents$Outbound = {
   key: string;
   role?: string | undefined;
 };
 
 /** @internal */
-export const UpdateAgentTeamOfAgents$outboundSchema: z.ZodType<
-  UpdateAgentTeamOfAgents$Outbound,
+export const UpdateAgentAgentsTeamOfAgents$outboundSchema: z.ZodType<
+  UpdateAgentAgentsTeamOfAgents$Outbound,
   z.ZodTypeDef,
-  UpdateAgentTeamOfAgents
+  UpdateAgentAgentsTeamOfAgents
 > = z.object({
   key: z.string(),
   role: z.string().optional(),
@@ -2900,30 +2976,32 @@ export const UpdateAgentTeamOfAgents$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateAgentTeamOfAgents$ {
-  /** @deprecated use `UpdateAgentTeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = UpdateAgentTeamOfAgents$inboundSchema;
-  /** @deprecated use `UpdateAgentTeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = UpdateAgentTeamOfAgents$outboundSchema;
-  /** @deprecated use `UpdateAgentTeamOfAgents$Outbound` instead. */
-  export type Outbound = UpdateAgentTeamOfAgents$Outbound;
+export namespace UpdateAgentAgentsTeamOfAgents$ {
+  /** @deprecated use `UpdateAgentAgentsTeamOfAgents$inboundSchema` instead. */
+  export const inboundSchema = UpdateAgentAgentsTeamOfAgents$inboundSchema;
+  /** @deprecated use `UpdateAgentAgentsTeamOfAgents$outboundSchema` instead. */
+  export const outboundSchema = UpdateAgentAgentsTeamOfAgents$outboundSchema;
+  /** @deprecated use `UpdateAgentAgentsTeamOfAgents$Outbound` instead. */
+  export type Outbound = UpdateAgentAgentsTeamOfAgents$Outbound;
 }
 
-export function updateAgentTeamOfAgentsToJSON(
-  updateAgentTeamOfAgents: UpdateAgentTeamOfAgents,
+export function updateAgentAgentsTeamOfAgentsToJSON(
+  updateAgentAgentsTeamOfAgents: UpdateAgentAgentsTeamOfAgents,
 ): string {
   return JSON.stringify(
-    UpdateAgentTeamOfAgents$outboundSchema.parse(updateAgentTeamOfAgents),
+    UpdateAgentAgentsTeamOfAgents$outboundSchema.parse(
+      updateAgentAgentsTeamOfAgents,
+    ),
   );
 }
 
-export function updateAgentTeamOfAgentsFromJSON(
+export function updateAgentAgentsTeamOfAgentsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateAgentTeamOfAgents, SDKValidationError> {
+): SafeParseResult<UpdateAgentAgentsTeamOfAgents, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateAgentTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateAgentTeamOfAgents' from JSON`,
+    (x) => UpdateAgentAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentsTeamOfAgents' from JSON`,
   );
 }
 
@@ -3098,7 +3176,9 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
   version_hash: z.string().optional(),
   path: z.string(),
   memory_stores: z.array(z.string()),
-  team_of_agents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$inboundSchema)),
+  team_of_agents: z.array(
+    z.lazy(() => UpdateAgentAgentsTeamOfAgents$inboundSchema),
+  ),
   metrics: z.lazy(() => UpdateAgentMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
@@ -3141,7 +3221,7 @@ export type UpdateAgentResponseBody$Outbound = {
   version_hash?: string | undefined;
   path: string;
   memory_stores: Array<string>;
-  team_of_agents: Array<UpdateAgentTeamOfAgents$Outbound>;
+  team_of_agents: Array<UpdateAgentAgentsTeamOfAgents$Outbound>;
   metrics?: UpdateAgentMetrics$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
   knowledge_bases?: Array<UpdateAgentAgentsKnowledgeBases$Outbound> | undefined;
@@ -3172,7 +3252,9 @@ export const UpdateAgentResponseBody$outboundSchema: z.ZodType<
   versionHash: z.string().optional(),
   path: z.string(),
   memoryStores: z.array(z.string()),
-  teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema)),
+  teamOfAgents: z.array(
+    z.lazy(() => UpdateAgentAgentsTeamOfAgents$outboundSchema),
+  ),
   metrics: z.lazy(() => UpdateAgentMetrics$outboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledgeBases: z.array(

@@ -219,7 +219,7 @@ export type RunAgentKnowledgeBases = {
   knowledgeId: string;
 };
 
-export type TeamOfAgents = {
+export type RunAgentTeamOfAgents = {
   /**
    * The unique key of the agent within the workspace
    */
@@ -779,7 +779,7 @@ export type RunAgentRequestBody = {
   /**
    * The agents that are accessible to this orchestrator. The main agent can hand off to these agents to perform tasks.
    */
-  teamOfAgents?: Array<TeamOfAgents> | undefined;
+  teamOfAgents?: Array<RunAgentTeamOfAgents> | undefined;
   settings: RunAgentSettings;
   /**
    * Optional metadata for the agent run as key-value pairs that will be included in traces
@@ -1816,8 +1816,8 @@ export function runAgentKnowledgeBasesFromJSON(
 }
 
 /** @internal */
-export const TeamOfAgents$inboundSchema: z.ZodType<
-  TeamOfAgents,
+export const RunAgentTeamOfAgents$inboundSchema: z.ZodType<
+  RunAgentTeamOfAgents,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1826,16 +1826,16 @@ export const TeamOfAgents$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type TeamOfAgents$Outbound = {
+export type RunAgentTeamOfAgents$Outbound = {
   key: string;
   role?: string | undefined;
 };
 
 /** @internal */
-export const TeamOfAgents$outboundSchema: z.ZodType<
-  TeamOfAgents$Outbound,
+export const RunAgentTeamOfAgents$outboundSchema: z.ZodType<
+  RunAgentTeamOfAgents$Outbound,
   z.ZodTypeDef,
-  TeamOfAgents
+  RunAgentTeamOfAgents
 > = z.object({
   key: z.string(),
   role: z.string().optional(),
@@ -1845,26 +1845,30 @@ export const TeamOfAgents$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace TeamOfAgents$ {
-  /** @deprecated use `TeamOfAgents$inboundSchema` instead. */
-  export const inboundSchema = TeamOfAgents$inboundSchema;
-  /** @deprecated use `TeamOfAgents$outboundSchema` instead. */
-  export const outboundSchema = TeamOfAgents$outboundSchema;
-  /** @deprecated use `TeamOfAgents$Outbound` instead. */
-  export type Outbound = TeamOfAgents$Outbound;
+export namespace RunAgentTeamOfAgents$ {
+  /** @deprecated use `RunAgentTeamOfAgents$inboundSchema` instead. */
+  export const inboundSchema = RunAgentTeamOfAgents$inboundSchema;
+  /** @deprecated use `RunAgentTeamOfAgents$outboundSchema` instead. */
+  export const outboundSchema = RunAgentTeamOfAgents$outboundSchema;
+  /** @deprecated use `RunAgentTeamOfAgents$Outbound` instead. */
+  export type Outbound = RunAgentTeamOfAgents$Outbound;
 }
 
-export function teamOfAgentsToJSON(teamOfAgents: TeamOfAgents): string {
-  return JSON.stringify(TeamOfAgents$outboundSchema.parse(teamOfAgents));
+export function runAgentTeamOfAgentsToJSON(
+  runAgentTeamOfAgents: RunAgentTeamOfAgents,
+): string {
+  return JSON.stringify(
+    RunAgentTeamOfAgents$outboundSchema.parse(runAgentTeamOfAgents),
+  );
 }
 
-export function teamOfAgentsFromJSON(
+export function runAgentTeamOfAgentsFromJSON(
   jsonString: string,
-): SafeParseResult<TeamOfAgents, SDKValidationError> {
+): SafeParseResult<RunAgentTeamOfAgents, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => TeamOfAgents$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TeamOfAgents' from JSON`,
+    (x) => RunAgentTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RunAgentTeamOfAgents' from JSON`,
   );
 }
 
@@ -3953,7 +3957,8 @@ export const RunAgentRequestBody$inboundSchema: z.ZodType<
   memory_stores: z.array(z.string()).optional(),
   knowledge_bases: z.array(z.lazy(() => RunAgentKnowledgeBases$inboundSchema))
     .optional(),
-  team_of_agents: z.array(z.lazy(() => TeamOfAgents$inboundSchema)).optional(),
+  team_of_agents: z.array(z.lazy(() => RunAgentTeamOfAgents$inboundSchema))
+    .optional(),
   settings: z.lazy(() => RunAgentSettings$inboundSchema),
   metadata: z.record(z.any()).optional(),
 }).transform((v) => {
@@ -3985,7 +3990,7 @@ export type RunAgentRequestBody$Outbound = {
   system_prompt?: string | undefined;
   memory_stores?: Array<string> | undefined;
   knowledge_bases?: Array<RunAgentKnowledgeBases$Outbound> | undefined;
-  team_of_agents?: Array<TeamOfAgents$Outbound> | undefined;
+  team_of_agents?: Array<RunAgentTeamOfAgents$Outbound> | undefined;
   settings: RunAgentSettings$Outbound;
   metadata?: { [k: string]: any } | undefined;
 };
@@ -4013,7 +4018,8 @@ export const RunAgentRequestBody$outboundSchema: z.ZodType<
   memoryStores: z.array(z.string()).optional(),
   knowledgeBases: z.array(z.lazy(() => RunAgentKnowledgeBases$outboundSchema))
     .optional(),
-  teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
+  teamOfAgents: z.array(z.lazy(() => RunAgentTeamOfAgents$outboundSchema))
+    .optional(),
   settings: z.lazy(() => RunAgentSettings$outboundSchema),
   metadata: z.record(z.any()).optional(),
 }).transform((v) => {
