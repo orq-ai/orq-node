@@ -5,11 +5,11 @@
 ```typescript
 import { Fifteen } from "@orq-ai/node/models/operations";
 
-let value: Fifteen = "google-ai/text-embedding-004";
+let value: Fifteen = "mistral/mistral-embed";
 ```
 
 ## Values
 
 ```typescript
-"google-ai/text-embedding-004"
+"mistral/mistral-embed"
 ```

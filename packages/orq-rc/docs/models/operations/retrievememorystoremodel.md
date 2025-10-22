@@ -82,28 +82,27 @@ const value: operations.RetrieveMemoryStoreModel11 =
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel12 =
-  "google/text-embedding-005";
+  "google/text-multilingual-embedding-002";
 ```
 
 ### `operations.RetrieveMemoryStoreModel13`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel13 =
-  "google/text-multilingual-embedding-002";
+  "google/multimodalembedding@001";
 ```
 
 ### `operations.RetrieveMemoryStoreModel14`
 
 ```typescript
 const value: operations.RetrieveMemoryStoreModel14 =
-  "google/multimodalembedding@001";
+  "google-ai/text-embedding-004";
 ```
 
 ### `operations.RetrieveMemoryStoreModel15`
 
 ```typescript
-const value: operations.RetrieveMemoryStoreModel15 =
-  "google-ai/text-embedding-004";
+const value: operations.RetrieveMemoryStoreModel15 = "mistral/mistral-embed";
 ```
 
 ### `operations.RetrieveMemoryStoreModel16`

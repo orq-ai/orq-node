@@ -6,7 +6,7 @@
 import { RetrieveMemoryStoreEmbeddingConfig } from "@orq-ai/node/models/operations";
 
 let value: RetrieveMemoryStoreEmbeddingConfig = {
-  model: "google/text-embedding-005",
+  model: "google/text-multilingual-embedding-002",
 };
 ```
 

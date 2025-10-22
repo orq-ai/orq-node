@@ -81,28 +81,28 @@ const value: operations.CreateMemoryStoreModel11 =
 ### `operations.CreateMemoryStoreModel12`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel12 = "google/text-embedding-005";
+const value: operations.CreateMemoryStoreModel12 =
+  "google/text-multilingual-embedding-002";
 ```
 
 ### `operations.CreateMemoryStoreModel13`
 
 ```typescript
 const value: operations.CreateMemoryStoreModel13 =
-  "google/text-multilingual-embedding-002";
+  "google/multimodalembedding@001";
 ```
 
 ### `operations.CreateMemoryStoreModel14`
 
 ```typescript
 const value: operations.CreateMemoryStoreModel14 =
-  "google/multimodalembedding@001";
+  "google-ai/text-embedding-004";
 ```
 
 ### `operations.CreateMemoryStoreModel15`
 
 ```typescript
-const value: operations.CreateMemoryStoreModel15 =
-  "google-ai/text-embedding-004";
+const value: operations.CreateMemoryStoreModel15 = "mistral/mistral-embed";
 ```
 
 ### `operations.CreateMemoryStoreModel16`

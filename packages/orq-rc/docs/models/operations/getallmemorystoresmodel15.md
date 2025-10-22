@@ -5,11 +5,11 @@
 ```typescript
 import { GetAllMemoryStoresModel15 } from "@orq-ai/node/models/operations";
 
-let value: GetAllMemoryStoresModel15 = "google-ai/text-embedding-004";
+let value: GetAllMemoryStoresModel15 = "mistral/mistral-embed";
 ```
 
 ## Values
 
 ```typescript
-"google-ai/text-embedding-004"
+"mistral/mistral-embed"
 ```

@@ -72,25 +72,25 @@ const value: operations.Eleven = "google/gemini-embedding-001";
 ### `operations.Twelve`
 
 ```typescript
-const value: operations.Twelve = "google/text-embedding-005";
+const value: operations.Twelve = "google/text-multilingual-embedding-002";
 ```
 
 ### `operations.Thirteen`
 
 ```typescript
-const value: operations.Thirteen = "google/text-multilingual-embedding-002";
+const value: operations.Thirteen = "google/multimodalembedding@001";
 ```
 
 ### `operations.Fourteen`
 
 ```typescript
-const value: operations.Fourteen = "google/multimodalembedding@001";
+const value: operations.Fourteen = "google-ai/text-embedding-004";
 ```
 
 ### `operations.Fifteen`
 
 ```typescript
-const value: operations.Fifteen = "google-ai/text-embedding-004";
+const value: operations.Fifteen = "mistral/mistral-embed";
 ```
 
 ### `operations.Sixteen`

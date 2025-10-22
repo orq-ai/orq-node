@@ -7,11 +7,11 @@ The modality of the model
 ```typescript
 import { ListModelsType } from "@orq-ai/node/models/operations";
 
-let value: ListModelsType = "moderations";
+let value: ListModelsType = "moderation";
 ```
 
 ## Values
 
 ```typescript
-"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "moderations" | "vision"
+"chat" | "completion" | "embedding" | "image" | "tts" | "stt" | "rerank" | "moderation" | "vision"
 ```

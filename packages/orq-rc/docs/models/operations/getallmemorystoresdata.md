@@ -12,7 +12,7 @@ let value: GetAllMemoryStoresData = {
   created: "<value>",
   updated: "<value>",
   embeddingConfig: {
-    model: "google-ai/text-embedding-004",
+    model: "mistral/mistral-embed",
   },
 };
 ```
