@@ -977,7 +977,7 @@ export type PromptInput = {
   /**
    * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported.
    */
-  model: string;
+  model?: string | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -5765,7 +5765,7 @@ export const PromptInput$inboundSchema: z.ZodType<
       z.lazy(() => CreatePromptMessagesAssistantMessage$inboundSchema),
     ]),
   ),
-  model: z.string(),
+  model: z.string().optional(),
   temperature: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   response_format: z.union([
@@ -5788,7 +5788,7 @@ export type PromptInput$Outbound = {
     | CreatePromptMessagesUserMessage$Outbound
     | CreatePromptMessagesAssistantMessage$Outbound
   >;
-  model: string;
+  model?: string | undefined;
   temperature?: number | null | undefined;
   max_tokens?: number | null | undefined;
   response_format?:
@@ -5812,7 +5812,7 @@ export const PromptInput$outboundSchema: z.ZodType<
       z.lazy(() => CreatePromptMessagesAssistantMessage$outboundSchema),
     ]),
   ),
-  model: z.string(),
+  model: z.string().optional(),
   temperature: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   responseFormat: z.union([
