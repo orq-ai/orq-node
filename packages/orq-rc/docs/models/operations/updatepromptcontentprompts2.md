@@ -40,10 +40,7 @@ const value: operations.UpdatePrompt2Prompts3 = {
 ```typescript
 const value: operations.UpdatePrompt24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

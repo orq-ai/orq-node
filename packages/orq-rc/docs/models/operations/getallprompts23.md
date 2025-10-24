@@ -7,9 +7,7 @@ import { GetAllPrompts23 } from "@orq-ai/node/models/operations";
 
 let value: GetAllPrompts23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

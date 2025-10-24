@@ -22,9 +22,7 @@ let value: GetOnePromptPrompt = {
         content: [
           {
             type: "file",
-            file: {
-              fileData: "<value>",
-            },
+            file: {},
           },
         ],
       },

@@ -7,10 +7,7 @@ import { Two4 } from "@orq-ai/node/models/components";
 
 let value: Two4 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

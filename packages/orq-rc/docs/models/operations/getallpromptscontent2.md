@@ -28,9 +28,7 @@ const value: operations.GetAllPrompts22 = {
 ```typescript
 const value: operations.GetAllPrompts23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

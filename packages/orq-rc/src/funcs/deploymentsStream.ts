@@ -161,8 +161,7 @@ async function $do(
   >(
     M.sse(
       200,
-      z
-        .instanceof(ReadableStream<Uint8Array>)
+      z.instanceof(ReadableStream<Uint8Array>)
         .transform(stream => {
           return new EventStream(stream, rawEvent => {
             if (rawEvent.data === "[DONE]") return { done: true };

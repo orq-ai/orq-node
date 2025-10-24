@@ -331,11 +331,19 @@ export type DeploymentCreateMetric2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type DeploymentCreateMetric24 = {
@@ -830,11 +838,19 @@ export type DeploymentCreateMetric2DeploymentsMetricsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type DeploymentCreateMetric2DeploymentsMetrics4 = {
@@ -2652,8 +2668,10 @@ export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -2662,8 +2680,10 @@ export const DeploymentCreateMetric2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeploymentCreateMetric2File$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -2672,8 +2692,10 @@ export const DeploymentCreateMetric2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentCreateMetric2File
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -5105,8 +5127,10 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    file_data: z.string(),
-    filename: z.string(),
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "file_data": "fileData",
@@ -5115,8 +5139,10 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$inboundSchema:
 
 /** @internal */
 export type DeploymentCreateMetric2DeploymentsMetricsFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -5126,8 +5152,10 @@ export const DeploymentCreateMetric2DeploymentsMetricsFile$outboundSchema:
     z.ZodTypeDef,
     DeploymentCreateMetric2DeploymentsMetricsFile
   > = z.object({
-    fileData: z.string(),
-    filename: z.string(),
+    fileData: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       fileData: "file_data",

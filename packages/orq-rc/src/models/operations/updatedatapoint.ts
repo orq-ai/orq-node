@@ -285,11 +285,19 @@ export type UpdateDatapoint2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type UpdateDatapoint24 = {
@@ -808,11 +816,19 @@ export type UpdateDatapoint2DatasetsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type UpdateDatapoint2Datasets4 = {
@@ -2534,8 +2550,10 @@ export const UpdateDatapoint2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -2544,8 +2562,10 @@ export const UpdateDatapoint2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateDatapoint2File$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -2554,8 +2574,10 @@ export const UpdateDatapoint2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapoint2File
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -5113,8 +5135,10 @@ export const UpdateDatapoint2DatasetsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -5123,8 +5147,10 @@ export const UpdateDatapoint2DatasetsFile$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateDatapoint2DatasetsFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -5133,8 +5159,10 @@ export const UpdateDatapoint2DatasetsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapoint2DatasetsFile
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -6252,7 +6280,7 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-23T13:46:21.441Z",
+    "2025-10-24T04:50:09.608Z",
   ).transform(v => new Date(v)),
   type: UpdateDatapointEvaluationsDatasetsResponseType$inboundSchema,
   values: z.array(z.string()),
@@ -6290,7 +6318,7 @@ export const UpdateDatapointEvaluations3$outboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-23T13:46:21.441Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-24T04:50:09.608Z"))
     .transform(v => v.toISOString()),
   type: UpdateDatapointEvaluationsDatasetsResponseType$outboundSchema,
   values: z.array(z.string()),
@@ -6419,7 +6447,7 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsDatasetsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-23T13:46:21.441Z",
+    "2025-10-24T04:50:09.608Z",
   ).transform(v => new Date(v)),
   type: UpdateDatapointEvaluationsDatasetsType$inboundSchema,
   value: z.number(),
@@ -6458,7 +6486,7 @@ export const UpdateDatapointEvaluations2$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-23T13:46:21.441Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-24T04:50:09.608Z"))
     .transform(v => v.toISOString()),
   type: UpdateDatapointEvaluationsDatasetsType$outboundSchema,
   value: z.number(),
@@ -6581,7 +6609,7 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   source: UpdateDatapointEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-23T13:46:21.441Z",
+    "2025-10-24T04:50:09.608Z",
   ).transform(v => new Date(v)),
   type: UpdateDatapointEvaluationsType$inboundSchema,
   value: z.string(),
@@ -6617,7 +6645,7 @@ export const UpdateDatapointEvaluations1$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: UpdateDatapointEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-23T13:46:21.441Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-24T04:50:09.608Z"))
     .transform(v => v.toISOString()),
   type: UpdateDatapointEvaluationsType$outboundSchema,
   value: z.string(),
@@ -6761,7 +6789,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-23T13:46:12.112Z",
+    "2025-10-24T04:49:59.822Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6840,7 +6868,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-23T13:46:12.112Z"))
+  updated: z.date().default(() => new Date("2025-10-24T04:49:59.822Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

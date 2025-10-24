@@ -28,9 +28,7 @@ const value: operations.GetPromptVersion22 = {
 ```typescript
 const value: operations.GetPromptVersion23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

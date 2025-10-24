@@ -65,3 +65,4 @@ typescript:
   templateVersion: v2
   usageSDKInitImports: []
   useIndexModules: true
+  zodVersion: v3

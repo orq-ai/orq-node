@@ -40,10 +40,7 @@ const value: components.Two3 = {
 ```typescript
 const value: components.Two4 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

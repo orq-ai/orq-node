@@ -7,9 +7,7 @@ import { CreatePrompt2PromptsResponse3 } from "@orq-ai/node/models/operations";
 
 let value: CreatePrompt2PromptsResponse3 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

@@ -96,7 +96,15 @@ export type CreatePrompt2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
@@ -731,11 +739,19 @@ export type CreatePrompt2PromptsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type CreatePrompt24 = {
@@ -1386,7 +1402,15 @@ export type CreatePrompt2PromptsResponseFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
@@ -1764,7 +1788,9 @@ export const CreatePrompt2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1774,7 +1800,9 @@ export const CreatePrompt2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreatePrompt2File$Outbound = {
-  file_data: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
   filename?: string | undefined;
 };
 
@@ -1784,7 +1812,9 @@ export const CreatePrompt2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePrompt2File
 > = z.object({
-  fileData: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4485,8 +4515,10 @@ export const CreatePrompt2PromptsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -4495,8 +4527,10 @@ export const CreatePrompt2PromptsFile$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreatePrompt2PromptsFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -4505,8 +4539,10 @@ export const CreatePrompt2PromptsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePrompt2PromptsFile
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -6794,7 +6830,9 @@ export const CreatePrompt2PromptsResponseFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -6804,7 +6842,9 @@ export const CreatePrompt2PromptsResponseFile$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreatePrompt2PromptsResponseFile$Outbound = {
-  file_data: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
   filename?: string | undefined;
 };
 
@@ -6814,7 +6854,9 @@ export const CreatePrompt2PromptsResponseFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePrompt2PromptsResponseFile
 > = z.object({
-  fileData: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

@@ -40,10 +40,7 @@ const value: operations.DeploymentCreateMetric2DeploymentsMetrics3 = {
 ```typescript
 const value: operations.DeploymentCreateMetric2DeploymentsMetrics4 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

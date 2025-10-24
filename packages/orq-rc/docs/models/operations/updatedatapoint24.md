@@ -7,10 +7,7 @@ import { UpdateDatapoint24 } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatapoint24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

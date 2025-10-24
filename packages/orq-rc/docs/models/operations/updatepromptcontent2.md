@@ -28,9 +28,7 @@ const value: operations.UpdatePrompt22 = {
 ```typescript
 const value: operations.UpdatePrompt23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

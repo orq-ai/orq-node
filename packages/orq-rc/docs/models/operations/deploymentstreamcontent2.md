@@ -40,10 +40,7 @@ const value: operations.DeploymentStream23 = {
 ```typescript
 const value: operations.DeploymentStream24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

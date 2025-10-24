@@ -7,9 +7,7 @@ import { InvokeEval23 } from "@orq-ai/node/models/operations";
 
 let value: InvokeEval23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

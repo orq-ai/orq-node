@@ -7,10 +7,7 @@ import { ListDatasetDatapoints24 } from "@orq-ai/node/models/operations";
 
 let value: ListDatasetDatapoints24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

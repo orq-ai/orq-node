@@ -7,9 +7,7 @@ import { DeploymentGetConfig23 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentGetConfig23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

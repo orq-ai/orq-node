@@ -28,9 +28,7 @@ const value: operations.InvokeEval22 = {
 ```typescript
 const value: operations.InvokeEval23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

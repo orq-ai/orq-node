@@ -7,10 +7,7 @@ import { DeploymentStream2Deployments4 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream2Deployments4 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

@@ -28,9 +28,7 @@ const value: operations.ListPromptVersions22 = {
 ```typescript
 const value: operations.ListPromptVersions23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

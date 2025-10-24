@@ -20,10 +20,7 @@ const value: operations.UpdatePromptMessagesUserMessage = {
   content: [
     {
       type: "file",
-      file: {
-        fileData: "<value>",
-        filename: "example.file",
-      },
+      file: {},
     },
   ],
 };

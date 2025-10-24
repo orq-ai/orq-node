@@ -7,9 +7,7 @@ import { UpdatePrompt23 } from "@orq-ai/node/models/operations";
 
 let value: UpdatePrompt23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

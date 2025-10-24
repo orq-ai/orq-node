@@ -28,9 +28,7 @@ const value: operations.Deployments22 = {
 ```typescript
 const value: operations.Deployments23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

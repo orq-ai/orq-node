@@ -28,9 +28,7 @@ const value: operations.UpdatePrompt2PromptsResponse2 = {
 ```typescript
 const value: operations.UpdatePrompt2PromptsResponse3 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

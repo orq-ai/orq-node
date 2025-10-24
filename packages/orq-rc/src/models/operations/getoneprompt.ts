@@ -362,7 +362,15 @@ export type GetOnePrompt2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
@@ -1471,7 +1479,9 @@ export const GetOnePrompt2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1481,7 +1491,9 @@ export const GetOnePrompt2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetOnePrompt2File$Outbound = {
-  file_data: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
   filename?: string | undefined;
 };
 
@@ -1491,7 +1503,9 @@ export const GetOnePrompt2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetOnePrompt2File
 > = z.object({
-  fileData: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {

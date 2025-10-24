@@ -10,10 +10,7 @@ let value: ListDatasetDatapointsMessagesUserMessage = {
   content: [
     {
       type: "file",
-      file: {
-        fileData: "<value>",
-        filename: "example.file",
-      },
+      file: {},
     },
   ],
 };

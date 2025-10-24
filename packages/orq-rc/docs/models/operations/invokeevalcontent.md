@@ -17,9 +17,7 @@ const value: string = "<value>";
 const value: operations.InvokeEvalContent2[] = [
   {
     type: "file",
-    file: {
-      fileData: "<value>",
-    },
+    file: {},
   },
 ];
 ```

@@ -28,9 +28,7 @@ const value: operations.GetOnePrompt22 = {
 ```typescript
 const value: operations.GetOnePrompt23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

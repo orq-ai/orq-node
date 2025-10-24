@@ -7,10 +7,7 @@ import { Four } from "@orq-ai/node/models/components";
 
 let value: Four = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

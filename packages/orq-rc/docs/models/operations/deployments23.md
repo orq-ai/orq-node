@@ -7,9 +7,7 @@ import { Deployments23 } from "@orq-ai/node/models/operations";
 
 let value: Deployments23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

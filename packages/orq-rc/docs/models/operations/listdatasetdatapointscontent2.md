@@ -40,10 +40,7 @@ const value: operations.ListDatasetDatapoints23 = {
 ```typescript
 const value: operations.ListDatasetDatapoints24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

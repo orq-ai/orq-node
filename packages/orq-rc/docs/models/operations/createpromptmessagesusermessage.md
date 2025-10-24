@@ -10,10 +10,7 @@ let value: CreatePromptMessagesUserMessage = {
   content: [
     {
       type: "file",
-      file: {
-        fileData: "<value>",
-        filename: "example.file",
-      },
+      file: {},
     },
   ],
 };

@@ -10,9 +10,7 @@ let value: GetAllPromptsMessages = {
   content: [
     {
       type: "file",
-      file: {
-        fileData: "<value>",
-      },
+      file: {},
     },
   ],
 };

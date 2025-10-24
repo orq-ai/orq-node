@@ -40,10 +40,7 @@ const value: operations.CreatePrompt2Prompts3 = {
 ```typescript
 const value: operations.CreatePrompt24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 
