@@ -10,7 +10,7 @@ import { CreatePrompt22 } from "@orq-ai/node/models/operations";
 let value: CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://bad-coil.org/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```

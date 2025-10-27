@@ -5,11 +5,11 @@
 ```typescript
 import { DataType } from "@orq-ai/node/models/operations";
 
-let value: DataType = "internal";
+let value: DataType = "json_schema";
 ```
 
 ## Values
 
 ```typescript
-"internal"
+"json_schema"
 ```

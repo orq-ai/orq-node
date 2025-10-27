@@ -5,11 +5,11 @@
 ```typescript
 import { CreateKnowledgeRequestBodyType } from "@orq-ai/node/models/operations";
 
-let value: CreateKnowledgeRequestBodyType = "external";
+let value: CreateKnowledgeRequestBodyType = "internal";
 ```
 
 ## Values
 
 ```typescript
-"external"
+"internal"
 ```

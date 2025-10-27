@@ -6,9 +6,11 @@ Budget configuration details
 
 ```typescript
 import { UpdateBudgetResponseBody } from "@orq-ai/node/models/operations";
+import { RFCDate } from "@orq-ai/node/types";
 
 let value: UpdateBudgetResponseBody = {
   id: "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  workspaceId: "550e8400-e29b-41d4-a716-446655440000",
   type: "contact",
   contactId: "user_123",
   budget: {
@@ -19,8 +21,8 @@ let value: UpdateBudgetResponseBody = {
   consumption: {
     currentAmount: 125.5,
     remainingAmount: 124.5,
-    periodStart: "2024-01-01T00:00:00Z",
-    periodEnd: "2024-01-31T23:59:59Z",
+    periodStart: new RFCDate("2024-01-01T00:00:00Z"),
+    periodEnd: new RFCDate("2024-01-31T23:59:59Z"),
   },
 };
 ```
@@ -30,6 +32,7 @@ let value: UpdateBudgetResponseBody = {
 | Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | Unique ULID for the budget configuration                                                      | 01ARZ3NDEKTSV4RRFFQ69G5FAV                                                                    |
+| `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | Workspace identifier that owns this budget configuration                                      | 550e8400-e29b-41d4-a716-446655440000                                                          |
 | `type`                                                                                        | [operations.UpdateBudgetType](../../models/operations/updatebudgettype.md)                    | :heavy_check_mark:                                                                            | Budget entity type                                                                            | contact                                                                                       |
 | `contactId`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | Contact external identifier (present when type is "contact")                                  | user_123                                                                                      |
 | `budget`                                                                                      | [operations.UpdateBudgetBudget](../../models/operations/updatebudgetbudget.md)                | :heavy_check_mark:                                                                            | Budget configuration                                                                          |                                                                                               |

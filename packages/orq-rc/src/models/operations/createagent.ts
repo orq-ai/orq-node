@@ -528,7 +528,7 @@ export type CreateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<Conditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**

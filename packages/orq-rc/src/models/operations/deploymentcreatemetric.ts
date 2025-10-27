@@ -327,6 +327,9 @@ export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType =
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType
   >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type DeploymentCreateMetric2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -351,6 +354,9 @@ export type DeploymentCreateMetric24 = {
    * The type of the content part. Always `file`.
    */
   type: DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: DeploymentCreateMetric2File;
 };
 
@@ -834,6 +840,9 @@ export type DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3C
     typeof DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type
   >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type DeploymentCreateMetric2DeploymentsMetricsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -859,6 +868,9 @@ export type DeploymentCreateMetric2DeploymentsMetrics4 = {
    */
   type:
     DeploymentCreateMetric2DeploymentsMetricsRequestRequestBodyChoices3Content4Type;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: DeploymentCreateMetric2DeploymentsMetricsFile;
 };
 

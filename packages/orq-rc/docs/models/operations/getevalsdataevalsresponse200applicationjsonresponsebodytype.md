@@ -6,11 +6,11 @@
 import { GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType } from "@orq-ai/node/models/operations";
 
 let value: GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType =
-  "ragas";
+  "llm_eval";
 ```
 
 ## Values
 
 ```typescript
-"ragas"
+"llm_eval"
 ```

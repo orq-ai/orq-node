@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The role of the prompt message
  */
-export const InvokeEvalRole = {
+export const Role = {
   System: "system",
   Assistant: "assistant",
   User: "user",
@@ -25,22 +25,20 @@ export const InvokeEvalRole = {
 /**
  * The role of the prompt message
  */
-export type InvokeEvalRole = ClosedEnum<typeof InvokeEvalRole>;
+export type Role = ClosedEnum<typeof Role>;
 
 /**
  * The type of the content part. Always `file`.
  */
-export const InvokeEval2EvalsRequestType = {
+export const InvokeEval2Type = {
   File: "file",
 } as const;
 /**
  * The type of the content part. Always `file`.
  */
-export type InvokeEval2EvalsRequestType = ClosedEnum<
-  typeof InvokeEval2EvalsRequestType
->;
+export type InvokeEval2Type = ClosedEnum<typeof InvokeEval2Type>;
 
-export type InvokeEval2File = {
+export type FileT = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
@@ -59,20 +57,20 @@ export type InvokeEval2File = {
   filename?: string | undefined;
 };
 
-export type InvokeEval23 = {
+export type Three = {
   /**
    * The type of the content part. Always `file`.
    */
-  type: InvokeEval2EvalsRequestType;
-  file: InvokeEval2File;
+  type: InvokeEval2Type;
+  file: FileT;
 };
 
-export const InvokeEval2EvalsType = {
+export const TwoType = {
   ImageUrl: "image_url",
 } as const;
-export type InvokeEval2EvalsType = ClosedEnum<typeof InvokeEval2EvalsType>;
+export type TwoType = ClosedEnum<typeof TwoType>;
 
-export type InvokeEval2ImageUrl = {
+export type ImageUrl = {
   /**
    * Either a URL of the image or the base64 encoded data URI.
    */
@@ -86,39 +84,37 @@ export type InvokeEval2ImageUrl = {
 /**
  * The image part of the prompt message. Only supported with vision models.
  */
-export type InvokeEval22 = {
-  type: InvokeEval2EvalsType;
-  imageUrl: InvokeEval2ImageUrl;
+export type Two2 = {
+  type: TwoType;
+  imageUrl: ImageUrl;
 };
 
-export const InvokeEval2Type = {
+export const Type = {
   Text: "text",
 } as const;
-export type InvokeEval2Type = ClosedEnum<typeof InvokeEval2Type>;
+export type Type = ClosedEnum<typeof Type>;
 
 /**
  * Text content part of a prompt message
  */
-export type InvokeEval21 = {
-  type: InvokeEval2Type;
+export type One = {
+  type: Type;
   text: string;
 };
 
-export type InvokeEvalContent2 = InvokeEval21 | InvokeEval22 | InvokeEval23;
+export type Two = One | Two2 | Three;
 
 /**
  * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
  */
-export type InvokeEvalContent =
-  | string
-  | Array<InvokeEval21 | InvokeEval22 | InvokeEval23>;
+export type Content = string | Array<One | Two2 | Three>;
 
 export const InvokeEvalType = {
   Function: "function",
 } as const;
 export type InvokeEvalType = ClosedEnum<typeof InvokeEvalType>;
 
-export type InvokeEvalFunction = {
+export type FunctionT = {
   name: string;
   /**
    * JSON string arguments for the functions
@@ -126,23 +122,23 @@ export type InvokeEvalFunction = {
   arguments: string;
 };
 
-export type InvokeEvalToolCalls = {
+export type ToolCalls = {
   id?: string | undefined;
   index?: number | undefined;
   type: InvokeEvalType;
-  function: InvokeEvalFunction;
+  function: FunctionT;
 };
 
-export type InvokeEvalMessages = {
+export type Messages = {
   /**
    * The role of the prompt message
    */
-  role: InvokeEvalRole;
+  role: Role;
   /**
    * The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.
    */
-  content: string | Array<InvokeEval21 | InvokeEval22 | InvokeEval23>;
-  toolCalls?: Array<InvokeEvalToolCalls> | undefined;
+  content: string | Array<One | Two2 | Three>;
+  toolCalls?: Array<ToolCalls> | undefined;
   toolCallId?: string | undefined;
 };
 
@@ -166,7 +162,7 @@ export type InvokeEvalRequestBody = {
   /**
    * The messages used to generate the output, without the last user message
    */
-  messages?: Array<InvokeEvalMessages> | undefined;
+  messages?: Array<Messages> | undefined;
 };
 
 export type InvokeEvalRequest = {
@@ -341,306 +337,23 @@ export type InvokeEvalResponseBody =
   | InvokeEvalResponseBodyHTTP;
 
 /** @internal */
-export const InvokeEvalRole$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalRole
-> = z.nativeEnum(InvokeEvalRole);
+export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
+  Role,
+);
 
 /** @internal */
-export const InvokeEvalRole$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEvalRole
-> = InvokeEvalRole$inboundSchema;
+export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
+  Role$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEvalRole$ {
-  /** @deprecated use `InvokeEvalRole$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalRole$inboundSchema;
-  /** @deprecated use `InvokeEvalRole$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalRole$outboundSchema;
-}
-
-/** @internal */
-export const InvokeEval2EvalsRequestType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsRequestType
-> = z.nativeEnum(InvokeEval2EvalsRequestType);
-
-/** @internal */
-export const InvokeEval2EvalsRequestType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsRequestType
-> = InvokeEval2EvalsRequestType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2EvalsRequestType$ {
-  /** @deprecated use `InvokeEval2EvalsRequestType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2EvalsRequestType$inboundSchema;
-  /** @deprecated use `InvokeEval2EvalsRequestType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2EvalsRequestType$outboundSchema;
-}
-
-/** @internal */
-export const InvokeEval2File$inboundSchema: z.ZodType<
-  InvokeEval2File,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  file_data: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
-  });
-});
-
-/** @internal */
-export type InvokeEval2File$Outbound = {
-  file_data?: string | undefined;
-  uri?: string | undefined;
-  mimeType?: string | undefined;
-  filename?: string | undefined;
-};
-
-/** @internal */
-export const InvokeEval2File$outboundSchema: z.ZodType<
-  InvokeEval2File$Outbound,
-  z.ZodTypeDef,
-  InvokeEval2File
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2File$ {
-  /** @deprecated use `InvokeEval2File$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2File$inboundSchema;
-  /** @deprecated use `InvokeEval2File$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2File$outboundSchema;
-  /** @deprecated use `InvokeEval2File$Outbound` instead. */
-  export type Outbound = InvokeEval2File$Outbound;
-}
-
-export function invokeEval2FileToJSON(
-  invokeEval2File: InvokeEval2File,
-): string {
-  return JSON.stringify(InvokeEval2File$outboundSchema.parse(invokeEval2File));
-}
-
-export function invokeEval2FileFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeEval2File, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeEval2File$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEval2File' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeEval23$inboundSchema: z.ZodType<
-  InvokeEval23,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeEval2EvalsRequestType$inboundSchema,
-  file: z.lazy(() => InvokeEval2File$inboundSchema),
-});
-
-/** @internal */
-export type InvokeEval23$Outbound = {
-  type: string;
-  file: InvokeEval2File$Outbound;
-};
-
-/** @internal */
-export const InvokeEval23$outboundSchema: z.ZodType<
-  InvokeEval23$Outbound,
-  z.ZodTypeDef,
-  InvokeEval23
-> = z.object({
-  type: InvokeEval2EvalsRequestType$outboundSchema,
-  file: z.lazy(() => InvokeEval2File$outboundSchema),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval23$ {
-  /** @deprecated use `InvokeEval23$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval23$inboundSchema;
-  /** @deprecated use `InvokeEval23$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval23$outboundSchema;
-  /** @deprecated use `InvokeEval23$Outbound` instead. */
-  export type Outbound = InvokeEval23$Outbound;
-}
-
-export function invokeEval23ToJSON(invokeEval23: InvokeEval23): string {
-  return JSON.stringify(InvokeEval23$outboundSchema.parse(invokeEval23));
-}
-
-export function invokeEval23FromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeEval23, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeEval23$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEval23' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeEval2EvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsType
-> = z.nativeEnum(InvokeEval2EvalsType);
-
-/** @internal */
-export const InvokeEval2EvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof InvokeEval2EvalsType
-> = InvokeEval2EvalsType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2EvalsType$ {
-  /** @deprecated use `InvokeEval2EvalsType$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2EvalsType$inboundSchema;
-  /** @deprecated use `InvokeEval2EvalsType$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2EvalsType$outboundSchema;
-}
-
-/** @internal */
-export const InvokeEval2ImageUrl$inboundSchema: z.ZodType<
-  InvokeEval2ImageUrl,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-/** @internal */
-export type InvokeEval2ImageUrl$Outbound = {
-  url: string;
-  detail?: string | undefined;
-};
-
-/** @internal */
-export const InvokeEval2ImageUrl$outboundSchema: z.ZodType<
-  InvokeEval2ImageUrl$Outbound,
-  z.ZodTypeDef,
-  InvokeEval2ImageUrl
-> = z.object({
-  url: z.string(),
-  detail: z.string().optional(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval2ImageUrl$ {
-  /** @deprecated use `InvokeEval2ImageUrl$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval2ImageUrl$inboundSchema;
-  /** @deprecated use `InvokeEval2ImageUrl$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval2ImageUrl$outboundSchema;
-  /** @deprecated use `InvokeEval2ImageUrl$Outbound` instead. */
-  export type Outbound = InvokeEval2ImageUrl$Outbound;
-}
-
-export function invokeEval2ImageUrlToJSON(
-  invokeEval2ImageUrl: InvokeEval2ImageUrl,
-): string {
-  return JSON.stringify(
-    InvokeEval2ImageUrl$outboundSchema.parse(invokeEval2ImageUrl),
-  );
-}
-
-export function invokeEval2ImageUrlFromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeEval2ImageUrl, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeEval2ImageUrl$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEval2ImageUrl' from JSON`,
-  );
-}
-
-/** @internal */
-export const InvokeEval22$inboundSchema: z.ZodType<
-  InvokeEval22,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: InvokeEval2EvalsType$inboundSchema,
-  image_url: z.lazy(() => InvokeEval2ImageUrl$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
-  });
-});
-
-/** @internal */
-export type InvokeEval22$Outbound = {
-  type: string;
-  image_url: InvokeEval2ImageUrl$Outbound;
-};
-
-/** @internal */
-export const InvokeEval22$outboundSchema: z.ZodType<
-  InvokeEval22$Outbound,
-  z.ZodTypeDef,
-  InvokeEval22
-> = z.object({
-  type: InvokeEval2EvalsType$outboundSchema,
-  imageUrl: z.lazy(() => InvokeEval2ImageUrl$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace InvokeEval22$ {
-  /** @deprecated use `InvokeEval22$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval22$inboundSchema;
-  /** @deprecated use `InvokeEval22$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval22$outboundSchema;
-  /** @deprecated use `InvokeEval22$Outbound` instead. */
-  export type Outbound = InvokeEval22$Outbound;
-}
-
-export function invokeEval22ToJSON(invokeEval22: InvokeEval22): string {
-  return JSON.stringify(InvokeEval22$outboundSchema.parse(invokeEval22));
-}
-
-export function invokeEval22FromJSON(
-  jsonString: string,
-): SafeParseResult<InvokeEval22, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => InvokeEval22$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEval22' from JSON`,
-  );
+export namespace Role$ {
+  /** @deprecated use `Role$inboundSchema` instead. */
+  export const inboundSchema = Role$inboundSchema;
+  /** @deprecated use `Role$outboundSchema` instead. */
+  export const outboundSchema = Role$outboundSchema;
 }
 
 /** @internal */
@@ -665,149 +378,387 @@ export namespace InvokeEval2Type$ {
 }
 
 /** @internal */
-export const InvokeEval21$inboundSchema: z.ZodType<
-  InvokeEval21,
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
+  .object({
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+    });
+  });
+
+/** @internal */
+export type FileT$Outbound = {
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
+};
+
+/** @internal */
+export const FileT$outboundSchema: z.ZodType<
+  FileT$Outbound,
+  z.ZodTypeDef,
+  FileT
+> = z.object({
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fileData: "file_data",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace FileT$ {
+  /** @deprecated use `FileT$inboundSchema` instead. */
+  export const inboundSchema = FileT$inboundSchema;
+  /** @deprecated use `FileT$outboundSchema` instead. */
+  export const outboundSchema = FileT$outboundSchema;
+  /** @deprecated use `FileT$Outbound` instead. */
+  export type Outbound = FileT$Outbound;
+}
+
+export function fileToJSON(fileT: FileT): string {
+  return JSON.stringify(FileT$outboundSchema.parse(fileT));
+}
+
+export function fileFromJSON(
+  jsonString: string,
+): SafeParseResult<FileT, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileT' from JSON`,
+  );
+}
+
+/** @internal */
+export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
+  .object({
+    type: InvokeEval2Type$inboundSchema,
+    file: z.lazy(() => FileT$inboundSchema),
+  });
+
+/** @internal */
+export type Three$Outbound = {
+  type: string;
+  file: FileT$Outbound;
+};
+
+/** @internal */
+export const Three$outboundSchema: z.ZodType<
+  Three$Outbound,
+  z.ZodTypeDef,
+  Three
+> = z.object({
+  type: InvokeEval2Type$outboundSchema,
+  file: z.lazy(() => FileT$outboundSchema),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Three$ {
+  /** @deprecated use `Three$inboundSchema` instead. */
+  export const inboundSchema = Three$inboundSchema;
+  /** @deprecated use `Three$outboundSchema` instead. */
+  export const outboundSchema = Three$outboundSchema;
+  /** @deprecated use `Three$Outbound` instead. */
+  export type Outbound = Three$Outbound;
+}
+
+export function threeToJSON(three: Three): string {
+  return JSON.stringify(Three$outboundSchema.parse(three));
+}
+
+export function threeFromJSON(
+  jsonString: string,
+): SafeParseResult<Three, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Three$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Three' from JSON`,
+  );
+}
+
+/** @internal */
+export const TwoType$inboundSchema: z.ZodNativeEnum<typeof TwoType> = z
+  .nativeEnum(TwoType);
+
+/** @internal */
+export const TwoType$outboundSchema: z.ZodNativeEnum<typeof TwoType> =
+  TwoType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwoType$ {
+  /** @deprecated use `TwoType$inboundSchema` instead. */
+  export const inboundSchema = TwoType$inboundSchema;
+  /** @deprecated use `TwoType$outboundSchema` instead. */
+  export const outboundSchema = TwoType$outboundSchema;
+}
+
+/** @internal */
+export const ImageUrl$inboundSchema: z.ZodType<
+  ImageUrl,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: InvokeEval2Type$inboundSchema,
-  text: z.string(),
+  url: z.string(),
+  detail: z.string().optional(),
 });
 
 /** @internal */
-export type InvokeEval21$Outbound = {
+export type ImageUrl$Outbound = {
+  url: string;
+  detail?: string | undefined;
+};
+
+/** @internal */
+export const ImageUrl$outboundSchema: z.ZodType<
+  ImageUrl$Outbound,
+  z.ZodTypeDef,
+  ImageUrl
+> = z.object({
+  url: z.string(),
+  detail: z.string().optional(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ImageUrl$ {
+  /** @deprecated use `ImageUrl$inboundSchema` instead. */
+  export const inboundSchema = ImageUrl$inboundSchema;
+  /** @deprecated use `ImageUrl$outboundSchema` instead. */
+  export const outboundSchema = ImageUrl$outboundSchema;
+  /** @deprecated use `ImageUrl$Outbound` instead. */
+  export type Outbound = ImageUrl$Outbound;
+}
+
+export function imageUrlToJSON(imageUrl: ImageUrl): string {
+  return JSON.stringify(ImageUrl$outboundSchema.parse(imageUrl));
+}
+
+export function imageUrlFromJSON(
+  jsonString: string,
+): SafeParseResult<ImageUrl, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ImageUrl$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ImageUrl' from JSON`,
+  );
+}
+
+/** @internal */
+export const Two2$inboundSchema: z.ZodType<Two2, z.ZodTypeDef, unknown> = z
+  .object({
+    type: TwoType$inboundSchema,
+    image_url: z.lazy(() => ImageUrl$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
+  });
+
+/** @internal */
+export type Two2$Outbound = {
+  type: string;
+  image_url: ImageUrl$Outbound;
+};
+
+/** @internal */
+export const Two2$outboundSchema: z.ZodType<Two2$Outbound, z.ZodTypeDef, Two2> =
+  z.object({
+    type: TwoType$outboundSchema,
+    imageUrl: z.lazy(() => ImageUrl$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      imageUrl: "image_url",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Two2$ {
+  /** @deprecated use `Two2$inboundSchema` instead. */
+  export const inboundSchema = Two2$inboundSchema;
+  /** @deprecated use `Two2$outboundSchema` instead. */
+  export const outboundSchema = Two2$outboundSchema;
+  /** @deprecated use `Two2$Outbound` instead. */
+  export type Outbound = Two2$Outbound;
+}
+
+export function two2ToJSON(two2: Two2): string {
+  return JSON.stringify(Two2$outboundSchema.parse(two2));
+}
+
+export function two2FromJSON(
+  jsonString: string,
+): SafeParseResult<Two2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Two2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two2' from JSON`,
+  );
+}
+
+/** @internal */
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
+  Type,
+);
+
+/** @internal */
+export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
+  Type$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Type$ {
+  /** @deprecated use `Type$inboundSchema` instead. */
+  export const inboundSchema = Type$inboundSchema;
+  /** @deprecated use `Type$outboundSchema` instead. */
+  export const outboundSchema = Type$outboundSchema;
+}
+
+/** @internal */
+export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
+  .object({
+    type: Type$inboundSchema,
+    text: z.string(),
+  });
+
+/** @internal */
+export type One$Outbound = {
   type: string;
   text: string;
 };
 
 /** @internal */
-export const InvokeEval21$outboundSchema: z.ZodType<
-  InvokeEval21$Outbound,
-  z.ZodTypeDef,
-  InvokeEval21
-> = z.object({
-  type: InvokeEval2Type$outboundSchema,
-  text: z.string(),
-});
+export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
+  .object({
+    type: Type$outboundSchema,
+    text: z.string(),
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEval21$ {
-  /** @deprecated use `InvokeEval21$inboundSchema` instead. */
-  export const inboundSchema = InvokeEval21$inboundSchema;
-  /** @deprecated use `InvokeEval21$outboundSchema` instead. */
-  export const outboundSchema = InvokeEval21$outboundSchema;
-  /** @deprecated use `InvokeEval21$Outbound` instead. */
-  export type Outbound = InvokeEval21$Outbound;
+export namespace One$ {
+  /** @deprecated use `One$inboundSchema` instead. */
+  export const inboundSchema = One$inboundSchema;
+  /** @deprecated use `One$outboundSchema` instead. */
+  export const outboundSchema = One$outboundSchema;
+  /** @deprecated use `One$Outbound` instead. */
+  export type Outbound = One$Outbound;
 }
 
-export function invokeEval21ToJSON(invokeEval21: InvokeEval21): string {
-  return JSON.stringify(InvokeEval21$outboundSchema.parse(invokeEval21));
+export function oneToJSON(one: One): string {
+  return JSON.stringify(One$outboundSchema.parse(one));
 }
 
-export function invokeEval21FromJSON(
+export function oneFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEval21, SDKValidationError> {
+): SafeParseResult<One, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEval21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEval21' from JSON`,
+    (x) => One$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'One' from JSON`,
   );
 }
 
 /** @internal */
-export const InvokeEvalContent2$inboundSchema: z.ZodType<
-  InvokeEvalContent2,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => InvokeEval21$inboundSchema),
-  z.lazy(() => InvokeEval22$inboundSchema),
-  z.lazy(() => InvokeEval23$inboundSchema),
-]);
+export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
+  [
+    z.lazy(() => One$inboundSchema),
+    z.lazy(() => Two2$inboundSchema),
+    z.lazy(() => Three$inboundSchema),
+  ],
+);
 
 /** @internal */
-export type InvokeEvalContent2$Outbound =
-  | InvokeEval21$Outbound
-  | InvokeEval22$Outbound
-  | InvokeEval23$Outbound;
+export type Two$Outbound = One$Outbound | Two2$Outbound | Three$Outbound;
 
 /** @internal */
-export const InvokeEvalContent2$outboundSchema: z.ZodType<
-  InvokeEvalContent2$Outbound,
-  z.ZodTypeDef,
-  InvokeEvalContent2
-> = z.union([
-  z.lazy(() => InvokeEval21$outboundSchema),
-  z.lazy(() => InvokeEval22$outboundSchema),
-  z.lazy(() => InvokeEval23$outboundSchema),
-]);
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
+  .union([
+    z.lazy(() => One$outboundSchema),
+    z.lazy(() => Two2$outboundSchema),
+    z.lazy(() => Three$outboundSchema),
+  ]);
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEvalContent2$ {
-  /** @deprecated use `InvokeEvalContent2$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalContent2$inboundSchema;
-  /** @deprecated use `InvokeEvalContent2$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalContent2$outboundSchema;
-  /** @deprecated use `InvokeEvalContent2$Outbound` instead. */
-  export type Outbound = InvokeEvalContent2$Outbound;
+export namespace Two$ {
+  /** @deprecated use `Two$inboundSchema` instead. */
+  export const inboundSchema = Two$inboundSchema;
+  /** @deprecated use `Two$outboundSchema` instead. */
+  export const outboundSchema = Two$outboundSchema;
+  /** @deprecated use `Two$Outbound` instead. */
+  export type Outbound = Two$Outbound;
 }
 
-export function invokeEvalContent2ToJSON(
-  invokeEvalContent2: InvokeEvalContent2,
-): string {
-  return JSON.stringify(
-    InvokeEvalContent2$outboundSchema.parse(invokeEvalContent2),
-  );
+export function twoToJSON(two: Two): string {
+  return JSON.stringify(Two$outboundSchema.parse(two));
 }
 
-export function invokeEvalContent2FromJSON(
+export function twoFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalContent2, SDKValidationError> {
+): SafeParseResult<Two, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalContent2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalContent2' from JSON`,
+    (x) => Two$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Two' from JSON`,
   );
 }
 
 /** @internal */
-export const InvokeEvalContent$inboundSchema: z.ZodType<
-  InvokeEvalContent,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => InvokeEval21$inboundSchema),
-    z.lazy(() => InvokeEval22$inboundSchema),
-    z.lazy(() => InvokeEval23$inboundSchema),
-  ])),
-]);
+export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => One$inboundSchema),
+      z.lazy(() => Two2$inboundSchema),
+      z.lazy(() => Three$inboundSchema),
+    ])),
+  ]);
 
 /** @internal */
-export type InvokeEvalContent$Outbound =
+export type Content$Outbound =
   | string
-  | Array<
-    InvokeEval21$Outbound | InvokeEval22$Outbound | InvokeEval23$Outbound
-  >;
+  | Array<One$Outbound | Two2$Outbound | Three$Outbound>;
 
 /** @internal */
-export const InvokeEvalContent$outboundSchema: z.ZodType<
-  InvokeEvalContent$Outbound,
+export const Content$outboundSchema: z.ZodType<
+  Content$Outbound,
   z.ZodTypeDef,
-  InvokeEvalContent
+  Content
 > = z.union([
   z.string(),
   z.array(z.union([
-    z.lazy(() => InvokeEval21$outboundSchema),
-    z.lazy(() => InvokeEval22$outboundSchema),
-    z.lazy(() => InvokeEval23$outboundSchema),
+    z.lazy(() => One$outboundSchema),
+    z.lazy(() => Two2$outboundSchema),
+    z.lazy(() => Three$outboundSchema),
   ])),
 ]);
 
@@ -815,30 +766,26 @@ export const InvokeEvalContent$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEvalContent$ {
-  /** @deprecated use `InvokeEvalContent$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalContent$inboundSchema;
-  /** @deprecated use `InvokeEvalContent$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalContent$outboundSchema;
-  /** @deprecated use `InvokeEvalContent$Outbound` instead. */
-  export type Outbound = InvokeEvalContent$Outbound;
+export namespace Content$ {
+  /** @deprecated use `Content$inboundSchema` instead. */
+  export const inboundSchema = Content$inboundSchema;
+  /** @deprecated use `Content$outboundSchema` instead. */
+  export const outboundSchema = Content$outboundSchema;
+  /** @deprecated use `Content$Outbound` instead. */
+  export type Outbound = Content$Outbound;
 }
 
-export function invokeEvalContentToJSON(
-  invokeEvalContent: InvokeEvalContent,
-): string {
-  return JSON.stringify(
-    InvokeEvalContent$outboundSchema.parse(invokeEvalContent),
-  );
+export function contentToJSON(content: Content): string {
+  return JSON.stringify(Content$outboundSchema.parse(content));
 }
 
-export function invokeEvalContentFromJSON(
+export function contentFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalContent, SDKValidationError> {
+): SafeParseResult<Content, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalContent' from JSON`,
+    (x) => Content$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Content' from JSON`,
   );
 }
 
@@ -864,8 +811,8 @@ export namespace InvokeEvalType$ {
 }
 
 /** @internal */
-export const InvokeEvalFunction$inboundSchema: z.ZodType<
-  InvokeEvalFunction,
+export const FunctionT$inboundSchema: z.ZodType<
+  FunctionT,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -874,16 +821,16 @@ export const InvokeEvalFunction$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type InvokeEvalFunction$Outbound = {
+export type FunctionT$Outbound = {
   name: string;
   arguments: string;
 };
 
 /** @internal */
-export const InvokeEvalFunction$outboundSchema: z.ZodType<
-  InvokeEvalFunction$Outbound,
+export const FunctionT$outboundSchema: z.ZodType<
+  FunctionT$Outbound,
   z.ZodTypeDef,
-  InvokeEvalFunction
+  FunctionT
 > = z.object({
   name: z.string(),
   arguments: z.string(),
@@ -893,113 +840,104 @@ export const InvokeEvalFunction$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEvalFunction$ {
-  /** @deprecated use `InvokeEvalFunction$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalFunction$inboundSchema;
-  /** @deprecated use `InvokeEvalFunction$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalFunction$outboundSchema;
-  /** @deprecated use `InvokeEvalFunction$Outbound` instead. */
-  export type Outbound = InvokeEvalFunction$Outbound;
+export namespace FunctionT$ {
+  /** @deprecated use `FunctionT$inboundSchema` instead. */
+  export const inboundSchema = FunctionT$inboundSchema;
+  /** @deprecated use `FunctionT$outboundSchema` instead. */
+  export const outboundSchema = FunctionT$outboundSchema;
+  /** @deprecated use `FunctionT$Outbound` instead. */
+  export type Outbound = FunctionT$Outbound;
 }
 
-export function invokeEvalFunctionToJSON(
-  invokeEvalFunction: InvokeEvalFunction,
-): string {
-  return JSON.stringify(
-    InvokeEvalFunction$outboundSchema.parse(invokeEvalFunction),
-  );
+export function functionToJSON(functionT: FunctionT): string {
+  return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
 }
 
-export function invokeEvalFunctionFromJSON(
+export function functionFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalFunction, SDKValidationError> {
+): SafeParseResult<FunctionT, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalFunction' from JSON`,
+    (x) => FunctionT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionT' from JSON`,
   );
 }
 
 /** @internal */
-export const InvokeEvalToolCalls$inboundSchema: z.ZodType<
-  InvokeEvalToolCalls,
+export const ToolCalls$inboundSchema: z.ZodType<
+  ToolCalls,
   z.ZodTypeDef,
   unknown
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
   type: InvokeEvalType$inboundSchema,
-  function: z.lazy(() => InvokeEvalFunction$inboundSchema),
+  function: z.lazy(() => FunctionT$inboundSchema),
 });
 
 /** @internal */
-export type InvokeEvalToolCalls$Outbound = {
+export type ToolCalls$Outbound = {
   id?: string | undefined;
   index?: number | undefined;
   type: string;
-  function: InvokeEvalFunction$Outbound;
+  function: FunctionT$Outbound;
 };
 
 /** @internal */
-export const InvokeEvalToolCalls$outboundSchema: z.ZodType<
-  InvokeEvalToolCalls$Outbound,
+export const ToolCalls$outboundSchema: z.ZodType<
+  ToolCalls$Outbound,
   z.ZodTypeDef,
-  InvokeEvalToolCalls
+  ToolCalls
 > = z.object({
   id: z.string().optional(),
   index: z.number().optional(),
   type: InvokeEvalType$outboundSchema,
-  function: z.lazy(() => InvokeEvalFunction$outboundSchema),
+  function: z.lazy(() => FunctionT$outboundSchema),
 });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEvalToolCalls$ {
-  /** @deprecated use `InvokeEvalToolCalls$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalToolCalls$inboundSchema;
-  /** @deprecated use `InvokeEvalToolCalls$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalToolCalls$outboundSchema;
-  /** @deprecated use `InvokeEvalToolCalls$Outbound` instead. */
-  export type Outbound = InvokeEvalToolCalls$Outbound;
+export namespace ToolCalls$ {
+  /** @deprecated use `ToolCalls$inboundSchema` instead. */
+  export const inboundSchema = ToolCalls$inboundSchema;
+  /** @deprecated use `ToolCalls$outboundSchema` instead. */
+  export const outboundSchema = ToolCalls$outboundSchema;
+  /** @deprecated use `ToolCalls$Outbound` instead. */
+  export type Outbound = ToolCalls$Outbound;
 }
 
-export function invokeEvalToolCallsToJSON(
-  invokeEvalToolCalls: InvokeEvalToolCalls,
-): string {
-  return JSON.stringify(
-    InvokeEvalToolCalls$outboundSchema.parse(invokeEvalToolCalls),
-  );
+export function toolCallsToJSON(toolCalls: ToolCalls): string {
+  return JSON.stringify(ToolCalls$outboundSchema.parse(toolCalls));
 }
 
-export function invokeEvalToolCallsFromJSON(
+export function toolCallsFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalToolCalls, SDKValidationError> {
+): SafeParseResult<ToolCalls, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalToolCalls$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalToolCalls' from JSON`,
+    (x) => ToolCalls$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ToolCalls' from JSON`,
   );
 }
 
 /** @internal */
-export const InvokeEvalMessages$inboundSchema: z.ZodType<
-  InvokeEvalMessages,
+export const Messages$inboundSchema: z.ZodType<
+  Messages,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  role: InvokeEvalRole$inboundSchema,
+  role: Role$inboundSchema,
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => InvokeEval21$inboundSchema),
-      z.lazy(() => InvokeEval22$inboundSchema),
-      z.lazy(() => InvokeEval23$inboundSchema),
+      z.lazy(() => One$inboundSchema),
+      z.lazy(() => Two2$inboundSchema),
+      z.lazy(() => Three$inboundSchema),
     ])),
   ]),
-  tool_calls: z.array(z.lazy(() => InvokeEvalToolCalls$inboundSchema))
-    .optional(),
+  tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
   tool_call_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1009,34 +947,29 @@ export const InvokeEvalMessages$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type InvokeEvalMessages$Outbound = {
+export type Messages$Outbound = {
   role: string;
-  content:
-    | string
-    | Array<
-      InvokeEval21$Outbound | InvokeEval22$Outbound | InvokeEval23$Outbound
-    >;
-  tool_calls?: Array<InvokeEvalToolCalls$Outbound> | undefined;
+  content: string | Array<One$Outbound | Two2$Outbound | Three$Outbound>;
+  tool_calls?: Array<ToolCalls$Outbound> | undefined;
   tool_call_id?: string | undefined;
 };
 
 /** @internal */
-export const InvokeEvalMessages$outboundSchema: z.ZodType<
-  InvokeEvalMessages$Outbound,
+export const Messages$outboundSchema: z.ZodType<
+  Messages$Outbound,
   z.ZodTypeDef,
-  InvokeEvalMessages
+  Messages
 > = z.object({
-  role: InvokeEvalRole$outboundSchema,
+  role: Role$outboundSchema,
   content: z.union([
     z.string(),
     z.array(z.union([
-      z.lazy(() => InvokeEval21$outboundSchema),
-      z.lazy(() => InvokeEval22$outboundSchema),
-      z.lazy(() => InvokeEval23$outboundSchema),
+      z.lazy(() => One$outboundSchema),
+      z.lazy(() => Two2$outboundSchema),
+      z.lazy(() => Three$outboundSchema),
     ])),
   ]),
-  toolCalls: z.array(z.lazy(() => InvokeEvalToolCalls$outboundSchema))
-    .optional(),
+  toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
   toolCallId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -1049,30 +982,26 @@ export const InvokeEvalMessages$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace InvokeEvalMessages$ {
-  /** @deprecated use `InvokeEvalMessages$inboundSchema` instead. */
-  export const inboundSchema = InvokeEvalMessages$inboundSchema;
-  /** @deprecated use `InvokeEvalMessages$outboundSchema` instead. */
-  export const outboundSchema = InvokeEvalMessages$outboundSchema;
-  /** @deprecated use `InvokeEvalMessages$Outbound` instead. */
-  export type Outbound = InvokeEvalMessages$Outbound;
+export namespace Messages$ {
+  /** @deprecated use `Messages$inboundSchema` instead. */
+  export const inboundSchema = Messages$inboundSchema;
+  /** @deprecated use `Messages$outboundSchema` instead. */
+  export const outboundSchema = Messages$outboundSchema;
+  /** @deprecated use `Messages$Outbound` instead. */
+  export type Outbound = Messages$Outbound;
 }
 
-export function invokeEvalMessagesToJSON(
-  invokeEvalMessages: InvokeEvalMessages,
-): string {
-  return JSON.stringify(
-    InvokeEvalMessages$outboundSchema.parse(invokeEvalMessages),
-  );
+export function messagesToJSON(messages: Messages): string {
+  return JSON.stringify(Messages$outboundSchema.parse(messages));
 }
 
-export function invokeEvalMessagesFromJSON(
+export function messagesFromJSON(
   jsonString: string,
-): SafeParseResult<InvokeEvalMessages, SDKValidationError> {
+): SafeParseResult<Messages, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InvokeEvalMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InvokeEvalMessages' from JSON`,
+    (x) => Messages$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Messages' from JSON`,
   );
 }
 
@@ -1086,7 +1015,7 @@ export const InvokeEvalRequestBody$inboundSchema: z.ZodType<
   output: z.string().optional(),
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
-  messages: z.array(z.lazy(() => InvokeEvalMessages$inboundSchema)).optional(),
+  messages: z.array(z.lazy(() => Messages$inboundSchema)).optional(),
 });
 
 /** @internal */
@@ -1095,7 +1024,7 @@ export type InvokeEvalRequestBody$Outbound = {
   output?: string | undefined;
   reference?: string | undefined;
   retrievals?: Array<string> | undefined;
-  messages?: Array<InvokeEvalMessages$Outbound> | undefined;
+  messages?: Array<Messages$Outbound> | undefined;
 };
 
 /** @internal */
@@ -1108,7 +1037,7 @@ export const InvokeEvalRequestBody$outboundSchema: z.ZodType<
   output: z.string().optional(),
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
-  messages: z.array(z.lazy(() => InvokeEvalMessages$outboundSchema)).optional(),
+  messages: z.array(z.lazy(() => Messages$outboundSchema)).optional(),
 });
 
 /**

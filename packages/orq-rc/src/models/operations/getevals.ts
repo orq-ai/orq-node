@@ -79,13 +79,12 @@ export type GetEvalsDataEvalsResponse200ApplicationJSONGuardrailConfig =
   | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber
   | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean;
 
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type = {
+export const GetEvalsDataEvalsResponse200ApplicationJSONType = {
   TypescriptEval: "typescript_eval",
 } as const;
-export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type =
-  ClosedEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type
-  >;
+export type GetEvalsDataEvalsResponse200ApplicationJSONType = ClosedEnum<
+  typeof GetEvalsDataEvalsResponse200ApplicationJSONType
+>;
 
 export type DataTypescript = {
   id: string;
@@ -97,7 +96,7 @@ export type DataTypescript = {
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONBoolean
     | undefined;
   code: string;
-  type: GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type;
+  type: GetEvalsDataEvalsResponse200ApplicationJSONType;
   key: string;
 };
 
@@ -150,13 +149,12 @@ export type GetEvalsDataEvalsResponse200GuardrailConfig =
   | GetEvalsGuardrailConfigEvalsResponse200Number
   | GetEvalsGuardrailConfigEvalsResponse200Boolean;
 
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType = {
+export const GetEvalsDataEvalsResponse200Type = {
   Ragas: "ragas",
 } as const;
-export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType =
-  ClosedEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
-  >;
+export type GetEvalsDataEvalsResponse200Type = ClosedEnum<
+  typeof GetEvalsDataEvalsResponse200Type
+>;
 
 export const DataRagasMetric = {
   ContextPrecision: "context_precision",
@@ -183,7 +181,7 @@ export type DataRagas = {
     | GetEvalsGuardrailConfigEvalsResponse200Number
     | GetEvalsGuardrailConfigEvalsResponse200Boolean
     | undefined;
-  type: GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType;
+  type: GetEvalsDataEvalsResponse200Type;
   ragasMetric: DataRagasMetric;
   key: string;
   model: string;
@@ -238,11 +236,11 @@ export type GetEvalsDataEvalsResponseGuardrailConfig =
   | GetEvalsGuardrailConfigEvalsResponseNumber
   | GetEvalsGuardrailConfigEvalsResponseBoolean;
 
-export const GetEvalsDataEvalsResponse200ApplicationJSONType = {
+export const GetEvalsDataEvalsResponseType = {
   FunctionEval: "function_eval",
 } as const;
-export type GetEvalsDataEvalsResponse200ApplicationJSONType = ClosedEnum<
-  typeof GetEvalsDataEvalsResponse200ApplicationJSONType
+export type GetEvalsDataEvalsResponseType = ClosedEnum<
+  typeof GetEvalsDataEvalsResponseType
 >;
 
 export const GetEvalsFunctionParamsEvalsResponse200ApplicationJSONResponseBodyData535Type =
@@ -777,7 +775,7 @@ export type DataFunction = {
     | GetEvalsGuardrailConfigEvalsResponseNumber
     | GetEvalsGuardrailConfigEvalsResponseBoolean
     | undefined;
-  type: GetEvalsDataEvalsResponse200ApplicationJSONType;
+  type: GetEvalsDataEvalsResponseType;
   functionParams:
     | GetEvalsFunctionParams12
     | GetEvalsFunctionParams1
@@ -865,12 +863,10 @@ export type GetEvalsDataEvalsGuardrailConfig =
   | GetEvalsGuardrailConfigEvalsNumber
   | GetEvalsGuardrailConfigEvalsBoolean;
 
-export const GetEvalsDataEvalsResponse200Type = {
+export const GetEvalsDataEvalsType = {
   PythonEval: "python_eval",
 } as const;
-export type GetEvalsDataEvalsResponse200Type = ClosedEnum<
-  typeof GetEvalsDataEvalsResponse200Type
->;
+export type GetEvalsDataEvalsType = ClosedEnum<typeof GetEvalsDataEvalsType>;
 
 export type DataPython = {
   id: string;
@@ -882,7 +878,7 @@ export type DataPython = {
     | GetEvalsGuardrailConfigEvalsBoolean
     | undefined;
   code: string;
-  type: GetEvalsDataEvalsResponse200Type;
+  type: GetEvalsDataEvalsType;
   key: string;
 };
 
@@ -928,12 +924,10 @@ export type GetEvalsDataGuardrailConfig =
   | GetEvalsGuardrailConfigNumber
   | GetEvalsGuardrailConfigBoolean;
 
-export const GetEvalsDataEvalsResponseType = {
+export const GetEvalsDataType = {
   HttpEval: "http_eval",
 } as const;
-export type GetEvalsDataEvalsResponseType = ClosedEnum<
-  typeof GetEvalsDataEvalsResponseType
->;
+export type GetEvalsDataType = ClosedEnum<typeof GetEvalsDataType>;
 
 export const DataMethod = {
   Get: "GET",
@@ -950,7 +944,7 @@ export type DataHTTP = {
     | GetEvalsGuardrailConfigNumber
     | GetEvalsGuardrailConfigBoolean
     | undefined;
-  type: GetEvalsDataEvalsResponseType;
+  type: GetEvalsDataType;
   url: string;
   method: DataMethod;
   headers: { [k: string]: string };
@@ -1006,10 +1000,10 @@ export type DataGuardrailConfig =
   | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
   | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean;
 
-export const GetEvalsDataEvalsType = {
+export const DataType = {
   JsonSchema: "json_schema",
 } as const;
-export type GetEvalsDataEvalsType = ClosedEnum<typeof GetEvalsDataEvalsType>;
+export type DataType = ClosedEnum<typeof DataType>;
 
 export type DataJSON = {
   id: string;
@@ -1020,17 +1014,19 @@ export type DataJSON = {
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean
     | undefined;
-  type: GetEvalsDataEvalsType;
+  type: DataType;
   schema: string;
   key: string;
 };
 
-export const GetEvalsGuardrailConfigType = {
-  Number: "number",
-} as const;
-export type GetEvalsGuardrailConfigType = ClosedEnum<
-  typeof GetEvalsGuardrailConfigType
->;
+export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
+  {
+    Number: "number",
+  } as const;
+export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
+  ClosedEnum<
+    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
+  >;
 
 export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator =
   {
@@ -1049,26 +1045,24 @@ export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOp
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber =
   {
     enabled: boolean;
-    type: GetEvalsGuardrailConfigType;
+    type:
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type;
     value: number;
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator;
   };
 
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
-  {
-    Boolean: "boolean",
-  } as const;
-export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
-  ClosedEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
-  >;
+export const GetEvalsGuardrailConfigType = {
+  Boolean: "boolean",
+} as const;
+export type GetEvalsGuardrailConfigType = ClosedEnum<
+  typeof GetEvalsGuardrailConfigType
+>;
 
 export type GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean =
   {
     enabled: boolean;
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type;
+    type: GetEvalsGuardrailConfigType;
     value: boolean;
   };
 
@@ -1076,10 +1070,13 @@ export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrailConf
   | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
   | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean;
 
-export const GetEvalsDataType = {
+export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType = {
   LlmEval: "llm_eval",
 } as const;
-export type GetEvalsDataType = ClosedEnum<typeof GetEvalsDataType>;
+export type GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType =
+  ClosedEnum<
+    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
+  >;
 
 export type DataLLM = {
   id: string;
@@ -1090,7 +1087,7 @@ export type DataLLM = {
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
     | GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
     | undefined;
-  type: GetEvalsDataType;
+  type: GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType;
   prompt: string;
   key: string;
   model: string;
@@ -1527,31 +1524,26 @@ export function getEvalsDataEvalsResponse200ApplicationJSONGuardrailConfigFromJS
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type
-  > = z.nativeEnum(
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type,
-  );
+export const GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<typeof GetEvalsDataEvalsResponse200ApplicationJSONType> = z
+    .nativeEnum(GetEvalsDataEvalsResponse200ApplicationJSONType);
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type
-  > =
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema;
+export const GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema:
+  z.ZodNativeEnum<typeof GetEvalsDataEvalsResponse200ApplicationJSONType> =
+    GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$ {
-  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema` instead. */
+export namespace GetEvalsDataEvalsResponse200ApplicationJSONType$ {
+  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
   export const inboundSchema =
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema;
-  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema` instead. */
+    GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema;
+  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
   export const outboundSchema =
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema;
+    GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema;
 }
 
 /** @internal */
@@ -1562,8 +1554,8 @@ export const DataTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -1573,8 +1565,7 @@ export const DataTypescript$inboundSchema: z.ZodType<
     ),
   ]).optional(),
   code: z.string(),
-  type:
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$inboundSchema,
+  type: GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -1606,8 +1597,8 @@ export const DataTypescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -1617,8 +1608,7 @@ export const DataTypescript$outboundSchema: z.ZodType<
     ),
   ]).optional(),
   code: z.string(),
-  type:
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBody7Type$outboundSchema,
+  type: GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -1957,28 +1947,24 @@ export function getEvalsDataEvalsResponse200GuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType);
+export const GetEvalsDataEvalsResponse200Type$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataEvalsResponse200Type
+> = z.nativeEnum(GetEvalsDataEvalsResponse200Type);
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
-  > = GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+export const GetEvalsDataEvalsResponse200Type$outboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataEvalsResponse200Type
+> = GetEvalsDataEvalsResponse200Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$ {
-  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
-  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema;
+export namespace GetEvalsDataEvalsResponse200Type$ {
+  /** @deprecated use `GetEvalsDataEvalsResponse200Type$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsDataEvalsResponse200Type$inboundSchema;
+  /** @deprecated use `GetEvalsDataEvalsResponse200Type$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsDataEvalsResponse200Type$outboundSchema;
 }
 
 /** @internal */
@@ -2010,14 +1996,13 @@ export const DataRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$inboundSchema),
   ]).optional(),
-  type:
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  type: GetEvalsDataEvalsResponse200Type$inboundSchema,
   ragas_metric: DataRagasMetric$inboundSchema,
   key: z.string(),
   model: z.string(),
@@ -2053,14 +2038,13 @@ export const DataRagas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Number$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponse200Boolean$outboundSchema),
   ]).optional(),
-  type:
-    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
+  type: GetEvalsDataEvalsResponse200Type$outboundSchema,
   ragasMetric: DataRagasMetric$outboundSchema,
   key: z.string(),
   model: z.string(),
@@ -2396,26 +2380,24 @@ export function getEvalsDataEvalsResponseGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsDataEvalsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetEvalsDataEvalsResponse200ApplicationJSONType);
+export const GetEvalsDataEvalsResponseType$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataEvalsResponseType
+> = z.nativeEnum(GetEvalsDataEvalsResponseType);
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema:
-  z.ZodNativeEnum<typeof GetEvalsDataEvalsResponse200ApplicationJSONType> =
-    GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema;
+export const GetEvalsDataEvalsResponseType$outboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataEvalsResponseType
+> = GetEvalsDataEvalsResponseType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataEvalsResponse200ApplicationJSONType$ {
-  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema` instead. */
-  export const inboundSchema =
-    GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema;
-  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema` instead. */
-  export const outboundSchema =
-    GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema;
+export namespace GetEvalsDataEvalsResponseType$ {
+  /** @deprecated use `GetEvalsDataEvalsResponseType$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsDataEvalsResponseType$inboundSchema;
+  /** @deprecated use `GetEvalsDataEvalsResponseType$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsDataEvalsResponseType$outboundSchema;
 }
 
 /** @internal */
@@ -5524,13 +5506,13 @@ export const DataFunction$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$inboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponse200ApplicationJSONType$inboundSchema,
+  type: GetEvalsDataEvalsResponseType$inboundSchema,
   function_params: z.union([
     z.lazy(() => GetEvalsFunctionParams12$inboundSchema),
     z.lazy(() => GetEvalsFunctionParams1$inboundSchema),
@@ -5635,13 +5617,13 @@ export const DataFunction$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsResponseBoolean$outboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponse200ApplicationJSONType$outboundSchema,
+  type: GetEvalsDataEvalsResponseType$outboundSchema,
   functionParams: z.union([
     z.lazy(() => GetEvalsFunctionParams12$outboundSchema),
     z.lazy(() => GetEvalsFunctionParams1$outboundSchema),
@@ -5990,24 +5972,24 @@ export function getEvalsDataEvalsGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200Type$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponse200Type
-> = z.nativeEnum(GetEvalsDataEvalsResponse200Type);
+export const GetEvalsDataEvalsType$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataEvalsType
+> = z.nativeEnum(GetEvalsDataEvalsType);
 
 /** @internal */
-export const GetEvalsDataEvalsResponse200Type$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponse200Type
-> = GetEvalsDataEvalsResponse200Type$inboundSchema;
+export const GetEvalsDataEvalsType$outboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataEvalsType
+> = GetEvalsDataEvalsType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataEvalsResponse200Type$ {
-  /** @deprecated use `GetEvalsDataEvalsResponse200Type$inboundSchema` instead. */
-  export const inboundSchema = GetEvalsDataEvalsResponse200Type$inboundSchema;
-  /** @deprecated use `GetEvalsDataEvalsResponse200Type$outboundSchema` instead. */
-  export const outboundSchema = GetEvalsDataEvalsResponse200Type$outboundSchema;
+export namespace GetEvalsDataEvalsType$ {
+  /** @deprecated use `GetEvalsDataEvalsType$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsDataEvalsType$inboundSchema;
+  /** @deprecated use `GetEvalsDataEvalsType$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsDataEvalsType$outboundSchema;
 }
 
 /** @internal */
@@ -6018,14 +6000,14 @@ export const DataPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$inboundSchema),
   ]).optional(),
   code: z.string(),
-  type: GetEvalsDataEvalsResponse200Type$inboundSchema,
+  type: GetEvalsDataEvalsType$inboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -6057,14 +6039,14 @@ export const DataPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigEvalsNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigEvalsBoolean$outboundSchema),
   ]).optional(),
   code: z.string(),
-  type: GetEvalsDataEvalsResponse200Type$outboundSchema,
+  type: GetEvalsDataEvalsType$outboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -6357,24 +6339,24 @@ export function getEvalsDataGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsResponseType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponseType
-> = z.nativeEnum(GetEvalsDataEvalsResponseType);
+export const GetEvalsDataType$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataType
+> = z.nativeEnum(GetEvalsDataType);
 
 /** @internal */
-export const GetEvalsDataEvalsResponseType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsResponseType
-> = GetEvalsDataEvalsResponseType$inboundSchema;
+export const GetEvalsDataType$outboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsDataType
+> = GetEvalsDataType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataEvalsResponseType$ {
-  /** @deprecated use `GetEvalsDataEvalsResponseType$inboundSchema` instead. */
-  export const inboundSchema = GetEvalsDataEvalsResponseType$inboundSchema;
-  /** @deprecated use `GetEvalsDataEvalsResponseType$outboundSchema` instead. */
-  export const outboundSchema = GetEvalsDataEvalsResponseType$outboundSchema;
+export namespace GetEvalsDataType$ {
+  /** @deprecated use `GetEvalsDataType$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsDataType$inboundSchema;
+  /** @deprecated use `GetEvalsDataType$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsDataType$outboundSchema;
 }
 
 /** @internal */
@@ -6404,13 +6386,13 @@ export const DataHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() => GetEvalsGuardrailConfigNumber$inboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigBoolean$inboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponseType$inboundSchema,
+  type: GetEvalsDataType$inboundSchema,
   url: z.string(),
   method: DataMethod$inboundSchema,
   headers: z.record(z.string()),
@@ -6449,13 +6431,13 @@ export const DataHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() => GetEvalsGuardrailConfigNumber$outboundSchema),
     z.lazy(() => GetEvalsGuardrailConfigBoolean$outboundSchema),
   ]).optional(),
-  type: GetEvalsDataEvalsResponseType$outboundSchema,
+  type: GetEvalsDataType$outboundSchema,
   url: z.string(),
   method: DataMethod$outboundSchema,
   headers: z.record(z.string()),
@@ -6787,24 +6769,22 @@ export function dataGuardrailConfigFromJSON(
 }
 
 /** @internal */
-export const GetEvalsDataEvalsType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsType
-> = z.nativeEnum(GetEvalsDataEvalsType);
+export const DataType$inboundSchema: z.ZodNativeEnum<typeof DataType> = z
+  .nativeEnum(DataType);
 
 /** @internal */
-export const GetEvalsDataEvalsType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataEvalsType
-> = GetEvalsDataEvalsType$inboundSchema;
+export const DataType$outboundSchema: z.ZodNativeEnum<typeof DataType> =
+  DataType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataEvalsType$ {
-  /** @deprecated use `GetEvalsDataEvalsType$inboundSchema` instead. */
-  export const inboundSchema = GetEvalsDataEvalsType$inboundSchema;
-  /** @deprecated use `GetEvalsDataEvalsType$outboundSchema` instead. */
-  export const outboundSchema = GetEvalsDataEvalsType$outboundSchema;
+export namespace DataType$ {
+  /** @deprecated use `DataType$inboundSchema` instead. */
+  export const inboundSchema = DataType$inboundSchema;
+  /** @deprecated use `DataType$outboundSchema` instead. */
+  export const outboundSchema = DataType$outboundSchema;
 }
 
 /** @internal */
@@ -6815,8 +6795,8 @@ export const DataJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$inboundSchema
@@ -6825,7 +6805,7 @@ export const DataJSON$inboundSchema: z.ZodType<
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$inboundSchema
     ),
   ]).optional(),
-  type: GetEvalsDataEvalsType$inboundSchema,
+  type: DataType$inboundSchema,
   schema: z.string(),
   key: z.string(),
 }).transform((v) => {
@@ -6858,8 +6838,8 @@ export const DataJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataNumber$outboundSchema
@@ -6868,7 +6848,7 @@ export const DataJSON$outboundSchema: z.ZodType<
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyDataBoolean$outboundSchema
     ),
   ]).optional(),
-  type: GetEvalsDataEvalsType$outboundSchema,
+  type: DataType$outboundSchema,
   schema: z.string(),
   key: z.string(),
 }).transform((v) => {
@@ -6906,24 +6886,31 @@ export function dataJSONFromJSON(
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsGuardrailConfigType
-> = z.nativeEnum(GetEvalsGuardrailConfigType);
+export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
+  > = z.nativeEnum(
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type,
+  );
 
 /** @internal */
-export const GetEvalsGuardrailConfigType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsGuardrailConfigType
-> = GetEvalsGuardrailConfigType$inboundSchema;
+export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
+  > =
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsGuardrailConfigType$ {
-  /** @deprecated use `GetEvalsGuardrailConfigType$inboundSchema` instead. */
-  export const inboundSchema = GetEvalsGuardrailConfigType$inboundSchema;
-  /** @deprecated use `GetEvalsGuardrailConfigType$outboundSchema` instead. */
-  export const outboundSchema = GetEvalsGuardrailConfigType$outboundSchema;
+export namespace GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$ {
+  /** @deprecated use `GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema` instead. */
+  export const inboundSchema =
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema;
+  /** @deprecated use `GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema` instead. */
+  export const outboundSchema =
+    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema;
 }
 
 /** @internal */
@@ -6962,7 +6949,8 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigType$inboundSchema,
+    type:
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema,
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$inboundSchema,
@@ -6985,7 +6973,8 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyN
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber
   > = z.object({
     enabled: z.boolean(),
-    type: GetEvalsGuardrailConfigType$outboundSchema,
+    type:
+      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema,
     value: z.number(),
     operator:
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyOperator$outboundSchema,
@@ -7035,31 +7024,24 @@ export function getEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBo
 }
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
-  > = z.nativeEnum(
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type,
-  );
+export const GetEvalsGuardrailConfigType$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsGuardrailConfigType
+> = z.nativeEnum(GetEvalsGuardrailConfigType);
 
 /** @internal */
-export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type
-  > =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema;
+export const GetEvalsGuardrailConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof GetEvalsGuardrailConfigType
+> = GetEvalsGuardrailConfigType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$ {
-  /** @deprecated use `GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema` instead. */
-  export const inboundSchema =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema;
-  /** @deprecated use `GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema` instead. */
-  export const outboundSchema =
-    GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema;
+export namespace GetEvalsGuardrailConfigType$ {
+  /** @deprecated use `GetEvalsGuardrailConfigType$inboundSchema` instead. */
+  export const inboundSchema = GetEvalsGuardrailConfigType$inboundSchema;
+  /** @deprecated use `GetEvalsGuardrailConfigType$outboundSchema` instead. */
+  export const outboundSchema = GetEvalsGuardrailConfigType$outboundSchema;
 }
 
 /** @internal */
@@ -7070,8 +7052,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     unknown
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$inboundSchema,
+    type: GetEvalsGuardrailConfigType$inboundSchema,
     value: z.boolean(),
   });
 
@@ -7091,8 +7072,7 @@ export const GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyB
     GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean
   > = z.object({
     enabled: z.boolean(),
-    type:
-      GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type$outboundSchema,
+    type: GetEvalsGuardrailConfigType$outboundSchema,
     value: z.boolean(),
   });
 
@@ -7218,24 +7198,28 @@ export function getEvalsDataEvalsResponse200ApplicationJSONResponseBodyGuardrail
 }
 
 /** @internal */
-export const GetEvalsDataType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataType
-> = z.nativeEnum(GetEvalsDataType);
+export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
+  > = z.nativeEnum(GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType);
 
 /** @internal */
-export const GetEvalsDataType$outboundSchema: z.ZodNativeEnum<
-  typeof GetEvalsDataType
-> = GetEvalsDataType$inboundSchema;
+export const GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType
+  > = GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetEvalsDataType$ {
-  /** @deprecated use `GetEvalsDataType$inboundSchema` instead. */
-  export const inboundSchema = GetEvalsDataType$inboundSchema;
-  /** @deprecated use `GetEvalsDataType$outboundSchema` instead. */
-  export const outboundSchema = GetEvalsDataType$outboundSchema;
+export namespace GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$ {
+  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema =
+    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema;
+  /** @deprecated use `GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema =
+    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema;
 }
 
 /** @internal */
@@ -7243,8 +7227,8 @@ export const DataLLM$inboundSchema: z.ZodType<DataLLM, z.ZodTypeDef, unknown> =
   z.object({
     _id: z.string(),
     description: z.string(),
-    created: z.string().default("2025-10-25T11:11:23.488Z"),
-    updated: z.string().default("2025-10-25T11:11:23.488Z"),
+    created: z.string().default("2025-10-27T05:23:37.413Z"),
+    updated: z.string().default("2025-10-27T05:23:37.413Z"),
     guardrail_config: z.union([
       z.lazy(() =>
         GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -7253,7 +7237,8 @@ export const DataLLM$inboundSchema: z.ZodType<DataLLM, z.ZodTypeDef, unknown> =
         GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$inboundSchema
       ),
     ]).optional(),
-    type: GetEvalsDataType$inboundSchema,
+    type:
+      GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$inboundSchema,
     prompt: z.string(),
     key: z.string(),
     model: z.string(),
@@ -7288,8 +7273,8 @@ export const DataLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -7298,7 +7283,8 @@ export const DataLLM$outboundSchema: z.ZodType<
       GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyBoolean$outboundSchema
     ),
   ]).optional(),
-  type: GetEvalsDataType$outboundSchema,
+  type:
+    GetEvalsDataEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
   prompt: z.string(),
   key: z.string(),
   model: z.string(),

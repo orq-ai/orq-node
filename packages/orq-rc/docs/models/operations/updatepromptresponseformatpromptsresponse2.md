@@ -5,11 +5,13 @@
 ```typescript
 import { UpdatePromptResponseFormatPromptsResponse2 } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseFormatPromptsResponse2 = "mp3";
+let value: UpdatePromptResponseFormatPromptsResponse2 = {
+  type: "json_object",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
-```
+| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                     | [operations.UpdatePromptResponseFormatPromptsResponse200Type](../../models/operations/updatepromptresponseformatpromptsresponse200type.md) | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |

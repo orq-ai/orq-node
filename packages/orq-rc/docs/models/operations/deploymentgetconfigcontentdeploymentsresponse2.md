@@ -3,30 +3,30 @@
 
 ## Supported Types
 
-### `operations.DeploymentGetConfig21`
+### `operations.DeploymentGetConfig2Deployments1`
 
 ```typescript
-const value: operations.DeploymentGetConfig21 = {
+const value: operations.DeploymentGetConfig2Deployments1 = {
   type: "text",
   text: "<value>",
 };
 ```
 
-### `operations.DeploymentGetConfig2Deployments2`
+### `operations.DeploymentGetConfig2DeploymentsResponse2`
 
 ```typescript
-const value: operations.DeploymentGetConfig2Deployments2 = {
+const value: operations.DeploymentGetConfig2DeploymentsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://discrete-seal.info/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
 
-### `operations.DeploymentGetConfig23`
+### `operations.DeploymentGetConfig2Deployments3`
 
 ```typescript
-const value: operations.DeploymentGetConfig23 = {
+const value: operations.DeploymentGetConfig2Deployments3 = {
   type: "file",
   file: {},
 };

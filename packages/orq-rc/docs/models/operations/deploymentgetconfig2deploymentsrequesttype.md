@@ -1,17 +1,15 @@
 # DeploymentGetConfig2DeploymentsRequestType
 
-The type of the content part.
-
 ## Example Usage
 
 ```typescript
 import { DeploymentGetConfig2DeploymentsRequestType } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfig2DeploymentsRequestType = "text";
+let value: DeploymentGetConfig2DeploymentsRequestType = "input_audio";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"input_audio"
 ```

@@ -1,33 +1,25 @@
 # ResponseFormat1
 
-
-## Supported Types
-
-### `operations.One1`
+## Example Usage
 
 ```typescript
-const value: operations.One1 = {
+import { ResponseFormat1 } from "@orq-ai/node/models/operations";
+
+let value: ResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {},
+    schema: {
+      "key": "<value>",
+      "key1": "<value>",
+    },
   },
 };
 ```
 
-### `operations.One2`
+## Fields
 
-```typescript
-const value: operations.One2 = {
-  type: "json_object",
-};
-```
-
-### `operations.CreatePrompt13`
-
-```typescript
-const value: operations.CreatePrompt13 = {
-  type: "text",
-};
-```
-
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `type`                                                                         | [operations.ResponseFormatType](../../models/operations/responseformattype.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `jsonSchema`                                                                   | [operations.JsonSchema](../../models/operations/jsonschema.md)                 | :heavy_check_mark:                                                             | N/A                                                                            |

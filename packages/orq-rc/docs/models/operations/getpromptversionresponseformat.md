@@ -15,25 +15,47 @@ Important: when using JSON mode, you must also instruct the model to produce JSO
 
 ```typescript
 const value: operations.GetPromptVersionResponseFormat1 = {
-  type: "text",
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+    schema: {
+      "key": "<value>",
+    },
+  },
 };
 ```
 
 ### `operations.GetPromptVersionResponseFormat2`
 
 ```typescript
-const value: operations.GetPromptVersionResponseFormat2 = "wav";
+const value: operations.GetPromptVersionResponseFormat2 = {
+  type: "json_object",
+};
 ```
 
 ### `operations.GetPromptVersionResponseFormat3`
 
 ```typescript
-const value: operations.GetPromptVersionResponseFormat3 = "base64_json";
+const value: operations.GetPromptVersionResponseFormat3 = {
+  type: "text",
+};
 ```
 
 ### `operations.GetPromptVersionResponseFormat4`
 
 ```typescript
-const value: operations.GetPromptVersionResponseFormat4 = "verbose_json";
+const value: operations.GetPromptVersionResponseFormat4 = "wav";
+```
+
+### `operations.GetPromptVersionResponseFormat5`
+
+```typescript
+const value: operations.GetPromptVersionResponseFormat5 = "base64_json";
+```
+
+### `operations.GetPromptVersionResponseFormat6`
+
+```typescript
+const value: operations.GetPromptVersionResponseFormat6 = "verbose_json";
 ```
 

@@ -1,5 +1,7 @@
 # One
 
+Text content part of a prompt message
+
 ## Example Usage
 
 ```typescript

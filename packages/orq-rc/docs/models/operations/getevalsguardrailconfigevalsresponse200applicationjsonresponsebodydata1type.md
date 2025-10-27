@@ -7,11 +7,11 @@ import { GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1
 
 let value:
   GetEvalsGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyData1Type =
-    "boolean";
+    "number";
 ```
 
 ## Values
 
 ```typescript
-"boolean"
+"number"
 ```

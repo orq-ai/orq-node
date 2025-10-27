@@ -87,7 +87,7 @@ export type ListAgentsTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<ListAgentsConditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**

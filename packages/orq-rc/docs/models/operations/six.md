@@ -5,11 +5,11 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = "azure/text-embedding-ada-002";
+let value: Six = "vtt";
 ```
 
 ## Values
 
 ```typescript
-"azure/text-embedding-ada-002"
+"json" | "text" | "srt" | "verbose_json" | "vtt"
 ```

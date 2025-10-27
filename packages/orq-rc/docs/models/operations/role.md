@@ -1,17 +1,17 @@
 # Role
 
-The role of the messages author, in this case  `developer`.
+The role of the prompt message
 
 ## Example Usage
 
 ```typescript
 import { Role } from "@orq-ai/node/models/operations";
 
-let value: Role = "developer";
+let value: Role = "user";
 ```
 
 ## Values
 
 ```typescript
-"developer"
+"system" | "assistant" | "user" | "exception" | "tool" | "prompt" | "correction" | "expected_output"
 ```

@@ -378,7 +378,7 @@ export type RequestBodyJsonSchema = {
   strict?: boolean | null | undefined;
 };
 
-export type CreateToolRequestBody2 = {
+export type RequestBody2 = {
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -449,7 +449,7 @@ export type RequestBodyFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type CreateToolRequestBody1 = {
+export type RequestBody1 = {
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
    *
@@ -484,8 +484,8 @@ export type CreateToolRequestBody1 = {
  * The tool to create
  */
 export type CreateToolRequestBody =
-  | CreateToolRequestBody1
-  | CreateToolRequestBody2
+  | RequestBody1
+  | RequestBody2
   | RequestBody3
   | RequestBody4
   | RequestBody5;
@@ -900,7 +900,7 @@ export type ResponseBodyJsonSchema = {
   strict?: boolean | null | undefined;
 };
 
-export type CreateToolResponseBody2 = {
+export type ResponseBody2 = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -985,7 +985,7 @@ export type CreateToolResponseBodyFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type CreateToolResponseBody1 = {
+export type ResponseBody1 = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -1034,8 +1034,8 @@ export type CreateToolResponseBody1 = {
  * Successfully created the tool.
  */
 export type CreateToolResponseBody =
-  | CreateToolResponseBody1
-  | CreateToolResponseBody2
+  | ResponseBody1
+  | ResponseBody2
   | ResponseBody3
   | ResponseBody4
   | ResponseBody5;
@@ -2115,8 +2115,8 @@ export function requestBodyJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const CreateToolRequestBody2$inboundSchema: z.ZodType<
-  CreateToolRequestBody2,
+export const RequestBody2$inboundSchema: z.ZodType<
+  RequestBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2135,7 +2135,7 @@ export const CreateToolRequestBody2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateToolRequestBody2$Outbound = {
+export type RequestBody2$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -2146,10 +2146,10 @@ export type CreateToolRequestBody2$Outbound = {
 };
 
 /** @internal */
-export const CreateToolRequestBody2$outboundSchema: z.ZodType<
-  CreateToolRequestBody2$Outbound,
+export const RequestBody2$outboundSchema: z.ZodType<
+  RequestBody2$Outbound,
   z.ZodTypeDef,
-  CreateToolRequestBody2
+  RequestBody2
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -2169,30 +2169,26 @@ export const CreateToolRequestBody2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateToolRequestBody2$ {
-  /** @deprecated use `CreateToolRequestBody2$inboundSchema` instead. */
-  export const inboundSchema = CreateToolRequestBody2$inboundSchema;
-  /** @deprecated use `CreateToolRequestBody2$outboundSchema` instead. */
-  export const outboundSchema = CreateToolRequestBody2$outboundSchema;
-  /** @deprecated use `CreateToolRequestBody2$Outbound` instead. */
-  export type Outbound = CreateToolRequestBody2$Outbound;
+export namespace RequestBody2$ {
+  /** @deprecated use `RequestBody2$inboundSchema` instead. */
+  export const inboundSchema = RequestBody2$inboundSchema;
+  /** @deprecated use `RequestBody2$outboundSchema` instead. */
+  export const outboundSchema = RequestBody2$outboundSchema;
+  /** @deprecated use `RequestBody2$Outbound` instead. */
+  export type Outbound = RequestBody2$Outbound;
 }
 
-export function createToolRequestBody2ToJSON(
-  createToolRequestBody2: CreateToolRequestBody2,
-): string {
-  return JSON.stringify(
-    CreateToolRequestBody2$outboundSchema.parse(createToolRequestBody2),
-  );
+export function requestBody2ToJSON(requestBody2: RequestBody2): string {
+  return JSON.stringify(RequestBody2$outboundSchema.parse(requestBody2));
 }
 
-export function createToolRequestBody2FromJSON(
+export function requestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolRequestBody2, SDKValidationError> {
+): SafeParseResult<RequestBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolRequestBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolRequestBody2' from JSON`,
+    (x) => RequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody2' from JSON`,
   );
 }
 
@@ -2302,8 +2298,8 @@ export function requestBodyFunctionFromJSON(
 }
 
 /** @internal */
-export const CreateToolRequestBody1$inboundSchema: z.ZodType<
-  CreateToolRequestBody1,
+export const RequestBody1$inboundSchema: z.ZodType<
+  RequestBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2321,7 +2317,7 @@ export const CreateToolRequestBody1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateToolRequestBody1$Outbound = {
+export type RequestBody1$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -2332,10 +2328,10 @@ export type CreateToolRequestBody1$Outbound = {
 };
 
 /** @internal */
-export const CreateToolRequestBody1$outboundSchema: z.ZodType<
-  CreateToolRequestBody1$Outbound,
+export const RequestBody1$outboundSchema: z.ZodType<
+  RequestBody1$Outbound,
   z.ZodTypeDef,
-  CreateToolRequestBody1
+  RequestBody1
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -2354,30 +2350,26 @@ export const CreateToolRequestBody1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateToolRequestBody1$ {
-  /** @deprecated use `CreateToolRequestBody1$inboundSchema` instead. */
-  export const inboundSchema = CreateToolRequestBody1$inboundSchema;
-  /** @deprecated use `CreateToolRequestBody1$outboundSchema` instead. */
-  export const outboundSchema = CreateToolRequestBody1$outboundSchema;
-  /** @deprecated use `CreateToolRequestBody1$Outbound` instead. */
-  export type Outbound = CreateToolRequestBody1$Outbound;
+export namespace RequestBody1$ {
+  /** @deprecated use `RequestBody1$inboundSchema` instead. */
+  export const inboundSchema = RequestBody1$inboundSchema;
+  /** @deprecated use `RequestBody1$outboundSchema` instead. */
+  export const outboundSchema = RequestBody1$outboundSchema;
+  /** @deprecated use `RequestBody1$Outbound` instead. */
+  export type Outbound = RequestBody1$Outbound;
 }
 
-export function createToolRequestBody1ToJSON(
-  createToolRequestBody1: CreateToolRequestBody1,
-): string {
-  return JSON.stringify(
-    CreateToolRequestBody1$outboundSchema.parse(createToolRequestBody1),
-  );
+export function requestBody1ToJSON(requestBody1: RequestBody1): string {
+  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
 }
 
-export function createToolRequestBody1FromJSON(
+export function requestBody1FromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolRequestBody1, SDKValidationError> {
+): SafeParseResult<RequestBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolRequestBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolRequestBody1' from JSON`,
+    (x) => RequestBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody1' from JSON`,
   );
 }
 
@@ -2387,8 +2379,8 @@ export const CreateToolRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateToolRequestBody1$inboundSchema),
-  z.lazy(() => CreateToolRequestBody2$inboundSchema),
+  z.lazy(() => RequestBody1$inboundSchema),
+  z.lazy(() => RequestBody2$inboundSchema),
   z.lazy(() => RequestBody3$inboundSchema),
   z.lazy(() => RequestBody4$inboundSchema),
   z.lazy(() => RequestBody5$inboundSchema),
@@ -2396,8 +2388,8 @@ export const CreateToolRequestBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateToolRequestBody$Outbound =
-  | CreateToolRequestBody1$Outbound
-  | CreateToolRequestBody2$Outbound
+  | RequestBody1$Outbound
+  | RequestBody2$Outbound
   | RequestBody3$Outbound
   | RequestBody4$Outbound
   | RequestBody5$Outbound;
@@ -2408,8 +2400,8 @@ export const CreateToolRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateToolRequestBody
 > = z.union([
-  z.lazy(() => CreateToolRequestBody1$outboundSchema),
-  z.lazy(() => CreateToolRequestBody2$outboundSchema),
+  z.lazy(() => RequestBody1$outboundSchema),
+  z.lazy(() => RequestBody2$outboundSchema),
   z.lazy(() => RequestBody3$outboundSchema),
   z.lazy(() => RequestBody4$outboundSchema),
   z.lazy(() => RequestBody5$outboundSchema),
@@ -2581,7 +2573,7 @@ export const ResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8DH20D9HHJ8EDA93CBXBDB5"),
+  _id: z.string().default("01K8J1YQ5339NVSCV0AWV3YTNY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2636,7 +2628,7 @@ export const ResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody5
 > = z.object({
-  id: z.string().default("01K8DH20D9HHJ8EDA93CBXBDB5"),
+  id: z.string().default("01K8J1YQ5339NVSCV0AWV3YTNY"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2995,7 +2987,7 @@ export const ResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8DH20D9X2HBT1HB9D557ZWK"),
+  _id: z.string().default("01K8J1YQ51YJYD0EZQ9TTYVRFA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3049,7 +3041,7 @@ export const ResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody4
 > = z.object({
-  id: z.string().default("01K8DH20D9X2HBT1HB9D557ZWK"),
+  id: z.string().default("01K8J1YQ51YJYD0EZQ9TTYVRFA"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3447,7 +3439,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8DH20D8BECBS35R2WE7SQ4E"),
+  _id: z.string().default("01K8J1YQ4R2J9N8RJJ50CJZSKT"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3499,7 +3491,7 @@ export const ResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody3
 > = z.object({
-  id: z.string().default("01K8DH20D8BECBS35R2WE7SQ4E"),
+  id: z.string().default("01K8J1YQ4R2J9N8RJJ50CJZSKT"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3659,12 +3651,12 @@ export function responseBodyJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBody2$inboundSchema: z.ZodType<
-  CreateToolResponseBody2,
+export const ResponseBody2$inboundSchema: z.ZodType<
+  ResponseBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8DH20D7C7H0BEJZ8YYK9KWW"),
+  _id: z.string().default("01K8J1YQ4QV8DT2XHGFJTZKDTY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3693,7 +3685,7 @@ export const CreateToolResponseBody2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateToolResponseBody2$Outbound = {
+export type ResponseBody2$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -3712,12 +3704,12 @@ export type CreateToolResponseBody2$Outbound = {
 };
 
 /** @internal */
-export const CreateToolResponseBody2$outboundSchema: z.ZodType<
-  CreateToolResponseBody2$Outbound,
+export const ResponseBody2$outboundSchema: z.ZodType<
+  ResponseBody2$Outbound,
   z.ZodTypeDef,
-  CreateToolResponseBody2
+  ResponseBody2
 > = z.object({
-  id: z.string().default("01K8DH20D7C7H0BEJZ8YYK9KWW"),
+  id: z.string().default("01K8J1YQ4QV8DT2XHGFJTZKDTY"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3749,30 +3741,26 @@ export const CreateToolResponseBody2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateToolResponseBody2$ {
-  /** @deprecated use `CreateToolResponseBody2$inboundSchema` instead. */
-  export const inboundSchema = CreateToolResponseBody2$inboundSchema;
-  /** @deprecated use `CreateToolResponseBody2$outboundSchema` instead. */
-  export const outboundSchema = CreateToolResponseBody2$outboundSchema;
-  /** @deprecated use `CreateToolResponseBody2$Outbound` instead. */
-  export type Outbound = CreateToolResponseBody2$Outbound;
+export namespace ResponseBody2$ {
+  /** @deprecated use `ResponseBody2$inboundSchema` instead. */
+  export const inboundSchema = ResponseBody2$inboundSchema;
+  /** @deprecated use `ResponseBody2$outboundSchema` instead. */
+  export const outboundSchema = ResponseBody2$outboundSchema;
+  /** @deprecated use `ResponseBody2$Outbound` instead. */
+  export type Outbound = ResponseBody2$Outbound;
 }
 
-export function createToolResponseBody2ToJSON(
-  createToolResponseBody2: CreateToolResponseBody2,
-): string {
-  return JSON.stringify(
-    CreateToolResponseBody2$outboundSchema.parse(createToolResponseBody2),
-  );
+export function responseBody2ToJSON(responseBody2: ResponseBody2): string {
+  return JSON.stringify(ResponseBody2$outboundSchema.parse(responseBody2));
 }
 
-export function createToolResponseBody2FromJSON(
+export function responseBody2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolResponseBody2, SDKValidationError> {
+): SafeParseResult<ResponseBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolResponseBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolResponseBody2' from JSON`,
+    (x) => ResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody2' from JSON`,
   );
 }
 
@@ -3884,12 +3872,12 @@ export function createToolResponseBodyFunctionFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBody1$inboundSchema: z.ZodType<
-  CreateToolResponseBody1,
+export const ResponseBody1$inboundSchema: z.ZodType<
+  ResponseBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8DH20D7CXXZVG93NMJ90Z6X"),
+  _id: z.string().default("01K8J1YQ4PWF6ZA7GAWP1XJF9T"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3917,7 +3905,7 @@ export const CreateToolResponseBody1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateToolResponseBody1$Outbound = {
+export type ResponseBody1$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -3936,12 +3924,12 @@ export type CreateToolResponseBody1$Outbound = {
 };
 
 /** @internal */
-export const CreateToolResponseBody1$outboundSchema: z.ZodType<
-  CreateToolResponseBody1$Outbound,
+export const ResponseBody1$outboundSchema: z.ZodType<
+  ResponseBody1$Outbound,
   z.ZodTypeDef,
-  CreateToolResponseBody1
+  ResponseBody1
 > = z.object({
-  id: z.string().default("01K8DH20D7CXXZVG93NMJ90Z6X"),
+  id: z.string().default("01K8J1YQ4PWF6ZA7GAWP1XJF9T"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3972,30 +3960,26 @@ export const CreateToolResponseBody1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateToolResponseBody1$ {
-  /** @deprecated use `CreateToolResponseBody1$inboundSchema` instead. */
-  export const inboundSchema = CreateToolResponseBody1$inboundSchema;
-  /** @deprecated use `CreateToolResponseBody1$outboundSchema` instead. */
-  export const outboundSchema = CreateToolResponseBody1$outboundSchema;
-  /** @deprecated use `CreateToolResponseBody1$Outbound` instead. */
-  export type Outbound = CreateToolResponseBody1$Outbound;
+export namespace ResponseBody1$ {
+  /** @deprecated use `ResponseBody1$inboundSchema` instead. */
+  export const inboundSchema = ResponseBody1$inboundSchema;
+  /** @deprecated use `ResponseBody1$outboundSchema` instead. */
+  export const outboundSchema = ResponseBody1$outboundSchema;
+  /** @deprecated use `ResponseBody1$Outbound` instead. */
+  export type Outbound = ResponseBody1$Outbound;
 }
 
-export function createToolResponseBody1ToJSON(
-  createToolResponseBody1: CreateToolResponseBody1,
-): string {
-  return JSON.stringify(
-    CreateToolResponseBody1$outboundSchema.parse(createToolResponseBody1),
-  );
+export function responseBody1ToJSON(responseBody1: ResponseBody1): string {
+  return JSON.stringify(ResponseBody1$outboundSchema.parse(responseBody1));
 }
 
-export function createToolResponseBody1FromJSON(
+export function responseBody1FromJSON(
   jsonString: string,
-): SafeParseResult<CreateToolResponseBody1, SDKValidationError> {
+): SafeParseResult<ResponseBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateToolResponseBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateToolResponseBody1' from JSON`,
+    (x) => ResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody1' from JSON`,
   );
 }
 
@@ -4005,8 +3989,8 @@ export const CreateToolResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateToolResponseBody1$inboundSchema),
-  z.lazy(() => CreateToolResponseBody2$inboundSchema),
+  z.lazy(() => ResponseBody1$inboundSchema),
+  z.lazy(() => ResponseBody2$inboundSchema),
   z.lazy(() => ResponseBody3$inboundSchema),
   z.lazy(() => ResponseBody4$inboundSchema),
   z.lazy(() => ResponseBody5$inboundSchema),
@@ -4014,8 +3998,8 @@ export const CreateToolResponseBody$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateToolResponseBody$Outbound =
-  | CreateToolResponseBody1$Outbound
-  | CreateToolResponseBody2$Outbound
+  | ResponseBody1$Outbound
+  | ResponseBody2$Outbound
   | ResponseBody3$Outbound
   | ResponseBody4$Outbound
   | ResponseBody5$Outbound;
@@ -4026,8 +4010,8 @@ export const CreateToolResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateToolResponseBody
 > = z.union([
-  z.lazy(() => CreateToolResponseBody1$outboundSchema),
-  z.lazy(() => CreateToolResponseBody2$outboundSchema),
+  z.lazy(() => ResponseBody1$outboundSchema),
+  z.lazy(() => ResponseBody2$outboundSchema),
   z.lazy(() => ResponseBody3$outboundSchema),
   z.lazy(() => ResponseBody4$outboundSchema),
   z.lazy(() => ResponseBody5$outboundSchema),

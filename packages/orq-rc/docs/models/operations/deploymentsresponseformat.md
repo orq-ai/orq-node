@@ -26,18 +26,34 @@ const value: operations.DeploymentsResponseFormat1 = {
 ### `operations.DeploymentsResponseFormat2`
 
 ```typescript
-const value: operations.DeploymentsResponseFormat2 = "wav";
+const value: operations.DeploymentsResponseFormat2 = {
+  type: "json_object",
+};
 ```
 
 ### `operations.DeploymentsResponseFormat3`
 
 ```typescript
-const value: operations.DeploymentsResponseFormat3 = "base64_json";
+const value: operations.DeploymentsResponseFormat3 = {
+  type: "text",
+};
 ```
 
 ### `operations.DeploymentsResponseFormat4`
 
 ```typescript
-const value: operations.DeploymentsResponseFormat4 = "verbose_json";
+const value: operations.DeploymentsResponseFormat4 = "wav";
+```
+
+### `operations.DeploymentsResponseFormat5`
+
+```typescript
+const value: operations.DeploymentsResponseFormat5 = "base64_json";
+```
+
+### `operations.DeploymentsResponseFormat6`
+
+```typescript
+const value: operations.DeploymentsResponseFormat6 = "json";
 ```
 

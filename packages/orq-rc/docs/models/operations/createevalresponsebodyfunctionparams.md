@@ -3,204 +3,204 @@
 
 ## Supported Types
 
-### `operations.FunctionParams1`
+### `operations.CreateEvalFunctionParams1`
 
 ```typescript
-const value: operations.FunctionParams1 = {
+const value: operations.CreateEvalFunctionParams1 = {
   type: "contains",
   value: "<value>",
 };
 ```
 
-### `operations.FunctionParams2`
+### `operations.CreateEvalFunctionParams2`
 
 ```typescript
-const value: operations.FunctionParams2 = {
+const value: operations.CreateEvalFunctionParams2 = {
   type: "contains_none",
-  keywords: [],
+  keywords: [
+    "<value 1>",
+  ],
 };
 ```
 
-### `operations.FunctionParams3`
+### `operations.CreateEvalFunctionParams3`
 
 ```typescript
-const value: operations.FunctionParams3 = {
+const value: operations.CreateEvalFunctionParams3 = {
   type: "contains_all",
   keywords: [
     "<value 1>",
     "<value 2>",
-    "<value 3>",
   ],
 };
 ```
 
-### `operations.FunctionParams4`
+### `operations.CreateEvalFunctionParams4`
 
 ```typescript
-const value: operations.FunctionParams4 = {
+const value: operations.CreateEvalFunctionParams4 = {
   type: "contains_any",
   keywords: [
     "<value 1>",
-    "<value 2>",
   ],
 };
 ```
 
-### `operations.FunctionParams5`
+### `operations.CreateEvalFunctionParams5`
 
 ```typescript
-const value: operations.FunctionParams5 = {
+const value: operations.CreateEvalFunctionParams5 = {
   type: "contains_email",
 };
 ```
 
-### `operations.FunctionParams6`
+### `operations.CreateEvalFunctionParams6`
 
 ```typescript
-const value: operations.FunctionParams6 = {
+const value: operations.CreateEvalFunctionParams6 = {
   type: "contains_url",
 };
 ```
 
-### `operations.FunctionParams7`
+### `operations.CreateEvalFunctionParams7`
 
 ```typescript
-const value: operations.FunctionParams7 = {
+const value: operations.CreateEvalFunctionParams7 = {
   type: "contains_valid_link",
 };
 ```
 
-### `operations.FunctionParams8`
+### `operations.CreateEvalFunctionParams8`
 
 ```typescript
-const value: operations.FunctionParams8 = {
+const value: operations.CreateEvalFunctionParams8 = {
   type: "start_with",
   value: "<value>",
 };
 ```
 
-### `operations.FunctionParams9`
+### `operations.CreateEvalFunctionParams9`
 
 ```typescript
-const value: operations.FunctionParams9 = {
+const value: operations.CreateEvalFunctionParams9 = {
   type: "ends_with",
   value: "<value>",
 };
 ```
 
-### `operations.FunctionParams10`
+### `operations.CreateEvalFunctionParams10`
 
 ```typescript
-const value: operations.FunctionParams10 = {
+const value: operations.CreateEvalFunctionParams10 = {
   type: "exact_match",
 };
 ```
 
-### `operations.FunctionParams11`
+### `operations.CreateEvalFunctionParams11`
 
 ```typescript
-const value: operations.FunctionParams11 = {
+const value: operations.CreateEvalFunctionParams11 = {
   type: "length_less_than",
-  value: 6346.02,
+  value: 3529.79,
 };
 ```
 
-### `operations.FunctionParams12`
+### `operations.CreateEvalFunctionParams12`
 
 ```typescript
-const value: operations.FunctionParams12 = {
+const value: operations.CreateEvalFunctionParams12 = {
   type: "length_between",
-  min: 5418.21,
-  max: 5310.29,
+  min: 9290.81,
+  max: 1247.95,
 };
 ```
 
-### `operations.FunctionParams13`
+### `operations.CreateEvalFunctionParams13`
 
 ```typescript
-const value: operations.FunctionParams13 = {
+const value: operations.CreateEvalFunctionParams13 = {
   type: "length_greater_than",
-  value: 9362.11,
+  value: 1582.59,
 };
 ```
 
-### `operations.FunctionParams14`
+### `operations.CreateEvalFunctionParams14`
 
 ```typescript
-const value: operations.FunctionParams14 = {
+const value: operations.CreateEvalFunctionParams14 = {
   type: "one_line",
 };
 ```
 
-### `operations.FunctionParams15`
+### `operations.CreateEvalFunctionParams15`
 
 ```typescript
-const value: operations.FunctionParams15 = {
+const value: operations.CreateEvalFunctionParams15 = {
   type: "regex",
   pattern: "<value>",
 };
 ```
 
-### `operations.FunctionParams16`
+### `operations.CreateEvalFunctionParams16`
 
 ```typescript
-const value: operations.FunctionParams16 = {
+const value: operations.CreateEvalFunctionParams16 = {
   type: "is_valid_json",
 };
 ```
 
-### `operations.FunctionParams17`
+### `operations.CreateEvalFunctionParams17`
 
 ```typescript
-const value: operations.FunctionParams17 = {
+const value: operations.CreateEvalFunctionParams17 = {
   type: "moderations_openai",
 };
 ```
 
-### `operations.FunctionParams18`
+### `operations.CreateEvalFunctionParams18`
 
 ```typescript
-const value: operations.FunctionParams18 = {
+const value: operations.CreateEvalFunctionParams18 = {
   type: "moderations_google",
 };
 ```
 
-### `operations.FunctionParams19`
+### `operations.CreateEvalFunctionParams19`
 
 ```typescript
-const value: operations.FunctionParams19 = {
+const value: operations.CreateEvalFunctionParams19 = {
   type: "bert_score",
 };
 ```
 
-### `operations.FunctionParams20`
+### `operations.CreateEvalFunctionParams20`
 
 ```typescript
-const value: operations.FunctionParams20 = {
+const value: operations.CreateEvalFunctionParams20 = {
   type: "bleu_score",
 };
 ```
 
-### `operations.FunctionParams21`
+### `operations.CreateEvalFunctionParams21`
 
 ```typescript
-const value: operations.FunctionParams21 = {
+const value: operations.CreateEvalFunctionParams21 = {
   type: "rouge_n",
 };
 ```
 
-### `operations.FunctionParams22`
+### `operations.CreateEvalFunctionParams22`
 
 ```typescript
-const value: operations.FunctionParams22 = {
+const value: operations.CreateEvalFunctionParams22 = {
   type: "meteor_score",
 };
 ```
 
-### `operations.FunctionParams23`
+### `operations.CreateEvalFunctionParams23`
 
 ```typescript
-const value: operations.FunctionParams23 = {
+const value: operations.CreateEvalFunctionParams23 = {
   type: "cosine_similarity",
 };
 ```

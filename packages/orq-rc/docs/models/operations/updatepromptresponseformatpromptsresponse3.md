@@ -5,11 +5,13 @@
 ```typescript
 import { UpdatePromptResponseFormatPromptsResponse3 } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseFormatPromptsResponse3 = "base64_json";
+let value: UpdatePromptResponseFormatPromptsResponse3 = {
+  type: "text",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"url" | "base64_json"
-```
+| Field                                                                                                                                                                    | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                   | [operations.UpdatePromptResponseFormatPromptsResponse200ApplicationJSONType](../../models/operations/updatepromptresponseformatpromptsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |

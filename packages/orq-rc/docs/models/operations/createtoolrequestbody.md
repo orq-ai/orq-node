@@ -5,13 +5,13 @@ The tool to create
 
 ## Supported Types
 
-### `operations.CreateToolRequestBody1`
+### `operations.RequestBody1`
 
 ```typescript
-const value: operations.CreateToolRequestBody1 = {
+const value: operations.RequestBody1 = {
   path: "Default",
   key: "<key>",
-  description: "eggplant until so yippee up",
+  description: "scuttle unlike ouch",
   type: "function",
   function: {
     name: "<value>",
@@ -19,14 +19,13 @@ const value: operations.CreateToolRequestBody1 = {
 };
 ```
 
-### `operations.CreateToolRequestBody2`
+### `operations.RequestBody2`
 
 ```typescript
-const value: operations.CreateToolRequestBody2 = {
+const value: operations.RequestBody2 = {
   path: "Default",
   key: "<key>",
-  description:
-    "sonnet kindheartedly mmm laughter scrabble aftermath uh-huh oof",
+  description: "tedious embossing ugly",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",

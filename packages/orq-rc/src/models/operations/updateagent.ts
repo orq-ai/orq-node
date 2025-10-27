@@ -527,7 +527,7 @@ export type UpdateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<UpdateAgentConditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**

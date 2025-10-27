@@ -5,11 +5,13 @@
 ```typescript
 import { CreatePromptResponseFormatPrompts3 } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormatPrompts3 = "base64_json";
+let value: CreatePromptResponseFormatPrompts3 = {
+  type: "text",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"url" | "base64_json"
-```
+| Field                                                                                                                                                                    | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                   | [operations.CreatePromptResponseFormatPromptsResponse200ApplicationJSONType](../../models/operations/createpromptresponseformatpromptsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |

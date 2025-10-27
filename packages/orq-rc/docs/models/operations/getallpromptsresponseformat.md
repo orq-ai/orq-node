@@ -20,7 +20,6 @@ const value: operations.GetAllPromptsResponseFormat1 = {
     name: "<value>",
     schema: {
       "key": "<value>",
-      "key1": "<value>",
     },
   },
 };
@@ -29,18 +28,34 @@ const value: operations.GetAllPromptsResponseFormat1 = {
 ### `operations.GetAllPromptsResponseFormat2`
 
 ```typescript
-const value: operations.GetAllPromptsResponseFormat2 = "opus";
+const value: operations.GetAllPromptsResponseFormat2 = {
+  type: "json_object",
+};
 ```
 
 ### `operations.GetAllPromptsResponseFormat3`
 
 ```typescript
-const value: operations.GetAllPromptsResponseFormat3 = "base64_json";
+const value: operations.GetAllPromptsResponseFormat3 = {
+  type: "text",
+};
 ```
 
 ### `operations.GetAllPromptsResponseFormat4`
 
 ```typescript
-const value: operations.GetAllPromptsResponseFormat4 = "json";
+const value: operations.GetAllPromptsResponseFormat4 = "mp3";
+```
+
+### `operations.GetAllPromptsResponseFormat5`
+
+```typescript
+const value: operations.GetAllPromptsResponseFormat5 = "url";
+```
+
+### `operations.GetAllPromptsResponseFormat6`
+
+```typescript
+const value: operations.GetAllPromptsResponseFormat6 = "text";
 ```
 

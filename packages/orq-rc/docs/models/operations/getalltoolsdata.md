@@ -3,13 +3,14 @@
 
 ## Supported Types
 
-### `operations.GetAllToolsData1`
+### `operations.Data1`
 
 ```typescript
-const value: operations.GetAllToolsData1 = {
+const value: operations.Data1 = {
   path: "Default",
   key: "<key>",
-  description: "amid eek winged blah rural softly hold",
+  description:
+    "mispronounce sedately twin hospitable jovially now council yogurt yuck worth",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -21,13 +22,13 @@ const value: operations.GetAllToolsData1 = {
 };
 ```
 
-### `operations.GetAllToolsData2`
+### `operations.Data2`
 
 ```typescript
-const value: operations.GetAllToolsData2 = {
+const value: operations.Data2 = {
   path: "Default",
   key: "<key>",
-  description: "uh-huh reckless for",
+  description: "not circulate now drab",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -37,6 +38,7 @@ const value: operations.GetAllToolsData2 = {
     name: "<value>",
     schema: {
       "key": "<value>",
+      "key1": "<value>",
     },
   },
 };

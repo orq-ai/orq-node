@@ -3020,6 +3020,19 @@ const orq = new Orq({
 async function run() {
   const result = await orq.evals.invoke({
     id: "<id>",
+    requestBody: {
+      messages: [
+        {
+          role: "tool",
+          content: [
+            {
+              type: "text",
+              text: "<value>",
+            },
+          ],
+        },
+      ],
+    },
   });
 
   console.log(result);
@@ -3045,6 +3058,19 @@ const orq = new OrqCore({
 async function run() {
   const res = await evalsInvoke(orq, {
     id: "<id>",
+    requestBody: {
+      messages: [
+        {
+          role: "tool",
+          content: [
+            {
+              type: "text",
+              text: "<value>",
+            },
+          ],
+        },
+      ],
+    },
   });
   if (res.ok) {
     const { value: result } = res;

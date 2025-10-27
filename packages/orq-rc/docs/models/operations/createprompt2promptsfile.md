@@ -1,5 +1,7 @@
 # CreatePrompt2PromptsFile
 
+File data for the content part. Must contain either file_data or uri, but not both.
+
 ## Example Usage
 
 ```typescript

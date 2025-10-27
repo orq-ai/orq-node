@@ -5,11 +5,11 @@
 ```typescript
 import { RequestBodyType } from "@orq-ai/node/models/operations";
 
-let value: RequestBodyType = "internal";
+let value: RequestBodyType = "json_schema";
 ```
 
 ## Values
 
 ```typescript
-"internal"
+"json_schema"
 ```

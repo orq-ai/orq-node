@@ -61,18 +61,15 @@ const value: operations.UpdateEvalResponseBodyPython = {
 };
 ```
 
-### `operations.UpdateEvalResponseBodyFunction`
+### `operations.ResponseBodyFunction`
 
 ```typescript
-const value: operations.UpdateEvalResponseBodyFunction = {
+const value: operations.ResponseBodyFunction = {
   id: "<id>",
-  description: "than tremendously always busily",
+  description: "pish mortally likely legitimize awareness easily zowie",
   type: "function_eval",
   functionParams: {
-    type: "keywords_match",
-    keywords: [
-      "<value 1>",
-    ],
+    type: "cosine_similarity",
   },
   key: "<key>",
 };

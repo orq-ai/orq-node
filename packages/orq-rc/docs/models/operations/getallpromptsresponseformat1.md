@@ -1,36 +1,24 @@
 # GetAllPromptsResponseFormat1
 
-
-## Supported Types
-
-### `operations.GetAllPrompts11`
+## Example Usage
 
 ```typescript
-const value: operations.GetAllPrompts11 = {
+import { GetAllPromptsResponseFormat1 } from "@orq-ai/node/models/operations";
+
+let value: GetAllPromptsResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
     schema: {
       "key": "<value>",
-      "key1": "<value>",
     },
   },
 };
 ```
 
-### `operations.GetAllPrompts12`
+## Fields
 
-```typescript
-const value: operations.GetAllPrompts12 = {
-  type: "json_object",
-};
-```
-
-### `operations.GetAllPrompts13`
-
-```typescript
-const value: operations.GetAllPrompts13 = {
-  type: "text",
-};
-```
-
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                               | [operations.GetAllPromptsResponseFormatType](../../models/operations/getallpromptsresponseformattype.md)             | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `jsonSchema`                                                                                                         | [operations.GetAllPromptsResponseFormatJsonSchema](../../models/operations/getallpromptsresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |

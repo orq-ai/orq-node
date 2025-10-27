@@ -18,7 +18,7 @@ const value: operations.UpdatePromptContentPromptsResponse2[] = [
   {
     type: "image_url",
     imageUrl: {
-      url: "https://lustrous-ceramics.biz/",
+      url: "https://picsum.photos/id/1/200/300",
     },
   },
 ];

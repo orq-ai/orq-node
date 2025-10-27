@@ -438,7 +438,7 @@ export type DataJsonSchema = {
   strict?: boolean | null | undefined;
 };
 
-export type GetAllToolsData2 = {
+export type Data2 = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -521,7 +521,7 @@ export type GetAllToolsDataFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type GetAllToolsData1 = {
+export type Data1 = {
   id?: string | undefined;
   /**
    * Entity storage path in the format: `project/folder/subfolder/...`
@@ -566,19 +566,14 @@ export type GetAllToolsData1 = {
   function: GetAllToolsDataFunction;
 };
 
-export type GetAllToolsData =
-  | GetAllToolsData1
-  | GetAllToolsData2
-  | Data3
-  | Data4
-  | Data5;
+export type GetAllToolsData = Data1 | Data2 | Data3 | Data4 | Data5;
 
 /**
  * Successfully retrieved the list of tools.
  */
 export type GetAllToolsResponseBody = {
   object: GetAllToolsObject;
-  data: Array<GetAllToolsData1 | GetAllToolsData2 | Data3 | Data4 | Data5>;
+  data: Array<Data1 | Data2 | Data3 | Data4 | Data5>;
   hasMore: boolean;
 };
 
@@ -798,7 +793,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8DH20D1KPG5GB0S25P7WW87"),
+    _id: z.string().default("01K8J1YQ4AEFK0YKKJ03NB0QR1"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -851,7 +846,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K8DH20D1KPG5GB0S25P7WW87"),
+  id: z.string().default("01K8J1YQ4AEFK0YKKJ03NB0QR1"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1194,7 +1189,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8DH20D1MVTSM02K7G0W0JKQ"),
+    _id: z.string().default("01K8J1YQ47BRZS0167E79VEERD"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1246,7 +1241,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K8DH20D1MVTSM02K7G0W0JKQ"),
+  id: z.string().default("01K8J1YQ47BRZS0167E79VEERD"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1629,7 +1624,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8DH20D03MQ1ZEVR9XVJTPR3"),
+    _id: z.string().default("01K8J1YQ44ZEFEAQJZ52N5YT6G"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1681,7 +1676,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K8DH20D03MQ1ZEVR9XVJTPR3"),
+  id: z.string().default("01K8J1YQ44ZEFEAQJZ52N5YT6G"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1837,41 +1832,38 @@ export function dataJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsData2$inboundSchema: z.ZodType<
-  GetAllToolsData2,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("01K8DH20D03N2YQET7B8PBZ51Y"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
-  type: GetAllToolsDataToolsType$inboundSchema,
-  json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
-    "json_schema": "jsonSchema",
+export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string().default("01K8J1YQ42RXGQ4HR424DY9KXT"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: GetAllToolsDataStatus$inboundSchema.default("live"),
+    version_hash: z.string().optional(),
+    type: GetAllToolsDataToolsType$inboundSchema,
+    json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "version_hash": "versionHash",
+      "json_schema": "jsonSchema",
+    });
   });
-});
 
 /** @internal */
-export type GetAllToolsData2$Outbound = {
+export type Data2$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -1890,12 +1882,12 @@ export type GetAllToolsData2$Outbound = {
 };
 
 /** @internal */
-export const GetAllToolsData2$outboundSchema: z.ZodType<
-  GetAllToolsData2$Outbound,
+export const Data2$outboundSchema: z.ZodType<
+  Data2$Outbound,
   z.ZodTypeDef,
-  GetAllToolsData2
+  Data2
 > = z.object({
-  id: z.string().default("01K8DH20D03N2YQET7B8PBZ51Y"),
+  id: z.string().default("01K8J1YQ42RXGQ4HR424DY9KXT"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1927,30 +1919,26 @@ export const GetAllToolsData2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetAllToolsData2$ {
-  /** @deprecated use `GetAllToolsData2$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsData2$inboundSchema;
-  /** @deprecated use `GetAllToolsData2$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsData2$outboundSchema;
-  /** @deprecated use `GetAllToolsData2$Outbound` instead. */
-  export type Outbound = GetAllToolsData2$Outbound;
+export namespace Data2$ {
+  /** @deprecated use `Data2$inboundSchema` instead. */
+  export const inboundSchema = Data2$inboundSchema;
+  /** @deprecated use `Data2$outboundSchema` instead. */
+  export const outboundSchema = Data2$outboundSchema;
+  /** @deprecated use `Data2$Outbound` instead. */
+  export type Outbound = Data2$Outbound;
 }
 
-export function getAllToolsData2ToJSON(
-  getAllToolsData2: GetAllToolsData2,
-): string {
-  return JSON.stringify(
-    GetAllToolsData2$outboundSchema.parse(getAllToolsData2),
-  );
+export function data2ToJSON(data2: Data2): string {
+  return JSON.stringify(Data2$outboundSchema.parse(data2));
 }
 
-export function getAllToolsData2FromJSON(
+export function data2FromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsData2, SDKValidationError> {
+): SafeParseResult<Data2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsData2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsData2' from JSON`,
+    (x) => Data2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data2' from JSON`,
   );
 }
 
@@ -2058,40 +2046,37 @@ export function getAllToolsDataFunctionFromJSON(
 }
 
 /** @internal */
-export const GetAllToolsData1$inboundSchema: z.ZodType<
-  GetAllToolsData1,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string().default("01K8DH20D0M4T1M5T23CDA0AH6"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: DataStatus$inboundSchema.default("live"),
-  version_hash: z.string().optional(),
-  type: GetAllToolsDataType$inboundSchema,
-  function: z.lazy(() => GetAllToolsDataFunction$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "version_hash": "versionHash",
+export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
+  .object({
+    _id: z.string().default("01K8J1YQ3ZS828HE4FZQK1NNHE"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: DataStatus$inboundSchema.default("live"),
+    version_hash: z.string().optional(),
+    type: GetAllToolsDataType$inboundSchema,
+    function: z.lazy(() => GetAllToolsDataFunction$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "version_hash": "versionHash",
+    });
   });
-});
 
 /** @internal */
-export type GetAllToolsData1$Outbound = {
+export type Data1$Outbound = {
   _id: string;
   path: string;
   key: string;
@@ -2110,12 +2095,12 @@ export type GetAllToolsData1$Outbound = {
 };
 
 /** @internal */
-export const GetAllToolsData1$outboundSchema: z.ZodType<
-  GetAllToolsData1$Outbound,
+export const Data1$outboundSchema: z.ZodType<
+  Data1$Outbound,
   z.ZodTypeDef,
-  GetAllToolsData1
+  Data1
 > = z.object({
-  id: z.string().default("01K8DH20D0M4T1M5T23CDA0AH6"),
+  id: z.string().default("01K8J1YQ3ZS828HE4FZQK1NNHE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2146,30 +2131,26 @@ export const GetAllToolsData1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace GetAllToolsData1$ {
-  /** @deprecated use `GetAllToolsData1$inboundSchema` instead. */
-  export const inboundSchema = GetAllToolsData1$inboundSchema;
-  /** @deprecated use `GetAllToolsData1$outboundSchema` instead. */
-  export const outboundSchema = GetAllToolsData1$outboundSchema;
-  /** @deprecated use `GetAllToolsData1$Outbound` instead. */
-  export type Outbound = GetAllToolsData1$Outbound;
+export namespace Data1$ {
+  /** @deprecated use `Data1$inboundSchema` instead. */
+  export const inboundSchema = Data1$inboundSchema;
+  /** @deprecated use `Data1$outboundSchema` instead. */
+  export const outboundSchema = Data1$outboundSchema;
+  /** @deprecated use `Data1$Outbound` instead. */
+  export type Outbound = Data1$Outbound;
 }
 
-export function getAllToolsData1ToJSON(
-  getAllToolsData1: GetAllToolsData1,
-): string {
-  return JSON.stringify(
-    GetAllToolsData1$outboundSchema.parse(getAllToolsData1),
-  );
+export function data1ToJSON(data1: Data1): string {
+  return JSON.stringify(Data1$outboundSchema.parse(data1));
 }
 
-export function getAllToolsData1FromJSON(
+export function data1FromJSON(
   jsonString: string,
-): SafeParseResult<GetAllToolsData1, SDKValidationError> {
+): SafeParseResult<Data1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetAllToolsData1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAllToolsData1' from JSON`,
+    (x) => Data1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Data1' from JSON`,
   );
 }
 
@@ -2179,8 +2160,8 @@ export const GetAllToolsData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => GetAllToolsData1$inboundSchema),
-  z.lazy(() => GetAllToolsData2$inboundSchema),
+  z.lazy(() => Data1$inboundSchema),
+  z.lazy(() => Data2$inboundSchema),
   z.lazy(() => Data3$inboundSchema),
   z.lazy(() => Data4$inboundSchema),
   z.lazy(() => Data5$inboundSchema),
@@ -2188,8 +2169,8 @@ export const GetAllToolsData$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetAllToolsData$Outbound =
-  | GetAllToolsData1$Outbound
-  | GetAllToolsData2$Outbound
+  | Data1$Outbound
+  | Data2$Outbound
   | Data3$Outbound
   | Data4$Outbound
   | Data5$Outbound;
@@ -2200,8 +2181,8 @@ export const GetAllToolsData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsData
 > = z.union([
-  z.lazy(() => GetAllToolsData1$outboundSchema),
-  z.lazy(() => GetAllToolsData2$outboundSchema),
+  z.lazy(() => Data1$outboundSchema),
+  z.lazy(() => Data2$outboundSchema),
   z.lazy(() => Data3$outboundSchema),
   z.lazy(() => Data4$outboundSchema),
   z.lazy(() => Data5$outboundSchema),
@@ -2245,8 +2226,8 @@ export const GetAllToolsResponseBody$inboundSchema: z.ZodType<
   object: GetAllToolsObject$inboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => GetAllToolsData1$inboundSchema),
-      z.lazy(() => GetAllToolsData2$inboundSchema),
+      z.lazy(() => Data1$inboundSchema),
+      z.lazy(() => Data2$inboundSchema),
       z.lazy(() => Data3$inboundSchema),
       z.lazy(() => Data4$inboundSchema),
       z.lazy(() => Data5$inboundSchema),
@@ -2263,8 +2244,8 @@ export const GetAllToolsResponseBody$inboundSchema: z.ZodType<
 export type GetAllToolsResponseBody$Outbound = {
   object: string;
   data: Array<
-    | GetAllToolsData1$Outbound
-    | GetAllToolsData2$Outbound
+    | Data1$Outbound
+    | Data2$Outbound
     | Data3$Outbound
     | Data4$Outbound
     | Data5$Outbound
@@ -2281,8 +2262,8 @@ export const GetAllToolsResponseBody$outboundSchema: z.ZodType<
   object: GetAllToolsObject$outboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => GetAllToolsData1$outboundSchema),
-      z.lazy(() => GetAllToolsData2$outboundSchema),
+      z.lazy(() => Data1$outboundSchema),
+      z.lazy(() => Data2$outboundSchema),
       z.lazy(() => Data3$outboundSchema),
       z.lazy(() => Data4$outboundSchema),
       z.lazy(() => Data5$outboundSchema),

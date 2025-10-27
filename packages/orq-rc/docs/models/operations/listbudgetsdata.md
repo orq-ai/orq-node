@@ -1,9 +1,12 @@
 # ListBudgetsData
 
+Budget configuration details (public API response)
+
 ## Example Usage
 
 ```typescript
 import { ListBudgetsData } from "@orq-ai/node/models/operations";
+import { RFCDate } from "@orq-ai/node/types";
 
 let value: ListBudgetsData = {
   id: "01ARZ3NDEKTSV4RRFFQ69G5FAV",
@@ -17,8 +20,8 @@ let value: ListBudgetsData = {
   consumption: {
     currentAmount: 125.5,
     remainingAmount: 124.5,
-    periodStart: "2024-01-01T00:00:00Z",
-    periodEnd: "2024-01-31T23:59:59Z",
+    periodStart: new RFCDate("2024-01-01T00:00:00Z"),
+    periodEnd: new RFCDate("2024-01-31T23:59:59Z"),
   },
 };
 ```

@@ -5,11 +5,13 @@
 ```typescript
 import { GetPromptVersionResponseFormat3 } from "@orq-ai/node/models/operations";
 
-let value: GetPromptVersionResponseFormat3 = "base64_json";
+let value: GetPromptVersionResponseFormat3 = {
+  type: "text",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"url" | "base64_json"
-```
+| Field                                                                                                                                        | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                       | [operations.GetPromptVersionResponseFormatPromptsResponseType](../../models/operations/getpromptversionresponseformatpromptsresponsetype.md) | :heavy_check_mark:                                                                                                                           | N/A                                                                                                                                          |

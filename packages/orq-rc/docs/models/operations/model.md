@@ -27,16 +27,16 @@ const value: operations.Model3 = "cohere/embed-english-light-v3.0";
 const value: operations.Model4 = "cohere/embed-english-v3.0";
 ```
 
-### `operations.Five`
+### `operations.Model5`
 
 ```typescript
-const value: operations.Five = "cohere/embed-v4.0";
+const value: operations.Model5 = "cohere/embed-v4.0";
 ```
 
-### `operations.Six`
+### `operations.Model6`
 
 ```typescript
-const value: operations.Six = "azure/text-embedding-ada-002";
+const value: operations.Model6 = "azure/text-embedding-ada-002";
 ```
 
 ### `operations.Seven`

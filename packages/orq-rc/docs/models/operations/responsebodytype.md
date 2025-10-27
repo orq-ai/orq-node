@@ -5,11 +5,11 @@
 ```typescript
 import { ResponseBodyType } from "@orq-ai/node/models/operations";
 
-let value: ResponseBodyType = "internal";
+let value: ResponseBodyType = "llm_eval";
 ```
 
 ## Values
 
 ```typescript
-"internal"
+"llm_eval"
 ```

@@ -5,11 +5,11 @@
 ```typescript
 import { ListKnowledgeBasesDataType } from "@orq-ai/node/models/operations";
 
-let value: ListKnowledgeBasesDataType = "external";
+let value: ListKnowledgeBasesDataType = "internal";
 ```
 
 ## Values
 
 ```typescript
-"external"
+"internal"
 ```

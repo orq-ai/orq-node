@@ -1,50 +1,21 @@
 # Messages
 
-
-## Supported Types
-
-### `operations.MessagesDeveloperMessage`
+## Example Usage
 
 ```typescript
-const value: operations.MessagesDeveloperMessage = {
-  role: "developer",
-  content: "<value>",
-};
-```
+import { Messages } from "@orq-ai/node/models/operations";
 
-### `operations.MessagesSystemMessage`
-
-```typescript
-const value: operations.MessagesSystemMessage = {
+let value: Messages = {
   role: "system",
   content: "<value>",
 };
 ```
 
-### `operations.MessagesUserMessage`
+## Fields
 
-```typescript
-const value: operations.MessagesUserMessage = {
-  role: "user",
-  content: [],
-};
-```
-
-### `operations.MessagesAssistantMessage`
-
-```typescript
-const value: operations.MessagesAssistantMessage = {
-  role: "assistant",
-};
-```
-
-### `operations.MessagesToolMessage`
-
-```typescript
-const value: operations.MessagesToolMessage = {
-  role: "tool",
-  content: "<value>",
-  toolCallId: "<id>",
-};
-```
-
+| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `role`                                                                                                                                                                                                                                                                   | [operations.Role](../../models/operations/role.md)                                                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
+| `content`                                                                                                                                                                                                                                                                | *operations.Content*                                                                                                                                                                                                                                                     | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
+| `toolCalls`                                                                                                                                                                                                                                                              | [operations.ToolCalls](../../models/operations/toolcalls.md)[]                                                                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+| `toolCallId`                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |

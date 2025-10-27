@@ -9,7 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteDatapointRequest = {
+  /**
+   * The unique identifier of the dataset
+   */
   datasetId: string;
+  /**
+   * The unique identifier of the datapoint
+   */
   datapointId: string;
 };
 

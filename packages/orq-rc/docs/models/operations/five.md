@@ -5,11 +5,11 @@
 ```typescript
 import { Five } from "@orq-ai/node/models/operations";
 
-let value: Five = "cohere/embed-v4.0";
+let value: Five = "base64_json";
 ```
 
 ## Values
 
 ```typescript
-"cohere/embed-v4.0"
+"url" | "base64_json"
 ```

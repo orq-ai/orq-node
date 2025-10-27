@@ -5,11 +5,13 @@
 ```typescript
 import { ResponseFormat2 } from "@orq-ai/node/models/operations";
 
-let value: ResponseFormat2 = "flac";
+let value: ResponseFormat2 = {
+  type: "json_object",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
-```
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | [operations.CreatePromptResponseFormatType](../../models/operations/createpromptresponseformattype.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

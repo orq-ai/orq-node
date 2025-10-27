@@ -18,7 +18,7 @@ const value: operations.CreatePrompt2PromptsResponse1 = {
 const value: operations.CreatePrompt2PromptsResponse2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://minor-saloon.net",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```

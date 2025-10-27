@@ -5,11 +5,11 @@
 ```typescript
 import { DeploymentGetConfigResponseFormat4 } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigResponseFormat4 = "text";
+let value: DeploymentGetConfigResponseFormat4 = "opus";
 ```
 
 ## Values
 
 ```typescript
-"json" | "text" | "srt" | "verbose_json" | "vtt"
+"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
 ```

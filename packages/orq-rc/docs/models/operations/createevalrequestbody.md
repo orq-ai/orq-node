@@ -26,15 +26,22 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.RequestBodyHTTP`
+### `operations.CreateEvalRequestBodyHTTP`
 
 ```typescript
-const value: operations.RequestBodyHTTP = {
+const value: operations.CreateEvalRequestBodyHTTP = {
   type: "http_eval",
-  url: "https://marvelous-jump.name/",
+  url: "https://tasty-cassava.com",
   method: "POST",
-  headers: {},
-  payload: {},
+  headers: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
+  payload: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
   path: "Default",
   key: "<key>",
 };

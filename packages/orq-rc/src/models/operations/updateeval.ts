@@ -131,11 +131,17 @@ export type UpdateEvalRequestBodyEvalsRequestGuardrailConfig =
   | UpdateEvalGuardrailConfigEvalsRequestNumber
   | UpdateEvalGuardrailConfigEvalsRequestBoolean;
 
+/**
+ * The type of output expected from the evaluator
+ */
 export const UpdateEvalRequestBodyEvalsRequestOutputType = {
   Boolean: "boolean",
   Number: "number",
   String: "string",
 } as const;
+/**
+ * The type of output expected from the evaluator
+ */
 export type UpdateEvalRequestBodyEvalsRequestOutputType = ClosedEnum<
   typeof UpdateEvalRequestBodyEvalsRequestOutputType
 >;
@@ -147,23 +153,24 @@ export type UpdateEvalRequestBodyEvalsRequestType = ClosedEnum<
   typeof UpdateEvalRequestBodyEvalsRequestType
 >;
 
-export const UpdateEvalRequestBodyMethod = {
+export const RequestBodyMethod = {
   Get: "GET",
   Post: "POST",
 } as const;
-export type UpdateEvalRequestBodyMethod = ClosedEnum<
-  typeof UpdateEvalRequestBodyMethod
->;
+export type RequestBodyMethod = ClosedEnum<typeof RequestBodyMethod>;
 
-export type UpdateEvalRequestBodyHTTP = {
+export type RequestBodyHTTP = {
   guardrailConfig?:
     | UpdateEvalGuardrailConfigEvalsRequestNumber
     | UpdateEvalGuardrailConfigEvalsRequestBoolean
     | undefined;
+  /**
+   * The type of output expected from the evaluator
+   */
   outputType?: UpdateEvalRequestBodyEvalsRequestOutputType | undefined;
   type: UpdateEvalRequestBodyEvalsRequestType;
   url?: string | undefined;
-  method?: UpdateEvalRequestBodyMethod | undefined;
+  method?: RequestBodyMethod | undefined;
   headers?: { [k: string]: string } | undefined;
   payload?: { [k: string]: any } | undefined;
   /**
@@ -302,11 +309,17 @@ export type UpdateEvalRequestBodyGuardrailConfig =
   | UpdateEvalGuardrailConfigNumber
   | UpdateEvalGuardrailConfigBoolean;
 
+/**
+ * The type of output expected from the evaluator
+ */
 export const UpdateEvalRequestBodyOutputType = {
   Boolean: "boolean",
   Number: "number",
   String: "string",
 } as const;
+/**
+ * The type of output expected from the evaluator
+ */
 export type UpdateEvalRequestBodyOutputType = ClosedEnum<
   typeof UpdateEvalRequestBodyOutputType
 >;
@@ -323,6 +336,9 @@ export type RequestBodyLLM = {
     | UpdateEvalGuardrailConfigNumber
     | UpdateEvalGuardrailConfigBoolean
     | undefined;
+  /**
+   * The type of output expected from the evaluator
+   */
   outputType?: UpdateEvalRequestBodyOutputType | undefined;
   type: UpdateEvalRequestBodyType;
   prompt?: string | undefined;
@@ -344,7 +360,7 @@ export type RequestBodyLLM = {
 export type UpdateEvalRequestBody =
   | RequestBodyLLM
   | RequestBodyJSON
-  | UpdateEvalRequestBodyHTTP
+  | RequestBodyHTTP
   | RequestBodyPython;
 
 export type UpdateEvalRequest = {
@@ -352,7 +368,7 @@ export type UpdateEvalRequest = {
   requestBody?:
     | RequestBodyLLM
     | RequestBodyJSON
-    | UpdateEvalRequestBodyHTTP
+    | RequestBodyHTTP
     | RequestBodyPython
     | undefined;
 };
@@ -763,7 +779,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type
   >;
 
-export type UpdateEvalFunctionParams23 = {
+export type FunctionParams23 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type;
 };
@@ -777,7 +793,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type
   >;
 
-export type UpdateEvalFunctionParams22 = {
+export type FunctionParams22 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type;
 };
@@ -791,7 +807,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type
   >;
 
-export type UpdateEvalFunctionParams21 = {
+export type FunctionParams21 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type;
 };
@@ -805,7 +821,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type
   >;
 
-export type UpdateEvalFunctionParams20 = {
+export type FunctionParams20 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type;
 };
@@ -819,7 +835,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type
   >;
 
-export type UpdateEvalFunctionParams19 = {
+export type FunctionParams19 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type;
 };
@@ -833,7 +849,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type
   >;
 
-export type UpdateEvalFunctionParams18 = {
+export type FunctionParams18 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type;
 };
@@ -847,7 +863,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type
   >;
 
-export type UpdateEvalFunctionParams17 = {
+export type FunctionParams17 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type;
 };
@@ -861,7 +877,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type
   >;
 
-export type UpdateEvalFunctionParams16 = {
+export type FunctionParams16 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type;
 };
@@ -875,7 +891,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type
   >;
 
-export type UpdateEvalFunctionParams15 = {
+export type FunctionParams15 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type;
   pattern: string;
@@ -890,7 +906,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type
   >;
 
-export type UpdateEvalFunctionParams14 = {
+export type FunctionParams14 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type;
 };
@@ -904,7 +920,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type
   >;
 
-export type UpdateEvalFunctionParams13 = {
+export type FunctionParams13 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type;
   value: number;
@@ -919,7 +935,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type
   >;
 
-export type UpdateEvalFunctionParams12 = {
+export type FunctionParams12 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type;
   min: number;
@@ -935,7 +951,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type
   >;
 
-export type UpdateEvalFunctionParams11 = {
+export type FunctionParams11 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type;
   value: number;
@@ -950,7 +966,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type
   >;
 
-export type UpdateEvalFunctionParams10 = {
+export type FunctionParams10 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type;
 };
@@ -964,7 +980,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type
   >;
 
-export type UpdateEvalFunctionParams9 = {
+export type FunctionParams9 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type;
   value: string;
@@ -979,7 +995,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody58Type
   >;
 
-export type UpdateEvalFunctionParams8 = {
+export type FunctionParams8 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody58Type;
   value: string;
@@ -994,7 +1010,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type
   >;
 
-export type UpdateEvalFunctionParams7 = {
+export type FunctionParams7 = {
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type;
 };
@@ -1008,7 +1024,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyT
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType
   >;
 
-export type UpdateEvalFunctionParams6 = {
+export type FunctionParams6 = {
   type: UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType;
 };
 
@@ -1020,7 +1036,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONType =
     typeof UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONType
   >;
 
-export type UpdateEvalFunctionParams5 = {
+export type FunctionParams5 = {
   type: UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONType;
 };
 
@@ -1031,7 +1047,7 @@ export type UpdateEvalFunctionParamsEvalsResponse200Type = ClosedEnum<
   typeof UpdateEvalFunctionParamsEvalsResponse200Type
 >;
 
-export type UpdateEvalFunctionParams4 = {
+export type FunctionParams4 = {
   type: UpdateEvalFunctionParamsEvalsResponse200Type;
   keywords: Array<string>;
 };
@@ -1043,7 +1059,7 @@ export type UpdateEvalFunctionParamsEvalsResponseType = ClosedEnum<
   typeof UpdateEvalFunctionParamsEvalsResponseType
 >;
 
-export type UpdateEvalFunctionParams3 = {
+export type FunctionParams3 = {
   type: UpdateEvalFunctionParamsEvalsResponseType;
   keywords: Array<string>;
 };
@@ -1055,7 +1071,7 @@ export type UpdateEvalFunctionParamsEvalsType = ClosedEnum<
   typeof UpdateEvalFunctionParamsEvalsType
 >;
 
-export type UpdateEvalFunctionParams2 = {
+export type FunctionParams2 = {
   type: UpdateEvalFunctionParamsEvalsType;
   keywords: Array<string>;
 };
@@ -1067,37 +1083,37 @@ export type UpdateEvalFunctionParamsType = ClosedEnum<
   typeof UpdateEvalFunctionParamsType
 >;
 
-export type UpdateEvalFunctionParams1 = {
+export type FunctionParams1 = {
   type: UpdateEvalFunctionParamsType;
   value: string;
 };
 
 export type ResponseBodyFunctionParams =
-  | UpdateEvalFunctionParams12
-  | UpdateEvalFunctionParams1
-  | UpdateEvalFunctionParams2
-  | UpdateEvalFunctionParams3
-  | UpdateEvalFunctionParams4
-  | UpdateEvalFunctionParams8
-  | UpdateEvalFunctionParams9
-  | UpdateEvalFunctionParams11
-  | UpdateEvalFunctionParams13
-  | UpdateEvalFunctionParams15
+  | FunctionParams12
+  | FunctionParams1
+  | FunctionParams2
+  | FunctionParams3
+  | FunctionParams4
+  | FunctionParams8
+  | FunctionParams9
+  | FunctionParams11
+  | FunctionParams13
+  | FunctionParams15
   | FunctionParams25
   | FunctionParams26
-  | UpdateEvalFunctionParams5
-  | UpdateEvalFunctionParams6
-  | UpdateEvalFunctionParams7
-  | UpdateEvalFunctionParams10
-  | UpdateEvalFunctionParams14
-  | UpdateEvalFunctionParams16
-  | UpdateEvalFunctionParams17
-  | UpdateEvalFunctionParams18
-  | UpdateEvalFunctionParams19
-  | UpdateEvalFunctionParams20
-  | UpdateEvalFunctionParams21
-  | UpdateEvalFunctionParams22
-  | UpdateEvalFunctionParams23
+  | FunctionParams5
+  | FunctionParams6
+  | FunctionParams7
+  | FunctionParams10
+  | FunctionParams14
+  | FunctionParams16
+  | FunctionParams17
+  | FunctionParams18
+  | FunctionParams19
+  | FunctionParams20
+  | FunctionParams21
+  | FunctionParams22
+  | FunctionParams23
   | FunctionParams24
   | FunctionParams27
   | FunctionParams28
@@ -1109,7 +1125,7 @@ export type ResponseBodyFunctionParams =
   | FunctionParams34
   | FunctionParams35;
 
-export type UpdateEvalResponseBodyFunction = {
+export type ResponseBodyFunction = {
   id: string;
   description: string;
   created?: string | undefined;
@@ -1120,31 +1136,31 @@ export type UpdateEvalResponseBodyFunction = {
     | undefined;
   type: UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType;
   functionParams:
-    | UpdateEvalFunctionParams12
-    | UpdateEvalFunctionParams1
-    | UpdateEvalFunctionParams2
-    | UpdateEvalFunctionParams3
-    | UpdateEvalFunctionParams4
-    | UpdateEvalFunctionParams8
-    | UpdateEvalFunctionParams9
-    | UpdateEvalFunctionParams11
-    | UpdateEvalFunctionParams13
-    | UpdateEvalFunctionParams15
+    | FunctionParams12
+    | FunctionParams1
+    | FunctionParams2
+    | FunctionParams3
+    | FunctionParams4
+    | FunctionParams8
+    | FunctionParams9
+    | FunctionParams11
+    | FunctionParams13
+    | FunctionParams15
     | FunctionParams25
     | FunctionParams26
-    | UpdateEvalFunctionParams5
-    | UpdateEvalFunctionParams6
-    | UpdateEvalFunctionParams7
-    | UpdateEvalFunctionParams10
-    | UpdateEvalFunctionParams14
-    | UpdateEvalFunctionParams16
-    | UpdateEvalFunctionParams17
-    | UpdateEvalFunctionParams18
-    | UpdateEvalFunctionParams19
-    | UpdateEvalFunctionParams20
-    | UpdateEvalFunctionParams21
-    | UpdateEvalFunctionParams22
-    | UpdateEvalFunctionParams23
+    | FunctionParams5
+    | FunctionParams6
+    | FunctionParams7
+    | FunctionParams10
+    | FunctionParams14
+    | FunctionParams16
+    | FunctionParams17
+    | FunctionParams18
+    | FunctionParams19
+    | FunctionParams20
+    | FunctionParams21
+    | FunctionParams22
+    | FunctionParams23
     | FunctionParams24
     | FunctionParams27
     | FunctionParams28
@@ -1458,7 +1474,7 @@ export type UpdateEvalResponseBody =
   | ResponseBodyRagas
   | UpdateEvalResponseBodyJSON
   | UpdateEvalResponseBodyPython
-  | UpdateEvalResponseBodyFunction
+  | ResponseBodyFunction
   | ResponseBodyTypescript;
 
 /** @internal */
@@ -2252,29 +2268,29 @@ export namespace UpdateEvalRequestBodyEvalsRequestType$ {
 }
 
 /** @internal */
-export const UpdateEvalRequestBodyMethod$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateEvalRequestBodyMethod
-> = z.nativeEnum(UpdateEvalRequestBodyMethod);
+export const RequestBodyMethod$inboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyMethod
+> = z.nativeEnum(RequestBodyMethod);
 
 /** @internal */
-export const UpdateEvalRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateEvalRequestBodyMethod
-> = UpdateEvalRequestBodyMethod$inboundSchema;
+export const RequestBodyMethod$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyMethod
+> = RequestBodyMethod$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalRequestBodyMethod$ {
-  /** @deprecated use `UpdateEvalRequestBodyMethod$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalRequestBodyMethod$inboundSchema;
-  /** @deprecated use `UpdateEvalRequestBodyMethod$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalRequestBodyMethod$outboundSchema;
+export namespace RequestBodyMethod$ {
+  /** @deprecated use `RequestBodyMethod$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyMethod$inboundSchema;
+  /** @deprecated use `RequestBodyMethod$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyMethod$outboundSchema;
 }
 
 /** @internal */
-export const UpdateEvalRequestBodyHTTP$inboundSchema: z.ZodType<
-  UpdateEvalRequestBodyHTTP,
+export const RequestBodyHTTP$inboundSchema: z.ZodType<
+  RequestBodyHTTP,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2286,7 +2302,7 @@ export const UpdateEvalRequestBodyHTTP$inboundSchema: z.ZodType<
     .optional(),
   type: UpdateEvalRequestBodyEvalsRequestType$inboundSchema,
   url: z.string().optional(),
-  method: UpdateEvalRequestBodyMethod$inboundSchema.optional(),
+  method: RequestBodyMethod$inboundSchema.optional(),
   headers: z.record(z.string()).optional(),
   payload: z.record(z.any()).optional(),
   path: z.string(),
@@ -2300,7 +2316,7 @@ export const UpdateEvalRequestBodyHTTP$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalRequestBodyHTTP$Outbound = {
+export type RequestBodyHTTP$Outbound = {
   guardrail_config?:
     | UpdateEvalGuardrailConfigEvalsRequestNumber$Outbound
     | UpdateEvalGuardrailConfigEvalsRequestBoolean$Outbound
@@ -2317,10 +2333,10 @@ export type UpdateEvalRequestBodyHTTP$Outbound = {
 };
 
 /** @internal */
-export const UpdateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
-  UpdateEvalRequestBodyHTTP$Outbound,
+export const RequestBodyHTTP$outboundSchema: z.ZodType<
+  RequestBodyHTTP$Outbound,
   z.ZodTypeDef,
-  UpdateEvalRequestBodyHTTP
+  RequestBodyHTTP
 > = z.object({
   guardrailConfig: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsRequestNumber$outboundSchema),
@@ -2330,7 +2346,7 @@ export const UpdateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
     .optional(),
   type: UpdateEvalRequestBodyEvalsRequestType$outboundSchema,
   url: z.string().optional(),
-  method: UpdateEvalRequestBodyMethod$outboundSchema.optional(),
+  method: RequestBodyMethod$outboundSchema.optional(),
   headers: z.record(z.string()).optional(),
   payload: z.record(z.any()).optional(),
   path: z.string(),
@@ -2347,30 +2363,28 @@ export const UpdateEvalRequestBodyHTTP$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalRequestBodyHTTP$ {
-  /** @deprecated use `UpdateEvalRequestBodyHTTP$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalRequestBodyHTTP$inboundSchema;
-  /** @deprecated use `UpdateEvalRequestBodyHTTP$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalRequestBodyHTTP$outboundSchema;
-  /** @deprecated use `UpdateEvalRequestBodyHTTP$Outbound` instead. */
-  export type Outbound = UpdateEvalRequestBodyHTTP$Outbound;
+export namespace RequestBodyHTTP$ {
+  /** @deprecated use `RequestBodyHTTP$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyHTTP$inboundSchema;
+  /** @deprecated use `RequestBodyHTTP$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyHTTP$outboundSchema;
+  /** @deprecated use `RequestBodyHTTP$Outbound` instead. */
+  export type Outbound = RequestBodyHTTP$Outbound;
 }
 
-export function updateEvalRequestBodyHTTPToJSON(
-  updateEvalRequestBodyHTTP: UpdateEvalRequestBodyHTTP,
+export function requestBodyHTTPToJSON(
+  requestBodyHTTP: RequestBodyHTTP,
 ): string {
-  return JSON.stringify(
-    UpdateEvalRequestBodyHTTP$outboundSchema.parse(updateEvalRequestBodyHTTP),
-  );
+  return JSON.stringify(RequestBodyHTTP$outboundSchema.parse(requestBodyHTTP));
 }
 
-export function updateEvalRequestBodyHTTPFromJSON(
+export function requestBodyHTTPFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalRequestBodyHTTP, SDKValidationError> {
+): SafeParseResult<RequestBodyHTTP, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalRequestBodyHTTP$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalRequestBodyHTTP' from JSON`,
+    (x) => RequestBodyHTTP$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyHTTP' from JSON`,
   );
 }
 
@@ -3172,7 +3186,7 @@ export const UpdateEvalRequestBody$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => RequestBodyLLM$inboundSchema),
   z.lazy(() => RequestBodyJSON$inboundSchema),
-  z.lazy(() => UpdateEvalRequestBodyHTTP$inboundSchema),
+  z.lazy(() => RequestBodyHTTP$inboundSchema),
   z.lazy(() => RequestBodyPython$inboundSchema),
 ]);
 
@@ -3180,7 +3194,7 @@ export const UpdateEvalRequestBody$inboundSchema: z.ZodType<
 export type UpdateEvalRequestBody$Outbound =
   | RequestBodyLLM$Outbound
   | RequestBodyJSON$Outbound
-  | UpdateEvalRequestBodyHTTP$Outbound
+  | RequestBodyHTTP$Outbound
   | RequestBodyPython$Outbound;
 
 /** @internal */
@@ -3191,7 +3205,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => RequestBodyLLM$outboundSchema),
   z.lazy(() => RequestBodyJSON$outboundSchema),
-  z.lazy(() => UpdateEvalRequestBodyHTTP$outboundSchema),
+  z.lazy(() => RequestBodyHTTP$outboundSchema),
   z.lazy(() => RequestBodyPython$outboundSchema),
 ]);
 
@@ -3236,7 +3250,7 @@ export const UpdateEvalRequest$inboundSchema: z.ZodType<
   RequestBody: z.union([
     z.lazy(() => RequestBodyLLM$inboundSchema),
     z.lazy(() => RequestBodyJSON$inboundSchema),
-    z.lazy(() => UpdateEvalRequestBodyHTTP$inboundSchema),
+    z.lazy(() => RequestBodyHTTP$inboundSchema),
     z.lazy(() => RequestBodyPython$inboundSchema),
   ]).optional(),
 }).transform((v) => {
@@ -3251,7 +3265,7 @@ export type UpdateEvalRequest$Outbound = {
   RequestBody?:
     | RequestBodyLLM$Outbound
     | RequestBodyJSON$Outbound
-    | UpdateEvalRequestBodyHTTP$Outbound
+    | RequestBodyHTTP$Outbound
     | RequestBodyPython$Outbound
     | undefined;
 };
@@ -3266,7 +3280,7 @@ export const UpdateEvalRequest$outboundSchema: z.ZodType<
   requestBody: z.union([
     z.lazy(() => RequestBodyLLM$outboundSchema),
     z.lazy(() => RequestBodyJSON$outboundSchema),
-    z.lazy(() => UpdateEvalRequestBodyHTTP$outboundSchema),
+    z.lazy(() => RequestBodyHTTP$outboundSchema),
     z.lazy(() => RequestBodyPython$outboundSchema),
   ]).optional(),
 }).transform((v) => {
@@ -3660,8 +3674,8 @@ export const ResponseBodyTypescript$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$inboundSchema
@@ -3704,8 +3718,8 @@ export const ResponseBodyTypescript$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody7Number$outboundSchema
@@ -4131,8 +4145,8 @@ export const ResponseBodyRagas$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$inboundSchema
@@ -4178,8 +4192,8 @@ export const ResponseBodyRagas$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody6Number$outboundSchema
@@ -5621,8 +5635,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams23$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams23,
+export const FunctionParams23$inboundSchema: z.ZodType<
+  FunctionParams23,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5631,15 +5645,15 @@ export const UpdateEvalFunctionParams23$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams23$Outbound = {
+export type FunctionParams23$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams23$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams23$Outbound,
+export const FunctionParams23$outboundSchema: z.ZodType<
+  FunctionParams23$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams23
+  FunctionParams23
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type$outboundSchema,
@@ -5649,30 +5663,30 @@ export const UpdateEvalFunctionParams23$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams23$ {
-  /** @deprecated use `UpdateEvalFunctionParams23$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams23$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams23$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams23$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams23$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams23$Outbound;
+export namespace FunctionParams23$ {
+  /** @deprecated use `FunctionParams23$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams23$inboundSchema;
+  /** @deprecated use `FunctionParams23$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams23$outboundSchema;
+  /** @deprecated use `FunctionParams23$Outbound` instead. */
+  export type Outbound = FunctionParams23$Outbound;
 }
 
-export function updateEvalFunctionParams23ToJSON(
-  updateEvalFunctionParams23: UpdateEvalFunctionParams23,
+export function functionParams23ToJSON(
+  functionParams23: FunctionParams23,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams23$outboundSchema.parse(updateEvalFunctionParams23),
+    FunctionParams23$outboundSchema.parse(functionParams23),
   );
 }
 
-export function updateEvalFunctionParams23FromJSON(
+export function functionParams23FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams23, SDKValidationError> {
+): SafeParseResult<FunctionParams23, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams23$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams23' from JSON`,
+    (x) => FunctionParams23$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams23' from JSON`,
   );
 }
 
@@ -5705,8 +5719,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams22$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams22,
+export const FunctionParams22$inboundSchema: z.ZodType<
+  FunctionParams22,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5715,15 +5729,15 @@ export const UpdateEvalFunctionParams22$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams22$Outbound = {
+export type FunctionParams22$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams22$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams22$Outbound,
+export const FunctionParams22$outboundSchema: z.ZodType<
+  FunctionParams22$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams22
+  FunctionParams22
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody522Type$outboundSchema,
@@ -5733,30 +5747,30 @@ export const UpdateEvalFunctionParams22$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams22$ {
-  /** @deprecated use `UpdateEvalFunctionParams22$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams22$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams22$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams22$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams22$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams22$Outbound;
+export namespace FunctionParams22$ {
+  /** @deprecated use `FunctionParams22$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams22$inboundSchema;
+  /** @deprecated use `FunctionParams22$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams22$outboundSchema;
+  /** @deprecated use `FunctionParams22$Outbound` instead. */
+  export type Outbound = FunctionParams22$Outbound;
 }
 
-export function updateEvalFunctionParams22ToJSON(
-  updateEvalFunctionParams22: UpdateEvalFunctionParams22,
+export function functionParams22ToJSON(
+  functionParams22: FunctionParams22,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams22$outboundSchema.parse(updateEvalFunctionParams22),
+    FunctionParams22$outboundSchema.parse(functionParams22),
   );
 }
 
-export function updateEvalFunctionParams22FromJSON(
+export function functionParams22FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams22, SDKValidationError> {
+): SafeParseResult<FunctionParams22, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams22$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams22' from JSON`,
+    (x) => FunctionParams22$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams22' from JSON`,
   );
 }
 
@@ -5789,8 +5803,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams21$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams21,
+export const FunctionParams21$inboundSchema: z.ZodType<
+  FunctionParams21,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5799,15 +5813,15 @@ export const UpdateEvalFunctionParams21$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams21$Outbound = {
+export type FunctionParams21$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams21$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams21$Outbound,
+export const FunctionParams21$outboundSchema: z.ZodType<
+  FunctionParams21$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams21
+  FunctionParams21
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody521Type$outboundSchema,
@@ -5817,30 +5831,30 @@ export const UpdateEvalFunctionParams21$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams21$ {
-  /** @deprecated use `UpdateEvalFunctionParams21$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams21$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams21$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams21$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams21$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams21$Outbound;
+export namespace FunctionParams21$ {
+  /** @deprecated use `FunctionParams21$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams21$inboundSchema;
+  /** @deprecated use `FunctionParams21$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams21$outboundSchema;
+  /** @deprecated use `FunctionParams21$Outbound` instead. */
+  export type Outbound = FunctionParams21$Outbound;
 }
 
-export function updateEvalFunctionParams21ToJSON(
-  updateEvalFunctionParams21: UpdateEvalFunctionParams21,
+export function functionParams21ToJSON(
+  functionParams21: FunctionParams21,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams21$outboundSchema.parse(updateEvalFunctionParams21),
+    FunctionParams21$outboundSchema.parse(functionParams21),
   );
 }
 
-export function updateEvalFunctionParams21FromJSON(
+export function functionParams21FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams21, SDKValidationError> {
+): SafeParseResult<FunctionParams21, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams21$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams21' from JSON`,
+    (x) => FunctionParams21$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams21' from JSON`,
   );
 }
 
@@ -5873,8 +5887,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams20$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams20,
+export const FunctionParams20$inboundSchema: z.ZodType<
+  FunctionParams20,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5883,15 +5897,15 @@ export const UpdateEvalFunctionParams20$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams20$Outbound = {
+export type FunctionParams20$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams20$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams20$Outbound,
+export const FunctionParams20$outboundSchema: z.ZodType<
+  FunctionParams20$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams20
+  FunctionParams20
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody520Type$outboundSchema,
@@ -5901,30 +5915,30 @@ export const UpdateEvalFunctionParams20$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams20$ {
-  /** @deprecated use `UpdateEvalFunctionParams20$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams20$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams20$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams20$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams20$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams20$Outbound;
+export namespace FunctionParams20$ {
+  /** @deprecated use `FunctionParams20$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams20$inboundSchema;
+  /** @deprecated use `FunctionParams20$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams20$outboundSchema;
+  /** @deprecated use `FunctionParams20$Outbound` instead. */
+  export type Outbound = FunctionParams20$Outbound;
 }
 
-export function updateEvalFunctionParams20ToJSON(
-  updateEvalFunctionParams20: UpdateEvalFunctionParams20,
+export function functionParams20ToJSON(
+  functionParams20: FunctionParams20,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams20$outboundSchema.parse(updateEvalFunctionParams20),
+    FunctionParams20$outboundSchema.parse(functionParams20),
   );
 }
 
-export function updateEvalFunctionParams20FromJSON(
+export function functionParams20FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams20, SDKValidationError> {
+): SafeParseResult<FunctionParams20, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams20$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams20' from JSON`,
+    (x) => FunctionParams20$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams20' from JSON`,
   );
 }
 
@@ -5957,8 +5971,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams19$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams19,
+export const FunctionParams19$inboundSchema: z.ZodType<
+  FunctionParams19,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -5967,15 +5981,15 @@ export const UpdateEvalFunctionParams19$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams19$Outbound = {
+export type FunctionParams19$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams19$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams19$Outbound,
+export const FunctionParams19$outboundSchema: z.ZodType<
+  FunctionParams19$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams19
+  FunctionParams19
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody519Type$outboundSchema,
@@ -5985,30 +5999,30 @@ export const UpdateEvalFunctionParams19$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams19$ {
-  /** @deprecated use `UpdateEvalFunctionParams19$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams19$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams19$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams19$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams19$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams19$Outbound;
+export namespace FunctionParams19$ {
+  /** @deprecated use `FunctionParams19$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams19$inboundSchema;
+  /** @deprecated use `FunctionParams19$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams19$outboundSchema;
+  /** @deprecated use `FunctionParams19$Outbound` instead. */
+  export type Outbound = FunctionParams19$Outbound;
 }
 
-export function updateEvalFunctionParams19ToJSON(
-  updateEvalFunctionParams19: UpdateEvalFunctionParams19,
+export function functionParams19ToJSON(
+  functionParams19: FunctionParams19,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams19$outboundSchema.parse(updateEvalFunctionParams19),
+    FunctionParams19$outboundSchema.parse(functionParams19),
   );
 }
 
-export function updateEvalFunctionParams19FromJSON(
+export function functionParams19FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams19, SDKValidationError> {
+): SafeParseResult<FunctionParams19, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams19$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams19' from JSON`,
+    (x) => FunctionParams19$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams19' from JSON`,
   );
 }
 
@@ -6041,8 +6055,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams18$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams18,
+export const FunctionParams18$inboundSchema: z.ZodType<
+  FunctionParams18,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6051,15 +6065,15 @@ export const UpdateEvalFunctionParams18$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams18$Outbound = {
+export type FunctionParams18$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams18$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams18$Outbound,
+export const FunctionParams18$outboundSchema: z.ZodType<
+  FunctionParams18$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams18
+  FunctionParams18
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody518Type$outboundSchema,
@@ -6069,30 +6083,30 @@ export const UpdateEvalFunctionParams18$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams18$ {
-  /** @deprecated use `UpdateEvalFunctionParams18$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams18$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams18$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams18$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams18$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams18$Outbound;
+export namespace FunctionParams18$ {
+  /** @deprecated use `FunctionParams18$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams18$inboundSchema;
+  /** @deprecated use `FunctionParams18$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams18$outboundSchema;
+  /** @deprecated use `FunctionParams18$Outbound` instead. */
+  export type Outbound = FunctionParams18$Outbound;
 }
 
-export function updateEvalFunctionParams18ToJSON(
-  updateEvalFunctionParams18: UpdateEvalFunctionParams18,
+export function functionParams18ToJSON(
+  functionParams18: FunctionParams18,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams18$outboundSchema.parse(updateEvalFunctionParams18),
+    FunctionParams18$outboundSchema.parse(functionParams18),
   );
 }
 
-export function updateEvalFunctionParams18FromJSON(
+export function functionParams18FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams18, SDKValidationError> {
+): SafeParseResult<FunctionParams18, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams18$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams18' from JSON`,
+    (x) => FunctionParams18$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams18' from JSON`,
   );
 }
 
@@ -6125,8 +6139,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams17$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams17,
+export const FunctionParams17$inboundSchema: z.ZodType<
+  FunctionParams17,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6135,15 +6149,15 @@ export const UpdateEvalFunctionParams17$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams17$Outbound = {
+export type FunctionParams17$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams17$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams17$Outbound,
+export const FunctionParams17$outboundSchema: z.ZodType<
+  FunctionParams17$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams17
+  FunctionParams17
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody517Type$outboundSchema,
@@ -6153,30 +6167,30 @@ export const UpdateEvalFunctionParams17$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams17$ {
-  /** @deprecated use `UpdateEvalFunctionParams17$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams17$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams17$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams17$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams17$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams17$Outbound;
+export namespace FunctionParams17$ {
+  /** @deprecated use `FunctionParams17$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams17$inboundSchema;
+  /** @deprecated use `FunctionParams17$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams17$outboundSchema;
+  /** @deprecated use `FunctionParams17$Outbound` instead. */
+  export type Outbound = FunctionParams17$Outbound;
 }
 
-export function updateEvalFunctionParams17ToJSON(
-  updateEvalFunctionParams17: UpdateEvalFunctionParams17,
+export function functionParams17ToJSON(
+  functionParams17: FunctionParams17,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams17$outboundSchema.parse(updateEvalFunctionParams17),
+    FunctionParams17$outboundSchema.parse(functionParams17),
   );
 }
 
-export function updateEvalFunctionParams17FromJSON(
+export function functionParams17FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams17, SDKValidationError> {
+): SafeParseResult<FunctionParams17, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams17$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams17' from JSON`,
+    (x) => FunctionParams17$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams17' from JSON`,
   );
 }
 
@@ -6209,8 +6223,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams16$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams16,
+export const FunctionParams16$inboundSchema: z.ZodType<
+  FunctionParams16,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6219,15 +6233,15 @@ export const UpdateEvalFunctionParams16$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams16$Outbound = {
+export type FunctionParams16$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams16$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams16$Outbound,
+export const FunctionParams16$outboundSchema: z.ZodType<
+  FunctionParams16$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams16
+  FunctionParams16
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody516Type$outboundSchema,
@@ -6237,30 +6251,30 @@ export const UpdateEvalFunctionParams16$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams16$ {
-  /** @deprecated use `UpdateEvalFunctionParams16$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams16$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams16$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams16$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams16$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams16$Outbound;
+export namespace FunctionParams16$ {
+  /** @deprecated use `FunctionParams16$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams16$inboundSchema;
+  /** @deprecated use `FunctionParams16$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams16$outboundSchema;
+  /** @deprecated use `FunctionParams16$Outbound` instead. */
+  export type Outbound = FunctionParams16$Outbound;
 }
 
-export function updateEvalFunctionParams16ToJSON(
-  updateEvalFunctionParams16: UpdateEvalFunctionParams16,
+export function functionParams16ToJSON(
+  functionParams16: FunctionParams16,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams16$outboundSchema.parse(updateEvalFunctionParams16),
+    FunctionParams16$outboundSchema.parse(functionParams16),
   );
 }
 
-export function updateEvalFunctionParams16FromJSON(
+export function functionParams16FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams16, SDKValidationError> {
+): SafeParseResult<FunctionParams16, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams16$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams16' from JSON`,
+    (x) => FunctionParams16$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams16' from JSON`,
   );
 }
 
@@ -6293,8 +6307,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams15$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams15,
+export const FunctionParams15$inboundSchema: z.ZodType<
+  FunctionParams15,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6304,16 +6318,16 @@ export const UpdateEvalFunctionParams15$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams15$Outbound = {
+export type FunctionParams15$Outbound = {
   type: string;
   pattern: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams15$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams15$Outbound,
+export const FunctionParams15$outboundSchema: z.ZodType<
+  FunctionParams15$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams15
+  FunctionParams15
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody515Type$outboundSchema,
@@ -6324,30 +6338,30 @@ export const UpdateEvalFunctionParams15$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams15$ {
-  /** @deprecated use `UpdateEvalFunctionParams15$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams15$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams15$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams15$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams15$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams15$Outbound;
+export namespace FunctionParams15$ {
+  /** @deprecated use `FunctionParams15$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams15$inboundSchema;
+  /** @deprecated use `FunctionParams15$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams15$outboundSchema;
+  /** @deprecated use `FunctionParams15$Outbound` instead. */
+  export type Outbound = FunctionParams15$Outbound;
 }
 
-export function updateEvalFunctionParams15ToJSON(
-  updateEvalFunctionParams15: UpdateEvalFunctionParams15,
+export function functionParams15ToJSON(
+  functionParams15: FunctionParams15,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams15$outboundSchema.parse(updateEvalFunctionParams15),
+    FunctionParams15$outboundSchema.parse(functionParams15),
   );
 }
 
-export function updateEvalFunctionParams15FromJSON(
+export function functionParams15FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams15, SDKValidationError> {
+): SafeParseResult<FunctionParams15, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams15$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams15' from JSON`,
+    (x) => FunctionParams15$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams15' from JSON`,
   );
 }
 
@@ -6380,8 +6394,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams14$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams14,
+export const FunctionParams14$inboundSchema: z.ZodType<
+  FunctionParams14,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6390,15 +6404,15 @@ export const UpdateEvalFunctionParams14$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams14$Outbound = {
+export type FunctionParams14$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams14$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams14$Outbound,
+export const FunctionParams14$outboundSchema: z.ZodType<
+  FunctionParams14$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams14
+  FunctionParams14
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody514Type$outboundSchema,
@@ -6408,30 +6422,30 @@ export const UpdateEvalFunctionParams14$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams14$ {
-  /** @deprecated use `UpdateEvalFunctionParams14$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams14$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams14$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams14$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams14$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams14$Outbound;
+export namespace FunctionParams14$ {
+  /** @deprecated use `FunctionParams14$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams14$inboundSchema;
+  /** @deprecated use `FunctionParams14$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams14$outboundSchema;
+  /** @deprecated use `FunctionParams14$Outbound` instead. */
+  export type Outbound = FunctionParams14$Outbound;
 }
 
-export function updateEvalFunctionParams14ToJSON(
-  updateEvalFunctionParams14: UpdateEvalFunctionParams14,
+export function functionParams14ToJSON(
+  functionParams14: FunctionParams14,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams14$outboundSchema.parse(updateEvalFunctionParams14),
+    FunctionParams14$outboundSchema.parse(functionParams14),
   );
 }
 
-export function updateEvalFunctionParams14FromJSON(
+export function functionParams14FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams14, SDKValidationError> {
+): SafeParseResult<FunctionParams14, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams14$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams14' from JSON`,
+    (x) => FunctionParams14$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams14' from JSON`,
   );
 }
 
@@ -6464,8 +6478,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams13$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams13,
+export const FunctionParams13$inboundSchema: z.ZodType<
+  FunctionParams13,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6475,16 +6489,16 @@ export const UpdateEvalFunctionParams13$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams13$Outbound = {
+export type FunctionParams13$Outbound = {
   type: string;
   value: number;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams13$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams13$Outbound,
+export const FunctionParams13$outboundSchema: z.ZodType<
+  FunctionParams13$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams13
+  FunctionParams13
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody513Type$outboundSchema,
@@ -6495,30 +6509,30 @@ export const UpdateEvalFunctionParams13$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams13$ {
-  /** @deprecated use `UpdateEvalFunctionParams13$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams13$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams13$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams13$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams13$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams13$Outbound;
+export namespace FunctionParams13$ {
+  /** @deprecated use `FunctionParams13$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams13$inboundSchema;
+  /** @deprecated use `FunctionParams13$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams13$outboundSchema;
+  /** @deprecated use `FunctionParams13$Outbound` instead. */
+  export type Outbound = FunctionParams13$Outbound;
 }
 
-export function updateEvalFunctionParams13ToJSON(
-  updateEvalFunctionParams13: UpdateEvalFunctionParams13,
+export function functionParams13ToJSON(
+  functionParams13: FunctionParams13,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams13$outboundSchema.parse(updateEvalFunctionParams13),
+    FunctionParams13$outboundSchema.parse(functionParams13),
   );
 }
 
-export function updateEvalFunctionParams13FromJSON(
+export function functionParams13FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams13, SDKValidationError> {
+): SafeParseResult<FunctionParams13, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams13$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams13' from JSON`,
+    (x) => FunctionParams13$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams13' from JSON`,
   );
 }
 
@@ -6551,8 +6565,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams12$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams12,
+export const FunctionParams12$inboundSchema: z.ZodType<
+  FunctionParams12,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6563,17 +6577,17 @@ export const UpdateEvalFunctionParams12$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams12$Outbound = {
+export type FunctionParams12$Outbound = {
   type: string;
   min: number;
   max: number;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams12$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams12$Outbound,
+export const FunctionParams12$outboundSchema: z.ZodType<
+  FunctionParams12$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams12
+  FunctionParams12
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type$outboundSchema,
@@ -6585,30 +6599,30 @@ export const UpdateEvalFunctionParams12$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams12$ {
-  /** @deprecated use `UpdateEvalFunctionParams12$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams12$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams12$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams12$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams12$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams12$Outbound;
+export namespace FunctionParams12$ {
+  /** @deprecated use `FunctionParams12$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams12$inboundSchema;
+  /** @deprecated use `FunctionParams12$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams12$outboundSchema;
+  /** @deprecated use `FunctionParams12$Outbound` instead. */
+  export type Outbound = FunctionParams12$Outbound;
 }
 
-export function updateEvalFunctionParams12ToJSON(
-  updateEvalFunctionParams12: UpdateEvalFunctionParams12,
+export function functionParams12ToJSON(
+  functionParams12: FunctionParams12,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams12$outboundSchema.parse(updateEvalFunctionParams12),
+    FunctionParams12$outboundSchema.parse(functionParams12),
   );
 }
 
-export function updateEvalFunctionParams12FromJSON(
+export function functionParams12FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams12, SDKValidationError> {
+): SafeParseResult<FunctionParams12, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams12$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams12' from JSON`,
+    (x) => FunctionParams12$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams12' from JSON`,
   );
 }
 
@@ -6641,8 +6655,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams11$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams11,
+export const FunctionParams11$inboundSchema: z.ZodType<
+  FunctionParams11,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6652,16 +6666,16 @@ export const UpdateEvalFunctionParams11$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams11$Outbound = {
+export type FunctionParams11$Outbound = {
   type: string;
   value: number;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams11$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams11$Outbound,
+export const FunctionParams11$outboundSchema: z.ZodType<
+  FunctionParams11$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams11
+  FunctionParams11
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody511Type$outboundSchema,
@@ -6672,30 +6686,30 @@ export const UpdateEvalFunctionParams11$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams11$ {
-  /** @deprecated use `UpdateEvalFunctionParams11$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams11$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams11$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams11$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams11$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams11$Outbound;
+export namespace FunctionParams11$ {
+  /** @deprecated use `FunctionParams11$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams11$inboundSchema;
+  /** @deprecated use `FunctionParams11$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams11$outboundSchema;
+  /** @deprecated use `FunctionParams11$Outbound` instead. */
+  export type Outbound = FunctionParams11$Outbound;
 }
 
-export function updateEvalFunctionParams11ToJSON(
-  updateEvalFunctionParams11: UpdateEvalFunctionParams11,
+export function functionParams11ToJSON(
+  functionParams11: FunctionParams11,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams11$outboundSchema.parse(updateEvalFunctionParams11),
+    FunctionParams11$outboundSchema.parse(functionParams11),
   );
 }
 
-export function updateEvalFunctionParams11FromJSON(
+export function functionParams11FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams11, SDKValidationError> {
+): SafeParseResult<FunctionParams11, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams11$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams11' from JSON`,
+    (x) => FunctionParams11$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams11' from JSON`,
   );
 }
 
@@ -6728,8 +6742,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams10$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams10,
+export const FunctionParams10$inboundSchema: z.ZodType<
+  FunctionParams10,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6738,15 +6752,15 @@ export const UpdateEvalFunctionParams10$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams10$Outbound = {
+export type FunctionParams10$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams10$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams10$Outbound,
+export const FunctionParams10$outboundSchema: z.ZodType<
+  FunctionParams10$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams10
+  FunctionParams10
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody510Type$outboundSchema,
@@ -6756,30 +6770,30 @@ export const UpdateEvalFunctionParams10$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams10$ {
-  /** @deprecated use `UpdateEvalFunctionParams10$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams10$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams10$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams10$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams10$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams10$Outbound;
+export namespace FunctionParams10$ {
+  /** @deprecated use `FunctionParams10$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams10$inboundSchema;
+  /** @deprecated use `FunctionParams10$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams10$outboundSchema;
+  /** @deprecated use `FunctionParams10$Outbound` instead. */
+  export type Outbound = FunctionParams10$Outbound;
 }
 
-export function updateEvalFunctionParams10ToJSON(
-  updateEvalFunctionParams10: UpdateEvalFunctionParams10,
+export function functionParams10ToJSON(
+  functionParams10: FunctionParams10,
 ): string {
   return JSON.stringify(
-    UpdateEvalFunctionParams10$outboundSchema.parse(updateEvalFunctionParams10),
+    FunctionParams10$outboundSchema.parse(functionParams10),
   );
 }
 
-export function updateEvalFunctionParams10FromJSON(
+export function functionParams10FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams10, SDKValidationError> {
+): SafeParseResult<FunctionParams10, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams10$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams10' from JSON`,
+    (x) => FunctionParams10$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams10' from JSON`,
   );
 }
 
@@ -6812,8 +6826,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams9$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams9,
+export const FunctionParams9$inboundSchema: z.ZodType<
+  FunctionParams9,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6823,16 +6837,16 @@ export const UpdateEvalFunctionParams9$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams9$Outbound = {
+export type FunctionParams9$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams9$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams9$Outbound,
+export const FunctionParams9$outboundSchema: z.ZodType<
+  FunctionParams9$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams9
+  FunctionParams9
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody59Type$outboundSchema,
@@ -6843,30 +6857,28 @@ export const UpdateEvalFunctionParams9$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams9$ {
-  /** @deprecated use `UpdateEvalFunctionParams9$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams9$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams9$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams9$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams9$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams9$Outbound;
+export namespace FunctionParams9$ {
+  /** @deprecated use `FunctionParams9$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams9$inboundSchema;
+  /** @deprecated use `FunctionParams9$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams9$outboundSchema;
+  /** @deprecated use `FunctionParams9$Outbound` instead. */
+  export type Outbound = FunctionParams9$Outbound;
 }
 
-export function updateEvalFunctionParams9ToJSON(
-  updateEvalFunctionParams9: UpdateEvalFunctionParams9,
+export function functionParams9ToJSON(
+  functionParams9: FunctionParams9,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams9$outboundSchema.parse(updateEvalFunctionParams9),
-  );
+  return JSON.stringify(FunctionParams9$outboundSchema.parse(functionParams9));
 }
 
-export function updateEvalFunctionParams9FromJSON(
+export function functionParams9FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams9, SDKValidationError> {
+): SafeParseResult<FunctionParams9, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams9$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams9' from JSON`,
+    (x) => FunctionParams9$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams9' from JSON`,
   );
 }
 
@@ -6899,8 +6911,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams8$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams8,
+export const FunctionParams8$inboundSchema: z.ZodType<
+  FunctionParams8,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6910,16 +6922,16 @@ export const UpdateEvalFunctionParams8$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams8$Outbound = {
+export type FunctionParams8$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams8$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams8$Outbound,
+export const FunctionParams8$outboundSchema: z.ZodType<
+  FunctionParams8$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams8
+  FunctionParams8
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody58Type$outboundSchema,
@@ -6930,30 +6942,28 @@ export const UpdateEvalFunctionParams8$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams8$ {
-  /** @deprecated use `UpdateEvalFunctionParams8$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams8$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams8$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams8$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams8$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams8$Outbound;
+export namespace FunctionParams8$ {
+  /** @deprecated use `FunctionParams8$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams8$inboundSchema;
+  /** @deprecated use `FunctionParams8$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams8$outboundSchema;
+  /** @deprecated use `FunctionParams8$Outbound` instead. */
+  export type Outbound = FunctionParams8$Outbound;
 }
 
-export function updateEvalFunctionParams8ToJSON(
-  updateEvalFunctionParams8: UpdateEvalFunctionParams8,
+export function functionParams8ToJSON(
+  functionParams8: FunctionParams8,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams8$outboundSchema.parse(updateEvalFunctionParams8),
-  );
+  return JSON.stringify(FunctionParams8$outboundSchema.parse(functionParams8));
 }
 
-export function updateEvalFunctionParams8FromJSON(
+export function functionParams8FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams8, SDKValidationError> {
+): SafeParseResult<FunctionParams8, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams8$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams8' from JSON`,
+    (x) => FunctionParams8$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams8' from JSON`,
   );
 }
 
@@ -6986,8 +6996,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams7$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams7,
+export const FunctionParams7$inboundSchema: z.ZodType<
+  FunctionParams7,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6996,15 +7006,15 @@ export const UpdateEvalFunctionParams7$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams7$Outbound = {
+export type FunctionParams7$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams7$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams7$Outbound,
+export const FunctionParams7$outboundSchema: z.ZodType<
+  FunctionParams7$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams7
+  FunctionParams7
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody5Type$outboundSchema,
@@ -7014,30 +7024,28 @@ export const UpdateEvalFunctionParams7$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams7$ {
-  /** @deprecated use `UpdateEvalFunctionParams7$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams7$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams7$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams7$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams7$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams7$Outbound;
+export namespace FunctionParams7$ {
+  /** @deprecated use `FunctionParams7$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams7$inboundSchema;
+  /** @deprecated use `FunctionParams7$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams7$outboundSchema;
+  /** @deprecated use `FunctionParams7$Outbound` instead. */
+  export type Outbound = FunctionParams7$Outbound;
 }
 
-export function updateEvalFunctionParams7ToJSON(
-  updateEvalFunctionParams7: UpdateEvalFunctionParams7,
+export function functionParams7ToJSON(
+  functionParams7: FunctionParams7,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams7$outboundSchema.parse(updateEvalFunctionParams7),
-  );
+  return JSON.stringify(FunctionParams7$outboundSchema.parse(functionParams7));
 }
 
-export function updateEvalFunctionParams7FromJSON(
+export function functionParams7FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams7, SDKValidationError> {
+): SafeParseResult<FunctionParams7, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams7$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams7' from JSON`,
+    (x) => FunctionParams7$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams7' from JSON`,
   );
 }
 
@@ -7070,8 +7078,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponse
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams6$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams6,
+export const FunctionParams6$inboundSchema: z.ZodType<
+  FunctionParams6,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7080,15 +7088,15 @@ export const UpdateEvalFunctionParams6$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams6$Outbound = {
+export type FunctionParams6$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams6$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams6$Outbound,
+export const FunctionParams6$outboundSchema: z.ZodType<
+  FunctionParams6$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams6
+  FunctionParams6
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBodyType$outboundSchema,
@@ -7098,30 +7106,28 @@ export const UpdateEvalFunctionParams6$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams6$ {
-  /** @deprecated use `UpdateEvalFunctionParams6$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams6$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams6$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams6$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams6$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams6$Outbound;
+export namespace FunctionParams6$ {
+  /** @deprecated use `FunctionParams6$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams6$inboundSchema;
+  /** @deprecated use `FunctionParams6$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams6$outboundSchema;
+  /** @deprecated use `FunctionParams6$Outbound` instead. */
+  export type Outbound = FunctionParams6$Outbound;
 }
 
-export function updateEvalFunctionParams6ToJSON(
-  updateEvalFunctionParams6: UpdateEvalFunctionParams6,
+export function functionParams6ToJSON(
+  functionParams6: FunctionParams6,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams6$outboundSchema.parse(updateEvalFunctionParams6),
-  );
+  return JSON.stringify(FunctionParams6$outboundSchema.parse(functionParams6));
 }
 
-export function updateEvalFunctionParams6FromJSON(
+export function functionParams6FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams6, SDKValidationError> {
+): SafeParseResult<FunctionParams6, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams6$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams6' from JSON`,
+    (x) => FunctionParams6$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams6' from JSON`,
   );
 }
 
@@ -7151,8 +7157,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONType$ {
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams5$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams5,
+export const FunctionParams5$inboundSchema: z.ZodType<
+  FunctionParams5,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7161,15 +7167,15 @@ export const UpdateEvalFunctionParams5$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams5$Outbound = {
+export type FunctionParams5$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams5$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams5$Outbound,
+export const FunctionParams5$outboundSchema: z.ZodType<
+  FunctionParams5$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams5
+  FunctionParams5
 > = z.object({
   type:
     UpdateEvalFunctionParamsEvalsResponse200ApplicationJSONType$outboundSchema,
@@ -7179,30 +7185,28 @@ export const UpdateEvalFunctionParams5$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams5$ {
-  /** @deprecated use `UpdateEvalFunctionParams5$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams5$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams5$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams5$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams5$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams5$Outbound;
+export namespace FunctionParams5$ {
+  /** @deprecated use `FunctionParams5$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams5$inboundSchema;
+  /** @deprecated use `FunctionParams5$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams5$outboundSchema;
+  /** @deprecated use `FunctionParams5$Outbound` instead. */
+  export type Outbound = FunctionParams5$Outbound;
 }
 
-export function updateEvalFunctionParams5ToJSON(
-  updateEvalFunctionParams5: UpdateEvalFunctionParams5,
+export function functionParams5ToJSON(
+  functionParams5: FunctionParams5,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams5$outboundSchema.parse(updateEvalFunctionParams5),
-  );
+  return JSON.stringify(FunctionParams5$outboundSchema.parse(functionParams5));
 }
 
-export function updateEvalFunctionParams5FromJSON(
+export function functionParams5FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams5, SDKValidationError> {
+): SafeParseResult<FunctionParams5, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams5' from JSON`,
+    (x) => FunctionParams5$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams5' from JSON`,
   );
 }
 
@@ -7230,8 +7234,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponse200Type$ {
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams4$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams4,
+export const FunctionParams4$inboundSchema: z.ZodType<
+  FunctionParams4,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7240,16 +7244,16 @@ export const UpdateEvalFunctionParams4$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams4$Outbound = {
+export type FunctionParams4$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams4$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams4$Outbound,
+export const FunctionParams4$outboundSchema: z.ZodType<
+  FunctionParams4$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams4
+  FunctionParams4
 > = z.object({
   type: UpdateEvalFunctionParamsEvalsResponse200Type$outboundSchema,
   keywords: z.array(z.string()),
@@ -7259,30 +7263,28 @@ export const UpdateEvalFunctionParams4$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams4$ {
-  /** @deprecated use `UpdateEvalFunctionParams4$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams4$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams4$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams4$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams4$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams4$Outbound;
+export namespace FunctionParams4$ {
+  /** @deprecated use `FunctionParams4$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams4$inboundSchema;
+  /** @deprecated use `FunctionParams4$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams4$outboundSchema;
+  /** @deprecated use `FunctionParams4$Outbound` instead. */
+  export type Outbound = FunctionParams4$Outbound;
 }
 
-export function updateEvalFunctionParams4ToJSON(
-  updateEvalFunctionParams4: UpdateEvalFunctionParams4,
+export function functionParams4ToJSON(
+  functionParams4: FunctionParams4,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams4$outboundSchema.parse(updateEvalFunctionParams4),
-  );
+  return JSON.stringify(FunctionParams4$outboundSchema.parse(functionParams4));
 }
 
-export function updateEvalFunctionParams4FromJSON(
+export function functionParams4FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams4, SDKValidationError> {
+): SafeParseResult<FunctionParams4, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams4' from JSON`,
+    (x) => FunctionParams4$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams4' from JSON`,
   );
 }
 
@@ -7310,8 +7312,8 @@ export namespace UpdateEvalFunctionParamsEvalsResponseType$ {
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams3$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams3,
+export const FunctionParams3$inboundSchema: z.ZodType<
+  FunctionParams3,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7320,16 +7322,16 @@ export const UpdateEvalFunctionParams3$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams3$Outbound = {
+export type FunctionParams3$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams3$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams3$Outbound,
+export const FunctionParams3$outboundSchema: z.ZodType<
+  FunctionParams3$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams3
+  FunctionParams3
 > = z.object({
   type: UpdateEvalFunctionParamsEvalsResponseType$outboundSchema,
   keywords: z.array(z.string()),
@@ -7339,30 +7341,28 @@ export const UpdateEvalFunctionParams3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams3$ {
-  /** @deprecated use `UpdateEvalFunctionParams3$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams3$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams3$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams3$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams3$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams3$Outbound;
+export namespace FunctionParams3$ {
+  /** @deprecated use `FunctionParams3$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams3$inboundSchema;
+  /** @deprecated use `FunctionParams3$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams3$outboundSchema;
+  /** @deprecated use `FunctionParams3$Outbound` instead. */
+  export type Outbound = FunctionParams3$Outbound;
 }
 
-export function updateEvalFunctionParams3ToJSON(
-  updateEvalFunctionParams3: UpdateEvalFunctionParams3,
+export function functionParams3ToJSON(
+  functionParams3: FunctionParams3,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams3$outboundSchema.parse(updateEvalFunctionParams3),
-  );
+  return JSON.stringify(FunctionParams3$outboundSchema.parse(functionParams3));
 }
 
-export function updateEvalFunctionParams3FromJSON(
+export function functionParams3FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams3, SDKValidationError> {
+): SafeParseResult<FunctionParams3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams3' from JSON`,
+    (x) => FunctionParams3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams3' from JSON`,
   );
 }
 
@@ -7389,8 +7389,8 @@ export namespace UpdateEvalFunctionParamsEvalsType$ {
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams2$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams2,
+export const FunctionParams2$inboundSchema: z.ZodType<
+  FunctionParams2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7399,16 +7399,16 @@ export const UpdateEvalFunctionParams2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams2$Outbound = {
+export type FunctionParams2$Outbound = {
   type: string;
   keywords: Array<string>;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams2$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams2$Outbound,
+export const FunctionParams2$outboundSchema: z.ZodType<
+  FunctionParams2$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams2
+  FunctionParams2
 > = z.object({
   type: UpdateEvalFunctionParamsEvalsType$outboundSchema,
   keywords: z.array(z.string()),
@@ -7418,30 +7418,28 @@ export const UpdateEvalFunctionParams2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams2$ {
-  /** @deprecated use `UpdateEvalFunctionParams2$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams2$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams2$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams2$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams2$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams2$Outbound;
+export namespace FunctionParams2$ {
+  /** @deprecated use `FunctionParams2$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams2$inboundSchema;
+  /** @deprecated use `FunctionParams2$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams2$outboundSchema;
+  /** @deprecated use `FunctionParams2$Outbound` instead. */
+  export type Outbound = FunctionParams2$Outbound;
 }
 
-export function updateEvalFunctionParams2ToJSON(
-  updateEvalFunctionParams2: UpdateEvalFunctionParams2,
+export function functionParams2ToJSON(
+  functionParams2: FunctionParams2,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams2$outboundSchema.parse(updateEvalFunctionParams2),
-  );
+  return JSON.stringify(FunctionParams2$outboundSchema.parse(functionParams2));
 }
 
-export function updateEvalFunctionParams2FromJSON(
+export function functionParams2FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams2, SDKValidationError> {
+): SafeParseResult<FunctionParams2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams2' from JSON`,
+    (x) => FunctionParams2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams2' from JSON`,
   );
 }
 
@@ -7467,8 +7465,8 @@ export namespace UpdateEvalFunctionParamsType$ {
 }
 
 /** @internal */
-export const UpdateEvalFunctionParams1$inboundSchema: z.ZodType<
-  UpdateEvalFunctionParams1,
+export const FunctionParams1$inboundSchema: z.ZodType<
+  FunctionParams1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -7477,16 +7475,16 @@ export const UpdateEvalFunctionParams1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalFunctionParams1$Outbound = {
+export type FunctionParams1$Outbound = {
   type: string;
   value: string;
 };
 
 /** @internal */
-export const UpdateEvalFunctionParams1$outboundSchema: z.ZodType<
-  UpdateEvalFunctionParams1$Outbound,
+export const FunctionParams1$outboundSchema: z.ZodType<
+  FunctionParams1$Outbound,
   z.ZodTypeDef,
-  UpdateEvalFunctionParams1
+  FunctionParams1
 > = z.object({
   type: UpdateEvalFunctionParamsType$outboundSchema,
   value: z.string(),
@@ -7496,30 +7494,28 @@ export const UpdateEvalFunctionParams1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalFunctionParams1$ {
-  /** @deprecated use `UpdateEvalFunctionParams1$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalFunctionParams1$inboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams1$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalFunctionParams1$outboundSchema;
-  /** @deprecated use `UpdateEvalFunctionParams1$Outbound` instead. */
-  export type Outbound = UpdateEvalFunctionParams1$Outbound;
+export namespace FunctionParams1$ {
+  /** @deprecated use `FunctionParams1$inboundSchema` instead. */
+  export const inboundSchema = FunctionParams1$inboundSchema;
+  /** @deprecated use `FunctionParams1$outboundSchema` instead. */
+  export const outboundSchema = FunctionParams1$outboundSchema;
+  /** @deprecated use `FunctionParams1$Outbound` instead. */
+  export type Outbound = FunctionParams1$Outbound;
 }
 
-export function updateEvalFunctionParams1ToJSON(
-  updateEvalFunctionParams1: UpdateEvalFunctionParams1,
+export function functionParams1ToJSON(
+  functionParams1: FunctionParams1,
 ): string {
-  return JSON.stringify(
-    UpdateEvalFunctionParams1$outboundSchema.parse(updateEvalFunctionParams1),
-  );
+  return JSON.stringify(FunctionParams1$outboundSchema.parse(functionParams1));
 }
 
-export function updateEvalFunctionParams1FromJSON(
+export function functionParams1FromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalFunctionParams1, SDKValidationError> {
+): SafeParseResult<FunctionParams1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalFunctionParams1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalFunctionParams1' from JSON`,
+    (x) => FunctionParams1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams1' from JSON`,
   );
 }
 
@@ -7529,31 +7525,31 @@ export const ResponseBodyFunctionParams$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdateEvalFunctionParams12$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams1$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams2$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams3$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams4$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams8$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams9$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams11$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams13$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams15$inboundSchema),
+  z.lazy(() => FunctionParams12$inboundSchema),
+  z.lazy(() => FunctionParams1$inboundSchema),
+  z.lazy(() => FunctionParams2$inboundSchema),
+  z.lazy(() => FunctionParams3$inboundSchema),
+  z.lazy(() => FunctionParams4$inboundSchema),
+  z.lazy(() => FunctionParams8$inboundSchema),
+  z.lazy(() => FunctionParams9$inboundSchema),
+  z.lazy(() => FunctionParams11$inboundSchema),
+  z.lazy(() => FunctionParams13$inboundSchema),
+  z.lazy(() => FunctionParams15$inboundSchema),
   z.lazy(() => FunctionParams25$inboundSchema),
   z.lazy(() => FunctionParams26$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams5$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams6$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams7$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams10$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams14$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams16$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams17$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams18$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams19$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams20$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams21$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams22$inboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams23$inboundSchema),
+  z.lazy(() => FunctionParams5$inboundSchema),
+  z.lazy(() => FunctionParams6$inboundSchema),
+  z.lazy(() => FunctionParams7$inboundSchema),
+  z.lazy(() => FunctionParams10$inboundSchema),
+  z.lazy(() => FunctionParams14$inboundSchema),
+  z.lazy(() => FunctionParams16$inboundSchema),
+  z.lazy(() => FunctionParams17$inboundSchema),
+  z.lazy(() => FunctionParams18$inboundSchema),
+  z.lazy(() => FunctionParams19$inboundSchema),
+  z.lazy(() => FunctionParams20$inboundSchema),
+  z.lazy(() => FunctionParams21$inboundSchema),
+  z.lazy(() => FunctionParams22$inboundSchema),
+  z.lazy(() => FunctionParams23$inboundSchema),
   z.lazy(() => FunctionParams24$inboundSchema),
   z.lazy(() => FunctionParams27$inboundSchema),
   z.lazy(() => FunctionParams28$inboundSchema),
@@ -7568,31 +7564,31 @@ export const ResponseBodyFunctionParams$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ResponseBodyFunctionParams$Outbound =
-  | UpdateEvalFunctionParams12$Outbound
-  | UpdateEvalFunctionParams1$Outbound
-  | UpdateEvalFunctionParams2$Outbound
-  | UpdateEvalFunctionParams3$Outbound
-  | UpdateEvalFunctionParams4$Outbound
-  | UpdateEvalFunctionParams8$Outbound
-  | UpdateEvalFunctionParams9$Outbound
-  | UpdateEvalFunctionParams11$Outbound
-  | UpdateEvalFunctionParams13$Outbound
-  | UpdateEvalFunctionParams15$Outbound
+  | FunctionParams12$Outbound
+  | FunctionParams1$Outbound
+  | FunctionParams2$Outbound
+  | FunctionParams3$Outbound
+  | FunctionParams4$Outbound
+  | FunctionParams8$Outbound
+  | FunctionParams9$Outbound
+  | FunctionParams11$Outbound
+  | FunctionParams13$Outbound
+  | FunctionParams15$Outbound
   | FunctionParams25$Outbound
   | FunctionParams26$Outbound
-  | UpdateEvalFunctionParams5$Outbound
-  | UpdateEvalFunctionParams6$Outbound
-  | UpdateEvalFunctionParams7$Outbound
-  | UpdateEvalFunctionParams10$Outbound
-  | UpdateEvalFunctionParams14$Outbound
-  | UpdateEvalFunctionParams16$Outbound
-  | UpdateEvalFunctionParams17$Outbound
-  | UpdateEvalFunctionParams18$Outbound
-  | UpdateEvalFunctionParams19$Outbound
-  | UpdateEvalFunctionParams20$Outbound
-  | UpdateEvalFunctionParams21$Outbound
-  | UpdateEvalFunctionParams22$Outbound
-  | UpdateEvalFunctionParams23$Outbound
+  | FunctionParams5$Outbound
+  | FunctionParams6$Outbound
+  | FunctionParams7$Outbound
+  | FunctionParams10$Outbound
+  | FunctionParams14$Outbound
+  | FunctionParams16$Outbound
+  | FunctionParams17$Outbound
+  | FunctionParams18$Outbound
+  | FunctionParams19$Outbound
+  | FunctionParams20$Outbound
+  | FunctionParams21$Outbound
+  | FunctionParams22$Outbound
+  | FunctionParams23$Outbound
   | FunctionParams24$Outbound
   | FunctionParams27$Outbound
   | FunctionParams28$Outbound
@@ -7610,31 +7606,31 @@ export const ResponseBodyFunctionParams$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBodyFunctionParams
 > = z.union([
-  z.lazy(() => UpdateEvalFunctionParams12$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams1$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams2$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams3$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams4$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams8$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams9$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams11$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams13$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams15$outboundSchema),
+  z.lazy(() => FunctionParams12$outboundSchema),
+  z.lazy(() => FunctionParams1$outboundSchema),
+  z.lazy(() => FunctionParams2$outboundSchema),
+  z.lazy(() => FunctionParams3$outboundSchema),
+  z.lazy(() => FunctionParams4$outboundSchema),
+  z.lazy(() => FunctionParams8$outboundSchema),
+  z.lazy(() => FunctionParams9$outboundSchema),
+  z.lazy(() => FunctionParams11$outboundSchema),
+  z.lazy(() => FunctionParams13$outboundSchema),
+  z.lazy(() => FunctionParams15$outboundSchema),
   z.lazy(() => FunctionParams25$outboundSchema),
   z.lazy(() => FunctionParams26$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams5$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams6$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams7$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams10$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams14$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams16$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams17$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams18$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams19$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams20$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams21$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams22$outboundSchema),
-  z.lazy(() => UpdateEvalFunctionParams23$outboundSchema),
+  z.lazy(() => FunctionParams5$outboundSchema),
+  z.lazy(() => FunctionParams6$outboundSchema),
+  z.lazy(() => FunctionParams7$outboundSchema),
+  z.lazy(() => FunctionParams10$outboundSchema),
+  z.lazy(() => FunctionParams14$outboundSchema),
+  z.lazy(() => FunctionParams16$outboundSchema),
+  z.lazy(() => FunctionParams17$outboundSchema),
+  z.lazy(() => FunctionParams18$outboundSchema),
+  z.lazy(() => FunctionParams19$outboundSchema),
+  z.lazy(() => FunctionParams20$outboundSchema),
+  z.lazy(() => FunctionParams21$outboundSchema),
+  z.lazy(() => FunctionParams22$outboundSchema),
+  z.lazy(() => FunctionParams23$outboundSchema),
   z.lazy(() => FunctionParams24$outboundSchema),
   z.lazy(() => FunctionParams27$outboundSchema),
   z.lazy(() => FunctionParams28$outboundSchema),
@@ -7679,15 +7675,15 @@ export function responseBodyFunctionParamsFromJSON(
 }
 
 /** @internal */
-export const UpdateEvalResponseBodyFunction$inboundSchema: z.ZodType<
-  UpdateEvalResponseBodyFunction,
+export const ResponseBodyFunction$inboundSchema: z.ZodType<
+  ResponseBodyFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$inboundSchema
@@ -7698,31 +7694,31 @@ export const UpdateEvalResponseBodyFunction$inboundSchema: z.ZodType<
   ]).optional(),
   type: UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType$inboundSchema,
   function_params: z.union([
-    z.lazy(() => UpdateEvalFunctionParams12$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams1$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams2$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams3$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams4$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams8$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams9$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams11$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams13$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams15$inboundSchema),
+    z.lazy(() => FunctionParams12$inboundSchema),
+    z.lazy(() => FunctionParams1$inboundSchema),
+    z.lazy(() => FunctionParams2$inboundSchema),
+    z.lazy(() => FunctionParams3$inboundSchema),
+    z.lazy(() => FunctionParams4$inboundSchema),
+    z.lazy(() => FunctionParams8$inboundSchema),
+    z.lazy(() => FunctionParams9$inboundSchema),
+    z.lazy(() => FunctionParams11$inboundSchema),
+    z.lazy(() => FunctionParams13$inboundSchema),
+    z.lazy(() => FunctionParams15$inboundSchema),
     z.lazy(() => FunctionParams25$inboundSchema),
     z.lazy(() => FunctionParams26$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams5$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams6$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams7$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams10$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams14$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams16$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams17$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams18$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams19$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams20$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams21$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams22$inboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams23$inboundSchema),
+    z.lazy(() => FunctionParams5$inboundSchema),
+    z.lazy(() => FunctionParams6$inboundSchema),
+    z.lazy(() => FunctionParams7$inboundSchema),
+    z.lazy(() => FunctionParams10$inboundSchema),
+    z.lazy(() => FunctionParams14$inboundSchema),
+    z.lazy(() => FunctionParams16$inboundSchema),
+    z.lazy(() => FunctionParams17$inboundSchema),
+    z.lazy(() => FunctionParams18$inboundSchema),
+    z.lazy(() => FunctionParams19$inboundSchema),
+    z.lazy(() => FunctionParams20$inboundSchema),
+    z.lazy(() => FunctionParams21$inboundSchema),
+    z.lazy(() => FunctionParams22$inboundSchema),
+    z.lazy(() => FunctionParams23$inboundSchema),
     z.lazy(() => FunctionParams24$inboundSchema),
     z.lazy(() => FunctionParams27$inboundSchema),
     z.lazy(() => FunctionParams28$inboundSchema),
@@ -7744,7 +7740,7 @@ export const UpdateEvalResponseBodyFunction$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateEvalResponseBodyFunction$Outbound = {
+export type ResponseBodyFunction$Outbound = {
   _id: string;
   description: string;
   created: string;
@@ -7755,31 +7751,31 @@ export type UpdateEvalResponseBodyFunction$Outbound = {
     | undefined;
   type: string;
   function_params:
-    | UpdateEvalFunctionParams12$Outbound
-    | UpdateEvalFunctionParams1$Outbound
-    | UpdateEvalFunctionParams2$Outbound
-    | UpdateEvalFunctionParams3$Outbound
-    | UpdateEvalFunctionParams4$Outbound
-    | UpdateEvalFunctionParams8$Outbound
-    | UpdateEvalFunctionParams9$Outbound
-    | UpdateEvalFunctionParams11$Outbound
-    | UpdateEvalFunctionParams13$Outbound
-    | UpdateEvalFunctionParams15$Outbound
+    | FunctionParams12$Outbound
+    | FunctionParams1$Outbound
+    | FunctionParams2$Outbound
+    | FunctionParams3$Outbound
+    | FunctionParams4$Outbound
+    | FunctionParams8$Outbound
+    | FunctionParams9$Outbound
+    | FunctionParams11$Outbound
+    | FunctionParams13$Outbound
+    | FunctionParams15$Outbound
     | FunctionParams25$Outbound
     | FunctionParams26$Outbound
-    | UpdateEvalFunctionParams5$Outbound
-    | UpdateEvalFunctionParams6$Outbound
-    | UpdateEvalFunctionParams7$Outbound
-    | UpdateEvalFunctionParams10$Outbound
-    | UpdateEvalFunctionParams14$Outbound
-    | UpdateEvalFunctionParams16$Outbound
-    | UpdateEvalFunctionParams17$Outbound
-    | UpdateEvalFunctionParams18$Outbound
-    | UpdateEvalFunctionParams19$Outbound
-    | UpdateEvalFunctionParams20$Outbound
-    | UpdateEvalFunctionParams21$Outbound
-    | UpdateEvalFunctionParams22$Outbound
-    | UpdateEvalFunctionParams23$Outbound
+    | FunctionParams5$Outbound
+    | FunctionParams6$Outbound
+    | FunctionParams7$Outbound
+    | FunctionParams10$Outbound
+    | FunctionParams14$Outbound
+    | FunctionParams16$Outbound
+    | FunctionParams17$Outbound
+    | FunctionParams18$Outbound
+    | FunctionParams19$Outbound
+    | FunctionParams20$Outbound
+    | FunctionParams21$Outbound
+    | FunctionParams22$Outbound
+    | FunctionParams23$Outbound
     | FunctionParams24$Outbound
     | FunctionParams27$Outbound
     | FunctionParams28$Outbound
@@ -7794,15 +7790,15 @@ export type UpdateEvalResponseBodyFunction$Outbound = {
 };
 
 /** @internal */
-export const UpdateEvalResponseBodyFunction$outboundSchema: z.ZodType<
-  UpdateEvalResponseBodyFunction$Outbound,
+export const ResponseBodyFunction$outboundSchema: z.ZodType<
+  ResponseBodyFunction$Outbound,
   z.ZodTypeDef,
-  UpdateEvalResponseBodyFunction
+  ResponseBodyFunction
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBody5Number$outboundSchema
@@ -7814,31 +7810,31 @@ export const UpdateEvalResponseBodyFunction$outboundSchema: z.ZodType<
   type:
     UpdateEvalResponseBodyEvalsResponse200ApplicationJSONType$outboundSchema,
   functionParams: z.union([
-    z.lazy(() => UpdateEvalFunctionParams12$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams1$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams2$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams3$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams4$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams8$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams9$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams11$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams13$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams15$outboundSchema),
+    z.lazy(() => FunctionParams12$outboundSchema),
+    z.lazy(() => FunctionParams1$outboundSchema),
+    z.lazy(() => FunctionParams2$outboundSchema),
+    z.lazy(() => FunctionParams3$outboundSchema),
+    z.lazy(() => FunctionParams4$outboundSchema),
+    z.lazy(() => FunctionParams8$outboundSchema),
+    z.lazy(() => FunctionParams9$outboundSchema),
+    z.lazy(() => FunctionParams11$outboundSchema),
+    z.lazy(() => FunctionParams13$outboundSchema),
+    z.lazy(() => FunctionParams15$outboundSchema),
     z.lazy(() => FunctionParams25$outboundSchema),
     z.lazy(() => FunctionParams26$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams5$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams6$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams7$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams10$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams14$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams16$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams17$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams18$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams19$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams20$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams21$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams22$outboundSchema),
-    z.lazy(() => UpdateEvalFunctionParams23$outboundSchema),
+    z.lazy(() => FunctionParams5$outboundSchema),
+    z.lazy(() => FunctionParams6$outboundSchema),
+    z.lazy(() => FunctionParams7$outboundSchema),
+    z.lazy(() => FunctionParams10$outboundSchema),
+    z.lazy(() => FunctionParams14$outboundSchema),
+    z.lazy(() => FunctionParams16$outboundSchema),
+    z.lazy(() => FunctionParams17$outboundSchema),
+    z.lazy(() => FunctionParams18$outboundSchema),
+    z.lazy(() => FunctionParams19$outboundSchema),
+    z.lazy(() => FunctionParams20$outboundSchema),
+    z.lazy(() => FunctionParams21$outboundSchema),
+    z.lazy(() => FunctionParams22$outboundSchema),
+    z.lazy(() => FunctionParams23$outboundSchema),
     z.lazy(() => FunctionParams24$outboundSchema),
     z.lazy(() => FunctionParams27$outboundSchema),
     z.lazy(() => FunctionParams28$outboundSchema),
@@ -7863,32 +7859,30 @@ export const UpdateEvalResponseBodyFunction$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateEvalResponseBodyFunction$ {
-  /** @deprecated use `UpdateEvalResponseBodyFunction$inboundSchema` instead. */
-  export const inboundSchema = UpdateEvalResponseBodyFunction$inboundSchema;
-  /** @deprecated use `UpdateEvalResponseBodyFunction$outboundSchema` instead. */
-  export const outboundSchema = UpdateEvalResponseBodyFunction$outboundSchema;
-  /** @deprecated use `UpdateEvalResponseBodyFunction$Outbound` instead. */
-  export type Outbound = UpdateEvalResponseBodyFunction$Outbound;
+export namespace ResponseBodyFunction$ {
+  /** @deprecated use `ResponseBodyFunction$inboundSchema` instead. */
+  export const inboundSchema = ResponseBodyFunction$inboundSchema;
+  /** @deprecated use `ResponseBodyFunction$outboundSchema` instead. */
+  export const outboundSchema = ResponseBodyFunction$outboundSchema;
+  /** @deprecated use `ResponseBodyFunction$Outbound` instead. */
+  export type Outbound = ResponseBodyFunction$Outbound;
 }
 
-export function updateEvalResponseBodyFunctionToJSON(
-  updateEvalResponseBodyFunction: UpdateEvalResponseBodyFunction,
+export function responseBodyFunctionToJSON(
+  responseBodyFunction: ResponseBodyFunction,
 ): string {
   return JSON.stringify(
-    UpdateEvalResponseBodyFunction$outboundSchema.parse(
-      updateEvalResponseBodyFunction,
-    ),
+    ResponseBodyFunction$outboundSchema.parse(responseBodyFunction),
   );
 }
 
-export function updateEvalResponseBodyFunctionFromJSON(
+export function responseBodyFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateEvalResponseBodyFunction, SDKValidationError> {
+): SafeParseResult<ResponseBodyFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateEvalResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateEvalResponseBodyFunction' from JSON`,
+    (x) => ResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyFunction' from JSON`,
   );
 }
 
@@ -8244,8 +8238,8 @@ export const UpdateEvalResponseBodyPython$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$inboundSchema
@@ -8287,8 +8281,8 @@ export const UpdateEvalResponseBodyPython$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONResponseBodyNumber$outboundSchema
@@ -8709,8 +8703,8 @@ export const UpdateEvalResponseBodyHTTP$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$inboundSchema
@@ -8758,8 +8752,8 @@ export const UpdateEvalResponseBodyHTTP$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200ApplicationJSONNumber$outboundSchema
@@ -9149,8 +9143,8 @@ export const UpdateEvalResponseBodyJSON$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponse200Number$inboundSchema),
     z.lazy(() =>
@@ -9190,8 +9184,8 @@ export const UpdateEvalResponseBodyJSON$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() =>
       UpdateEvalGuardrailConfigEvalsResponse200Number$outboundSchema
@@ -9549,8 +9543,8 @@ export const UpdateEvalResponseBodyLLM$inboundSchema: z.ZodType<
 > = z.object({
   _id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrail_config: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$inboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$inboundSchema),
@@ -9590,8 +9584,8 @@ export const UpdateEvalResponseBodyLLM$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   description: z.string(),
-  created: z.string().default("2025-10-25T11:11:23.488Z"),
-  updated: z.string().default("2025-10-25T11:11:23.488Z"),
+  created: z.string().default("2025-10-27T05:23:37.413Z"),
+  updated: z.string().default("2025-10-27T05:23:37.413Z"),
   guardrailConfig: z.union([
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseNumber$outboundSchema),
     z.lazy(() => UpdateEvalGuardrailConfigEvalsResponseBoolean$outboundSchema),
@@ -9649,7 +9643,7 @@ export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => ResponseBodyRagas$inboundSchema),
   z.lazy(() => UpdateEvalResponseBodyJSON$inboundSchema),
   z.lazy(() => UpdateEvalResponseBodyPython$inboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyFunction$inboundSchema),
+  z.lazy(() => ResponseBodyFunction$inboundSchema),
   z.lazy(() => ResponseBodyTypescript$inboundSchema),
 ]);
 
@@ -9660,7 +9654,7 @@ export type UpdateEvalResponseBody$Outbound =
   | ResponseBodyRagas$Outbound
   | UpdateEvalResponseBodyJSON$Outbound
   | UpdateEvalResponseBodyPython$Outbound
-  | UpdateEvalResponseBodyFunction$Outbound
+  | ResponseBodyFunction$Outbound
   | ResponseBodyTypescript$Outbound;
 
 /** @internal */
@@ -9674,7 +9668,7 @@ export const UpdateEvalResponseBody$outboundSchema: z.ZodType<
   z.lazy(() => ResponseBodyRagas$outboundSchema),
   z.lazy(() => UpdateEvalResponseBodyJSON$outboundSchema),
   z.lazy(() => UpdateEvalResponseBodyPython$outboundSchema),
-  z.lazy(() => UpdateEvalResponseBodyFunction$outboundSchema),
+  z.lazy(() => ResponseBodyFunction$outboundSchema),
   z.lazy(() => ResponseBodyTypescript$outboundSchema),
 ]);
 

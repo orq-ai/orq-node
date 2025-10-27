@@ -1,26 +1,50 @@
 # DeploymentGetConfigMessages
 
-## Example Usage
+
+## Supported Types
+
+### `operations.MessagesDeveloperMessage`
 
 ```typescript
-import { DeploymentGetConfigMessages } from "@orq-ai/node/models/operations";
-
-let value: DeploymentGetConfigMessages = {
-  role: "user",
-  content: [
-    {
-      type: "text",
-      text: "<value>",
-    },
-  ],
+const value: operations.MessagesDeveloperMessage = {
+  role: "developer",
+  content: "<value>",
 };
 ```
 
-## Fields
+### `operations.MessagesSystemMessage`
 
-| Field                                                                                                                                                                                                                                                                    | Type                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `role`                                                                                                                                                                                                                                                                   | [operations.DeploymentGetConfigRole](../../models/operations/deploymentgetconfigrole.md)                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                       | The role of the prompt message                                                                                                                                                                                                                                           |
-| `content`                                                                                                                                                                                                                                                                | *operations.DeploymentGetConfigContent*                                                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                                       | The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts.  |
-| `toolCalls`                                                                                                                                                                                                                                                              | [operations.DeploymentGetConfigToolCalls](../../models/operations/deploymentgetconfigtoolcalls.md)[]                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
-| `toolCallId`                                                                                                                                                                                                                                                             | *string*                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                       | N/A                                                                                                                                                                                                                                                                      |
+```typescript
+const value: operations.MessagesSystemMessage = {
+  role: "system",
+  content: "<value>",
+};
+```
+
+### `operations.MessagesUserMessage`
+
+```typescript
+const value: operations.MessagesUserMessage = {
+  role: "user",
+  content: [],
+};
+```
+
+### `operations.MessagesAssistantMessage`
+
+```typescript
+const value: operations.MessagesAssistantMessage = {
+  role: "assistant",
+};
+```
+
+### `operations.MessagesToolMessage`
+
+```typescript
+const value: operations.MessagesToolMessage = {
+  role: "tool",
+  content: "<value>",
+  toolCallId: "<id>",
+};
+```
+

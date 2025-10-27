@@ -5,13 +5,13 @@ Successfully created the tool.
 
 ## Supported Types
 
-### `operations.CreateToolResponseBody1`
+### `operations.ResponseBody1`
 
 ```typescript
-const value: operations.CreateToolResponseBody1 = {
+const value: operations.ResponseBody1 = {
   path: "Default",
   key: "<key>",
-  description: "agile although twist or",
+  description: "unto and times upon",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",
@@ -23,13 +23,13 @@ const value: operations.CreateToolResponseBody1 = {
 };
 ```
 
-### `operations.CreateToolResponseBody2`
+### `operations.ResponseBody2`
 
 ```typescript
-const value: operations.CreateToolResponseBody2 = {
+const value: operations.ResponseBody2 = {
   path: "Default",
   key: "<key>",
-  description: "midst righteously needy",
+  description: "noteworthy acquire below ouch palate nor",
   projectId: "<id>",
   workspaceId: "<id>",
   created: "<value>",

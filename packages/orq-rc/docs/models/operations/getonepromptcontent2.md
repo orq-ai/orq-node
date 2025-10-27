@@ -18,7 +18,7 @@ const value: operations.GetOnePrompt21 = {
 const value: operations.GetOnePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://unsteady-flame.org",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```

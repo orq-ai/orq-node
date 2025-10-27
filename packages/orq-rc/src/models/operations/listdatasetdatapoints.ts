@@ -10,6 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListDatasetDatapointsRequest = {
+  /**
+   * The unique identifier of the dataset
+   */
   datasetId: string;
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
@@ -317,6 +320,9 @@ export type ListDatasetDatapoints2DatasetsResponse200Type = ClosedEnum<
   typeof ListDatasetDatapoints2DatasetsResponse200Type
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type ListDatasetDatapoints2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -341,6 +347,9 @@ export type ListDatasetDatapoints24 = {
    * The type of the content part. Always `file`.
    */
   type: ListDatasetDatapoints2DatasetsResponse200Type;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: ListDatasetDatapoints2File;
 };
 
@@ -3352,7 +3361,7 @@ export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsSource$inboundSchema.default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-25T11:11:30.575Z",
+    "2025-10-27T05:23:46.761Z",
   ).transform(v => new Date(v)),
   type: ListDatasetDatapointsEvaluationsDatasetsType$inboundSchema,
   values: z.array(z.string()),
@@ -3388,7 +3397,7 @@ export const ListDatasetDatapointsEvaluations3$outboundSchema: z.ZodType<
   humanReviewId: z.string(),
   source: ListDatasetDatapointsEvaluationsSource$outboundSchema.default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-25T11:11:30.575Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-27T05:23:46.761Z"))
     .transform(v => v.toISOString()),
   type: ListDatasetDatapointsEvaluationsDatasetsType$outboundSchema,
   values: z.array(z.string()),
@@ -3526,7 +3535,7 @@ export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
     .default("orq"),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-25T11:11:30.575Z",
+    "2025-10-27T05:23:46.760Z",
   ).transform(v => new Date(v)),
   type: ListDatasetDatapointsEvaluationsType$inboundSchema,
   value: z.number(),
@@ -3564,7 +3573,7 @@ export const ListDatasetDatapointsEvaluations2$outboundSchema: z.ZodType<
   source: ListDatasetDatapointsEvaluationsDatasetsResponseSource$outboundSchema
     .default("orq"),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-25T11:11:30.575Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-27T05:23:46.760Z"))
     .transform(v => v.toISOString()),
   type: ListDatasetDatapointsEvaluationsType$outboundSchema,
   value: z.number(),
@@ -3697,7 +3706,7 @@ export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
   ),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2025-10-25T11:11:30.575Z",
+    "2025-10-27T05:23:46.759Z",
   ).transform(v => new Date(v)),
   type: ListDatasetDatapointsEvaluationsDatasetsResponseType$inboundSchema,
   value: z.string(),
@@ -3736,7 +3745,7 @@ export const ListDatasetDatapointsEvaluations1$outboundSchema: z.ZodType<
     "orq",
   ),
   reviewedById: z.string(),
-  reviewedAt: z.date().default(() => new Date("2025-10-25T11:11:30.575Z"))
+  reviewedAt: z.date().default(() => new Date("2025-10-27T05:23:46.759Z"))
     .transform(v => v.toISOString()),
   type: ListDatasetDatapointsEvaluationsDatasetsResponseType$outboundSchema,
   value: z.string(),
@@ -3879,7 +3888,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-25T11:11:21.225Z",
+    "2025-10-27T05:23:34.900Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -3960,7 +3969,7 @@ export const ListDatasetDatapointsData$outboundSchema: z.ZodType<
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-25T11:11:21.225Z"))
+  updated: z.date().default(() => new Date("2025-10-27T05:23:34.900Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

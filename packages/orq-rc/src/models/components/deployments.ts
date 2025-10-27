@@ -268,6 +268,9 @@ export type Deployments2PrefixMessagesType = ClosedEnum<
   typeof Deployments2PrefixMessagesType
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type FileT = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -292,6 +295,9 @@ export type Four = {
    * The type of the content part. Always `file`.
    */
   type: Deployments2PrefixMessagesType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: FileT;
 };
 
@@ -722,6 +728,9 @@ export type Deployments2Messages3Content4Type = ClosedEnum<
   typeof Deployments2Messages3Content4Type
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type TwoFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
@@ -746,6 +755,9 @@ export type Two4 = {
    * The type of the content part. Always `file`.
    */
   type: Deployments2Messages3Content4Type;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: TwoFile;
 };
 

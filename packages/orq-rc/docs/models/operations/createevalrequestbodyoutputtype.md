@@ -1,5 +1,7 @@
 # CreateEvalRequestBodyOutputType
 
+The type of output expected from the evaluator
+
 ## Example Usage
 
 ```typescript

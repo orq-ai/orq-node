@@ -31,11 +31,11 @@ export type ListKnowledgeBasesObject = ClosedEnum<
   typeof ListKnowledgeBasesObject
 >;
 
-export const ListKnowledgeBasesDataType = {
+export const ListKnowledgeBasesDataKnowledgeType = {
   External: "external",
 } as const;
-export type ListKnowledgeBasesDataType = ClosedEnum<
-  typeof ListKnowledgeBasesDataType
+export type ListKnowledgeBasesDataKnowledgeType = ClosedEnum<
+  typeof ListKnowledgeBasesDataKnowledgeType
 >;
 
 /**
@@ -99,7 +99,7 @@ export type DataExternalConfig = {
   apiUrl: string;
 };
 
-export type Data2 = {
+export type ListKnowledgeBasesData2 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -136,7 +136,7 @@ export type Data2 = {
    * The last update date of the knowledge base.
    */
   updated: string;
-  type?: ListKnowledgeBasesDataType | undefined;
+  type?: ListKnowledgeBasesDataKnowledgeType | undefined;
   /**
    * The retrieval settings for the knowledge base.
    */
@@ -144,10 +144,12 @@ export type Data2 = {
   externalConfig: DataExternalConfig;
 };
 
-export const DataType = {
+export const ListKnowledgeBasesDataType = {
   Internal: "internal",
 } as const;
-export type DataType = ClosedEnum<typeof DataType>;
+export type ListKnowledgeBasesDataType = ClosedEnum<
+  typeof ListKnowledgeBasesDataType
+>;
 
 /**
  * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
@@ -216,7 +218,7 @@ export type ListKnowledgeBasesDataRetrievalSettings = {
   agenticRagConfig?: ListKnowledgeBasesDataAgenticRagConfig | null | undefined;
 };
 
-export type Data1 = {
+export type ListKnowledgeBasesData1 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -253,7 +255,7 @@ export type Data1 = {
    * The last update date of the knowledge base.
    */
   updated: string;
-  type?: DataType | undefined;
+  type?: ListKnowledgeBasesDataType | undefined;
   /**
    * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
    */
@@ -264,14 +266,16 @@ export type Data1 = {
   model: string;
 };
 
-export type ListKnowledgeBasesData = Data1 | Data2;
+export type ListKnowledgeBasesData =
+  | ListKnowledgeBasesData1
+  | ListKnowledgeBasesData2;
 
 /**
  * Knowledge bases retrieved
  */
 export type ListKnowledgeBasesResponseBody = {
   object: ListKnowledgeBasesObject;
-  data: Array<Data1 | Data2>;
+  data: Array<ListKnowledgeBasesData1 | ListKnowledgeBasesData2>;
   hasMore: boolean;
 };
 
@@ -367,24 +371,26 @@ export namespace ListKnowledgeBasesObject$ {
 }
 
 /** @internal */
-export const ListKnowledgeBasesDataType$inboundSchema: z.ZodNativeEnum<
-  typeof ListKnowledgeBasesDataType
-> = z.nativeEnum(ListKnowledgeBasesDataType);
+export const ListKnowledgeBasesDataKnowledgeType$inboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesDataKnowledgeType
+> = z.nativeEnum(ListKnowledgeBasesDataKnowledgeType);
 
 /** @internal */
-export const ListKnowledgeBasesDataType$outboundSchema: z.ZodNativeEnum<
-  typeof ListKnowledgeBasesDataType
-> = ListKnowledgeBasesDataType$inboundSchema;
+export const ListKnowledgeBasesDataKnowledgeType$outboundSchema:
+  z.ZodNativeEnum<typeof ListKnowledgeBasesDataKnowledgeType> =
+    ListKnowledgeBasesDataKnowledgeType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ListKnowledgeBasesDataType$ {
-  /** @deprecated use `ListKnowledgeBasesDataType$inboundSchema` instead. */
-  export const inboundSchema = ListKnowledgeBasesDataType$inboundSchema;
-  /** @deprecated use `ListKnowledgeBasesDataType$outboundSchema` instead. */
-  export const outboundSchema = ListKnowledgeBasesDataType$outboundSchema;
+export namespace ListKnowledgeBasesDataKnowledgeType$ {
+  /** @deprecated use `ListKnowledgeBasesDataKnowledgeType$inboundSchema` instead. */
+  export const inboundSchema =
+    ListKnowledgeBasesDataKnowledgeType$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesDataKnowledgeType$outboundSchema` instead. */
+  export const outboundSchema =
+    ListKnowledgeBasesDataKnowledgeType$outboundSchema;
 }
 
 /** @internal */
@@ -660,34 +666,37 @@ export function dataExternalConfigFromJSON(
 }
 
 /** @internal */
-export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    created: z.string(),
-    description: z.string().optional(),
-    key: z.string(),
-    domain_id: z.string(),
-    path: z.string().optional(),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    updated: z.string(),
-    type: ListKnowledgeBasesDataType$inboundSchema.default("external"),
-    retrieval_settings: z.lazy(() => DataRetrievalSettings$inboundSchema)
-      .optional(),
-    external_config: z.lazy(() => DataExternalConfig$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "domain_id": "domainId",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "retrieval_settings": "retrievalSettings",
-      "external_config": "externalConfig",
-    });
+export const ListKnowledgeBasesData2$inboundSchema: z.ZodType<
+  ListKnowledgeBasesData2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domain_id: z.string(),
+  path: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: ListKnowledgeBasesDataKnowledgeType$inboundSchema.default("external"),
+  retrieval_settings: z.lazy(() => DataRetrievalSettings$inboundSchema)
+    .optional(),
+  external_config: z.lazy(() => DataExternalConfig$inboundSchema),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "retrieval_settings": "retrievalSettings",
+    "external_config": "externalConfig",
   });
+});
 
 /** @internal */
-export type Data2$Outbound = {
+export type ListKnowledgeBasesData2$Outbound = {
   _id: string;
   created: string;
   description?: string | undefined;
@@ -703,10 +712,10 @@ export type Data2$Outbound = {
 };
 
 /** @internal */
-export const Data2$outboundSchema: z.ZodType<
-  Data2$Outbound,
+export const ListKnowledgeBasesData2$outboundSchema: z.ZodType<
+  ListKnowledgeBasesData2$Outbound,
   z.ZodTypeDef,
-  Data2
+  ListKnowledgeBasesData2
 > = z.object({
   id: z.string(),
   created: z.string(),
@@ -717,7 +726,7 @@ export const Data2$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   updated: z.string(),
-  type: ListKnowledgeBasesDataType$outboundSchema.default("external"),
+  type: ListKnowledgeBasesDataKnowledgeType$outboundSchema.default("external"),
   retrievalSettings: z.lazy(() => DataRetrievalSettings$outboundSchema)
     .optional(),
   externalConfig: z.lazy(() => DataExternalConfig$outboundSchema),
@@ -736,46 +745,52 @@ export const Data2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Data2$ {
-  /** @deprecated use `Data2$inboundSchema` instead. */
-  export const inboundSchema = Data2$inboundSchema;
-  /** @deprecated use `Data2$outboundSchema` instead. */
-  export const outboundSchema = Data2$outboundSchema;
-  /** @deprecated use `Data2$Outbound` instead. */
-  export type Outbound = Data2$Outbound;
+export namespace ListKnowledgeBasesData2$ {
+  /** @deprecated use `ListKnowledgeBasesData2$inboundSchema` instead. */
+  export const inboundSchema = ListKnowledgeBasesData2$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesData2$outboundSchema` instead. */
+  export const outboundSchema = ListKnowledgeBasesData2$outboundSchema;
+  /** @deprecated use `ListKnowledgeBasesData2$Outbound` instead. */
+  export type Outbound = ListKnowledgeBasesData2$Outbound;
 }
 
-export function data2ToJSON(data2: Data2): string {
-  return JSON.stringify(Data2$outboundSchema.parse(data2));
+export function listKnowledgeBasesData2ToJSON(
+  listKnowledgeBasesData2: ListKnowledgeBasesData2,
+): string {
+  return JSON.stringify(
+    ListKnowledgeBasesData2$outboundSchema.parse(listKnowledgeBasesData2),
+  );
 }
 
-export function data2FromJSON(
+export function listKnowledgeBasesData2FromJSON(
   jsonString: string,
-): SafeParseResult<Data2, SDKValidationError> {
+): SafeParseResult<ListKnowledgeBasesData2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Data2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data2' from JSON`,
+    (x) => ListKnowledgeBasesData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListKnowledgeBasesData2' from JSON`,
   );
 }
 
 /** @internal */
-export const DataType$inboundSchema: z.ZodNativeEnum<typeof DataType> = z
-  .nativeEnum(DataType);
+export const ListKnowledgeBasesDataType$inboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesDataType
+> = z.nativeEnum(ListKnowledgeBasesDataType);
 
 /** @internal */
-export const DataType$outboundSchema: z.ZodNativeEnum<typeof DataType> =
-  DataType$inboundSchema;
+export const ListKnowledgeBasesDataType$outboundSchema: z.ZodNativeEnum<
+  typeof ListKnowledgeBasesDataType
+> = ListKnowledgeBasesDataType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace DataType$ {
-  /** @deprecated use `DataType$inboundSchema` instead. */
-  export const inboundSchema = DataType$inboundSchema;
-  /** @deprecated use `DataType$outboundSchema` instead. */
-  export const outboundSchema = DataType$outboundSchema;
+export namespace ListKnowledgeBasesDataType$ {
+  /** @deprecated use `ListKnowledgeBasesDataType$inboundSchema` instead. */
+  export const inboundSchema = ListKnowledgeBasesDataType$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesDataType$outboundSchema` instead. */
+  export const outboundSchema = ListKnowledgeBasesDataType$outboundSchema;
 }
 
 /** @internal */
@@ -1041,34 +1056,37 @@ export function listKnowledgeBasesDataRetrievalSettingsFromJSON(
 }
 
 /** @internal */
-export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    created: z.string(),
-    description: z.string().optional(),
-    key: z.string(),
-    domain_id: z.string(),
-    path: z.string().optional(),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    updated: z.string(),
-    type: DataType$inboundSchema.default("internal"),
-    retrieval_settings: z.lazy(() =>
-      ListKnowledgeBasesDataRetrievalSettings$inboundSchema
-    ).optional(),
-    model: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "domain_id": "domainId",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "retrieval_settings": "retrievalSettings",
-    });
+export const ListKnowledgeBasesData1$inboundSchema: z.ZodType<
+  ListKnowledgeBasesData1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domain_id: z.string(),
+  path: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: ListKnowledgeBasesDataType$inboundSchema.default("internal"),
+  retrieval_settings: z.lazy(() =>
+    ListKnowledgeBasesDataRetrievalSettings$inboundSchema
+  ).optional(),
+  model: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "retrieval_settings": "retrievalSettings",
   });
+});
 
 /** @internal */
-export type Data1$Outbound = {
+export type ListKnowledgeBasesData1$Outbound = {
   _id: string;
   created: string;
   description?: string | undefined;
@@ -1086,10 +1104,10 @@ export type Data1$Outbound = {
 };
 
 /** @internal */
-export const Data1$outboundSchema: z.ZodType<
-  Data1$Outbound,
+export const ListKnowledgeBasesData1$outboundSchema: z.ZodType<
+  ListKnowledgeBasesData1$Outbound,
   z.ZodTypeDef,
-  Data1
+  ListKnowledgeBasesData1
 > = z.object({
   id: z.string(),
   created: z.string(),
@@ -1100,7 +1118,7 @@ export const Data1$outboundSchema: z.ZodType<
   createdById: z.nullable(z.string()).optional(),
   updatedById: z.nullable(z.string()).optional(),
   updated: z.string(),
-  type: DataType$outboundSchema.default("internal"),
+  type: ListKnowledgeBasesDataType$outboundSchema.default("internal"),
   retrievalSettings: z.lazy(() =>
     ListKnowledgeBasesDataRetrievalSettings$outboundSchema
   ).optional(),
@@ -1119,26 +1137,30 @@ export const Data1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Data1$ {
-  /** @deprecated use `Data1$inboundSchema` instead. */
-  export const inboundSchema = Data1$inboundSchema;
-  /** @deprecated use `Data1$outboundSchema` instead. */
-  export const outboundSchema = Data1$outboundSchema;
-  /** @deprecated use `Data1$Outbound` instead. */
-  export type Outbound = Data1$Outbound;
+export namespace ListKnowledgeBasesData1$ {
+  /** @deprecated use `ListKnowledgeBasesData1$inboundSchema` instead. */
+  export const inboundSchema = ListKnowledgeBasesData1$inboundSchema;
+  /** @deprecated use `ListKnowledgeBasesData1$outboundSchema` instead. */
+  export const outboundSchema = ListKnowledgeBasesData1$outboundSchema;
+  /** @deprecated use `ListKnowledgeBasesData1$Outbound` instead. */
+  export type Outbound = ListKnowledgeBasesData1$Outbound;
 }
 
-export function data1ToJSON(data1: Data1): string {
-  return JSON.stringify(Data1$outboundSchema.parse(data1));
+export function listKnowledgeBasesData1ToJSON(
+  listKnowledgeBasesData1: ListKnowledgeBasesData1,
+): string {
+  return JSON.stringify(
+    ListKnowledgeBasesData1$outboundSchema.parse(listKnowledgeBasesData1),
+  );
 }
 
-export function data1FromJSON(
+export function listKnowledgeBasesData1FromJSON(
   jsonString: string,
-): SafeParseResult<Data1, SDKValidationError> {
+): SafeParseResult<ListKnowledgeBasesData1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Data1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Data1' from JSON`,
+    (x) => ListKnowledgeBasesData1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListKnowledgeBasesData1' from JSON`,
   );
 }
 
@@ -1148,12 +1170,14 @@ export const ListKnowledgeBasesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => Data1$inboundSchema),
-  z.lazy(() => Data2$inboundSchema),
+  z.lazy(() => ListKnowledgeBasesData1$inboundSchema),
+  z.lazy(() => ListKnowledgeBasesData2$inboundSchema),
 ]);
 
 /** @internal */
-export type ListKnowledgeBasesData$Outbound = Data1$Outbound | Data2$Outbound;
+export type ListKnowledgeBasesData$Outbound =
+  | ListKnowledgeBasesData1$Outbound
+  | ListKnowledgeBasesData2$Outbound;
 
 /** @internal */
 export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
@@ -1161,8 +1185,8 @@ export const ListKnowledgeBasesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListKnowledgeBasesData
 > = z.union([
-  z.lazy(() => Data1$outboundSchema),
-  z.lazy(() => Data2$outboundSchema),
+  z.lazy(() => ListKnowledgeBasesData1$outboundSchema),
+  z.lazy(() => ListKnowledgeBasesData2$outboundSchema),
 ]);
 
 /**
@@ -1205,8 +1229,8 @@ export const ListKnowledgeBasesResponseBody$inboundSchema: z.ZodType<
   object: ListKnowledgeBasesObject$inboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => Data1$inboundSchema),
-      z.lazy(() => Data2$inboundSchema),
+      z.lazy(() => ListKnowledgeBasesData1$inboundSchema),
+      z.lazy(() => ListKnowledgeBasesData2$inboundSchema),
     ]),
   ),
   has_more: z.boolean(),
@@ -1219,7 +1243,9 @@ export const ListKnowledgeBasesResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type ListKnowledgeBasesResponseBody$Outbound = {
   object: string;
-  data: Array<Data1$Outbound | Data2$Outbound>;
+  data: Array<
+    ListKnowledgeBasesData1$Outbound | ListKnowledgeBasesData2$Outbound
+  >;
   has_more: boolean;
 };
 
@@ -1232,8 +1258,8 @@ export const ListKnowledgeBasesResponseBody$outboundSchema: z.ZodType<
   object: ListKnowledgeBasesObject$outboundSchema,
   data: z.array(
     z.union([
-      z.lazy(() => Data1$outboundSchema),
-      z.lazy(() => Data2$outboundSchema),
+      z.lazy(() => ListKnowledgeBasesData1$outboundSchema),
+      z.lazy(() => ListKnowledgeBasesData2$outboundSchema),
     ]),
   ),
   hasMore: z.boolean(),

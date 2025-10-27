@@ -57,7 +57,7 @@ export type ListDatasourcesStatus = ClosedEnum<typeof ListDatasourcesStatus>;
 
 export type ListDatasourcesData = {
   /**
-   * The id of the resource
+   * The unique identifier of the data source
    */
   id?: string | undefined;
   /**
@@ -82,11 +82,11 @@ export type ListDatasourcesData = {
    */
   updated: string;
   /**
-   * The id of the resource
+   * The user ID of the creator of the knowledge base
    */
   createdById?: string | null | undefined;
   /**
-   * The id of the resource
+   * The user ID of the last user who updated the knowledge base
    */
   updateById?: string | null | undefined;
   /**
@@ -285,7 +285,7 @@ export const ListDatasourcesData$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8DH20A284M2AD6NWPAZ7WAV"),
+  _id: z.string().default("01K8J1YQ9J40DQ73B3AK2CPSTA"),
   display_name: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$inboundSchema,
@@ -329,7 +329,7 @@ export const ListDatasourcesData$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasourcesData
 > = z.object({
-  id: z.string().default("01K8DH20A284M2AD6NWPAZ7WAV"),
+  id: z.string().default("01K8J1YQ9J40DQ73B3AK2CPSTA"),
   displayName: z.string(),
   description: z.string().optional(),
   status: ListDatasourcesStatus$outboundSchema,

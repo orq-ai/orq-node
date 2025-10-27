@@ -30,16 +30,17 @@ const value: operations.UpdateMemoryStoreModel3 =
 const value: operations.UpdateMemoryStoreModel4 = "cohere/embed-english-v3.0";
 ```
 
-### `operations.Model5`
+### `operations.UpdateMemoryStoreModel5`
 
 ```typescript
-const value: operations.Model5 = "cohere/embed-v4.0";
+const value: operations.UpdateMemoryStoreModel5 = "cohere/embed-v4.0";
 ```
 
-### `operations.Model6`
+### `operations.UpdateMemoryStoreModel6`
 
 ```typescript
-const value: operations.Model6 = "azure/text-embedding-ada-002";
+const value: operations.UpdateMemoryStoreModel6 =
+  "azure/text-embedding-ada-002";
 ```
 
 ### `operations.Model7`
