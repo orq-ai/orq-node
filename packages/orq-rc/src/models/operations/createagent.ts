@@ -383,22 +383,24 @@ export type Settings = {
   /**
    * Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id.
    */
-  tools: Array<
-    | GoogleSearchTool
-    | WebScraperTool
-    | CallSubAgentTool
-    | RetrieveAgentsTool
-    | QueryMemoryStoreTool
-    | WriteMemoryStoreTool
-    | RetrieveMemoryStoresTool
-    | DeleteMemoryDocumentTool
-    | RetrieveKnowledgeBasesTool
-    | QueryKnowledgeBaseTool
-    | CurrentDateTool
-    | HTTPTool
-    | CodeExecutionTool
-    | FunctionTool
-  >;
+  tools?:
+    | Array<
+      | GoogleSearchTool
+      | WebScraperTool
+      | CallSubAgentTool
+      | RetrieveAgentsTool
+      | QueryMemoryStoreTool
+      | WriteMemoryStoreTool
+      | RetrieveMemoryStoresTool
+      | DeleteMemoryDocumentTool
+      | RetrieveKnowledgeBasesTool
+      | QueryKnowledgeBaseTool
+      | CurrentDateTool
+      | HTTPTool
+      | CodeExecutionTool
+      | FunctionTool
+    >
+    | undefined;
 };
 
 export type KnowledgeBases = {
@@ -550,7 +552,7 @@ export type CreateAgentSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: CreateAgentToolApprovalRequired | undefined;
-  tools: Array<CreateAgentTools>;
+  tools?: Array<CreateAgentTools> | undefined;
 };
 
 export type CreateAgentModel = {
@@ -2100,7 +2102,7 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
     ]),
-  ),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -2114,22 +2116,24 @@ export type Settings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<
-    | GoogleSearchTool$Outbound
-    | WebScraperTool$Outbound
-    | CallSubAgentTool$Outbound
-    | RetrieveAgentsTool$Outbound
-    | QueryMemoryStoreTool$Outbound
-    | WriteMemoryStoreTool$Outbound
-    | RetrieveMemoryStoresTool$Outbound
-    | DeleteMemoryDocumentTool$Outbound
-    | RetrieveKnowledgeBasesTool$Outbound
-    | QueryKnowledgeBaseTool$Outbound
-    | CurrentDateTool$Outbound
-    | HTTPTool$Outbound
-    | CodeExecutionTool$Outbound
-    | FunctionTool$Outbound
-  >;
+  tools?:
+    | Array<
+      | GoogleSearchTool$Outbound
+      | WebScraperTool$Outbound
+      | CallSubAgentTool$Outbound
+      | RetrieveAgentsTool$Outbound
+      | QueryMemoryStoreTool$Outbound
+      | WriteMemoryStoreTool$Outbound
+      | RetrieveMemoryStoresTool$Outbound
+      | DeleteMemoryDocumentTool$Outbound
+      | RetrieveKnowledgeBasesTool$Outbound
+      | QueryKnowledgeBaseTool$Outbound
+      | CurrentDateTool$Outbound
+      | HTTPTool$Outbound
+      | CodeExecutionTool$Outbound
+      | FunctionTool$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -2160,7 +2164,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
     ]),
-  ),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -2608,7 +2612,7 @@ export const CreateAgentSettings$inboundSchema: z.ZodType<
   tool_approval_required: CreateAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => CreateAgentTools$inboundSchema)),
+  tools: z.array(z.lazy(() => CreateAgentTools$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -2622,7 +2626,7 @@ export type CreateAgentSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<CreateAgentTools$Outbound>;
+  tools?: Array<CreateAgentTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2636,7 +2640,7 @@ export const CreateAgentSettings$outboundSchema: z.ZodType<
   toolApprovalRequired: CreateAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => CreateAgentTools$outboundSchema)),
+  tools: z.array(z.lazy(() => CreateAgentTools$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

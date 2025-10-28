@@ -43,14 +43,7 @@ let value: StreamRunAgentRequestBody = {
       knowledgeId: "customer-knowledge-base",
     },
   ],
-  settings: {
-    tools: [
-      {
-        type: "retrieve_agents",
-        requiresApproval: false,
-      },
-    ],
-  },
+  settings: {},
 };
 ```
 

@@ -681,22 +681,24 @@ export type RunAgentSettings = {
   /**
    * Tools available to the agent
    */
-  tools: Array<
-    | HTTPToolRun
-    | CodeToolRun
-    | FunctionToolRun
-    | AgentToolInputRunGoogleSearchTool
-    | AgentToolInputRunWebScraperTool
-    | AgentToolInputRunCallSubAgentTool
-    | AgentToolInputRunRetrieveAgentsTool
-    | AgentToolInputRunQueryMemoryStoreTool
-    | AgentToolInputRunWriteMemoryStoreTool
-    | AgentToolInputRunRetrieveMemoryStoresTool
-    | AgentToolInputRunDeleteMemoryDocumentTool
-    | AgentToolInputRunRetrieveKnowledgeBasesTool
-    | AgentToolInputRunQueryKnowledgeBaseTool
-    | AgentToolInputRunCurrentDateTool
-  >;
+  tools?:
+    | Array<
+      | HTTPToolRun
+      | CodeToolRun
+      | FunctionToolRun
+      | AgentToolInputRunGoogleSearchTool
+      | AgentToolInputRunWebScraperTool
+      | AgentToolInputRunCallSubAgentTool
+      | AgentToolInputRunRetrieveAgentsTool
+      | AgentToolInputRunQueryMemoryStoreTool
+      | AgentToolInputRunWriteMemoryStoreTool
+      | AgentToolInputRunRetrieveMemoryStoresTool
+      | AgentToolInputRunDeleteMemoryDocumentTool
+      | AgentToolInputRunRetrieveKnowledgeBasesTool
+      | AgentToolInputRunQueryKnowledgeBaseTool
+      | AgentToolInputRunCurrentDateTool
+    >
+    | undefined;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -3835,7 +3837,7 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$inboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$inboundSchema),
     ]),
-  ),
+  ).optional(),
   tool_approval_required: RunAgentToolApprovalRequired$inboundSchema.default(
     "none",
   ),
@@ -3851,22 +3853,24 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RunAgentSettings$Outbound = {
-  tools: Array<
-    | HTTPToolRun$Outbound
-    | CodeToolRun$Outbound
-    | FunctionToolRun$Outbound
-    | AgentToolInputRunGoogleSearchTool$Outbound
-    | AgentToolInputRunWebScraperTool$Outbound
-    | AgentToolInputRunCallSubAgentTool$Outbound
-    | AgentToolInputRunRetrieveAgentsTool$Outbound
-    | AgentToolInputRunQueryMemoryStoreTool$Outbound
-    | AgentToolInputRunWriteMemoryStoreTool$Outbound
-    | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
-    | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
-    | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-    | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-    | AgentToolInputRunCurrentDateTool$Outbound
-  >;
+  tools?:
+    | Array<
+      | HTTPToolRun$Outbound
+      | CodeToolRun$Outbound
+      | FunctionToolRun$Outbound
+      | AgentToolInputRunGoogleSearchTool$Outbound
+      | AgentToolInputRunWebScraperTool$Outbound
+      | AgentToolInputRunCallSubAgentTool$Outbound
+      | AgentToolInputRunRetrieveAgentsTool$Outbound
+      | AgentToolInputRunQueryMemoryStoreTool$Outbound
+      | AgentToolInputRunWriteMemoryStoreTool$Outbound
+      | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
+      | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
+      | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
+      | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
+      | AgentToolInputRunCurrentDateTool$Outbound
+    >
+    | undefined;
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
@@ -3895,7 +3899,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
     ]),
-  ),
+  ).optional(),
   toolApprovalRequired: RunAgentToolApprovalRequired$outboundSchema.default(
     "none",
   ),

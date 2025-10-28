@@ -12,14 +12,7 @@ let value: CreateAgentRequestBody = {
   description: "supposing why some",
   instructions: "<value>",
   model: "XTS",
-  settings: {
-    tools: [
-      {
-        type: "google_search",
-        requiresApproval: false,
-      },
-    ],
-  },
+  settings: {},
   knowledgeBases: [
     {
       knowledgeId: "customer-knowledge-base",

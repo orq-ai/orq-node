@@ -702,22 +702,24 @@ export type StreamRunAgentSettings = {
   /**
    * Tools available to the agent
    */
-  tools: Array<
-    | AgentToolInputRunHTTPToolRun
-    | AgentToolInputRunCodeToolRun
-    | AgentToolInputRunFunctionToolRun
-    | StreamRunAgentAgentToolInputRunGoogleSearchTool
-    | StreamRunAgentAgentToolInputRunWebScraperTool
-    | StreamRunAgentAgentToolInputRunCallSubAgentTool
-    | StreamRunAgentAgentToolInputRunRetrieveAgentsTool
-    | StreamRunAgentAgentToolInputRunQueryMemoryStoreTool
-    | StreamRunAgentAgentToolInputRunWriteMemoryStoreTool
-    | StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool
-    | StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool
-    | StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool
-    | StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool
-    | StreamRunAgentAgentToolInputRunCurrentDateTool
-  >;
+  tools?:
+    | Array<
+      | AgentToolInputRunHTTPToolRun
+      | AgentToolInputRunCodeToolRun
+      | AgentToolInputRunFunctionToolRun
+      | StreamRunAgentAgentToolInputRunGoogleSearchTool
+      | StreamRunAgentAgentToolInputRunWebScraperTool
+      | StreamRunAgentAgentToolInputRunCallSubAgentTool
+      | StreamRunAgentAgentToolInputRunRetrieveAgentsTool
+      | StreamRunAgentAgentToolInputRunQueryMemoryStoreTool
+      | StreamRunAgentAgentToolInputRunWriteMemoryStoreTool
+      | StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool
+      | StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool
+      | StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool
+      | StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool
+      | StreamRunAgentAgentToolInputRunCurrentDateTool
+    >
+    | undefined;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -4033,7 +4035,7 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
         StreamRunAgentAgentToolInputRunCurrentDateTool$inboundSchema
       ),
     ]),
-  ),
+  ).optional(),
   tool_approval_required: StreamRunAgentToolApprovalRequired$inboundSchema
     .default("none"),
   max_iterations: z.number().int().default(15),
@@ -4048,22 +4050,24 @@ export const StreamRunAgentSettings$inboundSchema: z.ZodType<
 
 /** @internal */
 export type StreamRunAgentSettings$Outbound = {
-  tools: Array<
-    | AgentToolInputRunHTTPToolRun$Outbound
-    | AgentToolInputRunCodeToolRun$Outbound
-    | AgentToolInputRunFunctionToolRun$Outbound
-    | StreamRunAgentAgentToolInputRunGoogleSearchTool$Outbound
-    | StreamRunAgentAgentToolInputRunWebScraperTool$Outbound
-    | StreamRunAgentAgentToolInputRunCallSubAgentTool$Outbound
-    | StreamRunAgentAgentToolInputRunRetrieveAgentsTool$Outbound
-    | StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$Outbound
-    | StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$Outbound
-    | StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$Outbound
-    | StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$Outbound
-    | StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-    | StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$Outbound
-    | StreamRunAgentAgentToolInputRunCurrentDateTool$Outbound
-  >;
+  tools?:
+    | Array<
+      | AgentToolInputRunHTTPToolRun$Outbound
+      | AgentToolInputRunCodeToolRun$Outbound
+      | AgentToolInputRunFunctionToolRun$Outbound
+      | StreamRunAgentAgentToolInputRunGoogleSearchTool$Outbound
+      | StreamRunAgentAgentToolInputRunWebScraperTool$Outbound
+      | StreamRunAgentAgentToolInputRunCallSubAgentTool$Outbound
+      | StreamRunAgentAgentToolInputRunRetrieveAgentsTool$Outbound
+      | StreamRunAgentAgentToolInputRunQueryMemoryStoreTool$Outbound
+      | StreamRunAgentAgentToolInputRunWriteMemoryStoreTool$Outbound
+      | StreamRunAgentAgentToolInputRunRetrieveMemoryStoresTool$Outbound
+      | StreamRunAgentAgentToolInputRunDeleteMemoryDocumentTool$Outbound
+      | StreamRunAgentAgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
+      | StreamRunAgentAgentToolInputRunQueryKnowledgeBaseTool$Outbound
+      | StreamRunAgentAgentToolInputRunCurrentDateTool$Outbound
+    >
+    | undefined;
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
@@ -4114,7 +4118,7 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
         StreamRunAgentAgentToolInputRunCurrentDateTool$outboundSchema
       ),
     ]),
-  ),
+  ).optional(),
   toolApprovalRequired: StreamRunAgentToolApprovalRequired$outboundSchema
     .default("none"),
   maxIterations: z.number().int().default(15),

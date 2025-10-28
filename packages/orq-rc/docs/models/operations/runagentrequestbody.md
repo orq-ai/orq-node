@@ -50,14 +50,7 @@ let value: RunAgentRequestBody = {
       knowledgeId: "customer-knowledge-base",
     },
   ],
-  settings: {
-    tools: [
-      {
-        type: "query_knowledge_base",
-        requiresApproval: false,
-      },
-    ],
-  },
+  settings: {},
 };
 ```
 

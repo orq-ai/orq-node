@@ -549,7 +549,7 @@ export type UpdateAgentAgentsSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: UpdateAgentAgentsToolApprovalRequired | undefined;
-  tools: Array<UpdateAgentTools>;
+  tools?: Array<UpdateAgentTools> | undefined;
 };
 
 export type UpdateAgentModel = {
@@ -2813,7 +2813,7 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
   max_execution_time: z.number().int().default(300),
   tool_approval_required: UpdateAgentAgentsToolApprovalRequired$inboundSchema
     .default("respect_tool"),
-  tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)),
+  tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -2827,7 +2827,7 @@ export type UpdateAgentAgentsSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<UpdateAgentTools$Outbound>;
+  tools?: Array<UpdateAgentTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2840,7 +2840,7 @@ export const UpdateAgentAgentsSettings$outboundSchema: z.ZodType<
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired$outboundSchema
     .default("respect_tool"),
-  tools: z.array(z.lazy(() => UpdateAgentTools$outboundSchema)),
+  tools: z.array(z.lazy(() => UpdateAgentTools$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
