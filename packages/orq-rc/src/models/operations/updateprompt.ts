@@ -470,6 +470,7 @@ export type PromptConfig = {
    * The modality of the model
    */
   modelType?: ModelType | null | undefined;
+  isPrivate?: boolean | undefined;
 };
 
 export const UpdatePromptUseCases = {
@@ -1063,6 +1064,7 @@ export type UpdatePromptPromptInput = {
    * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway-supported-models. Only chat models are supported.
    */
   model?: string | undefined;
+  isPrivate?: boolean | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
    */
@@ -3203,11 +3205,13 @@ export const PromptConfig$inboundSchema: z.ZodType<
   messages: z.array(z.lazy(() => UpdatePromptMessages$inboundSchema)),
   model_db_id: z.nullable(z.string()).optional(),
   model_type: z.nullable(ModelType$inboundSchema).optional(),
+  is_private: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     "model_parameters": "modelParameters",
     "model_db_id": "modelDbId",
     "model_type": "modelType",
+    "is_private": "isPrivate",
   });
 });
 
@@ -3221,6 +3225,7 @@ export type PromptConfig$Outbound = {
   messages: Array<UpdatePromptMessages$Outbound>;
   model_db_id?: string | null | undefined;
   model_type?: string | null | undefined;
+  is_private: boolean;
 };
 
 /** @internal */
@@ -3238,11 +3243,13 @@ export const PromptConfig$outboundSchema: z.ZodType<
   messages: z.array(z.lazy(() => UpdatePromptMessages$outboundSchema)),
   modelDbId: z.nullable(z.string()).optional(),
   modelType: z.nullable(ModelType$outboundSchema).optional(),
+  isPrivate: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {
     modelParameters: "model_parameters",
     modelDbId: "model_db_id",
     modelType: "model_type",
+    isPrivate: "is_private",
   });
 });
 
@@ -5978,6 +5985,7 @@ export const UpdatePromptPromptInput$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   model: z.string().optional(),
+  is_private: z.boolean().default(false),
   temperature: z.nullable(z.number()).optional(),
   max_tokens: z.nullable(z.number().int()).optional(),
   response_format: z.union([
@@ -5987,6 +5995,7 @@ export const UpdatePromptPromptInput$inboundSchema: z.ZodType<
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
+    "is_private": "isPrivate",
     "max_tokens": "maxTokens",
     "response_format": "responseFormat",
   });
@@ -6003,6 +6012,7 @@ export type UpdatePromptPromptInput$Outbound = {
     >
     | undefined;
   model?: string | undefined;
+  is_private: boolean;
   temperature?: number | null | undefined;
   max_tokens?: number | null | undefined;
   response_format?:
@@ -6027,6 +6037,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     ]),
   ).optional(),
   model: z.string().optional(),
+  isPrivate: z.boolean().default(false),
   temperature: z.nullable(z.number()).optional(),
   maxTokens: z.nullable(z.number().int()).optional(),
   responseFormat: z.union([
@@ -6036,6 +6047,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
+    isPrivate: "is_private",
     maxTokens: "max_tokens",
     responseFormat: "response_format",
   });
