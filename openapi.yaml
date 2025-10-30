@@ -1249,7 +1249,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -1257,7 +1257,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -1392,7 +1392,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-10-30T04:37:46.237Z"
+                          default: "2025-10-30T20:23:01.859Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -1400,7 +1400,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:46.237Z"
+                              default: "2025-10-30T20:23:01.859Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -1568,10 +1568,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1642,10 +1642,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1713,10 +1713,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1799,10 +1799,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -1870,10 +1870,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2268,10 +2268,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2355,10 +2355,10 @@ paths:
                               type: "string"
                             "created":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "updated":
                               type: "string"
-                              default: "2025-10-30T04:37:48.848Z"
+                              default: "2025-10-30T20:23:04.397Z"
                             "guardrail_config":
                               oneOf:
                                 - type: "object"
@@ -2773,10 +2773,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2847,10 +2847,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -2918,10 +2918,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3004,10 +3004,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3075,10 +3075,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3473,10 +3473,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3560,10 +3560,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -3965,10 +3965,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4039,10 +4039,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4110,10 +4110,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4196,10 +4196,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4267,10 +4267,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4665,10 +4665,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4752,10 +4752,10 @@ paths:
                         type: "string"
                       "created":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "updated":
                         type: "string"
-                        default: "2025-10-30T04:37:48.848Z"
+                        default: "2025-10-30T20:23:04.397Z"
                       "guardrail_config":
                         oneOf:
                           - type: "object"
@@ -4857,3015 +4857,6 @@ paths:
                   - "message"
       security:
         - ApiKey: []
-  "/v2/evaluators/bert_score":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "bertScore"
-      operationId: "EvalsBertScore"
-      summary: "Run BertScore Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "reference":
-                  type: "string"
-              required:
-                - "output"
-                - "reference"
-      responses:
-        "200":
-          description: "Returns the BERT Score evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type: "object"
-                    properties:
-                      "f1":
-                        type: "number"
-                      "precision":
-                        type: "number"
-                      "recall":
-                        type: "number"
-                    required:
-                      - "f1"
-                      - "precision"
-                      - "recall"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/bleu_score":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "bleuScore"
-      operationId: "EvalsBleuScore"
-      summary: "Run BLEU Score Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "reference":
-                  type: "string"
-              required:
-                - "output"
-                - "reference"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains_all":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "containsAll"
-      operationId: "EvalsContainsAll"
-      summary: "Run Contains All Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "keywords":
-                      type: "array"
-                      items:
-                        type: "string"
-                  required:
-                    - "keywords"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains_any":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "containsAny"
-      operationId: "EvalsContainsAny"
-      summary: "Run Contains Any Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "keywords":
-                      type: "array"
-                      items:
-                        type: "string"
-                  required:
-                    - "keywords"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains_email":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "containsEmail"
-      operationId: "EvalsContainsEmail"
-      summary: "Run Contains Email Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-              required:
-                - "output"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains_none":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "containsNone"
-      operationId: "EvalsContainsNone"
-      summary: "Run Contains None Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "keywords":
-                      type: "array"
-                      items:
-                        type: "string"
-                  required:
-                    - "keywords"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains_url":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "containsUrl"
-      operationId: "EvalsContainsUrl"
-      summary: "Run Contains URL Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-              required:
-                - "output"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains_valid_link":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "containsValidLink"
-      operationId: "EvalsContainsValidLink"
-      summary: "Run Contains Valid Link Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-              required:
-                - "output"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/contains":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "contains"
-      operationId: "EvalsContains"
-      summary: "Run Contains Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "value":
-                      type: "string"
-                  required:
-                    - "value"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ends_with":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "endsWith"
-      operationId: "EvalsEndsWith"
-      summary: "Run Ends With Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "value":
-                      type: "string"
-                  required:
-                    - "value"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/exact_match":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "exactMatch"
-      operationId: "EvalsExactMatch"
-      summary: "Run Exact Match Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "reference":
-                  type: "string"
-              required:
-                - "output"
-                - "reference"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/length_between":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "lengthBetween"
-      operationId: "EvalsLengthBetween"
-      summary: "Run Length Between Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "min_length":
-                      type: "number"
-                    "max_length":
-                      type: "number"
-                  required:
-                    - "min_length"
-                    - "max_length"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/length_greater_than":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "lengthGreaterThan"
-      operationId: "EvalsLengthGreaterThan"
-      summary: "Run Length Greater Than Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "length":
-                      type: "number"
-                  required:
-                    - "length"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/length_less_than":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "lengthLessThan"
-      operationId: "EvalsLengthLessThan"
-      summary: "Run Length Less Than Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "function_params":
-                  type: "object"
-                  properties:
-                    "length":
-                      type: "number"
-                  required:
-                    - "length"
-              required:
-                - "output"
-                - "function_params"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/valid_json":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "validJson"
-      operationId: "EvalsValidJson"
-      summary: "Run JSON Validation Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-              required:
-                - "output"
-      responses:
-        "200":
-          description: "Returns whether the input is valid JSON"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    anyOf:
-                      - type: "boolean"
-                      - type: "string"
-                      - type: "number"
-                      - type: "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/age_appropriate":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ageAppropriate"
-      operationId: "EvalsAgeAppropriate"
-      summary: "Run Age Appropriate Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the age appropriateness evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/bot_detection":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "botDetection"
-      operationId: "EvalsBotDetection"
-      summary: "Run Bot Detection Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the bot detection evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/fact_checking_knowledge_base":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "factCheckingKnowledgeBase"
-      operationId: "EvalsFactCheckingKnowledgeBase"
-      summary: "Run Fact Checking Knowledge Base Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-                - "reference"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/grammar":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "grammar"
-      operationId: "EvalsGrammar"
-      summary: "Run Grammar Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/localization":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "localization"
-      operationId: "EvalsLocalization"
-      summary: "Run Localization Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/pii":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "pii"
-      operationId: "EvalsPii"
-      summary: "Run PII Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/sentiment_classification":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "sentimentClassification"
-      operationId: "EvalsSentimentClassification"
-      summary: "Run Sentiment Classification Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/summarization":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "summarization"
-      operationId: "EvalsSummarization"
-      summary: "Run Summarization Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/tone_of_voice":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "toneOfVoice"
-      operationId: "EvalsToneOfVoice"
-      summary: "Run Tone of Voice Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/translation":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "translation"
-      operationId: "EvalsTranslation"
-      summary: "Run Translation Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                "output":
-                  type: "string"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "object"
-                      - "null"
-                    properties:
-                      "value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                      "explanation":
-                        type:
-                          - "string"
-                          - "null"
-                      "original_value":
-                        anyOf:
-                          - type: "number"
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "null"
-                      "original_explanation":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "value"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_coherence":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasCoherence"
-      operationId: "EvalsRagasCoherence"
-      summary: "Run Coherence Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The reference used to compare the output"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the coherence evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_conciseness":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasConciseness"
-      operationId: "EvalsRagasConciseness"
-      summary: "Run Conciseness Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The reference used to compare the output"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the conciseness evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_context_precision":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasContextPrecision"
-      operationId: "EvalsRagasContextPrecision"
-      summary: "Run Context Precision Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The reference used to compare the output"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the context precision evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_context_recall":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasContextRecall"
-      operationId: "EvalsRagasContextRecall"
-      summary: "Run Context Recall Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The ground truth answer to evaluate context recall against"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals"
-              required:
-                - "model"
-                - "reference"
-      responses:
-        "200":
-          description: "Returns the context recall evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_context_entities_recall":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasContextEntitiesRecall"
-      operationId: "EvalsRagasContextEntitiesRecall"
-      summary: "Run Context Entities Recall Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "reference":
-                  type: "string"
-                  description: "The ground truth answer to evaluate entity recall against"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals containing entities to evaluate"
-                "model":
-                  type: "string"
-              required:
-                - "reference"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the context entities recall evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_correctness":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasCorrectness"
-      operationId: "EvalsRagasCorrectness"
-      summary: "Run Correctness Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The reference used to compare the output"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the correctness evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_faithfulness":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasFaithfulness"
-      operationId: "EvalsRagasFaithfulness"
-      summary: "Run Faithfulness Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the faithfulness evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_harmfulness":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasHarmfulness"
-      operationId: "EvalsRagasHarmfulness"
-      summary: "Run Harmfulness Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the harmfulness evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_maliciousness":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasMaliciousness"
-      operationId: "EvalsRagasMaliciousness"
-      summary: "Run Maliciousness Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The reference used to compare the output"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the maliciousness evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_noise_sensitivity":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasNoiseSensitivity"
-      operationId: "EvalsRagasNoiseSensitivity"
-      summary: "Run Noise Sensitivity Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "reference":
-                  type: "string"
-                  description: "The ground truth answer to evaluate noise sensitivity against"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals that may contain irrelevant information"
-              required:
-                - "query"
-                - "output"
-                - "model"
-                - "reference"
-      responses:
-        "200":
-          description: "Returns the noise sensitivity evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_response_relevancy":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasResponseRelevancy"
-      operationId: "EvalsRagasResponseRelevancy"
-      summary: "Run Response Relevancy Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals"
-              required:
-                - "query"
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the response relevancy evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/ragas_summarization":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "ragasSummarization"
-      operationId: "EvalsRagasSummarization"
-      summary: "Run Summarization Evaluator"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "model":
-                  type: "string"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals"
-              required:
-                - "output"
-                - "model"
-      responses:
-        "200":
-          description: "Returns the summarization evaluation result"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "value":
-                    type:
-                      - "number"
-                      - "null"
-                required:
-                  - "value"
-        "404":
-          description: "Evaluator not found"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Internal server error"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  "/v2/evaluators/{id}/invoke":
-    post:
-      tags:
-        - "Evaluators Hub"
-      x-speakeasy-group: "evals"
-      x-speakeasy-name-override: "invoke"
-      operationId: "InvokeEval"
-      summary: "Invoke a Custom Evaluator"
-      parameters:
-        - schema:
-            type: "string"
-            description: "Evaluator ID"
-          required: true
-          description: "Evaluator ID"
-          name: "id"
-          in: "path"
-      requestBody:
-        content:
-          "application/json":
-            schema:
-              type: "object"
-              properties:
-                "query":
-                  type: "string"
-                  description: "Latest user message"
-                "output":
-                  type: "string"
-                  description: "The generated response from the model"
-                "reference":
-                  type: "string"
-                  description: "The reference used to compare the output"
-                "retrievals":
-                  type: "array"
-                  items:
-                    type: "string"
-                  description: "Knowledge base retrievals"
-                "messages":
-                  type: "array"
-                  items:
-                    type: "object"
-                    properties:
-                      "role":
-                        type: "string"
-                        enum:
-                          - "system"
-                          - "assistant"
-                          - "user"
-                          - "exception"
-                          - "tool"
-                          - "prompt"
-                          - "correction"
-                          - "expected_output"
-                        description: "The role of the prompt message"
-                      "content":
-                        anyOf:
-                          - type: "string"
-                          - type: "array"
-                            items:
-                              oneOf:
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
-                                        - "text"
-                                    "text":
-                                      type: "string"
-                                  required:
-                                    - "type"
-                                    - "text"
-                                  description: "Text content part of a prompt message"
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
-                                        - "image_url"
-                                    "image_url":
-                                      type: "object"
-                                      properties:
-                                        "id":
-                                          type: "string"
-                                          format: "ulid"
-                                          pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                          readOnly: true
-                                          description: "The orq.ai id of the image"
-                                        "url":
-                                          type: "string"
-                                          description: "Either a URL of the image or the base64 encoded data URI."
-                                          examples:
-                                            - "https://picsum.photos/id/1/200/300"
-                                            - "data:image/jpeg;base64,/9j/4QDcRXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgBAwABAAAAAgAAABMCAwABAAAAAQAAAGmHBAABAAAAZgAAAAAAAABIAAAAAQAAAEgAAAABAAAABwAAkAcABAAAADAyMTABkQcABAAAAAECAwCGkgcAFAAAAMAAAAAAoAcABAAAADAxMDABoAMAAQAAAP//AAACoAQAAQAAADIAAAADoAQAAQAAADIAAAAAAAAAQVNDSUkAAABQaWNzdW0gSUQ6IDH/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAAyADIDASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAAUGBAMCAf/EABgBAAMBAQAAAAAAAAAAAAAAAAACAwEE/9oADAMBAAIQAxAAAAGJ8VqTNw8a3ojTukdLSJLgZZlZdd6TV3CHYj9EWPM6bhUaNGKXfClLIL11F7/cfh02i8CpWBzWy5A6I+PgAAB//8QAIhAAAQQCAgIDAQAAAAAAAAAAAQACAwQSEwURFDIgISIj/9oACAEBAAEFAnQPYtaw6HSrfpk1Zpi6U1uqwOvALjX+aJeJ6RjdEYR/LS1X2a7q4WGdtkqbVqFlkbfMcrVEWn16sDBsmY+e+GQvsPmOYWSF47i5rI4ZjhycvcuZWX1sTao2TGJsBsvCL8iSs12nk4D2se/w/8QAHhEAAgIBBQEAAAAAAAAAAAAAAAECESEQEhMgMUH/2gAIAQMBAT8BErRHKo4is0RwSk2b5CT+lrWXnT//xAAbEQACAgMBAAAAAAAAAAAAAAAAAQIREiExIP/aAAgBAgEBPwEbpj1szFtWTVkYJGMRyiuFMssh3x//xAAqEAABAwIEBQMFAAAAAAAAAAABAAIRAxIQITFREyAiI2EyQXEEQlJigf/aAAgBAQAGPwLqGGYOeDmbqWDMYFjiah2aF2aFNnk9RVVv1HcjMSrqOmzlDha7D0hVNjnhfw3WFuqzU1Yt+FbTogjdxXoCFVz7Q0Q5TRYC78no3hwj3jpVwDS8+VLzOIMRC4tIxP27fHhERcVaCMtYHJ+moVmU+wC1IKnm/nL/AP/EACIQAAICAgEEAwEAAAAAAAAAAAERACExQVEQYXGBobHB0f/aAAgBAQABPyEgQjvByg05hUo2LiFjFYI7W43EDiVaHswr6T+yviNWy8EGiuNR40cj6MPOzDuOGmTHfziwMq+76EShwYJ8LmPkvUA0DK7y8RUIwU4Wf1moJxadQT0/YfMYyGLPkJiCZ6Rw+gHEOyLDRUgnkkfo7QoEZmabf4SsxCxwB3gBm9QgAYBbhGy6dySFOwYVeIcGHyxFUUo4LJ6JIxoBUkQiSuY4Ooc9f//aAAwDAQACAAMAAAAQK/6xMJVNTaRAi9cA/8QAHBEBAQEAAgMBAAAAAAAAAAAAAQARECExQVFh/9oACAEDAQE/ENJdCAjLX2X0Wzsr5v0mqx7MJOb3z//EAB0RAQEBAAAHAAAAAAAAAAAAAAEAERAgITFhcaH/2gAIAQIBAT8QxhwZqxessJqwhet4oA+Y0FeQTtx//8QAIxABAAICAQUAAgMAAAAAAAAAAQARITFBUWFxgZEQobHB0f/aAAgBAQABPxB2tTC0xLVUH7haUN2g1vP+RNGh8gq4UTGuGBUZ4MHv3iLSr8RIRqqi6Yv1carl4onc0eoWxjg8RD1aVFzk6f6b9/Y70zAti+Kx71GvjJeYuVsc6QwgBr5D/a/xfW1rFYoOcjjrK7p8CjoUUGXu5eMk0ZEmr6iVhzq4Hhj0LyLoGUvPiDGiXFOoUx6C6YKtA/EOTpu4FoAQGnL1SFVoWNDsQt27RtZg8GOQ6mm5/hiDjAW62BbV23sLxFbn20oMclu8B8lPIPaU4y+1hNDrowVllngQ2LIsGVq3iXxdrsPZu+8NsVhdHaO+tLVdwQ3CKME80BZTdNRSUt7WbPXP6zm5YlVv5//Z"
-                                        "detail":
-                                          type: "string"
-                                          description: "Specifies the detail level of the image. Currently only supported with OpenAI models"
-                                      required:
-                                        - "url"
-                                  required:
-                                    - "type"
-                                    - "image_url"
-                                  description: "The image part of the prompt message. Only supported with vision models."
-                                - type: "object"
-                                  properties:
-                                    "type":
-                                      type: "string"
-                                      enum:
-                                        - "file"
-                                      description: "The type of the content part. Always `file`."
-                                    "file":
-                                      type: "object"
-                                      properties:
-                                        "file_data":
-                                          type: "string"
-                                          description: "The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'"
-                                        "uri":
-                                          type: "string"
-                                          description: "URL to the file. Only supported by Anthropic Claude models for PDF files."
-                                        "mimeType":
-                                          type: "string"
-                                          description: "MIME type of the file (e.g., application/pdf, image/png)"
-                                        "filename":
-                                          type: "string"
-                                          description: "The name of the file, used when passing the file to the model as a string."
-                                  required:
-                                    - "type"
-                                    - "file"
-                        description: "The contents of the user message. Either the text content of the message or an array of content parts with a defined type, each can be of type `text` or `image_url` when passing in images. You can pass multiple images by adding multiple `image_url` content parts. "
-                      "tool_calls":
-                        type: "array"
-                        items:
-                          type: "object"
-                          properties:
-                            "id":
-                              type: "string"
-                            "index":
-                              type: "number"
-                            "type":
-                              type: "string"
-                              enum:
-                                - "function"
-                            "function":
-                              type: "object"
-                              properties:
-                                "name":
-                                  type: "string"
-                                "arguments":
-                                  type: "string"
-                                  description: "JSON string arguments for the functions"
-                              required:
-                                - "name"
-                                - "arguments"
-                          required:
-                            - "type"
-                            - "function"
-                      "tool_call_id":
-                        type: "string"
-                    required:
-                      - "role"
-                      - "content"
-                  description: "The messages used to generate the output, without the last user message"
-      responses:
-        "200":
-          description: "Returns the result of the evaluator run"
-          content:
-            "application/json":
-              schema:
-                oneOf:
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "string"
-                      "original_value":
-                        type:
-                          - "string"
-                          - "null"
-                      "value":
-                        type:
-                          - "string"
-                          - "null"
-                    required:
-                      - "type"
-                    title: "String"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "number"
-                      "original_value":
-                        type:
-                          - "number"
-                          - "null"
-                      "value":
-                        type:
-                          - "number"
-                          - "null"
-                    required:
-                      - "type"
-                      - "value"
-                    title: "Number"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "boolean"
-                      "value":
-                        anyOf:
-                          - type: "boolean"
-                          - type: "string"
-                          - type: "number"
-                          - type: "null"
-                    required:
-                      - "type"
-                      - "value"
-                    title: "Boolean"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "string_array"
-                      "values":
-                        type: "array"
-                        items:
-                          type:
-                            - "string"
-                            - "null"
-                    required:
-                      - "type"
-                      - "values"
-                    title: "String Array"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "rouge_n"
-                      "value":
-                        type: "object"
-                        properties:
-                          "rouge_1":
-                            type: "object"
-                            properties:
-                              "f1":
-                                type: "number"
-                              "precision":
-                                type: "number"
-                              "recall":
-                                type: "number"
-                            required:
-                              - "f1"
-                              - "precision"
-                              - "recall"
-                          "rouge_2":
-                            type: "object"
-                            properties:
-                              "f1":
-                                type: "number"
-                              "precision":
-                                type: "number"
-                              "recall":
-                                type: "number"
-                            required:
-                              - "f1"
-                              - "precision"
-                              - "recall"
-                          "rouge_l":
-                            type: "object"
-                            properties:
-                              "f1":
-                                type: "number"
-                              "precision":
-                                type: "number"
-                              "recall":
-                                type: "number"
-                            required:
-                              - "f1"
-                              - "precision"
-                              - "recall"
-                        required:
-                          - "rouge_1"
-                          - "rouge_2"
-                          - "rouge_l"
-                    required:
-                      - "type"
-                      - "value"
-                    title: "Rouge N"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "bert_score"
-                      "value":
-                        type: "object"
-                        properties:
-                          "f1":
-                            type: "number"
-                          "precision":
-                            type: "number"
-                          "recall":
-                            type: "number"
-                        required:
-                          - "f1"
-                          - "precision"
-                          - "recall"
-                    required:
-                      - "type"
-                      - "value"
-                    title: "BERT Score"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "llm_evaluator"
-                      "value":
-                        type:
-                          - "object"
-                          - "null"
-                        properties:
-                          "workflow_run_id":
-                            type: "string"
-                          "value":
-                            anyOf:
-                              - type: "number"
-                              - type: "boolean"
-                              - type: "string"
-                          "explanation":
-                            type:
-                              - "string"
-                              - "null"
-                          "original_value":
-                            anyOf:
-                              - type: "number"
-                              - type: "boolean"
-                              - type: "string"
-                              - type: "null"
-                          "original_explanation":
-                            type:
-                              - "string"
-                              - "null"
-                        required:
-                          - "workflow_run_id"
-                          - "value"
-                    required:
-                      - "type"
-                      - "value"
-                    title: "LLM"
-                  - type: "object"
-                    properties:
-                      "type":
-                        type: "string"
-                        enum:
-                          - "http_eval"
-                      "value":
-                        type:
-                          - "object"
-                          - "null"
-                        properties:
-                          "type":
-                            type: "string"
-                          "value":
-                            anyOf:
-                              - type: "number"
-                              - type: "boolean"
-                        required:
-                          - "type"
-                          - "value"
-                    required:
-                      - "type"
-                    title: "HTTP"
-        "404":
-          description: "Workspace ID is not found on the request"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-        "500":
-          description: "Error running the evaluator"
-          content:
-            "application/json":
-              schema:
-                type: "object"
-                properties:
-                  "message":
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
   "/v2/contacts/{id}":
     get:
       tags:
@@ -7940,7 +4931,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -7948,7 +4939,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -8084,7 +5075,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -8092,7 +5083,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -12830,7 +9821,7 @@ paths:
                               - "type"
                             title: "Function Tool"
                             description: "Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id."
-                        description: "Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools must reference pre-created tools by key or id."
+                        description: "Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id."
                         title: "Agent Tool Input (CRUD)"
                       default: []
                       description: "Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id."
@@ -13972,7 +10963,7 @@ paths:
                               - "type"
                             title: "Function Tool"
                             description: "Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id."
-                        description: "Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools must reference pre-created tools by key or id."
+                        description: "Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id."
                         title: "Agent Tool Input (CRUD)"
                       default: []
                       description: "Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id."
@@ -14833,7 +11824,6 @@ paths:
     post:
       tags:
         - "Agents"
-      x-mint: {"content": "<Warning>The Agents APIs are currently in beta and subject to change. Please report any feedback you might have to the team.</Warning>\n\n<Note>This endpoint returns a task object and does not stream responses. For streaming, use the stream-run endpoint.</Note>\n\n## Examples\n\n<RequestExample>\n\n```json New Execution - Text Only\n{\n  \"key\": \"simple-agent-1\",\n  \"role\": \"Assistant\",\n  \"description\": \"A helpful assistant for general tasks\",\n  \"instructions\": \"Be helpful and concise\",\n  \"settings\": {\n    \"max_iterations\": 3,\n    \"max_execution_time\": 300,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"requires_approval\": false,\n        \"display_name\": \"current_date\",\n        \"type\": \"current_date\"\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"kind\": \"text\",\n        \"text\": \"What's today's date and day of the week?\"\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\",\n  \"memory_stores\": [],\n  \"team_of_agents\": []\n}\n```\n\n```json New Execution - With Image\n{\n  \"key\": \"image-classifier-1\",\n  \"role\": \"Image Analyst\",\n  \"description\": \"Analyzes images and provides weather information\",\n  \"instructions\": \"Analyze images and use weather API when location is identified\",\n  \"settings\": {\n    \"max_iterations\": 5,\n    \"max_execution_time\": 600,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"requires_approval\": false,\n        \"display_name\": \"current_date\",\n        \"type\": \"current_date\"\n      },\n      {\n        \"key\": \"openweather_get_api_6\",\n        \"description\": \"Fetches weather data from the OpenWeatherMap API\",\n        \"display_name\": \"openweather_get_api_6\",\n        \"type\": \"http\",\n        \"http\": {\n          \"blueprint\": {\n            \"url\": \"https://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{lon}}&appid={{appid}}\",\n            \"method\": \"GET\",\n            \"headers\": {\n              \"Content-Type\": \"application/json\"\n            }\n          },\n          \"arguments\": {\n            \"lat\": {\n              \"type\": \"number\",\n              \"description\": \"Latitude of the location\",\n              \"send_to_model\": true\n            },\n            \"lon\": {\n              \"type\": \"number\",\n              \"description\": \"Longitude of the location\",\n              \"send_to_model\": true\n            },\n            \"appid\": {\n              \"type\": \"string\",\n              \"description\": \"Your OpenWeatherMap API key\",\n              \"send_to_model\": false,\n              \"default_value\": \"YOUR_API_KEY\"\n            }\n          }\n        }\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"kind\": \"text\",\n        \"text\": \"Look at this map image and tell me what cities you can identify. Also, what's the weather like in one of them?\"\n      },\n      {\n        \"kind\": \"file\",\n        \"file\": {\n          \"uri\": \"https://upload.wikimedia.org/wikipedia/commons/7/73/Herman_Moll_A_New_Map_of_Europe_According_to_the_Newest_Observations_1721.JPG\",\n          \"mimeType\": \"image/jpeg\",\n          \"name\": \"europe-map.jpg\"\n        }\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\",\n  \"memory_stores\": [],\n  \"team_of_agents\": []\n}\n```\n\n```json Continue Execution - User Message\n{\n  \"key\": \"simple-agent-1\",\n  \"role\": \"Assistant\",\n  \"description\": \"A helpful assistant for general tasks\",\n  \"instructions\": \"Be helpful and concise\",\n  \"task_id\": \"01K62T9YTVYZY4MV3WCJSMBCB2\",\n  \"settings\": {\n    \"max_iterations\": 3,\n    \"max_execution_time\": 300,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"requires_approval\": false,\n        \"display_name\": \"current_date\",\n        \"type\": \"current_date\"\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"kind\": \"text\",\n        \"text\": \"Thank you! Can you also tell me what season we're in?\"\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\",\n  \"memory_stores\": [],\n  \"team_of_agents\": []\n}\n```\n\n```json Continue Execution - Tool Results\n{\n  \"key\": \"journey-plan-orchestrator-5\",\n  \"role\": \"Itinerary Assistant\",\n  \"description\": \"A very well mannered overall orchestrator agent who helps plan trips\",\n  \"instructions\": \"You are able to help anybody plan their journey into any country\",\n  \"task_id\": \"01K62T9YTVYZY4MV3WCJSMBCB2\",\n  \"settings\": {\n    \"max_iterations\": 5,\n    \"max_execution_time\": 300,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"key\": \"get_local_events\",\n        \"display_name\": \"Get Local Events\",\n        \"description\": \"Retrieves local events happening in a specific city\",\n        \"requires_approval\": false,\n        \"function\": {\n          \"name\": \"get_local_events\",\n          \"description\": \"Queries the event database\",\n          \"strict\": false,\n          \"parameters\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"city\": {\n                \"type\": \"string\",\n                \"description\": \"The name of the city\"\n              },\n              \"date\": {\n                \"type\": \"string\",\n                \"description\": \"The date (YYYY-MM-DD)\"\n              }\n            },\n            \"required\": [\"city\", \"date\"]\n          }\n        }\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"tool\",\n    \"parts\": [\n      {\n        \"kind\": \"tool_result\",\n        \"tool_call_id\": \"call_example123\",\n        \"result\": {\n          \"events\": [\n            {\n              \"name\": \"Budapest Summer Festival\",\n              \"date\": \"2025-08-26\",\n              \"time\": \"16:00-22:00\",\n              \"location\": \"Margaret Island\",\n              \"type\": \"concert\",\n              \"description\": \"Open-air concert series\"\n            }\n          ],\n          \"total_found\": 1,\n          \"query_date\": \"2025-08-26\"\n        }\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\",\n  \"memory_stores\": [],\n  \"team_of_agents\": []\n}\n```\n\n</RequestExample>\n\n<ResponseExample>\n\n```json Task Response\n{\n  \"id\": \"01K62T9YTVYZY4MV3WCJSMBCB2\",\n  \"contextId\": \"workspace123\",\n  \"kind\": \"task\",\n  \"status\": {\n    \"state\": \"submitted\",\n    \"timestamp\": \"2025-09-26T10:30:00.000Z\"\n  },\n  \"metadata\": {\n    \"orq_workspace_id\": \"workspace123\",\n    \"orq_agent_id\": \"01JKG6QJ5FGHCWA7RVMMZB82QY\",\n    \"orq_agent_key\": \"simple-agent-1\",\n    \"orq_created_by_id\": \"account123\"\n  }\n}\n```\n\n</ResponseExample>"}
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "run"
       operationId: "RunAgent"
@@ -15428,7 +12418,7 @@ paths:
                               - "function"
                             title: "Function Tool (Run)"
                             description: "Function tool with inline definition for on-the-fly creation in run endpoint"
-                        description: "Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (http, code, function) support full inline definitions for on-the-fly creation."
+                        description: "Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function) support full inline definitions for on-the-fly creation."
                         title: "Agent Tool Input (Run)"
                       default: []
                       description: "Tools available to the agent"
@@ -15547,7 +12537,6 @@ paths:
     post:
       tags:
         - "Agents"
-      x-mint: {"content": "<Warning>The Agents APIs are currently in beta and subject to change. Please report any feedback you might have to the team.</Warning>\n\n## SSE Event Types\n\nThe stream-run endpoint returns Server-Sent Events (SSE) with the following event types. Each event contains a `type`, `data` object, and `timestamp`.\n\n```json SSE Event Types expandable\n// Agent Lifecycle Events\n{\n  \"type\": \"agents.execution_started\",\n  \"data\": {\n    \"agent_task_id\": \"01K631TNQZ9VWENJV91YS1JQXC\",\n    \"agent_manifest_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n    \"agent_key\": \"my-agent\",\n    \"workspace_id\": \"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:33.860Z\"\n}\n\n{\n  \"type\": \"event.agents.started\",\n  \"data\": {\n    \"inputMessage\": {\n      \"role\": \"user\",\n      \"parts\": [{\n        \"kind\": \"text\",\n        \"text\": \"Hello, how can you help me?\"\n      }],\n      \"metadata\": {}\n    },\n    \"modelId\": \"0707a18f-e3a0-44b6-9f24-4d5d28e0cdea\",\n    \"instructions\": \"Be helpful and provide accurate information\",\n    \"system_prompt\": \"You are an AI assistant...\",\n    \"settings\": {\n      \"max_iterations\": 5,\n      \"max_execution_time\": 300,\n      \"tool_approval_required\": \"none\",\n      \"tools\": []\n    },\n    \"agent_manifest_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n    \"agent_key\": \"my-agent\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:33.863Z\"\n}\n\n{\n  \"type\": \"event.agents.thought\",\n  \"data\": {\n    \"agent_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n    \"message_difference\": {\n      \"2\": {\n        \"messageId\": \"01K631TRNHF7XQ9HN7R9YX5GQR\",\n        \"role\": \"agent\",\n        \"parts\": [{\n          \"kind\": \"text\",\n          \"text\": \"I can help you with various tasks...\"\n        }],\n        \"metadata\": {},\n        \"agent_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n        \"agent_execution_id\": \"01K631TNQZ9VWENJV91YS1JQXC\",\n        \"workspace_id\": \"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\",\n        \"index\": 2\n      }\n    },\n    \"choice\": {\n      \"finish_reason\": \"stop\",\n      \"index\": 0,\n      \"message\": {\n        \"content\": \"I can help you with various tasks...\",\n        \"role\": \"assistant\"\n      }\n    },\n    \"choiceIndex\": 2,\n    \"iteration\": 1,\n    \"accumulated_execution_time\": 1250.5\n  },\n  \"timestamp\": \"2025-09-26T13:01:36.817Z\"\n}\n\n{\n  \"type\": \"event.agents.inactive\",\n  \"data\": {\n    \"last_message\": \"I can help you with various tasks including...\",\n    \"finish_reason\": \"stop\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:44.216Z\"\n}\n\n{\n  \"type\": \"event.agents.errored\",\n  \"data\": {\n    \"error\": \"Model request failed\",\n    \"code\": 500\n  },\n  \"timestamp\": \"2025-09-26T13:01:44.216Z\"\n}\n\n// Tool Execution Events\n{\n  \"type\": \"event.agents.action_review_requested\",\n  \"data\": {\n    \"agent_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n    \"action_id\": \"01K631TTTF9JAE0GKZXYWGSTTZ\",\n    \"requires_approval\": false,\n    \"tool\": {\n      \"id\": \"01JKG6QJ5FGHCWA7RVMMZB82QY\",\n      \"action_type\": \"orq_current_date\",\n      \"display_name\": \"Current Date & Time\",\n      \"requires_approval\": false\n    },\n    \"input\": {\n      \"timezone\": \"UTC\"\n    },\n    \"agent_tool_call_id\": \"toolu_01USVfbcLCA5TawuUNRNiaqS\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:39.023Z\"\n}\n\n{\n  \"type\": \"event.agents.action_reviewed\",\n  \"data\": {\n    \"agent_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n    \"action_id\": \"01K631TTTF9JAE0GKZXYWGSTTZ\",\n    \"agent_tool_call_id\": \"toolu_01USVfbcLCA5TawuUNRNiaqS\",\n    \"review\": \"approved\",\n    \"review_source\": \"automatic\",\n    \"reviewed_by_id\": \"system\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:39.025Z\"\n}\n\n{\n  \"type\": \"event.workflow_events.tool_execution_started\",\n  \"data\": {\n    \"tool_id\": \"01JKG6QJ5FGHCWA7RVMMZB82QY\",\n    \"tool_key\": \"orq_current_date\",\n    \"tool_display_name\": \"Current Date & Time\",\n    \"action_type\": \"orq_current_date\",\n    \"tool_arguments\": {\n      \"timezone\": \"UTC\"\n    },\n    \"tool_execution_context\": {\n      \"action_id\": \"01K631TTTF9JAE0GKZXYWGSTTZ\",\n      \"agent_tool_call_id\": \"toolu_01USVfbcLCA5TawuUNRNiaqS\",\n      \"workspace_id\": \"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\",\n      \"agent_manifest_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n      \"agent_execution_id\": \"01K631TNQZ9VWENJV91YS1JQXC\",\n      \"product\": \"agents\"\n    }\n  },\n  \"timestamp\": \"2025-09-26T13:01:39.029Z\"\n}\n\n{\n  \"type\": \"event.workflow_events.tool_execution_finished\",\n  \"data\": {\n    \"result\": {\n      \"currentDate\": \"2025-09-26T13:01:39.030Z\"\n    },\n    \"tool_execution_context\": {\n      \"action_id\": \"01K631TTTF9JAE0GKZXYWGSTTZ\",\n      \"agent_tool_call_id\": \"toolu_01USVfbcLCA5TawuUNRNiaqS\",\n      \"workspace_id\": \"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\",\n      \"agent_manifest_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n      \"agent_execution_id\": \"01K631TNQZ9VWENJV91YS1JQXC\",\n      \"product\": \"agents\"\n    }\n  },\n  \"timestamp\": \"2025-09-26T13:01:39.030Z\"\n}\n\n{\n  \"type\": \"event.workflow_events.tool_execution_failed\",\n  \"data\": {\n    \"error\": \"Tool execution timeout\",\n    \"tool_execution_context\": {\n      \"action_id\": \"01K631TTTF9JAE0GKZXYWGSTTZ\",\n      \"agent_tool_call_id\": \"toolu_01USVfbcLCA5TawuUNRNiaqS\",\n      \"workspace_id\": \"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\",\n      \"agent_manifest_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n      \"agent_execution_id\": \"01K631TNQZ9VWENJV91YS1JQXC\",\n      \"product\": \"agents\"\n    }\n  },\n  \"timestamp\": \"2025-09-26T13:01:45.030Z\"\n}\n\n// Execution Control Events\n{\n  \"type\": \"event.agents.execution_review_required\",\n  \"data\": {},\n  \"timestamp\": \"2025-09-26T13:01:40.000Z\"\n}\n\n{\n  \"type\": \"event.agents.execution_reviewed\",\n  \"data\": {},\n  \"timestamp\": \"2025-09-26T13:01:41.000Z\"\n}\n\n{\n  \"type\": \"event.agents.execution_named\",\n  \"data\": {\n    \"name\": \"Getting current date and providing information\",\n    \"agent_manifest_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:36.816Z\"\n}\n\n{\n  \"type\": \"event.agents.handed_off\",\n  \"data\": {\n    \"agent_id\": \"01K62T62KVJHRE0P9PX4VN2JHD\",\n    \"input\": \"Continuing with weather analysis task\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:45.000Z\"\n}\n\n// Special Events\n{\n  \"type\": \"agents.timeout\",\n  \"data\": {\n    \"message\": \"Agent execution exceeded maximum time limit\"\n  },\n  \"timestamp\": \"2025-09-26T13:06:00.000Z\"\n}\n\n{\n  \"type\": \"agents.error\",\n  \"data\": {\n    \"error\": \"Rate limit exceeded\",\n    \"code\": \"RATE_LIMIT_EXCEEDED\"\n  },\n  \"timestamp\": \"2025-09-26T13:01:45.000Z\"\n}\n\n// Stream Termination\n[DONE]\n```\n\n<Note>Stream responses use Server-Sent Events (SSE). Use an appropriate SSE client for proper handling.</Note>\n\n## Examples\n\n<RequestExample>\n\n```json New Execution - Text Only\n{\n  \"key\": \"simple-agent-1\",\n  \"role\": \"Assistant\",\n  \"description\": \"A helpful assistant for general tasks\",\n  \"instructions\": \"Be helpful and concise\",\n  \"settings\": {\n    \"max_iterations\": 3,\n    \"max_execution_time\": 300,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"requires_approval\": false,\n        \"display_name\": \"current_date\",\n        \"type\": \"current_date\"\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"kind\": \"text\",\n        \"text\": \"What's today's date and day of the week?\"\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\",\n  \"memory_stores\": [],\n  \"team_of_agents\": []\n}\n```\n\n```json New Execution - With Image\n{\n  \"key\": \"image-classifier-1\",\n  \"role\": \"Image Analyst\",\n  \"description\": \"Analyzes images and provides weather information\",\n  \"instructions\": \"Analyze images and use weather API when location is identified\",\n  \"settings\": {\n    \"max_iterations\": 5,\n    \"max_execution_time\": 600,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"requires_approval\": false,\n        \"display_name\": \"current_date\",\n        \"type\": \"current_date\"\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"kind\": \"text\",\n        \"text\": \"Look at this image and describe what you see\"\n      },\n      {\n        \"kind\": \"file\",\n        \"file\": {\n          \"uri\": \"https://example.com/image.jpg\",\n          \"mimeType\": \"image/jpeg\",\n          \"name\": \"sample-image.jpg\"\n        }\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\"\n}\n```\n\n```json Continue Execution - User Message\n{\n  \"key\": \"simple-agent-1\",\n  \"role\": \"Assistant\",\n  \"description\": \"A helpful assistant for general tasks\",\n  \"instructions\": \"Be helpful and concise\",\n  \"task_id\": \"01K62T9YTVYZY4MV3WCJSMBCB2\",\n  \"settings\": {\n    \"max_iterations\": 3,\n    \"max_execution_time\": 300,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"requires_approval\": false,\n        \"display_name\": \"current_date\",\n        \"type\": \"current_date\"\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"user\",\n    \"parts\": [\n      {\n        \"kind\": \"text\",\n        \"text\": \"Thank you! Can you also tell me what season we're in?\"\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\"\n}\n```\n\n```json Continue Execution - Tool Results\n{\n  \"key\": \"journey-plan-orchestrator-5\",\n  \"role\": \"Itinerary Assistant\",\n  \"description\": \"A very well mannered overall orchestrator agent who helps plan trips\",\n  \"instructions\": \"You are able to help anybody plan their journey into any country\",\n  \"task_id\": \"01K62T9YTVYZY4MV3WCJSMBCB2\",\n  \"settings\": {\n    \"max_iterations\": 5,\n    \"max_execution_time\": 300,\n    \"tool_approval_required\": \"none\",\n    \"tools\": [\n      {\n        \"type\": \"function\",\n        \"key\": \"get_local_events\",\n        \"display_name\": \"Get Local Events\",\n        \"description\": \"Retrieves local events happening in a specific city\",\n        \"requires_approval\": false,\n        \"function\": {\n          \"name\": \"get_local_events\",\n          \"description\": \"Queries the event database\",\n          \"strict\": false,\n          \"parameters\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"city\": {\n                \"type\": \"string\",\n                \"description\": \"The name of the city\"\n              },\n              \"date\": {\n                \"type\": \"string\",\n                \"description\": \"The date (YYYY-MM-DD)\"\n              }\n            },\n            \"required\": [\"city\", \"date\"]\n          }\n        }\n      }\n    ]\n  },\n  \"message\": {\n    \"role\": \"tool\",\n    \"parts\": [\n      {\n        \"kind\": \"tool_result\",\n        \"tool_call_id\": \"call_example123\",\n        \"result\": {\n          \"events\": [\n            {\n              \"name\": \"Budapest Summer Festival\",\n              \"date\": \"2025-08-26\",\n              \"time\": \"16:00-22:00\",\n              \"location\": \"Margaret Island\",\n              \"type\": \"concert\",\n              \"description\": \"Open-air concert series\"\n            }\n          ],\n          \"total_found\": 1,\n          \"query_date\": \"2025-08-26\"\n        }\n      }\n    ]\n  },\n  \"model\": \"openai/gpt-4o\",\n  \"path\": \"Default/agents\"\n}\n```\n\n</RequestExample>\n\n<ResponseExample>\n\n```text SSE Stream Response\ndata: {\"type\":\"agents.execution_started\",\"data\":{\"agent_task_id\":\"01K631TNQZ9VWENJV91YS1JQXC\",\"agent_manifest_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"agent_key\":\"simple-agent-1\",\"workspace_id\":\"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\"},\"timestamp\":\"2025-09-26T13:01:33.860Z\"}\n\ndata: {\"type\":\"event.agents.started\",\"data\":{\"inputMessage\":{\"role\":\"user\",\"parts\":[{\"kind\":\"text\",\"text\":\"What's today's date and day of the week?\"}],\"metadata\":{}},\"modelId\":\"0707a18f-e3a0-44b6-9f24-4d5d28e0cdea\",\"instructions\":\"Be helpful and concise\",\"system_prompt\":\"You are an AI agent with access to tools to help complete user tasks...\",\"settings\":{\"max_iterations\":3,\"max_execution_time\":300,\"tool_approval_required\":\"none\",\"tools\":[{\"id\":\"01JKG6QJ5FGHCWA7RVMMZB82QY\",\"action_type\":\"orq_current_date\",\"display_name\":\"Current Date & Time\",\"requires_approval\":false}]},\"agent_manifest_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"agent_key\":\"simple-agent-1\"},\"timestamp\":\"2025-09-26T13:01:33.863Z\"}\n\ndata: {\"type\":\"event.agents.thought\",\"data\":{\"agent_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"message_difference\":{\"2\":{\"messageId\":\"01K631TRNHF7XQ9HN7R9YX5GQR\",\"role\":\"agent\",\"parts\":[{\"kind\":\"tool_call\",\"tool_name\":\"orq_current_date\",\"tool_call_id\":\"toolu_01USVfbcLCA5TawuUNRNiaqS\",\"arguments\":{\"timezone\":\"UTC\"}}],\"metadata\":{}}},\"choice\":{\"finish_reason\":\"tool_calls\",\"index\":0,\"message\":{\"content\":null,\"tool_calls\":[{\"id\":\"toolu_01USVfbcLCA5TawuUNRNiaqS\",\"type\":\"function\",\"function\":{\"name\":\"orq_current_date\",\"arguments\":\"{\\\"timezone\\\":\\\"UTC\\\"}\"}}],\"role\":\"assistant\"}},\"choiceIndex\":2,\"iteration\":1,\"accumulated_execution_time\":0},\"timestamp\":\"2025-09-26T13:01:36.817Z\"}\n\ndata: {\"type\":\"event.agents.execution_named\",\"data\":{\"name\":\"Getting current date and providing information\",\"agent_manifest_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\"},\"timestamp\":\"2025-09-26T13:01:36.816Z\"}\n\ndata: {\"type\":\"event.agents.action_review_requested\",\"data\":{\"agent_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"action_id\":\"01K631TTTF9JAE0GKZXYWGSTTZ\",\"requires_approval\":false,\"tool\":{\"id\":\"01JKG6QJ5FGHCWA7RVMMZB82QY\",\"action_type\":\"orq_current_date\",\"display_name\":\"Current Date & Time\",\"requires_approval\":false},\"input\":{\"timezone\":\"UTC\"},\"agent_tool_call_id\":\"toolu_01USVfbcLCA5TawuUNRNiaqS\"},\"timestamp\":\"2025-09-26T13:01:39.023Z\"}\n\ndata: {\"type\":\"event.workflow_events.tool_execution_started\",\"data\":{\"tool_id\":\"01JKG6QJ5FGHCWA7RVMMZB82QY\",\"tool_key\":\"orq_current_date\",\"tool_display_name\":\"Current Date & Time\",\"action_type\":\"orq_current_date\",\"tool_arguments\":{\"timezone\":\"UTC\"},\"tool_execution_context\":{\"action_id\":\"01K631TTTF9JAE0GKZXYWGSTTZ\",\"agent_tool_call_id\":\"toolu_01USVfbcLCA5TawuUNRNiaqS\",\"workspace_id\":\"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\",\"agent_manifest_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"agent_execution_id\":\"01K631TNQZ9VWENJV91YS1JQXC\",\"product\":\"agents\"}},\"timestamp\":\"2025-09-26T13:01:39.029Z\"}\n\ndata: {\"type\":\"event.workflow_events.tool_execution_finished\",\"data\":{\"result\":{\"currentDate\":\"2025-09-26T13:01:39.030Z\"},\"tool_execution_context\":{\"action_id\":\"01K631TTTF9JAE0GKZXYWGSTTZ\",\"agent_tool_call_id\":\"toolu_01USVfbcLCA5TawuUNRNiaqS\",\"workspace_id\":\"cbd7b74a-4f2f-43b6-b3f9-19353c40dd62\",\"agent_manifest_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"agent_execution_id\":\"01K631TNQZ9VWENJV91YS1JQXC\",\"product\":\"agents\"}},\"timestamp\":\"2025-09-26T13:01:39.030Z\"}\n\ndata: {\"type\":\"event.agents.thought\",\"data\":{\"agent_id\":\"01K62T62KVJHRE0P9PX4VN2JHD\",\"message_difference\":{\"3\":{\"messageId\":\"01K631TZWQ834RCWD0D1QN455P\",\"role\":\"tool\",\"parts\":[{\"kind\":\"tool_result\",\"tool_call_id\":\"toolu_01USVfbcLCA5TawuUNRNiaqS\",\"result\":{\"currentDate\":\"2025-09-26T13:01:39.030Z\"}}],\"metadata\":{}},\"4\":{\"messageId\":\"01K631TZWQ93QY494FSGCTPG69\",\"role\":\"agent\",\"parts\":[{\"kind\":\"text\",\"text\":\"Today is Thursday, September 26th, 2025. The current date and time is 2025-09-26T13:01:39.030Z (UTC).\"}],\"metadata\":{}}},\"choice\":{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"content\":\"Today is Thursday, September 26th, 2025. The current date and time is 2025-09-26T13:01:39.030Z (UTC).\",\"role\":\"assistant\"}},\"choiceIndex\":4,\"iteration\":2,\"accumulated_execution_time\":5053.7},\"timestamp\":\"2025-09-26T13:01:44.215Z\"}\n\ndata: {\"type\":\"event.agents.inactive\",\"data\":{\"last_message\":\"Today is Thursday, September 26th, 2025. The current date and time is 2025-09-26T13:01:39.030Z (UTC).\",\"finish_reason\":\"stop\"},\"timestamp\":\"2025-09-26T13:01:44.216Z\"}\n\ndata: [DONE]\n\n```\n\n</ResponseExample>"}
       x-speakeasy-group: "agents"
       x-speakeasy-name-override: "streamRun"
       operationId: "StreamRunAgent"
@@ -16142,7 +13131,7 @@ paths:
                               - "function"
                             title: "Function Tool (Run)"
                             description: "Function tool with inline definition for on-the-fly creation in run endpoint"
-                        description: "Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (http, code, function) support full inline definitions for on-the-fly creation."
+                        description: "Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function) support full inline definitions for on-the-fly creation."
                         title: "Agent Tool Input (Run)"
                       default: []
                       description: "Tools available to the agent"
@@ -16749,7 +13738,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-10-30T04:37:49.868Z"
+                    default: "2025-10-30T20:23:05.577Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -16838,7 +13827,7 @@ paths:
                         "created":
                           type: "string"
                           format: "date-time"
-                          default: "2025-10-30T04:37:49.868Z"
+                          default: "2025-10-30T20:23:05.577Z"
                           readOnly: true
                           description: "The date and time the resource was created"
                       required:
@@ -16906,7 +13895,7 @@ paths:
                   "created":
                     type: "string"
                     format: "date-time"
-                    default: "2025-10-30T04:37:49.868Z"
+                    default: "2025-10-30T20:23:05.577Z"
                     readOnly: true
                     description: "The date and time the resource was created"
                 required:
@@ -18127,9 +15116,7 @@ paths:
                                 "schema":
                                   description: "The schema for the response format, described as a JSON Schema object."
                                 "strict":
-                                  type:
-                                    - "boolean"
-                                    - "null"
+                                  type: "boolean"
                                   description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
                               required:
                                 - "name"
@@ -19820,9 +16807,7 @@ paths:
                                 "schema":
                                   description: "The schema for the response format, described as a JSON Schema object."
                                 "strict":
-                                  type:
-                                    - "boolean"
-                                    - "null"
+                                  type: "boolean"
                                   description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true. "
                               required:
                                 - "name"
@@ -21381,7 +18366,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K8SPGZQGJ0HDYZ0TDE6E20T2"
+                              default: "01K8VCKT285VC9K5DTSBXD90R3"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -21460,7 +18445,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K8SPGZQK44SK9J4SY7WATXV3"
+                              default: "01K8VCKT2AT6CQME3NZ167W5ZT"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -21543,7 +18528,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K8SPGZQPHFG36THH78E5N8AG"
+                              default: "01K8VCKT2CYQ1Y42C34D0QWB2Y"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -21666,7 +18651,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K8SPGZQSB4M8TCQWZEQ1TPCW"
+                              default: "01K8VCKT2F8KGQAWE0JKC40V2K"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -21783,7 +18768,7 @@ paths:
                             "_id":
                               type: "string"
                               format: "ulid"
-                              default: "01K8SPGZQWC00WXB4XNJYT2BZ8"
+                              default: "01K8VCKT2H8K9Z1QB8DJ9MWNH5"
                             "path":
                               type: "string"
                               description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -21938,6 +18923,8 @@ paths:
                     - "description"
                     - "type"
                     - "function"
+                  title: "Function Tool"
+                  description: "A custom function tool that allows the model to call predefined functions with structured parameters."
                 - type: "object"
                   properties:
                     "path":
@@ -21997,6 +18984,8 @@ paths:
                     - "description"
                     - "type"
                     - "json_schema"
+                  title: "JSON Schema Tool"
+                  description: "A tool that enforces structured output format using JSON Schema for consistent response formatting."
                 - type: "object"
                   properties:
                     "path":
@@ -22096,6 +19085,8 @@ paths:
                     - "description"
                     - "type"
                     - "http"
+                  title: "HTTP Tool"
+                  description: "Executes HTTP requests to interact with external APIs and web services using customizable blueprints."
                 - type: "object"
                   properties:
                     "path":
@@ -22189,6 +19180,8 @@ paths:
                     - "description"
                     - "type"
                     - "mcp"
+                  title: "MCP Tool"
+                  description: "A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities."
                 - type: "object"
                   properties:
                     "path":
@@ -22243,6 +19236,8 @@ paths:
                     - "description"
                     - "type"
                     - "code_tool"
+                  title: "Code Execution Tool"
+                  description: "Executes code snippets in a sandboxed environment, currently supporting Python."
       responses:
         "200":
           description: "Successfully created the tool."
@@ -22255,7 +19250,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZR720ZQCSYQWMC0A9EJ"
+                        default: "01K8VCKT2X1ZV19R5Z8QFBMRYN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22334,7 +19329,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZR8VW8DQK93DTJ2FA4Z"
+                        default: "01K8VCKT2YNQR627DTQ3WSJA5S"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22417,7 +19412,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZR9EVFF7F5SSJ28HMZF"
+                        default: "01K8VCKT2ZRZ0C02PP8T1S85GY"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22540,7 +19535,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRBGBEJKWYNZ18AAK2V"
+                        default: "01K8VCKT31HT89BAX8B0C8WK2N"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22657,7 +19652,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRDZYGQYNGDQ6DWEM9J"
+                        default: "01K8VCKT33CK4R8GE3Y8X0GH7Z"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -22804,6 +19799,8 @@ paths:
                         - "name"
                   required:
                     - "type"
+                  title: "Update Function Tool"
+                  description: "Updates an existing function tool configuration."
                 - type: "object"
                   properties:
                     "path":
@@ -22859,6 +19856,8 @@ paths:
                         - "schema"
                   required:
                     - "type"
+                  title: "Update JSON Schema Tool"
+                  description: "Updates an existing JSON Schema tool configuration."
                 - type: "object"
                   properties:
                     "path":
@@ -22954,6 +19953,8 @@ paths:
                         - "blueprint"
                   required:
                     - "type"
+                  title: "Update HTTP Tool"
+                  description: "Updates an existing HTTP tool configuration."
                 - type: "object"
                   properties:
                     "path":
@@ -23043,6 +20044,8 @@ paths:
                         - "connection_type"
                   required:
                     - "type"
+                  title: "Update MCP Tool"
+                  description: "Updates an existing MCP tool configuration."
                 - type: "object"
                   properties:
                     "path":
@@ -23087,6 +20090,8 @@ paths:
                         - "code"
                   required:
                     - "type"
+                  title: "Update Code Execution Tool"
+                  description: "Updates an existing code execution tool configuration."
       responses:
         "200":
           description: "Successfully updated the tool."
@@ -23099,7 +20104,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRJDNZSNAE5X4B351F0"
+                        default: "01K8VCKT38ZCP4RWR6P860HJJE"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23178,7 +20183,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRMWHM5KDNVNDZANR00"
+                        default: "01K8VCKT3AWA47B78TZDVAGP0S"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23261,7 +20266,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRP1VCQ8DR3V9V9R5C1"
+                        default: "01K8VCKT3CNHZJ3G7GGKNM0SM8"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23384,7 +20389,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRS9M4AHMJE6EVTECPV"
+                        default: "01K8VCKT3QNTABB706VWD8NEKD"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23501,7 +20506,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZRYY8Y5CH6V6XHMADPB"
+                        default: "01K8VCKT3TR8T8K25YK7WPCR4Z"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23634,7 +20639,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZSXD8ZHH5PBTAYM603N"
+                        default: "01K8VCKT4F0760PAJYP7XF128K"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23713,7 +20718,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZT3SY4AGXB7JCHR23NK"
+                        default: "01K8VCKT4G8VBRS7HERG9S3RAN"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23796,7 +20801,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZT7JA5NH4MEA2YF0GEN"
+                        default: "01K8VCKT4H6DGQAX3GS7SDQ4NX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -23919,7 +20924,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZTAA2PA49N7GBDZR2WW"
+                        default: "01K8VCKT4KXFP3XNDBF7HPZNWX"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24036,7 +21041,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZTC5NG70ZX33SW286FX"
+                        default: "01K8VCKT4NMP1NP3QKE19SWT7Z"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24140,7 +21145,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZSJ05RV07BNFJMWHRAG"
+                        default: "01K8VCKT44NRDM29B1984FQM8A"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24219,7 +21224,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZSK3Q86F8XSTR81JQAM"
+                        default: "01K8VCKT46CZ47F0MHHCDQ6QWJ"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24302,7 +21307,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZSNH2VSBVMQ8BCJVHED"
+                        default: "01K8VCKT48DVX7RMGSYC7FEWZ9"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24425,7 +21430,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZSRWNF8TAGZDGFP190V"
+                        default: "01K8VCKT4BVQHRVTFHX5C180ND"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24542,7 +21547,7 @@ paths:
                       "_id":
                         type: "string"
                         format: "ulid"
-                        default: "01K8SPGZSTX5ZBRFJYEH2JW41Q"
+                        default: "01K8VCKT4DT573JT2KDMVAPTZ1"
                       "path":
                         type: "string"
                         description: "Entity storage path in the format: `project/folder/subfolder/...`\n\nThe first element identifies the project, followed by nested folders (auto-created as needed).\n\nWith project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key."
@@ -24793,7 +21798,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-10-30T04:37:46.623Z"
+                          default: "2025-10-30T20:23:02.184Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -24801,7 +21806,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:46.623Z"
+                              default: "2025-10-30T20:23:02.185Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -24995,7 +22000,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.623Z"
+                    default: "2025-10-30T20:23:02.184Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -25003,7 +22008,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.623Z"
+                        default: "2025-10-30T20:23:02.185Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -25137,7 +22142,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.623Z"
+                    default: "2025-10-30T20:23:02.184Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -25145,7 +22150,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.623Z"
+                        default: "2025-10-30T20:23:02.185Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -25305,7 +22310,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.623Z"
+                    default: "2025-10-30T20:23:02.184Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -25313,7 +22318,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.623Z"
+                        default: "2025-10-30T20:23:02.185Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -27213,7 +24218,7 @@ paths:
                           type: "string"
                           format: "ulid"
                           pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                          default: "01K8SPGZXK91YYZAKNM95F0K0Y"
+                          default: "01K8VCKT7CZY44T3FTYDMYT53Q"
                           readOnly: true
                           description: "The unique identifier of the data source"
                         "display_name":
@@ -27379,7 +24384,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01K8SPGZXQ3H1943PV02X7700W"
+                    default: "01K8VCKT7FRYW6F6G4YBF0RR1S"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -27475,7 +24480,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01K8SPGZXNDY94400Y3PHVVTR1"
+                    default: "01K8VCKT7DA28W6M46XDZGB5MP"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -27607,7 +24612,7 @@ paths:
                     type: "string"
                     format: "ulid"
                     pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                    default: "01K8SPGZXTDJB0PANM941JP3EQ"
+                    default: "01K8VCKT7KXCCV0VYKKGWS5XFP"
                     readOnly: true
                     description: "The unique identifier of the data source"
                   "display_name":
@@ -30398,7 +27403,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-10-30T04:37:46.237Z"
+                          default: "2025-10-30T20:23:01.859Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -30406,7 +27411,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:46.237Z"
+                              default: "2025-10-30T20:23:01.859Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -30542,7 +27547,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30550,7 +27555,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30673,7 +27678,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30681,7 +27686,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -30834,7 +27839,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -30842,7 +27847,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -31312,7 +28317,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-10-30T04:37:57.901Z"
+                                    default: "2025-10-30T20:23:13.478Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -31352,7 +28357,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-10-30T04:37:57.902Z"
+                                    default: "2025-10-30T20:23:13.481Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -31392,7 +28397,7 @@ paths:
                                   "reviewed_at":
                                     type: "string"
                                     format: "date-time"
-                                    default: "2025-10-30T04:37:57.903Z"
+                                    default: "2025-10-30T20:23:13.483Z"
                                     description: "The date and time the item was reviewed"
                                   "type":
                                     type: "string"
@@ -31428,7 +28433,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date"
-                          default: "2025-10-30T04:37:46.237Z"
+                          default: "2025-10-30T20:23:01.859Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -31436,7 +28441,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:46.237Z"
+                              default: "2025-10-30T20:23:01.859Z"
                             - type: "string"
                               format: "date"
                           readOnly: true
@@ -32196,7 +29201,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-10-30T04:37:57.931Z"
+                                default: "2025-10-30T20:23:13.497Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -32236,7 +29241,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-10-30T04:37:57.932Z"
+                                default: "2025-10-30T20:23:13.498Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -32276,7 +29281,7 @@ paths:
                               "reviewed_at":
                                 type: "string"
                                 format: "date-time"
-                                default: "2025-10-30T04:37:57.933Z"
+                                default: "2025-10-30T20:23:13.498Z"
                                 description: "The date and time the item was reviewed"
                               "type":
                                 type: "string"
@@ -32312,7 +29317,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date"
-                      default: "2025-10-30T04:37:46.237Z"
+                      default: "2025-10-30T20:23:01.859Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -32320,7 +29325,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2025-10-30T04:37:46.237Z"
+                          default: "2025-10-30T20:23:01.859Z"
                         - type: "string"
                           format: "date"
                       readOnly: true
@@ -32734,7 +29739,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:57.922Z"
+                              default: "2025-10-30T20:23:13.490Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -32774,7 +29779,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:57.923Z"
+                              default: "2025-10-30T20:23:13.491Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -32814,7 +29819,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:57.923Z"
+                              default: "2025-10-30T20:23:13.491Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -32850,7 +29855,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -32858,7 +29863,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
@@ -33616,7 +30621,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:57.974Z"
+                              default: "2025-10-30T20:23:13.531Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -33656,7 +30661,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:57.974Z"
+                              default: "2025-10-30T20:23:13.531Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -33696,7 +30701,7 @@ paths:
                             "reviewed_at":
                               type: "string"
                               format: "date-time"
-                              default: "2025-10-30T04:37:57.975Z"
+                              default: "2025-10-30T20:23:13.532Z"
                               description: "The date and time the item was reviewed"
                             "type":
                               type: "string"
@@ -33732,7 +30737,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date"
-                    default: "2025-10-30T04:37:46.237Z"
+                    default: "2025-10-30T20:23:01.859Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -33740,7 +30745,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2025-10-30T04:37:46.237Z"
+                        default: "2025-10-30T20:23:01.859Z"
                       - type: "string"
                         format: "date"
                     readOnly: true
