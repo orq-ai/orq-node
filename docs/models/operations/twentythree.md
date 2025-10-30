@@ -5,13 +5,11 @@
 ```typescript
 import { TwentyThree } from "@orq-ai/node/models/operations";
 
-let value: TwentyThree = {
-  type: "cosine_similarity",
-};
+let value: TwentyThree = "jina/jina-embeddings-v3";
 ```
 
-## Fields
+## Values
 
-| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                                                                                                         | [operations.CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody523Type](../../models/operations/createevalfunctionparamsevalsresponse200applicationjsonresponsebody523type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
+```typescript
+"jina/jina-embeddings-v3"
+```

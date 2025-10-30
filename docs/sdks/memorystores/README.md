@@ -268,7 +268,7 @@ async function run() {
     memoryStoreKey: "<value>",
     requestBody: {
       embeddingConfig: {
-        model: "google/text-embedding-005",
+        model: "google/text-multilingual-embedding-002",
       },
       description: "wherever cash since now exempt proliferate aha tabulate ack",
       path: "Default",
@@ -300,7 +300,7 @@ async function run() {
     memoryStoreKey: "<value>",
     requestBody: {
       embeddingConfig: {
-        model: "google/text-embedding-005",
+        model: "google/text-multilingual-embedding-002",
       },
       description: "wherever cash since now exempt proliferate aha tabulate ack",
       path: "Default",

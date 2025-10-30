@@ -40,10 +40,7 @@ const value: operations.Three = {
 ```typescript
 const value: operations.Four = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

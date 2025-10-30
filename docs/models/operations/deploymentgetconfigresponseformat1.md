@@ -1,12 +1,11 @@
 # DeploymentGetConfigResponseFormat1
 
-
-## Supported Types
-
-### `operations.DeploymentGetConfig11`
+## Example Usage
 
 ```typescript
-const value: operations.DeploymentGetConfig11 = {
+import { DeploymentGetConfigResponseFormat1 } from "@orq-ai/node/models/operations";
+
+let value: DeploymentGetConfigResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
@@ -18,19 +17,9 @@ const value: operations.DeploymentGetConfig11 = {
 };
 ```
 
-### `operations.DeploymentGetConfig12`
+## Fields
 
-```typescript
-const value: operations.DeploymentGetConfig12 = {
-  type: "json_object",
-};
-```
-
-### `operations.DeploymentGetConfig13`
-
-```typescript
-const value: operations.DeploymentGetConfig13 = {
-  type: "text",
-};
-```
-
+| Field                                                                                                                                                      | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                     | [operations.DeploymentGetConfigResponseFormatDeploymentsResponseType](../../models/operations/deploymentgetconfigresponseformatdeploymentsresponsetype.md) | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `jsonSchema`                                                                                                                                               | [operations.DeploymentGetConfigResponseFormatJsonSchema](../../models/operations/deploymentgetconfigresponseformatjsonschema.md)                           | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |

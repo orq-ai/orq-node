@@ -36,7 +36,7 @@ export function promptsRetrieve(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetOnePromptResponseBody,
+    operations.GetOnePromptPrompt,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -61,7 +61,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetOnePromptResponseBody,
+      operations.GetOnePromptPrompt,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -144,7 +144,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.GetOnePromptResponseBody,
+    operations.GetOnePromptPrompt,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -154,7 +154,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetOnePromptResponseBody$inboundSchema),
+    M.json(200, operations.GetOnePromptPrompt$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

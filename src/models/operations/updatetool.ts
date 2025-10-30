@@ -51,9 +51,18 @@ export type UpdateToolRequestBodyCodeTool = {
   code: string;
 };
 
-export type UpdateToolRequestBody5 = {
+/**
+ * Updates an existing code execution tool configuration.
+ */
+export type UpdateCodeExecutionTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
@@ -157,11 +166,24 @@ export type RequestBodyMcp = {
   connectionType: RequestBodyConnectionType;
 };
 
-export type UpdateToolRequestBody4 = {
+/**
+ * Updates an existing MCP tool configuration.
+ */
+export type UpdateMCPTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
@@ -289,12 +311,24 @@ export type UpdateToolRequestBodyHttp = {
   arguments?: { [k: string]: UpdateToolRequestBodyArguments } | undefined;
 };
 
-export type UpdateToolRequestBody3 = {
-  id?: string | undefined;
+/**
+ * Updates an existing HTTP tool configuration.
+ */
+export type UpdateHTTPTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
@@ -353,12 +387,24 @@ export type UpdateToolRequestBodyJsonSchema = {
   strict?: boolean | null | undefined;
 };
 
-export type UpdateToolRequestBody2 = {
-  id?: string | undefined;
+/**
+ * Updates an existing JSON Schema tool configuration.
+ */
+export type UpdateJSONSchemaTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
@@ -417,11 +463,24 @@ export type UpdateToolRequestBodyFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type UpdateToolRequestBody1 = {
+/**
+ * Updates an existing function tool configuration.
+ */
+export type UpdateFunctionTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
+  /**
+   * Unique key of the tool as it will be displayed in the UI
+   */
+  key?: string | undefined;
   /**
    * The name of the tool as it will be displayed in the UI. This is optional and if not provided, the `key` will be used.
    */
@@ -442,23 +501,23 @@ export type UpdateToolRequestBody1 = {
  * The tool to update
  */
 export type UpdateToolRequestBody =
-  | UpdateToolRequestBody1
-  | UpdateToolRequestBody2
-  | UpdateToolRequestBody3
-  | UpdateToolRequestBody4
-  | UpdateToolRequestBody5;
+  | UpdateFunctionTool
+  | UpdateJSONSchemaTool
+  | UpdateHTTPTool
+  | UpdateMCPTool
+  | UpdateCodeExecutionTool;
 
 export type UpdateToolRequest = {
-  toolKey: string;
+  toolId: string;
   /**
    * The tool to update
    */
   requestBody?:
-    | UpdateToolRequestBody1
-    | UpdateToolRequestBody2
-    | UpdateToolRequestBody3
-    | UpdateToolRequestBody4
-    | UpdateToolRequestBody5
+    | UpdateFunctionTool
+    | UpdateJSONSchemaTool
+    | UpdateHTTPTool
+    | UpdateMCPTool
+    | UpdateCodeExecutionTool
     | undefined;
 };
 
@@ -507,7 +566,13 @@ export type UpdateToolResponseBodyCodeTool = {
 export type UpdateToolResponseBody5 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -632,7 +697,13 @@ export type UpdateToolResponseBodyMcp = {
 export type UpdateToolResponseBody4 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -781,7 +852,13 @@ export type UpdateToolResponseBodyHttp = {
 export type UpdateToolResponseBody3 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -862,7 +939,13 @@ export type UpdateToolResponseBodyJsonSchema = {
 export type UpdateToolResponseBody2 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -943,7 +1026,13 @@ export type UpdateToolResponseBodyFunction = {
 export type UpdateToolResponseBody1 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -1120,8 +1209,8 @@ export function updateToolRequestBodyCodeToolFromJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBody5$inboundSchema: z.ZodType<
-  UpdateToolRequestBody5,
+export const UpdateCodeExecutionTool$inboundSchema: z.ZodType<
+  UpdateCodeExecutionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1142,7 +1231,7 @@ export const UpdateToolRequestBody5$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateToolRequestBody5$Outbound = {
+export type UpdateCodeExecutionTool$Outbound = {
   path?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
@@ -1152,10 +1241,10 @@ export type UpdateToolRequestBody5$Outbound = {
 };
 
 /** @internal */
-export const UpdateToolRequestBody5$outboundSchema: z.ZodType<
-  UpdateToolRequestBody5$Outbound,
+export const UpdateCodeExecutionTool$outboundSchema: z.ZodType<
+  UpdateCodeExecutionTool$Outbound,
   z.ZodTypeDef,
-  UpdateToolRequestBody5
+  UpdateCodeExecutionTool
 > = z.object({
   path: z.string().optional(),
   displayName: z.string().optional(),
@@ -1177,30 +1266,30 @@ export const UpdateToolRequestBody5$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateToolRequestBody5$ {
-  /** @deprecated use `UpdateToolRequestBody5$inboundSchema` instead. */
-  export const inboundSchema = UpdateToolRequestBody5$inboundSchema;
-  /** @deprecated use `UpdateToolRequestBody5$outboundSchema` instead. */
-  export const outboundSchema = UpdateToolRequestBody5$outboundSchema;
-  /** @deprecated use `UpdateToolRequestBody5$Outbound` instead. */
-  export type Outbound = UpdateToolRequestBody5$Outbound;
+export namespace UpdateCodeExecutionTool$ {
+  /** @deprecated use `UpdateCodeExecutionTool$inboundSchema` instead. */
+  export const inboundSchema = UpdateCodeExecutionTool$inboundSchema;
+  /** @deprecated use `UpdateCodeExecutionTool$outboundSchema` instead. */
+  export const outboundSchema = UpdateCodeExecutionTool$outboundSchema;
+  /** @deprecated use `UpdateCodeExecutionTool$Outbound` instead. */
+  export type Outbound = UpdateCodeExecutionTool$Outbound;
 }
 
-export function updateToolRequestBody5ToJSON(
-  updateToolRequestBody5: UpdateToolRequestBody5,
+export function updateCodeExecutionToolToJSON(
+  updateCodeExecutionTool: UpdateCodeExecutionTool,
 ): string {
   return JSON.stringify(
-    UpdateToolRequestBody5$outboundSchema.parse(updateToolRequestBody5),
+    UpdateCodeExecutionTool$outboundSchema.parse(updateCodeExecutionTool),
   );
 }
 
-export function updateToolRequestBody5FromJSON(
+export function updateCodeExecutionToolFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateToolRequestBody5, SDKValidationError> {
+): SafeParseResult<UpdateCodeExecutionTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateToolRequestBody5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBody5' from JSON`,
+    (x) => UpdateCodeExecutionTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateCodeExecutionTool' from JSON`,
   );
 }
 
@@ -1494,12 +1583,13 @@ export function requestBodyMcpFromJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
-  UpdateToolRequestBody4,
+export const UpdateMCPTool$inboundSchema: z.ZodType<
+  UpdateMCPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest4Status$inboundSchema.default(
@@ -1514,8 +1604,9 @@ export const UpdateToolRequestBody4$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateToolRequestBody4$Outbound = {
+export type UpdateMCPTool$Outbound = {
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -1524,12 +1615,13 @@ export type UpdateToolRequestBody4$Outbound = {
 };
 
 /** @internal */
-export const UpdateToolRequestBody4$outboundSchema: z.ZodType<
-  UpdateToolRequestBody4$Outbound,
+export const UpdateMCPTool$outboundSchema: z.ZodType<
+  UpdateMCPTool$Outbound,
   z.ZodTypeDef,
-  UpdateToolRequestBody4
+  UpdateMCPTool
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequest4Status$outboundSchema.default(
@@ -1547,30 +1639,26 @@ export const UpdateToolRequestBody4$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateToolRequestBody4$ {
-  /** @deprecated use `UpdateToolRequestBody4$inboundSchema` instead. */
-  export const inboundSchema = UpdateToolRequestBody4$inboundSchema;
-  /** @deprecated use `UpdateToolRequestBody4$outboundSchema` instead. */
-  export const outboundSchema = UpdateToolRequestBody4$outboundSchema;
-  /** @deprecated use `UpdateToolRequestBody4$Outbound` instead. */
-  export type Outbound = UpdateToolRequestBody4$Outbound;
+export namespace UpdateMCPTool$ {
+  /** @deprecated use `UpdateMCPTool$inboundSchema` instead. */
+  export const inboundSchema = UpdateMCPTool$inboundSchema;
+  /** @deprecated use `UpdateMCPTool$outboundSchema` instead. */
+  export const outboundSchema = UpdateMCPTool$outboundSchema;
+  /** @deprecated use `UpdateMCPTool$Outbound` instead. */
+  export type Outbound = UpdateMCPTool$Outbound;
 }
 
-export function updateToolRequestBody4ToJSON(
-  updateToolRequestBody4: UpdateToolRequestBody4,
-): string {
-  return JSON.stringify(
-    UpdateToolRequestBody4$outboundSchema.parse(updateToolRequestBody4),
-  );
+export function updateMCPToolToJSON(updateMCPTool: UpdateMCPTool): string {
+  return JSON.stringify(UpdateMCPTool$outboundSchema.parse(updateMCPTool));
 }
 
-export function updateToolRequestBody4FromJSON(
+export function updateMCPToolFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateToolRequestBody4, SDKValidationError> {
+): SafeParseResult<UpdateMCPTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateToolRequestBody4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBody4' from JSON`,
+    (x) => UpdateMCPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateMCPTool' from JSON`,
   );
 }
 
@@ -1924,13 +2012,13 @@ export function updateToolRequestBodyHttpFromJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBody3$inboundSchema: z.ZodType<
-  UpdateToolRequestBody3,
+export const UpdateHTTPTool$inboundSchema: z.ZodType<
+  UpdateHTTPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMWHXGQ7FGQY6CGE46K"),
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequestStatus$inboundSchema.default("live"),
@@ -1938,15 +2026,14 @@ export const UpdateToolRequestBody3$inboundSchema: z.ZodType<
   http: z.lazy(() => UpdateToolRequestBodyHttp$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
   });
 });
 
 /** @internal */
-export type UpdateToolRequestBody3$Outbound = {
-  _id: string;
+export type UpdateHTTPTool$Outbound = {
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -1955,13 +2042,13 @@ export type UpdateToolRequestBody3$Outbound = {
 };
 
 /** @internal */
-export const UpdateToolRequestBody3$outboundSchema: z.ZodType<
-  UpdateToolRequestBody3$Outbound,
+export const UpdateHTTPTool$outboundSchema: z.ZodType<
+  UpdateHTTPTool$Outbound,
   z.ZodTypeDef,
-  UpdateToolRequestBody3
+  UpdateHTTPTool
 > = z.object({
-  id: z.string().default("01K8AMTQMWHXGQ7FGQY6CGE46K"),
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsRequestStatus$outboundSchema.default(
@@ -1971,7 +2058,6 @@ export const UpdateToolRequestBody3$outboundSchema: z.ZodType<
   http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
   });
 });
@@ -1980,30 +2066,26 @@ export const UpdateToolRequestBody3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateToolRequestBody3$ {
-  /** @deprecated use `UpdateToolRequestBody3$inboundSchema` instead. */
-  export const inboundSchema = UpdateToolRequestBody3$inboundSchema;
-  /** @deprecated use `UpdateToolRequestBody3$outboundSchema` instead. */
-  export const outboundSchema = UpdateToolRequestBody3$outboundSchema;
-  /** @deprecated use `UpdateToolRequestBody3$Outbound` instead. */
-  export type Outbound = UpdateToolRequestBody3$Outbound;
+export namespace UpdateHTTPTool$ {
+  /** @deprecated use `UpdateHTTPTool$inboundSchema` instead. */
+  export const inboundSchema = UpdateHTTPTool$inboundSchema;
+  /** @deprecated use `UpdateHTTPTool$outboundSchema` instead. */
+  export const outboundSchema = UpdateHTTPTool$outboundSchema;
+  /** @deprecated use `UpdateHTTPTool$Outbound` instead. */
+  export type Outbound = UpdateHTTPTool$Outbound;
 }
 
-export function updateToolRequestBody3ToJSON(
-  updateToolRequestBody3: UpdateToolRequestBody3,
-): string {
-  return JSON.stringify(
-    UpdateToolRequestBody3$outboundSchema.parse(updateToolRequestBody3),
-  );
+export function updateHTTPToolToJSON(updateHTTPTool: UpdateHTTPTool): string {
+  return JSON.stringify(UpdateHTTPTool$outboundSchema.parse(updateHTTPTool));
 }
 
-export function updateToolRequestBody3FromJSON(
+export function updateHTTPToolFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateToolRequestBody3, SDKValidationError> {
+): SafeParseResult<UpdateHTTPTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateToolRequestBody3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBody3' from JSON`,
+    (x) => UpdateHTTPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateHTTPTool' from JSON`,
   );
 }
 
@@ -2115,13 +2197,13 @@ export function updateToolRequestBodyJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
-  UpdateToolRequestBody2,
+export const UpdateJSONSchemaTool$inboundSchema: z.ZodType<
+  UpdateJSONSchemaTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMWNB2X9ME66ARNB2JB"),
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsStatus$inboundSchema.default("live"),
@@ -2130,16 +2212,15 @@ export const UpdateToolRequestBody2$inboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 
 /** @internal */
-export type UpdateToolRequestBody2$Outbound = {
-  _id: string;
+export type UpdateJSONSchemaTool$Outbound = {
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -2148,13 +2229,13 @@ export type UpdateToolRequestBody2$Outbound = {
 };
 
 /** @internal */
-export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
-  UpdateToolRequestBody2$Outbound,
+export const UpdateJSONSchemaTool$outboundSchema: z.ZodType<
+  UpdateJSONSchemaTool$Outbound,
   z.ZodTypeDef,
-  UpdateToolRequestBody2
+  UpdateJSONSchemaTool
 > = z.object({
-  id: z.string().default("01K8AMTQMWNB2X9ME66ARNB2JB"),
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyToolsStatus$outboundSchema.default("live"),
@@ -2163,7 +2244,6 @@ export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
     jsonSchema: "json_schema",
   });
@@ -2173,30 +2253,30 @@ export const UpdateToolRequestBody2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateToolRequestBody2$ {
-  /** @deprecated use `UpdateToolRequestBody2$inboundSchema` instead. */
-  export const inboundSchema = UpdateToolRequestBody2$inboundSchema;
-  /** @deprecated use `UpdateToolRequestBody2$outboundSchema` instead. */
-  export const outboundSchema = UpdateToolRequestBody2$outboundSchema;
-  /** @deprecated use `UpdateToolRequestBody2$Outbound` instead. */
-  export type Outbound = UpdateToolRequestBody2$Outbound;
+export namespace UpdateJSONSchemaTool$ {
+  /** @deprecated use `UpdateJSONSchemaTool$inboundSchema` instead. */
+  export const inboundSchema = UpdateJSONSchemaTool$inboundSchema;
+  /** @deprecated use `UpdateJSONSchemaTool$outboundSchema` instead. */
+  export const outboundSchema = UpdateJSONSchemaTool$outboundSchema;
+  /** @deprecated use `UpdateJSONSchemaTool$Outbound` instead. */
+  export type Outbound = UpdateJSONSchemaTool$Outbound;
 }
 
-export function updateToolRequestBody2ToJSON(
-  updateToolRequestBody2: UpdateToolRequestBody2,
+export function updateJSONSchemaToolToJSON(
+  updateJSONSchemaTool: UpdateJSONSchemaTool,
 ): string {
   return JSON.stringify(
-    UpdateToolRequestBody2$outboundSchema.parse(updateToolRequestBody2),
+    UpdateJSONSchemaTool$outboundSchema.parse(updateJSONSchemaTool),
   );
 }
 
-export function updateToolRequestBody2FromJSON(
+export function updateJSONSchemaToolFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateToolRequestBody2, SDKValidationError> {
+): SafeParseResult<UpdateJSONSchemaTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateToolRequestBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBody2' from JSON`,
+    (x) => UpdateJSONSchemaTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateJSONSchemaTool' from JSON`,
   );
 }
 
@@ -2308,12 +2388,13 @@ export function updateToolRequestBodyFunctionFromJSON(
 }
 
 /** @internal */
-export const UpdateToolRequestBody1$inboundSchema: z.ZodType<
-  UpdateToolRequestBody1,
+export const UpdateFunctionTool$inboundSchema: z.ZodType<
+  UpdateFunctionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   display_name: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyStatus$inboundSchema.default("live"),
@@ -2327,8 +2408,9 @@ export const UpdateToolRequestBody1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateToolRequestBody1$Outbound = {
+export type UpdateFunctionTool$Outbound = {
   path?: string | undefined;
+  key?: string | undefined;
   display_name?: string | undefined;
   description?: string | undefined;
   status: string;
@@ -2337,12 +2419,13 @@ export type UpdateToolRequestBody1$Outbound = {
 };
 
 /** @internal */
-export const UpdateToolRequestBody1$outboundSchema: z.ZodType<
-  UpdateToolRequestBody1$Outbound,
+export const UpdateFunctionTool$outboundSchema: z.ZodType<
+  UpdateFunctionTool$Outbound,
   z.ZodTypeDef,
-  UpdateToolRequestBody1
+  UpdateFunctionTool
 > = z.object({
   path: z.string().optional(),
+  key: z.string().optional(),
   displayName: z.string().optional(),
   description: z.string().optional(),
   status: UpdateToolRequestBodyStatus$outboundSchema.default("live"),
@@ -2359,30 +2442,30 @@ export const UpdateToolRequestBody1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateToolRequestBody1$ {
-  /** @deprecated use `UpdateToolRequestBody1$inboundSchema` instead. */
-  export const inboundSchema = UpdateToolRequestBody1$inboundSchema;
-  /** @deprecated use `UpdateToolRequestBody1$outboundSchema` instead. */
-  export const outboundSchema = UpdateToolRequestBody1$outboundSchema;
-  /** @deprecated use `UpdateToolRequestBody1$Outbound` instead. */
-  export type Outbound = UpdateToolRequestBody1$Outbound;
+export namespace UpdateFunctionTool$ {
+  /** @deprecated use `UpdateFunctionTool$inboundSchema` instead. */
+  export const inboundSchema = UpdateFunctionTool$inboundSchema;
+  /** @deprecated use `UpdateFunctionTool$outboundSchema` instead. */
+  export const outboundSchema = UpdateFunctionTool$outboundSchema;
+  /** @deprecated use `UpdateFunctionTool$Outbound` instead. */
+  export type Outbound = UpdateFunctionTool$Outbound;
 }
 
-export function updateToolRequestBody1ToJSON(
-  updateToolRequestBody1: UpdateToolRequestBody1,
+export function updateFunctionToolToJSON(
+  updateFunctionTool: UpdateFunctionTool,
 ): string {
   return JSON.stringify(
-    UpdateToolRequestBody1$outboundSchema.parse(updateToolRequestBody1),
+    UpdateFunctionTool$outboundSchema.parse(updateFunctionTool),
   );
 }
 
-export function updateToolRequestBody1FromJSON(
+export function updateFunctionToolFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateToolRequestBody1, SDKValidationError> {
+): SafeParseResult<UpdateFunctionTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateToolRequestBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateToolRequestBody1' from JSON`,
+    (x) => UpdateFunctionTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateFunctionTool' from JSON`,
   );
 }
 
@@ -2392,20 +2475,20 @@ export const UpdateToolRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => UpdateToolRequestBody1$inboundSchema),
-  z.lazy(() => UpdateToolRequestBody2$inboundSchema),
-  z.lazy(() => UpdateToolRequestBody3$inboundSchema),
-  z.lazy(() => UpdateToolRequestBody4$inboundSchema),
-  z.lazy(() => UpdateToolRequestBody5$inboundSchema),
+  z.lazy(() => UpdateFunctionTool$inboundSchema),
+  z.lazy(() => UpdateJSONSchemaTool$inboundSchema),
+  z.lazy(() => UpdateHTTPTool$inboundSchema),
+  z.lazy(() => UpdateMCPTool$inboundSchema),
+  z.lazy(() => UpdateCodeExecutionTool$inboundSchema),
 ]);
 
 /** @internal */
 export type UpdateToolRequestBody$Outbound =
-  | UpdateToolRequestBody1$Outbound
-  | UpdateToolRequestBody2$Outbound
-  | UpdateToolRequestBody3$Outbound
-  | UpdateToolRequestBody4$Outbound
-  | UpdateToolRequestBody5$Outbound;
+  | UpdateFunctionTool$Outbound
+  | UpdateJSONSchemaTool$Outbound
+  | UpdateHTTPTool$Outbound
+  | UpdateMCPTool$Outbound
+  | UpdateCodeExecutionTool$Outbound;
 
 /** @internal */
 export const UpdateToolRequestBody$outboundSchema: z.ZodType<
@@ -2413,11 +2496,11 @@ export const UpdateToolRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequestBody
 > = z.union([
-  z.lazy(() => UpdateToolRequestBody1$outboundSchema),
-  z.lazy(() => UpdateToolRequestBody2$outboundSchema),
-  z.lazy(() => UpdateToolRequestBody3$outboundSchema),
-  z.lazy(() => UpdateToolRequestBody4$outboundSchema),
-  z.lazy(() => UpdateToolRequestBody5$outboundSchema),
+  z.lazy(() => UpdateFunctionTool$outboundSchema),
+  z.lazy(() => UpdateJSONSchemaTool$outboundSchema),
+  z.lazy(() => UpdateHTTPTool$outboundSchema),
+  z.lazy(() => UpdateMCPTool$outboundSchema),
+  z.lazy(() => UpdateCodeExecutionTool$outboundSchema),
 ]);
 
 /**
@@ -2457,30 +2540,30 @@ export const UpdateToolRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  tool_key: z.string(),
+  tool_id: z.string(),
   RequestBody: z.union([
-    z.lazy(() => UpdateToolRequestBody1$inboundSchema),
-    z.lazy(() => UpdateToolRequestBody2$inboundSchema),
-    z.lazy(() => UpdateToolRequestBody3$inboundSchema),
-    z.lazy(() => UpdateToolRequestBody4$inboundSchema),
-    z.lazy(() => UpdateToolRequestBody5$inboundSchema),
+    z.lazy(() => UpdateFunctionTool$inboundSchema),
+    z.lazy(() => UpdateJSONSchemaTool$inboundSchema),
+    z.lazy(() => UpdateHTTPTool$inboundSchema),
+    z.lazy(() => UpdateMCPTool$inboundSchema),
+    z.lazy(() => UpdateCodeExecutionTool$inboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "tool_key": "toolKey",
+    "tool_id": "toolId",
     "RequestBody": "requestBody",
   });
 });
 
 /** @internal */
 export type UpdateToolRequest$Outbound = {
-  tool_key: string;
+  tool_id: string;
   RequestBody?:
-    | UpdateToolRequestBody1$Outbound
-    | UpdateToolRequestBody2$Outbound
-    | UpdateToolRequestBody3$Outbound
-    | UpdateToolRequestBody4$Outbound
-    | UpdateToolRequestBody5$Outbound
+    | UpdateFunctionTool$Outbound
+    | UpdateJSONSchemaTool$Outbound
+    | UpdateHTTPTool$Outbound
+    | UpdateMCPTool$Outbound
+    | UpdateCodeExecutionTool$Outbound
     | undefined;
 };
 
@@ -2490,17 +2573,17 @@ export const UpdateToolRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolRequest
 > = z.object({
-  toolKey: z.string(),
+  toolId: z.string(),
   requestBody: z.union([
-    z.lazy(() => UpdateToolRequestBody1$outboundSchema),
-    z.lazy(() => UpdateToolRequestBody2$outboundSchema),
-    z.lazy(() => UpdateToolRequestBody3$outboundSchema),
-    z.lazy(() => UpdateToolRequestBody4$outboundSchema),
-    z.lazy(() => UpdateToolRequestBody5$outboundSchema),
+    z.lazy(() => UpdateFunctionTool$outboundSchema),
+    z.lazy(() => UpdateJSONSchemaTool$outboundSchema),
+    z.lazy(() => UpdateHTTPTool$outboundSchema),
+    z.lazy(() => UpdateMCPTool$outboundSchema),
+    z.lazy(() => UpdateCodeExecutionTool$outboundSchema),
   ]).optional(),
 }).transform((v) => {
   return remap$(v, {
-    toolKey: "tool_key",
+    toolId: "tool_id",
     requestBody: "RequestBody",
   });
 });
@@ -2675,7 +2758,7 @@ export const UpdateToolResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMWZ04WC5G5JGD21TQZ"),
+  _id: z.string().default("01K8VCKT3TR8T8K25YK7WPCR4Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2730,7 +2813,7 @@ export const UpdateToolResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody5
 > = z.object({
-  id: z.string().default("01K8AMTQMWZ04WC5G5JGD21TQZ"),
+  id: z.string().default("01K8VCKT3TR8T8K25YK7WPCR4Z"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3104,7 +3187,7 @@ export const UpdateToolResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMV0ES46NQPKM13GX5Y"),
+  _id: z.string().default("01K8VCKT3QNTABB706VWD8NEKD"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3158,7 +3241,7 @@ export const UpdateToolResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody4
 > = z.object({
-  id: z.string().default("01K8AMTQMV0ES46NQPKM13GX5Y"),
+  id: z.string().default("01K8VCKT3QNTABB706VWD8NEKD"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3576,7 +3659,7 @@ export const UpdateToolResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMVWPQS949M1JYVX3M9"),
+  _id: z.string().default("01K8VCKT3CNHZJ3G7GGKNM0SM8"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3630,7 +3713,7 @@ export const UpdateToolResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody3
 > = z.object({
-  id: z.string().default("01K8AMTQMVWPQS949M1JYVX3M9"),
+  id: z.string().default("01K8VCKT3CNHZJ3G7GGKNM0SM8"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3804,7 +3887,7 @@ export const UpdateToolResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMTCKY5FYTP56K2H4CC"),
+  _id: z.string().default("01K8VCKT3AWA47B78TZDVAGP0S"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3857,7 +3940,7 @@ export const UpdateToolResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody2
 > = z.object({
-  id: z.string().default("01K8AMTQMTCKY5FYTP56K2H4CC"),
+  id: z.string().default("01K8VCKT3AWA47B78TZDVAGP0S"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -4029,7 +4112,7 @@ export const UpdateToolResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMTRSGNPJFK0X6A2ZAR"),
+  _id: z.string().default("01K8VCKT38ZCP4RWR6P860HJJE"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -4081,7 +4164,7 @@ export const UpdateToolResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateToolResponseBody1
 > = z.object({
-  id: z.string().default("01K8AMTQMTRSGNPJFK0X6A2ZAR"),
+  id: z.string().default("01K8VCKT38ZCP4RWR6P860HJJE"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

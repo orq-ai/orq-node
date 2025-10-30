@@ -5,11 +5,11 @@
 ```typescript
 import { Seven } from "@orq-ai/node/models/operations";
 
-let value: Seven = "openai/text-embedding-3-large";
+let value: Seven = "azure/text-embedding-3-small";
 ```
 
 ## Values
 
 ```typescript
-"openai/text-embedding-3-large"
+"azure/text-embedding-3-small"
 ```

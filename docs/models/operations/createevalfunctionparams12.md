@@ -1,0 +1,21 @@
+# CreateEvalFunctionParams12
+
+## Example Usage
+
+```typescript
+import { CreateEvalFunctionParams12 } from "@orq-ai/node/models/operations";
+
+let value: CreateEvalFunctionParams12 = {
+  type: "length_between",
+  min: 9290.81,
+  max: 1247.95,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                          | Type                                                                                                                                                                                           | Required                                                                                                                                                                                       | Description                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                                         | [operations.CreateEvalFunctionParamsEvalsResponse200ApplicationJSONResponseBody512Type](../../models/operations/createevalfunctionparamsevalsresponse200applicationjsonresponsebody512type.md) | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
+| `min`                                                                                                                                                                                          | *number*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |
+| `max`                                                                                                                                                                                          | *number*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                             | N/A                                                                                                                                                                                            |

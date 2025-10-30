@@ -30,46 +30,47 @@ const value: operations.UpdateMemoryStoreModel3 =
 const value: operations.UpdateMemoryStoreModel4 = "cohere/embed-english-v3.0";
 ```
 
-### `operations.Model5`
+### `operations.UpdateMemoryStoreModel5`
 
 ```typescript
-const value: operations.Model5 = "azure/text-embedding-ada-002";
+const value: operations.UpdateMemoryStoreModel5 = "cohere/embed-v4.0";
 ```
 
-### `operations.Model6`
+### `operations.UpdateMemoryStoreModel6`
 
 ```typescript
-const value: operations.Model6 = "azure/text-embedding-3-small";
+const value: operations.UpdateMemoryStoreModel6 =
+  "azure/text-embedding-ada-002";
 ```
 
 ### `operations.Model7`
 
 ```typescript
-const value: operations.Model7 = "openai/text-embedding-3-large";
+const value: operations.Model7 = "azure/text-embedding-3-small";
 ```
 
 ### `operations.Model8`
 
 ```typescript
-const value: operations.Model8 = "openai/text-embedding-3-small";
+const value: operations.Model8 = "openai/text-embedding-3-large";
 ```
 
 ### `operations.Model9`
 
 ```typescript
-const value: operations.Model9 = "openai/text-embedding-ada-002";
+const value: operations.Model9 = "openai/text-embedding-3-small";
 ```
 
 ### `operations.Model10`
 
 ```typescript
-const value: operations.Model10 = "google/gemini-embedding-001";
+const value: operations.Model10 = "openai/text-embedding-ada-002";
 ```
 
 ### `operations.Model11`
 
 ```typescript
-const value: operations.Model11 = "google/text-embedding-005";
+const value: operations.Model11 = "google/gemini-embedding-001";
 ```
 
 ### `operations.Model12`
@@ -93,48 +94,54 @@ const value: operations.Model14 = "google-ai/text-embedding-004";
 ### `operations.Model15`
 
 ```typescript
-const value: operations.Model15 = "jina/jina-clip-v1";
+const value: operations.Model15 = "mistral/mistral-embed";
 ```
 
 ### `operations.Model16`
 
 ```typescript
-const value: operations.Model16 = "jina/jina-embeddings-v2-base-es";
+const value: operations.Model16 = "jina/jina-clip-v1";
 ```
 
 ### `operations.Model17`
 
 ```typescript
-const value: operations.Model17 = "jina/jina-embeddings-v2-base-en";
+const value: operations.Model17 = "jina/jina-embeddings-v2-base-es";
 ```
 
 ### `operations.Model18`
 
 ```typescript
-const value: operations.Model18 = "jina/jina-embeddings-v2-base-zh";
+const value: operations.Model18 = "jina/jina-embeddings-v2-base-en";
 ```
 
 ### `operations.Model19`
 
 ```typescript
-const value: operations.Model19 = "jina/jina-embeddings-v2-base-code";
+const value: operations.Model19 = "jina/jina-embeddings-v2-base-zh";
 ```
 
 ### `operations.Model20`
 
 ```typescript
-const value: operations.Model20 = "jina/jina-embeddings-v2-base-de";
+const value: operations.Model20 = "jina/jina-embeddings-v2-base-code";
 ```
 
 ### `operations.Model21`
 
 ```typescript
-const value: operations.Model21 = "jina/jina-clip-v2";
+const value: operations.Model21 = "jina/jina-embeddings-v2-base-de";
 ```
 
 ### `operations.Model22`
 
 ```typescript
-const value: operations.Model22 = "jina/jina-embeddings-v3";
+const value: operations.Model22 = "jina/jina-clip-v2";
+```
+
+### `operations.Model23`
+
+```typescript
+const value: operations.Model23 = "jina/jina-embeddings-v3";
 ```
 

@@ -5,11 +5,11 @@
 ```typescript
 import { GetEvalsGuardrailConfigType } from "@orq-ai/node/models/operations";
 
-let value: GetEvalsGuardrailConfigType = "number";
+let value: GetEvalsGuardrailConfigType = "boolean";
 ```
 
 ## Values
 
 ```typescript
-"number"
+"boolean"
 ```

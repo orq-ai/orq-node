@@ -34,7 +34,7 @@ export function promptsUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdatePromptResponseBody,
+    operations.UpdatePromptPrompt,
     | errors.UpdatePromptResponseBody
     | OrqError
     | ResponseValidationError
@@ -60,7 +60,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.UpdatePromptResponseBody,
+      operations.UpdatePromptPrompt,
       | errors.UpdatePromptResponseBody
       | OrqError
       | ResponseValidationError
@@ -149,7 +149,7 @@ async function $do(
   };
 
   const [result] = await M.match<
-    operations.UpdatePromptResponseBody,
+    operations.UpdatePromptPrompt,
     | errors.UpdatePromptResponseBody
     | OrqError
     | ResponseValidationError
@@ -160,7 +160,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdatePromptResponseBody$inboundSchema),
+    M.json(200, operations.UpdatePromptPrompt$inboundSchema),
     M.jsonErr(404, errors.UpdatePromptResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),

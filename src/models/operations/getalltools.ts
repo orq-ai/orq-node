@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetAllToolsRequest = {
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 300, and the default is 300
+   * Maximum number of tools per page (1-200). Omit to return all tools.
    */
   limit?: number | undefined;
   /**
@@ -72,7 +72,13 @@ export type DataCodeTool = {
 export type Data5 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -195,7 +201,13 @@ export type DataMcp = {
 export type Data4 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -344,7 +356,13 @@ export type GetAllToolsDataHttp = {
 export type Data3 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -423,7 +441,13 @@ export type DataJsonSchema = {
 export type Data2 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -500,7 +524,13 @@ export type GetAllToolsDataFunction = {
 export type Data1 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -553,7 +583,7 @@ export const GetAllToolsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  limit: z.number().default(300),
+  limit: z.number().optional(),
   starting_after: z.string().optional(),
   ending_before: z.string().optional(),
 }).transform((v) => {
@@ -565,7 +595,7 @@ export const GetAllToolsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetAllToolsRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
 };
@@ -576,7 +606,7 @@ export const GetAllToolsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetAllToolsRequest
 > = z.object({
-  limit: z.number().default(300),
+  limit: z.number().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
 }).transform((v) => {
@@ -763,7 +793,7 @@ export function dataCodeToolFromJSON(
 /** @internal */
 export const Data5$inboundSchema: z.ZodType<Data5, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8AMTQMH219379X3HP2XR19B"),
+    _id: z.string().default("01K8VCKT2H8K9Z1QB8DJ9MWNH5"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -816,7 +846,7 @@ export const Data5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data5
 > = z.object({
-  id: z.string().default("01K8AMTQMH219379X3HP2XR19B"),
+  id: z.string().default("01K8VCKT2H8K9Z1QB8DJ9MWNH5"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1159,7 +1189,7 @@ export function dataMcpFromJSON(
 /** @internal */
 export const Data4$inboundSchema: z.ZodType<Data4, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8AMTQMG352W8PSB39QE9M8T"),
+    _id: z.string().default("01K8VCKT2F8KGQAWE0JKC40V2K"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1211,7 +1241,7 @@ export const Data4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data4
 > = z.object({
-  id: z.string().default("01K8AMTQMG352W8PSB39QE9M8T"),
+  id: z.string().default("01K8VCKT2F8KGQAWE0JKC40V2K"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1594,7 +1624,7 @@ export function getAllToolsDataHttpFromJSON(
 /** @internal */
 export const Data3$inboundSchema: z.ZodType<Data3, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8AMTQMF05AQ730XMVQ7D8VB"),
+    _id: z.string().default("01K8VCKT2CYQ1Y42C34D0QWB2Y"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1646,7 +1676,7 @@ export const Data3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data3
 > = z.object({
-  id: z.string().default("01K8AMTQMF05AQ730XMVQ7D8VB"),
+  id: z.string().default("01K8VCKT2CYQ1Y42C34D0QWB2Y"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1804,7 +1834,7 @@ export function dataJsonSchemaFromJSON(
 /** @internal */
 export const Data2$inboundSchema: z.ZodType<Data2, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8AMTQMFFT4CV4DQASSE84SR"),
+    _id: z.string().default("01K8VCKT2AT6CQME3NZ167W5ZT"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -1857,7 +1887,7 @@ export const Data2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data2
 > = z.object({
-  id: z.string().default("01K8AMTQMFFT4CV4DQASSE84SR"),
+  id: z.string().default("01K8VCKT2AT6CQME3NZ167W5ZT"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2018,7 +2048,7 @@ export function getAllToolsDataFunctionFromJSON(
 /** @internal */
 export const Data1$inboundSchema: z.ZodType<Data1, z.ZodTypeDef, unknown> = z
   .object({
-    _id: z.string().default("01K8AMTQMFJZENT483JC6ARKZN"),
+    _id: z.string().default("01K8VCKT285VC9K5DTSBXD90R3"),
     path: z.string(),
     key: z.string(),
     display_name: z.string().optional(),
@@ -2070,7 +2100,7 @@ export const Data1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Data1
 > = z.object({
-  id: z.string().default("01K8AMTQMFJZENT483JC6ARKZN"),
+  id: z.string().default("01K8VCKT285VC9K5DTSBXD90R3"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

@@ -33,49 +33,49 @@ const value: operations.GetAllMemoryStoresModel4 = "cohere/embed-english-v3.0";
 ### `operations.GetAllMemoryStoresModel5`
 
 ```typescript
-const value: operations.GetAllMemoryStoresModel5 =
-  "azure/text-embedding-ada-002";
+const value: operations.GetAllMemoryStoresModel5 = "cohere/embed-v4.0";
 ```
 
 ### `operations.GetAllMemoryStoresModel6`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel6 =
-  "azure/text-embedding-3-small";
+  "azure/text-embedding-ada-002";
 ```
 
 ### `operations.GetAllMemoryStoresModel7`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel7 =
-  "openai/text-embedding-3-large";
+  "azure/text-embedding-3-small";
 ```
 
 ### `operations.GetAllMemoryStoresModel8`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel8 =
-  "openai/text-embedding-3-small";
+  "openai/text-embedding-3-large";
 ```
 
 ### `operations.GetAllMemoryStoresModel9`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel9 =
-  "openai/text-embedding-ada-002";
+  "openai/text-embedding-3-small";
 ```
 
 ### `operations.GetAllMemoryStoresModel10`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel10 =
-  "google/gemini-embedding-001";
+  "openai/text-embedding-ada-002";
 ```
 
 ### `operations.GetAllMemoryStoresModel11`
 
 ```typescript
-const value: operations.GetAllMemoryStoresModel11 = "google/text-embedding-005";
+const value: operations.GetAllMemoryStoresModel11 =
+  "google/gemini-embedding-001";
 ```
 
 ### `operations.GetAllMemoryStoresModel12`
@@ -102,53 +102,59 @@ const value: operations.GetAllMemoryStoresModel14 =
 ### `operations.GetAllMemoryStoresModel15`
 
 ```typescript
-const value: operations.GetAllMemoryStoresModel15 = "jina/jina-clip-v1";
+const value: operations.GetAllMemoryStoresModel15 = "mistral/mistral-embed";
 ```
 
 ### `operations.GetAllMemoryStoresModel16`
 
 ```typescript
-const value: operations.GetAllMemoryStoresModel16 =
-  "jina/jina-embeddings-v2-base-es";
+const value: operations.GetAllMemoryStoresModel16 = "jina/jina-clip-v1";
 ```
 
 ### `operations.GetAllMemoryStoresModel17`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel17 =
-  "jina/jina-embeddings-v2-base-en";
+  "jina/jina-embeddings-v2-base-es";
 ```
 
 ### `operations.GetAllMemoryStoresModel18`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel18 =
-  "jina/jina-embeddings-v2-base-zh";
+  "jina/jina-embeddings-v2-base-en";
 ```
 
 ### `operations.GetAllMemoryStoresModel19`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel19 =
-  "jina/jina-embeddings-v2-base-code";
+  "jina/jina-embeddings-v2-base-zh";
 ```
 
 ### `operations.GetAllMemoryStoresModel20`
 
 ```typescript
 const value: operations.GetAllMemoryStoresModel20 =
-  "jina/jina-embeddings-v2-base-de";
+  "jina/jina-embeddings-v2-base-code";
 ```
 
 ### `operations.GetAllMemoryStoresModel21`
 
 ```typescript
-const value: operations.GetAllMemoryStoresModel21 = "jina/jina-clip-v2";
+const value: operations.GetAllMemoryStoresModel21 =
+  "jina/jina-embeddings-v2-base-de";
 ```
 
 ### `operations.GetAllMemoryStoresModel22`
 
 ```typescript
-const value: operations.GetAllMemoryStoresModel22 = "jina/jina-embeddings-v3";
+const value: operations.GetAllMemoryStoresModel22 = "jina/jina-clip-v2";
+```
+
+### `operations.GetAllMemoryStoresModel23`
+
+```typescript
+const value: operations.GetAllMemoryStoresModel23 = "jina/jina-embeddings-v3";
 ```
 

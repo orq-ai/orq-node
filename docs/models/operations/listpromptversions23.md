@@ -7,9 +7,7 @@ import { ListPromptVersions23 } from "@orq-ai/node/models/operations";
 
 let value: ListPromptVersions23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

@@ -18,12 +18,21 @@ export type UpdateDatasetRequestBody = {
    */
   projectId?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
 };
 
 export type UpdateDatasetRequest = {
+  /**
+   * The unique identifier of the dataset
+   */
   datasetId: string;
   requestBody?: UpdateDatasetRequestBody | undefined;
 };
@@ -53,6 +62,7 @@ export type UpdateDatasetResponseBody = {
    * The unique identifier of the workspace it belongs to
    */
   workspaceId: string;
+  metadata: UpdateDatasetMetadata;
   /**
    * The unique identifier of the user who created the dataset
    */
@@ -61,15 +71,6 @@ export type UpdateDatasetResponseBody = {
    * The unique identifier of the user who last updated the dataset
    */
   updatedById?: string | undefined;
-  metadata: UpdateDatasetMetadata;
-  /**
-   * The unique identifier for the parent of the committed version
-   */
-  parentId?: string | undefined;
-  /**
-   * The version of the dataset
-   */
-  version?: string | undefined;
   /**
    * The date and time the resource was created
    */
@@ -294,15 +295,13 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
   display_name: z.string(),
   project_id: z.string(),
   workspace_id: z.string(),
+  metadata: z.lazy(() => UpdateDatasetMetadata$inboundSchema),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
-  metadata: z.lazy(() => UpdateDatasetMetadata$inboundSchema),
-  parent_id: z.string().optional(),
-  version: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-24T08:19:33.740Z",
+    "2025-10-30T20:23:01.859Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -312,7 +311,6 @@ export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
-    "parent_id": "parentId",
   });
 });
 
@@ -322,11 +320,9 @@ export type UpdateDatasetResponseBody$Outbound = {
   display_name: string;
   project_id: string;
   workspace_id: string;
+  metadata: UpdateDatasetMetadata$Outbound;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
-  metadata: UpdateDatasetMetadata$Outbound;
-  parent_id?: string | undefined;
-  version?: string | undefined;
   created?: string | undefined;
   updated: string;
 };
@@ -341,13 +337,11 @@ export const UpdateDatasetResponseBody$outboundSchema: z.ZodType<
   displayName: z.string(),
   projectId: z.string(),
   workspaceId: z.string(),
+  metadata: z.lazy(() => UpdateDatasetMetadata$outboundSchema),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
-  metadata: z.lazy(() => UpdateDatasetMetadata$outboundSchema),
-  parentId: z.string().optional(),
-  version: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+  updated: z.date().default(() => new Date("2025-10-30T20:23:01.859Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -357,7 +351,6 @@ export const UpdateDatasetResponseBody$outboundSchema: z.ZodType<
     workspaceId: "workspace_id",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
-    parentId: "parent_id",
   });
 });
 

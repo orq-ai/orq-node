@@ -18,7 +18,7 @@ const value: operations.Deployments21 = {
 const value: operations.Deployments22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://burdensome-horde.biz/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
@@ -28,9 +28,7 @@ const value: operations.Deployments22 = {
 ```typescript
 const value: operations.Deployments23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

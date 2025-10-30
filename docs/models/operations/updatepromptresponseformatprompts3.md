@@ -5,11 +5,17 @@
 ```typescript
 import { UpdatePromptResponseFormatPrompts3 } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseFormatPrompts3 = "base64_json";
+let value: UpdatePromptResponseFormatPrompts3 = {
+  type: "json_schema",
+  jsonSchema: {
+    name: "<value>",
+  },
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"url" | "base64_json"
-```
+| Field                                                                                                                                                                  | Type                                                                                                                                                                   | Required                                                                                                                                                               | Description                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                                 | [operations.UpdatePromptResponseFormatPromptsRequestRequestBodyPrompt3Type](../../models/operations/updatepromptresponseformatpromptsrequestrequestbodyprompt3type.md) | :heavy_check_mark:                                                                                                                                                     | N/A                                                                                                                                                                    |
+| `jsonSchema`                                                                                                                                                           | [operations.UpdatePromptResponseFormatPromptsJsonSchema](../../models/operations/updatepromptresponseformatpromptsjsonschema.md)                                       | :heavy_check_mark:                                                                                                                                                     | N/A                                                                                                                                                                    |

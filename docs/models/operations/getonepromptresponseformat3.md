@@ -5,11 +5,13 @@
 ```typescript
 import { GetOnePromptResponseFormat3 } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptResponseFormat3 = "url";
+let value: GetOnePromptResponseFormat3 = {
+  type: "text",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"url" | "base64_json"
-```
+| Field                                                                                                                                | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                               | [operations.GetOnePromptResponseFormatPromptsResponseType](../../models/operations/getonepromptresponseformatpromptsresponsetype.md) | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |

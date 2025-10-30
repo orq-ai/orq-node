@@ -60,15 +60,15 @@ const value: operations.ResponseBodyPython = {
 };
 ```
 
-### `operations.ResponseBodyFunction`
+### `operations.CreateEvalResponseBodyFunction`
 
 ```typescript
-const value: operations.ResponseBodyFunction = {
+const value: operations.CreateEvalResponseBodyFunction = {
   id: "<id>",
-  description: "pish mortally likely legitimize awareness easily zowie",
+  description: "worst than stale eek finally",
   type: "function_eval",
   functionParams: {
-    type: "cosine_similarity",
+    type: "bert_coherence",
   },
   key: "<key>",
 };

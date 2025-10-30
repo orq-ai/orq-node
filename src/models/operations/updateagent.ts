@@ -352,7 +352,7 @@ export type AgentToolInputCRUDGoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id.
  */
 export type UpdateAgentAgentToolInputCRUD =
   | AgentToolInputCRUDGoogleSearchTool
@@ -444,7 +444,13 @@ export type UpdateAgentRequestBody = {
   fallbackModels?: Array<string> | undefined;
   settings?: UpdateAgentSettings | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   memoryStores?: Array<string> | undefined;
@@ -521,7 +527,7 @@ export type UpdateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<UpdateAgentConditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**
@@ -543,7 +549,7 @@ export type UpdateAgentAgentsSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: UpdateAgentAgentsToolApprovalRequired | undefined;
-  tools: Array<UpdateAgentTools>;
+  tools?: Array<UpdateAgentTools> | undefined;
 };
 
 export type UpdateAgentModel = {
@@ -626,7 +632,13 @@ export type UpdateAgentResponseBody = {
   model: UpdateAgentModel;
   versionHash?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   memoryStores: Array<string>;
@@ -2801,7 +2813,7 @@ export const UpdateAgentAgentsSettings$inboundSchema: z.ZodType<
   max_execution_time: z.number().int().default(300),
   tool_approval_required: UpdateAgentAgentsToolApprovalRequired$inboundSchema
     .default("respect_tool"),
-  tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)),
+  tools: z.array(z.lazy(() => UpdateAgentTools$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -2815,7 +2827,7 @@ export type UpdateAgentAgentsSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<UpdateAgentTools$Outbound>;
+  tools?: Array<UpdateAgentTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2828,7 +2840,7 @@ export const UpdateAgentAgentsSettings$outboundSchema: z.ZodType<
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: UpdateAgentAgentsToolApprovalRequired$outboundSchema
     .default("respect_tool"),
-  tools: z.array(z.lazy(() => UpdateAgentTools$outboundSchema)),
+  tools: z.array(z.lazy(() => UpdateAgentTools$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

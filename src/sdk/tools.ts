@@ -17,7 +17,7 @@ export class Tools extends ClientSDK {
    * List tools
    *
    * @remarks
-   * Retrieves a paginated list of tools in the workspace. Use cursor-based pagination parameters to navigate through the results.
+   * Lists all workspace tools. By default, returns all tools in a single response. Set `limit` to enable cursor-based pagination with `starting_after` and `ending_before`.
    */
   async list(
     request?: operations.GetAllToolsRequest | undefined,
@@ -85,7 +85,7 @@ export class Tools extends ClientSDK {
    * Retrieve tool
    *
    * @remarks
-   * Retrieves a tool by key.
+   * Retrieves a tool by id.
    */
   async retrieve(
     request: operations.RetrieveToolRequest,
@@ -102,7 +102,7 @@ export class Tools extends ClientSDK {
    * Duplicate tool
    *
    * @remarks
-   * Creates a copy of an existing tool with a new key and ID.
+   * Creates a copy of an existing tool with a new id and ID.
    */
   async duplicate(
     request: operations.DuplicateToolRequest,

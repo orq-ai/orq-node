@@ -51,6 +51,7 @@ export type ListDatasetsData = {
    * The unique identifier of the workspace it belongs to
    */
   workspaceId: string;
+  metadata: ListDatasetsMetadata;
   /**
    * The unique identifier of the user who created the dataset
    */
@@ -59,7 +60,6 @@ export type ListDatasetsData = {
    * The unique identifier of the user who last updated the dataset
    */
   updatedById?: string | undefined;
-  metadata: ListDatasetsMetadata;
   /**
    * The date and time the resource was created
    */
@@ -247,13 +247,13 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   display_name: z.string(),
   project_id: z.string(),
   workspace_id: z.string(),
+  metadata: z.lazy(() => ListDatasetsMetadata$inboundSchema),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
-  metadata: z.lazy(() => ListDatasetsMetadata$inboundSchema),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-24T08:19:33.740Z",
+    "2025-10-30T20:23:01.859Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -272,9 +272,9 @@ export type ListDatasetsData$Outbound = {
   display_name: string;
   project_id: string;
   workspace_id: string;
+  metadata: ListDatasetsMetadata$Outbound;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
-  metadata: ListDatasetsMetadata$Outbound;
   created?: string | undefined;
   updated: string;
 };
@@ -289,11 +289,11 @@ export const ListDatasetsData$outboundSchema: z.ZodType<
   displayName: z.string(),
   projectId: z.string(),
   workspaceId: z.string(),
+  metadata: z.lazy(() => ListDatasetsMetadata$outboundSchema),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
-  metadata: z.lazy(() => ListDatasetsMetadata$outboundSchema),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+  updated: z.date().default(() => new Date("2025-10-30T20:23:01.859Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

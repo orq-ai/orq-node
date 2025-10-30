@@ -5,11 +5,11 @@
 ```typescript
 import { Five } from "@orq-ai/node/models/operations";
 
-let value: Five = "azure/text-embedding-ada-002";
+let value: Five = "base64_json";
 ```
 
 ## Values
 
 ```typescript
-"azure/text-embedding-ada-002"
+"url" | "base64_json"
 ```

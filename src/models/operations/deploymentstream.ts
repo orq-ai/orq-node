@@ -166,13 +166,13 @@ export type DeploymentStreamPrefixMessagesDeploymentsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole =
   ClosedEnum<
@@ -241,7 +241,7 @@ export type PrefixMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentStreamPrefixMessagesDeploymentsRequestRequestBodyRole;
   /**
@@ -296,15 +296,26 @@ export type DeploymentStream2DeploymentsRequestRequestBodyType = ClosedEnum<
   typeof DeploymentStream2DeploymentsRequestRequestBodyType
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type DeploymentStream2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type DeploymentStream24 = {
@@ -312,6 +323,9 @@ export type DeploymentStream24 = {
    * The type of the content part. Always `file`.
    */
   type: DeploymentStream2DeploymentsRequestRequestBodyType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: DeploymentStream2File;
 };
 
@@ -656,13 +670,13 @@ export type DeploymentStreamMessagesDeploymentsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentStreamMessagesDeploymentsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentStreamMessagesDeploymentsRequestRequestBodyRole =
   ClosedEnum<typeof DeploymentStreamMessagesDeploymentsRequestRequestBodyRole>;
@@ -730,7 +744,7 @@ export type DeploymentStreamMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentStreamMessagesDeploymentsRequestRequestBodyRole;
   /**
@@ -787,15 +801,26 @@ export type DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type 
     typeof DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type
   >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type DeploymentStream2DeploymentsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type DeploymentStream2Deployments4 = {
@@ -803,6 +828,9 @@ export type DeploymentStream2Deployments4 = {
    * The type of the content part. Always `file`.
    */
   type: DeploymentStream2DeploymentsRequestRequestBodyMessages3Content4Type;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: DeploymentStream2DeploymentsFile;
 };
 
@@ -1460,6 +1488,7 @@ export const DeploymentStreamProvider = {
   Openailike: "openailike",
   Cerebras: "cerebras",
   Bytedance: "bytedance",
+  Mistral: "mistral",
 } as const;
 /**
  * The provider used to generate the response
@@ -3094,8 +3123,10 @@ export const DeploymentStream2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -3104,8 +3135,10 @@ export const DeploymentStream2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeploymentStream2File$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -3114,8 +3147,10 @@ export const DeploymentStream2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStream2File
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -5491,8 +5526,10 @@ export const DeploymentStream2DeploymentsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -5501,8 +5538,10 @@ export const DeploymentStream2DeploymentsFile$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeploymentStream2DeploymentsFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -5511,8 +5550,10 @@ export const DeploymentStream2DeploymentsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeploymentStream2DeploymentsFile
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",

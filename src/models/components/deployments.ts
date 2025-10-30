@@ -143,13 +143,13 @@ export type PrefixMessagesContent =
   | Array<TextContentPart | RefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentsPrefixMessages4Role = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentsPrefixMessages4Role = ClosedEnum<
   typeof DeploymentsPrefixMessages4Role
@@ -213,7 +213,7 @@ export type AssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentsPrefixMessages4Role;
   /**
@@ -268,15 +268,26 @@ export type Deployments2PrefixMessagesType = ClosedEnum<
   typeof Deployments2PrefixMessagesType
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type FileT = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type Four = {
@@ -284,6 +295,9 @@ export type Four = {
    * The type of the content part. Always `file`.
    */
   type: Deployments2PrefixMessagesType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: FileT;
 };
 
@@ -589,13 +603,13 @@ export type DeploymentsMessagesContent =
   | Array<TwoTextContentPart | TwoRefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const DeploymentsMessages4Role = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type DeploymentsMessages4Role = ClosedEnum<
   typeof DeploymentsMessages4Role
@@ -659,7 +673,7 @@ export type MessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: DeploymentsMessages4Role;
   /**
@@ -714,15 +728,26 @@ export type Deployments2Messages3Content4Type = ClosedEnum<
   typeof Deployments2Messages3Content4Type
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type TwoFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type Two4 = {
@@ -730,6 +755,9 @@ export type Two4 = {
    * The type of the content part. Always `file`.
    */
   type: Deployments2Messages3Content4Type;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: TwoFile;
 };
 
@@ -2447,8 +2475,10 @@ export namespace Deployments2PrefixMessagesType$ {
 /** @internal */
 export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
   .object({
-    file_data: z.string(),
-    filename: z.string(),
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "file_data": "fileData",
@@ -2457,8 +2487,10 @@ export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
 
 /** @internal */
 export type FileT$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -2467,8 +2499,10 @@ export const FileT$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FileT
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -4514,8 +4548,10 @@ export namespace Deployments2Messages3Content4Type$ {
 /** @internal */
 export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
   z.object({
-    file_data: z.string(),
-    filename: z.string(),
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "file_data": "fileData",
@@ -4524,8 +4560,10 @@ export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
 
 /** @internal */
 export type TwoFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -4534,8 +4572,10 @@ export const TwoFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TwoFile
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",

@@ -87,13 +87,13 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    tool_key: encodeSimple("tool_key", payload.tool_key, {
+    tool_id: encodeSimple("tool_id", payload.tool_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
 
-  const path = pathToFunc("/v2/tools/{tool_key}")(pathParams);
+  const path = pathToFunc("/v2/tools/{tool_id}")(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "*/*",

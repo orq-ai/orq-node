@@ -346,7 +346,7 @@ export type GoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id.
  */
 export type AgentToolInputCRUD =
   | GoogleSearchTool
@@ -383,22 +383,24 @@ export type Settings = {
   /**
    * Tools available to the agent. Built-in tools only need a type, while custom tools (http, code, function) must reference pre-created tools by key or id.
    */
-  tools: Array<
-    | GoogleSearchTool
-    | WebScraperTool
-    | CallSubAgentTool
-    | RetrieveAgentsTool
-    | QueryMemoryStoreTool
-    | WriteMemoryStoreTool
-    | RetrieveMemoryStoresTool
-    | DeleteMemoryDocumentTool
-    | RetrieveKnowledgeBasesTool
-    | QueryKnowledgeBaseTool
-    | CurrentDateTool
-    | HTTPTool
-    | CodeExecutionTool
-    | FunctionTool
-  >;
+  tools?:
+    | Array<
+      | GoogleSearchTool
+      | WebScraperTool
+      | CallSubAgentTool
+      | RetrieveAgentsTool
+      | QueryMemoryStoreTool
+      | WriteMemoryStoreTool
+      | RetrieveMemoryStoresTool
+      | DeleteMemoryDocumentTool
+      | RetrieveKnowledgeBasesTool
+      | QueryKnowledgeBaseTool
+      | CurrentDateTool
+      | HTTPTool
+      | CodeExecutionTool
+      | FunctionTool
+    >
+    | undefined;
 };
 
 export type KnowledgeBases = {
@@ -528,7 +530,7 @@ export type CreateAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<Conditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**
@@ -550,7 +552,7 @@ export type CreateAgentSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: CreateAgentToolApprovalRequired | undefined;
-  tools: Array<CreateAgentTools>;
+  tools?: Array<CreateAgentTools> | undefined;
 };
 
 export type CreateAgentModel = {
@@ -631,7 +633,13 @@ export type CreateAgentResponseBody = {
   model: CreateAgentModel;
   versionHash?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   memoryStores: Array<string>;
@@ -2094,7 +2102,7 @@ export const Settings$inboundSchema: z.ZodType<
       z.lazy(() => CodeExecutionTool$inboundSchema),
       z.lazy(() => FunctionTool$inboundSchema),
     ]),
-  ),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -2108,22 +2116,24 @@ export type Settings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<
-    | GoogleSearchTool$Outbound
-    | WebScraperTool$Outbound
-    | CallSubAgentTool$Outbound
-    | RetrieveAgentsTool$Outbound
-    | QueryMemoryStoreTool$Outbound
-    | WriteMemoryStoreTool$Outbound
-    | RetrieveMemoryStoresTool$Outbound
-    | DeleteMemoryDocumentTool$Outbound
-    | RetrieveKnowledgeBasesTool$Outbound
-    | QueryKnowledgeBaseTool$Outbound
-    | CurrentDateTool$Outbound
-    | HTTPTool$Outbound
-    | CodeExecutionTool$Outbound
-    | FunctionTool$Outbound
-  >;
+  tools?:
+    | Array<
+      | GoogleSearchTool$Outbound
+      | WebScraperTool$Outbound
+      | CallSubAgentTool$Outbound
+      | RetrieveAgentsTool$Outbound
+      | QueryMemoryStoreTool$Outbound
+      | WriteMemoryStoreTool$Outbound
+      | RetrieveMemoryStoresTool$Outbound
+      | DeleteMemoryDocumentTool$Outbound
+      | RetrieveKnowledgeBasesTool$Outbound
+      | QueryKnowledgeBaseTool$Outbound
+      | CurrentDateTool$Outbound
+      | HTTPTool$Outbound
+      | CodeExecutionTool$Outbound
+      | FunctionTool$Outbound
+    >
+    | undefined;
 };
 
 /** @internal */
@@ -2154,7 +2164,7 @@ export const Settings$outboundSchema: z.ZodType<
       z.lazy(() => CodeExecutionTool$outboundSchema),
       z.lazy(() => FunctionTool$outboundSchema),
     ]),
-  ),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",
@@ -2602,7 +2612,7 @@ export const CreateAgentSettings$inboundSchema: z.ZodType<
   tool_approval_required: CreateAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => CreateAgentTools$inboundSchema)),
+  tools: z.array(z.lazy(() => CreateAgentTools$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -2616,7 +2626,7 @@ export type CreateAgentSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<CreateAgentTools$Outbound>;
+  tools?: Array<CreateAgentTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -2630,7 +2640,7 @@ export const CreateAgentSettings$outboundSchema: z.ZodType<
   toolApprovalRequired: CreateAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => CreateAgentTools$outboundSchema)),
+  tools: z.array(z.lazy(() => CreateAgentTools$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

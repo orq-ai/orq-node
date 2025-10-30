@@ -152,13 +152,13 @@ export type UpdateDatapointMessagesDatasetsContent =
   | Array<UpdateDatapoint2TextContentPart | UpdateDatapoint2RefusalContentPart>;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const UpdateDatapointMessagesDatasetsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type UpdateDatapointMessagesDatasetsRequestRequestBodyRole = ClosedEnum<
   typeof UpdateDatapointMessagesDatasetsRequestRequestBodyRole
@@ -226,7 +226,7 @@ export type UpdateDatapointMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: UpdateDatapointMessagesDatasetsRequestRequestBodyRole;
   /**
@@ -281,15 +281,26 @@ export type UpdateDatapoint2DatasetsRequestRequestBodyType = ClosedEnum<
   typeof UpdateDatapoint2DatasetsRequestRequestBodyType
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type UpdateDatapoint2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type UpdateDatapoint24 = {
@@ -297,6 +308,9 @@ export type UpdateDatapoint24 = {
    * The type of the content part. Always `file`.
    */
   type: UpdateDatapoint2DatasetsRequestRequestBodyType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: UpdateDatapoint2File;
 };
 
@@ -505,7 +519,13 @@ export type UpdateDatapointRequestBody = {
 };
 
 export type UpdateDatapointRequest = {
+  /**
+   * The unique identifier of the dataset
+   */
   datasetId: string;
+  /**
+   * The unique identifier of the datapoint
+   */
   datapointId: string;
   requestBody?: UpdateDatapointRequestBody | undefined;
 };
@@ -668,14 +688,14 @@ export type UpdateDatapointMessagesDatasetsResponse200Content =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   {
     Assistant: "assistant",
   } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   ClosedEnum<
@@ -745,7 +765,7 @@ export type UpdateDatapointMessagesDatasetsAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role:
     UpdateDatapointMessagesDatasetsResponse200ApplicationJSONResponseBodyRole;
@@ -804,15 +824,26 @@ export type UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType =
     typeof UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType
   >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type UpdateDatapoint2DatasetsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type UpdateDatapoint2Datasets4 = {
@@ -820,6 +851,9 @@ export type UpdateDatapoint2Datasets4 = {
    * The type of the content part. Always `file`.
    */
   type: UpdateDatapoint2DatasetsResponse200ApplicationJSONResponseBodyType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: UpdateDatapoint2DatasetsFile;
 };
 
@@ -1014,6 +1048,172 @@ export type UpdateDatapointDatasetsMessages =
   | UpdateDatapointMessagesDatasetsAssistantMessage;
 
 /**
+ * The type of evaluation
+ */
+export const UpdateDatapointEvaluationsDatasetsResponseEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type UpdateDatapointEvaluationsDatasetsResponseEvaluationType =
+  ClosedEnum<typeof UpdateDatapointEvaluationsDatasetsResponseEvaluationType>;
+
+export const UpdateDatapointEvaluationsDatasetsResponseSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type UpdateDatapointEvaluationsDatasetsResponseSource = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsResponseSource
+>;
+
+export const UpdateDatapointEvaluationsDatasetsResponseType = {
+  StringArray: "string_array",
+} as const;
+export type UpdateDatapointEvaluationsDatasetsResponseType = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsResponseType
+>;
+
+export type UpdateDatapointEvaluations3 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: UpdateDatapointEvaluationsDatasetsResponseEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: UpdateDatapointEvaluationsDatasetsResponseSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: UpdateDatapointEvaluationsDatasetsResponseType;
+  values: Array<string>;
+};
+
+/**
+ * The type of evaluation
+ */
+export const UpdateDatapointEvaluationsDatasetsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type UpdateDatapointEvaluationsDatasetsEvaluationType = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsEvaluationType
+>;
+
+export const UpdateDatapointEvaluationsDatasetsSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type UpdateDatapointEvaluationsDatasetsSource = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsSource
+>;
+
+export const UpdateDatapointEvaluationsDatasetsType = {
+  Number: "number",
+} as const;
+export type UpdateDatapointEvaluationsDatasetsType = ClosedEnum<
+  typeof UpdateDatapointEvaluationsDatasetsType
+>;
+
+export type UpdateDatapointEvaluations2 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: UpdateDatapointEvaluationsDatasetsEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: UpdateDatapointEvaluationsDatasetsSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: UpdateDatapointEvaluationsDatasetsType;
+  value: number;
+};
+
+/**
+ * The type of evaluation
+ */
+export const UpdateDatapointEvaluationsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type UpdateDatapointEvaluationsEvaluationType = ClosedEnum<
+  typeof UpdateDatapointEvaluationsEvaluationType
+>;
+
+export const UpdateDatapointEvaluationsSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type UpdateDatapointEvaluationsSource = ClosedEnum<
+  typeof UpdateDatapointEvaluationsSource
+>;
+
+export const UpdateDatapointEvaluationsType = {
+  String: "string",
+} as const;
+export type UpdateDatapointEvaluationsType = ClosedEnum<
+  typeof UpdateDatapointEvaluationsType
+>;
+
+export type UpdateDatapointEvaluations1 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: UpdateDatapointEvaluationsEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: UpdateDatapointEvaluationsSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: UpdateDatapointEvaluationsType;
+  value: string;
+};
+
+export type UpdateDatapointEvaluations =
+  | UpdateDatapointEvaluations1
+  | UpdateDatapointEvaluations2
+  | UpdateDatapointEvaluations3;
+
+/**
  * Dataset item updated.
  */
 export type UpdateDatapointResponseBody = {
@@ -1043,9 +1243,23 @@ export type UpdateDatapointResponseBody = {
     | undefined;
   expectedOutput?: string | undefined;
   /**
+   * Evaluations associated with the datapoint
+   */
+  evaluations?:
+    | Array<
+      | UpdateDatapointEvaluations1
+      | UpdateDatapointEvaluations2
+      | UpdateDatapointEvaluations3
+    >
+    | undefined;
+  /**
    * The unique identifier of the dataset
    */
   datasetId: string;
+  /**
+   * The version of the dataset snapshot
+   */
+  snapshotVersion?: string | undefined;
   /**
    * The unique identifier of the user who created the dataset
    */
@@ -2354,8 +2568,10 @@ export const UpdateDatapoint2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -2364,8 +2580,10 @@ export const UpdateDatapoint2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateDatapoint2File$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -2374,8 +2592,10 @@ export const UpdateDatapoint2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapoint2File
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -4933,8 +5153,10 @@ export const UpdateDatapoint2DatasetsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -4943,8 +5165,10 @@ export const UpdateDatapoint2DatasetsFile$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateDatapoint2DatasetsFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -4953,8 +5177,10 @@ export const UpdateDatapoint2DatasetsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatapoint2DatasetsFile
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -5988,6 +6214,561 @@ export function updateDatapointDatasetsMessagesFromJSON(
 }
 
 /** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointEvaluationsDatasetsResponseEvaluationType
+  > = z.nativeEnum(UpdateDatapointEvaluationsDatasetsResponseEvaluationType);
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseEvaluationType$outboundSchema:
+  z.ZodNativeEnum<
+    typeof UpdateDatapointEvaluationsDatasetsResponseEvaluationType
+  > = UpdateDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsDatasetsResponseEvaluationType$ {
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsResponseEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsDatasetsResponseEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsResponseSource> = z
+    .nativeEnum(UpdateDatapointEvaluationsDatasetsResponseSource);
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsResponseSource> =
+    UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsDatasetsResponseSource$ {
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsResponseType> = z
+    .nativeEnum(UpdateDatapointEvaluationsDatasetsResponseType);
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsResponseType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsResponseType> =
+    UpdateDatapointEvaluationsDatasetsResponseType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsDatasetsResponseType$ {
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsResponseType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsDatasetsResponseType$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsResponseType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsDatasetsResponseType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
+  UpdateDatapointEvaluations3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type:
+    UpdateDatapointEvaluationsDatasetsResponseEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: UpdateDatapointEvaluationsDatasetsResponseSource$inboundSchema
+    .default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-30T20:23:13.532Z",
+  ).transform(v => new Date(v)),
+  type: UpdateDatapointEvaluationsDatasetsResponseType$inboundSchema,
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointEvaluations3$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  values: Array<string>;
+};
+
+/** @internal */
+export const UpdateDatapointEvaluations3$outboundSchema: z.ZodType<
+  UpdateDatapointEvaluations3$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointEvaluations3
+> = z.object({
+  id: z.string(),
+  evaluationType:
+    UpdateDatapointEvaluationsDatasetsResponseEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: UpdateDatapointEvaluationsDatasetsResponseSource$outboundSchema
+    .default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-30T20:23:13.532Z"))
+    .transform(v => v.toISOString()),
+  type: UpdateDatapointEvaluationsDatasetsResponseType$outboundSchema,
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluations3$ {
+  /** @deprecated use `UpdateDatapointEvaluations3$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointEvaluations3$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations3$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointEvaluations3$outboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations3$Outbound` instead. */
+  export type Outbound = UpdateDatapointEvaluations3$Outbound;
+}
+
+export function updateDatapointEvaluations3ToJSON(
+  updateDatapointEvaluations3: UpdateDatapointEvaluations3,
+): string {
+  return JSON.stringify(
+    UpdateDatapointEvaluations3$outboundSchema.parse(
+      updateDatapointEvaluations3,
+    ),
+  );
+}
+
+export function updateDatapointEvaluations3FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointEvaluations3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointEvaluations3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointEvaluations3' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsEvaluationType> = z
+    .nativeEnum(UpdateDatapointEvaluationsDatasetsEvaluationType);
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsEvaluationType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsEvaluationType> =
+    UpdateDatapointEvaluationsDatasetsEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsDatasetsEvaluationType$ {
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsDatasetsEvaluationType$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsDatasetsEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsSource$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsSource> = z
+    .nativeEnum(UpdateDatapointEvaluationsDatasetsSource);
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsSource$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsSource> =
+    UpdateDatapointEvaluationsDatasetsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsDatasetsSource$ {
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsSource$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsDatasetsSource$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsDatasetsSource$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsType> = z.nativeEnum(
+    UpdateDatapointEvaluationsDatasetsType,
+  );
+
+/** @internal */
+export const UpdateDatapointEvaluationsDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsDatasetsType> =
+    UpdateDatapointEvaluationsDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsDatasetsType$ {
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsDatasetsType$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
+  UpdateDatapointEvaluations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type:
+    UpdateDatapointEvaluationsDatasetsEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: UpdateDatapointEvaluationsDatasetsSource$inboundSchema.default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-30T20:23:13.531Z",
+  ).transform(v => new Date(v)),
+  type: UpdateDatapointEvaluationsDatasetsType$inboundSchema,
+  value: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointEvaluations2$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  value: number;
+};
+
+/** @internal */
+export const UpdateDatapointEvaluations2$outboundSchema: z.ZodType<
+  UpdateDatapointEvaluations2$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointEvaluations2
+> = z.object({
+  id: z.string(),
+  evaluationType:
+    UpdateDatapointEvaluationsDatasetsEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: UpdateDatapointEvaluationsDatasetsSource$outboundSchema.default(
+    "orq",
+  ),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-30T20:23:13.531Z"))
+    .transform(v => v.toISOString()),
+  type: UpdateDatapointEvaluationsDatasetsType$outboundSchema,
+  value: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluations2$ {
+  /** @deprecated use `UpdateDatapointEvaluations2$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointEvaluations2$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations2$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointEvaluations2$outboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations2$Outbound` instead. */
+  export type Outbound = UpdateDatapointEvaluations2$Outbound;
+}
+
+export function updateDatapointEvaluations2ToJSON(
+  updateDatapointEvaluations2: UpdateDatapointEvaluations2,
+): string {
+  return JSON.stringify(
+    UpdateDatapointEvaluations2$outboundSchema.parse(
+      updateDatapointEvaluations2,
+    ),
+  );
+}
+
+export function updateDatapointEvaluations2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointEvaluations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointEvaluations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointEvaluations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsEvaluationType> = z
+    .nativeEnum(UpdateDatapointEvaluationsEvaluationType);
+
+/** @internal */
+export const UpdateDatapointEvaluationsEvaluationType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateDatapointEvaluationsEvaluationType> =
+    UpdateDatapointEvaluationsEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsEvaluationType$ {
+  /** @deprecated use `UpdateDatapointEvaluationsEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateDatapointEvaluationsEvaluationType$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateDatapointEvaluationsEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointEvaluationsSource
+> = z.nativeEnum(UpdateDatapointEvaluationsSource);
+
+/** @internal */
+export const UpdateDatapointEvaluationsSource$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointEvaluationsSource
+> = UpdateDatapointEvaluationsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsSource$ {
+  /** @deprecated use `UpdateDatapointEvaluationsSource$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointEvaluationsSource$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsSource$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointEvaluationsSource$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluationsType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointEvaluationsType
+> = z.nativeEnum(UpdateDatapointEvaluationsType);
+
+/** @internal */
+export const UpdateDatapointEvaluationsType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateDatapointEvaluationsType
+> = UpdateDatapointEvaluationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluationsType$ {
+  /** @deprecated use `UpdateDatapointEvaluationsType$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointEvaluationsType$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluationsType$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointEvaluationsType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
+  UpdateDatapointEvaluations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type: UpdateDatapointEvaluationsEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: UpdateDatapointEvaluationsSource$inboundSchema.default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-30T20:23:13.531Z",
+  ).transform(v => new Date(v)),
+  type: UpdateDatapointEvaluationsType$inboundSchema,
+  value: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type UpdateDatapointEvaluations1$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  value: string;
+};
+
+/** @internal */
+export const UpdateDatapointEvaluations1$outboundSchema: z.ZodType<
+  UpdateDatapointEvaluations1$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointEvaluations1
+> = z.object({
+  id: z.string(),
+  evaluationType: UpdateDatapointEvaluationsEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: UpdateDatapointEvaluationsSource$outboundSchema.default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-30T20:23:13.531Z"))
+    .transform(v => v.toISOString()),
+  type: UpdateDatapointEvaluationsType$outboundSchema,
+  value: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluations1$ {
+  /** @deprecated use `UpdateDatapointEvaluations1$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointEvaluations1$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations1$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointEvaluations1$outboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations1$Outbound` instead. */
+  export type Outbound = UpdateDatapointEvaluations1$Outbound;
+}
+
+export function updateDatapointEvaluations1ToJSON(
+  updateDatapointEvaluations1: UpdateDatapointEvaluations1,
+): string {
+  return JSON.stringify(
+    UpdateDatapointEvaluations1$outboundSchema.parse(
+      updateDatapointEvaluations1,
+    ),
+  );
+}
+
+export function updateDatapointEvaluations1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointEvaluations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointEvaluations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointEvaluations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointEvaluations$inboundSchema: z.ZodType<
+  UpdateDatapointEvaluations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => UpdateDatapointEvaluations1$inboundSchema),
+  z.lazy(() => UpdateDatapointEvaluations2$inboundSchema),
+  z.lazy(() => UpdateDatapointEvaluations3$inboundSchema),
+]);
+
+/** @internal */
+export type UpdateDatapointEvaluations$Outbound =
+  | UpdateDatapointEvaluations1$Outbound
+  | UpdateDatapointEvaluations2$Outbound
+  | UpdateDatapointEvaluations3$Outbound;
+
+/** @internal */
+export const UpdateDatapointEvaluations$outboundSchema: z.ZodType<
+  UpdateDatapointEvaluations$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointEvaluations
+> = z.union([
+  z.lazy(() => UpdateDatapointEvaluations1$outboundSchema),
+  z.lazy(() => UpdateDatapointEvaluations2$outboundSchema),
+  z.lazy(() => UpdateDatapointEvaluations3$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateDatapointEvaluations$ {
+  /** @deprecated use `UpdateDatapointEvaluations$inboundSchema` instead. */
+  export const inboundSchema = UpdateDatapointEvaluations$inboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations$outboundSchema` instead. */
+  export const outboundSchema = UpdateDatapointEvaluations$outboundSchema;
+  /** @deprecated use `UpdateDatapointEvaluations$Outbound` instead. */
+  export type Outbound = UpdateDatapointEvaluations$Outbound;
+}
+
+export function updateDatapointEvaluationsToJSON(
+  updateDatapointEvaluations: UpdateDatapointEvaluations,
+): string {
+  return JSON.stringify(
+    UpdateDatapointEvaluations$outboundSchema.parse(updateDatapointEvaluations),
+  );
+}
+
+export function updateDatapointEvaluationsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointEvaluations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateDatapointEvaluations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointEvaluations' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   UpdateDatapointResponseBody,
   z.ZodTypeDef,
@@ -6012,13 +6793,21 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   expected_output: z.string().optional(),
+  evaluations: z.array(
+    z.union([
+      z.lazy(() => UpdateDatapointEvaluations1$inboundSchema),
+      z.lazy(() => UpdateDatapointEvaluations2$inboundSchema),
+      z.lazy(() => UpdateDatapointEvaluations3$inboundSchema),
+    ]),
+  ).optional(),
   dataset_id: z.string(),
+  snapshot_version: z.string().optional(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-24T08:19:33.740Z",
+    "2025-10-30T20:23:01.859Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6026,6 +6815,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
     "expected_output": "expectedOutput",
     "dataset_id": "datasetId",
+    "snapshot_version": "snapshotVersion",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
   });
@@ -6046,7 +6836,15 @@ export type UpdateDatapointResponseBody$Outbound = {
     >
     | undefined;
   expected_output?: string | undefined;
+  evaluations?:
+    | Array<
+      | UpdateDatapointEvaluations1$Outbound
+      | UpdateDatapointEvaluations2$Outbound
+      | UpdateDatapointEvaluations3$Outbound
+    >
+    | undefined;
   dataset_id: string;
+  snapshot_version?: string | undefined;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
   created?: string | undefined;
@@ -6076,11 +6874,19 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
     ]),
   ).optional(),
   expectedOutput: z.string().optional(),
+  evaluations: z.array(
+    z.union([
+      z.lazy(() => UpdateDatapointEvaluations1$outboundSchema),
+      z.lazy(() => UpdateDatapointEvaluations2$outboundSchema),
+      z.lazy(() => UpdateDatapointEvaluations3$outboundSchema),
+    ]),
+  ).optional(),
   datasetId: z.string(),
+  snapshotVersion: z.string().optional(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+  updated: z.date().default(() => new Date("2025-10-30T20:23:01.859Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -6088,6 +6894,7 @@ export const UpdateDatapointResponseBody$outboundSchema: z.ZodType<
     workspaceId: "workspace_id",
     expectedOutput: "expected_output",
     datasetId: "dataset_id",
+    snapshotVersion: "snapshot_version",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
   });

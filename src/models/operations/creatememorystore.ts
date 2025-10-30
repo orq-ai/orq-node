@@ -9,43 +9,48 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export const TwentyTwo = {
+export const TwentyThree = {
   JinaJinaEmbeddingsV3: "jina/jina-embeddings-v3",
+} as const;
+export type TwentyThree = ClosedEnum<typeof TwentyThree>;
+
+export const TwentyTwo = {
+  JinaJinaClipV2: "jina/jina-clip-v2",
 } as const;
 export type TwentyTwo = ClosedEnum<typeof TwentyTwo>;
 
 export const TwentyOne = {
-  JinaJinaClipV2: "jina/jina-clip-v2",
+  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
 } as const;
 export type TwentyOne = ClosedEnum<typeof TwentyOne>;
 
 export const Twenty = {
-  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
+  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
 } as const;
 export type Twenty = ClosedEnum<typeof Twenty>;
 
 export const Nineteen = {
-  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
+  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
 } as const;
 export type Nineteen = ClosedEnum<typeof Nineteen>;
 
 export const Eighteen = {
-  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
+  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
 } as const;
 export type Eighteen = ClosedEnum<typeof Eighteen>;
 
 export const Seventeen = {
-  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
+  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
 } as const;
 export type Seventeen = ClosedEnum<typeof Seventeen>;
 
 export const Sixteen = {
-  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
+  JinaJinaClipV1: "jina/jina-clip-v1",
 } as const;
 export type Sixteen = ClosedEnum<typeof Sixteen>;
 
 export const Fifteen = {
-  JinaJinaClipV1: "jina/jina-clip-v1",
+  MistralMistralEmbed: "mistral/mistral-embed",
 } as const;
 export type Fifteen = ClosedEnum<typeof Fifteen>;
 
@@ -65,39 +70,39 @@ export const Twelve = {
 export type Twelve = ClosedEnum<typeof Twelve>;
 
 export const Eleven = {
-  GoogleTextEmbedding005: "google/text-embedding-005",
+  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
 } as const;
 export type Eleven = ClosedEnum<typeof Eleven>;
 
 export const Ten = {
-  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
+  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
 } as const;
 export type Ten = ClosedEnum<typeof Ten>;
 
 export const Nine = {
-  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
+  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
 } as const;
 export type Nine = ClosedEnum<typeof Nine>;
 
 export const Eight = {
-  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
+  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
 } as const;
 export type Eight = ClosedEnum<typeof Eight>;
 
 export const Seven = {
-  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
+  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
 } as const;
 export type Seven = ClosedEnum<typeof Seven>;
 
-export const Six = {
-  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
-} as const;
-export type Six = ClosedEnum<typeof Six>;
-
-export const Five = {
+export const Model6 = {
   AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
 } as const;
-export type Five = ClosedEnum<typeof Five>;
+export type Model6 = ClosedEnum<typeof Model6>;
+
+export const Model5 = {
+  CohereEmbedV40: "cohere/embed-v4.0",
+} as const;
+export type Model5 = ClosedEnum<typeof Model5>;
 
 export const Model4 = {
   CohereEmbedEnglishV30: "cohere/embed-english-v3.0",
@@ -124,8 +129,8 @@ export type Model =
   | Model2
   | Model3
   | Model4
-  | Five
-  | Six
+  | Model5
+  | Model6
   | Seven
   | Eight
   | Nine
@@ -141,7 +146,8 @@ export type Model =
   | Nineteen
   | Twenty
   | TwentyOne
-  | TwentyTwo;
+  | TwentyTwo
+  | TwentyThree;
 
 export type EmbeddingConfig = {
   model:
@@ -149,8 +155,8 @@ export type EmbeddingConfig = {
     | Model2
     | Model3
     | Model4
-    | Five
-    | Six
+    | Model5
+    | Model6
     | Seven
     | Eight
     | Nine
@@ -166,7 +172,8 @@ export type EmbeddingConfig = {
     | Nineteen
     | Twenty
     | TwentyOne
-    | TwentyTwo;
+    | TwentyTwo
+    | TwentyThree;
 };
 
 export type CreateMemoryStoreRequestBody = {
@@ -184,62 +191,75 @@ export type CreateMemoryStoreRequestBody = {
    */
   ttl?: number | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
 };
 
-export const CreateMemoryStoreModel22 = {
+export const CreateMemoryStoreModel23 = {
   JinaJinaEmbeddingsV3: "jina/jina-embeddings-v3",
+} as const;
+export type CreateMemoryStoreModel23 = ClosedEnum<
+  typeof CreateMemoryStoreModel23
+>;
+
+export const CreateMemoryStoreModel22 = {
+  JinaJinaClipV2: "jina/jina-clip-v2",
 } as const;
 export type CreateMemoryStoreModel22 = ClosedEnum<
   typeof CreateMemoryStoreModel22
 >;
 
 export const CreateMemoryStoreModel21 = {
-  JinaJinaClipV2: "jina/jina-clip-v2",
+  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
 } as const;
 export type CreateMemoryStoreModel21 = ClosedEnum<
   typeof CreateMemoryStoreModel21
 >;
 
 export const CreateMemoryStoreModel20 = {
-  JinaJinaEmbeddingsV2BaseDe: "jina/jina-embeddings-v2-base-de",
+  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
 } as const;
 export type CreateMemoryStoreModel20 = ClosedEnum<
   typeof CreateMemoryStoreModel20
 >;
 
 export const CreateMemoryStoreModel19 = {
-  JinaJinaEmbeddingsV2BaseCode: "jina/jina-embeddings-v2-base-code",
+  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
 } as const;
 export type CreateMemoryStoreModel19 = ClosedEnum<
   typeof CreateMemoryStoreModel19
 >;
 
 export const CreateMemoryStoreModel18 = {
-  JinaJinaEmbeddingsV2BaseZh: "jina/jina-embeddings-v2-base-zh",
+  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
 } as const;
 export type CreateMemoryStoreModel18 = ClosedEnum<
   typeof CreateMemoryStoreModel18
 >;
 
 export const CreateMemoryStoreModel17 = {
-  JinaJinaEmbeddingsV2BaseEn: "jina/jina-embeddings-v2-base-en",
+  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
 } as const;
 export type CreateMemoryStoreModel17 = ClosedEnum<
   typeof CreateMemoryStoreModel17
 >;
 
 export const CreateMemoryStoreModel16 = {
-  JinaJinaEmbeddingsV2BaseEs: "jina/jina-embeddings-v2-base-es",
+  JinaJinaClipV1: "jina/jina-clip-v1",
 } as const;
 export type CreateMemoryStoreModel16 = ClosedEnum<
   typeof CreateMemoryStoreModel16
 >;
 
 export const CreateMemoryStoreModel15 = {
-  JinaJinaClipV1: "jina/jina-clip-v1",
+  MistralMistralEmbed: "mistral/mistral-embed",
 } as const;
 export type CreateMemoryStoreModel15 = ClosedEnum<
   typeof CreateMemoryStoreModel15
@@ -267,49 +287,49 @@ export type CreateMemoryStoreModel12 = ClosedEnum<
 >;
 
 export const CreateMemoryStoreModel11 = {
-  GoogleTextEmbedding005: "google/text-embedding-005",
+  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
 } as const;
 export type CreateMemoryStoreModel11 = ClosedEnum<
   typeof CreateMemoryStoreModel11
 >;
 
 export const CreateMemoryStoreModel10 = {
-  GoogleGeminiEmbedding001: "google/gemini-embedding-001",
+  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
 } as const;
 export type CreateMemoryStoreModel10 = ClosedEnum<
   typeof CreateMemoryStoreModel10
 >;
 
 export const CreateMemoryStoreModel9 = {
-  OpenaiTextEmbeddingAda002: "openai/text-embedding-ada-002",
+  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
 } as const;
 export type CreateMemoryStoreModel9 = ClosedEnum<
   typeof CreateMemoryStoreModel9
 >;
 
 export const CreateMemoryStoreModel8 = {
-  OpenaiTextEmbedding3Small: "openai/text-embedding-3-small",
+  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
 } as const;
 export type CreateMemoryStoreModel8 = ClosedEnum<
   typeof CreateMemoryStoreModel8
 >;
 
 export const CreateMemoryStoreModel7 = {
-  OpenaiTextEmbedding3Large: "openai/text-embedding-3-large",
+  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
 } as const;
 export type CreateMemoryStoreModel7 = ClosedEnum<
   typeof CreateMemoryStoreModel7
 >;
 
 export const CreateMemoryStoreModel6 = {
-  AzureTextEmbedding3Small: "azure/text-embedding-3-small",
+  AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
 } as const;
 export type CreateMemoryStoreModel6 = ClosedEnum<
   typeof CreateMemoryStoreModel6
 >;
 
 export const CreateMemoryStoreModel5 = {
-  AzureTextEmbeddingAda002: "azure/text-embedding-ada-002",
+  CohereEmbedV40: "cohere/embed-v4.0",
 } as const;
 export type CreateMemoryStoreModel5 = ClosedEnum<
   typeof CreateMemoryStoreModel5
@@ -365,7 +385,8 @@ export type CreateMemoryStoreModel =
   | CreateMemoryStoreModel19
   | CreateMemoryStoreModel20
   | CreateMemoryStoreModel21
-  | CreateMemoryStoreModel22;
+  | CreateMemoryStoreModel22
+  | CreateMemoryStoreModel23;
 
 export type CreateMemoryStoreEmbeddingConfig = {
   model:
@@ -390,7 +411,8 @@ export type CreateMemoryStoreEmbeddingConfig = {
     | CreateMemoryStoreModel19
     | CreateMemoryStoreModel20
     | CreateMemoryStoreModel21
-    | CreateMemoryStoreModel22;
+    | CreateMemoryStoreModel22
+    | CreateMemoryStoreModel23;
 };
 
 /**
@@ -431,6 +453,25 @@ export type CreateMemoryStoreResponseBody = {
   ttl?: number | undefined;
   embeddingConfig: CreateMemoryStoreEmbeddingConfig;
 };
+
+/** @internal */
+export const TwentyThree$inboundSchema: z.ZodNativeEnum<typeof TwentyThree> = z
+  .nativeEnum(TwentyThree);
+
+/** @internal */
+export const TwentyThree$outboundSchema: z.ZodNativeEnum<typeof TwentyThree> =
+  TwentyThree$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TwentyThree$ {
+  /** @deprecated use `TwentyThree$inboundSchema` instead. */
+  export const inboundSchema = TwentyThree$inboundSchema;
+  /** @deprecated use `TwentyThree$outboundSchema` instead. */
+  export const outboundSchema = TwentyThree$outboundSchema;
+}
 
 /** @internal */
 export const TwentyTwo$inboundSchema: z.ZodNativeEnum<typeof TwentyTwo> = z
@@ -739,41 +780,41 @@ export namespace Seven$ {
 }
 
 /** @internal */
-export const Six$inboundSchema: z.ZodNativeEnum<typeof Six> = z.nativeEnum(Six);
+export const Model6$inboundSchema: z.ZodNativeEnum<typeof Model6> = z
+  .nativeEnum(Model6);
 
 /** @internal */
-export const Six$outboundSchema: z.ZodNativeEnum<typeof Six> =
-  Six$inboundSchema;
+export const Model6$outboundSchema: z.ZodNativeEnum<typeof Model6> =
+  Model6$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Six$ {
-  /** @deprecated use `Six$inboundSchema` instead. */
-  export const inboundSchema = Six$inboundSchema;
-  /** @deprecated use `Six$outboundSchema` instead. */
-  export const outboundSchema = Six$outboundSchema;
+export namespace Model6$ {
+  /** @deprecated use `Model6$inboundSchema` instead. */
+  export const inboundSchema = Model6$inboundSchema;
+  /** @deprecated use `Model6$outboundSchema` instead. */
+  export const outboundSchema = Model6$outboundSchema;
 }
 
 /** @internal */
-export const Five$inboundSchema: z.ZodNativeEnum<typeof Five> = z.nativeEnum(
-  Five,
-);
+export const Model5$inboundSchema: z.ZodNativeEnum<typeof Model5> = z
+  .nativeEnum(Model5);
 
 /** @internal */
-export const Five$outboundSchema: z.ZodNativeEnum<typeof Five> =
-  Five$inboundSchema;
+export const Model5$outboundSchema: z.ZodNativeEnum<typeof Model5> =
+  Model5$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace Five$ {
-  /** @deprecated use `Five$inboundSchema` instead. */
-  export const inboundSchema = Five$inboundSchema;
-  /** @deprecated use `Five$outboundSchema` instead. */
-  export const outboundSchema = Five$outboundSchema;
+export namespace Model5$ {
+  /** @deprecated use `Model5$inboundSchema` instead. */
+  export const inboundSchema = Model5$inboundSchema;
+  /** @deprecated use `Model5$outboundSchema` instead. */
+  export const outboundSchema = Model5$outboundSchema;
 }
 
 /** @internal */
@@ -859,8 +900,8 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     Model2$inboundSchema,
     Model3$inboundSchema,
     Model4$inboundSchema,
-    Five$inboundSchema,
-    Six$inboundSchema,
+    Model5$inboundSchema,
+    Model6$inboundSchema,
     Seven$inboundSchema,
     Eight$inboundSchema,
     Nine$inboundSchema,
@@ -877,10 +918,12 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     Twenty$inboundSchema,
     TwentyOne$inboundSchema,
     TwentyTwo$inboundSchema,
+    TwentyThree$inboundSchema,
   ]);
 
 /** @internal */
 export type Model$Outbound =
+  | string
   | string
   | string
   | string
@@ -914,8 +957,8 @@ export const Model$outboundSchema: z.ZodType<
   Model2$outboundSchema,
   Model3$outboundSchema,
   Model4$outboundSchema,
-  Five$outboundSchema,
-  Six$outboundSchema,
+  Model5$outboundSchema,
+  Model6$outboundSchema,
   Seven$outboundSchema,
   Eight$outboundSchema,
   Nine$outboundSchema,
@@ -932,6 +975,7 @@ export const Model$outboundSchema: z.ZodType<
   Twenty$outboundSchema,
   TwentyOne$outboundSchema,
   TwentyTwo$outboundSchema,
+  TwentyThree$outboundSchema,
 ]);
 
 /**
@@ -972,8 +1016,8 @@ export const EmbeddingConfig$inboundSchema: z.ZodType<
     Model2$inboundSchema,
     Model3$inboundSchema,
     Model4$inboundSchema,
-    Five$inboundSchema,
-    Six$inboundSchema,
+    Model5$inboundSchema,
+    Model6$inboundSchema,
     Seven$inboundSchema,
     Eight$inboundSchema,
     Nine$inboundSchema,
@@ -990,12 +1034,14 @@ export const EmbeddingConfig$inboundSchema: z.ZodType<
     Twenty$inboundSchema,
     TwentyOne$inboundSchema,
     TwentyTwo$inboundSchema,
+    TwentyThree$inboundSchema,
   ]),
 });
 
 /** @internal */
 export type EmbeddingConfig$Outbound = {
   model:
+    | string
     | string
     | string
     | string
@@ -1031,8 +1077,8 @@ export const EmbeddingConfig$outboundSchema: z.ZodType<
     Model2$outboundSchema,
     Model3$outboundSchema,
     Model4$outboundSchema,
-    Five$outboundSchema,
-    Six$outboundSchema,
+    Model5$outboundSchema,
+    Model6$outboundSchema,
     Seven$outboundSchema,
     Eight$outboundSchema,
     Nine$outboundSchema,
@@ -1049,6 +1095,7 @@ export const EmbeddingConfig$outboundSchema: z.ZodType<
     Twenty$outboundSchema,
     TwentyOne$outboundSchema,
     TwentyTwo$outboundSchema,
+    TwentyThree$outboundSchema,
   ]),
 });
 
@@ -1155,6 +1202,27 @@ export function createMemoryStoreRequestBodyFromJSON(
     (x) => CreateMemoryStoreRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateMemoryStoreRequestBody' from JSON`,
   );
+}
+
+/** @internal */
+export const CreateMemoryStoreModel23$inboundSchema: z.ZodNativeEnum<
+  typeof CreateMemoryStoreModel23
+> = z.nativeEnum(CreateMemoryStoreModel23);
+
+/** @internal */
+export const CreateMemoryStoreModel23$outboundSchema: z.ZodNativeEnum<
+  typeof CreateMemoryStoreModel23
+> = CreateMemoryStoreModel23$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateMemoryStoreModel23$ {
+  /** @deprecated use `CreateMemoryStoreModel23$inboundSchema` instead. */
+  export const inboundSchema = CreateMemoryStoreModel23$inboundSchema;
+  /** @deprecated use `CreateMemoryStoreModel23$outboundSchema` instead. */
+  export const outboundSchema = CreateMemoryStoreModel23$outboundSchema;
 }
 
 /** @internal */
@@ -1647,10 +1715,12 @@ export const CreateMemoryStoreModel$inboundSchema: z.ZodType<
   CreateMemoryStoreModel20$inboundSchema,
   CreateMemoryStoreModel21$inboundSchema,
   CreateMemoryStoreModel22$inboundSchema,
+  CreateMemoryStoreModel23$inboundSchema,
 ]);
 
 /** @internal */
 export type CreateMemoryStoreModel$Outbound =
+  | string
   | string
   | string
   | string
@@ -1702,6 +1772,7 @@ export const CreateMemoryStoreModel$outboundSchema: z.ZodType<
   CreateMemoryStoreModel20$outboundSchema,
   CreateMemoryStoreModel21$outboundSchema,
   CreateMemoryStoreModel22$outboundSchema,
+  CreateMemoryStoreModel23$outboundSchema,
 ]);
 
 /**
@@ -1764,12 +1835,14 @@ export const CreateMemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
     CreateMemoryStoreModel20$inboundSchema,
     CreateMemoryStoreModel21$inboundSchema,
     CreateMemoryStoreModel22$inboundSchema,
+    CreateMemoryStoreModel23$inboundSchema,
   ]),
 });
 
 /** @internal */
 export type CreateMemoryStoreEmbeddingConfig$Outbound = {
   model:
+    | string
     | string
     | string
     | string
@@ -1823,6 +1896,7 @@ export const CreateMemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
     CreateMemoryStoreModel20$outboundSchema,
     CreateMemoryStoreModel21$outboundSchema,
     CreateMemoryStoreModel22$outboundSchema,
+    CreateMemoryStoreModel23$outboundSchema,
   ]),
 });
 

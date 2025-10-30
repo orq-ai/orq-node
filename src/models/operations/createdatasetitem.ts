@@ -152,13 +152,13 @@ export type CreateDatasetItemMessagesDatasetsContent =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const CreateDatasetItemMessagesDatasetsRequestRequestBodyRole = {
   Assistant: "assistant",
 } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type CreateDatasetItemMessagesDatasetsRequestRequestBodyRole =
   ClosedEnum<typeof CreateDatasetItemMessagesDatasetsRequestRequestBodyRole>;
@@ -225,7 +225,7 @@ export type CreateDatasetItemMessagesAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role: CreateDatasetItemMessagesDatasetsRequestRequestBodyRole;
   /**
@@ -280,15 +280,26 @@ export type CreateDatasetItem2DatasetsRequestRequestBodyType = ClosedEnum<
   typeof CreateDatasetItem2DatasetsRequestRequestBodyType
 >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type CreateDatasetItem2File = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type CreateDatasetItem24 = {
@@ -296,6 +307,9 @@ export type CreateDatasetItem24 = {
    * The type of the content part. Always `file`.
    */
   type: CreateDatasetItem2DatasetsRequestRequestBodyType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: CreateDatasetItem2File;
 };
 
@@ -487,7 +501,7 @@ export type CreateDatasetItemMessages =
   | CreateDatasetItemMessagesUserMessage
   | CreateDatasetItemMessagesAssistantMessage;
 
-export type RequestBody = {
+export type CreateDatasetItemRequestBody = {
   /**
    * The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported.
    */
@@ -508,8 +522,11 @@ export type RequestBody = {
 };
 
 export type CreateDatasetItemRequest = {
+  /**
+   * The unique identifier of the dataset
+   */
   datasetId: string;
-  requestBody?: Array<RequestBody> | undefined;
+  requestBody?: Array<CreateDatasetItemRequestBody> | undefined;
 };
 
 /**
@@ -671,14 +688,14 @@ export type CreateDatasetItemMessagesDatasetsResponse200Content =
   >;
 
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export const CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   {
     Assistant: "assistant",
   } as const;
 /**
- * The role of the messages author, in this case `assistant` or `exception`.
+ * The role of the messages author, in this case `assistant`.
  */
 export type CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole =
   ClosedEnum<
@@ -748,7 +765,7 @@ export type CreateDatasetItemMessagesDatasetsAssistantMessage = {
    */
   refusal?: string | null | undefined;
   /**
-   * The role of the messages author, in this case `assistant` or `exception`.
+   * The role of the messages author, in this case `assistant`.
    */
   role:
     CreateDatasetItemMessagesDatasetsResponse200ApplicationJSONResponseBodyRole;
@@ -807,15 +824,26 @@ export type CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
     typeof CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType
   >;
 
+/**
+ * File data for the content part. Must contain either file_data or uri, but not both.
+ */
 export type CreateDatasetItem2DatasetsFile = {
   /**
    * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
-  fileData: string;
+  fileData?: string | undefined;
+  /**
+   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   */
+  uri?: string | undefined;
+  /**
+   * MIME type of the file (e.g., application/pdf, image/png)
+   */
+  mimeType?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
-  filename: string;
+  filename?: string | undefined;
 };
 
 export type CreateDatasetItem2Datasets4 = {
@@ -823,6 +851,9 @@ export type CreateDatasetItem2Datasets4 = {
    * The type of the content part. Always `file`.
    */
   type: CreateDatasetItem2DatasetsResponse200ApplicationJSONResponseBodyType;
+  /**
+   * File data for the content part. Must contain either file_data or uri, but not both.
+   */
   file: CreateDatasetItem2DatasetsFile;
 };
 
@@ -1015,7 +1046,163 @@ export type CreateDatasetItemDatasetsMessages =
   | CreateDatasetItemMessagesDatasetsUserMessage
   | CreateDatasetItemMessagesDatasetsAssistantMessage;
 
-export type ResponseBody = {
+/**
+ * The type of evaluation
+ */
+export const CreateDatasetItemEvaluationsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type CreateDatasetItemEvaluationsEvaluationType = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsEvaluationType
+>;
+
+export const CreateDatasetItemEvaluationsSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type CreateDatasetItemEvaluationsSource = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsSource
+>;
+
+export const CreateDatasetItemEvaluationsDatasetsType = {
+  StringArray: "string_array",
+} as const;
+export type CreateDatasetItemEvaluationsDatasetsType = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsDatasetsType
+>;
+
+export type Evaluations3 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: CreateDatasetItemEvaluationsEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: CreateDatasetItemEvaluationsSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: CreateDatasetItemEvaluationsDatasetsType;
+  values: Array<string>;
+};
+
+/**
+ * The type of evaluation
+ */
+export const EvaluationsEvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type EvaluationsEvaluationType = ClosedEnum<
+  typeof EvaluationsEvaluationType
+>;
+
+export const EvaluationsSource = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type EvaluationsSource = ClosedEnum<typeof EvaluationsSource>;
+
+export const CreateDatasetItemEvaluationsType = {
+  Number: "number",
+} as const;
+export type CreateDatasetItemEvaluationsType = ClosedEnum<
+  typeof CreateDatasetItemEvaluationsType
+>;
+
+export type Evaluations2 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: EvaluationsEvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: EvaluationsSource | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: CreateDatasetItemEvaluationsType;
+  value: number;
+};
+
+/**
+ * The type of evaluation
+ */
+export const EvaluationType = {
+  HumanReview: "human_review",
+} as const;
+/**
+ * The type of evaluation
+ */
+export type EvaluationType = ClosedEnum<typeof EvaluationType>;
+
+export const Source = {
+  Orq: "orq",
+  External: "external",
+} as const;
+export type Source = ClosedEnum<typeof Source>;
+
+export const EvaluationsType = {
+  String: "string",
+} as const;
+export type EvaluationsType = ClosedEnum<typeof EvaluationsType>;
+
+export type Evaluations1 = {
+  /**
+   * The unique identifier of the human evaluation
+   */
+  id: string;
+  /**
+   * The type of evaluation
+   */
+  evaluationType: EvaluationType;
+  /**
+   * The unique identifier of the human review
+   */
+  humanReviewId: string;
+  source?: Source | undefined;
+  /**
+   * The unique identifier of the user who reviewed the item
+   */
+  reviewedById: string;
+  /**
+   * The date and time the item was reviewed
+   */
+  reviewedAt?: Date | undefined;
+  type: EvaluationsType;
+  value: string;
+};
+
+export type Evaluations = Evaluations1 | Evaluations2 | Evaluations3;
+
+export type CreateDatasetItemResponseBody = {
   /**
    * The unique identifier of the dataset item
    */
@@ -1042,9 +1229,17 @@ export type ResponseBody = {
     | undefined;
   expectedOutput?: string | undefined;
   /**
+   * Evaluations associated with the datapoint
+   */
+  evaluations?: Array<Evaluations1 | Evaluations2 | Evaluations3> | undefined;
+  /**
    * The unique identifier of the dataset
    */
   datasetId: string;
+  /**
+   * The version of the dataset snapshot
+   */
+  snapshotVersion?: string | undefined;
   /**
    * The unique identifier of the user who created the dataset
    */
@@ -2375,8 +2570,10 @@ export const CreateDatasetItem2File$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -2385,8 +2582,10 @@ export const CreateDatasetItem2File$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateDatasetItem2File$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -2395,8 +2594,10 @@ export const CreateDatasetItem2File$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasetItem2File
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -3374,8 +3575,8 @@ export function createDatasetItemMessagesFromJSON(
 }
 
 /** @internal */
-export const RequestBody$inboundSchema: z.ZodType<
-  RequestBody,
+export const CreateDatasetItemRequestBody$inboundSchema: z.ZodType<
+  CreateDatasetItemRequestBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3397,7 +3598,7 @@ export const RequestBody$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type RequestBody$Outbound = {
+export type CreateDatasetItemRequestBody$Outbound = {
   inputs?: { [k: string]: any } | undefined;
   messages?:
     | Array<
@@ -3412,10 +3613,10 @@ export type RequestBody$Outbound = {
 };
 
 /** @internal */
-export const RequestBody$outboundSchema: z.ZodType<
-  RequestBody$Outbound,
+export const CreateDatasetItemRequestBody$outboundSchema: z.ZodType<
+  CreateDatasetItemRequestBody$Outbound,
   z.ZodTypeDef,
-  RequestBody
+  CreateDatasetItemRequestBody
 > = z.object({
   inputs: z.record(z.any()).optional(),
   messages: z.array(
@@ -3438,26 +3639,32 @@ export const RequestBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBody$ {
-  /** @deprecated use `RequestBody$inboundSchema` instead. */
-  export const inboundSchema = RequestBody$inboundSchema;
-  /** @deprecated use `RequestBody$outboundSchema` instead. */
-  export const outboundSchema = RequestBody$outboundSchema;
-  /** @deprecated use `RequestBody$Outbound` instead. */
-  export type Outbound = RequestBody$Outbound;
+export namespace CreateDatasetItemRequestBody$ {
+  /** @deprecated use `CreateDatasetItemRequestBody$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemRequestBody$inboundSchema;
+  /** @deprecated use `CreateDatasetItemRequestBody$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemRequestBody$outboundSchema;
+  /** @deprecated use `CreateDatasetItemRequestBody$Outbound` instead. */
+  export type Outbound = CreateDatasetItemRequestBody$Outbound;
 }
 
-export function requestBodyToJSON(requestBody: RequestBody): string {
-  return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
+export function createDatasetItemRequestBodyToJSON(
+  createDatasetItemRequestBody: CreateDatasetItemRequestBody,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemRequestBody$outboundSchema.parse(
+      createDatasetItemRequestBody,
+    ),
+  );
 }
 
-export function requestBodyFromJSON(
+export function createDatasetItemRequestBodyFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBody, SDKValidationError> {
+): SafeParseResult<CreateDatasetItemRequestBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody' from JSON`,
+    (x) => CreateDatasetItemRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemRequestBody' from JSON`,
   );
 }
 
@@ -3468,7 +3675,8 @@ export const CreateDatasetItemRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   dataset_id: z.string(),
-  RequestBody: z.array(z.lazy(() => RequestBody$inboundSchema)).optional(),
+  RequestBody: z.array(z.lazy(() => CreateDatasetItemRequestBody$inboundSchema))
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "dataset_id": "datasetId",
@@ -3479,7 +3687,7 @@ export const CreateDatasetItemRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type CreateDatasetItemRequest$Outbound = {
   dataset_id: string;
-  RequestBody?: Array<RequestBody$Outbound> | undefined;
+  RequestBody?: Array<CreateDatasetItemRequestBody$Outbound> | undefined;
 };
 
 /** @internal */
@@ -3489,7 +3697,9 @@ export const CreateDatasetItemRequest$outboundSchema: z.ZodType<
   CreateDatasetItemRequest
 > = z.object({
   datasetId: z.string(),
-  requestBody: z.array(z.lazy(() => RequestBody$outboundSchema)).optional(),
+  requestBody: z.array(
+    z.lazy(() => CreateDatasetItemRequestBody$outboundSchema),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     datasetId: "dataset_id",
@@ -4975,8 +5185,10 @@ export const CreateDatasetItem2DatasetsFile$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  file_data: z.string(),
-  filename: z.string(),
+  file_data: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
@@ -4985,8 +5197,10 @@ export const CreateDatasetItem2DatasetsFile$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateDatasetItem2DatasetsFile$Outbound = {
-  file_data: string;
-  filename: string;
+  file_data?: string | undefined;
+  uri?: string | undefined;
+  mimeType?: string | undefined;
+  filename?: string | undefined;
 };
 
 /** @internal */
@@ -4995,8 +5209,10 @@ export const CreateDatasetItem2DatasetsFile$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDatasetItem2DatasetsFile
 > = z.object({
-  fileData: z.string(),
-  filename: z.string(),
+  fileData: z.string().optional(),
+  uri: z.string().optional(),
+  mimeType: z.string().optional(),
+  filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
@@ -6051,8 +6267,519 @@ export function createDatasetItemDatasetsMessagesFromJSON(
 }
 
 /** @internal */
-export const ResponseBody$inboundSchema: z.ZodType<
-  ResponseBody,
+export const CreateDatasetItemEvaluationsEvaluationType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> = z
+    .nativeEnum(CreateDatasetItemEvaluationsEvaluationType);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsEvaluationType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsEvaluationType> =
+    CreateDatasetItemEvaluationsEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemEvaluationsEvaluationType$ {
+  /** @deprecated use `CreateDatasetItemEvaluationsEvaluationType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemEvaluationsEvaluationType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemEvaluationsEvaluationType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemEvaluationsEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemEvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsSource
+> = z.nativeEnum(CreateDatasetItemEvaluationsSource);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsSource$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsSource
+> = CreateDatasetItemEvaluationsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemEvaluationsSource$ {
+  /** @deprecated use `CreateDatasetItemEvaluationsSource$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemEvaluationsSource$inboundSchema;
+  /** @deprecated use `CreateDatasetItemEvaluationsSource$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemEvaluationsSource$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemEvaluationsDatasetsType$inboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsType> = z
+    .nativeEnum(CreateDatasetItemEvaluationsDatasetsType);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsDatasetsType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateDatasetItemEvaluationsDatasetsType> =
+    CreateDatasetItemEvaluationsDatasetsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemEvaluationsDatasetsType$ {
+  /** @deprecated use `CreateDatasetItemEvaluationsDatasetsType$inboundSchema` instead. */
+  export const inboundSchema =
+    CreateDatasetItemEvaluationsDatasetsType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemEvaluationsDatasetsType$outboundSchema` instead. */
+  export const outboundSchema =
+    CreateDatasetItemEvaluationsDatasetsType$outboundSchema;
+}
+
+/** @internal */
+export const Evaluations3$inboundSchema: z.ZodType<
+  Evaluations3,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type: CreateDatasetItemEvaluationsEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: CreateDatasetItemEvaluationsSource$inboundSchema.default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-30T20:23:13.498Z",
+  ).transform(v => new Date(v)),
+  type: CreateDatasetItemEvaluationsDatasetsType$inboundSchema,
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type Evaluations3$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  values: Array<string>;
+};
+
+/** @internal */
+export const Evaluations3$outboundSchema: z.ZodType<
+  Evaluations3$Outbound,
+  z.ZodTypeDef,
+  Evaluations3
+> = z.object({
+  id: z.string(),
+  evaluationType: CreateDatasetItemEvaluationsEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: CreateDatasetItemEvaluationsSource$outboundSchema.default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-30T20:23:13.498Z"))
+    .transform(v => v.toISOString()),
+  type: CreateDatasetItemEvaluationsDatasetsType$outboundSchema,
+  values: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Evaluations3$ {
+  /** @deprecated use `Evaluations3$inboundSchema` instead. */
+  export const inboundSchema = Evaluations3$inboundSchema;
+  /** @deprecated use `Evaluations3$outboundSchema` instead. */
+  export const outboundSchema = Evaluations3$outboundSchema;
+  /** @deprecated use `Evaluations3$Outbound` instead. */
+  export type Outbound = Evaluations3$Outbound;
+}
+
+export function evaluations3ToJSON(evaluations3: Evaluations3): string {
+  return JSON.stringify(Evaluations3$outboundSchema.parse(evaluations3));
+}
+
+export function evaluations3FromJSON(
+  jsonString: string,
+): SafeParseResult<Evaluations3, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Evaluations3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluations3' from JSON`,
+  );
+}
+
+/** @internal */
+export const EvaluationsEvaluationType$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsEvaluationType
+> = z.nativeEnum(EvaluationsEvaluationType);
+
+/** @internal */
+export const EvaluationsEvaluationType$outboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsEvaluationType
+> = EvaluationsEvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvaluationsEvaluationType$ {
+  /** @deprecated use `EvaluationsEvaluationType$inboundSchema` instead. */
+  export const inboundSchema = EvaluationsEvaluationType$inboundSchema;
+  /** @deprecated use `EvaluationsEvaluationType$outboundSchema` instead. */
+  export const outboundSchema = EvaluationsEvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const EvaluationsSource$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsSource
+> = z.nativeEnum(EvaluationsSource);
+
+/** @internal */
+export const EvaluationsSource$outboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsSource
+> = EvaluationsSource$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvaluationsSource$ {
+  /** @deprecated use `EvaluationsSource$inboundSchema` instead. */
+  export const inboundSchema = EvaluationsSource$inboundSchema;
+  /** @deprecated use `EvaluationsSource$outboundSchema` instead. */
+  export const outboundSchema = EvaluationsSource$outboundSchema;
+}
+
+/** @internal */
+export const CreateDatasetItemEvaluationsType$inboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsType
+> = z.nativeEnum(CreateDatasetItemEvaluationsType);
+
+/** @internal */
+export const CreateDatasetItemEvaluationsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateDatasetItemEvaluationsType
+> = CreateDatasetItemEvaluationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateDatasetItemEvaluationsType$ {
+  /** @deprecated use `CreateDatasetItemEvaluationsType$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemEvaluationsType$inboundSchema;
+  /** @deprecated use `CreateDatasetItemEvaluationsType$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemEvaluationsType$outboundSchema;
+}
+
+/** @internal */
+export const Evaluations2$inboundSchema: z.ZodType<
+  Evaluations2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type: EvaluationsEvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: EvaluationsSource$inboundSchema.default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-30T20:23:13.498Z",
+  ).transform(v => new Date(v)),
+  type: CreateDatasetItemEvaluationsType$inboundSchema,
+  value: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type Evaluations2$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  value: number;
+};
+
+/** @internal */
+export const Evaluations2$outboundSchema: z.ZodType<
+  Evaluations2$Outbound,
+  z.ZodTypeDef,
+  Evaluations2
+> = z.object({
+  id: z.string(),
+  evaluationType: EvaluationsEvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: EvaluationsSource$outboundSchema.default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-30T20:23:13.498Z"))
+    .transform(v => v.toISOString()),
+  type: CreateDatasetItemEvaluationsType$outboundSchema,
+  value: z.number(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Evaluations2$ {
+  /** @deprecated use `Evaluations2$inboundSchema` instead. */
+  export const inboundSchema = Evaluations2$inboundSchema;
+  /** @deprecated use `Evaluations2$outboundSchema` instead. */
+  export const outboundSchema = Evaluations2$outboundSchema;
+  /** @deprecated use `Evaluations2$Outbound` instead. */
+  export type Outbound = Evaluations2$Outbound;
+}
+
+export function evaluations2ToJSON(evaluations2: Evaluations2): string {
+  return JSON.stringify(Evaluations2$outboundSchema.parse(evaluations2));
+}
+
+export function evaluations2FromJSON(
+  jsonString: string,
+): SafeParseResult<Evaluations2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Evaluations2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluations2' from JSON`,
+  );
+}
+
+/** @internal */
+export const EvaluationType$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluationType
+> = z.nativeEnum(EvaluationType);
+
+/** @internal */
+export const EvaluationType$outboundSchema: z.ZodNativeEnum<
+  typeof EvaluationType
+> = EvaluationType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvaluationType$ {
+  /** @deprecated use `EvaluationType$inboundSchema` instead. */
+  export const inboundSchema = EvaluationType$inboundSchema;
+  /** @deprecated use `EvaluationType$outboundSchema` instead. */
+  export const outboundSchema = EvaluationType$outboundSchema;
+}
+
+/** @internal */
+export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
+  .nativeEnum(Source);
+
+/** @internal */
+export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
+  Source$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Source$ {
+  /** @deprecated use `Source$inboundSchema` instead. */
+  export const inboundSchema = Source$inboundSchema;
+  /** @deprecated use `Source$outboundSchema` instead. */
+  export const outboundSchema = Source$outboundSchema;
+}
+
+/** @internal */
+export const EvaluationsType$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsType
+> = z.nativeEnum(EvaluationsType);
+
+/** @internal */
+export const EvaluationsType$outboundSchema: z.ZodNativeEnum<
+  typeof EvaluationsType
+> = EvaluationsType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EvaluationsType$ {
+  /** @deprecated use `EvaluationsType$inboundSchema` instead. */
+  export const inboundSchema = EvaluationsType$inboundSchema;
+  /** @deprecated use `EvaluationsType$outboundSchema` instead. */
+  export const outboundSchema = EvaluationsType$outboundSchema;
+}
+
+/** @internal */
+export const Evaluations1$inboundSchema: z.ZodType<
+  Evaluations1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  evaluation_type: EvaluationType$inboundSchema,
+  human_review_id: z.string(),
+  source: Source$inboundSchema.default("orq"),
+  reviewed_by_id: z.string(),
+  reviewed_at: z.string().datetime({ offset: true }).default(
+    "2025-10-30T20:23:13.497Z",
+  ).transform(v => new Date(v)),
+  type: EvaluationsType$inboundSchema,
+  value: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "evaluation_type": "evaluationType",
+    "human_review_id": "humanReviewId",
+    "reviewed_by_id": "reviewedById",
+    "reviewed_at": "reviewedAt",
+  });
+});
+
+/** @internal */
+export type Evaluations1$Outbound = {
+  id: string;
+  evaluation_type: string;
+  human_review_id: string;
+  source: string;
+  reviewed_by_id: string;
+  reviewed_at: string;
+  type: string;
+  value: string;
+};
+
+/** @internal */
+export const Evaluations1$outboundSchema: z.ZodType<
+  Evaluations1$Outbound,
+  z.ZodTypeDef,
+  Evaluations1
+> = z.object({
+  id: z.string(),
+  evaluationType: EvaluationType$outboundSchema,
+  humanReviewId: z.string(),
+  source: Source$outboundSchema.default("orq"),
+  reviewedById: z.string(),
+  reviewedAt: z.date().default(() => new Date("2025-10-30T20:23:13.497Z"))
+    .transform(v => v.toISOString()),
+  type: EvaluationsType$outboundSchema,
+  value: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    evaluationType: "evaluation_type",
+    humanReviewId: "human_review_id",
+    reviewedById: "reviewed_by_id",
+    reviewedAt: "reviewed_at",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Evaluations1$ {
+  /** @deprecated use `Evaluations1$inboundSchema` instead. */
+  export const inboundSchema = Evaluations1$inboundSchema;
+  /** @deprecated use `Evaluations1$outboundSchema` instead. */
+  export const outboundSchema = Evaluations1$outboundSchema;
+  /** @deprecated use `Evaluations1$Outbound` instead. */
+  export type Outbound = Evaluations1$Outbound;
+}
+
+export function evaluations1ToJSON(evaluations1: Evaluations1): string {
+  return JSON.stringify(Evaluations1$outboundSchema.parse(evaluations1));
+}
+
+export function evaluations1FromJSON(
+  jsonString: string,
+): SafeParseResult<Evaluations1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Evaluations1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluations1' from JSON`,
+  );
+}
+
+/** @internal */
+export const Evaluations$inboundSchema: z.ZodType<
+  Evaluations,
+  z.ZodTypeDef,
+  unknown
+> = z.union([
+  z.lazy(() => Evaluations1$inboundSchema),
+  z.lazy(() => Evaluations2$inboundSchema),
+  z.lazy(() => Evaluations3$inboundSchema),
+]);
+
+/** @internal */
+export type Evaluations$Outbound =
+  | Evaluations1$Outbound
+  | Evaluations2$Outbound
+  | Evaluations3$Outbound;
+
+/** @internal */
+export const Evaluations$outboundSchema: z.ZodType<
+  Evaluations$Outbound,
+  z.ZodTypeDef,
+  Evaluations
+> = z.union([
+  z.lazy(() => Evaluations1$outboundSchema),
+  z.lazy(() => Evaluations2$outboundSchema),
+  z.lazy(() => Evaluations3$outboundSchema),
+]);
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Evaluations$ {
+  /** @deprecated use `Evaluations$inboundSchema` instead. */
+  export const inboundSchema = Evaluations$inboundSchema;
+  /** @deprecated use `Evaluations$outboundSchema` instead. */
+  export const outboundSchema = Evaluations$outboundSchema;
+  /** @deprecated use `Evaluations$Outbound` instead. */
+  export type Outbound = Evaluations$Outbound;
+}
+
+export function evaluationsToJSON(evaluations: Evaluations): string {
+  return JSON.stringify(Evaluations$outboundSchema.parse(evaluations));
+}
+
+export function evaluationsFromJSON(
+  jsonString: string,
+): SafeParseResult<Evaluations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Evaluations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Evaluations' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemResponseBody$inboundSchema: z.ZodType<
+  CreateDatasetItemResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -6075,13 +6802,21 @@ export const ResponseBody$inboundSchema: z.ZodType<
     ]),
   ).optional(),
   expected_output: z.string().optional(),
+  evaluations: z.array(
+    z.union([
+      z.lazy(() => Evaluations1$inboundSchema),
+      z.lazy(() => Evaluations2$inboundSchema),
+      z.lazy(() => Evaluations3$inboundSchema),
+    ]),
+  ).optional(),
   dataset_id: z.string(),
+  snapshot_version: z.string().optional(),
   created_by_id: z.string().optional(),
   updated_by_id: z.string().optional(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-24T08:19:33.740Z",
+    "2025-10-30T20:23:01.859Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -6089,13 +6824,14 @@ export const ResponseBody$inboundSchema: z.ZodType<
     "workspace_id": "workspaceId",
     "expected_output": "expectedOutput",
     "dataset_id": "datasetId",
+    "snapshot_version": "snapshotVersion",
     "created_by_id": "createdById",
     "updated_by_id": "updatedById",
   });
 });
 
 /** @internal */
-export type ResponseBody$Outbound = {
+export type CreateDatasetItemResponseBody$Outbound = {
   _id: string;
   workspace_id: string;
   inputs?: { [k: string]: any } | undefined;
@@ -6109,7 +6845,13 @@ export type ResponseBody$Outbound = {
     >
     | undefined;
   expected_output?: string | undefined;
+  evaluations?:
+    | Array<
+      Evaluations1$Outbound | Evaluations2$Outbound | Evaluations3$Outbound
+    >
+    | undefined;
   dataset_id: string;
+  snapshot_version?: string | undefined;
   created_by_id?: string | undefined;
   updated_by_id?: string | undefined;
   created?: string | undefined;
@@ -6117,10 +6859,10 @@ export type ResponseBody$Outbound = {
 };
 
 /** @internal */
-export const ResponseBody$outboundSchema: z.ZodType<
-  ResponseBody$Outbound,
+export const CreateDatasetItemResponseBody$outboundSchema: z.ZodType<
+  CreateDatasetItemResponseBody$Outbound,
   z.ZodTypeDef,
-  ResponseBody
+  CreateDatasetItemResponseBody
 > = z.object({
   id: z.string(),
   workspaceId: z.string(),
@@ -6141,11 +6883,19 @@ export const ResponseBody$outboundSchema: z.ZodType<
     ]),
   ).optional(),
   expectedOutput: z.string().optional(),
+  evaluations: z.array(
+    z.union([
+      z.lazy(() => Evaluations1$outboundSchema),
+      z.lazy(() => Evaluations2$outboundSchema),
+      z.lazy(() => Evaluations3$outboundSchema),
+    ]),
+  ).optional(),
   datasetId: z.string(),
+  snapshotVersion: z.string().optional(),
   createdById: z.string().optional(),
   updatedById: z.string().optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+  updated: z.date().default(() => new Date("2025-10-30T20:23:01.859Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
@@ -6153,6 +6903,7 @@ export const ResponseBody$outboundSchema: z.ZodType<
     workspaceId: "workspace_id",
     expectedOutput: "expected_output",
     datasetId: "dataset_id",
+    snapshotVersion: "snapshot_version",
     createdById: "created_by_id",
     updatedById: "updated_by_id",
   });
@@ -6162,25 +6913,31 @@ export const ResponseBody$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace ResponseBody$ {
-  /** @deprecated use `ResponseBody$inboundSchema` instead. */
-  export const inboundSchema = ResponseBody$inboundSchema;
-  /** @deprecated use `ResponseBody$outboundSchema` instead. */
-  export const outboundSchema = ResponseBody$outboundSchema;
-  /** @deprecated use `ResponseBody$Outbound` instead. */
-  export type Outbound = ResponseBody$Outbound;
+export namespace CreateDatasetItemResponseBody$ {
+  /** @deprecated use `CreateDatasetItemResponseBody$inboundSchema` instead. */
+  export const inboundSchema = CreateDatasetItemResponseBody$inboundSchema;
+  /** @deprecated use `CreateDatasetItemResponseBody$outboundSchema` instead. */
+  export const outboundSchema = CreateDatasetItemResponseBody$outboundSchema;
+  /** @deprecated use `CreateDatasetItemResponseBody$Outbound` instead. */
+  export type Outbound = CreateDatasetItemResponseBody$Outbound;
 }
 
-export function responseBodyToJSON(responseBody: ResponseBody): string {
-  return JSON.stringify(ResponseBody$outboundSchema.parse(responseBody));
+export function createDatasetItemResponseBodyToJSON(
+  createDatasetItemResponseBody: CreateDatasetItemResponseBody,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemResponseBody$outboundSchema.parse(
+      createDatasetItemResponseBody,
+    ),
+  );
 }
 
-export function responseBodyFromJSON(
+export function createDatasetItemResponseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBody, SDKValidationError> {
+): SafeParseResult<CreateDatasetItemResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBody' from JSON`,
+    (x) => CreateDatasetItemResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateDatasetItemResponseBody' from JSON`,
   );
 }

@@ -5,11 +5,11 @@
 ```typescript
 import { GetOnePromptResponseFormat4 } from "@orq-ai/node/models/operations";
 
-let value: GetOnePromptResponseFormat4 = "verbose_json";
+let value: GetOnePromptResponseFormat4 = "wav";
 ```
 
 ## Values
 
 ```typescript
-"json" | "text" | "srt" | "verbose_json" | "vtt"
+"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
 ```

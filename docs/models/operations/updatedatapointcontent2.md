@@ -40,10 +40,7 @@ const value: operations.UpdateDatapoint23 = {
 ```typescript
 const value: operations.UpdateDatapoint24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

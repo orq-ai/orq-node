@@ -18,6 +18,9 @@
 * [updateDatasource](#updatedatasource) - Update a datasource
 * [createChunks](#createchunks) - Create chunks for a datasource
 * [listChunks](#listchunks) - List all chunks for a datasource
+* [deleteChunks](#deletechunks) - Delete multiple chunks
+* [listChunksPaginated](#listchunkspaginated) - List chunks with offset-based pagination
+* [getChunksCount](#getchunkscount) - Get chunks total count
 * [updateChunk](#updatechunk) - Update a chunk
 * [deleteChunk](#deletechunk) - Delete a chunk
 * [retrieveChunk](#retrievechunk) - Retrieve a chunk
@@ -107,8 +110,10 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.knowledge.create({
+    type: "internal",
     key: "<key>",
     embeddingModel: "<value>",
+    isPrivateModel: false,
     path: "Default",
   });
 
@@ -134,8 +139,10 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await knowledgeCreate(orq, {
+    type: "internal",
     key: "<key>",
     embeddingModel: "<value>",
+    isPrivateModel: false,
     path: "Default",
   });
   if (res.ok) {
@@ -260,6 +267,7 @@ async function run() {
     knowledgeId: "<id>",
     requestBody: {
       path: "Default",
+      type: "external",
     },
   });
 
@@ -288,6 +296,7 @@ async function run() {
     knowledgeId: "<id>",
     requestBody: {
       path: "Default",
+      type: "external",
     },
   });
   if (res.ok) {
@@ -932,7 +941,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateChunkResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
 
 ### Errors
 
@@ -1016,6 +1025,231 @@ run();
 ### Response
 
 **Promise\<[operations.ListChunksResponseBody](../../models/operations/listchunksresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## deleteChunks
+
+Delete multiple chunks
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="DeleteChunks" method="delete" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.knowledge.deleteChunks({
+    knowledgeId: "<id>",
+    datasourceId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { knowledgeDeleteChunks } from "@orq-ai/node/funcs/knowledgeDeleteChunks.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await knowledgeDeleteChunks(orq, {
+    knowledgeId: "<id>",
+    datasourceId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeDeleteChunks failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteChunksRequest](../../models/operations/deletechunksrequest.md)                                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.DeleteChunksResponseBody](../../models/operations/deletechunksresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## listChunksPaginated
+
+List chunks with offset-based pagination
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="ListChunksPaginated" method="post" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks/list" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.knowledge.listChunksPaginated({
+    knowledgeId: "<id>",
+    datasourceId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { knowledgeListChunksPaginated } from "@orq-ai/node/funcs/knowledgeListChunksPaginated.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await knowledgeListChunksPaginated(orq, {
+    knowledgeId: "<id>",
+    datasourceId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeListChunksPaginated failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListChunksPaginatedRequest](../../models/operations/listchunkspaginatedrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ListChunksPaginatedResponseBody](../../models/operations/listchunkspaginatedresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## getChunksCount
+
+Get chunks total count
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="GetChunksCount" method="post" path="/v2/knowledge/{knowledge_id}/datasources/{datasource_id}/chunks/count" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.knowledge.getChunksCount({
+    knowledgeId: "<id>",
+    datasourceId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { knowledgeGetChunksCount } from "@orq-ai/node/funcs/knowledgeGetChunksCount.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await knowledgeGetChunksCount(orq, {
+    knowledgeId: "<id>",
+    datasourceId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("knowledgeGetChunksCount failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetChunksCountRequest](../../models/operations/getchunkscountrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetChunksCountResponseBody](../../models/operations/getchunkscountresponsebody.md)\>**
 
 ### Errors
 

@@ -17,9 +17,7 @@ const value: string = "<value>";
 const value: operations.DeploymentGetConfigContentDeploymentsResponse2[] = [
   {
     type: "file",
-    file: {
-      fileData: "<value>",
-    },
+    file: {},
   },
 ];
 ```

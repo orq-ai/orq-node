@@ -25,7 +25,7 @@ export const ListModelsType = {
   Tts: "tts",
   Stt: "stt",
   Rerank: "rerank",
-  Moderations: "moderations",
+  Moderation: "moderation",
   Vision: "vision",
 } as const;
 /**

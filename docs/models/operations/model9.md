@@ -5,11 +5,11 @@
 ```typescript
 import { Model9 } from "@orq-ai/node/models/operations";
 
-let value: Model9 = "openai/text-embedding-ada-002";
+let value: Model9 = "openai/text-embedding-3-small";
 ```
 
 ## Values
 
 ```typescript
-"openai/text-embedding-ada-002"
+"openai/text-embedding-3-small"
 ```

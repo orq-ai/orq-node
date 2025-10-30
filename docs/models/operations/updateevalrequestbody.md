@@ -21,10 +21,10 @@ const value: operations.RequestBodyJSON = {
 };
 ```
 
-### `operations.UpdateEvalRequestBodyHTTP`
+### `operations.RequestBodyHTTP`
 
 ```typescript
-const value: operations.UpdateEvalRequestBodyHTTP = {
+const value: operations.RequestBodyHTTP = {
   type: "http_eval",
   path: "Default",
 };

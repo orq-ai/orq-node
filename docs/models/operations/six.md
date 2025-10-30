@@ -5,11 +5,11 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = "azure/text-embedding-3-small";
+let value: Six = "vtt";
 ```
 
 ## Values
 
 ```typescript
-"azure/text-embedding-3-small"
+"json" | "text" | "srt" | "verbose_json" | "vtt"
 ```

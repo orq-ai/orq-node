@@ -5,11 +5,11 @@
 ```typescript
 import { ResponseFormat4 } from "@orq-ai/node/models/operations";
 
-let value: ResponseFormat4 = "json";
+let value: ResponseFormat4 = "mp3";
 ```
 
 ## Values
 
 ```typescript
-"json" | "text" | "srt" | "verbose_json" | "vtt"
+"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
 ```

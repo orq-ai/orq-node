@@ -5,11 +5,11 @@
 ```typescript
 import { CreateMemoryStoreModel6 } from "@orq-ai/node/models/operations";
 
-let value: CreateMemoryStoreModel6 = "azure/text-embedding-3-small";
+let value: CreateMemoryStoreModel6 = "azure/text-embedding-ada-002";
 ```
 
 ## Values
 
 ```typescript
-"azure/text-embedding-3-small"
+"azure/text-embedding-ada-002"
 ```

@@ -14,7 +14,7 @@ export const tool$toolsRetrieve: ToolDefinition<typeof args> = {
   name: "tools-retrieve",
   description: `Retrieve tool
 
-Retrieves a tool by key.`,
+Retrieves a tool by id.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await toolsRetrieve(

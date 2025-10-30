@@ -7,9 +7,13 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetBudgetRequest = {
+  /**
+   * Budget ID
+   */
   id: string;
 };
 
@@ -66,11 +70,11 @@ export type GetBudgetConsumption = {
   /**
    * When the current period started
    */
-  periodStart: string | null;
+  periodStart: RFCDate | null;
   /**
    * When the current period will reset
    */
-  periodEnd: string | null;
+  periodEnd: RFCDate | null;
 };
 
 /**
@@ -81,6 +85,10 @@ export type GetBudgetResponseBody = {
    * Unique ULID for the budget configuration
    */
   id: string;
+  /**
+   * Workspace identifier that owns this budget configuration
+   */
+  workspaceId: string;
   /**
    * Budget entity type
    */
@@ -267,8 +275,8 @@ export const GetBudgetConsumption$inboundSchema: z.ZodType<
 > = z.object({
   current_amount: z.number(),
   remaining_amount: z.number(),
-  period_start: z.nullable(z.string()),
-  period_end: z.nullable(z.string()),
+  period_start: z.nullable(z.string().transform(v => new RFCDate(v))),
+  period_end: z.nullable(z.string().transform(v => new RFCDate(v))),
 }).transform((v) => {
   return remap$(v, {
     "current_amount": "currentAmount",
@@ -294,8 +302,8 @@ export const GetBudgetConsumption$outboundSchema: z.ZodType<
 > = z.object({
   currentAmount: z.number(),
   remainingAmount: z.number(),
-  periodStart: z.nullable(z.string()),
-  periodEnd: z.nullable(z.string()),
+  periodStart: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+  periodEnd: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
 }).transform((v) => {
   return remap$(v, {
     currentAmount: "current_amount",
@@ -343,6 +351,7 @@ export const GetBudgetResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   _id: z.string(),
+  workspace_id: z.string(),
   type: GetBudgetType$inboundSchema,
   contact_id: z.string().optional(),
   budget: z.lazy(() => GetBudgetBudget$inboundSchema),
@@ -351,11 +360,12 @@ export const GetBudgetResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-24T08:19:33.740Z",
+    "2025-10-30T20:23:02.185Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
+    "workspace_id": "workspaceId",
     "contact_id": "contactId",
     "is_active": "isActive",
   });
@@ -364,6 +374,7 @@ export const GetBudgetResponseBody$inboundSchema: z.ZodType<
 /** @internal */
 export type GetBudgetResponseBody$Outbound = {
   _id: string;
+  workspace_id: string;
   type: string;
   contact_id?: string | undefined;
   budget: GetBudgetBudget$Outbound;
@@ -380,17 +391,19 @@ export const GetBudgetResponseBody$outboundSchema: z.ZodType<
   GetBudgetResponseBody
 > = z.object({
   id: z.string(),
+  workspaceId: z.string(),
   type: GetBudgetType$outboundSchema,
   contactId: z.string().optional(),
   budget: z.lazy(() => GetBudgetBudget$outboundSchema),
   isActive: z.boolean(),
   consumption: z.lazy(() => GetBudgetConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+  updated: z.date().default(() => new Date("2025-10-30T20:23:02.185Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
     id: "_id",
+    workspaceId: "workspace_id",
     contactId: "contact_id",
     isActive: "is_active",
   });

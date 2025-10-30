@@ -10,7 +10,7 @@ import { DeploymentGetConfig2Deployments2 } from "@orq-ai/node/models/operations
 let value: DeploymentGetConfig2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://discrete-seal.info/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```

@@ -14,4 +14,4 @@ let value: DeleteBudgetRequest = {
 
 | Field                      | Type                       | Required                   | Description                | Example                    |
 | -------------------------- | -------------------------- | -------------------------- | -------------------------- | -------------------------- |
-| `id`                       | *string*                   | :heavy_check_mark:         | N/A                        | 01K1J1AX8PGR63QRP7423NY008 |
+| `id`                       | *string*                   | :heavy_check_mark:         | Budget ID                  | 01K1J1AX8PGR63QRP7423NY008 |

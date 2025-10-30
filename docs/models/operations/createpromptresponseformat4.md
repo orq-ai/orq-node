@@ -5,11 +5,11 @@
 ```typescript
 import { CreatePromptResponseFormat4 } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormat4 = "vtt";
+let value: CreatePromptResponseFormat4 = "pcm";
 ```
 
 ## Values
 
 ```typescript
-"json" | "text" | "srt" | "verbose_json" | "vtt"
+"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
 ```

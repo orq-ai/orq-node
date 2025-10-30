@@ -113,7 +113,7 @@ export type ListAgentTasksTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<ListAgentTasksConditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**
@@ -135,7 +135,7 @@ export type ListAgentTasksSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: ListAgentTasksToolApprovalRequired | undefined;
-  tools: Array<ListAgentTasksTools>;
+  tools?: Array<ListAgentTasksTools> | undefined;
 };
 
 export type AgentManifestSnapshot = {
@@ -562,7 +562,7 @@ export const ListAgentTasksSettings$inboundSchema: z.ZodType<
   max_execution_time: z.number().int().default(300),
   tool_approval_required: ListAgentTasksToolApprovalRequired$inboundSchema
     .default("respect_tool"),
-  tools: z.array(z.lazy(() => ListAgentTasksTools$inboundSchema)),
+  tools: z.array(z.lazy(() => ListAgentTasksTools$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -576,7 +576,7 @@ export type ListAgentTasksSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<ListAgentTasksTools$Outbound>;
+  tools?: Array<ListAgentTasksTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -589,7 +589,7 @@ export const ListAgentTasksSettings$outboundSchema: z.ZodType<
   maxExecutionTime: z.number().int().default(300),
   toolApprovalRequired: ListAgentTasksToolApprovalRequired$outboundSchema
     .default("respect_tool"),
-  tools: z.array(z.lazy(() => ListAgentTasksTools$outboundSchema)),
+  tools: z.array(z.lazy(() => ListAgentTasksTools$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

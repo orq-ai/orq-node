@@ -27,10 +27,20 @@ const value: operations.UpdatePrompt2Prompts2 = {
 
 ```typescript
 const value: operations.UpdatePrompt2Prompts3 = {
-  type: "file",
-  file: {
-    fileData: "<value>",
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "mp3",
   },
+};
+```
+
+### `operations.UpdatePrompt24`
+
+```typescript
+const value: operations.UpdatePrompt24 = {
+  type: "file",
+  file: {},
 };
 ```
 

@@ -18,7 +18,7 @@ const value: operations.ListPromptVersions21 = {
 const value: operations.ListPromptVersions22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://unpleasant-vestment.biz",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
@@ -28,9 +28,7 @@ const value: operations.ListPromptVersions22 = {
 ```typescript
 const value: operations.ListPromptVersions23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

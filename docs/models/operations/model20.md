@@ -5,11 +5,11 @@
 ```typescript
 import { Model20 } from "@orq-ai/node/models/operations";
 
-let value: Model20 = "jina/jina-embeddings-v2-base-de";
+let value: Model20 = "jina/jina-embeddings-v2-base-code";
 ```
 
 ## Values
 
 ```typescript
-"jina/jina-embeddings-v2-base-de"
+"jina/jina-embeddings-v2-base-code"
 ```

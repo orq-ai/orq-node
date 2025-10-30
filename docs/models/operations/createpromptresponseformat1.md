@@ -1,35 +1,17 @@
 # CreatePromptResponseFormat1
 
-
-## Supported Types
-
-### `operations.CreatePrompt11`
+## Example Usage
 
 ```typescript
-const value: operations.CreatePrompt11 = {
-  type: "json_schema",
-  jsonSchema: {
-    name: "<value>",
-    schema: {
-      "key": "<value>",
-    },
-  },
-};
-```
+import { CreatePromptResponseFormat1 } from "@orq-ai/node/models/operations";
 
-### `operations.CreatePrompt12`
-
-```typescript
-const value: operations.CreatePrompt12 = {
-  type: "json_object",
-};
-```
-
-### `operations.CreatePrompt1Prompts3`
-
-```typescript
-const value: operations.CreatePrompt1Prompts3 = {
+let value: CreatePromptResponseFormat1 = {
   type: "text",
 };
 ```
 
+## Fields
+
+| Field                                                                                                                              | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                             | [operations.CreatePromptResponseFormatPromptsRequestType](../../models/operations/createpromptresponseformatpromptsrequesttype.md) | :heavy_check_mark:                                                                                                                 | N/A                                                                                                                                |

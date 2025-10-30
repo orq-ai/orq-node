@@ -28,16 +28,25 @@ export type ListActionsTool = {
   requiresApproval?: boolean | undefined;
 };
 
+/**
+ * Review status of the tool call
+ */
 export const ListActionsReview = {
   Approved: "approved",
   Rejected: "rejected",
 } as const;
+/**
+ * Review status of the tool call
+ */
 export type ListActionsReview = ClosedEnum<typeof ListActionsReview>;
 
 /**
  * An action is a tool that an agent chooses to use. If executed is false, together with the output being there, it can indicate that a tool was mocked
  */
 export type ListActionsState = {
+  /**
+   * Review status of the tool call
+   */
   review?: ListActionsReview | null | undefined;
   /**
    * The source of the review, where it was approved or rejected
@@ -269,7 +278,7 @@ export const ListActionsState$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  review: z.nullable(ListActionsReview$inboundSchema).optional(),
+  review: z.nullable(ListActionsReview$inboundSchema).default(null),
   review_source: z.string().optional(),
   reviewed_by_id: z.string().optional(),
   executed: z.boolean().default(false),
@@ -285,7 +294,7 @@ export const ListActionsState$inboundSchema: z.ZodType<
 
 /** @internal */
 export type ListActionsState$Outbound = {
-  review?: string | null | undefined;
+  review: string | null;
   review_source?: string | undefined;
   reviewed_by_id?: string | undefined;
   executed: boolean;
@@ -300,7 +309,7 @@ export const ListActionsState$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListActionsState
 > = z.object({
-  review: z.nullable(ListActionsReview$outboundSchema).optional(),
+  review: z.nullable(ListActionsReview$outboundSchema).default(null),
   reviewSource: z.string().optional(),
   reviewedById: z.string().optional(),
   executed: z.boolean().default(false),

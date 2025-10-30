@@ -99,17 +99,20 @@ const orq = new Orq({
 async function run() {
   const result = await orq.prompts.create({
     displayName: "Raymundo83",
-    promptConfig: {
+    prompt: {
       messages: [
         {
-          role: "assistant",
-          content: "<value>",
+          role: "system",
+          content: "You are a helpful assistant",
         },
         {
-          role: "assistant",
-          content: "<value>",
+          role: "user",
+          content: "What is the weather today?",
         },
       ],
+      model: "openai/gpt-4o",
+      temperature: 0.7,
+      maxTokens: 1000,
     },
     path: "Default",
   });
@@ -137,17 +140,20 @@ const orq = new OrqCore({
 async function run() {
   const res = await promptsCreate(orq, {
     displayName: "Raymundo83",
-    promptConfig: {
+    prompt: {
       messages: [
         {
-          role: "assistant",
-          content: "<value>",
+          role: "system",
+          content: "You are a helpful assistant",
         },
         {
-          role: "assistant",
-          content: "<value>",
+          role: "user",
+          content: "What is the weather today?",
         },
       ],
+      model: "openai/gpt-4o",
+      temperature: 0.7,
+      maxTokens: 1000,
     },
     path: "Default",
   });
@@ -173,7 +179,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreatePromptResponseBody](../../models/operations/createpromptresponsebody.md)\>**
+**Promise\<[operations.CreatePromptPrompt](../../models/operations/createpromptprompt.md)\>**
 
 ### Errors
 
@@ -246,7 +252,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetOnePromptResponseBody](../../models/operations/getonepromptresponsebody.md)\>**
+**Promise\<[operations.GetOnePromptPrompt](../../models/operations/getonepromptprompt.md)\>**
 
 ### Errors
 
@@ -273,6 +279,20 @@ async function run() {
     id: "<id>",
     requestBody: {
       path: "Default",
+      prompt: {
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful assistant",
+          },
+          {
+            role: "user",
+            content: "Hello!",
+          },
+        ],
+        model: "anthropic/claude-3-5-sonnet-20241022",
+        temperature: 0.5,
+      },
     },
   });
 
@@ -301,6 +321,20 @@ async function run() {
     id: "<id>",
     requestBody: {
       path: "Default",
+      prompt: {
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful assistant",
+          },
+          {
+            role: "user",
+            content: "Hello!",
+          },
+        ],
+        model: "anthropic/claude-3-5-sonnet-20241022",
+        temperature: 0.5,
+      },
     },
   });
   if (res.ok) {
@@ -325,7 +359,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.UpdatePromptResponseBody](../../models/operations/updatepromptresponsebody.md)\>**
+**Promise\<[operations.UpdatePromptPrompt](../../models/operations/updatepromptprompt.md)\>**
 
 ### Errors
 

@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import { RFCDate } from "../../types/rfcdate.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
@@ -38,7 +39,13 @@ export type ListBudgetsRequest = {
    * Filter by budget entity type (contact or workspace)
    */
   type?: QueryParamType | undefined;
+  /**
+   * Filter by specific entity ID
+   */
   entityId?: string | undefined;
+  /**
+   * Filter by active status
+   */
   isActive?: boolean | null | undefined;
 };
 
@@ -100,13 +107,16 @@ export type ListBudgetsConsumption = {
   /**
    * When the current period started
    */
-  periodStart: string | null;
+  periodStart: RFCDate | null;
   /**
    * When the current period will reset
    */
-  periodEnd: string | null;
+  periodEnd: RFCDate | null;
 };
 
+/**
+ * Budget configuration details (public API response)
+ */
 export type ListBudgetsData = {
   /**
    * Unique ULID for the budget configuration
@@ -380,8 +390,8 @@ export const ListBudgetsConsumption$inboundSchema: z.ZodType<
 > = z.object({
   current_amount: z.number(),
   remaining_amount: z.number(),
-  period_start: z.nullable(z.string()),
-  period_end: z.nullable(z.string()),
+  period_start: z.nullable(z.string().transform(v => new RFCDate(v))),
+  period_end: z.nullable(z.string().transform(v => new RFCDate(v))),
 }).transform((v) => {
   return remap$(v, {
     "current_amount": "currentAmount",
@@ -407,8 +417,8 @@ export const ListBudgetsConsumption$outboundSchema: z.ZodType<
 > = z.object({
   currentAmount: z.number(),
   remainingAmount: z.number(),
-  periodStart: z.nullable(z.string()),
-  periodEnd: z.nullable(z.string()),
+  periodStart: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+  periodEnd: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
 }).transform((v) => {
   return remap$(v, {
     currentAmount: "current_amount",
@@ -464,7 +474,7 @@ export const ListBudgetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2025-10-24T08:19:33.740Z",
+    "2025-10-30T20:23:02.185Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
@@ -499,7 +509,7 @@ export const ListBudgetsData$outboundSchema: z.ZodType<
   isActive: z.boolean(),
   consumption: z.lazy(() => ListBudgetsConsumption$outboundSchema).optional(),
   created: z.date().transform(v => v.toISOString()).optional(),
-  updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+  updated: z.date().default(() => new Date("2025-10-30T20:23:02.185Z"))
     .transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {

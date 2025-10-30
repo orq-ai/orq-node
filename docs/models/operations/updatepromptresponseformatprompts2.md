@@ -5,11 +5,13 @@
 ```typescript
 import { UpdatePromptResponseFormatPrompts2 } from "@orq-ai/node/models/operations";
 
-let value: UpdatePromptResponseFormatPrompts2 = "pcm";
+let value: UpdatePromptResponseFormatPrompts2 = {
+  type: "json_object",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
-```
+| Field                                                                                                                                                                | Type                                                                                                                                                                 | Required                                                                                                                                                             | Description                                                                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                               | [operations.UpdatePromptResponseFormatPromptsRequestRequestBodyPromptType](../../models/operations/updatepromptresponseformatpromptsrequestrequestbodyprompttype.md) | :heavy_check_mark:                                                                                                                                                   | N/A                                                                                                                                                                  |

@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
-export const UpdateKnowledgeRetrievalType = {
+export const RequestBodyRetrievalType = {
   VectorSearch: "vector_search",
   KeywordSearch: "keyword_search",
   HybridSearch: "hybrid_search",
@@ -20,14 +20,14 @@ export const UpdateKnowledgeRetrievalType = {
 /**
  * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
  */
-export type UpdateKnowledgeRetrievalType = ClosedEnum<
-  typeof UpdateKnowledgeRetrievalType
+export type RequestBodyRetrievalType = ClosedEnum<
+  typeof RequestBodyRetrievalType
 >;
 
 /**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
  */
-export type UpdateKnowledgeRerankConfig = {
+export type UpdateKnowledgeRequestBodyRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
@@ -45,7 +45,7 @@ export type UpdateKnowledgeRerankConfig = {
 /**
  * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
  */
-export type UpdateKnowledgeAgenticRagConfig = {
+export type UpdateKnowledgeRequestBodyAgenticRagConfig = {
   /**
    * The model to use for the Agentic RAG
    */
@@ -55,11 +55,11 @@ export type UpdateKnowledgeAgenticRagConfig = {
 /**
  * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
  */
-export type UpdateKnowledgeRetrievalSettings = {
+export type UpdateKnowledgeRequestBodyRetrievalSettings = {
   /**
    * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
    */
-  retrievalType?: UpdateKnowledgeRetrievalType | undefined;
+  retrievalType?: RequestBodyRetrievalType | undefined;
   /**
    * The number of results to return from the search.
    */
@@ -71,14 +71,24 @@ export type UpdateKnowledgeRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: UpdateKnowledgeRerankConfig | null | undefined;
+  rerankConfig?: UpdateKnowledgeRequestBodyRerankConfig | null | undefined;
   /**
    * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
    */
-  agenticRagConfig?: UpdateKnowledgeAgenticRagConfig | null | undefined;
+  agenticRagConfig?:
+    | UpdateKnowledgeRequestBodyAgenticRagConfig
+    | null
+    | undefined;
 };
 
-export type UpdateKnowledgeRequestBody = {
+export const UpdateKnowledgeRequestBodyKnowledgeType = {
+  Internal: "internal",
+} as const;
+export type UpdateKnowledgeRequestBodyKnowledgeType = ClosedEnum<
+  typeof UpdateKnowledgeRequestBodyKnowledgeType
+>;
+
+export type UpdateKnowledgeRequestBody2 = {
   /**
    * The description of the knowledge base.
    */
@@ -88,42 +98,26 @@ export type UpdateKnowledgeRequestBody = {
    */
   embeddingModel?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
   /**
    * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
    */
-  retrievalSettings?: UpdateKnowledgeRetrievalSettings | undefined;
+  retrievalSettings?: UpdateKnowledgeRequestBodyRetrievalSettings | undefined;
+  type?: UpdateKnowledgeRequestBodyKnowledgeType | undefined;
 };
-
-export type UpdateKnowledgeRequest = {
-  /**
-   * The unique identifier of the knowledge base
-   */
-  knowledgeId: string;
-  requestBody: UpdateKnowledgeRequestBody;
-};
-
-/**
- * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
- */
-export const UpdateKnowledgeKnowledgeRetrievalType = {
-  VectorSearch: "vector_search",
-  KeywordSearch: "keyword_search",
-  HybridSearch: "hybrid_search",
-} as const;
-/**
- * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
- */
-export type UpdateKnowledgeKnowledgeRetrievalType = ClosedEnum<
-  typeof UpdateKnowledgeKnowledgeRetrievalType
->;
 
 /**
  * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
  */
-export type UpdateKnowledgeKnowledgeRerankConfig = {
+export type RequestBodyRerankConfig = {
   /**
    * The number of results to return by the reranking model
    */
@@ -141,7 +135,7 @@ export type UpdateKnowledgeKnowledgeRerankConfig = {
 /**
  * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
  */
-export type UpdateKnowledgeKnowledgeAgenticRagConfig = {
+export type RequestBodyAgenticRagConfig = {
   /**
    * The model to use for the Agentic RAG
    */
@@ -149,13 +143,9 @@ export type UpdateKnowledgeKnowledgeAgenticRagConfig = {
 };
 
 /**
- * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ * The retrieval settings for the knowledge base.
  */
-export type UpdateKnowledgeKnowledgeRetrievalSettings = {
-  /**
-   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
-   */
-  retrievalType?: UpdateKnowledgeKnowledgeRetrievalType | undefined;
+export type RequestBodyRetrievalSettings = {
   /**
    * The number of results to return from the search.
    */
@@ -167,20 +157,151 @@ export type UpdateKnowledgeKnowledgeRetrievalSettings = {
   /**
    * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
    */
-  rerankConfig?: UpdateKnowledgeKnowledgeRerankConfig | null | undefined;
+  rerankConfig?: RequestBodyRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?: RequestBodyAgenticRagConfig | null | undefined;
+};
+
+/**
+ * Configuration for the external knowledge base.
+ */
+export type RequestBodyExternalConfig = {
+  /**
+   * The name of the external knowledge base.
+   */
+  name?: string | undefined;
+  /**
+   * The API URL for the external knowledge base.
+   */
+  apiUrl?: string | undefined;
+  /**
+   * The API key for the external knowledge base.
+   */
+  apiKey?: string | undefined;
+};
+
+export const UpdateKnowledgeRequestBodyType = {
+  External: "external",
+} as const;
+export type UpdateKnowledgeRequestBodyType = ClosedEnum<
+  typeof UpdateKnowledgeRequestBodyType
+>;
+
+export type UpdateKnowledgeRequestBody1 = {
+  /**
+   * The description of the knowledge base.
+   */
+  description?: string | null | undefined;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path?: string | undefined;
+  /**
+   * The retrieval settings for the knowledge base.
+   */
+  retrievalSettings?: RequestBodyRetrievalSettings | undefined;
+  /**
+   * Configuration for the external knowledge base.
+   */
+  externalConfig?: RequestBodyExternalConfig | undefined;
+  type?: UpdateKnowledgeRequestBodyType | undefined;
+};
+
+export type UpdateKnowledgeRequestBody =
+  | UpdateKnowledgeRequestBody1
+  | UpdateKnowledgeRequestBody2;
+
+export type UpdateKnowledgeRequest = {
+  /**
+   * The unique identifier of the knowledge base
+   */
+  knowledgeId: string;
+  requestBody: UpdateKnowledgeRequestBody1 | UpdateKnowledgeRequestBody2;
+};
+
+export const UpdateKnowledgeResponseBodyKnowledgeType = {
+  External: "external",
+} as const;
+export type UpdateKnowledgeResponseBodyKnowledgeType = ClosedEnum<
+  typeof UpdateKnowledgeResponseBodyKnowledgeType
+>;
+
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
+export type UpdateKnowledgeResponseBodyKnowledgeRerankConfig = {
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
+   */
+  rerankThreshold?: number | undefined;
+  /**
+   * The rerank model to use for the knowledge base.
+   */
+  rerankModel: string;
+};
+
+/**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
+ * The retrieval settings for the knowledge base.
+ */
+export type UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings = {
+  /**
+   * The number of results to return from the search.
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?:
+    | UpdateKnowledgeResponseBodyKnowledgeRerankConfig
+    | null
+    | undefined;
   /**
    * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
    */
   agenticRagConfig?:
-    | UpdateKnowledgeKnowledgeAgenticRagConfig
+    | UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig
     | null
     | undefined;
 };
 
-/**
- * Knowledge Base object
- */
-export type UpdateKnowledgeResponseBody = {
+export type UpdateKnowledgeResponseBodyExternalConfig = {
+  /**
+   * The name of the external knowledge base.
+   */
+  name: string;
+  /**
+   * The API URL of the external knowledge base.
+   */
+  apiUrl: string;
+};
+
+export type UpdateKnowledgeResponseBody2 = {
   /**
    * The unique identifier of the knowledge base.
    */
@@ -198,53 +319,193 @@ export type UpdateKnowledgeResponseBody = {
    */
   key: string;
   /**
-   * The embeddings model used for the knowledge base.
-   */
-  model: string;
-  /**
    * The project/domain ID of the knowledge base.
    */
   domainId: string;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path?: string | undefined;
-  /**
-   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
-   */
-  retrievalSettings?: UpdateKnowledgeKnowledgeRetrievalSettings | undefined;
   createdById?: string | null | undefined;
   updatedById?: string | null | undefined;
   /**
    * The last update date of the knowledge base.
    */
   updated: string;
+  type?: UpdateKnowledgeResponseBodyKnowledgeType | undefined;
+  /**
+   * The retrieval settings for the knowledge base.
+   */
+  retrievalSettings?:
+    | UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings
+    | undefined;
+  externalConfig: UpdateKnowledgeResponseBodyExternalConfig;
 };
 
-/** @internal */
-export const UpdateKnowledgeRetrievalType$inboundSchema: z.ZodNativeEnum<
-  typeof UpdateKnowledgeRetrievalType
-> = z.nativeEnum(UpdateKnowledgeRetrievalType);
+export const UpdateKnowledgeResponseBodyType = {
+  Internal: "internal",
+} as const;
+export type UpdateKnowledgeResponseBodyType = ClosedEnum<
+  typeof UpdateKnowledgeResponseBodyType
+>;
+
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export const UpdateKnowledgeResponseBodyRetrievalType = {
+  VectorSearch: "vector_search",
+  KeywordSearch: "keyword_search",
+  HybridSearch: "hybrid_search",
+} as const;
+/**
+ * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+ */
+export type UpdateKnowledgeResponseBodyRetrievalType = ClosedEnum<
+  typeof UpdateKnowledgeResponseBodyRetrievalType
+>;
+
+/**
+ * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+ */
+export type UpdateKnowledgeResponseBodyRerankConfig = {
+  /**
+   * The number of results to return by the reranking model
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the rerank results, only documents with a relevance score greater than the threshold will be returned
+   */
+  rerankThreshold?: number | undefined;
+  /**
+   * The rerank model to use for the knowledge base.
+   */
+  rerankModel: string;
+};
+
+/**
+ * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+ */
+export type UpdateKnowledgeResponseBodyAgenticRagConfig = {
+  /**
+   * The model to use for the Agentic RAG
+   */
+  model: string;
+};
+
+/**
+ * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+ */
+export type UpdateKnowledgeResponseBodyRetrievalSettings = {
+  /**
+   * The retrieval type to use for the knowledge base. If not provided, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalType?: UpdateKnowledgeResponseBodyRetrievalType | undefined;
+  /**
+   * The number of results to return from the search.
+   */
+  topK?: number | undefined;
+  /**
+   * The threshold value used to filter the search results, only documents with a relevance score greater than the threshold will be returned
+   */
+  threshold?: number | undefined;
+  /**
+   * The rerank configuration for the knowledge base. In case the model is provided it will be used to enhance the search precision.
+   */
+  rerankConfig?: UpdateKnowledgeResponseBodyRerankConfig | null | undefined;
+  /**
+   * The Agentic RAG configuration for the knowledge base. If `null` is provided, Agentic RAG will be disabled.
+   */
+  agenticRagConfig?:
+    | UpdateKnowledgeResponseBodyAgenticRagConfig
+    | null
+    | undefined;
+};
+
+export type UpdateKnowledgeResponseBody1 = {
+  /**
+   * The unique identifier of the knowledge base.
+   */
+  id: string;
+  /**
+   * The creation date of the knowledge base.
+   */
+  created: string;
+  /**
+   * The description of the knowledge base.
+   */
+  description?: string | undefined;
+  /**
+   * The unique key of the knowledge base.
+   */
+  key: string;
+  /**
+   * The project/domain ID of the knowledge base.
+   */
+  domainId: string;
+  /**
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
+   */
+  path?: string | undefined;
+  createdById?: string | null | undefined;
+  updatedById?: string | null | undefined;
+  /**
+   * The last update date of the knowledge base.
+   */
+  updated: string;
+  type?: UpdateKnowledgeResponseBodyType | undefined;
+  /**
+   * The retrieval settings for the knowledge base. If not provider, Hybrid Search will be used as a default query strategy.
+   */
+  retrievalSettings?: UpdateKnowledgeResponseBodyRetrievalSettings | undefined;
+  /**
+   * The embeddings model used for the knowledge base.
+   */
+  model: string;
+};
+
+/**
+ * Knowledge successfully updated
+ */
+export type UpdateKnowledgeResponseBody =
+  | UpdateKnowledgeResponseBody1
+  | UpdateKnowledgeResponseBody2;
 
 /** @internal */
-export const UpdateKnowledgeRetrievalType$outboundSchema: z.ZodNativeEnum<
-  typeof UpdateKnowledgeRetrievalType
-> = UpdateKnowledgeRetrievalType$inboundSchema;
+export const RequestBodyRetrievalType$inboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyRetrievalType
+> = z.nativeEnum(RequestBodyRetrievalType);
+
+/** @internal */
+export const RequestBodyRetrievalType$outboundSchema: z.ZodNativeEnum<
+  typeof RequestBodyRetrievalType
+> = RequestBodyRetrievalType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeRetrievalType$ {
-  /** @deprecated use `UpdateKnowledgeRetrievalType$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRetrievalType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRetrievalType$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRetrievalType$outboundSchema;
+export namespace RequestBodyRetrievalType$ {
+  /** @deprecated use `RequestBodyRetrievalType$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyRetrievalType$inboundSchema;
+  /** @deprecated use `RequestBodyRetrievalType$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyRetrievalType$outboundSchema;
 }
 
 /** @internal */
-export const UpdateKnowledgeRerankConfig$inboundSchema: z.ZodType<
-  UpdateKnowledgeRerankConfig,
+export const UpdateKnowledgeRequestBodyRerankConfig$inboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBodyRerankConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -260,17 +521,17 @@ export const UpdateKnowledgeRerankConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateKnowledgeRerankConfig$Outbound = {
+export type UpdateKnowledgeRequestBodyRerankConfig$Outbound = {
   top_k: number;
   rerank_threshold: number;
   rerank_model: string;
 };
 
 /** @internal */
-export const UpdateKnowledgeRerankConfig$outboundSchema: z.ZodType<
-  UpdateKnowledgeRerankConfig$Outbound,
+export const UpdateKnowledgeRequestBodyRerankConfig$outboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBodyRerankConfig$Outbound,
   z.ZodTypeDef,
-  UpdateKnowledgeRerankConfig
+  UpdateKnowledgeRequestBodyRerankConfig
 > = z.object({
   topK: z.number().int().default(5),
   rerankThreshold: z.number().default(0.5),
@@ -287,38 +548,400 @@ export const UpdateKnowledgeRerankConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeRerankConfig$ {
-  /** @deprecated use `UpdateKnowledgeRerankConfig$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRerankConfig$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRerankConfig$Outbound;
+export namespace UpdateKnowledgeRequestBodyRerankConfig$ {
+  /** @deprecated use `UpdateKnowledgeRequestBodyRerankConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeRequestBodyRerankConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyRerankConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeRequestBodyRerankConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyRerankConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeRequestBodyRerankConfig$Outbound;
 }
 
-export function updateKnowledgeRerankConfigToJSON(
-  updateKnowledgeRerankConfig: UpdateKnowledgeRerankConfig,
+export function updateKnowledgeRequestBodyRerankConfigToJSON(
+  updateKnowledgeRequestBodyRerankConfig:
+    UpdateKnowledgeRequestBodyRerankConfig,
 ): string {
   return JSON.stringify(
-    UpdateKnowledgeRerankConfig$outboundSchema.parse(
-      updateKnowledgeRerankConfig,
+    UpdateKnowledgeRequestBodyRerankConfig$outboundSchema.parse(
+      updateKnowledgeRequestBodyRerankConfig,
     ),
   );
 }
 
-export function updateKnowledgeRerankConfigFromJSON(
+export function updateKnowledgeRequestBodyRerankConfigFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateKnowledgeRerankConfig, SDKValidationError> {
+): SafeParseResult<UpdateKnowledgeRequestBodyRerankConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateKnowledgeRerankConfig' from JSON`,
+    (x) =>
+      UpdateKnowledgeRequestBodyRerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateKnowledgeRequestBodyRerankConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
-  UpdateKnowledgeAgenticRagConfig,
+export const UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema:
+  z.ZodType<UpdateKnowledgeRequestBodyAgenticRagConfig, z.ZodTypeDef, unknown> =
+    z.object({
+      model: z.string(),
+    });
+
+/** @internal */
+export type UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeRequestBodyAgenticRagConfig
+  > = z.object({
+    model: z.string(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeRequestBodyAgenticRagConfig$ {
+  /** @deprecated use `UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound;
+}
+
+export function updateKnowledgeRequestBodyAgenticRagConfigToJSON(
+  updateKnowledgeRequestBodyAgenticRagConfig:
+    UpdateKnowledgeRequestBodyAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema.parse(
+      updateKnowledgeRequestBodyAgenticRagConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeRequestBodyAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeRequestBodyAgenticRagConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeRequestBodyAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema:
+  z.ZodType<
+    UpdateKnowledgeRequestBodyRetrievalSettings,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    retrieval_type: RequestBodyRetrievalType$inboundSchema.default(
+      "hybrid_search",
+    ),
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(
+      z.lazy(() => UpdateKnowledgeRequestBodyRerankConfig$inboundSchema),
+    ).optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() => UpdateKnowledgeRequestBodyAgenticRagConfig$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "retrieval_type": "retrievalType",
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  });
+
+/** @internal */
+export type UpdateKnowledgeRequestBodyRetrievalSettings$Outbound = {
+  retrieval_type: string;
+  top_k: number;
+  threshold: number;
+  rerank_config?:
+    | UpdateKnowledgeRequestBodyRerankConfig$Outbound
+    | null
+    | undefined;
+  agentic_rag_config?:
+    | UpdateKnowledgeRequestBodyAgenticRagConfig$Outbound
+    | null
+    | undefined;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeRequestBodyRetrievalSettings$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeRequestBodyRetrievalSettings
+  > = z.object({
+    retrievalType: RequestBodyRetrievalType$outboundSchema.default(
+      "hybrid_search",
+    ),
+    topK: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerankConfig: z.nullable(
+      z.lazy(() => UpdateKnowledgeRequestBodyRerankConfig$outboundSchema),
+    ).optional(),
+    agenticRagConfig: z.nullable(
+      z.lazy(() => UpdateKnowledgeRequestBodyAgenticRagConfig$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      retrievalType: "retrieval_type",
+      topK: "top_k",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeRequestBodyRetrievalSettings$ {
+  /** @deprecated use `UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyRetrievalSettings$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeRequestBodyRetrievalSettings$Outbound;
+}
+
+export function updateKnowledgeRequestBodyRetrievalSettingsToJSON(
+  updateKnowledgeRequestBodyRetrievalSettings:
+    UpdateKnowledgeRequestBodyRetrievalSettings,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema.parse(
+      updateKnowledgeRequestBodyRetrievalSettings,
+    ),
+  );
+}
+
+export function updateKnowledgeRequestBodyRetrievalSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeRequestBodyRetrievalSettings,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeRequestBodyRetrievalSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeRequestBodyKnowledgeType> = z
+    .nativeEnum(UpdateKnowledgeRequestBodyKnowledgeType);
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeRequestBodyKnowledgeType> =
+    UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeRequestBodyKnowledgeType$ {
+  /** @deprecated use `UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateKnowledgeRequestBody2$inboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.nullable(z.string()).optional(),
+  embedding_model: z.string().optional(),
+  path: z.string().optional(),
+  retrieval_settings: z.lazy(() =>
+    UpdateKnowledgeRequestBodyRetrievalSettings$inboundSchema
+  ).optional(),
+  type: UpdateKnowledgeRequestBodyKnowledgeType$inboundSchema.default(
+    "internal",
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "embedding_model": "embeddingModel",
+    "retrieval_settings": "retrievalSettings",
+  });
+});
+
+/** @internal */
+export type UpdateKnowledgeRequestBody2$Outbound = {
+  description?: string | null | undefined;
+  embedding_model?: string | undefined;
+  path?: string | undefined;
+  retrieval_settings?:
+    | UpdateKnowledgeRequestBodyRetrievalSettings$Outbound
+    | undefined;
+  type: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBody2$outboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBody2$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeRequestBody2
+> = z.object({
+  description: z.nullable(z.string()).optional(),
+  embeddingModel: z.string().optional(),
+  path: z.string().optional(),
+  retrievalSettings: z.lazy(() =>
+    UpdateKnowledgeRequestBodyRetrievalSettings$outboundSchema
+  ).optional(),
+  type: UpdateKnowledgeRequestBodyKnowledgeType$outboundSchema.default(
+    "internal",
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    embeddingModel: "embedding_model",
+    retrievalSettings: "retrieval_settings",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeRequestBody2$ {
+  /** @deprecated use `UpdateKnowledgeRequestBody2$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeRequestBody2$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBody2$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeRequestBody2$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBody2$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeRequestBody2$Outbound;
+}
+
+export function updateKnowledgeRequestBody2ToJSON(
+  updateKnowledgeRequestBody2: UpdateKnowledgeRequestBody2,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBody2$outboundSchema.parse(
+      updateKnowledgeRequestBody2,
+    ),
+  );
+}
+
+export function updateKnowledgeRequestBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateKnowledgeRequestBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateKnowledgeRequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateKnowledgeRequestBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const RequestBodyRerankConfig$inboundSchema: z.ZodType<
+  RequestBodyRerankConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  top_k: z.number().int().default(5),
+  rerank_threshold: z.number().default(0.5),
+  rerank_model: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "top_k": "topK",
+    "rerank_threshold": "rerankThreshold",
+    "rerank_model": "rerankModel",
+  });
+});
+
+/** @internal */
+export type RequestBodyRerankConfig$Outbound = {
+  top_k: number;
+  rerank_threshold: number;
+  rerank_model: string;
+};
+
+/** @internal */
+export const RequestBodyRerankConfig$outboundSchema: z.ZodType<
+  RequestBodyRerankConfig$Outbound,
+  z.ZodTypeDef,
+  RequestBodyRerankConfig
+> = z.object({
+  topK: z.number().int().default(5),
+  rerankThreshold: z.number().default(0.5),
+  rerankModel: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    topK: "top_k",
+    rerankThreshold: "rerank_threshold",
+    rerankModel: "rerank_model",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RequestBodyRerankConfig$ {
+  /** @deprecated use `RequestBodyRerankConfig$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyRerankConfig$inboundSchema;
+  /** @deprecated use `RequestBodyRerankConfig$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyRerankConfig$outboundSchema;
+  /** @deprecated use `RequestBodyRerankConfig$Outbound` instead. */
+  export type Outbound = RequestBodyRerankConfig$Outbound;
+}
+
+export function requestBodyRerankConfigToJSON(
+  requestBodyRerankConfig: RequestBodyRerankConfig,
+): string {
+  return JSON.stringify(
+    RequestBodyRerankConfig$outboundSchema.parse(requestBodyRerankConfig),
+  );
+}
+
+export function requestBodyRerankConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<RequestBodyRerankConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RequestBodyRerankConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyRerankConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const RequestBodyAgenticRagConfig$inboundSchema: z.ZodType<
+  RequestBodyAgenticRagConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -326,15 +949,15 @@ export const UpdateKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateKnowledgeAgenticRagConfig$Outbound = {
+export type RequestBodyAgenticRagConfig$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const UpdateKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
-  UpdateKnowledgeAgenticRagConfig$Outbound,
+export const RequestBodyAgenticRagConfig$outboundSchema: z.ZodType<
+  RequestBodyAgenticRagConfig$Outbound,
   z.ZodTypeDef,
-  UpdateKnowledgeAgenticRagConfig
+  RequestBodyAgenticRagConfig
 > = z.object({
   model: z.string(),
 });
@@ -343,55 +966,50 @@ export const UpdateKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeAgenticRagConfig$ {
-  /** @deprecated use `UpdateKnowledgeAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeAgenticRagConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeAgenticRagConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeAgenticRagConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeAgenticRagConfig$Outbound;
+export namespace RequestBodyAgenticRagConfig$ {
+  /** @deprecated use `RequestBodyAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyAgenticRagConfig$inboundSchema;
+  /** @deprecated use `RequestBodyAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyAgenticRagConfig$outboundSchema;
+  /** @deprecated use `RequestBodyAgenticRagConfig$Outbound` instead. */
+  export type Outbound = RequestBodyAgenticRagConfig$Outbound;
 }
 
-export function updateKnowledgeAgenticRagConfigToJSON(
-  updateKnowledgeAgenticRagConfig: UpdateKnowledgeAgenticRagConfig,
+export function requestBodyAgenticRagConfigToJSON(
+  requestBodyAgenticRagConfig: RequestBodyAgenticRagConfig,
 ): string {
   return JSON.stringify(
-    UpdateKnowledgeAgenticRagConfig$outboundSchema.parse(
-      updateKnowledgeAgenticRagConfig,
+    RequestBodyAgenticRagConfig$outboundSchema.parse(
+      requestBodyAgenticRagConfig,
     ),
   );
 }
 
-export function updateKnowledgeAgenticRagConfigFromJSON(
+export function requestBodyAgenticRagConfigFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateKnowledgeAgenticRagConfig, SDKValidationError> {
+): SafeParseResult<RequestBodyAgenticRagConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateKnowledgeAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateKnowledgeAgenticRagConfig' from JSON`,
+    (x) => RequestBodyAgenticRagConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyAgenticRagConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
-  UpdateKnowledgeRetrievalSettings,
+export const RequestBodyRetrievalSettings$inboundSchema: z.ZodType<
+  RequestBodyRetrievalSettings,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  retrieval_type: UpdateKnowledgeRetrievalType$inboundSchema.default(
-    "hybrid_search",
-  ),
   top_k: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() => UpdateKnowledgeRerankConfig$inboundSchema),
-  ).optional(),
+  rerank_config: z.nullable(z.lazy(() => RequestBodyRerankConfig$inboundSchema))
+    .optional(),
   agentic_rag_config: z.nullable(
-    z.lazy(() => UpdateKnowledgeAgenticRagConfig$inboundSchema),
+    z.lazy(() => RequestBodyAgenticRagConfig$inboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    "retrieval_type": "retrievalType",
     "top_k": "topK",
     "rerank_config": "rerankConfig",
     "agentic_rag_config": "agenticRagConfig",
@@ -399,37 +1017,28 @@ export const UpdateKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateKnowledgeRetrievalSettings$Outbound = {
-  retrieval_type: string;
+export type RequestBodyRetrievalSettings$Outbound = {
   top_k: number;
   threshold: number;
-  rerank_config?: UpdateKnowledgeRerankConfig$Outbound | null | undefined;
-  agentic_rag_config?:
-    | UpdateKnowledgeAgenticRagConfig$Outbound
-    | null
-    | undefined;
+  rerank_config?: RequestBodyRerankConfig$Outbound | null | undefined;
+  agentic_rag_config?: RequestBodyAgenticRagConfig$Outbound | null | undefined;
 };
 
 /** @internal */
-export const UpdateKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
-  UpdateKnowledgeRetrievalSettings$Outbound,
+export const RequestBodyRetrievalSettings$outboundSchema: z.ZodType<
+  RequestBodyRetrievalSettings$Outbound,
   z.ZodTypeDef,
-  UpdateKnowledgeRetrievalSettings
+  RequestBodyRetrievalSettings
 > = z.object({
-  retrievalType: UpdateKnowledgeRetrievalType$outboundSchema.default(
-    "hybrid_search",
-  ),
   topK: z.number().int().default(5),
   threshold: z.number().default(0),
-  rerankConfig: z.nullable(
-    z.lazy(() => UpdateKnowledgeRerankConfig$outboundSchema),
-  ).optional(),
+  rerankConfig: z.nullable(z.lazy(() => RequestBodyRerankConfig$outboundSchema))
+    .optional(),
   agenticRagConfig: z.nullable(
-    z.lazy(() => UpdateKnowledgeAgenticRagConfig$outboundSchema),
+    z.lazy(() => RequestBodyAgenticRagConfig$outboundSchema),
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    retrievalType: "retrieval_type",
     topK: "top_k",
     rerankConfig: "rerank_config",
     agenticRagConfig: "agentic_rag_config",
@@ -440,32 +1049,205 @@ export const UpdateKnowledgeRetrievalSettings$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeRetrievalSettings$ {
-  /** @deprecated use `UpdateKnowledgeRetrievalSettings$inboundSchema` instead. */
-  export const inboundSchema = UpdateKnowledgeRetrievalSettings$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeRetrievalSettings$outboundSchema` instead. */
-  export const outboundSchema = UpdateKnowledgeRetrievalSettings$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeRetrievalSettings$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeRetrievalSettings$Outbound;
+export namespace RequestBodyRetrievalSettings$ {
+  /** @deprecated use `RequestBodyRetrievalSettings$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyRetrievalSettings$inboundSchema;
+  /** @deprecated use `RequestBodyRetrievalSettings$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyRetrievalSettings$outboundSchema;
+  /** @deprecated use `RequestBodyRetrievalSettings$Outbound` instead. */
+  export type Outbound = RequestBodyRetrievalSettings$Outbound;
 }
 
-export function updateKnowledgeRetrievalSettingsToJSON(
-  updateKnowledgeRetrievalSettings: UpdateKnowledgeRetrievalSettings,
+export function requestBodyRetrievalSettingsToJSON(
+  requestBodyRetrievalSettings: RequestBodyRetrievalSettings,
 ): string {
   return JSON.stringify(
-    UpdateKnowledgeRetrievalSettings$outboundSchema.parse(
-      updateKnowledgeRetrievalSettings,
+    RequestBodyRetrievalSettings$outboundSchema.parse(
+      requestBodyRetrievalSettings,
     ),
   );
 }
 
-export function updateKnowledgeRetrievalSettingsFromJSON(
+export function requestBodyRetrievalSettingsFromJSON(
   jsonString: string,
-): SafeParseResult<UpdateKnowledgeRetrievalSettings, SDKValidationError> {
+): SafeParseResult<RequestBodyRetrievalSettings, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => UpdateKnowledgeRetrievalSettings$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateKnowledgeRetrievalSettings' from JSON`,
+    (x) => RequestBodyRetrievalSettings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyRetrievalSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const RequestBodyExternalConfig$inboundSchema: z.ZodType<
+  RequestBodyExternalConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string().optional(),
+  api_url: z.string().optional(),
+  api_key: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "api_url": "apiUrl",
+    "api_key": "apiKey",
+  });
+});
+
+/** @internal */
+export type RequestBodyExternalConfig$Outbound = {
+  name?: string | undefined;
+  api_url?: string | undefined;
+  api_key?: string | undefined;
+};
+
+/** @internal */
+export const RequestBodyExternalConfig$outboundSchema: z.ZodType<
+  RequestBodyExternalConfig$Outbound,
+  z.ZodTypeDef,
+  RequestBodyExternalConfig
+> = z.object({
+  name: z.string().optional(),
+  apiUrl: z.string().optional(),
+  apiKey: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    apiUrl: "api_url",
+    apiKey: "api_key",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RequestBodyExternalConfig$ {
+  /** @deprecated use `RequestBodyExternalConfig$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyExternalConfig$inboundSchema;
+  /** @deprecated use `RequestBodyExternalConfig$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyExternalConfig$outboundSchema;
+  /** @deprecated use `RequestBodyExternalConfig$Outbound` instead. */
+  export type Outbound = RequestBodyExternalConfig$Outbound;
+}
+
+export function requestBodyExternalConfigToJSON(
+  requestBodyExternalConfig: RequestBodyExternalConfig,
+): string {
+  return JSON.stringify(
+    RequestBodyExternalConfig$outboundSchema.parse(requestBodyExternalConfig),
+  );
+}
+
+export function requestBodyExternalConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<RequestBodyExternalConfig, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RequestBodyExternalConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyExternalConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateKnowledgeRequestBodyType
+> = z.nativeEnum(UpdateKnowledgeRequestBodyType);
+
+/** @internal */
+export const UpdateKnowledgeRequestBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateKnowledgeRequestBodyType
+> = UpdateKnowledgeRequestBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeRequestBodyType$ {
+  /** @deprecated use `UpdateKnowledgeRequestBodyType$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeRequestBodyType$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBodyType$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeRequestBodyType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateKnowledgeRequestBody1$inboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBody1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  description: z.nullable(z.string()).optional(),
+  path: z.string().optional(),
+  retrieval_settings: z.lazy(() => RequestBodyRetrievalSettings$inboundSchema)
+    .optional(),
+  external_config: z.lazy(() => RequestBodyExternalConfig$inboundSchema)
+    .optional(),
+  type: UpdateKnowledgeRequestBodyType$inboundSchema.default("external"),
+}).transform((v) => {
+  return remap$(v, {
+    "retrieval_settings": "retrievalSettings",
+    "external_config": "externalConfig",
+  });
+});
+
+/** @internal */
+export type UpdateKnowledgeRequestBody1$Outbound = {
+  description?: string | null | undefined;
+  path?: string | undefined;
+  retrieval_settings?: RequestBodyRetrievalSettings$Outbound | undefined;
+  external_config?: RequestBodyExternalConfig$Outbound | undefined;
+  type: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeRequestBody1$outboundSchema: z.ZodType<
+  UpdateKnowledgeRequestBody1$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeRequestBody1
+> = z.object({
+  description: z.nullable(z.string()).optional(),
+  path: z.string().optional(),
+  retrievalSettings: z.lazy(() => RequestBodyRetrievalSettings$outboundSchema)
+    .optional(),
+  externalConfig: z.lazy(() => RequestBodyExternalConfig$outboundSchema)
+    .optional(),
+  type: UpdateKnowledgeRequestBodyType$outboundSchema.default("external"),
+}).transform((v) => {
+  return remap$(v, {
+    retrievalSettings: "retrieval_settings",
+    externalConfig: "external_config",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeRequestBody1$ {
+  /** @deprecated use `UpdateKnowledgeRequestBody1$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeRequestBody1$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBody1$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeRequestBody1$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeRequestBody1$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeRequestBody1$Outbound;
+}
+
+export function updateKnowledgeRequestBody1ToJSON(
+  updateKnowledgeRequestBody1: UpdateKnowledgeRequestBody1,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeRequestBody1$outboundSchema.parse(
+      updateKnowledgeRequestBody1,
+    ),
+  );
+}
+
+export function updateKnowledgeRequestBody1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateKnowledgeRequestBody1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateKnowledgeRequestBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateKnowledgeRequestBody1' from JSON`,
   );
 }
 
@@ -474,46 +1256,25 @@ export const UpdateKnowledgeRequestBody$inboundSchema: z.ZodType<
   UpdateKnowledgeRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  embedding_model: z.string().optional(),
-  path: z.string().optional(),
-  retrieval_settings: z.lazy(() =>
-    UpdateKnowledgeRetrievalSettings$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "embedding_model": "embeddingModel",
-    "retrieval_settings": "retrievalSettings",
-  });
-});
+> = z.union([
+  z.lazy(() => UpdateKnowledgeRequestBody1$inboundSchema),
+  z.lazy(() => UpdateKnowledgeRequestBody2$inboundSchema),
+]);
 
 /** @internal */
-export type UpdateKnowledgeRequestBody$Outbound = {
-  description?: string | null | undefined;
-  embedding_model?: string | undefined;
-  path?: string | undefined;
-  retrieval_settings?: UpdateKnowledgeRetrievalSettings$Outbound | undefined;
-};
+export type UpdateKnowledgeRequestBody$Outbound =
+  | UpdateKnowledgeRequestBody1$Outbound
+  | UpdateKnowledgeRequestBody2$Outbound;
 
 /** @internal */
 export const UpdateKnowledgeRequestBody$outboundSchema: z.ZodType<
   UpdateKnowledgeRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateKnowledgeRequestBody
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  embeddingModel: z.string().optional(),
-  path: z.string().optional(),
-  retrievalSettings: z.lazy(() =>
-    UpdateKnowledgeRetrievalSettings$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingModel: "embedding_model",
-    retrievalSettings: "retrieval_settings",
-  });
-});
+> = z.union([
+  z.lazy(() => UpdateKnowledgeRequestBody1$outboundSchema),
+  z.lazy(() => UpdateKnowledgeRequestBody2$outboundSchema),
+]);
 
 /**
  * @internal
@@ -553,7 +1314,10 @@ export const UpdateKnowledgeRequest$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   knowledge_id: z.string(),
-  RequestBody: z.lazy(() => UpdateKnowledgeRequestBody$inboundSchema),
+  RequestBody: z.union([
+    z.lazy(() => UpdateKnowledgeRequestBody1$inboundSchema),
+    z.lazy(() => UpdateKnowledgeRequestBody2$inboundSchema),
+  ]),
 }).transform((v) => {
   return remap$(v, {
     "knowledge_id": "knowledgeId",
@@ -564,7 +1328,9 @@ export const UpdateKnowledgeRequest$inboundSchema: z.ZodType<
 /** @internal */
 export type UpdateKnowledgeRequest$Outbound = {
   knowledge_id: string;
-  RequestBody: UpdateKnowledgeRequestBody$Outbound;
+  RequestBody:
+    | UpdateKnowledgeRequestBody1$Outbound
+    | UpdateKnowledgeRequestBody2$Outbound;
 };
 
 /** @internal */
@@ -574,7 +1340,10 @@ export const UpdateKnowledgeRequest$outboundSchema: z.ZodType<
   UpdateKnowledgeRequest
 > = z.object({
   knowledgeId: z.string(),
-  requestBody: z.lazy(() => UpdateKnowledgeRequestBody$outboundSchema),
+  requestBody: z.union([
+    z.lazy(() => UpdateKnowledgeRequestBody1$outboundSchema),
+    z.lazy(() => UpdateKnowledgeRequestBody2$outboundSchema),
+  ]),
 }).transform((v) => {
   return remap$(v, {
     knowledgeId: "knowledge_id",
@@ -614,32 +1383,538 @@ export function updateKnowledgeRequestFromJSON(
 }
 
 /** @internal */
-export const UpdateKnowledgeKnowledgeRetrievalType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateKnowledgeKnowledgeRetrievalType> = z.nativeEnum(
-    UpdateKnowledgeKnowledgeRetrievalType,
-  );
+export const UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyKnowledgeType> = z
+    .nativeEnum(UpdateKnowledgeResponseBodyKnowledgeType);
 
 /** @internal */
-export const UpdateKnowledgeKnowledgeRetrievalType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateKnowledgeKnowledgeRetrievalType> =
-    UpdateKnowledgeKnowledgeRetrievalType$inboundSchema;
+export const UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyKnowledgeType> =
+    UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema;
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeKnowledgeRetrievalType$ {
-  /** @deprecated use `UpdateKnowledgeKnowledgeRetrievalType$inboundSchema` instead. */
+export namespace UpdateKnowledgeResponseBodyKnowledgeType$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema` instead. */
   export const inboundSchema =
-    UpdateKnowledgeKnowledgeRetrievalType$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeRetrievalType$outboundSchema` instead. */
+    UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema` instead. */
   export const outboundSchema =
-    UpdateKnowledgeKnowledgeRetrievalType$outboundSchema;
+    UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema;
 }
 
 /** @internal */
-export const UpdateKnowledgeKnowledgeRerankConfig$inboundSchema: z.ZodType<
-  UpdateKnowledgeKnowledgeRerankConfig,
+export const UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    top_k: z.number().int().default(5),
+    rerank_threshold: z.number().default(0.5),
+    rerank_model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_threshold": "rerankThreshold",
+      "rerank_model": "rerankModel",
+    });
+  });
+
+/** @internal */
+export type UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound = {
+  top_k: number;
+  rerank_threshold: number;
+  rerank_model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig
+  > = z.object({
+    topK: z.number().int().default(5),
+    rerankThreshold: z.number().default(0.5),
+    rerankModel: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      rerankThreshold: "rerank_threshold",
+      rerankModel: "rerank_model",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyKnowledgeRerankConfig$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound` instead. */
+  export type Outbound =
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound;
+}
+
+export function updateKnowledgeResponseBodyKnowledgeRerankConfigToJSON(
+  updateKnowledgeResponseBodyKnowledgeRerankConfig:
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema.parse(
+      updateKnowledgeResponseBodyKnowledgeRerankConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBodyKnowledgeRerankConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeResponseBodyKnowledgeRerankConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeResponseBodyKnowledgeRerankConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    model: z.string(),
+  });
+
+/** @internal */
+export type UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig
+  > = z.object({
+    model: z.string(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound` instead. */
+  export type Outbound =
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound;
+}
+
+export function updateKnowledgeResponseBodyKnowledgeAgenticRagConfigToJSON(
+  updateKnowledgeResponseBodyKnowledgeAgenticRagConfig:
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema.parse(
+      updateKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBodyKnowledgeAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(
+      z.lazy(() =>
+        UpdateKnowledgeResponseBodyKnowledgeRerankConfig$inboundSchema
+      ),
+    ).optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() =>
+        UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$inboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  });
+
+/** @internal */
+export type UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound = {
+  top_k: number;
+  threshold: number;
+  rerank_config?:
+    | UpdateKnowledgeResponseBodyKnowledgeRerankConfig$Outbound
+    | null
+    | undefined;
+  agentic_rag_config?:
+    | UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$Outbound
+    | null
+    | undefined;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings
+  > = z.object({
+    topK: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerankConfig: z.nullable(
+      z.lazy(() =>
+        UpdateKnowledgeResponseBodyKnowledgeRerankConfig$outboundSchema
+      ),
+    ).optional(),
+    agenticRagConfig: z.nullable(
+      z.lazy(() =>
+        UpdateKnowledgeResponseBodyKnowledgeAgenticRagConfig$outboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound` instead. */
+  export type Outbound =
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound;
+}
+
+export function updateKnowledgeResponseBodyKnowledgeRetrievalSettingsToJSON(
+  updateKnowledgeResponseBodyKnowledgeRetrievalSettings:
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema.parse(
+      updateKnowledgeResponseBodyKnowledgeRetrievalSettings,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBodyKnowledgeRetrievalSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyExternalConfig$inboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBodyExternalConfig,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  name: z.string(),
+  api_url: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "api_url": "apiUrl",
+  });
+});
+
+/** @internal */
+export type UpdateKnowledgeResponseBodyExternalConfig$Outbound = {
+  name: string;
+  api_url: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyExternalConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyExternalConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeResponseBodyExternalConfig
+  > = z.object({
+    name: z.string(),
+    apiUrl: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiUrl: "api_url",
+    });
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyExternalConfig$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyExternalConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeResponseBodyExternalConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyExternalConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeResponseBodyExternalConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyExternalConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeResponseBodyExternalConfig$Outbound;
+}
+
+export function updateKnowledgeResponseBodyExternalConfigToJSON(
+  updateKnowledgeResponseBodyExternalConfig:
+    UpdateKnowledgeResponseBodyExternalConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBodyExternalConfig$outboundSchema.parse(
+      updateKnowledgeResponseBodyExternalConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBodyExternalConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeResponseBodyExternalConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeResponseBodyExternalConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeResponseBodyExternalConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBody2$inboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBody2,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domain_id: z.string(),
+  path: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: UpdateKnowledgeResponseBodyKnowledgeType$inboundSchema.default(
+    "external",
+  ),
+  retrieval_settings: z.lazy(() =>
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$inboundSchema
+  ).optional(),
+  external_config: z.lazy(() =>
+    UpdateKnowledgeResponseBodyExternalConfig$inboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "retrieval_settings": "retrievalSettings",
+    "external_config": "externalConfig",
+  });
+});
+
+/** @internal */
+export type UpdateKnowledgeResponseBody2$Outbound = {
+  _id: string;
+  created: string;
+  description?: string | undefined;
+  key: string;
+  domain_id: string;
+  path?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
+  updated: string;
+  type: string;
+  retrieval_settings?:
+    | UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$Outbound
+    | undefined;
+  external_config: UpdateKnowledgeResponseBodyExternalConfig$Outbound;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBody2$outboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBody2$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeResponseBody2
+> = z.object({
+  id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domainId: z.string(),
+  path: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: UpdateKnowledgeResponseBodyKnowledgeType$outboundSchema.default(
+    "external",
+  ),
+  retrievalSettings: z.lazy(() =>
+    UpdateKnowledgeResponseBodyKnowledgeRetrievalSettings$outboundSchema
+  ).optional(),
+  externalConfig: z.lazy(() =>
+    UpdateKnowledgeResponseBodyExternalConfig$outboundSchema
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    domainId: "domain_id",
+    createdById: "created_by_id",
+    updatedById: "updated_by_id",
+    retrievalSettings: "retrieval_settings",
+    externalConfig: "external_config",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBody2$ {
+  /** @deprecated use `UpdateKnowledgeResponseBody2$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeResponseBody2$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBody2$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeResponseBody2$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBody2$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeResponseBody2$Outbound;
+}
+
+export function updateKnowledgeResponseBody2ToJSON(
+  updateKnowledgeResponseBody2: UpdateKnowledgeResponseBody2,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBody2$outboundSchema.parse(
+      updateKnowledgeResponseBody2,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateKnowledgeResponseBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateKnowledgeResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateKnowledgeResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyType$inboundSchema: z.ZodNativeEnum<
+  typeof UpdateKnowledgeResponseBodyType
+> = z.nativeEnum(UpdateKnowledgeResponseBodyType);
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyType$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateKnowledgeResponseBodyType
+> = UpdateKnowledgeResponseBodyType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyType$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyType$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeResponseBodyType$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyType$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeResponseBodyType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyRetrievalType$inboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyRetrievalType> = z
+    .nativeEnum(UpdateKnowledgeResponseBodyRetrievalType);
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyRetrievalType$outboundSchema:
+  z.ZodNativeEnum<typeof UpdateKnowledgeResponseBodyRetrievalType> =
+    UpdateKnowledgeResponseBodyRetrievalType$inboundSchema;
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyRetrievalType$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalType$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeResponseBodyRetrievalType$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalType$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeResponseBodyRetrievalType$outboundSchema;
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyRerankConfig$inboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBodyRerankConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -655,17 +1930,17 @@ export const UpdateKnowledgeKnowledgeRerankConfig$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type UpdateKnowledgeKnowledgeRerankConfig$Outbound = {
+export type UpdateKnowledgeResponseBodyRerankConfig$Outbound = {
   top_k: number;
   rerank_threshold: number;
   rerank_model: string;
 };
 
 /** @internal */
-export const UpdateKnowledgeKnowledgeRerankConfig$outboundSchema: z.ZodType<
-  UpdateKnowledgeKnowledgeRerankConfig$Outbound,
+export const UpdateKnowledgeResponseBodyRerankConfig$outboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBodyRerankConfig$Outbound,
   z.ZodTypeDef,
-  UpdateKnowledgeKnowledgeRerankConfig
+  UpdateKnowledgeResponseBodyRerankConfig
 > = z.object({
   topK: z.number().int().default(5),
   rerankThreshold: z.number().default(0.5),
@@ -682,161 +1957,168 @@ export const UpdateKnowledgeKnowledgeRerankConfig$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeKnowledgeRerankConfig$ {
-  /** @deprecated use `UpdateKnowledgeKnowledgeRerankConfig$inboundSchema` instead. */
+export namespace UpdateKnowledgeResponseBodyRerankConfig$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyRerankConfig$inboundSchema` instead. */
   export const inboundSchema =
-    UpdateKnowledgeKnowledgeRerankConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeRerankConfig$outboundSchema` instead. */
+    UpdateKnowledgeResponseBodyRerankConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyRerankConfig$outboundSchema` instead. */
   export const outboundSchema =
-    UpdateKnowledgeKnowledgeRerankConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeRerankConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeKnowledgeRerankConfig$Outbound;
+    UpdateKnowledgeResponseBodyRerankConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyRerankConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeResponseBodyRerankConfig$Outbound;
 }
 
-export function updateKnowledgeKnowledgeRerankConfigToJSON(
-  updateKnowledgeKnowledgeRerankConfig: UpdateKnowledgeKnowledgeRerankConfig,
+export function updateKnowledgeResponseBodyRerankConfigToJSON(
+  updateKnowledgeResponseBodyRerankConfig:
+    UpdateKnowledgeResponseBodyRerankConfig,
 ): string {
   return JSON.stringify(
-    UpdateKnowledgeKnowledgeRerankConfig$outboundSchema.parse(
-      updateKnowledgeKnowledgeRerankConfig,
+    UpdateKnowledgeResponseBodyRerankConfig$outboundSchema.parse(
+      updateKnowledgeResponseBodyRerankConfig,
     ),
   );
 }
 
-export function updateKnowledgeKnowledgeRerankConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateKnowledgeKnowledgeRerankConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      UpdateKnowledgeKnowledgeRerankConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateKnowledgeKnowledgeRerankConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
-  UpdateKnowledgeKnowledgeAgenticRagConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.string(),
-});
-
-/** @internal */
-export type UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound = {
-  model: string;
-};
-
-/** @internal */
-export const UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema: z.ZodType<
-  UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound,
-  z.ZodTypeDef,
-  UpdateKnowledgeKnowledgeAgenticRagConfig
-> = z.object({
-  model: z.string(),
-});
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace UpdateKnowledgeKnowledgeAgenticRagConfig$ {
-  /** @deprecated use `UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema` instead. */
-  export const inboundSchema =
-    UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema` instead. */
-  export const outboundSchema =
-    UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound;
-}
-
-export function updateKnowledgeKnowledgeAgenticRagConfigToJSON(
-  updateKnowledgeKnowledgeAgenticRagConfig:
-    UpdateKnowledgeKnowledgeAgenticRagConfig,
-): string {
-  return JSON.stringify(
-    UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema.parse(
-      updateKnowledgeKnowledgeAgenticRagConfig,
-    ),
-  );
-}
-
-export function updateKnowledgeKnowledgeAgenticRagConfigFromJSON(
+export function updateKnowledgeResponseBodyRerankConfigFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateKnowledgeKnowledgeAgenticRagConfig,
+  UpdateKnowledgeResponseBodyRerankConfig,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema.parse(
+      UpdateKnowledgeResponseBodyRerankConfig$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'UpdateKnowledgeKnowledgeAgenticRagConfig' from JSON`,
+    `Failed to parse 'UpdateKnowledgeResponseBodyRerankConfig' from JSON`,
   );
 }
 
 /** @internal */
-export const UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema: z.ZodType<
-  UpdateKnowledgeKnowledgeRetrievalSettings,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  retrieval_type: UpdateKnowledgeKnowledgeRetrievalType$inboundSchema.default(
-    "hybrid_search",
-  ),
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(
-    z.lazy(() => UpdateKnowledgeKnowledgeRerankConfig$inboundSchema),
-  ).optional(),
-  agentic_rag_config: z.nullable(
-    z.lazy(() => UpdateKnowledgeKnowledgeAgenticRagConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "retrieval_type": "retrievalType",
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-    "agentic_rag_config": "agenticRagConfig",
+export const UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyAgenticRagConfig,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    model: z.string(),
   });
-});
 
 /** @internal */
-export type UpdateKnowledgeKnowledgeRetrievalSettings$Outbound = {
+export type UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound = {
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound,
+    z.ZodTypeDef,
+    UpdateKnowledgeResponseBodyAgenticRagConfig
+  > = z.object({
+    model: z.string(),
+  });
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBodyAgenticRagConfig$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema` instead. */
+  export const inboundSchema =
+    UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema` instead. */
+  export const outboundSchema =
+    UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound;
+}
+
+export function updateKnowledgeResponseBodyAgenticRagConfigToJSON(
+  updateKnowledgeResponseBodyAgenticRagConfig:
+    UpdateKnowledgeResponseBodyAgenticRagConfig,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema.parse(
+      updateKnowledgeResponseBodyAgenticRagConfig,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBodyAgenticRagConfigFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateKnowledgeResponseBodyAgenticRagConfig,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateKnowledgeResponseBodyAgenticRagConfig' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema:
+  z.ZodType<
+    UpdateKnowledgeResponseBodyRetrievalSettings,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    retrieval_type: UpdateKnowledgeResponseBodyRetrievalType$inboundSchema
+      .default("hybrid_search"),
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(
+      z.lazy(() => UpdateKnowledgeResponseBodyRerankConfig$inboundSchema),
+    ).optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() => UpdateKnowledgeResponseBodyAgenticRagConfig$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "retrieval_type": "retrievalType",
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  });
+
+/** @internal */
+export type UpdateKnowledgeResponseBodyRetrievalSettings$Outbound = {
   retrieval_type: string;
   top_k: number;
   threshold: number;
   rerank_config?:
-    | UpdateKnowledgeKnowledgeRerankConfig$Outbound
+    | UpdateKnowledgeResponseBodyRerankConfig$Outbound
     | null
     | undefined;
   agentic_rag_config?:
-    | UpdateKnowledgeKnowledgeAgenticRagConfig$Outbound
+    | UpdateKnowledgeResponseBodyAgenticRagConfig$Outbound
     | null
     | undefined;
 };
 
 /** @internal */
-export const UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema:
+export const UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema:
   z.ZodType<
-    UpdateKnowledgeKnowledgeRetrievalSettings$Outbound,
+    UpdateKnowledgeResponseBodyRetrievalSettings$Outbound,
     z.ZodTypeDef,
-    UpdateKnowledgeKnowledgeRetrievalSettings
+    UpdateKnowledgeResponseBodyRetrievalSettings
   > = z.object({
-    retrievalType: UpdateKnowledgeKnowledgeRetrievalType$outboundSchema.default(
-      "hybrid_search",
-    ),
+    retrievalType: UpdateKnowledgeResponseBodyRetrievalType$outboundSchema
+      .default("hybrid_search"),
     topK: z.number().int().default(5),
     threshold: z.number().default(0),
     rerankConfig: z.nullable(
-      z.lazy(() => UpdateKnowledgeKnowledgeRerankConfig$outboundSchema),
+      z.lazy(() => UpdateKnowledgeResponseBodyRerankConfig$outboundSchema),
     ).optional(),
     agenticRagConfig: z.nullable(
-      z.lazy(() => UpdateKnowledgeKnowledgeAgenticRagConfig$outboundSchema),
+      z.lazy(() => UpdateKnowledgeResponseBodyAgenticRagConfig$outboundSchema),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -851,41 +2133,152 @@ export const UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema:
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace UpdateKnowledgeKnowledgeRetrievalSettings$ {
-  /** @deprecated use `UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema` instead. */
+export namespace UpdateKnowledgeResponseBodyRetrievalSettings$ {
+  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema` instead. */
   export const inboundSchema =
-    UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema` instead. */
+    UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema` instead. */
   export const outboundSchema =
-    UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema;
-  /** @deprecated use `UpdateKnowledgeKnowledgeRetrievalSettings$Outbound` instead. */
-  export type Outbound = UpdateKnowledgeKnowledgeRetrievalSettings$Outbound;
+    UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBodyRetrievalSettings$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeResponseBodyRetrievalSettings$Outbound;
 }
 
-export function updateKnowledgeKnowledgeRetrievalSettingsToJSON(
-  updateKnowledgeKnowledgeRetrievalSettings:
-    UpdateKnowledgeKnowledgeRetrievalSettings,
+export function updateKnowledgeResponseBodyRetrievalSettingsToJSON(
+  updateKnowledgeResponseBodyRetrievalSettings:
+    UpdateKnowledgeResponseBodyRetrievalSettings,
 ): string {
   return JSON.stringify(
-    UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema.parse(
-      updateKnowledgeKnowledgeRetrievalSettings,
+    UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema.parse(
+      updateKnowledgeResponseBodyRetrievalSettings,
     ),
   );
 }
 
-export function updateKnowledgeKnowledgeRetrievalSettingsFromJSON(
+export function updateKnowledgeResponseBodyRetrievalSettingsFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  UpdateKnowledgeKnowledgeRetrievalSettings,
+  UpdateKnowledgeResponseBodyRetrievalSettings,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema.parse(
+      UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'UpdateKnowledgeKnowledgeRetrievalSettings' from JSON`,
+    `Failed to parse 'UpdateKnowledgeResponseBodyRetrievalSettings' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateKnowledgeResponseBody1$inboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBody1,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  _id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domain_id: z.string(),
+  path: z.string().optional(),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: UpdateKnowledgeResponseBodyType$inboundSchema.default("internal"),
+  retrieval_settings: z.lazy(() =>
+    UpdateKnowledgeResponseBodyRetrievalSettings$inboundSchema
+  ).optional(),
+  model: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "domain_id": "domainId",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "retrieval_settings": "retrievalSettings",
+  });
+});
+
+/** @internal */
+export type UpdateKnowledgeResponseBody1$Outbound = {
+  _id: string;
+  created: string;
+  description?: string | undefined;
+  key: string;
+  domain_id: string;
+  path?: string | undefined;
+  created_by_id?: string | null | undefined;
+  updated_by_id?: string | null | undefined;
+  updated: string;
+  type: string;
+  retrieval_settings?:
+    | UpdateKnowledgeResponseBodyRetrievalSettings$Outbound
+    | undefined;
+  model: string;
+};
+
+/** @internal */
+export const UpdateKnowledgeResponseBody1$outboundSchema: z.ZodType<
+  UpdateKnowledgeResponseBody1$Outbound,
+  z.ZodTypeDef,
+  UpdateKnowledgeResponseBody1
+> = z.object({
+  id: z.string(),
+  created: z.string(),
+  description: z.string().optional(),
+  key: z.string(),
+  domainId: z.string(),
+  path: z.string().optional(),
+  createdById: z.nullable(z.string()).optional(),
+  updatedById: z.nullable(z.string()).optional(),
+  updated: z.string(),
+  type: UpdateKnowledgeResponseBodyType$outboundSchema.default("internal"),
+  retrievalSettings: z.lazy(() =>
+    UpdateKnowledgeResponseBodyRetrievalSettings$outboundSchema
+  ).optional(),
+  model: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    id: "_id",
+    domainId: "domain_id",
+    createdById: "created_by_id",
+    updatedById: "updated_by_id",
+    retrievalSettings: "retrieval_settings",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateKnowledgeResponseBody1$ {
+  /** @deprecated use `UpdateKnowledgeResponseBody1$inboundSchema` instead. */
+  export const inboundSchema = UpdateKnowledgeResponseBody1$inboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBody1$outboundSchema` instead. */
+  export const outboundSchema = UpdateKnowledgeResponseBody1$outboundSchema;
+  /** @deprecated use `UpdateKnowledgeResponseBody1$Outbound` instead. */
+  export type Outbound = UpdateKnowledgeResponseBody1$Outbound;
+}
+
+export function updateKnowledgeResponseBody1ToJSON(
+  updateKnowledgeResponseBody1: UpdateKnowledgeResponseBody1,
+): string {
+  return JSON.stringify(
+    UpdateKnowledgeResponseBody1$outboundSchema.parse(
+      updateKnowledgeResponseBody1,
+    ),
+  );
+}
+
+export function updateKnowledgeResponseBody1FromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateKnowledgeResponseBody1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateKnowledgeResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateKnowledgeResponseBody1' from JSON`,
   );
 }
 
@@ -894,75 +2287,25 @@ export const UpdateKnowledgeResponseBody$inboundSchema: z.ZodType<
   UpdateKnowledgeResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  model: z.string(),
-  domain_id: z.string(),
-  path: z.string().optional(),
-  retrieval_settings: z.lazy(() =>
-    UpdateKnowledgeKnowledgeRetrievalSettings$inboundSchema
-  ).optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "retrieval_settings": "retrievalSettings",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
+> = z.union([
+  z.lazy(() => UpdateKnowledgeResponseBody1$inboundSchema),
+  z.lazy(() => UpdateKnowledgeResponseBody2$inboundSchema),
+]);
 
 /** @internal */
-export type UpdateKnowledgeResponseBody$Outbound = {
-  _id: string;
-  created: string;
-  description?: string | undefined;
-  key: string;
-  model: string;
-  domain_id: string;
-  path?: string | undefined;
-  retrieval_settings?:
-    | UpdateKnowledgeKnowledgeRetrievalSettings$Outbound
-    | undefined;
-  created_by_id?: string | null | undefined;
-  updated_by_id?: string | null | undefined;
-  updated: string;
-};
+export type UpdateKnowledgeResponseBody$Outbound =
+  | UpdateKnowledgeResponseBody1$Outbound
+  | UpdateKnowledgeResponseBody2$Outbound;
 
 /** @internal */
 export const UpdateKnowledgeResponseBody$outboundSchema: z.ZodType<
   UpdateKnowledgeResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateKnowledgeResponseBody
-> = z.object({
-  id: z.string(),
-  created: z.string(),
-  description: z.string().optional(),
-  key: z.string(),
-  model: z.string(),
-  domainId: z.string(),
-  path: z.string().optional(),
-  retrievalSettings: z.lazy(() =>
-    UpdateKnowledgeKnowledgeRetrievalSettings$outboundSchema
-  ).optional(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    domainId: "domain_id",
-    retrievalSettings: "retrieval_settings",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-  });
-});
+> = z.union([
+  z.lazy(() => UpdateKnowledgeResponseBody1$outboundSchema),
+  z.lazy(() => UpdateKnowledgeResponseBody2$outboundSchema),
+]);
 
 /**
  * @internal

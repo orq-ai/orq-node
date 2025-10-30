@@ -5,11 +5,11 @@
 ```typescript
 import { Fifteen } from "@orq-ai/node/models/operations";
 
-let value: Fifteen = "jina/jina-clip-v1";
+let value: Fifteen = "mistral/mistral-embed";
 ```
 
 ## Values
 
 ```typescript
-"jina/jina-clip-v1"
+"mistral/mistral-embed"
 ```

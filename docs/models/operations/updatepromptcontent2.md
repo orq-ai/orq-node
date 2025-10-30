@@ -18,7 +18,7 @@ const value: operations.UpdatePrompt21 = {
 const value: operations.UpdatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://illiterate-disclosure.org",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
@@ -28,9 +28,7 @@ const value: operations.UpdatePrompt22 = {
 ```typescript
 const value: operations.UpdatePrompt23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

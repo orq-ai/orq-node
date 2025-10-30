@@ -40,10 +40,7 @@ const value: components.Deployments23 = {
 ```typescript
 const value: components.Four = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 

@@ -7,10 +7,7 @@ import { DeploymentStream24 } from "@orq-ai/node/models/operations";
 
 let value: DeploymentStream24 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 
@@ -19,4 +16,4 @@ let value: DeploymentStream24 = {
 | Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                                                                                                                                         | [operations.DeploymentStream2DeploymentsRequestRequestBodyType](../../models/operations/deploymentstream2deploymentsrequestrequestbodytype.md) | :heavy_check_mark:                                                                                                                             | The type of the content part. Always `file`.                                                                                                   |
-| `file`                                                                                                                                         | [operations.DeploymentStream2File](../../models/operations/deploymentstream2file.md)                                                           | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `file`                                                                                                                                         | [operations.DeploymentStream2File](../../models/operations/deploymentstream2file.md)                                                           | :heavy_check_mark:                                                                                                                             | File data for the content part. Must contain either file_data or uri, but not both.                                                            |

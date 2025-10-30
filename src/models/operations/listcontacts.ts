@@ -33,6 +33,9 @@ export type ListContactsRequest = {
    * Filter contacts by tags. Can be provided as JSON object {"tags": ["premium", "beta-user"]} or as query format "tags=premium,beta-user"
    */
   filterBy?: QueryParamFilterBy | undefined;
+  /**
+   * Include usage metrics of the last 30 days for each contact.
+   */
   includeMetrics?: boolean | null | undefined;
 };
 
@@ -352,7 +355,7 @@ export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
     created: z.string().datetime({ offset: true }).transform(v => new Date(v))
       .optional(),
     updated: z.string().datetime({ offset: true }).default(
-      "2025-10-24T08:19:33.740Z",
+      "2025-10-30T20:23:01.859Z",
     ).transform(v => new Date(v)),
     metrics: z.lazy(() => ListContactsMetrics$inboundSchema),
   }).transform((v) => {
@@ -389,7 +392,7 @@ export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
     tags: z.array(z.string()).optional(),
     metadata: z.record(z.any()).optional(),
     created: z.date().transform(v => v.toISOString()).optional(),
-    updated: z.date().default(() => new Date("2025-10-24T08:19:33.740Z"))
+    updated: z.date().default(() => new Date("2025-10-30T20:23:01.859Z"))
       .transform(v => v.toISOString()),
     metrics: z.lazy(() => ListContactsMetrics$outboundSchema),
   }).transform((v) => {

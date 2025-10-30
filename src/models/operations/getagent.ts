@@ -74,7 +74,7 @@ export type GetAgentTools = {
   requiresApproval?: boolean | undefined;
   conditions?: Array<GetAgentConditions> | undefined;
   /**
-   * The id of the resource
+   * Optional MCP server reference for tools from MCP servers
    */
   mcpServer?: string | undefined;
   /**
@@ -96,7 +96,7 @@ export type GetAgentSettings = {
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
   toolApprovalRequired?: GetAgentToolApprovalRequired | undefined;
-  tools: Array<GetAgentTools>;
+  tools?: Array<GetAgentTools> | undefined;
 };
 
 export type GetAgentModel = {
@@ -177,7 +177,13 @@ export type GetAgentResponseBody = {
   model: GetAgentModel;
   versionHash?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   memoryStores: Array<string>;
@@ -458,7 +464,7 @@ export const GetAgentSettings$inboundSchema: z.ZodType<
   tool_approval_required: GetAgentToolApprovalRequired$inboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => GetAgentTools$inboundSchema)),
+  tools: z.array(z.lazy(() => GetAgentTools$inboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     "max_iterations": "maxIterations",
@@ -472,7 +478,7 @@ export type GetAgentSettings$Outbound = {
   max_iterations: number;
   max_execution_time: number;
   tool_approval_required: string;
-  tools: Array<GetAgentTools$Outbound>;
+  tools?: Array<GetAgentTools$Outbound> | undefined;
 };
 
 /** @internal */
@@ -486,7 +492,7 @@ export const GetAgentSettings$outboundSchema: z.ZodType<
   toolApprovalRequired: GetAgentToolApprovalRequired$outboundSchema.default(
     "respect_tool",
   ),
-  tools: z.array(z.lazy(() => GetAgentTools$outboundSchema)),
+  tools: z.array(z.lazy(() => GetAgentTools$outboundSchema)).optional(),
 }).transform((v) => {
   return remap$(v, {
     maxIterations: "max_iterations",

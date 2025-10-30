@@ -7,9 +7,12 @@ import { knowledgeCreateChunks } from "../funcs/knowledgeCreateChunks.js";
 import { knowledgeCreateDatasource } from "../funcs/knowledgeCreateDatasource.js";
 import { knowledgeDelete } from "../funcs/knowledgeDelete.js";
 import { knowledgeDeleteChunk } from "../funcs/knowledgeDeleteChunk.js";
+import { knowledgeDeleteChunks } from "../funcs/knowledgeDeleteChunks.js";
 import { knowledgeDeleteDatasource } from "../funcs/knowledgeDeleteDatasource.js";
+import { knowledgeGetChunksCount } from "../funcs/knowledgeGetChunksCount.js";
 import { knowledgeList } from "../funcs/knowledgeList.js";
 import { knowledgeListChunks } from "../funcs/knowledgeListChunks.js";
+import { knowledgeListChunksPaginated } from "../funcs/knowledgeListChunksPaginated.js";
 import { knowledgeListDatasources } from "../funcs/knowledgeListDatasources.js";
 import { knowledgeRetrieve } from "../funcs/knowledgeRetrieve.js";
 import { knowledgeRetrieveChunk } from "../funcs/knowledgeRetrieveChunk.js";
@@ -198,7 +201,7 @@ export class Knowledge extends ClientSDK {
   async createChunks(
     request: operations.CreateChunkRequest,
     options?: RequestOptions,
-  ): Promise<Array<operations.CreateChunkResponseBody>> {
+  ): Promise<Array<operations.ResponseBody>> {
     return unwrapAsync(knowledgeCreateChunks(
       this,
       request,
@@ -214,6 +217,48 @@ export class Knowledge extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.ListChunksResponseBody> {
     return unwrapAsync(knowledgeListChunks(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete multiple chunks
+   */
+  async deleteChunks(
+    request: operations.DeleteChunksRequest,
+    options?: RequestOptions,
+  ): Promise<operations.DeleteChunksResponseBody> {
+    return unwrapAsync(knowledgeDeleteChunks(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List chunks with offset-based pagination
+   */
+  async listChunksPaginated(
+    request: operations.ListChunksPaginatedRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListChunksPaginatedResponseBody> {
+    return unwrapAsync(knowledgeListChunksPaginated(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get chunks total count
+   */
+  async getChunksCount(
+    request: operations.GetChunksCountRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetChunksCountResponseBody> {
+    return unwrapAsync(knowledgeGetChunksCount(
       this,
       request,
       options,

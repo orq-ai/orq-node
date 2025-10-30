@@ -18,7 +18,7 @@ const value: operations.CreatePrompt21 = {
 const value: operations.CreatePrompt22 = {
   type: "image_url",
   imageUrl: {
-    url: "https://bad-coil.org/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
@@ -28,9 +28,7 @@ const value: operations.CreatePrompt22 = {
 ```typescript
 const value: operations.CreatePrompt23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

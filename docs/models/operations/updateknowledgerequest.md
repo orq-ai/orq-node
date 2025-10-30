@@ -9,13 +9,14 @@ let value: UpdateKnowledgeRequest = {
   knowledgeId: "<id>",
   requestBody: {
     path: "Default",
+    type: "internal",
   },
 };
 ```
 
 ## Fields
 
-| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `knowledgeId`                                                                                  | *string*                                                                                       | :heavy_check_mark:                                                                             | The unique identifier of the knowledge base                                                    |
-| `requestBody`                                                                                  | [operations.UpdateKnowledgeRequestBody](../../models/operations/updateknowledgerequestbody.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| Field                                       | Type                                        | Required                                    | Description                                 |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| `knowledgeId`                               | *string*                                    | :heavy_check_mark:                          | The unique identifier of the knowledge base |
+| `requestBody`                               | *operations.UpdateKnowledgeRequestBody*     | :heavy_check_mark:                          | N/A                                         |

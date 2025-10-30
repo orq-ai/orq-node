@@ -117,14 +117,7 @@ async function run() {
     description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
     instructions: "<value>",
     model: "Camaro",
-    settings: {
-      tools: [
-        {
-          type: "http",
-          requiresApproval: false,
-        },
-      ],
-    },
+    settings: {},
     knowledgeBases: [
       {
         knowledgeId: "customer-knowledge-base",
@@ -160,14 +153,7 @@ async function run() {
     description: "neatly unless refine aside platter alarmed shampoo shakily yippee",
     instructions: "<value>",
     model: "Camaro",
-    settings: {
-      tools: [
-        {
-          type: "http",
-          requiresApproval: false,
-        },
-      ],
-    },
+    settings: {},
     knowledgeBases: [
       {
         knowledgeId: "customer-knowledge-base",
@@ -775,14 +761,7 @@ async function run() {
         knowledgeId: "customer-knowledge-base",
       },
     ],
-    settings: {
-      tools: [
-        {
-          type: "write_memory_store",
-          requiresApproval: false,
-        },
-      ],
-    },
+    settings: {},
   });
 
   console.log(result);
@@ -849,14 +828,7 @@ async function run() {
         knowledgeId: "customer-knowledge-base",
       },
     ],
-    settings: {
-      tools: [
-        {
-          type: "write_memory_store",
-          requiresApproval: false,
-        },
-      ],
-    },
+    settings: {},
   });
   if (res.ok) {
     const { value: result } = res;
@@ -948,14 +920,7 @@ async function run() {
         knowledgeId: "customer-knowledge-base",
       },
     ],
-    settings: {
-      tools: [
-        {
-          type: "write_memory_store",
-          requiresApproval: false,
-        },
-      ],
-    },
+    settings: {},
   });
 
   for await (const event of result) {
@@ -1026,14 +991,7 @@ async function run() {
         knowledgeId: "customer-knowledge-base",
       },
     ],
-    settings: {
-      tools: [
-        {
-          type: "write_memory_store",
-          requiresApproval: false,
-        },
-      ],
-    },
+    settings: {},
   });
   if (res.ok) {
     const { value: result } = res;

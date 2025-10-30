@@ -5,11 +5,13 @@
 ```typescript
 import { CreatePromptResponseFormat2 } from "@orq-ai/node/models/operations";
 
-let value: CreatePromptResponseFormat2 = "pcm";
+let value: CreatePromptResponseFormat2 = {
+  type: "json_object",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"mp3" | "opus" | "aac" | "flac" | "wav" | "pcm"
-```
+| Field                                                                                                                                                    | Type                                                                                                                                                     | Required                                                                                                                                                 | Description                                                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                                                                   | [operations.CreatePromptResponseFormatPromptsRequestRequestBodyType](../../models/operations/createpromptresponseformatpromptsrequestrequestbodytype.md) | :heavy_check_mark:                                                                                                                                       | N/A                                                                                                                                                      |

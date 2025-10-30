@@ -7,7 +7,6 @@
 
 ```typescript
 const value: operations.Llm = {
-  outputType: "string",
   type: "llm_eval",
   prompt: "<value>",
   path: "Default",
@@ -20,7 +19,6 @@ const value: operations.Llm = {
 
 ```typescript
 const value: operations.Json = {
-  outputType: "boolean",
   type: "json_schema",
   schema: "<value>",
   path: "Default",
@@ -28,15 +26,17 @@ const value: operations.Json = {
 };
 ```
 
-### `operations.RequestBodyHTTP`
+### `operations.CreateEvalRequestBodyHTTP`
 
 ```typescript
-const value: operations.RequestBodyHTTP = {
-  outputType: "boolean",
+const value: operations.CreateEvalRequestBodyHTTP = {
   type: "http_eval",
-  url: "https://lumpy-petal.name/",
-  method: "GET",
-  headers: {},
+  url: "https://tasty-cassava.com",
+  method: "POST",
+  headers: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
   payload: {
     "key": "<value>",
     "key1": "<value>",
@@ -51,7 +51,6 @@ const value: operations.RequestBodyHTTP = {
 
 ```typescript
 const value: operations.Python = {
-  outputType: "number",
   code: "<value>",
   type: "python_eval",
   path: "Default",

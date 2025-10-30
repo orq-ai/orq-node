@@ -1,35 +1,22 @@
 # UpdatePromptResponseFormat1
 
-
-## Supported Types
-
-### `operations.UpdatePrompt11`
+## Example Usage
 
 ```typescript
-const value: operations.UpdatePrompt11 = {
+import { UpdatePromptResponseFormat1 } from "@orq-ai/node/models/operations";
+
+let value: UpdatePromptResponseFormat1 = {
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    schema: {
-      "key": "<value>",
-    },
+    schema: {},
   },
 };
 ```
 
-### `operations.UpdatePrompt12`
+## Fields
 
-```typescript
-const value: operations.UpdatePrompt12 = {
-  type: "json_object",
-};
-```
-
-### `operations.UpdatePrompt13`
-
-```typescript
-const value: operations.UpdatePrompt13 = {
-  type: "text",
-};
-```
-
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                             | [operations.UpdatePromptResponseFormatType](../../models/operations/updatepromptresponseformattype.md)             | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `jsonSchema`                                                                                                       | [operations.UpdatePromptResponseFormatJsonSchema](../../models/operations/updatepromptresponseformatjsonschema.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

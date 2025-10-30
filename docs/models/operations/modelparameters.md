@@ -1,13 +1,16 @@
 # ModelParameters
 
-Model Parameters: Not all parameters apply to every model
+Optional model parameters like temperature and maxTokens.
 
 ## Example Usage
 
 ```typescript
 import { ModelParameters } from "@orq-ai/node/models/operations";
 
-let value: ModelParameters = {};
+let value: ModelParameters = {
+  temperature: 0.7,
+  maxTokens: 1000,
+};
 ```
 
 ## Fields

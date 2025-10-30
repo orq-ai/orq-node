@@ -5,11 +5,11 @@
 ```typescript
 import { RetrieveMemoryStoreModel7 } from "@orq-ai/node/models/operations";
 
-let value: RetrieveMemoryStoreModel7 = "openai/text-embedding-3-large";
+let value: RetrieveMemoryStoreModel7 = "azure/text-embedding-3-small";
 ```
 
 ## Values
 
 ```typescript
-"openai/text-embedding-3-large"
+"azure/text-embedding-3-small"
 ```

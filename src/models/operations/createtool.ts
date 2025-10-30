@@ -49,9 +49,18 @@ export type RequestBodyCodeTool = {
   code: string;
 };
 
-export type RequestBody5 = {
+/**
+ * Executes code snippets in a sandboxed environment, currently supporting Python.
+ */
+export type RequestBodyCodeExecutionTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -157,9 +166,18 @@ export type Mcp = {
   connectionType: ConnectionType;
 };
 
-export type RequestBody4 = {
+/**
+ * A tool from a Model Context Protocol (MCP) server that provides standardized access to external capabilities.
+ */
+export type MCPTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -293,10 +311,18 @@ export type CreateToolRequestBodyHttp = {
   arguments?: { [k: string]: RequestBodyArguments } | undefined;
 };
 
-export type RequestBody3 = {
-  id?: string | undefined;
+/**
+ * Executes HTTP requests to interact with external APIs and web services using customizable blueprints.
+ */
+export type RequestBodyHTTPTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -361,10 +387,18 @@ export type RequestBodyJsonSchema = {
   strict?: boolean | null | undefined;
 };
 
-export type RequestBody2 = {
-  id?: string | undefined;
+/**
+ * A tool that enforces structured output format using JSON Schema for consistent response formatting.
+ */
+export type JSONSchemaTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -427,9 +461,18 @@ export type RequestBodyFunction = {
   parameters?: { [k: string]: any } | undefined;
 };
 
-export type RequestBody1 = {
+/**
+ * A custom function tool that allows the model to call predefined functions with structured parameters.
+ */
+export type RequestBodyFunctionTool = {
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -456,11 +499,11 @@ export type RequestBody1 = {
  * The tool to create
  */
 export type CreateToolRequestBody =
-  | RequestBody1
-  | RequestBody2
-  | RequestBody3
-  | RequestBody4
-  | RequestBody5;
+  | RequestBodyFunctionTool
+  | JSONSchemaTool
+  | RequestBodyHTTPTool
+  | MCPTool
+  | RequestBodyCodeExecutionTool;
 
 /**
  * The status of the tool. `Live` is the latest version of the tool. `Draft` is a version that is not yet published. `Pending` is a version that is pending approval. `Published` is a version that was live and has been replaced by a new version.
@@ -504,7 +547,13 @@ export type ResponseBodyCodeTool = {
 export type ResponseBody5 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -627,7 +676,13 @@ export type ResponseBodyMcp = {
 export type ResponseBody4 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -776,7 +831,13 @@ export type CreateToolResponseBodyHttp = {
 export type ResponseBody3 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -857,7 +918,13 @@ export type ResponseBodyJsonSchema = {
 export type ResponseBody2 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -936,7 +1003,13 @@ export type CreateToolResponseBodyFunction = {
 export type ResponseBody1 = {
   id?: string | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -1111,8 +1184,8 @@ export function requestBodyCodeToolFromJSON(
 }
 
 /** @internal */
-export const RequestBody5$inboundSchema: z.ZodType<
-  RequestBody5,
+export const RequestBodyCodeExecutionTool$inboundSchema: z.ZodType<
+  RequestBodyCodeExecutionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1133,7 +1206,7 @@ export const RequestBody5$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type RequestBody5$Outbound = {
+export type RequestBodyCodeExecutionTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1144,10 +1217,10 @@ export type RequestBody5$Outbound = {
 };
 
 /** @internal */
-export const RequestBody5$outboundSchema: z.ZodType<
-  RequestBody5$Outbound,
+export const RequestBodyCodeExecutionTool$outboundSchema: z.ZodType<
+  RequestBodyCodeExecutionTool$Outbound,
   z.ZodTypeDef,
-  RequestBody5
+  RequestBodyCodeExecutionTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -1169,26 +1242,32 @@ export const RequestBody5$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBody5$ {
-  /** @deprecated use `RequestBody5$inboundSchema` instead. */
-  export const inboundSchema = RequestBody5$inboundSchema;
-  /** @deprecated use `RequestBody5$outboundSchema` instead. */
-  export const outboundSchema = RequestBody5$outboundSchema;
-  /** @deprecated use `RequestBody5$Outbound` instead. */
-  export type Outbound = RequestBody5$Outbound;
+export namespace RequestBodyCodeExecutionTool$ {
+  /** @deprecated use `RequestBodyCodeExecutionTool$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyCodeExecutionTool$inboundSchema;
+  /** @deprecated use `RequestBodyCodeExecutionTool$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyCodeExecutionTool$outboundSchema;
+  /** @deprecated use `RequestBodyCodeExecutionTool$Outbound` instead. */
+  export type Outbound = RequestBodyCodeExecutionTool$Outbound;
 }
 
-export function requestBody5ToJSON(requestBody5: RequestBody5): string {
-  return JSON.stringify(RequestBody5$outboundSchema.parse(requestBody5));
+export function requestBodyCodeExecutionToolToJSON(
+  requestBodyCodeExecutionTool: RequestBodyCodeExecutionTool,
+): string {
+  return JSON.stringify(
+    RequestBodyCodeExecutionTool$outboundSchema.parse(
+      requestBodyCodeExecutionTool,
+    ),
+  );
 }
 
-export function requestBody5FromJSON(
+export function requestBodyCodeExecutionToolFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBody5, SDKValidationError> {
+): SafeParseResult<RequestBodyCodeExecutionTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBody5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody5' from JSON`,
+    (x) => RequestBodyCodeExecutionTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyCodeExecutionTool' from JSON`,
   );
 }
 
@@ -1465,26 +1544,25 @@ export function mcpFromJSON(
 }
 
 /** @internal */
-export const RequestBody4$inboundSchema: z.ZodType<
-  RequestBody4,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  status: CreateToolRequestBodyToolsRequestStatus$inboundSchema.default("live"),
-  type: CreateToolRequestBodyToolsRequest4Type$inboundSchema,
-  mcp: z.lazy(() => Mcp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
+export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
+  z.object({
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    status: CreateToolRequestBodyToolsRequestStatus$inboundSchema.default(
+      "live",
+    ),
+    type: CreateToolRequestBodyToolsRequest4Type$inboundSchema,
+    mcp: z.lazy(() => Mcp$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+    });
   });
-});
 
 /** @internal */
-export type RequestBody4$Outbound = {
+export type MCPTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1495,10 +1573,10 @@ export type RequestBody4$Outbound = {
 };
 
 /** @internal */
-export const RequestBody4$outboundSchema: z.ZodType<
-  RequestBody4$Outbound,
+export const MCPTool$outboundSchema: z.ZodType<
+  MCPTool$Outbound,
   z.ZodTypeDef,
-  RequestBody4
+  MCPTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -1519,26 +1597,26 @@ export const RequestBody4$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBody4$ {
-  /** @deprecated use `RequestBody4$inboundSchema` instead. */
-  export const inboundSchema = RequestBody4$inboundSchema;
-  /** @deprecated use `RequestBody4$outboundSchema` instead. */
-  export const outboundSchema = RequestBody4$outboundSchema;
-  /** @deprecated use `RequestBody4$Outbound` instead. */
-  export type Outbound = RequestBody4$Outbound;
+export namespace MCPTool$ {
+  /** @deprecated use `MCPTool$inboundSchema` instead. */
+  export const inboundSchema = MCPTool$inboundSchema;
+  /** @deprecated use `MCPTool$outboundSchema` instead. */
+  export const outboundSchema = MCPTool$outboundSchema;
+  /** @deprecated use `MCPTool$Outbound` instead. */
+  export type Outbound = MCPTool$Outbound;
 }
 
-export function requestBody4ToJSON(requestBody4: RequestBody4): string {
-  return JSON.stringify(RequestBody4$outboundSchema.parse(requestBody4));
+export function mcpToolToJSON(mcpTool: MCPTool): string {
+  return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));
 }
 
-export function requestBody4FromJSON(
+export function mcpToolFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBody4, SDKValidationError> {
+): SafeParseResult<MCPTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBody4$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody4' from JSON`,
+    (x) => MCPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MCPTool' from JSON`,
   );
 }
 
@@ -1876,12 +1954,11 @@ export function createToolRequestBodyHttpFromJSON(
 }
 
 /** @internal */
-export const RequestBody3$inboundSchema: z.ZodType<
-  RequestBody3,
+export const RequestBodyHTTPTool$inboundSchema: z.ZodType<
+  RequestBodyHTTPTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMSP1VZTWQA6X4KTJYA"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1891,14 +1968,12 @@ export const RequestBody3$inboundSchema: z.ZodType<
   http: z.lazy(() => CreateToolRequestBodyHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
   });
 });
 
 /** @internal */
-export type RequestBody3$Outbound = {
-  _id: string;
+export type RequestBodyHTTPTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -1909,12 +1984,11 @@ export type RequestBody3$Outbound = {
 };
 
 /** @internal */
-export const RequestBody3$outboundSchema: z.ZodType<
-  RequestBody3$Outbound,
+export const RequestBodyHTTPTool$outboundSchema: z.ZodType<
+  RequestBodyHTTPTool$Outbound,
   z.ZodTypeDef,
-  RequestBody3
+  RequestBodyHTTPTool
 > = z.object({
-  id: z.string().default("01K8AMTQMSP1VZTWQA6X4KTJYA"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -1924,7 +1998,6 @@ export const RequestBody3$outboundSchema: z.ZodType<
   http: z.lazy(() => CreateToolRequestBodyHttp$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
   });
 });
@@ -1933,26 +2006,30 @@ export const RequestBody3$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBody3$ {
-  /** @deprecated use `RequestBody3$inboundSchema` instead. */
-  export const inboundSchema = RequestBody3$inboundSchema;
-  /** @deprecated use `RequestBody3$outboundSchema` instead. */
-  export const outboundSchema = RequestBody3$outboundSchema;
-  /** @deprecated use `RequestBody3$Outbound` instead. */
-  export type Outbound = RequestBody3$Outbound;
+export namespace RequestBodyHTTPTool$ {
+  /** @deprecated use `RequestBodyHTTPTool$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyHTTPTool$inboundSchema;
+  /** @deprecated use `RequestBodyHTTPTool$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyHTTPTool$outboundSchema;
+  /** @deprecated use `RequestBodyHTTPTool$Outbound` instead. */
+  export type Outbound = RequestBodyHTTPTool$Outbound;
 }
 
-export function requestBody3ToJSON(requestBody3: RequestBody3): string {
-  return JSON.stringify(RequestBody3$outboundSchema.parse(requestBody3));
+export function requestBodyHTTPToolToJSON(
+  requestBodyHTTPTool: RequestBodyHTTPTool,
+): string {
+  return JSON.stringify(
+    RequestBodyHTTPTool$outboundSchema.parse(requestBodyHTTPTool),
+  );
 }
 
-export function requestBody3FromJSON(
+export function requestBodyHTTPToolFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBody3, SDKValidationError> {
+): SafeParseResult<RequestBodyHTTPTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBody3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody3' from JSON`,
+    (x) => RequestBodyHTTPTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyHTTPTool' from JSON`,
   );
 }
 
@@ -2062,12 +2139,11 @@ export function requestBodyJsonSchemaFromJSON(
 }
 
 /** @internal */
-export const RequestBody2$inboundSchema: z.ZodType<
-  RequestBody2,
+export const JSONSchemaTool$inboundSchema: z.ZodType<
+  JSONSchemaTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMS7PE3NSKZVND9K1WD"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2077,15 +2153,13 @@ export const RequestBody2$inboundSchema: z.ZodType<
   json_schema: z.lazy(() => RequestBodyJsonSchema$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    "_id": "id",
     "display_name": "displayName",
     "json_schema": "jsonSchema",
   });
 });
 
 /** @internal */
-export type RequestBody2$Outbound = {
-  _id: string;
+export type JSONSchemaTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -2096,12 +2170,11 @@ export type RequestBody2$Outbound = {
 };
 
 /** @internal */
-export const RequestBody2$outboundSchema: z.ZodType<
-  RequestBody2$Outbound,
+export const JSONSchemaTool$outboundSchema: z.ZodType<
+  JSONSchemaTool$Outbound,
   z.ZodTypeDef,
-  RequestBody2
+  JSONSchemaTool
 > = z.object({
-  id: z.string().default("01K8AMTQMS7PE3NSKZVND9K1WD"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2111,7 +2184,6 @@ export const RequestBody2$outboundSchema: z.ZodType<
   jsonSchema: z.lazy(() => RequestBodyJsonSchema$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
-    id: "_id",
     displayName: "display_name",
     jsonSchema: "json_schema",
   });
@@ -2121,26 +2193,26 @@ export const RequestBody2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBody2$ {
-  /** @deprecated use `RequestBody2$inboundSchema` instead. */
-  export const inboundSchema = RequestBody2$inboundSchema;
-  /** @deprecated use `RequestBody2$outboundSchema` instead. */
-  export const outboundSchema = RequestBody2$outboundSchema;
-  /** @deprecated use `RequestBody2$Outbound` instead. */
-  export type Outbound = RequestBody2$Outbound;
+export namespace JSONSchemaTool$ {
+  /** @deprecated use `JSONSchemaTool$inboundSchema` instead. */
+  export const inboundSchema = JSONSchemaTool$inboundSchema;
+  /** @deprecated use `JSONSchemaTool$outboundSchema` instead. */
+  export const outboundSchema = JSONSchemaTool$outboundSchema;
+  /** @deprecated use `JSONSchemaTool$Outbound` instead. */
+  export type Outbound = JSONSchemaTool$Outbound;
 }
 
-export function requestBody2ToJSON(requestBody2: RequestBody2): string {
-  return JSON.stringify(RequestBody2$outboundSchema.parse(requestBody2));
+export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
+  return JSON.stringify(JSONSchemaTool$outboundSchema.parse(jsonSchemaTool));
 }
 
-export function requestBody2FromJSON(
+export function jsonSchemaToolFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBody2, SDKValidationError> {
+): SafeParseResult<JSONSchemaTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody2' from JSON`,
+    (x) => JSONSchemaTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'JSONSchemaTool' from JSON`,
   );
 }
 
@@ -2250,8 +2322,8 @@ export function requestBodyFunctionFromJSON(
 }
 
 /** @internal */
-export const RequestBody1$inboundSchema: z.ZodType<
-  RequestBody1,
+export const RequestBodyFunctionTool$inboundSchema: z.ZodType<
+  RequestBodyFunctionTool,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2269,7 +2341,7 @@ export const RequestBody1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type RequestBody1$Outbound = {
+export type RequestBodyFunctionTool$Outbound = {
   path: string;
   key: string;
   display_name?: string | undefined;
@@ -2280,10 +2352,10 @@ export type RequestBody1$Outbound = {
 };
 
 /** @internal */
-export const RequestBody1$outboundSchema: z.ZodType<
-  RequestBody1$Outbound,
+export const RequestBodyFunctionTool$outboundSchema: z.ZodType<
+  RequestBodyFunctionTool$Outbound,
   z.ZodTypeDef,
-  RequestBody1
+  RequestBodyFunctionTool
 > = z.object({
   path: z.string(),
   key: z.string(),
@@ -2302,26 +2374,30 @@ export const RequestBody1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace RequestBody1$ {
-  /** @deprecated use `RequestBody1$inboundSchema` instead. */
-  export const inboundSchema = RequestBody1$inboundSchema;
-  /** @deprecated use `RequestBody1$outboundSchema` instead. */
-  export const outboundSchema = RequestBody1$outboundSchema;
-  /** @deprecated use `RequestBody1$Outbound` instead. */
-  export type Outbound = RequestBody1$Outbound;
+export namespace RequestBodyFunctionTool$ {
+  /** @deprecated use `RequestBodyFunctionTool$inboundSchema` instead. */
+  export const inboundSchema = RequestBodyFunctionTool$inboundSchema;
+  /** @deprecated use `RequestBodyFunctionTool$outboundSchema` instead. */
+  export const outboundSchema = RequestBodyFunctionTool$outboundSchema;
+  /** @deprecated use `RequestBodyFunctionTool$Outbound` instead. */
+  export type Outbound = RequestBodyFunctionTool$Outbound;
 }
 
-export function requestBody1ToJSON(requestBody1: RequestBody1): string {
-  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
+export function requestBodyFunctionToolToJSON(
+  requestBodyFunctionTool: RequestBodyFunctionTool,
+): string {
+  return JSON.stringify(
+    RequestBodyFunctionTool$outboundSchema.parse(requestBodyFunctionTool),
+  );
 }
 
-export function requestBody1FromJSON(
+export function requestBodyFunctionToolFromJSON(
   jsonString: string,
-): SafeParseResult<RequestBody1, SDKValidationError> {
+): SafeParseResult<RequestBodyFunctionTool, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => RequestBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RequestBody1' from JSON`,
+    (x) => RequestBodyFunctionTool$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBodyFunctionTool' from JSON`,
   );
 }
 
@@ -2331,20 +2407,20 @@ export const CreateToolRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => RequestBody1$inboundSchema),
-  z.lazy(() => RequestBody2$inboundSchema),
-  z.lazy(() => RequestBody3$inboundSchema),
-  z.lazy(() => RequestBody4$inboundSchema),
-  z.lazy(() => RequestBody5$inboundSchema),
+  z.lazy(() => RequestBodyFunctionTool$inboundSchema),
+  z.lazy(() => JSONSchemaTool$inboundSchema),
+  z.lazy(() => RequestBodyHTTPTool$inboundSchema),
+  z.lazy(() => MCPTool$inboundSchema),
+  z.lazy(() => RequestBodyCodeExecutionTool$inboundSchema),
 ]);
 
 /** @internal */
 export type CreateToolRequestBody$Outbound =
-  | RequestBody1$Outbound
-  | RequestBody2$Outbound
-  | RequestBody3$Outbound
-  | RequestBody4$Outbound
-  | RequestBody5$Outbound;
+  | RequestBodyFunctionTool$Outbound
+  | JSONSchemaTool$Outbound
+  | RequestBodyHTTPTool$Outbound
+  | MCPTool$Outbound
+  | RequestBodyCodeExecutionTool$Outbound;
 
 /** @internal */
 export const CreateToolRequestBody$outboundSchema: z.ZodType<
@@ -2352,11 +2428,11 @@ export const CreateToolRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateToolRequestBody
 > = z.union([
-  z.lazy(() => RequestBody1$outboundSchema),
-  z.lazy(() => RequestBody2$outboundSchema),
-  z.lazy(() => RequestBody3$outboundSchema),
-  z.lazy(() => RequestBody4$outboundSchema),
-  z.lazy(() => RequestBody5$outboundSchema),
+  z.lazy(() => RequestBodyFunctionTool$outboundSchema),
+  z.lazy(() => JSONSchemaTool$outboundSchema),
+  z.lazy(() => RequestBodyHTTPTool$outboundSchema),
+  z.lazy(() => MCPTool$outboundSchema),
+  z.lazy(() => RequestBodyCodeExecutionTool$outboundSchema),
 ]);
 
 /**
@@ -2525,7 +2601,7 @@ export const ResponseBody5$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMS5E46ZPXB4AQJTNHQ"),
+  _id: z.string().default("01K8VCKT33CK4R8GE3Y8X0GH7Z"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2580,7 +2656,7 @@ export const ResponseBody5$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody5
 > = z.object({
-  id: z.string().default("01K8AMTQMS5E46ZPXB4AQJTNHQ"),
+  id: z.string().default("01K8VCKT33CK4R8GE3Y8X0GH7Z"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -2939,7 +3015,7 @@ export const ResponseBody4$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMRQ57P1VXB6D4SPVX7"),
+  _id: z.string().default("01K8VCKT31HT89BAX8B0C8WK2N"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -2993,7 +3069,7 @@ export const ResponseBody4$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody4
 > = z.object({
-  id: z.string().default("01K8AMTQMRQ57P1VXB6D4SPVX7"),
+  id: z.string().default("01K8VCKT31HT89BAX8B0C8WK2N"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3391,7 +3467,7 @@ export const ResponseBody3$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMR5HEWX30MGRM2FCMH"),
+  _id: z.string().default("01K8VCKT2ZRZ0C02PP8T1S85GY"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3443,7 +3519,7 @@ export const ResponseBody3$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody3
 > = z.object({
-  id: z.string().default("01K8AMTQMR5HEWX30MGRM2FCMH"),
+  id: z.string().default("01K8VCKT2ZRZ0C02PP8T1S85GY"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3608,7 +3684,7 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMRVTZPGEZCR3D5RBC8"),
+  _id: z.string().default("01K8VCKT2YNQR627DTQ3WSJA5S"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3661,7 +3737,7 @@ export const ResponseBody2$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody2
 > = z.object({
-  id: z.string().default("01K8AMTQMRVTZPGEZCR3D5RBC8"),
+  id: z.string().default("01K8VCKT2YNQR627DTQ3WSJA5S"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),
@@ -3829,7 +3905,7 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQMQGNBN3ZZ0TB4E2BFG"),
+  _id: z.string().default("01K8VCKT2X1ZV19R5Z8QFBMRYN"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -3881,7 +3957,7 @@ export const ResponseBody1$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ResponseBody1
 > = z.object({
-  id: z.string().default("01K8AMTQMQGNBN3ZZ0TB4E2BFG"),
+  id: z.string().default("01K8VCKT2X1ZV19R5Z8QFBMRYN"),
   path: z.string(),
   key: z.string(),
   displayName: z.string().optional(),

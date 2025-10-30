@@ -6,7 +6,7 @@
 import { CreateMemoryStoreEmbeddingConfig } from "@orq-ai/node/models/operations";
 
 let value: CreateMemoryStoreEmbeddingConfig = {
-  model: "openai/text-embedding-ada-002",
+  model: "openai/text-embedding-3-small",
 };
 ```
 

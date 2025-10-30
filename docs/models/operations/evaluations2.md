@@ -1,0 +1,29 @@
+# Evaluations2
+
+## Example Usage
+
+```typescript
+import { Evaluations2 } from "@orq-ai/node/models/operations";
+
+let value: Evaluations2 = {
+  id: "<id>",
+  evaluationType: "human_review",
+  humanReviewId: "<id>",
+  reviewedById: "<id>",
+  type: "number",
+  value: 9374.68,
+};
+```
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                       | *string*                                                                                                   | :heavy_check_mark:                                                                                         | The unique identifier of the human evaluation                                                              |
+| `evaluationType`                                                                                           | [operations.EvaluationsEvaluationType](../../models/operations/evaluationsevaluationtype.md)               | :heavy_check_mark:                                                                                         | The type of evaluation                                                                                     |
+| `humanReviewId`                                                                                            | *string*                                                                                                   | :heavy_check_mark:                                                                                         | The unique identifier of the human review                                                                  |
+| `source`                                                                                                   | [operations.EvaluationsSource](../../models/operations/evaluationssource.md)                               | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |
+| `reviewedById`                                                                                             | *string*                                                                                                   | :heavy_check_mark:                                                                                         | The unique identifier of the user who reviewed the item                                                    |
+| `reviewedAt`                                                                                               | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)              | :heavy_minus_sign:                                                                                         | The date and time the item was reviewed                                                                    |
+| `type`                                                                                                     | [operations.CreateDatasetItemEvaluationsType](../../models/operations/createdatasetitemevaluationstype.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `value`                                                                                                    | *number*                                                                                                   | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

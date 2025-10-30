@@ -644,7 +644,7 @@ export type AgentToolInputRunGoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (http, code, function) support full inline definitions for on-the-fly creation.
+ * Tool configuration for agent run operations. Built-in tools only require a type and requires_approval, while custom tools (HTTP, Code, Function) support full inline definitions for on-the-fly creation.
  */
 export type AgentToolInputRun =
   | HTTPToolRun
@@ -681,22 +681,24 @@ export type RunAgentSettings = {
   /**
    * Tools available to the agent
    */
-  tools: Array<
-    | HTTPToolRun
-    | CodeToolRun
-    | FunctionToolRun
-    | AgentToolInputRunGoogleSearchTool
-    | AgentToolInputRunWebScraperTool
-    | AgentToolInputRunCallSubAgentTool
-    | AgentToolInputRunRetrieveAgentsTool
-    | AgentToolInputRunQueryMemoryStoreTool
-    | AgentToolInputRunWriteMemoryStoreTool
-    | AgentToolInputRunRetrieveMemoryStoresTool
-    | AgentToolInputRunDeleteMemoryDocumentTool
-    | AgentToolInputRunRetrieveKnowledgeBasesTool
-    | AgentToolInputRunQueryKnowledgeBaseTool
-    | AgentToolInputRunCurrentDateTool
-  >;
+  tools?:
+    | Array<
+      | HTTPToolRun
+      | CodeToolRun
+      | FunctionToolRun
+      | AgentToolInputRunGoogleSearchTool
+      | AgentToolInputRunWebScraperTool
+      | AgentToolInputRunCallSubAgentTool
+      | AgentToolInputRunRetrieveAgentsTool
+      | AgentToolInputRunQueryMemoryStoreTool
+      | AgentToolInputRunWriteMemoryStoreTool
+      | AgentToolInputRunRetrieveMemoryStoresTool
+      | AgentToolInputRunDeleteMemoryDocumentTool
+      | AgentToolInputRunRetrieveKnowledgeBasesTool
+      | AgentToolInputRunQueryKnowledgeBaseTool
+      | AgentToolInputRunCurrentDateTool
+    >
+    | undefined;
   /**
    * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
    */
@@ -757,7 +759,13 @@ export type RunAgentRequestBody = {
    */
   memory?: RunAgentMemory | undefined;
   /**
-   * The path where the entity is stored in the project structure. The first element of the path always represents the project name. Any subsequent path element after the project will be created as a folder in the project if it does not exists.
+   * Entity storage path in the format: `project/folder/subfolder/...`
+   *
+   * @remarks
+   *
+   * The first element identifies the project, followed by nested folders (auto-created as needed).
+   *
+   * With project-based API keys, the first element is treated as a folder name, as the project is predetermined by the API key.
    */
   path: string;
   /**
@@ -3829,7 +3837,7 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$inboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$inboundSchema),
     ]),
-  ),
+  ).optional(),
   tool_approval_required: RunAgentToolApprovalRequired$inboundSchema.default(
     "none",
   ),
@@ -3845,22 +3853,24 @@ export const RunAgentSettings$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RunAgentSettings$Outbound = {
-  tools: Array<
-    | HTTPToolRun$Outbound
-    | CodeToolRun$Outbound
-    | FunctionToolRun$Outbound
-    | AgentToolInputRunGoogleSearchTool$Outbound
-    | AgentToolInputRunWebScraperTool$Outbound
-    | AgentToolInputRunCallSubAgentTool$Outbound
-    | AgentToolInputRunRetrieveAgentsTool$Outbound
-    | AgentToolInputRunQueryMemoryStoreTool$Outbound
-    | AgentToolInputRunWriteMemoryStoreTool$Outbound
-    | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
-    | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
-    | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
-    | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
-    | AgentToolInputRunCurrentDateTool$Outbound
-  >;
+  tools?:
+    | Array<
+      | HTTPToolRun$Outbound
+      | CodeToolRun$Outbound
+      | FunctionToolRun$Outbound
+      | AgentToolInputRunGoogleSearchTool$Outbound
+      | AgentToolInputRunWebScraperTool$Outbound
+      | AgentToolInputRunCallSubAgentTool$Outbound
+      | AgentToolInputRunRetrieveAgentsTool$Outbound
+      | AgentToolInputRunQueryMemoryStoreTool$Outbound
+      | AgentToolInputRunWriteMemoryStoreTool$Outbound
+      | AgentToolInputRunRetrieveMemoryStoresTool$Outbound
+      | AgentToolInputRunDeleteMemoryDocumentTool$Outbound
+      | AgentToolInputRunRetrieveKnowledgeBasesTool$Outbound
+      | AgentToolInputRunQueryKnowledgeBaseTool$Outbound
+      | AgentToolInputRunCurrentDateTool$Outbound
+    >
+    | undefined;
   tool_approval_required: string;
   max_iterations: number;
   max_execution_time: number;
@@ -3889,7 +3899,7 @@ export const RunAgentSettings$outboundSchema: z.ZodType<
       z.lazy(() => AgentToolInputRunQueryKnowledgeBaseTool$outboundSchema),
       z.lazy(() => AgentToolInputRunCurrentDateTool$outboundSchema),
     ]),
-  ),
+  ).optional(),
   toolApprovalRequired: RunAgentToolApprovalRequired$outboundSchema.default(
     "none",
   ),

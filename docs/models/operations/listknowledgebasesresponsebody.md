@@ -14,13 +14,14 @@ let value: ListKnowledgeBasesResponseBody = {
       id: "<id>",
       created: "<value>",
       key: "<key>",
-      model: "Civic",
       domainId: "<id>",
       path: "Default",
       updated: "<value>",
+      type: "internal",
+      model: "Civic",
     },
   ],
-  hasMore: true,
+  hasMore: false,
 };
 ```
 
@@ -29,5 +30,5 @@ let value: ListKnowledgeBasesResponseBody = {
 | Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | `object`                                                                                   | [operations.ListKnowledgeBasesObject](../../models/operations/listknowledgebasesobject.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |
-| `data`                                                                                     | [operations.ListKnowledgeBasesData](../../models/operations/listknowledgebasesdata.md)[]   | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `data`                                                                                     | *operations.ListKnowledgeBasesData*[]                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
 | `hasMore`                                                                                  | *boolean*                                                                                  | :heavy_check_mark:                                                                         | N/A                                                                                        |

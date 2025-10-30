@@ -30,6 +30,11 @@ export class Orq extends ClientSDK {
     return (this._feedback ??= new Feedback(this._options));
   }
 
+  private _evals?: Evals;
+  get evals(): Evals {
+    return (this._evals ??= new Evals(this._options));
+  }
+
   private _deployments?: Deployments;
   get deployments(): Deployments {
     return (this._deployments ??= new Deployments(this._options));
@@ -60,14 +65,14 @@ export class Orq extends ClientSDK {
     return (this._models ??= new Models(this._options));
   }
 
-  private _memoryStores?: MemoryStores;
-  get memoryStores(): MemoryStores {
-    return (this._memoryStores ??= new MemoryStores(this._options));
+  private _tools?: Tools;
+  get tools(): Tools {
+    return (this._tools ??= new Tools(this._options));
   }
 
-  private _datasets?: Datasets;
-  get datasets(): Datasets {
-    return (this._datasets ??= new Datasets(this._options));
+  private _budgets?: Budgets;
+  get budgets(): Budgets {
+    return (this._budgets ??= new Budgets(this._options));
   }
 
   private _knowledge?: Knowledge;
@@ -80,18 +85,13 @@ export class Orq extends ClientSDK {
     return (this._chunking ??= new Chunking(this._options));
   }
 
-  private _evals?: Evals;
-  get evals(): Evals {
-    return (this._evals ??= new Evals(this._options));
+  private _memoryStores?: MemoryStores;
+  get memoryStores(): MemoryStores {
+    return (this._memoryStores ??= new MemoryStores(this._options));
   }
 
-  private _budgets?: Budgets;
-  get budgets(): Budgets {
-    return (this._budgets ??= new Budgets(this._options));
-  }
-
-  private _tools?: Tools;
-  get tools(): Tools {
-    return (this._tools ??= new Tools(this._options));
+  private _datasets?: Datasets;
+  get datasets(): Datasets {
+    return (this._datasets ??= new Datasets(this._options));
   }
 }

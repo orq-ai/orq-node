@@ -39,7 +39,7 @@ export type UpdateDatasourceStatus = ClosedEnum<typeof UpdateDatasourceStatus>;
  */
 export type UpdateDatasourceResponseBody = {
   /**
-   * The id of the resource
+   * The unique identifier of the data source
    */
   id?: string | undefined;
   /**
@@ -64,11 +64,11 @@ export type UpdateDatasourceResponseBody = {
    */
   updated: string;
   /**
-   * The id of the resource
+   * The user ID of the creator of the knowledge base
    */
   createdById?: string | null | undefined;
   /**
-   * The id of the resource
+   * The user ID of the last user who updated the knowledge base
    */
   updateById?: string | null | undefined;
   /**
@@ -244,7 +244,7 @@ export const UpdateDatasourceResponseBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("01K8AMTQHKJPQNA5HCD6EQA33C"),
+  _id: z.string().default("01K8VCKT7KXCCV0VYKKGWS5XFP"),
   display_name: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$inboundSchema,
@@ -288,7 +288,7 @@ export const UpdateDatasourceResponseBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateDatasourceResponseBody
 > = z.object({
-  id: z.string().default("01K8AMTQHKJPQNA5HCD6EQA33C"),
+  id: z.string().default("01K8VCKT7KXCCV0VYKKGWS5XFP"),
   displayName: z.string(),
   description: z.string().optional(),
   status: UpdateDatasourceStatus$outboundSchema,

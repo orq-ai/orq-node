@@ -16,9 +16,7 @@ let value: GetPromptVersionResponseBody = {
         content: [
           {
             type: "file",
-            file: {
-              fileData: "<value>",
-            },
+            file: {},
           },
         ],
       },

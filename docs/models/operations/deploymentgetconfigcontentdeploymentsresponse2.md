@@ -18,7 +18,7 @@ const value: operations.DeploymentGetConfig21 = {
 const value: operations.DeploymentGetConfig2Deployments2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://discrete-seal.info/",
+    url: "https://picsum.photos/id/1/200/300",
   },
 };
 ```
@@ -28,9 +28,7 @@ const value: operations.DeploymentGetConfig2Deployments2 = {
 ```typescript
 const value: operations.DeploymentGetConfig23 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-  },
+  file: {},
 };
 ```
 

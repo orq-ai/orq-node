@@ -40,10 +40,7 @@ const value: operations.CreateDatasetItem2Datasets3 = {
 ```typescript
 const value: operations.CreateDatasetItem2Datasets4 = {
   type: "file",
-  file: {
-    fileData: "<value>",
-    filename: "example.file",
-  },
+  file: {},
 };
 ```
 
