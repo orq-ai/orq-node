@@ -948,7 +948,7 @@ export type ResponseFormatJsonSchema = {
   /**
    * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the schema field. Only a subset of JSON Schema is supported when strict is true.
    */
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 export type CreatePromptResponseFormat3 = {
@@ -5415,7 +5415,7 @@ export const ResponseFormatJsonSchema$inboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.nullable(z.boolean()).optional(),
+  strict: z.boolean().optional(),
 });
 
 /** @internal */
@@ -5423,7 +5423,7 @@ export type ResponseFormatJsonSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema?: any | undefined;
-  strict?: boolean | null | undefined;
+  strict?: boolean | undefined;
 };
 
 /** @internal */
@@ -5435,7 +5435,7 @@ export const ResponseFormatJsonSchema$outboundSchema: z.ZodType<
   description: z.string().optional(),
   name: z.string(),
   schema: z.any().optional(),
-  strict: z.nullable(z.boolean()).optional(),
+  strict: z.boolean().optional(),
 });
 
 /**

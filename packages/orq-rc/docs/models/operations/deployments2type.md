@@ -5,11 +5,11 @@
 ```typescript
 import { Deployments2Type } from "@orq-ai/node/models/operations";
 
-let value: Deployments2Type = "text";
+let value: Deployments2Type = "image_url";
 ```
 
 ## Values
 
 ```typescript
-"text"
+"image_url"
 ```

@@ -5,13 +5,13 @@ The tool to create
 
 ## Supported Types
 
-### `operations.RequestBody1`
+### `operations.RequestBodyFunctionTool`
 
 ```typescript
-const value: operations.RequestBody1 = {
+const value: operations.RequestBodyFunctionTool = {
   path: "Default",
   key: "<key>",
-  description: "scuttle unlike ouch",
+  description: "surprisingly management aw character wretched",
   type: "function",
   function: {
     name: "<value>",
@@ -19,32 +19,31 @@ const value: operations.RequestBody1 = {
 };
 ```
 
-### `operations.RequestBody2`
+### `operations.JSONSchemaTool`
 
 ```typescript
-const value: operations.RequestBody2 = {
+const value: operations.JSONSchemaTool = {
   path: "Default",
   key: "<key>",
-  description: "tedious embossing ugly",
+  description: "uh-huh scholarship what madly",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
     schema: {
       "key": "<value>",
       "key1": "<value>",
-      "key2": "<value>",
     },
   },
 };
 ```
 
-### `operations.RequestBody3`
+### `operations.RequestBodyHTTPTool`
 
 ```typescript
-const value: operations.RequestBody3 = {
+const value: operations.RequestBodyHTTPTool = {
   path: "Default",
   key: "<key>",
-  description: "lively whose atop breastplate when excluding but slime",
+  description: "that finally rebuild carefully pace yowza whenever",
   type: "http",
   http: {
     blueprint: {
@@ -55,18 +54,19 @@ const value: operations.RequestBody3 = {
 };
 ```
 
-### `operations.RequestBody4`
+### `operations.MCPTool`
 
 ```typescript
-const value: operations.RequestBody4 = {
+const value: operations.MCPTool = {
   path: "Default",
   key: "<key>",
-  description: "instead righteously drat switch help observe whose",
+  description:
+    "yuppify unless overload phooey obnoxiously ribbon beard wriggler off",
   type: "mcp",
   mcp: {
     serverId: "<id>",
     toolName: "<value>",
-    serverUrl: "https://scornful-fog.net",
+    serverUrl: "https://simple-airman.org/",
     inputSchema: {
       type: "object",
     },
@@ -75,14 +75,13 @@ const value: operations.RequestBody4 = {
 };
 ```
 
-### `operations.RequestBody5`
+### `operations.RequestBodyCodeExecutionTool`
 
 ```typescript
-const value: operations.RequestBody5 = {
+const value: operations.RequestBodyCodeExecutionTool = {
   path: "Default",
   key: "<key>",
-  description:
-    "shady vague hungrily beyond fiercely furthermore hypothesize psst",
+  description: "yahoo er scared pretend endow obvious accentuate plain readily",
   type: "code",
   codeTool: {
     language: "python",

@@ -1,18 +1,17 @@
 # DeploymentGetConfigPrefixMessagesDeploymentsRequestRole
 
-The role of the messages author, in this case `assistant`.
+The role of the messages author, in this case tool.
 
 ## Example Usage
 
 ```typescript
 import { DeploymentGetConfigPrefixMessagesDeploymentsRequestRole } from "@orq-ai/node/models/operations";
 
-let value: DeploymentGetConfigPrefixMessagesDeploymentsRequestRole =
-  "assistant";
+let value: DeploymentGetConfigPrefixMessagesDeploymentsRequestRole = "tool";
 ```
 
 ## Values
 
 ```typescript
-"assistant"
+"tool"
 ```

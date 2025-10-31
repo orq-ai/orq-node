@@ -346,7 +346,7 @@ export type GoogleSearchTool = {
 };
 
 /**
- * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools must reference pre-created tools by key or id.
+ * Tool configuration for agent create/update operations. Built-in tools only require a type, while custom tools (HTTP, Code, Function) must reference pre-created tools by key or id.
  */
 export type AgentToolInputCRUD =
   | GoogleSearchTool

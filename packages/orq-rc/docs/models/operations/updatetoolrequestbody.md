@@ -5,46 +5,46 @@ The tool to update
 
 ## Supported Types
 
-### `operations.UpdateToolRequestBody1`
+### `operations.UpdateFunctionTool`
 
 ```typescript
-const value: operations.UpdateToolRequestBody1 = {
+const value: operations.UpdateFunctionTool = {
   path: "Default",
   type: "function",
 };
 ```
 
-### `operations.UpdateToolRequestBody2`
+### `operations.UpdateJSONSchemaTool`
 
 ```typescript
-const value: operations.UpdateToolRequestBody2 = {
+const value: operations.UpdateJSONSchemaTool = {
   path: "Default",
   type: "json_schema",
 };
 ```
 
-### `operations.UpdateToolRequestBody3`
+### `operations.UpdateHTTPTool`
 
 ```typescript
-const value: operations.UpdateToolRequestBody3 = {
+const value: operations.UpdateHTTPTool = {
   path: "Default",
   type: "http",
 };
 ```
 
-### `operations.UpdateToolRequestBody4`
+### `operations.UpdateMCPTool`
 
 ```typescript
-const value: operations.UpdateToolRequestBody4 = {
+const value: operations.UpdateMCPTool = {
   path: "Default",
   type: "mcp",
 };
 ```
 
-### `operations.UpdateToolRequestBody5`
+### `operations.UpdateCodeExecutionTool`
 
 ```typescript
-const value: operations.UpdateToolRequestBody5 = {
+const value: operations.UpdateCodeExecutionTool = {
   path: "Default",
   type: "code",
 };

@@ -18,7 +18,7 @@ const value: operations.One = {
 const value: operations.Two2 = {
   type: "image_url",
   imageUrl: {
-    url: "https://picsum.photos/id/1/200/300",
+    url: "https://frequent-passport.com",
   },
 };
 ```
@@ -27,6 +27,18 @@ const value: operations.Two2 = {
 
 ```typescript
 const value: operations.Three = {
+  type: "input_audio",
+  inputAudio: {
+    data: "<value>",
+    format: "wav",
+  },
+};
+```
+
+### `operations.Four`
+
+```typescript
+const value: operations.Four = {
   type: "file",
   file: {},
 };

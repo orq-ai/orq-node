@@ -11,9 +11,9 @@ The contents of the assistant message. Required unless `tool_calls` or `function
 const value: string = "<value>";
 ```
 
-### `operations.DeploymentGetConfigContentDeploymentsRequest2[]`
+### `operations.DeploymentGetConfigContentDeployments2[]`
 
 ```typescript
-const value: operations.DeploymentGetConfigContentDeploymentsRequest2[] = [];
+const value: operations.DeploymentGetConfigContentDeployments2[] = [];
 ```
 

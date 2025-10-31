@@ -31,7 +31,7 @@ export type ExternalConfig = {
   apiKey: string;
 };
 
-export type CreateKnowledgeRequestBody2 = {
+export type RequestBody2 = {
   type?: CreateKnowledgeRequestBodyKnowledgeType | undefined;
   key: string;
   description?: string | undefined;
@@ -115,7 +115,7 @@ export type RetrievalSettings = {
     | undefined;
 };
 
-export type CreateKnowledgeRequestBody1 = {
+export type RequestBody1 = {
   type?: CreateKnowledgeRequestBodyType | undefined;
   key: string;
   description?: string | undefined;
@@ -140,9 +140,7 @@ export type CreateKnowledgeRequestBody1 = {
   path: string;
 };
 
-export type CreateKnowledgeRequestBody =
-  | CreateKnowledgeRequestBody1
-  | CreateKnowledgeRequestBody2;
+export type CreateKnowledgeRequestBody = RequestBody1 | RequestBody2;
 
 export const CreateKnowledgeResponseBodyKnowledgeType = {
   External: "external",
@@ -481,8 +479,8 @@ export function externalConfigFromJSON(
 }
 
 /** @internal */
-export const CreateKnowledgeRequestBody2$inboundSchema: z.ZodType<
-  CreateKnowledgeRequestBody2,
+export const RequestBody2$inboundSchema: z.ZodType<
+  RequestBody2,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -499,7 +497,7 @@ export const CreateKnowledgeRequestBody2$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateKnowledgeRequestBody2$Outbound = {
+export type RequestBody2$Outbound = {
   type: string;
   key: string;
   description?: string | undefined;
@@ -507,10 +505,10 @@ export type CreateKnowledgeRequestBody2$Outbound = {
 };
 
 /** @internal */
-export const CreateKnowledgeRequestBody2$outboundSchema: z.ZodType<
-  CreateKnowledgeRequestBody2$Outbound,
+export const RequestBody2$outboundSchema: z.ZodType<
+  RequestBody2$Outbound,
   z.ZodTypeDef,
-  CreateKnowledgeRequestBody2
+  RequestBody2
 > = z.object({
   type: CreateKnowledgeRequestBodyKnowledgeType$outboundSchema.default(
     "external",
@@ -528,32 +526,26 @@ export const CreateKnowledgeRequestBody2$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateKnowledgeRequestBody2$ {
-  /** @deprecated use `CreateKnowledgeRequestBody2$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeRequestBody2$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRequestBody2$outboundSchema` instead. */
-  export const outboundSchema = CreateKnowledgeRequestBody2$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRequestBody2$Outbound` instead. */
-  export type Outbound = CreateKnowledgeRequestBody2$Outbound;
+export namespace RequestBody2$ {
+  /** @deprecated use `RequestBody2$inboundSchema` instead. */
+  export const inboundSchema = RequestBody2$inboundSchema;
+  /** @deprecated use `RequestBody2$outboundSchema` instead. */
+  export const outboundSchema = RequestBody2$outboundSchema;
+  /** @deprecated use `RequestBody2$Outbound` instead. */
+  export type Outbound = RequestBody2$Outbound;
 }
 
-export function createKnowledgeRequestBody2ToJSON(
-  createKnowledgeRequestBody2: CreateKnowledgeRequestBody2,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRequestBody2$outboundSchema.parse(
-      createKnowledgeRequestBody2,
-    ),
-  );
+export function requestBody2ToJSON(requestBody2: RequestBody2): string {
+  return JSON.stringify(RequestBody2$outboundSchema.parse(requestBody2));
 }
 
-export function createKnowledgeRequestBody2FromJSON(
+export function requestBody2FromJSON(
   jsonString: string,
-): SafeParseResult<CreateKnowledgeRequestBody2, SDKValidationError> {
+): SafeParseResult<RequestBody2, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateKnowledgeRequestBody2$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRequestBody2' from JSON`,
+    (x) => RequestBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody2' from JSON`,
   );
 }
 
@@ -836,8 +828,8 @@ export function retrievalSettingsFromJSON(
 }
 
 /** @internal */
-export const CreateKnowledgeRequestBody1$inboundSchema: z.ZodType<
-  CreateKnowledgeRequestBody1,
+export const RequestBody1$inboundSchema: z.ZodType<
+  RequestBody1,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -857,7 +849,7 @@ export const CreateKnowledgeRequestBody1$inboundSchema: z.ZodType<
 });
 
 /** @internal */
-export type CreateKnowledgeRequestBody1$Outbound = {
+export type RequestBody1$Outbound = {
   type: string;
   key: string;
   description?: string | undefined;
@@ -868,10 +860,10 @@ export type CreateKnowledgeRequestBody1$Outbound = {
 };
 
 /** @internal */
-export const CreateKnowledgeRequestBody1$outboundSchema: z.ZodType<
-  CreateKnowledgeRequestBody1$Outbound,
+export const RequestBody1$outboundSchema: z.ZodType<
+  RequestBody1$Outbound,
   z.ZodTypeDef,
-  CreateKnowledgeRequestBody1
+  RequestBody1
 > = z.object({
   type: CreateKnowledgeRequestBodyType$outboundSchema.default("internal"),
   key: z.string(),
@@ -892,32 +884,26 @@ export const CreateKnowledgeRequestBody1$outboundSchema: z.ZodType<
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
-export namespace CreateKnowledgeRequestBody1$ {
-  /** @deprecated use `CreateKnowledgeRequestBody1$inboundSchema` instead. */
-  export const inboundSchema = CreateKnowledgeRequestBody1$inboundSchema;
-  /** @deprecated use `CreateKnowledgeRequestBody1$outboundSchema` instead. */
-  export const outboundSchema = CreateKnowledgeRequestBody1$outboundSchema;
-  /** @deprecated use `CreateKnowledgeRequestBody1$Outbound` instead. */
-  export type Outbound = CreateKnowledgeRequestBody1$Outbound;
+export namespace RequestBody1$ {
+  /** @deprecated use `RequestBody1$inboundSchema` instead. */
+  export const inboundSchema = RequestBody1$inboundSchema;
+  /** @deprecated use `RequestBody1$outboundSchema` instead. */
+  export const outboundSchema = RequestBody1$outboundSchema;
+  /** @deprecated use `RequestBody1$Outbound` instead. */
+  export type Outbound = RequestBody1$Outbound;
 }
 
-export function createKnowledgeRequestBody1ToJSON(
-  createKnowledgeRequestBody1: CreateKnowledgeRequestBody1,
-): string {
-  return JSON.stringify(
-    CreateKnowledgeRequestBody1$outboundSchema.parse(
-      createKnowledgeRequestBody1,
-    ),
-  );
+export function requestBody1ToJSON(requestBody1: RequestBody1): string {
+  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
 }
 
-export function createKnowledgeRequestBody1FromJSON(
+export function requestBody1FromJSON(
   jsonString: string,
-): SafeParseResult<CreateKnowledgeRequestBody1, SDKValidationError> {
+): SafeParseResult<RequestBody1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CreateKnowledgeRequestBody1$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateKnowledgeRequestBody1' from JSON`,
+    (x) => RequestBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestBody1' from JSON`,
   );
 }
 
@@ -927,14 +913,14 @@ export const CreateKnowledgeRequestBody$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  z.lazy(() => CreateKnowledgeRequestBody1$inboundSchema),
-  z.lazy(() => CreateKnowledgeRequestBody2$inboundSchema),
+  z.lazy(() => RequestBody1$inboundSchema),
+  z.lazy(() => RequestBody2$inboundSchema),
 ]);
 
 /** @internal */
 export type CreateKnowledgeRequestBody$Outbound =
-  | CreateKnowledgeRequestBody1$Outbound
-  | CreateKnowledgeRequestBody2$Outbound;
+  | RequestBody1$Outbound
+  | RequestBody2$Outbound;
 
 /** @internal */
 export const CreateKnowledgeRequestBody$outboundSchema: z.ZodType<
@@ -942,8 +928,8 @@ export const CreateKnowledgeRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateKnowledgeRequestBody
 > = z.union([
-  z.lazy(() => CreateKnowledgeRequestBody1$outboundSchema),
-  z.lazy(() => CreateKnowledgeRequestBody2$outboundSchema),
+  z.lazy(() => RequestBody1$outboundSchema),
+  z.lazy(() => RequestBody2$outboundSchema),
 ]);
 
 /**
